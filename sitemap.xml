@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Hauptseite -->
+  <url>
+    <loc>https://www.certcoach.de/</loc>
+    <lastmod>2025-06-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="de" href="https://www.certcoach.de/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.certcoach.de/"/>
+    <xhtml:link rel="alternate" hreflang="fa" href="https://www.certcoach.de/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://www.certcoach.de/"/>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://www.certcoach.de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.certcoach.de/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.certcoach.de/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.certcoach.de/"/>
+  </url>
+
+  <!-- AZ-900 Seite (statisch) -->
+  <url>
+    <loc>https://www.certcoach.de/az-900/</loc>
+    <lastmod>2025-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Blog / Artikel -->
+  <url>
+    <loc>https://www.certcoach.de/blog/az-900-pruefungsvorbereitung/</loc>
+    <lastmod>2025-06-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Über uns -->
+  <url>
+    <loc>https://www.certcoach.de/ueber-uns/</loc>
+    <lastmod>2025-06-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+</urlset>
