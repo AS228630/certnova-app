@@ -1291,9 +1291,9 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
 
 <!-- ===== NAVBAR ===== -->
 <nav>
-  <a class="nav-brand" onclick="closeMegaMenu();showPage('home')" style="font-size:22px;letter-spacing:-1px">&#9670; Cert<span style="color:#50e6ff">Coach</span></a>
+  <a class="nav-brand" onclick="window.location.href='index.html'" style="font-size:22px;letter-spacing:-1px">&#9670; Cert<span style="color:#50e6ff">Coach</span></a>
   <div class="nav-links">
-    <span class="nav-link" onclick="closeMegaMenu();showPage('home')" data-i18n="nav_home">Startseite</span>
+    <span class="nav-link" onclick="window.location.href='index.html'" data-i18n="nav_home">Startseite</span>
 
     <!-- ══ IT-ZERTIFIKATE mega dropdown ══ -->
     <div class="nav-dropdown mega-drop" id="megaDrop">
@@ -1535,7 +1535,7 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
 <div class="save-toast" id="saveToast">✓ Fortschritt gespeichert</div>
 
 <!-- ===== HOME PAGE ===== -->
-<div id="page-home" class="page active">
+<div id="page-home" class="page">
   <div class="hero">
     <div class="hero-inner">
       <h1 data-i18n="hero_title">Echte Pr&#252;fungsfragen.<br>Ein bew&#228;hrtes System. <span class="accent" data-i18n="hero_accent">F&#252;r jede IT-Zertifizierung.</span></h1>
@@ -1632,7 +1632,7 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
 </div>
 
 <!-- ===== SECTIONS PAGE ===== -->
-<div id="page-sections" class="page">
+<div id="page-sections" class="page active">
   <div class="sections-page">
     <div class="sections-hero">
       <h2 id="secPageTitle">AB-900 Pr&#252;fungsvorbereitung</h2>
@@ -4359,6 +4359,7 @@ function aiAskBackend(){
 
 // run on load
 updateNavUser();
+showPage('sections');
 // Owner mode banner show
 (function(){
   if(isOwner()){
