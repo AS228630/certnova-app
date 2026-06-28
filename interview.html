@@ -4,1091 +4,110 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CertCoach – IT Interview Trainer | Vorstellungsgespräch Vorbereitung</title>
-<meta name="description" content="CertCoach: IT Interview Trainer für Deutschland. Echte Fragen für Cloud, Azure, Security, Linux, Netzwerk und HR/Soft Skills. Mehrsprachig.">
+<meta name="description" content="CertCoach: IT Interview Trainer für Deutschland. Echte Fragen für Cloud, Azure, Security, Linux, Netzwerk und HR/Soft Skills.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230a1f3d'/><text y='78' x='10' font-size='70' font-family='Arial' font-weight='900' fill='%2350e6ff'>CC</text></svg>" type="image/svg+xml">
 <link rel="canonical" href="https://www.certcoach.de/interview.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--blue:#0078d4;--dark:#005a9e;--light:#deecf9;--green:#107c10;--red:#a80000;--gbg:#dff6dd;--rbg:#fde7e9;--gray:#f3f2f1;--border:#c8c6c4;--text:#201f1e;--nova:#50e6ff;--nova2:#0a1f3d}
-
-/* RTL support for Arabic and Persian */
-[dir="rtl"] body{direction:rtl;text-align:right}
-[dir="rtl"] .nav-links{margin-left:0;margin-right:32px}
-[dir="rtl"] .nav-right{margin-left:0;margin-right:auto}
-[dir="rtl"] .section-item:hover:not(.locked){transform:translateX(-4px)}
-[dir="rtl"] .back-btn{flex-direction:row-reverse}
-[dir="rtl"] .q-foot{flex-direction:row-reverse}
-[dir="rtl"] .test-author{flex-direction:row-reverse}
-
-/* Lang dropdown — stylish flag design */
-.flag-ico{width:22px;height:16px;object-fit:cover;border-radius:3px;box-shadow:0 1px 3px rgba(0,0,0,.3);flex-shrink:0;display:inline-block;vertical-align:middle}
-.flag-badge{width:30px;height:30px;border-radius:9px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#f3f6fb;box-shadow:0 2px 6px rgba(0,0,0,.14);flex-shrink:0}
-.flag-badge img{width:100%;height:100%;object-fit:cover}
-
-.lang-dropdown-wrap{position:relative}
-.lang-drop-btn{background:rgba(255,255,255,.12);color:white;border:1px solid rgba(255,255,255,.25);padding:6px 14px 6px 8px;border-radius:20px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .18s;white-space:nowrap}
-.lang-drop-btn:hover{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.4);transform:translateY(-1px)}
-
-.lang-drop-menu{
-  display:none;position:absolute;top:calc(100% + 12px);right:0;
-  width:240px;
-  background:linear-gradient(160deg,#fdfeff 0%,#ffffff 55%,#f2f8ff 100%);
-  border:none;border-radius:16px;
-  box-shadow:0 22px 56px rgba(0,40,120,.2), 0 2px 8px rgba(0,0,0,.08);
-  z-index:2000;overflow:hidden;padding:10px;
-}
-.lang-drop-menu::before{
-  content:'';display:block;position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,#0078d4 0%,#50e6ff 50%,#0078d4 100%);
-}
-.lang-drop-menu.open{display:block;animation:langDropIn .18s ease}
-@keyframes langDropIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-.lang-drop-item{
-  display:flex;align-items:center;gap:11px;
-  padding:9px 10px;border-radius:10px;
-  font-size:13.5px;color:#1a2a4a;font-weight:600;
-  cursor:pointer;transition:all .15s ease;
-  margin-bottom:2px;border:1px solid transparent;position:relative;
-}
-.lang-drop-item:hover{
-  background:linear-gradient(90deg,#e8f3ff,#f0f9ff);
-  color:#0050a0;border-color:#c8e0fb;
-  transform:translateX(4px);
-  box-shadow:0 2px 8px rgba(0,120,212,.12);
-}
-.lang-drop-item.active-lang{background:linear-gradient(90deg,#e8f3ff,#f5fbff);border-color:#9fcdfb}
-.lang-drop-item.active-lang::after{content:'✓';margin-left:auto;color:#0078d4;font-weight:800}
-.lang-sep{color:rgba(255,255,255,.25);font-size:11px}
+:root{--blue:#0078d4;--dark:#005a9e;--light:#deecf9;--green:#107c10;--red:#a80000;--gbg:#dff6dd;--rbg:#fde7e9;--gray:#f3f2f1;--border:#c8c6c4;--text:#201f1e}
 
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--gray);color:var(--text)}
 
 /* ===== NAVBAR ===== */
 nav{background:#1a1a2e;color:white;padding:0 32px;display:flex;align-items:center;height:58px;box-shadow:0 2px 8px rgba(0,0,0,.4);position:sticky;top:0;z-index:1000}
-.nav-brand{font-size:20px;font-weight:800;letter-spacing:-0.5px;color:white;text-decoration:none;display:flex;align-items:center;gap:8px}
-.nav-brand .dot{color:#0078d4}
+.nav-brand{font-size:22px;font-weight:800;letter-spacing:-1px;color:white;text-decoration:none;display:flex;align-items:center;gap:8px;cursor:pointer}
 .nav-links{display:flex;align-items:center;gap:4px;margin-left:32px}
 .nav-link{color:rgba(255,255,255,.8);text-decoration:none;padding:8px 14px;border-radius:4px;font-size:14px;font-weight:500;transition:all .15s;cursor:pointer}
-.nav-link:hover,.nav-link.active{background:rgba(255,255,255,.12);color:white}
-.nav-dropdown{position:relative}
-.nav-dropdown-menu{display:none;position:absolute;top:calc(100% + 8px);left:0;background:white;border:1px solid var(--border);border-radius:6px;min-width:200px;box-shadow:0 4px 16px rgba(0,0,0,.15);z-index:100}
-.nav-dropdown:hover .nav-dropdown-menu{display:block}
-.nav-dropdown-item{display:block;padding:10px 16px;font-size:14px;color:var(--text);text-decoration:none;transition:background .15s;cursor:pointer}
-.nav-dropdown-item:hover{background:var(--light)}
-.nav-dropdown-item.disabled{color:#aaa;cursor:not-allowed}
-.nav-dropdown-group{padding:5px 16px 4px;font-size:10.5px;font-weight:800;color:#0078d4;text-transform:uppercase;letter-spacing:.6px;background:#f0f6ff;border-top:1px solid #dde8f5}
-.nav-dropdown-menu{max-height:420px;overflow-y:auto}
-
-/* ══ MEGA MENU — Premium Design ══ */
-.mega-drop{position:static}
-.mega-menu{
-  display:none !important;
-  position:fixed !important;
-  top:60px !important;
-  left:50% !important;
-  transform:translateX(-50%) !important;
-  width:96vw !important;
-  max-width:1200px !important;
-  max-height:none !important;
-  overflow:visible !important;
-  margin:0 !important;
-  background:linear-gradient(160deg,#f8faff 0%,#ffffff 60%,#f0f6ff 100%);
-  border:none;
-  border-radius:16px;
-  box-shadow:0 24px 64px rgba(0,60,160,.18), 0 2px 8px rgba(0,0,0,.08);
-  z-index:9999 !important;
-  padding:0;
-}
-.mega-menu.open{display:flex !important;gap:0}
-
-/* Header strip */
-.mega-menu::before{
-  content:'';
-  display:block;
-  position:absolute;
-  top:0;left:0;right:0;height:4px;
-  background:linear-gradient(90deg,#0078d4 0%,#50e6ff 50%,#0078d4 100%);
-  border-radius:16px 16px 0 0;
-}
-
-.mega-col{
-  flex:1;
-  padding:24px 22px 26px;
-  border-right:1px solid rgba(0,120,212,.08);
-  min-width:0;
-  max-height:80vh;
-  overflow-y:auto;
-  scrollbar-width:thin;
-  scrollbar-color:#c8dffc transparent;
-}
-.mega-col:last-child{border-right:none}
-
-/* Column header */
-.mega-col-title{
-  font-size:14px;
-  font-weight:900;
-  color:#0050a0;
-  letter-spacing:.4px;
-  padding:6px 10px 8px;
-  margin-bottom:10px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  background:linear-gradient(90deg,#e8f2ff,#f0f8ff);
-  border-radius:8px;
-  border-left:3px solid #0078d4;
-}
-
-/* Category group label */
-.mega-col .nav-dropdown-group{
-  font-size:9.5px;
-  font-weight:800;
-  color:#0078d4;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  padding:10px 10px 5px;
-  background:none;
-  border-top:none;
-  margin-top:6px;
-  opacity:.7;
-}
-.mega-col .nav-dropdown-group:first-child{margin-top:0}
-
-/* Cert items */
-.mega-col .nav-dropdown-item{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:9px 10px;
-  border-radius:8px;
-  font-size:13px;
-  font-weight:500;
-  color:#1a2a4a;
-  transition:all .15s ease;
-  margin-bottom:2px;
-  border:1px solid transparent;
-  position:relative;
-}
-.mega-col .nav-dropdown-item:not(.disabled):hover{
-  background:linear-gradient(90deg,#e8f3ff,#f0f9ff);
-  border-color:#c0dcff;
-  color:#0050a0;
-  transform:translateX(3px);
-  box-shadow:0 2px 8px rgba(0,120,212,.12);
-}
-.mega-col .nav-dropdown-item.disabled{
-  color:#9aadcc;
-  cursor:default;
-}
-.mega-col .nav-dropdown-item.disabled:hover{
-  background:none;
-  transform:none;
-  box-shadow:none;
-  border-color:transparent;
-}
-
-/* Active cert badge */
-.mega-col .nav-dropdown-item:not(.disabled){
-  font-weight:700;
-  color:#0050a0;
-}
-
-/* Soon tag refresh */
-.soon-tag{
-  font-size:9px;
-  background:linear-gradient(90deg,#fff8e0,#ffefc0);
-  color:#8a6000;
-  border-radius:4px;
-  padding:2px 6px;
-  font-style:normal;
-  font-weight:800;
-  border:1px solid #ffe090;
-  flex-shrink:0;
-  margin-left:auto;
-  letter-spacing:.3px;
-}
-
-/* Dark mode */
-body.dark .mega-menu{
-  background:linear-gradient(160deg,#0d1a2e 0%,#111928 60%,#0a1520 100%);
-  box-shadow:0 24px 64px rgba(0,0,0,.5);
-}
-body.dark .mega-col{border-right-color:rgba(255,255,255,.06)}
-body.dark .mega-col-title{
-  color:#50e6ff;
-  background:linear-gradient(90deg,rgba(80,230,255,.1),rgba(80,230,255,.04));
-  border-left-color:#50e6ff;
-}
-body.dark .mega-col .nav-dropdown-item:not(.disabled){color:#b0d0ff}
-body.dark .mega-col .nav-dropdown-item:not(.disabled):hover{
-  background:linear-gradient(90deg,rgba(0,120,212,.2),rgba(0,120,212,.08));
-  color:#50e6ff;
-  border-color:rgba(80,230,255,.2);
-}
-body.dark .mega-col .nav-dropdown-item.disabled{color:#3a5070}
-body.dark .mega-col .nav-dropdown-group{color:#50e6ff}
-
-/* ══ INTERVIEW PREP — stylish mega-menu (gold accent) ══ */
-.iv-drop{position:relative}
-.iv-mega-menu{
-  display:none !important;
-  position:absolute;
-  top:calc(100% + 10px);
-  left:50%;
-  transform:translateX(-50%);
-  width:640px;
-  max-width:92vw;
-  max-height:none;
-  overflow:visible;
-  margin:0;
-  background:linear-gradient(160deg,#fffaf0 0%,#ffffff 55%,#f0f8ff 100%);
-  border:none;
-  border-radius:16px;
-  box-shadow:0 24px 64px rgba(120,90,0,.16), 0 2px 8px rgba(0,0,0,.08);
-  z-index:9999;
-  padding:0;
-}
-.iv-drop:hover .iv-mega-menu{display:flex !important;gap:0}
-.iv-mega-menu::before{
-  content:'';
-  display:block;
-  position:absolute;
-  top:0;left:0;right:0;height:4px;
-  background:linear-gradient(90deg,#ffd700 0%,#50e6ff 50%,#ffd700 100%);
-  border-radius:16px 16px 0 0;
-}
-.iv-mega-menu .mega-col{max-height:78vh}
-.iv-mega-menu .mega-col-title{
-  background:linear-gradient(90deg,#fff6df,#fffdf5);
-  border-left:3px solid #e0ac00;
-  color:#8a6000;
-}
-.iv-mega-menu .mega-col-title.blue-title{
-  background:linear-gradient(90deg,#e8f2ff,#f0f8ff);
-  border-left:3px solid #0078d4;
-  color:#0050a0;
-}
-body.dark .iv-mega-menu{
-  background:linear-gradient(160deg,#1a1608 0%,#111928 55%,#0a1520 100%);
-  box-shadow:0 24px 64px rgba(0,0,0,.5);
-}
-body.dark .iv-mega-menu .mega-col-title{
-  background:linear-gradient(90deg,rgba(255,215,0,.12),rgba(255,215,0,.04));
-  border-left-color:#ffd700;
-  color:#ffd700;
-}
-body.dark .iv-mega-menu .mega-col-title.blue-title{
-  background:linear-gradient(90deg,rgba(80,230,255,.1),rgba(80,230,255,.04));
-  border-left-color:#50e6ff;
-  color:#50e6ff;
-}
-
-/* ══ NESTED (hover) DROPDOWN ══ */
-.nav-nested-wrap{position:relative}
-.nav-nested-trigger{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
-.nav-nested-badge{background:#e8f0fe;color:#0078d4;border-radius:10px;padding:1px 8px;font-size:10.5px;font-weight:700;flex-shrink:0}
-.nav-nested-menu{display:none;position:absolute;left:100%;top:0;background:white;border:1px solid var(--border);border-radius:8px;min-width:200px;box-shadow:0 8px 24px rgba(0,0,0,.15);z-index:1000;overflow:hidden}
-.nav-nested-wrap:hover .nav-nested-menu{display:block}
-body.dark .nav-nested-menu{background:#111928;border-color:#253047}
-
-/* lang-menu nested fix */
-.lang-menu .nav-nested-menu{left:100%}
-
-/* ══ SPRACHEN — stylish flag mega-menu ══ */
-.lang-menu{
-  min-width:300px !important;
-  padding:10px !important;
-  background:linear-gradient(160deg,#fdfeff 0%,#ffffff 55%,#f2f8ff 100%) !important;
-  border:none !important;
-  border-radius:16px !important;
-  box-shadow:0 22px 56px rgba(0,40,120,.2), 0 2px 8px rgba(0,0,0,.08) !important;
-  overflow:visible !important;
-  max-height:none !important;
-}
-.lang-menu::before{
-  content:'';display:block;position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,#0078d4 0%,#50e6ff 50%,#0078d4 100%);
-  border-radius:16px 16px 0 0;
-}
-.lang-menu .nav-nested-wrap{margin-bottom:3px}
-.lang-menu .nav-nested-trigger{
-  border-radius:11px;padding:10px 12px;gap:12px;
-  font-weight:600;font-size:14px;color:#1a2a4a;
-  transition:all .15s ease;border:1px solid transparent;
-}
-.lang-menu .nav-nested-trigger:hover{
-  background:linear-gradient(90deg,#e8f3ff,#f0f9ff);
-  color:#0050a0;border-color:#c8e0fb;
-  transform:translateX(4px);
-  box-shadow:0 2px 8px rgba(0,120,212,.12);
-}
-.lang-menu .nav-nested-badge{background:#e8f0fe;color:#0078d4;font-weight:800}
-.lang-menu .nav-nested-menu{
-  background:linear-gradient(160deg,#fdfeff 0%,#ffffff 100%);
-  border:none;border-radius:12px;
-  box-shadow:0 18px 40px rgba(0,40,120,.2);
-  padding:8px;margin-left:8px;
-}
-.lang-menu .nav-nested-menu .nav-dropdown-group{background:none;border-top:none;color:#0078d4;opacity:.75}
-.lang-menu .nav-nested-menu .nav-dropdown-item{border-radius:8px;padding:8px 10px}
-.lang-menu .nav-nested-menu .nav-dropdown-item:not(.disabled):hover{background:#eef6ff}
-body.dark .lang-menu{
-  background:linear-gradient(160deg,#0d1a2e 0%,#111928 55%,#0a1520 100%) !important;
-  box-shadow:0 22px 56px rgba(0,0,0,.5) !important;
-}
-body.dark .lang-menu .nav-nested-trigger{color:#b0d0ff}
-body.dark .lang-menu .nav-nested-trigger:hover{
-  background:linear-gradient(90deg,rgba(0,120,212,.2),rgba(0,120,212,.08));
-  color:#50e6ff;border-color:rgba(80,230,255,.2);
-}
-body.dark .lang-menu .nav-nested-menu{background:#0d1622;box-shadow:0 18px 40px rgba(0,0,0,.5)}
-body.dark .lang-menu .nav-nested-menu .nav-dropdown-item:not(.disabled):hover{background:#152040}
-body.dark .flag-badge{background:#1a2638}
-body.dark .lang-drop-menu{
-  background:linear-gradient(160deg,#0d1a2e 0%,#111928 55%,#0a1520 100%);
-  box-shadow:0 22px 56px rgba(0,0,0,.5);
-}
-body.dark .lang-drop-item{color:#b0d0ff}
-body.dark .lang-drop-item:hover{
-  background:linear-gradient(90deg,rgba(0,120,212,.2),rgba(0,120,212,.08));
-  color:#50e6ff;border-color:rgba(80,230,255,.2);
-}
-body.dark .lang-drop-item.active-lang{background:linear-gradient(90deg,rgba(0,120,212,.18),rgba(0,120,212,.06));border-color:rgba(80,230,255,.25)}
-
-/* Interview Prep gold accent */
-.nav-dropdown-item[style*="color:#50e6ff"]:hover{background:#0d2040!important}
-
-.soon-tag{font-size:10px;background:#fff4ce;color:#7a5c00;border-radius:3px;padding:1px 5px;font-style:normal;font-weight:700;margin-left:6px}
+.nav-link:hover{background:rgba(255,255,255,.12);color:white}
 .nav-right{margin-left:auto;display:flex;gap:8px}
-.btn-news{background:var(--blue);color:white;border:none;padding:8px 18px;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer}
-
-/* ===== PAGES ===== */
-.page{display:none}
-.page.active{display:block}
-
-/* ===== HOME PAGE ===== */
-.hero{position:relative;overflow:hidden;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(80,230,255,.16),transparent 65%),linear-gradient(160deg,#06101f 0%,#0a1f3d 45%,#0d3a6e 100%);color:#eef4fb;padding:68px 32px 50px;text-align:center}
-.hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:42px 42px;-webkit-mask-image:radial-gradient(ellipse 60% 55% at 50% 0%,#000,transparent);mask-image:radial-gradient(ellipse 60% 55% at 50% 0%,#000,transparent);pointer-events:none}
-.hero-inner{position:relative;z-index:1}
-.hero h1{font-size:38px;font-weight:800;line-height:1.16;margin-bottom:14px;letter-spacing:-.6px}
-.hero h1 span.accent{color:#7be3ff}
-.hero p.lead{font-size:16.5px;color:rgba(238,244,251,.8);max-width:560px;margin:0 auto 30px;line-height:1.65}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:42px}
-.btn-hero-prim{background:#fff;color:#0a1f3d;border:none;padding:13px 30px;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;transition:all .15s}
-.btn-hero-prim:hover{background:#7be3ff;transform:translateY(-1px)}
-.btn-hero-sec{background:transparent;color:#eef4fb;border:1.5px solid rgba(238,244,251,.35);padding:13px 30px;border-radius:6px;font-size:15px;font-weight:600;cursor:pointer;transition:all .15s}
-.btn-hero-sec:hover{border-color:#7be3ff;color:#7be3ff}
-/* ===== Hero trust stats — concrete numbers instead of a duplicate Teil-preview ===== */
-.hero-stats{display:flex;align-items:flex-start;justify-content:center;gap:22px;max-width:840px;margin:0 auto 44px;flex-wrap:wrap;padding:0 12px}
-.hero-stat{display:flex;flex-direction:column;align-items:center;min-width:64px;max-width:140px}
-.hs-num{font-size:26px;font-weight:800;color:#7be3ff;letter-spacing:-.4px;line-height:1.1}
-.hs-num.gold{
-  background:linear-gradient(150deg,#fff6dd 0%,#f3cf72 30%,#caa03c 55%,#f6d987 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.hs-label{font-size:11.5px;color:rgba(238,244,251,.6);font-weight:600;margin-top:4px;white-space:normal;text-align:center;line-height:1.3}
-.hs-sep{width:1px;height:30px;background:rgba(238,244,251,.18);flex-shrink:0;margin-top:2px}
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;max-width:960px;margin:0 auto;padding:0 16px;position:relative;z-index:1}
-.feature-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:20px;text-align:left;transition:all .2s}
-.feature-card:hover{background:rgba(255,255,255,.11);transform:translateY(-2px)}
-.feature-card .icon{width:36px;height:36px;border-radius:9px;background:rgba(80,230,255,.14);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:12px}
-.feature-card h3{font-size:14.5px;font-weight:700;margin-bottom:6px}
-.feature-card p{font-size:13px;color:rgba(238,244,251,.7);line-height:1.5}
-.certs-section{max-width:900px;margin:56px auto 48px;padding:0 20px}
-.certs-section .sec-eyebrow{font-size:12.5px;font-weight:700;color:var(--blue);letter-spacing:.4px;text-align:center;margin-bottom:6px;text-transform:uppercase}
-.certs-section h2{font-size:24px;font-weight:800;color:#201f1e;margin-bottom:24px;text-align:center}
-.cert-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-.cert-card{position:relative;background:white;border:1px solid var(--border);border-left:4px solid var(--blue);border-radius:8px;padding:24px 24px 24px 22px;cursor:pointer;transition:all .2s;box-shadow:0 2px 6px rgba(0,0,0,.06)}
-.cert-card:hover{box-shadow:0 8px 22px rgba(0,120,212,.14);transform:translateY(-3px)}
-.cert-card.locked{cursor:not-allowed;opacity:.65;border-left-color:#c8c6c4}
-.cert-card h3{font-size:18px;font-weight:800;color:#0a1f3d;margin-bottom:6px}
-.cert-card p{font-size:13.5px;color:#605e5c;margin-bottom:14px;line-height:1.5}
-.cert-badge{display:inline-block;background:var(--light);color:var(--blue);padding:4px 12px;border-radius:12px;font-size:12px;font-weight:700}
-.cert-badge.locked-badge{background:#f3f2f1;color:#aaa}
-
-/* ===== TESTIMONIALS ===== */
-.testimonials{background:#eef3fb;padding:56px 20px 60px}
-.testimonials h2{text-align:center;font-size:26px;font-weight:800;color:var(--green);margin-bottom:14px}
-.testimonials .underline{width:160px;height:4px;background:linear-gradient(90deg,var(--green),var(--blue));border-radius:2px;margin:0 auto 36px}
-.test-track{display:flex;gap:18px;overflow-x:auto;max-width:1180px;margin:0 auto;padding:4px 4px 12px;scroll-behavior:smooth}
-.test-card{background:white;border-radius:10px;padding:24px;min-width:260px;max-width:280px;flex-shrink:0;box-shadow:0 2px 10px rgba(0,0,0,.06);display:flex;flex-direction:column;justify-content:space-between}
-.test-card p{font-size:14px;line-height:1.65;color:#3a3a3a;margin-bottom:18px}
-.test-author{display:flex;align-items:center;gap:10px}
-.test-author .ft-mark{font-weight:800;font-size:17px}
-.test-author .ft-mark span{color:var(--blue)}
-.test-author .ft-mark em{color:var(--green);font-style:normal}
-.test-author .tname{font-size:14px;font-weight:600;color:#201f1e}
-.test-nav{display:flex;justify-content:center;gap:10px;margin-top:18px}
-.test-arrow{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:white;cursor:pointer;font-size:15px;color:var(--blue);display:flex;align-items:center;justify-content:center;transition:all .15s}
-.test-arrow:hover{background:var(--light)}
-
-/* ===== CTA BANNER ===== */
-.cta-banner{background:linear-gradient(135deg,#0a1f3d,var(--blue));color:white;text-align:center;padding:48px 24px}
-.cta-banner h2{font-size:24px;font-weight:800;margin-bottom:10px}
-.cta-banner p{font-size:15px;opacity:.9;margin-bottom:22px}
-.btn-cta{background:transparent;border:2px solid rgba(255,255,255,.7);color:white;padding:12px 28px;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .15s}
-.btn-cta:hover{background:rgba(255,255,255,.12)}
-
-/* ===== FEATURES (white section) ===== */
-.feat-white{max-width:1100px;margin:0 auto;padding:48px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px}
-.feat-white-card{padding:6px 10px}
-.feat-white-card .icon{font-size:26px;margin-bottom:14px;color:var(--green)}
-.feat-white-card h3{font-size:18px;font-weight:800;margin-bottom:10px;color:#201f1e}
-.feat-white-card p{font-size:14px;color:#605e5c;line-height:1.6}
-
-/* ===== FAQ ===== */
-.faq-section{max-width:900px;margin:8px auto 56px;padding:0 20px}
-.faq-section h2{text-align:center;font-size:24px;font-weight:800;margin-bottom:28px;color:#201f1e}
-.faq-item{background:#f3f2f1;border-radius:4px;margin-bottom:10px;overflow:hidden}
-.faq-q{display:flex;align-items:center;gap:14px;padding:18px 22px;cursor:pointer;font-size:15px;color:#201f1e;font-weight:500}
-.faq-q .plus{font-size:18px;color:#605e5c;flex-shrink:0;transition:transform .2s;width:18px;text-align:center}
-.faq-item.open .faq-q .plus{transform:rotate(45deg)}
-.faq-a{display:none;padding:0 22px 18px 54px;font-size:14px;color:#605e5c;line-height:1.6}
-.faq-item.open .faq-a{display:block}
-
-/* ===== FOOTER ===== */
-footer.site-footer{background:white;border-top:1px solid var(--border);padding:20px 32px;font-size:13px;color:#605e5c;text-align:center}
-footer.site-footer a{color:var(--blue);text-decoration:none;cursor:pointer}
-footer.site-footer a:hover{text-decoration:underline}
-.sections-page{max-width:1300px;margin:0 auto;padding:0;position:relative}
-.sections-hero{
-  position:relative;overflow:hidden;
-  background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(80,230,255,.14),transparent 65%),linear-gradient(160deg,#06101f 0%,#0a1f3d 50%,#0d3a6e 100%);
-  padding:44px 28px 30px;text-align:center;color:#eef4fb;
-  border-radius:0 0 22px 22px;margin-bottom:26px;
-}
-.sections-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:38px 38px;-webkit-mask-image:radial-gradient(ellipse 65% 60% at 50% 0%,#000,transparent);mask-image:radial-gradient(ellipse 65% 60% at 50% 0%,#000,transparent);pointer-events:none}
-.sections-page h2{position:relative;z-index:1;font-size:24px;font-weight:800;color:#fff;margin-bottom:6px;letter-spacing:-.3px}
-.sections-sub{position:relative;z-index:1;font-size:14px;color:rgba(238,244,251,.72);margin-bottom:22px;max-width:480px;margin-left:auto;margin-right:auto}
-.progress-overall{
-  position:relative;z-index:1;
-  background:rgba(255,255,255,.06);border:1px solid rgba(238,244,251,.16);
-  backdrop-filter:blur(6px);
-  border-radius:14px;padding:16px 22px;margin:0 auto 0;max-width:460px;
-  display:flex;align-items:center;gap:18px;
-  box-shadow:0 8px 28px rgba(0,0,0,.25);
-}
-.progress-overall .pct{font-size:30px;font-weight:800;background:linear-gradient(135deg,#7be3ff,#50e6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.progress-overall .pbar-wrap{flex:1;text-align:left}
-.progress-overall .pbar-label{font-size:12px;color:rgba(238,244,251,.65);margin-bottom:5px;font-weight:600}
-.pbar{height:8px;background:rgba(255,255,255,.12);border-radius:4px;overflow:hidden}
-.pbar-fill{height:100%;background:linear-gradient(90deg,#0078d4,#50e6ff);border-radius:4px;transition:width .5s;box-shadow:0 0 10px rgba(80,230,255,.5)}
-.unlock-msg{
-  display:flex;align-items:center;gap:10px;
-  background:linear-gradient(135deg,#fdf3da,#f7e3ad);
-  border:1px solid #e8c873;border-radius:10px;padding:11px 18px;
-  font-size:13px;color:#6b4f08;font-weight:600;margin:0 20px 18px;
-  box-shadow:0 2px 10px rgba(200,150,30,.12);
-  position:relative;z-index:1;
-}
-.sections-list-wrap{padding:0 24px 50px;max-width:1300px;margin:0 auto}
-.section-list{display:flex;flex-direction:column;gap:12px}
-.section-item{
-  position:relative;
-  background:linear-gradient(155deg,#0f1f38 0%,#0a1830 100%);
-  border:1px solid #1d3257;border-radius:14px;padding:17px 20px;
-  display:flex;align-items:center;gap:16px;cursor:pointer;
-  transition:all .2s;
-  box-shadow:0 4px 14px rgba(0,0,0,.22);
-}
-.section-item:hover:not(.locked){box-shadow:0 8px 24px rgba(0,100,200,.22);transform:translateX(4px);border-color:#2d4f85}
-.section-item.locked{opacity:1}
-.section-item .snum{
-  width:42px;height:42px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,#0078d4,#50e6ff);
-  color:#06101f;display:flex;align-items:center;justify-content:center;
-  font-weight:800;font-size:16px;box-shadow:0 0 0 4px rgba(80,230,255,.14);
-}
-/* Locked = premium gold medallion */
-.section-item.locked .snum{
-  background:linear-gradient(150deg,#fff6dd 0%,#f3cf72 22%,#caa03c 45%,#fbe7a8 58%,#a87c22 78%,#f6d987 100%);
-  border:1.5px solid #ffe9a8;color:#5a4109;
-  box-shadow:0 2px 4px rgba(0,0,0,.3),0 0 0 1px rgba(120,85,15,.35) inset,0 1px 0 rgba(255,255,255,.6) inset,0 0 14px rgba(255,205,90,.3);
-  position:relative;overflow:hidden;
-}
-.section-item.locked .snum svg{width:17px;height:17px;position:relative;z-index:1}
-.section-item .sinfo{flex:1}
-.section-item .sname{font-size:15.5px;font-weight:700;color:#fff}
-.section-item.locked .sname{color:#f3e3b8}
-.section-item .srange{font-size:13px;color:rgba(238,244,251,.55)}
-.section-item .sstats{font-size:12px;color:rgba(238,244,251,.5);margin-top:2px}
-.section-item .spct{font-size:14px;font-weight:800;min-width:48px;text-align:right;background:linear-gradient(135deg,#7be3ff,#50e6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.section-item.locked .spct{background:none;-webkit-background-clip:unset;background-clip:unset;color:#d9b873}
-.section-item-pbar{height:4px;background:rgba(255,255,255,.08);border-radius:0 0 14px 14px;margin-top:-12px;overflow:hidden;position:relative;z-index:0}
-
-/* ===== Filter-Banner über den Lernpfad-Spalten ===== */
-.path-banner{
-  position:relative;overflow:hidden;
-  background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(80,230,255,.14),transparent 65%),linear-gradient(160deg,#06101f 0%,#0a1f3d 50%,#0d3a6e 100%);
-  padding:34px 24px 26px;text-align:center;color:#eef4fb;
-  border-radius:18px;margin:0 24px 26px;
-}
-.path-banner::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:38px 38px;-webkit-mask-image:radial-gradient(ellipse 65% 60% at 50% 0%,#000,transparent);mask-image:radial-gradient(ellipse 65% 60% at 50% 0%,#000,transparent);pointer-events:none}
-.path-banner-title{position:relative;z-index:1;font-size:22px;font-weight:800;color:#fff;margin-bottom:6px;letter-spacing:-.3px}
-.path-banner-sub{position:relative;z-index:1;font-size:13.5px;color:rgba(238,244,251,.72);margin-bottom:20px}
-.path-filters{position:relative;z-index:1;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
-.path-filter-btn{
-  display:inline-flex;align-items:center;gap:8px;
-  background:rgba(255,255,255,.08);border:1px solid rgba(238,244,251,.18);
-  color:#eef4fb;font-size:13.5px;font-weight:700;
-  padding:10px 20px;border-radius:24px;cursor:pointer;
-  transition:all .18s;white-space:nowrap;
-}
-.path-filter-btn:hover{background:rgba(255,255,255,.16);border-color:rgba(238,244,251,.32);transform:translateY(-1px)}
-.path-filter-btn.active{
-  background:linear-gradient(135deg,#0078d4,#50e6ff);
-  border-color:transparent;color:#06101f;
-  box-shadow:0 4px 16px rgba(80,230,255,.35);
-}
-.path-filter-btn .pf-ico{font-size:15px}
-
-/* ===== Lernmodule & Labs — neue Spalten neben den Pr\u00fcfungsfragen ===== */
-.sections-columns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:26px;align-items:start}
-@media(max-width:900px){.sections-columns{grid-template-columns:1fr}}
-.sections-columns.cols-1{grid-template-columns:1fr;max-width:620px;margin-left:auto;margin-right:auto}
-.sections-columns.cols-2{grid-template-columns:1fr 1fr}
-@media(max-width:900px){.sections-columns.cols-2{grid-template-columns:1fr}}
-.sections-col{display:none;flex-direction:column;gap:12px}
-.sections-col.show{display:flex}
-.col-header{display:flex;align-items:center;gap:12px;background:linear-gradient(155deg,#0f1f38 0%,#0a1830 100%);border:1px solid #1d3257;border-radius:14px;padding:14px 16px;box-shadow:0 4px 14px rgba(0,0,0,.22)}
-.col-header .col-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.col-header.col-blue{border-bottom:3px solid #50e6ff}
-.col-header.col-blue .col-icon{background:rgba(80,230,255,.15);color:#50e6ff}
-.col-header.col-green{border-bottom:3px solid #3ddc84}
-.col-header.col-green .col-icon{background:rgba(61,220,132,.15);color:#3ddc84}
-.col-header.col-gold{border-bottom:3px solid #f2c14e}
-.col-header.col-gold .col-icon{background:rgba(242,193,78,.18);color:#f2c14e}
-.col-header .col-title{font-size:15px;font-weight:800;color:#fff}
-.col-header .col-sub{font-size:11.5px;color:rgba(238,244,251,.55);margin-top:2px}
-.mod-item,.lab-item{
-  position:relative;background:linear-gradient(155deg,#0f1f38 0%,#0a1830 100%);
-  border:1px solid #1d3257;border-radius:14px;padding:14px 16px;
-  display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .2s;
-  box-shadow:0 4px 14px rgba(0,0,0,.22);
-}
-.mod-item:hover,.lab-item:hover{box-shadow:0 8px 24px rgba(0,100,200,.22);transform:translateX(4px);border-color:#2d4f85}
-[dir="rtl"] .mod-item:hover,[dir="rtl"] .lab-item:hover{transform:translateX(-4px)}
-.mod-item .mnum{
-  width:38px;height:38px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,#0078d4,#50e6ff);
-  color:#06101f;display:flex;align-items:center;justify-content:center;
-  font-weight:800;font-size:15px;box-shadow:0 0 0 4px rgba(80,230,255,.14);
-}
-.lab-item .lnum{
-  width:38px;height:38px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,#0fa968,#5eebab);
-  color:#06241a;display:flex;align-items:center;justify-content:center;
-  font-weight:800;font-size:15px;box-shadow:0 0 0 4px rgba(95,235,170,.18);
-}
-/* Lernmodule — gesperrt: edles Blau/Saphir-Medaillon (Start der Reise) */
-.mod-item.locked .mnum{
-  background:linear-gradient(150deg,#eaf8ff 0%,#9fe3ff 22%,#1f8fd6 45%,#bfe9ff 58%,#0d5a96 78%,#7dd3ff 100%);
-  border:1.5px solid #b9e8ff;color:#06304f;
-  box-shadow:0 2px 4px rgba(0,0,0,.3),0 0 0 1px rgba(10,70,120,.35) inset,0 1px 0 rgba(255,255,255,.6) inset,0 0 14px rgba(80,180,255,.35);
-}
-/* Labs — gesperrt: edles Smaragd/Gr\u00fcn-Medaillon (Fortschritt) */
-.lab-item.locked .lnum{
-  background:linear-gradient(150deg,#eafff0 0%,#9ff0c0 22%,#1fa86a 45%,#bdf5d6 58%,#0d6e44 78%,#7de8ad 100%);
-  border:1.5px solid #b9f5d2;color:#063d20;
-  box-shadow:0 2px 4px rgba(0,0,0,.3),0 0 0 1px rgba(10,90,50,.35) inset,0 1px 0 rgba(255,255,255,.6) inset,0 0 14px rgba(80,220,140,.35);
-}
-.mod-item.locked .mnum svg,.lab-item.locked .lnum svg{width:15px;height:15px;position:relative;z-index:1}
-.mod-item .minfo,.lab-item .linfo{flex:1}
-.mod-item .mname,.lab-item .lname{font-size:14.5px;font-weight:700;color:#fff}
-.mod-item.locked .mname{color:#cfeaff}
-.lab-item.locked .lname{color:#cdf5e0}
-.mod-item .msub,.lab-item .lsub{font-size:12px;color:rgba(238,244,251,.5);margin-top:2px}
-
-/* ===== QUIZ PAGE — Premium dark/gold/cyan redesign ===== */
-.quiz-wrap{max-width:820px;margin:0 auto;padding:28px 20px 60px}
-.quiz-topbar{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-.back-btn{display:inline-flex;align-items:center;gap:6px;color:#9fc4ec;cursor:pointer;font-size:13px;font-weight:600;padding:8px 16px;border-radius:20px;background:linear-gradient(155deg,#0f1f38,#0a1830);border:1.5px solid #1d3257;transition:all .15s;box-shadow:0 2px 8px rgba(0,0,0,.2)}
-.back-btn:hover{background:linear-gradient(155deg,#132544,#0d1d3a);color:#7be3ff;border-color:#2d4f85}
-/* Number grid */
-.num-grid{
-  background:linear-gradient(155deg,#0f1f38 0%,#0a1830 100%);
-  border:1px solid #1d3257;border-radius:14px;padding:16px 18px;margin-bottom:22px;
-  box-shadow:0 4px 18px rgba(0,0,0,.25);
-}
-.num-grid-inner{display:flex;flex-wrap:wrap;gap:6px}
-.nq{
-  width:40px;height:32px;border:1.5px solid #253a5c;border-radius:8px;
-  background:rgba(255,255,255,.04);font-size:11.5px;font-weight:700;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;transition:all .15s;color:#8fb4dd;
-}
-.nq:hover{background:rgba(80,230,255,.1);border-color:#50e6ff;color:#7be3ff}
-.nq.cur{
-  background:linear-gradient(150deg,#fff6dd 0%,#f3cf72 22%,#caa03c 45%,#fbe7a8 58%,#a87c22 78%,#f6d987 100%);
-  border:1.5px solid #ffe9a8;color:#5a4109;font-weight:800;
-  box-shadow:0 2px 4px rgba(0,0,0,.3),0 0 0 1px rgba(120,85,15,.35) inset,0 1px 0 rgba(255,255,255,.6) inset,0 0 12px rgba(255,205,90,.3);
-}
-.nq.ok{background:rgba(34,197,94,.14);border-color:#22c55e;color:#6ee07a}
-.nq.bad{background:rgba(239,68,68,.14);border-color:#ef4444;color:#ff8080}
-/* Main card */
-.q-card{
-  background:linear-gradient(165deg,#0f1f38 0%,#0a1830 55%,#081428 100%);
-  border:1px solid #1d3257;border-radius:20px;
-  box-shadow:0 12px 48px rgba(0,0,0,.35),0 1px 6px rgba(0,0,0,.2);overflow:hidden;
-}
-/* Card header */
-.q-head{
-  background:radial-gradient(ellipse 80% 100% at 30% 0%,rgba(80,230,255,.18),transparent 60%),linear-gradient(135deg,#06101f 0%,#0a1f3d 50%,#0d3a6e 100%);
-  color:#eef4fb;padding:18px 24px;display:flex;align-items:center;gap:12px;
-  border-bottom:1px solid rgba(80,230,255,.15);
-}
-.q-head .qn{background:rgba(80,230,255,.12);border:1px solid rgba(80,230,255,.35);border-radius:8px;padding:5px 16px;font-weight:800;font-size:14px;letter-spacing:.3px;color:#7be3ff}
-.q-head .tlabel{font-size:12px;opacity:.75;font-weight:500}
-.q-head .qpos{margin-left:auto;font-size:12px;opacity:.9;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);padding:4px 12px;border-radius:20px;font-weight:600}
-/* Stats row */
-.stats-row{display:flex;gap:0;background:rgba(255,255,255,.03);border-bottom:1px solid #1a2c4d}
-.stat{display:flex;align-items:center;gap:7px;padding:11px 20px;font-size:12.5px;font-weight:600;color:#9fc4ec;flex:1;justify-content:center;border-right:1px solid #1a2c4d}
-.stat:last-child{border-right:none}
-.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0;box-shadow:0 0 6px currentColor}
-.dot.g{background:#22c55e;color:#22c55e}.dot.r{background:#ef4444;color:#ef4444}.dot.u{background:#64748c;color:#64748c}
-/* Progress */
-.prog{height:3px;background:#0a1830}
-.prog-fill{height:100%;background:linear-gradient(90deg,#0078d4,#50e6ff);transition:width .4s;border-radius:3px;box-shadow:0 0 8px rgba(80,230,255,.5)}
-/* Body */
-.q-body{padding:26px 26px 18px}
-/* Question text */
-.q-text-wrap{position:relative;margin-bottom:22px}
-.q-text-de{
-  background:linear-gradient(135deg,rgba(80,230,255,.08),rgba(80,230,255,.03));
-  border:1.5px solid rgba(80,230,255,.25);border-radius:14px;
-  padding:20px 56px 20px 22px;font-size:15.5px;line-height:1.8;color:#eef4fb;font-weight:500;user-select:text;
-}
-.btn-copy{position:absolute;top:10px;right:10px;background:rgba(80,230,255,.1);border:1px solid rgba(80,230,255,.3);color:#7be3ff;border-radius:7px;padding:5px 11px;font-size:11px;cursor:pointer;transition:all .15s;font-weight:600}
-.btn-copy:hover{background:rgba(80,230,255,.2)}.btn-copy.copied{background:#16a34a;color:white;border-color:#16a34a}
-/* Translation box */
-.trans-box{margin-bottom:14px;border:1.5px solid #b07ee8;border-radius:12px;overflow:hidden;background:linear-gradient(155deg,#1a1030,#150a28)}
-.trans-loading{padding:12px 16px;font-size:13px;color:#d4b8f5;font-weight:600}
-.trans-content{padding:14px 16px;font-family:'Vazirmatn','Segoe UI','Tahoma','Arial Unicode MS',sans-serif}
-.trans-q{font-size:14px;line-height:1.9;color:#f0e6ff;margin-bottom:10px;font-weight:500}
-.trans-opts{display:flex;flex-direction:column;gap:4px}
-.trans-opt-item{font-size:13px;padding:6px 10px;background:rgba(176,126,232,.12);border-radius:5px;color:#e4d4fa;line-height:1.85}
-.trans-opt-item .fl{font-weight:700;color:#c89af5;margin-right:6px}
-[dir="rtl"] .trans-opt-item .fl{margin-right:0;margin-left:6px}
-[dir="rtl"] .trans-box{direction:rtl;text-align:right}
-[dir="rtl"] .trans-content{font-family:'Vazirmatn','Tahoma','Arial Unicode MS',sans-serif;line-height:2.1}
-/* Multi-warn */
-.multi-warn{background:linear-gradient(135deg,rgba(245,200,90,.14),rgba(245,200,90,.06));border:1.5px solid #caa03c;border-radius:12px;padding:12px 18px;font-size:13px;color:#f3cf72;font-weight:600;margin-bottom:16px;display:none}
-.multi-warn.on{display:block}
-/* Options */
-.opts{display:flex;flex-direction:column;gap:10px;margin-bottom:18px}
-.opt{
-  display:flex;align-items:center;gap:14px;padding:15px 20px;
-  border:1.5px solid #1d3257;border-radius:13px;cursor:pointer;transition:all .18s ease;
-  background:linear-gradient(155deg,#101f38,#0c1830);user-select:none;
-  box-shadow:0 1px 5px rgba(0,0,0,.15);
-}
-.opt:hover:not(.locked){border-color:#50e6ff;background:linear-gradient(155deg,#132544,#0e1d3a);box-shadow:0 4px 16px rgba(80,230,255,.12);transform:translateX(4px)}
-[dir="rtl"] .opt:hover:not(.locked){transform:translateX(-4px)}
-.opt.sel{border-color:#50e6ff;background:linear-gradient(155deg,#0f2847,#0c2040);box-shadow:0 4px 16px rgba(80,230,255,.16)}
-.opt-radio{width:21px;height:21px;border-radius:50%;border:2px solid #2d4666;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .18s;background:rgba(255,255,255,.02)}
-.opt.sel .opt-radio{border-color:#50e6ff;background:#50e6ff}
-.opt.sel .opt-radio::after{content:'';width:7px;height:7px;border-radius:50%;background:#06101f;display:block}
-.opt-letter{width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.05);color:#8fb4dd;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;transition:all .18s;border:1.5px solid #253a5c}
-.opt-txt{font-size:14.5px;line-height:1.55;color:#dce8f8;font-weight:500;flex:1}
-/* CORRECT */
-.opt.correct{border-color:#16a34a !important;background:linear-gradient(155deg,#0c2818,#0a2014) !important;box-shadow:0 4px 18px rgba(34,197,94,.22) !important;transform:none !important}
-.opt.correct .opt-radio{border-color:#22c55e;background:#22c55e}
-.opt.correct .opt-radio::after{content:'✓';font-size:12px;color:#06101f;display:block;width:auto;height:auto;background:none;border-radius:0}
-.opt.correct .opt-letter{background:#22c55e;color:#06101f;border-color:#22c55e}
-.opt.correct .opt-txt{color:#7ef0a0;font-weight:700}
-/* WRONG */
-.opt.wrong{border-color:#dc2626 !important;background:linear-gradient(155deg,#280c0c,#200a0a) !important;box-shadow:0 4px 18px rgba(239,68,68,.2) !important;transform:none !important}
-.opt.wrong .opt-radio{border-color:#ef4444;background:#ef4444}
-.opt.wrong .opt-radio::after{content:'✕';font-size:12px;color:#06101f;display:block;width:auto;height:auto;background:none;border-radius:0}
-.opt.wrong .opt-letter{background:#ef4444;color:#06101f;border-color:#ef4444}
-.opt.wrong .opt-txt{color:#ff9a9a;font-weight:700}
-/* MISSED CORRECT */
-.opt.correct-miss{border-color:#16a34a !important;background:linear-gradient(155deg,#0c2818,#0a2014) !important}
-.opt.correct-miss .opt-letter{background:#22c55e;color:#06101f;border-color:#22c55e}
-.opt.correct-miss .opt-txt{color:#7ef0a0;font-weight:700}
-/* Checkbox */
-.opt-checkbox{width:21px;height:21px;border-radius:6px;border:2px solid #2d4666;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .18s;background:rgba(255,255,255,.02)}
-.opt.sel .opt-checkbox,.opt-checkbox.chk-sel{border-color:#50e6ff;background:#50e6ff}
-.opt.sel .opt-checkbox::after,.opt-checkbox.chk-sel::after{content:'✓';font-size:13px;color:#06101f;font-weight:800;line-height:1}
-.opt.correct .opt-checkbox,.opt-checkbox.chk-correct{border-color:#22c55e;background:#22c55e}
-.opt.correct .opt-checkbox::after,.opt-checkbox.chk-correct::after{content:'✓';font-size:13px;color:#06101f;font-weight:800;line-height:1}
-.opt.wrong .opt-checkbox,.opt-checkbox.chk-wrong{border-color:#ef4444;background:#ef4444}
-.opt.wrong .opt-checkbox::after,.opt-checkbox.chk-wrong::after{content:'✕';font-size:12px;color:#06101f;font-weight:800;line-height:1}
-.opt-radio.chk-correct{border-color:#22c55e;background:#22c55e}
-.opt-radio.chk-correct::after{content:'✓';font-size:11px;color:#06101f;display:block}
-.opt-radio.chk-wrong{border-color:#ef4444;background:#ef4444}
-.opt-radio.chk-wrong::after{content:'✕';font-size:11px;color:#06101f;display:block}
-
-/* ══ ACTION ROW — Zurück | Antwort prüfen | Weiter ══ */
-.action-row{display:flex;align-items:stretch;justify-content:center;gap:12px;margin:22px 0 18px;flex-wrap:wrap}
-.btn-nav-prev,.btn-nav-next{padding:13px 26px;border-radius:13px;font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .18s;border:2px solid;min-width:120px;justify-content:center}
-.btn-nav-prev{background:linear-gradient(155deg,#101f38,#0c1830);color:#9fc4ec;border-color:#1d3257;box-shadow:0 2px 8px rgba(0,0,0,.2)}
-.btn-nav-prev:hover:not(:disabled){border-color:#50e6ff;color:#7be3ff;transform:translateX(-2px)}
-[dir="rtl"] .btn-nav-prev:hover:not(:disabled){transform:translateX(2px)}
-.btn-nav-prev:disabled{opacity:.3;cursor:not-allowed;transform:none}
-.btn-check{background:linear-gradient(135deg,#15803d,#22c55e);color:#06101f;border:none;padding:13px 40px;border-radius:13px;font-size:15px;font-weight:800;cursor:pointer;display:none;align-items:center;gap:10px;box-shadow:0 5px 18px rgba(34,197,94,.32);transition:all .18s;letter-spacing:.2px}
-.btn-check:hover{background:linear-gradient(135deg,#16a34a,#4ade80);transform:translateY(-2px);box-shadow:0 8px 24px rgba(34,197,94,.4)}
-.btn-check:active{transform:translateY(0)}
-.btn-check.show{display:inline-flex}
-.btn-nav-next{background:linear-gradient(135deg,#0078d4,#50e6ff);color:#06101f;border-color:transparent;box-shadow:0 5px 18px rgba(80,230,255,.3)}
-.btn-nav-next:hover:not(:disabled){background:linear-gradient(135deg,#0060b8,#7be3ff);transform:translateX(2px);box-shadow:0 8px 24px rgba(80,230,255,.4)}
-[dir="rtl"] .btn-nav-next:hover:not(:disabled){transform:translateX(-2px)}
-.btn-nav-next:active{transform:translateY(0)}
-.btn-nav-next:disabled{opacity:.35;cursor:not-allowed;transform:none}
-
-/* Feedback */
-.fb{display:none;padding:16px 20px;border-radius:14px;font-size:15px;font-weight:700;margin-bottom:16px;align-items:center;gap:12px}
-.fb.on{display:flex}
-.fb.ok{background:linear-gradient(135deg,rgba(34,197,94,.14),rgba(34,197,94,.06));color:#6ee07a;border:1.5px solid #22c55e;box-shadow:0 4px 16px rgba(34,197,94,.18)}
-.fb.bad{background:linear-gradient(135deg,rgba(239,68,68,.14),rgba(239,68,68,.06));color:#ff9a9a;border:1.5px solid #ef4444;box-shadow:0 4px 16px rgba(239,68,68,.16)}
-/* Explanation */
-.expl-box{margin-bottom:14px;border:1.5px solid rgba(80,230,255,.25);border-radius:14px;overflow:hidden;display:none}
-.expl-box.show{display:block}
-.expl-btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:13px 18px;background:linear-gradient(135deg,rgba(80,230,255,.1),rgba(80,230,255,.04));border:none;cursor:pointer;font-size:14px;font-weight:700;color:#7be3ff;gap:8px}
-.expl-btn:hover{background:linear-gradient(135deg,rgba(80,230,255,.16),rgba(80,230,255,.07))}
-.expl-btn .arr{font-size:11px;transition:transform .2s;opacity:.7}
-.expl-btn.open .arr{transform:rotate(180deg)}
-.expl-content{display:none;padding:18px 20px;background:#0a1830;font-size:14px;line-height:1.8;border-top:1px solid rgba(80,230,255,.18);color:#c0d8f0;user-select:text}
-.expl-content.open{display:block}
-.expl-ref{margin-top:10px;font-size:12px;color:#7090b0}
-.expl-ref a{color:#50e6ff;word-break:break-all}
-/* Note box — gold accent, matching premium lock medallions elsewhere on site */
-.note-box{background:linear-gradient(135deg,rgba(245,200,90,.1),rgba(245,200,90,.04));border:1.5px solid rgba(245,200,90,.35);border-radius:14px;padding:18px 20px;margin-top:14px}
-.note-box-title{font-size:13px;font-weight:800;color:#f3cf72;margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.note-box textarea{width:100%;border:1.5px solid rgba(245,200,90,.3);border-radius:10px;background:#0a1424;font-size:13.5px;font-family:inherit;padding:11px 14px;resize:vertical;min-height:72px;color:#eef4fb;outline:none;transition:border .15s;line-height:1.6}
-.note-box textarea:focus{border-color:#caa03c;box-shadow:0 0 0 3px rgba(245,200,90,.12)}
-.note-save-btn{margin-top:10px;background:linear-gradient(150deg,#fff6dd,#f3cf72,#caa03c);color:#5a4109;border:none;padding:9px 22px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;box-shadow:0 3px 10px rgba(200,150,30,.25)}
-.note-save-btn:hover{background:linear-gradient(150deg,#fffbe8,#f6d987,#d4ab4a);transform:translateY(-1px)}
-.note-saved-msg{display:inline-block;font-size:12.5px;color:#6ee07a;font-weight:700;margin-left:12px;opacity:0;transition:opacity .3s}
-[dir="rtl"] .note-saved-msg{margin-left:0;margin-right:12px}
-.note-saved-msg.show{opacity:1}
-/* Footer */
-.q-foot{padding:14px 26px 18px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #1a2c4d;flex-wrap:wrap;gap:8px;background:rgba(255,255,255,.02);border-radius:0 0 20px 20px}
-.q-ctr{font-size:13px;color:#7090b0;font-weight:600}
-/* Old nav-btns hidden — replaced by action-row */
-.nav-btns{display:none}
-.btn{padding:12px 24px;border-radius:12px;border:none;cursor:pointer;font-size:14px;font-weight:700;transition:all .18s}
-.btn-p{background:linear-gradient(135deg,#0047a8,#0078d4);color:white;box-shadow:0 4px 14px rgba(0,120,212,.28)}.btn-p:hover{background:linear-gradient(135deg,#003480,#0060b8)}
-.btn-s{background:white;color:#4a6080;border:2px solid #d4e4f7}.btn-s:hover{background:#f0f6ff;border-color:#a8cff5}
-.btn:disabled{opacity:.35;cursor:not-allowed}
-
-/* ===== KONTAKT / NEWS ===== */
-.info-page{max-width:700px;margin:48px auto;padding:0 20px}
-.info-page h2{font-size:22px;font-weight:700;color:var(--blue);margin-bottom:16px}
-.info-card{background:white;border:1px solid var(--border);border-radius:8px;padding:24px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.info-card h3{font-size:16px;font-weight:700;margin-bottom:8px}
-.info-card p{font-size:14px;color:#605e5c;line-height:1.6}
-
-/* ===== NEWS BLOG ===== */
-.news-page{max-width:760px;margin:44px auto 60px;padding:0 20px}
-.news-page h2{font-size:26px;font-weight:800;color:var(--green);margin-bottom:24px}
-.news-post{padding:26px 0;border-top:1px solid var(--border)}
-.news-post:first-of-type{border-top:none}
-.news-date{font-size:12.5px;color:#8a8886;font-weight:600;margin-bottom:8px}
-.news-post h3{font-size:19px;font-weight:800;color:#201f1e;margin-bottom:10px}
-.news-post p{font-size:14.5px;color:#3a3a3a;line-height:1.7;margin-bottom:10px}
-.news-post ul{margin:10px 0 10px 20px;font-size:14.5px;color:#3a3a3a;line-height:1.8}
-.news-post strong.price{color:var(--blue)}
-
-/* ===== KONTAKT FORM ===== */
-.form-page{max-width:680px;margin:44px auto 60px;padding:0 20px}
-.form-page h2{font-size:26px;font-weight:800;color:var(--green);margin-bottom:16px}
-.form-page>p.intro{font-size:14.5px;color:#3a3a3a;line-height:1.7;margin-bottom:28px}
-.flabel{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:6px;display:block}
-.fgroup{margin-bottom:20px}
-.finput,.ftextarea{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:4px;background:#faf9f8;font-size:14px;font-family:inherit;color:var(--text)}
-.finput:focus,.ftextarea:focus{outline:2px solid var(--blue);background:white}
-.ftextarea{min-height:120px;resize:vertical}
-.fcheck-row{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:#3a3a3a;margin-bottom:18px;line-height:1.5}
-.fcheck-row input{margin-top:3px;flex-shrink:0}
-.captcha-box{border:1px solid var(--border);border-radius:6px;padding:16px 18px;margin-bottom:20px;background:#faf9f8}
-.captcha-box .ctext{font-size:14px;margin-bottom:12px}
-.captcha-box .ctext b{color:var(--dark)}
-.captcha-opts{display:flex;gap:18px;justify-content:center}
-.capt-btn{width:54px;height:54px;border:2px solid var(--border);border-radius:6px;background:white;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
-.capt-btn:hover{border-color:var(--blue)}
-.capt-btn.right{border-color:var(--green);background:var(--gbg)}
-.capt-btn.wrong{border-color:var(--red);background:var(--rbg)}
-.btn-submit{background:var(--blue);color:white;border:none;padding:12px 32px;border-radius:5px;font-size:14.5px;font-weight:700;cursor:pointer}
-.btn-submit:hover{background:var(--dark)}
-.btn-submit:disabled{opacity:.45;cursor:not-allowed}
-.form-msg{padding:12px 16px;border-radius:5px;font-size:14px;margin-bottom:18px;display:none}
-.form-msg.show{display:block}
-.form-msg.ok{background:var(--gbg);color:var(--green);border:1px solid #9fd89f}
-.form-msg.err{background:var(--rbg);color:var(--red);border:1px solid #f1b0b7}
-
-/* ===== FEEDBACK PAGE ===== */
-.stars-input{display:flex;gap:6px;font-size:30px;cursor:pointer;margin-bottom:4px}
-.stars-input .s{color:#d9d6d2;transition:color .1s}
-.stars-input .s.on{color:#f2b01e}
-.review-list{margin-top:36px;border-top:1px solid var(--border);padding-top:24px}
-.review-item{padding:18px 0;border-bottom:1px solid #edebe9}
-.review-stars{color:#f2b01e;font-size:15px;margin-bottom:4px}
-.review-date{font-size:12.5px;color:#8a8886;font-style:italic;margin-left:8px}
-.review-text{font-size:14.5px;color:#201f1e;margin-bottom:4px}
-.review-name{font-size:13.5px;color:#605e5c;font-weight:600}
-.review-reply{background:#f3f2f1;border-radius:6px;padding:14px 16px;margin-top:10px;font-size:13.5px;color:#3a3a3a;line-height:1.6}
-.review-reply b{display:block;margin-bottom:4px;color:var(--dark)}
-
-/* ===== RESPONSIVE ===== */
-@media(max-width:600px){
-  .nq{width:32px;height:28px;font-size:11px}
-  .quiz-wrap{padding:12px}
-  .hero h1{font-size:26px}
-  .hero{padding:48px 18px 38px}
-  .hero-stats{gap:18px}
-  .hs-num{font-size:21px}
-  .hs-label{font-size:10.5px}
-  .hs-sep{height:24px}
-  .test-card{min-width:220px}
-  .cta-banner h2{font-size:20px}
-  nav{padding:0 16px}
-  .nav-links{display:none}
-}
-/* ===== AUTH PAGE ===== */
-.auth-page{max-width:500px;margin:48px auto 80px;padding:0 20px}
-.auth-tabs{display:flex;gap:32px;justify-content:center;margin-bottom:32px;border-bottom:2px solid var(--border);padding-bottom:0}
-.auth-tab{font-size:18px;font-weight:700;color:#aaa;cursor:pointer;padding:10px 4px;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .18s}
-.auth-tab.active{color:var(--blue);border-bottom-color:var(--blue)}
-.auth-form-box{background:white;border:1px solid var(--border);border-radius:10px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,.07)}
-.auth-label{font-size:14px;font-weight:700;color:var(--dark);display:block;margin-bottom:6px}
-.auth-input-wrap{position:relative;margin-bottom:18px}
-.auth-input{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:6px;font-size:14px;font-family:inherit;background:#fafaf9;color:var(--text);transition:border .15s}
-.auth-input:focus{outline:none;border-color:var(--blue);background:white}
-.auth-eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:17px;color:#888;background:none;border:none}
-.auth-check-row{display:flex;align-items:center;gap:8px;font-size:13.5px;color:#444;margin-bottom:18px}
-.auth-btn{width:100%;background:var(--blue);color:white;border:none;padding:13px;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s;margin-top:4px}
-.auth-btn:hover{background:var(--dark)}
-.auth-forgot{display:block;text-align:center;margin-top:14px;font-size:13.5px;color:var(--blue);cursor:pointer;text-decoration:none}
-.auth-forgot:hover{text-decoration:underline}
-.auth-msg{padding:11px 14px;border-radius:5px;font-size:13.5px;margin-bottom:16px;display:none;font-weight:600}
-.auth-msg.show{display:block}
-.auth-msg.ok{background:var(--gbg);color:var(--green);border:1px solid #9fd89f}
-.auth-msg.err{background:var(--rbg);color:var(--red);border:1px solid #f1b0b7}
-/* Navbar user button */
-.nav-user-btn{background:rgba(255,255,255,.12);color:white;border:1px solid rgba(255,255,255,.25);padding:7px 14px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;transition:all .15s}
-.nav-user-btn:hover{background:rgba(255,255,255,.22)}
-.nav-user-btn .uicon{font-size:16px}
-/* Dashboard */
-.dashboard-page{max-width:680px;margin:44px auto 80px;padding:0 20px}
-.dash-card{background:white;border:1px solid var(--border);border-radius:10px;padding:28px 32px;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.dash-card h3{font-size:16px;font-weight:700;color:var(--blue);margin-bottom:10px}
-.dash-greeting{font-size:17px;font-weight:700;color:#201f1e;margin-bottom:8px}
-.dash-sub{font-size:14px;color:#605e5c;line-height:1.6;margin-bottom:20px}
-.dash-link{color:var(--blue);cursor:pointer;font-weight:600}
-.dash-link:hover{text-decoration:underline}
-.btn-dash{background:var(--blue);color:white;border:none;padding:11px 26px;border-radius:5px;font-size:14px;font-weight:700;cursor:pointer;margin-right:10px;margin-bottom:8px}
-.btn-dash:hover{background:var(--dark)}
-.btn-dash-del{background:#a80000;color:white;border:none;padding:10px 22px;border-radius:5px;font-size:14px;font-weight:600;cursor:pointer}
-.btn-dash-del:hover{background:#7a0000}
-.dash-sidebar{display:flex;flex-direction:column;gap:0;background:white;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:20px}
-.dash-sidebar a{display:flex;align-items:center;gap:10px;padding:14px 20px;font-size:14.5px;font-weight:600;color:#444;cursor:pointer;border-bottom:1px solid var(--border);text-decoration:none;transition:background .12s}
-.dash-sidebar a:last-child{border-bottom:none}
-.dash-sidebar a:hover,.dash-sidebar a.active{background:var(--light);color:var(--blue)}
-/* ===== PURCHASE MODAL ===== */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:3000;align-items:center;justify-content:center;padding:16px}
-.modal-overlay.open{display:flex}
-.modal-box{background:white;border-radius:14px;max-width:540px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.25);overflow:hidden;animation:modalIn .22s ease}
-@keyframes modalIn{from{transform:scale(.93);opacity:0}to{transform:scale(1);opacity:1}}
-.modal-header{background:linear-gradient(135deg,#0a1f3d,#0078d4);color:white;padding:24px 28px 20px;text-align:center}
-.modal-header h2{font-size:20px;font-weight:800;margin-bottom:6px}
-.modal-header p{font-size:13.5px;opacity:.88;line-height:1.5}
-.modal-body{padding:24px 28px}
-.bundle-box{border:2px solid var(--blue);border-radius:10px;padding:20px 22px;margin-bottom:18px}
-.bundle-desc{font-size:14px;color:#201f1e;line-height:1.65;font-weight:600;text-align:center;margin-bottom:16px}
-.price-row{display:flex;align-items:baseline;justify-content:center;gap:6px;margin-bottom:4px}
-.price-euro{font-size:22px;color:#888;font-weight:500}
-.price-num{font-size:52px;font-weight:900;color:#0a1f3d;line-height:1}
-.price-dur{font-size:13px;color:#888;text-align:center;margin-bottom:18px}
-.badge-row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
-.badge-pill{background:var(--gbg);color:var(--green);border:1px solid #9fd89f;border-radius:999px;padding:4px 12px;font-size:12px;font-weight:700}
-.paypal-btn-wrap{text-align:center;margin-bottom:8px}
-.paypal-btn{background:linear-gradient(180deg,#ffc439,#f4a400);border:1px solid #e09000;color:#003087;font-size:15px;font-weight:800;padding:13px 32px;border-radius:8px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .15s;box-shadow:0 2px 6px rgba(0,0,0,.15)}
-.paypal-btn:hover{background:linear-gradient(180deg,#ffd35a,#f4a400);transform:translateY(-1px);box-shadow:0 4px 14px rgba(0,0,0,.2)}
-.paypal-logo{font-size:18px;font-weight:900;font-style:italic}
-.paypal-logo .pp-p{color:#009cde}.paypal-logo .pp-b{color:#003087}
-.modal-note{font-size:12px;color:#888;text-align:center;margin-top:10px;line-height:1.5}
-.modal-close-row{text-align:center;padding:10px 0 18px}
-.modal-close-btn{background:none;border:none;color:#888;font-size:13px;cursor:pointer;padding:6px 14px}
-.modal-close-btn:hover{color:#333}
-.already-paid-row{text-align:center;margin-top:12px;font-size:13px;color:#605e5c}
-.already-paid-link{color:var(--blue);cursor:pointer;font-weight:600}
-.already-paid-link:hover{text-decoration:underline}
-.modal-warn-box{background:#fff8e1;border:1px solid #ffd54f;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:12.5px;color:#7a5c00;line-height:1.5;text-align:center}
-.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
-.tier-card{border:2px solid var(--border);border-radius:10px;padding:14px 8px;text-align:center;cursor:pointer;transition:all .15s;position:relative;background:white}
-.tier-card:hover{border-color:#9fcdfb;transform:translateY(-2px)}
-.tier-card.selected{border-color:var(--blue);background:var(--light);box-shadow:0 4px 14px rgba(0,120,212,.18)}
-.tier-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--green);color:white;font-size:10px;font-weight:800;padding:2px 9px;border-radius:999px;white-space:nowrap}
-.tier-days{font-size:13px;font-weight:700;color:#605e5c;margin-bottom:6px}
-.tier-price{font-size:24px;font-weight:900;color:#0a1f3d;line-height:1}
-.tier-price small{font-size:13px;font-weight:700}
-.tier-old{font-size:12px;color:#b0b0b0;text-decoration:line-through;margin-top:2px}
-body.dark .tier-card{background:#0f1929;border-color:#253047}
-body.dark .tier-card.selected{background:#152040;border-color:#1a6bbf}
-body.dark .tier-days{color:#9fb3cc}
-body.dark .tier-price{color:#e8e8e8}
-body.dark .modal-warn-box{background:#241c05;border-color:#5c4a10;color:#f2c14e}
-
-/* ===== DARK MODE ===== */
-body.dark{--gray:#0d0d0d;--text:#e8e8e8;--border:#333;background:#0d0d0d;color:#e8e8e8}
-body.dark nav{background:#060d1a;border-bottom:1px solid #1e2a3a}
-body.dark .q-card,body.dark .num-grid{background:linear-gradient(165deg,#08111f 0%,#060d18 100%);border-color:#152138}
-body.dark .q-head{background:radial-gradient(ellipse 80% 100% at 30% 0%,rgba(80,230,255,.1),transparent 60%),linear-gradient(135deg,#020508 0%,#040a14 50%,#06152c 100%)}
-body.dark .stats-row{background:rgba(255,255,255,.015);border-color:#0f1a2e}
-body.dark .q-foot{background:rgba(255,255,255,.015);border-color:#0f1a2e}
-body.dark .q-text-de{background:linear-gradient(135deg,rgba(80,230,255,.05),rgba(80,230,255,.02));border-color:rgba(80,230,255,.18);color:#c0d8f0}
-body.dark .opt{border-color:#152138;background:linear-gradient(155deg,#0a1626,#08111f)}
-body.dark .opt:hover:not(.locked){background:linear-gradient(155deg,#0d1c30,#0a1828);border-color:#50e6ff}
-body.dark .opt.sel{border-color:#50e6ff;background:linear-gradient(155deg,#0a2038,#081830)}
-body.dark .opt-txt{color:#a0c4e8}
-body.dark .opt-letter{background:rgba(255,255,255,.03);color:#7090b0;border-color:#1a2c4a}
-body.dark .opt.correct{background:linear-gradient(155deg,#06200f,#04190c) !important;border-color:#16a34a !important}
-body.dark .opt.correct .opt-txt{color:#6ee07a}
-body.dark .opt.wrong{background:linear-gradient(155deg,#1f0707,#180505) !important;border-color:#dc2626 !important}
-body.dark .opt.wrong .opt-txt{color:#ff8080}
-body.dark .expl-box{border-color:#152138}
-body.dark .expl-btn{background:linear-gradient(135deg,rgba(80,230,255,.08),rgba(80,230,255,.03));color:#50e6ff}
-body.dark .expl-content{background:#050a14;color:#9ab8d8}
-body.dark .trans-box{background:linear-gradient(155deg,#140a26,#0f071e);border-color:#3a2860;color:#cfd8e8}
-body.dark .note-box{background:linear-gradient(135deg,rgba(245,200,90,.06),rgba(245,200,90,.02));border-color:rgba(245,200,90,.25)}
-body.dark .note-box textarea{background:#050a14;border-color:rgba(245,200,90,.2);color:#cfd8e8}
-body.dark .fb.ok{background:linear-gradient(135deg,#04190c,#062010);border-color:#16a34a;color:#6ee07a}
-body.dark .fb.bad{background:linear-gradient(135deg,#180505,#1f0707);border-color:#dc2626;color:#ff8080}
-body.dark .btn-nav-prev{background:linear-gradient(155deg,#0a1626,#08111f);color:#7090b0;border-color:#152138}
-body.dark .btn-nav-prev:hover:not(:disabled){border-color:#50e6ff;color:#50e6ff}
-body.dark .back-btn{background:linear-gradient(155deg,#0a1626,#08111f);border-color:#152138;color:#7090b0}
-body.dark .back-btn:hover{color:#50e6ff;border-color:#2d4f85}
-body.dark .nq{background:rgba(255,255,255,.02);border-color:#152138;color:#7090b0}
-body.dark .nq:hover{border-color:#50e6ff;color:#50e6ff}
-body.dark .nq.cur{
-  background:linear-gradient(150deg,#fff6dd 0%,#f3cf72 22%,#caa03c 45%,#fbe7a8 58%,#a87c22 78%,#f6d987 100%);
-  border-color:#ffe9a8;color:#5a4109;
-}
-body.dark .nq.ok{background:rgba(34,197,94,.08);border-color:#16a34a;color:#6ee07a}
-body.dark .nq.bad{background:rgba(239,68,68,.08);border-color:#dc2626;color:#ff8080}
-
-/* Dark toggle button */
 .dm-toggle{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:white;padding:7px 11px;border-radius:6px;font-size:15px;cursor:pointer;line-height:1;transition:all .15s}
 .dm-toggle:hover{background:rgba(255,255,255,.2)}
 
-/* ===== NOTE BOX ===== */
-.note-box{background:#fffde7;border:1px solid #ffe082;border-radius:6px;padding:12px 14px;margin-top:10px}
-.note-box-title{font-size:11.5px;font-weight:700;color:#7a5c00;margin-bottom:6px;display:flex;align-items:center;gap:5px}
-.note-box textarea{width:100%;border:1px solid #ffd54f;border-radius:4px;background:white;font-size:13px;font-family:inherit;padding:8px 10px;resize:vertical;min-height:60px;color:#333;outline:none;transition:border .15s}
-.note-box textarea:focus{border-color:#f0a500}
-.note-save-btn{margin-top:6px;background:#f9a825;color:white;border:none;padding:5px 14px;border-radius:4px;font-size:12.5px;font-weight:600;cursor:pointer;transition:background .15s}
-.note-save-btn:hover{background:#e08c00}
-.note-saved-msg{display:inline-block;font-size:12px;color:#2e7d32;font-weight:600;margin-left:8px;opacity:0;transition:opacity .3s}
-.note-saved-msg.show{opacity:1}
+/* ===== DARK MODE ===== */
+body.dark{background:#0d0d0d;color:#e8e8e8}
+body.dark nav{background:#060d1a;border-bottom:1px solid #1e2a3a}
+body.dark .iv-opt{background:#111928;border-color:#253047;color:#c9d8ec}
+body.dark .iv-opt:hover:not(.iv-locked){background:#152040;border-color:#0078d4}
+body.dark .iv-opt.iv-correct{background:#062010;border-color:#1a5c25;color:#4cdf6a}
+body.dark .iv-opt.iv-wrong{background:#200707;border-color:#7c1515;color:#ff8080}
+body.dark #ivStatsBar{background:#111928;border-color:#253047;color:#c9d8ec}
+body.dark #ivCard{background:#111928;border-color:#253047}
+body.dark #ivExplBox{background:#0d1a2e;border-left-color:#0078d4;color:#aac4e8}
+body.dark #ivModelBox{background:#061a0e;border-left-color:#2e7d32;color:#7ee08a}
+body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
+body.dark .interview-wrap{color:#e8e8e8}
+body.dark .iv-tip-box{background:#1a1400;border-color:#5c4a10;color:#f2e4b0}
+body.dark .iv-tip-title{color:#f2c14e}
 
-/* ===== SAVE INDICATOR ===== */
-.save-toast{position:fixed;bottom:22px;right:22px;background:#0078d4;color:white;padding:9px 18px;border-radius:7px;font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .35s;z-index:9999;display:flex;align-items:center;gap:7px}
-.save-toast.show{opacity:1}
+/* ===== INTERVIEW ===== */
+.interview-wrap{max-width:900px;margin:0 auto;padding:36px 20px}
 
-/* ===== EXAM SIMULATOR ===== */
-.sim-page-wrap{max-width:860px;margin:0 auto;padding:28px 20px}
+.iv-header{text-align:center;margin-bottom:36px}
+.iv-header .iv-icon{font-size:48px;margin-bottom:12px}
+.iv-header h1{font-size:28px;font-weight:800;color:#1a3a5c;margin-bottom:8px}
+body.dark .iv-header h1{color:#7be3ff}
+.iv-header p{color:#666;font-size:15px;max-width:560px;margin:0 auto;line-height:1.6}
+body.dark .iv-header p{color:#8ba3c0}
 
-/* Setup screen */
-.sim-setup{background:#111928;border:1px solid #253047;border-radius:12px;padding:36px 32px;max-width:520px;margin:50px auto;color:#e6edf3;text-align:center}
-.sim-setup-title{font-size:24px;font-weight:800;color:#50e6ff;margin-bottom:6px}
-.sim-setup-sub{font-size:14px;color:#8ba3c0;margin-bottom:28px}
-.sim-options-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px;text-align:left}
-.sim-opt-card{background:#1a2640;border:2px solid #253047;border-radius:8px;padding:14px 16px;cursor:pointer;transition:all .15s}
-.sim-opt-card:hover,.sim-opt-card.sel{border-color:#50e6ff;background:#0e2040}
-.sim-opt-card h4{font-size:14px;font-weight:700;color:#e6edf3;margin-bottom:3px}
-.sim-opt-card p{font-size:12px;color:#8ba3c0;margin:0}
-.sim-start-btn{background:linear-gradient(135deg,#0078d4,#00a8e8);color:white;border:none;padding:13px 36px;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;width:100%;transition:all .15s;letter-spacing:.3px}
-.sim-start-btn:hover{background:linear-gradient(135deg,#005fa3,#0090c8);transform:translateY(-1px)}
-
-/* Active exam header */
-.sim-header{background:#111928;border:1px solid #253047;border-radius:10px;padding:14px 22px;margin-bottom:18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
-.sim-header-title{font-size:14px;font-weight:700;color:#8ba3c0}
-.sim-timer{font-size:30px;font-weight:900;color:#50e6ff;font-variant-numeric:tabular-nums;min-width:95px;letter-spacing:1px}
-.sim-timer.warning{color:#ff5252;animation:blink .7s infinite alternate}
-@keyframes blink{0%{opacity:1}100%{opacity:.4}}
-.sim-stats-row{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
-.sim-stat-badge{background:#1a2640;border-radius:5px;padding:4px 10px;font-size:12px;font-weight:700}
-.sim-stat-badge.g{color:#4cdf6a}.sim-stat-badge.r{color:#ff5252}.sim-stat-badge.u{color:#8ba3c0}
-
-/* Exam progress */
-.sim-prog-bar{height:4px;background:#1a2640;border-radius:2px;margin-bottom:18px}
-.sim-prog-fill{height:100%;background:linear-gradient(90deg,#0078d4,#50e6ff);border-radius:2px;transition:width .4s}
-
-/* Exam question card */
-.sim-q-card{background:#111928;border:1px solid #253047;border-radius:10px;overflow:hidden}
-.sim-q-top{background:#003580;color:white;padding:11px 20px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:10px}
-.sim-q-pos{margin-left:auto;opacity:.8;font-size:12px}
-.sim-q-text{padding:20px 22px;font-size:15px;line-height:1.7;color:#e6edf3;border-bottom:1px solid #1a2640}
-.sim-multi-warn{background:#1a2640;border-left:3px solid #50e6ff;padding:7px 14px;font-size:12.5px;color:#8ba3c0;display:none}
-.sim-multi-warn.on{display:block}
-.sim-opts{padding:10px 22px 4px;display:flex;flex-direction:column}
-.sim-opt-row{display:flex;align-items:flex-start;gap:11px;padding:12px 6px;border-bottom:1px solid #1a2640;cursor:pointer;transition:background .12s;user-select:none}
-.sim-opt-row:last-child{border-bottom:none}
-.sim-opt-row:hover:not(.locked){background:#152040}
-.sim-opt-radio{width:18px;height:18px;border-radius:50%;border:2px solid #3a5070;flex-shrink:0;margin-top:2px;background:#0d1421;display:flex;align-items:center;justify-content:center;transition:all .15s}
-.sim-opt-checkbox{width:18px;height:18px;border-radius:3px;border:2px solid #3a5070;flex-shrink:0;margin-top:2px;background:#0d1421;display:flex;align-items:center;justify-content:center;transition:all .15s}
-.sim-opt-row.selected .sim-opt-radio{border-color:#50e6ff;background:#50e6ff}
-.sim-opt-row.selected .sim-opt-radio::after{content:'';width:7px;height:7px;border-radius:50%;background:#111928;display:block}
-.sim-opt-row.selected .sim-opt-checkbox{border-color:#50e6ff;background:#50e6ff}
-.sim-opt-row.selected .sim-opt-checkbox::after{content:'✓';font-size:12px;color:#111928;font-weight:900;line-height:1}
-.sim-opt-row.selected .sim-opt-label{color:#50e6ff}
-.sim-opt-row.correct .sim-opt-radio,.sim-opt-row.correct .sim-opt-checkbox{border-color:#4cdf6a;background:#4cdf6a}
-.sim-opt-row.correct .sim-opt-label{color:#4cdf6a;font-weight:600}
-.sim-opt-row.wrong .sim-opt-radio,.sim-opt-row.wrong .sim-opt-checkbox{border-color:#ff5252;background:#ff5252}
-.sim-opt-row.wrong .sim-opt-label{color:#ff5252}
-.sim-opt-row.correct-miss .sim-opt-label{color:#4cdf6a;font-weight:600}
-.sim-opt-row.correct-miss .sim-opt-checkbox{border-color:#4cdf6a}
-.sim-opt-label{font-size:14px;color:#8ba3c0;line-height:1.55;transition:color .12s}
-.sim-opt-row:hover:not(.locked) .sim-opt-label{color:#c9d8ec}
-.sim-opt-row.locked{cursor:default}
-.sim-fb{display:none;padding:10px 16px;border-radius:6px;font-size:13.5px;font-weight:600;margin:0 22px 12px;align-items:center;gap:8px}
-.sim-fb.on{display:flex}
-.sim-fb.ok{background:#062010;color:#4cdf6a;border:1px solid #1a5c25}
-.sim-fb.bad{background:#200707;color:#ff5252;border:1px solid #7c1515}
-.sim-multi-submit{margin:0 22px 14px;background:#0078d4;color:white;border:none;padding:9px 22px;border-radius:5px;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s}
-.sim-multi-submit:hover{background:#005fa3}
-.sim-multi-submit:disabled{opacity:.35;cursor:not-allowed}
-.sim-foot{padding:14px 22px 18px;border-top:1px solid #1a2640;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.sim-btn{padding:9px 22px;border-radius:6px;border:none;cursor:pointer;font-size:14px;font-weight:600;transition:all .15s;font-family:inherit}
-.sim-btn-prim{background:#0078d4;color:white}.sim-btn-prim:hover{background:#005fa3}
-.sim-btn-dark{background:#1a2640;color:#c9d8ec;border:1px solid #253047}.sim-btn-dark:hover{background:#253047}
-.sim-btn-danger{background:#8b1a1a;color:white}.sim-btn-danger:hover{background:#a52020}
-.sim-btn:disabled{opacity:.35;cursor:not-allowed}
-
-/* Result screen */
-.sim-result{text-align:center;padding:40px 24px;color:#e6edf3;background:#111928;border:1px solid #253047;border-radius:10px}
-.sim-result-score{font-size:76px;font-weight:900;margin:16px 0 6px;letter-spacing:-2px}
-.sim-result-score.pass{color:#4cdf6a}.sim-result-score.fail{color:#ff5252}
-.sim-result-verdict{font-size:20px;font-weight:700;margin-bottom:20px}
-.sim-result-verdict.pass{color:#4cdf6a}.sim-result-verdict.fail{color:#ff5252}
-.sim-result-bar{height:14px;background:#1a2640;border-radius:7px;overflow:hidden;margin:0 auto 24px;max-width:300px}
-.sim-result-fill{height:100%;border-radius:7px;transition:width .6s}
-.sim-result-fill.pass{background:linear-gradient(90deg,#238636,#4cdf6a)}
-.sim-result-fill.fail{background:linear-gradient(90deg,#8b1a1a,#ff5252)}
-.sim-result-stats{display:flex;gap:20px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
-.sim-result-stat span{display:block;font-size:26px;font-weight:800;color:#e6edf3}
-.sim-result-stat p{font-size:13px;color:#8ba3c0;margin:2px 0 0}
-/* ===== INTERVIEW PREP ===== */
-.iv-cat-btn{padding:7px 16px;border-radius:20px;background:white;border:1.5px solid #ddd;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;color:#555}
+/* Category filters */
+.iv-filters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.iv-cat-btn{padding:7px 16px;border-radius:20px;background:white;border:1.5px solid #ddd;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;color:#555;user-select:none}
+body.dark .iv-cat-btn{background:#111928;border-color:#253047;color:#8ba3c0}
 .iv-cat-btn:hover{border-color:#0078d4;color:#0078d4}
+body.dark .iv-cat-btn:hover{border-color:#0078d4;color:#50e6ff}
 .iv-cat-btn.iv-cat-active{background:#0078d4;color:white;border-color:#0078d4}
+
+/* Job filters */
+.iv-job-label{font-size:12.5px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;margin-top:18px;text-align:center}
+.iv-job-filters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+/* Stats bar */
+#ivStatsBar{display:flex;gap:16px;background:white;border:1px solid #e0e0e0;border-radius:8px;padding:14px 22px;margin-bottom:22px;flex-wrap:wrap;align-items:center;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+#ivStatsBar strong{color:#0078d4}
+
+.iv-prog-wrap{flex:1;background:#eee;border-radius:4px;height:6px;min-width:80px}
+body.dark .iv-prog-wrap{background:#1a2640}
+#ivProgFill{height:100%;background:#0078d4;border-radius:4px;width:0%;transition:width .3s}
+.iv-stat-ok{font-size:13px;color:#2e7d32;font-weight:700}
+.iv-stat-bad{font-size:13px;color:#c62828;font-weight:700}
+
+/* Question card */
+#ivCard{background:white;border:1px solid #e0e0e0;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.08);overflow:hidden}
+#ivQHead{padding:12px 22px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:10px;color:white}
+#ivQText{font-size:16px;font-weight:600;color:#1a1a1a;line-height:1.65;margin-bottom:18px;padding:22px 24px 0}
+body.dark #ivQText{color:#e0eaf5}
+
+/* Options */
+#ivOptsEl{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;padding:0 24px}
 .iv-opt{display:flex;align-items:flex-start;gap:11px;padding:12px 16px;border:1.5px solid #e0e0e0;border-radius:7px;cursor:pointer;transition:all .15s;background:white;font-size:14px;color:#333;line-height:1.5}
 .iv-opt:hover:not(.iv-locked){border-color:#0078d4;background:#f0f6ff;color:#0078d4}
-.iv-opt.iv-correct{border-color:#4caf50;background:#e8f5e9;color:#2e7d32;font-weight:600}
-.iv-opt.iv-wrong{border-color:#ef5350;background:#ffebee;color:#c62828}
-.iv-opt.iv-missed{border-color:#4caf50;background:#f0fff4;color:#2e7d32;font-style:italic}
+.iv-opt.iv-correct{border-color:#4caf50 !important;background:#e8f5e9 !important;color:#2e7d32 !important;font-weight:600}
+.iv-opt.iv-wrong{border-color:#ef5350 !important;background:#ffebee !important;color:#c62828 !important}
+.iv-opt.iv-missed{border-color:#4caf50 !important;background:#f0fff4 !important;color:#2e7d32 !important;font-style:italic}
 .iv-opt.iv-locked{cursor:default}
-.iv-radio{width:17px;height:17px;border-radius:50%;border:2px solid #bbb;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center}
+.iv-radio{width:17px;height:17px;border-radius:50%;border:2px solid #bbb;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .iv-opt.iv-correct .iv-radio{border-color:#4caf50;background:#4caf50}
 .iv-opt.iv-correct .iv-radio::after,.iv-opt.iv-missed .iv-radio::after{content:'✓';font-size:10px;color:white;font-weight:700}
 .iv-opt.iv-wrong .iv-radio{border-color:#ef5350;background:#ef5350}
 .iv-opt.iv-wrong .iv-radio::after{content:'✕';font-size:10px;color:white;font-weight:700}
 .iv-opt.iv-missed .iv-radio{border-color:#4caf50}
+
+/* Feedback / Explanation / Model */
+#ivFb{display:none;padding:12px 16px;border-radius:6px;font-size:14px;line-height:1.6;margin:0 24px 14px}
+#ivFb.iv-fb-ok{display:block;background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7;font-weight:600}
+#ivFb.iv-fb-bad{display:block;background:#ffebee;color:#c62828;border:1px solid #ef9a9a;font-weight:600}
+#ivExplBox{display:none;background:#f0f6ff;border-left:4px solid #0078d4;border-radius:0 6px 6px 0;padding:14px 16px;font-size:13.5px;color:#1a3a5c;line-height:1.7;margin:0 24px 14px}
+#ivModelBox{display:none;background:#f0fff4;border-left:4px solid #4caf50;border-radius:0 6px 6px 0;padding:14px 16px;font-size:13.5px;color:#1a4a20;line-height:1.75;margin:0 24px 14px}
+#ivTransBox{display:none;background:#f8f0ff;border:1.5px solid #c9a7f5;border-radius:8px;padding:14px 16px;margin:0 24px 14px;font-family:'Vazirmatn','Segoe UI',sans-serif;font-size:14px;color:#2d0057;line-height:2}
+
+/* Action buttons */
+.iv-actions{padding:12px 22px 18px;border-top:1px solid #eee;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+body.dark .iv-actions{border-top-color:#1a2640}
 .iv-btn-dark{background:#2c2c2c;color:white;border:none;padding:9px 20px;border-radius:5px;font-size:13.5px;font-weight:600;cursor:pointer;transition:background .15s}
-.iv-btn-dark:hover{background:#444}
+.iv-btn-dark:hover:not(:disabled){background:#444}
 .iv-btn-dark:disabled{opacity:.35;cursor:not-allowed}
 .iv-btn-blue{background:#0078d4;color:white;border:none;padding:9px 20px;border-radius:5px;font-size:13.5px;font-weight:600;cursor:pointer;transition:background .15s}
 .iv-btn-blue:hover{background:#005fa3}
@@ -1096,25 +115,17 @@ body.dark .nq.bad{background:rgba(239,68,68,.08);border-color:#dc2626;color:#ff8
 .iv-btn-purple:hover{background:#5a1ab8}
 .iv-btn-sm{background:#eee;color:#444;border:none;padding:6px 14px;border-radius:5px;font-size:12.5px;font-weight:600;cursor:pointer;transition:background .15s}
 .iv-btn-sm:hover{background:#ddd}
-body.dark .iv-opt{background:#111928;border-color:#253047;color:#c9d8ec}
-body.dark .iv-opt:hover:not(.iv-locked){background:#152040;border-color:#0078d4}
-body.dark .iv-opt.iv-correct{background:#062010;border-color:#1a5c25;color:#4cdf6a}
-body.dark .iv-opt.iv-wrong{background:#200707;border-color:#7c1515;color:#ff8080}
-body.dark #ivStatsBar{background:#111928;border-color:#253047}
-body.dark #ivCard{background:#111928;border-color:#253047}
-body.dark #ivExplBox{background:#0d1a2e;border-color:#0078d4;color:#aac4e8}
-body.dark #ivModelBox{background:#061a0e;border-color:#2e7d32;color:#7ee08a}
-body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
-/* ===== FREE TRIAL BANNER ===== */
-.free-banner{background:linear-gradient(135deg,#107c10,#0b5e0b);color:white;text-align:center;padding:10px 16px;font-size:14px;font-weight:700;position:relative;z-index:10}
-.free-banner a{color:#a5f3a5;cursor:pointer;text-decoration:underline;margin-left:8px}
-/* ===== TRUST SIGNALS ===== */
-.trust-bar{background:white;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-bottom:0}
-.trust-item{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#444}
-.trust-item .ti{font-size:18px}
-/* ===== IMPROVED FOOTER ===== */
+body.dark .iv-btn-sm{background:#1a2640;color:#c9d8ec}
+body.dark .iv-btn-sm:hover{background:#253047}
+
+/* Tips box */
+.iv-tip-box{margin-top:22px;background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:16px 20px}
+.iv-tip-title{font-size:12.5px;font-weight:700;color:#7a5c00;margin-bottom:8px}
+#ivTip{font-size:13.5px;color:#5a4000;line-height:1.7}
+
+/* ===== FOOTER ===== */
 .site-footer{background:#0a1f3d;color:rgba(255,255,255,.7);padding:40px 20px 24px;margin-top:60px}
-.site-footer .footer-inner{max-width:960px;margin:0 auto}
+.footer-inner{max-width:960px;margin:0 auto}
 .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:32px;margin-bottom:32px}
 @media(max-width:700px){.footer-top{grid-template-columns:1fr;gap:20px}}
 .footer-brand-col .fb{font-size:22px;font-weight:900;color:white;letter-spacing:-0.5px;margin-bottom:8px}
@@ -1127,346 +138,80 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
 .footer-copy{font-size:12px;color:rgba(255,255,255,.3)}
 .footer-langs{display:flex;gap:6px;flex-wrap:wrap}
 .footer-langs span{font-size:11px;color:rgba(255,255,255,.35)}
-/* ===== KONTAKT FORM SUCCESS ===== */
-.form-success{background:var(--gbg);color:var(--green);border:1px solid #9fd89f;border-radius:6px;padding:14px 18px;font-weight:700;font-size:14px;margin-top:12px;display:none}
-.form-success.show{display:block}
-.form-error{background:var(--rbg);color:var(--red);border:1px solid #f1b0b7;border-radius:6px;padding:14px 18px;font-weight:700;font-size:14px;margin-top:12px;display:none}
-.form-error.show{display:block}
 
-/* ===== KI-ASSISTENT WIDGET ===== */
-.ai-launcher{
-  position:fixed;bottom:24px;right:24px;z-index:4000;
-  width:60px;height:60px;border-radius:50%;border:none;cursor:pointer;
-  background:radial-gradient(circle at 35% 30%,#3aa8f0,#0a5fc4 70%);
-  box-shadow:0 6px 22px rgba(10,95,196,.5),0 0 0 0 rgba(80,230,255,.5);
-  display:flex;align-items:center;justify-content:center;
-  font-size:28px;transition:transform .2s,box-shadow .2s;
-  animation:aiPulse 2.6s ease-in-out infinite;
+@media(max-width:600px){
+  nav{padding:0 16px}
+  .nav-links{display:none}
+  .interview-wrap{padding:20px 14px}
 }
-.ai-launcher:hover{transform:scale(1.07)}
-.ai-launcher.hide{display:none}
-@keyframes aiPulse{
-  0%,100%{box-shadow:0 6px 22px rgba(10,95,196,.5),0 0 0 0 rgba(80,230,255,.35)}
-  50%{box-shadow:0 6px 22px rgba(10,95,196,.5),0 0 0 9px rgba(80,230,255,0)}
-}
-[dir="rtl"] .ai-launcher{right:auto;left:24px}
-
-.ai-chat{
-  position:fixed;bottom:24px;right:24px;z-index:4001;
-  width:380px;max-width:calc(100vw - 32px);
-  height:540px;max-height:calc(100vh - 48px);
-  background:#fff;border-radius:18px;overflow:hidden;
-  box-shadow:0 24px 64px rgba(0,20,60,.35);
-  display:none;flex-direction:column;
-  font-family:'Segoe UI',system-ui,sans-serif;
-}
-.ai-chat.open{display:flex}
-[dir="rtl"] .ai-chat{right:auto;left:24px}
-.ai-chat-head{
-  background:linear-gradient(120deg,#06101f 0%,#0a1f3d 45%,#0d6fc4 100%);
-  color:#fff;padding:16px 18px;display:flex;align-items:center;gap:12px;flex-shrink:0;
-}
-.ai-chat-head .ai-ico{
-  width:38px;height:38px;border-radius:50%;flex-shrink:0;
-  background:radial-gradient(circle at 35% 30%,#3aa8f0,#0a5fc4 70%);
-  display:flex;align-items:center;justify-content:center;font-size:19px;
-}
-.ai-chat-head .ai-title{font-size:15.5px;font-weight:800;flex:1}
-.ai-chat-head .ai-close{background:transparent;border:none;color:#fff;font-size:20px;cursor:pointer;opacity:.8;padding:4px;line-height:1}
-.ai-chat-head .ai-close:hover{opacity:1}
-.ai-chat-body{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:#f7f9fc}
-.ai-msg{max-width:88%;font-size:13.5px;line-height:1.6;padding:11px 14px;border-radius:12px;white-space:pre-wrap;word-wrap:break-word}
-.ai-msg.bot{background:#eef3fa;color:#1c2a3a;align-self:flex-start;border-bottom-left-radius:4px}
-[dir="rtl"] .ai-msg.bot{border-bottom-left-radius:12px;border-bottom-right-radius:4px}
-.ai-msg.user{background:linear-gradient(135deg,#0078d4,#0a5fc4);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
-[dir="rtl"] .ai-msg.user{align-self:flex-start;border-bottom-right-radius:12px;border-bottom-left-radius:4px}
-.ai-msg.typing{display:flex;gap:4px;align-items:center;padding:14px}
-.ai-msg.typing span{width:6px;height:6px;border-radius:50%;background:#9bb3cc;animation:aiTyping 1.2s infinite}
-.ai-msg.typing span:nth-child(2){animation-delay:.15s}
-.ai-msg.typing span:nth-child(3){animation-delay:.3s}
-@keyframes aiTyping{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
-.ai-suggest{display:flex;flex-direction:column;gap:8px;margin-top:2px}
-.ai-suggest-btn{
-  background:#eef6ff;border:1px solid #cfe4fb;color:#0a5fc4;
-  font-size:13px;font-weight:600;text-align:left;
-  padding:10px 14px;border-radius:10px;cursor:pointer;transition:all .15s;
-}
-[dir="rtl"] .ai-suggest-btn{text-align:right}
-.ai-suggest-btn:hover{background:#dcedfc;border-color:#9fcdfb}
-.ai-chat-foot{border-top:1px solid #e8edf3;padding:12px;display:flex;gap:8px;flex-shrink:0;background:#fff}
-.ai-chat-input{
-  flex:1;border:1.5px solid #cfe0f0;border-radius:22px;padding:10px 16px;
-  font-size:13.5px;outline:none;transition:border-color .15s;font-family:inherit;
-}
-.ai-chat-input:focus{border-color:#0078d4}
-.ai-chat-send{
-  width:40px;height:40px;border-radius:50%;border:none;flex-shrink:0;
-  background:linear-gradient(135deg,#0078d4,#0a5fc4);color:#fff;
-  display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;
-  transition:opacity .15s;
-}
-.ai-chat-send:disabled{opacity:.5;cursor:default}
-.ai-chat-err{font-size:11.5px;color:#a80000;padding:0 16px 10px;display:none}
-.ai-chat-err.show{display:block}
-@media(max-width:480px){
-  .ai-chat{width:calc(100vw - 24px);right:12px;bottom:12px;height:calc(100vh - 24px)}
-  [dir="rtl"] .ai-chat{left:12px}
-  .ai-launcher{right:16px;bottom:16px}
-  [dir="rtl"] .ai-launcher{left:16px}
-}
-
-/* ===== "KI fragen" Button bei Pr\u00fcfungsfragen ===== */
-.btn-ask-ai{
-  position:absolute;top:10px;right:96px;
-  background:rgba(80,230,255,.1);border:1px solid rgba(80,230,255,.3);
-  color:#7be3ff;border-radius:7px;padding:5px 11px;font-size:11px;
-  cursor:pointer;transition:all .15s;font-weight:600;
-}
-[dir="rtl"] .btn-ask-ai{right:auto;left:96px}
-.btn-ask-ai:hover{background:rgba(80,230,255,.2)}
-
-</style>
-<style>
-/* Interview page standalone */
-.interview-standalone{max-width:900px;margin:0 auto;padding:36px 20px}
-.iv-cat-btn{padding:7px 16px;border-radius:20px;background:white;border:1.5px solid #ddd;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;color:#555}
-.iv-cat-btn:hover{border-color:#0078d4;color:#0078d4}
-.iv-cat-btn.iv-cat-active{background:#0078d4;color:white;border-color:#0078d4}
-.iv-opt{display:flex;align-items:flex-start;gap:11px;padding:12px 16px;border:1.5px solid #e0e0e0;border-radius:7px;cursor:pointer;transition:all .15s;background:white;font-size:14px;color:#333;line-height:1.5}
-.iv-opt:hover:not(.iv-locked){border-color:#0078d4;background:#f0f6ff;color:#0078d4}
-.iv-opt.iv-correct{border-color:#4caf50;background:#e8f5e9;color:#2e7d32;font-weight:600}
-.iv-opt.iv-wrong{border-color:#ef5350;background:#ffebee;color:#c62828}
-.iv-opt.iv-missed{border-color:#4caf50;background:#f0fff4;color:#2e7d32;font-style:italic}
-.iv-opt.iv-locked{cursor:default}
-.iv-radio{width:17px;height:17px;border-radius:50%;border:2px solid #bbb;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center}
-.iv-opt.iv-correct .iv-radio{border-color:#4caf50;background:#4caf50}
-.iv-opt.iv-correct .iv-radio::after,.iv-opt.iv-missed .iv-radio::after{content:'✓';font-size:10px;color:white;font-weight:700}
-.iv-opt.iv-wrong .iv-radio{border-color:#ef5350;background:#ef5350}
-.iv-opt.iv-wrong .iv-radio::after{content:'✕';font-size:10px;color:white;font-weight:700}
-.iv-opt.iv-missed .iv-radio{border-color:#4caf50}
-.iv-btn-dark{background:#2c2c2c;color:white;border:none;padding:9px 20px;border-radius:5px;font-size:13.5px;font-weight:600;cursor:pointer;transition:background .15s}
-.iv-btn-dark:hover{background:#444}
-.iv-btn-dark:disabled{opacity:.35;cursor:not-allowed}
-.iv-btn-blue{background:#0078d4;color:white;border:none;padding:9px 20px;border-radius:5px;font-size:13.5px;font-weight:600;cursor:pointer;transition:background .15s}
-.iv-btn-blue:hover{background:#005fa3}
-.iv-btn-purple{background:#6b21d4;color:white;border:none;padding:9px 20px;border-radius:5px;font-size:13.5px;font-weight:600;cursor:pointer;transition:background .15s}
-.iv-btn-purple:hover{background:#5a1ab8}
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-brand" onclick="closeMegaMenu();showPage('home')" style="font-size:22px;letter-spacing:-1px">&#9670; Cert<span style="color:#50e6ff">Coach</span></a>
+  <span class="nav-brand" onclick="window.location.href='index.html'">&#9670; Cert<span style="color:#50e6ff">Coach</span></span>
   <div class="nav-links">
-    <span class="nav-link" onclick="closeMegaMenu();showPage('home')" data-i18n="nav_home">Startseite</span>
-
-    <!-- ══ IT-ZERTIFIKATE mega dropdown ══ -->
-    <div class="nav-dropdown mega-drop" id="megaDrop">
-      <span class="nav-link" onclick="toggleMegaMenu(event)" onmouseenter="openMegaMenu()" onmouseleave="megaMouseLeaveBtn()">💻 IT-Zertifikate &#9660;</span>
-      <div class="nav-dropdown-menu mega-menu" onclick="event.stopPropagation()" onmouseenter="megaMouseEnterMenu()" onmouseleave="megaMouseLeaveMenu()">
-
-        <!-- Microsoft -->
-        <div class="mega-col">
-          <div class="mega-col-title">🪟 Microsoft</div>
-          <div class="nav-dropdown-group">Fundamentals</div>
-          <span class="nav-dropdown-item" onclick="window.location.href='az-900.html'">AZ-900 &mdash; Azure Fundamentals ✅</span>
-          <span class="nav-dropdown-item" onclick="window.location.href='ab-900.html'">AB-900 &mdash; Azure Basics ✅</span>
-          <span class="nav-dropdown-item disabled">AI-900 &mdash; AI Fundamentals <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">SC-900 &mdash; Security Fundamentals <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">PL-900 &mdash; Power Platform <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">MS-900 &mdash; M365 Fundamentals <em class="soon-tag">soon</em></span>
-          <div class="nav-dropdown-group">Associate / Expert</div>
-          <span class="nav-dropdown-item disabled">AZ-104 &mdash; Azure Administrator <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">AZ-204 &mdash; Azure Developer <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">AZ-305 &mdash; Solutions Architect <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">AZ-400 &mdash; DevOps Engineer <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">AZ-500 &mdash; Security Engineer <em class="soon-tag">soon</em></span>
-        </div>
-
-        <!-- AWS + CompTIA -->
-        <div class="mega-col">
-          <div class="mega-col-title">☁️ AWS Cloud</div>
-          <div class="nav-dropdown-group">Foundational</div>
-          <span class="nav-dropdown-item disabled">CLF-C02 &mdash; Cloud Practitioner <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">AIF-C01 &mdash; AI Practitioner <em class="soon-tag">soon</em></span>
-          <div class="nav-dropdown-group">Associate</div>
-          <span class="nav-dropdown-item disabled">SAA-C03 &mdash; Solutions Architect <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">DVA-C02 &mdash; Developer <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">SOA-C02 &mdash; SysOps Admin <em class="soon-tag">soon</em></span>
-
-          <div class="mega-col-title" style="margin-top:14px">🔵 CompTIA</div>
-          <div class="nav-dropdown-group">Core</div>
-          <span class="nav-dropdown-item disabled">A+ &mdash; IT Support <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">Network+ &mdash; Networking <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">Security+ &mdash; Cybersecurity <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">Cloud+ &mdash; Cloud Computing <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">CySA+ &mdash; Security Analyst <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">PenTest+ &mdash; Penetration Testing <em class="soon-tag">soon</em></span>
-        </div>
-
-        <!-- Linux + ITIL + IHK -->
-        <div class="mega-col">
-          <div class="mega-col-title">🐧 Linux</div>
-          <div class="nav-dropdown-group">LPI</div>
-          <span class="nav-dropdown-item disabled">Linux Essentials &mdash; LPI 010 <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">LPIC-1 &mdash; Linux Admin I <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">LPIC-2 &mdash; Linux Admin II <em class="soon-tag">soon</em></span>
-          <div class="nav-dropdown-group">Red Hat</div>
-          <span class="nav-dropdown-item disabled">RHCSA &mdash; Red Hat Admin <em class="soon-tag">soon</em></span>
-
-          <div class="mega-col-title" style="margin-top:14px">📋 ITIL &amp; ISM</div>
-          <span class="nav-dropdown-item disabled">ITIL 4 Foundation <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">ITIL 4 Practitioner <em class="soon-tag">soon</em></span>
-
-          <div class="mega-col-title" style="margin-top:14px">🏛️ IHK Prüfungen</div>
-          <div class="nav-dropdown-group">Ausbildung IT</div>
-          <span class="nav-dropdown-item disabled">Fachinformatiker &mdash; Systemintegration <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">Fachinformatiker &mdash; Anwendungsentwicklung <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">IT-Kaufmann/-frau <em class="soon-tag">soon</em></span>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ══ SPRACHEN dropdown — nur Deutsch ══ -->
-    <div class="nav-dropdown">
-      <span class="nav-link" onclick="closeMegaMenu()">🌍 Sprachen &#9660;</span>
-      <div class="nav-dropdown-menu lang-menu" style="min-width:220px">
-        <span class="nav-dropdown-item" onclick="window.location.href='index.html?page=german-levels'" style="display:flex;align-items:center;gap:10px">
-          <span class="flag-badge"><img src="https://flagcdn.com/h40/de.png" srcset="https://flagcdn.com/h80/de.png 2x" alt="DE" loading="lazy"></span> Deutsch
-        </span>
-      </div>
-    </div>
-
-    <!-- ══ IT INTERVIEW PREP ══ -->
-    <div class="nav-dropdown iv-drop">
-      <span class="nav-link" onclick="closeMegaMenu()" style="color:#ffd700;font-weight:700">💼 Interview Prep &#9660;</span>
-      <div class="nav-dropdown-menu iv-mega-menu" onclick="event.stopPropagation()">
-
-        <!-- Nach Fachgebiet -->
-        <div class="mega-col">
-          <div class="mega-col-title">🎯 Nach Fachgebiet</div>
-          <span class="nav-dropdown-item" onclick="window.location.href='interview.html'">☁️ Cloud &amp; Azure Interviews</span>
-          <span class="nav-dropdown-item" onclick="window.location.href='interview.html?cat=security'">🔒 Cybersecurity Interviews</span>
-          <span class="nav-dropdown-item" onclick="window.location.href='interview.html?cat=linux'">🐧 Linux &amp; Sysadmin Interviews</span>
-          <span class="nav-dropdown-item" onclick="window.location.href='interview.html?cat=network'">🌐 Networking Interviews</span>
-          <span class="nav-dropdown-item" onclick="window.location.href='interview.html?cat=hr'">🤝 Soft Skills / HR Interviews</span>
-        </div>
-
-        <!-- Nach Berufsbezeichnung + Bewerbung + Simulator -->
-        <div class="mega-col">
-          <div class="mega-col-title">🧑‍💼 Nach Berufsbezeichnung</div>
-          <span class="nav-dropdown-item" onclick="window.location.href='interview.html?job=support'">🎧 IT-Support-Mitarbeiter/in</span>
-          <span class="nav-dropdown-item" onclick="window.location.href='interview.html?job=sysadmin'">🖥️ IT-Systemadministrator/in</span>
-          <span class="nav-dropdown-item" onclick="window.location.href='interview.html?job=secspec'">🛡️ IT-Security-Spezialist/in</span>
-          <span class="nav-dropdown-item" onclick="window.location.href='interview.html?job=cloudeng'">☁️ Cloud Engineer / Azure-Admin</span>
-          <span class="nav-dropdown-item" onclick="window.location.href='interview.html?job=consultant'">📋 IT-Consultant / Projektmanager</span>
-
-          <div class="mega-col-title blue-title" style="margin-top:14px">📄 Bewerbung in Deutschland</div>
-          <span class="nav-dropdown-item disabled">Lebenslauf / CV auf Deutsch <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">Anschreiben schreiben <em class="soon-tag">soon</em></span>
-          <span class="nav-dropdown-item disabled">Typische Vorstellungsfragen <em class="soon-tag">soon</em></span>
-
-          <div class="mega-col-title blue-title" style="margin-top:14px">⏱ Simulator</div>
-          <span class="nav-dropdown-item" onclick="showSimSetup()" style="color:#0078d4">🚀 Prüfungssimulator starten</span>
-        </div>
-
-      </div>
-    </div>
-
-    <span class="nav-link" onclick="closeMegaMenu();showPage('news')" data-i18n="nav_news">News</span>
-    <span class="nav-link" onclick="closeMegaMenu();showPage('kontakt')" data-i18n="nav_contact">Kontakt</span>
+    <span class="nav-link" onclick="window.location.href='index.html'">Startseite</span>
+    <span class="nav-link" onclick="window.location.href='az-900.html'">AZ-900</span>
+    <span class="nav-link" onclick="window.location.href='ab-900.html'">AB-900</span>
+    <span class="nav-link" style="color:#ffd700;font-weight:700">💼 Interview Prep</span>
   </div>
   <div class="nav-right">
-    <div class="lang-dropdown-wrap" id="langDropWrap">
-      <button class="lang-drop-btn" id="langDropBtn" onclick="toggleLangMenu()">
-        <span class="flag-ico-wrap" style="width:22px;height:16px;border-radius:3px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.3);flex-shrink:0;display:inline-block">
-          <img id="langFlag" src="https://flagcdn.com/h40/de.png" alt="DE" style="width:100%;height:100%;object-fit:cover;display:block">
-        </span>
-        <span id="langLabel">DE</span>
-        <span style="font-size:10px;opacity:.7">▼</span>
-      </button>
-      <div class="lang-drop-menu" id="langDropMenu">
-        <div class="lang-drop-item active-lang" data-lang="de" onclick="setLang('de')"><span class="flag-badge"><img src="https://flagcdn.com/h40/de.png" srcset="https://flagcdn.com/h80/de.png 2x" alt="DE" loading="lazy"></span> Deutsch</div>
-        <div class="lang-drop-item" data-lang="en" onclick="setLang('en')"><span class="flag-badge"><img src="https://flagcdn.com/h40/gb.png" srcset="https://flagcdn.com/h80/gb.png 2x" alt="GB" loading="lazy"></span> English</div>
-        <div class="lang-drop-item" data-lang="fr" onclick="setLang('fr')"><span class="flag-badge"><img src="https://flagcdn.com/h40/fr.png" srcset="https://flagcdn.com/h80/fr.png 2x" alt="FR" loading="lazy"></span> Français</div>
-        <div class="lang-drop-item" data-lang="es" onclick="setLang('es')"><span class="flag-badge"><img src="https://flagcdn.com/h40/es.png" srcset="https://flagcdn.com/h80/es.png 2x" alt="ES" loading="lazy"></span> Español</div>
-        <div class="lang-drop-item" data-lang="tr" onclick="setLang('tr')"><span class="flag-badge"><img src="https://flagcdn.com/h40/tr.png" srcset="https://flagcdn.com/h80/tr.png 2x" alt="TR" loading="lazy"></span> Türkçe</div>
-        <div class="lang-drop-item" data-lang="ru" onclick="setLang('ru')"><span class="flag-badge"><img src="https://flagcdn.com/h40/ru.png" srcset="https://flagcdn.com/h80/ru.png 2x" alt="RU" loading="lazy"></span> Русский</div>
-        <div class="lang-drop-item" data-lang="ar" onclick="setLang('ar')"><span class="flag-badge"><img src="https://flagcdn.com/h40/sa.png" srcset="https://flagcdn.com/h80/sa.png 2x" alt="SA" loading="lazy"></span> العربية</div>
-        <div class="lang-drop-item" data-lang="fa" onclick="setLang('fa')"><span class="flag-badge"><img src="https://flagcdn.com/h40/ir.png" srcset="https://flagcdn.com/h80/ir.png 2x" alt="IR" loading="lazy"></span> فارسی</div>
-      </div>
-    </div>
-    <button class="nav-user-btn" id="navUserBtn" onclick="handleNavUserBtn()">
-      <span class="uicon">👤</span><span id="navUserLabel">Registrieren</span>
-    </button>
     <button class="dm-toggle" id="dmToggle" onclick="toggleDark()" title="Dark Mode">🌙</button>
   </div>
 </nav>
 
-<!-- INTERVIEW MAIN CONTENT -->
-<div class="interview-standalone">
-<div style="max-width:900px;margin:0 auto;padding:36px 20px">
+<div class="interview-wrap">
 
   <!-- Header -->
-  <div style="text-align:center;margin-bottom:36px">
-    <div style="font-size:48px;margin-bottom:12px">💼</div>
-    <h1 style="font-size:28px;font-weight:800;color:#1a3a5c;margin-bottom:8px">IT Interview Trainer</h1>
-    <p style="color:#666;font-size:15px;max-width:560px;margin:0 auto;line-height:1.6">Bereite dich auf IT-Vorstellungsgespräche in Deutschland vor. Echte Fragen · Mehrsprachig · Sofortiges Feedback</p>
-    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px">
-      <span id="ivCatAll"   class="iv-cat-btn iv-cat-active" onclick="setIvCat('all')">🌐 Alle</span>
-      <span id="ivCatCloud" class="iv-cat-btn" onclick="setIvCat('cloud')">☁️ Cloud & Azure</span>
-      <span id="ivCatNet"   class="iv-cat-btn" onclick="setIvCat('network')">🌐 Netzwerk</span>
-      <span id="ivCatSec"   class="iv-cat-btn" onclick="setIvCat('security')">🔒 Security</span>
-      <span id="ivCatLinux" class="iv-cat-btn" onclick="setIvCat('linux')">🐧 Linux</span>
-      <span id="ivCatHR"    class="iv-cat-btn" onclick="setIvCat('hr')">🤝 Soft Skills / HR</span>
+  <div class="iv-header">
+    <div class="iv-icon">💼</div>
+    <h1>IT Interview Trainer</h1>
+    <p>Bereite dich auf IT-Vorstellungsgespräche in Deutschland vor. Echte Fragen · Mehrsprachig · Sofortiges Feedback</p>
+
+    <!-- Category filters -->
+    <div class="iv-filters">
+      <span class="iv-cat-btn iv-cat-active" data-cat="all" onclick="setIvCat('all')">🌐 Alle</span>
+      <span class="iv-cat-btn" data-cat="cloud" onclick="setIvCat('cloud')">☁️ Cloud & Azure</span>
+      <span class="iv-cat-btn" data-cat="network" onclick="setIvCat('network')">🌐 Netzwerk</span>
+      <span class="iv-cat-btn" data-cat="security" onclick="setIvCat('security')">🔒 Security</span>
+      <span class="iv-cat-btn" data-cat="linux" onclick="setIvCat('linux')">🐧 Linux</span>
+      <span class="iv-cat-btn" data-cat="hr" onclick="setIvCat('hr')">🤝 Soft Skills / HR</span>
     </div>
-    <div style="margin-top:18px">
-      <div style="font-size:12.5px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">🧑‍💼 Oder nach Berufsbezeichnung (echte IT-Jobs in Deutschland)</div>
-      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-        <span id="ivJobSupport"   class="iv-cat-btn" onclick="setIvJob('support')">🎧 IT-Support-Mitarbeiter/in</span>
-        <span id="ivJobSysadmin"  class="iv-cat-btn" onclick="setIvJob('sysadmin')">🖥️ IT-Systemadministrator/in</span>
-        <span id="ivJobSecspec"   class="iv-cat-btn" onclick="setIvJob('secspec')">🛡️ IT-Security-Spezialist/in</span>
-        <span id="ivJobCloudeng"  class="iv-cat-btn" onclick="setIvJob('cloudeng')">☁️ Cloud Engineer / Azure-Administrator/in</span>
-        <span id="ivJobConsultant" class="iv-cat-btn" onclick="setIvJob('consultant')">📋 IT-Consultant / Projektmanager/in</span>
-      </div>
+
+    <!-- Job filters -->
+    <div class="iv-job-label">🧑‍💼 Oder nach Berufsbezeichnung</div>
+    <div class="iv-job-filters">
+      <span class="iv-cat-btn" data-job="support" onclick="setIvJob('support')">🎧 IT-Support-Mitarbeiter/in</span>
+      <span class="iv-cat-btn" data-job="sysadmin" onclick="setIvJob('sysadmin')">🖥️ IT-Systemadministrator/in</span>
+      <span class="iv-cat-btn" data-job="secspec" onclick="setIvJob('secspec')">🛡️ IT-Security-Spezialist/in</span>
+      <span class="iv-cat-btn" data-job="cloudeng" onclick="setIvJob('cloudeng')">☁️ Cloud Engineer / Azure-Admin</span>
+      <span class="iv-cat-btn" data-job="consultant" onclick="setIvJob('consultant')">📋 IT-Consultant / Projektmanager/in</span>
     </div>
   </div>
 
   <!-- Stats bar -->
-  <div id="ivStatsBar" style="display:flex;gap:16px;background:white;border:1px solid #e0e0e0;border-radius:8px;padding:14px 22px;margin-bottom:22px;flex-wrap:wrap;align-items:center;box-shadow:0 1px 6px rgba(0,0,0,.06)">
-    <div style="font-size:13px;color:#444">Frage <strong id="ivQNum">1</strong> von <strong id="ivQTotal">-</strong></div>
-    <div style="flex:1;background:#eee;border-radius:4px;height:6px;min-width:80px"><div id="ivProgFill" style="height:100%;background:#0078d4;border-radius:4px;width:0%;transition:width .3s"></div></div>
-    <div style="font-size:13px;color:#2e7d32;font-weight:700">✓ <span id="ivOk">0</span></div>
-    <div style="font-size:13px;color:#c62828;font-weight:700">✗ <span id="ivBad">0</span></div>
+  <div id="ivStatsBar">
+    <div style="font-size:13px">Frage <strong id="ivQNum">1</strong> von <strong id="ivQTotal">0</strong></div>
+    <div class="iv-prog-wrap"><div id="ivProgFill"></div></div>
+    <div class="iv-stat-ok">✓ <span id="ivOk">0</span></div>
+    <div class="iv-stat-bad">✗ <span id="ivBad">0</span></div>
     <button class="iv-btn-sm" onclick="resetIv()">↺ Neustart</button>
   </div>
 
   <!-- Question card -->
-  <div id="ivCard" style="background:white;border:1px solid #e0e0e0;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.08);overflow:hidden">
-    <div id="ivQHead" style="background:#1a3a5c;color:white;padding:12px 22px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:10px">
+  <div id="ivCard">
+    <div id="ivQHead">
       <span id="ivCatLabel"></span>
       <span style="margin-left:auto;opacity:.7;font-size:12px" id="ivDifficulty"></span>
     </div>
-    <div style="padding:22px 24px">
-      <div id="ivQText" style="font-size:16px;font-weight:600;color:#1a1a1a;line-height:1.65;margin-bottom:18px"></div>
-
-      <!-- Translation box -->
-      <div id="ivTransBox" style="display:none;background:#f8f0ff;border:1.5px solid #c9a7f5;border-radius:8px;padding:14px 16px;margin-bottom:16px;font-family:'Vazirmatn','Segoe UI',sans-serif;font-size:14px;color:#2d0057;line-height:2"></div>
-
-      <!-- Options -->
-      <div id="ivOptsEl" style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px"></div>
-
-      <!-- Feedback -->
-      <div id="ivFb" style="display:none;padding:12px 16px;border-radius:6px;font-size:14px;line-height:1.6;margin-bottom:14px"></div>
-
-      <!-- Explanation -->
-      <div id="ivExplBox" style="display:none;background:#f0f6ff;border-left:4px solid #0078d4;border-radius:0 6px 6px 0;padding:14px 16px;font-size:13.5px;color:#1a3a5c;line-height:1.7;margin-bottom:14px"></div>
-
-      <!-- Model answer (for open questions) -->
-      <div id="ivModelBox" style="display:none;background:#f0fff4;border-left:4px solid #4caf50;border-radius:0 6px 6px 0;padding:14px 16px;font-size:13.5px;color:#1a4a20;line-height:1.75;margin-bottom:14px"></div>
-    </div>
-    <div style="padding:12px 22px 18px;border-top:1px solid #eee;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    <div id="ivQText"></div>
+    <div id="ivTransBox"></div>
+    <div id="ivOptsEl"></div>
+    <div id="ivFb"></div>
+    <div id="ivExplBox"></div>
+    <div id="ivModelBox"></div>
+    <div class="iv-actions">
       <button class="iv-btn-dark" id="ivPrevBtn" onclick="ivMove(-1)" disabled>‹ Zurück</button>
       <button class="iv-btn-dark" id="ivNextBtn" onclick="ivMove(1)">Weiter ›</button>
       <button class="iv-btn-blue" onclick="ivShowModel()">💡 Musterlösung</button>
@@ -1475,12 +220,11 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
   </div>
 
   <!-- Tips box -->
-  <div style="margin-top:22px;background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:16px 20px">
-    <div style="font-size:12.5px;font-weight:700;color:#7a5c00;margin-bottom:8px">💡 Tipp für Vorstellungsgespräche in Deutschland</div>
-    <div id="ivTip" style="font-size:13.5px;color:#5a4000;line-height:1.7"></div>
+  <div class="iv-tip-box">
+    <div class="iv-tip-title">💡 Tipp für Vorstellungsgespräche in Deutschland</div>
+    <div id="ivTip">Lade...</div>
   </div>
 
-</div>
 </div>
 
 <footer class="site-footer">
@@ -1488,28 +232,25 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
     <div class="footer-top">
       <div class="footer-brand-col">
         <div class="fb">◆ Cert<span>Coach</span></div>
-        <p>IT-Zertifizierung strukturiert meistern — 563 echte Fragen, 8 Sprachen, progressives Lernsystem. Nicht offiziell mit Microsoft oder CompTIA verbunden.</p>
+        <p>IT-Zertifizierung strukturiert meistern — 563 echte Fragen, 8 Sprachen, progressives Lernsystem.</p>
       </div>
       <div class="footer-col">
         <h4>Navigation</h4>
-        <a onclick="showPage('home')">Startseite</a>
+        <a onclick="window.location.href='index.html'">Startseite</a>
         <a onclick="window.location.href='az-900.html'">AZ-900 Lernen</a>
-        <a onclick="showPage('news')">Neuigkeiten</a>
-        <a onclick="showPage('feedback')">Feedback</a>
-        <a onclick="showPage('kontakt')">Kontakt</a>
+        <a onclick="window.location.href='interview.html'">Interview Prep</a>
       </div>
       <div class="footer-col">
         <h4>Rechtliches</h4>
-        <a onclick="showPage('impressum')">Impressum</a>
-        <a onclick="showPage('datenschutz')">Datenschutz</a>
+        <a onclick="window.location.href='index.html?page=impressum'">Impressum</a>
+        <a onclick="window.location.href='index.html?page=datenschutz'">Datenschutz</a>
         <a href="mailto:info@certcoach.de">info@certcoach.de</a>
       </div>
     </div>
     <div class="footer-bottom">
       <div class="footer-copy">© 2026 CertCoach · Alle Rechte vorbehalten · Nicht offiziell mit Microsoft oder CompTIA verbunden</div>
       <div class="footer-langs">
-        <span>🇩🇪 DE</span><span>🇬🇧 EN</span><span>🇫🇷 FR</span><span>🇪🇸 ES</span>
-        <span>🇹🇷 TR</span><span>🇷🇺 RU</span><span>🇸🇦 AR</span><span>🇮🇷 FA</span>
+        <span>🇩🇪 DE</span><span>🇬🇧 EN</span><span>🇫🇷 FR</span><span>🇪🇸 ES</span><span>🇹🇷 TR</span><span>🇷🇺 RU</span>
       </div>
     </div>
   </div>
@@ -1524,7 +265,7 @@ function toggleDark(){
 }
 try{if(localStorage.getItem('dm')==='1'){document.body.classList.add('dark');document.getElementById('dmToggle').textContent='☀️';}}catch(e){}
 
-// ===== INTERVIEW JS =====
+// ===== INTERVIEW DATA =====
 var IV_QUESTIONS = [
   // ── CLOUD & AZURE ──
   {cat:'cloud', diff:'⭐ Einfach',
@@ -1537,344 +278,343 @@ var IV_QUESTIONS = [
    tip:'Erkläre immer den Unterschied zwischen CAPEX und OPEX — das zeigt, dass du die Geschäftsperspektive verstehst.'},
 
   {cat:'cloud', diff:'⭐⭐ Mittel',
-   q:'Ein Unternehmen möchte seine Anwendung nur in der Cloud betreiben, aber die Daten müssen im eigenen Rechenzentrum bleiben. Welches Deployment-Modell empfiehlst du?',
+   q:'Ein Unternehmen möchte Anwendungen in der Cloud betreiben, aber die Daten müssen im eigenen Rechenzentrum bleiben. Welches Deployment-Modell empfiehlst du?',
    opts:['Public Cloud','Private Cloud','Hybrid Cloud','Community Cloud'],
    c:2,
    expl:'Hybrid Cloud kombiniert Public Cloud (Anwendungen) und Private Cloud/On-Premises (sensible Daten). Ideal für Unternehmen mit Compliance-Anforderungen.',
-   model:'„Ich würde eine Hybrid Cloud empfehlen. Die Applikationen laufen in der Public Cloud für Skalierbarkeit, während die sensiblen Daten im eigenen Rechenzentrum bleiben und so Datenschutzanforderungen erfüllt werden."',
-   trans:'مدل Hybrid Cloud: اپلیکیشن‌ها در Cloud عمومی اجرا می‌شوند اما داده‌های حساس در Data Center خودی باقی می‌مانند.',
+   model:'„Ich würde eine Hybrid Cloud empfehlen. Die Applikationen laufen in der Public Cloud für Skalierbarkeit, während die sensiblen Daten im eigenen Rechenzentrum bleiben und Datenschutzanforderungen erfüllt werden."',
+   trans:'مدل Hybrid Cloud: اپلیکیشن‌ها در Cloud عمومی، داده‌های حساس در Data Center خودی باقی می‌مانند.',
    tip:'Nenne immer konkrete Anwendungsfälle. Deutsche Unternehmen sind sehr datenschutzbewusst — zeige DSGVO-Bewusstsein!'},
 
   {cat:'cloud', diff:'⭐⭐ Mittel',
    q:'Was ist der Unterschied zwischen IaaS, PaaS und SaaS?',
    opts:['Alle drei sind dasselbe, nur unterschiedliche Namen','IaaS = Infrastruktur, PaaS = Plattform, SaaS = Software als Dienst','IaaS ist teurer als SaaS','PaaS wird nur von Microsoft angeboten'],
    c:1,
-   expl:'IaaS (z.B. Azure VMs): Infrastruktur mieten. PaaS (z.B. Azure App Service): Entwicklungsplattform nutzen ohne Server zu verwalten. SaaS (z.B. Microsoft 365): fertige Software nutzen.',
-   model:'„IaaS gibt uns die Infrastruktur — wir verwalten alles ab dem Betriebssystem. Bei PaaS kümmert sich der Anbieter um die Infrastruktur, wir entwickeln nur die Anwendung. SaaS ist vollständig verwaltete Software, die wir direkt nutzen."',
-   trans:'IaaS = زیرساخت (مثل Azure VM) | PaaS = پلتفرم توسعه (مثل Azure App Service) | SaaS = نرم‌افزار آماده (مثل Microsoft 365)',
+   expl:'IaaS (z.B. Azure VMs): Infrastruktur mieten. PaaS (z.B. Azure App Service): Entwicklungsplattform nutzen. SaaS (z.B. Microsoft 365): fertige Software nutzen.',
+   model:'„IaaS gibt uns die Infrastruktur — wir verwalten alles ab dem Betriebssystem. Bei PaaS kümmert sich der Anbieter um die Infrastruktur. SaaS ist vollständig verwaltete Software."',
+   trans:'IaaS = زیرساخت (مثل Azure VM) | PaaS = پلتفرم توسعه | SaaS = نرم‌افزار آماده (مثل Microsoft 365)',
    tip:'Verwende immer echte Beispiele: Azure VMs (IaaS), Azure App Service (PaaS), Microsoft 365 (SaaS).'},
 
   {cat:'cloud', diff:'⭐⭐⭐ Schwer',
    q:'Ein Dienst ist für 99,9% Verfügbarkeit pro Monat garantiert. Wie viel Ausfallzeit ist das maximal pro Monat?',
    opts:['~43 Minuten','~4,3 Stunden','~8,7 Stunden','~1 Minute'],
    c:0,
-   expl:'99,9% Verfügbarkeit bedeutet 0,1% Ausfallzeit. Bei 30 Tagen × 24h × 60min = 43.200 Minuten × 0,001 = ca. 43 Minuten Ausfallzeit.',
-   model:'„Bei 99,9% SLA (Three Nines) sind das etwa 43 Minuten pro Monat oder 8,7 Stunden pro Jahr. Für kritische Systeme empfehle ich 99,99% (Four Nines) mit max. 4,3 Minuten Downtime pro Monat."',
-   trans:'99.9% availability = 43 دقیقه خرابی در ماه. محاسبه: 30 روز × 24 ساعت × 60 دقیقه × 0.001 = 43.2 دقیقه',
-   tip:'SLA-Berechnungen sind ein Klassiker in Cloud-Interviews. Lerne die wichtigsten Nines auswendig: 99,9% = 43min, 99,99% = 4,3min.'},
+   expl:'99,9% Verfügbarkeit = 0,1% Ausfallzeit. Bei 30 Tagen × 24h × 60min = 43.200 Minuten × 0,001 = ca. 43 Minuten.',
+   model:'„Bei 99,9% SLA (Three Nines) sind das etwa 43 Minuten pro Monat. Für kritische Systeme empfehle ich 99,99% (Four Nines) mit max. 4,3 Minuten Downtime."',
+   trans:'99.9% availability = 43 دقیقه خرابی در ماه. محاسبه: 43,200 × 0.001 = 43.2 دقیقه',
+   tip:'SLA-Berechnungen sind ein Klassiker in Cloud-Interviews. 99,9% = 43min/Monat, 99,99% = 4,3min/Monat.'},
 
   // ── NETZWERK ──
   {cat:'network', diff:'⭐ Einfach',
    q:'Was ist der Unterschied zwischen einem Hub und einem Switch in einem Netzwerk?',
-   opts:['Beide sind identisch','Ein Hub leitet Datenpakete intelligent weiter, ein Switch sendet an alle','Ein Switch leitet Pakete gezielt an den richtigen Port, ein Hub sendet an alle Ports','Ein Switch ist nur für WLAN'],
+   opts:['Beide sind identisch','Ein Hub leitet Datenpakete intelligent weiter','Ein Switch leitet Pakete gezielt an den richtigen Port, ein Hub sendet an alle Ports','Ein Switch ist nur für WLAN'],
    c:2,
-   expl:'Ein Hub sendet eingehende Pakete an alle angeschlossenen Geräte (Broadcast). Ein Switch speichert MAC-Adressen und leitet Pakete nur an den richtigen Empfänger weiter — effizienter und sicherer.',
-   model:'„Ein Hub arbeitet auf Layer 1 und sendet alle Daten an alle Ports — das erzeugt unnötigen Netzwerkverkehr. Ein Switch arbeitet auf Layer 2, speichert MAC-Adressen in der CAM-Table und leitet Pakete gezielt weiter."',
-   trans:'Hub: داده‌ها را به همه پورت‌ها ارسال می‌کند (Broadcast). Switch: داده‌ها را فقط به پورت صحیح هدایت می‌کند با استفاده از MAC Address Table.',
-   tip:'Erwähne immer die OSI-Layer! Hub = Layer 1, Switch = Layer 2, Router = Layer 3. Das zeigt technische Tiefe.'},
+   expl:'Ein Hub sendet eingehende Pakete an alle angeschlossenen Geräte (Broadcast). Ein Switch speichert MAC-Adressen und leitet Pakete nur an den richtigen Empfänger weiter.',
+   model:'„Ein Hub arbeitet auf Layer 1 und sendet alle Daten an alle Ports. Ein Switch arbeitet auf Layer 2, speichert MAC-Adressen in der CAM-Table und leitet Pakete gezielt weiter."',
+   trans:'Hub: داده‌ها را به همه پورت‌ها ارسال می‌کند. Switch: داده‌ها را فقط به پورت صحیح هدایت می‌کند.',
+   tip:'Erwähne immer die OSI-Layer! Hub = Layer 1, Switch = Layer 2, Router = Layer 3.'},
 
   {cat:'network', diff:'⭐⭐ Mittel',
    q:'Ein Benutzer kann keine Webseiten aufrufen, aber Ping zu 8.8.8.8 funktioniert. Was ist wahrscheinlich das Problem?',
    opts:['Die Netzwerkkarte ist defekt','DNS-Auflösung funktioniert nicht','Die IP-Adresse ist falsch','Das Gateway ist nicht erreichbar'],
    c:1,
-   expl:'Ping zu 8.8.8.8 (IP-Adresse) funktioniert → Netzwerkverbindung und Gateway sind in Ordnung. Webseiten nicht erreichbar → DNS-Auflösung schlägt fehl, da Browser Domainnamen in IP-Adressen auflösen müssen.',
-   model:'„Da Ping zu einer IP-Adresse funktioniert, ist die Netzwerkverbindung intakt. Das Problem liegt bei der DNS-Auflösung. Ich würde zunächst nslookup oder ping google.com testen und dann die DNS-Einstellungen prüfen."',
-   trans:'اتصال به IP کار می‌کند → شبکه سالم است. سایت‌ها باز نمی‌شوند → DNS کار نمی‌کند. DNS نام دامنه را به آدرس IP تبدیل می‌کند.',
-   tip:'Zeige strukturiertes Troubleshooting: von unten nach oben (OSI-Modell) vorgehen. Das beeindruckt deutsche Interviewer!'},
+   expl:'Ping zu 8.8.8.8 (IP-Adresse) funktioniert → Netzwerkverbindung und Gateway sind OK. Webseiten nicht erreichbar → DNS-Auflösung schlägt fehl.',
+   model:'„Da Ping zu einer IP-Adresse funktioniert, ist die Netzwerkverbindung intakt. Das Problem liegt bei der DNS-Auflösung. Ich würde nslookup oder ping google.com testen und dann die DNS-Einstellungen prüfen."',
+   trans:'اتصال به IP کار می‌کند → شبکه سالم. سایت‌ها باز نمی‌شوند → DNS کار نمی‌کند.',
+   tip:'Zeige strukturiertes Troubleshooting: von unten nach oben (OSI-Modell) vorgehen.'},
 
   {cat:'network', diff:'⭐⭐ Mittel',
    q:'Was ist der Unterschied zwischen TCP und UDP?',
    opts:['TCP ist schneller als UDP','UDP garantiert die Zustellung, TCP nicht','TCP ist verbindungsorientiert und zuverlässig, UDP ist schneller aber ohne Garantie','TCP und UDP sind identisch'],
    c:2,
-   expl:'TCP (Transmission Control Protocol): verbindungsorientiert, Drei-Wege-Handshake, garantierte Zustellung, geordnete Pakete. Für HTTP, E-Mail. UDP: schnell, kein Verbindungsaufbau, keine Garantie. Für Streaming, Gaming, DNS.',
-   model:'„TCP baut eine Verbindung auf (SYN-SYN/ACK-ACK), bestätigt jedes Paket und sorgt für Reihenfolge — ideal für kritische Daten. UDP sendet einfach los, ohne auf Bestätigung zu warten — perfekt für Echtzeit-Anwendungen wie VoIP oder Video-Streaming."',
-   trans:'TCP: اتصال برقرار می‌کند، تحویل را تضمین می‌کند، ترتیب پاکت‌ها را حفظ می‌کند. UDP: سریع‌تر، بدون تضمین، برای استریمینگ و بازی‌های آنلاین.',
-   tip:'Nenne konkrete Protokolle: HTTP/HTTPS, FTP, SSH → TCP. DNS, DHCP, VoIP, Video-Streaming → UDP.'},
+   expl:'TCP: verbindungsorientiert, Drei-Wege-Handshake, garantierte Zustellung. UDP: schnell, kein Verbindungsaufbau, keine Garantie — für Streaming, Gaming, DNS.',
+   model:'„TCP baut eine Verbindung auf, bestätigt jedes Paket — ideal für kritische Daten. UDP sendet einfach los — perfekt für Echtzeit-Anwendungen wie VoIP oder Video."',
+   trans:'TCP: اتصال برقرار می‌کند، تحویل را تضمین می‌کند. UDP: سریع‌تر، بدون تضمین، برای استریمینگ.',
+   tip:'Nenne konkrete Protokolle: HTTP/HTTPS, SSH → TCP. DNS, DHCP, VoIP, Streaming → UDP.'},
 
   // ── SECURITY ──
   {cat:'security', diff:'⭐ Einfach',
    q:'Was versteht man unter dem Prinzip der „minimalen Rechtevergabe" (Principle of Least Privilege)?',
    opts:['Alle Benutzer erhalten Admin-Rechte','Benutzer erhalten nur die Rechte, die sie für ihre Arbeit benötigen','Passwörter müssen mindestens 6 Zeichen haben','Administratoren dürfen keine E-Mails lesen'],
    c:1,
-   expl:'Least Privilege: Jeder Benutzer und jedes System erhält nur die minimal notwendigen Rechte. Reduziert den Schaden bei Sicherheitsvorfällen und begrenzt die Angriffsfläche.',
-   model:'„Das Prinzip der minimalen Rechtevergabe bedeutet, dass jeder Nutzer nur auf die Ressourcen zugreifen kann, die er für seine Aufgaben wirklich braucht — nicht mehr. Das begrenzt den potenziellen Schaden bei einer Kompromittierung erheblich."',
-   trans:'اصل Least Privilege: هر کاربر فقط به منابعی که برای کارش نیاز دارد دسترسی دارد. این اصل آسیب احتمالی در صورت نفوذ را کاهش می‌دهد.',
+   expl:'Least Privilege: Jeder Benutzer und jedes System erhält nur die minimal notwendigen Rechte. Reduziert den Schaden bei Sicherheitsvorfällen.',
+   model:'„Das Prinzip der minimalen Rechtevergabe bedeutet, dass jeder Nutzer nur auf Ressourcen zugreifen kann, die er für seine Aufgaben wirklich braucht — das begrenzt den Schaden bei einer Kompromittierung."',
+   trans:'اصل Least Privilege: هر کاربر فقط به منابعی که برای کارش نیاز دارد دسترسی دارد.',
    tip:'Verknüpfe dieses Prinzip mit Zero Trust Security — ein sehr aktuelles Thema in deutschen IT-Abteilungen.'},
 
   {cat:'security', diff:'⭐⭐ Mittel',
    q:'Ein Mitarbeiter erhält eine E-Mail von „Microsoft Support" und soll sein Passwort eingeben. Was ist das?',
    opts:['Legitime Anfrage von Microsoft','Phishing-Angriff','DDoS-Angriff','SQL Injection'],
    c:1,
-   expl:'Phishing: Angreifer geben sich als vertrauenswürdige Organisation aus, um sensible Daten zu stehlen. Microsoft und andere seriöse Unternehmen fordern NIEMALS per E-Mail nach Passwörtern.',
-   model:'„Das ist ein klassischer Phishing-Angriff. Ich würde sofort die IT-Security informieren, die E-Mail nicht öffnen und keinesfalls auf Links klicken oder Daten eingeben. Solche Mails sollten dem Security-Team zur Analyse gemeldet werden."',
-   trans:'این یک حمله Phishing است. مایکروسافت هرگز از طریق ایمیل درخواست رمز عبور نمی‌کند. باید فوراً به تیم IT Security اطلاع داد.',
-   tip:'Zeige Prozessbewusstsein: nicht nur das Problem identifizieren, sondern auch den Eskalationsweg kennen (Security Incident Response).'},
+   expl:'Phishing: Angreifer geben sich als vertrauenswürdige Organisation aus, um sensible Daten zu stehlen. Microsoft fordert NIEMALS per E-Mail nach Passwörtern.',
+   model:'„Das ist ein klassischer Phishing-Angriff. Ich würde sofort die IT-Security informieren, die E-Mail nicht öffnen und das Security-Team zur Analyse benachrichtigen."',
+   trans:'این یک حمله Phishing است. مایکروسافت هرگز از طریق ایمیل درخواست رمز عبور نمی‌کند.',
+   tip:'Zeige Prozessbewusstsein: nicht nur das Problem identifizieren, sondern auch den Eskalationsweg kennen.'},
 
   {cat:'security', diff:'⭐⭐⭐ Schwer',
    q:'Was ist der Unterschied zwischen symmetrischer und asymmetrischer Verschlüsselung?',
-   opts:['Beide verwenden denselben Schlüssel','Symmetrisch = ein Schlüssel für Ver- und Entschlüsselung; Asymmetrisch = Public/Private Key-Paar','Asymmetrisch ist immer unsicherer','Symmetrisch wird nur in WLAN verwendet'],
+   opts:['Beide verwenden denselben Schlüssel','Symmetrisch = ein Schlüssel; Asymmetrisch = Public/Private Key-Paar','Asymmetrisch ist immer unsicherer','Symmetrisch wird nur in WLAN verwendet'],
    c:1,
-   expl:'Symmetrisch (z.B. AES): Ein Schlüssel für Verschlüsseln und Entschlüsseln — schnell aber Schlüsseltauschproblem. Asymmetrisch (z.B. RSA): Public Key verschlüsselt, Private Key entschlüsselt — sicherer Schlüsseltausch, aber langsamer. HTTPS kombiniert beide.',
-   model:'„Symmetrische Verschlüsselung wie AES ist sehr schnell — ein Schlüssel für beide Seiten. Das Problem ist der sichere Schlüsseltausch. Asymmetrische Verschlüsselung wie RSA löst das mit einem Schlüsselpaar: der Public Key ist öffentlich, der Private Key bleibt geheim. HTTPS nutzt asymmetrisch für den Schlüsseltausch und dann symmetrisch für die eigentliche Übertragung."',
-   trans:'متقارن (AES): یک کلید برای رمزگذاری و رمزگشایی - سریع. نامتقارن (RSA): کلید عمومی رمزگذاری می‌کند، کلید خصوصی رمزگشایی - امن‌تر برای تبادل کلید.',
-   tip:'HTTPS als Beispiel für hybride Verschlüsselung zu nennen, zeigt tiefes Verständnis und wird Interviewer beeindrucken.'},
+   expl:'Symmetrisch (z.B. AES): Ein Schlüssel für Ver- und Entschlüsselung — schnell. Asymmetrisch (z.B. RSA): Public/Private Key — sicherer Schlüsseltausch. HTTPS kombiniert beide.',
+   model:'„AES (symmetrisch) ist sehr schnell. RSA (asymmetrisch) löst das Schlüsseltauschproblem mit dem Schlüsselpaar. HTTPS nutzt RSA für den Schlüsseltausch und AES für die eigentliche Übertragung."',
+   trans:'متقارن (AES): یک کلید - سریع. نامتقارن (RSA): کلید عمومی/خصوصی - امن‌تر برای تبادل کلید.',
+   tip:'HTTPS als hybride Verschlüsselung zu nennen zeigt tiefes Verständnis.'},
 
   // ── LINUX ──
   {cat:'linux', diff:'⭐ Einfach',
    q:'Mit welchem Befehl kannst du die Berechtigungen einer Datei in Linux ändern?',
    opts:['chown','chmod','chgrp','ls -l'],
    c:1,
-   expl:'chmod (change mode) ändert Lese-, Schreib- und Ausführungsrechte. Beispiel: chmod 755 datei.sh — gibt Owner alle Rechte, Gruppe und andere nur Lesen+Ausführen.',
-   model:'„Mit chmod setze ich Dateiberechtigungen. chmod 755 datei.sh bedeutet: Owner = rwx (7), Gruppe = r-x (5), Andere = r-x (5). Ich kann auch symbolisch arbeiten: chmod u+x datei.sh fügt dem Besitzer das Ausführungsrecht hinzu."',
-   trans:'chmod دستوری است که مجوزهای فایل را تغییر می‌دهد. مثال: chmod 755 یعنی مالک: همه مجوزها (7)، گروه: خواندن+اجرا (5)، دیگران: خواندن+اجرا (5)',
-   tip:'Kenne beide Methoden: numerisch (755, 644) und symbolisch (u+x, g-w). Erkläre auch chown für Eigentumsänderungen.'},
+   expl:'chmod (change mode) ändert Lese-, Schreib- und Ausführungsrechte. chmod 755 = Owner rwx, Gruppe/Andere r-x.',
+   model:'„Mit chmod setze ich Dateiberechtigungen. chmod 755 = Owner: alle Rechte (7), Gruppe: Lesen+Ausführen (5), Andere: Lesen+Ausführen (5). Symbolisch: chmod u+x datei.sh."',
+   trans:'chmod دستوری است که مجوزهای فایل را تغییر می‌دهد. chmod 755 = مالک همه مجوزها، گروه و دیگران فقط خواندن+اجرا.',
+   tip:'Kenne beide Methoden: numerisch (755, 644) und symbolisch (u+x, g-w).'},
 
   {cat:'linux', diff:'⭐⭐ Mittel',
    q:'Wie überprüfst du, welcher Prozess Port 80 auf einem Linux-Server belegt?',
-   opts:['ps aux','netstat -tlnp | grep :80  oder  ss -tlnp | grep :80','cat /etc/ports','ifconfig port80'],
+   opts:['ps aux','ss -tlnp | grep :80 oder netstat -tlnp | grep :80','cat /etc/ports','ifconfig port80'],
    c:1,
-   expl:'netstat -tlnp (oder das modernere ss -tlnp) zeigt alle aktiven TCP-Verbindungen mit Prozess-ID. grep :80 filtert nach Port 80. lsof -i :80 ist eine weitere Möglichkeit.',
-   model:'„Ich würde ss -tlnp | grep :80 verwenden — ss ist das modernere Tool. Alternativ netstat -tlnp | grep :80 oder lsof -i :80. Das zeigt mir sofort, welcher Prozess auf Port 80 lauscht und mit welcher PID."',
-   trans:'دستور ss -tlnp | grep :80 یا netstat -tlnp | grep :80 نشان می‌دهد کدام process از پورت 80 استفاده می‌کند.',
-   tip:'Zeige, dass du neuere Tools kennst: ss statt netstat, ip statt ifconfig. Das zeigt, dass du up-to-date bist.'},
+   expl:'ss -tlnp (oder netstat -tlnp) zeigt alle aktiven TCP-Verbindungen mit Prozess-ID. grep :80 filtert nach Port 80.',
+   model:'„Ich würde ss -tlnp | grep :80 verwenden — ss ist das modernere Tool. Alternativ netstat -tlnp | grep :80 oder lsof -i :80."',
+   trans:'دستور ss -tlnp | grep :80 نشان می‌دهد کدام process از پورت 80 استفاده می‌کند.',
+   tip:'Zeige, dass du neuere Tools kennst: ss statt netstat, ip statt ifconfig.'},
 
   // ── SOFT SKILLS / HR ──
   {cat:'hr', diff:'⭐⭐ Mittel',
    q:'Beschreibe eine Situation, in der du einen technischen Fehler gemacht hast. Wie bist du damit umgegangen?',
-   opts:['Ich habe nie Fehler gemacht.','Ich habe den Fehler sofort meinem Vorgesetzten gemeldet, analysiert was schief lief, und Maßnahmen getroffen, damit es nicht wieder passiert.','Ich habe den Fehler vertuscht.','Ich habe einen Kollegen dafür verantwortlich gemacht.'],
+   opts:['Ich habe nie Fehler gemacht.','Ich habe den Fehler sofort gemeldet, analysiert und Maßnahmen getroffen, damit es nicht wieder passiert.','Ich habe den Fehler vertuscht.','Ich habe einen Kollegen dafür verantwortlich gemacht.'],
    c:1,
-   expl:'Deutsche Arbeitgeber schätzen Fehlerkultur (Lernbereitschaft). Fehler zugeben + analysieren + Maßnahmen ableiten zeigt Professionalität und Reife.',
-   model:'„Einmal habe ich beim Update eines Servers vergessen, ein Backup zu erstellen. Als Probleme auftraten, habe ich sofort meinen Teamleiter informiert. Wir konnten den Dienst aus älteren Snapshots wiederherstellen. Danach habe ich eine Checkliste erstellt, die jetzt bei jedem Update Pflicht ist."',
+   expl:'Deutsche Arbeitgeber schätzen Fehlerkultur. Fehler zugeben + analysieren + Maßnahmen ableiten zeigt Professionalität.',
+   model:'„Einmal habe ich beim Update eines Servers vergessen, ein Backup zu erstellen. Ich habe sofort meinen Teamleiter informiert. Nach der Wiederherstellung habe ich eine Checkliste erstellt, die jetzt bei jedem Update Pflicht ist."',
    trans:'کارفرمایان آلمانی به فرهنگ اشتباه (Fehlerkultur) اهمیت می‌دهند. پذیرفتن خطا + تحلیل + پیشگیری = حرفه‌ای بودن.',
    tip:'Benutze die STAR-Methode: Situation → Task → Action → Result. Deutsche Interviewer lieben strukturierte Antworten!'},
 
   {cat:'hr', diff:'⭐ Einfach',
    q:'Warum möchten Sie in unserem Unternehmen arbeiten?',
-   opts:['Weil ich einen Job brauche.','Weil Ihr Unternehmen für mich gut liegt.','Weil ich Ihre Projekte im Cloud-Bereich beeindruckend finde und meine Azure-Kenntnisse dort einbringen möchte.','Weil Sie gut bezahlen.'],
+   opts:['Weil ich einen Job brauche.','Weil das Unternehmen gut für mich liegt.','Weil ich Ihre Cloud-Projekte beeindruckend finde und meine Azure-Kenntnisse einbringen möchte.','Weil Sie gut bezahlen.'],
    c:2,
-   expl:'Deutsche Arbeitgeber erwarten Recherche über das Unternehmen. Zeige spezifisches Interesse an Projekten, Technologien oder der Unternehmenskultur — nie nur Gehalt oder Standort nennen.',
-   model:'„Ich habe gesehen, dass Ihr Unternehmen gerade in Azure-basierte Lösungen für [Branche] investiert. Als zertifizierter Azure-Administrator möchte ich diesen Wandel aktiv mitgestalten. Gleichzeitig schätze ich Ihre bekannte Lernkultur und die Möglichkeit, mich fachlich weiterzuentwickeln."',
-   trans:'کارفرمایان آلمانی انتظار دارند شما در مورد شرکت تحقیق کرده باشید. علاقه خاص به پروژه‌ها یا فناوری‌های آن‌ها نشان دهید.',
-   tip:'Bereite dich immer auf 3 Fragen vor: Warum dieses Unternehmen? Warum diese Position? Was bringst du mit? Zeige echtes Interesse!'},
+   expl:'Deutsche Arbeitgeber erwarten Recherche über das Unternehmen. Zeige spezifisches Interesse an Projekten oder Technologien.',
+   model:'„Ich habe gesehen, dass Ihr Unternehmen in Azure-basierte Lösungen investiert. Als zertifizierter Azure-Administrator möchte ich diesen Wandel aktiv mitgestalten."',
+   trans:'کارفرمایان آلمانی انتظار دارند شما در مورد شرکت تحقیق کرده باشید.',
+   tip:'Bereite dich auf 3 Fragen vor: Warum dieses Unternehmen? Warum diese Position? Was bringst du mit?'},
 
   {cat:'hr', diff:'⭐⭐ Mittel',
    q:'Wie gehen Sie mit einem schwierigen Kollegen um, der Ihre Arbeit ständig kritisiert?',
-   opts:['Ich ignoriere den Kollegen komplett.','Ich suche das direkte, ruhige Gespräch unter vier Augen und versuche die Ursache zu verstehen.','Ich beschwere mich sofort beim Chef.','Ich werde auch aggressiv.'],
+   opts:['Ich ignoriere den Kollegen komplett.','Ich suche das direkte, ruhige Gespräch und versuche die Ursache zu verstehen.','Ich beschwere mich sofort beim Chef.','Ich werde auch aggressiv.'],
    c:1,
-   expl:'Deutsche Arbeitskultur schätzt direkte aber respektvolle Kommunikation. Konflikte zunächst im direkten Gespräch lösen, eskalieren erst wenn nötig.',
-   model:'„Ich würde zunächst das Gespräch unter vier Augen suchen, ruhig und sachlich. Ich würde fragen, was konkret seine Kritik auslöst und ob es fachliche Verbesserungsvorschläge gibt. Vielleicht hat er gute Punkte, die ich berücksichtigen kann. Wenn das nicht hilft, würde ich die Führungskraft einbeziehen."',
-   trans:'فرهنگ کاری آلمان: ابتدا مکالمه مستقیم و آرام. اگر حل نشد، مدیر را درگیر کنید. آلمانی‌ها ارتباط مستقیم را می‌پسندند.',
-   tip:'Zeige Konfliktlösungskompetenz nach dem Prinzip: direkt ansprechen → zuhören → Lösung finden → eskalieren wenn nötig.'}
+   expl:'Deutsche Arbeitskultur schätzt direkte, respektvolle Kommunikation. Konflikte zunächst im direkten Gespräch lösen.',
+   model:'„Ich würde zunächst das Gespräch unter vier Augen suchen, ruhig und sachlich. Ich frage, was seine Kritik auslöst und ob es Verbesserungsvorschläge gibt. Wenn das nicht hilft, würde ich die Führungskraft einbeziehen."',
+   trans:'فرهنگ کاری آلمان: ابتدا مکالمه مستقیم و آرام. اگر حل نشد، مدیر را درگیر کنید.',
+   tip:'Zeige Konfliktlösungskompetenz: direkt ansprechen → zuhören → Lösung finden → eskalieren wenn nötig.'}
 ];
+
+var IV_JOBS = {
+  support:    {cats:['network','linux']},
+  sysadmin:   {cats:['linux','network','cloud']},
+  secspec:    {cats:['security']},
+  cloudeng:   {cats:['cloud']},
+  consultant: {cats:['cloud','hr']}
+};
 
 var IV_TIPS = [
   'Beginne Antworten mit „Ich würde..." oder „In meiner Erfahrung..." — das klingt selbstbewusst und professionell.',
   'Deutsche Interviewer schätzen strukturierte Antworten. Nutze die STAR-Methode: Situation, Task, Action, Result.',
-  'Fachbegriffe auf Englisch und Deutsch kennen ist ein Vorteil: „Firewall" auf Deutsch bleibt „Firewall", aber „Rechenzentrum" = Data Center.',
+  'Fachbegriffe auf Englisch und Deutsch kennen ist ein Vorteil: „Firewall" bleibt „Firewall", „Rechenzentrum" = Data Center.',
   'Zeige immer den Bezug zur Praxis: „In einem früheren Projekt habe ich..." macht Antworten überzeugender.',
   'Bereite 5 Fragen vor, die DU dem Interviewer stellst — das zeigt echtes Interesse.',
   'Pünktlichkeit ist in Deutschland extrem wichtig. Für Online-Interviews: 5 Minuten früher verbinden.',
   'Das Wort „Fehlerkultur" ist Gold: Deutsche Unternehmen wollen wissen, wie du mit Fehlern umgehst.',
-  'Verknüpfe deine Azure-Kenntnisse immer mit Geschäftsnutzen: nicht nur „Ich kenne Azure", sondern „Azure hilft Unternehmen, Kosten zu reduzieren weil...".'
+  'Verknüpfe Azure-Kenntnisse mit Geschäftsnutzen: nicht nur „Ich kenne Azure", sondern „Azure hilft Unternehmen, Kosten zu reduzieren weil...".'
 ];
 
+// ===== STATE =====
 var ivCat = 'all';
 var ivFiltered = [];
 var ivCL = 0;
 var ivAns = {};
 var ivTransVisible = false;
 
-function setIvCat(cat){
+// ===== FUNCTIONS =====
+function setIvCat(cat) {
   ivCat = cat;
-  document.querySelectorAll('.iv-cat-btn').forEach(function(b){b.classList.remove('iv-cat-active');});
-  var catIdMap={all:'ivCatAll',cloud:'ivCatCloud',network:'ivCatNet',security:'ivCatSec',linux:'ivCatLinux',hr:'ivCatHR'};
-  var btn=document.getElementById(catIdMap[cat]||'');
-  if(btn)btn.classList.add('iv-cat-active');
-  ivFiltered = cat==='all' ? IV_QUESTIONS : IV_QUESTIONS.filter(function(q){return q.cat===cat;});
+  // Update all cat buttons
+  document.querySelectorAll('.iv-cat-btn[data-cat]').forEach(function(b) {
+    b.classList.toggle('iv-cat-active', b.getAttribute('data-cat') === cat);
+  });
+  // Deactivate all job buttons
+  document.querySelectorAll('.iv-cat-btn[data-job]').forEach(function(b) {
+    b.classList.remove('iv-cat-active');
+  });
+  ivFiltered = cat === 'all' ? IV_QUESTIONS.slice() : IV_QUESTIONS.filter(function(q) { return q.cat === cat; });
   ivCL = 0; ivAns = {}; ivTransVisible = false;
   ivRender();
 }
 
-// Echte Berufsbezeichnungen im deutschen IT-Arbeitsmarkt → passende Fragenkategorien
-var IV_JOBS = {
-  support:     {label:'🎧 IT-Support-Mitarbeiter/in (Helpdesk, 1st/2nd-Level)', cats:['network','linux']},
-  sysadmin:    {label:'🖥️ IT-Systemadministrator/in (Fachinformatiker Systemintegration)', cats:['linux','network','cloud']},
-  secspec:     {label:'🛡️ IT-Security-Spezialist/in', cats:['security']},
-  cloudeng:    {label:'☁️ Cloud Engineer / Azure-Administrator/in', cats:['cloud']},
-  consultant:  {label:'📋 IT-Consultant / Projektmanager/in', cats:['cloud','hr']}
-};
-
-function setIvJob(job){
-  document.querySelectorAll('.iv-cat-btn').forEach(function(b){b.classList.remove('iv-cat-active');});
-  var idMap={support:'ivJobSupport',sysadmin:'ivJobSysadmin',secspec:'ivJobSecspec',cloudeng:'ivJobCloudeng',consultant:'ivJobConsultant'};
-  var btn=document.getElementById(idMap[job]||'');
-  if(btn)btn.classList.add('iv-cat-active');
-  if(!IV_JOBS[job]){setIvCat('all');return;}
-  var cats = IV_JOBS[job].cats;
-  ivCat = job;
-  ivFiltered = IV_QUESTIONS.filter(function(q){return cats.indexOf(q.cat)!==-1;});
+function setIvJob(job) {
+  // Deactivate all cat buttons
+  document.querySelectorAll('.iv-cat-btn[data-cat]').forEach(function(b) {
+    b.classList.remove('iv-cat-active');
+  });
+  // Activate this job button
+  document.querySelectorAll('.iv-cat-btn[data-job]').forEach(function(b) {
+    b.classList.toggle('iv-cat-active', b.getAttribute('data-job') === job);
+  });
+  var jobDef = IV_JOBS[job];
+  if (!jobDef) { setIvCat('all'); return; }
+  var cats = jobDef.cats;
+  ivFiltered = IV_QUESTIONS.filter(function(q) { return cats.indexOf(q.cat) !== -1; });
   ivCL = 0; ivAns = {}; ivTransVisible = false;
   ivRender();
 }
 
-function resetIv(){ivAns={};ivCL=0;ivTransVisible=false;ivRender();}
-
-function ivMove(d){
-  var ni=ivCL+d;
-  if(ni>=0&&ni<ivFiltered.length){ivCL=ni;ivTransVisible=false;ivRender();}
+function resetIv() {
+  ivAns = {}; ivCL = 0; ivTransVisible = false;
+  ivRender();
 }
 
-function ivRender(){
-  if(!ivFiltered.length) return;
-  var q=ivFiltered[ivCL];
-  var answered=ivAns[ivCL];
+function ivMove(d) {
+  var ni = ivCL + d;
+  if (ni >= 0 && ni < ivFiltered.length) {
+    ivCL = ni;
+    ivTransVisible = false;
+    ivRender();
+  }
+}
 
-  document.getElementById('ivQNum').textContent=ivCL+1;
-  document.getElementById('ivQTotal').textContent=ivFiltered.length;
-  document.getElementById('ivProgFill').style.width=((ivCL+1)/ivFiltered.length*100).toFixed(0)+'%';
-  document.getElementById('ivQText').textContent=q.q;
-  document.getElementById('ivCatLabel').textContent=
-    {cloud:'☁️ Cloud & Azure',network:'🌐 Netzwerk',security:'🔒 Security',linux:'🐧 Linux',hr:'🤝 Soft Skills / HR'}[q.cat]||q.cat;
-  document.getElementById('ivDifficulty').textContent=q.diff;
+function ivPick(idx) {
+  if (ivAns[ivCL] !== undefined) return;
+  ivAns[ivCL] = idx;
+  ivRender();
+}
 
-  // Color header by cat
-  var colors={cloud:'#003580',network:'#1a4a20',security:'#4a1a1a',linux:'#2d1a4a',hr:'#1a3a3a'};
-  document.getElementById('ivQHead').style.background=colors[q.cat]||'#1a3a5c';
+function ivShowModel() {
+  var box = document.getElementById('ivModelBox');
+  if (box.style.display === 'block') { box.style.display = 'none'; return; }
+  var q = ivFiltered[ivCL];
+  box.innerHTML = '<strong>💡 Musterlösung:</strong><br><em>' + (q.model || '—') + '</em>';
+  box.style.display = 'block';
+}
+
+function ivToggleTrans() {
+  ivTransVisible = !ivTransVisible;
+  document.getElementById('ivTransBtn').textContent = ivTransVisible ? '🌍 Übersetzen ✓' : '🌍 Übersetzen';
+  ivRender();
+}
+
+function ivRender() {
+  if (!ivFiltered.length) {
+    document.getElementById('ivQText').textContent = 'Keine Fragen für diese Kategorie.';
+    document.getElementById('ivOptsEl').innerHTML = '';
+    document.getElementById('ivQTotal').textContent = '0';
+    document.getElementById('ivProgFill').style.width = '0%';
+    return;
+  }
+
+  var q = ivFiltered[ivCL];
+  var answered = ivAns[ivCL];
+
+  // Header
+  document.getElementById('ivQNum').textContent = ivCL + 1;
+  document.getElementById('ivQTotal').textContent = ivFiltered.length;
+  document.getElementById('ivProgFill').style.width = ((ivCL + 1) / ivFiltered.length * 100).toFixed(0) + '%';
+  document.getElementById('ivQText').textContent = q.q;
+
+  var catColors = {cloud:'#003580', network:'#1a4a20', security:'#4a1a1a', linux:'#2d1a4a', hr:'#1a3a3a'};
+  var catLabels = {cloud:'☁️ Cloud & Azure', network:'🌐 Netzwerk', security:'🔒 Security', linux:'🐧 Linux', hr:'🤝 Soft Skills / HR'};
+  var head = document.getElementById('ivQHead');
+  head.style.background = catColors[q.cat] || '#1a3a5c';
+  document.getElementById('ivCatLabel').textContent = catLabels[q.cat] || q.cat;
+  document.getElementById('ivDifficulty').textContent = q.diff || '';
 
   // Options
-  var con=document.getElementById('ivOptsEl');con.innerHTML='';
-  for(var i=0;i<q.opts.length;i++){
-    (function(idx){
-      var div=document.createElement('div');
-      var cls='iv-opt'+(answered!==undefined?' iv-locked':'');
-      if(answered!==undefined){
-        if(idx===q.c) cls+=' iv-correct';
-        else if(idx===answered) cls+=' iv-wrong';
+  var con = document.getElementById('ivOptsEl');
+  con.innerHTML = '';
+  for (var i = 0; i < q.opts.length; i++) {
+    (function(idx) {
+      var div = document.createElement('div');
+      var cls = 'iv-opt';
+      if (answered !== undefined) {
+        cls += ' iv-locked';
+        if (idx === q.c) cls += ' iv-correct';
+        else if (idx === answered) cls += ' iv-wrong';
       }
-      div.className=cls;
-      div.innerHTML='<div class="iv-radio"></div><div>'+q.opts[idx]+'</div>';
-      if(answered===undefined) div.onclick=(function(i2){return function(){ivPick(i2);};})(idx);
+      div.className = cls;
+      var radio = document.createElement('div');
+      radio.className = 'iv-radio';
+      div.appendChild(radio);
+      var txt = document.createElement('div');
+      txt.textContent = q.opts[idx];
+      div.appendChild(txt);
+      if (answered === undefined) {
+        div.onclick = (function(i2) { return function() { ivPick(i2); }; })(idx);
+      }
       con.appendChild(div);
     })(i);
   }
 
   // Feedback
-  var fb=document.getElementById('ivFb');
-  var expl=document.getElementById('ivExplBox');
-  if(answered!==undefined){
-    fb.style.display='block';
-    if(answered===q.c){
-      fb.style.cssText='display:block;padding:12px 16px;border-radius:6px;font-size:14px;background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7;font-weight:600;margin-bottom:14px';
-      fb.textContent='✓ Richtig! Sehr gut!';
+  var fb = document.getElementById('ivFb');
+  fb.className = '';
+  fb.style.display = 'none';
+  var expl = document.getElementById('ivExplBox');
+  expl.style.display = 'none';
+
+  if (answered !== undefined) {
+    fb.style.display = 'block';
+    if (answered === q.c) {
+      fb.className = 'iv-fb-ok';
+      fb.textContent = '✓ Richtig! Sehr gut!';
     } else {
-      fb.style.cssText='display:block;padding:12px 16px;border-radius:6px;font-size:14px;background:#ffebee;color:#c62828;border:1px solid #ef9a9a;font-weight:600;margin-bottom:14px';
-      fb.textContent='✗ Nicht ganz. Die richtige Antwort: ' + q.opts[q.c];
+      fb.className = 'iv-fb-bad';
+      fb.textContent = '✗ Nicht ganz. Die richtige Antwort: ' + q.opts[q.c];
     }
-    expl.style.display='block';
-    expl.innerHTML='<strong>📖 Erklärung:</strong><br>'+q.expl;
-  } else {
-    fb.style.display='none';
-    expl.style.display='none';
+    expl.innerHTML = '<strong>📖 Erklärung:</strong><br>' + q.expl;
+    expl.style.display = 'block';
   }
 
-  // Model answer hidden by default
-  document.getElementById('ivModelBox').style.display='none';
+  // Model answer — hide on question change
+  document.getElementById('ivModelBox').style.display = 'none';
 
   // Translation
-  var transBox=document.getElementById('ivTransBox');
-  transBox.style.display=ivTransVisible?'block':'none';
-  if(ivTransVisible) transBox.textContent=q.trans||'Keine Übersetzung verfügbar.';
-
-  // Tip
-  document.getElementById('ivTip').textContent=IV_TIPS[ivCL % IV_TIPS.length];
+  var transBox = document.getElementById('ivTransBox');
+  if (ivTransVisible) {
+    transBox.style.display = 'block';
+    transBox.textContent = q.trans || 'Keine Übersetzung verfügbar.';
+  } else {
+    transBox.style.display = 'none';
+  }
 
   // Stats
-  var ok=0,bad=0;
-  Object.keys(ivAns).forEach(function(k){
-    var qi=parseInt(k);
-    if(ivAns[k]===ivFiltered[qi].c) ok++; else bad++;
+  var ok = 0, bad = 0;
+  Object.keys(ivAns).forEach(function(k) {
+    var qi = parseInt(k);
+    if (ivAns[k] === ivFiltered[qi].c) ok++; else bad++;
   });
-  document.getElementById('ivOk').textContent=ok;
-  document.getElementById('ivBad').textContent=bad;
+  document.getElementById('ivOk').textContent = ok;
+  document.getElementById('ivBad').textContent = bad;
 
-  document.getElementById('ivPrevBtn').disabled=(ivCL===0);
-  document.getElementById('ivNextBtn').disabled=(ivCL===ivFiltered.length-1);
+  // Nav buttons
+  document.getElementById('ivPrevBtn').disabled = (ivCL === 0);
+  document.getElementById('ivNextBtn').disabled = (ivCL === ivFiltered.length - 1);
+
+  // Tip
+  document.getElementById('ivTip').textContent = IV_TIPS[ivCL % IV_TIPS.length];
 }
 
-function ivPick(idx){
-  if(ivAns[ivCL]!==undefined) return;
-  ivAns[ivCL]=idx;
-  ivRender();
-}
-
-function ivShowModel(){
-  var q=ivFiltered[ivCL];
-  var box=document.getElementById('ivModelBox');
-  if(box.style.display==='block'){box.style.display='none';return;}
-  box.style.display='block';
-  box.innerHTML='<strong>💡 Musterlösung:</strong><br><em>'+q.model+'</em>';
-}
-
-function ivToggleTrans(){
-  ivTransVisible=!ivTransVisible;
-  var btn=document.getElementById('ivTransBtn');
-  btn.textContent=ivTransVisible?'🌍 Übersetzen ✓':'🌍 Übersetzen';
-  ivRender();
-}
-
-// ===== NAVBAR stubs for interview page =====
-function showPage(id){
-  window.location.href='index.html?page='+id;
-}
-function showCert(c){
-  if(c==='az900') window.location.href='az-900.html';
-  else if(c==='ab900') window.location.href='ab-900.html';
-  else window.location.href='index.html';
-}
-function toggleMegaMenu(e){if(e)e.stopPropagation();}
-function openMegaMenu(){}
-function megaMouseLeaveBtn(){}
-function closeMegaMenu(){}
-function setIvJob_nav(job){ setIvJob(job); }
-function setIvCat_nav(cat){ setIvCat(cat); }
-
-// Lang dropdown
-function toggleLangDrop(e){
-  if(e)e.stopPropagation();
-  var m=document.getElementById('langDropMenu');
-  if(m)m.classList.toggle('open');
-}
-document.addEventListener('click',function(){
-  var m=document.getElementById('langDropMenu');
-  if(m)m.classList.remove('open');
-});
-
-// Nav dropdowns
-document.querySelectorAll('.nav-dropdown').forEach(function(d){
-  d.addEventListener('mouseenter',function(){
-    var m=d.querySelector('.nav-dropdown-menu');
-    if(m)m.style.display='block';
-  });
-  d.addEventListener('mouseleave',function(){
-    var m=d.querySelector('.nav-dropdown-menu');
-    if(m)m.style.display='none';
-  });
-});
-
-// Init interview
-window.addEventListener('DOMContentLoaded', function(){
-  // Read URL params for category/job filter
+// ===== INIT =====
+(function() {
+  // Read URL params
   var params = new URLSearchParams(window.location.search);
   var cat = params.get('cat');
   var job = params.get('job');
-  if(job){
+  if (job && IV_JOBS[job]) {
     setIvJob(job);
-  } else if(cat){
+  } else if (cat && cat !== 'all') {
     setIvCat(cat);
   } else {
     setIvCat('all');
   }
-});
+})();
 </script>
 </body>
 </html>
