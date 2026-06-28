@@ -1891,20 +1891,6 @@ function ivToggleTrans(){
   ivRender();
 }
 
-// Init interview page when shown
-var _origShowPageForIV = showPage;
-showPage = function(id){
-  if(id==='interview'){
-    document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
-    document.getElementById('page-interview').classList.add('active');
-    if(!ivFiltered.length){ ivFiltered=IV_QUESTIONS; ivRender(); }
-    window.scrollTo(0,0);
-    return;
-  }
-  _origShowPageForIV(id);
-};
-
-
 // ===== NAVBAR stubs for interview page =====
 function showPage(id){
   window.location.href='index.html?page='+id;
