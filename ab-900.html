@@ -1652,12 +1652,35 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
       <div class="path-banner-title">&#127891; AB-900 &#8212; Pr&#252;fungsvorbereitung</div>
       <div class="path-banner-sub">104 Fragen in 2 Teilen &#8212; Teil 1 kostenlos</div>
       <div class="path-filters">
-        <button class="path-filter-btn active" id="pfAll" onclick="setPathFilter('all')"><span class="pf-ico">&#127891;</span> Alle Pr&#252;fungsfragen</button>
+        <button class="path-filter-btn active" id="pfAll" onclick="setPathFilter('all')"><span class="pf-ico">&#128211;</span> Alle anzeigen</button>
+        <button class="path-filter-btn" id="pfMod" onclick="setPathFilter('mod')"><span class="pf-ico">&#128214;</span> Nur Lernmodule</button>
+        <button class="path-filter-btn" id="pfLab" onclick="setPathFilter('lab')"><span class="pf-ico">&#128187;</span> Nur Labs</button>
+        <button class="path-filter-btn" id="pfExam" onclick="setPathFilter('exam')"><span class="pf-ico">&#128221;</span> Nur Pr&#252;fung</button>
       </div>
     </div>
 
     <div class="sections-list-wrap">
-      <div class="sections-columns cols-1" id="sectionsColumns">
+      <div class="sections-columns cols-3" id="sectionsColumns">
+        <div class="sections-col show" data-col="mod">
+          <div class="col-header col-blue">
+            <div class="col-icon">&#128214;</div>
+            <div>
+              <div class="col-title">Lernmodule</div>
+              <div class="col-sub">Theorie &amp; Konzepte verstehen</div>
+            </div>
+          </div>
+          <div class="section-list" id="modList"></div>
+        </div>
+        <div class="sections-col show" data-col="lab">
+          <div class="col-header col-green">
+            <div class="col-icon">&#128187;</div>
+            <div>
+              <div class="col-title">Labs</div>
+              <div class="col-sub">Praktische &#220;bungen</div>
+            </div>
+          </div>
+          <div class="section-list" id="labList"></div>
+        </div>
         <div class="sections-col show" data-col="exam">
           <div class="col-header col-gold">
             <div class="col-icon">&#128221;</div>
