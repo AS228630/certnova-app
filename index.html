@@ -256,6 +256,58 @@ nav{background:#1a1a2e;color:white;padding:0 32px;display:flex;align-items:cente
   color:#0050a0;
 }
 
+/* ══ GERMAN LEVELS PAGE ══ */
+.german-level-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+  margin-top:24px;
+}
+.german-level-card{
+  position:relative;
+  background:linear-gradient(160deg,#fff 0%,#f5f9ff 100%);
+  border:1px solid #dde8f5;
+  border-radius:14px;
+  padding:22px 20px 20px;
+  cursor:pointer;
+  transition:all .2s ease;
+  overflow:hidden;
+}
+.german-level-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,#0078d4,#50e6ff);
+}
+.german-level-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 36px rgba(0,80,160,.16);
+  border-color:#9fcdfb;
+}
+.german-level-card .lvl-num{
+  position:absolute;top:14px;right:16px;
+  font-size:34px;font-weight:900;color:#e8f0fe;
+  line-height:1;
+}
+.german-level-card .lvl-cefr{
+  display:inline-block;
+  background:#0078d4;color:#fff;
+  font-weight:800;font-size:13px;
+  padding:4px 12px;border-radius:20px;
+  margin-bottom:10px;
+}
+.german-level-card .lvl-name{
+  font-size:17px;font-weight:800;color:#0050a0;margin-bottom:6px;
+}
+.german-level-card .lvl-desc{
+  font-size:13px;color:#5a6b85;line-height:1.5;margin-bottom:10px;
+}
+body.dark .german-level-card{
+  background:linear-gradient(160deg,#111928 0%,#0d1622 100%);
+  border-color:#253047;
+}
+body.dark .german-level-card .lvl-name{color:#50e6ff}
+body.dark .german-level-card .lvl-desc{color:#8fa3c4}
+body.dark .german-level-card .lvl-num{color:#1a2438}
+
 /* Soon tag refresh */
 .soon-tag{
   font-size:9px;
@@ -1363,86 +1415,13 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
       </div>
     </div>
 
-    <!-- ══ SPRACHEN dropdown with sub-levels ══ -->
+    <!-- ══ SPRACHEN dropdown — nur Deutsch ══ -->
     <div class="nav-dropdown">
       <span class="nav-link" onclick="closeMegaMenu()">🌍 Sprachen &#9660;</span>
       <div class="nav-dropdown-menu lang-menu" style="min-width:220px">
-        <!-- Deutsch with hover sub-levels -->
-        <div class="nav-nested-wrap">
-          <span class="nav-dropdown-item nav-nested-trigger">
-            <span style="display:flex;align-items:center;gap:10px"><span class="flag-badge"><img src="https://flagcdn.com/h40/de.png" srcset="https://flagcdn.com/h80/de.png 2x" alt="DE" loading="lazy"></span> Deutsch &nbsp;&#9658;</span>
-            <span class="nav-nested-badge">A1–C2</span>
-          </span>
-          <div class="nav-nested-menu">
-            <div class="nav-dropdown-group">Niveau wählen</div>
-            <span class="nav-dropdown-item disabled">A1 &mdash; Anfänger <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">A2 &mdash; Grundlegende Kenntnisse <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">B1 &mdash; Mittelstufe <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">B2 &mdash; Selbstständig <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">C1 &mdash; Fachkundig <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">C2 &mdash; Meisterlich <em class="soon-tag">soon</em></span>
-          </div>
-        </div>
-        <div class="nav-nested-wrap">
-          <span class="nav-dropdown-item nav-nested-trigger">
-            <span style="display:flex;align-items:center;gap:10px"><span class="flag-badge"><img src="https://flagcdn.com/h40/gb.png" srcset="https://flagcdn.com/h80/gb.png 2x" alt="GB" loading="lazy"></span> English &nbsp;&#9658;</span>
-            <span class="nav-nested-badge">A1–C2</span>
-          </span>
-          <div class="nav-nested-menu">
-            <div class="nav-dropdown-group">Level</div>
-            <span class="nav-dropdown-item disabled">A1 &mdash; Beginner <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">A2 &mdash; Elementary <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">B1 &mdash; Intermediate <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">B2 &mdash; Upper Intermediate <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">C1 &mdash; Advanced <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">C2 &mdash; Mastery <em class="soon-tag">soon</em></span>
-          </div>
-        </div>
-        <div class="nav-nested-wrap">
-          <span class="nav-dropdown-item nav-nested-trigger">
-            <span style="display:flex;align-items:center;gap:10px"><span class="flag-badge"><img src="https://flagcdn.com/h40/ir.png" srcset="https://flagcdn.com/h80/ir.png 2x" alt="IR" loading="lazy"></span> فارسی &nbsp;&#9658;</span>
-            <span class="nav-nested-badge">A1–C2</span>
-          </span>
-          <div class="nav-nested-menu">
-            <div class="nav-dropdown-group">سطح</div>
-            <span class="nav-dropdown-item disabled">A1 &mdash; مبتدی <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">A2 &mdash; پایه <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">B1 &mdash; متوسط <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">B2 &mdash; فوق متوسط <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">C1 &mdash; پیشرفته <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">C2 &mdash; تسلط کامل <em class="soon-tag">soon</em></span>
-          </div>
-        </div>
-        <div class="nav-nested-wrap">
-          <span class="nav-dropdown-item nav-nested-trigger">
-            <span style="display:flex;align-items:center;gap:10px"><span class="flag-badge"><img src="https://flagcdn.com/h40/sa.png" srcset="https://flagcdn.com/h80/sa.png 2x" alt="SA" loading="lazy"></span> العربية &nbsp;&#9658;</span>
-            <span class="nav-nested-badge">A1–C2</span>
-          </span>
-          <div class="nav-nested-menu">
-            <div class="nav-dropdown-group">المستوى</div>
-            <span class="nav-dropdown-item disabled">A1 &mdash; مبتدئ <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">A2 &mdash; أساسي <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">B1 &mdash; متوسط <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">B2 &mdash; فوق المتوسط <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">C1 &mdash; متقدم <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">C2 &mdash; إتقان <em class="soon-tag">soon</em></span>
-          </div>
-        </div>
-        <div class="nav-nested-wrap">
-          <span class="nav-dropdown-item nav-nested-trigger">
-            <span style="display:flex;align-items:center;gap:10px"><span class="flag-badge"><img src="https://flagcdn.com/h40/ua.png" srcset="https://flagcdn.com/h80/ua.png 2x" alt="UA" loading="lazy"></span> Українська &nbsp;&#9658;</span>
-            <span class="nav-nested-badge">A1–C2</span>
-          </span>
-          <div class="nav-nested-menu">
-            <div class="nav-dropdown-group">Рівень</div>
-            <span class="nav-dropdown-item disabled">A1 &mdash; Початківець <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">A2 &mdash; Базовий <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">B1 &mdash; Середній <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">B2 &mdash; Вищий середній <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">C1 &mdash; Просунутий <em class="soon-tag">soon</em></span>
-            <span class="nav-dropdown-item disabled">C2 &mdash; Майстерність <em class="soon-tag">soon</em></span>
-          </div>
-        </div>
+        <span class="nav-dropdown-item" onclick="closeMegaMenu();showPage('german-levels')" style="display:flex;align-items:center;gap:10px">
+          <span class="flag-badge"><img src="https://flagcdn.com/h40/de.png" srcset="https://flagcdn.com/h80/de.png 2x" alt="DE" loading="lazy"></span> Deutsch
+        </span>
       </div>
     </div>
 
@@ -1927,6 +1906,62 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
   </div>
 
 </div>
+</div>
+
+<!-- ===== NEWS PAGE ===== -->
+<!-- ===== GERMAN LEVELS PAGE ===== -->
+<div id="page-german-levels" class="page">
+  <div class="news-page">
+    <h2 style="display:flex;align-items:center;gap:12px">
+      <span class="flag-badge" style="width:38px;height:38px"><img src="https://flagcdn.com/h80/de.png" alt="DE"></span>
+      Deutsch lernen
+    </h2>
+    <p class="intro">Wähle dein Sprachniveau nach dem Common European Framework (CEFR). Jedes Niveau baut auf dem vorherigen auf.</p>
+    <div class="german-level-grid">
+      <div class="german-level-card" onclick="showPage('home')">
+        <div class="lvl-num">1</div>
+        <div class="lvl-cefr">A1</div>
+        <div class="lvl-name">Anfänger</div>
+        <div class="lvl-desc">Erste Schritte: einfache Sätze, Begrüßungen, Alltagsvokabular.</div>
+        <span class="soon-tag">soon</span>
+      </div>
+      <div class="german-level-card" onclick="showPage('home')">
+        <div class="lvl-num">2</div>
+        <div class="lvl-cefr">A2</div>
+        <div class="lvl-name">Grundlegende Kenntnisse</div>
+        <div class="lvl-desc">Einfache Alltagssituationen meistern und sich grundlegend verständigen.</div>
+        <span class="soon-tag">soon</span>
+      </div>
+      <div class="german-level-card" onclick="showPage('home')">
+        <div class="lvl-num">3</div>
+        <div class="lvl-cefr">B1</div>
+        <div class="lvl-name">Mittelstufe</div>
+        <div class="lvl-desc">Vertraute Themen sicher besprechen, Erfahrungen und Pläne erklären.</div>
+        <span class="soon-tag">soon</span>
+      </div>
+      <div class="german-level-card" onclick="showPage('home')">
+        <div class="lvl-num">4</div>
+        <div class="lvl-cefr">B2</div>
+        <div class="lvl-name">Selbstständig</div>
+        <div class="lvl-desc">Komplexere Texte verstehen und sich klar und detailliert ausdrücken.</div>
+        <span class="soon-tag">soon</span>
+      </div>
+      <div class="german-level-card" onclick="showPage('home')">
+        <div class="lvl-num">5</div>
+        <div class="lvl-cefr">C1</div>
+        <div class="lvl-name">Fachkundig</div>
+        <div class="lvl-desc">Spontan und fließend kommunizieren, auch in beruflichen und akademischen Kontexten.</div>
+        <span class="soon-tag">soon</span>
+      </div>
+      <div class="german-level-card" onclick="showPage('home')">
+        <div class="lvl-num">6</div>
+        <div class="lvl-cefr">C2</div>
+        <div class="lvl-name">Meisterlich</div>
+        <div class="lvl-desc">Nahezu muttersprachliches Niveau in allen Situationen.</div>
+        <span class="soon-tag">soon</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ===== NEWS PAGE ===== -->
@@ -4842,5 +4877,14 @@ function aiAskBackend(){
 
 // run on load
 updateNavUser();
+
+// Open the page requested via ?page=xxx in the URL (e.g. links from interview.html)
+(function(){
+  var params=new URLSearchParams(window.location.search);
+  var pageParam=params.get('page');
+  if(pageParam && document.getElementById('page-'+pageParam)){
+    showPage(pageParam);
+  }
+})();
 </script>
 </body></html>
