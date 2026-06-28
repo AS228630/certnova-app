@@ -4136,19 +4136,24 @@ function loadProgress(){
   }catch(e){}
 }
 
-// Patch pick() and pickMulti() to auto-save
-var _origPick=pick;
-pick=function(idx){_origPick(idx);saveProgress();};
-var _origPickMulti=pickMulti;
-pickMulti=function(){_origPickMulti();saveProgress();};
+// Patch pick() and pickMulti() to auto-save (guarded: these may not exist in this build)
+if(typeof pick==='function'){
+  var _origPick=pick;
+  pick=function(idx){_origPick(idx);saveProgress();};
+}
+if(typeof pickMulti==='function'){
+  var _origPickMulti=pickMulti;
+  pickMulti=function(){_origPickMulti();saveProgress();};
+}
 
 // Patch checkAnswer to also save
-var _origCheckAnswer=checkAnswer;
-checkAnswer=function(){_origCheckAnswer();saveProgress();};
+if(typeof checkAnswer==='function'){
+  var _origCheckAnswer=checkAnswer;
+  checkAnswer=function(){_origCheckAnswer();saveProgress();};
+}
 
 // Load on startup
 loadProgress();
-updateCounts();
 
 // ===== NOTES SYSTEM =====
 var NOTES_KEY='certcoachNotes';
