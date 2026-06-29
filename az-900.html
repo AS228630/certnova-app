@@ -906,7 +906,23 @@ footer.site-footer a:hover{text-decoration:underline}
   .cta-banner h2{font-size:20px}
   nav{padding:0 16px}
   .nav-links{display:none}
+  .nav-hamburger{display:flex}
+  .nav-right .reg-btn{display:none}
 }
+.mob-menu{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:var(--dark);z-index:9998;overflow-y:auto;padding:16px 0}
+.mob-menu.open{display:block}
+.mob-menu-item{display:block;padding:14px 24px;color:#fff;font-size:15px;font-weight:600;border-bottom:1px solid rgba(255,255,255,.08);cursor:pointer}
+.mob-menu-item:hover{background:rgba(255,255,255,.07)}
+.mob-menu-item.accent{color:#50e6ff}
+.mob-menu-section{padding:8px 24px 4px;font-size:11px;font-weight:800;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-top:8px}
+.mob-menu-sub{padding:10px 36px;color:rgba(255,255,255,.75);font-size:13.5px;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer}
+.mob-menu-sub:hover{background:rgba(255,255,255,.05);color:#50e6ff}
+.mob-menu-sub.soon{opacity:.45}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;margin-left:8px;background:none;border:none}
+.nav-hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:all .25s}
+.nav-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5p
 /* ===== AUTH PAGE ===== */
 .auth-page{max-width:500px;margin:48px auto 80px;padding:0 20px}
 .auth-tabs{display:flex;gap:32px;justify-content:center;margin-bottom:32px;border-bottom:2px solid var(--border);padding-bottom:0}
@@ -1429,7 +1445,10 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
     <button class="dm-toggle" id="dmToggle" onclick="toggleDark()" title="Dark Mode">🌙</button>
   </div>
 </nav>
-
+<!-- ===== MOBILE MENU ===== -->
+<div class="mob-menu" id="mobMenu">
+  <div class="mob-menu-item accent" onclick="closeMobMenu();showPage('home')">🏠 Startseite</div>
+ 
 <!-- OWNER MODE BANNER (فقط برای صاحب سایت نشان داده می‌شود) -->
 <div id="ownerBanner" style="display:none;background:linear-gradient(135deg,#7c3c10,#5e2b0b);color:white;text-align:center;padding:9px 16px;font-size:13px;font-weight:700;z-index:999;position:relative">
   🔑 <strong>Owner Mode فعال است</strong> — همه ۶ بخش AZ-900 برای شما باز هستند &nbsp;|&nbsp;
@@ -4798,5 +4817,21 @@ updateNavUser();
     if(ob) ob.style.display = 'block';
   }
 })();
+
+// ===== MOBILE MENU =====
+function toggleMobMenu(){
+  var m=document.getElementById('mobMenu');
+  var h=document.getElementById('navHamburger');
+  m.classList.toggle('open');
+  h.classList.toggle('open');
+  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
+}
+function closeMobMenu(){
+  document.getElementById('mobMenu').classList.remove('open');
+  document.getElementById('navHamburger').classList.remove('open');
+  document.body.style.overflow='';
+}
+// Close mobile menu on page resize
+window.addEventListener('resize',function(){if(window.innerWidth>768)c
 </script>
 </body></html>
