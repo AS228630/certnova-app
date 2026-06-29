@@ -1501,6 +1501,7 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
     <span class="nav-link" onclick="closeMegaMenu();showPage('news')" data-i18n="nav_news">News</span>
     <span class="nav-link" onclick="closeMegaMenu();showPage('kontakt')" data-i18n="nav_contact">Kontakt</span>
   </div>
+  <button class="nav-hamburger" id="navHamburger" onclick="toggleMobMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
   <div class="nav-right">
     <div class="lang-dropdown-wrap" id="langDropWrap">
       <button class="lang-drop-btn" id="langDropBtn" onclick="toggleLangMenu()">
@@ -1529,8 +1530,17 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
 </nav>
 <!-- ===== MOBILE MENU ===== -->
 <div class="mob-menu" id="mobMenu">
-  <div class="mob-menu-item accent" onclick="closeMobMenu();showPage('home')">🏠 Startseite</div>
- 
+  <div class="mob-menu-item accent" onclick="closeMobMenu();window.location.href='index.html'">🏠 Startseite</div>
+  <div class="mob-menu-section">IT-Zertifikate</div>
+  <div class="mob-menu-item" onclick="closeMobMenu();window.location.href='az-900.html'">📘 AZ-900 — Azure Fundamentals ✅</div>
+  <div class="mob-menu-item" onclick="closeMobMenu();window.location.href='ab-900.html'">📗 AB-900 — Azure Basics ✅</div>
+  <div class="mob-menu-section">Interview Prep</div>
+  <div class="mob-menu-item" onclick="closeMobMenu();window.location.href='interview.html'">🎙️ Interview Trainer</div>
+  <div class="mob-menu-section">Mehr</div>
+  <div class="mob-menu-item" onclick="closeMobMenu();window.location.href='index.html#news'">📰 News</div>
+  <div class="mob-menu-item" onclick="closeMobMenu();window.location.href='index.html#kontakt'">✉️ Kontakt</div>
+</div>
+
 <!-- OWNER MODE BANNER (فقط برای صاحب سایت نشان داده می‌شود) -->
 <div id="ownerBanner" style="display:none;background:linear-gradient(135deg,#7c3c10,#5e2b0b);color:white;text-align:center;padding:9px 16px;font-size:13px;font-weight:700;z-index:999;position:relative">
   🔑 <strong>Owner Mode فعال است</strong> — همه ۶ بخش AZ-900 برای شما باز هستند &nbsp;|&nbsp;
