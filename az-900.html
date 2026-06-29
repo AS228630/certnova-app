@@ -906,23 +906,7 @@ footer.site-footer a:hover{text-decoration:underline}
   .cta-banner h2{font-size:20px}
   nav{padding:0 16px}
   .nav-links{display:none}
-  .nav-hamburger{display:flex}
-  .nav-right .reg-btn{display:none}
 }
-.mob-menu{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:var(--dark);z-index:9998;overflow-y:auto;padding:16px 0}
-.mob-menu.open{display:block}
-.mob-menu-item{display:block;padding:14px 24px;color:#fff;font-size:15px;font-weight:600;border-bottom:1px solid rgba(255,255,255,.08);cursor:pointer}
-.mob-menu-item:hover{background:rgba(255,255,255,.07)}
-.mob-menu-item.accent{color:#50e6ff}
-.mob-menu-section{padding:8px 24px 4px;font-size:11px;font-weight:800;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-top:8px}
-.mob-menu-sub{padding:10px 36px;color:rgba(255,255,255,.75);font-size:13.5px;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer}
-.mob-menu-sub:hover{background:rgba(255,255,255,.05);color:#50e6ff}
-.mob-menu-sub.soon{opacity:.45}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;margin-left:8px;background:none;border:none}
-.nav-hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:all .25s}
-.nav-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.nav-hamburger.open span:nth-child(2){opacity:0}
-.nav-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5p
 /* ===== AUTH PAGE ===== */
 .auth-page{max-width:500px;margin:48px auto 80px;padding:0 20px}
 .auth-tabs{display:flex;gap:32px;justify-content:center;margin-bottom:32px;border-bottom:2px solid var(--border);padding-bottom:0}
@@ -1301,6 +1285,21 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
 [dir="rtl"] .btn-ask-ai{right:auto;left:96px}
 .btn-ask-ai:hover{background:rgba(80,230,255,.2)}
 
+
+.mob-menu{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:var(--dark);z-index:9998;overflow-y:auto;padding:16px 0}
+.mob-menu.open{display:block}
+.mob-menu-item{display:block;padding:14px 24px;color:#fff;font-size:15px;font-weight:600;border-bottom:1px solid rgba(255,255,255,.08);cursor:pointer}
+.mob-menu-item:hover{background:rgba(255,255,255,.07)}
+.mob-menu-item.accent{color:#50e6ff}
+.mob-menu-section{padding:8px 24px 4px;font-size:11px;font-weight:800;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-top:8px}
+.mob-menu-sub{padding:10px 36px;color:rgba(255,255,255,.75);font-size:13.5px;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer}
+.mob-menu-sub:hover{background:rgba(255,255,255,.05);color:#50e6ff}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;margin-left:8px;background:none;border:none}
+.nav-hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:all .25s}
+.nav-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+@media(max-width:768px){.nav-links{display:none}.nav-hamburger{display:flex}}
 </style>
 </head>
 <body>
@@ -1418,6 +1417,7 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
     <span class="nav-link" onclick="closeMegaMenu();showPage('news')" data-i18n="nav_news">News</span>
     <span class="nav-link" onclick="closeMegaMenu();showPage('kontakt')" data-i18n="nav_contact">Kontakt</span>
   </div>
+  <button class="nav-hamburger" id="navHamburger" onclick="toggleMobMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
   <div class="nav-right">
     <div class="lang-dropdown-wrap" id="langDropWrap">
       <button class="lang-drop-btn" id="langDropBtn" onclick="toggleLangMenu()">
@@ -1447,8 +1447,16 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
 </nav>
 <!-- ===== MOBILE MENU ===== -->
 <div class="mob-menu" id="mobMenu">
-  <div class="mob-menu-item accent" onclick="closeMobMenu();showPage('home')">🏠 Startseite</div>
- 
+  <div class="mob-menu-item accent" onclick="closeMobMenu();window.location.href='index.html'">🏠 Startseite</div>
+  <div class="mob-menu-section">IT-Zertifikate</div>
+  <div class="mob-menu-item" onclick="closeMobMenu();window.location.href='az-900.html'">📘 AZ-900 — Azure Fundamentals ✅</div>
+  <div class="mob-menu-item" onclick="closeMobMenu();window.location.href='ab-900.html'">📗 AB-900 — Azure Basics ✅</div>
+  <div class="mob-menu-section">Interview Prep</div>
+  <div class="mob-menu-item" onclick="closeMobMenu();window.location.href='interview.html'">🎙️ Interview Trainer</div>
+  <div class="mob-menu-section">Mehr</div>
+  <div class="mob-menu-item" onclick="closeMobMenu();window.location.href='index.html'">📰 News & Kontakt</div>
+</div>
+
 <!-- OWNER MODE BANNER (فقط برای صاحب سایت نشان داده می‌شود) -->
 <div id="ownerBanner" style="display:none;background:linear-gradient(135deg,#7c3c10,#5e2b0b);color:white;text-align:center;padding:9px 16px;font-size:13px;font-weight:700;z-index:999;position:relative">
   🔑 <strong>Owner Mode فعال است</strong> — همه ۶ بخش AZ-900 برای شما باز هستند &nbsp;|&nbsp;
@@ -4818,20 +4826,21 @@ updateNavUser();
   }
 })();
 
-// ===== MOBILE MENU =====
 function toggleMobMenu(){
   var m=document.getElementById('mobMenu');
   var h=document.getElementById('navHamburger');
+  if(!m||!h)return;
   m.classList.toggle('open');
   h.classList.toggle('open');
   document.body.style.overflow=m.classList.contains('open')?'hidden':'';
 }
 function closeMobMenu(){
-  document.getElementById('mobMenu').classList.remove('open');
-  document.getElementById('navHamburger').classList.remove('open');
+  var m=document.getElementById('mobMenu');
+  var h=document.getElementById('navHamburger');
+  if(m)m.classList.remove('open');
+  if(h)h.classList.remove('open');
   document.body.style.overflow='';
 }
-// Close mobile menu on page resize
-window.addEventListener('resize',function(){if(window.innerWidth>768)c
+window.addEventListener('resize',function(){if(window.innerWidth>768)closeMobMenu();});
 </script>
 </body></html>
