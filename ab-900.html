@@ -1543,7 +1543,7 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
 
 <!-- OWNER MODE BANNER (فقط برای صاحب سایت نشان داده می‌شود) -->
 <div id="ownerBanner" style="display:none;background:linear-gradient(135deg,#7c3c10,#5e2b0b);color:white;text-align:center;padding:9px 16px;font-size:13px;font-weight:700;z-index:999;position:relative">
-  🔑 <strong>Owner Mode فعال است</strong> — همه ۶ بخش AZ-900 برای شما باز هستند &nbsp;|&nbsp;
+  🔑 <strong>Owner Mode فعال است</strong> — هر دو بخش AB-900 برای شما باز هستند &nbsp;|&nbsp;
   <a style="color:#f5c88a;cursor:pointer;text-decoration:underline" onclick="localStorage.removeItem('cc_owner');location.reload()">خروج از Owner Mode</a>
 </div>
 
@@ -2206,7 +2206,7 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
     <button class="ai-close" onclick="closeAiChat()" aria-label="Schließen">&#10005;</button>
   </div>
   <div class="ai-chat-body" id="aiChatBody">
-    <div class="ai-msg bot">Hallo! Ich bin dein KI-Assistent für AZ-900. Du kannst Text markieren und fragen — oder hier direkt eine Frage stellen! 💡</div>
+    <div class="ai-msg bot">Hallo! Ich bin dein KI-Assistent für AB-900. Du kannst Text markieren und fragen — oder hier direkt eine Frage stellen! 💡</div>
     <div class="ai-suggest" id="aiSuggest">
       <button class="ai-suggest-btn" onclick="aiSendSuggested('Was ist IaaS, PaaS, SaaS?')">Was ist IaaS, PaaS, SaaS?</button>
       <button class="ai-suggest-btn" onclick="aiSendSuggested('Erkläre mir Azure Resource Manager.')">Azure Resource Manager erklären</button>
@@ -3286,7 +3286,7 @@ var TRANSLATIONS = {
       <div class="modal-warn-box">⚠️ Wichtig: Auch nach dem Kauf schaltet sich der nächste Abschnitt erst frei, wenn Sie im aktuellen Abschnitt mindestens <strong>90%</strong> der Fragen richtig beantwortet haben.</div>
       <div class="bundle-box">
         <div class="bundle-desc" id="modalBundleDesc">
-          Wählen Sie Ihre Zugangsdauer. Mit einer einmaligen Zahlung (kein Abo) werden alle verbleibenden Teile der AZ-900 Prüfung freigeschaltet.
+          Wählen Sie Ihre Zugangsdauer. Mit einer einmaligen Zahlung (kein Abo) werden alle verbleibenden Teile der AB-900 Prüfung freigeschaltet.
         </div>
         <div class="tier-grid" id="tierGrid">
           <div class="tier-card selected" data-tier="30" data-price="9.99" onclick="selectTier(this)">
@@ -3468,7 +3468,7 @@ function showSyncMsg(text, isError){
 
 function openPurchaseModal(si){
   // Build description based on which section was clicked
-  var certName='AZ-900';
+  var certName='AB-900';
   var desc='Wählen Sie Ihre Zugangsdauer. Mit einer einmaligen Zahlung (kein Abo) werden alle verbleibenden Teile der '+certName+' Prüfung freigeschaltet.';
   document.getElementById('modalBundleDesc').textContent=desc;
   document.getElementById('purchaseModal').classList.add('open');
