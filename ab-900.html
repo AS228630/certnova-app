@@ -906,7 +906,23 @@ footer.site-footer a:hover{text-decoration:underline}
   .cta-banner h2{font-size:20px}
   nav{padding:0 16px}
   .nav-links{display:none}
+  .nav-hamburger{display:flex}
+  .nav-right .reg-btn{display:none}
 }
+.mob-menu{display:none;position:fixed;top:56px;left:0;right:0;bottom:0;background:var(--dark);z-index:9998;overflow-y:auto;padding:16px 0}
+.mob-menu.open{display:block}
+.mob-menu-item{display:block;padding:14px 24px;color:#fff;font-size:15px;font-weight:600;border-bottom:1px solid rgba(255,255,255,.08);cursor:pointer}
+.mob-menu-item:hover{background:rgba(255,255,255,.07)}
+.mob-menu-item.accent{color:#50e6ff}
+.mob-menu-section{padding:8px 24px 4px;font-size:11px;font-weight:800;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-top:8px}
+.mob-menu-sub{padding:10px 36px;color:rgba(255,255,255,.75);font-size:13.5px;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer}
+.mob-menu-sub:hover{background:rgba(255,255,255,.05);color:#50e6ff}
+.mob-menu-sub.soon{opacity:.45}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;margin-left:8px;background:none;border:none}
+.nav-hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:all .25s}
+.nav-hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5p
 /* ===== AUTH PAGE ===== */
 .auth-page{max-width:500px;margin:48px auto 80px;padding:0 20px}
 .auth-tabs{display:flex;gap:32px;justify-content:center;margin-bottom:32px;border-bottom:2px solid var(--border);padding-bottom:0}
@@ -1304,7 +1320,7 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
         <div class="mega-col">
           <div class="mega-col-title">🪟 Microsoft</div>
           <div class="nav-dropdown-group">Fundamentals</div>
-          <span class="nav-dropdown-item" onclick="event.stopPropagation();showCert('az900')">AZ-900 &mdash; Azure Fundamentals ✅</span>
+          <span class="nav-dropdown-item" onclick="showCert('az900')">AZ-900 &mdash; Azure Fundamentals ✅</span>
           <span class="nav-dropdown-item" onclick="window.location.href='ab-900.html'">AB-900 &mdash; Azure Basics ✅</span>
           <span class="nav-dropdown-item disabled">AI-900 &mdash; AI Fundamentals <em class="soon-tag">soon</em></span>
           <span class="nav-dropdown-item disabled">SC-900 &mdash; Security Fundamentals <em class="soon-tag">soon</em></span>
@@ -1363,6 +1379,89 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
       </div>
     </div>
 
+    <!-- ══ SPRACHEN dropdown with sub-levels ══ -->
+    <div class="nav-dropdown">
+      <span class="nav-link" onclick="closeMegaMenu()">🌍 Sprachen &#9660;</span>
+      <div class="nav-dropdown-menu lang-menu" style="min-width:220px">
+        <!-- Deutsch with hover sub-levels -->
+        <div class="nav-nested-wrap">
+          <span class="nav-dropdown-item nav-nested-trigger">
+            <span style="display:flex;align-items:center;gap:10px"><span class="flag-badge"><img src="https://flagcdn.com/h40/de.png" srcset="https://flagcdn.com/h80/de.png 2x" alt="DE" loading="lazy"></span> Deutsch &nbsp;&#9658;</span>
+            <span class="nav-nested-badge">A1–C2</span>
+          </span>
+          <div class="nav-nested-menu">
+            <div class="nav-dropdown-group">Niveau wählen</div>
+            <span class="nav-dropdown-item disabled">A1 &mdash; Anfänger <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">A2 &mdash; Grundlegende Kenntnisse <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">B1 &mdash; Mittelstufe <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">B2 &mdash; Selbstständig <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">C1 &mdash; Fachkundig <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">C2 &mdash; Meisterlich <em class="soon-tag">soon</em></span>
+          </div>
+        </div>
+        <div class="nav-nested-wrap">
+          <span class="nav-dropdown-item nav-nested-trigger">
+            <span style="display:flex;align-items:center;gap:10px"><span class="flag-badge"><img src="https://flagcdn.com/h40/gb.png" srcset="https://flagcdn.com/h80/gb.png 2x" alt="GB" loading="lazy"></span> English &nbsp;&#9658;</span>
+            <span class="nav-nested-badge">A1–C2</span>
+          </span>
+          <div class="nav-nested-menu">
+            <div class="nav-dropdown-group">Level</div>
+            <span class="nav-dropdown-item disabled">A1 &mdash; Beginner <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">A2 &mdash; Elementary <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">B1 &mdash; Intermediate <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">B2 &mdash; Upper Intermediate <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">C1 &mdash; Advanced <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">C2 &mdash; Mastery <em class="soon-tag">soon</em></span>
+          </div>
+        </div>
+        <div class="nav-nested-wrap">
+          <span class="nav-dropdown-item nav-nested-trigger">
+            <span style="display:flex;align-items:center;gap:10px"><span class="flag-badge"><img src="https://flagcdn.com/h40/ir.png" srcset="https://flagcdn.com/h80/ir.png 2x" alt="IR" loading="lazy"></span> فارسی &nbsp;&#9658;</span>
+            <span class="nav-nested-badge">A1–C2</span>
+          </span>
+          <div class="nav-nested-menu">
+            <div class="nav-dropdown-group">سطح</div>
+            <span class="nav-dropdown-item disabled">A1 &mdash; مبتدی <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">A2 &mdash; پایه <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">B1 &mdash; متوسط <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">B2 &mdash; فوق متوسط <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">C1 &mdash; پیشرفته <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">C2 &mdash; تسلط کامل <em class="soon-tag">soon</em></span>
+          </div>
+        </div>
+        <div class="nav-nested-wrap">
+          <span class="nav-dropdown-item nav-nested-trigger">
+            <span style="display:flex;align-items:center;gap:10px"><span class="flag-badge"><img src="https://flagcdn.com/h40/sa.png" srcset="https://flagcdn.com/h80/sa.png 2x" alt="SA" loading="lazy"></span> العربية &nbsp;&#9658;</span>
+            <span class="nav-nested-badge">A1–C2</span>
+          </span>
+          <div class="nav-nested-menu">
+            <div class="nav-dropdown-group">المستوى</div>
+            <span class="nav-dropdown-item disabled">A1 &mdash; مبتدئ <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">A2 &mdash; أساسي <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">B1 &mdash; متوسط <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">B2 &mdash; فوق المتوسط <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">C1 &mdash; متقدم <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">C2 &mdash; إتقان <em class="soon-tag">soon</em></span>
+          </div>
+        </div>
+        <div class="nav-nested-wrap">
+          <span class="nav-dropdown-item nav-nested-trigger">
+            <span style="display:flex;align-items:center;gap:10px"><span class="flag-badge"><img src="https://flagcdn.com/h40/ua.png" srcset="https://flagcdn.com/h80/ua.png 2x" alt="UA" loading="lazy"></span> Українська &nbsp;&#9658;</span>
+            <span class="nav-nested-badge">A1–C2</span>
+          </span>
+          <div class="nav-nested-menu">
+            <div class="nav-dropdown-group">Рівень</div>
+            <span class="nav-dropdown-item disabled">A1 &mdash; Початківець <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">A2 &mdash; Базовий <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">B1 &mdash; Середній <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">B2 &mdash; Вищий середній <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">C1 &mdash; Просунутий <em class="soon-tag">soon</em></span>
+            <span class="nav-dropdown-item disabled">C2 &mdash; Майстерність <em class="soon-tag">soon</em></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ══ IT INTERVIEW PREP ══ -->
     <div class="nav-dropdown iv-drop">
       <span class="nav-link" onclick="closeMegaMenu()" style="color:#ffd700;font-weight:700">💼 Interview Prep &#9660;</span>
@@ -1418,7 +1517,6 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
         <div class="lang-drop-item" data-lang="es" onclick="setLang('es')"><span class="flag-badge"><img src="https://flagcdn.com/h40/es.png" srcset="https://flagcdn.com/h80/es.png 2x" alt="ES" loading="lazy"></span> Español</div>
         <div class="lang-drop-item" data-lang="tr" onclick="setLang('tr')"><span class="flag-badge"><img src="https://flagcdn.com/h40/tr.png" srcset="https://flagcdn.com/h80/tr.png 2x" alt="TR" loading="lazy"></span> Türkçe</div>
         <div class="lang-drop-item" data-lang="ru" onclick="setLang('ru')"><span class="flag-badge"><img src="https://flagcdn.com/h40/ru.png" srcset="https://flagcdn.com/h80/ru.png 2x" alt="RU" loading="lazy"></span> Русский</div>
-        <div class="lang-drop-item" data-lang="uk" onclick="setLang('uk')"><span class="flag-badge"><img src="https://flagcdn.com/h40/ua.png" srcset="https://flagcdn.com/h80/ua.png 2x" alt="UA" loading="lazy"></span> Українська</div>
         <div class="lang-drop-item" data-lang="ar" onclick="setLang('ar')"><span class="flag-badge"><img src="https://flagcdn.com/h40/sa.png" srcset="https://flagcdn.com/h80/sa.png 2x" alt="SA" loading="lazy"></span> العربية</div>
         <div class="lang-drop-item" data-lang="fa" onclick="setLang('fa')"><span class="flag-badge"><img src="https://flagcdn.com/h40/ir.png" srcset="https://flagcdn.com/h80/ir.png 2x" alt="IR" loading="lazy"></span> فارسی</div>
       </div>
@@ -1429,7 +1527,10 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
     <button class="dm-toggle" id="dmToggle" onclick="toggleDark()" title="Dark Mode">🌙</button>
   </div>
 </nav>
-
+<!-- ===== MOBILE MENU ===== -->
+<div class="mob-menu" id="mobMenu">
+  <div class="mob-menu-item accent" onclick="closeMobMenu();showPage('home')">🏠 Startseite</div>
+ 
 <!-- OWNER MODE BANNER (فقط برای صاحب سایت نشان داده می‌شود) -->
 <div id="ownerBanner" style="display:none;background:linear-gradient(135deg,#7c3c10,#5e2b0b);color:white;text-align:center;padding:9px 16px;font-size:13px;font-weight:700;z-index:999;position:relative">
   🔑 <strong>Owner Mode فعال است</strong> — همه ۶ بخش AZ-900 برای شما باز هستند &nbsp;|&nbsp;
@@ -1439,7 +1540,7 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
 <!-- FREE TRIAL BANNER -->
 <div class="free-banner">
   🎓 <strong>Teil 1 komplett KOSTENLOS</strong> — 50 echte AB-900 Fragen ohne Registrierung!
-  <a onclick="event.stopPropagation();showCert('az900')">Jetzt kostenlos starten →</a>
+  <a onclick="showCert('az900')">Jetzt kostenlos starten →</a>
 </div>
 
 <!-- TRUST BAR -->
@@ -1459,7 +1560,7 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
       <h1 data-i18n="hero_title">Echte Pr&#252;fungsfragen.<br>Ein bew&#228;hrtes System. <span class="accent" data-i18n="hero_accent">F&#252;r jede IT-Zertifizierung.</span></h1>
       <p class="lead" data-i18n="hero_lead">Jede Lernetappe schaltet sich erst frei, wenn die vorherige zu mindestens 90% sitzt &#8212; so lernst du wirklich durch, statt nur durchzuklicken.</p>
       <div class="hero-btns">
-        <button class="btn-hero-prim" onclick="event.stopPropagation();showCert('az900')" data-i18n="hero_start">Lernpfad starten &#8250;</button>
+        <button class="btn-hero-prim" onclick="showCert('az900')" data-i18n="hero_start">Lernpfad starten &#8250;</button>
         <button class="btn-hero-sec" onclick="showPage('kontakt')" data-i18n="nav_contact">Kontakt</button>
       </div>
       <div class="hero-stats">
@@ -1483,7 +1584,7 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
     <div class="sec-eyebrow" data-i18n="cert_eyebrow">Zertifizierungen</div>
     <h2 data-i18n="cert_heading">W&#228;hle deinen Lernpfad</h2>
     <div class="cert-cards">
-      <div class="cert-card" onclick="event.stopPropagation();showCert('az900')">
+      <div class="cert-card" onclick="showCert('az900')">
         <h3>AZ-900</h3>
         <p>Microsoft Azure Basics &#8212; 104 Fragen in 2 Teilen</p>
         <span class="cert-badge">563 Fragen verf&#252;gbar</span>
@@ -1516,7 +1617,7 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
   <div class="cta-banner">
     <h2 data-i18n="cta_title">Bereit f&#252;r den n&#228;chsten Schritt?</h2>
     <p data-i18n="cta_sub">Starte jetzt und verwandle dein Lernen in ein strukturiertes Erfolgsprogramm.</p>
-    <button class="btn-cta" onclick="event.stopPropagation();showCert('az900')" data-i18n="cta_btn">Jetzt starten &#8594;</button>
+    <button class="btn-cta" onclick="showCert('az900')" data-i18n="cta_btn">Jetzt starten &#8594;</button>
   </div>
 
   <!-- ===== FEATURES (white) ===== -->
@@ -2064,7 +2165,7 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
       <div class="footer-col">
         <h4>Navigation</h4>
         <a onclick="showPage('home')">Startseite</a>
-        <a onclick="event.stopPropagation();showCert('az900')">AZ-900 Lernen</a>
+        <a onclick="showCert('az900')">AZ-900 Lernen</a>
         <a onclick="showPage('news')">Neuigkeiten</a>
         <a onclick="showPage('feedback')">Feedback</a>
         <a onclick="showPage('kontakt')">Kontakt</a>
@@ -2080,7 +2181,7 @@ body.dark #ivTransBox{background:#1a0d30;border-color:#6b21d4;color:#d4aaff}
       <div class="footer-copy">© 2026 CertCoach · Alle Rechte vorbehalten · Nicht offiziell mit Microsoft oder CompTIA verbunden</div>
       <div class="footer-langs">
         <span>🇩🇪 DE</span><span>🇬🇧 EN</span><span>🇫🇷 FR</span><span>🇪🇸 ES</span>
-        <span>🇹🇷 TR</span><span>🇷🇺 RU</span>
+        <span>🇹🇷 TR</span><span>🇷🇺 RU</span><span>🇸🇦 AR</span><span>🇮🇷 FA</span>
       </div>
     </div>
   </div>
@@ -2630,8 +2731,8 @@ var TRANS_CACHE={};  // {lang: {qN: {q:'...', o:[...]}}}
 var TRANS_PENDING={};
 
 var LANG_CODES={de:'de',en:'en',fr:'fr',es:'es',tr:'tr',ru:'ru',ar:'ar',fa:'fa'};
-var LANG_NAMES={de:'Deutsch',en:'English',fr:'Français',es:'Español',tr:'Türkçe',ru:'Русский'};
-var LANG_FLAGS={de:'de',en:'gb',fr:'fr',es:'es',tr:'tr',ru:'ru',uk:'ua',ar:'sa',fa:'ir'};
+var LANG_NAMES={de:'Deutsch',en:'English',fr:'Français',es:'Español',tr:'Türkçe',ru:'Русский',ar:'العربية',fa:'فارسی'};
+var LANG_FLAGS={de:'de',en:'gb',fr:'fr',es:'es',tr:'tr',ru:'ru',ar:'sa',fa:'ir'};
 
 function translateQuestion(q,lang){
   var key='q'+q.n;
@@ -3113,31 +3214,6 @@ var TRANSLATIONS = {
     translating:'Перевод...', sec_sub:'Выберите раздел. Наберите 90%, чтобы открыть следующую часть.',
     dir:'ltr'
   },
-  uk: {
-    nav_home:'Головна', nav_exams:'Екзамени', nav_soon:'(скоро)', nav_feedback:'Відгуки',
-    nav_news:'Новини', nav_contact:'Контакт',
-    hero_title:'Реальні Питання Екзамену.<br>Перевірена Система. <span class="accent">Для Кожної IT-Сертифікації.</span>',
-    hero_lead:'Кожен етап відкривається лише після 90% на попередньому — так ви справді навчаєтесь, а не просто клікаєте.',
-    hero_start:'Почати шлях навчання ›',
-    hs_questions:'Активних питань (AZ-900)', hs_stages:'Сертифікацій у плані', hs_langs:'Мов', hs_free:'Порог майстерності',
-    feat1_title:'563 Питання', feat1_desc:'Повний пул питань AZ-900 з офіційними поясненнями',
-    feat2_title:'8 Мов', feat2_desc:'Кожне питання автоматично перекладається на вашу мову',
-    feat3_title:'Прогресивна система', feat3_desc:'Наступний розділ відкривається лише при 90% успіху',
-    feat4_title:'Відстеження прогресу', feat4_desc:'Ваш прогрес зберігається автоматично',
-    cert_eyebrow:'Сертифікати', cert_heading:'Виберіть свій шлях навчання',
-    test_heading:'Історії успіху з реальних екзаменів',
-    cta_title:'Готові до наступного кроку?',
-    cta_sub:'Почніть зараз і перетворіть навчання на структуровану програму успіху.',
-    cta_btn:'Почати →',
-    btn_copy:'Копіювати', btn_check:'Перевірити відповідь', btn_expl:'Пояснення',
-    btn_prev:'Назад', btn_next:'Далі',
-    q_label:'Питання', of:'з',
-    correct:'Правильно!', wrong:'Неправильно! Правильна відповідь:',
-    no_expl:'Пояснення недоступне.', ref:'Джерело',
-    multi_warn:'Декілька відповідей — виберіть усі правильні варіанти, потім перевірте.',
-    translating:'Переклад...', sec_sub:'Виберіть розділ. Набравши 90%, відкривається наступна частина.',
-    dir:'ltr'
-  },
   ar: {
     nav_home:'الرئيسية', nav_exams:'الامتحانات', nav_soon:'(قريباً)', nav_feedback:'التقييمات',
     nav_news:'الأخبار', nav_contact:'تواصل معنا',
@@ -3306,8 +3382,8 @@ var TRANSLATIONS = {
     </div>
     <div class="dash-card">
       <div class="dash-greeting">Hallo <strong id="dashUsername"></strong>! (<a class="dash-link" onclick="doLogout()">Abmelden</a>)</div>
-      <div class="dash-sub">In deiner Konto-Übersicht kannst du dein <a class="dash-link" onclick="showPage('auth')">Passwort und die Kontodetails bearbeiten</a>. Deine verfügbaren und absolvierten Examen findest du <a class="dash-link" onclick="event.stopPropagation();showCert('az900')">hier</a>.</div>
-      <button class="btn-dash" onclick="event.stopPropagation();showCert('az900')">Zu den Examen</button>
+      <div class="dash-sub">In deiner Konto-Übersicht kannst du dein <a class="dash-link" onclick="showPage('auth')">Passwort und die Kontodetails bearbeiten</a>. Deine verfügbaren und absolvierten Examen findest du <a class="dash-link" onclick="showCert('az900')">hier</a>.</div>
+      <button class="btn-dash" onclick="showCert('az900')">Zu den Examen</button>
     </div>
     <div class="dash-card" style="margin-top:18px">
       <div class="dash-greeting" style="font-size:16px">🔄 Fortschritt auf mehrere Geräte übertragen</div>
@@ -4333,5 +4409,21 @@ showPage('sections');
     if(ob) ob.style.display = 'block';
   }
 })();
+
+// ===== MOBILE MENU =====
+function toggleMobMenu(){
+  var m=document.getElementById('mobMenu');
+  var h=document.getElementById('navHamburger');
+  m.classList.toggle('open');
+  h.classList.toggle('open');
+  document.body.style.overflow=m.classList.contains('open')?'hidden':'';
+}
+function closeMobMenu(){
+  document.getElementById('mobMenu').classList.remove('open');
+  document.getElementById('navHamburger').classList.remove('open');
+  document.body.style.overflow='';
+}
+// Close mobile menu on page resize
+window.addEventListener('resize',function(){if(window.innerWidth>768)c
 </script>
 </body></html>
