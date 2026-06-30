@@ -13,20 +13,20 @@ const certs = [
 
 export default function Home() {
   return (
-    <div className="flex">
+    <div className="flex flex-col md:flex-row">
       <Sidebar />
       <div className="flex-1">
         <Header />
-        <main className="grid grid-cols-1 gap-6 bg-slate-50 p-8 lg:grid-cols-3">
+        <main className="grid grid-cols-1 gap-6 bg-slate-50 p-4 md:p-8 lg:grid-cols-3">
           <div className="space-y-6 lg:col-span-2">
-            <div className="rounded-2xl bg-gradient-to-l from-navy to-navy-light p-8 text-white">
+            <div className="rounded-2xl bg-gradient-to-l from-navy to-navy-light p-6 text-white md:p-8">
               <p className="mb-2 text-sm text-slate-300">Welcome back, Arman! 👋</p>
-              <h1 className="text-2xl font-extrabold leading-snug">
+              <h1 className="text-xl font-extrabold leading-snug md:text-2xl">
                 Let&apos;s get you certified.
                 <br />
                 <span className="text-gold">Your future is waiting.</span>
               </h1>
-              <div className="mt-6 flex gap-3">
+              <div className="mt-6 flex flex-wrap gap-3">
                 <button className="rounded-lg bg-white px-5 py-2.5 text-sm font-bold text-navy">
                   Continue Learning
                 </button>
@@ -47,7 +47,7 @@ export default function Home() {
 
             <div>
               <h2 className="mb-4 font-bold text-navy">Popular Certifications</h2>
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {certs.map((c) => {
                   const Icon = c.icon;
                   return (
