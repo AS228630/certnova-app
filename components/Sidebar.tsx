@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   GraduationCap,
@@ -19,26 +21,26 @@ import {
 } from "lucide-react";
 
 const menuItems = [
-  { label: "Dashboard", icon: LayoutDashboard, active: true },
-  { label: "Learning Paths", icon: GraduationCap },
-  { label: "Certifications", icon: Award },
-  { label: "Practice", icon: ListChecks, badge: "New" },
-  { label: "Lab Environment", icon: FlaskConical },
-  { label: "Projects", icon: FolderKanban },
-  { label: "AI Tutor", icon: Bot },
-  { label: "Analytics", icon: BarChart3 },
-  { label: "Community", icon: Users },
-  { label: "Leaderboard", icon: Trophy },
-  { label: "Career Center", icon: Briefcase },
-  { label: "Marketplace", icon: Store },
+  { label: "Dashboard", icon: LayoutDashboard, href: "/" },
+  { label: "Learning Paths", icon: GraduationCap, href: "/learning-paths" },
+  { label: "Certifications", icon: Award, href: "/certifications" },
+  { label: "Practice", icon: ListChecks, href: "/practice", badge: "New" },
+  { label: "Lab Environment", icon: FlaskConical, href: "/labs" },
+  { label: "Projects", icon: FolderKanban, href: "/projects" },
+  { label: "AI Tutor", icon: Bot, href: "/ai-tutor" },
+  { label: "Analytics", icon: BarChart3, href: "/analytics" },
+  { label: "Community", icon: Users, href: "/community" },
+  { label: "Leaderboard", icon: Trophy, href: "/leaderboard" },
+  { label: "Career Center", icon: Briefcase, href: "/career" },
+  { label: "Marketplace", icon: Store, href: "/marketplace" },
 ];
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <>
-      {/* Mobile top bar */}
       <div className="flex items-center justify-between bg-navy px-4 py-3 text-white md:hidden">
         <div className="flex items-center gap-2">
           <div className="h-6 w-6 rounded bg-gold" />
@@ -49,7 +51,6 @@ export default function Sidebar() {
         </button>
       </div>
 
-      {/* Overlay */}
       {open && (
         <div
           className="fixed inset-0 z-40 bg-black/50 md:hidden"
@@ -57,7 +58,6 @@ export default function Sidebar() {
         />
       )}
 
-      {/* Sidebar */}
       <aside
         className={`fixed inset-y-0 right-0 z-50 flex w-64 flex-col bg-navy text-white transition-transform duration-200 md:static md:translate-x-0 ${
           open ? "translate-x-0" : "translate-x-full"
@@ -76,11 +76,14 @@ export default function Sidebar() {
         <nav className="flex-1 space-y-1 overflow-y-auto px-3">
           {menuItems.map((item) => {
             const Icon = item.icon;
+            const active = pathname === item.href;
             return (
-              <button
+              <Link
                 key={item.label}
+                href={item.href}
+                onClick={() => setOpen(false)}
                 className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition ${
-                  item.active
+                  active
                     ? "bg-navy-light font-semibold text-white"
                     : "text-slate-300 hover:bg-navy-light/60"
                 }`}
@@ -92,7 +95,7 @@ export default function Sidebar() {
                     {item.badge}
                   </span>
                 )}
-              </button>
+              </Link>
             );
           })}
         </nav>
