@@ -1,12 +1,14 @@
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import { Flame } from "lucide-react";
+import Leaderboard from "@/components/Leaderboard";
+import RecentActivity from "@/components/RecentActivity";
+import { Flame, Cloud, ShieldCheck, Terminal } from "lucide-react";
 
 const certs = [
-  { title: "AZ-900", subtitle: "Microsoft Azure Fundamentals", questions: 563, level: "Beginner" },
-  { title: "AWS Cloud", subtitle: "Practitioner", questions: 416, level: "Beginner" },
-  { title: "Security+", subtitle: "CompTIA", questions: 601, level: "Intermediate" },
-  { title: "Linux Essentials", subtitle: "Linux Professional Institute", questions: 261, level: "Beginner" },
+  { title: "AZ-900", subtitle: "Microsoft Azure Fundamentals", questions: 563, level: "Beginner", icon: Cloud },
+  { title: "AWS Cloud", subtitle: "Practitioner", questions: 416, level: "Beginner", icon: Cloud },
+  { title: "Security+", subtitle: "CompTIA", questions: 601, level: "Intermediate", icon: ShieldCheck },
+  { title: "Linux Essentials", subtitle: "Linux Professional Institute", questions: 261, level: "Beginner", icon: Terminal },
 ];
 
 export default function Home() {
@@ -46,17 +48,22 @@ export default function Home() {
             <div>
               <h2 className="mb-4 font-bold text-navy">Popular Certifications</h2>
               <div className="grid gap-4 sm:grid-cols-2">
-                {certs.map((c) => (
-                  <div key={c.title} className="rounded-xl border border-slate-200 bg-white p-5">
-                    <div className="mb-3 h-9 w-9 rounded-lg bg-navy/10" />
-                    <h3 className="font-bold text-navy">{c.title}</h3>
-                    <p className="text-sm text-slate-500">{c.subtitle}</p>
-                    <div className="mt-4 flex items-center justify-between text-xs">
-                      <span className="text-slate-400">{c.questions} Questions</span>
-                      <span className="rounded-full bg-gold/10 px-2 py-1 font-semibold text-gold">{c.level}</span>
+                {certs.map((c) => {
+                  const Icon = c.icon;
+                  return (
+                    <div key={c.title} className="rounded-xl border border-slate-200 bg-white p-5">
+                      <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-navy/10">
+                        <Icon size={18} className="text-navy" />
+                      </div>
+                      <h3 className="font-bold text-navy">{c.title}</h3>
+                      <p className="text-sm text-slate-500">{c.subtitle}</p>
+                      <div className="mt-4 flex items-center justify-between text-xs">
+                        <span className="text-slate-400">{c.questions} Questions</span>
+                        <span className="rounded-full bg-gold/10 px-2 py-1 font-semibold text-gold">{c.level}</span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -88,6 +95,9 @@ export default function Home() {
                 Start Smart Practice
               </button>
             </div>
+
+            <Leaderboard />
+            <RecentActivity />
           </div>
         </main>
       </div>
