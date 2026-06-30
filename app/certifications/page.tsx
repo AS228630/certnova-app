@@ -1,19 +1,16 @@
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
-import { Cloud, ShieldCheck, Terminal, Server } from "lucide-react";
+import { supabase } from "@/lib/supabase/client";
+import { Cloud } from "lucide-react";
 
-const allCerts = [
-  { title: "AZ-900", subtitle: "Microsoft Azure Fundamentals", questions: 563, level: "Beginner", icon: Cloud },
-  { title: "AZ-104", subtitle: "Microsoft Azure Administrator", questions: 811, level: "Intermediate", icon: Cloud },
-  { title: "AZ-305", subtitle: "Azure Solutions Architect", questions: 1021, level: "Advanced", icon: Cloud },
-  { title: "AWS Cloud", subtitle: "Practitioner", questions: 416, level: "Beginner", icon: Cloud },
-  { title: "Security+", subtitle: "CompTIA", questions: 601, level: "Intermediate", icon: ShieldCheck },
-  { title: "Linux Essentials", subtitle: "Linux Professional Institute", questions: 261, level: "Beginner", icon: Terminal },
-  { title: "RHCSA", subtitle: "Red Hat System Admin", questions: 381, level: "Advanced", icon: Server },
-  { title: "CCNA 200-301", subtitle: "Cisco Certified Network Associate", questions: 598, level: "Intermediate", icon: Server },
-];
+export const revalidate = 0;
 
-export default function CertificationsPage() {
+export default async function CertificationsPage() {
+  const { data: certs, error } = await supabase
+    .from("certifications")
+    .select("*")
+    .order("created_at", { ascending: true });
+
   return (
     <div className="flex flex-col md:flex-row">
       <Sidebar />
@@ -25,23 +22,34 @@ export default function CertificationsPage() {
             Master IT certifications and advance your career.
           </p>
 
+          {error && (
+            <p className="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-600">
+              خطا در اتصال به دیتابیس: {error.message}
+            </p>
+          )}
+
+          {!error && (!certs || certs.length === 0) && (
+            <p className="text-sm text-slate-500">
+              هنوز هیچ گواهی‌نامه‌ای در دیتابیس ثبت نشده است.
+            </p>
+          )}
+
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {allCerts.map((c) => {
-              const Icon = c.icon;
-              return (
-                <div key={c.title} className="rounded-xl border border-slate-200 bg-white p-5">
-                  <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-navy/10">
-                    <Icon size={18} className="text-navy" />
-                  </div>
-                  <h3 className="font-bold text-navy">{c.title}</h3>
-                  <p className="text-sm text-slate-500">{c.subtitle}</p>
-                  <div className="mt-4 flex items-center justify-between text-xs">
-                    <span className="text-slate-400">{c.questions} Questions</span>
-                    <span className="rounded-full bg-gold/10 px-2 py-1 font-semibold text-gold">{c.level}</span>
-                  </div>
+            {certs?.map((c) => (
+              <div key={c.id} className="rounded-xl border border-slate-200 bg-white p-5">
+                <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-navy/10">
+                  <Cloud size={18} className="text-navy" />
                 </div>
-              );
-            })}
+                <h3 className="font-bold text-navy">{c.title}</h3>
+                <p className="text-sm text-slate-500">{c.vendor}</p>
+                <div className="mt-4 flex items-center justify-between text-xs">
+                  <span className="text-slate-400">{c.total_questions} Questions</span>
+                  <span className="rounded-full bg-gold/10 px-2 py-1 font-semibold text-gold">
+                    {c.level}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </main>
       </div>
