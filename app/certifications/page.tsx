@@ -1,7 +1,7 @@
 import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import { supabase } from "@/lib/supabase/client";
-import { Cloud } from "lucide-react";
+import { getVendorIcon } from "@/lib/vendorIcons";
 
 export const revalidate = 0;
 
@@ -38,7 +38,7 @@ export default async function CertificationsPage() {
             {certs?.map((c) => (
               <div key={c.id} className="rounded-xl border border-slate-200 bg-white p-5">
                 <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-navy/10">
-                  <Cloud size={18} className="text-navy" />
+                  {getVendorIcon(c.vendor)}
                 </div>
                 <h3 className="font-bold text-navy">{c.title}</h3>
                 <p className="text-sm text-slate-500">{c.vendor}</p>
