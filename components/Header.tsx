@@ -1,45 +1,46 @@
 "use client";
 
-import { Search, Sparkles, Globe, Bell } from "lucide-react";
+import { Search, Globe, Bell, Moon, ChevronDown } from "lucide-react";
 
 export default function Header() {
   return (
-    <header className="flex items-center justify-between gap-4 border-b border-border bg-white px-4 py-3 md:px-8">
-      <div className="flex w-full max-w-md items-center gap-2 rounded-lg border border-border bg-slate-50 px-3 py-2">
-        <Search size={16} className="text-slate-400" />
+    <header className="flex items-center justify-between gap-4 border-b border-border-soft bg-panel px-4 py-3 md:px-8">
+      <div className="flex w-full max-w-md items-center gap-2 rounded-lg border border-border-soft bg-panel-alt px-3 py-2">
+        <Search size={16} className="text-text-faint" />
         <input
-          placeholder="Search for certifications, topics, questions..."
-          className="w-full bg-transparent text-sm text-slate-700 outline-none placeholder:text-slate-400"
+          placeholder="Nach Kursen, Labs, Fragen suchen..."
+          className="w-full bg-transparent text-sm text-text outline-none placeholder:text-text-faint"
         />
-        <kbd className="hidden rounded border border-border bg-white px-1.5 py-0.5 text-[10px] text-slate-400 sm:inline">
-          Ctrl K
+        <kbd className="hidden rounded border border-border-soft bg-panel px-1.5 py-0.5 text-[10px] text-text-faint sm:inline">
+          ⌘K
         </kbd>
       </div>
 
       <div className="flex items-center gap-4">
-        <button className="hidden items-center gap-2 rounded-full bg-purple-light px-3 py-1.5 text-sm font-semibold text-purple md:flex">
-          <Sparkles size={15} />
-          AI Coach
-        </button>
-
-        <button className="hidden items-center gap-1 text-sm font-medium text-slate-500 md:flex">
+        <button className="hidden items-center gap-1 text-sm font-medium text-text-muted hover:text-text md:flex">
           <Globe size={16} />
-          EN
+          DE
+          <ChevronDown size={14} />
         </button>
 
-        <button className="relative text-slate-500">
-          <Bell size={20} />
-          <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-[9px] font-bold text-white">
+        <button className="text-text-muted hover:text-text" aria-label="Design wechseln">
+          <Moon size={19} />
+        </button>
+
+        <button className="relative text-text-muted hover:text-text" aria-label="Benachrichtigungen">
+          <Bell size={19} />
+          <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-danger text-[9px] font-bold text-white">
             3
           </span>
         </button>
 
         <div className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-purple" />
+          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-fuchsia-500" />
           <div className="hidden leading-tight sm:block">
-            <p className="text-sm font-semibold text-slate-900">Arman</p>
-            <p className="text-xs text-primary">Pro Plan</p>
+            <p className="text-sm font-semibold text-text">Arman</p>
+            <p className="text-xs text-text-muted">Pro Plan</p>
           </div>
+          <ChevronDown size={14} className="hidden text-text-faint sm:block" />
         </div>
       </div>
     </header>

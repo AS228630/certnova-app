@@ -1,31 +1,45 @@
-
-import { Flame } from "lucide-react";
+import { Flame, Target } from "lucide-react";
 
 export default function DailyPlan() {
   return (
-    <div className="rounded-2xl border border-border bg-white p-6">
-      <h2 className="mb-4 font-bold text-slate-900">Daily Plan</h2>
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <p className="text-xs text-slate-400">Study Time</p>
-          <p className="text-sm font-semibold text-slate-900">32m / 60m</p>
+    <div className="rounded-2xl border border-border-soft bg-panel p-5">
+      <h2 className="mb-4 font-bold text-text">Mein Tagesziel</h2>
+
+      <div className="mb-4">
+        <div className="mb-1.5 flex items-center justify-between text-xs">
+          <span className="text-text-muted">Bearbeitungszeit</span>
+          <span className="font-semibold text-text">48 / 60 Min.</span>
         </div>
-        <div>
-          <p className="text-xs text-slate-400">Today&apos;s Goal</p>
-          <p className="text-sm font-semibold text-slate-900">12 / 20 questions</p>
-        </div>
-        <div>
-          <p className="text-xs text-slate-400">Current Streak</p>
-          <p className="text-sm font-semibold text-slate-900">14 days</p>
-        </div>
-        <div>
-          <p className="text-xs text-slate-400">Weekly Goal</p>
-          <p className="text-sm font-semibold text-slate-900">3 / 5 days</p>
+        <div className="h-2 w-full rounded-full bg-panel-alt">
+          <div className="h-2 w-4/5 rounded-full bg-primary" />
         </div>
       </div>
-      <div className="mt-4 flex items-center gap-2 rounded-lg bg-orange-50 px-3 py-2 text-sm font-semibold text-orange-500">
-        <Flame size={16} />
-        Current Streak: 14 days
+
+      <div className="mb-5">
+        <div className="mb-1.5 flex items-center justify-between text-xs">
+          <span className="text-text-muted">Fragen gelöst</span>
+          <span className="font-semibold text-text">18 / 20</span>
+        </div>
+        <div className="h-2 w-full rounded-full bg-panel-alt">
+          <div className="h-2 w-[90%] rounded-full bg-success" />
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between border-t border-border-soft pt-4">
+        <div className="flex items-center gap-2">
+          <Flame size={18} className="text-warning" />
+          <div>
+            <p className="text-sm font-bold text-text">14 Tage</p>
+            <p className="text-[11px] text-text-faint">Lernserie</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <Target size={18} className="text-primary" />
+          <div>
+            <p className="text-sm font-bold text-text">4 / 5 Tage</p>
+            <p className="text-[11px] text-text-faint">Wochenziel</p>
+          </div>
+        </div>
       </div>
     </div>
   );
