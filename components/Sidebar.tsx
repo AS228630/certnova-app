@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 
 const menuItems = [
-  { label: "Dashboard", icon: LayoutDashboard, href: "/" },
+  { label: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
   { label: "Learning Paths", icon: GraduationCap, href: "/learning-paths" },
   { label: "Certifications", icon: Award, href: "/certifications" },
   { label: "Practice", icon: ListChecks, href: "/practice", badge: "New" },
