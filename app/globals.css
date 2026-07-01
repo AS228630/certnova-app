@@ -5,8 +5,20 @@
   --color-navy-light: #16224A;
   --color-gold: #D4AF37;
   --color-gold-light: #F0C75E;
+
+  --color-primary: #2F6FED;
+  --color-primary-light: #EEF3FF;
+  --color-primary-dark: #1E52C8;
+  --color-purple: #7C6FF0;
+  --color-purple-light: #F1EEFF;
+  --color-success: #16A34A;
+  --color-success-light: #EAFBF0;
+  --color-warning: #F5A524;
+  --color-bg: #F6F7FB;
+  --color-border: #ECEEF3;
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
 }
