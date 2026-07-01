@@ -19,18 +19,25 @@ const skills = [
 const total = skills.reduce((sum, s) => sum + s.value, 0);
 const average = Math.round(skills.reduce((sum, s) => sum + s.value, 0) / skills.length);
 
-function Donut() {
-  let offset = 0;
-  const radius = 40;
-  const circumference = 2 * Math.PI * radius;
+const radius = 40;
+const circumference = 2 * Math.PI * radius;
 
+const skillsWithOffset = skills.reduce
+  { label: string; value: number; color: string; pct: number; offset: number }[]
+>((acc, s) => {
+  const pct = (s.value / total) * 100;
+  const prevOffset = acc.length > 0 ? acc[acc.length - 1].offset + acc[acc.length - 1].pct : 0;
+  acc.push({ ...s, pct, offset: prevOffset });
+  return acc;
+}, []);
+
+function Donut() {
   return (
     <div className="relative flex h-32 w-32 items-center justify-center">
       <svg viewBox="0 0 100 100" className="h-full w-full -rotate-90">
-        {skills.map((s) => {
-          const pct = (s.value / total) * 100;
-          const dash = (pct / 100) * circumference;
-          const el = (
+        {skillsWithOffset.map((s) => {
+          const dash = (s.pct / 100) * circumference;
+          return (
             <circle
               key={s.label}
               cx="50"
@@ -40,12 +47,10 @@ function Donut() {
               stroke={s.color}
               strokeWidth="10"
               strokeDasharray={`${dash} ${circumference - dash}`}
-              strokeDashoffset={-((offset / 100) * circumference)}
+              strokeDashoffset={-((s.offset / 100) * circumference)}
               strokeLinecap="round"
             />
           );
-          offset += pct;
-          return el;
         })}
       </svg>
       <div className="absolute flex flex-col items-center">
