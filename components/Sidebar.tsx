@@ -6,34 +6,30 @@ import {
   LayoutDashboard,
   GraduationCap,
   Award,
-  CheckSquare,
-  FlaskConical,
   FolderKanban,
-  Bot,
-  BarChart3,
   Users,
+  BarChart3,
   Trophy,
   Briefcase,
-  Store,
   Menu,
   X,
+  Crown,
 } from "lucide-react";
 import { useState } from "react";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/learning-paths", label: "Learning Paths", icon: GraduationCap },
-  { href: "/certifications", label: "Certifications", icon: Award },
-  { href: "/practice", label: "Practice", icon: CheckSquare, badge: "New" },
-  { href: "/labs", label: "Lab Environment", icon: FlaskConical },
-  { href: "/projects", label: "Projects", icon: FolderKanban },
-  { href: "/ai-tutor", label: "AI Tutor", icon: Bot },
-  { href: "/analytics", label: "Analytics", icon: BarChart3 },
+  { href: "/learning-paths", label: "Lernpfade", icon: GraduationCap },
+  { href: "/certifications", label: "Zertifizierungen", icon: Award },
+  { href: "/projects", label: "Projekte", icon: FolderKanban },
   { href: "/community", label: "Community", icon: Users },
-  { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
-  { href: "/career", label: "Career Center", icon: Briefcase },
-  { href: "/marketplace", label: "Marketplace", icon: Store },
+  { href: "/analytics", label: "Analysen", icon: BarChart3 },
+  { href: "/leaderboard", label: "Bestenliste", icon: Trophy },
+  { href: "/interview", label: "Interview-Vorbereitung", icon: Briefcase },
 ];
+
+const streakDays = ["M", "D", "M", "D", "F", "S", "S"];
+const streakDone = [true, true, true, true, true, true, false];
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -42,12 +38,14 @@ export default function Sidebar() {
   return (
     <>
       {/* Mobile top bar */}
-      <div className="flex items-center justify-between border-b border-border bg-white px-4 py-3 lg:hidden">
+      <div className="flex items-center justify-between border-b border-border-soft bg-panel px-4 py-3 lg:hidden">
         <div className="flex items-center gap-2">
-          <div className="h-6 w-6 rotate-45 rounded-md bg-primary" />
-          <span className="text-lg font-bold text-slate-900">CertCoach</span>
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white">
+            C
+          </div>
+          <span className="text-lg font-bold text-text">CertCoach</span>
         </div>
-        <button onClick={() => setOpen(!open)} aria-label="Toggle menu">
+        <button onClick={() => setOpen(!open)} aria-label="Menü öffnen" className="text-text">
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
@@ -55,14 +53,16 @@ export default function Sidebar() {
       <aside
         className={`${
           open ? "flex" : "hidden"
-        } fixed inset-0 z-40 flex-col bg-white lg:static lg:flex lg:w-64 lg:shrink-0 lg:border-r lg:border-border`}
+        } fixed inset-0 z-40 flex-col overflow-y-auto bg-panel lg:static lg:flex lg:w-64 lg:shrink-0 lg:border-r lg:border-border-soft`}
       >
         <div className="hidden items-center gap-2 px-6 py-6 lg:flex">
-          <div className="h-6 w-6 rotate-45 rounded-md bg-primary" />
-          <span className="text-lg font-bold text-slate-900">CertCoach</span>
+          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white">
+            C
+          </div>
+          <span className="text-lg font-bold tracking-tight text-text">CertCoach</span>
         </div>
 
-        <nav className="flex-1 overflow-y-auto px-3 py-2">
+        <nav className="flex-1 space-y-1 px-3 py-2">
           {navItems.map((item) => {
             const active = pathname === item.href;
             const Icon = item.icon;
@@ -71,170 +71,54 @@ export default function Sidebar() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className={`mb-1 flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+                className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
                   active
-                    ? "bg-primary-light text-primary"
-                    : "text-slate-600 hover:bg-slate-50"
+                    ? "bg-primary text-white"
+                    : "text-text-muted hover:bg-panel-alt hover:text-text"
                 }`}
               >
                 <Icon size={18} />
                 <span className="flex-1">{item.label}</span>
-                {item.badge && (
-                  <span className="rounded-full bg-success-light px-2 py-0.5 text-[10px] font-bold text-success">
-                    {item.badge}
-                  </span>
-                )}
               </Link>
             );
           })}
         </nav>
 
         <div className="space-y-3 px-4 pb-4">
-          <div className="rounded-xl bg-gradient-to-br from-primary to-primary-dark p-4 text-white">
-            <p className="text-sm font-bold">Upgrade to Pro</p>
-            <p className="mt-1 text-xs text-blue-100">
-              Unlock all features, labs, AI tutor and more.
+          <div className="rounded-xl bg-panel-alt p-4">
+            <div className="mb-2 flex items-center gap-2 text-warning">
+              <Crown size={16} />
+              <p className="text-sm font-bold text-text">Pro Upgrade</p>
+            </div>
+            <p className="text-xs leading-relaxed text-text-muted">
+              Schalte alle Funktionen frei, unbegrenzte Labs und KI-gestützte Werkzeuge.
             </p>
-            <button className="mt-3 w-full rounded-lg bg-white py-2 text-sm font-bold text-primary">
-              Upgrade Now
+            <button className="mt-3 w-full rounded-lg bg-primary py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark">
+              Upgrade starten
             </button>
           </div>
 
-          <div className="rounded-xl border border-border bg-white p-4">
-            <p className="text-sm font-bold text-slate-900">Your Streak</p>
-            <p className="mt-1 text-2xl font-extrabold text-slate-900">
-              14 <span className="text-sm font-medium text-slate-400">days</span>
+          <div className="rounded-xl border border-border-soft p-4">
+            <p className="text-sm font-bold text-text">Deine Lernserie 🔥</p>
+            <p className="mt-1 text-2xl font-extrabold text-text">
+              14 <span className="text-sm font-medium text-text-muted">Tage in Folge</span>
             </p>
             <div className="mt-3 flex justify-between">
-              {["M", "T", "W", "T", "F", "S", "S"].map((d, i) => (
-                <span key={i} className="text-orange-400">
-                  🔥
-                </span>
-              ))}
-            </div>
-            <p className="mt-2 text-xs text-slate-400">Best: 28 days</p>
-          </div>
-        </div>
-      </aside>
-    </>
-  );
-}
-EOFcat > components/Sidebar.tsx << 'EOF'
-"use client";
-
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import {
-  LayoutDashboard,
-  GraduationCap,
-  Award,
-  CheckSquare,
-  FlaskConical,
-  FolderKanban,
-  Bot,
-  BarChart3,
-  Users,
-  Trophy,
-  Briefcase,
-  Store,
-  Menu,
-  X,
-} from "lucide-react";
-import { useState } from "react";
-
-const navItems = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/learning-paths", label: "Learning Paths", icon: GraduationCap },
-  { href: "/certifications", label: "Certifications", icon: Award },
-  { href: "/practice", label: "Practice", icon: CheckSquare, badge: "New" },
-  { href: "/labs", label: "Lab Environment", icon: FlaskConical },
-  { href: "/projects", label: "Projects", icon: FolderKanban },
-  { href: "/ai-tutor", label: "AI Tutor", icon: Bot },
-  { href: "/analytics", label: "Analytics", icon: BarChart3 },
-  { href: "/community", label: "Community", icon: Users },
-  { href: "/leaderboard", label: "Leaderboard", icon: Trophy },
-  { href: "/career", label: "Career Center", icon: Briefcase },
-  { href: "/marketplace", label: "Marketplace", icon: Store },
-];
-
-export default function Sidebar() {
-  const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      {/* Mobile top bar */}
-      <div className="flex items-center justify-between border-b border-border bg-white px-4 py-3 lg:hidden">
-        <div className="flex items-center gap-2">
-          <div className="h-6 w-6 rotate-45 rounded-md bg-primary" />
-          <span className="text-lg font-bold text-slate-900">CertCoach</span>
-        </div>
-        <button onClick={() => setOpen(!open)} aria-label="Toggle menu">
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </div>
-
-      <aside
-        className={`${
-          open ? "flex" : "hidden"
-        } fixed inset-0 z-40 flex-col bg-white lg:static lg:flex lg:w-64 lg:shrink-0 lg:border-r lg:border-border`}
-      >
-        <div className="hidden items-center gap-2 px-6 py-6 lg:flex">
-          <div className="h-6 w-6 rotate-45 rounded-md bg-primary" />
-          <span className="text-lg font-bold text-slate-900">CertCoach</span>
-        </div>
-
-        <nav className="flex-1 overflow-y-auto px-3 py-2">
-          {navItems.map((item) => {
-            const active = pathname === item.href;
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className={`mb-1 flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
-                  active
-                    ? "bg-primary-light text-primary"
-                    : "text-slate-600 hover:bg-slate-50"
-                }`}
-              >
-                <Icon size={18} />
-                <span className="flex-1">{item.label}</span>
-                {item.badge && (
-                  <span className="rounded-full bg-success-light px-2 py-0.5 text-[10px] font-bold text-success">
-                    {item.badge}
+              {streakDays.map((d, i) => (
+                <div key={i} className="flex flex-col items-center gap-1">
+                  <span
+                    className={`flex h-6 w-6 items-center justify-center rounded-full text-xs ${
+                      streakDone[i]
+                        ? "bg-success-light text-success"
+                        : "bg-panel-alt text-text-faint"
+                    }`}
+                  >
+                    {streakDone[i] ? "✓" : ""}
                   </span>
-                )}
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="space-y-3 px-4 pb-4">
-          <div className="rounded-xl bg-gradient-to-br from-primary to-primary-dark p-4 text-white">
-            <p className="text-sm font-bold">Upgrade to Pro</p>
-            <p className="mt-1 text-xs text-blue-100">
-              Unlock all features, labs, AI tutor and more.
-            </p>
-            <button className="mt-3 w-full rounded-lg bg-white py-2 text-sm font-bold text-primary">
-              Upgrade Now
-            </button>
-          </div>
-
-          <div className="rounded-xl border border-border bg-white p-4">
-            <p className="text-sm font-bold text-slate-900">Your Streak</p>
-            <p className="mt-1 text-2xl font-extrabold text-slate-900">
-              14 <span className="text-sm font-medium text-slate-400">days</span>
-            </p>
-            <div className="mt-3 flex justify-between">
-              {["M", "T", "W", "T", "F", "S", "S"].map((d, i) => (
-                <span key={i} className="text-orange-400">
-                  🔥
-                </span>
+                  <span className="text-[10px] text-text-faint">{d}</span>
+                </div>
               ))}
             </div>
-            <p className="mt-2 text-xs text-slate-400">Best: 28 days</p>
           </div>
         </div>
       </aside>
