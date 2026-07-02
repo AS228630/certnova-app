@@ -132,12 +132,22 @@ const footerColumns = [
 ];
 
 const trustBadges = [
-  { icon: Lock, label: "SSL Verschlüsselt" },
-  { icon: CreditCard, label: "Sichere Zahlung" },
-  { icon: ShieldCheck, label: "GDPR Konform" },
-  { icon: Star, label: "Trusted by 100.000+ Lernende" },
-  { icon: Globe2, label: "Server in Deutschland" },
+  { icon: Lock, label: "SSL Verschlüsselt", color: "#22c55e" },
+  { icon: CreditCard, label: "Sichere Zahlung", color: "#6d4cff" },
+  { icon: ShieldCheck, label: "GDPR Konform", color: "#0ea5e9" },
+  { icon: Star, label: "Trusted by 100.000+ Lernende", color: "#f59e0b" },
+  { icon: Globe2, label: "Server in Deutschland", color: "#ef4444" },
 ];
+
+function GermanFlag({ size = 16 }: { size?: number }) {
+  return (
+    <svg width={size} height={(size * 3) / 5} viewBox="0 0 5 3" aria-hidden="true" className="rounded-[2px]">
+      <rect width="5" height="1" y="0" fill="#000000" />
+      <rect width="5" height="1" y="1" fill="#DD0000" />
+      <rect width="5" height="1" y="2" fill="#FFCE00" />
+    </svg>
+  );
+}
 
 export default function LandingPage() {
   return (
@@ -537,16 +547,17 @@ export default function LandingPage() {
           <div className="mt-8 flex flex-col items-center gap-4 border-t border-border-soft pt-6 sm:flex-row sm:justify-between">
             <div className="flex flex-wrap items-center justify-center gap-4">
               {trustBadges.map((b) => (
-                <span key={b.label} className="flex items-center gap-1.5 text-[11px] text-text-faint">
-                  <b.icon size={13} />
+                <span key={b.label} className="flex items-center gap-1.5 text-[11px] text-text-muted">
+                  <b.icon size={13} style={{ color: b.color }} />
                   {b.label}
                 </span>
               ))}
             </div>
             <div className="flex items-center gap-4 text-xs text-text-faint">
               <span>© 2026 CertCoach GmbH. Made with ❤️ in Germany</span>
-              <button className="flex items-center gap-1">
-                🇩🇪 Sprache
+              <button className="flex items-center gap-1.5">
+                <GermanFlag size={16} />
+                Sprache
               </button>
             </div>
           </div>
