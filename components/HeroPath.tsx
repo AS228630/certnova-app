@@ -1,55 +1,62 @@
 import { BookOpenCheck, Dumbbell, ShieldCheck, UserCheck, Flag } from "lucide-react";
 
-const steps = [
-  { icon: BookOpenCheck, label: "Lernen", lift: 0, active: true },
-  { icon: Dumbbell, label: "Üben", lift: 14, active: false },
-  { icon: ShieldCheck, label: "Zertifizierung", lift: 28, active: false },
-  { icon: UserCheck, label: "Interview", lift: 14, active: false },
-  { icon: Flag, label: "Ziel erreichen", lift: 40, active: false, goal: true },
+const points = [
+  { x: 8, y: 68, icon: BookOpenCheck, label: "Lernen", active: true },
+  { x: 29, y: 84, icon: Dumbbell, label: "Üben", active: false },
+  { x: 51, y: 52, icon: ShieldCheck, label: "Zertifizierung", active: false },
+  { x: 73, y: 34, icon: UserCheck, label: "Interview", active: false },
+  { x: 93, y: 12, icon: Flag, label: "Ziel erreichen", active: false, goal: true },
 ];
+
+const linePath = points.map((p) => `${p.x},${p.y}`).join(" ");
 
 export default function HeroPath() {
   return (
-    <div className="no-scrollbar -mx-1 overflow-x-auto px-1">
-      <div className="flex min-w-[560px] items-end justify-between gap-1 sm:min-w-0">
-        {steps.map((step, i) => (
-          <div key={step.label} className="flex flex-1 items-end">
-            <div
-              className="flex flex-col items-center gap-2"
-              style={{ transform: `translateY(-${step.lift}px)` }}
-            >
-              {step.goal && (
-                <div className="mb-1 h-9 w-9 rounded-full bg-gradient-to-br from-primary/30 to-fuchsia-400/20 blur-md" />
-              )}
-              <div
-                className={`relative flex h-11 w-11 items-center justify-center rounded-full ${
-                  step.active
-                    ? "bg-primary text-white"
-                    : step.goal
-                      ? "bg-warning text-white"
-                      : "border border-border-soft bg-panel-alt text-text-muted"
-                }`}
-              >
-                <step.icon size={18} />
-              </div>
-              <span className="whitespace-nowrap text-[11px] font-medium text-text-muted">
-                {step.label}
-              </span>
-            </div>
+    <div className="relative h-44 w-full sm:h-52">
+      <svg
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        className="absolute inset-0 h-full w-full"
+      >
+        {/* mountain silhouette */}
+        <polygon points="0,100 18,45 34,100" className="fill-panel-alt" opacity="0.6" />
+        <polygon points="20,100 45,25 68,100" className="fill-panel-alt" opacity="0.8" />
+        <polygon points="55,100 82,15 100,55 100,100" className="fill-panel-alt" />
 
-            {i < steps.length - 1 && (
-              <div
-                className="mx-1.5 mb-[34px] h-px flex-1 border-t border-dashed border-border-soft sm:mx-2"
-                style={{
-                  transform: `translateY(-${(step.lift + steps[i + 1].lift) / 2}px) rotate(${
-                    step.lift < steps[i + 1].lift ? "-4deg" : step.lift > steps[i + 1].lift ? "4deg" : "0deg"
-                  })`,
-                }}
-              />
-            )}
+        {/* dashed connecting line */}
+        <polyline
+          points={linePath}
+          fill="none"
+          className="stroke-border-soft"
+          strokeWidth="0.6"
+          strokeDasharray="2.5 2.5"
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
+
+      {points.map((p) => (
+        <div
+          key={p.label}
+          className="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5"
+          style={{ left: `${p.x}%`, top: `${p.y}%` }}
+        >
+          <div
+            className={`flex h-9 w-9 items-center justify-center rounded-full sm:h-11 sm:w-11 ${
+              p.active
+                ? "bg-primary text-white"
+                : p.goal
+                  ? "bg-warning text-white"
+                  : "border border-border-soft bg-panel text-text-muted"
+            }`}
+          >
+            <p.icon size={16} className="sm:hidden" />
+            <p.icon size={18} className="hidden sm:block" />
           </div>
-        ))}
-      </div>
+          <span className="whitespace-nowrap text-[9px] font-medium text-text-muted sm:text-[11px]">
+            {p.label}
+          </span>
+        </div>
+      ))}
     </div>
   );
 }
