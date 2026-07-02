@@ -21,6 +21,7 @@ import {
   Globe2,
   BadgeCheck,
   Apple,
+  AlignLeft,
 } from "lucide-react";
 import { FaLinkedin, FaGithub, FaYoutube, FaFacebook, FaInstagram, FaMicrosoft, FaAmazon } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -271,19 +272,78 @@ export default function LandingPage() {
           </div>
 
           <div className="relative mx-auto flex h-80 w-full max-w-md items-center justify-center sm:h-96">
-            <div className="absolute h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
-            <div className="relative flex h-40 w-40 rotate-45 items-center justify-center rounded-3xl bg-gradient-to-br from-primary to-fuchsia-500 shadow-2xl shadow-primary/40">
-              <div className="h-16 w-16 -rotate-45 rounded-xl bg-white/20 backdrop-blur" />
-            </div>
+            <div className="absolute h-64 w-64 rounded-full bg-primary/25 blur-3xl" />
 
-            <div className="absolute left-2 top-6 flex items-center gap-2 rounded-xl border border-border-soft bg-panel px-3 py-2 shadow-lg sm:left-6">
-              {getCompanyIcon("aws", 16)}
+            <svg viewBox="0 0 400 400" className="relative h-full w-full max-w-sm drop-shadow-2xl">
+              <defs>
+                <linearGradient id="crystalLeft" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#c4b5fd" />
+                  <stop offset="100%" stopColor="#7c3aed" />
+                </linearGradient>
+                <linearGradient id="crystalRight" x1="1" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#a78bfa" />
+                  <stop offset="100%" stopColor="#c026d3" />
+                </linearGradient>
+                <linearGradient id="tierTop" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#2d2760" />
+                  <stop offset="100%" stopColor="#211c47" />
+                </linearGradient>
+              </defs>
+
+              {/* Isometric platform, 3 stacked tiers */}
+              {[
+                { cy: 262, half: 100, depth: 26, shade: "#171334" },
+                { cy: 222, half: 72, depth: 22, shade: "#1c1840" },
+                { cy: 185, half: 42, depth: 16, shade: "#221c4d" },
+              ].map((t, i) => (
+                <g key={i}>
+                  <polygon
+                    points={`200,${t.cy - t.half * 0.55} ${200 + t.half},${t.cy} 200,${t.cy + t.half * 0.55} ${200 - t.half},${t.cy}`}
+                    fill="url(#tierTop)"
+                  />
+                  <polygon
+                    points={`${200 - t.half},${t.cy} 200,${t.cy + t.half * 0.55} 200,${t.cy + t.half * 0.55 + t.depth} ${200 - t.half},${t.cy + t.depth}`}
+                    fill={t.shade}
+                  />
+                  <polygon
+                    points={`${200 + t.half},${t.cy} 200,${t.cy + t.half * 0.55} 200,${t.cy + t.half * 0.55 + t.depth} ${200 + t.half},${t.cy + t.depth}`}
+                    fill={t.shade}
+                    opacity={0.7}
+                  />
+                </g>
+              ))}
+
+              {/* Faceted crystal */}
+              <g>
+                <polygon points="200,60 245,135 200,178 200,60" fill="url(#crystalRight)" />
+                <polygon points="200,60 155,135 200,178 200,60" fill="url(#crystalLeft)" />
+                <polygon points="200,60 222,100 200,116 178,100" fill="#ede9fe" opacity="0.85" />
+                <line x1="200" y1="60" x2="200" y2="178" stroke="#ffffff" strokeOpacity="0.25" strokeWidth="1.5" />
+                <line x1="155" y1="135" x2="245" y2="135" stroke="#ffffff" strokeOpacity="0.15" strokeWidth="1" />
+              </g>
+
+              {/* Sparkles */}
+              {[
+                [90, 100, 3], [320, 90, 2.5], [70, 220, 2], [340, 240, 3],
+                [110, 320, 2], [300, 320, 2.5], [200, 40, 2],
+              ].map(([cx, cy, r], i) => (
+                <circle key={i} cx={cx} cy={cy} r={r} fill="#c4b5fd" opacity={0.7} />
+              ))}
+              <path d="M60 150 h14 M67 143 v14" stroke="#a78bfa" strokeWidth="1.5" opacity="0.6" strokeLinecap="round" />
+              <path d="M330 170 h14 M337 163 v14" stroke="#a78bfa" strokeWidth="1.5" opacity="0.6" strokeLinecap="round" />
+            </svg>
+
+            <div className="absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-xl border border-border-soft bg-panel shadow-lg sm:left-8">
+              {getCompanyIcon("aws", 18)}
             </div>
-            <div className="absolute right-0 top-2 flex items-center gap-2 rounded-xl border border-border-soft bg-panel px-3 py-2 shadow-lg sm:right-4">
-              {getCompanyIcon("microsoft", 16)}
+            <div className="absolute right-6 top-8 flex h-10 w-10 items-center justify-center rounded-xl border border-border-soft bg-panel/80 shadow-lg backdrop-blur">
+              <Code2 size={18} className="text-primary" />
             </div>
-            <div className="absolute left-0 bottom-16 flex items-center gap-2 rounded-xl border border-border-soft bg-panel px-3 py-2 shadow-lg">
-              {getCompanyIcon("google-cloud", 16)}
+            <div className="absolute left-0 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-xl border border-border-soft bg-panel/80 shadow-lg backdrop-blur sm:left-2">
+              <Cloud size={18} className="text-sky-400" />
+            </div>
+            <div className="absolute right-0 top-[58%] flex h-10 w-10 items-center justify-center rounded-xl border border-border-soft bg-panel/80 shadow-lg backdrop-blur sm:right-4">
+              <AlignLeft size={18} className="text-text-muted" />
             </div>
             <div className="absolute bottom-4 right-2 rounded-xl border border-border-soft bg-panel px-3 py-2 text-xs font-bold text-text shadow-lg sm:right-6">
               AWS <span className="text-primary">Certified</span>
