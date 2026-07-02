@@ -27,7 +27,6 @@ import {
   Instagram,
   Linkedin,
   Apple,
-  User,
 } from "lucide-react";
 import { getVendorIcon, getCompanyIcon } from "@/lib/vendorIcons";
 
@@ -99,19 +98,19 @@ const testimonials = [
     name: "Lukas Weber",
     role: "AWS Solutions Architect",
     quote: "Dank CertCoach habe ich mein AWS Zertifikat bestanden und meinen Traumjob bekommen!",
-    gradient: "linear-gradient(135deg,#6d4cff,#a78bfa)",
+    seed: "Lukas-Weber",
   },
   {
     name: "Sarah Müller",
     role: "Azure Administrator",
     quote: "Die Labs und Projekte sind einfach fantastisch. Sehr praxisnah und verständlich erklärt.",
-    gradient: "linear-gradient(135deg,#ec4899,#f472b6)",
+    seed: "Sarah-Mueller",
   },
   {
     name: "David Krause",
     role: "Security Analyst",
     quote: "Die Lernpfade haben mir geholfen, meine Karriere im Bereich Cyber Security zu starten.",
-    gradient: "linear-gradient(135deg,#0ea5e9,#38bdf8)",
+    seed: "David-Krause",
   },
 ];
 
@@ -240,21 +239,13 @@ export default function LandingPage() {
 
             <div className="mt-8 flex items-center gap-3">
               <div className="flex -space-x-3">
-                {[0, 1, 2, 3].map((i) => (
-                  <div
-                    key={i}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-bg text-white"
-                    style={{
-                      background: [
-                        "linear-gradient(135deg,#6d4cff,#a78bfa)",
-                        "linear-gradient(135deg,#f59e0b,#fbbf24)",
-                        "linear-gradient(135deg,#22c55e,#4ade80)",
-                        "linear-gradient(135deg,#ef4444,#f87171)",
-                      ][i],
-                    }}
-                  >
-                    <User size={16} className="fill-white/25" />
-                  </div>
+                {["Alex", "Bella", "Chris", "Dana"].map((seed) => (
+                  <img
+                    key={seed}
+                    src={`https://api.dicebear.com/9.x/personas/svg?seed=${seed}&backgroundColor=6d4cff,f59e0b,22c55e,ef4444`}
+                    alt=""
+                    className="h-9 w-9 rounded-full border-2 border-bg bg-panel-alt object-cover"
+                  />
                 ))}
               </div>
               <div className="text-sm">
@@ -359,12 +350,11 @@ export default function LandingPage() {
           {testimonials.map((t) => (
             <div key={t.name} className="rounded-2xl border border-border-soft bg-panel p-5">
               <div className="mb-3 flex items-center gap-3">
-                <div
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white"
-                  style={{ background: t.gradient }}
-                >
-                  <User size={18} className="fill-white/25" />
-                </div>
+                <img
+                  src={`https://api.dicebear.com/9.x/personas/svg?seed=${t.seed}`}
+                  alt=""
+                  className="h-11 w-11 shrink-0 rounded-full bg-panel-alt object-cover"
+                />
                 <div>
                   <p className="text-sm font-bold text-text">{t.name}</p>
                   <p className="text-xs text-text-faint">{t.role}</p>
