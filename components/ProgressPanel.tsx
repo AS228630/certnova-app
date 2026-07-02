@@ -22,7 +22,7 @@ const average = Math.round(skills.reduce((sum, s) => sum + s.value, 0) / skills.
 const radius = 40;
 const circumference = 2 * Math.PI * radius;
 
-const skillsWithOffset = skills.reduce
+const skillsWithOffset = skills.reduce<
   { label: string; value: number; color: string; pct: number; offset: number }[]
 >((acc, s) => {
   const pct = (s.value / total) * 100;
