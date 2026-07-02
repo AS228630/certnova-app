@@ -462,14 +462,10 @@ export default function LandingPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-panel-alt text-text-muted transition-colors hover:text-white"
-                    style={{ ["--social-hover" as string]: color }}
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-panel-alt transition-transform hover:-translate-y-0.5"
+                    style={{ color }}
                   >
-                    <span
-                      className="flex h-full w-full items-center justify-center rounded-full transition-colors hover:[background-color:var(--social-hover)]"
-                    >
-                      <Icon size={16} />
-                    </span>
+                    <Icon size={17} />
                   </a>
                 ))}
               </div>
