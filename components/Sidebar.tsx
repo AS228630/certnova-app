@@ -13,7 +13,11 @@ import {
   Briefcase,
   X,
   Crown,
+  Settings,
+  HelpCircle,
+  LogOut,
 } from "lucide-react";
+import { useTheme } from "@/components/ThemeProvider";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -37,10 +41,10 @@ export default function Sidebar({
   onClose?: () => void;
 }) {
   const pathname = usePathname();
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <>
-      {/* Mobile overlay */}
       {open && (
         <div
           className="fixed inset-0 z-40 bg-black/60 lg:hidden"
@@ -70,7 +74,7 @@ export default function Sidebar({
           </button>
         </div>
 
-        <nav className="flex-1 space-y-1 px-3 py-2">
+        <nav className="space-y-1 px-3 py-2">
           {navItems.map((item) => {
             const active = pathname === item.href;
             const Icon = item.icon;
@@ -92,7 +96,7 @@ export default function Sidebar({
           })}
         </nav>
 
-        <div className="space-y-3 px-4 pb-6">
+        <div className="space-y-3 px-4 py-4">
           <div className="rounded-xl bg-panel-alt p-4">
             <div className="mb-2 flex items-center gap-2 text-warning">
               <Crown size={16} />
@@ -127,6 +131,46 @@ export default function Sidebar({
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+
+        <div className="mt-auto space-y-1 border-t border-border-soft px-3 py-4">
+          <Link
+            href="/settings"
+            onClick={onClose}
+            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-text-muted hover:bg-panel-alt hover:text-text"
+          >
+            <Settings size={18} />
+            Einstellungen
+          </Link>
+          <Link
+            href="/help"
+            onClick={onClose}
+            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-text-muted hover:bg-panel-alt hover:text-text"
+          >
+            <HelpCircle size={18} />
+            Hilfe & Support
+          </Link>
+          <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-text-muted hover:bg-panel-alt hover:text-text">
+            <LogOut size={18} />
+            Logout
+          </button>
+
+          <div className="flex items-center justify-between rounded-lg px-3 py-2.5">
+            <span className="text-sm font-medium text-text-muted">Dark Mode</span>
+            <button
+              onClick={toggleTheme}
+              aria-label="Design wechseln"
+              className={`relative h-6 w-11 shrink-0 rounded-full transition-colors ${
+                theme === "dark" ? "bg-primary" : "bg-panel-alt"
+              }`}
+            >
+              <span
+                className={`absolute top-0.5 h-5 w-5 rounded-full bg-white transition-transform ${
+                  theme === "dark" ? "translate-x-5" : "translate-x-0.5"
+                }`}
+              />
+            </button>
           </div>
         </div>
       </aside>
