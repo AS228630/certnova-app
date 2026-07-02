@@ -1,8 +1,15 @@
+"use client";
+
 import { Bot, ArrowRight } from "lucide-react";
+import { useUser } from "@/components/UserContext";
+import { getFirstName } from "@/lib/supabase/useUser";
 
 const focusAreas = ["Azure Storage", "Netzwerksicherheit", "NSG"];
 
 export default function AICoach() {
+  const { user } = useUser();
+  const firstName = getFirstName(user);
+
   return (
     <div className="relative overflow-hidden rounded-2xl border border-border-soft bg-panel p-5">
       <div className="mb-3 flex items-center gap-2">
@@ -17,7 +24,7 @@ export default function AICoach() {
           <Bot size={24} className="text-primary" />
         </div>
         <p className="text-sm leading-relaxed text-text-muted">
-          Hallo Arman! Ich habe einige Bereiche identifiziert, auf die du achten solltest.
+          Hallo {firstName}! Ich habe einige Bereiche identifiziert, auf die du achten solltest.
         </p>
       </div>
 

@@ -2,9 +2,14 @@
 
 import { Search, Globe, Bell, Moon, Sun, ChevronDown, Menu } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
+import { useUser } from "@/components/UserContext";
+import { getFullName } from "@/lib/supabase/useUser";
 
 export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   const { theme, toggleTheme } = useTheme();
+  const { user } = useUser();
+  const displayName = getFullName(user);
+  const initial = displayName.charAt(0).toUpperCase();
 
   return (
     <header className="sticky top-0 z-30 border-b border-border-soft bg-panel px-3 py-3 sm:px-4 md:px-8">
@@ -60,10 +65,12 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
           </button>
 
           <div className="flex items-center gap-2">
-            <div className="h-8 w-8 shrink-0 rounded-full bg-gradient-to-br from-primary to-fuchsia-500" />
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-fuchsia-500 text-xs font-bold text-white">
+              {initial}
+            </div>
             <div className="hidden leading-tight sm:block">
-              <p className="text-sm font-semibold text-text">Arman</p>
-              <p className="text-xs text-text-muted">Pro Plan</p>
+              <p className="text-sm font-semibold text-text">{displayName}</p>
+              <p className="text-xs text-text-muted">Kostenloser Plan</p>
             </div>
             <ChevronDown size={14} className="hidden text-text-faint sm:block" />
           </div>

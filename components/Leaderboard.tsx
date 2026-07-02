@@ -1,11 +1,24 @@
-const leaders = [
+"use client";
+
+import { useUser } from "@/components/UserContext";
+import { getFirstName } from "@/lib/supabase/useUser";
+
+type Leader = { name: string; xp: number; isUser?: boolean };
+
+const otherLeaders: Leader[] = [
   { name: "Sarah J.", xp: 2450 },
   { name: "Mike R.", xp: 2150 },
-  { name: "Arman (Du)", xp: 1850, isUser: true },
   { name: "Emma T.", xp: 1650 },
 ];
 
 export default function Leaderboard() {
+  const { user } = useUser();
+  const leaders: Leader[] = [
+    ...otherLeaders.slice(0, 2),
+    { name: `${getFirstName(user)} (Du)`, xp: 1850, isUser: true },
+    otherLeaders[2],
+  ];
+
   return (
     <div className="rounded-2xl border border-border-soft bg-panel p-5">
       <div className="mb-4 flex items-center justify-between">

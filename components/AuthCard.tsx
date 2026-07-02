@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Diamond, User, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
 import { FaGoogle, FaGithub, FaMicrosoft } from "react-icons/fa";
@@ -54,6 +54,12 @@ export default function AuthCard({ initialMode }: { initialMode: Mode }) {
   const [info, setInfo] = useState<string | null>(null);
 
   const strength = passwordStrength(password);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      if (data.session) router.replace("/dashboard");
+    });
+  }, [router]);
 
   function switchMode(next: Mode) {
     setMode(next);

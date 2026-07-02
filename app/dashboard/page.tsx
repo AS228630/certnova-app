@@ -1,3 +1,5 @@
+"use client";
+
 import DashboardShell from "@/components/DashboardShell";
 import DailyPlan from "@/components/DailyPlan";
 import AICoach from "@/components/AICoach";
@@ -13,6 +15,8 @@ import {
 import { getVendorIcon } from "@/lib/vendorIcons";
 import HeroPath from "@/components/HeroPath";
 import CertsScroller from "@/components/CertsScroller";
+import { useUser } from "@/components/UserContext";
+import { getFirstName } from "@/lib/supabase/useUser";
 
 const stats = [
   { icon: Users, label: "Aktive Lernende", value: "120K+" },
@@ -30,6 +34,12 @@ const certs = [
   { title: "CompTIA", subtitle: "Security+", level: "Anfänger", rating: "4,7", vendor: "CompTIA" },
 ];
 
+// Rendered *inside* DashboardShell so it sits below UserContext.Provider in the tree.
+function Greeting() {
+  const { user } = useUser();
+  return <p className="mb-2 text-sm text-text-muted">Guten Morgen, {getFirstName(user)}! 👋</p>;
+}
+
 export default function DashboardPage() {
   return (
     <DashboardShell>
@@ -37,7 +47,7 @@ export default function DashboardPage() {
           <div className="space-y-5 sm:space-y-6 lg:col-span-2">
             {/* Hero */}
             <div className="rounded-2xl border border-border-soft bg-panel p-4 sm:p-6 md:p-8">
-              <p className="mb-2 text-sm text-text-muted">Guten Morgen, Arman! 👋</p>
+              <Greeting />
               <h1 className="text-xl font-extrabold leading-snug text-text sm:text-2xl md:text-3xl">
                 Lerne. Übe. Zertifiziere dich.
                 <br />

@@ -18,6 +18,8 @@ import {
   LogOut,
 } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
+import { useRouter } from "next/navigation";
+import { supabase } from "@/lib/supabase/client";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -42,6 +44,12 @@ export default function Sidebar({
 }) {
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
+  const router = useRouter();
+
+  async function handleLogout() {
+    await supabase.auth.signOut();
+    router.replace("/login");
+  }
 
   return (
     <>
@@ -151,7 +159,10 @@ export default function Sidebar({
             <HelpCircle size={18} />
             Hilfe & Support
           </Link>
-          <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-text-muted hover:bg-panel-alt hover:text-text">
+          <button
+            onClick={handleLogout}
+            className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-text-muted hover:bg-panel-alt hover:text-text"
+          >
             <LogOut size={18} />
             Logout
           </button>
