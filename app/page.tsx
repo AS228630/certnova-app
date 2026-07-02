@@ -22,8 +22,9 @@ import {
   BadgeCheck,
   Apple,
 } from "lucide-react";
-import { FaLinkedin, FaGithub, FaYoutube, FaFacebook, FaInstagram } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaYoutube, FaFacebook, FaInstagram, FaMicrosoft, FaAmazon } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import { SiGoogle, SiSiemens } from "react-icons/si";
 import { getVendorIcon, getCompanyIcon } from "@/lib/vendorIcons";
 
 const navLinksBefore = [
@@ -110,7 +111,14 @@ const testimonials = [
   },
 ];
 
-const trustedLogos = ["Google", "Microsoft", "amazon", "Deloitte.", "SIEMENS", "IBM"];
+const trustedLogos = [
+  { name: "Google", type: "icon" as const, Icon: SiGoogle },
+  { name: "Microsoft", type: "icon" as const, Icon: FaMicrosoft },
+  { name: "Amazon", type: "icon" as const, Icon: FaAmazon },
+  { name: "Deloitte.", type: "text" as const },
+  { name: "SIEMENS", type: "icon" as const, Icon: SiSiemens },
+  { name: "IBM", type: "text" as const },
+];
 
 const footerColumns = [
   {
@@ -382,12 +390,16 @@ export default function LandingPage() {
         <p className="mb-6 text-center text-sm text-text-faint">
           Vertrauenswürdig von führenden Unternehmen weltweit
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 opacity-60 grayscale">
-          {trustedLogos.map((l) => (
-            <span key={l} className="text-xl font-bold text-text">
-              {l}
-            </span>
-          ))}
+        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4 opacity-70 grayscale">
+          {trustedLogos.map((l) =>
+            l.type === "icon" ? (
+              <l.Icon key={l.name} size={26} className="text-text" aria-label={l.name} />
+            ) : (
+              <span key={l.name} className="text-xl font-black tracking-tight text-text">
+                {l.name}
+              </span>
+            )
+          )}
         </div>
       </section>
 
