@@ -4,7 +4,7 @@ import { companies } from "@/lib/companiesData";
 
 export default function CertificationsPage() {
   return (
-    <DashboardShell>
+    <DashboardShell requireAuth={false}>
       <main className="flex-1 p-4 md:p-8">
         <h1 className="mb-1 text-2xl font-bold text-text">Zertifizierungen</h1>
         <p className="mb-6 text-sm text-text-muted">

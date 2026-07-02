@@ -21,7 +21,7 @@ export default function CompanyCard({ company, active = false }: { company: Comp
         {getCompanyIcon(company.slug, 26)}
       </div>
       <p className="text-sm font-semibold text-text">{company.name}</p>
-      <p className="text-xs text-text-faint">{company.certCount} Zertifizierungen</p>
+      <p className="text-xs text-text-faint">{company.totalCertCount} Zertifizierungen</p>
     </Link>
   );
 }

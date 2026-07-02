@@ -9,10 +9,18 @@ import BottomNav from "@/components/BottomNav";
 import { supabase } from "@/lib/supabase/client";
 import { UserContext } from "@/components/UserContext";
 
-export default function DashboardShell({ children }: { children: React.ReactNode }) {
+export default function DashboardShell({
+  children,
+  requireAuth = true,
+}: {
+  children: React.ReactNode;
+  requireAuth?: boolean;
+}) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-  const [checked, setChecked] = useState(false);
+  // Public pages (requireAuth=false) render immediately as guests; only
+  // gated pages block on the session check to avoid flashing real content.
+  const [checked, setChecked] = useState(!requireAuth);
   const router = useRouter();
 
   useEffect(() => {
@@ -21,7 +29,11 @@ export default function DashboardShell({ children }: { children: React.ReactNode
     supabase.auth.getSession().then(({ data }) => {
       if (!mounted) return;
       if (!data.session) {
-        router.replace("/login");
+        if (requireAuth) {
+          router.replace("/login");
+          return;
+        }
+        setChecked(true);
         return;
       }
       setUser(data.session.user);
@@ -31,7 +43,9 @@ export default function DashboardShell({ children }: { children: React.ReactNode
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       if (!session) {
         setUser(null);
-        router.replace("/login");
+        if (requireAuth) {
+          router.replace("/login");
+        }
         return;
       }
       setUser(session.user);
@@ -42,7 +56,7 @@ export default function DashboardShell({ children }: { children: React.ReactNode
       mounted = false;
       listener.subscription.unsubscribe();
     };
-  }, [router]);
+  }, [router, requireAuth]);
 
   // Avoid flashing mock content before we know whether someone is logged in.
   if (!checked) {

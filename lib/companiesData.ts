@@ -1,17 +1,23 @@
-export type CertLevel = "Anfänger" | "Fortgeschritten" | "Experte";
-export type CertCategory = "Fundamentals" | "Associate" | "Expert" | "Specialty";
+export type CertLevel = "Beginner" | "Intermediate" | "Advanced";
+
+export type CertCategoryIcon = "cloud" | "security" | "ai" | "data" | "m365" | "layers";
 
 export type Certification = {
   id: string;
+  code: string;
   title: string;
   description: string;
-  category: CertCategory;
+  categoryKey: string;
   level: CertLevel;
-  questions: number;
-  students: number;
-  rating: number;
+  progress: number; // 0-100
   free?: boolean;
   locked?: boolean;
+};
+
+export type CertCategoryDef = {
+  key: string;
+  label: string;
+  icon: CertCategoryIcon;
 };
 
 export type LearningPath = {
@@ -24,21 +30,23 @@ export type LearningPath = {
 export type Company = {
   slug: string;
   name: string;
-  certCount: number;
+  totalCertCount: number;
   learningPathCount: number;
   students: string;
   rating: number;
   tagline: string;
+  categories: CertCategoryDef[];
   certs: Certification[];
   learningPaths: LearningPath[];
 };
 
-// Companies shown in the grid. `certCount` drives the badge on each tile.
-// Only Microsoft has hand-authored detail content matching the approved
-// design; every other company gets realistic placeholder content generated
-// below so every tile is clickable and the page never 404s.
+// Companies shown in the grid. `certCount` drives the badge on the tile in
+// the /certifications overview. Only Microsoft has hand-authored detail
+// content matching the approved design; every other company gets realistic
+// placeholder content generated below so every tile is clickable and the
+// detail page never 404s.
 const COMPANY_SEED: { slug: string; name: string; certCount: number }[] = [
-  { slug: "microsoft", name: "Microsoft", certCount: 12 },
+  { slug: "microsoft", name: "Microsoft", certCount: 58 },
   { slug: "aws", name: "AWS", certCount: 15 },
   { slug: "google-cloud", name: "Google Cloud", certCount: 10 },
   { slug: "cisco", name: "Cisco", certCount: 8 },
@@ -59,59 +67,69 @@ const COMPANY_SEED: { slug: string; name: string; certCount: number }[] = [
   { slug: "sap", name: "SAP", certCount: 7 },
 ];
 
+// ---------------------------------------------------------------------------
+// Microsoft — hand-authored to match the approved design exactly.
+// ---------------------------------------------------------------------------
+
+const MICROSOFT_CATEGORIES: CertCategoryDef[] = [
+  { key: "azure", label: "Azure", icon: "cloud" },
+  { key: "security", label: "Security", icon: "security" },
+  { key: "ai", label: "AI", icon: "ai" },
+  { key: "data", label: "Data", icon: "data" },
+  { key: "m365", label: "Microsoft 365", icon: "m365" },
+];
+
 const MICROSOFT_CERTS: Certification[] = [
-  {
-    id: "az-900",
-    title: "Microsoft Azure Fundamentals",
-    description: "Beschreibt Cloud-Konzepte, Azure-Services, Preise und Support.",
-    category: "Fundamentals",
-    level: "Anfänger",
-    questions: 563,
-    students: 12450,
-    rating: 4.8,
-    free: true,
-  },
-  {
-    id: "az-104",
-    title: "Microsoft Azure Administrator",
-    description: "Verwaltet Azure Governance, Speicher, Compute und mehr.",
-    category: "Associate",
-    level: "Fortgeschritten",
-    questions: 1245,
-    students: 12230,
-    rating: 4.7,
-  },
-  {
-    id: "az-305",
-    title: "Microsoft Azure Solutions Architect",
-    description: "Entwirft Cloud-Lösungen, die auf Microsoft Azure laufen.",
-    category: "Associate",
-    level: "Fortgeschritten",
-    questions: 1400,
-    students: 9870,
-    rating: 4.8,
-  },
-  {
-    id: "az-400",
-    title: "Microsoft Azure DevOps Engineer Expert",
-    description: "Implementiert DevOps-Praktiken und Continuous-Delivery-Lösungen.",
-    category: "Expert",
-    level: "Fortgeschritten",
-    questions: 1100,
-    students: 7630,
-    rating: 4.7,
-    locked: true,
-  },
-  {
-    id: "ms-900",
-    title: "Microsoft 365 Fundamentals",
-    description: "Beschreibt die Kernservices und Konzepte von Microsoft 365.",
-    category: "Fundamentals",
-    level: "Anfänger",
-    questions: 321,
-    students: 5940,
-    rating: 4.6,
-  },
+  // Azure (15) — first 9 match the approved mockup card-for-card.
+  { id: "az-104", code: "AZ-104", title: "Azure Administrator Associate", description: "Verwaltet Azure-Identitäten, Governance, Speicher und mehr.", categoryKey: "azure", level: "Intermediate", progress: 20 },
+  { id: "az-900", code: "AZ-900", title: "Azure Fundamentals", description: "Grundlegende Cloud-Konzepte und -Dienste verstehen.", categoryKey: "azure", level: "Beginner", progress: 35, free: true },
+  { id: "az-305", code: "AZ-305", title: "Azure Solutions Architect Expert", description: "Entwerfen und Optimieren von Lösungen auf Azure.", categoryKey: "azure", level: "Advanced", progress: 10 },
+  { id: "az-204", code: "AZ-204", title: "Azure Developer Associate", description: "Entwickeln von Lösungen auf Microsoft Azure.", categoryKey: "azure", level: "Intermediate", progress: 15 },
+  { id: "az-400", code: "AZ-400", title: "DevOps Engineer Expert", description: "Entwerfen und Implementieren von DevOps-Prozessen.", categoryKey: "azure", level: "Advanced", progress: 5 },
+  { id: "az-500", code: "AZ-500", title: "Azure Security Engineer Associate", description: "Implementieren von Sicherheitskontrollen und Schutzmaßnahmen.", categoryKey: "azure", level: "Intermediate", progress: 0 },
+  { id: "az-700", code: "AZ-700", title: "Azure Network Engineer Associate", description: "Implementieren von Netzwerklösungen auf Microsoft Azure.", categoryKey: "azure", level: "Intermediate", progress: 0 },
+  { id: "az-800", code: "AZ-800", title: "Windows Server Hybrid Administrator", description: "Verwalten von Hybridumgebungen mit Windows Server.", categoryKey: "azure", level: "Intermediate", progress: 0 },
+  { id: "dp-900", code: "DP-900", title: "Azure Data Fundamentals", description: "Grundlegende Datenkonzepte und -dienste in Azure.", categoryKey: "azure", level: "Beginner", progress: 10 },
+  { id: "az-801", code: "AZ-801", title: "Windows Server Hybrid Advanced Administrator", description: "Fortgeschrittene Verwaltung hybrider Windows-Server-Umgebungen.", categoryKey: "azure", level: "Advanced", progress: 0, locked: true },
+  { id: "az-140", code: "AZ-140", title: "Azure Virtual Desktop Specialty", description: "Planen und Konfigurieren einer Azure-Virtual-Desktop-Infrastruktur.", categoryKey: "azure", level: "Intermediate", progress: 0 },
+  { id: "az-120", code: "AZ-120", title: "Cloud Data Center Specialist", description: "Verwalten von Microsoft-Cloud-Rechenzentrumslösungen.", categoryKey: "azure", level: "Advanced", progress: 0, locked: true },
+  { id: "az-220", code: "AZ-220", title: "Azure IoT Developer Specialty", description: "Entwerfen und Implementieren von IoT-Lösungen auf Azure.", categoryKey: "azure", level: "Intermediate", progress: 0 },
+  { id: "az-600", code: "AZ-600", title: "Azure Stack Hub Operator", description: "Konfigurieren und Betreiben von Azure Stack Hub.", categoryKey: "azure", level: "Advanced", progress: 0, locked: true },
+  { id: "az-720", code: "AZ-720", title: "Azure Connectivity Troubleshooter", description: "Beheben von Netzwerkverbindungsproblemen in Azure.", categoryKey: "azure", level: "Intermediate", progress: 0 },
+
+  // Security (8)
+  { id: "sc-900", code: "SC-900", title: "Security, Compliance & Identity Fundamentals", description: "Grundlagen von Sicherheit, Compliance und Identität in Microsoft-Diensten.", categoryKey: "security", level: "Beginner", progress: 40, free: true },
+  { id: "sc-200", code: "SC-200", title: "Security Operations Analyst", description: "Erkennen, Untersuchen und Reagieren auf Bedrohungen.", categoryKey: "security", level: "Intermediate", progress: 0 },
+  { id: "sc-300", code: "SC-300", title: "Identity and Access Administrator", description: "Entwerfen und Implementieren von Identitätslösungen.", categoryKey: "security", level: "Intermediate", progress: 0 },
+  { id: "sc-400", code: "SC-400", title: "Information Protection Administrator", description: "Schützen von Informationen in Microsoft-365-Umgebungen.", categoryKey: "security", level: "Intermediate", progress: 0 },
+  { id: "sc-100", code: "SC-100", title: "Cybersecurity Architect Expert", description: "Entwerfen von Cybersicherheitsstrategien für Unternehmen.", categoryKey: "security", level: "Advanced", progress: 0, locked: true },
+  { id: "md-102", code: "MD-102", title: "Endpoint Administrator", description: "Verwalten und Schützen von Geräten in Unternehmen.", categoryKey: "security", level: "Intermediate", progress: 0 },
+  { id: "sc-401", code: "SC-401", title: "Information Security Administrator", description: "Implementieren von Datensicherheits- und Compliance-Lösungen.", categoryKey: "security", level: "Intermediate", progress: 0 },
+  { id: "sc-5001", code: "SC-5001", title: "Security Operations Specialty", description: "Fortgeschrittene Bedrohungserkennung mit Microsoft-Sicherheitstools.", categoryKey: "security", level: "Advanced", progress: 0, locked: true },
+
+  // AI (6)
+  { id: "ai-900", code: "AI-900", title: "Azure AI Fundamentals", description: "Grundlegende Konzepte von KI und maschinellem Lernen.", categoryKey: "ai", level: "Beginner", progress: 55, free: true },
+  { id: "ai-102", code: "AI-102", title: "Azure AI Engineer Associate", description: "Entwerfen und Implementieren von KI-Lösungen auf Azure.", categoryKey: "ai", level: "Intermediate", progress: 0 },
+  { id: "ai-fdc", code: "AI-FDC", title: "Copilot Fundamentals", description: "Grundlagen der Nutzung von Microsoft Copilot im Arbeitsalltag.", categoryKey: "ai", level: "Beginner", progress: 20 },
+  { id: "dp-100", code: "DP-100", title: "Azure Data Scientist Associate", description: "Entwerfen und Implementieren von Machine-Learning-Lösungen.", categoryKey: "ai", level: "Intermediate", progress: 0 },
+  { id: "ai-102x", code: "AI-102X", title: "AI Solutions Architect Expert", description: "Architektur großskaliger KI-Lösungen für Unternehmen.", categoryKey: "ai", level: "Advanced", progress: 0, locked: true },
+  { id: "pl-300ai", code: "PL-300", title: "Power BI Data Analyst", description: "Aufbereiten, Modellieren und Visualisieren von Daten mit Power BI.", categoryKey: "ai", level: "Intermediate", progress: 0 },
+
+  // Data (7)
+  { id: "dp-203", code: "DP-203", title: "Azure Data Engineer Associate", description: "Entwerfen und Implementieren von Datenlösungen auf Azure.", categoryKey: "data", level: "Intermediate", progress: 0 },
+  { id: "dp-300", code: "DP-300", title: "Azure Database Administrator", description: "Verwalten relationaler Datenbanken in der Cloud.", categoryKey: "data", level: "Intermediate", progress: 0 },
+  { id: "dp-420", code: "DP-420", title: "Cosmos DB Developer Specialty", description: "Entwerfen und Implementieren von Cosmos-DB-Lösungen.", categoryKey: "data", level: "Advanced", progress: 0, locked: true },
+  { id: "dp-500", code: "DP-500", title: "Enterprise Data Analyst Associate", description: "Skalierbare Analyselösungen mit Azure und Power BI.", categoryKey: "data", level: "Intermediate", progress: 0 },
+  { id: "dp-600", code: "DP-600", title: "Fabric Analytics Engineer Associate", description: "Aufbau von Analytics-Lösungen mit Microsoft Fabric.", categoryKey: "data", level: "Intermediate", progress: 0 },
+  { id: "dp-700", code: "DP-700", title: "Fabric Data Engineer Associate", description: "Implementieren von Dateningenieur-Lösungen mit Microsoft Fabric.", categoryKey: "data", level: "Intermediate", progress: 0 },
+  { id: "pl-300", code: "PL-300", title: "Power BI Data Analyst Associate", description: "Datenmodellierung und -visualisierung mit Power BI.", categoryKey: "data", level: "Beginner", progress: 30 },
+
+  // Microsoft 365 (5)
+  { id: "ms-900", code: "MS-900", title: "Microsoft 365 Fundamentals", description: "Grundlegende Konzepte und Kernservices von Microsoft 365.", categoryKey: "m365", level: "Beginner", progress: 60, free: true },
+  { id: "ms-102", code: "MS-102", title: "Microsoft 365 Administrator", description: "Verwalten von Diensten, Sicherheit und Compliance in Microsoft 365.", categoryKey: "m365", level: "Intermediate", progress: 0 },
+  { id: "md-1021", code: "MD-102", title: "Endpoint Administrator Associate", description: "Bereitstellen und Verwalten von Geräten in Microsoft 365.", categoryKey: "m365", level: "Intermediate", progress: 0 },
+  { id: "mo-201", code: "MO-201", title: "Excel Expert Associate", description: "Fortgeschrittene Datenanalyse und Automatisierung in Excel.", categoryKey: "m365", level: "Intermediate", progress: 0 },
+  { id: "ms-700", code: "MS-700", title: "Teams Administrator Associate", description: "Planen und Verwalten von Microsoft-Teams-Umgebungen.", categoryKey: "m365", level: "Intermediate", progress: 0 },
 ];
 
 const MICROSOFT_PATHS: LearningPath[] = [
@@ -121,32 +139,42 @@ const MICROSOFT_PATHS: LearningPath[] = [
   { title: "Security Specialist", certCount: 2, levelRange: "Fortgeschritten", progress: null },
 ];
 
-// Deterministic placeholder generator so every non-Microsoft company still
-// renders a believable, fully-clickable detail page.
-function generateCerts(company: { name: string; certCount: number }): Certification[] {
-  const templates: { suffix: string; category: CertCategory; level: CertLevel }[] = [
-    { suffix: "Fundamentals", category: "Fundamentals", level: "Anfänger" },
-    { suffix: "Associate", category: "Associate", level: "Fortgeschritten" },
-    { suffix: "Professional", category: "Expert", level: "Fortgeschritten" },
-    { suffix: "Expert", category: "Expert", level: "Experte" },
-    { suffix: "Specialty", category: "Specialty", level: "Experte" },
-  ];
-  const count = Math.min(company.certCount, 5);
+// ---------------------------------------------------------------------------
+// Placeholder generator for every other company, using the same shape as
+// Microsoft so the detail page renders identically for all of them.
+// ---------------------------------------------------------------------------
+
+const GENERIC_CATEGORIES: CertCategoryDef[] = [
+  { key: "fundamentals", label: "Fundamentals", icon: "layers" },
+  { key: "associate", label: "Associate", icon: "cloud" },
+  { key: "security", label: "Security", icon: "security" },
+  { key: "expert", label: "Expert", icon: "ai" },
+];
+
+function generateCerts(company: { slug: string; name: string; certCount: number }): Certification[] {
+  const levels: CertLevel[] = ["Beginner", "Intermediate", "Advanced"];
+  const count = Math.max(4, Math.min(company.certCount, 16));
   return Array.from({ length: count }).map((_, i) => {
-    const t = templates[i % templates.length];
+    const cat = GENERIC_CATEGORIES[i % GENERIC_CATEGORIES.length];
+    const level = levels[Math.min(i % levels.length, cat.key === "fundamentals" ? 0 : 2)];
+    const prefix = company.name.slice(0, 2).toUpperCase();
     return {
-      id: `${company.name.toLowerCase().replace(/\s+/g, "-")}-${i}`,
-      title: `${company.name} ${t.suffix}`,
-      description: `Grundlagen- und Praxiswissen für die ${t.suffix}-Zertifizierung von ${company.name}.`,
-      category: t.category,
-      level: t.level,
-      questions: 300 + i * 220,
-      students: 1200 + i * 950,
-      rating: 4.4 + (i % 3) * 0.1,
+      id: `${company.slug}-${i}`,
+      code: `${prefix}-${100 + i * 10}`,
+      title: `${company.name} ${cat.label} ${i + 1}`,
+      description: `Grundlagen- und Praxiswissen für die ${cat.label}-Zertifizierung von ${company.name}.`,
+      categoryKey: cat.key,
+      level,
+      progress: i === 0 ? 25 : 0,
       free: i === 0,
-      locked: i === templates.length - 1,
+      locked: i === count - 1 && count > 5,
     };
   });
+}
+
+function generateCategories(certs: Certification[]): CertCategoryDef[] {
+  const present = new Set(certs.map((c) => c.categoryKey));
+  return GENERIC_CATEGORIES.filter((c) => present.has(c.key));
 }
 
 function generatePaths(company: { name: string }): LearningPath[] {
@@ -160,21 +188,26 @@ export const companies: Company[] = COMPANY_SEED.map((seed) => {
   if (seed.slug === "microsoft") {
     return {
       ...seed,
+      totalCertCount: seed.certCount,
       learningPathCount: 6,
       students: "8.450+",
       rating: 4.8,
       tagline: "Entdecke alle Microsoft-Zertifizierungen und bring deine Karriere voran.",
+      categories: MICROSOFT_CATEGORIES,
       certs: MICROSOFT_CERTS,
       learningPaths: MICROSOFT_PATHS,
     };
   }
+  const certs = generateCerts(seed);
   return {
     ...seed,
+    totalCertCount: certs.length,
     learningPathCount: Math.max(2, Math.round(seed.certCount / 3)),
     students: `${(seed.certCount * 850).toLocaleString("de-DE")}+`,
     rating: 4.5,
     tagline: `Entdecke alle ${seed.name}-Zertifizierungen und bring deine Karriere voran.`,
-    certs: generateCerts(seed),
+    categories: generateCategories(certs),
+    certs,
     learningPaths: generatePaths(seed),
   };
 });
@@ -182,5 +215,3 @@ export const companies: Company[] = COMPANY_SEED.map((seed) => {
 export function getCompany(slug: string): Company | undefined {
   return companies.find((c) => c.slug === slug);
 }
-
-export const certCategories: CertCategory[] = ["Fundamentals", "Associate", "Expert", "Specialty"];

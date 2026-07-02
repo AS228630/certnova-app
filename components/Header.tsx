@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Search, Globe, Bell, Moon, Sun, ChevronDown, Menu } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
 import { useUser } from "@/components/UserContext";
@@ -57,23 +58,42 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
             {theme === "dark" ? <Moon size={19} /> : <Sun size={19} />}
           </button>
 
-          <button className="relative text-text-muted hover:text-text" aria-label="Benachrichtigungen">
-            <Bell size={19} />
-            <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-danger text-[9px] font-bold text-white">
-              3
-            </span>
-          </button>
+          {user ? (
+            <>
+              <button className="relative text-text-muted hover:text-text" aria-label="Benachrichtigungen">
+                <Bell size={19} />
+                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-danger text-[9px] font-bold text-white">
+                  3
+                </span>
+              </button>
 
-          <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-fuchsia-500 text-xs font-bold text-white">
-              {initial}
+              <div className="flex items-center gap-2">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-fuchsia-500 text-xs font-bold text-white">
+                  {initial}
+                </div>
+                <div className="hidden leading-tight sm:block">
+                  <p className="text-sm font-semibold text-text">{displayName}</p>
+                  <p className="text-xs text-text-muted">Kostenloser Plan</p>
+                </div>
+                <ChevronDown size={14} className="hidden text-text-faint sm:block" />
+              </div>
+            </>
+          ) : (
+            <div className="flex items-center gap-2">
+              <Link
+                href="/login"
+                className="rounded-lg px-3 py-1.5 text-sm font-semibold text-text-muted hover:text-text"
+              >
+                Anmelden
+              </Link>
+              <Link
+                href="/register"
+                className="rounded-lg bg-primary px-3.5 py-1.5 text-sm font-bold text-white hover:bg-primary-dark"
+              >
+                Jetzt starten
+              </Link>
             </div>
-            <div className="hidden leading-tight sm:block">
-              <p className="text-sm font-semibold text-text">{displayName}</p>
-              <p className="text-xs text-text-muted">Kostenloser Plan</p>
-            </div>
-            <ChevronDown size={14} className="hidden text-text-faint sm:block" />
-          </div>
+          )}
         </div>
       </div>
 

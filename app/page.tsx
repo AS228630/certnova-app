@@ -437,13 +437,31 @@ export default function LandingPage() {
               <p className="mb-4 max-w-xs text-sm text-text-faint">
                 Deine All-in-One-Plattform für IT-Skills, Sprachen und Karriereentwicklung.
               </p>
-              <div className="flex items-center gap-3 text-text-faint">
-                <FaLinkedin size={16} className="hover:text-text" />
-                <FaGithub size={16} className="hover:text-text" />
-                <FaYoutube size={16} className="hover:text-text" />
-                <FaXTwitter size={16} className="hover:text-text" />
-                <FaFacebook size={16} className="hover:text-text" />
-                <FaInstagram size={16} className="hover:text-text" />
+              <div className="flex items-center gap-2.5">
+                {[
+                  { Icon: FaLinkedin, label: "LinkedIn", href: "https://linkedin.com", color: "#0A66C2" },
+                  { Icon: FaGithub, label: "GitHub", href: "https://github.com", color: "#f2f3f9" },
+                  { Icon: FaYoutube, label: "YouTube", href: "https://youtube.com", color: "#FF0000" },
+                  { Icon: FaXTwitter, label: "X", href: "https://x.com", color: "#f2f3f9" },
+                  { Icon: FaFacebook, label: "Facebook", href: "https://facebook.com", color: "#1877F2" },
+                  { Icon: FaInstagram, label: "Instagram", href: "https://instagram.com", color: "#E1306C" },
+                ].map(({ Icon, label, href, color }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-panel-alt text-text-muted transition-colors hover:text-white"
+                    style={{ ["--social-hover" as string]: color }}
+                  >
+                    <span
+                      className="flex h-full w-full items-center justify-center rounded-full transition-colors hover:[background-color:var(--social-hover)]"
+                    >
+                      <Icon size={16} />
+                    </span>
+                  </a>
+                ))}
               </div>
             </div>
 
