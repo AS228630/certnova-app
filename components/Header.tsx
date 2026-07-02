@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Globe, Bell, Moon, ChevronDown, Menu, X } from "lucide-react";
+import { Search, Globe, Bell, Moon, Sun, ChevronDown, Menu, X } from "lucide-react";
+import { useTheme } from "@/components/ThemeProvider";
 
 export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <header className="sticky top-0 z-30 border-b border-border-soft bg-panel px-3 py-3 sm:px-4 md:px-8">
@@ -64,8 +66,12 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
               <ChevronDown size={14} />
             </button>
 
-            <button className="hidden text-text-muted hover:text-text sm:block" aria-label="Design wechseln">
-              <Moon size={19} />
+            <button
+              onClick={toggleTheme}
+              className="hidden text-text-muted hover:text-text sm:block"
+              aria-label="Design wechseln"
+            >
+              {theme === "dark" ? <Moon size={19} /> : <Sun size={19} />}
             </button>
 
             <button className="relative text-text-muted hover:text-text" aria-label="Benachrichtigungen">

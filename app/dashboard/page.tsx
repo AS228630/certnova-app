@@ -8,14 +8,11 @@ import {
   FlaskConical,
   CheckCircle2,
   Star,
-  BookOpenCheck,
-  Dumbbell,
-  ShieldCheck,
-  UserCheck,
-  Flag,
   ChevronRight,
 } from "lucide-react";
 import { getVendorIcon } from "@/lib/vendorIcons";
+import HeroPath from "@/components/HeroPath";
+import CertsScroller from "@/components/CertsScroller";
 
 const stats = [
   { icon: Users, label: "Aktive Lernende", value: "120K+" },
@@ -23,14 +20,6 @@ const stats = [
   { icon: FlaskConical, label: "Labs genutzt", value: "2.500+" },
   { icon: CheckCircle2, label: "Bestehensrate", value: "98%" },
   { icon: Star, label: "Bewertung", value: "4,9/5" },
-];
-
-const pathSteps = [
-  { icon: BookOpenCheck, label: "Lernen" },
-  { icon: Dumbbell, label: "Üben" },
-  { icon: ShieldCheck, label: "Zertifizierung" },
-  { icon: UserCheck, label: "Interview" },
-  { icon: Flag, label: "Ziel erreichen" },
 ];
 
 const certs = [
@@ -69,26 +58,8 @@ export default function DashboardPage() {
               </div>
 
               {/* Path illustration */}
-              <div className="mt-8 hidden items-center justify-between md:flex">
-                {pathSteps.map((step, i) => (
-                  <div key={step.label} className="flex flex-1 items-center">
-                    <div className="flex flex-col items-center gap-2">
-                      <div
-                        className={`flex h-11 w-11 items-center justify-center rounded-full ${
-                          i === 0
-                            ? "bg-primary text-white"
-                            : "border border-border-soft bg-panel-alt text-text-muted"
-                        }`}
-                      >
-                        <step.icon size={18} />
-                      </div>
-                      <span className="text-[11px] font-medium text-text-muted">{step.label}</span>
-                    </div>
-                    {i < pathSteps.length - 1 && (
-                      <div className="mx-2 mb-5 h-px flex-1 border-t border-dashed border-border-soft" />
-                    )}
-                  </div>
-                ))}
+              <div className="mt-8">
+                <HeroPath />
               </div>
 
               <div className="mt-6 grid grid-cols-2 gap-4 border-t border-border-soft pt-6 sm:grid-cols-5">
@@ -146,29 +117,7 @@ export default function DashboardPage() {
                 <h2 className="font-bold text-text">Beliebte Zertifizierungen</h2>
                 <span className="cursor-pointer text-xs font-semibold text-primary">Alle anzeigen</span>
               </div>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                {certs.map((c) => (
-                  <div
-                    key={c.title}
-                    className="rounded-xl border border-border-soft bg-panel p-5 transition-colors hover:border-primary/40"
-                  >
-                    <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-panel-alt">
-                      {getVendorIcon(c.vendor)}
-                    </div>
-                    <h3 className="font-bold text-text">{c.title}</h3>
-                    <p className="text-sm text-text-muted">{c.subtitle}</p>
-                    <div className="mt-4 flex items-center justify-between text-xs">
-                      <span className="rounded-full bg-primary-light px-2 py-1 font-semibold text-primary">
-                        {c.level}
-                      </span>
-                      <span className="flex items-center gap-1 font-semibold text-text">
-                        <Star size={12} className="fill-warning text-warning" />
-                        {c.rating}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <CertsScroller certs={certs} />
             </div>
           </div>
 
