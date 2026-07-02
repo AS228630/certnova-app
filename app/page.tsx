@@ -20,14 +20,10 @@ import {
   CreditCard,
   Globe2,
   BadgeCheck,
-  Github,
-  Youtube,
-  Twitter,
-  Facebook,
-  Instagram,
-  Linkedin,
   Apple,
 } from "lucide-react";
+import { FaLinkedin, FaGithub, FaYoutube, FaFacebook, FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { getVendorIcon, getCompanyIcon } from "@/lib/vendorIcons";
 
 const navLinksBefore = [
@@ -442,12 +438,12 @@ export default function LandingPage() {
                 Deine All-in-One-Plattform für IT-Skills, Sprachen und Karriereentwicklung.
               </p>
               <div className="flex items-center gap-3 text-text-faint">
-                <Linkedin size={16} className="hover:text-text" />
-                <Github size={16} className="hover:text-text" />
-                <Youtube size={16} className="hover:text-text" />
-                <Twitter size={16} className="hover:text-text" />
-                <Facebook size={16} className="hover:text-text" />
-                <Instagram size={16} className="hover:text-text" />
+                <FaLinkedin size={16} className="hover:text-text" />
+                <FaGithub size={16} className="hover:text-text" />
+                <FaYoutube size={16} className="hover:text-text" />
+                <FaXTwitter size={16} className="hover:text-text" />
+                <FaFacebook size={16} className="hover:text-text" />
+                <FaInstagram size={16} className="hover:text-text" />
               </div>
             </div>
 
