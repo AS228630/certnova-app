@@ -28,13 +28,17 @@ import {
   Instagram,
   Linkedin,
   Apple,
+  User,
 } from "lucide-react";
 import { getVendorIcon } from "@/lib/vendorIcons";
 
-const navLinks = [
+const navLinksBefore = [
   { label: "Kurse", href: "/courses" },
   { label: "Zertifizierungen", href: "/certifications" },
   { label: "Lernpfade", href: "/learning-paths" },
+];
+
+const navLinksAfter = [
   { label: "Für Unternehmen", href: "/business" },
   { label: "Preise", href: "/pricing" },
 ];
@@ -96,19 +100,19 @@ const testimonials = [
     name: "Lukas Weber",
     role: "AWS Solutions Architect",
     quote: "Dank CertCoach habe ich mein AWS Zertifikat bestanden und meinen Traumjob bekommen!",
-    initials: "LW",
+    gradient: "linear-gradient(135deg,#6d4cff,#a78bfa)",
   },
   {
     name: "Sarah Müller",
     role: "Azure Administrator",
     quote: "Die Labs und Projekte sind einfach fantastisch. Sehr praxisnah und verständlich erklärt.",
-    initials: "SM",
+    gradient: "linear-gradient(135deg,#ec4899,#f472b6)",
   },
   {
     name: "David Krause",
     role: "Security Analyst",
     quote: "Die Lernpfade haben mir geholfen, meine Karriere im Bereich Cyber Security zu starten.",
-    initials: "DK",
+    gradient: "linear-gradient(135deg,#0ea5e9,#38bdf8)",
   },
 ];
 
@@ -155,7 +159,7 @@ export default function LandingPage() {
           </Link>
 
           <nav className="hidden items-center gap-7 lg:flex">
-            {navLinks.map((l) => (
+            {navLinksBefore.map((l) => (
               <Link
                 key={l.label}
                 href={l.href}
@@ -168,6 +172,15 @@ export default function LandingPage() {
               Ressourcen
               <ChevronDown size={14} />
             </button>
+            {navLinksAfter.map((l) => (
+              <Link
+                key={l.label}
+                href={l.href}
+                className="text-sm font-medium text-text-muted transition-colors hover:text-text"
+              >
+                {l.label}
+              </Link>
+            ))}
           </nav>
 
           <div className="flex shrink-0 items-center gap-3">
@@ -228,10 +241,10 @@ export default function LandingPage() {
 
             <div className="mt-8 flex items-center gap-3">
               <div className="flex -space-x-3">
-                {["A", "B", "C", "D"].map((l, i) => (
+                {[0, 1, 2, 3].map((i) => (
                   <div
-                    key={l}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-bg text-xs font-bold text-white"
+                    key={i}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-bg text-white"
                     style={{
                       background: [
                         "linear-gradient(135deg,#6d4cff,#a78bfa)",
@@ -241,7 +254,7 @@ export default function LandingPage() {
                       ][i],
                     }}
                   >
-                    {l}
+                    <User size={16} className="fill-white/25" />
                   </div>
                 ))}
               </div>
@@ -347,8 +360,11 @@ export default function LandingPage() {
           {testimonials.map((t) => (
             <div key={t.name} className="rounded-2xl border border-border-soft bg-panel p-5">
               <div className="mb-3 flex items-center gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-fuchsia-500 text-sm font-bold text-white">
-                  {t.initials}
+                <div
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white"
+                  style={{ background: t.gradient }}
+                >
+                  <User size={18} className="fill-white/25" />
                 </div>
                 <div>
                   <p className="text-sm font-bold text-text">{t.name}</p>
