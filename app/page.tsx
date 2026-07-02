@@ -487,12 +487,36 @@ export default function LandingPage() {
               </div>
             </div>
             <div className="mt-4 flex gap-3">
-              <span className="flex items-center gap-2 rounded-lg border border-border-soft px-3 py-2 text-xs text-text-faint">
-                <Apple size={14} /> App Store
-              </span>
-              <span className="flex items-center gap-2 rounded-lg border border-border-soft px-3 py-2 text-xs text-text-faint">
-                <Play size={14} /> Google Play
-              </span>
+              <a
+                href="#"
+                className="flex items-center gap-2.5 rounded-lg border border-white/10 bg-black px-3.5 py-2 transition-opacity hover:opacity-80"
+              >
+                <Apple size={22} className="text-white" />
+                <div className="text-left leading-none">
+                  <p className="text-[9px] text-gray-300">Download on the</p>
+                  <p className="text-sm font-semibold text-white">App Store</p>
+                </div>
+              </a>
+              <a
+                href="#"
+                className="flex items-center gap-2.5 rounded-lg border border-white/10 bg-black px-3.5 py-2 transition-opacity hover:opacity-80"
+              >
+                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="googlePlayGradient" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor="#00C2FF" />
+                      <stop offset="35%" stopColor="#00E676" />
+                      <stop offset="65%" stopColor="#FFD600" />
+                      <stop offset="100%" stopColor="#FF3D57" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M5 3l14 9-14 9V3z" fill="url(#googlePlayGradient)" />
+                </svg>
+                <div className="text-left leading-none">
+                  <p className="text-[9px] text-gray-300">GET IT ON</p>
+                  <p className="text-sm font-semibold text-white">Google Play</p>
+                </div>
+              </a>
             </div>
           </div>
 
