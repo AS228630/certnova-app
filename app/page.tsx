@@ -6,7 +6,6 @@ import {
   Play,
   Users,
   BookOpen,
-  List,
   ShieldCheck,
   ThumbsUp,
   Star,
@@ -30,7 +29,7 @@ import {
   Apple,
   User,
 } from "lucide-react";
-import { getVendorIcon } from "@/lib/vendorIcons";
+import { getVendorIcon, getCompanyIcon } from "@/lib/vendorIcons";
 
 const navLinksBefore = [
   { label: "Kurse", href: "/courses" },
@@ -272,13 +271,13 @@ export default function LandingPage() {
             </div>
 
             <div className="absolute left-2 top-6 flex items-center gap-2 rounded-xl border border-border-soft bg-panel px-3 py-2 shadow-lg sm:left-6">
-              <Code2 size={16} className="text-primary" />
+              {getCompanyIcon("aws", 16)}
             </div>
             <div className="absolute right-0 top-2 flex items-center gap-2 rounded-xl border border-border-soft bg-panel px-3 py-2 shadow-lg sm:right-4">
-              <List size={16} className="text-primary" />
+              {getCompanyIcon("microsoft", 16)}
             </div>
             <div className="absolute left-0 bottom-16 flex items-center gap-2 rounded-xl border border-border-soft bg-panel px-3 py-2 shadow-lg">
-              <Cloud size={16} className="text-primary" />
+              {getCompanyIcon("google-cloud", 16)}
             </div>
             <div className="absolute bottom-4 right-2 rounded-xl border border-border-soft bg-panel px-3 py-2 text-xs font-bold text-text shadow-lg sm:right-6">
               AWS <span className="text-primary">Certified</span>
