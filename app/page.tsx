@@ -6,6 +6,7 @@ import {
   Play,
   Users,
   BookOpen,
+  List,
   ShieldCheck,
   ThumbsUp,
   Star,
@@ -261,7 +262,7 @@ export default function LandingPage() {
               <Code2 size={16} className="text-primary" />
             </div>
             <div className="absolute right-0 top-2 flex items-center gap-2 rounded-xl border border-border-soft bg-panel px-3 py-2 shadow-lg sm:right-4">
-              <BookOpen size={16} className="text-primary" />
+              <List size={16} className="text-primary" />
             </div>
             <div className="absolute left-0 bottom-16 flex items-center gap-2 rounded-xl border border-border-soft bg-panel px-3 py-2 shadow-lg">
               <Cloud size={16} className="text-primary" />
