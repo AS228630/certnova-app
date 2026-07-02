@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 type Theme = "light" | "dark";
 
@@ -11,13 +11,14 @@ const ThemeContext = createContext<{ theme: Theme; toggleTheme: () => void }>({
 
 export const useTheme = () => useContext(ThemeContext);
 
-export default function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
+function getInitialTheme(): Theme {
+  if (typeof window === "undefined") return "dark";
+  const stored = window.localStorage.getItem("certcoach-theme") as Theme | null;
+  return stored ?? "dark";
+}
 
-  useEffect(() => {
-    const stored = window.localStorage.getItem("certcoach-theme") as Theme | null;
-    if (stored) setTheme(stored);
-  }, []);
+export default function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   const toggleTheme = () => {
     const next: Theme = theme === "dark" ? "light" : "dark";
