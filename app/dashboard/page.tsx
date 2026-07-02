@@ -1,5 +1,4 @@
-import Sidebar from "@/components/Sidebar";
-import Header from "@/components/Header";
+import DashboardShell from "@/components/DashboardShell";
 import DailyPlan from "@/components/DailyPlan";
 import AICoach from "@/components/AICoach";
 import ProgressPanel from "@/components/ProgressPanel";
@@ -44,16 +43,13 @@ const certs = [
 
 export default function DashboardPage() {
   return (
-    <div className="flex flex-col lg:flex-row">
-      <Sidebar />
-      <div className="flex-1">
-        <Header />
-        <main className="grid grid-cols-1 gap-6 p-4 md:p-8 lg:grid-cols-3">
-          <div className="space-y-6 lg:col-span-2">
+    <DashboardShell>
+      <main className="grid grid-cols-1 gap-5 p-3 sm:gap-6 sm:p-4 md:p-8 lg:grid-cols-3">
+          <div className="space-y-5 sm:space-y-6 lg:col-span-2">
             {/* Hero */}
-            <div className="rounded-2xl border border-border-soft bg-panel p-6 md:p-8">
+            <div className="rounded-2xl border border-border-soft bg-panel p-4 sm:p-6 md:p-8">
               <p className="mb-2 text-sm text-text-muted">Guten Morgen, Arman! 👋</p>
-              <h1 className="text-2xl font-extrabold leading-snug text-text md:text-3xl">
+              <h1 className="text-xl font-extrabold leading-snug text-text sm:text-2xl md:text-3xl">
                 Lerne. Übe. Zertifiziere dich.
                 <br />
                 <span className="text-primary">Werde eingestellt.</span>
@@ -181,8 +177,7 @@ export default function DashboardPage() {
             <AICoach />
             <ProgressPanel />
           </div>
-        </main>
-      </div>
-    </div>
+      </main>
+    </DashboardShell>
   );
 }

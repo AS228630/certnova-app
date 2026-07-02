@@ -11,11 +11,9 @@ import {
   BarChart3,
   Trophy,
   Briefcase,
-  Menu,
   X,
   Crown,
 } from "lucide-react";
-import { useState } from "react";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -31,35 +29,45 @@ const navItems = [
 const streakDays = ["M", "D", "M", "D", "F", "S", "S"];
 const streakDone = [true, true, true, true, true, true, false];
 
-export default function Sidebar() {
+export default function Sidebar({
+  open = false,
+  onClose,
+}: {
+  open?: boolean;
+  onClose?: () => void;
+}) {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
 
   return (
     <>
-      {/* Mobile top bar */}
-      <div className="flex items-center justify-between border-b border-border-soft bg-panel px-4 py-3 lg:hidden">
-        <div className="flex items-center gap-2">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white">
-            C
-          </div>
-          <span className="text-lg font-bold text-text">CertCoach</span>
-        </div>
-        <button onClick={() => setOpen(!open)} aria-label="Menü öffnen" className="text-text">
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </div>
+      {/* Mobile overlay */}
+      {open && (
+        <div
+          className="fixed inset-0 z-40 bg-black/60 lg:hidden"
+          onClick={onClose}
+          aria-hidden="true"
+        />
+      )}
 
       <aside
-        className={`${
-          open ? "flex" : "hidden"
-        } fixed inset-0 z-40 flex-col overflow-y-auto bg-panel lg:static lg:flex lg:w-64 lg:shrink-0 lg:border-r lg:border-border-soft`}
+        className={`fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] -translate-x-full flex-col overflow-y-auto bg-panel transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:w-64 lg:max-w-none lg:shrink-0 lg:translate-x-0 lg:border-r lg:border-border-soft ${
+          open ? "translate-x-0" : ""
+        }`}
       >
-        <div className="hidden items-center gap-2 px-6 py-6 lg:flex">
-          <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white">
-            C
-          </div>
-          <span className="text-lg font-bold tracking-tight text-text">CertCoach</span>
+        <div className="flex items-center justify-between px-5 py-5 lg:px-6 lg:py-6">
+          <Link href="/dashboard" className="flex items-center gap-2" onClick={onClose}>
+            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white">
+              C
+            </div>
+            <span className="text-lg font-bold tracking-tight text-text">CertCoach</span>
+          </Link>
+          <button
+            onClick={onClose}
+            aria-label="Menü schließen"
+            className="text-text-muted hover:text-text lg:hidden"
+          >
+            <X size={22} />
+          </button>
         </div>
 
         <nav className="flex-1 space-y-1 px-3 py-2">
@@ -70,7 +78,7 @@ export default function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                onClick={() => setOpen(false)}
+                onClick={onClose}
                 className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
                   active
                     ? "bg-primary text-white"
@@ -84,7 +92,7 @@ export default function Sidebar() {
           })}
         </nav>
 
-        <div className="space-y-3 px-4 pb-4">
+        <div className="space-y-3 px-4 pb-6">
           <div className="rounded-xl bg-panel-alt p-4">
             <div className="mb-2 flex items-center gap-2 text-warning">
               <Crown size={16} />
