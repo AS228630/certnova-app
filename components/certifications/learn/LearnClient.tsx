@@ -321,14 +321,12 @@ export default function LearnClient({
                 <FileText size={14} /> Offizielle Doku
                 <ExternalLink size={11} className="ml-auto" />
               </a>
-              {certId === "az-900" && (
-                <Link
-                  href={`/certifications/${companySlug}/${certId}/practice`}
-                  className="flex items-center gap-2 text-text-muted hover:text-primary"
-                >
-                  <ClipboardList size={14} /> Übungsfragen
-                </Link>
-              )}
+              <Link
+                href={`/certifications/${companySlug}/${certId}/practice`}
+                className="flex items-center gap-2 text-text-muted hover:text-primary"
+              >
+                <ClipboardList size={14} /> Übungsfragen
+              </Link>
             </div>
           </div>
 

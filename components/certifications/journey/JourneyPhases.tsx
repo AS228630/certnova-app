@@ -99,7 +99,7 @@ export default function JourneyPhases({
     if (phase.key === "labore") {
       return `/certifications/${companySlug}/${certId}/labs`;
     }
-    if (phase.key === "pruefung" && certId === "az-900") {
+    if (phase.key === "pruefung") {
       return `/certifications/${companySlug}/${certId}/practice`;
     }
     return undefined;
