@@ -37,7 +37,7 @@ export default function CertCard({ cert, companySlug }: { cert: Certification; c
         </button>
       </div>
 
-      <Link href={gated ? "/register" : `/certifications/${companySlug}/${cert.id}`}>
+      <Link href={gated ? "#" : `/certifications/${companySlug}/${cert.id}`} className={gated ? "pointer-events-none" : ""}>
         <h3 className="font-bold leading-snug text-text hover:text-primary">{cert.title}</h3>
         <span
           className={`mt-2 inline-block rounded-full px-2 py-0.5 text-[11px] font-semibold ${LEVEL_STYLES[cert.level]}`}
