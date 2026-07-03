@@ -102,8 +102,7 @@ const AZ_104_JOURNEY: CertJourney = {
         { label: "Durchschnitt", done: 68, total: 100 },
       ],
       cta: "Übungstests anzeigen",
-      unlocked: false,
-      unlockHint: "Wird freigeschaltet, wenn Labs zu 70% abgeschlossen sind",
+      unlocked: true,
     },
   ],
   history: [
@@ -198,8 +197,7 @@ function generateJourney(cert: Certification): CertJourney {
           { label: "Durchschnitt", done: 60, total: 100 },
         ],
         cta: "Übungstests anzeigen",
-        unlocked: laborePct >= 70,
-        unlockHint: laborePct >= 70 ? undefined : "Wird freigeschaltet, wenn Labs zu 70% abgeschlossen sind",
+        unlocked: true,
       },
     ],
     history: Array.from({ length: 7 }).map((_, i) => ({
