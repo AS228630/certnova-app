@@ -2,11 +2,76 @@
 
 import { useEffect, useState } from "react";
 import type { Lab, LabTask } from "@/lib/labsData";
+import { useLabStore, TARGET_RG_NAME } from "@/lib/store/labStore";
 import LabHeader from "./LabHeader";
 import LabOverviewPanel from "./LabOverviewPanel";
 import VirtualEnvironment from "./VirtualEnvironment";
 import CloudShell from "./CloudShell";
+import RealCloudShell from "./RealCloudShell";
 import LabSidebar from "./LabSidebar";
+import AzurePortalFrame from "./azure-portal/AzurePortalFrame";
+import ResourceGroupsBlade from "./azure-portal/ResourceGroupsBlade";
+import CreateResourceGroupBlade from "./azure-portal/CreateResourceGroupBlade";
+
+function InteractiveResourceGroupLab({
+  companyName,
+  companySlug,
+  certCode,
+  certId,
+  lab,
+  remaining,
+  onEnd,
+}: {
+  companyName: string;
+  companySlug: string;
+  certCode: string;
+  certId: string;
+  lab: Lab;
+  remaining: number;
+  onEnd: () => void;
+}) {
+  const resourceGroups = useLabStore((s) => s.resourceGroups);
+  const activeBlade = useLabStore((s) => s.activeBlade);
+
+  const created = resourceGroups.find((rg) => rg.name.toLowerCase() === TARGET_RG_NAME.toLowerCase());
+  const tasks: LabTask[] = lab.tasks.map((t) => {
+    if (t.id === "rg-created") return { ...t, done: !!created };
+    if (t.id === "rg-region")
+      return { ...t, done: !!created && created.location.toLowerCase().replace(/\s+/g, "") === "westeurope" };
+    return t;
+  });
+
+  return (
+    <div>
+      <LabHeader
+        companyName={companyName}
+        companySlug={companySlug}
+        certCode={certCode}
+        certId={certId}
+        lab={lab}
+        remainingSeconds={remaining}
+        onEnd={onEnd}
+      />
+
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr_300px]">
+        <div className="lg:order-1">
+          <LabOverviewPanel lab={lab} />
+        </div>
+
+        <div className="space-y-6 lg:order-2">
+          <AzurePortalFrame breadcrumb={["Home", "Resource groups", ...(activeBlade === "create" ? ["Create a resource group"] : [])]}>
+            {activeBlade === "create" ? <CreateResourceGroupBlade /> : <ResourceGroupsBlade />}
+          </AzurePortalFrame>
+          <RealCloudShell />
+        </div>
+
+        <div className="lg:order-3">
+          <LabSidebar lab={lab} tasks={tasks} onToggleTask={() => {}} readOnly />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function LabClient({
   companyName,
@@ -24,6 +89,7 @@ export default function LabClient({
   const [remaining, setRemaining] = useState(lab.totalMinutes);
   const [tasks, setTasks] = useState<LabTask[]>(lab.tasks);
   const [ended, setEnded] = useState(false);
+  const resetStore = useLabStore((s) => s.reset);
 
   useEffect(() => {
     if (ended) return;
@@ -35,6 +101,12 @@ export default function LabClient({
     setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
   }
 
+  function restart() {
+    setEnded(false);
+    setRemaining(lab.totalMinutes);
+    if (lab.interactive === "resource-group") resetStore();
+  }
+
   if (ended) {
     return (
       <div className="rounded-2xl border border-border-soft bg-panel p-10 text-center">
@@ -43,15 +115,26 @@ export default function LabClient({
           Deine Umgebung wurde zurückgesetzt. Du kannst dieses Lab jederzeit erneut starten.
         </p>
         <button
-          onClick={() => {
-            setEnded(false);
-            setRemaining(lab.totalMinutes);
-          }}
+          onClick={restart}
           className="rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white hover:bg-primary-dark"
         >
           Lab erneut starten
         </button>
       </div>
+    );
+  }
+
+  if (lab.interactive === "resource-group") {
+    return (
+      <InteractiveResourceGroupLab
+        companyName={companyName}
+        companySlug={companySlug}
+        certCode={certCode}
+        certId={certId}
+        lab={lab}
+        remaining={remaining}
+        onEnd={() => setEnded(true)}
+      />
     );
   }
 

@@ -7,10 +7,12 @@ export default function LabSidebar({
   lab,
   tasks,
   onToggleTask,
+  readOnly = false,
 }: {
   lab: Lab;
   tasks: LabTask[];
   onToggleTask: (id: string) => void;
+  readOnly?: boolean;
 }) {
   const done = tasks.filter((t) => t.done).length;
   const progress = tasks.length === 0 ? 0 : Math.round((done / tasks.length) * 100);
@@ -51,8 +53,11 @@ export default function LabSidebar({
           {tasks.map((t, i) => (
             <li key={t.id}>
               <button
-                onClick={() => onToggleTask(t.id)}
-                className="flex w-full items-center gap-2 text-left text-sm text-text-muted hover:text-text"
+                onClick={() => !readOnly && onToggleTask(t.id)}
+                disabled={readOnly}
+                className={`flex w-full items-center gap-2 text-left text-sm text-text-muted ${
+                  readOnly ? "cursor-default" : "hover:text-text"
+                }`}
               >
                 {t.done ? (
                   <CheckCircle2 size={16} className="flex-none text-success" />
@@ -66,9 +71,15 @@ export default function LabSidebar({
             </li>
           ))}
         </ul>
-        <button className="mt-4 w-full rounded-lg bg-primary py-2 text-sm font-bold text-white hover:bg-primary-dark">
-          Ergebnisse validieren
-        </button>
+        {readOnly ? (
+          <p className="mt-4 text-center text-xs text-text-faint">
+            ✓ Wird automatisch anhand deiner Aktionen überprüft
+          </p>
+        ) : (
+          <button className="mt-4 w-full rounded-lg bg-primary py-2 text-sm font-bold text-white hover:bg-primary-dark">
+            Ergebnisse validieren
+          </button>
+        )}
       </div>
 
       {lab.docs.length > 0 && (

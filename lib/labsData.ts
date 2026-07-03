@@ -21,6 +21,50 @@ export type Lab = {
   resources: LabResource[];
   tasks: LabTask[];
   docs: { label: string; url: string }[];
+  /** When set, the lab renders a real, state-driven simulation instead of the static mock. */
+  interactive?: "resource-group";
+};
+
+export const AZ900_RG_LAB: Lab = {
+  id: "resource-group-basics",
+  title: "Lab: Erste Ressourcengruppe erstellen",
+  description:
+    "Erstelle deine erste Azure-Ressourcengruppe — entweder über das Portal oder direkt per Azure CLI in der Cloud Shell. Diese Simulation prüft dein Ergebnis in Echtzeit.",
+  level: "Beginner",
+  durationLabel: "20-30 Minuten",
+  totalMinutes: 25 * 60,
+  tags: ["Online-Lab", "Echtzeit-Validierung", "Reset möglich", "Portal + CLI"],
+  goal: 'Erstelle eine Ressourcengruppe namens "CC-Lab-RG" in "West Europe".',
+  goalChecklist: [
+    'Ressourcengruppe mit dem Namen "CC-Lab-RG" erstellen',
+    "Region West Europe auswählen",
+    "Ergebnis über az group list bestätigen",
+  ],
+  instructions: [
+    'Klicke im simulierten Azure-Portal auf "Create" oder nutze die Cloud Shell unten.',
+    'Portal: Fülle "Resource group name" mit CC-Lab-RG und wähle West Europe als Region.',
+    'CLI: az group create --name CC-Lab-RG --location westeurope',
+    "Bestätige dein Ergebnis — die Checkliste rechts aktualisiert sich automatisch.",
+  ],
+  details: [
+    { label: "Azure Region", value: "West Europe" },
+    { label: "Benötigte Rollen", value: "Mitwirkender" },
+    { label: "Ziel-Ressourcengruppe", value: "CC-Lab-RG" },
+    { label: "Ressourcen", value: "1" },
+    { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+  ],
+  resources: [{ id: "r1", label: "Resource Group (noch nicht erstellt)", active: false }],
+  tasks: [
+    { id: "rg-created", label: 'Ressourcengruppe "CC-Lab-RG" erstellt', done: false },
+    { id: "rg-region", label: "Region West Europe korrekt gesetzt", done: false },
+  ],
+  docs: [
+    {
+      label: "Was ist eine Ressourcengruppe?",
+      url: "https://learn.microsoft.com/de-de/azure/azure-resource-manager/management/overview",
+    },
+    { label: "az group create Referenz", url: "https://learn.microsoft.com/de-de/cli/azure/group" },
+  ],
 };
 
 export const AZ104_B2C_LAB: Lab = {
@@ -74,6 +118,7 @@ export const AZ104_B2C_LAB: Lab = {
 
 const LABS: Record<string, Lab> = {
   "az-104": AZ104_B2C_LAB,
+  "az-900": AZ900_RG_LAB,
 };
 
 function generateLab(certId: string, certTitle: string, level: string): Lab {
