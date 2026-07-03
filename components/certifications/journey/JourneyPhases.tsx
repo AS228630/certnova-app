@@ -93,10 +93,11 @@ export default function JourneyPhases({
   certId: string;
 }) {
   function destinationFor(phase: JourneyPhase): string | undefined {
-    // Only wire a phase to a real page once that page actually has content
-    // for this certification. Extend this as more certs/phases go live.
-    if (phase.key === "lernen" && (certId === "az-900" || certId === "az-104")) {
+    if (phase.key === "lernen") {
       return `/certifications/${companySlug}/${certId}/learn`;
+    }
+    if (phase.key === "labore") {
+      return `/certifications/${companySlug}/${certId}/labs`;
     }
     if (phase.key === "pruefung" && certId === "az-900") {
       return `/certifications/${companySlug}/${certId}/practice`;

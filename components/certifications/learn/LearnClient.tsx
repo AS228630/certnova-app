@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import {
-  ChevronLeft,
   Search,
   SlidersHorizontal,
   CheckCircle2,
@@ -17,9 +16,13 @@ import {
   ExternalLink,
   StickyNote,
 } from "lucide-react";
-import CertBadge from "@/components/certifications/CertBadge";
+import JourneyHeader from "@/components/certifications/journey/JourneyHeader";
 import ProgressRing from "@/components/certifications/journey/ProgressRing";
 import { moduleSummary, type Module, type Lesson } from "@/lib/learnData";
+import type { Company } from "@/lib/companiesData";
+import type { CertJourney } from "@/lib/journeyData";
+
+const TABS = ["Lernpfad", "Übersicht", "Ressourcen", "Diskussionen"] as const;
 
 const LESSON_ICON: Record<Lesson["type"], typeof PlayCircle> = {
   video: PlayCircle,
@@ -154,24 +157,21 @@ function ModuleCard({ module: m, defaultOpen }: { module: Module; defaultOpen: b
 }
 
 export default function LearnClient({
-  companyName,
-  companySlug,
-  certId,
-  certCode,
-  certTitle,
+  company,
+  journey,
   modules,
 }: {
-  companyName: string;
-  companySlug: string;
-  certId: string;
-  certCode: string;
-  certTitle: string;
+  company: Company;
+  journey: CertJourney;
   modules: Module[];
 }) {
   const [query, setQuery] = useState("");
   const [notes, setNotes] = useState<{ id: string; text: string }[]>([]);
   const [draft, setDraft] = useState("");
   const [addingNote, setAddingNote] = useState(false);
+  const [tab, setTab] = useState<(typeof TABS)[number]>("Lernpfad");
+  const certId = journey.code.toLowerCase();
+  const companySlug = company.slug;
   const stats = moduleStats(modules);
   const filtered = modules.filter((m) => m.title.toLowerCase().includes(query.toLowerCase()));
   const firstOpenIndex = modules.findIndex((m) => !m.locked && modulePct(m) < 100);
@@ -185,34 +185,34 @@ export default function LearnClient({
 
   return (
     <div>
-      {/* Breadcrumb */}
-      <div className="mb-4 flex flex-wrap items-center gap-2 text-sm text-text-muted">
-        <Link href={`/certifications/${companySlug}/${certId}`} className="text-text-muted hover:text-text" aria-label="Zurück">
-          <ChevronLeft size={18} />
-        </Link>
-        <Link href="/certifications" className="hover:text-primary">
-          Zertifizierungen
-        </Link>
-        <span>/</span>
-        <Link href={`/certifications/${companySlug}`} className="hover:text-primary">
-          {companyName}
-        </Link>
-        <span>/</span>
-        <Link href={`/certifications/${companySlug}/${certId}`} className="hover:text-primary">
-          {certCode.toUpperCase()}
-        </Link>
-        <span>/</span>
-        <span className="font-semibold text-primary">Lernen</span>
+      <JourneyHeader company={company} journey={journey} />
+
+      <div className="mb-6 mt-6 flex gap-6 overflow-x-auto border-b border-border-soft">
+        {TABS.map((t) => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            className={`relative shrink-0 pb-3 text-sm font-semibold transition-colors ${
+              tab === t ? "text-primary" : "text-text-muted hover:text-text"
+            }`}
+          >
+            {t}
+            {tab === t && <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-primary" />}
+          </button>
+        ))}
       </div>
 
-      <div className="mb-6 flex items-start gap-3">
-        <CertBadge code={certCode.toUpperCase()} size={48} />
-        <div>
-          <h1 className="text-xl font-extrabold text-text sm:text-2xl">{certTitle}</h1>
-          <p className="text-sm text-text-muted">Wissen aufbauen — Module, Videos und Quizfragen</p>
-        </div>
-      </div>
+      {tab === "Übersicht" && (
+        <p className="text-sm text-text-muted">Eine allgemeine Übersicht zu dieser Zertifizierung folgt in Kürze.</p>
+      )}
+      {tab === "Diskussionen" && (
+        <p className="text-sm text-text-muted">Diskussionen für diese Zertifizierung folgen in Kürze.</p>
+      )}
+      {tab === "Ressourcen" && (
+        <p className="text-sm text-text-muted">Weitere Ressourcen findest du in der Seitenleiste rechts.</p>
+      )}
 
+      {tab === "Lernpfad" && (
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_300px]">
         <div>
           {/* Stats row */}
@@ -390,6 +390,7 @@ export default function LearnClient({
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 }
