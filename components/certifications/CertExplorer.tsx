@@ -81,7 +81,7 @@ export default function CertExplorer({ company }: { company: Company }) {
       {shown.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {shown.map((cert) => (
-            <CertCard key={cert.id} cert={cert} />
+            <CertCard key={cert.id} cert={cert} companySlug={company.slug} />
           ))}
         </div>
       ) : (

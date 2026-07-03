@@ -19,7 +19,7 @@ const LEVEL_LABELS: Record<Certification["level"], string> = {
   Advanced: "Advanced",
 };
 
-export default function CertCard({ cert }: { cert: Certification }) {
+export default function CertCard({ cert, companySlug }: { cert: Certification; companySlug: string }) {
   const [saved, setSaved] = useState(false);
   const { user } = useUser();
   const gated = cert.locked && !user;
@@ -37,15 +37,15 @@ export default function CertCard({ cert }: { cert: Certification }) {
         </button>
       </div>
 
-      <div>
-        <h3 className="font-bold leading-snug text-text">{cert.title}</h3>
+      <Link href={gated ? "/register" : `/certifications/${companySlug}/${cert.id}`}>
+        <h3 className="font-bold leading-snug text-text hover:text-primary">{cert.title}</h3>
         <span
           className={`mt-2 inline-block rounded-full px-2 py-0.5 text-[11px] font-semibold ${LEVEL_STYLES[cert.level]}`}
         >
           {LEVEL_LABELS[cert.level]}
         </span>
         <p className="mt-2 line-clamp-2 text-sm text-text-muted">{cert.description}</p>
-      </div>
+      </Link>
 
       {gated ? (
         <Link
@@ -56,14 +56,14 @@ export default function CertCard({ cert }: { cert: Certification }) {
           Registrieren zum Freischalten
         </Link>
       ) : (
-        <div>
+        <Link href={`/certifications/${companySlug}/${cert.id}`}>
           <div className="h-1.5 w-full overflow-hidden rounded-full bg-panel-alt">
             <div className="h-full rounded-full bg-primary" style={{ width: `${cert.progress}%` }} />
           </div>
           <p className="mt-1 text-[11px] text-text-faint">
             {cert.progress}% <span className="text-text-faint/80">Fortschritt</span>
           </p>
-        </div>
+        </Link>
       )}
     </div>
   );
