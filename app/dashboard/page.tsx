@@ -49,13 +49,12 @@ export default function DashboardPage() {
             <div className="rounded-2xl border border-border-soft bg-panel p-4 sm:p-6 md:p-8">
               <Greeting />
               <h1 className="text-xl font-extrabold leading-snug text-text sm:text-2xl md:text-3xl">
-                Lerne. Übe. Zertifiziere dich.
+                Deine Reise. Deine Skills.
                 <br />
-                <span className="text-primary">Werde eingestellt.</span>
+                <span className="text-primary">IT & Sprachen meistern.</span>
               </h1>
               <p className="mt-3 max-w-lg text-sm text-text-muted">
-                Deine All-in-One-Plattform, um IT-Skills aufzubauen, Zertifikate zu erhalten und
-                deinen Traumjob zu bekommen.
+                Lerne, übe, werde zertifiziert und erreiche deine Ziele mit KI-Unterstützung.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <button className="flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-primary-dark">
