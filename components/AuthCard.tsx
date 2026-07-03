@@ -183,15 +183,8 @@ export default function AuthCard({ initialMode }: { initialMode: Mode }) {
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-6xl gap-12 px-4 py-12 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-16">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-8 lg:py-16">
         <AuthHero mode={mode} />
-
-        {/* Mobile-only logo (shown above the card when the hero column is hidden) */}
-        <div className="mb-2 flex items-center gap-2 lg:hidden">
-          <span className="rounded-full bg-primary-light px-3.5 py-1.5 text-xs font-semibold text-primary">
-            {mode === "register" ? "Werde Teil von CertCoach" : "Willkommen zurück"}
-          </span>
-        </div>
 
         <div className="w-full">
           <div className="rounded-2xl border border-border-soft bg-panel p-6 shadow-xl sm:p-8">

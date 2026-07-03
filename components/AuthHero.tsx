@@ -24,12 +24,12 @@ export default function AuthHero({ mode }: { mode: Mode }) {
   const features = mode === "register" ? registerFeatures : loginFeatures;
 
   return (
-    <div className="hidden flex-col justify-center lg:flex">
-      <span className="mb-5 inline-flex w-fit items-center gap-1.5 rounded-full border border-primary/30 bg-primary-light px-3.5 py-1.5 text-xs font-semibold text-primary">
+    <div className="flex flex-col justify-center">
+      <span className="mb-4 inline-flex w-fit items-center gap-1.5 rounded-full border border-primary/30 bg-primary-light px-3.5 py-1.5 text-xs font-semibold text-primary lg:mb-5">
         {mode === "register" ? "Werde Teil von CertCoach" : "Willkommen zurück"}
       </span>
 
-      <h1 className="max-w-md text-4xl font-extrabold leading-[1.2] text-text xl:text-[2.6rem]">
+      <h1 className="max-w-md text-2xl font-extrabold leading-[1.25] text-text sm:text-3xl lg:text-4xl lg:leading-[1.2] xl:text-[2.6rem]">
         {mode === "register" ? (
           <>
             Erstelle dein Konto und starte deine{" "}
@@ -48,19 +48,19 @@ export default function AuthHero({ mode }: { mode: Mode }) {
         )}
       </h1>
 
-      <ul className="mt-8 space-y-4">
+      <ul className="mt-6 space-y-3 lg:mt-8 lg:space-y-4">
         {features.map((f) => (
           <li key={f.text} className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary-light">
-              <f.icon size={17} className="text-primary" />
+            <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary-light lg:h-9 lg:w-9">
+              <f.icon size={16} className="text-primary" />
             </div>
-            <p className="pt-1.5 text-sm text-text-muted">{f.text}</p>
+            <p className="pt-1 text-sm text-text-muted lg:pt-1.5">{f.text}</p>
           </li>
         ))}
       </ul>
 
       {/* Ringed planet illustration */}
-      <div className="relative mt-10 h-48 w-48">
+      <div className="relative mt-8 h-36 w-36 sm:h-44 sm:w-44 lg:mt-10 lg:h-48 lg:w-48">
         <div className="absolute inset-0 rounded-full bg-primary/20 blur-3xl" />
         <svg viewBox="0 0 200 200" className="relative h-full w-full">
           <defs>
@@ -101,7 +101,7 @@ export default function AuthHero({ mode }: { mode: Mode }) {
         </svg>
       </div>
 
-      <div className="mt-6 flex items-center gap-3">
+      <div className="mt-5 flex items-center gap-3 lg:mt-6">
         <div className="flex -space-x-2">
           {[0, 1, 2].map((i) => (
             <div
