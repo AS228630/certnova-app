@@ -1,17 +1,24 @@
 import DashboardShell from "@/components/DashboardShell";
-import CompanyGrid from "@/components/certifications/CompanyGrid";
 import { companies } from "@/lib/companiesData";
+import CertificationsHero from "@/components/certifications/CertificationsHero";
+import CertificationsStats from "@/components/certifications/CertificationsStats";
+import PopularProvidersCarousel from "@/components/certifications/PopularProvidersCarousel";
+import AllProvidersGrid from "@/components/certifications/AllProvidersGrid";
+import CertificationsCTA from "@/components/certifications/CertificationsCTA";
+import Footer from "@/components/Footer";
 
 export default function CertificationsPage() {
+  const featured = companies.slice(0, 4);
+
   return (
     <DashboardShell requireAuth={false}>
       <main className="flex-1 p-4 md:p-8">
-        <h1 className="mb-1 text-2xl font-bold text-text">Zertifizierungen</h1>
-        <p className="mb-6 text-sm text-text-muted">
-          Entdecke Zertifizierungen der besten Unternehmen.
-        </p>
-
-        <CompanyGrid companies={companies} />
+        <CertificationsHero />
+        <CertificationsStats />
+        <PopularProvidersCarousel companies={featured} />
+        <AllProvidersGrid companies={companies} />
+        <CertificationsCTA />
+        <Footer />
       </main>
     </DashboardShell>
   );
