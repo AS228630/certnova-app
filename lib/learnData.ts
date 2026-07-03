@@ -18,6 +18,7 @@ export type Module = {
   number: number;
   title: string;
   description: string;
+  duration: string;
   lessons: Lesson[];
   locked: boolean;
   lockedHint?: string;
@@ -34,12 +35,23 @@ function pct(modules: Module[]): number {
   return total === 0 ? 0 : Math.round((done / total) * 100);
 }
 
+/** Approximate a module's total duration by summing lesson durations that
+ * look like minutes (e.g. "12 Min", "18:30" counted as ~1 min per unit is
+ * too fragile to parse reliably, so this stays a simple heuristic). */
+export function moduleSummary(m: Module) {
+  const videos = m.lessons.filter((l) => l.type === "video").length;
+  const quizzes = m.lessons.filter((l) => l.type === "quiz").length;
+  const readings = m.lessons.filter((l) => l.type === "reading").length;
+  return { lessonCount: m.lessons.length, videos, quizzes, readings };
+}
+
 const AZ900_MODULES: Module[] = [
   {
     id: "einfuehrung",
     number: 1,
     title: "Einführung in Azure",
     description: "Grundlagen von Azure, globale Infrastruktur, Regionen und Verfügbarkeitszonen.",
+    duration: "1h 5min",
     locked: false,
     lessons: [
       { id: "l1", title: "Was ist Cloud Computing?", type: "video", duration: "8 Min", completed: true },
@@ -53,6 +65,7 @@ const AZ900_MODULES: Module[] = [
     number: 2,
     title: "Kern-Services von Azure",
     description: "Compute, Storage, Netzwerk und Datenbank-Services im Überblick.",
+    duration: "1h 15min",
     locked: false,
     lessons: [
       { id: "l1", title: "Virtuelle Maschinen", type: "video", duration: "15 Min", completed: true },
@@ -66,6 +79,7 @@ const AZ900_MODULES: Module[] = [
     number: 3,
     title: "Sicherheit, Compliance und Vertrauen",
     description: "Identitätsverwaltung, Governance-Tools und Compliance-Angebote von Azure.",
+    duration: "35min",
     locked: false,
     lessons: [
       { id: "l1", title: "Microsoft Entra ID Grundlagen", type: "video", duration: "11 Min", completed: false },
@@ -78,6 +92,7 @@ const AZ900_MODULES: Module[] = [
     number: 4,
     title: "Kosten und Support",
     description: "Preismodelle, Kostenverwaltung und Azure-Supportpläne.",
+    duration: "40min",
     locked: true,
     lockedHint: "Schließe Modul 3 ab, um freizuschalten",
     lessons: [
@@ -94,6 +109,7 @@ const AZ104_MODULES: Module[] = [
     number: 1,
     title: "Einführung in Azure",
     description: "Grundlagen von Azure, globale Infrastruktur, Regionen und Verfügbarkeitszonen.",
+    duration: "1h 20min",
     locked: false,
     lessons: [
       { id: "l1", title: "Azure Administrator: Rolle & Aufgaben", type: "video", duration: "10 Min", completed: true },
@@ -107,6 +123,7 @@ const AZ104_MODULES: Module[] = [
     number: 2,
     title: "Azure Identity und Access Management",
     description: "Verwalten von Benutzern, Gruppen, Rollen und Zugriffssteuerung mit Azure AD.",
+    duration: "1h 45min",
     locked: false,
     lessons: [
       { id: "l1", title: "Benutzer und Gruppen verwalten", type: "video", duration: "13 Min", completed: true },
@@ -120,6 +137,7 @@ const AZ104_MODULES: Module[] = [
     number: 3,
     title: "Azure Governance und Compliance",
     description: "Verwalten von Richtlinien, Rollenzuweisungen und Compliance in Azure.",
+    duration: "1h 30min",
     locked: false,
     lessons: [
       { id: "l1", title: "Azure Policy Grundlagen", type: "video", duration: "12:45", completed: true },
@@ -134,6 +152,7 @@ const AZ104_MODULES: Module[] = [
     number: 4,
     title: "Azure Speicherlösungen",
     description: "Überblick über Blob Storage, Files, Queues und Tables in Azure.",
+    duration: "1h 25min",
     locked: true,
     lockedHint: "Schließe Modul 3 ab, um freizuschalten",
     lessons: [

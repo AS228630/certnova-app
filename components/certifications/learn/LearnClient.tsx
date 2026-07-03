@@ -6,7 +6,6 @@ import {
   ChevronLeft,
   Search,
   SlidersHorizontal,
-  ChevronDown,
   CheckCircle2,
   Circle,
   Lock,
@@ -20,7 +19,7 @@ import {
 } from "lucide-react";
 import CertBadge from "@/components/certifications/CertBadge";
 import ProgressRing from "@/components/certifications/journey/ProgressRing";
-import type { Module, Lesson } from "@/lib/learnData";
+import { moduleSummary, type Module, type Lesson } from "@/lib/learnData";
 
 const LESSON_ICON: Record<Lesson["type"], typeof PlayCircle> = {
   video: PlayCircle,
@@ -47,7 +46,7 @@ function modulePct(m: Module): number {
   return Math.round((m.lessons.filter((l) => l.completed).length / m.lessons.length) * 100);
 }
 
-function LessonRow({ lesson, active }: { lesson: Lesson; active: boolean }) {
+function LessonRow({ lesson, number, active }: { lesson: Lesson; number: string; active: boolean }) {
   const Icon = LESSON_ICON[lesson.type];
   return (
     <div
@@ -56,7 +55,8 @@ function LessonRow({ lesson, active }: { lesson: Lesson; active: boolean }) {
       }`}
     >
       <span className="flex items-center gap-2.5 text-text-muted">
-        <Icon size={14} className="text-text-faint" />
+        <span className="w-8 shrink-0 text-[11px] text-text-faint">{number}</span>
+        <Icon size={14} className="shrink-0 text-text-faint" />
         {lesson.title}
       </span>
       <span className="flex items-center gap-3 text-xs text-text-faint">
@@ -75,14 +75,12 @@ function ModuleCard({ module: m, defaultOpen }: { module: Module; defaultOpen: b
   const [open, setOpen] = useState(defaultOpen);
   const p = modulePct(m);
   const isDone = p === 100;
+  const summary = moduleSummary(m);
+  const actionLabel = isDone ? "Wiederholen" : p > 0 ? "Fortsetzen" : "Starten";
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border-soft bg-panel">
-      <button
-        onClick={() => !m.locked && setOpen((v) => !v)}
-        disabled={m.locked}
-        className={`flex w-full items-center gap-4 p-4 text-left sm:p-5 ${m.locked ? "cursor-not-allowed opacity-60" : ""}`}
-      >
+      <div className="flex items-start gap-4 p-4 sm:p-5">
         <span
           className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
             isDone ? "bg-success-light text-success" : m.locked ? "bg-panel-alt text-text-faint" : "bg-primary/15 text-primary"
@@ -91,34 +89,64 @@ function ModuleCard({ module: m, defaultOpen }: { module: Module; defaultOpen: b
           {m.locked ? <Lock size={14} /> : m.number}
         </span>
 
-        <div className="min-w-0 flex-1">
+        <button
+          onClick={() => !m.locked && setOpen((v) => !v)}
+          disabled={m.locked}
+          className={`min-w-0 flex-1 text-left ${m.locked ? "cursor-not-allowed opacity-60" : ""}`}
+        >
           <p className="truncate text-sm font-bold text-text">
             Modul {m.number}: {m.title}
           </p>
-          <p className="truncate text-xs text-text-faint">{m.description}</p>
+          <p className="mb-2 truncate text-xs text-text-faint">{m.description}</p>
+          {!m.locked && (
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-text-faint">
+              <span className="flex items-center gap-1">
+                <BookOpen size={11} /> {summary.lessonCount} Lektionen
+              </span>
+              <span className="flex items-center gap-1">
+                <PlayCircle size={11} /> {summary.videos} Videos
+              </span>
+              <span className="flex items-center gap-1">
+                <ClipboardList size={11} /> {summary.quizzes} Quizfragen
+              </span>
+              <span className="flex items-center gap-1">
+                <Clock3 size={11} /> {m.duration}
+              </span>
+            </div>
+          )}
+        </button>
+
+        <div className="flex shrink-0 flex-col items-end gap-2">
+          {m.locked ? (
+            <span className="text-right text-[11px] text-text-faint">{m.lockedHint}</span>
+          ) : (
+            <>
+              <ProgressRing value={p} size={40} stroke={4} color={isDone ? "#22c55e" : "#6d4cff"} />
+              <button
+                onClick={() => setOpen((v) => !v)}
+                className={`rounded-full px-3 py-1 text-[11px] font-bold transition-colors ${
+                  isDone
+                    ? "border border-success/40 text-success hover:bg-success-light"
+                    : "bg-primary text-white hover:bg-primary-dark"
+                }`}
+              >
+                {actionLabel}
+              </button>
+            </>
+          )}
         </div>
-
-        {m.locked ? (
-          <span className="hidden shrink-0 text-right text-xs text-text-faint sm:block">{m.lockedHint}</span>
-        ) : (
-          <div className="hidden shrink-0 sm:block">
-            <ProgressRing value={p} size={44} stroke={4} color={isDone ? "#22c55e" : "#6d4cff"} />
-          </div>
-        )}
-
-        {!m.locked && (
-          <ChevronDown size={18} className={`shrink-0 text-text-faint transition-transform ${open ? "rotate-180" : ""}`} />
-        )}
-      </button>
+      </div>
 
       {open && !m.locked && (
         <div className="space-y-1 border-t border-border-soft px-3 pb-4 pt-2 sm:px-4">
-          {m.lessons.map((l) => (
-            <LessonRow key={l.id} lesson={l} active={!l.completed && m.lessons.find((x) => !x.completed)?.id === l.id} />
+          {m.lessons.map((l, i) => (
+            <LessonRow
+              key={l.id}
+              lesson={l}
+              number={`${m.number}.${i + 1}`}
+              active={!l.completed && m.lessons.find((x) => !x.completed)?.id === l.id}
+            />
           ))}
-          <button className="mt-2 w-full rounded-lg bg-primary py-2 text-sm font-bold text-white hover:bg-primary-dark">
-            {isDone ? "Wiederholen" : p > 0 ? "Fortsetzen" : "Starten"}
-          </button>
         </div>
       )}
     </div>
@@ -141,9 +169,19 @@ export default function LearnClient({
   modules: Module[];
 }) {
   const [query, setQuery] = useState("");
+  const [notes, setNotes] = useState<{ id: string; text: string }[]>([]);
+  const [draft, setDraft] = useState("");
+  const [addingNote, setAddingNote] = useState(false);
   const stats = moduleStats(modules);
   const filtered = modules.filter((m) => m.title.toLowerCase().includes(query.toLowerCase()));
   const firstOpenIndex = modules.findIndex((m) => !m.locked && modulePct(m) < 100);
+
+  function saveNote() {
+    if (!draft.trim()) return;
+    setNotes((prev) => [{ id: crypto.randomUUID(), text: draft.trim() }, ...prev]);
+    setDraft("");
+    setAddingNote(false);
+  }
 
   return (
     <div>
@@ -283,14 +321,72 @@ export default function LearnClient({
                 <FileText size={14} /> Offizielle Doku
                 <ExternalLink size={11} className="ml-auto" />
               </a>
+              {certId === "az-900" && (
+                <Link
+                  href={`/certifications/${companySlug}/${certId}/practice`}
+                  className="flex items-center gap-2 text-text-muted hover:text-primary"
+                >
+                  <ClipboardList size={14} /> Übungsfragen
+                </Link>
+              )}
             </div>
           </div>
 
           <div className="rounded-2xl border border-border-soft bg-panel p-5">
-            <p className="mb-3 flex items-center gap-1.5 text-xs font-semibold text-text-muted">
-              <StickyNote size={13} /> Deine Notizen
-            </p>
-            <p className="text-sm text-text-faint">Noch keine Notizen für diesen Abschnitt.</p>
+            <div className="mb-3 flex items-center justify-between">
+              <p className="flex items-center gap-1.5 text-xs font-semibold text-text-muted">
+                <StickyNote size={13} /> Deine Notizen
+              </p>
+            </div>
+
+            {notes.length === 0 && !addingNote && (
+              <p className="mb-3 text-sm text-text-faint">Noch keine Notizen für diesen Abschnitt.</p>
+            )}
+
+            <div className="mb-3 space-y-2">
+              {notes.map((n) => (
+                <p key={n.id} className="rounded-lg bg-panel-alt p-3 text-xs text-text-muted">
+                  {n.text}
+                </p>
+              ))}
+            </div>
+
+            {addingNote ? (
+              <div className="space-y-2">
+                <textarea
+                  value={draft}
+                  onChange={(e) => setDraft(e.target.value)}
+                  autoFocus
+                  rows={3}
+                  placeholder="Was möchtest du dir merken?"
+                  className="w-full rounded-lg border border-border-soft bg-panel-alt p-2.5 text-xs text-text placeholder:text-text-faint outline-none focus:border-primary"
+                />
+                <div className="flex gap-2">
+                  <button
+                    onClick={saveNote}
+                    className="flex-1 rounded-lg bg-primary py-1.5 text-xs font-bold text-white hover:bg-primary-dark"
+                  >
+                    Speichern
+                  </button>
+                  <button
+                    onClick={() => {
+                      setAddingNote(false);
+                      setDraft("");
+                    }}
+                    className="rounded-lg border border-border-soft px-3 py-1.5 text-xs text-text-muted hover:text-text"
+                  >
+                    Abbrechen
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button
+                onClick={() => setAddingNote(true)}
+                className="w-full rounded-lg border border-primary/40 py-2 text-xs font-bold text-primary hover:bg-primary-light"
+              >
+                Neue Notiz
+              </button>
+            )}
           </div>
         </div>
       </div>
