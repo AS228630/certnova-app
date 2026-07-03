@@ -1,0 +1,197 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import { Sparkles } from "lucide-react";
+import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
+import PracticeHeader from "./PracticeHeader";
+import TopicsSidebar from "./TopicsSidebar";
+import QuestionPanel from "./QuestionPanel";
+import QuestionNavigator from "./QuestionNavigator";
+import QuickStats from "./QuickStats";
+import AICoachPanel from "./AICoachPanel";
+
+export default function PracticeClient({
+  companyName,
+  companySlug,
+  certCode,
+  certTitle,
+  level,
+  rating,
+  ratingCount,
+  topics,
+  questions,
+}: {
+  companyName: string;
+  companySlug: string;
+  certCode: string;
+  certTitle: string;
+  level: string;
+  rating: number;
+  ratingCount: number;
+  topics: PracticeTopic[];
+  questions: PracticeQuestion[];
+}) {
+  const loadedCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const t of topics) counts[t.id] = questions.filter((q) => q.topicId === t.id).length;
+    return counts;
+  }, [topics, questions]);
+
+  const [activeTopicId, setActiveTopicId] = useState(topics.find((t) => loadedCounts[t.id] > 0)?.id ?? topics[0].id);
+  const [order, setOrder] = useState<string[] | null>(null); // null = topic order, else shuffled question ids
+  const [index, setIndex] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, PracticeOptionId>>({});
+  const [checked, setChecked] = useState<Set<string>>(new Set());
+  const [marked, setMarked] = useState<Set<string>>(new Set());
+  const [skipped, setSkipped] = useState<Set<string>>(new Set());
+  const [coachOpen, setCoachOpen] = useState(false);
+
+  const activeQuestions = useMemo(() => {
+    if (order) return order.map((id) => questions.find((q) => q.id === id)!).filter(Boolean);
+    return questions.filter((q) => q.topicId === activeTopicId);
+  }, [order, activeTopicId, questions]);
+
+  const current = activeQuestions[index];
+
+  const answeredCount = checked.size;
+  const correctCount = [...checked].filter((id) => answers[id] === questions.find((q) => q.id === id)?.correct).length;
+  const wrongCount = answeredCount - correctCount;
+
+  const progressByTopic = useMemo(() => {
+    const result: Record<string, number> = {};
+    for (const t of topics) {
+      const qs = questions.filter((q) => q.topicId === t.id);
+      const done = qs.filter((q) => checked.has(q.id)).length;
+      result[t.id] = qs.length === 0 ? 0 : Math.round((done / qs.length) * 100);
+    }
+    return result;
+  }, [topics, questions, checked]);
+
+  function selectTopic(id: string) {
+    setActiveTopicId(id);
+    setOrder(null);
+    setIndex(0);
+  }
+
+  function shuffle() {
+    const ids = questions.map((q) => q.id);
+    for (let i = ids.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [ids[i], ids[j]] = [ids[j], ids[i]];
+    }
+    setOrder(ids);
+    setIndex(0);
+  }
+
+  function goTo(i: number) {
+    setIndex(Math.max(0, Math.min(activeQuestions.length - 1, i)));
+  }
+
+  function statusFor(i: number): "correct" | "wrong" | "marked" | "skipped" | "unanswered" {
+    const q = activeQuestions[i];
+    if (!q) return "unanswered";
+    if (marked.has(q.id)) return "marked";
+    if (skipped.has(q.id) && !checked.has(q.id)) return "skipped";
+    if (checked.has(q.id)) return answers[q.id] === q.correct ? "correct" : "wrong";
+    return "unanswered";
+  }
+
+  if (!current) {
+    return (
+      <div className="rounded-xl border border-border-soft bg-panel p-8 text-center text-sm text-text-muted">
+        Für dieses Thema sind noch keine Fragen verfügbar.
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <PracticeHeader
+        companyName={companyName}
+        companySlug={companySlug}
+        certCode={certCode}
+        certTitle={certTitle}
+        level={level}
+        rating={rating}
+        ratingCount={ratingCount}
+        total={activeQuestions.length}
+        answered={answeredCount}
+        correct={correctCount}
+        wrong={wrongCount}
+      />
+
+      <button
+        onClick={() => setCoachOpen(true)}
+        className="mt-4 flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white lg:hidden"
+      >
+        <Sparkles size={13} />
+        KI Coach öffnen
+      </button>
+
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[260px_1fr_300px]">
+        <div className="lg:order-1">
+          <TopicsSidebar
+            topics={topics}
+            loadedCounts={loadedCounts}
+            activeTopicId={activeTopicId}
+            onSelectTopic={selectTopic}
+            progressByTopic={progressByTopic}
+            onShuffle={shuffle}
+          />
+        </div>
+
+        <div className="space-y-6 lg:order-2">
+          <QuestionPanel
+            question={current}
+            index={index}
+            total={activeQuestions.length}
+            selected={answers[current.id] ?? null}
+            checked={checked.has(current.id)}
+            marked={marked.has(current.id)}
+            onSelect={(id) => setAnswers((a) => ({ ...a, [current.id]: id }))}
+            onCheck={() => setChecked((s) => new Set(s).add(current.id))}
+            onNext={() => goTo(index + 1)}
+            onPrev={() => goTo(index - 1)}
+            onSkip={() => {
+              setSkipped((s) => new Set(s).add(current.id));
+              goTo(index + 1);
+            }}
+            onToggleMark={() =>
+              setMarked((s) => {
+                const next = new Set(s);
+                if (next.has(current.id)) next.delete(current.id);
+                else next.add(current.id);
+                return next;
+              })
+            }
+            onOpenAiCoach={() => setCoachOpen(true)}
+          />
+
+          <QuestionNavigator
+            total={activeQuestions.length}
+            currentIndex={index}
+            statusFor={statusFor}
+            onJump={goTo}
+          />
+        </div>
+
+        <div className="space-y-6 lg:order-3">
+          <div className="hidden lg:block">
+            <AICoachPanel question={current} isOpen={true} onClose={() => {}} />
+          </div>
+          <QuickStats
+            answered={answeredCount}
+            correct={correctCount}
+            wrong={wrongCount}
+            skipped={skipped.size}
+            bestStreak={correctCount}
+          />
+        </div>
+      </div>
+
+      <div className="lg:hidden">
+        <AICoachPanel question={current} isOpen={coachOpen} onClose={() => setCoachOpen(false)} />
+      </div>
+    </div>
+  );
+}

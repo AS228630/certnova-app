@@ -88,6 +88,15 @@ export default function JourneyHeader({ company, journey }: { company: Company; 
             Weiterlernen
           </Link>
 
+          {journey.code.toLowerCase() === "az-900" && (
+            <Link
+              href={`/certifications/${company.slug}/${journey.code.toLowerCase()}/practice`}
+              className="mt-2 block rounded-lg border border-primary py-2 text-center text-sm font-bold text-primary hover:bg-primary-light"
+            >
+              Übungsfragen starten
+            </Link>
+          )}
+
           {showCalc && (
             <div className="absolute right-0 top-full z-20 mt-2 w-72 rounded-xl border border-border-soft bg-panel-alt p-4 shadow-xl sm:left-0 sm:right-auto">
               <p className="mb-3 text-sm font-bold text-text">Wie wird der Gesamtfortschritt berechnet?</p>
