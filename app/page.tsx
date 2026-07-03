@@ -68,7 +68,7 @@ const learningPaths = [
   {
     tag: "Microsoft",
     tagClass: "bg-primary-light text-primary",
-    icon: () => getVendorIcon("microsoft", 26),
+    icon: () => getVendorIcon("azure", 26),
     title: "Azure Administrator Associate",
     level: "Intermediate",
     progress: 30,

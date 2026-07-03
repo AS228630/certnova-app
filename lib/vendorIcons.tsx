@@ -15,9 +15,11 @@ import { Cloud, Building2 } from "lucide-react";
 export function getVendorIcon(vendor: string, size = 18) {
   const key = vendor?.toLowerCase() ?? "";
 
+  if (key.includes("azure"))
+    return <Cloud size={size} className="text-[#0078D4]" />;
   if (key.includes("aws") || key.includes("amazon"))
     return <FaAws size={size} className="text-[#FF9900]" />;
-  if (key.includes("microsoft") || key.includes("azure"))
+  if (key.includes("microsoft"))
     return <FaMicrosoft size={size} className="text-[#00A4EF]" />;
   if (key.includes("linux"))
     return <FaLinux size={size} className="text-[#FCC624]" />;
