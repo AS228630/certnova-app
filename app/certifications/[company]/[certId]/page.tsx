@@ -28,7 +28,7 @@ export default async function CertJourneyPage({
         <JourneyHeader company={company} journey={journey} />
 
         <JourneyTabs>
-          <JourneyPhases phases={journey.phases} />
+          <JourneyPhases phases={journey.phases} companySlug={company.slug} certId={certId} />
         </JourneyTabs>
 
         <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-[1fr_360px]">

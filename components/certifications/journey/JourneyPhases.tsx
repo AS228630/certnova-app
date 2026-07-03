@@ -1,5 +1,6 @@
 import { ArrowRight, CheckCircle2, Lock, Clock3 } from "lucide-react";
 import { Fragment } from "react";
+import Link from "next/link";
 import type { JourneyPhase } from "@/lib/journeyData";
 import ProgressRing from "./ProgressRing";
 import PhaseIllustration from "./PhaseIllustration";
@@ -10,7 +11,9 @@ const RING_COLORS: Record<JourneyPhase["key"], string> = {
   pruefung: "#a855f7",
 };
 
-function PhaseCard({ phase }: { phase: JourneyPhase }) {
+function PhaseCard({ phase, href }: { phase: JourneyPhase; href?: string }) {
+  const isReady = phase.unlocked && !!href;
+
   return (
     <div className="flex flex-1 flex-col rounded-2xl border border-border-soft bg-panel p-5">
       <div className="mb-3 flex items-center gap-2">
@@ -47,36 +50,62 @@ function PhaseCard({ phase }: { phase: JourneyPhase }) {
         ))}
       </div>
 
-      <button
-        disabled={!phase.unlocked}
-        className={`mb-3 w-full rounded-lg py-2 text-xs font-bold transition-colors ${
-          phase.unlocked
-            ? "border border-primary/40 text-primary hover:bg-primary hover:text-white"
-            : "cursor-not-allowed border border-border-soft text-text-faint"
-        }`}
-      >
-        {phase.cta}
-      </button>
+      {isReady ? (
+        <Link
+          href={href}
+          className="mb-3 block w-full rounded-lg border border-primary/40 py-2 text-center text-xs font-bold text-primary transition-colors hover:bg-primary hover:text-white"
+        >
+          {phase.cta}
+        </Link>
+      ) : (
+        <button
+          disabled
+          className="mb-3 w-full cursor-not-allowed rounded-lg border border-border-soft py-2 text-xs font-bold text-text-faint"
+        >
+          {phase.cta}
+        </button>
+      )}
 
-      {phase.unlocked ? (
+      {isReady ? (
         <span className="flex items-center justify-center gap-1.5 rounded-lg bg-success-light py-1.5 text-[11px] font-semibold text-success">
           <CheckCircle2 size={12} /> Verfügbar
         </span>
-      ) : (
+      ) : !phase.unlocked ? (
         <span className="flex items-center justify-center gap-1.5 rounded-lg bg-panel-alt py-1.5 text-center text-[11px] font-semibold text-text-faint">
           <Lock size={11} /> {phase.unlockHint}
+        </span>
+      ) : (
+        <span className="flex items-center justify-center gap-1.5 rounded-lg bg-panel-alt py-1.5 text-center text-[11px] font-semibold text-text-faint">
+          <Clock3 size={11} /> Inhalte werden vorbereitet
         </span>
       )}
     </div>
   );
 }
 
-export default function JourneyPhases({ phases }: { phases: JourneyPhase[] }) {
+export default function JourneyPhases({
+  phases,
+  companySlug,
+  certId,
+}: {
+  phases: JourneyPhase[];
+  companySlug: string;
+  certId: string;
+}) {
+  function destinationFor(phase: JourneyPhase): string | undefined {
+    // Only wire a phase to a real page once that page actually has content
+    // for this certification. Extend this as more certs/phases go live.
+    if (phase.key === "pruefung" && certId === "az-900") {
+      return `/certifications/${companySlug}/${certId}/practice`;
+    }
+    return undefined;
+  }
+
   return (
     <div id="phasen" className="flex flex-col items-stretch gap-4 lg:flex-row lg:items-start">
       {phases.map((phase, i) => (
         <Fragment key={phase.key}>
-          <PhaseCard phase={phase} />
+          <PhaseCard phase={phase} href={destinationFor(phase)} />
           {i < phases.length - 1 && (
             <div className="flex items-center justify-center py-2 lg:py-0 lg:pt-24">
               <ArrowRight size={18} className="rotate-90 text-text-faint lg:rotate-0" />
