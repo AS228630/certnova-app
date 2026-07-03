@@ -83,6 +83,7 @@ const MICROSOFT_CERTS: Certification[] = [
   // Azure (15) — first 9 match the approved mockup card-for-card.
   { id: "az-104", code: "AZ-104", title: "Azure Administrator Associate", description: "Verwaltet Azure-Identitäten, Governance, Speicher und mehr.", categoryKey: "azure", level: "Intermediate", progress: 20 },
   { id: "az-900", code: "AZ-900", title: "Azure Fundamentals", description: "Grundlegende Cloud-Konzepte und -Dienste verstehen.", categoryKey: "azure", level: "Beginner", progress: 35, free: true },
+  { id: "ab-900", code: "AB-900", title: "AB-900 Grundlagen", description: "Wird bald mit eigenem Kursmaterial befüllt.", categoryKey: "azure", level: "Beginner", progress: 0, free: true },
   { id: "az-305", code: "AZ-305", title: "Azure Solutions Architect Expert", description: "Entwerfen und Optimieren von Lösungen auf Azure.", categoryKey: "azure", level: "Advanced", progress: 10 },
   { id: "az-204", code: "AZ-204", title: "Azure Developer Associate", description: "Entwickeln von Lösungen auf Microsoft Azure.", categoryKey: "azure", level: "Intermediate", progress: 15 },
   { id: "az-400", code: "AZ-400", title: "DevOps Engineer Expert", description: "Entwerfen und Implementieren von DevOps-Prozessen.", categoryKey: "azure", level: "Advanced", progress: 5 },
