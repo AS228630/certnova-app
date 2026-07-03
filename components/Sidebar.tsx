@@ -6,11 +6,13 @@ import {
   LayoutDashboard,
   GraduationCap,
   Award,
+  Languages,
   FolderKanban,
   Users,
+  Newspaper,
   BarChart3,
-  Trophy,
   Briefcase,
+  Bot,
   X,
   Crown,
   Settings,
@@ -25,11 +27,13 @@ const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/learning-paths", label: "Lernpfade", icon: GraduationCap },
   { href: "/certifications", label: "Zertifizierungen", icon: Award },
+  { href: "/language-courses", label: "Sprachkurse", icon: Languages },
   { href: "/projects", label: "Projekte", icon: FolderKanban },
   { href: "/community", label: "Community", icon: Users },
+  { href: "/news", label: "Aktuelles", icon: Newspaper, badge: "Neu" },
   { href: "/analytics", label: "Analysen", icon: BarChart3 },
-  { href: "/leaderboard", label: "Bestenliste", icon: Trophy },
   { href: "/interview", label: "Interview-Vorbereitung", icon: Briefcase },
+  { href: "/ai-coach", label: "KI Coach", icon: Bot, badge: "BETA" },
 ];
 
 const streakDays = ["M", "D", "M", "D", "F", "S", "S"];
@@ -99,6 +103,17 @@ export default function Sidebar({
               >
                 <Icon size={18} />
                 <span className="flex-1">{item.label}</span>
+                {item.badge && (
+                  <span
+                    className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                      item.badge === "Neu"
+                        ? "bg-success-light text-success"
+                        : "bg-primary-light text-primary"
+                    }`}
+                  >
+                    {item.badge}
+                  </span>
+                )}
               </Link>
             );
           })}
