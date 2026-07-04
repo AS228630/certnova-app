@@ -56,8 +56,9 @@ export default function AzurePortalFrame({
   const setSection = useLabStore((s) => s.setSection);
 
   return (
+    <div className="overflow-x-auto">
     <div
-      className="overflow-hidden rounded-2xl border"
+      className="min-w-[640px] overflow-hidden rounded-2xl border"
       style={{ backgroundColor: AZL.bg, borderColor: AZL.border }}
     >
       {/* Real Azure blue top command bar */}
@@ -130,6 +131,7 @@ export default function AzurePortalFrame({
           {children}
         </div>
       </div>
+    </div>
     </div>
   );
 }
