@@ -26,7 +26,7 @@ export default async function LabPage({
 
   return (
     <DashboardShell requireAuth={false}>
-      <main className="flex-1 p-4 md:p-8">
+      <main className="min-w-0 flex-1 overflow-x-hidden p-4 md:p-8">
         <LabClient
           companyName={company.name}
           companySlug={company.slug}

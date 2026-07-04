@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { RotateCw, ChevronDown } from "lucide-react";
+import { useState, type MouseEvent as ReactMouseEvent } from "react";
+import { RotateCw, ChevronDown, ArrowLeftRight } from "lucide-react";
+import HomeServicesView from "./HomeServicesView";
 import {
   Home24Color,
   ViewDesktop24Regular,
@@ -32,6 +33,9 @@ import {
   Info24Filled,
   Dismiss24Regular,
   ArrowSort24Regular,
+  Prompt24Regular,
+  FullScreenMaximize24Regular,
+  FullScreenMinimize24Regular,
 } from "@fluentui/react-icons";
 
 const NAV_ITEMS = [
@@ -70,17 +74,58 @@ const TABLE_ROWS = [
   },
 ];
 
+const QUICK_COMMANDS = [
+  { label: "Ressourcengruppe auflisten", cmd: "az group list", out: "CC-Lab-RG          westeurope" },
+  { label: "Speicherkonten auflisten", cmd: "az storage account list", out: "certcoachb2c        CC-Lab-RG" },
+  { label: "Aktuelles Abo anzeigen", cmd: "az account show", out: "Azure Pass - Sponsorship" },
+];
+
 export default function LabEnvironment() {
+  const [activeView, setActiveView] = useState<"home" | "b2c">("b2c");
+  const [terminalOpen, setTerminalOpen] = useState(false);
+  const [extraLines, setExtraLines] = useState<string[]>([]);
+  const [boxSize, setBoxSize] = useState({ width: 760, height: 360 });
+  const [maximized, setMaximized] = useState(false);
+
+  function runQuickCommand(cmd: string, out: string) {
+    setTerminalOpen(true);
+    setExtraLines((prev) => [...prev, `PS /home/azureuser> ${cmd}`, out]);
+  }
+
+  function startResize(e: ReactMouseEvent) {
+    if (maximized) return;
+    e.preventDefault();
+    const startX = e.clientX;
+    const startY = e.clientY;
+    const startW = boxSize.width;
+    const startH = boxSize.height;
+
+    function onMove(ev: MouseEvent) {
+      const newW = Math.min(1400, Math.max(480, startW + (ev.clientX - startX)));
+      const newH = Math.min(720, Math.max(260, startH + (ev.clientY - startY)));
+      setBoxSize({ width: newW, height: newH });
+    }
+    function onUp() {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    }
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+  }
+
+  const effectiveWidth = maximized ? 1200 : boxSize.width;
+  const effectiveHeight = maximized ? 560 : boxSize.height;
+
   return (
     <div className="rounded-2xl border border-border-soft bg-panel p-4 sm:p-6">
-      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+      <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <h2 className="whitespace-nowrap font-bold text-text">Virtuelle Umgebung</h2>
+          <h2 className="font-bold text-text">Virtuelle Umgebung</h2>
           <span className="flex items-center gap-1 text-xs font-semibold text-success">
             <span className="h-1.5 w-1.5 rounded-full bg-success" /> Aktiv
           </span>
         </div>
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex items-center gap-2">
           <button className="flex items-center gap-1.5 rounded-lg border border-border-soft px-2.5 py-1.5 text-xs font-semibold text-text-muted hover:text-text">
             <RotateCw size={13} /> Neustarten
           </button>
@@ -91,44 +136,60 @@ export default function LabEnvironment() {
       </div>
 
       {/* Mock browser chrome */}
-      <div className="overflow-hidden rounded-xl border border-border-soft bg-bg">
+      <p className="mb-1.5 flex items-center gap-1 text-[11px] text-text-faint sm:hidden">
+        <ArrowLeftRight size={12} />
+        Zur Seite wischen, um mehr zu sehen
+      </p>
+      <div className="relative overflow-hidden rounded-xl border border-border-soft bg-bg">
         <div className="flex items-center gap-2 border-b border-border-soft bg-panel-alt px-3 py-2">
           <Search24Regular fontSize={14} className="text-text-faint" />
           <span className="text-xs text-text-faint">Azure-Portal</span>
         </div>
 
-        <div className="bg-white">
-          {/* Real Azure blue top bar — full width, not part of the scrollable region */}
-          <div className="flex items-center gap-3 bg-[#0078d4] px-3 py-1.5">
-            <span className="flex shrink-0 items-center gap-1.5 text-sm font-semibold text-white">
-              <Grid24Regular fontSize={16} />
-              <span className="hidden sm:inline">Microsoft Azure</span>
-            </span>
-            <div className="flex h-7 min-w-0 flex-1 items-center gap-2 rounded bg-white px-2 sm:max-w-md">
-              <Search24Regular fontSize={13} className="shrink-0 text-[#605e5c]" />
-              <span className="truncate text-[11px] text-[#605e5c]">
-                Search resources, services, and docs (G+/)
-              </span>
-            </div>
-            <div className="ml-auto flex shrink-0 items-center gap-2.5 text-white sm:gap-3">
-              <QuestionCircle24Color fontSize={16} className="hidden sm:block" />
-              <Settings24Color fontSize={16} className="hidden sm:block" />
-              <Alert24Color fontSize={16} />
-              <Person24Color fontSize={18} />
-            </div>
-          </div>
-        </div>
-
         <div className="overflow-x-auto">
-          {/* Light-mode Azure Portal simulation — only the nav+content workspace
-              needs a fixed minimum width; the top bar above stays fluid. */}
-          <div className="min-w-[760px] bg-white text-[#323130]">
-            <div className="flex h-[360px]">
+          {/* Light-mode Azure Portal simulation */}
+          <div className="bg-white text-[#323130]" style={{ minWidth: effectiveWidth }}>
+            {/* Real Azure blue top bar */}
+            <div className="flex items-center gap-4 bg-[#0078d4] px-3 py-1.5">
+              <span className="flex items-center gap-1.5 text-sm font-semibold text-white">
+                <Grid24Regular fontSize={16} />
+                Microsoft Azure
+              </span>
+              <div className="flex flex-1 items-center gap-2 rounded bg-white px-2 py-1">
+                <Search24Regular fontSize={13} className="text-[#605e5c]" />
+                <span className="text-[11px] text-[#605e5c]">Search resources, services, and docs (G+/)</span>
+              </div>
+              <div className="flex items-center gap-3 text-white">
+                <button
+                  onClick={() => setTerminalOpen((v) => !v)}
+                  title="Cloud Shell"
+                  className={`rounded p-0.5 ${terminalOpen ? "bg-white/20" : "hover:bg-white/10"}`}
+                >
+                  <Prompt24Regular fontSize={16} />
+                </button>
+                <button
+                  onClick={() => setMaximized((v) => !v)}
+                  title={maximized ? "Verkleinern" : "Maximieren"}
+                  className="rounded p-0.5 hover:bg-white/10"
+                >
+                  {maximized ? <FullScreenMinimize24Regular fontSize={16} /> : <FullScreenMaximize24Regular fontSize={16} />}
+                </button>
+                <QuestionCircle24Color fontSize={16} />
+                <Settings24Color fontSize={16} />
+                <Alert24Color fontSize={16} />
+                <Person24Color fontSize={18} />
+              </div>
+            </div>
+
+            <div className="flex" style={{ height: effectiveHeight }}>
               <div className="w-48 shrink-0 overflow-y-auto border-r border-[#e1e1e1] bg-[#f9f9f9] p-2 text-[11px]">
                 {NAV_ITEMS.map((n) => (
                   <p
                     key={n.label}
-                    className="flex cursor-default items-center gap-2 truncate rounded px-1.5 py-1.5 text-[#323130] hover:bg-[#eeeeee]"
+                    onClick={() => n.label === "Home" && setActiveView("home")}
+                    className={`flex items-center gap-2 truncate rounded px-1.5 py-1.5 hover:bg-[#eeeeee] ${
+                      n.label === "Home" ? "cursor-pointer" : "cursor-default"
+                    } ${n.label === "Home" && activeView === "home" ? "bg-[#deecf9] text-[#0078d4]" : "text-[#323130]"}`}
                   >
                     <n.icon fontSize={16} className="shrink-0" style={{ color: n.color }} />
                     {n.label}
@@ -140,8 +201,13 @@ export default function LabEnvironment() {
                 {FAVORITE_ITEMS.map((n) => (
                   <p
                     key={n.label}
-                    className={`flex cursor-default items-center gap-2 truncate rounded px-1.5 py-1.5 hover:bg-[#eeeeee] ${
-                      n.label === "Azure Active Directory" ? "bg-[#deecf9] text-[#0078d4]" : "text-[#323130]"
+                    onClick={() => n.label === "Azure Active Directory" && setActiveView("b2c")}
+                    className={`flex items-center gap-2 truncate rounded px-1.5 py-1.5 hover:bg-[#eeeeee] ${
+                      n.label === "Azure Active Directory" ? "cursor-pointer" : "cursor-default"
+                    } ${
+                      n.label === "Azure Active Directory" && activeView === "b2c"
+                        ? "bg-[#deecf9] text-[#0078d4]"
+                        : "text-[#323130]"
                     }`}
                   >
                     <n.icon fontSize={16} className="shrink-0" style={{ color: n.color }} />
@@ -150,12 +216,16 @@ export default function LabEnvironment() {
                 ))}
               </div>
 
+              {activeView === "home" ? (
+                <HomeServicesView />
+              ) : (
               <div className="w-[540px] shrink-0 overflow-y-auto bg-white p-4">
                 <p className="mb-1 text-[11px] text-[#605e5c]">
                   Home <span className="mx-1">&gt;</span> Azure AD B2C
                 </p>
                 <h3 className="mb-3 text-lg font-semibold text-[#201f1e]">Azure AD B2C</h3>
                 <p className="mb-3 text-[11px] text-[#605e5c]">CertCoach</p>
+
 
                 <div className="mb-3 flex flex-wrap items-center gap-4 border-b border-[#e1e1e1] pb-2 text-xs text-[#323130]">
                   <span className="flex items-center gap-1">
@@ -228,6 +298,7 @@ export default function LabEnvironment() {
                   </tbody>
                 </table>
               </div>
+              )}
             </div>
           </div>
         </div>
@@ -236,14 +307,47 @@ export default function LabEnvironment() {
           <Grid24Regular fontSize={14} />
           <span className="ml-auto text-[10px]">10:15 AM 20/05/2024</span>
         </div>
+
+        {!maximized && (
+          <div
+            onMouseDown={startResize}
+            title="Größe ändern"
+            className="absolute bottom-1 right-1 hidden h-4 w-4 cursor-nwse-resize items-end justify-end text-text-faint/60 hover:text-primary sm:flex"
+          >
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+              <path d="M9 1L1 9M9 5L5 9M9 9L9 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            </svg>
+          </div>
+        )}
       </div>
 
-      <LabTerminal />
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <span className="text-[11px] font-semibold text-text-faint">Schnellbefehle:</span>
+        {QUICK_COMMANDS.map((q) => (
+          <button
+            key={q.cmd}
+            onClick={() => runQuickCommand(q.cmd, q.out)}
+            className="rounded-full border border-border-soft bg-panel-alt px-2.5 py-1 font-mono text-[10px] text-text-muted transition-colors hover:border-primary hover:text-primary"
+          >
+            {q.label}
+          </button>
+        ))}
+      </div>
+
+      <div
+        className={`grid transition-all duration-300 ease-out ${
+          terminalOpen ? "mt-3 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <LabTerminal extraLines={extraLines} />
+        </div>
+      </div>
     </div>
   );
 }
 
-function LabTerminal() {
+function LabTerminal({ extraLines = [] }: { extraLines?: string[] }) {
   const [tab, setTab] = useState<"cloudshell" | "powershell">("cloudshell");
 
   return (
@@ -268,6 +372,17 @@ function LabTerminal() {
         <p className="mt-1 text-slate-300">ResourceGroupName&emsp;&emsp;Location</p>
         <p className="text-slate-300">-----------------&emsp;&emsp;--------</p>
         <p className="text-slate-300">CC-Lab-RG&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;westeurope</p>
+        {extraLines.map((line, i) =>
+          line.startsWith("PS ") ? (
+            <p key={i} className="mt-1 text-emerald-400">
+              {line}
+            </p>
+          ) : (
+            <p key={i} className="text-slate-300">
+              {line}
+            </p>
+          )
+        )}
         <p className="mt-1">
           PS /home/azureuser&gt; <span className="animate-pulse">▍</span>
         </p>

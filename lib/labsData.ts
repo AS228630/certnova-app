@@ -5,6 +5,7 @@
 
 export type LabResource = { id: string; label: string; active: boolean };
 export type LabTask = { id: string; label: string; done: boolean };
+export type LabStep = { id: string; title: string; durationLabel: string; status: "ready" | "locked" };
 
 export type Lab = {
   id: string;
@@ -21,6 +22,8 @@ export type Lab = {
   resources: LabResource[];
   tasks: LabTask[];
   docs: { label: string; url: string }[];
+  /** Numbered sub-labs shown in the "Lab-Übersicht" overview grid. */
+  steps?: LabStep[];
   /** When set, the lab renders a real, state-driven simulation instead of the static mock. */
   interactive?: "resource-group";
 };
@@ -119,6 +122,20 @@ export const AZ104_B2C_LAB: Lab = {
     { label: "Azure AD B2C Documentation", url: "https://learn.microsoft.com/de-de/azure/active-directory-b2c/" },
     { label: "Tutorial: Azure AD B2C", url: "https://learn.microsoft.com/de-de/azure/active-directory-b2c/tutorial-create-tenant" },
     { label: "Best Practices für Identität", url: "https://learn.microsoft.com/de-de/azure/active-directory-b2c/best-practices" },
+  ],
+  steps: [
+    { id: "s1", title: "Azure AD B2C – Erstellen eines Mandanten", durationLabel: "10-15 Min.", status: "ready" },
+    { id: "s2", title: "Benutzerflow erstellen", durationLabel: "15-20 Min.", status: "ready" },
+    { id: "s3", title: "E-Mail-Verifizierung aktivieren", durationLabel: "10-15 Min.", status: "ready" },
+    { id: "s4", title: "Registrierung konfigurieren", durationLabel: "15-20 Min.", status: "ready" },
+    { id: "s5", title: "Anmeldung testen", durationLabel: "10-15 Min.", status: "ready" },
+    { id: "s6", title: "Passwortrichtlinien konfigurieren", durationLabel: "15-20 Min.", status: "ready" },
+    { id: "s7", title: "Multi-Faktor-Authentifizierung aktivieren", durationLabel: "10-15 Min.", status: "ready" },
+    { id: "s8", title: "Benutzerattribute verwalten", durationLabel: "10-15 Min.", status: "ready" },
+    { id: "s9", title: "API-Verbindungen konfigurieren", durationLabel: "15-20 Min.", status: "ready" },
+    { id: "s10", title: "Anwendungen integrieren", durationLabel: "15-20 Min.", status: "ready" },
+    { id: "s11", title: "Identitätsanbieter konfigurieren", durationLabel: "15-20 Min.", status: "ready" },
+    { id: "s12", title: "Überwachung und Protokollierung", durationLabel: "10-15 Min.", status: "ready" },
   ],
 };
 
