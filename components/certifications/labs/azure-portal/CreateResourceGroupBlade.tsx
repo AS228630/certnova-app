@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { CheckCircle2, AlertCircle } from "lucide-react";
 import { useLabStore, TARGET_LOCATION_LABEL } from "@/lib/store/labStore";
-import { AZ } from "./AzurePortalFrame";
+import { AZL } from "./AzurePortalFrame";
 
 const REGIONS = ["West Europe", "North Europe", "East US", "Southeast Asia", "UK South"];
 
@@ -31,17 +31,17 @@ export default function CreateResourceGroupBlade() {
 
   return (
     <div>
-      <h2 className="mb-4 text-lg font-semibold text-white">Create a resource group</h2>
+      <h2 className="mb-4 text-lg font-semibold text-[#201f1e]">Create a resource group</h2>
 
-      <div className="mb-4 flex gap-4 border-b" style={{ borderColor: AZ.border }}>
+      <div className="mb-4 flex gap-4 border-b" style={{ borderColor: AZL.border }}>
         {(["basics", "review"] as const).map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
             className="border-b-2 pb-2 text-[12px] font-medium"
             style={{
-              borderColor: tab === t ? AZ.blue : "transparent",
-              color: tab === t ? "white" : AZ.textMuted,
+              borderColor: tab === t ? AZL.blue : "transparent",
+              color: tab === t ? "white" : AZL.textMuted,
             }}
           >
             {t === "basics" ? "Basics" : "Review + create"}
@@ -52,39 +52,39 @@ export default function CreateResourceGroupBlade() {
       {tab === "basics" ? (
         <div className="max-w-md space-y-4">
           <div>
-            <label className="mb-1 block text-[12px]" style={{ color: AZ.textMuted }}>
+            <label className="mb-1 block text-[12px]" style={{ color: AZL.textMuted }}>
               Subscription
             </label>
             <div
-              className="rounded border px-3 py-2 text-[12px] text-white"
-              style={{ borderColor: AZ.border, backgroundColor: AZ.panelAlt }}
+              className="rounded border px-3 py-2 text-[12px] text-[#201f1e]"
+              style={{ borderColor: AZL.border, backgroundColor: AZL.panelAlt }}
             >
               Azure Pass - Sponsorship
             </div>
           </div>
 
           <div>
-            <label className="mb-1 block text-[12px]" style={{ color: AZ.textMuted }}>
-              Resource group name <span style={{ color: AZ.danger }}>*</span>
+            <label className="mb-1 block text-[12px]" style={{ color: AZL.textMuted }}>
+              Resource group name <span style={{ color: AZL.danger }}>*</span>
             </label>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="z.B. CC-Lab-RG"
-              className="w-full rounded border px-3 py-2 text-[12px] text-white outline-none"
-              style={{ borderColor: AZ.border, backgroundColor: "#0f0f0f" }}
+              className="w-full rounded border px-3 py-2 text-[12px] text-[#201f1e] outline-none"
+              style={{ borderColor: AZL.border, backgroundColor: "#ffffff" }}
             />
           </div>
 
           <div>
-            <label className="mb-1 block text-[12px]" style={{ color: AZ.textMuted }}>
-              Region <span style={{ color: AZ.danger }}>*</span>
+            <label className="mb-1 block text-[12px]" style={{ color: AZL.textMuted }}>
+              Region <span style={{ color: AZL.danger }}>*</span>
             </label>
             <select
               value={region}
               onChange={(e) => setRegion(e.target.value)}
-              className="w-full rounded border px-3 py-2 text-[12px] text-white outline-none"
-              style={{ borderColor: AZ.border, backgroundColor: "#0f0f0f" }}
+              className="w-full rounded border px-3 py-2 text-[12px] text-[#201f1e] outline-none"
+              style={{ borderColor: AZL.border, backgroundColor: "#ffffff" }}
             >
               {REGIONS.map((r) => (
                 <option key={r} value={r}>
@@ -98,36 +98,36 @@ export default function CreateResourceGroupBlade() {
             onClick={() => setTab("review")}
             disabled={!name.trim()}
             className="rounded px-4 py-2 text-[12px] font-semibold text-white disabled:opacity-40"
-            style={{ backgroundColor: AZ.blueDark }}
+            style={{ backgroundColor: AZL.blue }}
           >
             Review + create
           </button>
         </div>
       ) : (
         <div className="max-w-md space-y-4">
-          <div className="rounded border p-3 text-[12px]" style={{ borderColor: AZ.border }}>
+          <div className="rounded border p-3 text-[12px]" style={{ borderColor: AZL.border }}>
             <div className="mb-2 flex justify-between">
-              <span style={{ color: AZ.textMuted }}>Subscription</span>
-              <span className="text-white">Azure Pass - Sponsorship</span>
+              <span style={{ color: AZL.textMuted }}>Subscription</span>
+              <span className="text-[#201f1e]">Azure Pass - Sponsorship</span>
             </div>
             <div className="mb-2 flex justify-between">
-              <span style={{ color: AZ.textMuted }}>Resource group</span>
-              <span className="text-white">{name || "—"}</span>
+              <span style={{ color: AZL.textMuted }}>Resource group</span>
+              <span className="text-[#201f1e]">{name || "—"}</span>
             </div>
             <div className="flex justify-between">
-              <span style={{ color: AZ.textMuted }}>Region</span>
-              <span className="text-white">{region}</span>
+              <span style={{ color: AZL.textMuted }}>Region</span>
+              <span className="text-[#201f1e]">{region}</span>
             </div>
           </div>
 
           {error && (
-            <div className="flex items-start gap-2 rounded border p-2.5 text-[12px]" style={{ borderColor: AZ.danger, color: AZ.danger }}>
+            <div className="flex items-start gap-2 rounded border p-2.5 text-[12px]" style={{ borderColor: AZL.danger, color: AZL.danger }}>
               <AlertCircle size={14} className="mt-0.5 shrink-0" />
               {error}
             </div>
           )}
           {success && (
-            <div className="flex items-start gap-2 rounded border p-2.5 text-[12px]" style={{ borderColor: AZ.success, color: AZ.success }}>
+            <div className="flex items-start gap-2 rounded border p-2.5 text-[12px]" style={{ borderColor: AZL.success, color: AZL.success }}>
               <CheckCircle2 size={14} className="mt-0.5 shrink-0" />
               {success}
             </div>
@@ -137,7 +137,7 @@ export default function CreateResourceGroupBlade() {
             <button
               onClick={() => setTab("basics")}
               className="rounded border px-4 py-2 text-[12px] font-medium"
-              style={{ borderColor: AZ.border, color: AZ.textMuted }}
+              style={{ borderColor: AZL.border, color: AZL.textMuted }}
             >
               Zurück
             </button>
@@ -145,7 +145,7 @@ export default function CreateResourceGroupBlade() {
               <button
                 onClick={closeCreateBlade}
                 className="rounded px-4 py-2 text-[12px] font-semibold text-white"
-                style={{ backgroundColor: AZ.success }}
+                style={{ backgroundColor: AZL.success }}
               >
                 Zu den Ressourcengruppen
               </button>
@@ -153,7 +153,7 @@ export default function CreateResourceGroupBlade() {
               <button
                 onClick={handleCreate}
                 className="rounded px-4 py-2 text-[12px] font-semibold text-white"
-                style={{ backgroundColor: AZ.blueDark }}
+                style={{ backgroundColor: AZL.blue }}
               >
                 Create
               </button>

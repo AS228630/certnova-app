@@ -1,9 +1,10 @@
 "use client";
 
-import { Menu, Search, Bell, HelpCircle, Settings, Grid3x3, FolderKanban, Database } from "lucide-react";
+import { Menu, Search, Bell, HelpCircle, Settings, Grid3x3, FolderKanban, HardDrive } from "lucide-react";
 import { useLabStore } from "@/lib/store/labStore";
 
-// Authentic Azure Portal "Dark theme" palette (matches portal.azure.com dark mode)
+// Authentic Azure Portal "Dark theme" palette — used for the top command bar
+// and the left icon rail (matches portal.azure.com dark chrome).
 export const AZ = {
   bg: "#1b1a19",
   panel: "#201f1e",
@@ -17,6 +18,22 @@ export const AZ = {
   success: "#57a300",
   warning: "#fce100",
   danger: "#f1707b",
+};
+
+// Real Azure Portal blades are white/light by default (matching the approved
+// desktop lab reference) — the content pane uses this palette, not the dark
+// chrome colors above.
+export const AZL = {
+  bg: "#ffffff",
+  panelAlt: "#f3f2f1",
+  border: "#e1dfdd",
+  blue: "#0078d4",
+  text: "#201f1e",
+  textMuted: "#605e5c",
+  textFaint: "#8a8886",
+  success: "#107c10",
+  warning: "#8a6116",
+  danger: "#a4262c",
 };
 
 export default function AzurePortalFrame({
@@ -96,7 +113,7 @@ export default function AzurePortalFrame({
           {(
             [
               { key: "resource-groups" as const, icon: FolderKanban, label: "Resource groups" },
-              { key: "storage-accounts" as const, icon: Database, label: "Storage accounts" },
+              { key: "storage-accounts" as const, icon: HardDrive, label: "Storage accounts" },
             ]
           ).map((item) => {
             const active = section === item.key;
@@ -119,7 +136,7 @@ export default function AzurePortalFrame({
           })}
         </div>
 
-        <div className="flex-1 p-4" style={{ backgroundColor: AZ.panel, minHeight: 320 }}>
+        <div className="flex-1 p-4" style={{ backgroundColor: AZL.bg, minHeight: 320 }}>
           {children}
         </div>
       </div>
