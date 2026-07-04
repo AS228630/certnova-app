@@ -1,10 +1,19 @@
 "use client";
 
-import { Menu, Search, Bell, HelpCircle, Settings, Grid3x3, FolderKanban, HardDrive } from "lucide-react";
+import {
+  Grid24Regular,
+  Search24Regular,
+  QuestionCircle24Color,
+  Settings24Color,
+  Alert24Color,
+  Person24Color,
+  Folder24Regular,
+  Storage24Regular,
+} from "@fluentui/react-icons";
 import { useLabStore } from "@/lib/store/labStore";
 
-// Authentic Azure Portal "Dark theme" palette — used for the top command bar
-// and the left icon rail (matches portal.azure.com dark chrome).
+// Authentic Azure Portal "Dark theme" palette — kept available for anything
+// that still needs the dark chrome look elsewhere.
 export const AZ = {
   bg: "#1b1a19",
   panel: "#201f1e",
@@ -20,11 +29,11 @@ export const AZ = {
   danger: "#f1707b",
 };
 
-// Real Azure Portal blades are white/light by default (matching the approved
-// desktop lab reference) — the content pane uses this palette, not the dark
-// chrome colors above.
+// Real Azure Portal is light by default: blue command bar, white/near-white
+// sidebar and blades. This matches the approved AZ-104 lab reference exactly.
 export const AZL = {
   bg: "#ffffff",
+  sidebar: "#f9f9f9",
   panelAlt: "#f3f2f1",
   border: "#e1dfdd",
   blue: "#0078d4",
@@ -49,58 +58,40 @@ export default function AzurePortalFrame({
   return (
     <div
       className="overflow-hidden rounded-2xl border"
-      style={{ backgroundColor: AZ.bg, borderColor: AZ.border }}
+      style={{ backgroundColor: AZL.bg, borderColor: AZL.border }}
     >
-      {/* top command bar */}
-      <div
-        className="flex items-center gap-2 overflow-hidden border-b px-2 py-2 sm:gap-3 sm:px-3"
-        style={{ backgroundColor: "#0a0a0a", borderColor: AZ.border }}
-      >
-        <Menu size={16} className="shrink-0" style={{ color: AZ.textMuted }} />
-        <div className="flex shrink-0 items-center gap-1.5">
-          <div
-            className="flex h-5 w-5 shrink-0 items-center justify-center rounded"
-            style={{ backgroundColor: AZ.blueDark }}
-          >
-            <span className="text-[10px] font-bold text-white">A</span>
-          </div>
-          <span className="hidden text-[13px] font-medium text-white sm:inline">Microsoft Azure</span>
+      {/* Real Azure blue top command bar */}
+      <div className="flex items-center gap-3 overflow-hidden px-3 py-2" style={{ backgroundColor: AZL.blue }}>
+        <div className="flex shrink-0 items-center gap-1.5 text-white">
+          <Grid24Regular fontSize={18} />
+          <span className="hidden text-[13px] font-semibold sm:inline">Microsoft Azure</span>
         </div>
-        <div
-          className="ml-1 flex h-7 min-w-0 flex-1 items-center gap-2 rounded border px-2 sm:ml-2 sm:max-w-md"
-          style={{ backgroundColor: "#1f1f1f", borderColor: AZ.border }}
-        >
-          <Search size={12} className="shrink-0" style={{ color: AZ.textFaint }} />
-          <span className="hidden truncate text-[11px] sm:inline" style={{ color: AZ.textFaint }}>
+        <div className="ml-1 flex h-7 min-w-0 flex-1 items-center gap-2 rounded bg-white px-2 sm:ml-2 sm:max-w-md">
+          <Search24Regular fontSize={13} className="shrink-0 text-[#605e5c]" />
+          <span className="hidden truncate text-[11px] text-[#605e5c] sm:inline">
             Search resources, services, and docs (G+/)
           </span>
-          <span className="truncate text-[11px] sm:hidden" style={{ color: AZ.textFaint }}>
-            Search
-          </span>
+          <span className="truncate text-[11px] text-[#605e5c] sm:hidden">Search</span>
         </div>
-        <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3" style={{ color: AZ.textMuted }}>
-          <HelpCircle size={15} className="hidden sm:block" />
-          <Settings size={15} className="hidden sm:block" />
-          <Bell size={15} />
-          <Grid3x3 size={15} className="hidden sm:block" />
-          <div
-            className="flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold text-white"
-            style={{ backgroundColor: AZ.blueDark }}
-          >
-            CC
-          </div>
+        <div className="ml-auto flex shrink-0 items-center gap-2.5 text-white sm:gap-3">
+          <QuestionCircle24Color fontSize={17} className="hidden sm:block" />
+          <Settings24Color fontSize={17} className="hidden sm:block" />
+          <Alert24Color fontSize={17} />
+          <Person24Color fontSize={19} />
         </div>
       </div>
 
       {/* breadcrumb */}
       <div
         className="flex items-center gap-1.5 border-b px-4 py-2 text-[12px]"
-        style={{ borderColor: AZ.border, color: AZ.textMuted }}
+        style={{ borderColor: AZL.border, backgroundColor: AZL.sidebar, color: AZL.textMuted }}
       >
         {breadcrumb.map((b, i) => (
           <span key={b} className="flex items-center gap-1.5">
-            {i > 0 && <span style={{ color: AZ.textFaint }}>&gt;</span>}
-            <span className={i === breadcrumb.length - 1 ? "text-white" : ""}>{b}</span>
+            {i > 0 && <span style={{ color: AZL.textFaint }}>&gt;</span>}
+            <span style={i === breadcrumb.length - 1 ? { color: AZL.text, fontWeight: 600 } : undefined}>
+              {b}
+            </span>
           </span>
         ))}
       </div>
@@ -108,12 +99,12 @@ export default function AzurePortalFrame({
       <div className="flex">
         <div
           className="flex w-12 flex-col items-center gap-1 border-r py-3"
-          style={{ borderColor: AZ.border, backgroundColor: AZ.panel }}
+          style={{ borderColor: AZL.border, backgroundColor: AZL.sidebar }}
         >
           {(
             [
-              { key: "resource-groups" as const, icon: FolderKanban, label: "Resource groups" },
-              { key: "storage-accounts" as const, icon: HardDrive, label: "Storage accounts" },
+              { key: "resource-groups" as const, icon: Folder24Regular, label: "Resource groups", color: "#0078d4" },
+              { key: "storage-accounts" as const, icon: Storage24Regular, label: "Storage accounts", color: "#00bcf2" },
             ]
           ).map((item) => {
             const active = section === item.key;
@@ -125,12 +116,11 @@ export default function AzurePortalFrame({
                 title={item.label}
                 className="flex h-9 w-9 items-center justify-center rounded"
                 style={{
-                  backgroundColor: active ? "rgba(40,153,245,0.15)" : "transparent",
-                  color: active ? AZ.blue : AZ.textMuted,
-                  borderLeft: active ? `2px solid ${AZ.blue}` : "2px solid transparent",
+                  backgroundColor: active ? "#deecf9" : "transparent",
+                  borderLeft: active ? `2px solid ${AZL.blue}` : "2px solid transparent",
                 }}
               >
-                <Icon size={16} />
+                <Icon fontSize={18} style={{ color: item.color }} />
               </button>
             );
           })}
