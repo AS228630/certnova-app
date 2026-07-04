@@ -73,14 +73,14 @@ const TABLE_ROWS = [
 export default function LabEnvironment() {
   return (
     <div className="rounded-2xl border border-border-soft bg-panel p-4 sm:p-6">
-      <div className="mb-3 flex items-center justify-between">
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <h2 className="font-bold text-text">Virtuelle Umgebung</h2>
+          <h2 className="whitespace-nowrap font-bold text-text">Virtuelle Umgebung</h2>
           <span className="flex items-center gap-1 text-xs font-semibold text-success">
             <span className="h-1.5 w-1.5 rounded-full bg-success" /> Aktiv
           </span>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <button className="flex items-center gap-1.5 rounded-lg border border-border-soft px-2.5 py-1.5 text-xs font-semibold text-text-muted hover:text-text">
             <RotateCw size={13} /> Neustarten
           </button>
@@ -97,27 +97,32 @@ export default function LabEnvironment() {
           <span className="text-xs text-text-faint">Azure-Portal</span>
         </div>
 
-        <div className="overflow-x-auto">
-          {/* Light-mode Azure Portal simulation */}
-          <div className="min-w-[760px] bg-white text-[#323130]">
-            {/* Real Azure blue top bar */}
-            <div className="flex items-center gap-4 bg-[#0078d4] px-3 py-1.5">
-              <span className="flex items-center gap-1.5 text-sm font-semibold text-white">
-                <Grid24Regular fontSize={16} />
-                Microsoft Azure
+        <div className="bg-white">
+          {/* Real Azure blue top bar — full width, not part of the scrollable region */}
+          <div className="flex items-center gap-3 bg-[#0078d4] px-3 py-1.5">
+            <span className="flex shrink-0 items-center gap-1.5 text-sm font-semibold text-white">
+              <Grid24Regular fontSize={16} />
+              <span className="hidden sm:inline">Microsoft Azure</span>
+            </span>
+            <div className="flex h-7 min-w-0 flex-1 items-center gap-2 rounded bg-white px-2 sm:max-w-md">
+              <Search24Regular fontSize={13} className="shrink-0 text-[#605e5c]" />
+              <span className="truncate text-[11px] text-[#605e5c]">
+                Search resources, services, and docs (G+/)
               </span>
-              <div className="flex flex-1 items-center gap-2 rounded bg-white px-2 py-1">
-                <Search24Regular fontSize={13} className="text-[#605e5c]" />
-                <span className="text-[11px] text-[#605e5c]">Search resources, services, and docs (G+/)</span>
-              </div>
-              <div className="flex items-center gap-3 text-white">
-                <QuestionCircle24Color fontSize={16} />
-                <Settings24Color fontSize={16} />
-                <Alert24Color fontSize={16} />
-                <Person24Color fontSize={18} />
-              </div>
             </div>
+            <div className="ml-auto flex shrink-0 items-center gap-2.5 text-white sm:gap-3">
+              <QuestionCircle24Color fontSize={16} className="hidden sm:block" />
+              <Settings24Color fontSize={16} className="hidden sm:block" />
+              <Alert24Color fontSize={16} />
+              <Person24Color fontSize={18} />
+            </div>
+          </div>
+        </div>
 
+        <div className="overflow-x-auto">
+          {/* Light-mode Azure Portal simulation — only the nav+content workspace
+              needs a fixed minimum width; the top bar above stays fluid. */}
+          <div className="min-w-[760px] bg-white text-[#323130]">
             <div className="flex h-[360px]">
               <div className="w-48 shrink-0 overflow-y-auto border-r border-[#e1e1e1] bg-[#f9f9f9] p-2 text-[11px]">
                 {NAV_ITEMS.map((n) => (
