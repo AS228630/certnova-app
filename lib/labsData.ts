@@ -27,6 +27,7 @@ export type Lab = {
 
 export const AZ900_RG_LAB: Lab = {
   id: "resource-group-basics",
+  interactive: "resource-group",
   title: "Lab: Erste Ressourcengruppe erstellen",
   description:
     "Erstelle deine erste Azure-Ressourcengruppe — entweder über das Portal oder direkt per Azure CLI in der Cloud Shell. Diese Simulation prüft dein Ergebnis in Echtzeit.",
