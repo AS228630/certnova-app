@@ -14,6 +14,8 @@ import ResourceGroupsBlade from "./azure-portal/ResourceGroupsBlade";
 import CreateResourceGroupBlade from "./azure-portal/CreateResourceGroupBlade";
 import StorageAccountsBlade from "./azure-portal/StorageAccountsBlade";
 import CreateStorageAccountBlade from "./azure-portal/CreateStorageAccountBlade";
+import ChaosModeToggle from "./ChaosModeToggle";
+import LabScorecardModal from "./LabScorecardModal";
 
 function InteractiveResourceGroupLab({
   companyName,
@@ -36,6 +38,9 @@ function InteractiveResourceGroupLab({
   const storageAccounts = useLabStore((s) => s.storageAccounts);
   const activeBlade = useLabStore((s) => s.activeBlade);
   const activeSection = useLabStore((s) => s.activeSection);
+  const mistakeCount = useLabStore((s) => s.mistakeCount);
+  const startedAt = useLabStore((s) => s.startedAt);
+  const resetStore = useLabStore((s) => s.reset);
 
   const created = resourceGroups.find((rg) => rg.name.toLowerCase() === TARGET_RG_NAME.toLowerCase());
   const tasks: LabTask[] = lab.tasks.map((t) => {
@@ -46,6 +51,18 @@ function InteractiveResourceGroupLab({
       return { ...t, done: storageAccounts.some((sa) => sa.resourceGroup.toLowerCase() === TARGET_RG_NAME.toLowerCase()) };
     return t;
   });
+
+  const allDone = tasks.every((t) => t.done);
+  const [completedAt, setCompletedAt] = useState<number | null>(null);
+  const [scorecardDismissed, setScorecardDismissed] = useState(false);
+
+  useEffect(() => {
+    if (allDone && completedAt === null) setCompletedAt(Date.now());
+    if (!allDone && completedAt !== null) {
+      setCompletedAt(null);
+      setScorecardDismissed(false);
+    }
+  }, [allDone, completedAt]);
 
   const sectionLabel = activeSection === "resource-groups" ? "Resource groups" : "Storage accounts";
   const bladeContent =
@@ -79,6 +96,7 @@ function InteractiveResourceGroupLab({
         </div>
 
         <div className="space-y-6 lg:order-2">
+          <ChaosModeToggle />
           <AzurePortalFrame breadcrumb={["Home", sectionLabel, ...(activeBlade === "create" ? [`Create ${activeSection === "resource-groups" ? "a resource group" : "a storage account"}`] : [])]}>
             {bladeContent}
           </AzurePortalFrame>
@@ -89,6 +107,18 @@ function InteractiveResourceGroupLab({
           <LabSidebar lab={lab} tasks={tasks} onToggleTask={() => {}} readOnly />
         </div>
       </div>
+
+      {allDone && !scorecardDismissed && completedAt !== null && (
+        <LabScorecardModal
+          elapsedMs={completedAt - startedAt}
+          mistakeCount={mistakeCount}
+          onDismiss={() => setScorecardDismissed(true)}
+          onRestart={() => {
+            resetStore();
+            setScorecardDismissed(true);
+          }}
+        />
+      )}
     </div>
   );
 }

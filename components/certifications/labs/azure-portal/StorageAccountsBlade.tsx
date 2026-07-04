@@ -1,12 +1,13 @@
 "use client";
 
-import { Plus, RefreshCw, Database } from "lucide-react";
+import { Plus, RefreshCw, Database, Trash2 } from "lucide-react";
 import { useLabStore } from "@/lib/store/labStore";
 import { AZ } from "./AzurePortalFrame";
 
 export default function StorageAccountsBlade() {
   const storageAccounts = useLabStore((s) => s.storageAccounts);
   const openCreateBlade = useLabStore((s) => s.openCreateBlade);
+  const deleteStorageAccount = useLabStore((s) => s.deleteStorageAccount);
 
   return (
     <div>
@@ -35,12 +36,13 @@ export default function StorageAccountsBlade() {
 
       <div className="overflow-hidden rounded border" style={{ borderColor: AZ.border }}>
         <div
-          className="grid grid-cols-[1fr_1fr_auto] gap-4 border-b px-3 py-2 text-[11px] font-semibold"
+          className="grid grid-cols-[1fr_1fr_auto_auto] gap-4 border-b px-3 py-2 text-[11px] font-semibold"
           style={{ borderColor: AZ.border, color: AZ.textFaint, backgroundColor: AZ.panelAlt }}
         >
           <span>Name</span>
           <span>Resource group</span>
-          <span className="pr-8">Location</span>
+          <span>Location</span>
+          <span></span>
         </div>
 
         {storageAccounts.length === 0 ? (
@@ -54,14 +56,22 @@ export default function StorageAccountsBlade() {
           storageAccounts.map((sa) => (
             <div
               key={sa.name}
-              className="grid grid-cols-[1fr_1fr_auto] gap-4 border-b px-3 py-2.5 text-[12px] last:border-b-0"
+              className="grid grid-cols-[1fr_1fr_auto_auto] items-center gap-4 border-b px-3 py-2.5 text-[12px] last:border-b-0"
               style={{ borderColor: AZ.border }}
             >
               <span className="font-medium" style={{ color: AZ.blue }}>
                 {sa.name}
               </span>
               <span className="text-white">{sa.resourceGroup}</span>
-              <span className="pr-8 text-white">{sa.location}</span>
+              <span className="text-white">{sa.location}</span>
+              <button
+                onClick={() => deleteStorageAccount(sa.name)}
+                title="Löschen"
+                className="rounded p-1 hover:bg-white/10"
+                style={{ color: AZ.textFaint }}
+              >
+                <Trash2 size={13} />
+              </button>
             </div>
           ))
         )}

@@ -47,6 +47,8 @@ type LabState = {
   activeSection: "resource-groups" | "storage-accounts";
   activeBlade: "list" | "create";
   mistakeCount: number;
+  startedAt: number;
+  chaosActive: boolean;
 
   setSection: (section: LabState["activeSection"]) => void;
   createResourceGroup: (name: string, location: string) => { ok: boolean; message: string };
@@ -55,6 +57,9 @@ type LabState = {
     resourceGroup: string,
     location: string
   ) => { ok: boolean; message: string };
+  deleteResourceGroup: (name: string) => void;
+  deleteStorageAccount: (name: string) => void;
+  activateChaos: () => void;
   openCreateBlade: () => void;
   closeCreateBlade: () => void;
   runCliCommand: (raw: string) => void;
@@ -73,10 +78,40 @@ export const useLabStore = create<LabState>((set, get) => ({
   activeSection: "resource-groups",
   activeBlade: "list",
   mistakeCount: 0,
+  startedAt: Date.now(),
+  chaosActive: false,
 
   setSection: (section) => set({ activeSection: section, activeBlade: "list" }),
   openCreateBlade: () => set({ activeBlade: "create" }),
   closeCreateBlade: () => set({ activeBlade: "list" }),
+
+  activateChaos: () => {
+    if (get().chaosActive || get().resourceGroups.length > 0) return;
+    set({
+      chaosActive: true,
+      resourceGroups: [{ name: TARGET_RG_NAME, location: "eastus", createdAt: Date.now() }],
+      cliLog: [
+        ...get().cliLog,
+        {
+          type: "err",
+          text: `⚠ Chaos Mode: Ein Kollege hat bereits "${TARGET_RG_NAME}" angelegt — aber in der falschen Region (East US statt West Europe). Finde und behebe den Fehler (Region ist unveränderlich — lösche die Gruppe und erstelle sie neu).`,
+        },
+      ],
+    });
+  },
+
+  deleteResourceGroup: (name) => {
+    set((s) => ({
+      resourceGroups: s.resourceGroups.filter((rg) => rg.name.toLowerCase() !== name.toLowerCase()),
+      storageAccounts: s.storageAccounts.filter((sa) => sa.resourceGroup.toLowerCase() !== name.toLowerCase()),
+    }));
+  },
+
+  deleteStorageAccount: (name) => {
+    set((s) => ({
+      storageAccounts: s.storageAccounts.filter((sa) => sa.name.toLowerCase() !== name.toLowerCase()),
+    }));
+  },
 
   createResourceGroup: (name, location) => {
     if (!name.trim()) {
@@ -205,6 +240,32 @@ export const useLabStore = create<LabState>((set, get) => ({
       return;
     }
 
+    if (/^az\s+group\s+delete/i.test(text)) {
+      if (!nameMatch) {
+        set((s) => ({
+          cliLog: [...s.cliLog, { type: "err", text: "Fehler: --name ist erforderlich." }],
+          mistakeCount: s.mistakeCount + 1,
+        }));
+        return;
+      }
+      get().deleteResourceGroup(nameMatch[1]);
+      set((s) => ({ cliLog: [...s.cliLog, { type: "out", text: `Ressourcengruppe "${nameMatch[1]}" gelöscht.` }] }));
+      return;
+    }
+
+    if (/^az\s+storage\s+account\s+delete/i.test(text)) {
+      if (!nameMatch) {
+        set((s) => ({
+          cliLog: [...s.cliLog, { type: "err", text: "Fehler: --name ist erforderlich." }],
+          mistakeCount: s.mistakeCount + 1,
+        }));
+        return;
+      }
+      get().deleteStorageAccount(nameMatch[1]);
+      set((s) => ({ cliLog: [...s.cliLog, { type: "out", text: `Speicherkonto "${nameMatch[1]}" gelöscht.` }] }));
+      return;
+    }
+
     if (/^clear$/i.test(text)) {
       set({ cliLog: [] });
       return;
@@ -230,5 +291,7 @@ export const useLabStore = create<LabState>((set, get) => ({
       activeSection: "resource-groups",
       activeBlade: "list",
       mistakeCount: 0,
+      startedAt: Date.now(),
+      chaosActive: false,
     }),
 }));
