@@ -151,14 +151,14 @@ export default function LabEnvironment() {
                 ))}
               </div>
 
-              <div className="w-[540px] shrink-0 overflow-y-auto p-4">
-                <p className="mb-1 text-[11px] text-[#8b92a3]">
+              <div className="w-[540px] shrink-0 overflow-y-auto bg-white p-4">
+                <p className="mb-1 text-[11px] text-[#605e5c]">
                   Home <span className="mx-1">&gt;</span> Azure AD B2C
                 </p>
-                <h3 className="mb-3 text-lg font-semibold text-white">Azure AD B2C</h3>
-                <p className="mb-3 text-[11px] text-[#8b92a3]">CertCoach</p>
+                <h3 className="mb-3 text-lg font-semibold text-[#201f1e]">Azure AD B2C</h3>
+                <p className="mb-3 text-[11px] text-[#605e5c]">CertCoach</p>
 
-                <div className="mb-3 flex flex-wrap items-center gap-4 border-b border-white/10 pb-2 text-xs text-[#c7cbd4]">
+                <div className="mb-3 flex flex-wrap items-center gap-4 border-b border-black/10 pb-2 text-xs text-[#201f1e]">
                   <span className="flex items-center gap-1">
                     <Plus size={13} /> Create
                   </span>
@@ -176,36 +176,36 @@ export default function LabEnvironment() {
                   </span>
                 </div>
 
-                <div className="mb-3 flex items-center justify-between rounded border border-[#2b6cb0]/40 bg-[#12253f] px-3 py-1.5 text-[11px] text-[#9cc4ec]">
+                <div className="mb-3 flex items-center justify-between rounded border border-[#c7e0f4] bg-[#f0f6fc] px-3 py-1.5 text-[11px] text-[#0078d4]">
                   <span className="flex items-center gap-1.5">
                     <Info size={12} />
                     Click here to switch back to the old Azure AD B2C experience.
                   </span>
-                  <X size={12} className="text-[#9cc4ec]" />
+                  <X size={12} className="text-[#0078d4]" />
                 </div>
 
                 <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px]">
                   <input
                     readOnly
                     placeholder="Filter for any field..."
-                    className="w-40 rounded border border-white/15 bg-[#141a29] px-2 py-1 text-[#c7cbd4] placeholder:text-[#6b7284]"
+                    className="w-40 rounded border border-[#d1d1d1] bg-white px-2 py-1 text-[#201f1e] placeholder:text-[#8a8886]"
                   />
-                  <span className="flex items-center gap-1 rounded border border-white/15 bg-[#141a29] px-2 py-1 text-[#c7cbd4]">
+                  <span className="flex items-center gap-1 rounded border border-[#d1d1d1] bg-white px-2 py-1 text-[#201f1e]">
                     Subscription equals all <ChevronDown size={11} />
                   </span>
-                  <span className="flex items-center gap-1 rounded border border-white/15 bg-[#141a29] px-2 py-1 text-[#c7cbd4]">
+                  <span className="flex items-center gap-1 rounded border border-[#d1d1d1] bg-white px-2 py-1 text-[#201f1e]">
                     Location equals all <ChevronDown size={11} />
                   </span>
-                  <span className="flex items-center gap-1 text-[#9cc4ec]">
+                  <span className="flex items-center gap-1 text-[#0078d4]">
                     <Plus size={11} /> Add filter
                   </span>
                 </div>
 
-                <p className="mb-2 text-[11px] text-[#8b92a3]">Showing 1 to 1 of 1 records</p>
+                <p className="mb-2 text-[11px] text-[#605e5c]">Showing 1 to 1 of 1 records</p>
 
                 <table className="w-full text-left text-[11px]">
                   <thead>
-                    <tr className="border-b border-white/10 text-[#8b92a3]">
+                    <tr className="border-b border-black/10 text-[#605e5c]">
                       {TABLE_COLUMNS.map((col) => (
                         <th key={col} className="pb-1.5 pr-3 font-medium">
                           <span className="flex items-center gap-1">
@@ -218,12 +218,12 @@ export default function LabEnvironment() {
                   </thead>
                   <tbody>
                     {TABLE_ROWS.map((row) => (
-                      <tr key={row.name} className="border-b border-white/5">
-                        <td className="py-2 pr-3 text-[#9cc4ec]">{row.name}</td>
-                        <td className="py-2 pr-3 text-[#c7cbd4]">{row.domain}</td>
-                        <td className="py-2 pr-3 text-[#c7cbd4]">{row.resourceGroup}</td>
-                        <td className="py-2 pr-3 text-[#c7cbd4]">{row.location}</td>
-                        <td className="py-2 pr-3 text-[#c7cbd4]">{row.subscription}</td>
+                      <tr key={row.name} className="border-b border-black/5">
+                        <td className="py-2 pr-3 text-[#0078d4]">{row.name}</td>
+                        <td className="py-2 pr-3 text-[#201f1e]">{row.domain}</td>
+                        <td className="py-2 pr-3 text-[#201f1e]">{row.resourceGroup}</td>
+                        <td className="py-2 pr-3 text-[#201f1e]">{row.location}</td>
+                        <td className="py-2 pr-3 text-[#201f1e]">{row.subscription}</td>
                       </tr>
                     ))}
                   </tbody>
