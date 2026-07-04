@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type MouseEvent as ReactMouseEvent } from "react";
 import { RotateCw, ChevronDown, ArrowLeftRight } from "lucide-react";
 import {
   Home24Color,
@@ -33,6 +33,8 @@ import {
   Dismiss24Regular,
   ArrowSort24Regular,
   Prompt24Regular,
+  FullScreenMaximize24Regular,
+  FullScreenMinimize24Regular,
 } from "@fluentui/react-icons";
 
 const NAV_ITEMS = [
@@ -80,11 +82,37 @@ const QUICK_COMMANDS = [
 export default function LabEnvironment() {
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [extraLines, setExtraLines] = useState<string[]>([]);
+  const [boxSize, setBoxSize] = useState({ width: 760, height: 360 });
+  const [maximized, setMaximized] = useState(false);
 
   function runQuickCommand(cmd: string, out: string) {
     setTerminalOpen(true);
     setExtraLines((prev) => [...prev, `PS /home/azureuser> ${cmd}`, out]);
   }
+
+  function startResize(e: ReactMouseEvent) {
+    if (maximized) return;
+    e.preventDefault();
+    const startX = e.clientX;
+    const startY = e.clientY;
+    const startW = boxSize.width;
+    const startH = boxSize.height;
+
+    function onMove(ev: MouseEvent) {
+      const newW = Math.min(1400, Math.max(480, startW + (ev.clientX - startX)));
+      const newH = Math.min(720, Math.max(260, startH + (ev.clientY - startY)));
+      setBoxSize({ width: newW, height: newH });
+    }
+    function onUp() {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    }
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+  }
+
+  const effectiveWidth = maximized ? 1200 : boxSize.width;
+  const effectiveHeight = maximized ? 560 : boxSize.height;
 
   return (
     <div className="rounded-2xl border border-border-soft bg-panel p-4 sm:p-6">
@@ -110,7 +138,7 @@ export default function LabEnvironment() {
         <ArrowLeftRight size={12} />
         Zur Seite wischen, um mehr zu sehen
       </p>
-      <div className="overflow-hidden rounded-xl border border-border-soft bg-bg">
+      <div className="relative overflow-hidden rounded-xl border border-border-soft bg-bg">
         <div className="flex items-center gap-2 border-b border-border-soft bg-panel-alt px-3 py-2">
           <Search24Regular fontSize={14} className="text-text-faint" />
           <span className="text-xs text-text-faint">Azure-Portal</span>
@@ -118,7 +146,7 @@ export default function LabEnvironment() {
 
         <div className="overflow-x-auto">
           {/* Light-mode Azure Portal simulation */}
-          <div className="min-w-[760px] bg-white text-[#323130]">
+          <div className="bg-white text-[#323130]" style={{ minWidth: effectiveWidth }}>
             {/* Real Azure blue top bar */}
             <div className="flex items-center gap-4 bg-[#0078d4] px-3 py-1.5">
               <span className="flex items-center gap-1.5 text-sm font-semibold text-white">
@@ -137,6 +165,13 @@ export default function LabEnvironment() {
                 >
                   <Prompt24Regular fontSize={16} />
                 </button>
+                <button
+                  onClick={() => setMaximized((v) => !v)}
+                  title={maximized ? "Verkleinern" : "Maximieren"}
+                  className="rounded p-0.5 hover:bg-white/10"
+                >
+                  {maximized ? <FullScreenMinimize24Regular fontSize={16} /> : <FullScreenMaximize24Regular fontSize={16} />}
+                </button>
                 <QuestionCircle24Color fontSize={16} />
                 <Settings24Color fontSize={16} />
                 <Alert24Color fontSize={16} />
@@ -144,7 +179,7 @@ export default function LabEnvironment() {
               </div>
             </div>
 
-            <div className="flex h-[360px]">
+            <div className="flex" style={{ height: effectiveHeight }}>
               <div className="w-48 shrink-0 overflow-y-auto border-r border-[#e1e1e1] bg-[#f9f9f9] p-2 text-[11px]">
                 {NAV_ITEMS.map((n) => (
                   <p
@@ -257,6 +292,18 @@ export default function LabEnvironment() {
           <Grid24Regular fontSize={14} />
           <span className="ml-auto text-[10px]">10:15 AM 20/05/2024</span>
         </div>
+
+        {!maximized && (
+          <div
+            onMouseDown={startResize}
+            title="Größe ändern"
+            className="absolute bottom-1 right-1 hidden h-4 w-4 cursor-nwse-resize items-end justify-end text-text-faint/60 hover:text-primary sm:flex"
+          >
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+              <path d="M9 1L1 9M9 5L5 9M9 9L9 9" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            </svg>
+          </div>
+        )}
       </div>
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
