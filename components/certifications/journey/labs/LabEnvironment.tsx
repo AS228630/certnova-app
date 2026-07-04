@@ -75,27 +75,28 @@ export default function LabEnvironment() {
           <span className="text-xs text-text-faint">Azure-Portal</span>
         </div>
 
-        <div className="flex h-[380px] bg-[#0f1420] text-[#e2e5ea]">
-          <div className="hidden w-44 shrink-0 overflow-y-auto border-r border-white/10 bg-[#141a29] p-2 text-[11px] sm:block">
-            {NAV_ITEMS.map((n) => (
-              <p key={n} className="cursor-default truncate rounded px-1.5 py-1.5 text-[#c7cbd4] hover:bg-white/5">
-                {n}
-              </p>
-            ))}
-            <p className="mt-2 px-1.5 pb-1 font-semibold text-[#8b92a3]">FAVORITES</p>
-            {FAVORITE_ITEMS.map((n) => (
-              <p
-                key={n}
-                className={`cursor-default truncate rounded px-1.5 py-1.5 hover:bg-white/5 ${
-                  n === "Azure Active Directory" ? "bg-primary/20 text-primary" : "text-[#c7cbd4]"
-                }`}
-              >
-                {n}
-              </p>
-            ))}
-          </div>
+        <div className="overflow-x-auto">
+          <div className="flex h-[380px] min-w-[760px] bg-[#0f1420] text-[#e2e5ea]">
+            <div className="w-44 shrink-0 overflow-y-auto border-r border-white/10 bg-[#141a29] p-2 text-[11px]">
+              {NAV_ITEMS.map((n) => (
+                <p key={n} className="cursor-default truncate rounded px-1.5 py-1.5 text-[#c7cbd4] hover:bg-white/5">
+                  {n}
+                </p>
+              ))}
+              <p className="mt-2 px-1.5 pb-1 font-semibold text-[#8b92a3]">FAVORITES</p>
+              {FAVORITE_ITEMS.map((n) => (
+                <p
+                  key={n}
+                  className={`cursor-default truncate rounded px-1.5 py-1.5 hover:bg-white/5 ${
+                    n === "Azure Active Directory" ? "bg-primary/20 text-primary" : "text-[#c7cbd4]"
+                  }`}
+                >
+                  {n}
+                </p>
+              ))}
+            </div>
 
-          <div className="flex-1 overflow-y-auto p-4">
+            <div className="w-[540px] shrink-0 overflow-y-auto p-4">
             <p className="mb-1 text-[11px] text-[#8b92a3]">
               Home <span className="mx-1">&gt;</span> Azure AD B2C
             </p>
@@ -169,6 +170,7 @@ export default function LabEnvironment() {
                 ))}
               </tbody>
             </table>
+            </div>
           </div>
         </div>
 
