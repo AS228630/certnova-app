@@ -96,12 +96,12 @@ function InteractiveResourceGroupLab({
         onEnd={onEnd}
       />
 
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[280px_minmax(0,1fr)_300px]">
-        <div className="lg:order-1">
+      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[260px_minmax(0,1fr)_280px]">
+        <div className="xl:order-1">
           <LabOverviewPanel lab={lab} />
         </div>
 
-        <div className="space-y-6 lg:order-2">
+        <div className="space-y-6 xl:order-2">
           <ChaosModeToggle />
           <AzurePortalFrame breadcrumb={["Home", sectionLabel, ...(activeBlade === "create" ? [`Create ${activeSection === "resource-groups" ? "a resource group" : "a storage account"}`] : [])]}>
             {bladeContent}
@@ -109,7 +109,7 @@ function InteractiveResourceGroupLab({
           <RealCloudShell />
         </div>
 
-        <div className="lg:order-3">
+        <div className="xl:order-3">
           <LabSidebar lab={lab} tasks={tasks} onToggleTask={() => {}} readOnly />
         </div>
       </div>
@@ -206,26 +206,26 @@ export default function LabClient({
         onEnd={() => setEnded(true)}
       />
 
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[280px_minmax(0,1fr)_300px]">
-        <div className="lg:order-1">
+      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[260px_minmax(0,1fr)_280px]">
+        <div className="xl:order-1">
           <LabOverviewPanel lab={lab} />
         </div>
 
-        <div className="space-y-6 lg:order-2">
+        <div className="space-y-6 xl:order-2">
           <VirtualEnvironment />
         </div>
 
-        <div className="lg:order-3">
+        <div className="xl:order-3">
           <LabSidebar lab={lab} tasks={tasks} onToggleTask={toggleTask} />
         </div>
       </div>
 
       {(lab.docs.length > 0 || true) && (
-        <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[280px_minmax(0,1fr)_300px]">
-          <div className="hidden lg:order-1 lg:block" />
+        <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[260px_minmax(0,1fr)_280px]">
+          <div className="hidden xl:order-1 xl:block" />
 
           {lab.docs.length > 0 && (
-            <div className="rounded-2xl border border-border-soft bg-panel p-5 lg:order-2">
+            <div className="rounded-2xl border border-border-soft bg-panel p-5 xl:order-2">
               <p className="mb-3 flex items-center gap-1.5 text-sm font-bold text-text">
                 <BookOpen size={14} />
                 Dokumentation &amp; Hilfe
@@ -248,7 +248,7 @@ export default function LabClient({
             </div>
           )}
 
-          <div className="rounded-2xl border border-border-soft bg-panel p-5 lg:order-3">
+          <div className="rounded-2xl border border-border-soft bg-panel p-5 xl:order-3">
             <p className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-text">
               <LifeBuoy size={14} />
               Support
