@@ -5,8 +5,7 @@ import type { Lab, LabTask } from "@/lib/labsData";
 import { useLabStore, TARGET_RG_NAME } from "@/lib/store/labStore";
 import LabHeader from "./LabHeader";
 import LabOverviewPanel from "./LabOverviewPanel";
-import VirtualEnvironment from "./VirtualEnvironment";
-import CloudShell from "./CloudShell";
+import VirtualEnvironment from "@/components/certifications/journey/labs/LabEnvironment";
 import RealCloudShell from "./RealCloudShell";
 import LabSidebar from "./LabSidebar";
 import AzurePortalFrame from "./azure-portal/AzurePortalFrame";
@@ -213,7 +212,6 @@ export default function LabClient({
 
         <div className="space-y-6 lg:order-2">
           <VirtualEnvironment />
-          <CloudShell />
         </div>
 
         <div className="lg:order-3">
