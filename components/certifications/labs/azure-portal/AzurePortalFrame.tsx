@@ -36,33 +36,36 @@ export default function AzurePortalFrame({
     >
       {/* top command bar */}
       <div
-        className="flex items-center gap-3 border-b px-3 py-2"
+        className="flex items-center gap-2 overflow-hidden border-b px-2 py-2 sm:gap-3 sm:px-3"
         style={{ backgroundColor: "#0a0a0a", borderColor: AZ.border }}
       >
-        <Menu size={16} style={{ color: AZ.textMuted }} />
-        <div className="flex items-center gap-1.5">
+        <Menu size={16} className="shrink-0" style={{ color: AZ.textMuted }} />
+        <div className="flex shrink-0 items-center gap-1.5">
           <div
-            className="flex h-5 w-5 items-center justify-center rounded"
+            className="flex h-5 w-5 shrink-0 items-center justify-center rounded"
             style={{ backgroundColor: AZ.blueDark }}
           >
             <span className="text-[10px] font-bold text-white">A</span>
           </div>
-          <span className="text-[13px] font-medium text-white">Microsoft Azure</span>
+          <span className="hidden text-[13px] font-medium text-white sm:inline">Microsoft Azure</span>
         </div>
         <div
-          className="ml-2 flex h-7 flex-1 max-w-md items-center gap-2 rounded border px-2"
+          className="ml-1 flex h-7 min-w-0 flex-1 items-center gap-2 rounded border px-2 sm:ml-2 sm:max-w-md"
           style={{ backgroundColor: "#1f1f1f", borderColor: AZ.border }}
         >
-          <Search size={12} style={{ color: AZ.textFaint }} />
-          <span className="text-[11px]" style={{ color: AZ.textFaint }}>
+          <Search size={12} className="shrink-0" style={{ color: AZ.textFaint }} />
+          <span className="hidden truncate text-[11px] sm:inline" style={{ color: AZ.textFaint }}>
             Search resources, services, and docs (G+/)
           </span>
+          <span className="truncate text-[11px] sm:hidden" style={{ color: AZ.textFaint }}>
+            Search
+          </span>
         </div>
-        <div className="ml-auto flex items-center gap-3" style={{ color: AZ.textMuted }}>
-          <HelpCircle size={15} />
-          <Settings size={15} />
+        <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3" style={{ color: AZ.textMuted }}>
+          <HelpCircle size={15} className="hidden sm:block" />
+          <Settings size={15} className="hidden sm:block" />
           <Bell size={15} />
-          <Grid3x3 size={15} />
+          <Grid3x3 size={15} className="hidden sm:block" />
           <div
             className="flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold text-white"
             style={{ backgroundColor: AZ.blueDark }}
