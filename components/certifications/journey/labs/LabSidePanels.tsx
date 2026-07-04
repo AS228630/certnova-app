@@ -1,5 +1,17 @@
-import { CheckCircle2, Circle, FileText, LifeBuoy } from "lucide-react";
-import type { LabContent } from "@/lib/labData";
+import { CheckCircle2, Circle, FileText, LifeBuoy, Users, AppWindow, HardDrive, Server, Box } from "lucide-react";
+import type { LabContent, LabResource } from "@/lib/labData";
+
+const RESOURCE_ICONS: { match: RegExp; icon: React.ComponentType<{ size?: number; className?: string }> }[] = [
+  { match: /tenant|b2c|directory|identit/i, icon: Users },
+  { match: /web app/i, icon: AppWindow },
+  { match: /storage/i, icon: HardDrive },
+  { match: /app service|plan/i, icon: Server },
+];
+
+function iconFor(resource: LabResource) {
+  const found = RESOURCE_ICONS.find((r) => r.match.test(resource.name));
+  return found?.icon ?? Box;
+}
 
 export default function LabSidePanels({ lab }: { lab: LabContent }) {
   const doneCount = lab.checklist.filter((c) => c.done).length;
@@ -15,15 +27,18 @@ export default function LabSidePanels({ lab }: { lab: LabContent }) {
           </span>
         </div>
         <ul className="space-y-2.5">
-          {lab.resources.map((r) => (
-            <li key={r.name} className="flex items-center justify-between text-xs">
-              <span className="flex items-center gap-2 text-text-muted">
-                <span className="h-1.5 w-1.5 rounded-full bg-success" />
-                {r.name}
-              </span>
-              <span className="font-medium text-success">{r.status}</span>
-            </li>
-          ))}
+          {lab.resources.map((r) => {
+            const Icon = iconFor(r);
+            return (
+              <li key={r.name} className="flex items-center justify-between text-xs">
+                <span className="flex items-center gap-2 text-text-muted">
+                  <Icon size={13} className="shrink-0 text-primary" />
+                  {r.name}
+                </span>
+                <span className="font-medium text-success">{r.status}</span>
+              </li>
+            );
+          })}
         </ul>
         <button className="mt-4 w-full rounded-lg border border-border-soft py-2 text-xs font-semibold text-text-muted hover:text-text">
           Alle Ressourcen anzeigen

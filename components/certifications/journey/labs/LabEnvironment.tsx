@@ -99,17 +99,22 @@ export default function LabEnvironment() {
 
         <div className="overflow-x-auto">
           <div className="min-w-[760px] bg-[#0f1420] text-[#e2e5ea]">
-            {/* Real Azure-style top bar */}
-            <div className="flex items-center gap-4 border-b border-white/10 bg-[#0b1220] px-3 py-1.5">
-              <span className="flex items-center gap-1.5 text-sm font-semibold text-white">
-                <Grid3x3 size={15} className="text-[#50b4ff]" />
+            {/* Real Azure-style top bar (white, matching the actual Azure Portal) */}
+            <div className="flex items-center gap-4 border-b border-black/10 bg-white px-3 py-1.5">
+              <span className="flex items-center gap-1.5 text-sm font-semibold text-[#1b1b1f]">
+                <svg width="18" height="18" viewBox="0 0 18 18" className="shrink-0">
+                  <rect x="0" y="0" width="8" height="8" fill="#F25022" />
+                  <rect x="10" y="0" width="8" height="8" fill="#7FBA00" />
+                  <rect x="0" y="10" width="8" height="8" fill="#00A4EF" />
+                  <rect x="10" y="10" width="8" height="8" fill="#FFB900" />
+                </svg>
                 Microsoft Azure
               </span>
-              <div className="flex flex-1 items-center gap-2 rounded bg-white/5 px-2 py-1">
-                <Search size={12} className="text-[#8b92a3]" />
-                <span className="text-[11px] text-[#8b92a3]">Search resources, services, and docs (G+/)</span>
+              <div className="flex flex-1 items-center gap-2 rounded bg-[#f3f2f1] px-2 py-1">
+                <Search size={12} className="text-[#605e5c]" />
+                <span className="text-[11px] text-[#605e5c]">Search resources, services, and docs (G+/)</span>
               </div>
-              <div className="flex items-center gap-3 text-[#c7cbd4]">
+              <div className="flex items-center gap-3 text-[#3b3a39]">
                 <HelpCircle size={14} />
                 <Settings size={14} />
                 <Bell size={14} />
