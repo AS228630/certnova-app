@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { RotateCw, ChevronDown } from "lucide-react";
+import { RotateCw, ChevronDown, ArrowLeftRight } from "lucide-react";
 import {
   Home24Color,
   ViewDesktop24Regular,
@@ -91,6 +91,10 @@ export default function LabEnvironment() {
       </div>
 
       {/* Mock browser chrome */}
+      <p className="mb-1.5 flex items-center gap-1 text-[11px] text-text-faint sm:hidden">
+        <ArrowLeftRight size={12} />
+        Zur Seite wischen, um mehr zu sehen
+      </p>
       <div className="overflow-hidden rounded-xl border border-border-soft bg-bg">
         <div className="flex items-center gap-2 border-b border-border-soft bg-panel-alt px-3 py-2">
           <Search24Regular fontSize={14} className="text-text-faint" />

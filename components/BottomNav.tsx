@@ -6,10 +6,10 @@ import { Home, GraduationCap, Bot, Award, User } from "lucide-react";
 
 const items = [
   { href: "/dashboard", label: "Dashboard", icon: Home },
-  { href: "/learning-paths", label: "Learn", icon: GraduationCap },
-  { href: "/ai-coach", label: "AI Coach", icon: Bot },
-  { href: "/certifications", label: "Certifications", icon: Award },
-  { href: "/profile", label: "Profile", icon: User },
+  { href: "/learning-paths", label: "Lernen", icon: GraduationCap },
+  { href: "/ai-coach", label: "KI Coach", icon: Bot },
+  { href: "/certifications", label: "Zertifikate", icon: Award },
+  { href: "/profile", label: "Profil", icon: User },
 ];
 
 export default function BottomNav() {
