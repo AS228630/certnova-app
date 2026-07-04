@@ -69,10 +69,10 @@ export default function AzureLabSimulator({
   };
 
   return (
-    <div className="relative w-full h-screen bg-gradient-to-b from-[#0b0f19] to-[#0d1117] overflow-hidden">
+    <div className="w-full">
       {/* Lab Header */}
-      <div className="bg-panel border-b border-border-soft px-6 py-4">
-        <div className="flex items-center justify-between">
+      <div className="bg-panel border border-border-soft rounded-xl px-6 py-4 mb-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-4">
             <div className="flex flex-col">
               <p className="text-xs text-text-faint mb-1">Labs {'>'} Microsoft Azure {'>'} AZ-900</p>
@@ -91,7 +91,7 @@ export default function AzureLabSimulator({
         </div>
 
         {/* Tags */}
-        <div className="flex gap-2 mt-4">
+        <div className="flex flex-wrap gap-2 mt-4">
           {['Online-Lab', 'Sichere Umgebung', 'Reset möglich', 'Auto-Validierung', 'Schritt-für-Schritt-Anleitung'].map((tag) => (
             <span key={tag} className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
               {tag}
@@ -101,9 +101,9 @@ export default function AzureLabSimulator({
       </div>
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-12 gap-4 p-4 h-[calc(100vh-120px)] overflow-hidden">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:h-[calc(100vh-200px)] lg:min-h-[600px]">
         {/* Left Panels */}
-        <div className="col-span-2 flex flex-col gap-4 overflow-y-auto">
+        <div className="flex flex-col gap-4 lg:col-span-3 lg:overflow-y-auto xl:col-span-2">
           {/* Goal Checklist */}
           <div className="bg-panel border border-border-soft rounded-lg p-4">
             <h3 className="font-bold text-text mb-3 text-sm">Ziel des Labs</h3>
@@ -146,7 +146,7 @@ export default function AzureLabSimulator({
         </div>
 
         {/* Center - Azure Portal Window (Light Mode) */}
-        <div className="col-span-8 flex flex-col bg-white rounded-lg shadow-2xl overflow-hidden border-2 border-gray-200">
+        <div className="flex min-h-[520px] flex-col overflow-hidden rounded-lg border-2 border-gray-200 bg-white shadow-2xl lg:col-span-7 xl:col-span-8">
           {/* Portal Header - Azure Blue */}
           <div className="bg-[#0078d4] text-white px-6 py-3 flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -155,7 +155,7 @@ export default function AzureLabSimulator({
               </div>
               <span className="font-semibold text-sm">Microsoft Azure</span>
             </div>
-            <div className="flex items-center gap-3 flex-1 mx-6">
+            <div className="hidden items-center gap-3 flex-1 mx-6 sm:flex">
               <Search24Regular primaryFill="rgba(255,255,255,0.6)" />
               <input 
                 type="text" 
@@ -173,7 +173,7 @@ export default function AzureLabSimulator({
           {/* Portal Content - Light Mode */}
           <div className="flex flex-1 overflow-hidden bg-white">
             {/* Portal Sidebar - Light with Fluent Icons */}
-            <div className="w-56 bg-[#f2f2f2] border-r border-gray-300 overflow-y-auto">
+            <div className="w-40 shrink-0 bg-[#f2f2f2] border-r border-gray-300 overflow-y-auto sm:w-56">
               <div className="p-4">
                 <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white text-[#323130] text-sm font-medium transition">
                   <Home24Regular primaryFill="#0078d4" />
@@ -251,7 +251,7 @@ export default function AzureLabSimulator({
         </div>
 
         {/* Right Panels */}
-        <div className="col-span-2 flex flex-col gap-4 overflow-y-auto">
+        <div className="flex flex-col gap-4 lg:col-span-2 lg:overflow-y-auto xl:col-span-2">
           {/* Resources Status */}
           <div className="bg-panel border border-border-soft rounded-lg p-4">
             <h3 className="font-bold text-text mb-3 text-sm">Labressourcen</h3>

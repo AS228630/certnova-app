@@ -17,7 +17,7 @@ export default function AZ900ResourceGroupLabPage() {
 
   return (
     <DashboardShell requireAuth={false}>
-      <main className="flex-1 w-full h-screen overflow-hidden bg-bg">
+      <main className="flex-1 p-4 md:p-8">
         <AzureLabSimulator
           labId={labData.id}
           labTitle={labData.title}
