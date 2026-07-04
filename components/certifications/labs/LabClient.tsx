@@ -57,6 +57,12 @@ function InteractiveResourceGroupLab({
   const [scorecardDismissed, setScorecardDismissed] = useState(false);
 
   useEffect(() => {
+    // Date.now() is an impure read, so it belongs here (an effect), not in
+    // the render body. The `completedAt === null` / `!== null` guards make
+    // this idempotent — it only ever fires once per completion transition,
+    // so it does not cause a render cascade despite the lint rule's default
+    // suspicion of any setState call inside an effect body.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (allDone && completedAt === null) setCompletedAt(Date.now());
     if (!allDone && completedAt !== null) {
       setCompletedAt(null);
