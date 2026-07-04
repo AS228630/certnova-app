@@ -1,6 +1,7 @@
 "use client";
 
-import { Menu, Search, Bell, HelpCircle, Settings, Grid3x3 } from "lucide-react";
+import { Menu, Search, Bell, HelpCircle, Settings, Grid3x3, FolderKanban, Database } from "lucide-react";
+import { useLabStore } from "@/lib/store/labStore";
 
 // Authentic Azure Portal "Dark theme" palette (matches portal.azure.com dark mode)
 export const AZ = {
@@ -25,6 +26,9 @@ export default function AzurePortalFrame({
   breadcrumb: string[];
   children: React.ReactNode;
 }) {
+  const section = useLabStore((s) => s.activeSection);
+  const setSection = useLabStore((s) => s.setSection);
+
   return (
     <div
       className="overflow-hidden rounded-2xl border"
@@ -81,8 +85,40 @@ export default function AzurePortalFrame({
         ))}
       </div>
 
-      <div className="p-4" style={{ backgroundColor: AZ.panel, minHeight: 320 }}>
-        {children}
+      <div className="flex">
+        <div
+          className="flex w-12 flex-col items-center gap-1 border-r py-3"
+          style={{ borderColor: AZ.border, backgroundColor: AZ.panel }}
+        >
+          {(
+            [
+              { key: "resource-groups" as const, icon: FolderKanban, label: "Resource groups" },
+              { key: "storage-accounts" as const, icon: Database, label: "Storage accounts" },
+            ]
+          ).map((item) => {
+            const active = section === item.key;
+            const Icon = item.icon;
+            return (
+              <button
+                key={item.key}
+                onClick={() => setSection(item.key)}
+                title={item.label}
+                className="flex h-9 w-9 items-center justify-center rounded"
+                style={{
+                  backgroundColor: active ? "rgba(40,153,245,0.15)" : "transparent",
+                  color: active ? AZ.blue : AZ.textMuted,
+                  borderLeft: active ? `2px solid ${AZ.blue}` : "2px solid transparent",
+                }}
+              >
+                <Icon size={16} />
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="flex-1 p-4" style={{ backgroundColor: AZ.panel, minHeight: 320 }}>
+          {children}
+        </div>
       </div>
     </div>
   );

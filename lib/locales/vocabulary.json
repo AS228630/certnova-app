@@ -1,0 +1,32 @@
+{
+  "Ressourcengruppe": {
+    "en": "Resource group",
+    "fa": "گروه منابع",
+    "explanation": "Ein logischer Container, der verwandte Azure-Ressourcen (VMs, Speicher, Netzwerke) zusammen verwaltet."
+  },
+  "Ressourcengruppen": {
+    "en": "Resource groups",
+    "fa": "گروه‌های منابع",
+    "explanation": "Mehrere logische Container, die verwandte Azure-Ressourcen zusammen verwalten."
+  },
+  "Speicherkonto": {
+    "en": "Storage account",
+    "fa": "حساب ذخیره‌سازی",
+    "explanation": "Ein Azure-Dienst, der Blob-, Datei-, Warteschlangen- und Tabellenspeicher bereitstellt."
+  },
+  "Region": {
+    "en": "Region",
+    "fa": "منطقه",
+    "explanation": "Ein geografischer Standort von Azure-Rechenzentren, z.B. West Europe."
+  },
+  "Cloud Shell": {
+    "en": "Cloud Shell",
+    "fa": "پوسته‌ی ابری",
+    "explanation": "Eine browserbasierte Befehlszeile zur Verwaltung von Azure-Ressourcen."
+  },
+  "Mitwirkender": {
+    "en": "Contributor",
+    "fa": "همکار (نقش دسترسی)",
+    "explanation": "Eine Azure-Rolle, die volle Verwaltungsrechte außer Zugriffsverwaltung gewährt."
+  }
+}

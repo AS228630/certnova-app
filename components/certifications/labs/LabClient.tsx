@@ -12,6 +12,8 @@ import LabSidebar from "./LabSidebar";
 import AzurePortalFrame from "./azure-portal/AzurePortalFrame";
 import ResourceGroupsBlade from "./azure-portal/ResourceGroupsBlade";
 import CreateResourceGroupBlade from "./azure-portal/CreateResourceGroupBlade";
+import StorageAccountsBlade from "./azure-portal/StorageAccountsBlade";
+import CreateStorageAccountBlade from "./azure-portal/CreateStorageAccountBlade";
 
 function InteractiveResourceGroupLab({
   companyName,
@@ -31,15 +33,33 @@ function InteractiveResourceGroupLab({
   onEnd: () => void;
 }) {
   const resourceGroups = useLabStore((s) => s.resourceGroups);
+  const storageAccounts = useLabStore((s) => s.storageAccounts);
   const activeBlade = useLabStore((s) => s.activeBlade);
+  const activeSection = useLabStore((s) => s.activeSection);
 
   const created = resourceGroups.find((rg) => rg.name.toLowerCase() === TARGET_RG_NAME.toLowerCase());
   const tasks: LabTask[] = lab.tasks.map((t) => {
     if (t.id === "rg-created") return { ...t, done: !!created };
     if (t.id === "rg-region")
       return { ...t, done: !!created && created.location.toLowerCase().replace(/\s+/g, "") === "westeurope" };
+    if (t.id === "storage-created")
+      return { ...t, done: storageAccounts.some((sa) => sa.resourceGroup.toLowerCase() === TARGET_RG_NAME.toLowerCase()) };
     return t;
   });
+
+  const sectionLabel = activeSection === "resource-groups" ? "Resource groups" : "Storage accounts";
+  const bladeContent =
+    activeSection === "resource-groups" ? (
+      activeBlade === "create" ? (
+        <CreateResourceGroupBlade />
+      ) : (
+        <ResourceGroupsBlade />
+      )
+    ) : activeBlade === "create" ? (
+      <CreateStorageAccountBlade />
+    ) : (
+      <StorageAccountsBlade />
+    );
 
   return (
     <div>
@@ -59,8 +79,8 @@ function InteractiveResourceGroupLab({
         </div>
 
         <div className="space-y-6 lg:order-2">
-          <AzurePortalFrame breadcrumb={["Home", "Resource groups", ...(activeBlade === "create" ? ["Create a resource group"] : [])]}>
-            {activeBlade === "create" ? <CreateResourceGroupBlade /> : <ResourceGroupsBlade />}
+          <AzurePortalFrame breadcrumb={["Home", sectionLabel, ...(activeBlade === "create" ? [`Create ${activeSection === "resource-groups" ? "a resource group" : "a storage account"}`] : [])]}>
+            {bladeContent}
           </AzurePortalFrame>
           <RealCloudShell />
         </div>

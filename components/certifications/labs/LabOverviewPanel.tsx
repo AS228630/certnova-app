@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 import type { Lab } from "@/lib/labsData";
+import { VocabularyText } from "@/components/VocabularyTerm";
 
 export default function LabOverviewPanel({ lab }: { lab: Lab }) {
   const [tab, setTab] = useState<"uebersicht" | "anleitungen">("uebersicht");
@@ -60,7 +61,7 @@ export default function LabOverviewPanel({ lab }: { lab: Lab }) {
                 <span className="flex h-5 w-5 flex-none items-center justify-center rounded-full bg-primary/15 text-[11px] font-bold text-primary">
                   {i + 1}
                 </span>
-                {step}
+                <VocabularyText text={step} />
               </li>
             ))}
           </ol>

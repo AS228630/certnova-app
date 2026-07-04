@@ -34,29 +34,35 @@ export const AZ900_RG_LAB: Lab = {
   durationLabel: "20-30 Minuten",
   totalMinutes: 25 * 60,
   tags: ["Online-Lab", "Echtzeit-Validierung", "Reset möglich", "Portal + CLI"],
-  goal: 'Erstelle eine Ressourcengruppe namens "CC-Lab-RG" in "West Europe".',
+  goal: 'Erstelle eine Ressourcengruppe namens "CC-Lab-RG" in "West Europe" und darin ein Speicherkonto.',
   goalChecklist: [
     'Ressourcengruppe mit dem Namen "CC-Lab-RG" erstellen',
     "Region West Europe auswählen",
-    "Ergebnis über az group list bestätigen",
+    "Ein Speicherkonto in dieser Ressourcengruppe erstellen",
+    "Ergebnis über az group list / az storage account list bestätigen",
   ],
   instructions: [
-    'Klicke im simulierten Azure-Portal auf "Create" oder nutze die Cloud Shell unten.',
-    'Portal: Fülle "Resource group name" mit CC-Lab-RG und wähle West Europe als Region.',
+    'Portal: Wähle links "Resource groups", klicke "Create", Name CC-Lab-RG, Region West Europe.',
     'CLI: az group create --name CC-Lab-RG --location westeurope',
-    "Bestätige dein Ergebnis — die Checkliste rechts aktualisiert sich automatisch.",
+    'Wähle danach links "Storage accounts" und erstelle eins in CC-Lab-RG (nur Kleinbuchstaben/Zahlen, 3-24 Zeichen).',
+    'CLI: az storage account create --name certcoachstorage --resource-group CC-Lab-RG --location westeurope',
+    "Die Checkliste rechts aktualisiert sich automatisch, sobald beide Ressourcen korrekt existieren.",
   ],
   details: [
     { label: "Azure Region", value: "West Europe" },
     { label: "Benötigte Rollen", value: "Mitwirkender" },
     { label: "Ziel-Ressourcengruppe", value: "CC-Lab-RG" },
-    { label: "Ressourcen", value: "1" },
+    { label: "Ressourcen", value: "2" },
     { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
   ],
-  resources: [{ id: "r1", label: "Resource Group (noch nicht erstellt)", active: false }],
+  resources: [
+    { id: "r1", label: "Resource Group (noch nicht erstellt)", active: false },
+    { id: "r2", label: "Storage Account (noch nicht erstellt)", active: false },
+  ],
   tasks: [
     { id: "rg-created", label: 'Ressourcengruppe "CC-Lab-RG" erstellt', done: false },
     { id: "rg-region", label: "Region West Europe korrekt gesetzt", done: false },
+    { id: "storage-created", label: "Speicherkonto in CC-Lab-RG erstellt", done: false },
   ],
   docs: [
     {
