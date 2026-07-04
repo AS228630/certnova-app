@@ -5,6 +5,7 @@ import { BookOpen, ExternalLink, LifeBuoy } from "lucide-react";
 import type { Lab, LabTask } from "@/lib/labsData";
 import { useLabStore, TARGET_RG_NAME } from "@/lib/store/labStore";
 import LabHeader from "./LabHeader";
+import LabStepsOverview from "./LabStepsOverview";
 import LabOverviewPanel from "./LabOverviewPanel";
 import VirtualEnvironment from "@/components/certifications/journey/labs/LabEnvironment";
 import RealCloudShell from "./RealCloudShell";
@@ -145,6 +146,7 @@ export default function LabClient({
   const [remaining, setRemaining] = useState(lab.totalMinutes);
   const [tasks, setTasks] = useState<LabTask[]>(lab.tasks);
   const [ended, setEnded] = useState(false);
+  const [simulatorOpen, setSimulatorOpen] = useState(!lab.steps || lab.steps.length === 0);
   const resetStore = useLabStore((s) => s.reset);
 
   useEffect(() => {
@@ -206,19 +208,27 @@ export default function LabClient({
         onEnd={() => setEnded(true)}
       />
 
-      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[260px_minmax(0,1fr)_280px]">
-        <div className="xl:order-1">
-          <LabOverviewPanel lab={lab} />
+      {!simulatorOpen && lab.steps && lab.steps.length > 0 ? (
+        <div className="mt-6">
+          <LabStepsOverview steps={lab.steps} onOpen={() => setSimulatorOpen(true)} />
         </div>
+      ) : (
+        <>
+          <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[260px_minmax(0,1fr)_280px]">
+            <div className="xl:order-1">
+              <LabOverviewPanel lab={lab} />
+            </div>
 
-        <div className="space-y-6 xl:order-2">
-          <VirtualEnvironment />
-        </div>
+            <div className="space-y-6 xl:order-2">
+              <VirtualEnvironment />
+            </div>
 
-        <div className="xl:order-3">
-          <LabSidebar lab={lab} tasks={tasks} onToggleTask={toggleTask} />
-        </div>
-      </div>
+            <div className="xl:order-3">
+              <LabSidebar lab={lab} tasks={tasks} onToggleTask={toggleTask} />
+            </div>
+          </div>
+        </>
+      )}
 
       {(lab.docs.length > 0 || true) && (
         <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[260px_minmax(0,1fr)_280px]">
