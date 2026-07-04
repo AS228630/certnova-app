@@ -2,6 +2,7 @@
 
 import { useState, type MouseEvent as ReactMouseEvent } from "react";
 import { RotateCw, ChevronDown, ArrowLeftRight } from "lucide-react";
+import HomeServicesView from "./HomeServicesView";
 import {
   Home24Color,
   ViewDesktop24Regular,
@@ -80,6 +81,7 @@ const QUICK_COMMANDS = [
 ];
 
 export default function LabEnvironment() {
+  const [activeView, setActiveView] = useState<"home" | "b2c">("b2c");
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [extraLines, setExtraLines] = useState<string[]>([]);
   const [boxSize, setBoxSize] = useState({ width: 760, height: 360 });
@@ -184,7 +186,10 @@ export default function LabEnvironment() {
                 {NAV_ITEMS.map((n) => (
                   <p
                     key={n.label}
-                    className="flex cursor-default items-center gap-2 truncate rounded px-1.5 py-1.5 text-[#323130] hover:bg-[#eeeeee]"
+                    onClick={() => n.label === "Home" && setActiveView("home")}
+                    className={`flex items-center gap-2 truncate rounded px-1.5 py-1.5 hover:bg-[#eeeeee] ${
+                      n.label === "Home" ? "cursor-pointer" : "cursor-default"
+                    } ${n.label === "Home" && activeView === "home" ? "bg-[#deecf9] text-[#0078d4]" : "text-[#323130]"}`}
                   >
                     <n.icon fontSize={16} className="shrink-0" style={{ color: n.color }} />
                     {n.label}
@@ -196,8 +201,13 @@ export default function LabEnvironment() {
                 {FAVORITE_ITEMS.map((n) => (
                   <p
                     key={n.label}
-                    className={`flex cursor-default items-center gap-2 truncate rounded px-1.5 py-1.5 hover:bg-[#eeeeee] ${
-                      n.label === "Azure Active Directory" ? "bg-[#deecf9] text-[#0078d4]" : "text-[#323130]"
+                    onClick={() => n.label === "Azure Active Directory" && setActiveView("b2c")}
+                    className={`flex items-center gap-2 truncate rounded px-1.5 py-1.5 hover:bg-[#eeeeee] ${
+                      n.label === "Azure Active Directory" ? "cursor-pointer" : "cursor-default"
+                    } ${
+                      n.label === "Azure Active Directory" && activeView === "b2c"
+                        ? "bg-[#deecf9] text-[#0078d4]"
+                        : "text-[#323130]"
                     }`}
                   >
                     <n.icon fontSize={16} className="shrink-0" style={{ color: n.color }} />
@@ -206,12 +216,16 @@ export default function LabEnvironment() {
                 ))}
               </div>
 
+              {activeView === "home" ? (
+                <HomeServicesView />
+              ) : (
               <div className="w-[540px] shrink-0 overflow-y-auto bg-white p-4">
                 <p className="mb-1 text-[11px] text-[#605e5c]">
                   Home <span className="mx-1">&gt;</span> Azure AD B2C
                 </p>
                 <h3 className="mb-3 text-lg font-semibold text-[#201f1e]">Azure AD B2C</h3>
                 <p className="mb-3 text-[11px] text-[#605e5c]">CertCoach</p>
+
 
                 <div className="mb-3 flex flex-wrap items-center gap-4 border-b border-[#e1e1e1] pb-2 text-xs text-[#323130]">
                   <span className="flex items-center gap-1">
@@ -284,6 +298,7 @@ export default function LabEnvironment() {
                   </tbody>
                 </table>
               </div>
+              )}
             </div>
           </div>
         </div>
