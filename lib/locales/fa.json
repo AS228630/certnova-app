@@ -1,0 +1,133 @@
+{
+  "common": {
+    "appName": "سرتیچ",
+    "language": "فارسی",
+    "back": "بازگشت",
+    "next": "بعدی",
+    "cancel": "انصراف",
+    "save": "ذخیره",
+    "delete": "حذف",
+    "edit": "ویرایش",
+    "close": "بستن",
+    "loading": "در حال بارگیری...",
+    "error": "خطا",
+    "success": "موفق",
+    "warning": "هشدار"
+  },
+  "lab": {
+    "title": "آزمایشگاه: ایجاد اولین گروه منابع",
+    "description": "اولین گروه منابع Azure خود را ایجاد کنید — یا از طریق پورتال یا مستقیماً از طریق Azure CLI در Cloud Shell. این شبیه‌سازی نتیجه شما را بلافاصله بررسی می‌کند.",
+    "goal": "یک گروه منابع به نام \"CC-Lab-RG\" در منطقه \"West Europe\" و یک حساب ذخیره‌سازی در آن را ایجاد کنید.",
+    "goalChecklist": [
+      "ایجاد گروه منابع با نام \"CC-Lab-RG\"",
+      "انتخاب منطقه West Europe",
+      "ایجاد یک حساب ذخیره‌سازی در این گروه منابع",
+      "تأیید نتیجه از طریق az group list / az storage account list"
+    ],
+    "instructions": [
+      "پورتال: در سمت چپ \"Resource groups\" را انتخاب کنید، روی \"Create\" کلیک کنید، نام CC-Lab-RG، منطقه West Europe.",
+      "CLI: az group create --name CC-Lab-RG --location westeurope",
+      "سپس در سمت چپ \"Storage accounts\" را انتخاب کنید و یکی را در CC-Lab-RG ایجاد کنید (فقط حروف کوچک و اعداد، 3-24 کاراکتر).",
+      "CLI: az storage account create --name certcoachstorage --resource-group CC-Lab-RG --location westeurope",
+      "فهرست بررسی در سمت راست به‌طور خودکار به‌روزرسانی می‌شود، زمانی که هر دو منبع به‌درستی ایجاد شوند."
+    ],
+    "details": {
+      "azureRegion": "منطقه Azure",
+      "requiredRoles": "نقش‌های مورد نیاز",
+      "resourceGroup": "گروه منابع",
+      "resources": "منابع",
+      "costs": "هزینه‌ها",
+      "westEurope": "West Europe",
+      "contributor": "مشارک",
+      "ccLabRg": "CC-Lab-RG",
+      "free": "$0.00 (شامل در آزمایشگاه)"
+    },
+    "resources": {
+      "title": "منابع آزمایشگاه",
+      "active": "فعال",
+      "inactive": "غیرفعال",
+      "resourceGroupNotCreated": "گروه منابع (هنوز ایجاد نشده)",
+      "storageAccountNotCreated": "حساب ذخیره‌سازی (هنوز ایجاد نشده)"
+    },
+    "tasks": {
+      "title": "فهرست وظایف",
+      "validateResults": "تأیید نتایج"
+    },
+    "status": {
+      "title": "وضعیت آزمایشگاه",
+      "progress": "پیشرفت",
+      "points": "امتیازات",
+      "attempts": "تلاش‌ها",
+      "lastReset": "آخرین بازنشانی: امروز، ساعت 10:00"
+    },
+    "portal": {
+      "home": "صفحه اصلی",
+      "dashboard": "داشبورد",
+      "resourceGroups": "گروه‌های منابع",
+      "storageAccounts": "حساب‌های ذخیره‌سازی",
+      "virtualMachines": "ماشین‌های مجازی",
+      "allServices": "تمام خدمات",
+      "resourceGroupsDesc": "گروه‌های منابع را ایجاد و مدیریت کنید",
+      "create": "+ ایجاد",
+      "noResourceGroups": "هیچ گروه منابعی یافت نشد",
+      "createResourceGroupDesc": "برای شروع، یک گروه منابع جدید ایجاد کنید",
+      "search": "جستجو برای منابع، خدمات و اسناد..."
+    },
+    "cloudShell": {
+      "title": "Cloud Shell",
+      "welcome": "خوش‌آمدید به Azure Cloud Shell (شبیه‌سازی).",
+      "example": "مثال: az group create --name CC-Lab-RG --location westeurope",
+      "availableCommands": "دستورات موجود:"
+    },
+    "help": {
+      "title": "مستندات و کمک",
+      "whatIsResourceGroup": "گروه منابع چیست؟",
+      "azGroupCreateRef": "مرجع az group create",
+      "contactSupport": "تماس با پشتیبانی"
+    },
+    "tags": {
+      "onlineLab": "آزمایشگاه آنلاین",
+      "secureEnvironment": "محیط ایمن",
+      "resetPossible": "بازنشانی ممکن",
+      "autoValidation": "تأیید خودکار",
+      "stepByStep": "راهنمای گام‌به‌گام"
+    },
+    "timeRemaining": "زمان باقی‌مانده",
+    "endLab": "پایان آزمایشگاه",
+    "labDetails": "جزئیات آزمایشگاه",
+    "labInstructions": "دستورالعمل‌های آزمایشگاه",
+    "labGoal": "هدف آزمایشگاه"
+  },
+  "vocabulary": {
+    "resourceGroup": {
+      "fa": "گروه منابع",
+      "definition": "کانتینری که منابع Azure مرتبط را در خود نگاه می‌دارد.",
+      "golden": true
+    },
+    "storageAccount": {
+      "fa": "حساب ذخیره‌سازی",
+      "definition": "یک حساب ذخیره‌سازی Azure یک فضای نام منحصربه‌فرد برای داده‌های Azure Storage شما فراهم می‌کند.",
+      "golden": true
+    },
+    "cloudShell": {
+      "fa": "Cloud Shell",
+      "definition": "یک پنجره shell تعاملی برای مدیریت منابع Azure از طریق خط فرمان.",
+      "golden": true
+    },
+    "azureCli": {
+      "fa": "Azure CLI",
+      "definition": "رابط خط فرمان Azure (CLI) ابزاری برای مدیریت منابع Azure است.",
+      "golden": true
+    },
+    "location": {
+      "fa": "منطقه",
+      "definition": "مرکز داده جغرافیایی که منابع شما در آن میزبانی می‌شوند.",
+      "golden": true
+    },
+    "westEurope": {
+      "fa": "West Europe",
+      "definition": "منطقه Azure در هلند، توسط مایکروسافت اداره می‌شود.",
+      "golden": false
+    }
+  }
+}

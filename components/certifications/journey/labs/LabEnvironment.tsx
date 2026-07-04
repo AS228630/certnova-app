@@ -1,61 +1,61 @@
 "use client";
 
 import { useState } from "react";
+import { RotateCw, ChevronDown } from "lucide-react";
 import {
-  RotateCw,
-  ChevronDown,
-  Search,
-  Info,
-  Plus,
-  LayoutGrid,
-  Trash2,
-  RefreshCw,
-  MessageSquare,
-  X,
-  Home,
-  LayoutDashboard,
-  Grid3x3,
-  List,
-  FolderKanban,
-  AppWindow,
-  Zap,
-  Database,
-  Server,
-  Waypoints,
-  HardDrive,
-  Share2,
-  Users,
-  Activity,
-  Lightbulb,
-  ShieldCheck,
-  HelpCircle,
-  Settings,
-  Bell,
-  ChevronsUpDown,
-} from "lucide-react";
+  Home24Color,
+  ViewDesktop24Regular,
+  Apps24Color,
+  List24Regular,
+  Folder24Regular,
+  WindowDevTools24Regular,
+  Flash24Regular,
+  Database24Color,
+  Server24Regular,
+  Scales24Regular,
+  Storage24Regular,
+  VirtualNetwork24Regular,
+  PeopleTeam24Color,
+  Pulse24Regular,
+  Lightbulb24Color,
+  ShieldCheckmark24Color,
+  Search24Regular,
+  QuestionCircle24Color,
+  Settings24Color,
+  Alert24Color,
+  Person24Color,
+  Add24Regular,
+  Grid24Regular,
+  Delete24Regular,
+  ArrowSync24Color,
+  CommentMultiple24Color,
+  Info24Filled,
+  Dismiss24Regular,
+  ArrowSort24Regular,
+} from "@fluentui/react-icons";
 
 const NAV_ITEMS = [
-  { label: "Create a resource", icon: Plus },
-  { label: "Home", icon: Home },
-  { label: "Dashboard", icon: LayoutDashboard },
-  { label: "All services", icon: Grid3x3 },
+  { label: "Create a resource", icon: Add24Regular, color: "#0078d4" },
+  { label: "Home", icon: Home24Color, color: "#0078d4" },
+  { label: "Dashboard", icon: ViewDesktop24Regular, color: "#0078d4" },
+  { label: "All services", icon: Apps24Color, color: "#0078d4" },
 ];
 
 const FAVORITE_ITEMS = [
-  { label: "All resources", icon: List },
-  { label: "Resource groups", icon: FolderKanban },
-  { label: "App Services", icon: AppWindow },
-  { label: "Function App", icon: Zap },
-  { label: "SQL databases", icon: Database },
-  { label: "Azure Cosmos DB", icon: Database },
-  { label: "Virtual machines", icon: Server },
-  { label: "Load balancers", icon: Waypoints },
-  { label: "Storage accounts", icon: HardDrive },
-  { label: "Virtual networks", icon: Share2 },
-  { label: "Azure Active Directory", icon: Users },
-  { label: "Monitor", icon: Activity },
-  { label: "Advisor", icon: Lightbulb },
-  { label: "Microsoft Defender for Cloud", icon: ShieldCheck },
+  { label: "All resources", icon: List24Regular, color: "#0078d4" },
+  { label: "Resource groups", icon: Folder24Regular, color: "#0078d4" },
+  { label: "App Services", icon: WindowDevTools24Regular, color: "#0062ad" },
+  { label: "Function App", icon: Flash24Regular, color: "#f2a815" },
+  { label: "SQL databases", icon: Database24Color, color: "#0078d4" },
+  { label: "Azure Cosmos DB", icon: Database24Color, color: "#0078d4" },
+  { label: "Virtual machines", icon: Server24Regular, color: "#0089d6" },
+  { label: "Load balancers", icon: Scales24Regular, color: "#5c2d91" },
+  { label: "Storage accounts", icon: Storage24Regular, color: "#0078d4" },
+  { label: "Virtual networks", icon: VirtualNetwork24Regular, color: "#00bcf2" },
+  { label: "Azure Active Directory", icon: PeopleTeam24Color, color: "#0078d4" },
+  { label: "Monitor", icon: Pulse24Regular, color: "#7fba00" },
+  { label: "Advisor", icon: Lightbulb24Color, color: "#f2c811" },
+  { label: "Microsoft Defender for Cloud", icon: ShieldCheckmark24Color, color: "#7fba00" },
 ];
 
 const TABLE_COLUMNS = ["Name", "Domain Name", "Resource Group", "Location", "Subscription"];
@@ -72,7 +72,7 @@ const TABLE_ROWS = [
 
 export default function LabEnvironment() {
   return (
-    <div className="rounded-2xl border border-border-soft bg-panel p-3 sm:p-4">
+    <div className="rounded-2xl border border-border-soft bg-panel p-4 sm:p-6">
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <h2 className="font-bold text-text">Virtuelle Umgebung</h2>
@@ -93,45 +93,39 @@ export default function LabEnvironment() {
       {/* Mock browser chrome */}
       <div className="overflow-hidden rounded-xl border border-border-soft bg-bg">
         <div className="flex items-center gap-2 border-b border-border-soft bg-panel-alt px-3 py-2">
-          <Search size={12} className="text-text-faint" />
+          <Search24Regular fontSize={14} className="text-text-faint" />
           <span className="text-xs text-text-faint">Azure-Portal</span>
         </div>
 
         <div className="overflow-x-auto">
-          <div className="min-w-[760px] bg-white text-[#201f1e]">
-            {/* Real Azure-style top bar (white, matching the actual Azure Portal) */}
-            <div className="flex items-center gap-4 border-b border-black/10 bg-white px-3 py-1.5">
-              <span className="flex items-center gap-1.5 text-sm font-semibold text-[#1b1b1f]">
-                <svg width="18" height="18" viewBox="0 0 18 18" className="shrink-0">
-                  <rect x="0" y="0" width="8" height="8" fill="#F25022" />
-                  <rect x="10" y="0" width="8" height="8" fill="#7FBA00" />
-                  <rect x="0" y="10" width="8" height="8" fill="#00A4EF" />
-                  <rect x="10" y="10" width="8" height="8" fill="#FFB900" />
-                </svg>
+          {/* Light-mode Azure Portal simulation */}
+          <div className="min-w-[760px] bg-white text-[#323130]">
+            {/* Real Azure blue top bar */}
+            <div className="flex items-center gap-4 bg-[#0078d4] px-3 py-1.5">
+              <span className="flex items-center gap-1.5 text-sm font-semibold text-white">
+                <Grid24Regular fontSize={16} />
                 Microsoft Azure
               </span>
-              <div className="flex flex-1 items-center gap-2 rounded bg-[#f3f2f1] px-2 py-1">
-                <Search size={12} className="text-[#605e5c]" />
+              <div className="flex flex-1 items-center gap-2 rounded bg-white px-2 py-1">
+                <Search24Regular fontSize={13} className="text-[#605e5c]" />
                 <span className="text-[11px] text-[#605e5c]">Search resources, services, and docs (G+/)</span>
               </div>
-              <div className="flex items-center gap-3 text-[#3b3a39]">
-                <HelpCircle size={14} />
-                <Settings size={14} />
-                <Bell size={14} />
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#50b4ff] text-[9px] font-bold text-white">
-                  A
-                </span>
+              <div className="flex items-center gap-3 text-white">
+                <QuestionCircle24Color fontSize={16} />
+                <Settings24Color fontSize={16} />
+                <Alert24Color fontSize={16} />
+                <Person24Color fontSize={18} />
               </div>
             </div>
 
             <div className="flex h-[360px]">
-              <div className="w-44 shrink-0 overflow-y-auto border-r border-black/10 bg-white p-2 text-[11px]">
+              <div className="w-48 shrink-0 overflow-y-auto border-r border-[#e1e1e1] bg-[#f9f9f9] p-2 text-[11px]">
                 {NAV_ITEMS.map((n) => (
                   <p
                     key={n.label}
-                    className="flex cursor-default items-center gap-2 truncate rounded px-1.5 py-1.5 text-[#323130] hover:bg-black/5"
+                    className="flex cursor-default items-center gap-2 truncate rounded px-1.5 py-1.5 text-[#323130] hover:bg-[#eeeeee]"
                   >
-                    <n.icon size={13} className="shrink-0 text-[#605e5c]" />
+                    <n.icon fontSize={16} className="shrink-0" style={{ color: n.color }} />
                     {n.label}
                   </p>
                 ))}
@@ -141,16 +135,11 @@ export default function LabEnvironment() {
                 {FAVORITE_ITEMS.map((n) => (
                   <p
                     key={n.label}
-                    className={`flex cursor-default items-center gap-2 truncate rounded px-1.5 py-1.5 hover:bg-black/5 ${
-                      n.label === "Azure Active Directory"
-                        ? "bg-[#f0f6fc] text-[#0078d4]"
-                        : "text-[#323130]"
+                    className={`flex cursor-default items-center gap-2 truncate rounded px-1.5 py-1.5 hover:bg-[#eeeeee] ${
+                      n.label === "Azure Active Directory" ? "bg-[#deecf9] text-[#0078d4]" : "text-[#323130]"
                     }`}
                   >
-                    <n.icon
-                      size={13}
-                      className={`shrink-0 ${n.label === "Azure Active Directory" ? "text-[#0078d4]" : "text-[#605e5c]"}`}
-                    />
+                    <n.icon fontSize={16} className="shrink-0" style={{ color: n.color }} />
                     {n.label}
                   </p>
                 ))}
@@ -163,46 +152,46 @@ export default function LabEnvironment() {
                 <h3 className="mb-3 text-lg font-semibold text-[#201f1e]">Azure AD B2C</h3>
                 <p className="mb-3 text-[11px] text-[#605e5c]">CertCoach</p>
 
-                <div className="mb-3 flex flex-wrap items-center gap-4 border-b border-black/10 pb-2 text-xs text-[#201f1e]">
+                <div className="mb-3 flex flex-wrap items-center gap-4 border-b border-[#e1e1e1] pb-2 text-xs text-[#323130]">
                   <span className="flex items-center gap-1">
-                    <Plus size={13} /> Create
+                    <Add24Regular fontSize={14} className="text-[#0078d4]" /> Create
                   </span>
                   <span className="flex items-center gap-1">
-                    <LayoutGrid size={13} /> Manage view <ChevronDown size={11} />
+                    <Grid24Regular fontSize={14} className="text-[#0078d4]" /> Manage view <ChevronDown size={11} />
                   </span>
                   <span className="flex items-center gap-1">
-                    <Trash2 size={13} /> Delete
+                    <Delete24Regular fontSize={14} className="text-[#0078d4]" /> Delete
                   </span>
                   <span className="flex items-center gap-1">
-                    <RefreshCw size={13} /> Refresh
+                    <ArrowSync24Color fontSize={14} /> Refresh
                   </span>
                   <span className="flex items-center gap-1">
-                    <MessageSquare size={13} /> Got feedback?
+                    <CommentMultiple24Color fontSize={14} /> Got feedback?
                   </span>
                 </div>
 
-                <div className="mb-3 flex items-center justify-between rounded border border-[#c7e0f4] bg-[#f0f6fc] px-3 py-1.5 text-[11px] text-[#0078d4]">
+                <div className="mb-3 flex items-center justify-between rounded border border-[#c7e0f4] bg-[#f3f9fd] px-3 py-1.5 text-[11px] text-[#004578]">
                   <span className="flex items-center gap-1.5">
-                    <Info size={12} />
+                    <Info24Filled fontSize={13} className="text-[#0078d4]" />
                     Click here to switch back to the old Azure AD B2C experience.
                   </span>
-                  <X size={12} className="text-[#0078d4]" />
+                  <Dismiss24Regular fontSize={13} className="text-[#004578]" />
                 </div>
 
                 <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px]">
                   <input
                     readOnly
                     placeholder="Filter for any field..."
-                    className="w-40 rounded border border-[#d1d1d1] bg-white px-2 py-1 text-[#201f1e] placeholder:text-[#8a8886]"
+                    className="w-40 rounded border border-[#c8c6c4] bg-white px-2 py-1 text-[#323130] placeholder:text-[#a19f9d]"
                   />
-                  <span className="flex items-center gap-1 rounded border border-[#d1d1d1] bg-white px-2 py-1 text-[#201f1e]">
+                  <span className="flex items-center gap-1 rounded border border-[#c8c6c4] bg-white px-2 py-1 text-[#323130]">
                     Subscription equals all <ChevronDown size={11} />
                   </span>
-                  <span className="flex items-center gap-1 rounded border border-[#d1d1d1] bg-white px-2 py-1 text-[#201f1e]">
+                  <span className="flex items-center gap-1 rounded border border-[#c8c6c4] bg-white px-2 py-1 text-[#323130]">
                     Location equals all <ChevronDown size={11} />
                   </span>
                   <span className="flex items-center gap-1 text-[#0078d4]">
-                    <Plus size={11} /> Add filter
+                    <Add24Regular fontSize={11} /> Add filter
                   </span>
                 </div>
 
@@ -210,12 +199,12 @@ export default function LabEnvironment() {
 
                 <table className="w-full text-left text-[11px]">
                   <thead>
-                    <tr className="border-b border-black/10 text-[#605e5c]">
+                    <tr className="border-b border-[#e1e1e1] text-[#605e5c]">
                       {TABLE_COLUMNS.map((col) => (
                         <th key={col} className="pb-1.5 pr-3 font-medium">
                           <span className="flex items-center gap-1">
                             {col}
-                            <ChevronsUpDown size={10} />
+                            <ArrowSort24Regular fontSize={11} />
                           </span>
                         </th>
                       ))}
@@ -223,12 +212,12 @@ export default function LabEnvironment() {
                   </thead>
                   <tbody>
                     {TABLE_ROWS.map((row) => (
-                      <tr key={row.name} className="border-b border-black/5">
+                      <tr key={row.name} className="border-b border-[#f3f2f1]">
                         <td className="py-2 pr-3 text-[#0078d4]">{row.name}</td>
-                        <td className="py-2 pr-3 text-[#201f1e]">{row.domain}</td>
-                        <td className="py-2 pr-3 text-[#201f1e]">{row.resourceGroup}</td>
-                        <td className="py-2 pr-3 text-[#201f1e]">{row.location}</td>
-                        <td className="py-2 pr-3 text-[#201f1e]">{row.subscription}</td>
+                        <td className="py-2 pr-3 text-[#323130]">{row.domain}</td>
+                        <td className="py-2 pr-3 text-[#323130]">{row.resourceGroup}</td>
+                        <td className="py-2 pr-3 text-[#323130]">{row.location}</td>
+                        <td className="py-2 pr-3 text-[#323130]">{row.subscription}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -239,7 +228,7 @@ export default function LabEnvironment() {
         </div>
 
         <div className="flex items-center gap-3 border-t border-border-soft bg-panel-alt px-3 py-1.5 text-text-faint">
-          <LayoutGrid size={13} />
+          <Grid24Regular fontSize={14} />
           <span className="ml-auto text-[10px]">10:15 AM 20/05/2024</span>
         </div>
       </div>

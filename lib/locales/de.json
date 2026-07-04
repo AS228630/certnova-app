@@ -1,0 +1,133 @@
+{
+  "common": {
+    "appName": "CertCoach",
+    "language": "Deutsch",
+    "back": "Zurück",
+    "next": "Weiter",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "close": "Schließen",
+    "loading": "Lädt...",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "warning": "Warnung"
+  },
+  "lab": {
+    "title": "Lab: Erste Ressourcengruppe erstellen",
+    "description": "Erstelle deine erste Azure-Ressourcengruppe — entweder über das Portal oder direkt per Azure CLI in der Cloud Shell. Diese Simulation prüft dein Ergebnis in Echtzeit.",
+    "goal": "Erstelle eine Ressourcengruppe namens \"CC-Lab-RG\" in \"West Europe\" und darin ein Speicherkonto.",
+    "goalChecklist": [
+      "Ressourcengruppe mit dem Namen \"CC-Lab-RG\" erstellen",
+      "Region West Europe auswählen",
+      "Ein Speicherkonto in dieser Ressourcengruppe erstellen",
+      "Ergebnis über az group list / az storage account list bestätigen"
+    ],
+    "instructions": [
+      "Portal: Wähle links \"Resource groups\", klicke \"Create\", Name CC-Lab-RG, Region West Europe.",
+      "CLI: az group create --name CC-Lab-RG --location westeurope",
+      "Wähle danach links \"Storage accounts\" und erstelle eins in CC-Lab-RG (nur Kleinbuchstaben/Zahlen, 3-24 Zeichen).",
+      "CLI: az storage account create --name certcoachstorage --resource-group CC-Lab-RG --location westeurope",
+      "Die Checkliste rechts aktualisiert sich automatisch, sobald beide Ressourcen korrekt existieren."
+    ],
+    "details": {
+      "azureRegion": "Azure Region",
+      "requiredRoles": "Benötigte Rollen",
+      "resourceGroup": "Ressourcengruppe",
+      "resources": "Ressourcen",
+      "costs": "Kosten",
+      "westEurope": "West Europe",
+      "contributor": "Mitwirkender",
+      "ccLabRg": "CC-Lab-RG",
+      "free": "$0.00 (im Lab enthalten)"
+    },
+    "resources": {
+      "title": "Labressourcen",
+      "active": "Aktiv",
+      "inactive": "Inaktiv",
+      "resourceGroupNotCreated": "Resource Group (noch nicht erstellt)",
+      "storageAccountNotCreated": "Storage Account (noch nicht erstellt)"
+    },
+    "tasks": {
+      "title": "Aufgaben-Checklist",
+      "validateResults": "Ergebnisse validieren"
+    },
+    "status": {
+      "title": "Lab-Status",
+      "progress": "Fortschritt",
+      "points": "Punkte",
+      "attempts": "Versuche",
+      "lastReset": "Letzter Reset: Heute, 10:00"
+    },
+    "portal": {
+      "home": "Home",
+      "dashboard": "Dashboard",
+      "resourceGroups": "Ressourcengruppen",
+      "storageAccounts": "Speicherkonten",
+      "virtualMachines": "Virtuelle Computer",
+      "allServices": "Alle Dienste",
+      "resourceGroupsDesc": "Erstellen und verwalten Sie Ressourcengruppen",
+      "create": "+ Erstellen",
+      "noResourceGroups": "Keine Ressourcengruppen gefunden",
+      "createResourceGroupDesc": "Erstellen Sie eine neue Ressourcengruppe, um zu beginnen",
+      "search": "Nach Ressourcen, Services und Docs suchen..."
+    },
+    "cloudShell": {
+      "title": "Cloud Shell",
+      "welcome": "Willkommen in der Azure Cloud Shell (Simulation).",
+      "example": "Gib z.B. ein: az group create --name CC-Lab-RG --location westeurope",
+      "availableCommands": "Verfügbare Befehle:"
+    },
+    "help": {
+      "title": "Dokumentation & Hilfe",
+      "whatIsResourceGroup": "Was ist eine Ressourcengruppe?",
+      "azGroupCreateRef": "az group create Referenz",
+      "contactSupport": "Support kontaktieren"
+    },
+    "tags": {
+      "onlineLab": "Online-Lab",
+      "secureEnvironment": "Sichere Umgebung",
+      "resetPossible": "Reset möglich",
+      "autoValidation": "Auto-Validierung",
+      "stepByStep": "Schritt-für-Schritt-Anleitung"
+    },
+    "timeRemaining": "Verbleibende Zeit",
+    "endLab": "Lab beenden",
+    "labDetails": "Lab-Details",
+    "labInstructions": "Lab-Anweisungen",
+    "labGoal": "Ziel des Labs"
+  },
+  "vocabulary": {
+    "resourceGroup": {
+      "de": "Ressourcengruppe",
+      "definition": "Ein Container, der zusammengehörige Azure-Ressourcen enthält.",
+      "golden": true
+    },
+    "storageAccount": {
+      "de": "Speicherkonto",
+      "definition": "Ein Azure-Speicherkonto bietet einen eindeutigen Namespace für Ihre Azure Storage-Daten.",
+      "golden": true
+    },
+    "cloudShell": {
+      "de": "Cloud Shell",
+      "definition": "Ein interaktives Shell-Fenster, mit dem Sie Azure-Ressourcen über die Befehlszeile verwalten können.",
+      "golden": true
+    },
+    "azureCli": {
+      "de": "Azure CLI",
+      "definition": "Die Azure Befehlszeilenschnittstelle (CLI) ist ein Tool für die Verwaltung von Azure-Ressourcen.",
+      "golden": true
+    },
+    "location": {
+      "de": "Region",
+      "definition": "Das geografische Rechenzentrum, in dem Ihre Ressourcen gehostet werden.",
+      "golden": true
+    },
+    "westEurope": {
+      "de": "West Europe",
+      "definition": "Azure-Region in den Niederlanden, betrieben von Microsoft.",
+      "golden": false
+    }
+  }
+}
