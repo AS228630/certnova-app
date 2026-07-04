@@ -12,31 +12,53 @@ import {
   RefreshCw,
   MessageSquare,
   X,
+  Home,
+  LayoutDashboard,
+  Grid3x3,
+  List,
+  FolderKanban,
+  AppWindow,
+  Zap,
+  Database,
+  Server,
+  Waypoints,
+  HardDrive,
+  Share2,
+  Users,
+  Activity,
+  Lightbulb,
+  ShieldCheck,
+  HelpCircle,
+  Settings,
+  Bell,
+  ChevronsUpDown,
 } from "lucide-react";
 
 const NAV_ITEMS = [
-  "Create a resource",
-  "Home",
-  "Dashboard",
-  "All services",
+  { label: "Create a resource", icon: Plus },
+  { label: "Home", icon: Home },
+  { label: "Dashboard", icon: LayoutDashboard },
+  { label: "All services", icon: Grid3x3 },
 ];
 
 const FAVORITE_ITEMS = [
-  "All resources",
-  "Resource groups",
-  "App Services",
-  "Function App",
-  "SQL databases",
-  "Azure Cosmos DB",
-  "Virtual machines",
-  "Load balancers",
-  "Storage accounts",
-  "Virtual networks",
-  "Azure Active Directory",
-  "Monitor",
-  "Advisor",
-  "Microsoft Defender for Cloud",
+  { label: "All resources", icon: List },
+  { label: "Resource groups", icon: FolderKanban },
+  { label: "App Services", icon: AppWindow },
+  { label: "Function App", icon: Zap },
+  { label: "SQL databases", icon: Database },
+  { label: "Azure Cosmos DB", icon: Database },
+  { label: "Virtual machines", icon: Server },
+  { label: "Load balancers", icon: Waypoints },
+  { label: "Storage accounts", icon: HardDrive },
+  { label: "Virtual networks", icon: Share2 },
+  { label: "Azure Active Directory", icon: Users },
+  { label: "Monitor", icon: Activity },
+  { label: "Advisor", icon: Lightbulb },
+  { label: "Microsoft Defender for Cloud", icon: ShieldCheck },
 ];
+
+const TABLE_COLUMNS = ["Name", "Domain Name", "Resource Group", "Location", "Subscription"];
 
 const TABLE_ROWS = [
   {
@@ -76,100 +98,132 @@ export default function LabEnvironment() {
         </div>
 
         <div className="overflow-x-auto">
-          <div className="flex h-[380px] min-w-[760px] bg-[#0f1420] text-[#e2e5ea]">
-            <div className="w-44 shrink-0 overflow-y-auto border-r border-white/10 bg-[#141a29] p-2 text-[11px]">
-              {NAV_ITEMS.map((n) => (
-                <p key={n} className="cursor-default truncate rounded px-1.5 py-1.5 text-[#c7cbd4] hover:bg-white/5">
-                  {n}
-                </p>
-              ))}
-              <p className="mt-2 px-1.5 pb-1 font-semibold text-[#8b92a3]">FAVORITES</p>
-              {FAVORITE_ITEMS.map((n) => (
-                <p
-                  key={n}
-                  className={`cursor-default truncate rounded px-1.5 py-1.5 hover:bg-white/5 ${
-                    n === "Azure Active Directory" ? "bg-primary/20 text-primary" : "text-[#c7cbd4]"
-                  }`}
-                >
-                  {n}
-                </p>
-              ))}
+          <div className="min-w-[760px] bg-[#0f1420] text-[#e2e5ea]">
+            {/* Real Azure-style top bar */}
+            <div className="flex items-center gap-4 border-b border-white/10 bg-[#0b1220] px-3 py-1.5">
+              <span className="flex items-center gap-1.5 text-sm font-semibold text-white">
+                <Grid3x3 size={15} className="text-[#50b4ff]" />
+                Microsoft Azure
+              </span>
+              <div className="flex flex-1 items-center gap-2 rounded bg-white/5 px-2 py-1">
+                <Search size={12} className="text-[#8b92a3]" />
+                <span className="text-[11px] text-[#8b92a3]">Search resources, services, and docs (G+/)</span>
+              </div>
+              <div className="flex items-center gap-3 text-[#c7cbd4]">
+                <HelpCircle size={14} />
+                <Settings size={14} />
+                <Bell size={14} />
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#50b4ff] text-[9px] font-bold text-white">
+                  A
+                </span>
+              </div>
             </div>
 
-            <div className="w-[540px] shrink-0 overflow-y-auto p-4">
-            <p className="mb-1 text-[11px] text-[#8b92a3]">
-              Home <span className="mx-1">&gt;</span> Azure AD B2C
-            </p>
-            <h3 className="mb-3 text-lg font-semibold text-white">Azure AD B2C</h3>
-            <p className="mb-3 text-[11px] text-[#8b92a3]">CertCoach</p>
-
-            <div className="mb-3 flex flex-wrap items-center gap-4 border-b border-white/10 pb-2 text-xs text-[#c7cbd4]">
-              <span className="flex items-center gap-1">
-                <Plus size={13} /> Create
-              </span>
-              <span className="flex items-center gap-1">
-                <LayoutGrid size={13} /> Manage view <ChevronDown size={11} />
-              </span>
-              <span className="flex items-center gap-1">
-                <Trash2 size={13} /> Delete
-              </span>
-              <span className="flex items-center gap-1">
-                <RefreshCw size={13} /> Refresh
-              </span>
-              <span className="flex items-center gap-1">
-                <MessageSquare size={13} /> Got feedback?
-              </span>
-            </div>
-
-            <div className="mb-3 flex items-center justify-between rounded border border-[#2b6cb0]/40 bg-[#12253f] px-3 py-1.5 text-[11px] text-[#9cc4ec]">
-              <span className="flex items-center gap-1.5">
-                <Info size={12} />
-                Click here to switch back to the old Azure AD B2C experience.
-              </span>
-              <X size={12} className="text-[#9cc4ec]" />
-            </div>
-
-            <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px]">
-              <input
-                readOnly
-                placeholder="Filter for any field..."
-                className="w-40 rounded border border-white/15 bg-[#141a29] px-2 py-1 text-[#c7cbd4] placeholder:text-[#6b7284]"
-              />
-              <span className="flex items-center gap-1 rounded border border-white/15 bg-[#141a29] px-2 py-1 text-[#c7cbd4]">
-                Subscription equals all <ChevronDown size={11} />
-              </span>
-              <span className="flex items-center gap-1 rounded border border-white/15 bg-[#141a29] px-2 py-1 text-[#c7cbd4]">
-                Location equals all <ChevronDown size={11} />
-              </span>
-              <span className="flex items-center gap-1 text-[#9cc4ec]">
-                <Plus size={11} /> Add filter
-              </span>
-            </div>
-
-            <p className="mb-2 text-[11px] text-[#8b92a3]">Showing 1 to 1 of 1 records</p>
-
-            <table className="w-full text-left text-[11px]">
-              <thead>
-                <tr className="border-b border-white/10 text-[#8b92a3]">
-                  <th className="pb-1.5 font-medium">Name</th>
-                  <th className="pb-1.5 font-medium">Domain Name</th>
-                  <th className="pb-1.5 font-medium">Resource Group</th>
-                  <th className="pb-1.5 font-medium">Location</th>
-                  <th className="pb-1.5 font-medium">Subscription</th>
-                </tr>
-              </thead>
-              <tbody>
-                {TABLE_ROWS.map((row) => (
-                  <tr key={row.name} className="border-b border-white/5">
-                    <td className="py-2 text-[#9cc4ec]">{row.name}</td>
-                    <td className="py-2 text-[#c7cbd4]">{row.domain}</td>
-                    <td className="py-2 text-[#c7cbd4]">{row.resourceGroup}</td>
-                    <td className="py-2 text-[#c7cbd4]">{row.location}</td>
-                    <td className="py-2 text-[#c7cbd4]">{row.subscription}</td>
-                  </tr>
+            <div className="flex h-[360px]">
+              <div className="w-44 shrink-0 overflow-y-auto border-r border-white/10 bg-[#141a29] p-2 text-[11px]">
+                {NAV_ITEMS.map((n) => (
+                  <p
+                    key={n.label}
+                    className="flex cursor-default items-center gap-2 truncate rounded px-1.5 py-1.5 text-[#c7cbd4] hover:bg-white/5"
+                  >
+                    <n.icon size={13} className="shrink-0 text-[#8b92a3]" />
+                    {n.label}
+                  </p>
                 ))}
-              </tbody>
-            </table>
+                <p className="mt-2 flex items-center gap-1 px-1.5 pb-1 font-semibold text-[#8b92a3]">
+                  ★ FAVORITES
+                </p>
+                {FAVORITE_ITEMS.map((n) => (
+                  <p
+                    key={n.label}
+                    className={`flex cursor-default items-center gap-2 truncate rounded px-1.5 py-1.5 hover:bg-white/5 ${
+                      n.label === "Azure Active Directory" ? "bg-primary/20 text-primary" : "text-[#c7cbd4]"
+                    }`}
+                  >
+                    <n.icon size={13} className="shrink-0 text-[#8b92a3]" />
+                    {n.label}
+                  </p>
+                ))}
+              </div>
+
+              <div className="w-[540px] shrink-0 overflow-y-auto p-4">
+                <p className="mb-1 text-[11px] text-[#8b92a3]">
+                  Home <span className="mx-1">&gt;</span> Azure AD B2C
+                </p>
+                <h3 className="mb-3 text-lg font-semibold text-white">Azure AD B2C</h3>
+                <p className="mb-3 text-[11px] text-[#8b92a3]">CertCoach</p>
+
+                <div className="mb-3 flex flex-wrap items-center gap-4 border-b border-white/10 pb-2 text-xs text-[#c7cbd4]">
+                  <span className="flex items-center gap-1">
+                    <Plus size={13} /> Create
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <LayoutGrid size={13} /> Manage view <ChevronDown size={11} />
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Trash2 size={13} /> Delete
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <RefreshCw size={13} /> Refresh
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <MessageSquare size={13} /> Got feedback?
+                  </span>
+                </div>
+
+                <div className="mb-3 flex items-center justify-between rounded border border-[#2b6cb0]/40 bg-[#12253f] px-3 py-1.5 text-[11px] text-[#9cc4ec]">
+                  <span className="flex items-center gap-1.5">
+                    <Info size={12} />
+                    Click here to switch back to the old Azure AD B2C experience.
+                  </span>
+                  <X size={12} className="text-[#9cc4ec]" />
+                </div>
+
+                <div className="mb-2 flex flex-wrap items-center gap-2 text-[11px]">
+                  <input
+                    readOnly
+                    placeholder="Filter for any field..."
+                    className="w-40 rounded border border-white/15 bg-[#141a29] px-2 py-1 text-[#c7cbd4] placeholder:text-[#6b7284]"
+                  />
+                  <span className="flex items-center gap-1 rounded border border-white/15 bg-[#141a29] px-2 py-1 text-[#c7cbd4]">
+                    Subscription equals all <ChevronDown size={11} />
+                  </span>
+                  <span className="flex items-center gap-1 rounded border border-white/15 bg-[#141a29] px-2 py-1 text-[#c7cbd4]">
+                    Location equals all <ChevronDown size={11} />
+                  </span>
+                  <span className="flex items-center gap-1 text-[#9cc4ec]">
+                    <Plus size={11} /> Add filter
+                  </span>
+                </div>
+
+                <p className="mb-2 text-[11px] text-[#8b92a3]">Showing 1 to 1 of 1 records</p>
+
+                <table className="w-full text-left text-[11px]">
+                  <thead>
+                    <tr className="border-b border-white/10 text-[#8b92a3]">
+                      {TABLE_COLUMNS.map((col) => (
+                        <th key={col} className="pb-1.5 pr-3 font-medium">
+                          <span className="flex items-center gap-1">
+                            {col}
+                            <ChevronsUpDown size={10} />
+                          </span>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {TABLE_ROWS.map((row) => (
+                      <tr key={row.name} className="border-b border-white/5">
+                        <td className="py-2 pr-3 text-[#9cc4ec]">{row.name}</td>
+                        <td className="py-2 pr-3 text-[#c7cbd4]">{row.domain}</td>
+                        <td className="py-2 pr-3 text-[#c7cbd4]">{row.resourceGroup}</td>
+                        <td className="py-2 pr-3 text-[#c7cbd4]">{row.location}</td>
+                        <td className="py-2 pr-3 text-[#c7cbd4]">{row.subscription}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
