@@ -98,7 +98,7 @@ export default function LabEnvironment() {
         </div>
 
         <div className="overflow-x-auto">
-          <div className="min-w-[760px] bg-[#0f1420] text-[#e2e5ea]">
+          <div className="min-w-[760px] bg-white text-[#201f1e]">
             {/* Real Azure-style top bar (white, matching the actual Azure Portal) */}
             <div className="flex items-center gap-4 border-b border-black/10 bg-white px-3 py-1.5">
               <span className="flex items-center gap-1.5 text-sm font-semibold text-[#1b1b1f]">
@@ -125,27 +125,32 @@ export default function LabEnvironment() {
             </div>
 
             <div className="flex h-[360px]">
-              <div className="w-44 shrink-0 overflow-y-auto border-r border-white/10 bg-[#141a29] p-2 text-[11px]">
+              <div className="w-44 shrink-0 overflow-y-auto border-r border-black/10 bg-white p-2 text-[11px]">
                 {NAV_ITEMS.map((n) => (
                   <p
                     key={n.label}
-                    className="flex cursor-default items-center gap-2 truncate rounded px-1.5 py-1.5 text-[#c7cbd4] hover:bg-white/5"
+                    className="flex cursor-default items-center gap-2 truncate rounded px-1.5 py-1.5 text-[#323130] hover:bg-black/5"
                   >
-                    <n.icon size={13} className="shrink-0 text-[#8b92a3]" />
+                    <n.icon size={13} className="shrink-0 text-[#605e5c]" />
                     {n.label}
                   </p>
                 ))}
-                <p className="mt-2 flex items-center gap-1 px-1.5 pb-1 font-semibold text-[#8b92a3]">
+                <p className="mt-2 flex items-center gap-1 px-1.5 pb-1 font-semibold text-[#605e5c]">
                   ★ FAVORITES
                 </p>
                 {FAVORITE_ITEMS.map((n) => (
                   <p
                     key={n.label}
-                    className={`flex cursor-default items-center gap-2 truncate rounded px-1.5 py-1.5 hover:bg-white/5 ${
-                      n.label === "Azure Active Directory" ? "bg-primary/20 text-primary" : "text-[#c7cbd4]"
+                    className={`flex cursor-default items-center gap-2 truncate rounded px-1.5 py-1.5 hover:bg-black/5 ${
+                      n.label === "Azure Active Directory"
+                        ? "bg-[#f0f6fc] text-[#0078d4]"
+                        : "text-[#323130]"
                     }`}
                   >
-                    <n.icon size={13} className="shrink-0 text-[#8b92a3]" />
+                    <n.icon
+                      size={13}
+                      className={`shrink-0 ${n.label === "Azure Active Directory" ? "text-[#0078d4]" : "text-[#605e5c]"}`}
+                    />
                     {n.label}
                   </p>
                 ))}
