@@ -101,7 +101,7 @@ function InteractiveResourceGroupLab({
           <LabOverviewPanel lab={lab} />
         </div>
 
-        <div className="space-y-6 lg:order-2">
+        <div className="min-w-0 space-y-6 lg:order-2">
           <ChaosModeToggle />
           <AzurePortalFrame breadcrumb={["Home", sectionLabel, ...(activeBlade === "create" ? [`Create ${activeSection === "resource-groups" ? "a resource group" : "a storage account"}`] : [])]}>
             {bladeContent}
@@ -211,7 +211,7 @@ export default function LabClient({
           <LabOverviewPanel lab={lab} />
         </div>
 
-        <div className="space-y-6 lg:order-2">
+        <div className="min-w-0 space-y-6 lg:order-2">
           <VirtualEnvironment />
         </div>
 
