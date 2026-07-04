@@ -35,27 +35,27 @@ import {
 } from "@fluentui/react-icons";
 
 const NAV_ITEMS = [
-  { label: "Create a resource", icon: Add24Regular },
-  { label: "Home", icon: Home24Color },
-  { label: "Dashboard", icon: ViewDesktop24Regular },
-  { label: "All services", icon: Apps24Color },
+  { label: "Create a resource", icon: Add24Regular, color: "#0078d4" },
+  { label: "Home", icon: Home24Color, color: "#0078d4" },
+  { label: "Dashboard", icon: ViewDesktop24Regular, color: "#0078d4" },
+  { label: "All services", icon: Apps24Color, color: "#0078d4" },
 ];
 
 const FAVORITE_ITEMS = [
-  { label: "All resources", icon: List24Regular },
-  { label: "Resource groups", icon: Folder24Regular },
-  { label: "App Services", icon: WindowDevTools24Regular },
-  { label: "Function App", icon: Flash24Regular },
-  { label: "SQL databases", icon: Database24Color },
-  { label: "Azure Cosmos DB", icon: Database24Color },
-  { label: "Virtual machines", icon: Server24Regular },
-  { label: "Load balancers", icon: Scales24Regular },
-  { label: "Storage accounts", icon: Storage24Regular },
-  { label: "Virtual networks", icon: VirtualNetwork24Regular },
-  { label: "Azure Active Directory", icon: PeopleTeam24Color },
-  { label: "Monitor", icon: Pulse24Regular },
-  { label: "Advisor", icon: Lightbulb24Color },
-  { label: "Microsoft Defender for Cloud", icon: ShieldCheckmark24Color },
+  { label: "All resources", icon: List24Regular, color: "#0078d4" },
+  { label: "Resource groups", icon: Folder24Regular, color: "#0078d4" },
+  { label: "App Services", icon: WindowDevTools24Regular, color: "#0062ad" },
+  { label: "Function App", icon: Flash24Regular, color: "#f2a815" },
+  { label: "SQL databases", icon: Database24Color, color: "#0078d4" },
+  { label: "Azure Cosmos DB", icon: Database24Color, color: "#0078d4" },
+  { label: "Virtual machines", icon: Server24Regular, color: "#0089d6" },
+  { label: "Load balancers", icon: Scales24Regular, color: "#5c2d91" },
+  { label: "Storage accounts", icon: Storage24Regular, color: "#0078d4" },
+  { label: "Virtual networks", icon: VirtualNetwork24Regular, color: "#00bcf2" },
+  { label: "Azure Active Directory", icon: PeopleTeam24Color, color: "#0078d4" },
+  { label: "Monitor", icon: Pulse24Regular, color: "#7fba00" },
+  { label: "Advisor", icon: Lightbulb24Color, color: "#f2c811" },
+  { label: "Microsoft Defender for Cloud", icon: ShieldCheckmark24Color, color: "#7fba00" },
 ];
 
 const TABLE_COLUMNS = ["Name", "Domain Name", "Resource Group", "Location", "Subscription"];
@@ -72,7 +72,7 @@ const TABLE_ROWS = [
 
 export default function LabEnvironment() {
   return (
-    <div className="rounded-2xl border border-border-soft bg-panel p-3 sm:p-4">
+    <div className="rounded-2xl border border-border-soft bg-panel p-4 sm:p-6">
       <div className="mb-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <h2 className="font-bold text-text">Virtuelle Umgebung</h2>
@@ -125,7 +125,7 @@ export default function LabEnvironment() {
                     key={n.label}
                     className="flex cursor-default items-center gap-2 truncate rounded px-1.5 py-1.5 text-[#323130] hover:bg-[#eeeeee]"
                   >
-                    <n.icon fontSize={16} className="shrink-0 text-[#0078d4]" />
+                    <n.icon fontSize={16} className="shrink-0" style={{ color: n.color }} />
                     {n.label}
                   </p>
                 ))}
@@ -139,7 +139,7 @@ export default function LabEnvironment() {
                       n.label === "Azure Active Directory" ? "bg-[#deecf9] text-[#0078d4]" : "text-[#323130]"
                     }`}
                   >
-                    <n.icon fontSize={16} className="shrink-0 text-[#0078d4]" />
+                    <n.icon fontSize={16} className="shrink-0" style={{ color: n.color }} />
                     {n.label}
                   </p>
                 ))}
