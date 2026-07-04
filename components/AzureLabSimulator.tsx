@@ -2,12 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { 
-  Home,
-  BarChart3,
-  Cloud,
-  HardDrive,
-  Zap,
-  Search,
   X,
   Play,
   RotateCcw,
@@ -15,6 +9,17 @@ import {
   ChevronDown,
   Terminal,
 } from 'lucide-react';
+import {
+  Home24Regular,
+  Board24Regular,
+  FolderHorizontal24Regular,
+  Database24Regular,
+  VirtualNetwork24Regular,
+  Apps24Regular,
+  Search24Regular,
+  Settings24Regular,
+  QuestionCircle24Regular,
+} from '@fluentui/react-icons';
 
 interface AzureLabSimulatorProps {
   labId: string;
@@ -151,7 +156,7 @@ export default function AzureLabSimulator({
               <span className="font-semibold text-sm">Microsoft Azure</span>
             </div>
             <div className="flex items-center gap-3 flex-1 mx-6">
-              <Search size={18} className="text-white/60" />
+              <Search24Regular primaryFill="rgba(255,255,255,0.6)" />
               <input 
                 type="text" 
                 placeholder="Nach Ressourcen, Services und Docs suchen..." 
@@ -167,28 +172,32 @@ export default function AzureLabSimulator({
 
           {/* Portal Content - Light Mode */}
           <div className="flex flex-1 overflow-hidden bg-white">
-            {/* Portal Sidebar - Light */}
+            {/* Portal Sidebar - Light with Fluent Icons */}
             <div className="w-56 bg-[#f2f2f2] border-r border-gray-300 overflow-y-auto">
               <div className="p-4">
                 <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white text-[#323130] text-sm font-medium transition">
-                  <Home size={18} className="text-[#0078d4]" />
+                  <Home24Regular primaryFill="#0078d4" />
                   <span>Home</span>
                 </button>
                 <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white text-[#323130] text-sm font-medium transition mt-1">
-                  <BarChart3 size={18} className="text-[#7FBA00]" />
+                  <Board24Regular primaryFill="#7FBA00" />
                   <span>Dashboard</span>
                 </button>
                 <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg bg-white text-[#323130] text-sm font-medium transition mt-1 border-l-4 border-[#0078d4]">
-                  <Cloud size={18} className="text-[#0078d4]" />
+                  <FolderHorizontal24Regular primaryFill="#0078d4" />
                   <span>Ressourcengruppen</span>
                 </button>
                 <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white text-[#323130] text-sm font-medium transition mt-1">
-                  <HardDrive size={18} className="text-[#005a9e]" />
+                  <Database24Regular primaryFill="#005a9e" />
                   <span>Speicherkonten</span>
                 </button>
                 <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white text-[#323130] text-sm font-medium transition mt-1">
-                  <Zap size={18} className="text-[#f25022]" />
+                  <VirtualNetwork24Regular primaryFill="#f25022" />
                   <span>Virtuelle Computer</span>
+                </button>
+                <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white text-[#323130] text-sm font-medium transition mt-1">
+                  <Apps24Regular primaryFill="#7fba00" />
+                  <span>Alle Dienste</span>
                 </button>
               </div>
             </div>
@@ -201,14 +210,14 @@ export default function AzureLabSimulator({
               </div>
 
               {/* Create Button */}
-              <button className="px-4 py-2 bg-[#0078d4] text-white rounded-lg hover:bg-[#106ebe] font-medium text-sm mb-6">
-                + Erstellen
+              <button className="px-4 py-2 bg-[#0078d4] text-white rounded-lg hover:bg-[#106ebe] font-medium text-sm mb-6 flex items-center gap-2">
+                <span>+ Erstellen</span>
               </button>
 
               {/* Content Area */}
               <div className="border border-gray-300 rounded-lg p-6 bg-gray-50">
                 <div className="text-center text-[#5b6178]">
-                  <Cloud size={48} className="mx-auto mb-4 text-gray-400" />
+                  <FolderHorizontal24Regular primaryFill="rgb(209, 211, 212)" className="mx-auto mb-4" style={{ width: 48, height: 48 }} />
                   <p className="font-medium">Keine Ressourcengruppen gefunden</p>
                   <p className="text-sm mt-1">Erstellen Sie eine neue Ressourcengruppe, um zu beginnen</p>
                 </div>
@@ -315,7 +324,10 @@ export default function AzureLabSimulator({
 
           {/* Help & Support */}
           <div className="bg-panel border border-border-soft rounded-lg p-4">
-            <h3 className="font-bold text-text mb-3 text-sm">Dokumentation & Hilfe</h3>
+            <h3 className="font-bold text-text mb-3 text-sm flex items-center gap-2">
+              <QuestionCircle24Regular primaryFill="currentColor" />
+              Dokumentation & Hilfe
+            </h3>
             <div className="space-y-2">
               <a href="#" className="block text-xs text-primary hover:underline">
                 Was ist eine Ressourcengruppe?
