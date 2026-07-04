@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, Circle, ExternalLink, LifeBuoy, BookOpen } from "lucide-react";
+import { CheckCircle2, Circle } from "lucide-react";
 import type { Lab, LabTask } from "@/lib/labsData";
 
 export default function LabSidebar({
@@ -82,40 +82,33 @@ export default function LabSidebar({
         )}
       </div>
 
-      {lab.docs.length > 0 && (
-        <div className="rounded-2xl border border-border-soft bg-panel p-5">
-          <p className="mb-3 flex items-center gap-1.5 text-sm font-bold text-text">
-            <BookOpen size={14} />
-            Dokumentation &amp; Hilfe
-          </p>
-          <ul className="space-y-2">
-            {lab.docs.map((d) => (
-              <li key={d.url}>
-                <a
-                  href={d.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center gap-1.5 text-sm text-text-muted hover:text-primary"
-                >
-                  <ExternalLink size={12} className="flex-none" />
-                  {d.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
       <div className="rounded-2xl border border-border-soft bg-panel p-5">
-        <p className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-text">
-          <LifeBuoy size={14} />
-          Support
-        </p>
-        <p className="mb-3 text-xs text-text-muted">Brauchen Sie Hilfe? Unser Support-Team ist für Sie da.</p>
-        <button className="w-full rounded-lg border border-border-soft py-2 text-xs font-semibold text-text hover:border-primary hover:text-primary">
-          Ticket erstellen
-        </button>
+        <p className="mb-3 text-sm font-bold text-text">Lab-Status</p>
+        <div className="mb-3">
+          <div className="mb-1.5 flex items-center justify-between text-xs">
+            <span className="text-text-faint">Fortschritt</span>
+            <span className="font-semibold text-text">{progress}%</span>
+          </div>
+          <div className="h-1.5 w-full rounded-full bg-panel-alt">
+            <div className="h-1.5 rounded-full bg-primary" style={{ width: `${progress}%` }} />
+          </div>
+        </div>
+        <div className="space-y-1.5 text-xs">
+          <div className="flex items-center justify-between">
+            <span className="text-text-faint">Punkte</span>
+            <span className="font-semibold text-text">{progress} / 100</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-text-faint">Versuche</span>
+            <span className="font-semibold text-text">1 / 3</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-text-faint">Letzter Reset</span>
+            <span className="font-semibold text-text">Noch nicht</span>
+          </div>
+        </div>
       </div>
+
     </div>
   );
 }

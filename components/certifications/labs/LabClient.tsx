@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { BookOpen, ExternalLink, LifeBuoy } from "lucide-react";
 import type { Lab, LabTask } from "@/lib/labsData";
 import { useLabStore, TARGET_RG_NAME } from "@/lib/store/labStore";
 import LabHeader from "./LabHeader";
@@ -218,6 +219,47 @@ export default function LabClient({
           <LabSidebar lab={lab} tasks={tasks} onToggleTask={toggleTask} />
         </div>
       </div>
+
+      {(lab.docs.length > 0 || true) && (
+        <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr_300px]">
+          <div className="hidden lg:order-1 lg:block" />
+
+          {lab.docs.length > 0 && (
+            <div className="rounded-2xl border border-border-soft bg-panel p-5 lg:order-2">
+              <p className="mb-3 flex items-center gap-1.5 text-sm font-bold text-text">
+                <BookOpen size={14} />
+                Dokumentation &amp; Hilfe
+              </p>
+              <ul className="space-y-2">
+                {lab.docs.map((d) => (
+                  <li key={d.url}>
+                    <a
+                      href={d.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-1.5 text-sm text-text-muted hover:text-primary"
+                    >
+                      <ExternalLink size={12} className="flex-none" />
+                      {d.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <div className="rounded-2xl border border-border-soft bg-panel p-5 lg:order-3">
+            <p className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-text">
+              <LifeBuoy size={14} />
+              Support
+            </p>
+            <p className="mb-3 text-xs text-text-muted">Brauchen Sie Hilfe? Unser Support-Team ist für Sie da.</p>
+            <button className="w-full rounded-lg border border-border-soft py-2 text-xs font-semibold text-text hover:border-primary hover:text-primary">
+              Ticket erstellen
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
