@@ -12,7 +12,7 @@ import {
 import {
   Home24Regular,
   Board24Regular,
-  FolderHorizontal24Regular,
+  Folder24Regular,
   Database24Regular,
   VirtualNetwork24Regular,
   Apps24Regular,
@@ -75,7 +75,7 @@ export default function AzureLabSimulator({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="flex flex-col">
-              <p className="text-xs text-text-faint mb-1">Labs > Microsoft Azure > AZ-900</p>
+              <p className="text-xs text-text-faint mb-1">Labs {'>'} Microsoft Azure {'>'} AZ-900</p>
               <h1 className="text-xl font-bold text-text">{labTitle}</h1>
             </div>
           </div>
@@ -184,7 +184,7 @@ export default function AzureLabSimulator({
                   <span>Dashboard</span>
                 </button>
                 <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg bg-white text-[#323130] text-sm font-medium transition mt-1 border-l-4 border-[#0078d4]">
-                  <FolderHorizontal24Regular primaryFill="#0078d4" />
+                  <Folder24Regular primaryFill="#0078d4" />
                   <span>Ressourcengruppen</span>
                 </button>
                 <button className="w-full flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white text-[#323130] text-sm font-medium transition mt-1">
@@ -217,7 +217,7 @@ export default function AzureLabSimulator({
               {/* Content Area */}
               <div className="border border-gray-300 rounded-lg p-6 bg-gray-50">
                 <div className="text-center text-[#5b6178]">
-                  <FolderHorizontal24Regular primaryFill="rgb(209, 211, 212)" className="mx-auto mb-4" style={{ width: 48, height: 48 }} />
+                  <Folder24Regular primaryFill="rgb(209, 211, 212)" className="mx-auto mb-4" style={{ width: 48, height: 48 }} />
                   <p className="font-medium">Keine Ressourcengruppen gefunden</p>
                   <p className="text-sm mt-1">Erstellen Sie eine neue Ressourcengruppe, um zu beginnen</p>
                 </div>
