@@ -83,6 +83,7 @@ const QUICK_COMMANDS = [
 export default function LabEnvironment() {
   const [activeView, setActiveView] = useState<"home" | "b2c">("b2c");
   const [terminalOpen, setTerminalOpen] = useState(false);
+  const [shellChoice, setShellChoice] = useState<"bash" | "powershell" | null>(null);
   const [extraLines, setExtraLines] = useState<string[]>([]);
   const [boxSize, setBoxSize] = useState({ width: 760, height: 360 });
   const [maximized, setMaximized] = useState(false);
@@ -340,15 +341,59 @@ export default function LabEnvironment() {
         }`}
       >
         <div className="overflow-hidden">
-          <LabTerminal extraLines={extraLines} />
+          {shellChoice ? (
+            <LabTerminal extraLines={extraLines} initialTab={shellChoice} />
+          ) : (
+            <CloudShellWelcome onChoose={setShellChoice} />
+          )}
         </div>
       </div>
     </div>
   );
 }
 
-function LabTerminal({ extraLines = [] }: { extraLines?: string[] }) {
-  const [tab, setTab] = useState<"cloudshell" | "powershell">("cloudshell");
+function CloudShellWelcome({
+  onChoose,
+}: {
+  onChoose: (choice: "bash" | "powershell") => void;
+}) {
+  return (
+    <div className="mt-4 flex flex-col items-center rounded-xl border border-border-soft bg-panel p-6 text-center sm:p-8">
+      <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-lg bg-primary/15 text-primary">
+        <Prompt24Regular fontSize={22} />
+      </div>
+      <h3 className="mb-2 text-base font-bold text-text">Willkommen bei Azure Cloud Shell</h3>
+      <p className="mb-5 max-w-md text-xs text-text-muted">
+        Wählen Sie Bash oder PowerShell. Über die Umgebungsauswahl in der Cloud-Shell-Symbolleiste
+        können Sie Shells jederzeit wechseln — die zuletzt verwendete Umgebung wird als Standard
+        für die nächste Sitzung festgelegt.
+      </p>
+      <div className="flex gap-3">
+        <button
+          onClick={() => onChoose("bash")}
+          className="rounded-lg border border-border-soft px-5 py-2 text-sm font-semibold text-text hover:border-primary hover:text-primary"
+        >
+          Bash
+        </button>
+        <button
+          onClick={() => onChoose("powershell")}
+          className="rounded-lg bg-primary px-5 py-2 text-sm font-semibold text-white hover:bg-primary-dark"
+        >
+          PowerShell
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function LabTerminal({
+  extraLines = [],
+  initialTab = "bash",
+}: {
+  extraLines?: string[];
+  initialTab?: "bash" | "powershell";
+}) {
+  const [tab, setTab] = useState<"cloudshell" | "powershell">(initialTab === "bash" ? "cloudshell" : "powershell");
 
   return (
     <div className="mt-4 overflow-hidden rounded-xl border border-border-soft bg-black">

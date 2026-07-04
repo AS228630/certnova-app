@@ -146,7 +146,7 @@ export default function LabClient({
   const [remaining, setRemaining] = useState(lab.totalMinutes);
   const [tasks, setTasks] = useState<LabTask[]>(lab.tasks);
   const [ended, setEnded] = useState(false);
-  const [simulatorOpen, setSimulatorOpen] = useState(!lab.steps || lab.steps.length === 0);
+  const [simulatorOpen, setSimulatorOpen] = useState(true);
   const resetStore = useLabStore((s) => s.reset);
 
   useEffect(() => {
