@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
 import DashboardShell from "@/components/DashboardShell";
 import LearnClient from "@/components/certifications/learn/LearnClient";
-import { getCompany, companies } from "@/lib/companiesData";
+import { getCompany, getAzureLearnRolloutParams, isAzureLearnRolloutCert } from "@/lib/companiesData";
 import { getLearnTrack } from "@/lib/learnData";
 import { getCertJourney } from "@/lib/journeyData";
 
 export function generateStaticParams() {
-  return companies.flatMap((c) => c.certs.map((cert) => ({ company: c.slug, certId: cert.id })));
+  return getAzureLearnRolloutParams();
 }
 
 export default async function LearnPage({
@@ -15,6 +15,8 @@ export default async function LearnPage({
   params: Promise<{ company: string; certId: string }>;
 }) {
   const { company: slug, certId } = await params;
+  if (!isAzureLearnRolloutCert(slug, certId)) notFound();
+
   const company = getCompany(slug);
   const cert = company?.certs.find((c) => c.id === certId);
   const journey = getCertJourney(slug, certId);

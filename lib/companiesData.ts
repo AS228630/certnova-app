@@ -213,6 +213,24 @@ export const companies: Company[] = COMPANY_SEED.map((seed) => {
   };
 });
 
+// Learn / Labs / Practice are currently only rolled out for Microsoft's 16
+// Azure-track certifications (categoryKey === "azure"). Every other company
+// and every other Microsoft category (security, ai, data, m365, ...) still
+// shows the Lernpfad overview, just without these three sub-pages yet.
+// Extend this list deliberately as real content is authored for more certs.
+export function getAzureLearnRolloutParams(): { company: string; certId: string }[] {
+  const company = getCompany("microsoft");
+  if (!company) return [];
+  return company.certs.filter((c) => c.categoryKey === "azure").map((c) => ({ company: "microsoft", certId: c.id }));
+}
+
+export function isAzureLearnRolloutCert(companySlug: string, certId: string): boolean {
+  if (companySlug !== "microsoft") return false;
+  const company = getCompany(companySlug);
+  const cert = company?.certs.find((c) => c.id === certId);
+  return cert?.categoryKey === "azure";
+}
+
 export function getCompany(slug: string): Company | undefined {
   return companies.find((c) => c.slug === slug);
 }

@@ -96,7 +96,7 @@ function InteractiveResourceGroupLab({
         onEnd={onEnd}
       />
 
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr_300px]">
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[280px_minmax(0,1fr)_300px]">
         <div className="lg:order-1">
           <LabOverviewPanel lab={lab} />
         </div>
@@ -206,7 +206,7 @@ export default function LabClient({
         onEnd={() => setEnded(true)}
       />
 
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr_300px]">
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[280px_minmax(0,1fr)_300px]">
         <div className="lg:order-1">
           <LabOverviewPanel lab={lab} />
         </div>
@@ -221,7 +221,7 @@ export default function LabClient({
       </div>
 
       {(lab.docs.length > 0 || true) && (
-        <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr_300px]">
+        <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[280px_minmax(0,1fr)_300px]">
           <div className="hidden lg:order-1 lg:block" />
 
           {lab.docs.length > 0 && (

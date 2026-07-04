@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import DashboardShell from "@/components/DashboardShell";
-import { getCompany, companies } from "@/lib/companiesData";
+import { getCompany, getAzureLearnRolloutParams, isAzureLearnRolloutCert } from "@/lib/companiesData";
 import { getLab } from "@/lib/labsData";
 import LabClient from "@/components/certifications/labs/LabClient";
 
 export function generateStaticParams() {
-  return companies.flatMap((c) => c.certs.map((cert) => ({ company: c.slug, certId: cert.id })));
+  return getAzureLearnRolloutParams();
 }
 
 export default async function LabPage({
@@ -14,6 +14,8 @@ export default async function LabPage({
   params: Promise<{ company: string; certId: string }>;
 }) {
   const { company: companySlug, certId } = await params;
+  if (!isAzureLearnRolloutCert(companySlug, certId)) notFound();
+
   const company = getCompany(companySlug);
   if (!company) notFound();
 
