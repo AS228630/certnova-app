@@ -32,6 +32,7 @@ import {
   Info24Filled,
   Dismiss24Regular,
   ArrowSort24Regular,
+  Prompt24Regular,
 } from "@fluentui/react-icons";
 
 const NAV_ITEMS = [
@@ -70,7 +71,21 @@ const TABLE_ROWS = [
   },
 ];
 
+const QUICK_COMMANDS = [
+  { label: "Ressourcengruppe auflisten", cmd: "az group list", out: "CC-Lab-RG          westeurope" },
+  { label: "Speicherkonten auflisten", cmd: "az storage account list", out: "certcoachb2c        CC-Lab-RG" },
+  { label: "Aktuelles Abo anzeigen", cmd: "az account show", out: "Azure Pass - Sponsorship" },
+];
+
 export default function LabEnvironment() {
+  const [terminalOpen, setTerminalOpen] = useState(false);
+  const [extraLines, setExtraLines] = useState<string[]>([]);
+
+  function runQuickCommand(cmd: string, out: string) {
+    setTerminalOpen(true);
+    setExtraLines((prev) => [...prev, `PS /home/azureuser> ${cmd}`, out]);
+  }
+
   return (
     <div className="rounded-2xl border border-border-soft bg-panel p-4 sm:p-6">
       <div className="mb-3 flex items-center justify-between">
@@ -115,6 +130,13 @@ export default function LabEnvironment() {
                 <span className="text-[11px] text-[#605e5c]">Search resources, services, and docs (G+/)</span>
               </div>
               <div className="flex items-center gap-3 text-white">
+                <button
+                  onClick={() => setTerminalOpen((v) => !v)}
+                  title="Cloud Shell"
+                  className={`rounded p-0.5 ${terminalOpen ? "bg-white/20" : "hover:bg-white/10"}`}
+                >
+                  <Prompt24Regular fontSize={16} />
+                </button>
                 <QuestionCircle24Color fontSize={16} />
                 <Settings24Color fontSize={16} />
                 <Alert24Color fontSize={16} />
@@ -237,12 +259,33 @@ export default function LabEnvironment() {
         </div>
       </div>
 
-      <LabTerminal />
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <span className="text-[11px] font-semibold text-text-faint">Schnellbefehle:</span>
+        {QUICK_COMMANDS.map((q) => (
+          <button
+            key={q.cmd}
+            onClick={() => runQuickCommand(q.cmd, q.out)}
+            className="rounded-full border border-border-soft bg-panel-alt px-2.5 py-1 font-mono text-[10px] text-text-muted transition-colors hover:border-primary hover:text-primary"
+          >
+            {q.label}
+          </button>
+        ))}
+      </div>
+
+      <div
+        className={`grid transition-all duration-300 ease-out ${
+          terminalOpen ? "mt-3 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <LabTerminal extraLines={extraLines} />
+        </div>
+      </div>
     </div>
   );
 }
 
-function LabTerminal() {
+function LabTerminal({ extraLines = [] }: { extraLines?: string[] }) {
   const [tab, setTab] = useState<"cloudshell" | "powershell">("cloudshell");
 
   return (
@@ -267,6 +310,17 @@ function LabTerminal() {
         <p className="mt-1 text-slate-300">ResourceGroupName&emsp;&emsp;Location</p>
         <p className="text-slate-300">-----------------&emsp;&emsp;--------</p>
         <p className="text-slate-300">CC-Lab-RG&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;westeurope</p>
+        {extraLines.map((line, i) =>
+          line.startsWith("PS ") ? (
+            <p key={i} className="mt-1 text-emerald-400">
+              {line}
+            </p>
+          ) : (
+            <p key={i} className="text-slate-300">
+              {line}
+            </p>
+          )
+        )}
         <p className="mt-1">
           PS /home/azureuser&gt; <span className="animate-pulse">▍</span>
         </p>
