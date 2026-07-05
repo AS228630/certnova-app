@@ -1,11 +1,12 @@
 import type { Company, Certification } from "@/lib/companiesData";
 import type { LabInfrastructureType } from "@/lib/labInfrastructure";
 import type { Lab } from "@/lib/labsData";
-import { generateAwsLab, generateM365Lab } from "@/lib/labsData";
+import { generateAwsLab, generateM365Lab, generateLinuxLab } from "@/lib/labsData";
 import LabClient from "./LabClient";
 import ComingSoonLab from "./ComingSoonLab";
 import AwsConsoleEnvironment from "./aws/AwsConsoleEnvironment";
 import M365AdminEnvironment from "./m365/M365AdminEnvironment";
+import LinuxTerminalEnvironment from "./linux/LinuxTerminalEnvironment";
 
 type UniversalLabStageProps = {
   infrastructureType: LabInfrastructureType;
@@ -61,7 +62,20 @@ export default function UniversalLabStage({ infrastructureType, company, cert, l
         />
       );
 
-    // GOOGLE_CLOUD / WINDOWS_SERVER / LINUX / CISCO / GENERIC:
+    // LINUX: real isolated terminal (filesystem navigation, mkdir/touch/chmod).
+    case "LINUX":
+      return (
+        <LabClient
+          companyName={company.name}
+          companySlug={company.slug}
+          certCode={cert.code}
+          certId={cert.id}
+          lab={generateLinuxLab(cert.id, cert.title, cert.level)}
+          environment={<LinuxTerminalEnvironment />}
+        />
+      );
+
+    // GOOGLE_CLOUD / WINDOWS_SERVER / CISCO / GENERIC:
     // no dedicated runtime yet — every one of them lands here for now.
     default:
       return <ComingSoonLab company={company} cert={cert} />;

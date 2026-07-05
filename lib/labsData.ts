@@ -374,6 +374,49 @@ export function generateM365Lab(certId: string, certTitle: string, level: string
   };
 }
 
+export function generateLinuxLab(certId: string, certTitle: string, level: string): Lab {
+  return {
+    id: `${certId}-terminal-lab`,
+    title: `Lab: Linux-Terminal Grundlagen`,
+    description: `Wende die Konzepte von „${certTitle}“ praktisch an: navigiere das Dateisystem, lege Verzeichnisse an und setze Berechtigungen in einem echten, isolierten Linux-Terminal.`,
+    level: (level as Lab["level"]) ?? "Beginner",
+    durationLabel: "20-30 Minuten",
+    totalMinutes: 25 * 60,
+    tags: ["Online-Lab", "Sichere Umgebung", "Reset möglich", "Schritt-für-Schritt-Anleitung"],
+    goal: "Navigiere das Dateisystem, lege ein Verzeichnis mit einer Datei an und setze die richtigen Berechtigungen.",
+    goalChecklist: [
+      "Aktuelles Verzeichnis mit pwd anzeigen",
+      "Verzeichnis lab-data anlegen",
+      "Datei notes.txt in lab-data erstellen",
+      "Ausführungsrechte für notes.txt setzen",
+    ],
+    instructions: [
+      "Zeige mit pwd dein aktuelles Verzeichnis an.",
+      "Lege mit mkdir lab-data ein neues Verzeichnis an.",
+      "Wechsle mit cd lab-data hinein und erstelle mit touch notes.txt eine Datei.",
+      "Setze mit chmod +x notes.txt die Ausführungsrechte und überprüfe mit ls -l.",
+    ],
+    details: [
+      { label: "Distribution", value: "Ubuntu 22.04 LTS" },
+      { label: "Benötigte Rechte", value: "Standardnutzer (kein root)" },
+      { label: "Arbeitsverzeichnis", value: "/home/student" },
+      { label: "Ressourcen", value: "1 virtuelles Terminal" },
+      { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+    ],
+    resources: [{ id: "r1", label: "Linux-Terminal (Demo)", active: true }],
+    tasks: [
+      { id: "t1", label: "Verzeichnis anlegen", done: false },
+      { id: "t2", label: "Datei erstellen", done: false },
+      { id: "t3", label: "Berechtigungen setzen", done: false },
+      { id: "t4", label: "Ergebnis validieren", done: false },
+    ],
+    docs: [
+      { label: "Linux-Dateisystem-Grundlagen", url: "https://linuxjourney.com/" },
+      { label: "chmod-Berechtigungen erklärt", url: "https://en.wikipedia.org/wiki/Chmod" },
+    ],
+  };
+}
+
 export function getLab(certId: string, certTitle: string, level: string): Lab {
   return LABS[certId] ?? generateLab(certId, certTitle, level);
 }
