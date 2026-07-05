@@ -34,7 +34,7 @@ export type Lab = {
   /** Numbered sub-labs shown in the "Lab-Übersicht" overview grid. */
   steps?: LabStep[];
   /** When set, the lab renders a real, state-driven simulation instead of the static mock. */
-  interactive?: "resource-group" | "virtual-machine";
+  interactive?: "resource-group" | "virtual-machine" | "virtual-network";
   /** URL segment for this lab under /certifications/[company]/[certId]/labs/[labSlug]. */
   slug?: string;
 };
@@ -137,6 +137,56 @@ export const AZ104_VM_LAB: Lab = {
     { label: "az vm create Referenz", url: "https://learn.microsoft.com/de-de/cli/azure/vm" },
   ],
   interactive: "virtual-machine",
+};
+
+export const AZ104_VNET_LAB: Lab = {
+  id: "az104-vnet-creation",
+  slug: "vnet-creation",
+  title: "Lab: Virtuelles Netzwerk erstellen",
+  description:
+    "Erstelle eine Ressourcengruppe und darin ein virtuelles Netzwerk mit Subnetz — über das Portal oder direkt per Azure CLI in der Cloud Shell. Diese Simulation prüft dein Ergebnis in Echtzeit.",
+  level: "Beginner",
+  durationLabel: "20-30 Minuten",
+  totalMinutes: 25 * 60,
+  tags: ["Online-Lab", "Echtzeit-Validierung", "Reset möglich", "Portal + CLI"],
+  goal: 'Erstelle eine Ressourcengruppe namens "CC-Lab-RG" in "West Europe" und darin ein virtuelles Netzwerk namens "CC-Lab-VNet" mit Adressbereich 10.0.0.0/16.',
+  goalChecklist: [
+    'Ressourcengruppe mit dem Namen "CC-Lab-RG" erstellen',
+    "Region West Europe auswählen",
+    'Ein virtuelles Netzwerk namens "CC-Lab-VNet" mit Adressbereich 10.0.0.0/16 erstellen',
+    "Ergebnis über az group list / az network vnet list bestätigen",
+  ],
+  instructions: [
+    'Portal: Wähle links "Resource groups", klicke "Create", Name CC-Lab-RG, Region West Europe.',
+    'CLI: az group create --name CC-Lab-RG --location westeurope',
+    'Wähle danach links "Virtual networks" und erstelle eins namens CC-Lab-VNet in CC-Lab-RG mit Adressbereich 10.0.0.0/16.',
+    'CLI: az network vnet create --name CC-Lab-VNet --resource-group CC-Lab-RG --location westeurope --address-prefix 10.0.0.0/16 --subnet-name default --subnet-prefix 10.0.0.0/24',
+    "Die Checkliste rechts aktualisiert sich automatisch, sobald beide Ressourcen korrekt existieren.",
+  ],
+  details: [
+    { label: "Azure Region", value: "West Europe" },
+    { label: "Benötigte Rollen", value: "Netzwerkmitwirkender" },
+    { label: "Ziel-Ressourcengruppe", value: "CC-Lab-RG" },
+    { label: "Ressourcen", value: "2" },
+    { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+  ],
+  resources: [
+    { id: "r1", label: "Resource Group (noch nicht erstellt)", active: false },
+    { id: "r2", label: "Virtual Network (noch nicht erstellt)", active: false },
+  ],
+  tasks: [
+    { id: "rg-created", label: 'Ressourcengruppe "CC-Lab-RG" erstellt', done: false },
+    { id: "rg-region", label: "Region West Europe korrekt gesetzt", done: false },
+    { id: "vnet-created", label: 'Virtuelles Netzwerk "CC-Lab-VNet" mit 10.0.0.0/16 erstellt', done: false },
+  ],
+  docs: [
+    {
+      label: "Was ist ein virtuelles Netzwerk?",
+      url: "https://learn.microsoft.com/de-de/azure/virtual-network/virtual-networks-overview",
+    },
+    { label: "az network vnet create Referenz", url: "https://learn.microsoft.com/de-de/cli/azure/network/vnet" },
+  ],
+  interactive: "virtual-network",
 };
 
 export const AZ104_B2C_LAB: Lab = {
@@ -309,7 +359,7 @@ export const AZ104_B2C_LAB: Lab = {
 // each array is the "primary" lab shown at the no-slug /labs route, so
 // existing links and getLab(certId, ...) calls keep working unchanged.
 const LABS: Record<string, Lab[]> = {
-  "az-104": [AZ104_VM_LAB, AZ104_B2C_LAB],
+  "az-104": [AZ104_VM_LAB, AZ104_VNET_LAB, AZ104_B2C_LAB],
   "az-900": [AZ900_RG_LAB],
 };
 

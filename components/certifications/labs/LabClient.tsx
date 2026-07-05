@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { BookOpen, ExternalLink, LifeBuoy, ChevronLeft } from "lucide-react";
 import type { Lab, LabTask } from "@/lib/labsData";
-import { useLabStore, TARGET_RG_NAME, TARGET_VM_NAME } from "@/lib/store/labStore";
+import { useLabStore, TARGET_RG_NAME, TARGET_VM_NAME, TARGET_VNET_NAME } from "@/lib/store/labStore";
 import LabHeader from "./LabHeader";
 import LabStepsOverview from "./LabStepsOverview";
 import LabOverviewPanel from "./LabOverviewPanel";
@@ -18,6 +18,8 @@ import StorageAccountsBlade from "./azure-portal/StorageAccountsBlade";
 import CreateStorageAccountBlade from "./azure-portal/CreateStorageAccountBlade";
 import VirtualMachinesBlade from "./azure-portal/VirtualMachinesBlade";
 import CreateVirtualMachineBlade from "./azure-portal/CreateVirtualMachineBlade";
+import VirtualNetworksBlade from "./azure-portal/VirtualNetworksBlade";
+import CreateVirtualNetworkBlade from "./azure-portal/CreateVirtualNetworkBlade";
 import ChaosModeToggle from "./ChaosModeToggle";
 import LabScorecardModal from "./LabScorecardModal";
 
@@ -41,6 +43,7 @@ function InteractiveResourceGroupLab({
   const resourceGroups = useLabStore((s) => s.resourceGroups);
   const storageAccounts = useLabStore((s) => s.storageAccounts);
   const virtualMachines = useLabStore((s) => s.virtualMachines);
+  const virtualNetworks = useLabStore((s) => s.virtualNetworks);
   const activeBlade = useLabStore((s) => s.activeBlade);
   const activeSection = useLabStore((s) => s.activeSection);
   const mistakeCount = useLabStore((s) => s.mistakeCount);
@@ -61,6 +64,16 @@ function InteractiveResourceGroupLab({
           (vm) =>
             vm.resourceGroup.toLowerCase() === TARGET_RG_NAME.toLowerCase() &&
             vm.name.toLowerCase() === TARGET_VM_NAME.toLowerCase()
+        ),
+      };
+    if (t.id === "vnet-created")
+      return {
+        ...t,
+        done: virtualNetworks.some(
+          (vnet) =>
+            vnet.resourceGroup.toLowerCase() === TARGET_RG_NAME.toLowerCase() &&
+            vnet.name.toLowerCase() === TARGET_VNET_NAME.toLowerCase() &&
+            vnet.addressSpace === "10.0.0.0/16"
         ),
       };
     return t;
@@ -84,12 +97,13 @@ function InteractiveResourceGroupLab({
     }
   }, [allDone, completedAt]);
 
-  const sectionLabel =
-    activeSection === "resource-groups"
-      ? "Resource groups"
-      : activeSection === "storage-accounts"
-        ? "Storage accounts"
-        : "Virtual machines";
+  const SECTION_META = {
+    "resource-groups": { label: "Resource groups", createLabel: "a resource group" },
+    "storage-accounts": { label: "Storage accounts", createLabel: "a storage account" },
+    "virtual-machines": { label: "Virtual machines", createLabel: "a virtual machine" },
+    "virtual-networks": { label: "Virtual networks", createLabel: "a virtual network" },
+  } as const;
+  const sectionLabel = SECTION_META[activeSection].label;
   const bladeContent =
     activeSection === "resource-groups" ? (
       activeBlade === "create" ? (
@@ -103,10 +117,16 @@ function InteractiveResourceGroupLab({
       ) : (
         <StorageAccountsBlade />
       )
+    ) : activeSection === "virtual-machines" ? (
+      activeBlade === "create" ? (
+        <CreateVirtualMachineBlade />
+      ) : (
+        <VirtualMachinesBlade />
+      )
     ) : activeBlade === "create" ? (
-      <CreateVirtualMachineBlade />
+      <CreateVirtualNetworkBlade />
     ) : (
-      <VirtualMachinesBlade />
+      <VirtualNetworksBlade />
     );
 
   return (
@@ -132,17 +152,7 @@ function InteractiveResourceGroupLab({
             breadcrumb={[
               "Home",
               sectionLabel,
-              ...(activeBlade === "create"
-                ? [
-                    `Create ${
-                      activeSection === "resource-groups"
-                        ? "a resource group"
-                        : activeSection === "storage-accounts"
-                          ? "a storage account"
-                          : "a virtual machine"
-                    }`,
-                  ]
-                : []),
+              ...(activeBlade === "create" ? [`Create ${SECTION_META[activeSection].createLabel}`] : []),
             ]}
           >
             {bladeContent}
@@ -202,7 +212,12 @@ export default function LabClient({
   function restart() {
     setEnded(false);
     setRemaining(lab.totalMinutes);
-    if (lab.interactive === "resource-group" || lab.interactive === "virtual-machine") resetStore();
+    if (
+      lab.interactive === "resource-group" ||
+      lab.interactive === "virtual-machine" ||
+      lab.interactive === "virtual-network"
+    )
+      resetStore();
   }
 
   if (ended) {
@@ -222,7 +237,11 @@ export default function LabClient({
     );
   }
 
-  if (lab.interactive === "resource-group" || lab.interactive === "virtual-machine") {
+  if (
+    lab.interactive === "resource-group" ||
+    lab.interactive === "virtual-machine" ||
+    lab.interactive === "virtual-network"
+  ) {
     return (
       <InteractiveResourceGroupLab
         companyName={companyName}
