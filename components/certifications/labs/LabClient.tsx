@@ -206,6 +206,7 @@ export default function LabClient({
         lab={lab}
         remainingSeconds={remaining}
         onEnd={() => setEnded(true)}
+        compact={simulatorOpen}
       />
 
       {!simulatorOpen && lab.steps && lab.steps.length > 0 ? (

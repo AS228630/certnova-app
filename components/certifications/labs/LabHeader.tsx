@@ -33,6 +33,7 @@ export default function LabHeader({
   lab,
   remainingSeconds,
   onEnd,
+  compact = false,
 }: {
   companyName: string;
   companySlug: string;
@@ -41,7 +42,41 @@ export default function LabHeader({
   lab: Lab;
   remainingSeconds: number;
   onEnd: () => void;
+  compact?: boolean;
 }) {
+  if (compact) {
+    return (
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border-soft bg-panel px-4 py-2.5">
+        <div className="flex min-w-0 items-center gap-2 text-sm">
+          <Link
+            href={`/certifications/${companySlug}/${certId}`}
+            className="text-text-muted hover:text-text"
+            aria-label="Zurück"
+          >
+            <ChevronLeft size={16} />
+          </Link>
+          <span className="truncate font-bold text-text">{lab.title}</span>
+          <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-bold ${LEVEL_STYLES[lab.level]}`}>
+            {lab.level}
+          </span>
+        </div>
+        <div className="flex shrink-0 items-center gap-3">
+          <span className="flex items-center gap-1.5 font-mono text-sm font-bold text-text">
+            <Clock3 size={13} className="text-text-muted" />
+            {formatTime(remainingSeconds)}
+          </span>
+          <button
+            onClick={onEnd}
+            className="flex items-center gap-1.5 rounded-lg border border-danger/40 px-2.5 py-1.5 text-xs font-bold text-danger hover:bg-danger/10"
+          >
+            <Power size={13} />
+            Lab beenden
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
       <div className="mb-4 flex flex-wrap items-center gap-1.5 text-xs text-text-muted">
