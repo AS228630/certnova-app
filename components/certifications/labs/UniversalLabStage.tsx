@@ -1,13 +1,14 @@
 import type { Company, Certification } from "@/lib/companiesData";
 import type { LabInfrastructureType } from "@/lib/labInfrastructure";
 import type { Lab } from "@/lib/labsData";
-import { generateAwsLab, generateM365Lab, generateLinuxLab, generateGcpLab } from "@/lib/labsData";
+import { generateAwsLab, generateM365Lab, generateLinuxLab, generateGcpLab, generateWindowsServerLab } from "@/lib/labsData";
 import LabClient from "./LabClient";
 import ComingSoonLab from "./ComingSoonLab";
 import AwsConsoleEnvironment from "./aws/AwsConsoleEnvironment";
 import M365AdminEnvironment from "./m365/M365AdminEnvironment";
 import LinuxTerminalEnvironment from "./linux/LinuxTerminalEnvironment";
 import GcpConsoleEnvironment from "./gcp/GcpConsoleEnvironment";
+import ActiveDirectoryMockEnvironment from "./windows-server/ActiveDirectoryMockEnvironment";
 
 type UniversalLabStageProps = {
   infrastructureType: LabInfrastructureType;
@@ -89,7 +90,20 @@ export default function UniversalLabStage({ infrastructureType, company, cert, l
         />
       );
 
-    // WINDOWS_SERVER / CISCO / GENERIC:
+    // WINDOWS_SERVER: real Active Directory Users & Computers lab (browse OU + create user).
+    case "WINDOWS_SERVER":
+      return (
+        <LabClient
+          companyName={company.name}
+          companySlug={company.slug}
+          certCode={cert.code}
+          certId={cert.id}
+          lab={generateWindowsServerLab(cert.id, cert.title, cert.level)}
+          environment={<ActiveDirectoryMockEnvironment />}
+        />
+      );
+
+    // CISCO / GENERIC:
     // no dedicated runtime yet — every one of them lands here for now.
     default:
       return <ComingSoonLab company={company} cert={cert} />;
