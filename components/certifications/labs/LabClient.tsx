@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { BookOpen, ExternalLink, LifeBuoy } from "lucide-react";
+import Link from "next/link";
+import { BookOpen, ExternalLink, LifeBuoy, ChevronLeft } from "lucide-react";
 import type { Lab, LabTask } from "@/lib/labsData";
 import { useLabStore, TARGET_RG_NAME } from "@/lib/store/labStore";
 import LabHeader from "./LabHeader";
@@ -198,16 +199,17 @@ export default function LabClient({
 
   return (
     <div>
-      <LabHeader
-        companyName={companyName}
-        companySlug={companySlug}
-        certCode={certCode}
-        certId={certId}
-        lab={lab}
-        remainingSeconds={remaining}
-        onEnd={() => setEnded(true)}
-        compact={simulatorOpen}
-      />
+      {!simulatorOpen && (
+        <LabHeader
+          companyName={companyName}
+          companySlug={companySlug}
+          certCode={certCode}
+          certId={certId}
+          lab={lab}
+          remainingSeconds={remaining}
+          onEnd={() => setEnded(true)}
+        />
+      )}
 
       {!simulatorOpen && lab.steps && lab.steps.length > 0 ? (
         <div className="mt-6">
@@ -215,7 +217,16 @@ export default function LabClient({
         </div>
       ) : (
         <>
-          <div className="mt-6">
+          {simulatorOpen && (
+            <Link
+              href={`/certifications/${companySlug}/${certId}`}
+              className="mb-2 mt-2 inline-flex items-center gap-1 text-xs text-text-faint hover:text-text"
+            >
+              <ChevronLeft size={14} />
+              Zurück zum Lab
+            </Link>
+          )}
+          <div className="mt-4">
             <VirtualEnvironment />
           </div>
 
