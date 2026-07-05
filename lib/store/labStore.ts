@@ -23,6 +23,8 @@ export type VirtualMachine = {
   image: string;
   adminUsername: string;
   status: "Running" | "Stopped";
+  /** Name of the VNet this VM's NIC is attached to, if any (optional — older/simple labs don't set this). */
+  vnetName?: string;
   createdAt: number;
 };
 
@@ -125,7 +127,8 @@ type LabState = {
     location: string,
     size: string,
     image: string,
-    adminUsername: string
+    adminUsername: string,
+    vnetName?: string
   ) => { ok: boolean; message: string };
   createVirtualNetwork: (
     name: string,
@@ -243,7 +246,7 @@ export const useLabStore = create<LabState>((set, get) => ({
     return { ok: true, message: `Speicherkonto "${name}" wurde erfolgreich erstellt.` };
   },
 
-  createVirtualMachine: (name, resourceGroup, location, size, image, adminUsername) => {
+  createVirtualMachine: (name, resourceGroup, location, size, image, adminUsername, vnetName) => {
     const nameError = validateVmName(name);
     if (nameError) {
       set((s) => ({ mistakeCount: s.mistakeCount + 1 }));
@@ -264,6 +267,18 @@ export const useLabStore = create<LabState>((set, get) => ({
       set((s) => ({ mistakeCount: s.mistakeCount + 1 }));
       return { ok: false, message: "Der Administratorbenutzername darf nicht leer sein." };
     }
+    if (
+      vnetName &&
+      !get().virtualNetworks.some(
+        (v) => v.name.toLowerCase() === vnetName.toLowerCase() && v.resourceGroup.toLowerCase() === resourceGroup.toLowerCase()
+      )
+    ) {
+      set((s) => ({ mistakeCount: s.mistakeCount + 1 }));
+      return {
+        ok: false,
+        message: `Virtuelles Netzwerk "${vnetName}" existiert nicht in Ressourcengruppe "${resourceGroup}".`,
+      };
+    }
     const vm: VirtualMachine = {
       name,
       resourceGroup,
@@ -272,6 +287,7 @@ export const useLabStore = create<LabState>((set, get) => ({
       image,
       adminUsername,
       status: "Running",
+      vnetName,
       createdAt: Date.now(),
     };
     set((s) => ({ virtualMachines: [...s.virtualMachines, vm], activeBlade: "list" }));
@@ -433,14 +449,15 @@ export const useLabStore = create<LabState>((set, get) => ({
       const size = sizeMatch?.[1] ?? "Standard_B1s";
       const image = imageMatch?.[1] ?? "Ubuntu2204";
       const adminUsername = userMatch?.[1] ?? "azureuser";
-      const result = get().createVirtualMachine(name, rg, location, size, image, adminUsername);
+      const vnetMatch = text.match(/--vnet-name\s+"?([^\s"]+)"?/i);
+      const result = get().createVirtualMachine(name, rg, location, size, image, adminUsername, vnetMatch?.[1]);
       set((s) => ({
         cliLog: [
           ...s.cliLog,
           result.ok
             ? {
                 type: "out",
-                text: `${result.message}\nResourceGroup: ${rg}\nLocation: ${location}\nSize: ${size}\nImage: ${image}`,
+                text: `${result.message}\nResourceGroup: ${rg}\nLocation: ${location}\nSize: ${size}\nImage: ${image}${vnetMatch ? `\nVNet: ${vnetMatch[1]}` : ""}`,
               }
             : { type: "err", text: result.message },
         ],
@@ -455,9 +472,12 @@ export const useLabStore = create<LabState>((set, get) => ({
         return;
       }
       const table = [
-        "Name          ResourceGroup   Location    PowerState",
-        "------------  --------------  ----------  -----------",
-        ...vms.map((vm) => `${vm.name.padEnd(14)}${vm.resourceGroup.padEnd(16)}${vm.location.padEnd(12)}${vm.status}`),
+        "Name          ResourceGroup   Location    VNet            PowerState",
+        "------------  --------------  ----------  --------------  -----------",
+        ...vms.map(
+          (vm) =>
+            `${vm.name.padEnd(14)}${vm.resourceGroup.padEnd(16)}${vm.location.padEnd(12)}${(vm.vnetName ?? "-").padEnd(16)}${vm.status}`
+        ),
       ].join("\n");
       set((s) => ({ cliLog: [...s.cliLog, { type: "out", text: table }] }));
       return;
