@@ -15,6 +15,17 @@ export type StorageAccount = {
   createdAt: number;
 };
 
+export type VirtualMachine = {
+  name: string;
+  resourceGroup: string;
+  location: string;
+  size: string;
+  image: string;
+  adminUsername: string;
+  status: "Running" | "Stopped";
+  createdAt: number;
+};
+
 export type CliLine =
   | { type: "cmd"; text: string }
   | { type: "out"; text: string }
@@ -25,6 +36,9 @@ export const TARGET_RG_NAME = "CC-Lab-RG";
 export const TARGET_LOCATION_LABEL = "West Europe";
 export const TARGET_LOCATION_VALUE = "westeurope";
 export const TARGET_STORAGE_PREFIX = "certcoach";
+export const TARGET_VM_NAME = "CC-Lab-VM";
+export const VM_SIZES = ["Standard_B1s", "Standard_B2s", "Standard_D2s_v3"] as const;
+export const VM_IMAGES = ["Ubuntu Server 22.04 LTS", "Windows Server 2022 Datacenter"] as const;
 
 function normalizeLocation(raw: string) {
   return raw.toLowerCase().replace(/\s+/g, "");
@@ -40,11 +54,22 @@ export function validateStorageAccountName(name: string): string | null {
   return null;
 }
 
+// Real Azure naming rule for VMs: 1-64 chars, letters/numbers/hyphens, can't end with a hyphen.
+export function validateVmName(name: string): string | null {
+  if (!name) return "Der Name der virtuellen Maschine darf nicht leer sein.";
+  if (name.length > 64) return "Der Name darf maximal 64 Zeichen lang sein.";
+  if (!/^[a-zA-Z0-9-]+$/.test(name))
+    return "Nur Buchstaben, Zahlen und Bindestriche sind erlaubt.";
+  if (name.endsWith("-")) return "Der Name darf nicht mit einem Bindestrich enden.";
+  return null;
+}
+
 type LabState = {
   resourceGroups: ResourceGroup[];
   storageAccounts: StorageAccount[];
+  virtualMachines: VirtualMachine[];
   cliLog: CliLine[];
-  activeSection: "resource-groups" | "storage-accounts";
+  activeSection: "resource-groups" | "storage-accounts" | "virtual-machines";
   activeBlade: "list" | "create";
   mistakeCount: number;
   startedAt: number;
@@ -57,8 +82,17 @@ type LabState = {
     resourceGroup: string,
     location: string
   ) => { ok: boolean; message: string };
+  createVirtualMachine: (
+    name: string,
+    resourceGroup: string,
+    location: string,
+    size: string,
+    image: string,
+    adminUsername: string
+  ) => { ok: boolean; message: string };
   deleteResourceGroup: (name: string) => void;
   deleteStorageAccount: (name: string) => void;
+  deleteVirtualMachine: (name: string) => void;
   activateChaos: () => void;
   openCreateBlade: () => void;
   closeCreateBlade: () => void;
@@ -74,6 +108,7 @@ const initialCliLog: CliLine[] = [
 export const useLabStore = create<LabState>((set, get) => ({
   resourceGroups: [],
   storageAccounts: [],
+  virtualMachines: [],
   cliLog: initialCliLog,
   activeSection: "resource-groups",
   activeBlade: "list",
@@ -113,6 +148,12 @@ export const useLabStore = create<LabState>((set, get) => ({
     }));
   },
 
+  deleteVirtualMachine: (name) => {
+    set((s) => ({
+      virtualMachines: s.virtualMachines.filter((vm) => vm.name.toLowerCase() !== name.toLowerCase()),
+    }));
+  },
+
   createResourceGroup: (name, location) => {
     if (!name.trim()) {
       set((s) => ({ mistakeCount: s.mistakeCount + 1 }));
@@ -147,6 +188,41 @@ export const useLabStore = create<LabState>((set, get) => ({
     const sa: StorageAccount = { name, resourceGroup, location, createdAt: Date.now() };
     set((s) => ({ storageAccounts: [...s.storageAccounts, sa], activeBlade: "list" }));
     return { ok: true, message: `Speicherkonto "${name}" wurde erfolgreich erstellt.` };
+  },
+
+  createVirtualMachine: (name, resourceGroup, location, size, image, adminUsername) => {
+    const nameError = validateVmName(name);
+    if (nameError) {
+      set((s) => ({ mistakeCount: s.mistakeCount + 1 }));
+      return { ok: false, message: nameError };
+    }
+    if (!get().resourceGroups.some((rg) => rg.name.toLowerCase() === resourceGroup.toLowerCase())) {
+      set((s) => ({ mistakeCount: s.mistakeCount + 1 }));
+      return {
+        ok: false,
+        message: `Ressourcengruppe "${resourceGroup}" existiert nicht. Erstelle zuerst eine Ressourcengruppe.`,
+      };
+    }
+    if (get().virtualMachines.some((vm) => vm.name.toLowerCase() === name.toLowerCase())) {
+      set((s) => ({ mistakeCount: s.mistakeCount + 1 }));
+      return { ok: false, message: `Eine virtuelle Maschine namens "${name}" existiert bereits.` };
+    }
+    if (!adminUsername.trim()) {
+      set((s) => ({ mistakeCount: s.mistakeCount + 1 }));
+      return { ok: false, message: "Der Administratorbenutzername darf nicht leer sein." };
+    }
+    const vm: VirtualMachine = {
+      name,
+      resourceGroup,
+      location,
+      size,
+      image,
+      adminUsername,
+      status: "Running",
+      createdAt: Date.now(),
+    };
+    set((s) => ({ virtualMachines: [...s.virtualMachines, vm], activeBlade: "list" }));
+    return { ok: true, message: `Virtuelle Maschine "${name}" wurde erfolgreich erstellt und wird ausgeführt.` };
   },
 
   runCliCommand: (raw) => {
@@ -240,6 +316,73 @@ export const useLabStore = create<LabState>((set, get) => ({
       return;
     }
 
+    if (/^az\s+vm\s+create/i.test(text)) {
+      if (!nameMatch || !rgMatch) {
+        set((s) => ({
+          cliLog: [
+            ...s.cliLog,
+            {
+              type: "err",
+              text: "Fehler: --name und --resource-group sind erforderlich, z.B. --name CC-Lab-VM --resource-group CC-Lab-RG",
+            },
+          ],
+          mistakeCount: s.mistakeCount + 1,
+        }));
+        return;
+      }
+      const name = nameMatch[1];
+      const rg = rgMatch[1];
+      const location = normalizeLocation(locMatch?.[1] ?? "westeurope");
+      const imageMatch = text.match(/--image\s+"?([^\s"]+)"?/i);
+      const sizeMatch = text.match(/--size\s+"?([^\s"]+)"?/i);
+      const userMatch =
+        text.match(/--admin-username\s+"?([^\s"]+)"?/i) ?? text.match(/-u\s+"?([^\s"]+)"?/i);
+      const size = sizeMatch?.[1] ?? "Standard_B1s";
+      const image = imageMatch?.[1] ?? "Ubuntu2204";
+      const adminUsername = userMatch?.[1] ?? "azureuser";
+      const result = get().createVirtualMachine(name, rg, location, size, image, adminUsername);
+      set((s) => ({
+        cliLog: [
+          ...s.cliLog,
+          result.ok
+            ? {
+                type: "out",
+                text: `${result.message}\nResourceGroup: ${rg}\nLocation: ${location}\nSize: ${size}\nImage: ${image}`,
+              }
+            : { type: "err", text: result.message },
+        ],
+      }));
+      return;
+    }
+
+    if (/^az\s+vm\s+list/i.test(text)) {
+      const vms = get().virtualMachines;
+      if (vms.length === 0) {
+        set((s) => ({ cliLog: [...s.cliLog, { type: "out", text: "[]" }] }));
+        return;
+      }
+      const table = [
+        "Name          ResourceGroup   Location    PowerState",
+        "------------  --------------  ----------  -----------",
+        ...vms.map((vm) => `${vm.name.padEnd(14)}${vm.resourceGroup.padEnd(16)}${vm.location.padEnd(12)}${vm.status}`),
+      ].join("\n");
+      set((s) => ({ cliLog: [...s.cliLog, { type: "out", text: table }] }));
+      return;
+    }
+
+    if (/^az\s+vm\s+delete/i.test(text)) {
+      if (!nameMatch) {
+        set((s) => ({
+          cliLog: [...s.cliLog, { type: "err", text: "Fehler: --name ist erforderlich." }],
+          mistakeCount: s.mistakeCount + 1,
+        }));
+        return;
+      }
+      get().deleteVirtualMachine(nameMatch[1]);
+      set((s) => ({ cliLog: [...s.cliLog, { type: "out", text: `Virtuelle Maschine "${nameMatch[1]}" gelöscht.` }] }));
+      return;
+    }
+
     if (/^az\s+group\s+delete/i.test(text)) {
       if (!nameMatch) {
         set((s) => ({
@@ -276,7 +419,7 @@ export const useLabStore = create<LabState>((set, get) => ({
         ...s.cliLog,
         {
           type: "err",
-          text: `Befehl nicht erkannt: "${text}". Unterstützt: az group create, az group list, az storage account create, az storage account list, clear`,
+          text: `Befehl nicht erkannt: "${text}". Unterstützt: az group create, az group list, az storage account create, az storage account list, az vm create, az vm list, clear`,
         },
       ],
       mistakeCount: s.mistakeCount + 1,
@@ -287,6 +430,7 @@ export const useLabStore = create<LabState>((set, get) => ({
     set({
       resourceGroups: [],
       storageAccounts: [],
+      virtualMachines: [],
       cliLog: initialCliLog,
       activeSection: "resource-groups",
       activeBlade: "list",

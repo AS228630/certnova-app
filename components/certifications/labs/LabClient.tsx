@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { BookOpen, ExternalLink, LifeBuoy, ChevronLeft } from "lucide-react";
 import type { Lab, LabTask } from "@/lib/labsData";
-import { useLabStore, TARGET_RG_NAME } from "@/lib/store/labStore";
+import { useLabStore, TARGET_RG_NAME, TARGET_VM_NAME } from "@/lib/store/labStore";
 import LabHeader from "./LabHeader";
 import LabStepsOverview from "./LabStepsOverview";
 import LabOverviewPanel from "./LabOverviewPanel";
@@ -16,6 +16,8 @@ import ResourceGroupsBlade from "./azure-portal/ResourceGroupsBlade";
 import CreateResourceGroupBlade from "./azure-portal/CreateResourceGroupBlade";
 import StorageAccountsBlade from "./azure-portal/StorageAccountsBlade";
 import CreateStorageAccountBlade from "./azure-portal/CreateStorageAccountBlade";
+import VirtualMachinesBlade from "./azure-portal/VirtualMachinesBlade";
+import CreateVirtualMachineBlade from "./azure-portal/CreateVirtualMachineBlade";
 import ChaosModeToggle from "./ChaosModeToggle";
 import LabScorecardModal from "./LabScorecardModal";
 
@@ -38,6 +40,7 @@ function InteractiveResourceGroupLab({
 }) {
   const resourceGroups = useLabStore((s) => s.resourceGroups);
   const storageAccounts = useLabStore((s) => s.storageAccounts);
+  const virtualMachines = useLabStore((s) => s.virtualMachines);
   const activeBlade = useLabStore((s) => s.activeBlade);
   const activeSection = useLabStore((s) => s.activeSection);
   const mistakeCount = useLabStore((s) => s.mistakeCount);
@@ -51,6 +54,15 @@ function InteractiveResourceGroupLab({
       return { ...t, done: !!created && created.location.toLowerCase().replace(/\s+/g, "") === "westeurope" };
     if (t.id === "storage-created")
       return { ...t, done: storageAccounts.some((sa) => sa.resourceGroup.toLowerCase() === TARGET_RG_NAME.toLowerCase()) };
+    if (t.id === "vm-created")
+      return {
+        ...t,
+        done: virtualMachines.some(
+          (vm) =>
+            vm.resourceGroup.toLowerCase() === TARGET_RG_NAME.toLowerCase() &&
+            vm.name.toLowerCase() === TARGET_VM_NAME.toLowerCase()
+        ),
+      };
     return t;
   });
 
@@ -72,7 +84,12 @@ function InteractiveResourceGroupLab({
     }
   }, [allDone, completedAt]);
 
-  const sectionLabel = activeSection === "resource-groups" ? "Resource groups" : "Storage accounts";
+  const sectionLabel =
+    activeSection === "resource-groups"
+      ? "Resource groups"
+      : activeSection === "storage-accounts"
+        ? "Storage accounts"
+        : "Virtual machines";
   const bladeContent =
     activeSection === "resource-groups" ? (
       activeBlade === "create" ? (
@@ -80,10 +97,16 @@ function InteractiveResourceGroupLab({
       ) : (
         <ResourceGroupsBlade />
       )
+    ) : activeSection === "storage-accounts" ? (
+      activeBlade === "create" ? (
+        <CreateStorageAccountBlade />
+      ) : (
+        <StorageAccountsBlade />
+      )
     ) : activeBlade === "create" ? (
-      <CreateStorageAccountBlade />
+      <CreateVirtualMachineBlade />
     ) : (
-      <StorageAccountsBlade />
+      <VirtualMachinesBlade />
     );
 
   return (
@@ -105,7 +128,23 @@ function InteractiveResourceGroupLab({
 
         <div className="space-y-6 xl:order-2">
           <ChaosModeToggle />
-          <AzurePortalFrame breadcrumb={["Home", sectionLabel, ...(activeBlade === "create" ? [`Create ${activeSection === "resource-groups" ? "a resource group" : "a storage account"}`] : [])]}>
+          <AzurePortalFrame
+            breadcrumb={[
+              "Home",
+              sectionLabel,
+              ...(activeBlade === "create"
+                ? [
+                    `Create ${
+                      activeSection === "resource-groups"
+                        ? "a resource group"
+                        : activeSection === "storage-accounts"
+                          ? "a storage account"
+                          : "a virtual machine"
+                    }`,
+                  ]
+                : []),
+            ]}
+          >
             {bladeContent}
           </AzurePortalFrame>
           <RealCloudShell />
@@ -163,7 +202,7 @@ export default function LabClient({
   function restart() {
     setEnded(false);
     setRemaining(lab.totalMinutes);
-    if (lab.interactive === "resource-group") resetStore();
+    if (lab.interactive === "resource-group" || lab.interactive === "virtual-machine") resetStore();
   }
 
   if (ended) {
@@ -183,7 +222,7 @@ export default function LabClient({
     );
   }
 
-  if (lab.interactive === "resource-group") {
+  if (lab.interactive === "resource-group" || lab.interactive === "virtual-machine") {
     return (
       <InteractiveResourceGroupLab
         companyName={companyName}
