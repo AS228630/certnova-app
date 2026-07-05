@@ -6,7 +6,6 @@ import { BookOpen, ExternalLink, LifeBuoy, ChevronLeft } from "lucide-react";
 import type { Lab, LabTask } from "@/lib/labsData";
 import { useLabStore, TARGET_RG_NAME } from "@/lib/store/labStore";
 import LabHeader from "./LabHeader";
-import LabStepsOverview from "./LabStepsOverview";
 import LabOverviewPanel from "./LabOverviewPanel";
 import VirtualEnvironment from "@/components/certifications/journey/labs/LabEnvironment";
 import RealCloudShell from "./RealCloudShell";
@@ -147,7 +146,7 @@ export default function LabClient({
   const [remaining, setRemaining] = useState(lab.totalMinutes);
   const [tasks, setTasks] = useState<LabTask[]>(lab.tasks);
   const [ended, setEnded] = useState(false);
-  const [simulatorOpen, setSimulatorOpen] = useState(!lab.steps || lab.steps.length === 0);
+  const [simulatorOpen] = useState(true);
   const resetStore = useLabStore((s) => s.reset);
 
   useEffect(() => {
@@ -199,48 +198,37 @@ export default function LabClient({
 
   return (
     <div>
-      {!simulatorOpen && (
-        <LabHeader
-          companyName={companyName}
-          companySlug={companySlug}
-          certCode={certCode}
-          certId={certId}
-          lab={lab}
-          remainingSeconds={remaining}
-          onEnd={() => setEnded(true)}
-        />
-      )}
+      <LabHeader
+        companyName={companyName}
+        companySlug={companySlug}
+        certCode={certCode}
+        certId={certId}
+        lab={lab}
+        remainingSeconds={remaining}
+        onEnd={() => setEnded(true)}
+      />
 
-      {!simulatorOpen && lab.steps && lab.steps.length > 0 ? (
-        <div className="mt-6">
-          <LabStepsOverview steps={lab.steps} onOpen={() => setSimulatorOpen(true)} />
+      <Link
+        href={`/certifications/${companySlug}/${certId}`}
+        className="mb-2 mt-4 inline-flex items-center gap-1 text-xs text-text-faint hover:text-text"
+      >
+        <ChevronLeft size={14} />
+        Zurück zum Lab
+      </Link>
+
+      <div className="mt-2">
+        <VirtualEnvironment />
+      </div>
+
+      <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[1fr_280px]">
+        <div>
+          <LabOverviewPanel lab={lab} />
         </div>
-      ) : (
-        <>
-          {simulatorOpen && (
-            <Link
-              href={`/certifications/${companySlug}/${certId}`}
-              className="mb-2 mt-2 inline-flex items-center gap-1 text-xs text-text-faint hover:text-text"
-            >
-              <ChevronLeft size={14} />
-              Zurück zum Lab
-            </Link>
-          )}
-          <div className="mt-4">
-            <VirtualEnvironment />
-          </div>
 
-          <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[1fr_280px]">
-            <div>
-              <LabOverviewPanel lab={lab} />
-            </div>
-
-            <div>
-              <LabSidebar lab={lab} tasks={tasks} onToggleTask={toggleTask} />
-            </div>
-          </div>
-        </>
-      )}
+        <div>
+          <LabSidebar lab={lab} tasks={tasks} onToggleTask={toggleTask} />
+        </div>
+      </div>
 
       {(lab.docs.length > 0 || true) && (
         <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[260px_minmax(0,1fr)_280px]">

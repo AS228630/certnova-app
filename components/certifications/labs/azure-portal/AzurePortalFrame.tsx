@@ -11,6 +11,7 @@ import {
   Storage24Regular,
 } from "@fluentui/react-icons";
 import { useLabStore } from "@/lib/store/labStore";
+import ScaleToFit from "@/components/ui/ScaleToFit";
 
 // Authentic Azure Portal "Dark theme" palette — kept available for anything
 // that still needs the dark chrome look elsewhere.
@@ -56,16 +57,16 @@ export default function AzurePortalFrame({
   const setSection = useLabStore((s) => s.setSection);
 
   return (
-    <div className="overflow-x-auto">
+    <ScaleToFit width={640}>
     <div
-      className="min-w-[640px] overflow-hidden rounded-2xl border"
+      className="overflow-hidden rounded-2xl border"
       style={{ backgroundColor: AZL.bg, borderColor: AZL.border }}
     >
       {/* Real Azure blue top command bar */}
       <div className="flex items-center gap-3 overflow-hidden px-3 py-2" style={{ backgroundColor: AZL.blue }}>
         <div className="flex shrink-0 items-center gap-1.5 text-white">
           <Grid24Regular fontSize={18} />
-          <span className="hidden text-[13px] font-semibold sm:inline">Microsoft Azure</span>
+          <span className="text-[13px] font-semibold">Microsoft Azure</span>
         </div>
         <div className="ml-1 flex h-7 min-w-0 flex-1 items-center gap-2 rounded bg-white px-2 sm:ml-2 sm:max-w-md">
           <Search24Regular fontSize={13} className="shrink-0 text-[#605e5c]" />
@@ -132,6 +133,6 @@ export default function AzurePortalFrame({
         </div>
       </div>
     </div>
-    </div>
+    </ScaleToFit>
   );
 }

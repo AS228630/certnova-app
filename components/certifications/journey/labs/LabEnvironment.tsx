@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { RotateCw, ChevronDown, Apple, Play } from "lucide-react";
+import ScaleToFit from "@/components/ui/ScaleToFit";
 import {
   Navigation24Regular,
   Search24Regular,
@@ -142,9 +143,9 @@ export default function LabEnvironment() {
           <span className="text-xs text-text-faint">Azure-Portal</span>
         </div>
 
-        <div className="overflow-x-auto">
+        <ScaleToFit width={900}>
           {/* Light-mode Azure Portal simulation */}
-          <div className="min-w-[900px] bg-white text-[#323130]">
+          <div className="bg-white text-[#323130]">
             {/* Real Azure blue top bar */}
             <div className="flex items-center gap-3 bg-[#0078d4] px-3 py-1.5">
               <Navigation24Regular fontSize={18} className="text-white" />
@@ -301,7 +302,7 @@ export default function LabEnvironment() {
               </div>
             </div>
           </div>
-        </div>
+        </ScaleToFit>
 
         <div className="flex items-center gap-3 border-t border-border-soft bg-panel-alt px-3 py-1.5 text-text-faint">
           <Grid24Regular fontSize={14} />
