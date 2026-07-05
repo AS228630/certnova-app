@@ -214,16 +214,16 @@ export default function LabClient({
         </div>
       ) : (
         <>
-          <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[260px_minmax(0,1fr)_280px]">
-            <div className="xl:order-1">
+          <div className="mt-6">
+            <VirtualEnvironment />
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[1fr_280px]">
+            <div>
               <LabOverviewPanel lab={lab} />
             </div>
 
-            <div className="space-y-6 xl:order-2">
-              <VirtualEnvironment />
-            </div>
-
-            <div className="xl:order-3">
+            <div>
               <LabSidebar lab={lab} tasks={tasks} onToggleTask={toggleTask} />
             </div>
           </div>
