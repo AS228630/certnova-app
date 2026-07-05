@@ -66,7 +66,7 @@ export default function Sidebar({
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] -translate-x-full flex-col overflow-y-auto bg-panel transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:w-64 lg:max-w-none lg:shrink-0 lg:translate-x-0 lg:border-r lg:border-border-soft ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] -translate-x-full flex-col overflow-y-auto bg-[#0B1020] transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:w-[260px] lg:max-w-none lg:shrink-0 lg:translate-x-0 lg:border-r lg:border-border-soft ${
           open ? "translate-x-0" : ""
         }`}
       >
