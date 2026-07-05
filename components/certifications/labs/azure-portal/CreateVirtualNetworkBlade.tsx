@@ -1,0 +1,270 @@
+"use client";
+
+import { useState } from "react";
+import { CheckCircle2, AlertCircle } from "lucide-react";
+import {
+  useLabStore,
+  validateVnetName,
+  validateCidr,
+  DEFAULT_ADDRESS_SPACE,
+  DEFAULT_SUBNET_NAME,
+  DEFAULT_SUBNET_PREFIX,
+} from "@/lib/store/labStore";
+import { AZL } from "./AzurePortalFrame";
+
+export default function CreateVirtualNetworkBlade() {
+  const resourceGroups = useLabStore((s) => s.resourceGroups);
+  const createVirtualNetwork = useLabStore((s) => s.createVirtualNetwork);
+  const closeCreateBlade = useLabStore((s) => s.closeCreateBlade);
+
+  const [tab, setTab] = useState<"basics" | "ipAddresses" | "review">("basics");
+  const [name, setName] = useState("");
+  const [rg, setRg] = useState(resourceGroups[0]?.name ?? "");
+  const [addressSpace, setAddressSpace] = useState(DEFAULT_ADDRESS_SPACE);
+  const [subnetName, setSubnetName] = useState(DEFAULT_SUBNET_NAME);
+  const [subnetPrefix, setSubnetPrefix] = useState(DEFAULT_SUBNET_PREFIX);
+  const [liveError, setLiveError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  if (resourceGroups.length === 0) {
+    return (
+      <div className="max-w-md rounded border p-4 text-[12px]" style={{ borderColor: AZL.warning, color: AZL.warning }}>
+        Du musst zuerst eine Ressourcengruppe erstellen, bevor du ein virtuelles Netzwerk anlegen kannst.
+      </div>
+    );
+  }
+
+  function handleNameChange(v: string) {
+    setName(v);
+    setLiveError(v ? validateVnetName(v) : null);
+  }
+
+  function handleCreate() {
+    const result = createVirtualNetwork(
+      name,
+      rg,
+      resourceGroups.find((r) => r.name === rg)?.location ?? "westeurope",
+      addressSpace,
+      subnetName,
+      subnetPrefix
+    );
+    if (!result.ok) {
+      setError(result.message);
+      setSuccess(null);
+    } else {
+      setError(null);
+      setSuccess(result.message);
+    }
+  }
+
+  const addressError = addressSpace ? validateCidr(addressSpace) : null;
+  const subnetError = subnetPrefix ? validateCidr(subnetPrefix) : null;
+
+  return (
+    <div>
+      <h2 className="mb-4 text-lg font-semibold text-[#201f1e]">Create virtual network</h2>
+
+      <div className="mb-4 flex gap-4 border-b" style={{ borderColor: AZL.border }}>
+        {(["basics", "ipAddresses", "review"] as const).map((t) => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            className="border-b-2 pb-2 text-[12px] font-medium"
+            style={{
+              borderColor: tab === t ? AZL.blue : "transparent",
+              color: tab === t ? "white" : AZL.textMuted,
+            }}
+          >
+            {t === "basics" ? "Basics" : t === "ipAddresses" ? "IP Addresses" : "Review + create"}
+          </button>
+        ))}
+      </div>
+
+      {tab === "basics" && (
+        <div className="max-w-md space-y-4">
+          <div>
+            <label className="mb-1 block text-[12px]" style={{ color: AZL.textMuted }}>
+              Resource group <span style={{ color: AZL.danger }}>*</span>
+            </label>
+            <select
+              value={rg}
+              onChange={(e) => setRg(e.target.value)}
+              className="w-full rounded border px-3 py-2 text-[12px] text-[#201f1e] outline-none"
+              style={{ borderColor: AZL.border, backgroundColor: "#ffffff" }}
+            >
+              {resourceGroups.map((r) => (
+                <option key={r.name} value={r.name}>
+                  {r.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label className="mb-1 block text-[12px]" style={{ color: AZL.textMuted }}>
+              Name <span style={{ color: AZL.danger }}>*</span>
+            </label>
+            <input
+              value={name}
+              onChange={(e) => handleNameChange(e.target.value)}
+              placeholder="z.B. CC-Lab-VNet"
+              className="w-full rounded border px-3 py-2 text-[12px] text-[#201f1e] outline-none"
+              style={{ borderColor: liveError ? AZL.danger : AZL.border, backgroundColor: "#ffffff" }}
+            />
+            <p className="mt-1 text-[11px]" style={{ color: liveError ? AZL.danger : AZL.textFaint }}>
+              {liveError ?? "1-64 Zeichen, Buchstaben/Zahlen/Punkte/Bindestriche/Unterstriche."}
+            </p>
+          </div>
+
+          <button
+            onClick={() => setTab("ipAddresses")}
+            disabled={!name.trim() || !!liveError}
+            className="rounded px-4 py-2 text-[12px] font-semibold text-white disabled:opacity-40"
+            style={{ backgroundColor: AZL.blue }}
+          >
+            Next: IP Addresses
+          </button>
+        </div>
+      )}
+
+      {tab === "ipAddresses" && (
+        <div className="max-w-md space-y-4">
+          <div>
+            <label className="mb-1 block text-[12px]" style={{ color: AZL.textMuted }}>
+              IPv4 address space <span style={{ color: AZL.danger }}>*</span>
+            </label>
+            <input
+              value={addressSpace}
+              onChange={(e) => setAddressSpace(e.target.value)}
+              placeholder="10.0.0.0/16"
+              className="w-full rounded border px-3 py-2 font-mono text-[12px] text-[#201f1e] outline-none"
+              style={{ borderColor: addressError ? AZL.danger : AZL.border, backgroundColor: "#ffffff" }}
+            />
+            <p className="mt-1 text-[11px]" style={{ color: addressError ? AZL.danger : AZL.textFaint }}>
+              {addressError ?? "CIDR-Notation, z.B. 10.0.0.0/16."}
+            </p>
+          </div>
+
+          <div className="rounded border p-3" style={{ borderColor: AZL.border }}>
+            <p className="mb-3 text-[12px] font-semibold" style={{ color: AZL.text }}>
+              Subnet
+            </p>
+            <div className="space-y-3">
+              <div>
+                <label className="mb-1 block text-[12px]" style={{ color: AZL.textMuted }}>
+                  Subnet name <span style={{ color: AZL.danger }}>*</span>
+                </label>
+                <input
+                  value={subnetName}
+                  onChange={(e) => setSubnetName(e.target.value)}
+                  placeholder="default"
+                  className="w-full rounded border px-3 py-2 text-[12px] text-[#201f1e] outline-none"
+                  style={{ borderColor: AZL.border, backgroundColor: "#ffffff" }}
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-[12px]" style={{ color: AZL.textMuted }}>
+                  Subnet address range <span style={{ color: AZL.danger }}>*</span>
+                </label>
+                <input
+                  value={subnetPrefix}
+                  onChange={(e) => setSubnetPrefix(e.target.value)}
+                  placeholder="10.0.0.0/24"
+                  className="w-full rounded border px-3 py-2 font-mono text-[12px] text-[#201f1e] outline-none"
+                  style={{ borderColor: subnetError ? AZL.danger : AZL.border, backgroundColor: "#ffffff" }}
+                />
+                <p className="mt-1 text-[11px]" style={{ color: subnetError ? AZL.danger : AZL.textFaint }}>
+                  {subnetError ?? "Muss innerhalb des Adressbereichs liegen."}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex gap-2">
+            <button
+              onClick={() => setTab("basics")}
+              className="rounded border px-4 py-2 text-[12px] font-medium"
+              style={{ borderColor: AZL.border, color: AZL.textMuted }}
+            >
+              Zurück
+            </button>
+            <button
+              onClick={() => setTab("review")}
+              disabled={!!addressError || !!subnetError || !subnetName.trim()}
+              className="rounded px-4 py-2 text-[12px] font-semibold text-white disabled:opacity-40"
+              style={{ backgroundColor: AZL.blue }}
+            >
+              Review + create
+            </button>
+          </div>
+        </div>
+      )}
+
+      {tab === "review" && (
+        <div className="max-w-md space-y-4">
+          <div className="rounded border p-3 text-[12px]" style={{ borderColor: AZL.border }}>
+            <div className="mb-2 flex justify-between">
+              <span style={{ color: AZL.textMuted }}>Resource group</span>
+              <span className="text-[#201f1e]">{rg}</span>
+            </div>
+            <div className="mb-2 flex justify-between">
+              <span style={{ color: AZL.textMuted }}>Name</span>
+              <span className="text-[#201f1e]">{name || "—"}</span>
+            </div>
+            <div className="mb-2 flex justify-between">
+              <span style={{ color: AZL.textMuted }}>Address space</span>
+              <span className="text-[#201f1e]">{addressSpace}</span>
+            </div>
+            <div className="flex justify-between">
+              <span style={{ color: AZL.textMuted }}>Subnet</span>
+              <span className="text-[#201f1e]">
+                {subnetName} ({subnetPrefix})
+              </span>
+            </div>
+          </div>
+
+          {error && (
+            <div className="flex items-start gap-2 rounded border p-2.5 text-[12px]" style={{ borderColor: AZL.danger, color: AZL.danger }}>
+              <AlertCircle size={14} className="mt-0.5 shrink-0" />
+              {error}
+            </div>
+          )}
+          {success && (
+            <div className="flex items-start gap-2 rounded border p-2.5 text-[12px]" style={{ borderColor: AZL.success, color: AZL.success }}>
+              <CheckCircle2 size={14} className="mt-0.5 shrink-0" />
+              {success}
+            </div>
+          )}
+
+          <div className="flex gap-2">
+            <button
+              onClick={() => setTab("ipAddresses")}
+              className="rounded border px-4 py-2 text-[12px] font-medium"
+              style={{ borderColor: AZL.border, color: AZL.textMuted }}
+            >
+              Zurück
+            </button>
+            {success ? (
+              <button
+                onClick={closeCreateBlade}
+                className="rounded px-4 py-2 text-[12px] font-semibold text-white"
+                style={{ backgroundColor: AZL.success }}
+              >
+                Zu den virtuellen Netzwerken
+              </button>
+            ) : (
+              <button
+                onClick={handleCreate}
+                className="rounded px-4 py-2 text-[12px] font-semibold text-white"
+                style={{ backgroundColor: AZL.blue }}
+              >
+                Create
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

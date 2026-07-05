@@ -9,6 +9,8 @@ import {
   Person24Color,
   Folder24Regular,
   Storage24Regular,
+  Server24Regular,
+  VirtualNetwork24Regular,
 } from "@fluentui/react-icons";
 import { useLabStore } from "@/lib/store/labStore";
 import ScaleToFit from "@/components/ui/ScaleToFit";
@@ -107,6 +109,8 @@ export default function AzurePortalFrame({
             [
               { key: "resource-groups" as const, icon: Folder24Regular, label: "Resource groups", color: "#0078d4" },
               { key: "storage-accounts" as const, icon: Storage24Regular, label: "Storage accounts", color: "#00bcf2" },
+              { key: "virtual-machines" as const, icon: Server24Regular, label: "Virtual machines", color: "#0078d4" },
+              { key: "virtual-networks" as const, icon: VirtualNetwork24Regular, label: "Virtual networks", color: "#00bcf2" },
             ]
           ).map((item) => {
             const active = section === item.key;

@@ -34,11 +34,14 @@ export type Lab = {
   /** Numbered sub-labs shown in the "Lab-Übersicht" overview grid. */
   steps?: LabStep[];
   /** When set, the lab renders a real, state-driven simulation instead of the static mock. */
-  interactive?: "resource-group";
+  interactive?: "resource-group" | "virtual-machine" | "virtual-network";
+  /** URL segment for this lab under /certifications/[company]/[certId]/labs/[labSlug]. */
+  slug?: string;
 };
 
 export const AZ900_RG_LAB: Lab = {
   id: "resource-group-basics",
+  slug: "resource-group-basics",
   title: "Lab: Erste Ressourcengruppe erstellen",
   description:
     "Erstelle deine erste Azure-Ressourcengruppe — entweder über das Portal oder direkt per Azure CLI in der Cloud Shell. Diese Simulation prüft dein Ergebnis in Echtzeit.",
@@ -83,10 +86,112 @@ export const AZ900_RG_LAB: Lab = {
     },
     { label: "az group create Referenz", url: "https://learn.microsoft.com/de-de/cli/azure/group" },
   ],
+  interactive: "resource-group",
+};
+
+export const AZ104_VM_LAB: Lab = {
+  id: "az104-vm-creation",
+  slug: "vm-creation",
+  title: "Lab: Erste virtuelle Maschine erstellen",
+  description:
+    "Erstelle eine Ressourcengruppe und darin eine virtuelle Maschine — über das Portal oder direkt per Azure CLI in der Cloud Shell. Diese Simulation prüft dein Ergebnis in Echtzeit.",
+  level: "Beginner",
+  durationLabel: "20-30 Minuten",
+  totalMinutes: 25 * 60,
+  tags: ["Online-Lab", "Echtzeit-Validierung", "Reset möglich", "Portal + CLI"],
+  goal: 'Erstelle eine Ressourcengruppe namens "CC-Lab-RG" in "West Europe" und darin eine virtuelle Maschine namens "CC-Lab-VM".',
+  goalChecklist: [
+    'Ressourcengruppe mit dem Namen "CC-Lab-RG" erstellen',
+    "Region West Europe auswählen",
+    'Eine virtuelle Maschine namens "CC-Lab-VM" in dieser Ressourcengruppe erstellen',
+    "Ergebnis über az group list / az vm list bestätigen",
+  ],
+  instructions: [
+    'Portal: Wähle links "Resource groups", klicke "Create", Name CC-Lab-RG, Region West Europe.',
+    'CLI: az group create --name CC-Lab-RG --location westeurope',
+    'Wähle danach links "Virtual machines" und erstelle eine VM namens CC-Lab-VM in CC-Lab-RG.',
+    'CLI: az vm create --name CC-Lab-VM --resource-group CC-Lab-RG --location westeurope --image Ubuntu2204 --admin-username azureuser',
+    "Die Checkliste rechts aktualisiert sich automatisch, sobald beide Ressourcen korrekt existieren.",
+  ],
+  details: [
+    { label: "Azure Region", value: "West Europe" },
+    { label: "Benötigte Rollen", value: "Mitwirkender" },
+    { label: "Ziel-Ressourcengruppe", value: "CC-Lab-RG" },
+    { label: "Ressourcen", value: "2" },
+    { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+  ],
+  resources: [
+    { id: "r1", label: "Resource Group (noch nicht erstellt)", active: false },
+    { id: "r2", label: "Virtual Machine (noch nicht erstellt)", active: false },
+  ],
+  tasks: [
+    { id: "rg-created", label: 'Ressourcengruppe "CC-Lab-RG" erstellt', done: false },
+    { id: "rg-region", label: "Region West Europe korrekt gesetzt", done: false },
+    { id: "vm-created", label: 'Virtuelle Maschine "CC-Lab-VM" erstellt', done: false },
+  ],
+  docs: [
+    {
+      label: "Was ist eine virtuelle Maschine?",
+      url: "https://learn.microsoft.com/de-de/azure/virtual-machines/overview",
+    },
+    { label: "az vm create Referenz", url: "https://learn.microsoft.com/de-de/cli/azure/vm" },
+  ],
+  interactive: "virtual-machine",
+};
+
+export const AZ104_VNET_LAB: Lab = {
+  id: "az104-vnet-creation",
+  slug: "vnet-creation",
+  title: "Lab: Virtuelles Netzwerk erstellen",
+  description:
+    "Erstelle eine Ressourcengruppe und darin ein virtuelles Netzwerk mit Subnetz — über das Portal oder direkt per Azure CLI in der Cloud Shell. Diese Simulation prüft dein Ergebnis in Echtzeit.",
+  level: "Beginner",
+  durationLabel: "20-30 Minuten",
+  totalMinutes: 25 * 60,
+  tags: ["Online-Lab", "Echtzeit-Validierung", "Reset möglich", "Portal + CLI"],
+  goal: 'Erstelle eine Ressourcengruppe namens "CC-Lab-RG" in "West Europe" und darin ein virtuelles Netzwerk namens "CC-Lab-VNet" mit Adressbereich 10.0.0.0/16.',
+  goalChecklist: [
+    'Ressourcengruppe mit dem Namen "CC-Lab-RG" erstellen',
+    "Region West Europe auswählen",
+    'Ein virtuelles Netzwerk namens "CC-Lab-VNet" mit Adressbereich 10.0.0.0/16 erstellen',
+    "Ergebnis über az group list / az network vnet list bestätigen",
+  ],
+  instructions: [
+    'Portal: Wähle links "Resource groups", klicke "Create", Name CC-Lab-RG, Region West Europe.',
+    'CLI: az group create --name CC-Lab-RG --location westeurope',
+    'Wähle danach links "Virtual networks" und erstelle eins namens CC-Lab-VNet in CC-Lab-RG mit Adressbereich 10.0.0.0/16.',
+    'CLI: az network vnet create --name CC-Lab-VNet --resource-group CC-Lab-RG --location westeurope --address-prefix 10.0.0.0/16 --subnet-name default --subnet-prefix 10.0.0.0/24',
+    "Die Checkliste rechts aktualisiert sich automatisch, sobald beide Ressourcen korrekt existieren.",
+  ],
+  details: [
+    { label: "Azure Region", value: "West Europe" },
+    { label: "Benötigte Rollen", value: "Netzwerkmitwirkender" },
+    { label: "Ziel-Ressourcengruppe", value: "CC-Lab-RG" },
+    { label: "Ressourcen", value: "2" },
+    { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+  ],
+  resources: [
+    { id: "r1", label: "Resource Group (noch nicht erstellt)", active: false },
+    { id: "r2", label: "Virtual Network (noch nicht erstellt)", active: false },
+  ],
+  tasks: [
+    { id: "rg-created", label: 'Ressourcengruppe "CC-Lab-RG" erstellt', done: false },
+    { id: "rg-region", label: "Region West Europe korrekt gesetzt", done: false },
+    { id: "vnet-created", label: 'Virtuelles Netzwerk "CC-Lab-VNet" mit 10.0.0.0/16 erstellt', done: false },
+  ],
+  docs: [
+    {
+      label: "Was ist ein virtuelles Netzwerk?",
+      url: "https://learn.microsoft.com/de-de/azure/virtual-network/virtual-networks-overview",
+    },
+    { label: "az network vnet create Referenz", url: "https://learn.microsoft.com/de-de/cli/azure/network/vnet" },
+  ],
+  interactive: "virtual-network",
 };
 
 export const AZ104_B2C_LAB: Lab = {
   id: "b2c-identitaeten",
+  slug: "b2c-identitaeten",
   title: "Lab: Verwalten von Azure-Identitäten (B2C)",
   description: "Konfigurieren und verwalten Sie Azure AD B2C für externe Benutzer (B2C = Business to Customer).",
   level: "Intermediate",
@@ -249,9 +354,13 @@ export const AZ104_B2C_LAB: Lab = {
   ],
 };
 
-const LABS: Record<string, Lab> = {
-  "az-104": AZ104_B2C_LAB,
-  "az-900": AZ900_RG_LAB,
+// Each certId can now have multiple hand-authored labs, addressed by slug
+// (/certifications/[company]/[certId]/labs/[labSlug]). The first entry in
+// each array is the "primary" lab shown at the no-slug /labs route, so
+// existing links and getLab(certId, ...) calls keep working unchanged.
+const LABS: Record<string, Lab[]> = {
+  "az-104": [AZ104_VM_LAB, AZ104_VNET_LAB, AZ104_B2C_LAB],
+  "az-900": [AZ900_RG_LAB],
 };
 
 function generateLab(certId: string, certTitle: string, level: string): Lab {
@@ -501,6 +610,20 @@ export function generateGcpLab(certId: string, certTitle: string, level: string)
   };
 }
 
-export function getLab(certId: string, certTitle: string, level: string): Lab {
-  return LABS[certId] ?? generateLab(certId, certTitle, level);
+/**
+ * Resolve a lab for a cert. With no `labSlug`, returns the cert's primary
+ * (first) hand-authored lab, or a generated fallback if none exists — this
+ * keeps every existing call site (no slug) working exactly as before.
+ * With a `labSlug`, looks that specific lab up within the cert's list.
+ */
+export function getLab(certId: string, certTitle: string, level: string, labSlug?: string): Lab {
+  const labs = LABS[certId];
+  if (!labs || labs.length === 0) return generateLab(certId, certTitle, level);
+  if (!labSlug) return labs[0];
+  return labs.find((l) => l.slug === labSlug) ?? labs[0];
+}
+
+/** All hand-authored labs for a cert, for building a lab picker/list UI. */
+export function getLabsForCert(certId: string): Lab[] {
+  return LABS[certId] ?? [];
 }
