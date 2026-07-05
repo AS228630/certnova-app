@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, type MouseEvent as ReactMouseEvent } from "react";
-import { RotateCw, ChevronDown, ArrowLeftRight } from "lucide-react";
+import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent } from "react";
+import { RotateCw, ChevronDown } from "lucide-react";
 import HomeServicesView from "./HomeServicesView";
 import {
   Home24Color,
@@ -87,6 +87,18 @@ export default function LabEnvironment() {
   const [extraLines, setExtraLines] = useState<string[]>([]);
   const [boxSize, setBoxSize] = useState({ width: 760, height: 360 });
   const [maximized, setMaximized] = useState(false);
+  const scaleWrapRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState<number | null>(null);
+
+  useEffect(() => {
+    const el = scaleWrapRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver((entries) => {
+      setContainerWidth(entries[0].contentRect.width);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   function runQuickCommand(cmd: string, out: string) {
     setTerminalOpen(true);
@@ -116,6 +128,7 @@ export default function LabEnvironment() {
 
   const effectiveWidth = maximized ? 1200 : boxSize.width;
   const effectiveHeight = maximized ? 560 : boxSize.height;
+  const scale = containerWidth ? Math.min(1, containerWidth / effectiveWidth) : 1;
 
   return (
     <div className="rounded-2xl border border-border-soft bg-panel p-4 sm:p-6">
@@ -137,19 +150,20 @@ export default function LabEnvironment() {
       </div>
 
       {/* Mock browser chrome */}
-      <p className="mb-1.5 flex items-center gap-1 text-[11px] text-text-faint sm:hidden">
-        <ArrowLeftRight size={12} />
-        Zur Seite wischen, um mehr zu sehen
-      </p>
-      <div className="relative overflow-hidden rounded-xl border border-border-soft bg-bg">
+      <div ref={scaleWrapRef} className="relative overflow-hidden rounded-xl border border-border-soft bg-bg">
         <div className="flex items-center gap-2 border-b border-border-soft bg-panel-alt px-3 py-2">
           <Search24Regular fontSize={14} className="text-text-faint" />
           <span className="text-xs text-text-faint">Azure-Portal</span>
         </div>
 
-        <div className="overflow-x-auto">
-          {/* Light-mode Azure Portal simulation */}
-          <div className="bg-white text-[#323130]" style={{ minWidth: effectiveWidth }}>
+        <div className="overflow-hidden" style={{ height: (effectiveHeight + 40) * scale }}>
+          {/* Light-mode Azure Portal simulation — scaled to fit the available
+              width so the whole workspace is visible without horizontal
+              scrolling, matching the reference design on any screen size. */}
+          <div
+            className="bg-white text-[#323130]"
+            style={{ width: effectiveWidth, transform: `scale(${scale})`, transformOrigin: "top left" }}
+          >
             {/* Real Azure blue top bar */}
             <div className="flex items-center gap-4 bg-[#0078d4] px-3 py-1.5">
               <span className="flex items-center gap-1.5 text-sm font-semibold text-white">
