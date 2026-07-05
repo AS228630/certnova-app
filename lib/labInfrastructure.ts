@@ -28,8 +28,11 @@ const COMPANY_INFRASTRUCTURE: Record<string, LabInfrastructureType> = {
  * certs are split further by categoryKey (its Azure track vs. M365/security/
  * ai/data), since only Azure has a real simulator so far.
  */
+const WINDOWS_SERVER_CERT_IDS = new Set(["az-800", "az-801"]);
+
 export function getLabInfrastructureType(companySlug: string, cert?: Certification): LabInfrastructureType {
   if (companySlug === "microsoft") {
+    if (cert && WINDOWS_SERVER_CERT_IDS.has(cert.id)) return "WINDOWS_SERVER";
     if (cert?.categoryKey === "azure") return "AZURE";
     if (cert?.categoryKey === "m365") return "M365";
     return "GENERIC";
