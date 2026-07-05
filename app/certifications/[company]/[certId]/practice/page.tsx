@@ -1,22 +1,23 @@
 import { notFound } from "next/navigation";
 import DashboardShell from "@/components/DashboardShell";
 import PracticeClient from "@/components/certifications/practice/PracticeClient";
-import { getCompany, getAzureLearnRolloutParams, isAzureLearnRolloutCert } from "@/lib/companiesData";
+import { getCompany, companies } from "@/lib/companiesData";
 import { AZ900_TOPICS, AZ900_QUESTIONS } from "@/lib/az900Practice";
 import { AZ104_TOPICS, AZ104_QUESTIONS } from "@/lib/az104Practice";
 import { generatePracticeBank } from "@/lib/genericPractice";
 
 // Registry of hand-authored practice-question banks by certId. Any certId
 // not listed here automatically gets a generic-but-real placeholder bank
-// via generatePracticeBank (see lib/genericPractice.ts). Add more entries
-// here as real content is written for the other Azure certs.
+// via generatePracticeBank (see lib/genericPractice.ts), so this page works
+// for every company/cert from the start. Add more entries here as real
+// question banks are authored.
 const PRACTICE_BANKS: Record<string, { topics: typeof AZ900_TOPICS; questions: typeof AZ900_QUESTIONS }> = {
   "az-900": { topics: AZ900_TOPICS, questions: AZ900_QUESTIONS },
   "az-104": { topics: AZ104_TOPICS, questions: AZ104_QUESTIONS },
 };
 
 export function generateStaticParams() {
-  return getAzureLearnRolloutParams();
+  return companies.flatMap((c) => c.certs.map((cert) => ({ company: c.slug, certId: cert.id })));
 }
 
 export default async function PracticePage({
@@ -25,8 +26,6 @@ export default async function PracticePage({
   params: Promise<{ company: string; certId: string }>;
 }) {
   const { company: slug, certId } = await params;
-  if (!isAzureLearnRolloutCert(slug, certId)) notFound();
-
   const company = getCompany(slug);
   const cert = company?.certs.find((c) => c.id === certId);
 
