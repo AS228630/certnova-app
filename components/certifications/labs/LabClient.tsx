@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { BookOpen, ExternalLink, LifeBuoy, ChevronLeft } from "lucide-react";
 import type { Lab, LabTask } from "@/lib/labsData";
@@ -137,12 +137,15 @@ export default function LabClient({
   certCode,
   certId,
   lab,
+  environment,
 }: {
   companyName: string;
   companySlug: string;
   certCode: string;
   certId: string;
   lab: Lab;
+  /** Defaults to the Azure Portal simulator. Pass a different mock (e.g. AWS Console) to reuse this same lab chrome for another provider. */
+  environment?: ReactNode;
 }) {
   const [remaining, setRemaining] = useState(lab.totalMinutes);
   const [tasks, setTasks] = useState<LabTask[]>(lab.tasks);
@@ -232,7 +235,7 @@ export default function LabClient({
             </Link>
           )}
           <div className={simulatorOpen ? "" : "mt-4"}>
-            <VirtualEnvironment />
+            {environment ?? <VirtualEnvironment />}
           </div>
 
           {!simulatorOpen && (

@@ -1,8 +1,10 @@
 import type { Company, Certification } from "@/lib/companiesData";
 import type { LabInfrastructureType } from "@/lib/labInfrastructure";
 import type { Lab } from "@/lib/labsData";
+import { generateAwsLab } from "@/lib/labsData";
 import LabClient from "./LabClient";
 import ComingSoonLab from "./ComingSoonLab";
+import AwsConsoleEnvironment from "./aws/AwsConsoleEnvironment";
 
 type UniversalLabStageProps = {
   infrastructureType: LabInfrastructureType;
@@ -32,7 +34,20 @@ export default function UniversalLabStage({ infrastructureType, company, cert, l
         />
       );
 
-    // AWS / GOOGLE_CLOUD / M365 / WINDOWS_SERVER / LINUX / CISCO / GENERIC:
+    // AWS: real S3-bucket lab, reusing the same chrome as Azure with its own console mock.
+    case "AWS":
+      return (
+        <LabClient
+          companyName={company.name}
+          companySlug={company.slug}
+          certCode={cert.code}
+          certId={cert.id}
+          lab={generateAwsLab(cert.id, cert.title, cert.level)}
+          environment={<AwsConsoleEnvironment />}
+        />
+      );
+
+    // GOOGLE_CLOUD / M365 / WINDOWS_SERVER / LINUX / CISCO / GENERIC:
     // no dedicated runtime yet — every one of them lands here for now.
     default:
       return <ComingSoonLab company={company} cert={cert} />;

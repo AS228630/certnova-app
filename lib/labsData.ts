@@ -290,6 +290,48 @@ function generateLab(certId: string, certTitle: string, level: string): Lab {
   };
 }
 
+export function generateAwsLab(certId: string, certTitle: string, level: string): Lab {
+  return {
+    id: `${certId}-s3-lab`,
+    title: `Lab: Ersten S3-Bucket erstellen`,
+    description: `Wende die Konzepte von „${certTitle}“ praktisch an: erstelle und konfiguriere einen Amazon-S3-Bucket in einer echten, isolierten AWS-Umgebung.`,
+    level: (level as Lab["level"]) ?? "Beginner",
+    durationLabel: "30-40 Minuten",
+    totalMinutes: 35 * 60,
+    tags: ["Online-Lab", "Sichere Umgebung", "Reset möglich", "Schritt-für-Schritt-Anleitung"],
+    goal: "Erstelle einen S3-Bucket mit den richtigen Einstellungen für sicheres Speichern.",
+    goalChecklist: [
+      "Bucket mit eindeutigem Namen erstellen",
+      "Region auswählen",
+      "Blockierung des öffentlichen Zugriffs aktiviert lassen",
+      "Bucket in der Übersicht bestätigen",
+    ],
+    instructions: [
+      "Öffne die AWS-Konsole und navigiere zu S3.",
+      "Klicke auf „Bucket erstellen“ und vergib einen eindeutigen Namen.",
+      "Wähle die Region eu-central-1 (Frankfurt).",
+      "Überprüfe dein Ergebnis mit der Validierung.",
+    ],
+    details: [
+      { label: "AWS Region", value: "eu-central-1 (Frankfurt)" },
+      { label: "Benötigte Rollen", value: "S3 Full Access" },
+      { label: "Ziel-Bucket", value: `${certId}-lab-bucket` },
+      { label: "Ressourcen", value: "1" },
+      { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+    ],
+    resources: [{ id: "r1", label: "S3 Bucket (Demo)", active: true }],
+    tasks: [
+      { id: "t1", label: "Bucket erstellen", done: false },
+      { id: "t2", label: "Region auswählen", done: false },
+      { id: "t3", label: "Ergebnis validieren", done: false },
+    ],
+    docs: [
+      { label: "Amazon S3 Dokumentation", url: "https://docs.aws.amazon.com/s3/" },
+      { label: "S3-Bucket-Benennungsregeln", url: "https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html" },
+    ],
+  };
+}
+
 export function getLab(certId: string, certTitle: string, level: string): Lab {
   return LABS[certId] ?? generateLab(certId, certTitle, level);
 }
