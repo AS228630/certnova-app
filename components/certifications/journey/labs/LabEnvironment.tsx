@@ -118,30 +118,8 @@ const LINKS_COL2 = ["Azure Migrationstools", "Dienstupdates", "Azure-Community"]
 export default function LabEnvironment() {
   return (
     <div className="rounded-2xl border border-border-soft bg-panel p-3 sm:p-4">
-      <div className="mb-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <h2 className="font-bold text-text">Virtuelle Umgebung</h2>
-          <span className="flex items-center gap-1 text-xs font-semibold text-success">
-            <span className="h-1.5 w-1.5 rounded-full bg-success" /> Aktiv
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <button className="flex items-center gap-1.5 rounded-lg border border-border-soft px-2.5 py-1.5 text-xs font-semibold text-text-muted hover:text-text">
-            <RotateCw size={13} /> Neustarten
-          </button>
-          <button className="flex items-center gap-1.5 rounded-lg border border-border-soft px-2.5 py-1.5 text-xs font-semibold text-text-muted hover:text-text">
-            Optionen <ChevronDown size={13} />
-          </button>
-        </div>
-      </div>
-
       {/* Mock browser chrome */}
       <div className="overflow-hidden rounded-xl border border-border-soft bg-bg">
-        <div className="flex items-center gap-2 border-b border-border-soft bg-panel-alt px-3 py-2">
-          <Search24Regular fontSize={14} className="text-text-faint" />
-          <span className="text-xs text-text-faint">Azure-Portal</span>
-        </div>
-
         <div className="overflow-x-auto">
           {/* Light-mode Azure Portal simulation */}
           <div className="min-w-[900px] bg-white text-[#323130]">
