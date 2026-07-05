@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type MouseEvent as ReactMouseEvent } from "react";
-import { RotateCw, ChevronDown, ArrowLeftRight, ExternalLink } from "lucide-react";
+import { RotateCw, ChevronDown, ArrowLeftRight } from "lucide-react";
 import HomeServicesView from "./HomeServicesView";
 import {
   Home24Color,
@@ -346,33 +346,6 @@ export default function LabEnvironment() {
           ) : (
             <CloudShellWelcome onChoose={setShellChoice} />
           )}
-        </div>
-      </div>
-
-      <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <div className="rounded-xl border border-border-soft bg-panel p-4">
-          <p className="mb-2.5 text-sm font-bold text-text">Dokumentation &amp; Hilfe</p>
-          <div className="space-y-1.5 text-xs">
-            {[
-              "Azure AD B2C Dokumentation",
-              "Tutorial: Azure AD B2C",
-              "Best Practices für Identitäten",
-              "Troubleshooting Guide",
-            ].map((d) => (
-              <a key={d} href="#" className="flex items-center gap-1.5 text-primary hover:underline">
-                <ExternalLink size={12} />
-                {d}
-              </a>
-            ))}
-          </div>
-        </div>
-
-        <div className="rounded-xl border border-border-soft bg-panel p-4">
-          <p className="mb-1 text-sm font-bold text-text">Support</p>
-          <p className="mb-3 text-xs text-text-faint">Brauchen Sie Hilfe? Unser Support-Team ist für Sie da.</p>
-          <button className="w-full rounded-lg bg-primary py-2 text-xs font-bold text-white hover:bg-primary-dark">
-            Ticket erstellen
-          </button>
         </div>
       </div>
     </div>
