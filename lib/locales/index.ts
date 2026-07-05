@@ -5,10 +5,17 @@ import fa from './fa.json';
 
 export type Locale = 'de' | 'fa';
 
+export type VocabularyTerm = {
+  de?: string;
+  fa?: string;
+  definition: string;
+  golden?: boolean;
+};
+
 export interface LocaleData {
   common: Record<string, string>;
-  lab: Record<string, any>;
-  vocabulary: Record<string, any>;
+  lab: Record<string, unknown>;
+  vocabulary: Record<string, VocabularyTerm>;
 }
 
 const locales: Record<Locale, LocaleData> = {
@@ -22,11 +29,11 @@ const locales: Record<Locale, LocaleData> = {
  */
 export function t(locale: Locale, key: string): string {
   const keys = key.split('.');
-  let value: any = locales[locale];
+  let value: unknown = locales[locale];
 
   for (const k of keys) {
-    if (value === undefined) return key; // Fallback to key if not found
-    value = value[k];
+    if (value === undefined || value === null || typeof value !== 'object') return key; // Fallback to key if not found
+    value = (value as Record<string, unknown>)[k];
   }
 
   return typeof value === 'string' ? value : key;
@@ -54,8 +61,8 @@ export function getVocabularyTerm(locale: Locale, termKey: string) {
 export function getGoldenWords(locale: Locale) {
   const vocab = locales[locale].vocabulary || {};
   return Object.entries(vocab)
-    .filter(([_, term]: [string, any]) => term.golden)
-    .map(([key, term]: [string, any]) => ({
+    .filter(([, term]) => term.golden)
+    .map(([key, term]) => ({
       key,
       term: locale === 'de' ? term.de : term.fa,
       definition: term.definition,
