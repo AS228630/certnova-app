@@ -198,7 +198,7 @@ export default function LabClient({
   }
 
   return (
-    <div>
+    <div className={simulatorOpen ? "" : "p-4 md:p-8"}>
       {!simulatorOpen && (
         <LabHeader
           companyName={companyName}
@@ -212,42 +212,56 @@ export default function LabClient({
       )}
 
       {!simulatorOpen && lab.steps && lab.steps.length > 0 ? (
-        <div className="mt-6">
-          <LabStepsOverview steps={lab.steps} onOpen={() => setSimulatorOpen(true)} />
+        <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[1fr_280px]">
+          <div>
+            <LabStepsOverview steps={lab.steps} onOpen={() => setSimulatorOpen(true)} />
+          </div>
+          <div>
+            <LabSidebar lab={lab} tasks={tasks} onToggleTask={toggleTask} />
+          </div>
         </div>
       ) : (
         <>
           {simulatorOpen && (
             <Link
               href={`/certifications/${companySlug}/${certId}`}
-              className="mb-2 mt-2 inline-flex items-center gap-1 text-xs text-text-faint hover:text-text"
+              className="mb-2 ml-2 mt-2 inline-flex items-center gap-1 text-xs text-text-faint hover:text-text"
             >
               <ChevronLeft size={14} />
               Zurück zum Lab
             </Link>
           )}
-          <div className="mt-4">
+          <div className={simulatorOpen ? "" : "mt-4"}>
             <VirtualEnvironment />
           </div>
 
-          <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[1fr_280px]">
-            <div>
-              <LabOverviewPanel lab={lab} />
+          {!simulatorOpen && (
+            <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[1fr_280px]">
+              <div>
+                <LabOverviewPanel lab={lab} />
+              </div>
+              <div>
+                <LabSidebar lab={lab} tasks={tasks} onToggleTask={toggleTask} />
+              </div>
             </div>
-
-            <div>
-              <LabSidebar lab={lab} tasks={tasks} onToggleTask={toggleTask} />
-            </div>
-          </div>
+          )}
         </>
       )}
 
       {(lab.docs.length > 0 || true) && (
-        <div className="mt-6 grid grid-cols-1 gap-6 xl:grid-cols-[260px_minmax(0,1fr)_280px]">
+        <div
+          className={`grid grid-cols-1 gap-6 xl:grid-cols-[260px_minmax(0,1fr)_280px] ${
+            simulatorOpen ? "bg-[#0D1324] px-4 py-6 md:px-8" : "px-4 pb-6 pt-6 md:px-8"
+          }`}
+        >
           <div className="hidden xl:order-1 xl:block" />
 
           {lab.docs.length > 0 && (
-            <div className="rounded-2xl border border-border-soft bg-panel p-5 xl:order-2">
+            <div
+              className={`xl:order-2 ${
+                simulatorOpen ? "p-1" : "rounded-2xl border border-border-soft bg-panel p-5"
+              }`}
+            >
               <p className="mb-3 flex items-center gap-1.5 text-sm font-bold text-text">
                 <BookOpen size={14} />
                 Dokumentation &amp; Hilfe
@@ -270,7 +284,9 @@ export default function LabClient({
             </div>
           )}
 
-          <div className="rounded-2xl border border-border-soft bg-panel p-5 xl:order-3">
+          <div
+            className={`xl:order-3 ${simulatorOpen ? "p-1" : "rounded-2xl border border-border-soft bg-panel p-5"}`}
+          >
             <p className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-text">
               <LifeBuoy size={14} />
               Support

@@ -1,12 +1,16 @@
 import { notFound } from "next/navigation";
 import DashboardShell from "@/components/DashboardShell";
 import LearnClient from "@/components/certifications/learn/LearnClient";
-import { getCompany, getAzureLearnRolloutParams, isAzureLearnRolloutCert } from "@/lib/companiesData";
+import { getCompany, companies } from "@/lib/companiesData";
 import { getLearnTrack } from "@/lib/learnData";
 import { getCertJourney } from "@/lib/journeyData";
 
+// Learn content is provider-agnostic (modules/videos/quizzes, not a live
+// cloud simulator), so it's generic for every company/cert from the start —
+// see lib/learnData.ts's generateLearnTrack fallback for certs without
+// hand-authored modules yet.
 export function generateStaticParams() {
-  return getAzureLearnRolloutParams();
+  return companies.flatMap((c) => c.certs.map((cert) => ({ company: c.slug, certId: cert.id })));
 }
 
 export default async function LearnPage({
@@ -15,8 +19,6 @@ export default async function LearnPage({
   params: Promise<{ company: string; certId: string }>;
 }) {
   const { company: slug, certId } = await params;
-  if (!isAzureLearnRolloutCert(slug, certId)) notFound();
-
   const company = getCompany(slug);
   const cert = company?.certs.find((c) => c.id === certId);
   const journey = getCertJourney(slug, certId);

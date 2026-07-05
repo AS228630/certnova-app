@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { RotateCw, ChevronDown, Apple, Play } from "lucide-react";
+import { Apple, Play } from "lucide-react";
+import ScaleToFit from "@/components/ui/ScaleToFit";
 import {
   Navigation24Regular,
   Search24Regular,
@@ -117,12 +118,10 @@ const LINKS_COL2 = ["Azure Migrationstools", "Dienstupdates", "Azure-Community"]
 
 export default function LabEnvironment() {
   return (
-    <div className="rounded-2xl border border-border-soft bg-panel p-3 sm:p-4">
-      {/* Mock browser chrome */}
-      <div className="overflow-hidden rounded-xl border border-border-soft bg-bg">
-        <div className="overflow-x-auto">
-          {/* Light-mode Azure Portal simulation */}
-          <div className="min-w-[900px] bg-white text-[#323130]">
+    <div>
+      <ScaleToFit width={900}>
+        {/* Light-mode Azure Portal simulation */}
+        <div className="bg-white text-[#323130]">
             {/* Real Azure blue top bar */}
             <div className="flex items-center gap-3 bg-[#0078d4] px-3 py-1.5">
               <Navigation24Regular fontSize={18} className="text-white" />
@@ -279,13 +278,7 @@ export default function LabEnvironment() {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="flex items-center gap-3 border-t border-border-soft bg-panel-alt px-3 py-1.5 text-text-faint">
-          <Grid24Regular fontSize={14} />
-          <span className="ml-auto text-[10px]">10:15 AM 20/05/2024</span>
-        </div>
-      </div>
+        </ScaleToFit>
 
       <LabTerminal />
     </div>
@@ -296,8 +289,8 @@ function LabTerminal() {
   const [tab, setTab] = useState<"cloudshell" | "powershell">("cloudshell");
 
   return (
-    <div className="mt-4 overflow-hidden rounded-xl border border-border-soft bg-black">
-      <div className="flex items-center gap-4 border-b border-border-soft bg-panel-alt px-3 py-2">
+    <div className="h-60 overflow-hidden bg-[#0D1324]">
+      <div className="flex items-center gap-4 border-b border-white/10 px-3 py-2">
         <button
           onClick={() => setTab("cloudshell")}
           className={`text-xs font-semibold ${tab === "cloudshell" ? "text-primary" : "text-text-faint"}`}
