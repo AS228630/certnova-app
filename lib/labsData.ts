@@ -417,6 +417,48 @@ export function generateLinuxLab(certId: string, certTitle: string, level: strin
   };
 }
 
+export function generateWindowsServerLab(certId: string, certTitle: string, level: string): Lab {
+  return {
+    id: `${certId}-ad-lab`,
+    title: `Lab: Active Directory-Benutzer verwalten`,
+    description: `Wende die Konzepte von „${certTitle}“ praktisch an: navigiere die Domänenstruktur und lege einen neuen Active-Directory-Benutzer an.`,
+    level: (level as Lab["level"]) ?? "Beginner",
+    durationLabel: "20-30 Minuten",
+    totalMinutes: 25 * 60,
+    tags: ["Online-Lab", "Sichere Umgebung", "Reset möglich", "Schritt-für-Schritt-Anleitung"],
+    goal: "Navigiere die Organisationseinheiten der Domäne und lege einen neuen Benutzer in der OU „Users“ an.",
+    goalChecklist: [
+      "Domänenstruktur in Active Directory-Benutzer und -Computer öffnen",
+      "Organisationseinheit „Users“ auswählen",
+      "Neuen Benutzer anlegen",
+      "Ergebnis validieren",
+    ],
+    instructions: [
+      "Öffne „Active Directory-Benutzer und -Computer“.",
+      "Navigiere zur Organisationseinheit „Users“.",
+      "Klicke auf „Neuer Benutzer“ und vergib einen Anzeigenamen.",
+      "Überprüfe dein Ergebnis mit der Validierung.",
+    ],
+    details: [
+      { label: "Domäne", value: "certcoach-lab.local" },
+      { label: "Benötigte Rollen", value: "Domänen-Administrator" },
+      { label: "Ziel-OU", value: "Users" },
+      { label: "Ressourcen", value: "1" },
+      { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+    ],
+    resources: [{ id: "r1", label: "Domänencontroller (Demo)", active: true }],
+    tasks: [
+      { id: "t1", label: "OU „Users“ öffnen", done: false },
+      { id: "t2", label: "Benutzer anlegen", done: false },
+      { id: "t3", label: "Ergebnis validieren", done: false },
+    ],
+    docs: [
+      { label: "Active Directory-Grundlagen (Microsoft Learn)", url: "https://learn.microsoft.com/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview" },
+      { label: "Benutzer und Computer verwalten", url: "https://learn.microsoft.com/windows-server/identity/ad-ds/get-started/adac/introduction-to-active-directory-administrative-center-enhancements" },
+    ],
+  };
+}
+
 export function generateGcpLab(certId: string, certTitle: string, level: string): Lab {
   return {
     id: `${certId}-gcs-lab`,
