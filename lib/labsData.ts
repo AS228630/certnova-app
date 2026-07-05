@@ -332,6 +332,48 @@ export function generateAwsLab(certId: string, certTitle: string, level: string)
   };
 }
 
+export function generateM365Lab(certId: string, certTitle: string, level: string): Lab {
+  return {
+    id: `${certId}-user-lab`,
+    title: `Lab: Neuen Benutzer im Microsoft 365 Admin Center anlegen`,
+    description: `Wende die Konzepte von „${certTitle}“ praktisch an: lege einen neuen Benutzer an und weise eine Lizenz zu.`,
+    level: (level as Lab["level"]) ?? "Beginner",
+    durationLabel: "20-30 Minuten",
+    totalMinutes: 25 * 60,
+    tags: ["Online-Lab", "Sichere Umgebung", "Reset möglich", "Schritt-für-Schritt-Anleitung"],
+    goal: "Erstelle einen neuen Benutzer und weise ihm eine Microsoft-365-Lizenz zu.",
+    goalChecklist: [
+      "Benutzer mit Anzeigename und Benutzername anlegen",
+      "Passwort festlegen",
+      "Lizenz zuweisen",
+      "Benutzer in der Übersicht bestätigen",
+    ],
+    instructions: [
+      "Öffne das Microsoft 365 Admin Center und navigiere zu „Benutzer“.",
+      "Klicke auf „Benutzer hinzufügen“ und fülle Name und Benutzername aus.",
+      "Weise eine passende Lizenz zu.",
+      "Überprüfe dein Ergebnis mit der Validierung.",
+    ],
+    details: [
+      { label: "Organisation", value: "CertCoach GmbH (Lab)" },
+      { label: "Benötigte Rollen", value: "Benutzeradministrator" },
+      { label: "Ziel-Domain", value: `${certId}-lab.onmicrosoft.com` },
+      { label: "Ressourcen", value: "1" },
+      { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+    ],
+    resources: [{ id: "r1", label: "Benutzerkonto (Demo)", active: true }],
+    tasks: [
+      { id: "t1", label: "Benutzer anlegen", done: false },
+      { id: "t2", label: "Lizenz zuweisen", done: false },
+      { id: "t3", label: "Ergebnis validieren", done: false },
+    ],
+    docs: [
+      { label: "Benutzer hinzufügen (Microsoft Learn)", url: "https://learn.microsoft.com/microsoft-365/admin/add-users/add-users" },
+      { label: "Lizenzen zuweisen", url: "https://learn.microsoft.com/microsoft-365/admin/manage/assign-licenses-to-users" },
+    ],
+  };
+}
+
 export function getLab(certId: string, certTitle: string, level: string): Lab {
   return LABS[certId] ?? generateLab(certId, certTitle, level);
 }
