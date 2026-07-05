@@ -17,6 +17,7 @@ import {
   Key24Regular,
   Folder24Regular,
   ViewDesktop24Regular,
+  VirtualNetwork24Regular,
 } from "@fluentui/react-icons";
 import { GraduationCap, Activity, ShieldCheck, DollarSign, ExternalLink, Download } from "lucide-react";
 
@@ -31,7 +32,10 @@ const SERVICE_TILES = [
   { label: "Speicherkonten", icon: Storage24Regular, color: "#0078d4" },
   { label: "Weitere Dienste", icon: ArrowRight24Regular, color: "#0078d4" },
   { label: "App Services", icon: WindowDevTools24Regular, color: "#0062ad" },
+  { label: "Speicherkonten", icon: Storage24Regular, color: "#0078d4" },
   { label: "SQL-Datenbanken", icon: Database24Color, color: "#0078d4" },
+  { label: "Azure Cosmos DB", icon: Database24Color, color: "#3999c6" },
+  { label: "Virtuelle Netzwerke", icon: VirtualNetwork24Regular, color: "#00bcf2" },
   { label: "Überwachen", icon: Pulse24Regular, color: "#7fba00" },
 ];
 
@@ -85,9 +89,17 @@ export default function HomeServicesView() {
     <div className="w-[540px] shrink-0 overflow-y-auto bg-white p-4">
       <h3 className="mb-4 text-lg font-semibold text-[#201f1e]">Azure-Dienste</h3>
 
-      <div className="mb-6 grid grid-cols-4 gap-x-2 gap-y-4">
-        {SERVICE_TILES.map((t) => (
-          <div key={t.label} className="flex flex-col items-center gap-1.5 text-center">
+      <div className="mb-3 grid grid-cols-5 gap-x-2 gap-y-4 sm:grid-cols-9">
+        {SERVICE_TILES.slice(0, 9).map((t, i) => (
+          <div key={`${t.label}-${i}`} className="flex flex-col items-center gap-1.5 text-center">
+            <t.icon fontSize={22} style={{ color: t.color }} />
+            <span className="text-[10px] leading-tight text-[#0078d4]">{t.label}</span>
+          </div>
+        ))}
+      </div>
+      <div className="mb-6 grid grid-cols-3 gap-x-2 gap-y-4 sm:grid-cols-6">
+        {SERVICE_TILES.slice(9).map((t, i) => (
+          <div key={`${t.label}-${i + 9}`} className="flex flex-col items-center gap-1.5 text-center">
             <t.icon fontSize={22} style={{ color: t.color }} />
             <span className="text-[10px] leading-tight text-[#0078d4]">{t.label}</span>
           </div>

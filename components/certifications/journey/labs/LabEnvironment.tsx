@@ -81,7 +81,7 @@ const QUICK_COMMANDS = [
 ];
 
 export default function LabEnvironment() {
-  const [activeView, setActiveView] = useState<"home" | "b2c">("b2c");
+  const [activeView, setActiveView] = useState<"home" | "b2c">("home");
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [shellChoice, setShellChoice] = useState<"bash" | "powershell" | null>(null);
   const [extraLines, setExtraLines] = useState<string[]>([]);
@@ -166,7 +166,10 @@ export default function LabEnvironment() {
           >
             {/* Real Azure blue top bar */}
             <div className="flex items-center gap-4 bg-[#0078d4] px-3 py-1.5">
-              <span className="flex items-center gap-1.5 text-sm font-semibold text-white">
+              <span
+                onClick={() => setActiveView("home")}
+                className="flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-white"
+              >
                 <Grid24Regular fontSize={16} />
                 Microsoft Azure
               </span>
