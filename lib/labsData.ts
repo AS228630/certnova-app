@@ -34,7 +34,7 @@ export type Lab = {
   /** Numbered sub-labs shown in the "Lab-Übersicht" overview grid. */
   steps?: LabStep[];
   /** When set, the lab renders a real, state-driven simulation instead of the static mock. */
-  interactive?: "resource-group" | "virtual-machine" | "virtual-network";
+  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket";
   /** URL segment for this lab under /certifications/[company]/[certId]/labs/[labSlug]. */
   slug?: string;
 };
@@ -430,14 +430,15 @@ export function generateAwsLab(certId: string, certTitle: string, level: string)
     ],
     resources: [{ id: "r1", label: "S3 Bucket (Demo)", active: true }],
     tasks: [
-      { id: "t1", label: "Bucket erstellen", done: false },
-      { id: "t2", label: "Region auswählen", done: false },
-      { id: "t3", label: "Ergebnis validieren", done: false },
+      { id: "bucket-created", label: "Bucket erstellen", done: false },
+      { id: "bucket-region", label: "Region eu-central-1 (Frankfurt) auswählen", done: false },
+      { id: "bucket-secure", label: "Öffentlichen Zugriff blockiert lassen", done: false },
     ],
     docs: [
       { label: "Amazon S3 Dokumentation", url: "https://docs.aws.amazon.com/s3/" },
       { label: "S3-Bucket-Benennungsregeln", url: "https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html" },
     ],
+    interactive: "s3-bucket",
   };
 }
 

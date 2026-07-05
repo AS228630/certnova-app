@@ -5,6 +5,7 @@ import Link from "next/link";
 import { BookOpen, ExternalLink, LifeBuoy, ChevronLeft } from "lucide-react";
 import type { Lab, LabTask } from "@/lib/labsData";
 import { useLabStore, TARGET_RG_NAME, TARGET_VM_NAME, TARGET_VNET_NAME } from "@/lib/store/labStore";
+import { useAwsLabStore, TARGET_BUCKET_REGION } from "@/lib/store/awsLabStore";
 import LabHeader from "./LabHeader";
 import LabStepsOverview from "./LabStepsOverview";
 import LabOverviewPanel from "./LabOverviewPanel";
@@ -201,12 +202,29 @@ export default function LabClient({
   const [ended, setEnded] = useState(false);
   const [simulatorOpen, setSimulatorOpen] = useState(!lab.steps || lab.steps.length === 0);
   const resetStore = useLabStore((s) => s.reset);
+  const awsBuckets = useAwsLabStore((s) => s.buckets);
+  const resetAwsStore = useAwsLabStore((s) => s.reset);
 
   useEffect(() => {
     if (ended) return;
     const t = setInterval(() => setRemaining((s) => Math.max(0, s - 1)), 1000);
     return () => clearInterval(t);
   }, [ended]);
+
+  // For labs backed by a real store (currently only s3-bucket outside the
+  // dedicated Azure path), derive task completion from that store instead of
+  // relying on the user to tick checkboxes by hand.
+  const effectiveTasks: LabTask[] =
+    lab.interactive === "s3-bucket"
+      ? tasks.map((t) => {
+          if (t.id === "bucket-created") return { ...t, done: awsBuckets.length > 0 };
+          if (t.id === "bucket-region")
+            return { ...t, done: awsBuckets.some((b) => b.region === TARGET_BUCKET_REGION) };
+          if (t.id === "bucket-secure")
+            return { ...t, done: awsBuckets.some((b) => b.blockPublicAccess) };
+          return t;
+        })
+      : tasks;
 
   function toggleTask(id: string) {
     setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
@@ -221,6 +239,7 @@ export default function LabClient({
       lab.interactive === "virtual-network"
     )
       resetStore();
+    if (lab.interactive === "s3-bucket") resetAwsStore();
   }
 
   if (ended) {
@@ -278,7 +297,7 @@ export default function LabClient({
             <LabStepsOverview steps={lab.steps} onOpen={() => setSimulatorOpen(true)} />
           </div>
           <div>
-            <LabSidebar lab={lab} tasks={tasks} onToggleTask={toggleTask} />
+            <LabSidebar lab={lab} tasks={effectiveTasks} onToggleTask={toggleTask} />
           </div>
         </div>
       ) : (
@@ -302,7 +321,7 @@ export default function LabClient({
                 <LabOverviewPanel lab={lab} />
               </div>
               <div>
-                <LabSidebar lab={lab} tasks={tasks} onToggleTask={toggleTask} />
+                <LabSidebar lab={lab} tasks={effectiveTasks} onToggleTask={toggleTask} />
               </div>
             </div>
           )}
