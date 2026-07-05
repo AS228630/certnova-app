@@ -6,11 +6,11 @@ import {
   Navigation24Regular,
   Search24Regular,
   Sparkle24Filled,
-  Mail24Regular,
+  Prompt24Regular,
   Alert24Color,
   Settings24Color,
   QuestionCircle24Color,
-  CommentMultiple24Color,
+  PersonAdd24Regular,
   Home24Color,
   ViewDesktop24Regular,
   Apps24Color,
@@ -160,11 +160,11 @@ export default function LabEnvironment() {
                 <Sparkle24Regular fontSize={13} /> Copilot
               </span>
               <div className="flex items-center gap-2.5 text-white">
-                <Mail24Regular fontSize={16} />
+                <Prompt24Regular fontSize={16} />
                 <Alert24Color fontSize={16} />
                 <Settings24Color fontSize={16} />
                 <QuestionCircle24Color fontSize={16} />
-                <CommentMultiple24Color fontSize={16} />
+                <PersonAdd24Regular fontSize={16} />
               </div>
               <div className="flex items-center gap-2 border-l border-white/25 pl-2.5">
                 <div className="text-right leading-tight">
