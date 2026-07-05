@@ -85,7 +85,7 @@ export default function LabEnvironment() {
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [shellChoice, setShellChoice] = useState<"bash" | "powershell" | null>(null);
   const [extraLines, setExtraLines] = useState<string[]>([]);
-  const [boxSize, setBoxSize] = useState({ width: 760, height: 360 });
+  const [boxSize, setBoxSize] = useState({ width: 760, height: 520 });
   const [maximized, setMaximized] = useState(false);
   const scaleWrapRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState<number | null>(null);

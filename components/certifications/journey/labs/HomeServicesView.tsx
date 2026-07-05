@@ -18,6 +18,7 @@ import {
   Folder24Regular,
   ViewDesktop24Regular,
 } from "@fluentui/react-icons";
+import { GraduationCap, Activity, ShieldCheck, DollarSign, ExternalLink, Download } from "lucide-react";
 
 const SERVICE_TILES = [
   { label: "Resource erstellen", icon: Add24Regular, color: "#0078d4" },
@@ -39,6 +40,42 @@ const NAVIGATE_TILES = [
   { label: "Ressourcengruppen", icon: Folder24Regular, color: "#0078d4" },
   { label: "Alle Ressourcen", icon: Apps24Color, color: "#0078d4" },
   { label: "Dashboard", icon: ViewDesktop24Regular, color: "#0078d4" },
+];
+
+const TOOLS_TILES = [
+  {
+    label: "Microsoft Learn",
+    desc: "Erfahren Sie mit kostenlosen Onlinetrainings von Microsoft",
+    icon: GraduationCap,
+    color: "#0078d4",
+  },
+  {
+    label: "Azure Monitor",
+    desc: "Überwachen Sie Ihre Apps und Infrastruktur",
+    icon: Activity,
+    color: "#2ca01c",
+  },
+  {
+    label: "Microsoft Defender for Cloud",
+    desc: "Schützen Sie Ihre Apps und Infrastruktur",
+    icon: ShieldCheck,
+    color: "#0078d4",
+  },
+  {
+    label: "Kostenverwaltung",
+    desc: "Kosten analysieren und optimieren",
+    icon: DollarSign,
+    color: "#2ca01c",
+  },
+];
+
+const USEFUL_LINKS = [
+  "Technische Dokumentation",
+  "Azure-Dienste",
+  "Hilfe von Microsoft erhalten",
+  "Azure Migrationstools",
+  "Dienstupdates",
+  "Azure-Community",
 ];
 
 export default function HomeServicesView() {
@@ -104,6 +141,41 @@ export default function HomeServicesView() {
             <span className="text-[#0078d4]">{t.label}</span>
           </div>
         ))}
+      </div>
+
+      <h4 className="mb-2 text-sm font-semibold text-[#201f1e]">Tools</h4>
+      <div className="mb-6 grid grid-cols-2 gap-4">
+        {TOOLS_TILES.map((t) => (
+          <div key={t.label} className="flex gap-2">
+            <t.icon size={20} style={{ color: t.color }} className="mt-0.5 shrink-0" />
+            <div>
+              <p className="text-[11px] font-semibold text-[#0078d4]">{t.label}</p>
+              <p className="text-[10px] leading-tight text-[#605e5c]">{t.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h4 className="mb-2 text-sm font-semibold text-[#201f1e]">Nützliche Links</h4>
+      <div className="mb-6 grid grid-cols-2 gap-y-2 text-[11px]">
+        {USEFUL_LINKS.map((l) => (
+          <a key={l} href="#" className="flex items-center gap-1 text-[#0078d4] hover:underline">
+            {l}
+            <ExternalLink size={10} />
+          </a>
+        ))}
+      </div>
+
+      <h4 className="mb-2 text-sm font-semibold text-[#201f1e]">Azure mobile App</h4>
+      <div className="flex gap-2">
+        <div className="flex items-center gap-1.5 rounded border border-[#e1e1e1] px-2.5 py-1.5 text-[10px] text-[#201f1e]">
+          <Download size={13} />
+          App Store
+        </div>
+        <div className="flex items-center gap-1.5 rounded border border-[#e1e1e1] px-2.5 py-1.5 text-[10px] text-[#201f1e]">
+          <Download size={13} />
+          Google Play
+        </div>
       </div>
     </div>
   );
