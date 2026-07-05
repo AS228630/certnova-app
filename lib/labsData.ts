@@ -417,6 +417,48 @@ export function generateLinuxLab(certId: string, certTitle: string, level: strin
   };
 }
 
+export function generateGcpLab(certId: string, certTitle: string, level: string): Lab {
+  return {
+    id: `${certId}-gcs-lab`,
+    title: `Lab: Ersten Cloud-Storage-Bucket erstellen`,
+    description: `Wende die Konzepte von „${certTitle}“ praktisch an: erstelle und konfiguriere einen Google-Cloud-Storage-Bucket in einer echten, isolierten GCP-Umgebung.`,
+    level: (level as Lab["level"]) ?? "Beginner",
+    durationLabel: "25-35 Minuten",
+    totalMinutes: 30 * 60,
+    tags: ["Online-Lab", "Sichere Umgebung", "Reset möglich", "Schritt-für-Schritt-Anleitung"],
+    goal: "Erstelle einen Cloud-Storage-Bucket mit den richtigen Einstellungen für sicheres Speichern.",
+    goalChecklist: [
+      "Bucket mit global eindeutigem Namen erstellen",
+      "Standort/Region auswählen",
+      "Standardspeicherklasse festlegen",
+      "Bucket in der Übersicht bestätigen",
+    ],
+    instructions: [
+      "Öffne die Google Cloud Console und navigiere zu Cloud Storage.",
+      "Klicke auf „Erstellen“ und vergib einen global eindeutigen Namen.",
+      "Wähle die Region europe-west3 (Frankfurt).",
+      "Überprüfe dein Ergebnis mit der Validierung.",
+    ],
+    details: [
+      { label: "GCP-Region", value: "europe-west3 (Frankfurt)" },
+      { label: "Benötigte Rollen", value: "Storage Admin" },
+      { label: "Ziel-Bucket", value: `${certId}-lab-bucket` },
+      { label: "Ressourcen", value: "1" },
+      { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+    ],
+    resources: [{ id: "r1", label: "Cloud Storage Bucket (Demo)", active: true }],
+    tasks: [
+      { id: "t1", label: "Bucket erstellen", done: false },
+      { id: "t2", label: "Region auswählen", done: false },
+      { id: "t3", label: "Ergebnis validieren", done: false },
+    ],
+    docs: [
+      { label: "Cloud Storage Dokumentation", url: "https://cloud.google.com/storage/docs" },
+      { label: "Bucket-Namensregeln", url: "https://cloud.google.com/storage/docs/buckets#naming" },
+    ],
+  };
+}
+
 export function getLab(certId: string, certTitle: string, level: string): Lab {
   return LABS[certId] ?? generateLab(certId, certTitle, level);
 }
