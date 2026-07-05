@@ -5,7 +5,16 @@
 
 export type LabResource = { id: string; label: string; active: boolean };
 export type LabTask = { id: string; label: string; done: boolean };
-export type LabStep = { id: string; title: string; durationLabel: string; status: "ready" | "locked" };
+export type LabStep = {
+  id: string;
+  title: string;
+  durationLabel: string;
+  status: "ready" | "locked";
+  description?: string;
+  goal?: string;
+  prerequisites?: string[];
+  notes?: string;
+};
 
 export type Lab = {
   id: string;
@@ -124,18 +133,119 @@ export const AZ104_B2C_LAB: Lab = {
     { label: "Best Practices für Identität", url: "https://learn.microsoft.com/de-de/azure/active-directory-b2c/best-practices" },
   ],
   steps: [
-    { id: "s1", title: "Azure AD B2C – Erstellen eines Mandanten", durationLabel: "10-15 Min.", status: "ready" },
-    { id: "s2", title: "Benutzerflow erstellen", durationLabel: "15-20 Min.", status: "ready" },
-    { id: "s3", title: "E-Mail-Verifizierung aktivieren", durationLabel: "10-15 Min.", status: "ready" },
-    { id: "s4", title: "Registrierung konfigurieren", durationLabel: "15-20 Min.", status: "ready" },
-    { id: "s5", title: "Anmeldung testen", durationLabel: "10-15 Min.", status: "ready" },
-    { id: "s6", title: "Passwortrichtlinien konfigurieren", durationLabel: "15-20 Min.", status: "ready" },
-    { id: "s7", title: "Multi-Faktor-Authentifizierung aktivieren", durationLabel: "10-15 Min.", status: "ready" },
-    { id: "s8", title: "Benutzerattribute verwalten", durationLabel: "10-15 Min.", status: "ready" },
-    { id: "s9", title: "API-Verbindungen konfigurieren", durationLabel: "15-20 Min.", status: "ready" },
-    { id: "s10", title: "Anwendungen integrieren", durationLabel: "15-20 Min.", status: "ready" },
-    { id: "s11", title: "Identitätsanbieter konfigurieren", durationLabel: "15-20 Min.", status: "ready" },
-    { id: "s12", title: "Überwachung und Protokollierung", durationLabel: "10-15 Min.", status: "ready" },
+    {
+      id: "s1",
+      title: "Azure AD B2C – Erstellen eines Mandanten",
+      durationLabel: "10-15 Min.",
+      status: "ready",
+      description:
+        "Lege einen neuen Azure AD B2C-Mandanten an, der als eigenständiges Verzeichnis für externe Benutzer (Kunden) dient, getrennt von deinem internen Unternehmensverzeichnis.",
+      goal: "Ein Azure AD B2C-Mandant ist erstellt und mit deinem Abonnement verknüpft.",
+      prerequisites: ["Aktives Azure-Abonnement", "Globaler Administrator-Zugriff"],
+      notes: "Der Mandantenname muss global eindeutig sein und endet auf .onmicrosoft.com.",
+    },
+    {
+      id: "s2",
+      title: "Benutzerflow erstellen",
+      durationLabel: "15-20 Min.",
+      status: "ready",
+      description:
+        "Konfiguriere einen Sign-up/Sign-in-Benutzerflow, der festlegt, wie sich externe Benutzer registrieren und anmelden können.",
+      goal: "Ein funktionierender Benutzerflow ist erstellt und kann getestet werden.",
+      prerequisites: ["Azure AD B2C-Mandant vorhanden"],
+      notes: "Wähle die Version 'Empfohlen' für die neuesten Anpassungsoptionen.",
+    },
+    {
+      id: "s3",
+      title: "E-Mail-Verifizierung aktivieren",
+      durationLabel: "10-15 Min.",
+      status: "ready",
+      description:
+        "Aktiviere die E-Mail-Verifizierung, damit neue Benutzer ihre E-Mail-Adresse per Einmalcode bestätigen müssen.",
+      goal: "Neue Registrierungen erfordern eine bestätigte E-Mail-Adresse.",
+      prerequisites: ["Benutzerflow erstellt"],
+    },
+    {
+      id: "s4",
+      title: "Registrierung konfigurieren",
+      durationLabel: "15-20 Min.",
+      status: "ready",
+      description: "Passe die Registrierungsseite an: welche Attribute abgefragt und im Token zurückgegeben werden.",
+      goal: "Das Registrierungsformular sammelt genau die benötigten Benutzerattribute.",
+      prerequisites: ["Benutzerflow erstellt"],
+    },
+    {
+      id: "s5",
+      title: "Anmeldung testen",
+      durationLabel: "10-15 Min.",
+      status: "ready",
+      description: "Teste den kompletten Registrierungs- und Anmeldevorgang über 'Benutzerflow ausführen'.",
+      goal: "Ein Testbenutzer kann sich erfolgreich registrieren und anmelden.",
+      prerequisites: ["Registrierung konfiguriert"],
+    },
+    {
+      id: "s6",
+      title: "Passwortrichtlinien konfigurieren",
+      durationLabel: "15-20 Min.",
+      status: "ready",
+      description: "Lege Komplexitätsanforderungen für Passwörter fest (Länge, Zeichenarten, Sperrverhalten).",
+      goal: "Passwortrichtlinien entsprechen den Sicherheitsanforderungen des Labs.",
+      prerequisites: ["Benutzerflow erstellt"],
+    },
+    {
+      id: "s7",
+      title: "Multi-Faktor-Authentifizierung aktivieren",
+      durationLabel: "10-15 Min.",
+      status: "ready",
+      description: "Aktiviere MFA (z.B. per SMS oder E-Mail-Code) als zusätzliche Sicherheitsebene beim Anmelden.",
+      goal: "MFA ist für den Benutzerflow verpflichtend aktiviert.",
+      prerequisites: ["Anmeldung getestet"],
+    },
+    {
+      id: "s8",
+      title: "Benutzerattribute verwalten",
+      durationLabel: "10-15 Min.",
+      status: "ready",
+      description: "Definiere benutzerdefinierte Attribute (z.B. Firmenname, Kundennummer) für dein Verzeichnis.",
+      goal: "Benutzerdefinierte Attribute sind angelegt und im Registrierungsflow sichtbar.",
+      prerequisites: ["Azure AD B2C-Mandant vorhanden"],
+    },
+    {
+      id: "s9",
+      title: "API-Verbindungen konfigurieren",
+      durationLabel: "15-20 Min.",
+      status: "ready",
+      description: "Verbinde den Benutzerflow mit einer REST-API zur Validierung von Eingaben während der Registrierung.",
+      goal: "Eine API-Verbindung ist konfiguriert und wird im Flow aufgerufen.",
+      prerequisites: ["Registrierung konfiguriert"],
+    },
+    {
+      id: "s10",
+      title: "Anwendungen integrieren",
+      durationLabel: "15-20 Min.",
+      status: "ready",
+      description: "Registriere eine Beispielanwendung in Azure AD B2C und verbinde sie mit dem Benutzerflow.",
+      goal: "Eine App-Registrierung existiert und akzeptiert Anmeldungen über B2C.",
+      prerequisites: ["Benutzerflow erstellt"],
+    },
+    {
+      id: "s11",
+      title: "Identitätsanbieter konfigurieren",
+      durationLabel: "15-20 Min.",
+      status: "ready",
+      description: "Füge einen externen Identitätsanbieter (z.B. Google oder Microsoft-Konto) als Anmeldeoption hinzu.",
+      goal: "Benutzer können sich zusätzlich über einen externen Anbieter anmelden.",
+      prerequisites: ["Benutzerflow erstellt"],
+    },
+    {
+      id: "s12",
+      title: "Überwachung und Protokollierung",
+      durationLabel: "10-15 Min.",
+      status: "ready",
+      description: "Richte Azure Monitor / Log Analytics ein, um Anmeldeversuche und Fehler zu protokollieren.",
+      goal: "Anmeldeereignisse werden protokolliert und sind im Log Analytics-Workspace sichtbar.",
+      prerequisites: ["Mindestens ein Benutzerflow aktiv"],
+    },
   ],
 };
 
