@@ -8,6 +8,7 @@ import { useLabStore, TARGET_RG_NAME, TARGET_VM_NAME, TARGET_VNET_NAME } from "@
 import { useAwsLabStore, TARGET_BUCKET_REGION } from "@/lib/store/awsLabStore";
 import { useAdLabStore, TARGET_OU } from "@/lib/store/adLabStore";
 import { useGcpLabStore, TARGET_LOCATION } from "@/lib/store/gcpLabStore";
+import { useM365LabStore } from "@/lib/store/m365LabStore";
 import LabHeader from "./LabHeader";
 import LabStepsOverview from "./LabStepsOverview";
 import LabOverviewPanel from "./LabOverviewPanel";
@@ -211,6 +212,8 @@ export default function LabClient({
   const resetAdStore = useAdLabStore((s) => s.reset);
   const gcpBuckets = useGcpLabStore((s) => s.buckets);
   const resetGcpStore = useGcpLabStore((s) => s.reset);
+  const m365Users = useM365LabStore((s) => s.users);
+  const resetM365Store = useM365LabStore((s) => s.reset);
 
   useEffect(() => {
     if (ended) return;
@@ -221,32 +224,35 @@ export default function LabClient({
   // For labs backed by a real store (currently only s3-bucket outside the
   // dedicated Azure path), derive task completion from that store instead of
   // relying on the user to tick checkboxes by hand.
-  const effectiveTasks: LabTask[] =
-    lab.interactive === "s3-bucket"
-      ? tasks.map((t) => {
-          if (t.id === "bucket-created") return { ...t, done: awsBuckets.length > 0 };
-          if (t.id === "bucket-region")
-            return { ...t, done: awsBuckets.some((b) => b.region === TARGET_BUCKET_REGION) };
-          if (t.id === "bucket-secure")
-            return { ...t, done: awsBuckets.some((b) => b.blockPublicAccess) };
-          return t;
-        })
-      : lab.interactive === "ad-user"
-        ? tasks.map((t) => {
-            if (t.id === "ou-selected") return { ...t, done: adSelectedOu === TARGET_OU };
-            if (t.id === "user-created") return { ...t, done: adUsers.length > 0 };
-            if (t.id === "user-in-ou") return { ...t, done: adUsers.some((u) => u.ou === TARGET_OU) };
-            return t;
-          })
-        : lab.interactive === "gcs-bucket"
-          ? tasks.map((t) => {
-              if (t.id === "bucket-created") return { ...t, done: gcpBuckets.length > 0 };
-              if (t.id === "bucket-region")
-                return { ...t, done: gcpBuckets.some((b) => b.location === TARGET_LOCATION) };
-              if (t.id === "bucket-storage-class") return { ...t, done: gcpBuckets.length > 0 };
-              return t;
-            })
-          : tasks;
+  const TASK_CHECKERS: Partial<Record<NonNullable<Lab["interactive"]>, (taskId: string) => boolean>> = {
+    "s3-bucket": (taskId) => {
+      if (taskId === "bucket-created") return awsBuckets.length > 0;
+      if (taskId === "bucket-region") return awsBuckets.some((b) => b.region === TARGET_BUCKET_REGION);
+      if (taskId === "bucket-secure") return awsBuckets.some((b) => b.blockPublicAccess);
+      return false;
+    },
+    "ad-user": (taskId) => {
+      if (taskId === "ou-selected") return adSelectedOu === TARGET_OU;
+      if (taskId === "user-created") return adUsers.length > 0;
+      if (taskId === "user-in-ou") return adUsers.some((u) => u.ou === TARGET_OU);
+      return false;
+    },
+    "gcs-bucket": (taskId) => {
+      if (taskId === "bucket-created") return gcpBuckets.length > 0;
+      if (taskId === "bucket-region") return gcpBuckets.some((b) => b.location === TARGET_LOCATION);
+      if (taskId === "bucket-storage-class") return gcpBuckets.length > 0;
+      return false;
+    },
+    "m365-user": (taskId) => {
+      if (taskId === "user-created") return m365Users.length > 0;
+      if (taskId === "user-licensed") return m365Users.some((u) => u.license !== "Keine Lizenz");
+      return false;
+    },
+  };
+  const activeChecker = lab.interactive ? TASK_CHECKERS[lab.interactive] : undefined;
+  const effectiveTasks: LabTask[] = activeChecker
+    ? tasks.map((t) => ({ ...t, done: activeChecker(t.id) }))
+    : tasks;
 
   function toggleTask(id: string) {
     setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
@@ -264,6 +270,7 @@ export default function LabClient({
     if (lab.interactive === "s3-bucket") resetAwsStore();
     if (lab.interactive === "ad-user") resetAdStore();
     if (lab.interactive === "gcs-bucket") resetGcpStore();
+    if (lab.interactive === "m365-user") resetM365Store();
   }
 
   if (ended) {

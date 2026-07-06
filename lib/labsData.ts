@@ -34,7 +34,7 @@ export type Lab = {
   /** Numbered sub-labs shown in the "Lab-Übersicht" overview grid. */
   steps?: LabStep[];
   /** When set, the lab renders a real, state-driven simulation instead of the static mock. */
-  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket" | "ad-user" | "gcs-bucket";
+  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket" | "ad-user" | "gcs-bucket" | "m365-user";
   /** URL segment for this lab under /certifications/[company]/[certId]/labs/[labSlug]. */
   slug?: string;
 };
@@ -473,14 +473,14 @@ export function generateM365Lab(certId: string, certTitle: string, level: string
     ],
     resources: [{ id: "r1", label: "Benutzerkonto (Demo)", active: true }],
     tasks: [
-      { id: "t1", label: "Benutzer anlegen", done: false },
-      { id: "t2", label: "Lizenz zuweisen", done: false },
-      { id: "t3", label: "Ergebnis validieren", done: false },
+      { id: "user-created", label: "Benutzer anlegen", done: false },
+      { id: "user-licensed", label: "Lizenz zuweisen", done: false },
     ],
     docs: [
       { label: "Benutzer hinzufügen (Microsoft Learn)", url: "https://learn.microsoft.com/microsoft-365/admin/add-users/add-users" },
       { label: "Lizenzen zuweisen", url: "https://learn.microsoft.com/microsoft-365/admin/manage/assign-licenses-to-users" },
     ],
+    interactive: "m365-user",
   };
 }
 
