@@ -619,6 +619,45 @@ export function generateGcpLab(certId: string, certTitle: string, level: string)
  * keeps every existing call site (no slug) working exactly as before.
  * With a `labSlug`, looks that specific lab up within the cert's list.
  */
+export function generateOracleLab(certId: string, certTitle: string, level: string): Lab {
+  return {
+    id: `${certId}-sql-lab`,
+    title: "Lab: Erste Tabelle mit SQL erstellen",
+    description: `Wende die Konzepte von „${certTitle}“ praktisch an: erstelle eine Tabelle, füge Daten ein und frage sie über eine echte SQL-Befehlszeile ab.`,
+    level: (level as Lab["level"]) ?? "Beginner",
+    durationLabel: "25-35 Minuten",
+    totalMinutes: 30 * 60,
+    tags: ["Online-Lab", "Sichere Umgebung", "Reset möglich", "Schritt-für-Schritt-Anleitung"],
+    goal: "Erstelle die Tabelle MITARBEITER, füge einen Datensatz ein und frage die Tabelle ab.",
+    goalChecklist: [
+      "Tabelle MITARBEITER mit den Spalten ID, NAME erstellen",
+      "Einen Datensatz einfügen",
+      "Die Tabelle mit SELECT abfragen",
+    ],
+    instructions: [
+      "Erstelle die Tabelle mit `CREATE TABLE MITARBEITER (ID, NAME);`.",
+      "Füge einen Datensatz ein mit `INSERT INTO MITARBEITER VALUES (1, 'Anna');`.",
+      "Frage die Tabelle ab mit `SELECT * FROM MITARBEITER;`.",
+      "Kontrolliere alle Tabellen mit `SHOW TABLES;`.",
+    ],
+    details: [
+      { label: "Datenbank", value: "Oracle Database (simuliert)" },
+      { label: "Ziel-Tabelle", value: "MITARBEITER" },
+      { label: "Benötigte Rolle", value: "CERTCOACH_LAB" },
+      { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+    ],
+    resources: [{ id: "r1", label: "Oracle-Datenbank (simuliert)", active: true }],
+    tasks: [
+      { id: "table-created", label: "Tabelle MITARBEITER erstellen", done: false },
+      { id: "row-inserted", label: "Datensatz einfügen", done: false },
+      { id: "table-queried", label: "Tabelle abfragen", done: false },
+    ],
+    docs: [
+      { label: "SQL-Grundlagen (Oracle Docs)", url: "https://docs.oracle.com/en/database/oracle/oracle-database/index.html" },
+    ],
+  };
+}
+
 export function generateCiscoLab(certId: string, certTitle: string, level: string): Lab {
   return {
     id: `${certId}-router-lab`,
