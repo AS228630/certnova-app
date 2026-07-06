@@ -10,6 +10,7 @@ import { useAdLabStore, TARGET_OU } from "@/lib/store/adLabStore";
 import { useGcpLabStore, TARGET_LOCATION } from "@/lib/store/gcpLabStore";
 import { useM365LabStore } from "@/lib/store/m365LabStore";
 import { useVSphereLabStore, ESXI_TARGET_HOST } from "@/lib/store/vsphereLabStore";
+import { useDockerLabStore, TARGET_IMAGE, TARGET_CONTAINER_NAME } from "@/lib/store/dockerLabStore";
 import { useCiscoLabStore, TARGET_HOSTNAME, TARGET_IP, TARGET_MASK } from "@/lib/store/ciscoLabStore";
 import LabHeader from "./LabHeader";
 import LabStepsOverview from "./LabStepsOverview";
@@ -218,6 +219,9 @@ export default function LabClient({
   const resetM365Store = useM365LabStore((s) => s.reset);
   const vsphereVms = useVSphereLabStore((s) => s.vms);
   const resetVSphereStore = useVSphereLabStore((s) => s.reset);
+  const dockerImages = useDockerLabStore((s) => s.images);
+  const dockerContainers = useDockerLabStore((s) => s.containers);
+  const resetDockerStore = useDockerLabStore((s) => s.reset);
   const ciscoHostname = useCiscoLabStore((s) => s.hostname);
   const ciscoHasEnteredPrivileged = useCiscoLabStore((s) => s.hasEnteredPrivileged);
   const ciscoInterfaces = useCiscoLabStore((s) => s.interfaces);
@@ -269,6 +273,13 @@ export default function LabClient({
       if (taskId === "vsphere-vm-resources") return vsphereVms.length > 0;
       return false;
     },
+    "docker-container": (taskId) => {
+      if (taskId === "image-pulled") return dockerImages.some((i) => i.repository === TARGET_IMAGE);
+      if (taskId === "container-created") return dockerContainers.some((c) => c.name === TARGET_CONTAINER_NAME);
+      if (taskId === "container-running")
+        return dockerContainers.some((c) => c.name === TARGET_CONTAINER_NAME && c.status === "running");
+      return false;
+    },
   };
   const activeChecker = lab.interactive ? TASK_CHECKERS[lab.interactive] : undefined;
   const effectiveTasks: LabTask[] = activeChecker
@@ -294,6 +305,7 @@ export default function LabClient({
     if (lab.interactive === "m365-user") resetM365Store();
     if (lab.interactive === "cisco-router") resetCiscoStore();
     if (lab.interactive === "vsphere-vm") resetVSphereStore();
+    if (lab.interactive === "docker-container") resetDockerStore();
   }
 
   if (ended) {

@@ -1,7 +1,7 @@
 import type { Company, Certification } from "@/lib/companiesData";
 import type { LabInfrastructureType } from "@/lib/labInfrastructure";
 import type { Lab } from "@/lib/labsData";
-import { generateAwsLab, generateM365Lab, generateLinuxLab, generateGcpLab, generateWindowsServerLab, generateCiscoLab, generateOracleLab, generateVmwareLab } from "@/lib/labsData";
+import { generateAwsLab, generateM365Lab, generateLinuxLab, generateGcpLab, generateWindowsServerLab, generateCiscoLab, generateOracleLab, generateVmwareLab, generateDockerLab } from "@/lib/labsData";
 import LabClient from "./LabClient";
 import ComingSoonLab from "./ComingSoonLab";
 import AwsConsoleEnvironment from "./aws/AwsConsoleEnvironment";
@@ -12,6 +12,7 @@ import ActiveDirectoryMockEnvironment from "./windows-server/ActiveDirectoryMock
 import CiscoTerminalEnvironment from "./cisco/CiscoTerminalEnvironment";
 import OracleSqlEnvironment from "./oracle/OracleSqlEnvironment";
 import VSphereClientEnvironment from "./vmware/VSphereClientEnvironment";
+import DockerCliEnvironment from "./docker/DockerCliEnvironment";
 
 type UniversalLabStageProps = {
   infrastructureType: LabInfrastructureType;
@@ -142,6 +143,19 @@ export default function UniversalLabStage({ infrastructureType, company, cert, l
           certId={cert.id}
           lab={generateVmwareLab(cert.id, cert.title, cert.level)}
           environment={<VSphereClientEnvironment />}
+        />
+      );
+
+    // DOCKER: real Docker CLI simulator (pull, run, ps, stop, rm, rmi).
+    case "DOCKER":
+      return (
+        <LabClient
+          companyName={company.name}
+          companySlug={company.slug}
+          certCode={cert.code}
+          certId={cert.id}
+          lab={generateDockerLab(cert.id, cert.title, cert.level)}
+          environment={<DockerCliEnvironment />}
         />
       );
 

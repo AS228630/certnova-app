@@ -34,7 +34,7 @@ export type Lab = {
   /** Numbered sub-labs shown in the "Lab-Übersicht" overview grid. */
   steps?: LabStep[];
   /** When set, the lab renders a real, state-driven simulation instead of the static mock. */
-  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket" | "ad-user" | "gcs-bucket" | "m365-user" | "cisco-router" | "vsphere-vm";
+  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket" | "ad-user" | "gcs-bucket" | "m365-user" | "cisco-router" | "vsphere-vm" | "docker-container";
   /** URL segment for this lab under /certifications/[company]/[certId]/labs/[labSlug]. */
   slug?: string;
 };
@@ -653,6 +653,47 @@ export function generateVmwareLab(certId: string, certTitle: string, level: stri
       { label: "Virtuelle Maschinen verwalten", url: "https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-vm-administration.html" },
     ],
     interactive: "vsphere-vm",
+  };
+}
+
+export function generateDockerLab(certId: string, certTitle: string, level: string): Lab {
+  return {
+    id: `${certId}-docker-lab`,
+    title: "Lab: Ersten Container starten",
+    description: `Wende die Konzepte von „${certTitle}“ praktisch an: lade ein Image herunter und starte einen Container über eine echte, isolierte Docker-CLI.`,
+    level: (level as Lab["level"]) ?? "Beginner",
+    durationLabel: "20-30 Minuten",
+    totalMinutes: 25 * 60,
+    tags: ["Online-Lab", "Sichere Umgebung", "Reset möglich", "Schritt-für-Schritt-Anleitung"],
+    goal: `Lade das Image "nginx" herunter und starte einen laufenden Container namens "cc-lab-web" davon.`,
+    goalChecklist: [
+      'Image "nginx" mit docker pull herunterladen',
+      'Container namens "cc-lab-web" von diesem Image starten',
+      "Container mit docker ps als laufend bestätigen",
+    ],
+    instructions: [
+      "Lade das nginx-Image herunter: `docker pull nginx`",
+      "Prüfe die heruntergeladenen Images: `docker images`",
+      'Starte einen Container: `docker run -d --name cc-lab-web -p 8080:80 nginx`',
+      "Kontrolliere laufende Container: `docker ps`",
+    ],
+    details: [
+      { label: "Docker Engine", value: "simuliert" },
+      { label: "Ziel-Image", value: "nginx:latest" },
+      { label: "Ziel-Container", value: "cc-lab-web" },
+      { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+    ],
+    resources: [{ id: "r1", label: "Docker-Container (simuliert)", active: true }],
+    tasks: [
+      { id: "image-pulled", label: 'Image "nginx" herunterladen', done: false },
+      { id: "container-created", label: 'Container "cc-lab-web" starten', done: false },
+      { id: "container-running", label: "Container läuft (docker ps)", done: false },
+    ],
+    docs: [
+      { label: "Docker-Grundlagen (offizielle Docs)", url: "https://docs.docker.com/get-started/" },
+      { label: "docker run Referenz", url: "https://docs.docker.com/engine/reference/run/" },
+    ],
+    interactive: "docker-container",
   };
 }
 
