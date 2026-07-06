@@ -1,7 +1,7 @@
 import type { Company, Certification } from "@/lib/companiesData";
 import type { LabInfrastructureType } from "@/lib/labInfrastructure";
 import type { Lab } from "@/lib/labsData";
-import { generateAwsLab, generateM365Lab, generateLinuxLab, generateGcpLab, generateWindowsServerLab, generateCiscoLab } from "@/lib/labsData";
+import { generateAwsLab, generateM365Lab, generateLinuxLab, generateGcpLab, generateWindowsServerLab, generateCiscoLab, generateOracleLab } from "@/lib/labsData";
 import LabClient from "./LabClient";
 import ComingSoonLab from "./ComingSoonLab";
 import AwsConsoleEnvironment from "./aws/AwsConsoleEnvironment";
@@ -10,6 +10,7 @@ import LinuxTerminalEnvironment from "./linux/LinuxTerminalEnvironment";
 import GcpConsoleEnvironment from "./gcp/GcpConsoleEnvironment";
 import ActiveDirectoryMockEnvironment from "./windows-server/ActiveDirectoryMockEnvironment";
 import CiscoTerminalEnvironment from "./cisco/CiscoTerminalEnvironment";
+import OracleSqlEnvironment from "./oracle/OracleSqlEnvironment";
 
 type UniversalLabStageProps = {
   infrastructureType: LabInfrastructureType;
@@ -114,6 +115,19 @@ export default function UniversalLabStage({ infrastructureType, company, cert, l
           certId={cert.id}
           lab={generateCiscoLab(cert.id, cert.title, cert.level)}
           environment={<CiscoTerminalEnvironment />}
+        />
+      );
+
+    // ORACLE_SQL: real SQL*Plus-style terminal (CREATE TABLE, INSERT, SELECT, SHOW TABLES).
+    case "ORACLE_SQL":
+      return (
+        <LabClient
+          companyName={company.name}
+          companySlug={company.slug}
+          certCode={cert.code}
+          certId={cert.id}
+          lab={generateOracleLab(cert.id, cert.title, cert.level)}
+          environment={<OracleSqlEnvironment />}
         />
       );
 
