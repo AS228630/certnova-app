@@ -46,7 +46,7 @@ const initialCliLog: CliLine[] = [
 ];
 
 function podsForDeployment(dep: K8sDeployment): K8sPod[] {
-  return Array.from({ length: dep.replicas }).map((_, i) => ({
+  return Array.from({ length: dep.replicas }).map(() => ({
     name: `${dep.name}-${randomSuffix()}-${randomSuffix().slice(0, 5)}`,
     namespace: dep.namespace,
     image: dep.image,
