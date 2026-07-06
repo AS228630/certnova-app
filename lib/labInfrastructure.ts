@@ -20,6 +20,7 @@ const COMPANY_INFRASTRUCTURE: Record<string, LabInfrastructureType> = {
   aws: "AWS",
   "google-cloud": "GOOGLE_CLOUD",
   linux: "LINUX",
+  redhat: "LINUX", // RHCSA/RHCE etc. are Linux system-administration exams
   cisco: "CISCO",
 };
 
