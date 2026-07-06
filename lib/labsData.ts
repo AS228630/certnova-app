@@ -34,7 +34,7 @@ export type Lab = {
   /** Numbered sub-labs shown in the "Lab-Übersicht" overview grid. */
   steps?: LabStep[];
   /** When set, the lab renders a real, state-driven simulation instead of the static mock. */
-  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket" | "ad-user";
+  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket" | "ad-user" | "gcs-bucket";
   /** URL segment for this lab under /certifications/[company]/[certId]/labs/[labSlug]. */
   slug?: string;
 };
@@ -601,14 +601,15 @@ export function generateGcpLab(certId: string, certTitle: string, level: string)
     ],
     resources: [{ id: "r1", label: "Cloud Storage Bucket (Demo)", active: true }],
     tasks: [
-      { id: "t1", label: "Bucket erstellen", done: false },
-      { id: "t2", label: "Region auswählen", done: false },
-      { id: "t3", label: "Ergebnis validieren", done: false },
+      { id: "bucket-created", label: "Bucket erstellen", done: false },
+      { id: "bucket-region", label: "Region europe-west3 (Frankfurt) auswählen", done: false },
+      { id: "bucket-storage-class", label: "Speicherklasse festlegen", done: false },
     ],
     docs: [
       { label: "Cloud Storage Dokumentation", url: "https://cloud.google.com/storage/docs" },
       { label: "Bucket-Namensregeln", url: "https://cloud.google.com/storage/docs/buckets#naming" },
     ],
+    interactive: "gcs-bucket",
   };
 }
 

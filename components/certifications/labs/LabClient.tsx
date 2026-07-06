@@ -7,6 +7,7 @@ import type { Lab, LabTask } from "@/lib/labsData";
 import { useLabStore, TARGET_RG_NAME, TARGET_VM_NAME, TARGET_VNET_NAME } from "@/lib/store/labStore";
 import { useAwsLabStore, TARGET_BUCKET_REGION } from "@/lib/store/awsLabStore";
 import { useAdLabStore, TARGET_OU } from "@/lib/store/adLabStore";
+import { useGcpLabStore, TARGET_LOCATION } from "@/lib/store/gcpLabStore";
 import LabHeader from "./LabHeader";
 import LabStepsOverview from "./LabStepsOverview";
 import LabOverviewPanel from "./LabOverviewPanel";
@@ -208,6 +209,8 @@ export default function LabClient({
   const adUsers = useAdLabStore((s) => s.users);
   const adSelectedOu = useAdLabStore((s) => s.selectedOu);
   const resetAdStore = useAdLabStore((s) => s.reset);
+  const gcpBuckets = useGcpLabStore((s) => s.buckets);
+  const resetGcpStore = useGcpLabStore((s) => s.reset);
 
   useEffect(() => {
     if (ended) return;
@@ -235,7 +238,15 @@ export default function LabClient({
             if (t.id === "user-in-ou") return { ...t, done: adUsers.some((u) => u.ou === TARGET_OU) };
             return t;
           })
-        : tasks;
+        : lab.interactive === "gcs-bucket"
+          ? tasks.map((t) => {
+              if (t.id === "bucket-created") return { ...t, done: gcpBuckets.length > 0 };
+              if (t.id === "bucket-region")
+                return { ...t, done: gcpBuckets.some((b) => b.location === TARGET_LOCATION) };
+              if (t.id === "bucket-storage-class") return { ...t, done: gcpBuckets.length > 0 };
+              return t;
+            })
+          : tasks;
 
   function toggleTask(id: string) {
     setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
@@ -252,6 +263,7 @@ export default function LabClient({
       resetStore();
     if (lab.interactive === "s3-bucket") resetAwsStore();
     if (lab.interactive === "ad-user") resetAdStore();
+    if (lab.interactive === "gcs-bucket") resetGcpStore();
   }
 
   if (ended) {
