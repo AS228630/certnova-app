@@ -6,6 +6,7 @@ import { BookOpen, ExternalLink, LifeBuoy, ChevronLeft } from "lucide-react";
 import type { Lab, LabTask } from "@/lib/labsData";
 import { useLabStore, TARGET_RG_NAME, TARGET_VM_NAME, TARGET_VNET_NAME } from "@/lib/store/labStore";
 import { useAwsLabStore, TARGET_BUCKET_REGION } from "@/lib/store/awsLabStore";
+import { useAdLabStore, TARGET_OU } from "@/lib/store/adLabStore";
 import LabHeader from "./LabHeader";
 import LabStepsOverview from "./LabStepsOverview";
 import LabOverviewPanel from "./LabOverviewPanel";
@@ -204,6 +205,9 @@ export default function LabClient({
   const resetStore = useLabStore((s) => s.reset);
   const awsBuckets = useAwsLabStore((s) => s.buckets);
   const resetAwsStore = useAwsLabStore((s) => s.reset);
+  const adUsers = useAdLabStore((s) => s.users);
+  const adSelectedOu = useAdLabStore((s) => s.selectedOu);
+  const resetAdStore = useAdLabStore((s) => s.reset);
 
   useEffect(() => {
     if (ended) return;
@@ -224,7 +228,14 @@ export default function LabClient({
             return { ...t, done: awsBuckets.some((b) => b.blockPublicAccess) };
           return t;
         })
-      : tasks;
+      : lab.interactive === "ad-user"
+        ? tasks.map((t) => {
+            if (t.id === "ou-selected") return { ...t, done: adSelectedOu === TARGET_OU };
+            if (t.id === "user-created") return { ...t, done: adUsers.length > 0 };
+            if (t.id === "user-in-ou") return { ...t, done: adUsers.some((u) => u.ou === TARGET_OU) };
+            return t;
+          })
+        : tasks;
 
   function toggleTask(id: string) {
     setTasks((prev) => prev.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
@@ -240,6 +251,7 @@ export default function LabClient({
     )
       resetStore();
     if (lab.interactive === "s3-bucket") resetAwsStore();
+    if (lab.interactive === "ad-user") resetAdStore();
   }
 
   if (ended) {

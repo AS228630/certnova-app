@@ -34,7 +34,7 @@ export type Lab = {
   /** Numbered sub-labs shown in the "Lab-Übersicht" overview grid. */
   steps?: LabStep[];
   /** When set, the lab renders a real, state-driven simulation instead of the static mock. */
-  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket";
+  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket" | "ad-user";
   /** URL segment for this lab under /certifications/[company]/[certId]/labs/[labSlug]. */
   slug?: string;
 };
@@ -558,14 +558,15 @@ export function generateWindowsServerLab(certId: string, certTitle: string, leve
     ],
     resources: [{ id: "r1", label: "Domänencontroller (Demo)", active: true }],
     tasks: [
-      { id: "t1", label: "OU „Users“ öffnen", done: false },
-      { id: "t2", label: "Benutzer anlegen", done: false },
-      { id: "t3", label: "Ergebnis validieren", done: false },
+      { id: "ou-selected", label: "OU „Users“ öffnen", done: false },
+      { id: "user-created", label: "Benutzer anlegen", done: false },
+      { id: "user-in-ou", label: "Benutzer befindet sich in „Users“", done: false },
     ],
     docs: [
       { label: "Active Directory-Grundlagen (Microsoft Learn)", url: "https://learn.microsoft.com/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview" },
       { label: "Benutzer und Computer verwalten", url: "https://learn.microsoft.com/windows-server/identity/ad-ds/get-started/adac/introduction-to-active-directory-administrative-center-enhancements" },
     ],
+    interactive: "ad-user",
   };
 }
 
