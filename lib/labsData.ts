@@ -34,7 +34,7 @@ export type Lab = {
   /** Numbered sub-labs shown in the "Lab-Übersicht" overview grid. */
   steps?: LabStep[];
   /** When set, the lab renders a real, state-driven simulation instead of the static mock. */
-  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket" | "ad-user" | "gcs-bucket" | "m365-user" | "cisco-router";
+  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket" | "ad-user" | "gcs-bucket" | "m365-user" | "cisco-router" | "vsphere-vm";
   /** URL segment for this lab under /certifications/[company]/[certId]/labs/[labSlug]. */
   slug?: string;
 };
@@ -610,6 +610,49 @@ export function generateGcpLab(certId: string, certTitle: string, level: string)
       { label: "Bucket-Namensregeln", url: "https://cloud.google.com/storage/docs/buckets#naming" },
     ],
     interactive: "gcs-bucket",
+  };
+}
+
+export function generateVmwareLab(certId: string, certTitle: string, level: string): Lab {
+  return {
+    id: `${certId}-vsphere-lab`,
+    title: "Lab: Erste virtuelle Maschine in vSphere erstellen",
+    description: `Wende die Konzepte von „${certTitle}“ praktisch an: erstelle und konfiguriere eine virtuelle Maschine auf einem ESXi-Host über den vSphere Client.`,
+    level: (level as Lab["level"]) ?? "Beginner",
+    durationLabel: "25-35 Minuten",
+    totalMinutes: 30 * 60,
+    tags: ["Online-Lab", "Sichere Umgebung", "Reset möglich", "Schritt-für-Schritt-Anleitung"],
+    goal: "Erstelle eine virtuelle Maschine auf einem ESXi-Host mit den richtigen Ressourcen.",
+    goalChecklist: [
+      "Virtuelle Maschine mit gültigem Namen erstellen",
+      "Einen ESXi-Host als Ziel auswählen",
+      "Gastbetriebssystem und Ressourcen (CPU/RAM) festlegen",
+      "Virtuelle Maschine in der Inventarstruktur bestätigen",
+    ],
+    instructions: [
+      "Öffne den vSphere Client und navigiere zu deinem ESXi-Host.",
+      "Klicke auf „Neue virtuelle Maschine“ und vergib einen eindeutigen Namen.",
+      "Wähle das Gastbetriebssystem sowie CPU- und Arbeitsspeicher-Ressourcen.",
+      "Schließe den Assistenten ab und überprüfe dein Ergebnis in der Inventarstruktur.",
+    ],
+    details: [
+      { label: "vCenter-Domäne", value: "certcoach-lab.local" },
+      { label: "Benötigte Rolle", value: "Virtual Machine Administrator" },
+      { label: "Ziel-Host", value: "esxi-lab-01.certcoach.local" },
+      { label: "Ressourcen", value: "1" },
+      { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+    ],
+    resources: [{ id: "r1", label: "Virtuelle Maschine (Demo)", active: true }],
+    tasks: [
+      { id: "vsphere-vm-created", label: "Virtuelle Maschine erstellen", done: false },
+      { id: "vsphere-vm-host", label: "ESXi-Host esxi-lab-01 als Ziel auswählen", done: false },
+      { id: "vsphere-vm-resources", label: "Ressourcen (CPU/RAM) festlegen", done: false },
+    ],
+    docs: [
+      { label: "vSphere-Grundlagen (Broadcom/VMware Docs)", url: "https://techdocs.broadcom.com/us/en/vmware-cis/vsphere.html" },
+      { label: "Virtuelle Maschinen verwalten", url: "https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-vm-administration.html" },
+    ],
+    interactive: "vsphere-vm",
   };
 }
 
