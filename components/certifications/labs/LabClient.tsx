@@ -9,6 +9,7 @@ import { useAwsLabStore, TARGET_BUCKET_REGION } from "@/lib/store/awsLabStore";
 import { useAdLabStore, TARGET_OU } from "@/lib/store/adLabStore";
 import { useGcpLabStore, TARGET_LOCATION } from "@/lib/store/gcpLabStore";
 import { useM365LabStore } from "@/lib/store/m365LabStore";
+import { useCiscoLabStore, TARGET_HOSTNAME, TARGET_IP, TARGET_MASK } from "@/lib/store/ciscoLabStore";
 import LabHeader from "./LabHeader";
 import LabStepsOverview from "./LabStepsOverview";
 import LabOverviewPanel from "./LabOverviewPanel";
@@ -214,6 +215,10 @@ export default function LabClient({
   const resetGcpStore = useGcpLabStore((s) => s.reset);
   const m365Users = useM365LabStore((s) => s.users);
   const resetM365Store = useM365LabStore((s) => s.reset);
+  const ciscoHostname = useCiscoLabStore((s) => s.hostname);
+  const ciscoHasEnteredPrivileged = useCiscoLabStore((s) => s.hasEnteredPrivileged);
+  const ciscoInterfaces = useCiscoLabStore((s) => s.interfaces);
+  const resetCiscoStore = useCiscoLabStore((s) => s.reset);
 
   useEffect(() => {
     if (ended) return;
@@ -248,6 +253,13 @@ export default function LabClient({
       if (taskId === "user-licensed") return m365Users.some((u) => u.license !== "Keine Lizenz");
       return false;
     },
+    "cisco-router": (taskId) => {
+      if (taskId === "privileged-mode") return ciscoHasEnteredPrivileged;
+      if (taskId === "hostname-set") return ciscoHostname === TARGET_HOSTNAME;
+      if (taskId === "interface-ip") return ciscoInterfaces.some((i) => i.ip === TARGET_IP && i.mask === TARGET_MASK);
+      if (taskId === "interface-enabled") return ciscoInterfaces.some((i) => i.ip === TARGET_IP && i.enabled);
+      return false;
+    },
   };
   const activeChecker = lab.interactive ? TASK_CHECKERS[lab.interactive] : undefined;
   const effectiveTasks: LabTask[] = activeChecker
@@ -271,6 +283,7 @@ export default function LabClient({
     if (lab.interactive === "ad-user") resetAdStore();
     if (lab.interactive === "gcs-bucket") resetGcpStore();
     if (lab.interactive === "m365-user") resetM365Store();
+    if (lab.interactive === "cisco-router") resetCiscoStore();
   }
 
   if (ended) {

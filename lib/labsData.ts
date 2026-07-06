@@ -34,7 +34,7 @@ export type Lab = {
   /** Numbered sub-labs shown in the "Lab-Übersicht" overview grid. */
   steps?: LabStep[];
   /** When set, the lab renders a real, state-driven simulation instead of the static mock. */
-  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket" | "ad-user" | "gcs-bucket" | "m365-user";
+  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket" | "ad-user" | "gcs-bucket" | "m365-user" | "cisco-router";
   /** URL segment for this lab under /certifications/[company]/[certId]/labs/[labSlug]. */
   slug?: string;
 };
@@ -619,6 +619,51 @@ export function generateGcpLab(certId: string, certTitle: string, level: string)
  * keeps every existing call site (no slug) working exactly as before.
  * With a `labSlug`, looks that specific lab up within the cert's list.
  */
+export function generateCiscoLab(certId: string, certTitle: string, level: string): Lab {
+  return {
+    id: `${certId}-router-lab`,
+    title: "Lab: Ersten Router konfigurieren (Cisco IOS)",
+    description: `Wende die Konzepte von „${certTitle}“ praktisch an: konfiguriere Hostname und Schnittstelle eines Routers über die echte Cisco-IOS-Befehlszeile.`,
+    level: (level as Lab["level"]) ?? "Beginner",
+    durationLabel: "30-40 Minuten",
+    totalMinutes: 35 * 60,
+    tags: ["Online-Lab", "Sichere Umgebung", "Reset möglich", "Schritt-für-Schritt-Anleitung"],
+    goal: "Konfiguriere den Hostnamen und aktiviere eine Schnittstelle mit einer IP-Adresse.",
+    goalChecklist: [
+      "In den privilegierten Modus wechseln (enable)",
+      "Hostname auf CC-Lab-R1 setzen",
+      "IP-Adresse 192.168.1.1/255.255.255.0 auf GigabitEthernet0/0 konfigurieren",
+      "Schnittstelle mit no shutdown aktivieren",
+    ],
+    instructions: [
+      "Wechsle mit `enable` in den privilegierten Modus.",
+      "Wechsle mit `configure terminal` in den Konfigurationsmodus.",
+      "Setze den Hostnamen mit `hostname CC-Lab-R1`.",
+      "Wechsle mit `interface GigabitEthernet0/0` in die Schnittstellen-Konfiguration.",
+      "Vergib die IP-Adresse mit `ip address 192.168.1.1 255.255.255.0`.",
+      "Aktiviere die Schnittstelle mit `no shutdown`.",
+    ],
+    details: [
+      { label: "Gerätetyp", value: "Cisco IOS Router (simuliert)" },
+      { label: "Ziel-Hostname", value: "CC-Lab-R1" },
+      { label: "Ziel-Schnittstelle", value: "GigabitEthernet0/0" },
+      { label: "Ziel-IP", value: "192.168.1.1 / 255.255.255.0" },
+      { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+    ],
+    resources: [{ id: "r1", label: "Router (simuliert)", active: true }],
+    tasks: [
+      { id: "privileged-mode", label: "In den privilegierten Modus wechseln (enable)", done: false },
+      { id: "hostname-set", label: "Hostname auf CC-Lab-R1 setzen", done: false },
+      { id: "interface-ip", label: "IP-Adresse auf GigabitEthernet0/0 konfigurieren", done: false },
+      { id: "interface-enabled", label: "Schnittstelle mit no shutdown aktivieren", done: false },
+    ],
+    docs: [
+      { label: "Cisco IOS Configuration Fundamentals", url: "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-software-releases-121-mainline/13729-15.html" },
+    ],
+    interactive: "cisco-router",
+  };
+}
+
 export function getLab(certId: string, certTitle: string, level: string, labSlug?: string): Lab {
   const labs = LABS[certId];
   if (!labs || labs.length === 0) return generateLab(certId, certTitle, level);

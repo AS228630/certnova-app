@@ -1,7 +1,7 @@
 import type { Company, Certification } from "@/lib/companiesData";
 import type { LabInfrastructureType } from "@/lib/labInfrastructure";
 import type { Lab } from "@/lib/labsData";
-import { generateAwsLab, generateM365Lab, generateLinuxLab, generateGcpLab, generateWindowsServerLab } from "@/lib/labsData";
+import { generateAwsLab, generateM365Lab, generateLinuxLab, generateGcpLab, generateWindowsServerLab, generateCiscoLab } from "@/lib/labsData";
 import LabClient from "./LabClient";
 import ComingSoonLab from "./ComingSoonLab";
 import AwsConsoleEnvironment from "./aws/AwsConsoleEnvironment";
@@ -9,6 +9,7 @@ import M365AdminEnvironment from "./m365/M365AdminEnvironment";
 import LinuxTerminalEnvironment from "./linux/LinuxTerminalEnvironment";
 import GcpConsoleEnvironment from "./gcp/GcpConsoleEnvironment";
 import ActiveDirectoryMockEnvironment from "./windows-server/ActiveDirectoryMockEnvironment";
+import CiscoTerminalEnvironment from "./cisco/CiscoTerminalEnvironment";
 
 type UniversalLabStageProps = {
   infrastructureType: LabInfrastructureType;
@@ -103,7 +104,20 @@ export default function UniversalLabStage({ infrastructureType, company, cert, l
         />
       );
 
-    // CISCO / GENERIC:
+    // CISCO: real IOS-style CLI (enable, configure terminal, hostname, interface, ip address, no shutdown).
+    case "CISCO":
+      return (
+        <LabClient
+          companyName={company.name}
+          companySlug={company.slug}
+          certCode={cert.code}
+          certId={cert.id}
+          lab={generateCiscoLab(cert.id, cert.title, cert.level)}
+          environment={<CiscoTerminalEnvironment />}
+        />
+      );
+
+    // GENERIC:
     // no dedicated runtime yet — every one of them lands here for now.
     default:
       return <ComingSoonLab company={company} cert={cert} />;
