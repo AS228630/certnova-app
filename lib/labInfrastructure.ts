@@ -33,8 +33,13 @@ const WINDOWS_SERVER_CERT_IDS = new Set(["az-800", "az-801"]);
 export function getLabInfrastructureType(companySlug: string, cert?: Certification): LabInfrastructureType {
   if (companySlug === "microsoft") {
     if (cert && WINDOWS_SERVER_CERT_IDS.has(cert.id)) return "WINDOWS_SERVER";
-    if (cert?.categoryKey === "azure") return "AZURE";
     if (cert?.categoryKey === "m365") return "M365";
+    // "azure", "security" (Entra ID/Purview), "ai" (Azure AI) and "data"
+    // (Azure Data) certs are all fundamentally Azure services, so they all
+    // get the real Azure Portal simulator.
+    if (cert?.categoryKey === "azure" || cert?.categoryKey === "security" || cert?.categoryKey === "ai" || cert?.categoryKey === "data") {
+      return "AZURE";
+    }
     return "GENERIC";
   }
   return COMPANY_INFRASTRUCTURE[companySlug] ?? "GENERIC";
