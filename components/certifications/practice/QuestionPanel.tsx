@@ -1,6 +1,7 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, Bookmark, Sparkles, CheckCircle2, XCircle, ExternalLink } from "lucide-react";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight, Bookmark, Sparkles, CheckCircle2, XCircle, ExternalLink, Lightbulb } from "lucide-react";
 import type { PracticeOptionId, PracticeQuestion } from "@/lib/az900Practice";
 
 export default function QuestionPanel({
@@ -32,7 +33,9 @@ export default function QuestionPanel({
   onToggleMark: () => void;
   onOpenAiCoach: () => void;
 }) {
+  const [showExplanation, setShowExplanation] = useState(false);
   const isCorrect = checked && selected === question.correct;
+  const explanationVisible = checked || showExplanation;
 
   return (
     <div className="rounded-xl border border-border-soft bg-panel p-5 md:p-6">
@@ -106,16 +109,28 @@ export default function QuestionPanel({
         })}
       </div>
 
-      {checked && (
+      {explanationVisible && (
         <div
           className={`mt-5 rounded-lg border p-4 ${
-            isCorrect ? "border-success/40 bg-success-light" : "border-danger/40 bg-danger/10"
+            !checked
+              ? "border-primary/30 bg-primary-light"
+              : isCorrect
+              ? "border-success/40 bg-success-light"
+              : "border-danger/40 bg-danger/10"
           }`}
         >
-          <p className={`mb-1.5 flex items-center gap-1.5 text-sm font-bold ${isCorrect ? "text-success" : "text-danger"}`}>
-            {isCorrect ? <CheckCircle2 size={15} /> : <XCircle size={15} />}
-            {isCorrect ? "Richtige Antwort!" : "Nicht ganz richtig"}
-          </p>
+          {checked && (
+            <p className={`mb-1.5 flex items-center gap-1.5 text-sm font-bold ${isCorrect ? "text-success" : "text-danger"}`}>
+              {isCorrect ? <CheckCircle2 size={15} /> : <XCircle size={15} />}
+              {isCorrect ? "Richtige Antwort!" : "Nicht ganz richtig"}
+            </p>
+          )}
+          {!checked && (
+            <p className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-primary">
+              <Lightbulb size={15} />
+              Erklärung
+            </p>
+          )}
           <p className="text-sm text-text-muted">{question.explanation}</p>
           {question.resources && question.resources.length > 0 && (
             <div className="mt-3 space-y-1">
@@ -136,15 +151,25 @@ export default function QuestionPanel({
         </div>
       )}
 
-      <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-border-soft pt-5">
-        <button
-          onClick={onPrev}
-          disabled={index === 0}
-          className="rounded-lg border border-border-soft px-5 py-2.5 text-sm font-semibold text-text hover:border-primary disabled:opacity-30"
-        >
-          Zurück
-        </button>
-        <div className="flex flex-1 justify-end gap-3">
+      <div className="mt-6 border-t border-border-soft pt-5">
+        {/* Mobile: clean 2x2 grid */}
+        <div className="grid grid-cols-2 gap-3 sm:hidden">
+          <button
+            onClick={onPrev}
+            disabled={index === 0}
+            className="rounded-lg border border-border-soft px-5 py-2.5 text-sm font-semibold text-text hover:border-primary disabled:opacity-30"
+          >
+            Zurück
+          </button>
+          <button
+            onClick={() => setShowExplanation((v) => !v)}
+            className={`flex items-center justify-center gap-1.5 rounded-lg border px-5 py-2.5 text-sm font-semibold ${
+              showExplanation ? "border-primary text-primary" : "border-border-soft text-text hover:border-primary"
+            }`}
+          >
+            <Lightbulb size={15} />
+            Erklärung
+          </button>
           <button
             onClick={onSkip}
             className="rounded-lg border border-border-soft px-5 py-2.5 text-sm font-semibold text-text hover:border-primary"
@@ -168,6 +193,51 @@ export default function QuestionPanel({
               Weiter →
             </button>
           )}
+        </div>
+
+        {/* Desktop: Zurück on the left, the rest clustered on the right */}
+        <div className="hidden sm:flex sm:items-center sm:justify-between">
+          <button
+            onClick={onPrev}
+            disabled={index === 0}
+            className="rounded-lg border border-border-soft px-5 py-2.5 text-sm font-semibold text-text hover:border-primary disabled:opacity-30"
+          >
+            Zurück
+          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={() => setShowExplanation((v) => !v)}
+              className={`flex items-center gap-1.5 rounded-lg border px-5 py-2.5 text-sm font-semibold ${
+                showExplanation ? "border-primary text-primary" : "border-border-soft text-text hover:border-primary"
+              }`}
+            >
+              <Lightbulb size={15} />
+              Erklärung
+            </button>
+            <button
+              onClick={onSkip}
+              className="rounded-lg border border-border-soft px-5 py-2.5 text-sm font-semibold text-text hover:border-primary"
+            >
+              Überspringen
+            </button>
+            {!checked ? (
+              <button
+                onClick={onCheck}
+                disabled={!selected}
+                className="rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-white hover:bg-primary-dark disabled:opacity-40"
+              >
+                Antwort prüfen
+              </button>
+            ) : (
+              <button
+                onClick={onNext}
+                disabled={index === total - 1}
+                className="rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-white hover:bg-primary-dark disabled:opacity-40"
+              >
+                Weiter →
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
