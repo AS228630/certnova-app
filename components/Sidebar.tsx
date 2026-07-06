@@ -22,6 +22,7 @@ import {
 import { useTheme } from "@/components/ThemeProvider";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
+import { useUserProgressStore } from "@/lib/store/userProgressStore";
 
 const navItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -36,8 +37,7 @@ const navItems = [
   { href: "/ai-coach", label: "KI Coach", icon: Bot, badge: "BETA" },
 ];
 
-const streakDays = ["M", "D", "M", "D", "F", "S", "S"];
-const streakDone = [true, true, true, true, true, true, false];
+const streakDayLabels = ["M", "D", "M", "D", "F", "S", "S"];
 
 export default function Sidebar({
   open = false,
@@ -49,6 +49,11 @@ export default function Sidebar({
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
   const router = useRouter();
+  const progress = useUserProgressStore((s) => s.progress);
+  const streakDaysCount = progress?.streak_days ?? 0;
+  // Honest simplification: without a full per-day activity log, we mark the
+  // last N weekdays as done based on the current streak count (capped at 7).
+  const streakDone = streakDayLabels.map((_, i) => i >= streakDayLabels.length - streakDaysCount);
 
   async function handleLogout() {
     await supabase.auth.signOut();
@@ -136,10 +141,10 @@ export default function Sidebar({
           <div className="rounded-xl border border-border-soft p-4">
             <p className="text-sm font-bold text-text">Deine Lernserie 🔥</p>
             <p className="mt-1 text-2xl font-extrabold text-text">
-              14 <span className="text-sm font-medium text-text-muted">Tage in Folge</span>
+              {streakDaysCount} <span className="text-sm font-medium text-text-muted">Tage in Folge</span>
             </p>
             <div className="mt-3 flex justify-between">
-              {streakDays.map((d, i) => (
+              {streakDayLabels.map((d, i) => (
                 <div key={i} className="flex flex-col items-center gap-1">
                   <span
                     className={`flex h-6 w-6 items-center justify-center rounded-full text-xs ${

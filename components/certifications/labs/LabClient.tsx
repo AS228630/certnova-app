@@ -13,6 +13,7 @@ import { useVSphereLabStore, ESXI_TARGET_HOST } from "@/lib/store/vsphereLabStor
 import { useDockerLabStore, TARGET_IMAGE, TARGET_CONTAINER_NAME } from "@/lib/store/dockerLabStore";
 import { useK8sLabStore, TARGET_DEPLOYMENT_NAME } from "@/lib/store/k8sLabStore";
 import { useCiscoLabStore, TARGET_HOSTNAME, TARGET_IP, TARGET_MASK } from "@/lib/store/ciscoLabStore";
+import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import LabHeader from "./LabHeader";
 import LabStepsOverview from "./LabStepsOverview";
 import LabOverviewPanel from "./LabOverviewPanel";
@@ -97,8 +98,11 @@ function InteractiveResourceGroupLab({
     // this idempotent — it only ever fires once per completion transition,
     // so it does not cause a render cascade despite the lint rule's default
     // suspicion of any setState call inside an effect body.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (allDone && completedAt === null) setCompletedAt(Date.now());
+    if (allDone && completedAt === null) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setCompletedAt(Date.now());
+      useUserProgressStore.getState().recordLabCompletion();
+    }
     if (!allDone && completedAt !== null) {
       setCompletedAt(null);
       setScorecardDismissed(false);
