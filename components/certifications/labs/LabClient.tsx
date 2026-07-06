@@ -11,6 +11,7 @@ import { useGcpLabStore, TARGET_LOCATION } from "@/lib/store/gcpLabStore";
 import { useM365LabStore } from "@/lib/store/m365LabStore";
 import { useVSphereLabStore, ESXI_TARGET_HOST } from "@/lib/store/vsphereLabStore";
 import { useDockerLabStore, TARGET_IMAGE, TARGET_CONTAINER_NAME } from "@/lib/store/dockerLabStore";
+import { useK8sLabStore, TARGET_DEPLOYMENT_NAME } from "@/lib/store/k8sLabStore";
 import { useCiscoLabStore, TARGET_HOSTNAME, TARGET_IP, TARGET_MASK } from "@/lib/store/ciscoLabStore";
 import LabHeader from "./LabHeader";
 import LabStepsOverview from "./LabStepsOverview";
@@ -222,6 +223,8 @@ export default function LabClient({
   const dockerImages = useDockerLabStore((s) => s.images);
   const dockerContainers = useDockerLabStore((s) => s.containers);
   const resetDockerStore = useDockerLabStore((s) => s.reset);
+  const k8sDeployments = useK8sLabStore((s) => s.deployments);
+  const resetK8sStore = useK8sLabStore((s) => s.reset);
   const ciscoHostname = useCiscoLabStore((s) => s.hostname);
   const ciscoHasEnteredPrivileged = useCiscoLabStore((s) => s.hasEnteredPrivileged);
   const ciscoInterfaces = useCiscoLabStore((s) => s.interfaces);
@@ -280,6 +283,13 @@ export default function LabClient({
         return dockerContainers.some((c) => c.name === TARGET_CONTAINER_NAME && c.status === "running");
       return false;
     },
+    "k8s-deployment": (taskId) => {
+      const dep = k8sDeployments.find((d) => d.name === TARGET_DEPLOYMENT_NAME);
+      if (taskId === "deployment-created") return !!dep;
+      if (taskId === "deployment-visible") return !!dep;
+      if (taskId === "deployment-scaled") return !!dep && dep.replicas === 3;
+      return false;
+    },
   };
   const activeChecker = lab.interactive ? TASK_CHECKERS[lab.interactive] : undefined;
   const effectiveTasks: LabTask[] = activeChecker
@@ -306,6 +316,7 @@ export default function LabClient({
     if (lab.interactive === "cisco-router") resetCiscoStore();
     if (lab.interactive === "vsphere-vm") resetVSphereStore();
     if (lab.interactive === "docker-container") resetDockerStore();
+    if (lab.interactive === "k8s-deployment") resetK8sStore();
   }
 
   if (ended) {

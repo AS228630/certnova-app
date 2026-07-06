@@ -17,6 +17,7 @@ export type LabInfrastructureType =
   | "ORACLE_SQL"
   | "VSPHERE"
   | "DOCKER"
+  | "KUBERNETES"
   | "GENERIC";
 
 const COMPANY_INFRASTRUCTURE: Record<string, LabInfrastructureType> = {
@@ -28,6 +29,7 @@ const COMPANY_INFRASTRUCTURE: Record<string, LabInfrastructureType> = {
   oracle: "ORACLE_SQL",
   vmware: "VSPHERE",
   docker: "DOCKER",
+  kubernetes: "KUBERNETES",
 };
 
 /**

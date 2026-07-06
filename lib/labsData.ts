@@ -34,7 +34,7 @@ export type Lab = {
   /** Numbered sub-labs shown in the "Lab-Übersicht" overview grid. */
   steps?: LabStep[];
   /** When set, the lab renders a real, state-driven simulation instead of the static mock. */
-  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket" | "ad-user" | "gcs-bucket" | "m365-user" | "cisco-router" | "vsphere-vm" | "docker-container";
+  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket" | "ad-user" | "gcs-bucket" | "m365-user" | "cisco-router" | "vsphere-vm" | "docker-container" | "k8s-deployment";
   /** URL segment for this lab under /certifications/[company]/[certId]/labs/[labSlug]. */
   slug?: string;
 };
@@ -694,6 +694,47 @@ export function generateDockerLab(certId: string, certTitle: string, level: stri
       { label: "docker run Referenz", url: "https://docs.docker.com/engine/reference/run/" },
     ],
     interactive: "docker-container",
+  };
+}
+
+export function generateKubernetesLab(certId: string, certTitle: string, level: string): Lab {
+  return {
+    id: `${certId}-k8s-lab`,
+    title: "Lab: Erstes Deployment erstellen",
+    description: `Wende die Konzepte von „${certTitle}“ praktisch an: erstelle ein Deployment und skaliere es über eine echte, isolierte kubectl-CLI.`,
+    level: (level as Lab["level"]) ?? "Beginner",
+    durationLabel: "25-35 Minuten",
+    totalMinutes: 30 * 60,
+    tags: ["Online-Lab", "Sichere Umgebung", "Reset möglich", "Schritt-für-Schritt-Anleitung"],
+    goal: 'Erstelle ein Deployment namens "cc-lab-app" und skaliere es auf 3 Replicas.',
+    goalChecklist: [
+      'Deployment namens "cc-lab-app" mit kubectl create deployment erstellen',
+      "Deployment mit kubectl get deployments bestätigen",
+      "Deployment auf 3 Replicas skalieren",
+    ],
+    instructions: [
+      'Erstelle das Deployment: `kubectl create deployment cc-lab-app --image=nginx`',
+      "Kontrolliere das Deployment: `kubectl get deployments`",
+      "Prüfe die zugehörigen Pods: `kubectl get pods`",
+      'Skaliere auf 3 Replicas: `kubectl scale deployment cc-lab-app --replicas=3`',
+    ],
+    details: [
+      { label: "Kubernetes-Cluster", value: "simuliert" },
+      { label: "Namespace", value: "default" },
+      { label: "Ziel-Deployment", value: "cc-lab-app" },
+      { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+    ],
+    resources: [{ id: "r1", label: "Deployment (simuliert)", active: true }],
+    tasks: [
+      { id: "deployment-created", label: 'Deployment "cc-lab-app" erstellen', done: false },
+      { id: "deployment-visible", label: "Deployment mit kubectl get deployments bestätigen", done: false },
+      { id: "deployment-scaled", label: "Deployment auf 3 Replicas skalieren", done: false },
+    ],
+    docs: [
+      { label: "Kubernetes-Grundlagen (offizielle Docs)", url: "https://kubernetes.io/docs/concepts/overview/" },
+      { label: "kubectl Referenz", url: "https://kubernetes.io/docs/reference/kubectl/" },
+    ],
+    interactive: "k8s-deployment",
   };
 }
 

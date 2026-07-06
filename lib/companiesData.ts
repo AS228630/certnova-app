@@ -55,6 +55,7 @@ const COMPANY_SEED: { slug: string; name: string; certCount: number }[] = [
   { slug: "ibm", name: "IBM", certCount: 7 },
   { slug: "linux", name: "Linux", certCount: 6 },
   { slug: "docker", name: "Docker", certCount: 4 },
+  { slug: "kubernetes", name: "Kubernetes", certCount: 4 },
   { slug: "redhat", name: "Red Hat", certCount: 6 },
   { slug: "itil", name: "ITIL", certCount: 5 },
   { slug: "vmware", name: "VMware", certCount: 4 },
