@@ -14,6 +14,7 @@ export type LabInfrastructureType =
   | "WINDOWS_SERVER"
   | "LINUX"
   | "CISCO"
+  | "ORACLE_SQL"
   | "GENERIC";
 
 const COMPANY_INFRASTRUCTURE: Record<string, LabInfrastructureType> = {
@@ -22,6 +23,7 @@ const COMPANY_INFRASTRUCTURE: Record<string, LabInfrastructureType> = {
   linux: "LINUX",
   redhat: "LINUX", // RHCSA/RHCE etc. are Linux system-administration exams
   cisco: "CISCO",
+  oracle: "ORACLE_SQL",
 };
 
 /**
