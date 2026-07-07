@@ -9,6 +9,7 @@ import BottomNav from "@/components/BottomNav";
 import { supabase } from "@/lib/supabase/client";
 import { UserContext } from "@/components/UserContext";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
+import { getFullName } from "@/lib/supabase/useUser";
 
 export default function DashboardShell({
   children,
@@ -39,7 +40,7 @@ export default function DashboardShell({
       }
       setUser(data.session.user);
       setChecked(true);
-      useUserProgressStore.getState().load(data.session.user.id);
+      useUserProgressStore.getState().load(data.session.user.id, getFullName(data.session.user));
     });
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -53,7 +54,7 @@ export default function DashboardShell({
       }
       setUser(session.user);
       setChecked(true);
-      useUserProgressStore.getState().load(session.user.id);
+      useUserProgressStore.getState().load(session.user.id, getFullName(session.user));
     });
 
     return () => {
