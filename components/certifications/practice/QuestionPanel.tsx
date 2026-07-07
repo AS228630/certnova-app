@@ -3,8 +3,11 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Bookmark, Sparkles, CheckCircle2, XCircle, ExternalLink, Lightbulb } from "lucide-react";
 import type { PracticeOptionId, PracticeQuestion } from "@/lib/az900Practice";
+import MatchingQuestionView from "./MatchingQuestionView";
 
 type YesNoAnswers = Record<number, "Ja" | "Nein">;
+type MatchingAnswers = Record<string, string>;
+type Answer = PracticeOptionId | YesNoAnswers | MatchingAnswers;
 
 export default function QuestionPanel({
   question,
@@ -14,8 +17,11 @@ export default function QuestionPanel({
   checked,
   marked,
   isCorrect,
+  hintOpen,
   onSelect,
   onSelectStatement,
+  onSelectMatch,
+  onClearMatch,
   onCheck,
   onNext,
   onPrev,
@@ -26,12 +32,15 @@ export default function QuestionPanel({
   question: PracticeQuestion;
   index: number;
   total: number;
-  selected: PracticeOptionId | YesNoAnswers | null;
+  selected: Answer | null;
   checked: boolean;
   marked: boolean;
   isCorrect: boolean;
+  hintOpen: boolean;
   onSelect: (id: PracticeOptionId) => void;
   onSelectStatement: (i: number, value: "Ja" | "Nein") => void;
+  onSelectMatch: (descriptionId: string, itemId: string) => void;
+  onClearMatch: (descriptionId: string) => void;
   onCheck: () => void;
   onNext: () => void;
   onPrev: () => void;
@@ -40,20 +49,22 @@ export default function QuestionPanel({
   onOpenAiCoach: () => void;
 }) {
   const [showExplanation, setShowExplanation] = useState(false);
-  const [showHint, setShowHint] = useState(false);
   const hintText = deriveHint(question.explanation);
   const isYesNo = question.type === "yesno";
+  const isMatching = question.type === "matching";
   const yesNoAnswers = (isYesNo ? (selected as YesNoAnswers) : {}) ?? {};
-  const singleSelected = isYesNo ? null : (selected as PracticeOptionId | null);
+  const matchingAnswers = (isMatching ? (selected as MatchingAnswers) : {}) ?? {};
+  const singleSelected = isYesNo || isMatching ? null : (selected as PracticeOptionId | null);
   const canCheck = isYesNo
     ? question.statements.every((_, i) => yesNoAnswers[i])
-    : !!singleSelected;
+    : isMatching
+      ? question.descriptions.every((d) => !!matchingAnswers[d.id])
+      : !!singleSelected;
   const explanationVisible = checked || showExplanation;
 
   const [lastQuestionId, setLastQuestionId] = useState(question.id);
   if (question.id !== lastQuestionId) {
     setLastQuestionId(question.id);
-    setShowHint(false);
     setShowExplanation(false);
   }
 
@@ -92,15 +103,6 @@ export default function QuestionPanel({
             Markieren
           </button>
           <button
-            onClick={() => setShowHint((v) => !v)}
-            className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold ${
-              showHint ? "border-warning text-warning" : "border-border-soft text-text-muted hover:border-primary"
-            }`}
-          >
-            <Lightbulb size={13} />
-            AI Hint
-          </button>
-          <button
             onClick={onOpenAiCoach}
             className="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-bold text-white hover:bg-primary-dark"
           >
@@ -110,7 +112,7 @@ export default function QuestionPanel({
         </div>
       </div>
 
-      {showHint && !checked && (
+      {hintOpen && !checked && (
         <div className="mb-4 flex items-start gap-2 rounded-lg border border-warning/40 bg-warning/10 p-3 text-sm text-text-muted">
           <Lightbulb size={15} className="mt-0.5 flex-none text-warning" />
           <p>{hintText}</p>
@@ -119,7 +121,15 @@ export default function QuestionPanel({
 
       <p className="mb-5 text-base font-medium leading-relaxed text-text">{question.prompt}</p>
 
-      {isYesNo ? (
+      {isMatching ? (
+        <MatchingQuestionView
+          question={question}
+          selectedMap={matchingAnswers}
+          checked={checked}
+          onAssign={onSelectMatch}
+          onClear={onClearMatch}
+        />
+      ) : isYesNo ? (
         <div className="overflow-hidden rounded-lg border border-border-soft">
           <div className="grid grid-cols-[1fr_auto] gap-3 border-b border-border-soft bg-panel-alt px-3.5 py-2 text-xs font-semibold text-text-faint">
             <span>Aussage</span>

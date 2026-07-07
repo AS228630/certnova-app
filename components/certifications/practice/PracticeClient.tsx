@@ -1,19 +1,24 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Sparkles } from "lucide-react";
+import { X } from "lucide-react";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
-import PracticeHeader from "./PracticeHeader";
+import PracticeToolbar from "./PracticeToolbar";
 import TopicsSidebar from "./TopicsSidebar";
 import QuestionPanel from "./QuestionPanel";
 import QuestionNavigator from "./QuestionNavigator";
 import QuickStats from "./QuickStats";
 import AICoachPanel from "./AICoachPanel";
 import PracticeNotesPanel from "./PracticeNotesPanel";
+import PracticeFloatingActions from "./PracticeFloatingActions";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 
 const EXAM_TOTAL_SECONDS = 2 * 60 * 60; // 2h, matches a real certification exam
+
+type YesNoAnswers = Record<number, "Ja" | "Nein">;
+type MatchingAnswers = Record<string, string>;
+type Answer = PracticeOptionId | YesNoAnswers | MatchingAnswers;
 
 export default function PracticeClient({
   companyName,
@@ -47,12 +52,14 @@ export default function PracticeClient({
   const [activeTopicId, setActiveTopicId] = useState(topics.find((t) => loadedCounts[t.id] > 0)?.id ?? topics[0].id);
   const [order, setOrder] = useState<string[] | null>(null); // null = topic order, else shuffled question ids
   const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, PracticeOptionId | Record<number, "Ja" | "Nein">>>({});
+  const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [checked, setChecked] = useState<Set<string>>(new Set());
   const [marked, setMarked] = useState<Set<string>>(new Set());
   const [skipped, setSkipped] = useState<Set<string>>(new Set());
   const [coachOpen, setCoachOpen] = useState(false);
   const [notesOpen, setNotesOpen] = useState(false);
+  const [topicsOpen, setTopicsOpen] = useState(false);
+  const [hintOpen, setHintOpen] = useState(false);
   const [remainingSeconds, setRemainingSeconds] = useState(EXAM_TOTAL_SECONDS);
 
   useEffect(() => {
@@ -67,18 +74,20 @@ export default function PracticeClient({
 
   const current = activeQuestions[index];
 
-  function isCorrectAnswer(q: PracticeQuestion, answer: PracticeOptionId | Record<number, "Ja" | "Nein"> | undefined): boolean {
+  function isCorrectAnswer(q: PracticeQuestion, answer: Answer | undefined): boolean {
     if (!answer) return false;
     if (q.type === "yesno") {
-      const a = answer as Record<number, "Ja" | "Nein">;
+      const a = answer as YesNoAnswers;
       return q.statements.every((s, i) => a[i] === s.correct);
+    }
+    if (q.type === "matching") {
+      const a = answer as MatchingAnswers;
+      return q.descriptions.every((d) => a[d.id] === d.correctItemId);
     }
     return answer === q.correct;
   }
 
   const answeredCount = checked.size;
-  const correctCount = [...checked].filter((id) => isCorrectAnswer(questions.find((q) => q.id === id)!, answers[id])).length;
-  const wrongCount = answeredCount - correctCount;
 
   const progressByTopic = useMemo(() => {
     const result: Record<string, number> = {};
@@ -94,6 +103,7 @@ export default function PracticeClient({
     setActiveTopicId(id);
     setOrder(null);
     setIndex(0);
+    setTopicsOpen(false);
   }
 
   function shuffle() {
@@ -104,10 +114,12 @@ export default function PracticeClient({
     }
     setOrder(ids);
     setIndex(0);
+    setTopicsOpen(false);
   }
 
   function goTo(i: number) {
     setIndex(Math.max(0, Math.min(activeQuestions.length - 1, i)));
+    setHintOpen(false);
   }
 
   function statusFor(i: number): "correct" | "wrong" | "marked" | "skipped" | "unanswered" {
@@ -129,42 +141,19 @@ export default function PracticeClient({
 
   return (
     <div>
-      <PracticeHeader
+      <PracticeToolbar
         companyName={companyName}
         companySlug={companySlug}
         certCode={certCode}
         certTitle={certTitle}
-        level={level}
-        rating={rating}
-        ratingCount={ratingCount}
+        index={index}
         total={activeQuestions.length}
-        answered={answeredCount}
-        correct={correctCount}
-        wrong={wrongCount}
         onToggleNotes={() => setNotesOpen(true)}
+        onToggleTopics={() => setTopicsOpen(true)}
       />
 
-      <button
-        onClick={() => setCoachOpen(true)}
-        className="mt-4 flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white lg:hidden"
-      >
-        <Sparkles size={13} />
-        KI Coach öffnen
-      </button>
-
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[260px_1fr_300px]">
-        <div className="lg:order-1">
-          <TopicsSidebar
-            topics={topics}
-            loadedCounts={loadedCounts}
-            activeTopicId={activeTopicId}
-            onSelectTopic={selectTopic}
-            progressByTopic={progressByTopic}
-            onShuffle={shuffle}
-          />
-        </div>
-
-        <div className="space-y-6 lg:order-2">
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_300px]">
+        <div className="space-y-6">
           <QuestionPanel
             question={current}
             index={index}
@@ -173,12 +162,26 @@ export default function PracticeClient({
             checked={checked.has(current.id)}
             marked={marked.has(current.id)}
             isCorrect={isCorrectAnswer(current, answers[current.id])}
+            hintOpen={hintOpen}
             onSelect={(id) => setAnswers((a) => ({ ...a, [current.id]: id }))}
             onSelectStatement={(i, val) =>
               setAnswers((a) => ({
                 ...a,
-                [current.id]: { ...((a[current.id] as Record<number, "Ja" | "Nein">) ?? {}), [i]: val },
+                [current.id]: { ...((a[current.id] as YesNoAnswers) ?? {}), [i]: val },
               }))
+            }
+            onSelectMatch={(descriptionId, itemId) =>
+              setAnswers((a) => ({
+                ...a,
+                [current.id]: { ...((a[current.id] as MatchingAnswers) ?? {}), [descriptionId]: itemId },
+              }))
+            }
+            onClearMatch={(descriptionId) =>
+              setAnswers((a) => {
+                const next = { ...((a[current.id] as MatchingAnswers) ?? {}) };
+                delete next[descriptionId];
+                return { ...a, [current.id]: next };
+              })
             }
             onCheck={() => {
               setChecked((s) => new Set(s).add(current.id));
@@ -212,7 +215,7 @@ export default function PracticeClient({
           />
         </div>
 
-        <div className="space-y-6 lg:order-3">
+        <div className="space-y-6">
           <div className="hidden lg:block">
             <AICoachPanel question={current} isOpen={true} onClose={() => {}} />
           </div>
@@ -232,6 +235,37 @@ export default function PracticeClient({
       </div>
 
       <PracticeNotesPanel isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
+
+      <PracticeFloatingActions
+        onHint={() => setHintOpen((v) => !v)}
+        onNotes={() => setNotesOpen(true)}
+        onCoach={() => setCoachOpen(true)}
+      />
+
+      {topicsOpen && (
+        <div className="fixed inset-0 z-40 flex justify-start">
+          <div className="absolute inset-0 bg-black/40" onClick={() => setTopicsOpen(false)} />
+          <div className="relative h-full w-full max-w-xs overflow-y-auto border-r border-border-soft bg-panel p-5">
+            <div className="mb-1 flex items-center justify-between">
+              <p className="font-bold text-text">Themen</p>
+              <button onClick={() => setTopicsOpen(false)} className="text-text-muted hover:text-text">
+                <X size={18} />
+              </button>
+            </div>
+            <p className="mb-4 text-xs text-text-faint">
+              {certCode} · {level} · ★ {rating} ({ratingCount.toLocaleString("de-DE")})
+            </p>
+            <TopicsSidebar
+              topics={topics}
+              loadedCounts={loadedCounts}
+              activeTopicId={activeTopicId}
+              onSelectTopic={selectTopic}
+              progressByTopic={progressByTopic}
+              onShuffle={shuffle}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

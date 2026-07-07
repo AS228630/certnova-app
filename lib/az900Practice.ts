@@ -35,7 +35,22 @@ export type YesNoQuestion = {
   resources?: { label: string; url: string }[];
 };
 
-export type PracticeQuestion = SingleChoiceQuestion | YesNoQuestion;
+export type MatchingItem = { id: string; label: string };
+export type MatchingDescription = { id: string; text: string; correctItemId: string };
+
+export type MatchingQuestion = {
+  type: "matching";
+  id: string;
+  topicId: string;
+  prompt: string;
+  instructions?: string;
+  items: MatchingItem[];
+  descriptions: MatchingDescription[];
+  explanation: string;
+  resources?: { label: string; url: string }[];
+};
+
+export type PracticeQuestion = SingleChoiceQuestion | YesNoQuestion | MatchingQuestion;
 
 export type PracticeTopic = {
   id: string;
@@ -2495,5 +2510,37 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Eine Plattform ... bietet die vollständige Kontrolle über die Betriebssysteme, auf denen Anwendungen gehostet werden", correct: "Nein" },
     ],
     explanation: "Azure App Services abstrahieren die Bereitstellung und Verwaltung von Web-Apps vom Webserver. Sie benötigen keinen Zugriff auf den zugrunde liegenden Webserver. Azure App Services ermöglichen horizontale und vertikale Skalierung. Azure App Services bietet Bereitstellungsslots für die Entwicklung und einfache Bereitstellung von Updates und neuen Funktionen."
+  },
+  {
+    type: "matching",
+    id: "real-match-1",
+    topicId: "cloud-konzepte",
+    prompt: "Ordnen Sie die Ressourcen den entsprechenden Beschreibungen zu.",
+    instructions:
+      "Ordnen Sie jede Ressource der passenden Beschreibung zu. Jede Ressource kann einmal, mehrmals oder gar nicht verwendet werden. HINWEIS: Jede richtige Zuordnung zählt einen Punkt.",
+    items: [
+      { id: "dpa", label: "Data Protection Addendum" },
+      { id: "privacy", label: "Microsoft Privacy Statement" },
+      { id: "ost", label: "Online Services Terms" },
+    ],
+    descriptions: [
+      {
+        id: "d1",
+        text: "Beschreibt, welche personenbezogenen Daten gesammelt werden, wie die Daten verwendet werden und wofür die Daten verwendet werden.",
+        correctItemId: "privacy",
+      },
+      {
+        id: "d2",
+        text: "Ein rechtsverbindlicher Vertrag, der die Verpflichtungen zwischen Microsoft und einem Kunden in Bezug auf die Verarbeitung und Sicherheit von Kunden- und personenbezogenen Daten festlegt.",
+        correctItemId: "dpa",
+      },
+      {
+        id: "d3",
+        text: "Definiert die Datenverarbeitungs- und Sicherheitsbedingungen für Online-Dienste, einschließlich der Offenlegung verarbeiteter Daten sowie der Übertragung, Aufbewahrung und Löschung von Daten.",
+        correctItemId: "ost",
+      },
+    ],
+    explanation:
+      "Das Microsoft Privacy Statement beschreibt, welche personenbezogenen Daten gesammelt und wie sie verwendet werden. Das Data Protection Addendum (DPA) ist der rechtsverbindliche Vertrag zu Verarbeitung und Sicherheit von Kundendaten. Die Online Services Terms (OST) definieren die Datenverarbeitungs- und Sicherheitsbedingungen für die Online-Dienste selbst.",
   },
 ];
