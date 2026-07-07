@@ -61,6 +61,15 @@ export default function QuestionNavigator({
     return s <= 1 || sectionAccuracy(s - 1) >= UNLOCK_THRESHOLD;
   }
 
+  function sectionCompleted(s: number): boolean {
+    const [start, end] = sectionRange(s);
+    for (let i = start; i < end; i++) {
+      const st = statusFor(i);
+      if (st !== "correct" && st !== "wrong") return false;
+    }
+    return true;
+  }
+
   return (
     <div className="rounded-xl border border-border-soft bg-panel p-5">
       <p className="mb-3 font-bold text-text">Fragen-Navigator</p>
@@ -77,6 +86,7 @@ export default function QuestionNavigator({
           const unlocked = sectionUnlocked(s);
           const open = openSection === s && unlocked;
           const accuracy = sectionAccuracy(s);
+          const completed = unlocked && sectionCompleted(s);
 
           return (
             <div key={s} className="rounded-lg border border-border-soft">
@@ -88,7 +98,11 @@ export default function QuestionNavigator({
                 }`}
               >
                 <span className="flex items-center gap-2">
-                  <span className={`h-2 w-2 rounded-full ${unlocked ? "bg-primary" : "bg-text-faint"}`} />
+                  <span
+                    className={`h-2 w-2 rounded-full ${
+                      completed ? "bg-success" : unlocked ? "bg-primary" : "bg-text-faint"
+                    }`}
+                  />
                   Abschnitt {s + 1}
                   <span className="text-[11px] text-text-faint">
                     ({start + 1}–{end})
