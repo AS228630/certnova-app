@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Bookmark, Lock } from "lucide-react";
 import type { Certification } from "@/lib/companiesData";
 import { useUser } from "@/components/UserContext";
+import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import CertBadge from "./CertBadge";
 
 const LEVEL_STYLES: Record<Certification["level"], string> = {
@@ -23,6 +24,7 @@ export default function CertCard({ cert, companySlug }: { cert: Certification; c
   const [saved, setSaved] = useState(false);
   const { user } = useUser();
   const gated = cert.locked && !user;
+  const progress = useCertProgressStore((s) => s.getProgress(cert.id));
 
   return (
     <div className="flex flex-col gap-3 rounded-2xl border border-border-soft bg-panel p-4 transition-colors hover:border-primary/40">
@@ -58,10 +60,10 @@ export default function CertCard({ cert, companySlug }: { cert: Certification; c
       ) : (
         <Link href={`/certifications/${companySlug}/${cert.id}`}>
           <div className="h-1.5 w-full overflow-hidden rounded-full bg-panel-alt">
-            <div className="h-full rounded-full bg-primary" style={{ width: `${cert.progress}%` }} />
+            <div className="h-full rounded-full bg-primary" style={{ width: `${progress}%` }} />
           </div>
           <p className="mt-1 text-[11px] text-text-faint">
-            {cert.progress}% <span className="text-text-faint/80">Fortschritt</span>
+            {progress}% <span className="text-text-faint/80">Fortschritt</span>
           </p>
         </Link>
       )}
