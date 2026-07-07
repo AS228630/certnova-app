@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Bookmark, Sparkles, CheckCircle2, XCircle, ExternalLink, Lightbulb } from "lucide-react";
+import { Bookmark, Sparkles, CheckCircle2, XCircle, ExternalLink, Lightbulb } from "lucide-react";
 import type { PracticeOptionId, PracticeQuestion } from "@/lib/az900Practice";
 import MatchingQuestionView from "./MatchingQuestionView";
 
@@ -71,28 +71,14 @@ export default function QuestionPanel({
 
   return (
     <div className="rounded-xl border border-border-soft bg-panel p-5 md:p-6">
-      <div className="mb-5 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <button
-            onClick={onPrev}
-            disabled={index === 0}
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-border-soft text-text-muted hover:border-primary hover:text-primary disabled:opacity-30"
-          >
-            <ChevronLeft size={16} />
-          </button>
-          <span className="text-sm font-semibold text-text">
-            Frage {index + 1} von {total}
+      <div className="mb-5 flex items-start justify-between gap-3">
+        <div className="flex items-start gap-3">
+          <span className="flex h-8 w-8 flex-none items-center justify-center rounded-lg bg-primary text-sm font-bold text-white">
+            {index + 1}.
           </span>
-          <button
-            onClick={onNext}
-            disabled={index === total - 1}
-            className="flex h-8 w-8 items-center justify-center rounded-lg border border-border-soft text-text-muted hover:border-primary hover:text-primary disabled:opacity-30"
-          >
-            <ChevronRight size={16} />
-          </button>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-none items-center gap-2">
           <button
             onClick={onToggleMark}
             className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold ${

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp, Lock } from "lucide-react";
+import { ChevronDown, ChevronUp, Lock, Info } from "lucide-react";
 
 type Status = "current" | "correct" | "wrong" | "marked" | "skipped" | "unanswered";
 
@@ -72,7 +72,10 @@ export default function QuestionNavigator({
 
   return (
     <div className="rounded-xl border border-border-soft bg-panel p-5">
-      <p className="mb-3 font-bold text-text">Fragen-Navigator</p>
+      <p className="mb-3 flex items-center gap-1.5 font-bold text-text">
+        Fragen-Navigator
+        <Info size={13} className="text-text-faint" />
+      </p>
       <div className="mb-4 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-text-muted">
         <Legend color="bg-success" label="Beantwortet" />
         <Legend color="bg-warning" label="Markiert" />

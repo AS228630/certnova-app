@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { GripVertical, CheckCircle2, XCircle, X } from "lucide-react";
+import { GripVertical, CheckCircle2, XCircle, X, Info, MousePointer2 } from "lucide-react";
 import type { MatchingQuestion } from "@/lib/az900Practice";
 
 export default function MatchingQuestionView({
@@ -37,7 +37,10 @@ export default function MatchingQuestionView({
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
-          <p className="mb-2 text-xs font-semibold text-text-faint">Ressourcen</p>
+          <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-text-faint">
+            Ressourcen
+            <Info size={12} />
+          </p>
           <div className="space-y-2">
             {question.items.map((item) => {
               const isPicked = pickedItemId === item.id;
@@ -59,14 +62,23 @@ export default function MatchingQuestionView({
             })}
           </div>
           {!checked && (
-            <p className="mt-2 text-[11px] text-text-faint">
-              Ressource antippen, dann die passende Beschreibung antippen.
-            </p>
+            <>
+              <div className="mt-3 flex flex-col items-center justify-center gap-1.5 rounded-lg border border-dashed border-border-soft py-6 text-text-faint">
+                <MousePointer2 size={16} />
+                <span className="text-xs">Ziehen Sie eine Ressource hierher</span>
+              </div>
+              <p className="mt-2 text-[11px] text-text-faint">
+                Ressource antippen, dann die passende Beschreibung antippen.
+              </p>
+            </>
           )}
         </div>
 
         <div>
-          <p className="mb-2 text-xs font-semibold text-text-faint">Beschreibungen</p>
+          <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-text-faint">
+            Beschreibungen
+            <Info size={12} />
+          </p>
           <div className="space-y-2">
             {question.descriptions.map((d) => {
               const assignedId = selectedMap[d.id];
