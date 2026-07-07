@@ -40,7 +40,7 @@ export default function PracticeClient({
   const [activeTopicId, setActiveTopicId] = useState(topics.find((t) => loadedCounts[t.id] > 0)?.id ?? topics[0].id);
   const [order, setOrder] = useState<string[] | null>(null); // null = topic order, else shuffled question ids
   const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<string, PracticeOptionId>>({});
+  const [answers, setAnswers] = useState<Record<string, PracticeOptionId | Record<number, "Ja" | "Nein">>>({});
   const [checked, setChecked] = useState<Set<string>>(new Set());
   const [marked, setMarked] = useState<Set<string>>(new Set());
   const [skipped, setSkipped] = useState<Set<string>>(new Set());
@@ -53,8 +53,17 @@ export default function PracticeClient({
 
   const current = activeQuestions[index];
 
+  function isCorrectAnswer(q: PracticeQuestion, answer: PracticeOptionId | Record<number, "Ja" | "Nein"> | undefined): boolean {
+    if (!answer) return false;
+    if (q.type === "yesno") {
+      const a = answer as Record<number, "Ja" | "Nein">;
+      return q.statements.every((s, i) => a[i] === s.correct);
+    }
+    return answer === q.correct;
+  }
+
   const answeredCount = checked.size;
-  const correctCount = [...checked].filter((id) => answers[id] === questions.find((q) => q.id === id)?.correct).length;
+  const correctCount = [...checked].filter((id) => isCorrectAnswer(questions.find((q) => q.id === id)!, answers[id])).length;
   const wrongCount = answeredCount - correctCount;
 
   const progressByTopic = useMemo(() => {
@@ -92,7 +101,7 @@ export default function PracticeClient({
     if (!q) return "unanswered";
     if (marked.has(q.id)) return "marked";
     if (skipped.has(q.id) && !checked.has(q.id)) return "skipped";
-    if (checked.has(q.id)) return answers[q.id] === q.correct ? "correct" : "wrong";
+    if (checked.has(q.id)) return isCorrectAnswer(q, answers[q.id]) ? "correct" : "wrong";
     return "unanswered";
   }
 
@@ -148,7 +157,14 @@ export default function PracticeClient({
             selected={answers[current.id] ?? null}
             checked={checked.has(current.id)}
             marked={marked.has(current.id)}
+            isCorrect={isCorrectAnswer(current, answers[current.id])}
             onSelect={(id) => setAnswers((a) => ({ ...a, [current.id]: id }))}
+            onSelectStatement={(i, val) =>
+              setAnswers((a) => ({
+                ...a,
+                [current.id]: { ...((a[current.id] as Record<number, "Ja" | "Nein">) ?? {}), [i]: val },
+              }))
+            }
             onCheck={() => setChecked((s) => new Set(s).add(current.id))}
             onNext={() => goTo(index + 1)}
             onPrev={() => goTo(index - 1)}

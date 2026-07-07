@@ -4,6 +4,8 @@ import { useState } from "react";
 import { ChevronLeft, ChevronRight, Bookmark, Sparkles, CheckCircle2, XCircle, ExternalLink, Lightbulb } from "lucide-react";
 import type { PracticeOptionId, PracticeQuestion } from "@/lib/az900Practice";
 
+type YesNoAnswers = Record<number, "Ja" | "Nein">;
+
 export default function QuestionPanel({
   question,
   index,
@@ -11,7 +13,9 @@ export default function QuestionPanel({
   selected,
   checked,
   marked,
+  isCorrect,
   onSelect,
+  onSelectStatement,
   onCheck,
   onNext,
   onPrev,
@@ -22,10 +26,12 @@ export default function QuestionPanel({
   question: PracticeQuestion;
   index: number;
   total: number;
-  selected: PracticeOptionId | null;
+  selected: PracticeOptionId | YesNoAnswers | null;
   checked: boolean;
   marked: boolean;
+  isCorrect: boolean;
   onSelect: (id: PracticeOptionId) => void;
+  onSelectStatement: (i: number, value: "Ja" | "Nein") => void;
   onCheck: () => void;
   onNext: () => void;
   onPrev: () => void;
@@ -34,7 +40,12 @@ export default function QuestionPanel({
   onOpenAiCoach: () => void;
 }) {
   const [showExplanation, setShowExplanation] = useState(false);
-  const isCorrect = checked && selected === question.correct;
+  const isYesNo = question.type === "yesno";
+  const yesNoAnswers = (isYesNo ? (selected as YesNoAnswers) : {}) ?? {};
+  const singleSelected = isYesNo ? null : (selected as PracticeOptionId | null);
+  const canCheck = isYesNo
+    ? question.statements.every((_, i) => yesNoAnswers[i])
+    : !!singleSelected;
   const explanationVisible = checked || showExplanation;
 
   return (
@@ -82,32 +93,75 @@ export default function QuestionPanel({
 
       <p className="mb-5 text-base font-medium leading-relaxed text-text">{question.prompt}</p>
 
-      <div className="space-y-2.5">
-        {question.options.map((opt) => {
-          const isSelected = selected === opt.id;
-          const isRight = opt.id === question.correct;
-          let style = "border-border-soft hover:border-primary/40";
-          if (checked && isRight) style = "border-success bg-success-light";
-          else if (checked && isSelected && !isRight) style = "border-danger bg-danger/10";
-          else if (!checked && isSelected) style = "border-primary bg-primary-light";
+      {isYesNo ? (
+        <div className="overflow-hidden rounded-lg border border-border-soft">
+          <div className="grid grid-cols-[1fr_auto] gap-3 border-b border-border-soft bg-panel-alt px-3.5 py-2 text-xs font-semibold text-text-faint">
+            <span>Aussage</span>
+            <span>Antwort</span>
+          </div>
+          {question.statements.map((stmt, i) => {
+            const picked = yesNoAnswers[i];
+            const isRowCorrect = checked && picked === stmt.correct;
+            const isRowWrong = checked && picked && picked !== stmt.correct;
+            return (
+              <div
+                key={i}
+                className={`grid grid-cols-[1fr_auto] items-center gap-3 border-b border-border-soft px-3.5 py-3 text-sm last:border-b-0 ${
+                  isRowCorrect ? "bg-success-light" : isRowWrong ? "bg-danger/10" : ""
+                }`}
+              >
+                <span className="text-text">{stmt.text}</span>
+                <div className="flex shrink-0 items-center gap-1.5">
+                  {(["Ja", "Nein"] as const).map((opt) => {
+                    const isPicked = picked === opt;
+                    let style = "border-border-soft text-text-muted hover:border-primary/40";
+                    if (checked && opt === stmt.correct) style = "border-success bg-success-light text-success";
+                    else if (checked && isPicked && opt !== stmt.correct) style = "border-danger bg-danger/10 text-danger";
+                    else if (!checked && isPicked) style = "border-primary bg-primary-light text-primary";
+                    return (
+                      <button
+                        key={opt}
+                        disabled={checked}
+                        onClick={() => onSelectStatement(i, opt)}
+                        className={`flex h-8 w-14 items-center justify-center rounded-md border text-xs font-bold transition ${style}`}
+                      >
+                        {opt}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="space-y-2.5">
+          {question.options.map((opt) => {
+            const isSelected = singleSelected === opt.id;
+            const isRight = opt.id === question.correct;
+            let style = "border-border-soft hover:border-primary/40";
+            if (checked && isRight) style = "border-success bg-success-light";
+            else if (checked && isSelected && !isRight) style = "border-danger bg-danger/10";
+            else if (!checked && isSelected) style = "border-primary bg-primary-light";
 
-          return (
-            <button
-              key={opt.id}
-              disabled={checked}
-              onClick={() => onSelect(opt.id)}
-              className={`flex w-full items-center gap-3 rounded-lg border p-3.5 text-left text-sm transition ${style}`}
-            >
-              <span className="flex h-6 w-6 flex-none items-center justify-center rounded-md border border-border-soft text-xs font-bold text-text-muted">
-                {opt.id}
-              </span>
-              <span className="flex-1 text-text">{opt.text}</span>
-              {checked && isRight && <CheckCircle2 size={17} className="flex-none text-success" />}
-              {checked && isSelected && !isRight && <XCircle size={17} className="flex-none text-danger" />}
-            </button>
-          );
-        })}
-      </div>
+            return (
+              <button
+                key={opt.id}
+                disabled={checked}
+                onClick={() => onSelect(opt.id)}
+                className={`flex w-full items-center gap-3 rounded-lg border p-3.5 text-left text-sm transition ${style}`}
+              >
+                <span className="flex h-6 w-6 flex-none items-center justify-center rounded-md border border-border-soft text-xs font-bold text-text-muted">
+                  {opt.id}
+                </span>
+                <span className="flex-1 text-text">{opt.text}</span>
+                {checked && isRight && <CheckCircle2 size={17} className="flex-none text-success" />}
+                {checked && isSelected && !isRight && <XCircle size={17} className="flex-none text-danger" />}
+              </button>
+            );
+          })}
+        </div>
+      )}
 
       {explanationVisible && (
         <div
@@ -179,7 +233,7 @@ export default function QuestionPanel({
           {!checked ? (
             <button
               onClick={onCheck}
-              disabled={!selected}
+              disabled={!canCheck}
               className="rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-white hover:bg-primary-dark disabled:opacity-40"
             >
               Antwort prüfen
@@ -223,7 +277,7 @@ export default function QuestionPanel({
             {!checked ? (
               <button
                 onClick={onCheck}
-                disabled={!selected}
+                disabled={!canCheck}
                 className="rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-white hover:bg-primary-dark disabled:opacity-40"
               >
                 Antwort prüfen
