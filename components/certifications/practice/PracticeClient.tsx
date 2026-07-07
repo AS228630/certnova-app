@@ -1,10 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { X } from "lucide-react";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
 import PracticeToolbar from "./PracticeToolbar";
-import TopicsSidebar from "./TopicsSidebar";
 import QuestionPanel from "./QuestionPanel";
 import QuestionNavigator from "./QuestionNavigator";
 import QuickStats from "./QuickStats";
@@ -26,10 +24,6 @@ export default function PracticeClient({
   certId,
   certCode,
   certTitle,
-  level,
-  rating,
-  ratingCount,
-  topics,
   questions,
 }: {
   companyName: string;
@@ -43,14 +37,7 @@ export default function PracticeClient({
   topics: PracticeTopic[];
   questions: PracticeQuestion[];
 }) {
-  const loadedCounts = useMemo(() => {
-    const counts: Record<string, number> = {};
-    for (const t of topics) counts[t.id] = questions.filter((q) => q.topicId === t.id).length;
-    return counts;
-  }, [topics, questions]);
-
-  const [activeTopicId, setActiveTopicId] = useState(topics.find((t) => loadedCounts[t.id] > 0)?.id ?? topics[0].id);
-  const [order, setOrder] = useState<string[] | null>(null); // null = topic order, else shuffled question ids
+  const [order, setOrder] = useState<string[] | null>(null); // null = authored order, else shuffled question ids
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [checked, setChecked] = useState<Set<string>>(new Set());
@@ -58,7 +45,6 @@ export default function PracticeClient({
   const [skipped, setSkipped] = useState<Set<string>>(new Set());
   const [coachOpen, setCoachOpen] = useState(false);
   const [notesOpen, setNotesOpen] = useState(false);
-  const [topicsOpen, setTopicsOpen] = useState(false);
   const [hintOpen, setHintOpen] = useState(false);
   const [remainingSeconds, setRemainingSeconds] = useState(EXAM_TOTAL_SECONDS);
 
@@ -67,10 +53,12 @@ export default function PracticeClient({
     return () => clearInterval(t);
   }, []);
 
+  // The practice exam always covers the full authored question set for this
+  // cert — no topic filter, matching a real certification exam simulation.
   const activeQuestions = useMemo(() => {
     if (order) return order.map((id) => questions.find((q) => q.id === id)!).filter(Boolean);
-    return questions.filter((q) => q.topicId === activeTopicId);
-  }, [order, activeTopicId, questions]);
+    return questions;
+  }, [order, questions]);
 
   const current = activeQuestions[index];
 
@@ -89,23 +77,6 @@ export default function PracticeClient({
 
   const answeredCount = checked.size;
 
-  const progressByTopic = useMemo(() => {
-    const result: Record<string, number> = {};
-    for (const t of topics) {
-      const qs = questions.filter((q) => q.topicId === t.id);
-      const done = qs.filter((q) => checked.has(q.id)).length;
-      result[t.id] = qs.length === 0 ? 0 : Math.round((done / qs.length) * 100);
-    }
-    return result;
-  }, [topics, questions, checked]);
-
-  function selectTopic(id: string) {
-    setActiveTopicId(id);
-    setOrder(null);
-    setIndex(0);
-    setTopicsOpen(false);
-  }
-
   function shuffle() {
     const ids = questions.map((q) => q.id);
     for (let i = ids.length - 1; i > 0; i--) {
@@ -114,7 +85,6 @@ export default function PracticeClient({
     }
     setOrder(ids);
     setIndex(0);
-    setTopicsOpen(false);
   }
 
   function goTo(i: number) {
@@ -134,7 +104,7 @@ export default function PracticeClient({
   if (!current) {
     return (
       <div className="rounded-xl border border-border-soft bg-panel p-8 text-center text-sm text-text-muted">
-        Für dieses Thema sind noch keine Fragen verfügbar.
+        Für diese Zertifizierung sind noch keine Fragen verfügbar.
       </div>
     );
   }
@@ -149,7 +119,7 @@ export default function PracticeClient({
         index={index}
         total={activeQuestions.length}
         onToggleNotes={() => setNotesOpen(true)}
-        onToggleTopics={() => setTopicsOpen(true)}
+        onShuffle={shuffle}
       />
 
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_300px]">
@@ -241,31 +211,6 @@ export default function PracticeClient({
         onNotes={() => setNotesOpen(true)}
         onCoach={() => setCoachOpen(true)}
       />
-
-      {topicsOpen && (
-        <div className="fixed inset-0 z-40 flex justify-start">
-          <div className="absolute inset-0 bg-black/40" onClick={() => setTopicsOpen(false)} />
-          <div className="relative h-full w-full max-w-xs overflow-y-auto border-r border-border-soft bg-panel p-5">
-            <div className="mb-1 flex items-center justify-between">
-              <p className="font-bold text-text">Themen</p>
-              <button onClick={() => setTopicsOpen(false)} className="text-text-muted hover:text-text">
-                <X size={18} />
-              </button>
-            </div>
-            <p className="mb-4 text-xs text-text-faint">
-              {certCode} · {level} · ★ {rating} ({ratingCount.toLocaleString("de-DE")})
-            </p>
-            <TopicsSidebar
-              topics={topics}
-              loadedCounts={loadedCounts}
-              activeTopicId={activeTopicId}
-              onSelectTopic={selectTopic}
-              progressByTopic={progressByTopic}
-              onShuffle={shuffle}
-            />
-          </div>
-        </div>
-      )}
     </div>
   );
 }

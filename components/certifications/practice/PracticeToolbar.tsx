@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Clock3, Bookmark, StickyNote, ListFilter } from "lucide-react";
+import { Clock3, Bookmark, StickyNote, Shuffle } from "lucide-react";
 
 export default function PracticeToolbar({
   companyName,
@@ -9,7 +9,7 @@ export default function PracticeToolbar({
   index,
   total,
   onToggleNotes,
-  onToggleTopics,
+  onShuffle,
 }: {
   companyName: string;
   companySlug: string;
@@ -18,7 +18,7 @@ export default function PracticeToolbar({
   index: number;
   total: number;
   onToggleNotes: () => void;
-  onToggleTopics: () => void;
+  onShuffle: () => void;
 }) {
   const progress = total === 0 ? 0 : Math.round(((index + 1) / total) * 100);
 
@@ -53,11 +53,11 @@ export default function PracticeToolbar({
         <span className="flex-none text-sm font-bold text-text">{progress}%</span>
 
         <button
-          onClick={onToggleTopics}
+          onClick={onShuffle}
           className="flex h-8 items-center gap-1.5 rounded-lg border border-border-soft px-3 text-xs font-semibold text-text-muted hover:border-primary hover:text-primary"
         >
-          <ListFilter size={14} />
-          Themen
+          <Shuffle size={14} />
+          Mischen
         </button>
         <button
           onClick={onToggleNotes}

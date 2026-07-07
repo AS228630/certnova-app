@@ -5,7 +5,7 @@ import { ChevronDown, ChevronUp, Lock } from "lucide-react";
 
 type Status = "current" | "correct" | "wrong" | "marked" | "skipped" | "unanswered";
 
-const SECTION_COUNT = 5;
+const SECTION_SIZE = 50;
 const UNLOCK_THRESHOLD = 90;
 
 export default function QuestionNavigator({
@@ -19,9 +19,8 @@ export default function QuestionNavigator({
   statusFor: (index: number) => Status;
   onJump: (index: number) => void;
 }) {
-  const sectionSize = Math.max(1, Math.ceil(total / SECTION_COUNT));
-  const sectionCount = Math.min(SECTION_COUNT, Math.ceil(total / sectionSize));
-  const currentSection = Math.floor(currentIndex / sectionSize);
+  const sectionCount = Math.max(1, Math.ceil(total / SECTION_SIZE));
+  const currentSection = Math.floor(currentIndex / SECTION_SIZE);
   const [openSection, setOpenSection] = useState(currentSection);
 
   const styles: Record<Status, string> = {
@@ -34,7 +33,7 @@ export default function QuestionNavigator({
   };
 
   function sectionRange(s: number): [number, number] {
-    return [s * sectionSize, Math.min(total, (s + 1) * sectionSize)];
+    return [s * SECTION_SIZE, Math.min(total, (s + 1) * SECTION_SIZE)];
   }
 
   function sectionAccuracy(s: number): number {
