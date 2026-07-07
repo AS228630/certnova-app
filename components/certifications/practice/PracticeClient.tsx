@@ -27,6 +27,7 @@ export default function PracticeClient({
   certId,
   certCode,
   certTitle,
+  topics,
   questions,
 }: {
   companyName: string;
@@ -166,6 +167,7 @@ export default function PracticeClient({
           <SectionScorecard
             sectionIndex={scorecardSection}
             questions={activeQuestions}
+            topics={topics}
             answers={answers}
             checked={checked}
             skipped={skipped}

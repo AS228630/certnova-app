@@ -17,7 +17,7 @@ import {
   BookOpen,
   ExternalLink,
 } from "lucide-react";
-import type { PracticeOptionId, PracticeQuestion } from "@/lib/az900Practice";
+import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
 import { getSectionCount, getSectionRange } from "@/lib/practiceSections";
 
 type YesNoAnswers = Record<number, "Ja" | "Nein">;
@@ -49,6 +49,7 @@ function isCorrectAnswer(q: PracticeQuestion, answer: Answer | undefined): boole
 export default function SectionScorecard({
   sectionIndex,
   questions,
+  topics,
   answers,
   checked,
   skipped,
@@ -61,6 +62,7 @@ export default function SectionScorecard({
 }: {
   sectionIndex: number;
   questions: PracticeQuestion[];
+  topics: PracticeTopic[];
   answers: Record<string, Answer>;
   checked: Set<string>;
   skipped: Set<string>;
@@ -153,6 +155,10 @@ export default function SectionScorecard({
                 const sScore = sAnswered === 0 ? null : Math.round((sCorrect / sAnswered) * 100);
                 const stars = sScore === null ? 0 : Math.max(0, Math.min(5, Math.round(sScore / 20)));
                 const Icon = SECTION_ICONS[s % SECTION_ICONS.length];
+                const topicCounts = new Map<string, number>();
+                sQuestions.forEach((q) => topicCounts.set(q.topicId, (topicCounts.get(q.topicId) ?? 0) + 1));
+                const dominantTopicId = [...topicCounts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
+                const sectionSubtitle = topics.find((t) => t.id === dominantTopicId)?.title ?? "Übungsfragen";
 
                 return (
                   <div
@@ -166,7 +172,8 @@ export default function SectionScorecard({
                     </div>
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-sm font-semibold text-text">Abschnitt {s + 1}</p>
-                      <div className="flex items-center gap-0.5">
+                      <p className="truncate text-[11px] text-text-faint">{sectionSubtitle}</p>
+                      <div className="mt-0.5 flex items-center gap-0.5">
                         {Array.from({ length: 5 }).map((_, i) => (
                           <Star key={i} size={11} className={i < stars ? "fill-warning text-warning" : "text-text-faint"} />
                         ))}
@@ -278,9 +285,10 @@ export default function SectionScorecard({
               {filtered.length > expanded && (
                 <button
                   onClick={() => setExpanded((v) => v + 5)}
-                  className="w-full rounded-lg border border-border-soft py-2 text-xs font-semibold text-text-muted hover:border-primary"
+                  className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-border-soft py-2 text-xs font-semibold text-text-muted hover:border-primary"
                 >
                   + {filtered.length - expanded} weitere Fragen
+                  <ChevronRight size={12} className="rotate-90" />
                 </button>
               )}
             </div>
@@ -358,9 +366,11 @@ function StatBox({
   bg: string;
 }) {
   return (
-    <div className={`rounded-lg p-3 ${bg}`}>
-      <Icon size={15} className={color} />
-      <p className={`mt-1.5 text-lg font-extrabold ${color}`}>{value}</p>
+    <div className="flex flex-col items-center gap-1.5 text-center sm:items-start sm:text-left">
+      <div className={`flex h-8 w-8 items-center justify-center rounded-full ${bg}`}>
+        <Icon size={15} className={color} />
+      </div>
+      <p className="text-lg font-extrabold text-text">{value}</p>
       <p className="text-[11px] text-text-muted">{label}</p>
     </div>
   );
