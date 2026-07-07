@@ -10,10 +10,12 @@ import QuestionNavigator from "./QuestionNavigator";
 import QuickStats from "./QuickStats";
 import AICoachPanel from "./AICoachPanel";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
+import { useCertProgressStore } from "@/lib/store/certProgressStore";
 
 export default function PracticeClient({
   companyName,
   companySlug,
+  certId,
   certCode,
   certTitle,
   level,
@@ -24,6 +26,7 @@ export default function PracticeClient({
 }: {
   companyName: string;
   companySlug: string;
+  certId: string;
   certCode: string;
   certTitle: string;
   level: string;
@@ -152,7 +155,9 @@ export default function PracticeClient({
             onSelect={(id) => setAnswers((a) => ({ ...a, [current.id]: id }))}
             onCheck={() => {
               setChecked((s) => new Set(s).add(current.id));
-              useUserProgressStore.getState().recordAnswer(answers[current.id] === current.correct);
+              const isCorrect = answers[current.id] === current.correct;
+              useUserProgressStore.getState().recordAnswer(isCorrect);
+              if (isCorrect) useCertProgressStore.getState().recordModuleCompletion(certId, 2);
             }}
             onNext={() => goTo(index + 1)}
             onPrev={() => goTo(index - 1)}

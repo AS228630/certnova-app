@@ -39,6 +39,7 @@ export default async function PracticePage({
         <PracticeClient
           companyName={company.name}
           companySlug={company.slug}
+          certId={certId}
           certCode={cert.code}
           certTitle={cert.title}
           level={cert.level}
