@@ -66,7 +66,7 @@ export default function QuestionNavigator({
         <Legend color="border border-primary" label="Aktuell" />
       </div>
 
-      <div className="space-y-2">
+      <div className="max-h-[420px] space-y-2 overflow-y-auto pr-1">
         {Array.from({ length: sectionCount }).map((_, s) => {
           const [start, end] = sectionRange(s);
           const unlocked = sectionUnlocked(s);
@@ -108,7 +108,7 @@ export default function QuestionNavigator({
               )}
 
               {open && (
-                <div className="grid grid-cols-6 gap-1.5 border-t border-border-soft p-3 sm:grid-cols-8 lg:grid-cols-5 xl:grid-cols-6">
+                <div className="grid max-h-64 grid-cols-6 gap-1.5 overflow-y-auto border-t border-border-soft p-3 sm:grid-cols-8 lg:grid-cols-5 xl:grid-cols-6">
                   {Array.from({ length: end - start }).map((_, j) => {
                     const i = start + j;
                     return (

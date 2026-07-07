@@ -177,18 +177,18 @@ export default function PracticeClient({
             onOpenAiCoach={() => setCoachOpen(true)}
           />
 
+          <div className="hidden lg:block">
+            <AICoachPanel question={current} isOpen={true} onClose={() => {}} />
+          </div>
+        </div>
+
+        <div className="space-y-6">
           <QuestionNavigator
             total={activeQuestions.length}
             currentIndex={index}
             statusFor={statusFor}
             onJump={goTo}
           />
-        </div>
-
-        <div className="space-y-6">
-          <div className="hidden lg:block">
-            <AICoachPanel question={current} isOpen={true} onClose={() => {}} />
-          </div>
           <QuickStats
             answered={answeredCount}
             skipped={skipped.size}
