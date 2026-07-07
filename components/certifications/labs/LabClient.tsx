@@ -112,7 +112,7 @@ function InteractiveResourceGroupLab({
       setCompletedAt(null);
       setScorecardDismissed(false);
     }
-  }, [allDone, completedAt]);
+  }, [allDone, completedAt, certId]);
 
   const SECTION_META = {
     "resource-groups": { label: "Resource groups", createLabel: "a resource group" },
