@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CheckCircle2,
   Share2,
@@ -117,31 +117,77 @@ export default function SectionScorecard({
   ];
   const summaryText = summaryLines.join("\n");
 
+  const [feedback, setFeedback] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!feedback) return;
+    const t = setTimeout(() => setFeedback(null), 4000);
+    return () => clearTimeout(t);
+  }, [feedback]);
+
+  function legacyCopy(text: string): boolean {
+    try {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      const ok = document.execCommand("copy");
+      document.body.removeChild(textarea);
+      return ok;
+    } catch {
+      return false;
+    }
+  }
+
   async function handleShare() {
     if (typeof navigator !== "undefined" && "share" in navigator) {
       try {
         await navigator.share({ title: "Mein CertCoach Ergebnis", text: summaryText });
+        setFeedback("Ergebnis geteilt!");
         return;
       } catch {
-        // User cancelled the native share sheet — fall through to clipboard.
+        // User cancelled, or share isn't actually usable here — fall through.
       }
     }
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      await navigator.clipboard.writeText(summaryText);
-      alert("Ergebnis wurde in die Zwischenablage kopiert.");
+    try {
+      if (typeof navigator !== "undefined" && navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(summaryText);
+        setFeedback("Ergebnis wurde in die Zwischenablage kopiert.");
+        return;
+      }
+      throw new Error("no clipboard API");
+    } catch {
+      if (legacyCopy(summaryText)) {
+        setFeedback("Ergebnis wurde in die Zwischenablage kopiert.");
+      } else {
+        setFeedback("Teilen wird von diesem Browser nicht unterstützt. Bitte im echten Browser (nicht In-App) öffnen.");
+      }
     }
   }
 
   function handleDownload() {
-    const blob = new Blob([summaryText], { type: "text/plain;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `certcoach-ergebnis-abschnitt-${sectionIndex + 1}.txt`;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
+    try {
+      const blob = new Blob([summaryText], { type: "text/plain;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `certcoach-ergebnis-abschnitt-${sectionIndex + 1}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      setFeedback("Download gestartet.");
+    } catch {
+      try {
+        window.open(`data:text/plain;charset=utf-8,${encodeURIComponent(summaryText)}`, "_blank");
+        setFeedback("Ergebnis in neuem Tab geöffnet — dort speichern.");
+      } catch {
+        setFeedback("Download wird von diesem Browser nicht unterstützt. Bitte im echten Browser (nicht In-App) öffnen.");
+      }
+    }
   }
 
   return (
@@ -156,6 +202,7 @@ export default function SectionScorecard({
             <p className="text-sm text-text-muted">
               Großartig! Du bist auf dem richtigen Weg. Bleib dran und erreiche dein Ziel! 🚀
             </p>
+            {feedback && <p className="mt-2 text-xs font-semibold text-primary">{feedback}</p>}
           </div>
         </div>
         <div className="flex flex-none gap-2">
