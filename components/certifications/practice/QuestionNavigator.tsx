@@ -5,7 +5,8 @@ import { ChevronDown, ChevronUp, Lock } from "lucide-react";
 
 type Status = "current" | "correct" | "wrong" | "marked" | "skipped" | "unanswered";
 
-const SECTION_SIZE = 50;
+const TARGET_SECTIONS = 5;
+const MAX_SECTION_SIZE = 50;
 const UNLOCK_THRESHOLD = 90;
 
 export default function QuestionNavigator({
@@ -19,6 +20,10 @@ export default function QuestionNavigator({
   statusFor: (index: number) => Status;
   onJump: (index: number) => void;
 }) {
+  // Aim for 5 roughly-equal sections for small/medium banks; cap each
+  // section at 50 questions for large banks, so a 500+ question bank
+  // naturally produces more (e.g. ~11-12) sections instead of a few huge ones.
+  const SECTION_SIZE = Math.max(1, Math.min(MAX_SECTION_SIZE, Math.ceil(total / TARGET_SECTIONS)));
   const sectionCount = Math.max(1, Math.ceil(total / SECTION_SIZE));
   const currentSection = Math.floor(currentIndex / SECTION_SIZE);
   const [openSection, setOpenSection] = useState(currentSection);
@@ -53,7 +58,7 @@ export default function QuestionNavigator({
   }
 
   function sectionUnlocked(s: number): boolean {
-    return s === 0 || sectionAccuracy(s - 1) >= UNLOCK_THRESHOLD;
+    return s <= 1 || sectionAccuracy(s - 1) >= UNLOCK_THRESHOLD;
   }
 
   return (

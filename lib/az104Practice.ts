@@ -137,4 +137,172 @@ export const AZ104_QUESTIONS: PracticeQuestion[] = [
     explanation:
       "Der Cool-Tier eignet sich für Daten, auf die selten zugegriffen wird, die aber weiterhin sofort verfügbar sein müssen — bei niedrigeren Speicherkosten als Hot.",
   },
+  {
+    id: "sp-3",
+    topicId: "speicher",
+    prompt: "Welche Funktion in Azure Storage schützt versehentlich gelöschte Blobs vor dauerhaftem Verlust?",
+    options: [
+      { id: "A", text: "Soft Delete für Blobs" },
+      { id: "B", text: "Geo-Replikation" },
+      { id: "C", text: "Lifecycle Management" },
+      { id: "D", text: "Shared Access Signature" },
+    ],
+    correct: "A",
+    explanation:
+      "Soft Delete hält gelöschte Blobs für einen konfigurierbaren Zeitraum wiederherstellbar, bevor sie endgültig entfernt werden.",
+  },
+  {
+    id: "net-1",
+    topicId: "netzwerke",
+    prompt: "Welche Ressource wird benötigt, um zwei Azure Virtual Networks (VNets) miteinander zu verbinden?",
+    options: [
+      { id: "A", text: "VNet Peering" },
+      { id: "B", text: "Network Security Group" },
+      { id: "C", text: "Load Balancer" },
+      { id: "D", text: "Azure Bastion" },
+    ],
+    correct: "A",
+    explanation:
+      "VNet Peering verbindet zwei virtuelle Netzwerke, sodass Ressourcen über private IP-Adressen miteinander kommunizieren können, ohne dass Datenverkehr über das öffentliche Internet läuft.",
+  },
+  {
+    id: "net-2",
+    topicId: "netzwerke",
+    prompt: "Was ist die primäre Funktion einer Network Security Group (NSG) in Azure?",
+    options: [
+      { id: "A", text: "Ein- und ausgehenden Netzwerkverkehr auf Basis von Regeln filtern" },
+      { id: "B", text: "DNS-Namen für Ressourcen verwalten" },
+      { id: "C", text: "Lastverteilung über mehrere VMs" },
+      { id: "D", text: "Automatisches Skalieren von virtuellen Maschinen" },
+    ],
+    correct: "A",
+    explanation:
+      "Eine NSG enthält Sicherheitsregeln, die ein- und ausgehenden Netzwerkverkehr zu Azure-Ressourcen innerhalb eines virtuellen Netzwerks erlauben oder verweigern.",
+  },
+  {
+    id: "net-3",
+    topicId: "netzwerke",
+    prompt: "Welcher Azure-Dienst ermöglicht sicheren RDP/SSH-Zugriff auf VMs, ohne eine öffentliche IP-Adresse zuzuweisen?",
+    options: [
+      { id: "A", text: "Azure Bastion" },
+      { id: "B", text: "Azure Front Door" },
+      { id: "C", text: "Azure Traffic Manager" },
+      { id: "D", text: "Azure CDN" },
+    ],
+    correct: "A",
+    explanation:
+      "Azure Bastion stellt einen sicheren RDP/SSH-Zugriff auf virtuelle Computer direkt über das Azure Portal bereit, ohne dass eine öffentliche IP-Adresse auf der VM benötigt wird.",
+  },
+  {
+    id: "comp-1",
+    topicId: "compute",
+    prompt: "Was ist eine Availability Set in Azure?",
+    options: [
+      { id: "A", text: "Eine logische Gruppierung von VMs zum Schutz vor Ausfällen innerhalb eines Rechenzentrums" },
+      { id: "B", text: "Ein Speicherkonto-Typ" },
+      { id: "C", text: "Ein Sicherheitsrichtlinien-Set für Azure Policy" },
+      { id: "D", text: "Ein Backup-Zeitplan" },
+    ],
+    correct: "A",
+    explanation:
+      "Availability Sets verteilen VMs auf mehrere Fault- und Update-Domänen innerhalb eines Rechenzentrums, um die Verfügbarkeit bei Hardware- oder Wartungsausfällen zu erhöhen.",
+  },
+  {
+    id: "comp-2",
+    topicId: "compute",
+    prompt: "Welcher Dienst ermöglicht automatisches horizontales Skalieren von VMs basierend auf Auslastungsmetriken?",
+    options: [
+      { id: "A", text: "Virtual Machine Scale Sets" },
+      { id: "B", text: "Azure Container Instances" },
+      { id: "C", text: "Azure Automation" },
+      { id: "D", text: "Azure Site Recovery" },
+    ],
+    correct: "A",
+    explanation:
+      "Virtual Machine Scale Sets ermöglichen es, identische VMs automatisch basierend auf Metriken wie CPU-Auslastung horizontal hoch- oder herunterzuskalieren.",
+  },
+  {
+    id: "comp-3",
+    topicId: "compute",
+    prompt: "Was passiert mit den Daten auf dem temporären Datenträger (Temporary Disk) einer Azure-VM bei einem Neustart?",
+    options: [
+      { id: "A", text: "Sie können verloren gehen, da der temporäre Datenträger nicht dauerhaft ist" },
+      { id: "B", text: "Sie werden automatisch im Azure Storage gesichert" },
+      { id: "C", text: "Sie bleiben garantiert immer erhalten" },
+      { id: "D", text: "Der temporäre Datenträger wird verschlüsselt archiviert" },
+    ],
+    correct: "A",
+    explanation:
+      "Der temporäre Datenträger (oft D:) ist nicht dauerhaft — Daten können bei bestimmten Ereignissen wie Neustart, Neubereitstellung oder Wartung verloren gehen und sollten nicht für persistente Daten verwendet werden.",
+  },
+  {
+    id: "gov-3",
+    topicId: "governance",
+    prompt: "Was ist der Unterschied zwischen einer Azure-Rolle (RBAC) und einer Azure Policy?",
+    options: [
+      { id: "A", text: "RBAC steuert, WER WAS tun darf; Azure Policy steuert, WELCHE Konfigurationen erlaubt sind" },
+      { id: "B", text: "Beide steuern ausschließlich Kosten" },
+      { id: "C", text: "RBAC und Azure Policy sind identisch" },
+      { id: "D", text: "Azure Policy ersetzt die Notwendigkeit von RBAC vollständig" },
+    ],
+    correct: "A",
+    explanation:
+      "RBAC (Role-Based Access Control) legt fest, welche Aktionen ein Benutzer auf welchen Ressourcen ausführen darf. Azure Policy erzwingt hingegen Regeln darüber, wie Ressourcen konfiguriert sein dürfen — unabhängig davon, wer sie erstellt.",
+  },
+  {
+    id: "bereit-1",
+    topicId: "bereitstellung",
+    prompt: "Welches Format wird für Azure Resource Manager (ARM) Templates verwendet, um Infrastruktur deklarativ bereitzustellen?",
+    options: [
+      { id: "A", text: "JSON (oder Bicep als Abstraktion darüber)" },
+      { id: "B", text: "XML" },
+      { id: "C", text: "YAML ausschließlich" },
+      { id: "D", text: "CSV" },
+    ],
+    correct: "A",
+    explanation:
+      "ARM-Templates werden im JSON-Format definiert; Bicep ist eine domänenspezifische Sprache, die eine einfachere Syntax bietet und in JSON kompiliert wird.",
+  },
+  {
+    id: "bereit-2",
+    topicId: "bereitstellung",
+    prompt: "Was ist ein Vorteil der Verwendung von Ressourcengruppen-Tags in Azure?",
+    options: [
+      { id: "A", text: "Bessere Organisation, Kostenzuordnung und Filterung von Ressourcen" },
+      { id: "B", text: "Automatische Verschlüsselung aller Daten" },
+      { id: "C", text: "Tags sind rein kosmetisch und haben keinen praktischen Nutzen" },
+      { id: "D", text: "Sie ersetzen die Notwendigkeit von Ressourcengruppen" },
+    ],
+    correct: "A",
+    explanation:
+      "Tags (Schlüssel-Wert-Paare) helfen, Ressourcen zu organisieren, Kosten nach Abteilung/Projekt zuzuordnen und gezielt nach Ressourcen zu filtern oder zu automatisieren.",
+  },
+  {
+    id: "mon-1",
+    topicId: "ueberwachung",
+    prompt: "Welcher Azure-Dienst sammelt und analysiert Telemetriedaten wie Metriken und Protokolle von Azure-Ressourcen?",
+    options: [
+      { id: "A", text: "Azure Monitor" },
+      { id: "B", text: "Azure Advisor" },
+      { id: "C", text: "Azure Migrate" },
+      { id: "D", text: "Azure DevOps" },
+    ],
+    correct: "A",
+    explanation:
+      "Azure Monitor sammelt, analysiert und reagiert auf Telemetriedaten aus Cloud- und On-Premises-Umgebungen, einschließlich Metriken, Protokollen und Warnungen.",
+  },
+  {
+    id: "mon-2",
+    topicId: "ueberwachung",
+    prompt: "Wie oft können Sie Standard-Backups für eine Azure-VM über Azure Backup mindestens planen?",
+    options: [
+      { id: "A", text: "Mindestens einmal täglich" },
+      { id: "B", text: "Nur einmal im Jahr" },
+      { id: "C", text: "Backups sind für VMs nicht möglich" },
+      { id: "D", text: "Nur manuell, niemals automatisiert" },
+    ],
+    correct: "A",
+    explanation:
+      "Azure Backup ermöglicht die Planung von mindestens täglichen automatisierten Backups für virtuelle Computer über eine Backuprichtlinie (Backup Policy).",
+  },
 ];
