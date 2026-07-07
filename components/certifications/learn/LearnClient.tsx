@@ -21,6 +21,8 @@ import ProgressRing from "@/components/certifications/journey/ProgressRing";
 import { moduleSummary, type Module, type Lesson } from "@/lib/learnData";
 import type { Company } from "@/lib/companiesData";
 import type { CertJourney } from "@/lib/journeyData";
+import { useUserProgressStore } from "@/lib/store/userProgressStore";
+import { useCertProgressStore } from "@/lib/store/certProgressStore";
 
 const TABS = ["Lernpfad", "Übersicht", "Ressourcen", "Diskussionen"] as const;
 
@@ -49,11 +51,22 @@ function modulePct(m: Module): number {
   return Math.round((m.lessons.filter((l) => l.completed).length / m.lessons.length) * 100);
 }
 
-function LessonRow({ lesson, number, active }: { lesson: Lesson; number: string; active: boolean }) {
+function LessonRow({
+  lesson,
+  number,
+  active,
+  onToggle,
+}: {
+  lesson: Lesson;
+  number: string;
+  active: boolean;
+  onToggle: () => void;
+}) {
   const Icon = LESSON_ICON[lesson.type];
   return (
-    <div
-      className={`flex items-center justify-between rounded-lg px-3 py-2 text-sm ${
+    <button
+      onClick={onToggle}
+      className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left text-sm transition-colors ${
         active ? "bg-primary/10" : "hover:bg-panel-alt"
       }`}
     >
@@ -70,11 +83,19 @@ function LessonRow({ lesson, number, active }: { lesson: Lesson; number: string;
           <Circle size={15} className="text-text-faint" />
         )}
       </span>
-    </div>
+    </button>
   );
 }
 
-function ModuleCard({ module: m, defaultOpen }: { module: Module; defaultOpen: boolean }) {
+function ModuleCard({
+  module: m,
+  defaultOpen,
+  onToggleLesson,
+}: {
+  module: Module;
+  defaultOpen: boolean;
+  onToggleLesson: (moduleId: string, lessonId: string) => void;
+}) {
   const [open, setOpen] = useState(defaultOpen);
   const p = modulePct(m);
   const isDone = p === 100;
@@ -148,6 +169,7 @@ function ModuleCard({ module: m, defaultOpen }: { module: Module; defaultOpen: b
               lesson={l}
               number={`${m.number}.${i + 1}`}
               active={!l.completed && m.lessons.find((x) => !x.completed)?.id === l.id}
+              onToggle={() => onToggleLesson(m.id, l.id)}
             />
           ))}
         </div>
@@ -170,11 +192,39 @@ export default function LearnClient({
   const [draft, setDraft] = useState("");
   const [addingNote, setAddingNote] = useState(false);
   const [tab, setTab] = useState<(typeof TABS)[number]>("Lernpfad");
+  const [localModules, setLocalModules] = useState<Module[]>(modules);
   const certId = journey.code.toLowerCase();
   const companySlug = company.slug;
-  const stats = moduleStats(modules);
-  const filtered = modules.filter((m) => m.title.toLowerCase().includes(query.toLowerCase()));
-  const firstOpenIndex = modules.findIndex((m) => !m.locked && modulePct(m) < 100);
+  const stats = moduleStats(localModules);
+  const filtered = localModules.filter((m) => m.title.toLowerCase().includes(query.toLowerCase()));
+  const firstOpenIndex = localModules.findIndex((m) => !m.locked && modulePct(m) < 100);
+  const totalLessons = localModules.flatMap((m) => m.lessons).length;
+
+  function toggleLesson(moduleId: string, lessonId: string) {
+    let becameComplete = false;
+
+    setLocalModules((prev) =>
+      prev.map((m) => {
+        if (m.id !== moduleId) return m;
+        return {
+          ...m,
+          lessons: m.lessons.map((l) => {
+            if (l.id !== lessonId) return l;
+            if (!l.completed) becameComplete = true;
+            return { ...l, completed: !l.completed };
+          }),
+        };
+      })
+    );
+
+    // Only award progress/XP on the incomplete -> complete transition, not
+    // when unchecking, so undoing a mis-click can't be used to farm XP.
+    if (becameComplete) {
+      const increment = totalLessons > 0 ? 100 / totalLessons : 0;
+      useCertProgressStore.getState().recordModuleCompletion(certId, increment);
+      useUserProgressStore.getState().recordLessonCompletion();
+    }
+  }
 
   function saveNote() {
     if (!draft.trim()) return;
@@ -239,7 +289,7 @@ export default function LearnClient({
               <p className="flex items-center gap-1 text-xs text-text-faint">
                 <Clock3 size={11} /> Gesamtdauer
               </p>
-              <p className="text-lg font-extrabold text-text">~{modules.length * 45} Min</p>
+              <p className="text-lg font-extrabold text-text">~{localModules.length * 45} Min</p>
             </div>
           </div>
 
@@ -262,7 +312,7 @@ export default function LearnClient({
           {/* Modules */}
           <div className="space-y-4">
             {filtered.map((m, i) => (
-              <ModuleCard key={m.id} module={m} defaultOpen={i === firstOpenIndex} />
+              <ModuleCard key={m.id} module={m} defaultOpen={i === firstOpenIndex} onToggleLesson={toggleLesson} />
             ))}
             {filtered.length === 0 && <p className="text-sm text-text-faint">Keine Module gefunden.</p>}
           </div>
@@ -289,14 +339,20 @@ export default function LearnClient({
                   {stats.modulesDone} / {stats.modulesTotal}
                 </span>
               </div>
-              <div className="flex items-center justify-between px-3 py-2 text-text-muted">
+              <Link
+                href={`/certifications/${companySlug}/${certId}/labs`}
+                className="flex items-center justify-between rounded-lg px-3 py-2 text-text-muted hover:bg-panel-alt hover:text-text"
+              >
                 <span>2. Praxis-Labore</span>
-                <span className="text-text-faint">bald</span>
-              </div>
-              <div className="flex items-center justify-between px-3 py-2 text-text-muted">
+                <span className="text-text-faint">öffnen →</span>
+              </Link>
+              <Link
+                href={`/certifications/${companySlug}/${certId}/practice`}
+                className="flex items-center justify-between rounded-lg px-3 py-2 text-text-muted hover:bg-panel-alt hover:text-text"
+              >
                 <span>3. Prüfungs-Simulation</span>
-                <span className="text-text-faint">bald</span>
-              </div>
+                <span className="text-text-faint">öffnen →</span>
+              </Link>
             </div>
           </div>
 

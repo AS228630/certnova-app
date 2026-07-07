@@ -58,6 +58,7 @@ type UserProgressState = {
   load: (userId: string, displayName: string) => Promise<void>;
   recordAnswer: (correct: boolean) => Promise<void>;
   recordLabCompletion: () => Promise<void>;
+  recordLessonCompletion: () => Promise<void>;
   reset: () => void;
 };
 
@@ -155,6 +156,25 @@ export const useUserProgressStore = create<UserProgressState>((set, get) => ({
       xp: rolled.xp + 40,
       study_minutes_today: rolled.study_minutes_today + 5,
       study_minutes_total: rolled.study_minutes_total + 5,
+      streak_days: rolled.streak_days === 0 ? 1 : rolled.streak_days,
+      last_active_date: todayStr(),
+    };
+
+    set({ progress: updated });
+    await persist(current.user_id, updated);
+    await syncLeaderboard(current.user_id, get().displayName, updated.xp);
+  },
+
+  recordLessonCompletion: async () => {
+    const current = get().progress;
+    if (!current) return;
+    const rolled = rollForNewDay(current);
+
+    const updated: UserProgress = {
+      ...rolled,
+      xp: rolled.xp + 8,
+      study_minutes_today: rolled.study_minutes_today + 3,
+      study_minutes_total: rolled.study_minutes_total + 3,
       streak_days: rolled.streak_days === 0 ? 1 : rolled.streak_days,
       last_active_date: todayStr(),
     };
