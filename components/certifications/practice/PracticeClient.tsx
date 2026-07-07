@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
+import { getSectionForIndex, getSectionRange, getSectionCount } from "@/lib/practiceSections";
 import PracticeToolbar from "./PracticeToolbar";
 import QuestionPanel from "./QuestionPanel";
 import QuestionNavigator from "./QuestionNavigator";
@@ -9,6 +11,7 @@ import QuickStats from "./QuickStats";
 import AICoachPanel from "./AICoachPanel";
 import PracticeNotesPanel from "./PracticeNotesPanel";
 import PracticeFloatingActions from "./PracticeFloatingActions";
+import SectionScorecard from "./SectionScorecard";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 
@@ -37,6 +40,7 @@ export default function PracticeClient({
   topics: PracticeTopic[];
   questions: PracticeQuestion[];
 }) {
+  const router = useRouter();
   const [order, setOrder] = useState<string[] | null>(null); // null = authored order, else shuffled question ids
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
@@ -47,6 +51,7 @@ export default function PracticeClient({
   const [notesOpen, setNotesOpen] = useState(false);
   const [hintOpen, setHintOpen] = useState(false);
   const [remainingSeconds, setRemainingSeconds] = useState(EXAM_TOTAL_SECONDS);
+  const [scorecardSection, setScorecardSection] = useState<number | null>(null);
 
   useEffect(() => {
     const t = setInterval(() => setRemainingSeconds((s) => Math.max(0, s - 1)), 1000);
@@ -61,6 +66,7 @@ export default function PracticeClient({
   }, [order, questions]);
 
   const current = activeQuestions[index];
+  const sectionCount = getSectionCount(activeQuestions.length);
 
   function isCorrectAnswer(q: PracticeQuestion, answer: Answer | undefined): boolean {
     if (!answer) return false;
@@ -101,10 +107,86 @@ export default function PracticeClient({
     return "unanswered";
   }
 
+  // Checks whether every question in `current`'s section has now been
+  // resolved (answered or skipped) — if so, shows the real section results.
+  function maybeShowScorecard(justResolvedId: string, nowChecked: Set<string>) {
+    const sectionIdx = getSectionForIndex(activeQuestions.length, index);
+    const [start, end] = getSectionRange(activeQuestions.length, sectionIdx);
+    for (let i = start; i < end; i++) {
+      const q = activeQuestions[i];
+      if (!q) continue;
+      const resolved = q.id === justResolvedId || nowChecked.has(q.id) || skipped.has(q.id);
+      if (!resolved) return;
+    }
+    setScorecardSection(sectionIdx);
+  }
+
+  function resetSection(sectionIdx: number) {
+    const [start, end] = getSectionRange(activeQuestions.length, sectionIdx);
+    const ids = activeQuestions.slice(start, end).map((q) => q.id);
+    setChecked((s) => {
+      const next = new Set(s);
+      ids.forEach((id) => next.delete(id));
+      return next;
+    });
+    setSkipped((s) => {
+      const next = new Set(s);
+      ids.forEach((id) => next.delete(id));
+      return next;
+    });
+    setAnswers((a) => {
+      const next = { ...a };
+      ids.forEach((id) => delete next[id]);
+      return next;
+    });
+  }
+
   if (!current) {
     return (
       <div className="rounded-xl border border-border-soft bg-panel p-8 text-center text-sm text-text-muted">
         Für diese Zertifizierung sind noch keine Fragen verfügbar.
+      </div>
+    );
+  }
+
+  if (scorecardSection !== null) {
+    return (
+      <div>
+        <PracticeToolbar
+          companyName={companyName}
+          companySlug={companySlug}
+          certCode={certCode}
+          certTitle={certTitle}
+          index={index}
+          total={activeQuestions.length}
+          onToggleNotes={() => setNotesOpen(true)}
+          onShuffle={shuffle}
+        />
+        <div className="mt-6">
+          <SectionScorecard
+            sectionIndex={scorecardSection}
+            questions={activeQuestions}
+            answers={answers}
+            checked={checked}
+            skipped={skipped}
+            marked={marked}
+            elapsedSeconds={EXAM_TOTAL_SECONDS - remainingSeconds}
+            hasNextSection={scorecardSection + 1 < sectionCount}
+            onBackToPath={() => router.push(`/certifications/${companySlug}/${certId}/learn`)}
+            onNextSection={() => {
+              const [, end] = getSectionRange(activeQuestions.length, scorecardSection);
+              setScorecardSection(null);
+              goTo(Math.min(end, activeQuestions.length - 1));
+            }}
+            onRetry={() => {
+              resetSection(scorecardSection);
+              const [start] = getSectionRange(activeQuestions.length, scorecardSection);
+              setScorecardSection(null);
+              goTo(start);
+            }}
+          />
+        </div>
+        <PracticeNotesPanel isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
       </div>
     );
   }
@@ -154,16 +236,19 @@ export default function PracticeClient({
               })
             }
             onCheck={() => {
-              setChecked((s) => new Set(s).add(current.id));
+              const next = new Set(checked).add(current.id);
+              setChecked(next);
               const isCorrect = isCorrectAnswer(current, answers[current.id]);
               useUserProgressStore.getState().recordAnswer(isCorrect);
               useCertProgressStore.getState().recordAnswerForCert(certId, isCorrect);
               if (isCorrect) useCertProgressStore.getState().recordModuleCompletion(certId, 2);
+              maybeShowScorecard(current.id, next);
             }}
             onNext={() => goTo(index + 1)}
             onPrev={() => goTo(index - 1)}
             onSkip={() => {
               setSkipped((s) => new Set(s).add(current.id));
+              maybeShowScorecard(current.id, checked);
               goTo(index + 1);
             }}
             onToggleMark={() =>
