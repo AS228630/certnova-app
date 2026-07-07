@@ -20,7 +20,8 @@ export default async function CertJourneyPage({
   const { company: slug, certId } = await params;
   const company = getCompany(slug);
   const journey = getCertJourney(slug, certId);
-  if (!company || !journey) notFound();
+  const cert = company?.certs.find((c) => c.id === certId);
+  if (!company || !journey || !cert) notFound();
 
   return (
     <DashboardShell requireAuth={false}>
@@ -28,7 +29,7 @@ export default async function CertJourneyPage({
         <JourneyHeader company={company} journey={journey} />
 
         <JourneyTabs>
-          <JourneyPhases phases={journey.phases} companySlug={company.slug} certId={certId} />
+          <JourneyPhases phases={journey.phases} companySlug={company.slug} certId={certId} certTitle={cert.title} />
         </JourneyTabs>
 
         <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-[1fr_360px]">

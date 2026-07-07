@@ -1,9 +1,15 @@
+"use client";
+
 import { ArrowRight, CheckCircle2, Lock, Clock3 } from "lucide-react";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import Link from "next/link";
 import type { JourneyPhase } from "@/lib/journeyData";
 import ProgressRing from "./ProgressRing";
 import PhaseIllustration from "./PhaseIllustration";
+import { useUser } from "@/components/UserContext";
+import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
+import { useUserProgressStore } from "@/lib/store/userProgressStore";
+import { getLearnTrack } from "@/lib/learnData";
 
 const RING_COLORS: Record<JourneyPhase["key"], string> = {
   lernen: "#6d4cff",
@@ -87,11 +93,69 @@ export default function JourneyPhases({
   phases,
   companySlug,
   certId,
+  certTitle,
 }: {
   phases: JourneyPhase[];
   companySlug: string;
   certId: string;
+  certTitle: string;
 }) {
+  const { user } = useUser();
+  const completionSet = useLessonCompletionStore((s) => s.completions[certId]);
+  const loadForCert = useLessonCompletionStore((s) => s.loadForCert);
+  const progress = useUserProgressStore((s) => s.progress);
+
+  useEffect(() => {
+    if (user) loadForCert(user.id, certId);
+  }, [user, certId, loadForCert]);
+
+  const realPhases: JourneyPhase[] = phases.map((phase) => {
+    if (phase.key === "lernen") {
+      const track = getLearnTrack(certId, certTitle);
+      const allLessons = track.modules.flatMap((m) => m.lessons);
+      const videos = allLessons.filter((l) => l.type === "video");
+      const quizzes = allLessons.filter((l) => l.type === "quiz");
+      const done = user && completionSet ? completionSet.size : 0;
+      const total = allLessons.length;
+      const completion = total === 0 ? 0 : Math.round((done / total) * 100);
+      const doneVideos = user && completionSet ? videos.filter((v) => completionSet.has(v.id)).length : 0;
+      const doneQuizzes = user && completionSet ? quizzes.filter((q) => completionSet.has(q.id)).length : 0;
+      const doneModules = track.modules.filter((m) => m.lessons.every((l) => completionSet?.has(l.id))).length;
+
+      return {
+        ...phase,
+        completion,
+        stats: [
+          { label: "Module", done: doneModules, total: track.modules.length },
+          { label: "Videos", done: doneVideos, total: videos.length },
+          { label: "Quiz", done: doneQuizzes, total: quizzes.length },
+        ],
+      };
+    }
+
+    if (phase.key === "labore") {
+      const labsCompleted = progress?.labs_completed ?? 0;
+      return {
+        ...phase,
+        completion: labsCompleted > 0 ? 100 : 0,
+        stats: [{ label: "Labs abgeschlossen (gesamt)", done: labsCompleted, total: Math.max(labsCompleted, 1) }],
+      };
+    }
+
+    // pruefung
+    const answered = progress?.questions_answered ?? 0;
+    const correct = progress?.questions_correct ?? 0;
+    const accuracy = answered === 0 ? 0 : Math.round((correct / answered) * 100);
+    return {
+      ...phase,
+      completion: answered === 0 ? 0 : Math.min(100, Math.round((answered / 50) * 100)),
+      stats: [
+        { label: "Fragen beantwortet (gesamt)", done: answered, total: Math.max(answered, 1) },
+        { label: "Durchschnitt", done: accuracy, total: 100 },
+      ],
+    };
+  });
+
   function destinationFor(phase: JourneyPhase): string | undefined {
     if (phase.key === "lernen") {
       return `/certifications/${companySlug}/${certId}/learn`;
@@ -107,10 +171,10 @@ export default function JourneyPhases({
 
   return (
     <div id="phasen" className="flex flex-col items-stretch gap-4 lg:flex-row lg:items-start">
-      {phases.map((phase, i) => (
+      {realPhases.map((phase, i) => (
         <Fragment key={phase.key}>
           <PhaseCard phase={phase} href={destinationFor(phase)} />
-          {i < phases.length - 1 && (
+          {i < realPhases.length - 1 && (
             <div className="flex items-center justify-center py-2 lg:py-0 lg:pt-24">
               <ArrowRight size={18} className="rotate-90 text-text-faint lg:rotate-0" />
             </div>

@@ -1,12 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ChevronLeft, Bookmark, Star, Info } from "lucide-react";
 import CertBadge from "../CertBadge";
 import ProgressRing from "./ProgressRing";
 import type { CertJourney } from "@/lib/journeyData";
 import type { Company } from "@/lib/companiesData";
+import { useUser } from "@/components/UserContext";
+import { useCertProgressStore } from "@/lib/store/certProgressStore";
+import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
+import { getLearnTrack } from "@/lib/learnData";
 
 const LEVEL_STYLES: Record<string, string> = {
   Beginner: "bg-success-light text-success",
@@ -16,6 +20,23 @@ const LEVEL_STYLES: Record<string, string> = {
 
 export default function JourneyHeader({ company, journey }: { company: Company; journey: CertJourney }) {
   const [showCalc, setShowCalc] = useState(false);
+  const certId = journey.code.toLowerCase();
+  const { user } = useUser();
+  const realProgress = useCertProgressStore((s) => (user ? s.getProgress(certId) : null));
+  const completionSet = useLessonCompletionStore((s) => s.completions[certId]);
+  const loadForCert = useLessonCompletionStore((s) => s.loadForCert);
+
+  useEffect(() => {
+    if (user) loadForCert(user.id, certId);
+  }, [user, certId, loadForCert]);
+
+  const track = getLearnTrack(certId, journey.title);
+  const totalLessons = track.modules.flatMap((m) => m.lessons).length;
+  const doneLessons = user && completionSet ? completionSet.size : 0;
+
+  const overallProgress = user ? Math.round(realProgress ?? 0) : journey.overallProgress;
+  const themesDone = user ? doneLessons : journey.themesDone;
+  const themesTotal = user ? totalLessons : journey.themesTotal;
 
   return (
     <div>
@@ -72,11 +93,11 @@ export default function JourneyHeader({ company, journey }: { company: Company; 
           </div>
 
           <div className="flex items-center gap-4">
-            <ProgressRing value={journey.overallProgress} size={64} stroke={6} />
+            <ProgressRing value={overallProgress} size={64} stroke={6} />
             <div>
-              <p className="text-2xl font-extrabold text-text">{journey.overallProgress}%</p>
+              <p className="text-2xl font-extrabold text-text">{overallProgress}%</p>
               <p className="text-[11px] text-text-faint">
-                {journey.themesDone} / {journey.themesTotal} Themen abgeschlossen
+                {themesDone} / {themesTotal} Themen abgeschlossen
               </p>
             </div>
           </div>
@@ -115,7 +136,7 @@ export default function JourneyHeader({ company, journey }: { company: Company; 
               </div>
               <div className="mt-3 flex items-center justify-between border-t border-border-soft pt-2 text-xs font-bold text-text">
                 <span>Gesamtfortschritt</span>
-                <span>{journey.overallProgress}%</span>
+                <span>{overallProgress}%</span>
               </div>
             </div>
           )}
