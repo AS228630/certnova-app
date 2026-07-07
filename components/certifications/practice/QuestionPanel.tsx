@@ -40,6 +40,8 @@ export default function QuestionPanel({
   onOpenAiCoach: () => void;
 }) {
   const [showExplanation, setShowExplanation] = useState(false);
+  const [showHint, setShowHint] = useState(false);
+  const hintText = deriveHint(question.explanation);
   const isYesNo = question.type === "yesno";
   const yesNoAnswers = (isYesNo ? (selected as YesNoAnswers) : {}) ?? {};
   const singleSelected = isYesNo ? null : (selected as PracticeOptionId | null);
@@ -47,6 +49,14 @@ export default function QuestionPanel({
     ? question.statements.every((_, i) => yesNoAnswers[i])
     : !!singleSelected;
   const explanationVisible = checked || showExplanation;
+
+  const [lastQuestionId, setLastQuestionId] = useState(question.id);
+  if (question.id !== lastQuestionId) {
+    setLastQuestionId(question.id);
+    setShowHint(false);
+    setShowExplanation(false);
+  }
+
 
   return (
     <div className="rounded-xl border border-border-soft bg-panel p-5 md:p-6">
@@ -82,6 +92,15 @@ export default function QuestionPanel({
             Markieren
           </button>
           <button
+            onClick={() => setShowHint((v) => !v)}
+            className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold ${
+              showHint ? "border-warning text-warning" : "border-border-soft text-text-muted hover:border-primary"
+            }`}
+          >
+            <Lightbulb size={13} />
+            AI Hint
+          </button>
+          <button
             onClick={onOpenAiCoach}
             className="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-bold text-white hover:bg-primary-dark"
           >
@@ -90,6 +109,13 @@ export default function QuestionPanel({
           </button>
         </div>
       </div>
+
+      {showHint && !checked && (
+        <div className="mb-4 flex items-start gap-2 rounded-lg border border-warning/40 bg-warning/10 p-3 text-sm text-text-muted">
+          <Lightbulb size={15} className="mt-0.5 flex-none text-warning" />
+          <p>{hintText}</p>
+        </div>
+      )}
 
       <p className="mb-5 text-base font-medium leading-relaxed text-text">{question.prompt}</p>
 
@@ -296,4 +322,16 @@ export default function QuestionPanel({
       </div>
     </div>
   );
+}
+
+/**
+ * Turns a full explanation into a short, non-spoiling nudge: just the first
+ * clause/sentence, so it points the learner in the right direction without
+ * revealing which option is correct.
+ */
+function deriveHint(explanation: string): string {
+  const firstSentence = explanation.split(/[.!?]/)[0]?.trim();
+  const words = firstSentence.split(/\s+/);
+  const short = words.slice(0, 14).join(" ");
+  return `Denk daran: ${short}${words.length > 14 ? "…" : "."}`;
 }

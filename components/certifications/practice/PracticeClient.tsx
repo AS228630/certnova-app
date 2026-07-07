@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Sparkles } from "lucide-react";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
 import PracticeHeader from "./PracticeHeader";
@@ -9,8 +9,11 @@ import QuestionPanel from "./QuestionPanel";
 import QuestionNavigator from "./QuestionNavigator";
 import QuickStats from "./QuickStats";
 import AICoachPanel from "./AICoachPanel";
+import PracticeNotesPanel from "./PracticeNotesPanel";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
+
+const EXAM_TOTAL_SECONDS = 2 * 60 * 60; // 2h, matches a real certification exam
 
 export default function PracticeClient({
   companyName,
@@ -49,6 +52,13 @@ export default function PracticeClient({
   const [marked, setMarked] = useState<Set<string>>(new Set());
   const [skipped, setSkipped] = useState<Set<string>>(new Set());
   const [coachOpen, setCoachOpen] = useState(false);
+  const [notesOpen, setNotesOpen] = useState(false);
+  const [remainingSeconds, setRemainingSeconds] = useState(EXAM_TOTAL_SECONDS);
+
+  useEffect(() => {
+    const t = setInterval(() => setRemainingSeconds((s) => Math.max(0, s - 1)), 1000);
+    return () => clearInterval(t);
+  }, []);
 
   const activeQuestions = useMemo(() => {
     if (order) return order.map((id) => questions.find((q) => q.id === id)!).filter(Boolean);
@@ -131,6 +141,7 @@ export default function PracticeClient({
         answered={answeredCount}
         correct={correctCount}
         wrong={wrongCount}
+        onToggleNotes={() => setNotesOpen(true)}
       />
 
       <button
@@ -207,10 +218,11 @@ export default function PracticeClient({
           </div>
           <QuickStats
             answered={answeredCount}
-            correct={correctCount}
-            wrong={wrongCount}
             skipped={skipped.size}
-            bestStreak={correctCount}
+            marked={marked.size}
+            total={activeQuestions.length}
+            remainingSeconds={remainingSeconds}
+            totalSeconds={EXAM_TOTAL_SECONDS}
           />
         </div>
       </div>
@@ -218,6 +230,8 @@ export default function PracticeClient({
       <div className="lg:hidden">
         <AICoachPanel question={current} isOpen={coachOpen} onClose={() => setCoachOpen(false)} />
       </div>
+
+      <PracticeNotesPanel isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
     </div>
   );
 }

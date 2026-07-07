@@ -1,39 +1,54 @@
-import { CheckCircle2, XCircle, SkipForward, BadgeCheck } from "lucide-react";
+import { CheckCircle2, SkipForward, Bookmark, Clock3 } from "lucide-react";
+
+function formatTime(totalSeconds: number) {
+  const h = Math.floor(totalSeconds / 3600);
+  const m = Math.floor((totalSeconds % 3600) / 60);
+  const s = Math.floor(totalSeconds % 60);
+  return [h, m, s].map((n) => String(n).padStart(2, "0")).join(":");
+}
 
 export default function QuickStats({
   answered,
-  correct,
-  wrong,
   skipped,
-  bestStreak,
+  marked,
+  total,
+  remainingSeconds,
+  totalSeconds,
 }: {
   answered: number;
-  correct: number;
-  wrong: number;
   skipped: number;
-  bestStreak: number;
+  marked: number;
+  total: number;
+  remainingSeconds: number;
+  totalSeconds: number;
 }) {
-  const avg = answered === 0 ? 0 : Math.round((correct / answered) * 100);
+  const remaining = Math.max(0, total - answered - skipped);
+  const timePct = totalSeconds === 0 ? 0 : Math.max(0, Math.min(100, (remainingSeconds / totalSeconds) * 100));
 
   return (
     <div className="rounded-xl border border-border-soft bg-panel p-5">
-      <p className="mb-4 font-bold text-text">Schnellstatistik</p>
+      <p className="mb-4 font-bold text-text">Mein Fortschritt</p>
 
       <div className="grid grid-cols-2 gap-3">
-        <StatBox icon={BadgeCheck} value={answered} label="Beantwortet" color="text-primary" />
-        <StatBox icon={CheckCircle2} value={correct} label="Richtig" color="text-success" />
-        <StatBox icon={XCircle} value={wrong} label="Falsch" color="text-danger" />
-        <StatBox icon={SkipForward} value={skipped} label="Übersprungen" color="text-text-muted" />
+        <StatBox icon={CheckCircle2} value={answered} label="Beantwortet" color="text-success" bg="bg-success-light" />
+        <StatBox icon={SkipForward} value={skipped} label="Übersprungen" color="text-warning" bg="bg-warning/10" />
+        <StatBox icon={Bookmark} value={marked} label="Markiert" color="text-primary" bg="bg-primary-light" />
+        <StatBox icon={Clock3} value={remaining} label="Verbleibend" color="text-text-muted" bg="bg-panel-alt" />
       </div>
 
-      <div className="mt-4 grid grid-cols-2 gap-4 border-t border-border-soft pt-4 text-sm">
-        <div>
-          <p className="text-xs text-text-muted">Beste Serie</p>
-          <p className="font-bold text-text">{bestStreak}</p>
+      <div className="mt-5 border-t border-border-soft pt-4">
+        <div className="mb-2 flex items-center justify-between text-sm">
+          <span className="flex items-center gap-1.5 text-text-muted">
+            <Clock3 size={13} />
+            Verbleibende Zeit
+          </span>
+          <span className="font-mono font-bold text-text">{formatTime(remainingSeconds)}</span>
         </div>
-        <div>
-          <p className="text-xs text-text-muted">Durchschnitt</p>
-          <p className="font-bold text-text">{avg}%</p>
+        <div className="h-1.5 w-full rounded-full bg-panel-alt">
+          <div
+            className={`h-1.5 rounded-full transition-all ${timePct < 15 ? "bg-danger" : "bg-primary"}`}
+            style={{ width: `${timePct}%` }}
+          />
         </div>
       </div>
     </div>
@@ -45,19 +60,19 @@ function StatBox({
   value,
   label,
   color,
+  bg,
 }: {
   icon: React.ComponentType<{ size?: number; className?: string }>;
   value: number;
   label: string;
   color: string;
+  bg: string;
 }) {
   return (
-    <div className="flex items-center gap-2 rounded-lg bg-panel-alt p-3">
-      <Icon size={16} className={color} />
-      <div>
-        <p className={`text-sm font-extrabold ${color}`}>{value}</p>
-        <p className="text-[11px] text-text-muted">{label}</p>
-      </div>
+    <div className={`rounded-lg p-3 ${bg}`}>
+      <Icon size={15} className={color} />
+      <p className={`mt-1.5 text-lg font-extrabold ${color}`}>{value}</p>
+      <p className="text-[11px] text-text-muted">{label}</p>
     </div>
   );
 }

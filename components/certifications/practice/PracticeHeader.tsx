@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronLeft, Star, Bookmark } from "lucide-react";
+import { ChevronLeft, Star, Bookmark, StickyNote } from "lucide-react";
 
 const levelStyles: Record<string, string> = {
   Beginner: "bg-success-light text-success",
@@ -19,6 +19,7 @@ export default function PracticeHeader({
   correct,
   wrong,
   total,
+  onToggleNotes,
 }: {
   companyName: string;
   companySlug: string;
@@ -31,6 +32,7 @@ export default function PracticeHeader({
   correct: number;
   wrong: number;
   total: number;
+  onToggleNotes: () => void;
 }) {
   const progress = total === 0 ? 0 : Math.round((answered / total) * 100);
 
@@ -72,8 +74,15 @@ export default function PracticeHeader({
           {rating} ({ratingCount.toLocaleString("de-DE")})
         </span>
         <button
+          onClick={onToggleNotes}
+          className="ml-auto flex h-8 items-center gap-1.5 rounded-lg border border-border-soft px-3 text-xs font-semibold text-text-muted hover:border-primary hover:text-primary"
+        >
+          <StickyNote size={14} />
+          Notizen
+        </button>
+        <button
           aria-label="Merken"
-          className="ml-auto flex h-8 w-8 items-center justify-center rounded-lg border border-border-soft text-text-muted hover:border-primary hover:text-primary"
+          className="flex h-8 w-8 items-center justify-center rounded-lg border border-border-soft text-text-muted hover:border-primary hover:text-primary"
         >
           <Bookmark size={15} />
         </button>
