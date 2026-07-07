@@ -54,7 +54,8 @@ function rollForNewDay(p: UserProgress): UserProgress {
 type UserProgressState = {
   progress: UserProgress | null;
   loading: boolean;
-  load: (userId: string) => Promise<void>;
+  displayName: string;
+  load: (userId: string, displayName: string) => Promise<void>;
   recordAnswer: (correct: boolean) => Promise<void>;
   recordLabCompletion: () => Promise<void>;
   reset: () => void;
@@ -64,18 +65,48 @@ async function persist(userId: string, patch: Partial<UserProgress>) {
   await supabase.from("user_progress").update(patch).eq("user_id", userId);
 }
 
+async function syncLeaderboard(userId: string, displayName: string, xp: number) {
+  await supabase.from("leaderboard_entries").upsert({ user_id: userId, display_name: displayName, xp });
+}
+
+export type LeaderboardRow = { display_name: string; xp: number; isUser?: boolean };
+
+/** Top-N leaderboard rows, with the current user's own row guaranteed to be included. */
+export async function getLeaderboard(currentUserId: string, limit = 10): Promise<LeaderboardRow[]> {
+  const { data: top } = await supabase
+    .from("leaderboard_entries")
+    .select("user_id, display_name, xp")
+    .order("xp", { ascending: false })
+    .limit(limit);
+
+  const rows = (top ?? []).map((r) => ({ display_name: r.display_name, xp: r.xp, isUser: r.user_id === currentUserId }));
+
+  if (!rows.some((r) => r.isUser)) {
+    const { data: mine } = await supabase
+      .from("leaderboard_entries")
+      .select("display_name, xp")
+      .eq("user_id", currentUserId)
+      .maybeSingle();
+    if (mine) rows.push({ display_name: mine.display_name, xp: mine.xp, isUser: true });
+  }
+
+  return rows;
+}
+
 export const useUserProgressStore = create<UserProgressState>((set, get) => ({
   progress: null,
   loading: true,
+  displayName: "Lernender",
 
-  load: async (userId: string) => {
-    set({ loading: true });
+  load: async (userId: string, displayName: string) => {
+    set({ loading: true, displayName });
     const { data, error } = await supabase.from("user_progress").select("*").eq("user_id", userId).maybeSingle();
 
     if (error || !data) {
       // Brand-new user: create a real, all-zero row.
       const fresh: UserProgress = { user_id: userId, ...ZERO_PROGRESS };
       await supabase.from("user_progress").insert(fresh);
+      await syncLeaderboard(userId, displayName, fresh.xp);
       set({ progress: fresh, loading: false });
       return;
     }
@@ -88,6 +119,7 @@ export const useUserProgressStore = create<UserProgressState>((set, get) => ({
         last_active_date: rolled.last_active_date,
       });
     }
+    await syncLeaderboard(userId, displayName, rolled.xp);
     set({ progress: rolled, loading: false });
   },
 
@@ -109,6 +141,7 @@ export const useUserProgressStore = create<UserProgressState>((set, get) => ({
 
     set({ progress: updated });
     await persist(current.user_id, updated);
+    await syncLeaderboard(current.user_id, get().displayName, updated.xp);
   },
 
   recordLabCompletion: async () => {
@@ -128,7 +161,8 @@ export const useUserProgressStore = create<UserProgressState>((set, get) => ({
 
     set({ progress: updated });
     await persist(current.user_id, updated);
+    await syncLeaderboard(current.user_id, get().displayName, updated.xp);
   },
 
-  reset: () => set({ progress: null, loading: true }),
+  reset: () => set({ progress: null, loading: true, displayName: "Lernender" }),
 }));

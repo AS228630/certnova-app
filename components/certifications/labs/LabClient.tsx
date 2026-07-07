@@ -14,6 +14,7 @@ import { useDockerLabStore, TARGET_IMAGE, TARGET_CONTAINER_NAME } from "@/lib/st
 import { useK8sLabStore, TARGET_DEPLOYMENT_NAME } from "@/lib/store/k8sLabStore";
 import { useCiscoLabStore, TARGET_HOSTNAME, TARGET_IP, TARGET_MASK } from "@/lib/store/ciscoLabStore";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
+import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import LabHeader from "./LabHeader";
 import LabStepsOverview from "./LabStepsOverview";
 import LabOverviewPanel from "./LabOverviewPanel";
@@ -102,6 +103,10 @@ function InteractiveResourceGroupLab({
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setCompletedAt(Date.now());
       useUserProgressStore.getState().recordLabCompletion();
+      // A cert typically has several labs; +15% per completed lab is a
+      // reasonable step so progress builds up gradually rather than jumping
+      // straight to 100% after the first one.
+      useCertProgressStore.getState().recordModuleCompletion(certId, 15);
     }
     if (!allDone && completedAt !== null) {
       setCompletedAt(null);
