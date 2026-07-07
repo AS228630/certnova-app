@@ -173,6 +173,7 @@ export default function PracticeClient({
               setChecked((s) => new Set(s).add(current.id));
               const isCorrect = isCorrectAnswer(current, answers[current.id]);
               useUserProgressStore.getState().recordAnswer(isCorrect);
+              useCertProgressStore.getState().recordAnswerForCert(certId, isCorrect);
               if (isCorrect) useCertProgressStore.getState().recordModuleCompletion(certId, 2);
             }}
             onNext={() => goTo(index + 1)}

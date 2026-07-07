@@ -107,6 +107,7 @@ function InteractiveResourceGroupLab({
       // reasonable step so progress builds up gradually rather than jumping
       // straight to 100% after the first one.
       useCertProgressStore.getState().recordModuleCompletion(certId, 15);
+      useCertProgressStore.getState().recordLabCompletionForCert(certId);
     }
     if (!allDone && completedAt !== null) {
       setCompletedAt(null);

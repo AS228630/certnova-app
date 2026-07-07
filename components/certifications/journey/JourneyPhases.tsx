@@ -8,7 +8,7 @@ import ProgressRing from "./ProgressRing";
 import PhaseIllustration from "./PhaseIllustration";
 import { useUser } from "@/components/UserContext";
 import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
-import { useUserProgressStore } from "@/lib/store/userProgressStore";
+import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { getLearnTrack } from "@/lib/learnData";
 
 const RING_COLORS: Record<JourneyPhase["key"], string> = {
@@ -103,7 +103,7 @@ export default function JourneyPhases({
   const { user } = useUser();
   const completionSet = useLessonCompletionStore((s) => s.completions[certId]);
   const loadForCert = useLessonCompletionStore((s) => s.loadForCert);
-  const progress = useUserProgressStore((s) => s.progress);
+  const certDetail = useCertProgressStore((s) => s.getDetail(certId));
 
   useEffect(() => {
     if (user) loadForCert(user.id, certId);
@@ -134,23 +134,22 @@ export default function JourneyPhases({
     }
 
     if (phase.key === "labore") {
-      const labsCompleted = progress?.labs_completed ?? 0;
       return {
         ...phase,
-        completion: labsCompleted > 0 ? 100 : 0,
-        stats: [{ label: "Labs abgeschlossen (gesamt)", done: labsCompleted, total: Math.max(labsCompleted, 1) }],
+        completion: certDetail.labCompleted ? 100 : 0,
+        stats: [{ label: "Lab-Status", done: certDetail.labCompleted ? 1 : 0, total: 1 }],
       };
     }
 
     // pruefung
-    const answered = progress?.questions_answered ?? 0;
-    const correct = progress?.questions_correct ?? 0;
+    const answered = certDetail.questionsAnswered;
+    const correct = certDetail.questionsCorrect;
     const accuracy = answered === 0 ? 0 : Math.round((correct / answered) * 100);
     return {
       ...phase,
-      completion: answered === 0 ? 0 : Math.min(100, Math.round((answered / 50) * 100)),
+      completion: answered === 0 ? 0 : Math.min(100, Math.round((answered / 20) * 100)),
       stats: [
-        { label: "Fragen beantwortet (gesamt)", done: answered, total: Math.max(answered, 1) },
+        { label: "Fragen beantwortet", done: answered, total: Math.max(answered, 1) },
         { label: "Durchschnitt", done: accuracy, total: 100 },
       ],
     };
