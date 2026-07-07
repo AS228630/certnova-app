@@ -211,15 +211,31 @@ export default function SectionScorecard({
           </div>
 
           <div className="mb-3 flex flex-wrap gap-2 text-xs">
-            <FilterTab active={filter === "alle"} onClick={() => setFilter("alle")} label={`Alle (${flagged.length})`} />
-            <FilterTab active={filter === "falsch"} onClick={() => setFilter("falsch")} label={`Falsch (${wrongQuestions.length})`} icon={XCircle} />
+            <FilterTab active={filter === "alle"} onClick={() => setFilter("alle")} label={`Alle (${flagged.length})`} activeColor="bg-text text-white" />
+            <FilterTab
+              active={filter === "falsch"}
+              onClick={() => setFilter("falsch")}
+              label={`Falsch (${wrongQuestions.length})`}
+              icon={XCircle}
+              activeColor="bg-danger text-white"
+              tint="border-danger/30 text-danger"
+            />
             <FilterTab
               active={filter === "uebersprungen"}
               onClick={() => setFilter("uebersprungen")}
               label={`Übersprungen (${skippedQuestions.length})`}
               icon={SkipForward}
+              activeColor="bg-warning text-white"
+              tint="border-warning/30 text-warning"
             />
-            <FilterTab active={filter === "markiert"} onClick={() => setFilter("markiert")} label={`Markiert (${markedQuestions.length})`} icon={Star} />
+            <FilterTab
+              active={filter === "markiert"}
+              onClick={() => setFilter("markiert")}
+              label={`Markiert (${markedQuestions.length})`}
+              icon={Star}
+              activeColor="bg-primary text-white"
+              tint="border-primary/30 text-primary"
+            />
           </div>
 
           <button
@@ -328,6 +344,7 @@ export default function SectionScorecard({
 function ScoreRing({ value }: { value: number }) {
   const r = 44;
   const c = 2 * Math.PI * r;
+  const color = value >= 80 ? "#22c55e" : value >= 50 ? "#f59e0b" : "#ef4444";
   return (
     <div className="relative flex h-32 w-32 flex-none items-center justify-center">
       <svg viewBox="0 0 100 100" className="h-32 w-32 -rotate-90">
@@ -337,7 +354,7 @@ function ScoreRing({ value }: { value: number }) {
           cy="50"
           r={r}
           fill="none"
-          stroke="#22c55e"
+          stroke={color}
           strokeWidth="8"
           strokeLinecap="round"
           strokeDasharray={c}
@@ -401,17 +418,21 @@ function FilterTab({
   onClick,
   label,
   icon: Icon,
+  activeColor = "bg-primary text-white",
+  tint = "border-border-soft text-text-muted",
 }: {
   active: boolean;
   onClick: () => void;
   label: string;
   icon?: React.ComponentType<{ size?: number }>;
+  activeColor?: string;
+  tint?: string;
 }) {
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-semibold transition ${
-        active ? "bg-primary text-white" : "border border-border-soft text-text-muted hover:border-primary"
+      className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 font-semibold transition ${
+        active ? `border-transparent ${activeColor}` : `${tint} hover:opacity-80`
       }`}
     >
       {Icon && <Icon size={12} />}
