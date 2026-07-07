@@ -1,12 +1,22 @@
-import { Flame, Target } from "lucide-react";
+"use client";
 
-const minutesDone = 48;
-const minutesGoal = 60;
-const percent = Math.round((minutesDone / minutesGoal) * 100);
-const circumference = 2 * Math.PI * 40;
-const dashOffset = circumference * (1 - percent / 100);
+import { Flame, Target } from "lucide-react";
+import { useUserProgressStore } from "@/lib/store/userProgressStore";
 
 export default function DailyPlan() {
+  const progress = useUserProgressStore((s) => s.progress);
+
+  const minutesDone = progress?.study_minutes_today ?? 0;
+  const minutesGoal = progress?.daily_goal_minutes ?? 20;
+  const questionsAnswered = progress?.questions_answered ?? 0;
+  const streakDays = progress?.streak_days ?? 0;
+
+  const percent = minutesGoal === 0 ? 0 : Math.min(100, Math.round((minutesDone / minutesGoal) * 100));
+  const circumference = 2 * Math.PI * 40;
+  const dashOffset = circumference * (1 - percent / 100);
+  const weeklyGoalDays = 5;
+  const weeklyDaysActive = Math.min(weeklyGoalDays, streakDays);
+
   return (
     <div className="rounded-2xl border border-border-soft bg-panel p-5">
       <h2 className="mb-4 font-bold text-text">Mein Tagesziel</h2>
@@ -35,20 +45,20 @@ export default function DailyPlan() {
 
         <div className="flex-1 space-y-3 text-sm">
           <div>
-            <p className="text-text-faint">Fragen gelöst</p>
-            <p className="font-semibold text-text">18 / 20</p>
+            <p className="text-text-faint">Fragen heute beantwortet</p>
+            <p className="font-semibold text-text">{questionsAnswered}</p>
           </div>
           <div className="flex items-center gap-2">
             <Flame size={16} className="text-warning" />
             <div>
-              <p className="font-semibold text-text">14 Tage</p>
+              <p className="font-semibold text-text">{streakDays} {streakDays === 1 ? "Tag" : "Tage"}</p>
               <p className="text-[10px] text-text-faint">Lernserie</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <Target size={16} className="text-primary" />
             <div>
-              <p className="font-semibold text-text">4 / 5 Tage</p>
+              <p className="font-semibold text-text">{weeklyDaysActive} / {weeklyGoalDays} Tage</p>
               <p className="text-[10px] text-text-faint">Wochenziel</p>
             </div>
           </div>

@@ -9,6 +9,7 @@ import QuestionPanel from "./QuestionPanel";
 import QuestionNavigator from "./QuestionNavigator";
 import QuickStats from "./QuickStats";
 import AICoachPanel from "./AICoachPanel";
+import { useUserProgressStore } from "@/lib/store/userProgressStore";
 
 export default function PracticeClient({
   companyName,
@@ -165,7 +166,10 @@ export default function PracticeClient({
                 [current.id]: { ...((a[current.id] as Record<number, "Ja" | "Nein">) ?? {}), [i]: val },
               }))
             }
-            onCheck={() => setChecked((s) => new Set(s).add(current.id))}
+            onCheck={() => {
+              setChecked((s) => new Set(s).add(current.id));
+              useUserProgressStore.getState().recordAnswer(isCorrectAnswer(current, answers[current.id]));
+            }}
             onNext={() => goTo(index + 1)}
             onPrev={() => goTo(index - 1)}
             onSkip={() => {

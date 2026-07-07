@@ -9,7 +9,11 @@ import { useAwsLabStore, TARGET_BUCKET_REGION } from "@/lib/store/awsLabStore";
 import { useAdLabStore, TARGET_OU } from "@/lib/store/adLabStore";
 import { useGcpLabStore, TARGET_LOCATION } from "@/lib/store/gcpLabStore";
 import { useM365LabStore } from "@/lib/store/m365LabStore";
+import { useVSphereLabStore, ESXI_TARGET_HOST } from "@/lib/store/vsphereLabStore";
+import { useDockerLabStore, TARGET_IMAGE, TARGET_CONTAINER_NAME } from "@/lib/store/dockerLabStore";
+import { useK8sLabStore, TARGET_DEPLOYMENT_NAME } from "@/lib/store/k8sLabStore";
 import { useCiscoLabStore, TARGET_HOSTNAME, TARGET_IP, TARGET_MASK } from "@/lib/store/ciscoLabStore";
+import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import LabHeader from "./LabHeader";
 import LabStepsOverview from "./LabStepsOverview";
 import LabOverviewPanel from "./LabOverviewPanel";
@@ -94,8 +98,11 @@ function InteractiveResourceGroupLab({
     // this idempotent — it only ever fires once per completion transition,
     // so it does not cause a render cascade despite the lint rule's default
     // suspicion of any setState call inside an effect body.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (allDone && completedAt === null) setCompletedAt(Date.now());
+    if (allDone && completedAt === null) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setCompletedAt(Date.now());
+      useUserProgressStore.getState().recordLabCompletion();
+    }
     if (!allDone && completedAt !== null) {
       setCompletedAt(null);
       setScorecardDismissed(false);
@@ -215,6 +222,13 @@ export default function LabClient({
   const resetGcpStore = useGcpLabStore((s) => s.reset);
   const m365Users = useM365LabStore((s) => s.users);
   const resetM365Store = useM365LabStore((s) => s.reset);
+  const vsphereVms = useVSphereLabStore((s) => s.vms);
+  const resetVSphereStore = useVSphereLabStore((s) => s.reset);
+  const dockerImages = useDockerLabStore((s) => s.images);
+  const dockerContainers = useDockerLabStore((s) => s.containers);
+  const resetDockerStore = useDockerLabStore((s) => s.reset);
+  const k8sDeployments = useK8sLabStore((s) => s.deployments);
+  const resetK8sStore = useK8sLabStore((s) => s.reset);
   const ciscoHostname = useCiscoLabStore((s) => s.hostname);
   const ciscoHasEnteredPrivileged = useCiscoLabStore((s) => s.hasEnteredPrivileged);
   const ciscoInterfaces = useCiscoLabStore((s) => s.interfaces);
@@ -260,6 +274,26 @@ export default function LabClient({
       if (taskId === "interface-enabled") return ciscoInterfaces.some((i) => i.ip === TARGET_IP && i.enabled);
       return false;
     },
+    "vsphere-vm": (taskId) => {
+      if (taskId === "vsphere-vm-created") return vsphereVms.length > 0;
+      if (taskId === "vsphere-vm-host") return vsphereVms.some((v) => v.host === ESXI_TARGET_HOST);
+      if (taskId === "vsphere-vm-resources") return vsphereVms.length > 0;
+      return false;
+    },
+    "docker-container": (taskId) => {
+      if (taskId === "image-pulled") return dockerImages.some((i) => i.repository === TARGET_IMAGE);
+      if (taskId === "container-created") return dockerContainers.some((c) => c.name === TARGET_CONTAINER_NAME);
+      if (taskId === "container-running")
+        return dockerContainers.some((c) => c.name === TARGET_CONTAINER_NAME && c.status === "running");
+      return false;
+    },
+    "k8s-deployment": (taskId) => {
+      const dep = k8sDeployments.find((d) => d.name === TARGET_DEPLOYMENT_NAME);
+      if (taskId === "deployment-created") return !!dep;
+      if (taskId === "deployment-visible") return !!dep;
+      if (taskId === "deployment-scaled") return !!dep && dep.replicas === 3;
+      return false;
+    },
   };
   const activeChecker = lab.interactive ? TASK_CHECKERS[lab.interactive] : undefined;
   const effectiveTasks: LabTask[] = activeChecker
@@ -284,6 +318,9 @@ export default function LabClient({
     if (lab.interactive === "gcs-bucket") resetGcpStore();
     if (lab.interactive === "m365-user") resetM365Store();
     if (lab.interactive === "cisco-router") resetCiscoStore();
+    if (lab.interactive === "vsphere-vm") resetVSphereStore();
+    if (lab.interactive === "docker-container") resetDockerStore();
+    if (lab.interactive === "k8s-deployment") resetK8sStore();
   }
 
   if (ended) {

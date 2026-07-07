@@ -34,7 +34,7 @@ export type Lab = {
   /** Numbered sub-labs shown in the "Lab-Übersicht" overview grid. */
   steps?: LabStep[];
   /** When set, the lab renders a real, state-driven simulation instead of the static mock. */
-  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket" | "ad-user" | "gcs-bucket" | "m365-user" | "cisco-router";
+  interactive?: "resource-group" | "virtual-machine" | "virtual-network" | "s3-bucket" | "ad-user" | "gcs-bucket" | "m365-user" | "cisco-router" | "vsphere-vm" | "docker-container" | "k8s-deployment";
   /** URL segment for this lab under /certifications/[company]/[certId]/labs/[labSlug]. */
   slug?: string;
 };
@@ -610,6 +610,131 @@ export function generateGcpLab(certId: string, certTitle: string, level: string)
       { label: "Bucket-Namensregeln", url: "https://cloud.google.com/storage/docs/buckets#naming" },
     ],
     interactive: "gcs-bucket",
+  };
+}
+
+export function generateVmwareLab(certId: string, certTitle: string, level: string): Lab {
+  return {
+    id: `${certId}-vsphere-lab`,
+    title: "Lab: Erste virtuelle Maschine in vSphere erstellen",
+    description: `Wende die Konzepte von „${certTitle}“ praktisch an: erstelle und konfiguriere eine virtuelle Maschine auf einem ESXi-Host über den vSphere Client.`,
+    level: (level as Lab["level"]) ?? "Beginner",
+    durationLabel: "25-35 Minuten",
+    totalMinutes: 30 * 60,
+    tags: ["Online-Lab", "Sichere Umgebung", "Reset möglich", "Schritt-für-Schritt-Anleitung"],
+    goal: "Erstelle eine virtuelle Maschine auf einem ESXi-Host mit den richtigen Ressourcen.",
+    goalChecklist: [
+      "Virtuelle Maschine mit gültigem Namen erstellen",
+      "Einen ESXi-Host als Ziel auswählen",
+      "Gastbetriebssystem und Ressourcen (CPU/RAM) festlegen",
+      "Virtuelle Maschine in der Inventarstruktur bestätigen",
+    ],
+    instructions: [
+      "Öffne den vSphere Client und navigiere zu deinem ESXi-Host.",
+      "Klicke auf „Neue virtuelle Maschine“ und vergib einen eindeutigen Namen.",
+      "Wähle das Gastbetriebssystem sowie CPU- und Arbeitsspeicher-Ressourcen.",
+      "Schließe den Assistenten ab und überprüfe dein Ergebnis in der Inventarstruktur.",
+    ],
+    details: [
+      { label: "vCenter-Domäne", value: "certcoach-lab.local" },
+      { label: "Benötigte Rolle", value: "Virtual Machine Administrator" },
+      { label: "Ziel-Host", value: "esxi-lab-01.certcoach.local" },
+      { label: "Ressourcen", value: "1" },
+      { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+    ],
+    resources: [{ id: "r1", label: "Virtuelle Maschine (Demo)", active: true }],
+    tasks: [
+      { id: "vsphere-vm-created", label: "Virtuelle Maschine erstellen", done: false },
+      { id: "vsphere-vm-host", label: "ESXi-Host esxi-lab-01 als Ziel auswählen", done: false },
+      { id: "vsphere-vm-resources", label: "Ressourcen (CPU/RAM) festlegen", done: false },
+    ],
+    docs: [
+      { label: "vSphere-Grundlagen (Broadcom/VMware Docs)", url: "https://techdocs.broadcom.com/us/en/vmware-cis/vsphere.html" },
+      { label: "Virtuelle Maschinen verwalten", url: "https://techdocs.broadcom.com/us/en/vmware-cis/vsphere/vsphere/8-0/vsphere-vm-administration.html" },
+    ],
+    interactive: "vsphere-vm",
+  };
+}
+
+export function generateDockerLab(certId: string, certTitle: string, level: string): Lab {
+  return {
+    id: `${certId}-docker-lab`,
+    title: "Lab: Ersten Container starten",
+    description: `Wende die Konzepte von „${certTitle}“ praktisch an: lade ein Image herunter und starte einen Container über eine echte, isolierte Docker-CLI.`,
+    level: (level as Lab["level"]) ?? "Beginner",
+    durationLabel: "20-30 Minuten",
+    totalMinutes: 25 * 60,
+    tags: ["Online-Lab", "Sichere Umgebung", "Reset möglich", "Schritt-für-Schritt-Anleitung"],
+    goal: `Lade das Image "nginx" herunter und starte einen laufenden Container namens "cc-lab-web" davon.`,
+    goalChecklist: [
+      'Image "nginx" mit docker pull herunterladen',
+      'Container namens "cc-lab-web" von diesem Image starten',
+      "Container mit docker ps als laufend bestätigen",
+    ],
+    instructions: [
+      "Lade das nginx-Image herunter: `docker pull nginx`",
+      "Prüfe die heruntergeladenen Images: `docker images`",
+      'Starte einen Container: `docker run -d --name cc-lab-web -p 8080:80 nginx`',
+      "Kontrolliere laufende Container: `docker ps`",
+    ],
+    details: [
+      { label: "Docker Engine", value: "simuliert" },
+      { label: "Ziel-Image", value: "nginx:latest" },
+      { label: "Ziel-Container", value: "cc-lab-web" },
+      { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+    ],
+    resources: [{ id: "r1", label: "Docker-Container (simuliert)", active: true }],
+    tasks: [
+      { id: "image-pulled", label: 'Image "nginx" herunterladen', done: false },
+      { id: "container-created", label: 'Container "cc-lab-web" starten', done: false },
+      { id: "container-running", label: "Container läuft (docker ps)", done: false },
+    ],
+    docs: [
+      { label: "Docker-Grundlagen (offizielle Docs)", url: "https://docs.docker.com/get-started/" },
+      { label: "docker run Referenz", url: "https://docs.docker.com/engine/reference/run/" },
+    ],
+    interactive: "docker-container",
+  };
+}
+
+export function generateKubernetesLab(certId: string, certTitle: string, level: string): Lab {
+  return {
+    id: `${certId}-k8s-lab`,
+    title: "Lab: Erstes Deployment erstellen",
+    description: `Wende die Konzepte von „${certTitle}“ praktisch an: erstelle ein Deployment und skaliere es über eine echte, isolierte kubectl-CLI.`,
+    level: (level as Lab["level"]) ?? "Beginner",
+    durationLabel: "25-35 Minuten",
+    totalMinutes: 30 * 60,
+    tags: ["Online-Lab", "Sichere Umgebung", "Reset möglich", "Schritt-für-Schritt-Anleitung"],
+    goal: 'Erstelle ein Deployment namens "cc-lab-app" und skaliere es auf 3 Replicas.',
+    goalChecklist: [
+      'Deployment namens "cc-lab-app" mit kubectl create deployment erstellen',
+      "Deployment mit kubectl get deployments bestätigen",
+      "Deployment auf 3 Replicas skalieren",
+    ],
+    instructions: [
+      'Erstelle das Deployment: `kubectl create deployment cc-lab-app --image=nginx`',
+      "Kontrolliere das Deployment: `kubectl get deployments`",
+      "Prüfe die zugehörigen Pods: `kubectl get pods`",
+      'Skaliere auf 3 Replicas: `kubectl scale deployment cc-lab-app --replicas=3`',
+    ],
+    details: [
+      { label: "Kubernetes-Cluster", value: "simuliert" },
+      { label: "Namespace", value: "default" },
+      { label: "Ziel-Deployment", value: "cc-lab-app" },
+      { label: "Kosten", value: "$0.00 (im Lab enthalten)" },
+    ],
+    resources: [{ id: "r1", label: "Deployment (simuliert)", active: true }],
+    tasks: [
+      { id: "deployment-created", label: 'Deployment "cc-lab-app" erstellen', done: false },
+      { id: "deployment-visible", label: "Deployment mit kubectl get deployments bestätigen", done: false },
+      { id: "deployment-scaled", label: "Deployment auf 3 Replicas skalieren", done: false },
+    ],
+    docs: [
+      { label: "Kubernetes-Grundlagen (offizielle Docs)", url: "https://kubernetes.io/docs/concepts/overview/" },
+      { label: "kubectl Referenz", url: "https://kubernetes.io/docs/reference/kubectl/" },
+    ],
+    interactive: "k8s-deployment",
   };
 }
 
