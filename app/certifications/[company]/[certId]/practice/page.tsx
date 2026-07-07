@@ -31,7 +31,7 @@ export default async function PracticePage({
 
   if (!company || !cert) notFound();
 
-  const bank = PRACTICE_BANKS[certId] ?? generatePracticeBank(certId, cert.title);
+  const bank = PRACTICE_BANKS[certId] ?? generatePracticeBank(certId, cert.title, cert, company);
 
   return (
     <DashboardShell requireAuth={false}>
