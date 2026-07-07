@@ -180,7 +180,7 @@ export default function LandingPage() {
                 <ArrowRight size={16} />
               </Link>
               <Link
-                href="/courses"
+                href="/certifications"
                 className="flex items-center gap-2 rounded-lg border border-border-soft px-6 py-3 text-sm font-bold text-text hover:bg-panel-alt"
               >
                 Kurse entdecken
