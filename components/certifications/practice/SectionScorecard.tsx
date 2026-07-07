@@ -59,6 +59,7 @@ export default function SectionScorecard({
   onBackToPath,
   onNextSection,
   onRetry,
+  onRetryQuestion,
 }: {
   sectionIndex: number;
   questions: PracticeQuestion[];
@@ -72,6 +73,7 @@ export default function SectionScorecard({
   onBackToPath: () => void;
   onNextSection: () => void;
   onRetry: () => void;
+  onRetryQuestion: (questionId: string) => void;
 }) {
   const [filter, setFilter] = useState<"alle" | "falsch" | "uebersprungen" | "markiert">("alle");
   const [hideWrong, setHideWrong] = useState(false);
@@ -104,6 +106,44 @@ export default function SectionScorecard({
     return [h, m, s].map((n) => String(n).padStart(2, "0")).join(":");
   }
 
+  const summaryLines = [
+    "CertCoach – Ergebnis",
+    `Abschnitt ${sectionIndex + 1}`,
+    `Gesamtpunktzahl: ${score}%`,
+    `Richtig beantwortet: ${correct}`,
+    `Falsch beantwortet: ${wrong}`,
+    `Übersprungen: ${skippedCount}`,
+    `Gesamtzeit: ${formatElapsed(elapsedSeconds)}`,
+  ];
+  const summaryText = summaryLines.join("\n");
+
+  async function handleShare() {
+    if (typeof navigator !== "undefined" && "share" in navigator) {
+      try {
+        await navigator.share({ title: "Mein CertCoach Ergebnis", text: summaryText });
+        return;
+      } catch {
+        // User cancelled the native share sheet — fall through to clipboard.
+      }
+    }
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      await navigator.clipboard.writeText(summaryText);
+      alert("Ergebnis wurde in die Zwischenablage kopiert.");
+    }
+  }
+
+  function handleDownload() {
+    const blob = new Blob([summaryText], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `certcoach-ergebnis-abschnitt-${sectionIndex + 1}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
   return (
     <div>
       <div className="flex flex-col gap-4 rounded-xl border border-border-soft bg-panel p-5 sm:flex-row sm:items-center sm:justify-between">
@@ -119,11 +159,17 @@ export default function SectionScorecard({
           </div>
         </div>
         <div className="flex flex-none gap-2">
-          <button className="flex items-center gap-1.5 rounded-lg border border-border-soft px-4 py-2 text-xs font-semibold text-text hover:border-primary">
+          <button
+            onClick={handleShare}
+            className="flex items-center gap-1.5 rounded-lg border border-border-soft px-4 py-2 text-xs font-semibold text-text hover:border-primary"
+          >
             <Share2 size={14} />
             Ergebnis teilen
           </button>
-          <button className="flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white hover:bg-primary-dark">
+          <button
+            onClick={handleDownload}
+            className="flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white hover:bg-primary-dark"
+          >
             <Download size={14} />
             Ergebnis herunterladen
           </button>
@@ -279,7 +325,10 @@ export default function SectionScorecard({
                       </div>
                     )}
                     <div className="flex items-center gap-3">
-                      <button className="flex items-center gap-1.5 rounded-lg border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary-light">
+                      <button
+                        onClick={() => onRetryQuestion(q.id)}
+                        className="flex items-center gap-1.5 rounded-lg border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary-light"
+                      >
                         <RotateCcw size={12} />
                         Wiederholen
                       </button>

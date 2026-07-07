@@ -186,6 +186,27 @@ export default function PracticeClient({
               setScorecardSection(null);
               goTo(start);
             }}
+            onRetryQuestion={(questionId) => {
+              const qIndex = activeQuestions.findIndex((q) => q.id === questionId);
+              if (qIndex === -1) return;
+              setChecked((s) => {
+                const next = new Set(s);
+                next.delete(questionId);
+                return next;
+              });
+              setSkipped((s) => {
+                const next = new Set(s);
+                next.delete(questionId);
+                return next;
+              });
+              setAnswers((a) => {
+                const next = { ...a };
+                delete next[questionId];
+                return next;
+              });
+              setScorecardSection(null);
+              goTo(qIndex);
+            }}
           />
         </div>
         <PracticeNotesPanel isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
