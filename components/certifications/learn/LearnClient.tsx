@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   Search,
@@ -23,6 +23,8 @@ import type { Company } from "@/lib/companiesData";
 import type { CertJourney } from "@/lib/journeyData";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
+import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
+import { useUser } from "@/components/UserContext";
 
 const TABS = ["Lernpfad", "Übersicht", "Ressourcen", "Diskussionen"] as const;
 
@@ -192,34 +194,40 @@ export default function LearnClient({
   const [draft, setDraft] = useState("");
   const [addingNote, setAddingNote] = useState(false);
   const [tab, setTab] = useState<(typeof TABS)[number]>("Lernpfad");
-  const [localModules, setLocalModules] = useState<Module[]>(modules);
   const certId = journey.code.toLowerCase();
   const companySlug = company.slug;
+  const { user } = useUser();
+  const completionSet = useLessonCompletionStore((s) => s.completions[certId]);
+  const loadForCert = useLessonCompletionStore((s) => s.loadForCert);
+
+  useEffect(() => {
+    if (user) loadForCert(user.id, certId);
+  }, [user, certId, loadForCert]);
+
+  // Merge the static module/lesson structure with each lesson's *real*,
+  // persisted completion state. Falls back to the static demo flags only
+  // while logged out (nothing to persist) or before the real data has
+  // loaded, so the page never looks empty during the brief loading window.
+  const localModules: Module[] = useMemo(() => {
+    if (!user || !completionSet) return modules;
+    return modules.map((m) => ({
+      ...m,
+      lessons: m.lessons.map((l) => ({ ...l, completed: completionSet.has(l.id) })),
+    }));
+  }, [modules, user, completionSet]);
+
   const stats = moduleStats(localModules);
   const filtered = localModules.filter((m) => m.title.toLowerCase().includes(query.toLowerCase()));
   const firstOpenIndex = localModules.findIndex((m) => !m.locked && modulePct(m) < 100);
   const totalLessons = localModules.flatMap((m) => m.lessons).length;
 
-  function toggleLesson(moduleId: string, lessonId: string) {
-    let becameComplete = false;
-
-    setLocalModules((prev) =>
-      prev.map((m) => {
-        if (m.id !== moduleId) return m;
-        return {
-          ...m,
-          lessons: m.lessons.map((l) => {
-            if (l.id !== lessonId) return l;
-            if (!l.completed) becameComplete = true;
-            return { ...l, completed: !l.completed };
-          }),
-        };
-      })
-    );
+  async function toggleLesson(_moduleId: string, lessonId: string) {
+    if (!user) return;
+    const nowCompleted = await useLessonCompletionStore.getState().toggle(user.id, certId, lessonId);
 
     // Only award progress/XP on the incomplete -> complete transition, not
     // when unchecking, so undoing a mis-click can't be used to farm XP.
-    if (becameComplete) {
+    if (nowCompleted) {
       const increment = totalLessons > 0 ? 100 / totalLessons : 0;
       useCertProgressStore.getState().recordModuleCompletion(certId, increment);
       useUserProgressStore.getState().recordLessonCompletion();

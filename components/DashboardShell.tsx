@@ -10,6 +10,7 @@ import { supabase } from "@/lib/supabase/client";
 import { UserContext } from "@/components/UserContext";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
+import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
 import { getFullName } from "@/lib/supabase/useUser";
 
 export default function DashboardShell({
@@ -50,6 +51,7 @@ export default function DashboardShell({
         setUser(null);
         useUserProgressStore.getState().reset();
         useCertProgressStore.getState().reset();
+        useLessonCompletionStore.getState().reset();
         if (requireAuth) {
           router.replace("/login");
         }
