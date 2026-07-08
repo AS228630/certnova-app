@@ -6962,4 +6962,105 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     explanation: "Bei der mehrstufigen Verteidigung handelt es sich um eine Strategie, die eine Reihe von Mechanismen nutzt, um das Voranschreiten eines Angriffs zu verlangsamen, der auf unbefugten Zugriff auf Informationen abzielt. Jede Ebene bietet Schutz, sodass bei einem Durchbruch einer Ebene bereits eine weitere Ebene vorhanden ist, um weitere Angriffe zu verhindern. Microsoft verfolgt einen mehrschichtigen Sicherheitsansatz, sowohl in seinen physischen Rechenzentren als auch in allen Azure-Diensten. Ziel der mehrstufigen Verteidigung ist es, Informationen zu schützen und deren Diebstahl durch unbefugte Personen zu verhindern. Die allgemeinen Prinzipien zur Definition einer Sicherheitslage sind Vertraulichkeit, Integrität und Verfügbarkeit (zusammengefasst als CIA). • Vertraulichkeit: Das Prinzip der geringsten Privilegien beschränkt den Zugriff auf Informationen auf Personen, denen dieser ausdrücklich gewährt wurde. Zu diesen Informationen gehört der Schutz von Benutzerkennwörtern, Remote-Zugriffszertifikaten und E-Mail-Inhalten. • Integrität: Ziel ist es, unbefugte Änderungen an gespeicherten oder übertragenen Informationen zu verhindern. Ein gängiger Ansatz bei der Datenübertragung besteht darin, dass der Absender mithilfe eines Einweg-Hashing-Algorithmus einen eindeutigen Fingerabdruck der Daten erstellt. Dieser Hash wird zusammen mit den Daten an den Empfänger gesendet. Der Empfänger berechnet den Hash der Daten neu und vergleicht ihn mit dem Original, um sicherzustellen, dass die Daten während der Übertragung nicht verloren gegangen oder verändert wurden. • Verfügbarkeit: Stellen Sie sicher, dass die Dienste für autorisierte Benutzer verfügbar sind. Denial-of-Service-Angriffe sind eine häufige Ursache für den Verlust der Verfügbarkeit für Benutzer. Naturkatastrophen erfordern außerdem die Systementwicklung, um einzelne Ausfallpunkte zu vermeiden und mehrere Instanzen einer Anwendung an geografisch verteilten Standorten bereitzustellen. Jede Schicht kann eines oder mehrere der CIA-Anliegen implementieren:",
   },
+
+  {
+    type: "matching",
+    id: "real-az900-47",
+    topicId: "azure-verwaltung",
+    prompt: "Mehrere Supporttechniker planen, Azure mithilfe der in der folgenden Tabelle aufgeführten Computer zu verwalten: Sie müssen ermitteln, welche Azure-Verwaltungstools von jedem Computer aus verwendet werden können. Was sollten Sie für jeden Computer ermitteln? (Wählen Sie zur Beantwortung die",
+    items: [
+      { id: "item0", label: "Die Azure CLI, das Azure-Portal und Azure PowerShell" },
+      { id: "item1", label: "Die Azure CLI, das Azure-Portal und Azure PowerShell" },
+      { id: "item2", label: "Die Azure CLI, das Azure-Portal und Azure PowerShell" },
+    ],
+    descriptions: [
+      { id: "d0", text: "Computer1", correctItemId: "item0" },
+      { id: "d1", text: "Computer2", correctItemId: "item1" },
+      { id: "d2", text: "Computer3", correctItemId: "item2" },
+    ],
+    explanation: "Das Azure-Portal ist eine öffentliche Website, auf die Sie mit jedem Webbrowser zugreifen können. Sobald Sie sich mit Ihrem Azure-Konto angemeldet haben, können Sie alle verfügbaren Azure-Dienste erstellen, verwalten und überwachen. Azure PowerShell ist ein Modul, das Sie zu Windows PowerShell oder PowerShell Core hinzufügen – einer plattformübergreifenden Version von PowerShell, die unter Windows, Linux oder macOS läuft – und Ihnen ermöglicht, eine Verbindung zu Ihrem Azure-Abonnement herzustellen und Ressourcen zu verwalten. Azure CLI ist ein plattformübergreifendes Befehlszeilenprogramm, das eine Verbindung zu Azure herstellt und administrative Befehle für Azure-Ressourcen ausführt. Plattformübergreifend bedeutet, dass es unter Windows, Linux oder macOS ausgeführt werden kann.",
+  },
+  {
+    type: "matching",
+    id: "real-az900-103",
+    topicId: "cloud-konzepte",
+    prompt: "Welche Cloud-Bereitstellungslösung wird für Azure-VMs und Azure SQL-Datenbanken verwendet? (Wählen Sie zur Beantwortung die entsprechenden Optionen im Antwortbereich aus. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.) Virtuelle Azure-Computer: Infrastructure as a Service (IaaS)",
+    items: [
+      { id: "item0", label: "Infrastructure as a Service (IaaS)" },
+      { id: "item1", label: "Platform as a Service (PaaS)" },
+    ],
+    descriptions: [
+      { id: "d0", text: "Virtuelle Azure-Computer", correctItemId: "item0" },
+      { id: "d1", text: "Azure SQL-Datenbanken", correctItemId: "item1" },
+    ],
+    explanation: "Virtuelle Azure-Computer gelten im Allgemeinen als Infrastructure-as-a-Service (IaaS), da Sie weiterhin für das Patchen und Verwalten des Betriebssystems der virtuellen Maschine verantwortlich sind. Azure SQL-Datenbank ist eine vollständig verwaltete Platform-as-a-Service (PaaS)-Datenbank-Engine, die die meisten Datenbankverwaltungsfunktionen wie Upgrades, Patches, Sicherungen und Überwachung ohne Benutzereingriff übernimmt. Azure SQL-Datenbank wird manchmal auch als Database as a Service (DaaS) bezeichnet. Hinweis: IaaS und PaaS sind keine präzisen Fachbegriffe. Sie können PaaS-Dienste nutzen, die einen umfangreichen Konfigurations- und Wartungsaufwand erfordern, und IaaS-Dienste, die vollständig verwaltet werden.",
+  },
+  {
+    type: "matching",
+    id: "real-az900-327",
+    topicId: "cloud-konzepte",
+    prompt: "Ordnen Sie die Cloud-Service-Modelle den passenden Angeboten zu. (Ziehen Sie dazu das passende Modell aus der linken Spalte zum entsprechenden Angebot rechts. Jedes Modell kann einmal, mehrmals oder gar nicht verwendet werden. HINWEIS: Jede richtige Zuordnung zählt einen Punkt.)",
+    items: [
+      { id: "item0", label: "Plattform als Service (PaaS)" },
+      { id: "item1", label: "Infrastruktur als Service (IaaS)" },
+      { id: "item2", label: "Software als Service (SaaS)" },
+    ],
+    descriptions: [
+      { id: "d0", text: "Azure App Service", correctItemId: "item0" },
+      { id: "d1", text: "Azure Virtual Machines", correctItemId: "item1" },
+      { id: "d2", text: "Microsoft Dynamics 365", correctItemId: "item2" },
+    ],
+    explanation: "Software as a Service (SaaS) ist ein Softwarelizenzierungs- und Bereitstellungsmodell, bei dem Software an einen Benutzer lizenziert wird. Der Zugriff auf die Software bzw. Anwendung erfolgt über das Internet und einen Webbrowser. Sie müssen die Software nicht lokal installieren und warten. Sie können sofort mit der Konfiguration und Nutzung beginnen. Infrastructure as a Service (IaaS) ist ein Cloud-Computing-Dienst, der wichtige Rechen-, Speicher- und Netzwerkressourcen bedarfsgerecht und nutzungsbasiert bereitstellt. Mit IaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung physischer Server und Rechenzentrumsinfrastruktur. Jede Ressource wird als separate Servicekomponente angeboten, und Sie zahlen nur für die jeweilige Ressource, solange Sie sie benötigen. Ein Cloud-Computing-Dienstanbieter wie Azure verwaltet die Infrastruktur, während Sie Ihre eigene Software – einschließlich Betriebssystemen, Middleware und Anwendungen – kaufen, installieren, konfigurieren und verwalten. Wie IaaS umfasst PaaS Infrastruktur – Server, Speicher und Netzwerk –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. Azure Backup ist ein Beispiel für eine PaaS-Lösung. Referenzen: Was ist PaaS? Was ist IaaS? Was ist SaaS?",
+  },
+  {
+    type: "matching",
+    id: "real-az900-434",
+    topicId: "cloud-konzepte",
+    prompt: "Ordnen Sie die Cloud-Service-Modelle den passenden Lösungen zu. (Ziehen Sie dazu das passende Cloud-Service-Modell aus der linken Spalte in die rechte Spalte. Jedes Cloud-Service-Modell kann einmal, mehrmals oder gar nicht verwendet werden. HINWEIS: Jede richtige Zuordnung zählt einen Punkt.)",
+    items: [
+      { id: "item0", label: "Infrastructure as a Service (IaaS)" },
+      { id: "item1", label: "Software as a Service (SaaS)" },
+      { id: "item2", label: "Platform as a Service (PaaS)" },
+    ],
+    descriptions: [
+      { id: "d0", text: "Ein Cloud-basierter Dateiserver", correctItemId: "item0" },
+      { id: "d1", text: "Ein Cloud-basiertes Buchhaltungssystem", correctItemId: "item1" },
+      { id: "d2", text: "Ein Cloud-basierter Dienst für benutzerdefinierte Apps", correctItemId: "item2" },
+    ],
+    explanation: "Platform as a Service (PaaS) ist eine umfassende Entwicklungs- und Bereitstellungsumgebung in der Cloud mit Ressourcen, die Ihnen die Bereitstellung von Anwendungen aller Art ermöglichen – von einfachen Cloud-basierten Apps bis hin zu komplexen, Cloud-fähigen Unternehmensanwendungen. Sie erwerben die benötigten Ressourcen von einem Cloud-Service-Anbieter auf Pay-as-you-go-Basis und greifen über eine sichere Internetverbindung darauf zu. Wie IaaS umfasst PaaS die Infrastruktur – Server, Speicher und Netzwerke –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. PaaS unterstützt den gesamten Lebenszyklus von Webanwendungen: Erstellen, Testen, Bereitstellen, Verwalten und Aktualisieren. Mit PaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung von Softwarelizenzen, der zugrunde liegenden Anwendungsinfrastruktur und Middleware, Container-Orchestratoren wie Kubernetes oder der Entwicklungstools und anderer Ressourcen. Sie verwalten die von Ihnen entwickelten Anwendungen und Dienste, und der Cloud-Service-Anbieter kümmert sich in der Regel um alles Weitere. Durch die Bereitstellung von Infrastructure as a Service bietet PaaS dieselben Vorteile wie IaaS. Die zusätzlichen Funktionen – Middleware, Entwicklungstools und andere Business-Tools – bieten Ihnen jedoch weitere Vorteile. Software as a Service (SaaS) ist ein Softwarelizenzierungs- und Bereitstellungsmodell, bei dem Software an einen Benutzer lizenziert wird. Der Zugriff auf die Software bzw. Anwendung erfolgt über das Internet und einen Webbrowser. Sie müssen die Software nicht lokal installieren und warten. Sie können sofort mit der Konfiguration und Nutzung beginnen. Infrastructure as a Service (IaaS) ist ein Cloud-Computing-Dienst, der wichtige Rechen-, Speicher- und Netzwerkressourcen bedarfsgerecht und nutzungsbasiert bereitstellt. Mit IaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung physischer Server und Rechenzentrumsinfrastruktur. Jede Ressource wird als separate Servicekomponente angeboten, und Sie zahlen nur für die jeweilige Ressource, solange Sie sie benötigen. Ein Cloud-Computing-Dienstanbieter wie Azure verwaltet die Infrastruktur, während Sie Ihre eigene Software – einschließlich Betriebssysteme, Middleware und Anwendungen – kaufen, installieren, konfigurieren und verwalten. Microsoft SQL Server 2019, installiert auf einer virtuellen Azure-Maschine, ist ein Beispiel für Infrastructure as a Service (IaaS). Azure Cosmos DB ist ein Beispiel für einen Platform as a Service (PaaS)-Cloud-Datenbankanbieter. Referenzen: Was ist PaaS? Was ist IaaS? Was ist SaaS?",
+  },
+  {
+    type: "matching",
+    id: "real-az900-556",
+    topicId: "cloud-konzepte",
+    prompt: "Ordnen Sie den Cloud-Dienst der entsprechenden Beschreibung zu. (Ziehen Sie dazu den entsprechenden Cloud-Dienst aus der linken Spalte in die rechte Spalte. Jeder Dienst kann einmal, mehrmals oder gar nicht verwendet werden. HINWEIS: Jede richtige Zuordnung zählt einen Punkt.)",
+    items: [
+      { id: "item0", label: "Infrastructure as a Service (IaaS)" },
+      { id: "item1", label: "Platform as a Service (PaaS)" },
+      { id: "item2", label: "Infrastructure as a Service (IaaS)" },
+    ],
+    descriptions: [
+      { id: "d0", text: "Bietet die größtmögliche Kontrolle über eine Cloud-Umgebung", correctItemId: "item0" },
+      { id: "d1", text: "Bietet die größtmögliche Kontrolle über ein Datenbankdesign, ohne das Betriebssystem warten zu müssen", correctItemId: "item1" },
+      { id: "d2", text: "Wird zum Hosten virtueller Azure-Computer verwendet", correctItemId: "item2" },
+    ],
+    explanation: "Software as a Service (SaaS) ist ein Softwarelizenzierungs- und Bereitstellungsmodell, bei dem Software an einen Benutzer lizenziert wird. Der Zugriff auf die Software bzw. Anwendung erfolgt über das Internet und einen Webbrowser. Sie müssen die Software nicht lokal installieren und warten. Sie können sofort mit der Konfiguration und Nutzung beginnen. Infrastructure as a Service (IaaS) ist ein Cloud-Computing-Dienst, der wichtige Rechen-, Speicher- und Netzwerkressourcen bedarfsgerecht und nutzungsbasiert bereitstellt. Mit IaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung physischer Server und Rechenzentrumsinfrastruktur. Jede Ressource wird als separate Servicekomponente angeboten, und Sie zahlen nur für die jeweilige Ressource, solange Sie sie benötigen. Ein Cloud-Computing-Dienstanbieter wie Azure verwaltet die Infrastruktur, während Sie Ihre eigene Software – einschließlich Betriebssystemen, Middleware und Anwendungen – kaufen, installieren, konfigurieren und verwalten. Wie IaaS umfasst PaaS Infrastruktur – Server, Speicher und Netzwerk –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. Azure Backup ist ein Beispiel für eine PaaS-Lösung. Referenzen: Was ist PaaS? Was ist IaaS? Was ist SaaS?",
+  },
+  {
+    type: "matching",
+    id: "real-az900-558",
+    topicId: "azure-architektur",
+    prompt: "Ordnen Sie die Azure-Rechendienste den entsprechenden Beschreibungen zu. (Ziehen Sie dazu den entsprechenden Rechendienst aus der linken Spalte in die rechte Spalte. Jeder Dienst kann einmal, mehrmals oder gar nicht verwendet werden. HINWEIS: Jede richtige Zuordnung zählt einen Punkt.)",
+    items: [
+      { id: "item0", label: "ExpressRoute" },
+      { id: "item1", label: "Virtual Private Network (VPN)" },
+      { id: "item2", label: "Azure Virtual Desktop" },
+    ],
+    descriptions: [
+      { id: "d0", text: "Eine dedizierte private Verbindung, die nicht über das Internet läuft", correctItemId: "item0" },
+      { id: "d1", text: "Verwendet Gateways, um den Datenverkehr zwischen lokalen Standorten und Azure zu verschlüsseln", correctItemId: "item1" },
+      { id: "d2", text: "Bietet eine vollständige Desktop- und App-Virtualisierungsumgebung, die in Azure ausgeführt wird", correctItemId: "item2" },
+    ],
+    explanation: "Container Instances bieten schnelle, isolierte Rechenleistung, um Spitzenlasten zu bewältigen, ohne dass Server verwaltet werden müssen. Beispielsweise verwendet AKS Virtual Kubelet, um Pods in Container Instances bereitzustellen, die in Sekundenschnelle starten. AKS läuft mit gerade genug Kapazität für Ihre durchschnittliche Arbeitslast. Wenn die Kapazität Ihres AKS-Clusters erschöpft ist, können Sie zusätzliche Pods in Container Instances skalieren, ohne zusätzliche Server verwalten zu müssen. Azure Virtual Desktop ist ein Desktop- und App-Virtualisierungsdienst, der auf Azure ausgeführt wird. Hier sind einige der wichtigsten Highlights: • Bieten Sie ein umfassendes Windows-Erlebnis mit Windows 11, Windows 10 oder Windows Server. Verwenden Sie Einzelsitzungen, um Geräte einem einzelnen Benutzer zuzuweisen, oder Multisitzungen für Skalierbarkeit. • Bieten Sie vollständige Desktops an oder verwenden Sie RemoteApp, um einzelne Apps bereitzustellen. • Präsentieren Sie Microsoft 365 Apps für Unternehmen und optimieren Sie sie für die Ausführung in virtuellen Mehrbenutzerszenarien. • Installieren Sie Ihre Branchen- oder benutzerdefinierten Apps, die Sie von überall aus ausführen können, einschließlich Apps in den Formaten Win32, MSIX und Appx. • Stellen Sie Software-as-a-Service (SaaS) für die externe Nutzung bereit. • Ersetzen Sie vorhandene Remote Desktop Services (RDS)-Bereitstellungen. • Verwalten Sie Desktops und Apps von verschiedenen Windows- und Windows Server-Betriebssystemen mit einer einheitlichen Verwaltungserfahrung. • Hosten Sie Desktops und Apps vor Ort in einer Hybridkonfiguration mit Azure Local. Mit ExpressRoute können Sie Ihre lokalen Netzwerke mithilfe eines Konnektivitätsanbieters über eine private Verbindung in die Microsoft-Cloud erweitern. Mit ExpressRoute können Sie Verbindungen zu Microsoft-Clouddiensten wie Microsoft Azure und Microsoft 365 herstellen. Die Konnektivität kann über ein Any-to-Any-Netzwerk (IP VPN), ein Point-to-Point-Ethernet-Netzwerk oder eine virtuelle Querverbindung über einen Konnektivitätsanbieter in einer Colocation-Einrichtung erfolgen. ExpressRoute-Verbindungen bieten mehr Zuverlässigkeit, höhere Geschwindigkeiten, konsistente Latenzen und höhere Sicherheit als typische Verbindungen über das Internet, da sie nicht über das öffentliche Internet laufen. Azure Virtual Private Network (VPN) ermöglicht sichere Verbindungen zwischen Ihren lokalen Netzwerken und virtuellen Azure-Netzwerken oder zwischen virtuellen Azure-Netzwerken untereinander. Azure VPN verwendet Azure VPN Gateway. Azure VPN Gateway ist ein Dienst, mit dem verschlüsselter Datenverkehr zwischen einem virtuellen Azure-Netzwerk und lokalen Standorten über das öffentliche Internet gesendet werden kann. Sie können VPN Gateway auch verwenden, um verschlüsselten Datenverkehr zwischen virtuellen Azure- Netzwerken über das Microsoft-Netzwerk zu senden. VPN Gateway verwendet einen bestimmten Typ von Azure Virtual Network Gateway, das sogenannte VPN-Gateway. Es können mehrere Verbindungen zum selben VPN-Gateway hergestellt werden. Wenn Sie mehrere Verbindungen herstellen, teilen sich alle VPN-Tunnel die verfügbare Gateway- Bandbreite. Referenzen: Was ist ein Container? Was ist Azure Virtual Desktop? Was ist Azure ExpressRoute? Was ist Azure VPN Gateway?",
+  },
 ];
