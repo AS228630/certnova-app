@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Search, ChevronDown, Menu, X } from "lucide-react";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const navLinksBefore = [
   { label: "Kurse", href: "/courses" },
@@ -51,6 +52,7 @@ export default function LandingHeader() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+          <LanguageSwitcher variant="dark" />
           <button
             aria-label="Suchen"
             className="hidden h-9 w-9 items-center justify-center rounded-lg border border-border-soft text-text-muted hover:text-text sm:flex"

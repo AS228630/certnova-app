@@ -18,6 +18,12 @@ import {
   Route,
   ArrowRight,
   Rocket,
+  GraduationCap,
+  Bot,
+  MessagesSquare,
+  LifeBuoy,
+  BarChart3,
+  Languages,
 } from "lucide-react";
 import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
@@ -360,6 +366,83 @@ export default function PricingPage() {
                 {openFaq === i && <p className="px-4 pb-3 text-xs text-text-muted">{f.a}</p>}
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Student Discount */}
+        <section className="mt-12 flex flex-col items-start gap-4 rounded-2xl border border-border-soft bg-panel p-5 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-start gap-3">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-light text-primary">
+              <GraduationCap size={20} />
+            </div>
+            <div>
+              <p className="flex flex-wrap items-center gap-2 text-sm font-bold text-text">
+                Student Discount
+                <span className="rounded-full bg-primary-light px-2 py-0.5 text-[10px] font-bold text-primary">Bis zu 50% Rabatt</span>
+              </p>
+              <p className="mt-0.5 text-xs text-text-muted">
+                Du bist Student? Profitiere von einem exklusiven Rabatt auf alle kostenpflichtigen Pläne.
+              </p>
+              <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-text-muted">
+                <span className="flex items-center gap-1">
+                  <Check size={12} className="text-success" />
+                  Gültiger Studentenausweis erforderlich
+                </span>
+                <span className="flex items-center gap-1">
+                  <Check size={12} className="text-success" />
+                  Alle Pläne mit Studentenrabatt
+                </span>
+              </div>
+            </div>
+          </div>
+          <Link
+            href="/register?discount=student"
+            className="shrink-0 rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-white hover:bg-primary-dark"
+          >
+            Rabatt sichern
+          </Link>
+        </section>
+
+        {/* CertCoach AI */}
+        <section className="mt-8 rounded-2xl border border-border-soft bg-panel p-6">
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-light text-primary">
+                <Bot size={22} />
+              </div>
+              <div>
+                <p className="flex items-center gap-2 text-sm font-bold text-text">
+                  CertCoach AI
+                  <span className="rounded-full bg-success-light px-2 py-0.5 text-[10px] font-bold text-success">Immer für dich da</span>
+                </p>
+                <p className="mt-0.5 text-xs text-text-muted">
+                  Dein intelligenter KI-Coach unterstützt dich beim Lernen, Üben und Verstehen — rund um die Uhr.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="mt-5 grid grid-cols-2 gap-4 border-t border-border-soft pt-5 sm:grid-cols-4">
+            {[
+              { icon: MessagesSquare, label: "Antworten auf Fragen" },
+              { icon: BookOpen, label: "Erklärungen & Beispiele" },
+              { icon: LifeBuoy, label: "Hilfe bei Übungen" },
+              { icon: BarChart3, label: "Analyse von Fortschritt" },
+              { icon: Sparkles, label: "Persönliche Lernempfehlungen" },
+              { icon: Languages, label: "Mehrsprachige Unterstützung" },
+            ].map((f) => (
+              <div key={f.label} className="flex flex-col items-center gap-2 text-center">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-panel-alt text-primary">
+                  <f.icon size={16} />
+                </div>
+                <p className="text-[11px] text-text-muted">{f.label}</p>
+              </div>
+            ))}
+            <div className="flex flex-col items-center gap-2 text-center">
+              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-panel-alt text-success">
+                <ShieldCheck size={16} />
+              </div>
+              <p className="text-[11px] text-text-muted">Privacy First — deine Daten sind geschützt</p>
+            </div>
           </div>
         </section>
 

@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { Search, Globe, Bell, Moon, Sun, ChevronDown, Menu } from "lucide-react";
+import { Search, Bell, Moon, Sun, ChevronDown, Menu } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
 import { useUser } from "@/components/UserContext";
 import { getFullName } from "@/lib/supabase/useUser";
 import { useProfileStore } from "@/lib/store/profileStore";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   const { theme, toggleTheme } = useTheme();
@@ -46,11 +47,9 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
         </div>
 
         <div className="flex shrink-0 items-center gap-3 sm:gap-4">
-          <button className="hidden items-center gap-1 text-sm font-medium text-text-muted hover:text-text md:flex">
-            <Globe size={16} />
-            DE
-            <ChevronDown size={14} />
-          </button>
+          <div className="hidden md:block">
+            <LanguageSwitcher variant="dark" />
+          </div>
 
           <button
             onClick={toggleTheme}
