@@ -1,6 +1,7 @@
 "use client";
 
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
+import { useLocale } from "@/components/LocaleProvider";
 
 function formatMinutes(total: number) {
   const h = Math.floor(total / 60);
@@ -11,6 +12,7 @@ function formatMinutes(total: number) {
 
 export default function ProgressPanel() {
   const progress = useUserProgressStore((s) => s.progress);
+  const { t } = useLocale();
 
   const studyMinutes = progress?.study_minutes_total ?? 0;
   const answered = progress?.questions_answered ?? 0;
@@ -23,16 +25,16 @@ export default function ProgressPanel() {
   const correctDash = (accuracy / 100) * circumference;
 
   const monthStats = [
-    { label: "Lernzeit gesamt", value: formatMinutes(studyMinutes) },
-    { label: "Fragen beantwortet", value: String(answered) },
-    { label: "Labs abgeschlossen", value: String(labsCompleted) },
+    { label: t("dashboard.studyTimeTotal"), value: formatMinutes(studyMinutes) },
+    { label: t("dashboard.questionsAnswered"), value: String(answered) },
+    { label: t("dashboard.labsCompleted"), value: String(labsCompleted) },
   ];
 
   return (
     <div className="rounded-2xl border border-border-soft bg-panel p-5">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="font-bold text-text">Fortschrittsübersicht</h2>
-        <span className="text-xs font-medium text-text-faint">Insgesamt</span>
+        <h2 className="font-bold text-text">{t("dashboard.progressOverview")}</h2>
+        <span className="text-xs font-medium text-text-faint">{t("dashboard.total")}</span>
       </div>
 
       <div className="mb-6 grid grid-cols-3 gap-3">
@@ -45,11 +47,9 @@ export default function ProgressPanel() {
       </div>
 
       <div className="border-t border-border-soft pt-5">
-        <p className="mb-3 text-xs font-semibold text-text-muted">Trefferquote</p>
+        <p className="mb-3 text-xs font-semibold text-text-muted">{t("dashboard.accuracy")}</p>
         {answered === 0 ? (
-          <p className="text-sm text-text-faint">
-            Beantworte deine ersten Übungsfragen, um hier deine Trefferquote zu sehen.
-          </p>
+          <p className="text-sm text-text-faint">{t("dashboard.accuracyEmpty")}</p>
         ) : (
           <div className="flex items-center gap-5">
             <div className="relative flex h-24 w-24 shrink-0 items-center justify-center">
@@ -68,16 +68,16 @@ export default function ProgressPanel() {
               </svg>
               <div className="absolute flex flex-col items-center">
                 <span className="text-xl font-extrabold text-text">{accuracy}%</span>
-                <span className="text-[10px] text-text-faint">richtig</span>
+                <span className="text-[10px] text-text-faint">{t("dashboard.correct")}</span>
               </div>
             </div>
             <div className="flex-1 space-y-1.5 text-xs">
               <p className="flex items-center justify-between">
-                <span className="text-text-muted">Richtig beantwortet</span>
+                <span className="text-text-muted">{t("dashboard.correctlyAnswered")}</span>
                 <span className="font-semibold text-text">{correct}</span>
               </p>
               <p className="flex items-center justify-between">
-                <span className="text-text-muted">Insgesamt beantwortet</span>
+                <span className="text-text-muted">{t("dashboard.totalAnswered")}</span>
                 <span className="font-semibold text-text">{answered}</span>
               </p>
             </div>

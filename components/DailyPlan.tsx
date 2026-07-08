@@ -2,9 +2,11 @@
 
 import { Flame, Target } from "lucide-react";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
+import { useLocale } from "@/components/LocaleProvider";
 
 export default function DailyPlan() {
   const progress = useUserProgressStore((s) => s.progress);
+  const { t } = useLocale();
 
   const minutesDone = progress?.study_minutes_today ?? 0;
   const minutesGoal = progress?.daily_goal_minutes ?? 20;
@@ -19,7 +21,7 @@ export default function DailyPlan() {
 
   return (
     <div className="rounded-2xl border border-border-soft bg-panel p-5">
-      <h2 className="mb-4 font-bold text-text">Mein Tagesziel</h2>
+      <h2 className="mb-4 font-bold text-text">{t("dashboard.dailyGoal")}</h2>
 
       <div className="flex items-center gap-5">
         <div className="relative flex h-24 w-24 shrink-0 items-center justify-center">
@@ -39,27 +41,27 @@ export default function DailyPlan() {
           </svg>
           <div className="absolute flex flex-col items-center">
             <span className="text-lg font-extrabold text-text">{minutesDone}</span>
-            <span className="text-[10px] text-text-faint">/ {minutesGoal} Min.</span>
+            <span className="text-[10px] text-text-faint">/ {minutesGoal} {t("dashboard.min")}</span>
           </div>
         </div>
 
         <div className="flex-1 space-y-3 text-sm">
           <div>
-            <p className="text-text-faint">Fragen heute beantwortet</p>
+            <p className="text-text-faint">{t("dashboard.questionsToday")}</p>
             <p className="font-semibold text-text">{questionsAnswered}</p>
           </div>
           <div className="flex items-center gap-2">
             <Flame size={16} className="text-warning" />
             <div>
-              <p className="font-semibold text-text">{streakDays} {streakDays === 1 ? "Tag" : "Tage"}</p>
-              <p className="text-[10px] text-text-faint">Lernserie</p>
+              <p className="font-semibold text-text">{streakDays} {streakDays === 1 ? t("dashboard.day") : t("dashboard.days")}</p>
+              <p className="text-[10px] text-text-faint">{t("dashboard.streakLabel")}</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <Target size={16} className="text-primary" />
             <div>
-              <p className="font-semibold text-text">{weeklyDaysActive} / {weeklyGoalDays} Tage</p>
-              <p className="text-[10px] text-text-faint">Wochenziel</p>
+              <p className="font-semibold text-text">{weeklyDaysActive} / {weeklyGoalDays} {t("dashboard.days")}</p>
+              <p className="text-[10px] text-text-faint">{t("dashboard.weeklyGoal")}</p>
             </div>
           </div>
         </div>
