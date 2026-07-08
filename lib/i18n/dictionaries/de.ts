@@ -87,6 +87,22 @@ const de = {
     streakLabel: "Lernserie",
     days: "Tage",
   },
+  comingSoon: {
+    agb: { title: "AGB", description: "Unsere allgemeinen Geschäftsbedingungen werden aktuell rechtlich finalisiert." },
+    aiCoach: { title: "KI Coach", description: "Dein persönlicher KI-Lerncoach mit individuellen Empfehlungen und Erklärungen ist in Arbeit." },
+    analytics: { title: "Analysen", description: "Detaillierte Auswertungen deines Lernfortschritts über alle Zertifizierungen hinweg." },
+    community: { title: "Community", description: "Tausche dich mit anderen Lernenden aus, stelle Fragen und teile dein Wissen." },
+    datenschutz: { title: "Datenschutz", description: "Unsere Datenschutzerklärung wird aktuell rechtlich finalisiert." },
+    help: { title: "Hilfe & Support", description: "Unser Hilfe-Center mit FAQs und Kontaktmöglichkeiten ist in Arbeit." },
+    interview: { title: "Interview-Vorbereitung", description: "Übe echte Interviewfragen und bereite dich gezielt auf dein nächstes Vorstellungsgespräch vor." },
+    languageCoursesPage: { title: "Sprachkurse", description: "Fach- und Business-Englisch sowie weitere Sprachkurse für deine IT-Karriere." },
+    learningPathsPage: { title: "Lernpfade", description: "Strukturierte, mehrstufige Lernpfade über mehrere Zertifizierungen hinweg." },
+    newsPage: { title: "Aktuelles", description: "Neuigkeiten, Produkt-Updates und Ankündigungen rund um CertCoach." },
+    projectsPage: { title: "Projekte", description: "Praxisprojekte, mit denen du dein Wissen in realistischen Szenarien anwendest." },
+    reviewsPage: { title: "Alle Bewertungen", description: "Eine vollständige, durchsuchbare Übersicht aller Bewertungen unserer Lernenden ist in Arbeit." },
+    settingsPage: { title: "Einstellungen", description: "Konto-, Benachrichtigungs- und Datenschutzeinstellungen sind in Arbeit." },
+    label: "Demnächst verfügbar",
+  },
 };
 
 export default de;

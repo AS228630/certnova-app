@@ -1,11 +1,15 @@
+"use client";
+
 import ComingSoonPage from "@/components/ComingSoonPage";
+import { useLocale } from "@/components/LocaleProvider";
 import { Bot } from "lucide-react";
 
 export default function Page() {
+  const { t } = useLocale();
   return (
     <ComingSoonPage
-      title="KI Coach"
-      description="Dein persönlicher KI-Lerncoach mit individuellen Empfehlungen und Erklärungen ist in Arbeit."
+      title={t("comingSoon.aiCoach.title")}
+      description={t("comingSoon.aiCoach.description")}
       icon={Bot}
     />
   );

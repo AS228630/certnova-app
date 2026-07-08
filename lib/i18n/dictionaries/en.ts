@@ -86,6 +86,22 @@ const en: Dictionary = {
     streakLabel: "Streak",
     days: "Days",
   },
+  comingSoon: {
+    agb: { title: "Terms & Conditions", description: "Our terms and conditions are currently being finalized legally." },
+    aiCoach: { title: "AI Coach", description: "Your personal AI learning coach with tailored recommendations and explanations is in the works." },
+    analytics: { title: "Analytics", description: "Detailed insights into your learning progress across all certifications." },
+    community: { title: "Community", description: "Connect with other learners, ask questions, and share your knowledge." },
+    datenschutz: { title: "Privacy Policy", description: "Our privacy policy is currently being finalized legally." },
+    help: { title: "Help & Support", description: "Our help center with FAQs and contact options is in the works." },
+    interview: { title: "Interview Prep", description: "Practice real interview questions and prepare specifically for your next job interview." },
+    languageCoursesPage: { title: "Language Courses", description: "Technical and business English, plus other language courses for your IT career." },
+    learningPathsPage: { title: "Learning Paths", description: "Structured, multi-stage learning paths spanning multiple certifications." },
+    newsPage: { title: "News", description: "News, product updates, and announcements about CertCoach." },
+    projectsPage: { title: "Projects", description: "Hands-on projects where you apply your knowledge in realistic scenarios." },
+    reviewsPage: { title: "All Reviews", description: "A complete, searchable overview of all our learners' reviews is in the works." },
+    settingsPage: { title: "Settings", description: "Account, notification, and privacy settings are in the works." },
+    label: "Coming soon",
+  },
 };
 
 export default en;

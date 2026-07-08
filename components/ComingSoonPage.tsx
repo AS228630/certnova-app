@@ -1,6 +1,9 @@
+"use client";
+
 import type { LucideIcon } from "lucide-react";
 import { Sparkles } from "lucide-react";
 import DashboardShell from "@/components/DashboardShell";
+import { useLocale } from "@/components/LocaleProvider";
 
 /**
  * Generic "coming soon" page used for nav items that don't have a real
@@ -17,6 +20,7 @@ export default function ComingSoonPage({
   description: string;
   icon?: LucideIcon;
 }) {
+  const { t } = useLocale();
   return (
     <DashboardShell requireAuth={false}>
       <main className="flex flex-1 items-center justify-center p-4 md:p-8">
@@ -27,7 +31,7 @@ export default function ComingSoonPage({
           <h1 className="mb-2 text-xl font-extrabold text-text">{title}</h1>
           <p className="mb-6 text-sm text-text-muted">{description}</p>
           <div className="mx-auto flex max-w-[220px] items-center justify-center gap-2 rounded-lg border border-dashed border-border-soft py-3 text-xs font-semibold text-text-faint">
-            Demnächst verfügbar
+            {t("comingSoon.label")}
           </div>
         </div>
       </main>

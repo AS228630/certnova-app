@@ -1,11 +1,15 @@
+"use client";
+
 import ComingSoonPage from "@/components/ComingSoonPage";
+import { useLocale } from "@/components/LocaleProvider";
 import { Languages } from "lucide-react";
 
 export default function Page() {
+  const { t } = useLocale();
   return (
     <ComingSoonPage
-      title="Sprachkurse"
-      description="Fach- und Business-Englisch sowie weitere Sprachkurse für deine IT-Karriere."
+      title={t("comingSoon.languageCoursesPage.title")}
+      description={t("comingSoon.languageCoursesPage.description")}
       icon={Languages}
     />
   );

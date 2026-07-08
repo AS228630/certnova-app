@@ -1,11 +1,15 @@
+"use client";
+
 import ComingSoonPage from "@/components/ComingSoonPage";
+import { useLocale } from "@/components/LocaleProvider";
 import { Users } from "lucide-react";
 
 export default function Page() {
+  const { t } = useLocale();
   return (
     <ComingSoonPage
-      title="Community"
-      description="Tausche dich mit anderen Lernenden aus, stelle Fragen und teile dein Wissen."
+      title={t("comingSoon.community.title")}
+      description={t("comingSoon.community.description")}
       icon={Users}
     />
   );
