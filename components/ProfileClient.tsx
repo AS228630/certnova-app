@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   Pencil,
@@ -12,6 +12,7 @@ import {
   Link2,
   LayoutGrid,
   GraduationCap,
+  BookOpen,
   FlaskConical,
   ClipboardCheck,
   Trophy,
@@ -25,9 +26,11 @@ import { getFullName } from "@/lib/supabase/useUser";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useProfileStore } from "@/lib/store/profileStore";
+import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
+import { getLearnTrack } from "@/lib/learnData";
 import AvatarUpload from "@/components/AvatarUpload";
 
-const TABS = ["Übersicht", "Meine Lernpfade", "Meine Labs", "Practice Exams", "Erfolge", "Badges", "Meine Zertifikate"] as const;
+const TABS = ["Übersicht", "Meine Lernpfade", "Lernen", "Meine Labs", "Practice Exams", "Erfolge", "Badges", "Meine Zertifikate"] as const;
 
 export default function ProfileClient() {
   const { user } = useUser();
@@ -35,7 +38,16 @@ export default function ProfileClient() {
   const profile = useProfileStore((s) => s.profile);
   const progressMap = useCertProgressStore((s) => s.progressMap);
   const detailMap = useCertProgressStore((s) => s.detailMap);
+  const lessonCompletions = useLessonCompletionStore((s) => s.completions);
   const [tab, setTab] = useState<(typeof TABS)[number]>("Übersicht");
+
+  useEffect(() => {
+    if (!user) return;
+    Object.keys(progressMap).forEach((certId) => {
+      useLessonCompletionStore.getState().loadForCert(user.id, certId);
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user, Object.keys(progressMap).join(",")]);
 
   if (!user) return null;
 
@@ -120,7 +132,7 @@ export default function ProfileClient() {
 
       <div className="mb-6 flex gap-1 overflow-x-auto border-b border-border-soft">
         {TABS.map((t) => {
-          const Icon = { "Übersicht": LayoutGrid, "Meine Lernpfade": GraduationCap, "Meine Labs": FlaskConical, "Practice Exams": ClipboardCheck, "Erfolge": Trophy, "Badges": Award, "Meine Zertifikate": BadgeCheck }[t];
+          const Icon = { "Übersicht": LayoutGrid, "Meine Lernpfade": GraduationCap, "Lernen": BookOpen, "Meine Labs": FlaskConical, "Practice Exams": ClipboardCheck, "Erfolge": Trophy, "Badges": Award, "Meine Zertifikate": BadgeCheck }[t];
           return (
             <button
               key={t}
@@ -138,6 +150,7 @@ export default function ProfileClient() {
 
       {tab === "Übersicht" && <OverviewTab progressMap={progressMap} avgScore={avgScore} questionsAnswered={questionsAnswered} labsCompleted={labsCompleted} />}
       {tab === "Meine Lernpfade" && <PathsTab progressMap={progressMap} />}
+      {tab === "Lernen" && <LearnTab progressMap={progressMap} lessonCompletions={lessonCompletions} />}
       {tab === "Meine Labs" && <LabsTab detailMap={detailMap} />}
       {tab === "Practice Exams" && <ExamsTab detailMap={detailMap} />}
       {tab === "Erfolge" && <BadgesGrid badges={badges} />}
@@ -251,6 +264,45 @@ function PathsTab({ progressMap }: { progressMap: Record<string, number> }) {
             <div className="h-2 rounded-full bg-primary" style={{ width: `${Math.round(pct)}%` }} />
           </div>
           <p className="mt-1 text-xs text-text-faint">{Math.round(pct)}% abgeschlossen</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function LearnTab({
+  progressMap,
+  lessonCompletions,
+}: {
+  progressMap: Record<string, number>;
+  lessonCompletions: Record<string, Set<string>>;
+}) {
+  const certIds = Object.keys(progressMap);
+  const rows = certIds
+    .map((certId) => {
+      const track = getLearnTrack(certId, certId);
+      const allLessons = track.modules.flatMap((m) => m.lessons);
+      const done = lessonCompletions[certId]?.size ?? 0;
+      const total = allLessons.length;
+      return { certId, done, total, pct: total === 0 ? 0 : Math.round((done / total) * 100) };
+    })
+    .filter((r) => r.done > 0);
+
+  if (rows.length === 0) {
+    return <EmptyState text="Noch keine Lektionen abgeschlossen." href="/certifications" cta="Mit dem Lernen beginnen" />;
+  }
+
+  return (
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      {rows.map((r) => (
+        <div key={r.certId} className="rounded-xl border border-border-soft bg-panel p-4">
+          <p className="text-sm font-bold uppercase text-text">{r.certId}</p>
+          <div className="mt-2 h-2 w-full rounded-full bg-panel-alt">
+            <div className="h-2 rounded-full bg-primary" style={{ width: `${r.pct}%` }} />
+          </div>
+          <p className="mt-1 text-xs text-text-faint">
+            {r.done} / {r.total} Lektionen abgeschlossen ({r.pct}%)
+          </p>
         </div>
       ))}
     </div>
