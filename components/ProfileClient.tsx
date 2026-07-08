@@ -25,6 +25,7 @@ import { useUser } from "@/components/UserContext";
 import { getFullName } from "@/lib/supabase/useUser";
 import { companies } from "@/lib/companiesData";
 import { generateCertificatePdf } from "@/lib/generateCertificate";
+import { useLocale } from "@/components/LocaleProvider";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useProfileStore } from "@/lib/store/profileStore";
@@ -32,16 +33,18 @@ import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
 import { getLearnTrack } from "@/lib/learnData";
 import AvatarUpload from "@/components/AvatarUpload";
 
-const TABS = ["Übersicht", "Meine Lernpfade", "Lernen", "Meine Labs", "Practice Exams", "Erfolge", "Badges", "Meine Zertifikate"] as const;
+const TAB_KEYS = ["overview", "paths", "learn", "labs", "exams", "achievements", "badges", "certificates"] as const;
+type TabKey = (typeof TAB_KEYS)[number];
 
 export default function ProfileClient() {
   const { user } = useUser();
+  const { t } = useLocale();
   const progress = useUserProgressStore((s) => s.progress);
   const profile = useProfileStore((s) => s.profile);
   const progressMap = useCertProgressStore((s) => s.progressMap);
   const detailMap = useCertProgressStore((s) => s.detailMap);
   const lessonCompletions = useLessonCompletionStore((s) => s.completions);
-  const [tab, setTab] = useState<(typeof TABS)[number]>("Übersicht");
+  const [tab, setTab] = useState<TabKey>("overview");
 
   useEffect(() => {
     if (!user) return;
@@ -72,12 +75,12 @@ export default function ProfileClient() {
   // Real, milestone-based badges — each one only "unlocked" once the
   // underlying real stat actually crosses the threshold. No fake badges.
   const badges = [
-    { id: "first-steps", label: "Erste Schritte", icon: Star, unlocked: xp > 0, desc: "Erste Aktivität abgeschlossen" },
-    { id: "lab-master", label: "Lab Master", icon: FlaskConical, unlocked: labsCompleted >= 5, desc: "5 Labs abgeschlossen" },
-    { id: "practice-expert", label: "Practice Expert", icon: ClipboardCheck, unlocked: questionsAnswered >= 50, desc: "50 Übungsfragen beantwortet" },
-    { id: "streak-7", label: "7-Tage-Streak", icon: Flame, unlocked: streak >= 7, desc: "7 Tage in Folge gelernt" },
-    { id: "path-complete", label: "Zertifiziert", icon: BadgeCheck, unlocked: pathsCompleted >= 1, desc: "Einen Lernpfad zu 100% abgeschlossen" },
-    { id: "high-achiever", label: "High Achiever", icon: Trophy, unlocked: avgScore >= 90 && questionsAnswered >= 20, desc: "Ø 90%+ bei mind. 20 Fragen" },
+    { id: "first-steps", label: t("profile.badgeFirstSteps"), icon: Star, unlocked: xp > 0, desc: t("profile.badgeFirstStepsDesc") },
+    { id: "lab-master", label: t("profile.badgeLabMaster"), icon: FlaskConical, unlocked: labsCompleted >= 5, desc: t("profile.badgeLabMasterDesc") },
+    { id: "practice-expert", label: t("profile.badgePracticeExpert"), icon: ClipboardCheck, unlocked: questionsAnswered >= 50, desc: t("profile.badgePracticeExpertDesc") },
+    { id: "streak-7", label: t("profile.badgeStreak7"), icon: Flame, unlocked: streak >= 7, desc: t("profile.badgeStreak7Desc") },
+    { id: "path-complete", label: t("profile.badgeCertified"), icon: BadgeCheck, unlocked: pathsCompleted >= 1, desc: t("profile.badgeCertifiedDesc") },
+    { id: "high-achiever", label: t("profile.badgeHighAchiever"), icon: Trophy, unlocked: avgScore >= 90 && questionsAnswered >= 20, desc: t("profile.badgeHighAchieverDesc") },
   ];
   const unlockedBadges = badges.filter((b) => b.unlocked);
 
@@ -90,7 +93,7 @@ export default function ProfileClient() {
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-xl font-extrabold text-text">{displayName}</h1>
-              <span className="rounded-full bg-primary-light px-2.5 py-0.5 text-xs font-bold text-primary">Learner</span>
+              <span className="rounded-full bg-primary-light px-2.5 py-0.5 text-xs font-bold text-primary">{t("profile.learnerBadge")}</span>
             </div>
             {profile?.bio && <p className="mt-1 text-sm text-text-muted">{profile.bio}</p>}
             <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-text-faint">
@@ -102,7 +105,7 @@ export default function ProfileClient() {
               )}
               <span className="flex items-center gap-1">
                 <Calendar size={13} />
-                Beigetreten: {joinedDate}
+                {t("profile.joined")}: {joinedDate}
               </span>
             </div>
             <div className="mt-3 flex items-center gap-3 text-text-faint">
@@ -118,46 +121,65 @@ export default function ProfileClient() {
             className="flex items-center gap-1.5 rounded-lg border border-border-soft px-3 py-1.5 text-xs font-semibold text-text hover:border-primary"
           >
             <Pencil size={13} />
-            Profil bearbeiten
+            {t("profile.editProfile")}
           </Link>
         </div>
 
         <div className="mt-6 grid grid-cols-2 gap-4 border-t border-border-soft pt-5 sm:grid-cols-3 lg:grid-cols-6">
-          <StatBlock value={studyHours} label="Stunden gelernt" />
-          <StatBlock value={pathsInProgress} label="Lernpfade" />
-          <StatBlock value={labsCompleted} label="Labs abgeschlossen" />
-          <StatBlock value={`${avgScore}%`} label="Durchschnitts-Score" />
-          <StatBlock value={pathsCompleted} label="Zertifikate" />
-          <StatBlock value={unlockedBadges.length} label="Badges" />
+          <StatBlock value={studyHours} label={t("profile.statStudyHours")} />
+          <StatBlock value={pathsInProgress} label={t("profile.statPaths")} />
+          <StatBlock value={labsCompleted} label={t("profile.statLabsCompleted")} />
+          <StatBlock value={`${avgScore}%`} label={t("profile.statAvgScore")} />
+          <StatBlock value={pathsCompleted} label={t("profile.statCertificates")} />
+          <StatBlock value={unlockedBadges.length} label={t("profile.statBadges")} />
         </div>
       </div>
 
       <div className="mb-6 flex gap-1 overflow-x-auto border-b border-border-soft">
-        {TABS.map((t) => {
-          const Icon = { "Übersicht": LayoutGrid, "Meine Lernpfade": GraduationCap, "Lernen": BookOpen, "Meine Labs": FlaskConical, "Practice Exams": ClipboardCheck, "Erfolge": Trophy, "Badges": Award, "Meine Zertifikate": BadgeCheck }[t];
+        {TAB_KEYS.map((key) => {
+          const Icon = {
+            overview: LayoutGrid,
+            paths: GraduationCap,
+            learn: BookOpen,
+            labs: FlaskConical,
+            exams: ClipboardCheck,
+            achievements: Trophy,
+            badges: Award,
+            certificates: BadgeCheck,
+          }[key];
+          const labelKey = {
+            overview: "profile.profileTabOverview",
+            paths: "profile.profileTabPaths",
+            learn: "profile.profileTabLearn",
+            labs: "profile.profileTabLabs",
+            exams: "profile.profileTabExams",
+            achievements: "profile.profileTabAchievements",
+            badges: "profile.profileTabBadges",
+            certificates: "profile.profileTabCertificates",
+          }[key];
           return (
             <button
-              key={t}
-              onClick={() => setTab(t)}
+              key={key}
+              onClick={() => setTab(key)}
               className={`flex flex-none items-center gap-1.5 border-b-2 px-3 py-2.5 text-sm font-semibold ${
-                tab === t ? "border-primary text-primary" : "border-transparent text-text-muted hover:text-text"
+                tab === key ? "border-primary text-primary" : "border-transparent text-text-muted hover:text-text"
               }`}
             >
               <Icon size={15} />
-              {t}
+              {t(labelKey)}
             </button>
           );
         })}
       </div>
 
-      {tab === "Übersicht" && <OverviewTab progressMap={progressMap} avgScore={avgScore} questionsAnswered={questionsAnswered} labsCompleted={labsCompleted} />}
-      {tab === "Meine Lernpfade" && <PathsTab progressMap={progressMap} />}
-      {tab === "Lernen" && <LearnTab progressMap={progressMap} lessonCompletions={lessonCompletions} />}
-      {tab === "Meine Labs" && <LabsTab detailMap={detailMap} />}
-      {tab === "Practice Exams" && <ExamsTab detailMap={detailMap} />}
-      {tab === "Erfolge" && <BadgesGrid badges={badges} />}
-      {tab === "Badges" && <BadgesGrid badges={badges} />}
-      {tab === "Meine Zertifikate" && (
+      {tab === "overview" && <OverviewTab progressMap={progressMap} avgScore={avgScore} questionsAnswered={questionsAnswered} labsCompleted={labsCompleted} />}
+      {tab === "paths" && <PathsTab progressMap={progressMap} />}
+      {tab === "learn" && <LearnTab progressMap={progressMap} lessonCompletions={lessonCompletions} />}
+      {tab === "labs" && <LabsTab detailMap={detailMap} />}
+      {tab === "exams" && <ExamsTab detailMap={detailMap} />}
+      {tab === "achievements" && <BadgesGrid badges={badges} />}
+      {tab === "badges" && <BadgesGrid badges={badges} />}
+      {tab === "certificates" && (
         <CertificatesTab
           progressMap={progressMap}
           detailMap={detailMap}
@@ -190,6 +212,7 @@ function OverviewTab({
   questionsAnswered: number;
   labsCompleted: number;
 }) {
+  const { t } = useLocale();
   const entries = Object.entries(progressMap).filter(([, p]) => p > 0);
   const overall = entries.length === 0 ? 0 : Math.round(entries.reduce((sum, [, p]) => sum + p, 0) / entries.length);
   const r = 54;
@@ -218,14 +241,14 @@ function OverviewTab({
           </div>
         </div>
         <p className="mt-3 text-center text-xs text-text-faint">
-          {entries.length === 0 ? "Starte deinen ersten Lernpfad!" : "Weiter so! Du bist auf dem richtigen Weg."}
+          {entries.length === 0 ? t("profile.startFirstPath") : t("profile.keepGoing")}
         </p>
       </div>
 
       <div className="rounded-xl border border-border-soft bg-panel p-5">
-        <p className="mb-4 font-bold text-text">Bereiche</p>
+        <p className="mb-4 font-bold text-text">{t("profile.areas")}</p>
         {entries.length === 0 ? (
-          <p className="text-sm text-text-faint">Noch keine Aktivität — starte mit einer Zertifizierung.</p>
+          <p className="text-sm text-text-faint">{t("profile.noActivityYet")}</p>
         ) : (
           <div className="space-y-4">
             {entries.slice(0, 6).map(([certId, pct]) => (
@@ -244,15 +267,15 @@ function OverviewTab({
         <div className="mt-5 grid grid-cols-2 gap-3 border-t border-border-soft pt-4 text-xs sm:grid-cols-3">
           <p className="text-text-muted">
             <span className="block text-base font-bold text-text">{questionsAnswered}</span>
-            Fragen beantwortet
+            {t("profile.questionsAnsweredLabel")}
           </p>
           <p className="text-text-muted">
             <span className="block text-base font-bold text-text">{labsCompleted}</span>
-            Labs abgeschlossen
+            {t("profile.labsCompletedLabel")}
           </p>
           <p className="text-text-muted">
             <span className="block text-base font-bold text-text">{avgScore}%</span>
-            Ø Trefferquote
+            {t("profile.avgAccuracyLabel")}
           </p>
         </div>
       </div>
@@ -261,9 +284,10 @@ function OverviewTab({
 }
 
 function PathsTab({ progressMap }: { progressMap: Record<string, number> }) {
+  const { t } = useLocale();
   const entries = Object.entries(progressMap);
   if (entries.length === 0) {
-    return <EmptyState text="Noch keine Lernpfade gestartet." href="/certifications" cta="Zertifizierungen entdecken" />;
+    return <EmptyState text={t("profile.noPathsStarted")} href="/certifications" cta={t("profile.discoverCerts")} />;
   }
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -273,7 +297,7 @@ function PathsTab({ progressMap }: { progressMap: Record<string, number> }) {
           <div className="mt-2 h-2 w-full rounded-full bg-panel-alt">
             <div className="h-2 rounded-full bg-primary" style={{ width: `${Math.round(pct)}%` }} />
           </div>
-          <p className="mt-1 text-xs text-text-faint">{Math.round(pct)}% abgeschlossen</p>
+          <p className="mt-1 text-xs text-text-faint">{Math.round(pct)}% {t("profile.completedPct")}</p>
         </div>
       ))}
     </div>
@@ -287,6 +311,7 @@ function LearnTab({
   progressMap: Record<string, number>;
   lessonCompletions: Record<string, Set<string>>;
 }) {
+  const { t } = useLocale();
   const certIds = Object.keys(progressMap);
   const rows = certIds
     .map((certId) => {
@@ -299,7 +324,7 @@ function LearnTab({
     .filter((r) => r.done > 0);
 
   if (rows.length === 0) {
-    return <EmptyState text="Noch keine Lektionen abgeschlossen." href="/certifications" cta="Mit dem Lernen beginnen" />;
+    return <EmptyState text={t("profile.noLessonsCompleted")} href="/certifications" cta={t("profile.startLearning")} />;
   }
 
   return (
@@ -311,7 +336,7 @@ function LearnTab({
             <div className="h-2 rounded-full bg-primary" style={{ width: `${r.pct}%` }} />
           </div>
           <p className="mt-1 text-xs text-text-faint">
-            {r.done} / {r.total} Lektionen abgeschlossen ({r.pct}%)
+            {r.done} / {r.total} {t("profile.lessonsCompletedSuffix")} ({r.pct}%)
           </p>
         </div>
       ))}
@@ -320,16 +345,17 @@ function LearnTab({
 }
 
 function LabsTab({ detailMap }: { detailMap: Record<string, { labCompleted: boolean }> }) {
+  const { t } = useLocale();
   const done = Object.entries(detailMap).filter(([, d]) => d.labCompleted);
   if (done.length === 0) {
-    return <EmptyState text="Noch keine Labs abgeschlossen." href="/certifications" cta="Ein Lab starten" />;
+    return <EmptyState text={t("profile.noLabsCompleted")} href="/certifications" cta={t("profile.startALab")} />;
   }
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
       {done.map(([certId]) => (
         <div key={certId} className="flex items-center gap-3 rounded-xl border border-border-soft bg-panel p-4">
           <FlaskConical size={18} className="text-success" />
-          <p className="text-sm font-bold uppercase text-text">{certId} — Lab abgeschlossen</p>
+          <p className="text-sm font-bold uppercase text-text">{certId} — {t("profile.labCompletedSuffix")}</p>
         </div>
       ))}
     </div>
@@ -337,9 +363,10 @@ function LabsTab({ detailMap }: { detailMap: Record<string, { labCompleted: bool
 }
 
 function ExamsTab({ detailMap }: { detailMap: Record<string, { questionsAnswered: number; questionsCorrect: number }> }) {
+  const { t } = useLocale();
   const entries = Object.entries(detailMap).filter(([, d]) => d.questionsAnswered > 0);
   if (entries.length === 0) {
-    return <EmptyState text="Noch keine Übungsfragen beantwortet." href="/certifications" cta="Übungsfragen starten" />;
+    return <EmptyState text={t("profile.noQuestionsAnswered")} href="/certifications" cta={t("profile.startPracticeQuestions")} />;
   }
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -349,7 +376,7 @@ function ExamsTab({ detailMap }: { detailMap: Record<string, { questionsAnswered
           <div key={certId} className="rounded-xl border border-border-soft bg-panel p-4">
             <p className="text-sm font-bold uppercase text-text">{certId}</p>
             <p className="mt-1 text-xs text-text-faint">
-              {d.questionsAnswered} Fragen beantwortet • {pct}% richtig
+              {d.questionsAnswered} {t("profile.questionsAnsweredCorrect")} • {pct}% {t("profile.correctPct")}
             </p>
           </div>
         );
@@ -392,6 +419,7 @@ function CertificatesTab({
   displayName: string;
   studyHours: number;
 }) {
+  const { t } = useLocale();
   const [generating, setGenerating] = useState<string | null>(null);
 
   function findCert(certId: string) {
@@ -421,9 +449,9 @@ function CertificatesTab({
   if (eligible.length === 0) {
     return (
       <EmptyState
-        text="Noch kein Zertifikat verdient. Ein Zertifikat wird automatisch verfügbar, sobald du 100% des Lernpfads, 100% der Labs UND mindestens 90% bei den Übungsfragen erreicht hast."
+        text={t("profile.noCertificatesYet")}
         href="/certifications"
-        cta="Weiter lernen"
+        cta={t("profile.keepLearning")}
       />
     );
   }
@@ -469,7 +497,7 @@ function CertificatesTab({
                 <p className="text-sm font-bold text-text">
                   {meta.code}: {meta.title}
                 </p>
-                <p className="text-xs text-text-faint">Endergebnis: {r.finalScore}%</p>
+                <p className="text-xs text-text-faint">{t("profile.finalResult")}: {r.finalScore}%</p>
               </div>
             </div>
             <button
@@ -477,7 +505,7 @@ function CertificatesTab({
               disabled={generating === r.certId}
               className="flex-none rounded-lg bg-primary px-3 py-1.5 text-xs font-bold text-white hover:bg-primary-dark disabled:opacity-60"
             >
-              {generating === r.certId ? "Erstelle..." : "PDF herunterladen"}
+              {generating === r.certId ? t("profile.generating") : t("profile.downloadPdf")}
             </button>
           </div>
         );
