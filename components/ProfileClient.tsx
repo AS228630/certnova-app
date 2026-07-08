@@ -23,6 +23,8 @@ import {
 } from "lucide-react";
 import { useUser } from "@/components/UserContext";
 import { getFullName } from "@/lib/supabase/useUser";
+import { companies } from "@/lib/companiesData";
+import { generateCertificatePdf } from "@/lib/generateCertificate";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useProfileStore } from "@/lib/store/profileStore";
@@ -155,7 +157,15 @@ export default function ProfileClient() {
       {tab === "Practice Exams" && <ExamsTab detailMap={detailMap} />}
       {tab === "Erfolge" && <BadgesGrid badges={badges} />}
       {tab === "Badges" && <BadgesGrid badges={badges} />}
-      {tab === "Meine Zertifikate" && <CertificatesTab progressMap={progressMap} />}
+      {tab === "Meine Zertifikate" && (
+        <CertificatesTab
+          progressMap={progressMap}
+          detailMap={detailMap}
+          lessonCompletions={lessonCompletions}
+          displayName={displayName}
+          studyHours={studyHours}
+        />
+      )}
     </div>
   );
 }
@@ -369,19 +379,109 @@ function BadgesGrid({ badges }: { badges: { id: string; label: string; icon: Rea
   );
 }
 
-function CertificatesTab({ progressMap }: { progressMap: Record<string, number> }) {
-  const completed = Object.entries(progressMap).filter(([, p]) => p >= 100);
-  if (completed.length === 0) {
-    return <EmptyState text="Noch keine Zertifizierung zu 100% abgeschlossen." href="/certifications" cta="Weiter lernen" />;
+function CertificatesTab({
+  progressMap,
+  detailMap,
+  lessonCompletions,
+  displayName,
+  studyHours,
+}: {
+  progressMap: Record<string, number>;
+  detailMap: Record<string, { labCompleted: boolean; questionsAnswered: number; questionsCorrect: number }>;
+  lessonCompletions: Record<string, Set<string>>;
+  displayName: string;
+  studyHours: number;
+}) {
+  const [generating, setGenerating] = useState<string | null>(null);
+
+  function findCert(certId: string) {
+    for (const company of companies) {
+      const cert = company.certs.find((c) => c.id === certId);
+      if (cert) return { code: cert.code, title: cert.title };
+    }
+    return { code: certId.toUpperCase(), title: certId.toUpperCase() };
   }
+
+  const eligible = Object.keys(progressMap)
+    .map((certId) => {
+      const track = getLearnTrack(certId, certId);
+      const totalLessons = track.modules.flatMap((m) => m.lessons).length;
+      const doneLessons = lessonCompletions[certId]?.size ?? 0;
+      const lessonsPct = totalLessons === 0 ? 0 : Math.round((doneLessons / totalLessons) * 100);
+
+      const detail = detailMap[certId];
+      const labsPct = detail?.labCompleted ? 100 : 0;
+      const finalScore = detail && detail.questionsAnswered > 0 ? Math.round((detail.questionsCorrect / detail.questionsAnswered) * 100) : 0;
+
+      const isEligible = lessonsPct >= 100 && labsPct >= 100 && finalScore >= 90 && (detail?.questionsAnswered ?? 0) >= 5;
+      return { certId, lessonsPct, labsPct, finalScore, isEligible, questionsAnswered: detail?.questionsAnswered ?? 0 };
+    })
+    .filter((r) => r.isEligible);
+
+  if (eligible.length === 0) {
+    return (
+      <EmptyState
+        text="Noch kein Zertifikat verdient. Ein Zertifikat wird automatisch verfügbar, sobald du 100% des Lernpfads, 100% der Labs UND mindestens 90% bei den Übungsfragen erreicht hast."
+        href="/certifications"
+        cta="Weiter lernen"
+      />
+    );
+  }
+
+  async function handleDownload(certId: string, meta: { code: string; title: string }, r: (typeof eligible)[number]) {
+    setGenerating(certId);
+    try {
+      const certificateId = `CC-${meta.code.toUpperCase()}-${new Date().getFullYear()}-${certId.slice(0, 6).toUpperCase()}`;
+      const blob = await generateCertificatePdf({
+        userName: displayName,
+        certCode: meta.code,
+        certTitle: meta.title,
+        finalScore: r.finalScore,
+        labsPct: r.labsPct,
+        lessonsPct: r.lessonsPct,
+        certificateId,
+        issueDate: new Date(),
+        questionsAnswered: r.questionsAnswered,
+        studyHours: studyHours,
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `certcoach-zertifikat-${certId}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } finally {
+      setGenerating(null);
+    }
+  }
+
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-      {completed.map(([certId]) => (
-        <div key={certId} className="flex items-center gap-3 rounded-xl border border-border-soft bg-panel p-4">
-          <BadgeCheck size={20} className="text-success" />
-          <p className="text-sm font-bold uppercase text-text">{certId} — 100% abgeschlossen</p>
-        </div>
-      ))}
+      {eligible.map((r) => {
+        const meta = findCert(r.certId);
+        return (
+          <div key={r.certId} className="flex items-center justify-between gap-3 rounded-xl border border-border-soft bg-panel p-4">
+            <div className="flex items-center gap-3">
+              <BadgeCheck size={20} className="text-success" />
+              <div>
+                <p className="text-sm font-bold text-text">
+                  {meta.code}: {meta.title}
+                </p>
+                <p className="text-xs text-text-faint">Endergebnis: {r.finalScore}%</p>
+              </div>
+            </div>
+            <button
+              onClick={() => handleDownload(r.certId, meta, r)}
+              disabled={generating === r.certId}
+              className="flex-none rounded-lg bg-primary px-3 py-1.5 text-xs font-bold text-white hover:bg-primary-dark disabled:opacity-60"
+            >
+              {generating === r.certId ? "Erstelle..." : "PDF herunterladen"}
+            </button>
+          </div>
+        );
+      })}
     </div>
   );
 }
