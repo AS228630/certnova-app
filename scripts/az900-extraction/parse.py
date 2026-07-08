@@ -104,7 +104,7 @@ for block in blocks:
     prompt_and_options = re.sub(r"(?:^|\n)\s{0,3}Ein\s{2,}", "\n A              ", prompt_and_options)
 
     # Detect the "choose Ja/Nein for each statement" combinatorial format.
-    is_matching = bool(re.search(r"Ordnen Sie", prompt_and_options))
+    is_matching = bool(re.search(r"Ordnen Sie|Ziehen Sie.{0,40}(Ebenen|Positionen|Modell)", prompt_and_options))
     if is_matching:
         errors.append((f"q{qnum}-matching-type-skipped",))
         continue
@@ -184,6 +184,33 @@ for block in blocks:
     })
 
 questions.sort(key=lambda q: q["number"])
+
+# Post-parse safety check: catch mangled matching-question fragments that
+# slipped through as "valid" single-choice options. Better to drop a
+# question here than ship wrong content in a real exam-prep tool.
+clean_questions = []
+dropped_for_qa = []
+for q in questions:
+    bad = False
+    if q["type"] == "single":
+        texts = list(q["options"].values())
+        if len(texts) != len(set(t.strip() for t in texts)):
+            bad = True
+        if any(t.count(":") >= 2 for t in texts):
+            bad = True
+    else:
+        texts = [s["text"] for s in q["statements"]]
+        if len(texts) != len(set(t.strip() for t in texts)):
+            bad = True
+    if bad:
+        dropped_for_qa.append(q["number"])
+    else:
+        clean_questions.append(q)
+
+if dropped_for_qa:
+    print(f"QA DROPPED (mangled matching content, needs manual review): {sorted(dropped_for_qa)}")
+questions = clean_questions
+
 print(f"Parsed OK: {len(questions)} / {len(blocks)}")
 print(f"Errors: {len(errors)}")
 for e in errors:

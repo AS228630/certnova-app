@@ -5,10 +5,29 @@ Extracts real exam-prep questions from the user's authoritative PDF
 **reverse** page order — page N = Frage (565-N)).
 
 ## Status
-Questions 1-300 processed. 285 confidently verified and merged into
-`lib/az900Practice.ts`. 15 ambiguous "choose Ja/Nein for each statement"
-questions were skipped (see the header comment in az900Practice.ts for the
-exact list) — safer to omit than risk a wrong answer in a real exam tool.
+Questions 1-400 processed. 351 confidently verified and merged into
+`lib/az900Practice.ts`. 49 skipped/removed — see the header comment in
+az900Practice.ts for the exact breakdown and reasons.
+
+## ⚠️ Critical lesson (read before extracting more)
+A full QA audit after batch 4 found that 18 "successfully parsed" questions
+from batches 1-3 were actually **silently wrong**: multi-item matching
+questions ("Ordnen Sie ... Spalte", "Ziehen Sie ... Ebenen/Modell") got
+mis-parsed into single-choice format with multiple "Term: Value" fragments
+concatenated into one option string. The result looked structurally valid
+(4 options, a correct letter) but the actual text was garbled/wrong.
+These were all removed. `parse.py` now:
+1. Detects "Ordnen Sie" / "Ziehen Sie ... Ebenen/Positionen/Modell" and
+   skips those questions entirely (they need proper `MatchingQuestion`
+   handling, not single-choice).
+2. Runs an automated post-parse QA check (duplicate option text, or any
+   option containing 2+ colons) and drops anything suspicious before
+   writing output.
+
+**Never trust "Parsed OK" alone — always spot-check a sample of the actual
+generated TypeScript against the raw PDF text for every batch**, the same
+way this bug was caught (grep for "Antwortbereich"/"Ordnen Sie"/"Ziehen
+Sie" across the whole file and manually inspect a sample of hits).
 
 ## To extract the next batch (e.g. 301-400)
 
