@@ -253,6 +253,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-13",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Ihr Azure-Testkonto ist letzte Woche abgelaufen. Sie können jetzt keine weiteren Azure Active Directory (Azure AD)-Benutzerkonten mehr erstellen . ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.)",
+    underlinedText: "keine weiteren Azure Active Directory (Azure AD)-Benutzerkonten mehr erstellen",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "Starten einer vorhandenen Azure-VM" },
@@ -266,6 +267,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-14",
     topicId: "azure-architektur",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er richtig ist. Sie haben mehrere virtuelle Maschinen in einem Azure-Abonnement. Sie erstellen ein neues Abonnement. Die virtuellen Maschinen können nicht in das neue Abonnement verschoben werden . ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch richtig ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, mit der die Aussage richtig ist.)",
+    underlinedText: "Die virtuellen Maschinen können nicht in das neue Abonnement verschoben werden",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich." },
       { id: "B", text: "Die virtuellen Maschinen können in das neue Abonnement verschoben werden." },
@@ -431,6 +433,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-27",
     topicId: "cloud-konzepte",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Wenn Sie planen, eine öffentliche Website zu Azure zu migrieren, müssen Sie mit monatlichen Nutzungskosten rechnen . ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, mit der die Aussage richtig ist.)",
+    underlinedText: "müssen Sie mit monatlichen Nutzungskosten rechnen",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich." },
       { id: "B", text: "Stellen Sie ein VPN bereit." },
@@ -514,6 +517,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-35",
     topicId: "cloud-konzepte",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Wenn Sie eine Software-as-a-Service-Lösung (SaaS) implementieren, sind Sie für die Konfiguration der Hochverfügbarkeit verantwortlich . ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, mit der die Aussage richtig ist.)",
+    underlinedText: "sind Sie für die Konfiguration der Hochverfügbarkeit verantwortlich",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "Definieren von Skalierbarkeitsregeln" },
@@ -828,6 +832,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-68",
     topicId: "azure-architektur",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er richtig ist. Eine Azure-Region enthält ein oder mehrere Rechenzentren, die über ein Netzwerk mit geringer Latenz verbunden sind . ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch richtig ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, mit der die Aussage richtig ist.)",
+    underlinedText: "enthält ein oder mehrere Rechenzentren, die über ein Netzwerk mit geringer Latenz verbunden sind",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "ist in jedem Land zu finden, in dem Microsoft eine Niederlassung hat" },
@@ -841,6 +846,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-69",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Wenn Sie Berechtigungen gleichzeitig an mehrere virtuelle Azure-Computer delegieren müssen, müssen Sie die virtuellen Azure-Computer in derselben Azure- Region bereitstellen . ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, mit der die Aussage richtig ist.)",
+    underlinedText: "in derselben Azure- Region bereitstellen",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "durch Verwendung derselben Azure Resource Manager-Vorlage" },
@@ -937,6 +943,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-77",
     topicId: "azure-architektur",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Sie planen, 20 virtuelle Maschinen in einer Azure-Umgebung bereitzustellen. Um sicherzustellen, dass eine virtuelle Maschine namens VM1 keine Verbindung zu den anderen virtuellen Maschinen herstellen kann, muss VM1 in einem separaten virtuellen Netzwerk bereitgestellt werden . Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, mit der die Aussage richtig ist.",
+    underlinedText: "muss VM1 in einem separaten virtuellen Netzwerk bereitgestellt werden",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "Führen Sie ein anderes Betriebssystem als die anderen virtuellen Maschinen aus" },
@@ -977,6 +984,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-80",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Ihr Unternehmen implementiert Azure-Richtlinien , um Microsoft Word-Dokumenten mit Kreditkarteninformationen automatisch ein Wasserzeichen hinzuzufügen. ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage korrigiert.)",
+    underlinedText: "Azure-Richtlinien",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "DDoS-Schutz" },
@@ -990,6 +998,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-81",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er richtig ist. In Azure Monitor können Sie sehen, welcher Benutzer in den letzten 14 Tagen eine bestimmte virtuelle Maschine ausgeschaltet hat. ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch richtig ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.)",
+    underlinedText: "In Azure Monitor",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "Azure Event Hubs" },
@@ -1003,6 +1012,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-82",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Sie verfügen über ein virtuelles Azure-Netzwerk namens VNET1 in einer Ressourcengruppe namens RG1. Sie weisen eine Azure-Richtlinie zu, die angibt, dass virtuelle Netzwerke in RG1 kein zulässiger Ressourcentyp sind. VNET1 wird automatisch gelöscht . ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage korrigiert.)",
+    underlinedText: "VNET1 wird automatisch gelöscht",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "wird automatisch in eine andere Ressourcengruppe verschoben" },
@@ -1029,6 +1039,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-84",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Bei der Autorisierung werden die Anmeldeinformationen eines Benutzers überprüft. ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.)",
+    underlinedText: "Bei der Autorisierung",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "Authentifizierung" },
@@ -1121,6 +1132,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-91",
     topicId: "azure-architektur",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Wenn eine Ressourcengruppe namens RG1 eine Löschsperre hat, kann nur ein Mitglied der globalen Administratorengruppe RG1 löschen. ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.)",
+    underlinedText: "kann nur ein Mitglied der globalen Administratorengruppe RG1 löschen",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "Die Löschsperre muss entfernt werden, bevor ein Administrator" },
@@ -1160,6 +1172,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-94",
     topicId: "azure-architektur",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Azure Key Vault wird zum Speichern von Geheimnissen für Azure Active Directory (Azure AD)-Benutzerkonten verwendet . ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, mit der die Aussage richtig ist.)",
+    underlinedText: "Azure Active Directory (Azure AD)-Benutzerkonten",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "Azure Active Directory (Azure AD)-Administratorkonten" },
@@ -1199,6 +1212,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-97",
     topicId: "cloud-konzepte",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er richtig ist. Azure Deutschland kann nur von Personen mit legalem Wohnsitz in Deutschland genutzt werden . ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch richtig ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, mit der die Aussage richtig ist.)",
+    underlinedText: "kann nur von Personen mit legalem Wohnsitz in Deutschland genutzt werden",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "nur Unternehmen mit Sitz in Deutschland" },
@@ -1212,6 +1226,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-98",
     topicId: "azure-architektur",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Nachdem Sie eine virtuelle Maschine erstellt haben, müssen Sie die Netzwerksicherheitsgruppe (NSG) ändern , um Verbindungen von TCP-Port 8080 zur virtuellen Maschine zuzulassen. ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.)",
+    underlinedText: "müssen Sie die Netzwerksicherheitsgruppe (NSG) ändern",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "virtuelles Netzwerkgateway" },
@@ -1289,6 +1304,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-108",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er richtig ist. Sie stellen eine Azure-Ressource bereit. Aufgrund eines Dienstausfalls ist die Ressource für einen längeren Zeitraum nicht verfügbar. Microsoft erstattet Ihnen den Betrag automatisch zurück . (Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch richtig ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, mit der die Aussage richtig ist.)",
+    underlinedText: "erstattet Ihnen den Betrag automatisch zurück",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "die Ressource automatisch in ein anderes Abonnement migrieren" },
@@ -1315,6 +1331,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-110",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Sollte Microsoft den Support für einen Azure-Dienst einstellen, für den es KEINEN Nachfolgedienst gibt, wird Microsoft Sie mindestens 12 Monate im Voraus darüber informieren. (Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.)",
+    underlinedText: "mindestens 12 Monate im Voraus",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "6 Monate" },
@@ -1409,6 +1426,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-118",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er richtig ist. Ein Azure-Dienst steht allen Azure-Kunden in der öffentlichen Vorschau zur Verfügung . (Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch richtig ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, mit der die Aussage richtig ist.)",
+    underlinedText: "in der öffentlichen Vorschau",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "private Vorschau" },
@@ -1639,6 +1657,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-138",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Ein Standard- Supportplan ist eine Supportlösung, die Ihnen Best-Practice-Informationen, Statusinformationen und Benachrichtigungen sowie rund um die Uhr Zugriff auf Abrechnungsinformationen zu möglichst geringen Kosten bietet. (Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.)",
+    underlinedText: "Standard",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "Entwickler" },
@@ -1652,6 +1671,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-139",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Der Azure Standard- Supportplan ist die günstigste Option, um rund um die Uhr telefonischen Support zu erhalten. (Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.)",
+    underlinedText: "Standard",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "Entwickler" },
@@ -1665,6 +1685,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-140",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er richtig ist. Alle Azure-Dienste in der öffentlichen Vorschau werden ohne Dokumentation bereitgestellt . (Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch richtig ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, mit der die Aussage richtig ist.)",
+    underlinedText: "werden ohne Dokumentation bereitgestellt",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "nur über die Azure CLI konfigurierbar" },
@@ -1704,6 +1725,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-143",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Sie können die Advisor-Empfehlungen in Azure nutzen, um E-Mail-Benachrichtigungen zu erhalten, wenn die Kosten für den aktuellen Abrechnungszeitraum eines Azure-Abonnements einen bestimmten Grenzwert überschreiten. (Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage korrigiert.)",
+    underlinedText: "die Advisor-Empfehlungen",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "Zugriffskontrolle (IAM)" },
@@ -1807,6 +1829,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-151",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Ein Standard- Supportplan ist eine Supportlösung, die Ihnen Best-Practice-Informationen, Informationen zum Systemzustand und Benachrichtigungen sowie rund um die Uhr Zugriff auf Abrechnungsinformationen zu möglichst geringen Kosten bietet. (Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.)",
+    underlinedText: "Standard",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "Entwickler" },
@@ -1833,6 +1856,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-153",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er richtig ist. Sie können eine Azure-Supportanfrage unter support.microsoft.com erstellen . (Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch richtig ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, mit der die Aussage richtig ist.)",
+    underlinedText: "support.microsoft.com",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "das Azure-Portal" },
@@ -1951,6 +1975,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-163",
     topicId: "azure-verwaltung",
     prompt: "Sie müssen Azure mithilfe von Azure Cloud Shell verwalten. Welches Azure-Portalsymbol sollten Sie auswählen? (Wählen Sie zur Beantwortung das entsprechende Symbol im Antwortbereich aus.)",
+    imageUrl: "/exam-images/az900-q163.png",
     options: [
       { id: "A", text: "Position 1" },
       { id: "B", text: "Position 2" },
@@ -1994,6 +2019,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-170",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er richtig ist. Sie können eine Azure-Supportanfrage unter support.microsoft.com erstellen . (Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch richtig ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, mit der die Aussage richtig ist.)",
+    underlinedText: "support.microsoft.com",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "das Azure-Portal" },
@@ -2725,6 +2751,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-231",
     topicId: "azure-architektur",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Microsoft Marketplace wird von Unternehmen als primäre Quelle für Abonnements auf Unternehmensebene für Anwendungen wie Microsoft Office 365 verwendet . Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.",
+    underlinedText: "wird von Unternehmen als primäre Quelle für Abonnements auf Unternehmensebene für Anwendungen wie Microsoft Office 365 verwendet",
     options: [
       { id: "A", text: "bietet Organisationen eine Möglichkeit, interne Apps zu veröffentlichen, damit Benutzer und Geschäftspartner einfach darauf zugreifen können." },
       { id: "B", text: "ist ein offener Marktplatz, der potenziellen Kunden den direkten Kontakt mit Lösungsanbietern ermöglicht." },
@@ -2836,6 +2863,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-240",
     topicId: "cloud-konzepte",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Ein Unternehmen migriert zu Cloud-Diensten, um Infrastrukturkosten als Betriebsausgaben zu veranschlagen . Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.",
+    underlinedText: "als Betriebsausgaben",
     options: [
       { id: "A", text: "als Kapital- und Betriebskosten" },
       { id: "B", text: "als Kapitalausgabe" },
@@ -3033,6 +3061,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-256",
     topicId: "azure-architektur",
     prompt: "Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er richtig ist: „ Eine Availability Zone in Azure verfügt über physisch getrennte Standorte auf zwei Kontinenten . “ (Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch richtig ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, mit der die Aussage richtig ist.)",
+    underlinedText: "physisch getrennte Standorte auf zwei Kontinenten",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich." },
       { id: "B", text: "innerhalb einer einzelnen Azure-Region" },
@@ -3208,6 +3237,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-273",
     topicId: "azure-verwaltung",
     prompt: "Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er richtig ist. In Azure Cloud Shell können Sie die gesetzlichen Standards und Vorschriften Ihres Unternehmens, z. B. ISO 27001, verfolgen . (Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch richtig ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, mit der die Aussage richtig ist.)",
+    underlinedText: "können Sie die gesetzlichen Standards und Vorschriften Ihres Unternehmens, z. B. ISO 27001, verfolgen",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich." },
       { id: "B", text: "das Microsoft Cloud Partner Portal" },
