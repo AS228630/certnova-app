@@ -6724,4 +6724,22 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     explanation: "Das Domain Name System (DNS) ist für die Übersetzung (Auflösung) eines Dienstnamens in eine IP-Adresse verantwortlich. Azure DNS bietet DNS-Hosting, Auflösung und Lastenausgleich für Ihre Anwendungen mithilfe der Microsoft Azure-Infrastruktur. Azure DNS unterstützt sowohl internetbasierte DNS-Domänen als auch private DNS-Zonen und bietet die folgenden Dienste: • Azure Public DNS ist ein Hostingdienst für DNS-Domänen. Wenn Sie Ihre Domänen in Azure hosten, können Sie Ihre DNS-Einträge mit denselben Anmeldeinformationen, APIs, Tools und Abrechnungsmethoden wie bei Ihren anderen Azure-Diensten verwalten. • Azure Private DNS ist ein DNS-Dienst für Ihre virtuellen Netzwerke. Azure Private DNS verwaltet und löst Domänennamen im virtuellen Netzwerk auf, ohne dass eine benutzerdefinierte DNS-Lösung konfiguriert werden muss. • Azure DNS Private Resolver ist ein Dienst, mit dem Sie private Azure DNS-Zonen aus einer lokalen Umgebung und umgekehrt abfragen können, ohne VM-basierte DNS-Server bereitzustellen. • Azure Traffic Manager ist ein DNS-basierter Lastenausgleich für den Datenverkehr. Mit diesem Dienst können Sie den Datenverkehr an Ihre öffentlichen Anwendungen in den globalen Azure-Regionen verteilen. Azure DNS ermöglicht mehrere Szenarien, darunter: • Hosten und Auflösen öffentlicher Domänen • Verwalten der DNS-Auflösung in Ihren virtuellen Netzwerken • Aktivieren der automatischen Registrierung für VMs • Aktivieren der Namensauflösung zwischen Azure und Ihren lokalen Ressourcen • Sicheres Hybridnetzwerk • Überwachen Sie DNS-Metriken und -Warnungen • Integration mit Ihren anderen Azure-Diensten • Führen Sie eine Private Link- und DNS-Integration im großen Maßstab durch • Schützen Sie Ihre öffentlichen und privaten DNS-Zonen und -Einträge • Aktivieren Sie die automatische Fehlertoleranz und das Failover für die DNS-Auflösung • Lastenausgleich für Ihre Anwendungen • Erhöhen Sie die Anwendungsverfügbarkeit und -leistung • Überwachen Sie die Verkehrsmuster Ihrer Anwendungen",
   },
+  {
+    type: "matching",
+    id: "real-az900-315",
+    topicId: "cloud-konzepte",
+    prompt: "Ordnen Sie die Ressourcen den entsprechenden Beschreibungen zu.",
+    instructions: "Ordnen Sie jede Ressource der passenden Beschreibung zu. Jede Ressource kann einmal, mehrmals oder gar nicht verwendet werden. HINWEIS: Jede richtige Zuordnung zählt einen Punkt.",
+    items: [
+      { id: "dpa", label: "Nachtrag zum Datenschutz" },
+      { id: "privacy", label: "Microsoft-Datenschutzerklärung" },
+      { id: "ost", label: "Bedingungen für Onlinedienste" },
+    ],
+    descriptions: [
+      { id: "d1", text: "Erläutert, welche personenbezogenen Daten Microsoft verarbeitet, wie Microsoft sie verarbeitet und zu welchen Zwecken.", correctItemId: "privacy" },
+      { id: "d2", text: "Legt die Verpflichtungen von Kunde und Microsoft hinsichtlich der Verarbeitung und Sicherheit von Kundendaten und personenbezogenen Daten in Verbindung mit Azure fest.", correctItemId: "dpa" },
+      { id: "d3", text: "Enthält Ausnahmen und zusätzliche Verpflichtungen für zentrale Onlinedienste, ergänzend zum Nachtrag zum Datenschutz.", correctItemId: "ost" },
+    ],
+    explanation: "Die Microsoft-Datenschutzerklärung erläutert, welche personenbezogenen Daten Microsoft verarbeitet, wie und zu welchen Zwecken. Der Nachtrag zum Datenschutz (DPA) legt die Verpflichtungen von Kunde und Microsoft hinsichtlich der Verarbeitung und Sicherheit von Kundendaten fest. Die Bedingungen für Onlinedienste enthalten weitere Ausnahmen und Verpflichtungen für zentrale Onlinedienste, ergänzend zum DPA.",
+  },
 ];
