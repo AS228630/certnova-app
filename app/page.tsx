@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Search,
@@ -27,13 +29,14 @@ import { FaLinkedin, FaGithub, FaYoutube, FaFacebook, FaInstagram } from "react-
 import { FaXTwitter } from "react-icons/fa6";
 import { getVendorIcon, getCompanyIcon } from "@/lib/vendorIcons";
 import LandingHeader from "@/components/LandingHeader";
+import { useLocale } from "@/components/LocaleProvider";
 
 const heroStats = [
-  { icon: Users, value: "120K+", label: "Aktive Lernende" },
-  { icon: BookOpen, value: "500+", label: "Kurse & Labs" },
-  { icon: ShieldCheck, value: "250+", label: "Zertifizierungen" },
-  { icon: ThumbsUp, value: "98%", label: "Weiterempfehlung" },
-  { icon: Star, value: "4.9/5", label: "Durchschnittsbewertung" },
+  { icon: Users, value: "120K+", labelKey: "landing.statActiveLearners" },
+  { icon: BookOpen, value: "500+", labelKey: "landing.statCoursesLabs" },
+  { icon: ShieldCheck, value: "250+", labelKey: "landing.statCertifications" },
+  { icon: ThumbsUp, value: "98%", labelKey: "landing.statRecommend" },
+  { icon: Star, value: "4.9/5", labelKey: "landing.statAvgRating" },
 ];
 
 const learningPaths = [
@@ -42,15 +45,15 @@ const learningPaths = [
     tagClass: "bg-warning/15 text-warning",
     icon: () => getVendorIcon("aws", 26),
     title: "AWS Cloud Practitioner",
-    level: "Beginner",
+    levelKey: "landing.beginner",
     progress: 65,
   },
   {
-    tag: "Security",
+    tagKey: "landing.tagSecurity",
     tagClass: "bg-success-light text-success",
     icon: () => <ShieldCheck size={24} className="text-success" />,
     title: "Cyber Security Fundamentals",
-    level: "Beginner",
+    levelKey: "landing.beginner",
     progress: 42,
   },
   {
@@ -58,70 +61,70 @@ const learningPaths = [
     tagClass: "bg-primary-light text-primary",
     icon: () => getVendorIcon("azure", 26),
     title: "Azure Administrator Associate",
-    level: "Intermediate",
+    levelKey: "landing.intermediate",
     progress: 30,
   },
   {
-    tag: "Development",
+    tagKey: "landing.tagDevelopment",
     tagClass: "bg-danger/15 text-danger",
     icon: () => <Code2 size={24} className="text-danger" />,
     title: "Full Stack Developer Bootcamp",
-    level: "Beginner",
+    levelKey: "landing.beginner",
     progress: 20,
   },
 ];
 
 const features = [
-  { icon: Laptop, title: "Praxisnah lernen", desc: "Hands-on Labs und Projekte für echte Praxiserfahrung." },
-  { icon: BadgeCheck, title: "Anerkannte Zertifikate", desc: "International anerkannte Zertifikate für deine Karriere." },
-  { icon: Sparkles, title: "KI Coach", desc: "Dein persönlicher KI-Coach begleitet dich beim Lernen." },
-  { icon: Route, title: "Lernpfade", desc: "Strukturierte Pfade für individuellen Erfolg." },
-  { icon: Cloud, title: "Flexibel lernen", desc: "Lerne wann und wo du willst, auf allen Geräten." },
-  { icon: TrendingUp, title: "Karriere boost", desc: "Bereite dich auf Interviews vor und finde deinen Traumjob." },
+  { icon: Laptop, titleKey: "landing.featPracticalTitle", descKey: "landing.featPracticalDesc" },
+  { icon: BadgeCheck, titleKey: "landing.featCertsTitle", descKey: "landing.featCertsDesc" },
+  { icon: Sparkles, titleKey: "landing.featAiCoachTitle", descKey: "landing.featAiCoachDesc" },
+  { icon: Route, titleKey: "landing.featPathsTitle", descKey: "landing.featPathsDesc" },
+  { icon: Cloud, titleKey: "landing.featFlexTitle", descKey: "landing.featFlexDesc" },
+  { icon: TrendingUp, titleKey: "landing.featCareerTitle", descKey: "landing.featCareerDesc" },
 ];
 
 const testimonials = [
   {
     name: "Lukas Weber",
-    role: "AWS Solutions Architect",
-    quote: "Dank CertCoach habe ich mein AWS Zertifikat bestanden und meinen Traumjob bekommen!",
+    roleKey: "landing.role1",
+    quoteKey: "landing.quote1",
     seed: "Lukas-Weber",
   },
   {
     name: "Sarah Müller",
-    role: "Azure Administrator",
-    quote: "Die Labs und Projekte sind einfach fantastisch. Sehr praxisnah und verständlich erklärt.",
+    roleKey: "landing.role2",
+    quoteKey: "landing.quote2",
     seed: "Sarah-Mueller",
   },
   {
     name: "David Krause",
-    role: "Security Analyst",
-    quote: "Die Lernpfade haben mir geholfen, meine Karriere im Bereich Cyber Security zu starten.",
+    roleKey: "landing.role3",
+    quoteKey: "landing.quote3",
     seed: "David-Krause",
   },
 ];
 
 const footerColumns = [
   {
-    title: "Plattform",
+    titleKey: "landing.footerPlatform",
     links: ["Kurse", "Lernpfade", "Zertifizierungen", "Labs", "KI Coach", "Community"],
   },
   {
-    title: "Ressourcen",
+    titleKey: "landing.footerResources",
     links: ["Blog", "Success Stories", "Learning Guides", "Interview Fragen", "Practice Exams", "FAQ"],
   },
   {
-    title: "Rechtliches",
+    titleKey: "landing.footerLegal",
     links: ["Impressum", "Datenschutz (GDPR)", "Nutzungsbedingungen", "AGB", "Widerrufsrecht"],
   },
 ];
 
 const trustBadges = [
-  { icon: Lock, label: "SSL Verschlüsselt", color: "#22c55e" },
-  { icon: CreditCard, label: "Sichere Zahlung", color: "#6d4cff" },
-  { icon: ShieldCheck, label: "GDPR Konform", color: "#0ea5e9" },
-  { icon: Star, label: "Trusted by 100.000+ Lernende", color: "#f59e0b" },
-  { icon: Globe2, label: "Server in Deutschland", color: "#ef4444" },
+  { icon: Lock, labelKey: "landing.sslEncrypted", color: "#22c55e" },
+  { icon: CreditCard, labelKey: "landing.securePayment", color: "#6d4cff" },
+  { icon: ShieldCheck, labelKey: "landing.gdprCompliant", color: "#0ea5e9" },
+  { icon: Users, labelKey: "landing.communitySupport", color: "#f59e0b" },
+  { icon: Globe2, labelKey: "landing.serverInGermany", color: "#ef4444" },
 ];
 
 function GermanFlag({ size = 16 }: { size?: number }) {
@@ -135,6 +138,7 @@ function GermanFlag({ size = 16 }: { size?: number }) {
 }
 
 export default function LandingPage() {
+  const { t } = useLocale();
   return (
     <div className="min-h-screen bg-bg">
       {/* Nav */}
@@ -145,15 +149,15 @@ export default function LandingPage() {
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <div>
             <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-border-soft bg-panel px-3 py-1.5 text-xs font-semibold text-warning">
-              🏆 #1 IT Learning Platform in DACH
+              🏆 {t("landing.badge")}
             </span>
             <h1 className="text-4xl font-extrabold leading-tight text-text sm:text-5xl">
-              Deine Zukunft beginnt
+              {t("landing.heroTitle1")}
               <br />
-              <span className="text-primary">mit neuen Skills</span>
+              <span className="text-primary">{t("landing.heroTitle2")}</span>
             </h1>
             <p className="mt-5 max-w-md text-base leading-relaxed text-text-muted">
-              Lerne von Experten, erhalte anerkannte Zertifikate und baue die Karriere auf, die du dir wünschst.
+              {t("landing.heroDesc")}
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -161,14 +165,14 @@ export default function LandingPage() {
                 href="/register"
                 className="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-dark"
               >
-                Kostenlos starten
+                {t("landing.ctaFree")}
                 <ArrowRight size={16} />
               </Link>
               <Link
                 href="/certifications"
                 className="flex items-center gap-2 rounded-lg border border-border-soft px-6 py-3 text-sm font-bold text-text hover:bg-panel-alt"
               >
-                Kurse entdecken
+                {t("landing.ctaDiscover")}
                 <Play size={14} />
               </Link>
             </div>
@@ -186,7 +190,7 @@ export default function LandingPage() {
               </div>
               <div className="text-sm">
                 <p className="font-bold text-text">120K+</p>
-                <p className="text-text-faint">Aktive Lernende weltweit</p>
+                <p className="text-text-faint">{t("landing.activeLearners")}</p>
               </div>
             </div>
           </div>
@@ -274,13 +278,13 @@ export default function LandingPage() {
         {/* Stats bar */}
         <div className="mt-16 grid grid-cols-2 gap-4 rounded-2xl border border-border-soft bg-panel p-6 sm:grid-cols-3 lg:grid-cols-5">
           {heroStats.map((s) => (
-            <div key={s.label} className="flex items-center gap-3">
+            <div key={s.labelKey} className="flex items-center gap-3">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-light text-primary">
                 <s.icon size={18} />
               </div>
               <div>
                 <p className="font-bold text-text">{s.value}</p>
-                <p className="text-xs text-text-faint">{s.label}</p>
+                <p className="text-xs text-text-faint">{t(s.labelKey)}</p>
               </div>
             </div>
           ))}
@@ -290,9 +294,9 @@ export default function LandingPage() {
       {/* Popular learning paths */}
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-2xl font-extrabold text-text">Beliebte Lernpfade</h2>
+          <h2 className="text-2xl font-extrabold text-text">{t("landing.popularPaths")}</h2>
           <Link href="/learning-paths" className="flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
-            Alle Lernpfade anzeigen
+            {t("landing.viewAllPaths")}
             <ArrowRight size={14} />
           </Link>
         </div>
@@ -301,15 +305,15 @@ export default function LandingPage() {
           {learningPaths.map((p) => (
             <div key={p.title} className="rounded-2xl border border-border-soft bg-panel p-5">
               <div className="mb-4 flex items-center justify-between">
-                <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${p.tagClass}`}>{p.tag}</span>
+                <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${p.tagClass}`}>{p.tagKey ? t(p.tagKey) : p.tag}</span>
                 {p.icon()}
               </div>
               <h3 className="mb-1 font-bold text-text">{p.title}</h3>
-              <p className="mb-4 text-xs text-text-faint">{p.level}</p>
+              <p className="mb-4 text-xs text-text-faint">{t(p.levelKey)}</p>
               <div className="h-1.5 w-full rounded-full bg-panel-alt">
                 <div className="h-1.5 rounded-full bg-primary" style={{ width: `${p.progress}%` }} />
               </div>
-              <p className="mt-2 text-xs text-text-faint">{p.progress}% abgeschlossen</p>
+              <p className="mt-2 text-xs text-text-faint">{p.progress}% {t("landing.completedSuffix")}</p>
             </div>
           ))}
         </div>
@@ -317,15 +321,15 @@ export default function LandingPage() {
 
       {/* Why CertCoach */}
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <h2 className="mb-6 text-2xl font-extrabold text-text">Warum CertCoach?</h2>
+        <h2 className="mb-6 text-2xl font-extrabold text-text">{t("landing.whyCertCoach")}</h2>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
           {features.map((f) => (
-            <div key={f.title} className="rounded-2xl border border-border-soft bg-panel p-5">
+            <div key={f.titleKey} className="rounded-2xl border border-border-soft bg-panel p-5">
               <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-primary-light text-primary">
                 <f.icon size={18} />
               </div>
-              <h3 className="mb-1 text-sm font-bold text-text">{f.title}</h3>
-              <p className="text-xs leading-relaxed text-text-faint">{f.desc}</p>
+              <h3 className="mb-1 text-sm font-bold text-text">{t(f.titleKey)}</h3>
+              <p className="text-xs leading-relaxed text-text-faint">{t(f.descKey)}</p>
             </div>
           ))}
         </div>
@@ -334,28 +338,28 @@ export default function LandingPage() {
       {/* Testimonials */}
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-2xl font-extrabold text-text">Was unsere Lernenden sagen</h2>
+          <h2 className="text-2xl font-extrabold text-text">{t("landing.testimonialsTitle")}</h2>
           <Link href="/reviews" className="flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
-            Alle Bewertungen anzeigen
+            {t("landing.viewAllReviews")}
             <ArrowRight size={14} />
           </Link>
         </div>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((t) => (
-            <div key={t.name} className="rounded-2xl border border-border-soft bg-panel p-5">
+          {testimonials.map((tst) => (
+            <div key={tst.name} className="rounded-2xl border border-border-soft bg-panel p-5">
               <div className="mb-3 flex items-center gap-3">
                 <img
-                  src={`https://api.dicebear.com/9.x/personas/svg?seed=${t.seed}`}
+                  src={`https://api.dicebear.com/9.x/personas/svg?seed=${tst.seed}`}
                   alt=""
                   className="h-11 w-11 shrink-0 rounded-full bg-panel-alt object-cover"
                 />
                 <div>
-                  <p className="text-sm font-bold text-text">{t.name}</p>
-                  <p className="text-xs text-text-faint">{t.role}</p>
+                  <p className="text-sm font-bold text-text">{tst.name}</p>
+                  <p className="text-xs text-text-faint">{t(tst.roleKey)}</p>
                 </div>
               </div>
-              <p className="mb-3 text-sm leading-relaxed text-text-muted">&ldquo;{t.quote}&rdquo;</p>
+              <p className="mb-3 text-sm leading-relaxed text-text-muted">&ldquo;{t(tst.quoteKey)}&rdquo;</p>
               <div className="flex gap-0.5 text-warning">
                 {Array.from({ length: 5 }).map((_, i) => (
                   <Star key={i} size={14} className="fill-warning" />
@@ -375,9 +379,9 @@ export default function LandingPage() {
               <Rocket size={22} />
             </div>
             <div>
-              <h2 className="text-xl font-extrabold text-white">Bereit, deine Zukunft zu gestalten?</h2>
+              <h2 className="text-xl font-extrabold text-white">{t("landing.ctaReadyTitle")}</h2>
               <p className="mt-1 max-w-md text-sm text-white/80">
-                Starte noch heute mit IT-Zertifizierungen, Sprachen, KI-Coach und Karriere-Tools.
+                {t("landing.ctaReadyDesc")}
               </p>
             </div>
           </div>
@@ -385,26 +389,26 @@ export default function LandingPage() {
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
             <input
               type="email"
-              placeholder="Deine E-Mail-Adresse"
+              placeholder={t("landing.emailPlaceholder")}
               className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-2.5 text-sm text-white placeholder:text-white/60 focus:outline-none sm:w-64"
             />
             <Link
               href="/register"
               className="flex items-center justify-center gap-1 rounded-lg bg-white px-5 py-2.5 text-sm font-bold text-primary hover:bg-white/90"
             >
-              Kostenlos starten
+              {t("landing.ctaFree")}
             </Link>
           </div>
         </div>
         <div className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-text-faint">
           <span className="flex items-center gap-1.5">
-            <BadgeCheck size={14} className="text-success" /> Kostenlos starten
+            <BadgeCheck size={14} className="text-success" /> {t("landing.ctaFree")}
           </span>
           <span className="flex items-center gap-1.5">
-            <BadgeCheck size={14} className="text-success" /> Keine Kreditkarte erforderlich
+            <BadgeCheck size={14} className="text-success" /> {t("landing.noCreditCard")}
           </span>
           <span className="flex items-center gap-1.5">
-            <BadgeCheck size={14} className="text-success" /> Jederzeit kündbar
+            <BadgeCheck size={14} className="text-success" /> {t("landing.cancelAnytime")}
           </span>
         </div>
       </section>
@@ -421,7 +425,7 @@ export default function LandingPage() {
                 <span className="text-lg font-bold text-text">CertCoach</span>
               </div>
               <p className="mb-4 max-w-xs text-sm text-text-faint">
-                Deine All-in-One-Plattform für IT-Skills, Sprachen und Karriereentwicklung.
+                {t("landing.footerTagline")}
               </p>
               <div className="flex items-center gap-2.5">
                 {[
@@ -448,8 +452,8 @@ export default function LandingPage() {
             </div>
 
             {footerColumns.map((col) => (
-              <div key={col.title}>
-                <p className="mb-3 text-sm font-bold text-text">{col.title}</p>
+              <div key={col.titleKey}>
+                <p className="mb-3 text-sm font-bold text-text">{t(col.titleKey)}</p>
                 <ul className="space-y-2">
                   {col.links.map((l) => (
                     <li key={l}>
@@ -466,19 +470,19 @@ export default function LandingPage() {
           <div className="mt-10 rounded-xl border border-border-soft p-5">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-sm font-bold text-text">Stay updated</p>
+                <p className="text-sm font-bold text-text">{t("landing.stayUpdated")}</p>
                 <p className="text-xs text-text-faint">
-                  Erhalte die neuesten Kurse, Zertifizierungen und Lerntipps in deinem Postfach.
+                  {t("landing.newsletterDesc")}
                 </p>
               </div>
               <div className="flex flex-col gap-2 sm:flex-row">
                 <input
                   type="email"
-                  placeholder="Deine E-Mail-Adresse"
+                  placeholder={t("landing.emailPlaceholder")}
                   className="rounded-lg border border-border-soft bg-panel-alt px-4 py-2 text-sm text-text placeholder:text-text-faint focus:outline-none sm:w-56"
                 />
                 <button className="rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white hover:bg-primary-dark">
-                  Abonnieren
+                  {t("landing.subscribe")}
                 </button>
               </div>
             </div>
@@ -519,17 +523,17 @@ export default function LandingPage() {
           <div className="mt-8 flex flex-col items-center gap-4 border-t border-border-soft pt-6 sm:flex-row sm:justify-between">
             <div className="flex flex-wrap items-center justify-center gap-4">
               {trustBadges.map((b) => (
-                <span key={b.label} className="flex items-center gap-1.5 text-[11px] text-text-muted">
+                <span key={b.labelKey} className="flex items-center gap-1.5 text-[11px] text-text-muted">
                   <b.icon size={13} style={{ color: b.color }} />
-                  {b.label}
+                  {t(b.labelKey)}
                 </span>
               ))}
             </div>
             <div className="flex items-center gap-4 text-xs text-text-faint">
-              <span>© 2026 CertCoach. Made with ❤️ in Germany</span>
+              <span>{t("landing.copyright")}</span>
               <button className="flex items-center gap-1.5">
                 <GermanFlag size={16} />
-                Sprache
+                {t("landing.language")}
               </button>
             </div>
           </div>
