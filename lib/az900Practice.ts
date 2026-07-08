@@ -6742,4 +6742,14 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     explanation: "Die Microsoft-Datenschutzerklärung erläutert, welche personenbezogenen Daten Microsoft verarbeitet, wie und zu welchen Zwecken. Der Nachtrag zum Datenschutz (DPA) legt die Verpflichtungen von Kunde und Microsoft hinsichtlich der Verarbeitung und Sicherheit von Kundendaten fest. Die Bedingungen für Onlinedienste enthalten weitere Ausnahmen und Verpflichtungen für zentrale Onlinedienste, ergänzend zum DPA.",
   },
+  {
+    id: "real-az900-429",
+    topicId: "azure-architektur",
+    prompt: "Diese Frage enthält ausschließlich eine Grafik/einen Screenshot im PDF — der Fragetext konnte nicht zuverlässig gelesen und übersetzt werden.",
+    options: [
+      { id: "A", text: "(Text nicht verfügbar)" },
+    ],
+    correct: "A",
+    explanation: "Für diese Frage liegt uns kein extrahierbarer Text vor. Bitte einen klaren Screenshot der Original-PDF-Seite senden, damit sie korrekt ergänzt werden kann.",
+  },
 ];
