@@ -133,6 +133,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-3",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Azure-Richtlinien bieten eine gemeinsame Plattform für die Bereitstellung von Objekten in einer Cloud-Infrastruktur und für die Implementierung von Konsistenz in der gesamten Azure-Umgebung. ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.)",
+    underlinedText: "Azure-Richtlinien",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "Ressourcengruppen bieten" },
@@ -331,6 +332,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-19",
     topicId: "azure-verwaltung",
     prompt: "Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Ressourcengruppen bieten Organisationen die Möglichkeit, die Compliance von Azure-Ressourcen über mehrere Abonnements hinweg zu verwalten. ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.)",
+    underlinedText: "Ressourcengruppen",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "Verwaltungsgruppen" },
@@ -442,6 +444,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-28",
     topicId: "cloud-konzepte",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Ein Unternehmen, das seine Infrastruktur in einer privaten Cloud hostet , kann sein Rechenzentrum außer Betrieb nehmen. ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.)",
+    underlinedText: "privaten Cloud",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich." },
       { id: "B", text: "In einer Hybrid Cloud." },
@@ -537,6 +540,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-37",
     topicId: "cloud-konzepte",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Ein Unternehmen, das seine Infrastruktur in einer privaten Cloud hostet , kann sein Rechenzentrum außer Betrieb nehmen. ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.)",
+    underlinedText: "privaten Cloud",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "In einer Hybrid Cloud" },
@@ -756,6 +760,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-63",
     topicId: "azure-verwaltung",
     prompt: "Hinweis: Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er korrekt ist. Einer der Vorteile von Azure SQL Data Warehouse ist die integrierte Hochverfügbarkeit der Plattform. ( Anleitung: Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch korrekt ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.)",
+    underlinedText: "integrierte Hochverfügbarkeit",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich" },
       { id: "B", text: "Automatische Skalierung" },
@@ -4537,5 +4542,17 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Die Standardstufe ist die günstigste, die alle Anforderungen erfüllt.",
+  },
+  {
+    type: "yesno",
+    id: "real-az900-351",
+    topicId: "azure-verwaltung",
+    prompt: "Wählen Sie für jede der folgenden Aussagen \u201eJa\u201c, wenn sie wahr ist. Andernfalls wählen Sie \u201eNein\u201c.",
+    statements: [
+      { text: "Pay-As-You-Go (PAYG) ist ein verbrauchsbasiertes Modell", correct: "Ja" },
+      { text: "Zahlungen an Cloud-Dienstanbieter gelten als Investitionsausgaben (CapEx)", correct: "Nein" },
+      { text: "Die über ein verbrauchsbasiertes Modell bereitgestellten Dienste gelten als Betriebsausgaben (OpEx)", correct: "Ja" },
+    ],
+    explanation: "Investitionsausgaben (CapEx) sind die anfänglichen Vorabkosten für physische Infrastruktur, deren Wert mit der Zeit sinkt. Betriebsausgaben (OpEx) sind Ausgaben für Dienstleistungen oder Produkte, die sofort abgerechnet werden und erst bei Nutzung anfallen. Beim Pay-As-You-Go-Modell zahlen Sie für Cloud-Dienste nach tatsächlicher Nutzung — das ist ein klassisches Betriebsausgaben-Modell (OpEx), keine Investitionsausgabe (CapEx).",
   },
 ];
