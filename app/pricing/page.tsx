@@ -6,7 +6,6 @@ import {
   Wallet,
   CalendarDays,
   Crown,
-  Building2,
   CreditCard,
   RefreshCcw,
   ShieldCheck,
@@ -94,28 +93,6 @@ const plans = [
     ctaClass: "bg-primary text-white hover:bg-primary-dark",
     featured: true,
   },
-  {
-    icon: Building2,
-    iconClass: "bg-white/10 text-text",
-    name: "Für Unternehmen",
-    tag: "Enterprise Plan",
-    tagClass: "text-text-muted",
-    price: { monthly: "Individuelle Preise", yearly: "Individuelle Preise" },
-    period: { monthly: "", yearly: "" },
-    description: "Lösungen für Teams jeder Größe.",
-    features: [
-      "Team-Dashboards",
-      "Fortschrittsanalysen",
-      "Rollen & Rechte",
-      "SLA & Support",
-      "Rechnungsstellung",
-      "Onboarding & Schulung",
-    ],
-    cta: "Mehr erfahren",
-    ctaHref: "/business",
-    ctaClass: "border border-border-soft text-text hover:bg-panel-alt",
-    featured: false,
-  },
 ];
 
 const addOns = [
@@ -186,11 +163,10 @@ const faqs = [
   },
   {
     q: "Gibt es Rabatte für Studenten oder Bildungseinrichtungen?",
-    a: "Ja, wir bieten vergünstigte Konditionen für Studierende und Bildungseinrichtungen an. Kontaktiere unser Team über die Unternehmensseite für weitere Informationen.",
+    a: "Ja, wir bieten vergünstigte Konditionen für Studierende und Bildungseinrichtungen an. Kontaktiere unseren Support für weitere Informationen.",
   },
 ];
 
-const trustedLogos = ["Google", "Microsoft", "Amazon", "Deloitte", "Siemens", "IBM"];
 
 export default function PricingPage() {
   const [billing, setBilling] = useState<Billing>("yearly");
@@ -274,7 +250,7 @@ export default function PricingPage() {
         </div>
 
         {/* Plan cards */}
-        <section className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <section className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {plans.map((plan) => (
             <div
               key={plan.name}
@@ -365,41 +341,6 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* Enterprise strip */}
-        <section className="mt-8 flex flex-col items-start gap-4 rounded-2xl border border-border-soft bg-panel p-5 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-start gap-3">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary-light text-primary">
-              <Building2 size={20} />
-            </div>
-            <div>
-              <p className="text-sm font-bold text-text">Maßgeschneiderte Lösungen für dein Unternehmen</p>
-              <p className="mt-0.5 text-xs text-text-muted">
-                Skaliere das Lernen in deinem Team mit leistungsstarken Tools und Einblicken.
-              </p>
-              <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-text-muted">
-                <span className="flex items-center gap-1">
-                  <Check size={12} className="text-success" />
-                  Flexible Preise
-                </span>
-                <span className="flex items-center gap-1">
-                  <Check size={12} className="text-success" />
-                  Dedicated Support
-                </span>
-                <span className="flex items-center gap-1">
-                  <Check size={12} className="text-success" />
-                  Individuelle Integrationen
-                </span>
-              </div>
-            </div>
-          </div>
-          <Link
-            href="/business"
-            className="shrink-0 rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-white hover:bg-primary-dark"
-          >
-            Kontakt aufnehmen
-          </Link>
-        </section>
-
         {/* FAQ */}
         <section className="mt-14">
           <h2 className="mb-5 text-center text-lg font-bold text-text">Häufige Fragen</h2>
@@ -418,16 +359,6 @@ export default function PricingPage() {
                 </button>
                 {openFaq === i && <p className="px-4 pb-3 text-xs text-text-muted">{f.a}</p>}
               </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Trusted by */}
-        <section className="mt-12 text-center">
-          <p className="mb-5 text-xs text-text-faint">Vertrauenswürdig von führenden Unternehmen weltweit</p>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-sm font-bold text-text-faint">
-            {trustedLogos.map((l) => (
-              <span key={l}>{l}</span>
             ))}
           </div>
         </section>

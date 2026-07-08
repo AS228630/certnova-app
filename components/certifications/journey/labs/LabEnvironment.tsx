@@ -146,7 +146,7 @@ export default function LabEnvironment() {
               <div className="flex items-center gap-2 border-l border-white/25 pl-2.5">
                 <div className="text-right leading-tight">
                   <p className="text-[10px] text-white">student@certcoach-lab.com</p>
-                  <p className="text-[9px] text-[#c7e0f4]">CertCoach GmbH (Lab)</p>
+                  <p className="text-[9px] text-[#c7e0f4]">Contoso Ltd. (Lab)</p>
                 </div>
                 <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white text-[10px] font-bold text-[#0078d4]">
                   A

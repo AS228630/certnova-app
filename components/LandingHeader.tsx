@@ -10,10 +10,7 @@ const navLinksBefore = [
   { label: "Lernpfade", href: "/learning-paths" },
 ];
 
-const navLinksAfter = [
-  { label: "Für Unternehmen", href: "/business" },
-  { label: "Preise", href: "/pricing" },
-];
+const navLinksAfter = [{ label: "Preise", href: "/pricing" }];
 
 export default function LandingHeader() {
   const [open, setOpen] = useState(false);

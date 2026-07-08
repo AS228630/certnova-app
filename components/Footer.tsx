@@ -11,10 +11,6 @@ const columns = [
     links: ["Blog", "Lern-Guides", "Erfolgsgeschichten", "Übungsfragen", "Practice Exams", "FAQ", "Hilfe-Center"],
   },
   {
-    title: "Unternehmen",
-    links: ["Über uns", "Karriere", "Partner", "Kontakt", "Presse", "Affiliate Programm"],
-  },
-  {
     title: "Rechtliches",
     links: ["Impressum", "Datenschutz (DSGVO)", "Cookie-Einstellungen", "AGB", "Widerrufsrecht", "Barrierefreiheit", "Sicherheit"],
   },
@@ -24,14 +20,14 @@ const trustItems = [
   { icon: ShieldCheck, label: "GDPR Konform" },
   { icon: Lock, label: "SSL Verschlüsselt" },
   { icon: BadgeCheck, label: "ISO 27001 Zertifiziert" },
-  { icon: Users, label: "Trusted by 100.000+ Lernende" },
+  { icon: Users, label: "Community-Support" },
   { icon: Server, label: "Server in Deutschland" },
 ];
 
 export default function Footer() {
   return (
     <footer className="mt-10 rounded-2xl border border-border-soft bg-panel p-6 md:p-8">
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="mb-3 flex items-center gap-2">
             <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary">
@@ -106,7 +102,7 @@ export default function Footer() {
             </span>
           ))}
         </div>
-        <p>© 2026 CertCoach GmbH · Made with ❤️ in Germany</p>
+        <p>© 2026 CertCoach · Made with ❤️ in Germany</p>
       </div>
     </footer>
   );

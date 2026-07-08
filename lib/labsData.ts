@@ -465,7 +465,7 @@ export function generateM365Lab(certId: string, certTitle: string, level: string
       "Überprüfe dein Ergebnis mit der Validierung.",
     ],
     details: [
-      { label: "Organisation", value: "CertCoach GmbH (Lab)" },
+      { label: "Organisation", value: "Contoso Ltd. (Lab)" },
       { label: "Benötigte Rollen", value: "Benutzeradministrator" },
       { label: "Ziel-Domain", value: `${certId}-lab.onmicrosoft.com` },
       { label: "Ressourcen", value: "1" },

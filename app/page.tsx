@@ -23,10 +23,8 @@ import {
   Apple,
   AlignLeft,
 } from "lucide-react";
-import { FaLinkedin, FaGithub, FaYoutube, FaFacebook, FaInstagram, FaMicrosoft, FaAmazon } from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaYoutube, FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { SiSiemens } from "react-icons/si";
-import { FcGoogle } from "react-icons/fc";
 import { getVendorIcon, getCompanyIcon } from "@/lib/vendorIcons";
 import LandingHeader from "@/components/LandingHeader";
 
@@ -103,15 +101,6 @@ const testimonials = [
   },
 ];
 
-const trustedLogos = [
-  { name: "Google", type: "icon" as const, Icon: FcGoogle, color: undefined },
-  { name: "Microsoft", type: "icon" as const, Icon: FaMicrosoft, color: "#00A4EF" },
-  { name: "Amazon", type: "icon" as const, Icon: FaAmazon, color: "#FF9900" },
-  { name: "Deloitte.", type: "text" as const, color: "#86BC25" },
-  { name: "SIEMENS", type: "icon" as const, Icon: SiSiemens, color: "#009999" },
-  { name: "IBM", type: "text" as const, color: "#1F70C1" },
-];
-
 const footerColumns = [
   {
     title: "Plattform",
@@ -120,10 +109,6 @@ const footerColumns = [
   {
     title: "Ressourcen",
     links: ["Blog", "Success Stories", "Learning Guides", "Interview Fragen", "Practice Exams", "FAQ"],
-  },
-  {
-    title: "Unternehmen",
-    links: ["Über uns", "Karriere", "Partner", "Presse", "Affiliate Program"],
   },
   {
     title: "Rechtliches",
@@ -381,23 +366,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Trusted by */}
-      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        <p className="mb-6 text-center text-sm text-text-faint">
-          Vertrauenswürdig von führenden Unternehmen weltweit
-        </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-4">
-          {trustedLogos.map((l) =>
-            l.type === "icon" ? (
-              <l.Icon key={l.name} size={26} style={{ color: l.color }} aria-label={l.name} />
-            ) : (
-              <span key={l.name} className="text-xl font-black tracking-tight" style={{ color: l.color }}>
-                {l.name}
-              </span>
-            )
-          )}
-        </div>
-      </section>
 
       {/* CTA banner */}
       <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -444,7 +412,7 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="mt-10 border-t border-border-soft bg-panel">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-6">
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5">
             <div className="lg:col-span-2">
               <div className="mb-3 flex items-center gap-2">
                 <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white">
@@ -558,7 +526,7 @@ export default function LandingPage() {
               ))}
             </div>
             <div className="flex items-center gap-4 text-xs text-text-faint">
-              <span>© 2026 CertCoach GmbH. Made with ❤️ in Germany</span>
+              <span>© 2026 CertCoach. Made with ❤️ in Germany</span>
               <button className="flex items-center gap-1.5">
                 <GermanFlag size={16} />
                 Sprache
