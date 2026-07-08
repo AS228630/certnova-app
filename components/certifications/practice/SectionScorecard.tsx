@@ -60,6 +60,7 @@ export default function SectionScorecard({
   onNextSection,
   onRetry,
   onRetryQuestion,
+  onViewFinalResult,
 }: {
   sectionIndex: number;
   questions: PracticeQuestion[];
@@ -74,6 +75,7 @@ export default function SectionScorecard({
   onNextSection: () => void;
   onRetry: () => void;
   onRetryQuestion: (questionId: string) => void;
+  onViewFinalResult?: () => void;
 }) {
   const [filter, setFilter] = useState<"alle" | "falsch" | "uebersprungen" | "markiert">("alle");
   const [hideWrong, setHideWrong] = useState(false);
@@ -415,13 +417,22 @@ export default function SectionScorecard({
         >
           ← Zurück zum Lernpfad
         </button>
-        {hasNextSection && (
+        {hasNextSection ? (
           <button
             onClick={onNextSection}
             className="flex-1 rounded-lg bg-primary py-3 text-sm font-bold text-white hover:bg-primary-dark"
           >
             Nächsten Abschnitt starten
           </button>
+        ) : (
+          onViewFinalResult && (
+            <button
+              onClick={onViewFinalResult}
+              className="flex-1 rounded-lg bg-primary py-3 text-sm font-bold text-white hover:bg-primary-dark"
+            >
+              Gesamtergebnis ansehen 🎉
+            </button>
+          )
         )}
         <button
           onClick={onRetry}

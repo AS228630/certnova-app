@@ -12,6 +12,7 @@ import AICoachPanel from "./AICoachPanel";
 import PracticeNotesPanel from "./PracticeNotesPanel";
 import PracticeFloatingActions from "./PracticeFloatingActions";
 import SectionScorecard from "./SectionScorecard";
+import ExamCompleteScreen from "./ExamCompleteScreen";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 
@@ -53,6 +54,7 @@ export default function PracticeClient({
   const [hintOpen, setHintOpen] = useState(false);
   const [remainingSeconds, setRemainingSeconds] = useState(EXAM_TOTAL_SECONDS);
   const [scorecardSection, setScorecardSection] = useState<number | null>(null);
+  const [examComplete, setExamComplete] = useState(false);
 
   useEffect(() => {
     const t = setInterval(() => setRemainingSeconds((s) => Math.max(0, s - 1)), 1000);
@@ -165,6 +167,48 @@ export default function PracticeClient({
     );
   }
 
+  if (examComplete) {
+    return (
+      <div>
+        <PracticeToolbar
+          companyName={companyName}
+          companySlug={companySlug}
+          certCode={certCode}
+          certTitle={certTitle}
+          index={index}
+          total={activeQuestions.length}
+          onToggleNotes={() => setNotesOpen(true)}
+          onShuffle={shuffle}
+        />
+        <div className="mt-6">
+          <ExamCompleteScreen
+            companySlug={companySlug}
+            companyName={companyName}
+            certCode={certCode}
+            certTitle={certTitle}
+            questions={activeQuestions}
+            topics={topics}
+            answers={answers}
+            checked={checked}
+            skipped={skipped}
+            elapsedSeconds={EXAM_TOTAL_SECONDS - remainingSeconds}
+            onBackToPath={() => router.push(`/certifications/${companySlug}/${certId}/learn`)}
+            onRetryAll={() => {
+              setAnswers({});
+              setChecked(new Set());
+              setSkipped(new Set());
+              setMarked(new Set());
+              setExamComplete(false);
+              setScorecardSection(null);
+              goTo(0);
+            }}
+          />
+        </div>
+        <PracticeNotesPanel isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
+      </div>
+    );
+  }
+
   if (scorecardSection !== null) {
     return (
       <div>
@@ -221,6 +265,10 @@ export default function PracticeClient({
               });
               setScorecardSection(null);
               goTo(qIndex);
+            }}
+            onViewFinalResult={() => {
+              setScorecardSection(null);
+              setExamComplete(true);
             }}
           />
         </div>
