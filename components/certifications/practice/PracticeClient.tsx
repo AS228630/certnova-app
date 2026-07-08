@@ -125,6 +125,21 @@ export default function PracticeClient({
   function resetSection(sectionIdx: number) {
     const [start, end] = getSectionRange(activeQuestions.length, sectionIdx);
     const ids = activeQuestions.slice(start, end).map((q) => q.id);
+
+    // Shuffle just this section's question order (Fisher-Yates), so
+    // retaking a section shows the same pool of questions but never in the
+    // same order twice — keeps section boundaries (global indices) stable
+    // for the rest of the exam.
+    const shuffledIds = [...ids];
+    for (let i = shuffledIds.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledIds[i], shuffledIds[j]] = [shuffledIds[j], shuffledIds[i]];
+    }
+    const baseOrder = order ?? questions.map((q) => q.id);
+    const newOrder = [...baseOrder];
+    newOrder.splice(start, shuffledIds.length, ...shuffledIds);
+    setOrder(newOrder);
+
     setChecked((s) => {
       const next = new Set(s);
       ids.forEach((id) => next.delete(id));
