@@ -45,6 +45,13 @@ export type SingleChoiceQuestion = {
   id: string;
   topicId: string;
   prompt: string;
+  /** For "check the underlined text" questions: the exact substring of
+   * `prompt` that should be rendered with an underline, so the student
+   * knows which part to evaluate/replace. */
+  underlinedText?: string;
+  /** Path to a reference screenshot the question depends on (e.g. an Azure
+   * Portal navigation panel), shown above the answer options. */
+  imageUrl?: string;
   options: { id: PracticeOptionId; text: string }[];
   correct: PracticeOptionId;
   explanation: string;
@@ -473,6 +480,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-32",
     topicId: "azure-verwaltung",
     prompt: "Sie benötigen eine Liste der geplanten Wartungsereignisse, die die Verfügbarkeit eines Azure-Abonnements beeinträchtigen können. Welches Blade sollten Sie im Azure-Portal verwenden? (Wählen Sie zur Beantwortung das entsprechende Blade im Antwortbereich aus.)",
+    imageUrl: "/exam-images/az900-q32.png",
     options: [
       { id: "A", text: "Alle Ressourcen" },
       { id: "B", text: "Azure Active Directory" },
@@ -3044,6 +3052,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-258",
     topicId: "azure-verwaltung",
     prompt: "Bei dieser Frage müssen Sie den unterstrichenen Text prüfen, um festzustellen, ob er richtig ist. Azure Databricks ist ein auf Apache Spark basierender Analysedienst. (Überprüfen Sie den unterstrichenen Text. Wenn die Aussage dadurch richtig ist, wählen Sie „Keine Änderung erforderlich“. Wenn die Aussage falsch ist, wählen Sie die Antwortmöglichkeit, die die Aussage richtig macht.)",
+    underlinedText: "Azure Databricks",
     options: [
       { id: "A", text: "Es ist keine Änderung erforderlich." },
       { id: "B", text: "Azure Data Factory" },

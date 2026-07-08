@@ -105,7 +105,14 @@ export default function QuestionPanel({
         </div>
       )}
 
-      <p className="mb-5 text-base font-medium leading-relaxed text-text">{question.prompt}</p>
+      <p className="mb-5 text-base font-medium leading-relaxed text-text">{renderPrompt(question)}</p>
+
+      {"imageUrl" in question && question.imageUrl && (
+        <div className="mb-5 overflow-hidden rounded-lg border border-border-soft">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={question.imageUrl} alt="Referenz-Screenshot zur Frage" className="w-full" />
+        </div>
+      )}
 
       {isMatching ? (
         <MatchingQuestionView
@@ -330,4 +337,26 @@ function deriveHint(explanation: string): string {
   const words = firstSentence.split(/\s+/);
   const short = words.slice(0, 14).join(" ");
   return `Denk daran: ${short}${words.length > 14 ? "…" : "."}`;
+}
+
+/**
+ * Renders a question's prompt as plain text, unless it has an
+ * `underlinedText` marker (for "check the underlined text" questions), in
+ * which case that exact substring is rendered with a visible underline so
+ * the student knows what to evaluate.
+ */
+function renderPrompt(question: PracticeQuestion) {
+  const underline = "underlinedText" in question ? question.underlinedText : undefined;
+  if (!underline) return question.prompt;
+
+  const idx = question.prompt.indexOf(underline);
+  if (idx === -1) return question.prompt;
+
+  return (
+    <>
+      {question.prompt.slice(0, idx)}
+      <span className="underline decoration-2 underline-offset-2">{underline}</span>
+      {question.prompt.slice(idx + underline.length)}
+    </>
+  );
 }
