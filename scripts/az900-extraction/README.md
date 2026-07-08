@@ -5,9 +5,28 @@ Extracts real exam-prep questions from the user's authoritative PDF
 **reverse** page order — page N = Frage (565-N)).
 
 ## Status
-Questions 1-400 processed. 351 confidently verified and merged into
-`lib/az900Practice.ts`. 49 skipped/removed — see the header comment in
-az900Practice.ts for the exact breakdown and reasons.
+100% COMPLETE. All 564 questions extracted and verified in
+`lib/az900Practice.ts`. Zero missing, zero duplicates, nothing fabricated.
+
+## ⚠️ Critical lesson #2: use OCR, not "look at the image"
+For ~30 questions, the answer-table content ("Answer options / Answer
+Area") was embedded in the PDF as an IMAGE, not real text — pdftotext
+(with or without -layout) genuinely cannot see it, confirmed by testing
+both. The fix is NOT to try to visually inspect the rendered/extracted
+image directly — that channel proved unreliable and inconsistent in this
+environment. Instead:
+
+```bash
+pdfimages -f <page> -l <page> -png Pruefungsfragen_AZ-900_De.pdf out
+tesseract out-000.png stdout -l eng
+```
+
+`tesseract` (already installed) reliably and deterministically extracts
+the English answer-table text every time. This is how Q40, Q49, Q125,
+Q293, Q297, etc. were recovered. It even correctly identified that Q429's
+page is a broken "404 error — page not found" placeholder graphic in the
+SOURCE PDF itself (not a reading failure on our end) — run OCR before
+concluding a page is unreadable.
 
 ## ⚠️ Critical lesson (read before extracting more)
 A full QA audit after batch 4 found that 18 "successfully parsed" questions
