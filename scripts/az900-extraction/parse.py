@@ -8,7 +8,7 @@ def strip_marker_artifact(text):
     return re.sub(r"^[A-F]\s(?=[A-ZÄÖÜ])", "", text).strip()
 
 
-with open("q1_100_raw.txt", encoding="utf-8") as f:
+with open("q301_400_raw.txt", encoding="utf-8") as f:
     raw = f.read()
 
 blocks = [b for b in raw.split("\f") if b.strip()]
@@ -104,6 +104,10 @@ for block in blocks:
     prompt_and_options = re.sub(r"(?:^|\n)\s{0,3}Ein\s{2,}", "\n A              ", prompt_and_options)
 
     # Detect the "choose Ja/Nein for each statement" combinatorial format.
+    is_matching = bool(re.search(r"Ordnen Sie", prompt_and_options))
+    if is_matching:
+        errors.append((f"q{qnum}-matching-type-skipped",))
+        continue
     is_combinatorial = bool(re.search(r"für jede der folgenden Aussagen", prompt_and_options))
 
     if is_combinatorial and correct_letter:
@@ -185,5 +189,5 @@ print(f"Errors: {len(errors)}")
 for e in errors:
     print(e)
 
-with open("parsed_q1_100.json", "w", encoding="utf-8") as f:
+with open("parsed_q301_400.json", "w", encoding="utf-8") as f:
     json.dump(questions, f, ensure_ascii=False, indent=2)
