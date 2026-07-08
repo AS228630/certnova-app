@@ -5,10 +5,12 @@ import { Search, Globe, Bell, Moon, Sun, ChevronDown, Menu } from "lucide-react"
 import { useTheme } from "@/components/ThemeProvider";
 import { useUser } from "@/components/UserContext";
 import { getFullName } from "@/lib/supabase/useUser";
+import { useProfileStore } from "@/lib/store/profileStore";
 
 export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   const { theme, toggleTheme } = useTheme();
   const { user } = useUser();
+  const profile = useProfileStore((s) => s.profile);
   const displayName = getFullName(user);
   const initial = displayName.charAt(0).toUpperCase();
 
@@ -67,16 +69,21 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
                 </span>
               </button>
 
-              <div className="flex items-center gap-2">
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary to-fuchsia-500 text-xs font-bold text-white">
-                  {initial}
+              <Link href="/profile" className="flex items-center gap-2 hover:opacity-80">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-primary to-fuchsia-500 text-xs font-bold text-white">
+                  {profile?.avatar_url ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={profile.avatar_url} alt="Profilbild" className="h-full w-full object-cover" />
+                  ) : (
+                    initial
+                  )}
                 </div>
                 <div className="hidden leading-tight sm:block">
                   <p className="text-sm font-semibold text-text">{displayName}</p>
                   <p className="text-xs text-text-muted">Kostenloser Plan</p>
                 </div>
                 <ChevronDown size={14} className="hidden text-text-faint sm:block" />
-              </div>
+              </Link>
             </>
           ) : (
             <div className="flex items-center gap-2">

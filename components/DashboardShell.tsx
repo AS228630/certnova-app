@@ -9,6 +9,7 @@ import BottomNav from "@/components/BottomNav";
 import { supabase } from "@/lib/supabase/client";
 import { UserContext } from "@/components/UserContext";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
+import { useProfileStore } from "@/lib/store/profileStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
 import { getFullName } from "@/lib/supabase/useUser";
@@ -43,6 +44,7 @@ export default function DashboardShell({
       setUser(data.session.user);
       setChecked(true);
       useUserProgressStore.getState().load(data.session.user.id, getFullName(data.session.user));
+      useProfileStore.getState().load(data.session.user.id);
       useCertProgressStore.getState().loadAll(data.session.user.id);
     });
 
@@ -50,6 +52,7 @@ export default function DashboardShell({
       if (!session) {
         setUser(null);
         useUserProgressStore.getState().reset();
+        useProfileStore.getState().reset();
         useCertProgressStore.getState().reset();
         useLessonCompletionStore.getState().reset();
         if (requireAuth) {
@@ -60,6 +63,7 @@ export default function DashboardShell({
       setUser(session.user);
       setChecked(true);
       useUserProgressStore.getState().load(session.user.id, getFullName(session.user));
+      useProfileStore.getState().load(session.user.id);
       useCertProgressStore.getState().loadAll(session.user.id);
     });
 
