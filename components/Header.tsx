@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Search, Bell, Moon, Sun, ChevronDown, Menu } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
+import { useLocale } from "@/components/LocaleProvider";
 import { useUser } from "@/components/UserContext";
 import { getFullName } from "@/lib/supabase/useUser";
 import { useProfileStore } from "@/lib/store/profileStore";
@@ -10,6 +11,7 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   const { theme, toggleTheme } = useTheme();
+  const { t } = useLocale();
   const { user } = useUser();
   const profile = useProfileStore((s) => s.profile);
   const displayName = getFullName(user);
@@ -37,7 +39,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
           <div className="hidden w-full max-w-md items-center gap-2 rounded-lg border border-border-soft bg-panel-alt px-3 py-2 lg:flex">
             <Search size={16} className="text-text-faint" />
             <input
-              placeholder="Nach Kursen, Labs, Fragen suchen..."
+              placeholder={t("header.searchPlaceholder")}
               className="w-full bg-transparent text-sm text-text outline-none placeholder:text-text-faint"
             />
             <kbd className="hidden rounded border border-border-soft bg-panel px-1.5 py-0.5 text-[10px] text-text-faint md:inline">
@@ -79,7 +81,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
                 </div>
                 <div className="hidden leading-tight sm:block">
                   <p className="text-sm font-semibold text-text">{displayName}</p>
-                  <p className="text-xs text-text-muted">Kostenloser Plan</p>
+                  <p className="text-xs text-text-muted">{t("header.freePlan")}</p>
                 </div>
                 <ChevronDown size={14} className="hidden text-text-faint sm:block" />
               </Link>
@@ -106,7 +108,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
       <div className="mt-3 flex items-center gap-2 rounded-lg border border-border-soft bg-panel-alt px-3 py-2.5 lg:hidden">
         <Search size={16} className="text-text-faint" />
         <input
-          placeholder="Nach Kursen, Labs, Fragen suchen..."
+          placeholder={t("header.searchPlaceholder")}
           className="w-full bg-transparent text-sm text-text outline-none placeholder:text-text-faint"
         />
       </div>

@@ -1,17 +1,20 @@
+"use client";
+
 import Link from "next/link";
+import { useLocale } from "@/components/LocaleProvider";
 import { Linkedin, Youtube, Twitter, Instagram, Facebook, ShieldCheck, Lock, BadgeCheck, Users, Server } from "lucide-react";
 
 const columns = [
   {
-    title: "Plattform",
+    titleKey: "footer.platform",
     links: ["Dashboard", "Lernpfade", "Zertifizierungen", "Sprachkurse", "Projekte", "Community", "Analysen", "KI Coach", "Interview-Vorbereitung"],
   },
   {
-    title: "Ressourcen",
+    titleKey: "footer.resources",
     links: ["Blog", "Lern-Guides", "Erfolgsgeschichten", "Übungsfragen", "Practice Exams", "FAQ", "Hilfe-Center"],
   },
   {
-    title: "Rechtliches",
+    titleKey: "footer.legal",
     links: ["Impressum", "Datenschutz (DSGVO)", "Cookie-Einstellungen", "AGB", "Widerrufsrecht", "Barrierefreiheit", "Sicherheit"],
   },
 ];
@@ -25,6 +28,7 @@ const trustItems = [
 ];
 
 export default function Footer() {
+  const { t } = useLocale();
   return (
     <footer className="mt-10 rounded-2xl border border-border-soft bg-panel p-6 md:p-8">
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -36,7 +40,7 @@ export default function Footer() {
             <span className="text-base font-bold text-text">CertCoach</span>
           </div>
           <p className="mb-4 text-sm text-text-muted">
-            Deine All-in-One-Plattform für IT-Skills, Sprachen und Karriereentwicklung.
+            {t("footer.tagline")}
           </p>
           <div className="flex items-center gap-3 text-text-faint">
             <Linkedin size={17} />
@@ -48,8 +52,8 @@ export default function Footer() {
         </div>
 
         {columns.map((col) => (
-          <div key={col.title}>
-            <p className="mb-3 text-sm font-bold text-text">{col.title}</p>
+          <div key={col.titleKey}>
+            <p className="mb-3 text-sm font-bold text-text">{t(col.titleKey)}</p>
             <ul className="space-y-2">
               {col.links.map((l) => (
                 <li key={l}>
@@ -102,7 +106,7 @@ export default function Footer() {
             </span>
           ))}
         </div>
-        <p>© 2026 CertCoach · Made with ❤️ in Germany</p>
+        <p>{t("footer.copyright")}</p>
       </div>
     </footer>
   );

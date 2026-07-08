@@ -4,17 +4,19 @@ import { useState } from "react";
 import Link from "next/link";
 import { Search, ChevronDown, Menu, X } from "lucide-react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useLocale } from "@/components/LocaleProvider";
 
 const navLinksBefore = [
-  { label: "Kurse", href: "/courses" },
-  { label: "Zertifizierungen", href: "/certifications" },
-  { label: "Lernpfade", href: "/learning-paths" },
+  { labelKey: "landingNav.courses", href: "/courses" },
+  { labelKey: "landingNav.certifications", href: "/certifications" },
+  { labelKey: "landingNav.learningPaths", href: "/learning-paths" },
 ];
 
-const navLinksAfter = [{ label: "Preise", href: "/pricing" }];
+const navLinksAfter = [{ labelKey: "landingNav.pricing", href: "/pricing" }];
 
 export default function LandingHeader() {
   const [open, setOpen] = useState(false);
+  const { t } = useLocale();
 
   return (
     <header className="sticky top-0 z-40 border-b border-border-soft bg-panel/95 backdrop-blur">
@@ -29,24 +31,24 @@ export default function LandingHeader() {
         <nav className="hidden items-center gap-7 lg:flex">
           {navLinksBefore.map((l) => (
             <Link
-              key={l.label}
+              key={l.labelKey}
               href={l.href}
               className="text-sm font-medium text-text-muted transition-colors hover:text-text"
             >
-              {l.label}
+              {t(l.labelKey)}
             </Link>
           ))}
           <button className="flex items-center gap-1 text-sm font-medium text-text-muted transition-colors hover:text-text">
-            Ressourcen
+            {t("landingNav.resources")}
             <ChevronDown size={14} />
           </button>
           {navLinksAfter.map((l) => (
             <Link
-              key={l.label}
+              key={l.labelKey}
               href={l.href}
               className="text-sm font-medium text-text-muted transition-colors hover:text-text"
             >
-              {l.label}
+              {t(l.labelKey)}
             </Link>
           ))}
         </nav>
@@ -63,13 +65,13 @@ export default function LandingHeader() {
             href="/login"
             className="hidden rounded-lg border border-border-soft px-4 py-2 text-sm font-semibold text-text hover:bg-panel-alt sm:inline-block"
           >
-            Anmelden
+            {t("landingNav.login")}
           </Link>
           <Link
             href="/register"
             className="rounded-lg bg-primary px-3.5 py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark sm:px-4"
           >
-            Jetzt starten
+            {t("landingNav.getStarted")}
           </Link>
           <button
             aria-label={open ? "Menü schließen" : "Menü öffnen"}
@@ -84,14 +86,14 @@ export default function LandingHeader() {
       {open && (
         <nav className="border-t border-border-soft bg-panel px-4 py-3 lg:hidden">
           <div className="flex flex-col gap-1">
-            {[...navLinksBefore, { label: "Ressourcen", href: "/resources" }, ...navLinksAfter].map((l) => (
+            {[...navLinksBefore, { labelKey: "landingNav.resources", href: "/resources" }, ...navLinksAfter].map((l) => (
               <Link
-                key={l.label}
+                key={l.labelKey}
                 href={l.href}
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-2 py-2.5 text-sm font-medium text-text-muted hover:bg-panel-alt hover:text-text"
               >
-                {l.label}
+                {t(l.labelKey)}
               </Link>
             ))}
             <Link
@@ -99,7 +101,7 @@ export default function LandingHeader() {
               onClick={() => setOpen(false)}
               className="mt-1 rounded-lg px-2 py-2.5 text-sm font-semibold text-text hover:bg-panel-alt sm:hidden"
             >
-              Anmelden
+              {t("landingNav.login")}
             </Link>
           </div>
         </nav>

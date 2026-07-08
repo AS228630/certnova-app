@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Globe, Check } from "lucide-react";
+import { useLocale } from "@/components/LocaleProvider";
 
 export type LanguageOption = {
   code: string;
@@ -32,7 +33,7 @@ export default function LanguageSwitcher({
   variant?: "light" | "dark";
 }) {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState("de");
+  const { locale, setLocale, availableLocales } = useLocale();
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -43,7 +44,7 @@ export default function LanguageSwitcher({
     return () => document.removeEventListener("mousedown", onClick);
   }, []);
 
-  const current = LANGUAGES.find((l) => l.code === selected) ?? LANGUAGES[0];
+  const current = LANGUAGES.find((l) => l.code === locale) ?? LANGUAGES[0];
 
   return (
     <div ref={ref} className="relative">
@@ -61,21 +62,29 @@ export default function LanguageSwitcher({
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full z-50 mt-2 w-44 overflow-hidden rounded-xl border border-border-soft bg-panel py-1 shadow-xl">
-          {LANGUAGES.map((lang) => (
-            <button
-              key={lang.code}
-              onClick={() => {
-                setSelected(lang.code);
-                setOpen(false);
-              }}
-              className="flex w-full items-center gap-2.5 px-3 py-2 text-left text-sm text-text hover:bg-panel-alt"
-            >
-              <span className="text-base">{lang.flag}</span>
-              <span className="flex-1">{lang.label}</span>
-              {selected === lang.code && <Check size={14} className="text-primary" />}
-            </button>
-          ))}
+        <div className="absolute right-0 top-full z-50 mt-2 w-52 overflow-hidden rounded-xl border border-border-soft bg-panel py-1 shadow-xl">
+          {LANGUAGES.map((lang) => {
+            const isAvailable = availableLocales.includes(lang.code);
+            return (
+              <button
+                key={lang.code}
+                onClick={() => {
+                  if (!isAvailable) return;
+                  setLocale(lang.code);
+                  setOpen(false);
+                }}
+                disabled={!isAvailable}
+                className={`flex w-full items-center gap-2.5 px-3 py-2 text-left text-sm ${
+                  isAvailable ? "text-text hover:bg-panel-alt" : "cursor-not-allowed text-text-faint"
+                }`}
+              >
+                <span className="text-base">{lang.flag}</span>
+                <span className="flex-1">{lang.label}</span>
+                {!isAvailable && <span className="text-[10px] text-text-faint">bald</span>}
+                {locale === lang.code && <Check size={14} className="text-primary" />}
+              </button>
+            );
+          })}
         </div>
       )}
     </div>

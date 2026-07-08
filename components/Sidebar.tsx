@@ -20,21 +20,22 @@ import {
   LogOut,
 } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
+import { useLocale } from "@/components/LocaleProvider";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 
 const navItems = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/learning-paths", label: "Lernpfade", icon: GraduationCap },
-  { href: "/certifications", label: "Zertifizierungen", icon: Award },
-  { href: "/language-courses", label: "Sprachkurse", icon: Languages },
-  { href: "/projects", label: "Projekte", icon: FolderKanban },
-  { href: "/community", label: "Community", icon: Users },
-  { href: "/news", label: "Aktuelles", icon: Newspaper, badge: "Neu" },
-  { href: "/analytics", label: "Analysen", icon: BarChart3 },
-  { href: "/interview", label: "Interview-Vorbereitung", icon: Briefcase },
-  { href: "/ai-coach", label: "KI Coach", icon: Bot, badge: "BETA" },
+  { href: "/dashboard", labelKey: "nav.dashboard", icon: LayoutDashboard },
+  { href: "/learning-paths", labelKey: "nav.learningPaths", icon: GraduationCap },
+  { href: "/certifications", labelKey: "nav.certifications", icon: Award },
+  { href: "/language-courses", labelKey: "nav.languageCourses", icon: Languages },
+  { href: "/projects", labelKey: "nav.projects", icon: FolderKanban },
+  { href: "/community", labelKey: "nav.community", icon: Users },
+  { href: "/news", labelKey: "nav.news", icon: Newspaper, badgeKey: "nav.new" },
+  { href: "/analytics", labelKey: "nav.analytics", icon: BarChart3 },
+  { href: "/interview", labelKey: "nav.interview", icon: Briefcase },
+  { href: "/ai-coach", labelKey: "nav.aiCoach", icon: Bot, badgeKey: "nav.beta" },
 ];
 
 const streakDayLabels = ["M", "D", "M", "D", "F", "S", "S"];
@@ -48,6 +49,7 @@ export default function Sidebar({
 }) {
   const pathname = usePathname();
   const { theme, toggleTheme } = useTheme();
+  const { t } = useLocale();
   const router = useRouter();
   const progress = useUserProgressStore((s) => s.progress);
   const streakDaysCount = progress?.streak_days ?? 0;
@@ -107,16 +109,16 @@ export default function Sidebar({
                 }`}
               >
                 <Icon size={18} />
-                <span className="flex-1">{item.label}</span>
-                {item.badge && (
+                <span className="flex-1">{t(item.labelKey)}</span>
+                {item.badgeKey && (
                   <span
                     className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                      item.badge === "Neu"
+                      item.badgeKey === "nav.new"
                         ? "bg-success-light text-success"
                         : "bg-primary-light text-primary"
                     }`}
                   >
-                    {item.badge}
+                    {t(item.badgeKey)}
                   </span>
                 )}
               </Link>
@@ -128,20 +130,20 @@ export default function Sidebar({
           <div className="rounded-xl bg-panel-alt p-4">
             <div className="mb-2 flex items-center gap-2 text-warning">
               <Crown size={16} />
-              <p className="text-sm font-bold text-text">Pro Upgrade</p>
+              <p className="text-sm font-bold text-text">{t("sidebar.proUpgrade")}</p>
             </div>
             <p className="text-xs leading-relaxed text-text-muted">
-              Schalte alle Funktionen frei, unbegrenzte Labs und KI-gestützte Werkzeuge.
+              {t("sidebar.proUpgradeDesc")}
             </p>
             <button className="mt-3 w-full rounded-lg bg-primary py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark">
-              Upgrade starten
+              {t("sidebar.upgradeNow")}
             </button>
           </div>
 
           <div className="rounded-xl border border-border-soft p-4">
-            <p className="text-sm font-bold text-text">Deine Lernserie 🔥</p>
+            <p className="text-sm font-bold text-text">{t("sidebar.streak")}</p>
             <p className="mt-1 text-2xl font-extrabold text-text">
-              {streakDaysCount} <span className="text-sm font-medium text-text-muted">Tage in Folge</span>
+              {streakDaysCount} <span className="text-sm font-medium text-text-muted">{t("sidebar.daysInARow")}</span>
             </p>
             <div className="mt-3 flex justify-between">
               {streakDayLabels.map((d, i) => (
@@ -169,7 +171,7 @@ export default function Sidebar({
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-text-muted hover:bg-panel-alt hover:text-text"
           >
             <Settings size={18} />
-            Einstellungen
+            {t("nav.settings")}
           </Link>
           <Link
             href="/help"
@@ -177,18 +179,18 @@ export default function Sidebar({
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-text-muted hover:bg-panel-alt hover:text-text"
           >
             <HelpCircle size={18} />
-            Hilfe & Support
+            {t("nav.help")}
           </Link>
           <button
             onClick={handleLogout}
             className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-sm font-medium text-text-muted hover:bg-panel-alt hover:text-text"
           >
             <LogOut size={18} />
-            Logout
+            {t("nav.logout")}
           </button>
 
           <div className="flex items-center justify-between rounded-lg px-3 py-2.5">
-            <span className="text-sm font-medium text-text-muted">Dark Mode</span>
+            <span className="text-sm font-medium text-text-muted">{t("sidebar.darkMode")}</span>
             <button
               onClick={toggleTheme}
               aria-label="Design wechseln"

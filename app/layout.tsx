@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 };
 
 import ThemeProvider from "@/components/ThemeProvider";
+import LocaleProvider from "@/components/LocaleProvider";
 
 export default function RootLayout({
   children,
@@ -20,12 +21,15 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem('certcoach-theme')||'dark';document.documentElement.classList.add(t);}catch(e){document.documentElement.classList.add('dark');}`,
+            __html: `try{var t=localStorage.getItem('certcoach-theme')||'dark';document.documentElement.classList.add(t);}catch(e){document.documentElement.classList.add('dark');}
+try{var l=localStorage.getItem('certcoach-locale')||'de';document.documentElement.lang=l;document.documentElement.dir=(l==='fa'||l==='ar')?'rtl':'ltr';}catch(e){}`,
           }}
         />
       </head>
       <body className="min-h-full flex flex-col bg-bg text-text">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <LocaleProvider>{children}</LocaleProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

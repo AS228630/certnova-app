@@ -1,0 +1,67 @@
+import type { Dictionary } from "./de";
+
+const fa: Dictionary = {
+  nav: {
+    dashboard: "داشبورد",
+    learningPaths: "مسیرهای یادگیری",
+    certifications: "گواهینامه‌ها",
+    languageCourses: "دوره‌های زبان",
+    projects: "پروژه‌ها",
+    community: "انجمن",
+    news: "اخبار",
+    analytics: "تحلیل‌ها",
+    interview: "آماده‌سازی مصاحبه",
+    aiCoach: "مربی هوش مصنوعی",
+    settings: "تنظیمات",
+    help: "پشتیبانی و راهنما",
+    logout: "خروج",
+    profile: "پروفایل",
+    new: "جدید",
+    beta: "بتا",
+  },
+  sidebar: {
+    proUpgrade: "ارتقا به Pro",
+    proUpgradeDesc: "همه‌ی امکانات، لب‌های نامحدود و ابزارهای مبتنی بر هوش مصنوعی رو باز کن.",
+    upgradeNow: "همین حالا ارتقا بده",
+    streak: "روند یادگیری تو 🔥",
+    daysInARow: "روز پشت‌سرهم",
+    darkMode: "حالت تاریک",
+  },
+  header: {
+    searchPlaceholder: "جستجو در دوره‌ها، لب‌ها، سوالات...",
+    freePlan: "پلن رایگان",
+  },
+  landingNav: {
+    courses: "دوره‌ها",
+    certifications: "گواهینامه‌ها",
+    learningPaths: "مسیرهای یادگیری",
+    resources: "منابع",
+    pricing: "قیمت‌گذاری",
+    login: "ورود",
+    getStarted: "همین حالا شروع کن",
+  },
+  bottomNav: {
+    dashboard: "داشبورد",
+    learn: "یادگیری",
+    aiCoach: "مربی هوش مصنوعی",
+    certificates: "گواهینامه‌ها",
+    profile: "پروفایل",
+  },
+  footer: {
+    platform: "پلتفرم",
+    resources: "منابع",
+    legal: "حقوقی",
+    tagline: "پلتفرم همه‌کاره‌ی تو برای مهارت‌های فناوری اطلاعات، زبان‌ها و رشد شغلی.",
+    copyright: "© ۲۰۲۶ CertCoach · با ❤️ در آلمان ساخته شده",
+  },
+  common: {
+    save: "ذخیره",
+    cancel: "لغو",
+    close: "بستن",
+    loading: "در حال بارگذاری...",
+    continue: "ادامه",
+    back: "بازگشت",
+  },
+};
+
+export default fa;

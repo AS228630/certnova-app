@@ -3,17 +3,19 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, GraduationCap, Bot, Award, User } from "lucide-react";
+import { useLocale } from "@/components/LocaleProvider";
 
 const items = [
-  { href: "/dashboard", label: "Dashboard", icon: Home },
-  { href: "/learning-paths", label: "Lernen", icon: GraduationCap },
-  { href: "/ai-coach", label: "KI Coach", icon: Bot },
-  { href: "/certifications", label: "Zertifikate", icon: Award },
-  { href: "/profile", label: "Profil", icon: User },
+  { href: "/dashboard", labelKey: "bottomNav.dashboard", icon: Home },
+  { href: "/learning-paths", labelKey: "bottomNav.learn", icon: GraduationCap },
+  { href: "/ai-coach", labelKey: "bottomNav.aiCoach", icon: Bot },
+  { href: "/certifications", labelKey: "bottomNav.certificates", icon: Award },
+  { href: "/profile", labelKey: "bottomNav.profile", icon: User },
 ];
 
 export default function BottomNav() {
   const pathname = usePathname();
+  const { t } = useLocale();
 
   return (
     <nav className="fixed inset-x-0 bottom-0 z-30 flex items-center justify-around border-t border-border-soft bg-panel px-1 py-2 lg:hidden">
@@ -29,7 +31,7 @@ export default function BottomNav() {
             }`}
           >
             <Icon size={20} />
-            <span>{item.label}</span>
+            <span>{t(item.labelKey)}</span>
             {active && <span className="mt-0.5 h-0.5 w-5 rounded-full bg-primary" />}
           </Link>
         );
