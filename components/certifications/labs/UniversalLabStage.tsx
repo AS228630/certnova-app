@@ -1,7 +1,10 @@
+"use client";
+
 import type { Company, Certification } from "@/lib/companiesData";
 import type { LabInfrastructureType } from "@/lib/labInfrastructure";
 import type { Lab } from "@/lib/labsData";
-import { generateAwsLab, generateM365Lab, generateLinuxLab, generateGcpLab, generateWindowsServerLab, generateCiscoLab, generateOracleLab, generateVmwareLab, generateDockerLab, generateKubernetesLab } from "@/lib/labsData";
+import { generateAwsLab, generateM365Lab, generateLinuxLab, generateGcpLab, generateWindowsServerLab, generateCiscoLab, generateOracleLab, generateVmwareLab, generateDockerLab, generateKubernetesLab, getLab } from "@/lib/labsData";
+import { useLocale } from "@/components/LocaleProvider";
 import LabClient from "./LabClient";
 import ComingSoonLab from "./ComingSoonLab";
 import AwsConsoleEnvironment from "./aws/AwsConsoleEnvironment";
@@ -29,7 +32,9 @@ type UniversalLabStageProps = {
  * ComingSoonLab. Add a new case (e.g. 'AWS' -> <AwsPortalSimulator />) here,
  * and nowhere else, once a new runtime is built.
  */
-export default function UniversalLabStage({ infrastructureType, company, cert, lab }: UniversalLabStageProps) {
+export default function UniversalLabStage({ infrastructureType, company, cert, lab: labFromServer }: UniversalLabStageProps) {
+  const { locale } = useLocale();
+  const lab = infrastructureType === "AZURE" && labFromServer ? getLab(cert.id, cert.title, cert.level, labFromServer.slug, locale) : labFromServer;
   switch (infrastructureType) {
     case "AZURE":
       if (!lab) return <ComingSoonLab company={company} cert={cert} />;

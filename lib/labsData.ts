@@ -828,11 +828,45 @@ export function generateCiscoLab(certId: string, certTitle: string, level: strin
   };
 }
 
-export function getLab(certId: string, certTitle: string, level: string, labSlug?: string): Lab {
+import labs_en from "@/lib/i18n/questions/labs.en";
+import type { LabTranslation } from "@/lib/i18n/questions/labs.en";
+
+const LAB_TRANSLATIONS: Partial<Record<string, Record<string, LabTranslation>>> = { en: labs_en };
+
+function applyLabTranslation(lab: Lab, locale: string): Lab {
+  const tr = LAB_TRANSLATIONS[locale]?.[lab.id];
+  if (!tr) return lab;
+  return {
+    ...lab,
+    goal: tr.goal ?? lab.goal,
+    goalChecklist: tr.goalChecklist ?? lab.goalChecklist,
+    instructions: tr.instructions ?? lab.instructions,
+    details: lab.details.map((d) => ({
+      label: tr.details?.[d.label] ?? d.label,
+      value: tr.detailValues?.[d.label] ?? d.value,
+    })),
+    resources: lab.resources.map((r) => ({ ...r, label: tr.resources?.[r.id] ?? r.label })),
+    tasks: lab.tasks.map((t) => ({ ...t, label: tr.tasks?.[t.id] ?? t.label })),
+    docs: lab.docs.map((d) => ({ ...d, label: tr.docs?.[d.label] ?? d.label })),
+    steps: lab.steps?.map((s) => {
+      const st = tr.steps?.[s.id];
+      if (!st) return s;
+      return {
+        ...s,
+        title: st.title ?? s.title,
+        description: st.description ?? s.description,
+        goal: st.goal ?? s.goal,
+        prerequisites: st.prerequisites ?? s.prerequisites,
+        notes: st.notes ?? s.notes,
+      };
+    }),
+  };
+}
+
+export function getLab(certId: string, certTitle: string, level: string, labSlug?: string, locale: string = "de"): Lab {
   const labs = LABS[certId];
-  if (!labs || labs.length === 0) return generateLab(certId, certTitle, level);
-  if (!labSlug) return labs[0];
-  return labs.find((l) => l.slug === labSlug) ?? labs[0];
+  const lab = !labs || labs.length === 0 ? generateLab(certId, certTitle, level) : !labSlug ? labs[0] : labs.find((l) => l.slug === labSlug) ?? labs[0];
+  return applyLabTranslation(lab, locale);
 }
 
 /** All hand-authored labs for a cert, for building a lab picker/list UI. */
