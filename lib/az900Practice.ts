@@ -2824,12 +2824,12 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-201",
     topicId: "azure-architektur",
-    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    prompt: "Sie planen, 20 virtuelle Computer in einer Azure-Umgebung bereitzustellen. Um sicherzustellen, dass ein virtueller Computer namens VM1 keine Verbindung zu den anderen virtuellen Computern herstellen kann, muss VM1 ... Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
     options: [
-      { id: "A", text: "..., VM1 muss in einem separaten virtuellen Netzwerk bereitgestellt werden ." },
-      { id: "B", text: "..., VM1 muss ein anderes Betriebssystem ausführen als die anderen virtuellen Maschinen ." },
-      { id: "C", text: "..., VM1 muss in einer separaten Ressourcengruppe bereitgestellt werden ." },
-      { id: "D", text: "..., VM1 muss über zwei Netzwerkschnittstellen verfügen ." },
+      { id: "A", text: "in einem separaten virtuellen Netzwerk bereitgestellt werden" },
+      { id: "B", text: "ein anderes Betriebssystem ausführen als die anderen virtuellen Computer" },
+      { id: "C", text: "in einer separaten Ressourcengruppe bereitgestellt werden" },
+      { id: "D", text: "über zwei Netzwerkschnittstellen verfügen" },
     ],
     correct: "A",
     explanation: "Um die Netzwerkkonnektivität zwischen virtuellen Maschinen zu verhindern, können wir die virtuellen Maschinen in verschiedenen virtuellen Netzwerken bereitstellen und die Kommunikation zwischen den virtuellen Netzwerken verhindern.",
@@ -2899,8 +2899,8 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Die Datenschutz-Grundverordnung (DSGVO) definiert Datenschutz- und Privatsphäreregeln: Ja",
     statements: [
       { text: "Die Datenschutz-Grundverordnung (DSGVO) definiert Datenschutz- und Privatsphäreregeln", correct: "Ja" },
-      { text: "Die Datenschutz-Grundverordnung (DSGVO) gilt für Unternehmen, die Waren anbieten...", correct: "Ja" },
-      { text: "Azure kann zum Erstellen einer Datenschutz-Grundverordnung (DSGVO)-konformen... verwendet werden", correct: "Ja" },
+      { text: "Die Datenschutz-Grundverordnung (DSGVO) gilt für Unternehmen, die Personen in der EU Waren oder Dienstleistungen anbieten", correct: "Ja" },
+      { text: "Azure kann zum Aufbau einer DSGVO-konformen Infrastruktur verwendet werden", correct: "Ja" },
     ],
     explanation: "Die Datenschutz-Grundverordnung (DSGVO) führt neue Regeln für Organisationen ein, die Waren und Dienstleistungen für Personen in der Europäischen Union (EU) anbieten oder Daten von EU-Bürgern sammeln und analysieren, unabhängig davon, wo Sie oder Ihr Unternehmen ansässig sind.",
     resources: [{ label: "Gdpr", url: "https://docs.microsoft.com/en-us/microsoft-365/compliance/gdpr?view=o365-worldwide" }],
@@ -3071,8 +3071,8 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Azure Active Directory Premium P2 garantiert mindestens 99,9 Prozent Verfügbarkeit: Ja",
     statements: [
       { text: "Azure Active Directory Premium P2 garantiert mindestens 99,9 Prozent Verfügbarkeit", correct: "Ja" },
-      { text: "Das Service Level Agreement (SLA) für Azure Active Directory Premium P2 ist dasselbe...", correct: "Nein" },
-      { text: "Alle zahlenden Kunden erhalten eine Gutschrift, wenn ihr monatlicher Verfügbarkeitsprozentsatz unter... liegt", correct: "Ja" },
+      { text: "Das Service Level Agreement (SLA) für Azure Active Directory Premium P2 ist dasselbe wie das SLA für Azure Active Directory Free", correct: "Nein" },
+      { text: "Alle zahlenden Kunden erhalten eine Gutschrift, wenn ihre monatliche Verfügbarkeit unter dem im Service Level Agreement (SLA) garantierten Wert liegt", correct: "Ja" },
     ],
     explanation: "Wir garantieren eine Verfügbarkeit von mindestens 99,9 % für die Azure Active Directory Basic- und Premium-Dienste. Die Dienste gelten in den folgenden Szenarien als verfügbar: • Benutzer können sich beim Dienst anmelden, sich beim Zugriffsbereich anmelden, auf Anwendungen im Zugriffsbereich zugreifen und Kennwörter zurücksetzen. • IT-Administratoren können Einträge im Verzeichnis erstellen, lesen, schreiben und löschen oder Benutzern Anwendungen im Verzeichnis bereitstellen oder die Bereitstellung aufheben. Für die kostenlose Stufe von Azure Active Directory wird kein SLA bereitgestellt. So und wann können Sie bei Microsoft eine Gutschrift für ein Service-Level-Agreement (SLA) anfordern Sie können bei Microsoft Gutschriften für Service-Level-Agreements (SLA) anfordern, wenn ein Dienst, den Sie Ihren Kunden bereitstellen, ausfällt. SLA-Gutschriften von Microsoft richten sich nach den betroffenen Diensten. Wenn Ihr Kunde beispielsweise über eine Office 365-Suite verfügt, aber nur SharePoint ausgefallen ist, wird die SLA-Gutschrift nur für SharePoint und nicht für den gesamten Plan des Kunden gewährt. Der Cloud Solution Provider (CSP)-Partner muss den Anspruch und alle erforderlichen Informationen bis zum Ende des Kalendermonats nach dem Monat einreichen, in dem der Vorfall aufgetreten ist. Wenn der Vorfall beispielsweise am 15. Februar aufgetreten ist, muss Microsoft den Anspruch und alle erforderlichen Informationen bis zum 31. März erhalten haben. Endkunden und indirekte Wiederverkäufer können keine SLA-Gutschriftenansprüche einreichen. Entweder der indirekte Anbieter oder der Direktabrechnungspartner muss die Ansprüche in ihrem Namen einreichen. Referenzen: SLA für Azure Active Directory Wie und wann Sie eine Gutschrift für ein Service-Level-Agreement (SLA) von Microsoft anfordern",
     resources: [{ label: "V1 0", url: "https://azure.microsoft.com/en-us/support/legal/sla/active-directory/v1_0/" }, { label: "Request Credit", url: "https://docs.microsoft.com/en-us/partner-center/request-credit" }],
@@ -4226,7 +4226,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     topicId: "azure-architektur",
     prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn die Aussage wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Übereinstimmung ist einen Punkt wert.) Azure DevOps Services ermöglicht Entwicklern das Bereitstellen oder Aktualisieren von Anwendungen...: Ja",
     statements: [
-      { text: "Azure DevOps Services ermöglicht Entwicklern das Bereitstellen oder Aktualisieren von Anwendungen...", correct: "Ja" },
+      { text: "Azure DevOps Services ermöglicht Entwicklern das Bereitstellen oder Aktualisieren von Anwendungen in Azure mithilfe von Continuous-Integration/Continuous-Delivery (CI/CD)-Pipelines", correct: "Ja" },
       { text: "Azure DevOps Services umfasst ein Git-Repository, in dem Entwickler Code speichern können", correct: "Ja" },
       { text: "Azure DevOps Services kann zum Erstellen und Hosten von Web-Apps verwendet werden", correct: "Nein" },
     ],
@@ -4346,7 +4346,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     descriptions: [
       { id: "d0", text: "Beschränken Sie, welche virtuellen Maschinentypen in einem Abonnement erstellt werden können", correctItemId: "item0" },
       { id: "d1", text: "Identifizieren Sie Azure-Ressourcen, die bestimmten Kostenstellen zugeordnet sind", correctItemId: "item1" },
-      { id: "d2", text: "Stellen Sie eine vollständige Azure-Anwendungsumgebung einschließlich Ressourcen bereit...", correctItemId: "item2" },
+      { id: "d2", text: "Stellen Sie eine vollständige Azure-Anwendungsumgebung einschließlich Ressourcenkonfiguration und Rollenzuweisungen bereit", correctItemId: "item2" },
     ],
     explanation: "Azure Policy unterstützt Sie bei der Durchsetzung organisatorischer Standards und der umfassenden Compliance-Bewertung. Das Compliance-Dashboard bietet eine aggregierte Ansicht zur Bewertung des Gesamtzustands der Umgebung mit der Möglichkeit, bis auf die Granularität pro Ressource und Richtlinie herunterzubrechen. Darüber hinaus trägt es dazu bei, die Compliance Ihrer Ressourcen durch Massenkorrekturen für vorhandene Ressourcen und automatische Korrekturen für neue Ressourcen zu gewährleisten. Zu den gängigen Anwendungsfällen für Azure Policy gehört die Implementierung von Governance für Ressourcenkonsistenz, Einhaltung gesetzlicher Vorschriften, Sicherheit, Kosten und Verwaltung. Richtliniendefinitionen für diese häufigen Anwendungsfälle sind in Ihrer Azure-Umgebung bereits integriert, um Ihnen den Einstieg zu erleichtern. Sie wenden Tags auf Ihre Azure-Ressourcen, Ressourcengruppen und Abonnements an, um sie logisch in einer Taxonomie zu organisieren. Jedes Tag besteht aus einem Namen und einem Wertepaar. Sie können beispielsweise allen Ressourcen in der Produktion den Namen „ Umgebung“ und den Wert „Produktion“ zuweisen. Ressourcentags unterstützen alle kostenintensiven Dienste. Um sicherzustellen, dass kostenintensive Dienste mit einem Tag bereitgestellt werden, verwenden Sie eine der Tag- Richtlinien. So wie ein Ingenieur oder Architekt mit einem Blueprint die Entwurfsparameter eines Projekts skizzieren kann, ermöglicht Azure Blueprints Cloudarchitekten und zentralen IT-Gruppen die Definition eines wiederholbaren Satzes von Azure-Ressourcen, der die Standards, Muster und Anforderungen einer Organisation implementiert und einhält. Azure Blueprints ermöglicht es Entwicklungsteams, schnell neue Umgebungen zu erstellen und einzurichten. Dabei bauen sie auf die Einhaltung der Organisationsrichtlinien mit integrierten Komponenten wie Netzwerken auf und beschleunigen so Entwicklung und Bereitstellung. Blueprints sind eine deklarative Möglichkeit, die Bereitstellung verschiedener Ressourcenvorlagen und anderer Artefakte zu orchestrieren, wie beispielsweise: • Rollenzuweisungen • Richtlinienzuweisungen • Azure Resource Manager-Vorlagen (ARM-Vorlagen) • Ressourcengruppen Als Administrator können Sie mithilfe von Ressourcensperren ein Abonnement, eine Ressourcengruppe oder eine Ressource sperren, um zu verhindern, dass andere Benutzer in Ihrer Organisation versehentlich wichtige Ressourcen löschen oder ändern. Die Sperre überschreibt alle Berechtigungen des Benutzers. Referenzen: Was ist Azure Policy? Verwenden Sie Tags, um Ihre Azure-Ressourcen und die Verwaltungshierarchie zu organisieren. Was ist Azure Blueprints? Sperren Sie Ressourcen, um unerwartete Änderungen zu verhindern.",
     resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/governance/policy/overview" }, { label: "Tag Resources", url: "https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources?tabs=json" }, { label: "Overview", url: "https://docs.microsoft.com/en-us/azure/governance/blueprints/overview" }, { label: "Lock Resources", url: "https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources?tabs=json" }],
