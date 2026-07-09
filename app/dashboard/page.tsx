@@ -11,7 +11,9 @@ import {
   CheckCircle2,
   Star,
   ChevronRight,
+  Compass,
 } from "lucide-react";
+import Link from "next/link";
 import { getVendorIcon } from "@/lib/vendorIcons";
 import HeroPath from "@/components/HeroPath";
 import CertsScroller from "@/components/CertsScroller";
@@ -20,6 +22,8 @@ import LearningCalendar from "@/components/LearningCalendar";
 import { useUser } from "@/components/UserContext";
 import { getFirstName } from "@/lib/supabase/useUser";
 import { useLocale } from "@/components/LocaleProvider";
+import { useCertProgressStore } from "@/lib/store/certProgressStore";
+import { findCertByCertId } from "@/lib/companiesData";
 
 const stats = [
   { icon: Users, labelKey: "dashboard2.statActiveLearners2", value: "120K+" },
@@ -35,19 +39,6 @@ const certs = [
   { title: "GCP", subtitle: "Cloud Digital Leader", levelKey: "dashboard2.levelBeginnerD", rating: "4,6", vendor: "Google" },
   { title: "CCNA 200-301", subtitle: "Cisco Certified Network Associate", levelKey: "dashboard2.levelIntermediateD", rating: "4,6", vendor: "Cisco" },
   { title: "CompTIA", subtitle: "Security+", levelKey: "dashboard2.levelBeginnerD", rating: "4,7", vendor: "CompTIA" },
-];
-
-const continueItems: {
-  tagKey: "dashboard2.tagIT" | "dashboard2.tagLanguages";
-  vendor?: string;
-  flag?: string;
-  title: string;
-  progress: number;
-}[] = [
-  { tagKey: "dashboard2.tagIT", vendor: "Microsoft", title: "AZ-104: Microsoft Azure Administrator", progress: 65 },
-  { tagKey: "dashboard2.tagLanguages", flag: "🇩🇪", title: "Deutsch B1 Intensivkurs", progress: 42 },
-  { tagKey: "dashboard2.tagLanguages", flag: "🇬🇧", title: "English B2 Upper Intermediate", progress: 30 },
-  { tagKey: "dashboard2.tagIT", vendor: "AWS", title: "AWS Solutions Architect SAA-C03", progress: 20 },
 ];
 
 const newsItems = [
@@ -93,6 +84,70 @@ function Greeting() {
   const { user } = useUser();
   const { t } = useLocale();
   return <p className="mb-2 text-sm text-text-muted">{t("dashboard2.goodMorning")}, {getFirstName(user)}! 👋</p>;
+}
+
+// Real "continue where you left off" list, built from the signed-in user's
+// actual cert progress (not hardcoded demo percentages). A brand-new user
+// with no progress yet sees a discover-paths empty state instead.
+function ContinueLearningSection() {
+  const { t } = useLocale();
+  const progressMap = useCertProgressStore((s) => s.progressMap);
+
+  const inProgress = Object.entries(progressMap)
+    .filter(([, pct]) => pct > 0 && pct < 100)
+    .map(([certId, pct]) => {
+      const match = findCertByCertId(certId);
+      if (!match) return null;
+      return { certId, pct, company: match.company, cert: match.cert };
+    })
+    .filter((x): x is NonNullable<typeof x> => x !== null)
+    .sort((a, b) => b.pct - a.pct)
+    .slice(0, 4);
+
+  if (inProgress.length === 0) {
+    return (
+      <div className="rounded-xl border border-dashed border-border-soft bg-panel p-8 text-center">
+        <p className="mb-4 text-sm text-text-faint">{t("dashboard2.noProgressYet")}</p>
+        <Link
+          href="/certifications"
+          className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white hover:bg-primary-dark"
+        >
+          <Compass size={15} />
+          {t("dashboard2.discoverPaths")}
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {inProgress.map(({ certId, pct, company, cert }) => (
+        <Link
+          key={certId}
+          href={`/certifications/${company.slug}/${cert.id}`}
+          className="rounded-xl border border-border-soft bg-panel p-4 transition-colors hover:border-primary/40"
+        >
+          <div className="mb-3 flex items-center justify-between">
+            <span className="rounded-full bg-primary-light px-2 py-0.5 text-[10px] font-bold text-primary">
+              {cert.code}
+            </span>
+            <span className="text-lg">{getVendorIcon(company.name, 22)}</span>
+          </div>
+          <p className="mb-3 text-sm font-bold leading-snug text-text">{cert.title}</p>
+          <div className="h-1.5 w-full rounded-full bg-panel-alt">
+            <div className="h-1.5 rounded-full bg-primary" style={{ width: `${Math.round(pct)}%` }} />
+          </div>
+          <p className="mt-1.5 text-xs text-text-faint">
+            {Math.round(pct)}% {t("dashboard2.completedD")}
+          </p>
+          <span className="mt-3 flex items-center gap-1 text-xs font-bold text-primary">
+            {t("dashboard2.resume")}
+            <ChevronRight size={13} />
+          </span>
+        </Link>
+      ))}
+    </div>
+  );
 }
 
 export default function DashboardPage() {
@@ -144,40 +199,13 @@ export default function DashboardPage() {
             <div>
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="font-bold text-text">{t("dashboard2.continuePlaying")}</h2>
-                <span className="cursor-pointer text-xs font-semibold text-primary">{t("dashboard2.viewAllD")}</span>
+                {t("dashboard2.viewAllD") && (
+                  <Link href="/certifications" className="cursor-pointer text-xs font-semibold text-primary">
+                    {t("dashboard2.viewAllD")}
+                  </Link>
+                )}
               </div>
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {continueItems.map((item) => (
-                  <div key={item.title} className="rounded-xl border border-border-soft bg-panel p-4">
-                    <div className="mb-3 flex items-center justify-between">
-                      <span
-                        className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                          item.tagKey === "dashboard2.tagIT"
-                            ? "bg-primary-light text-primary"
-                            : "bg-success-light text-success"
-                        }`}
-                      >
-                        {t(item.tagKey)}
-                      </span>
-                      <span className="text-lg">
-                        {item.flag ? item.flag : getVendorIcon(item.vendor!, 22)}
-                      </span>
-                    </div>
-                    <p className="mb-3 text-sm font-bold leading-snug text-text">{item.title}</p>
-                    <div className="h-1.5 w-full rounded-full bg-panel-alt">
-                      <div
-                        className="h-1.5 rounded-full bg-primary"
-                        style={{ width: `${item.progress}%` }}
-                      />
-                    </div>
-                    <p className="mt-1.5 text-xs text-text-faint">{item.progress}% {t("dashboard2.completedD")}</p>
-                    <button className="mt-3 flex items-center gap-1 text-xs font-bold text-primary">
-                      {t("dashboard2.resume")}
-                      <ChevronRight size={13} />
-                    </button>
-                  </div>
-                ))}
-              </div>
+              <ContinueLearningSection />
             </div>
 
             {/* Aktuelles & Neuigkeiten */}

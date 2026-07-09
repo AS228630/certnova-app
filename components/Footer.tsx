@@ -2,29 +2,36 @@
 
 import Link from "next/link";
 import { useLocale } from "@/components/LocaleProvider";
-import { Linkedin, Youtube, Twitter, Instagram, Facebook, ShieldCheck, Lock, BadgeCheck, Users, Server } from "lucide-react";
+import { Linkedin, Youtube, Twitter, Instagram, Facebook } from "lucide-react";
 
 const columns = [
   {
     titleKey: "footer.platform",
-    links: ["Dashboard", "Lernpfade", "Zertifizierungen", "Sprachkurse", "Projekte", "Community", "Analysen", "KI Coach", "Interview-Vorbereitung"],
+    links: [
+      { labelKey: "nav.dashboard", href: "/dashboard" },
+      { labelKey: "nav.learningPaths", href: "/learning-paths" },
+      { labelKey: "nav.certifications", href: "/certifications" },
+      { labelKey: "nav.projects", href: "/projects" },
+      { labelKey: "nav.community", href: "/community" },
+      { labelKey: "nav.aiCoach", href: "/ai-coach" },
+    ],
   },
   {
     titleKey: "footer.resources",
-    links: ["Blog", "Lern-Guides", "Erfolgsgeschichten", "Übungsfragen", "Practice Exams", "FAQ", "Hilfe-Center"],
+    links: [
+      { labelKey: "nav.news", href: "/news" },
+      { labelKey: "nav.interview", href: "/interview" },
+      { labelKey: "nav.help", href: "/help" },
+      { labelKey: "footer.pricing", href: "/pricing" },
+    ],
   },
   {
     titleKey: "footer.legal",
-    links: ["Impressum", "Datenschutz (DSGVO)", "Cookie-Einstellungen", "AGB", "Widerrufsrecht", "Barrierefreiheit", "Sicherheit"],
+    links: [
+      { labelKey: "footer.terms", href: "/agb" },
+      { labelKey: "footer.privacy", href: "/datenschutz" },
+    ],
   },
-];
-
-const trustItems = [
-  { icon: ShieldCheck, label: "GDPR Konform" },
-  { icon: Lock, label: "SSL Verschlüsselt" },
-  { icon: BadgeCheck, label: "ISO 27001 Zertifiziert" },
-  { icon: Users, label: "Community-Support" },
-  { icon: Server, label: "Server in Deutschland" },
 ];
 
 export default function Footer() {
@@ -56,9 +63,9 @@ export default function Footer() {
             <p className="mb-3 text-sm font-bold text-text">{t(col.titleKey)}</p>
             <ul className="space-y-2">
               {col.links.map((l) => (
-                <li key={l}>
-                  <Link href="#" className="text-sm text-text-muted hover:text-primary">
-                    {l}
+                <li key={l.href}>
+                  <Link href={l.href} className="text-sm text-text-muted hover:text-primary">
+                    {t(l.labelKey)}
                   </Link>
                 </li>
               ))}
@@ -67,45 +74,21 @@ export default function Footer() {
         ))}
       </div>
 
-      <div className="mt-8 grid grid-cols-1 gap-6 border-t border-border-soft pt-6 sm:grid-cols-2">
+      <div className="mt-8 border-t border-border-soft pt-6 sm:flex sm:items-center sm:justify-between">
         <div>
-          <p className="mb-1 text-sm font-bold text-text">Bleibe auf dem Laufenden</p>
-          <p className="mb-3 text-sm text-text-muted">
-            Erhalte die neuesten Kurse, Zertifizierungen und Lerntipps in deinem Postfach.
-          </p>
-          <div className="flex max-w-sm gap-2">
-            <input
-              placeholder="Deine E-Mail-Adresse"
-              className="w-full rounded-lg border border-border-soft bg-panel-alt px-3 py-2.5 text-sm text-text placeholder:text-text-faint focus:border-primary focus:outline-none"
-            />
-            <button className="flex-none rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-white hover:bg-primary-dark">
-              Abonnieren
-            </button>
-          </div>
-        </div>
-
-        <div className="sm:justify-self-end">
-          <p className="mb-2 text-sm font-bold text-text">App herunterladen</p>
+          <p className="mb-2 text-sm font-bold text-text">{t("footer.getTheApp")}</p>
           <div className="flex gap-2">
             <span className="rounded-lg border border-border-soft px-4 py-2 text-xs text-text-muted">
-              📱 App Store
+              📱 App Store — {t("footer.comingSoonBadge")}
             </span>
             <span className="rounded-lg border border-border-soft px-4 py-2 text-xs text-text-muted">
-              ▶ Google Play
+              ▶ Google Play — {t("footer.comingSoonBadge")}
             </span>
           </div>
         </div>
       </div>
 
       <div className="mt-6 flex flex-col gap-4 border-t border-border-soft pt-6 text-xs text-text-faint sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
-        <div className="flex flex-wrap gap-4">
-          {trustItems.map((t) => (
-            <span key={t.label} className="flex items-center gap-1.5">
-              <t.icon size={13} />
-              {t.label}
-            </span>
-          ))}
-        </div>
         <p>{t("footer.copyright")}</p>
       </div>
     </footer>

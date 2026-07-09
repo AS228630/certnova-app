@@ -1,22 +1,37 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Search, ChevronDown, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLocale } from "@/components/LocaleProvider";
+import { supabase } from "@/lib/supabase/client";
 
-const navLinksBefore = [
-  { labelKey: "landingNav.courses", href: "/courses" },
-  { labelKey: "landingNav.certifications", href: "/certifications" },
+const navLinks = [
+  { labelKey: "landingNav.courses", href: "/certifications" },
   { labelKey: "landingNav.learningPaths", href: "/learning-paths" },
+  { labelKey: "landingNav.resources", href: "/help" },
+  { labelKey: "landingNav.pricing", href: "/pricing" },
 ];
-
-const navLinksAfter = [{ labelKey: "landingNav.pricing", href: "/pricing" }];
 
 export default function LandingHeader() {
   const [open, setOpen] = useState(false);
+  const [signedIn, setSignedIn] = useState<boolean | null>(null);
   const { t } = useLocale();
+
+  useEffect(() => {
+    let mounted = true;
+    supabase.auth.getSession().then(({ data }) => {
+      if (mounted) setSignedIn(!!data.session);
+    });
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSignedIn(!!session);
+    });
+    return () => {
+      mounted = false;
+      listener.subscription.unsubscribe();
+    };
+  }, []);
 
   return (
     <header className="sticky top-0 z-40 border-b border-border-soft bg-panel/95 backdrop-blur">
@@ -29,20 +44,7 @@ export default function LandingHeader() {
         </Link>
 
         <nav className="hidden items-center gap-7 lg:flex">
-          {navLinksBefore.map((l) => (
-            <Link
-              key={l.labelKey}
-              href={l.href}
-              className="text-sm font-medium text-text-muted transition-colors hover:text-text"
-            >
-              {t(l.labelKey)}
-            </Link>
-          ))}
-          <button className="flex items-center gap-1 text-sm font-medium text-text-muted transition-colors hover:text-text">
-            {t("landingNav.resources")}
-            <ChevronDown size={14} />
-          </button>
-          {navLinksAfter.map((l) => (
+          {navLinks.map((l) => (
             <Link
               key={l.labelKey}
               href={l.href}
@@ -55,24 +57,29 @@ export default function LandingHeader() {
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           <LanguageSwitcher variant="dark" />
-          <button
-            aria-label="Suchen"
-            className="hidden h-9 w-9 items-center justify-center rounded-lg border border-border-soft text-text-muted hover:text-text sm:flex"
-          >
-            <Search size={16} />
-          </button>
-          <Link
-            href="/login"
-            className="hidden rounded-lg border border-border-soft px-4 py-2 text-sm font-semibold text-text hover:bg-panel-alt sm:inline-block"
-          >
-            {t("landingNav.login")}
-          </Link>
-          <Link
-            href="/register"
-            className="rounded-lg bg-primary px-3.5 py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark sm:px-4"
-          >
-            {t("landingNav.getStarted")}
-          </Link>
+          {signedIn ? (
+            <Link
+              href="/dashboard"
+              className="rounded-lg bg-primary px-3.5 py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark sm:px-4"
+            >
+              {t("landingNav.goToDashboard")}
+            </Link>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="hidden rounded-lg border border-border-soft px-4 py-2 text-sm font-semibold text-text hover:bg-panel-alt sm:inline-block"
+              >
+                {t("landingNav.login")}
+              </Link>
+              <Link
+                href="/register"
+                className="rounded-lg bg-primary px-3.5 py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark sm:px-4"
+              >
+                {t("landingNav.getStarted")}
+              </Link>
+            </>
+          )}
           <button
             aria-label={open ? "Menü schließen" : "Menü öffnen"}
             onClick={() => setOpen((v) => !v)}
@@ -86,7 +93,7 @@ export default function LandingHeader() {
       {open && (
         <nav className="border-t border-border-soft bg-panel px-4 py-3 lg:hidden">
           <div className="flex flex-col gap-1">
-            {[...navLinksBefore, { labelKey: "landingNav.resources", href: "/resources" }, ...navLinksAfter].map((l) => (
+            {navLinks.map((l) => (
               <Link
                 key={l.labelKey}
                 href={l.href}
@@ -96,13 +103,15 @@ export default function LandingHeader() {
                 {t(l.labelKey)}
               </Link>
             ))}
-            <Link
-              href="/login"
-              onClick={() => setOpen(false)}
-              className="mt-1 rounded-lg px-2 py-2.5 text-sm font-semibold text-text hover:bg-panel-alt sm:hidden"
-            >
-              {t("landingNav.login")}
-            </Link>
+            {!signedIn && (
+              <Link
+                href="/login"
+                onClick={() => setOpen(false)}
+                className="mt-1 rounded-lg px-2 py-2.5 text-sm font-semibold text-text hover:bg-panel-alt sm:hidden"
+              >
+                {t("landingNav.login")}
+              </Link>
+            )}
           </div>
         </nav>
       )}

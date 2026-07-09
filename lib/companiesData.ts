@@ -331,3 +331,15 @@ export function isAzureLearnRolloutCert(companySlug: string, certId: string): bo
 export function getCompany(slug: string): Company | undefined {
   return companies.find((c) => c.slug === slug);
 }
+
+/** Resolves a bare certId (as stored in progress rows, which don't carry
+ * the company slug) back to its company + cert record. Certs ids are
+ * globally unique across companies in this dataset, so a linear scan is
+ * fine and avoids maintaining a second lookup structure. */
+export function findCertByCertId(certId: string): { company: Company; cert: Certification } | undefined {
+  for (const company of companies) {
+    const cert = company.certs.find((c) => c.id === certId);
+    if (cert) return { company, cert };
+  }
+  return undefined;
+}
