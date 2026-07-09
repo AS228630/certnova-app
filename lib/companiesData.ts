@@ -212,7 +212,23 @@ function companyGenDict(locale: string) {
 }
 
 import msCertDesc_en from "@/lib/i18n/questions/msCertDesc.en";
-const MS_CERT_DESC: Partial<Record<string, Record<string, string>>> = { en: msCertDesc_en };
+import msCertDesc_fa from "@/lib/i18n/questions/msCertDesc.fa";
+import msCertDesc_ar from "@/lib/i18n/questions/msCertDesc.ar";
+import msCertDesc_uk from "@/lib/i18n/questions/msCertDesc.uk";
+import msCertDesc_es from "@/lib/i18n/questions/msCertDesc.es";
+import msCertDesc_fr from "@/lib/i18n/questions/msCertDesc.fr";
+import msCertDesc_ru from "@/lib/i18n/questions/msCertDesc.ru";
+import msCertDesc_tr from "@/lib/i18n/questions/msCertDesc.tr";
+const MS_CERT_DESC: Partial<Record<string, Record<string, string>>> = {
+  en: msCertDesc_en,
+  fa: msCertDesc_fa,
+  ar: msCertDesc_ar,
+  uk: msCertDesc_uk,
+  es: msCertDesc_es,
+  fr: msCertDesc_fr,
+  ru: msCertDesc_ru,
+  tr: msCertDesc_tr,
+};
 
 const GENERIC_CAT_LABEL_KEY: Record<string, string> = {
   Fundamentals: "genericCatFundamentals",
