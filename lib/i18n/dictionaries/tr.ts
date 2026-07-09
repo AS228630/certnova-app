@@ -462,6 +462,8 @@ const tr: Dictionary = {
     downloadNotSupported: "Bu tarayıcı indirmeyi desteklemiyor. Lütfen gerçek bir tarayıcıda açın (uygulama içi değil).",
     wrongLabel: "Yanlış",
     yesLabel: "Evet",
+    orPickCombo: "Veya doğrudan bir cevap kombinasyonu seç",
+    optionLetter: "Seçenek",
     noLabel: "Hayır",
     correctWouldBe: "Doğrusu",
   },

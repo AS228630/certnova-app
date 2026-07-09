@@ -462,6 +462,8 @@ const ru: Dictionary = {
     downloadNotSupported: "Этот браузер не поддерживает загрузку. Пожалуйста, открой в настоящем браузере (не в приложении).",
     wrongLabel: "Неправильно",
     yesLabel: "Да",
+    orPickCombo: "Или выбери комбинацию ответов напрямую",
+    optionLetter: "Вариант",
     noLabel: "Нет",
     correctWouldBe: "Правильным было бы",
   },

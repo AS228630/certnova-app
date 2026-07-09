@@ -463,6 +463,8 @@ const de = {
     downloadNotSupported: "Download wird von diesem Browser nicht unterstützt. Bitte im echten Browser (nicht In-App) öffnen.",
     wrongLabel: "Falsch",
     yesLabel: "Ja",
+    orPickCombo: "Oder wählen Sie direkt eine Antwortkombination",
+    optionLetter: "Option",
     noLabel: "Nein",
     correctWouldBe: "Richtig wäre",
   },

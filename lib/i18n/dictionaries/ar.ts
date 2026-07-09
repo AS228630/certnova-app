@@ -462,6 +462,8 @@ const ar: Dictionary = {
     downloadNotSupported: "لا يدعم هذا المتصفح التنزيل. يرجى الفتح في متصفح حقيقي (ليس داخل التطبيق).",
     wrongLabel: "خاطئ",
     yesLabel: "نعم",
+    orPickCombo: "أو اختر مجموعة إجابات مباشرة",
+    optionLetter: "الخيار",
     noLabel: "لا",
     correctWouldBe: "الصحيح هو",
   },

@@ -462,6 +462,8 @@ const uk: Dictionary = {
     downloadNotSupported: "Цей браузер не підтримує завантаження. Будь ласка, відкрий у справжньому браузері (не всередині додатку).",
     wrongLabel: "Неправильно",
     yesLabel: "Так",
+    orPickCombo: "Або обери комбінацію відповідей напряму",
+    optionLetter: "Варіант",
     noLabel: "Ні",
     correctWouldBe: "Правильно було б",
   },

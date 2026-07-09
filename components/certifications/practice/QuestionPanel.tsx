@@ -165,7 +165,43 @@ export default function QuestionPanel({
             );
           })}
         </div>
-      ) : (
+      ) : null}
+      {isYesNo && "combinedOptions" in question && question.combinedOptions && question.combinedOptions.length > 0 && (
+        <div className="mt-3 rounded-lg border border-border-soft p-3">
+          <p className="mb-2.5 text-xs font-semibold text-text-faint">{t("practice.orPickCombo")}</p>
+          <div className="space-y-1.5">
+            {question.combinedOptions.map((combo, ci) => {
+              const letter = String.fromCharCode(65 + ci);
+              const isThisPicked = question.statements.every((_, i) => yesNoAnswers[i] === combo[i]);
+              const isThisCorrect = question.statements.every((s, i) => combo[i] === s.correct);
+              let style = "border-border-soft hover:border-primary/40";
+              if (checked && isThisCorrect) style = "border-success bg-success-light";
+              else if (checked && isThisPicked && !isThisCorrect) style = "border-danger bg-danger/10";
+              else if (!checked && isThisPicked) style = "border-primary bg-primary-light";
+              return (
+                <button
+                  key={ci}
+                  disabled={checked}
+                  onClick={() => combo.forEach((v, i) => onSelectStatement(i, v))}
+                  className={`flex w-full items-start gap-2.5 rounded-md border px-3 py-2 text-left text-xs transition ${style}`}
+                >
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-current text-[10px] font-bold">
+                    {letter}
+                  </span>
+                  <span className="flex-1 space-y-0.5 text-text-muted">
+                    {question.statements.map((s, i) => (
+                      <span key={i} className="block">
+                        {s.text}: <span className="font-semibold text-text">{combo[i] === "Ja" ? t("practice.yesLabel") : t("practice.noLabel")}</span>
+                      </span>
+                    ))}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+      {!isYesNo && !isMatching && (
         <div className="space-y-2.5">
           {question.options.map((opt) => {
             const isSelected = singleSelected === opt.id;

@@ -462,6 +462,8 @@ const fa: Dictionary = {
     downloadNotSupported: "این مرورگر دانلود رو پشتیبانی نمی‌کنه. لطفاً تو مرورگر واقعی (نه درون‌برنامه‌ای) باز کن.",
     wrongLabel: "غلط",
     yesLabel: "بله",
+    orPickCombo: "یا مستقیم یه ترکیب پاسخ رو انتخاب کن",
+    optionLetter: "گزینه",
     noLabel: "خیر",
     correctWouldBe: "جواب درست",
   },

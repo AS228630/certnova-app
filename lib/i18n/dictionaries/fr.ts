@@ -462,6 +462,8 @@ const fr: Dictionary = {
     downloadNotSupported: "Le téléchargement n'est pas pris en charge par ce navigateur. Ouvre dans un vrai navigateur (pas dans l'app).",
     wrongLabel: "Incorrect",
     yesLabel: "Oui",
+    orPickCombo: "Ou choisis directement une combinaison de réponses",
+    optionLetter: "Option",
     noLabel: "Non",
     correctWouldBe: "La bonne réponse serait",
   },
