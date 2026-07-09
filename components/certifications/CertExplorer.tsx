@@ -7,10 +7,12 @@ import CertFilterBar from "./CertFilterBar";
 import SortHeader, { type SortKey } from "./SortHeader";
 import CertCard from "./CertCard";
 import Pagination from "./Pagination";
+import { useLocale } from "@/components/LocaleProvider";
 
 const PAGE_SIZE = 9;
 
 export default function CertExplorer({ company }: { company: Company }) {
+  const { t } = useLocale();
   const [activeCategory, setActiveCategory] = useState(company.categories[0]?.key ?? "");
   const [query, setQuery] = useState("");
   const [levelFilter, setLevelFilter] = useState<CertLevel | "Alle">("Alle");
@@ -86,7 +88,7 @@ export default function CertExplorer({ company }: { company: Company }) {
         </div>
       ) : (
         <p className="rounded-xl border border-border-soft bg-panel p-6 text-center text-sm text-text-muted">
-          Keine Zertifizierungen gefunden.
+          {t("certList.noCertsFound")}
         </p>
       )}
 

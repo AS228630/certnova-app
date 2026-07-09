@@ -6,6 +6,7 @@ import { Bookmark, Lock } from "lucide-react";
 import type { Certification } from "@/lib/companiesData";
 import { useUser } from "@/components/UserContext";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
+import { useLocale } from "@/components/LocaleProvider";
 import CertBadge from "./CertBadge";
 
 const LEVEL_STYLES: Record<Certification["level"], string> = {
@@ -14,13 +15,14 @@ const LEVEL_STYLES: Record<Certification["level"], string> = {
   Advanced: "bg-danger/10 text-danger",
 };
 
-const LEVEL_LABELS: Record<Certification["level"], string> = {
-  Beginner: "Beginner",
-  Intermediate: "Intermediate",
-  Advanced: "Advanced",
+const LEVEL_LABEL_KEYS: Record<Certification["level"], string> = {
+  Beginner: "certList.levelBeginnerShort",
+  Intermediate: "certList.levelIntermediateShort",
+  Advanced: "certList.levelAdvancedShort",
 };
 
 export default function CertCard({ cert, companySlug }: { cert: Certification; companySlug: string }) {
+  const { t } = useLocale();
   const [saved, setSaved] = useState(false);
   const { user } = useUser();
   const gated = cert.locked && !user;
@@ -32,7 +34,7 @@ export default function CertCard({ cert, companySlug }: { cert: Certification; c
         <CertBadge code={cert.code} />
         <button
           onClick={() => setSaved((v) => !v)}
-          aria-label={saved ? "Aus Favoriten entfernen" : "Zu Favoriten hinzufügen"}
+          aria-label={saved ? t("certList.removeFromFavorites") : t("certList.addToFavorites")}
           className="text-text-faint transition-colors hover:text-primary"
         >
           <Bookmark size={18} className={saved ? "fill-primary text-primary" : ""} />
@@ -44,7 +46,7 @@ export default function CertCard({ cert, companySlug }: { cert: Certification; c
         <span
           className={`mt-2 inline-block rounded-full px-2 py-0.5 text-[11px] font-semibold ${LEVEL_STYLES[cert.level]}`}
         >
-          {LEVEL_LABELS[cert.level]}
+          {t(LEVEL_LABEL_KEYS[cert.level])}
         </span>
         <p className="mt-2 line-clamp-2 text-sm text-text-muted">{cert.description}</p>
       </Link>
@@ -63,7 +65,7 @@ export default function CertCard({ cert, companySlug }: { cert: Certification; c
             <div className="h-full rounded-full bg-primary" style={{ width: `${progress}%` }} />
           </div>
           <p className="mt-1 text-[11px] text-text-faint">
-            {progress}% <span className="text-text-faint/80">Fortschritt</span>
+            {progress}% <span className="text-text-faint/80">{t("certList.progressLabel")}</span>
           </p>
         </Link>
       )}

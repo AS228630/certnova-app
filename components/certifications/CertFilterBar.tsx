@@ -1,5 +1,8 @@
+"use client";
+
 import { Search } from "lucide-react";
 import type { CertCategoryDef, CertLevel } from "@/lib/companiesData";
+import { useLocale } from "@/components/LocaleProvider";
 
 export default function CertFilterBar({
   query,
@@ -18,6 +21,7 @@ export default function CertFilterBar({
   levelFilter: CertLevel | "Alle";
   onLevelChange: (v: CertLevel | "Alle") => void;
 }) {
+  const { t } = useLocale();
   return (
     <div className="mb-5 flex flex-col gap-3 sm:flex-row">
       <div className="relative flex-1">
@@ -25,7 +29,7 @@ export default function CertFilterBar({
         <input
           value={query}
           onChange={(e) => onQueryChange(e.target.value)}
-          placeholder="Zertifizierung suchen..."
+          placeholder={t("certList.searchCertification")}
           className="w-full rounded-lg border border-border-soft bg-panel py-2.5 pl-9 pr-3 text-sm text-text placeholder:text-text-faint focus:border-primary focus:outline-none"
         />
       </div>
@@ -35,7 +39,7 @@ export default function CertFilterBar({
         onChange={(e) => onCategoryChange(e.target.value)}
         className="rounded-lg border border-border-soft bg-panel px-3 py-2.5 text-sm text-text focus:border-primary focus:outline-none sm:w-48"
       >
-        <option value="Alle">Alle Kategorien</option>
+        <option value="Alle">{t("certList.catAll")}</option>
         {categories.map((c) => (
           <option key={c.key} value={c.key}>
             {c.label}
@@ -48,10 +52,10 @@ export default function CertFilterBar({
         onChange={(e) => onLevelChange(e.target.value as CertLevel | "Alle")}
         className="rounded-lg border border-border-soft bg-panel px-3 py-2.5 text-sm text-text focus:border-primary focus:outline-none sm:w-44"
       >
-        <option value="Alle">Alle Niveaus</option>
-        <option value="Beginner">Beginner</option>
-        <option value="Intermediate">Intermediate</option>
-        <option value="Advanced">Advanced</option>
+        <option value="Alle">{t("certList.levelAllShort")}</option>
+        <option value="Beginner">{t("certList.levelBeginnerShort")}</option>
+        <option value="Intermediate">{t("certList.levelIntermediateShort")}</option>
+        <option value="Advanced">{t("certList.levelAdvancedShort")}</option>
       </select>
     </div>
   );
