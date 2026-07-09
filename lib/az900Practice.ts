@@ -215,6 +215,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Die Azure-Befehlszeilenschnittstelle (Azure CLI) umfasst eine Reihe von Befehlen zum Erstellen und Verwalten von Azure-Ressourcen. Azure CLI ist eine Alternative zu Azure PowerShell. Azure PowerShell ist für die Verwaltung von Azure-Ressourcen über die Befehlszeile konzipiert. Verwenden Sie Azure PowerShell, wenn Sie automatisierte Tools erstellen möchten, die das Azure Resource Manager-Modell verwenden. Testen Sie Azure PowerShell in Ihrem Browser mit Azure Cloud Shell oder installieren Sie es auf Ihrem lokalen Computer.",
+    resources: [{ label: "Azure PowerShell Dokumentation", url: "https://docs.microsoft.com/en-us/powershell/azure/?view=azps-4.6.1" }],
   },
   {
     id: "real-az900-11",
@@ -226,6 +227,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure PowerShell ist für die Verwaltung von Azure-Ressourcen über die Befehlszeile konzipiert. Verwenden Sie Azure PowerShell, wenn Sie automatisierte Tools erstellen möchten, die das Azure Resource Manager-Modell verwenden. Testen Sie es in Ihrem Browser mit Azure Cloud Shell oder installieren Sie es auf Ihrem lokalen Computer.",
+    resources: [{ label: "Azure Cloud Shell Schnellstart", url: "https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart-powershell" }],
   },
   {
     id: "real-az900-12",
@@ -237,6 +239,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure PowerShell ist für die Verwaltung von Azure-Ressourcen über die Befehlszeile konzipiert. Verwenden Sie Azure PowerShell, wenn Sie automatisierte Tools erstellen möchten, die das Azure Resource Manager-Modell verwenden. Testen Sie es in Ihrem Browser mit Azure Cloud Shell oder installieren Sie es auf Ihrem lokalen Computer. Das Azure PowerShell-Modul kann auf Windows-, macOS- und Linux-Plattformen installiert werden.",
+    resources: [{ label: "Azure PowerShell installieren", url: "https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-4.6.1" }],
   },
   {
     id: "real-az900-13",
@@ -279,6 +282,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Azure Government ist eine Cloud-Umgebung, die speziell entwickelt wurde, um die Compliance- und Sicherheitsanforderungen der US-Regierung zu erfüllen. Diese unternehmenskritische Cloud bietet Kunden der US-Regierung und ihren Partnern bahnbrechende Innovationen. Azure Government gilt für Behörden aller Ebenen – von bundesstaatlichen und lokalen Behörden bis hin zu Bundesbehörden, einschließlich der Behörden des Verteidigungsministeriums. Obwohl es im öffentlichen Sektor zahlreiche Cloud-Anbieter gibt, können nicht viele die einzigartigen Funktionen bieten, die von staatlichen, lokalen und bundesstaatlichen Behörden benötigt werden. Azure Government bietet hybride Flexibilität, umfassende Sicherheit und umfassende Compliance-Abdeckung für alle gesetzlichen Standards. Der Hauptunterschied zwischen Microsoft Azure und Microsoft Azure Government besteht darin, dass Azure Government eine souveräne Cloud ist. Es handelt sich um eine physisch getrennte Instanz von Azure, die ausschließlich für die Workloads der US-Regierung bestimmt ist. Sie wurde exklusiv für Regierungsbehörden und ihre Lösungsanbieter entwickelt. Azure Government ist für hochsensible Daten konzipiert und ermöglicht Regierungskunden die sichere Übertragung unternehmenskritischer Workloads in die Cloud.",
+    resources: [{ label: "Was ist Azure Government?", url: "https://docs.microsoft.com/en-us/learn/modules/intro-to-azure-government/2-what-is-azure-government" }],
   },
   {
     id: "real-az900-16",
