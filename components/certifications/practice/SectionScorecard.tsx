@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
 import { getSectionCount, getSectionRange } from "@/lib/practiceSections";
+import { useLocale } from "@/components/LocaleProvider";
 
 type YesNoAnswers = Record<number, "Ja" | "Nein">;
 type MatchingAnswers = Record<string, string>;
@@ -77,6 +78,7 @@ export default function SectionScorecard({
   onRetryQuestion: (questionId: string) => void;
   onViewFinalResult?: () => void;
 }) {
+  const { t } = useLocale();
   const [filter, setFilter] = useState<"alle" | "falsch" | "uebersprungen" | "markiert">("alle");
   const [hideWrong, setHideWrong] = useState(false);
 
@@ -109,13 +111,13 @@ export default function SectionScorecard({
   }
 
   const summaryLines = [
-    "CertCoach – Ergebnis",
-    `Abschnitt ${sectionIndex + 1}`,
-    `Gesamtpunktzahl: ${score}%`,
-    `Richtig beantwortet: ${correct}`,
-    `Falsch beantwortet: ${wrong}`,
-    `Übersprungen: ${skippedCount}`,
-    `Gesamtzeit: ${formatElapsed(elapsedSeconds)}`,
+    t("practice.resultTitle"),
+    `${t("practice.sectionWord")} ${sectionIndex + 1}`,
+    `${t("practice.totalScoreWord")}: ${score}%`,
+    `${t("practice.correctlyAnsweredSC")}: ${correct}`,
+    `${t("practice.wrongAnsweredSC")}: ${wrong}`,
+    `${t("practice.skippedQ")}: ${skippedCount}`,
+    `${t("practice.totalTimeSC")}: ${formatElapsed(elapsedSeconds)}`,
   ];
   const summaryText = summaryLines.join("\n");
 
@@ -147,8 +149,8 @@ export default function SectionScorecard({
   async function handleShare() {
     if (typeof navigator !== "undefined" && "share" in navigator) {
       try {
-        await navigator.share({ title: "Mein CertCoach Ergebnis", text: summaryText });
-        setFeedback("Ergebnis geteilt!");
+        await navigator.share({ title: t("practice.myResultShared"), text: summaryText });
+        setFeedback(t("practice.resultShared"));
         return;
       } catch {
         // User cancelled, or share isn't actually usable here — fall through.
@@ -157,15 +159,15 @@ export default function SectionScorecard({
     try {
       if (typeof navigator !== "undefined" && navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(summaryText);
-        setFeedback("Ergebnis wurde in die Zwischenablage kopiert.");
+        setFeedback(t("practice.resultCopied"));
         return;
       }
       throw new Error("no clipboard API");
     } catch {
       if (legacyCopy(summaryText)) {
-        setFeedback("Ergebnis wurde in die Zwischenablage kopiert.");
+        setFeedback(t("practice.resultCopied"));
       } else {
-        setFeedback("Teilen wird von diesem Browser nicht unterstützt. Bitte im echten Browser (nicht In-App) öffnen.");
+        setFeedback(t("practice.shareNotSupported"));
       }
     }
   }
@@ -181,13 +183,13 @@ export default function SectionScorecard({
       a.click();
       a.remove();
       URL.revokeObjectURL(url);
-      setFeedback("Download gestartet.");
+      setFeedback(t("practice.downloadStarted"));
     } catch {
       try {
         window.open(`data:text/plain;charset=utf-8,${encodeURIComponent(summaryText)}`, "_blank");
-        setFeedback("Ergebnis in neuem Tab geöffnet — dort speichern.");
+        setFeedback(t("practice.resultOpenedNewTab"));
       } catch {
-        setFeedback("Download wird von diesem Browser nicht unterstützt. Bitte im echten Browser (nicht In-App) öffnen.");
+        setFeedback(t("practice.downloadNotSupported"));
       }
     }
   }
@@ -200,9 +202,9 @@ export default function SectionScorecard({
             <CheckCircle2 size={22} className="text-success" />
           </div>
           <div>
-            <p className="text-lg font-extrabold text-text">Abschnitt {sectionIndex + 1} abgeschlossen!</p>
+            <p className="text-lg font-extrabold text-text">{t("practice.sectionCompleted").replace("{n}", String(sectionIndex + 1))}</p>
             <p className="text-sm text-text-muted">
-              Großartig! Du bist auf dem richtigen Weg. Bleib dran und erreiche dein Ziel! 🚀
+              {t("practice.greatJob")}
             </p>
             {feedback && <p className="mt-2 text-xs font-semibold text-primary">{feedback}</p>}
           </div>
@@ -213,14 +215,14 @@ export default function SectionScorecard({
             className="flex items-center gap-1.5 rounded-lg border border-border-soft px-4 py-2 text-xs font-semibold text-text hover:border-primary"
           >
             <Share2 size={14} />
-            Ergebnis teilen
+            {t("practice.shareResult")}
           </button>
           <button
             onClick={handleDownload}
             className="flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white hover:bg-primary-dark"
           >
             <Download size={14} />
-            Ergebnis herunterladen
+            {t("practice.downloadResult")}
           </button>
         </div>
       </div>
@@ -228,18 +230,18 @@ export default function SectionScorecard({
       <div className="mt-4 flex flex-col items-center gap-6 rounded-xl border border-border-soft bg-panel p-5 sm:flex-row">
         <ScoreRing value={score} />
         <div className="grid flex-1 grid-cols-2 gap-4 sm:grid-cols-4">
-          <StatBox icon={CheckCircle2} value={correct} label="Richtig beantwortet" color="text-success" bg="bg-success-light" />
-          <StatBox icon={XCircle} value={wrong} label="Falsch beantwortet" color="text-danger" bg="bg-danger/10" />
-          <StatBox icon={SkipForward} value={skippedCount} label="Übersprungen" color="text-warning" bg="bg-warning/10" />
-          <StatBox icon={Clock3} value={formatElapsed(elapsedSeconds)} label="Gesamtzeit" color="text-primary" bg="bg-primary-light" />
+          <StatBox icon={CheckCircle2} value={correct} label={t("practice.correctlyAnsweredSC")} color="text-success" bg="bg-success-light" />
+          <StatBox icon={XCircle} value={wrong} label={t("practice.wrongAnsweredSC")} color="text-danger" bg="bg-danger/10" />
+          <StatBox icon={SkipForward} value={skippedCount} label={t("practice.skippedQ")} color="text-warning" bg="bg-warning/10" />
+          <StatBox icon={Clock3} value={formatElapsed(elapsedSeconds)} label={t("practice.totalTimeSC")} color="text-primary" bg="bg-primary-light" />
         </div>
       </div>
 
       <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-[1fr_1fr]">
         <div className="space-y-4">
           <div className="rounded-xl border border-border-soft bg-panel p-5">
-            <p className="font-bold text-text">Dein Fortschritt</p>
-            <p className="mb-4 text-xs text-text-faint">Verdiene Sterne, indem du jeden Abschnitt abschließt.</p>
+            <p className="font-bold text-text">{t("practice.yourProgress")}</p>
+            <p className="mb-4 text-xs text-text-faint">{t("practice.earnStars")}</p>
             <div className="space-y-2">
               {Array.from({ length: sectionCount }).map((_, s) => {
                 const [sStart, sEnd] = getSectionRange(total, s);
@@ -253,7 +255,7 @@ export default function SectionScorecard({
                 const topicCounts = new Map<string, number>();
                 sQuestions.forEach((q) => topicCounts.set(q.topicId, (topicCounts.get(q.topicId) ?? 0) + 1));
                 const dominantTopicId = [...topicCounts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0];
-                const sectionSubtitle = topics.find((t) => t.id === dominantTopicId)?.title ?? "Übungsfragen";
+                const sectionSubtitle = topics.find((tp) => tp.id === dominantTopicId)?.title ?? t("practice.practiceExam");
 
                 return (
                   <div
@@ -266,7 +268,7 @@ export default function SectionScorecard({
                       <Icon size={16} className="text-primary" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-semibold text-text">Abschnitt {s + 1}</p>
+                      <p className="truncate text-sm font-semibold text-text">{t("practice.sectionWord")} {s + 1}</p>
                       <p className="truncate text-[11px] text-text-faint">{sectionSubtitle}</p>
                       <div className="mt-0.5 flex items-center gap-0.5">
                         {Array.from({ length: 5 }).map((_, i) => (
@@ -285,14 +287,14 @@ export default function SectionScorecard({
           </div>
 
           <div className="rounded-xl border border-border-soft bg-panel p-5">
-            <p className="mb-1 font-bold text-text">Bleib motiviert!</p>
+            <p className="mb-1 font-bold text-text">{t("practice.stayMotivated")}</p>
             <p className="mb-4 text-xs text-text-muted">
-              Jede Antwort bringt dich deinem Ziel näher. Bleib fokussiert und glaub an dich!
+              {t("practice.everyAnswer")}
             </p>
             <div className="grid grid-cols-3 gap-3 text-center">
-              <Motivation icon={Trophy} title="Du schaffst das!" desc="Dein Einsatz heute zahlt sich morgen aus." />
-              <Motivation icon={Target} title="Sei konsequent" desc="Tägliche Übung führt zum Erfolg." />
-              <Motivation icon={BookOpen} title="Lerne aus Fehlern" desc="Jeder Fehler ist eine Chance zu wachsen." />
+              <Motivation icon={Trophy} title={t("practice.youCanDoIt")} desc={t("practice.youCanDoItDesc")} />
+              <Motivation icon={Target} title={t("practice.beConsistent")} desc={t("practice.beConsistentDesc")} />
+              <Motivation icon={BookOpen} title={t("practice.learnFromMistakes")} desc={t("practice.learnFromMistakesDesc")} />
             </div>
           </div>
         </div>
@@ -300,17 +302,17 @@ export default function SectionScorecard({
         <div className="rounded-xl border border-border-soft bg-panel p-5">
           <div className="mb-3 flex items-center justify-between">
             <p className="flex items-center gap-2 font-bold text-text">
-              Falsch beantwortete Fragen
+              {t("practice.wrongQuestionsTitle")}
               <span className="rounded-full bg-danger/15 px-2 py-0.5 text-xs font-bold text-danger">{wrong}</span>
             </p>
           </div>
 
           <div className="mb-3 flex flex-wrap gap-2 text-xs">
-            <FilterTab active={filter === "alle"} onClick={() => setFilter("alle")} label={`Alle (${flagged.length})`} activeColor="bg-text text-white" />
+            <FilterTab active={filter === "alle"} onClick={() => setFilter("alle")} label={`${t("practice.filterAll")} (${flagged.length})`} activeColor="bg-text text-white" />
             <FilterTab
               active={filter === "falsch"}
               onClick={() => setFilter("falsch")}
-              label={`Falsch (${wrongQuestions.length})`}
+              label={`${t("practice.filterWrong")} (${wrongQuestions.length})`}
               icon={XCircle}
               activeColor="bg-danger text-white"
               tint="border-danger/30 text-danger"
@@ -318,7 +320,7 @@ export default function SectionScorecard({
             <FilterTab
               active={filter === "uebersprungen"}
               onClick={() => setFilter("uebersprungen")}
-              label={`Übersprungen (${skippedQuestions.length})`}
+              label={`${t("practice.filterSkipped")} (${skippedQuestions.length})`}
               icon={SkipForward}
               activeColor="bg-warning text-white"
               tint="border-warning/30 text-warning"
@@ -326,7 +328,7 @@ export default function SectionScorecard({
             <FilterTab
               active={filter === "markiert"}
               onClick={() => setFilter("markiert")}
-              label={`Markiert (${markedQuestions.length})`}
+              label={`${t("practice.filterMarked")} (${markedQuestions.length})`}
               icon={Star}
               activeColor="bg-primary text-white"
               tint="border-primary/30 text-primary"
@@ -338,13 +340,13 @@ export default function SectionScorecard({
             className="mb-3 flex items-center gap-1.5 rounded-lg border border-border-soft px-3 py-1.5 text-xs font-semibold text-text-muted hover:border-primary"
           >
             <EyeOff size={13} />
-            {hideWrong ? "Fehler anzeigen" : "Fehler verstecken"}
+            {hideWrong ? t("practice.showErrors") : t("practice.hideErrors")}
           </button>
 
           {!hideWrong && (
             <div className="space-y-3">
               {filtered.length === 0 && (
-                <p className="py-6 text-center text-sm text-text-faint">Keine Fragen in dieser Kategorie.</p>
+                <p className="py-6 text-center text-sm text-text-faint">{t("practice.noQuestionsInCategory")}</p>
               )}
               {filtered.slice(0, expanded).map((q) => {
                 const globalIndex = questions.findIndex((x) => x.id === q.id);
@@ -353,23 +355,23 @@ export default function SectionScorecard({
                 return (
                   <div key={q.id} className="rounded-lg border border-border-soft p-3">
                     <div className="mb-1.5 flex items-center justify-between">
-                      <p className="text-xs font-semibold text-text-faint">Frage {globalIndex + 1}</p>
+                      <p className="text-xs font-semibold text-text-faint">{t("practice.questionN").replace("{n}", String(globalIndex + 1))}</p>
                       <span
                         className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
                           wasWrong ? "bg-danger/15 text-danger" : wasSkipped ? "bg-warning/15 text-warning" : "bg-primary-light text-primary"
                         }`}
                       >
-                        {wasWrong ? "Falsch" : wasSkipped ? "Übersprungen" : "Markiert"}
+                        {wasWrong ? t("practice.filterWrong") : wasSkipped ? t("practice.filterSkipped") : t("practice.filterMarked")}
                       </span>
                     </div>
                     <p className="mb-2 text-sm text-text">{q.prompt}</p>
                     {wasWrong && q.type !== "matching" && q.type !== "yesno" && (
                       <div className="mb-2 space-y-1 text-xs">
                         <p className="text-danger">
-                          Deine Antwort: <span className="font-semibold">{optionText(q, answers[q.id] as PracticeOptionId)}</span>
+                          {t("practice.yourAnswer")}: <span className="font-semibold">{optionText(q, answers[q.id] as PracticeOptionId)}</span>
                         </p>
                         <p className="text-success">
-                          Richtige Antwort: <span className="font-semibold">{optionText(q, q.correct)}</span>
+                          {t("practice.correctAnswerSC")}: <span className="font-semibold">{optionText(q, q.correct)}</span>
                         </p>
                       </div>
                     )}
@@ -379,7 +381,7 @@ export default function SectionScorecard({
                         className="flex items-center gap-1.5 rounded-lg border border-primary/40 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary-light"
                       >
                         <RotateCcw size={12} />
-                        Wiederholen
+                        {t("practice.retryBtn")}
                       </button>
                       {q.resources && q.resources[0] && (
                         <a
@@ -388,7 +390,7 @@ export default function SectionScorecard({
                           rel="noreferrer"
                           className="flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary-dark"
                         >
-                          Mehr erfahren in Microsoft Docs
+                          {t("practice.moreInDocs")}
                           <ExternalLink size={11} />
                         </a>
                       )}
@@ -401,7 +403,7 @@ export default function SectionScorecard({
                   onClick={() => setExpanded((v) => v + 5)}
                   className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-border-soft py-2 text-xs font-semibold text-text-muted hover:border-primary"
                 >
-                  + {filtered.length - expanded} weitere Fragen
+                  + {filtered.length - expanded} {t("practice.moreQuestions")}
                   <ChevronRight size={12} className="rotate-90" />
                 </button>
               )}
@@ -415,14 +417,14 @@ export default function SectionScorecard({
           onClick={onBackToPath}
           className="flex-1 rounded-lg border border-border-soft py-3 text-sm font-semibold text-text hover:border-primary"
         >
-          ← Zurück zum Lernpfad
+          {t("practice.backToPath")}
         </button>
         {hasNextSection ? (
           <button
             onClick={onNextSection}
             className="flex-1 rounded-lg bg-primary py-3 text-sm font-bold text-white hover:bg-primary-dark"
           >
-            Nächsten Abschnitt starten
+            {t("practice.nextSectionBtn")}
           </button>
         ) : (
           onViewFinalResult && (
@@ -430,7 +432,7 @@ export default function SectionScorecard({
               onClick={onViewFinalResult}
               className="flex-1 rounded-lg bg-primary py-3 text-sm font-bold text-white hover:bg-primary-dark"
             >
-              Gesamtergebnis ansehen 🎉
+              {t("practice.viewFinalResultBtn")}
             </button>
           )
         )}
@@ -440,7 +442,7 @@ export default function SectionScorecard({
         >
           <span className="inline-flex items-center gap-1.5">
             <RotateCcw size={14} />
-            Erneut üben
+            {t("practice.practiceAgain")}
           </span>
         </button>
       </div>
@@ -449,6 +451,7 @@ export default function SectionScorecard({
 }
 
 function ScoreRing({ value }: { value: number }) {
+  const { t } = useLocale();
   const r = 44;
   const c = 2 * Math.PI * r;
   const color = value >= 80 ? "#22c55e" : value >= 50 ? "#f59e0b" : "#ef4444";
@@ -470,7 +473,7 @@ function ScoreRing({ value }: { value: number }) {
       </svg>
       <div className="absolute flex flex-col items-center">
         <span className="text-2xl font-extrabold text-text">{value}%</span>
-        <span className="text-[10px] text-text-faint">Gesamtpunktzahl</span>
+        <span className="text-[10px] text-text-faint">{t("practice.overallScoreSC")}</span>
       </div>
     </div>
   );

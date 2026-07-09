@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { ChevronLeft, Star, Bookmark, StickyNote } from "lucide-react";
+import { useLocale } from "@/components/LocaleProvider";
 
 const levelStyles: Record<string, string> = {
   Beginner: "bg-success-light text-success",
@@ -34,13 +37,14 @@ export default function PracticeHeader({
   total: number;
   onToggleNotes: () => void;
 }) {
+  const { t } = useLocale();
   const progress = total === 0 ? 0 : Math.round((answered / total) * 100);
 
   return (
     <div>
       <div className="mb-3 flex flex-wrap items-center gap-1.5 text-xs text-text-muted">
         <Link href="/certifications" className="hover:text-primary">
-          Zertifizierungen
+          {t("nav.certifications")}
         </Link>
         <span>/</span>
         <Link href={`/certifications/${companySlug}`} className="hover:text-primary">
@@ -51,7 +55,7 @@ export default function PracticeHeader({
           {certCode}
         </Link>
         <span>/</span>
-        <span className="text-text">Übungsfragen</span>
+        <span className="text-text">{t("practice.practiceQuestionsTag")}</span>
       </div>
 
       <Link
@@ -59,7 +63,7 @@ export default function PracticeHeader({
         className="mb-3 inline-flex items-center gap-1 text-xs font-semibold text-text-muted hover:text-primary"
       >
         <ChevronLeft size={14} />
-        Zurück zur Übersicht
+        {t("practice.backToOverview")}
       </Link>
 
       <div className="flex flex-wrap items-center gap-3">
@@ -78,10 +82,10 @@ export default function PracticeHeader({
           className="ml-auto flex h-8 items-center gap-1.5 rounded-lg border border-border-soft px-3 text-xs font-semibold text-text-muted hover:border-primary hover:text-primary"
         >
           <StickyNote size={14} />
-          Notizen
+          {t("practice.notes")}
         </button>
         <button
-          aria-label="Merken"
+          aria-label={t("practice.bookmarkThis")}
           className="flex h-8 w-8 items-center justify-center rounded-lg border border-border-soft text-text-muted hover:border-primary hover:text-primary"
         >
           <Bookmark size={15} />
@@ -90,7 +94,7 @@ export default function PracticeHeader({
 
       <div className="mt-5 rounded-xl border border-border-soft bg-panel p-4">
         <div className="mb-2 flex items-center justify-between text-sm">
-          <span className="text-text-muted">Fortschritt</span>
+          <span className="text-text-muted">{t("practice.progressLabelP")}</span>
           <span className="font-bold text-text">{progress}%</span>
         </div>
         <div className="mb-4 h-2 w-full rounded-full bg-panel-alt">
@@ -98,10 +102,10 @@ export default function PracticeHeader({
         </div>
 
         <div className="grid grid-cols-2 gap-4 border-t border-border-soft pt-4 sm:grid-cols-4">
-          <Stat value={total} label="Gesamtfragen" />
-          <Stat value={answered} label="Beantwortet" />
-          <Stat value={correct} label="Richtig" color="text-success" />
-          <Stat value={wrong} label="Falsch" color="text-danger" />
+          <Stat value={total} label={t("practice.totalQuestions")} />
+          <Stat value={answered} label={t("practice.answeredQ")} />
+          <Stat value={correct} label={t("practice.correctLabel")} color="text-success" />
+          <Stat value={wrong} label={t("practice.wrongLabel")} color="text-danger" />
         </div>
       </div>
     </div>
