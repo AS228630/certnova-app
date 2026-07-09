@@ -461,6 +461,8 @@ const ru: Dictionary = {
     resultOpenedNewTab: "Результат открыт в новой вкладке — сохрани его там.",
     downloadNotSupported: "Этот браузер не поддерживает загрузку. Пожалуйста, открой в настоящем браузере (не в приложении).",
     wrongLabel: "Неправильно",
+    yesLabel: "Да",
+    noLabel: "Нет",
     correctWouldBe: "Правильным было бы",
   },
   learn: {

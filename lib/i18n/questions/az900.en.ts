@@ -138,6 +138,15 @@ const az900_en: QuestionTranslations = {
     },
     explanation: "Azure Government is a cloud environment specifically designed to meet the compliance and security requirements of the US government. This mission-critical cloud delivers breakthrough innovation to US government customers and their partners. Azure Government applies to agencies at all levels — from state and local government to federal agencies, including Department of Defense agencies. While there are many cloud providers in the public sector, not many can offer the unique capabilities needed by state, local, and federal agencies. Azure Government provides hybrid flexibility, comprehensive security, and broad compliance coverage for all regulatory standards. The main difference between Microsoft Azure and Microsoft Azure Government is that Azure Government is a sovereign cloud. It's a physically separate instance of Azure dedicated exclusively to US government workloads. It was built exclusively for government agencies and their solution providers. Azure Government is designed for highly sensitive data and allows government customers to securely move mission-critical workloads to the cloud.",
   },
+  "real-az900-394": {
+    prompt: "Select 'Yes' for each of the following statements if it is true. Otherwise, select 'No'. (Note: Each correct answer is worth one point.)",
+    statements: [
+      "The cost of outbound traffic from Azure is the same for all Azure regions",
+      "Purchasing Azure services through an Enterprise Agreement (EA) requires you to spend a predetermined amount",
+      "Microsoft defines the pricing structure of all third-party services sold through Azure Marketplace",
+    ],
+    explanation: "Bandwidth refers to data moving in and out of Azure datacenters, as well as data moving between Azure datacenters; other transfers are explicitly covered by the Content Delivery Network, ExpressRoute pricing, or peering. The cost of outbound data transfer from Azure varies by source continent. Purchasing Azure services through an Enterprise Agreement (EA) requires an upfront payment. Enterprise administrators can view a summary of their usage data, consumed Azure prepayment, and charges associated with overage in the Azure Enterprise portal. Azure Marketplace is an online store with thousands of IT software applications and services from industry-leading technology companies. In Azure Marketplace, you can find, try, purchase, and deploy the software and services you need to build new solutions and manage your cloud infrastructure. The catalog includes solutions for various industries and technical areas, free trials, and consulting services from Microsoft partners. The software vendor sets the price, end-user license agreement, and privacy policies.",
+  },
 };
 
 export default az900_en;

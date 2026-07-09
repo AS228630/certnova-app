@@ -462,6 +462,8 @@ const de = {
     resultOpenedNewTab: "Ergebnis in neuem Tab geöffnet — dort speichern.",
     downloadNotSupported: "Download wird von diesem Browser nicht unterstützt. Bitte im echten Browser (nicht In-App) öffnen.",
     wrongLabel: "Falsch",
+    yesLabel: "Ja",
+    noLabel: "Nein",
     correctWouldBe: "Richtig wäre",
   },
   learn: {

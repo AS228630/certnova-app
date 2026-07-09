@@ -461,6 +461,8 @@ const fa: Dictionary = {
     resultOpenedNewTab: "نتیجه تو تب جدید باز شد — از اونجا ذخیره کن.",
     downloadNotSupported: "این مرورگر دانلود رو پشتیبانی نمی‌کنه. لطفاً تو مرورگر واقعی (نه درون‌برنامه‌ای) باز کن.",
     wrongLabel: "غلط",
+    yesLabel: "بله",
+    noLabel: "خیر",
     correctWouldBe: "جواب درست",
   },
   learn: {

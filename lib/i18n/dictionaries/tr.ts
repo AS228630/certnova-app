@@ -461,6 +461,8 @@ const tr: Dictionary = {
     resultOpenedNewTab: "Sonuç yeni bir sekmede açıldı — oradan kaydedin.",
     downloadNotSupported: "Bu tarayıcı indirmeyi desteklemiyor. Lütfen gerçek bir tarayıcıda açın (uygulama içi değil).",
     wrongLabel: "Yanlış",
+    yesLabel: "Evet",
+    noLabel: "Hayır",
     correctWouldBe: "Doğrusu",
   },
   learn: {

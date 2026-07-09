@@ -461,6 +461,8 @@ const ar: Dictionary = {
     resultOpenedNewTab: "تم فتح النتيجة في علامة تبويب جديدة — احفظها من هناك.",
     downloadNotSupported: "لا يدعم هذا المتصفح التنزيل. يرجى الفتح في متصفح حقيقي (ليس داخل التطبيق).",
     wrongLabel: "خاطئ",
+    yesLabel: "نعم",
+    noLabel: "لا",
     correctWouldBe: "الصحيح هو",
   },
   learn: {

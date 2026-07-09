@@ -461,6 +461,8 @@ const fr: Dictionary = {
     resultOpenedNewTab: "Résultat ouvert dans un nouvel onglet — enregistre-le là-bas.",
     downloadNotSupported: "Le téléchargement n'est pas pris en charge par ce navigateur. Ouvre dans un vrai navigateur (pas dans l'app).",
     wrongLabel: "Incorrect",
+    yesLabel: "Oui",
+    noLabel: "Non",
     correctWouldBe: "La bonne réponse serait",
   },
   learn: {

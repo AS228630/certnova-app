@@ -461,6 +461,8 @@ const uk: Dictionary = {
     resultOpenedNewTab: "Результат відкрито в новій вкладці — збережи там.",
     downloadNotSupported: "Цей браузер не підтримує завантаження. Будь ласка, відкрий у справжньому браузері (не всередині додатку).",
     wrongLabel: "Неправильно",
+    yesLabel: "Так",
+    noLabel: "Ні",
     correctWouldBe: "Правильно було б",
   },
   learn: {

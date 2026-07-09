@@ -461,6 +461,8 @@ const es: Dictionary = {
     resultOpenedNewTab: "Resultado abierto en una nueva pestaña — guárdalo allí.",
     downloadNotSupported: "Este navegador no admite la descarga. Abre en un navegador real (no dentro de la app).",
     wrongLabel: "Incorrecto",
+    yesLabel: "Sí",
+    noLabel: "No",
     correctWouldBe: "Lo correcto sería",
   },
   learn: {

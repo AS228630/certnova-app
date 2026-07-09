@@ -461,6 +461,8 @@ const en: Dictionary = {
     resultOpenedNewTab: "Result opened in a new tab — save it there.",
     downloadNotSupported: "Download is not supported by this browser. Please open in a real browser (not in-app).",
     wrongLabel: "Wrong",
+    yesLabel: "Yes",
+    noLabel: "No",
     correctWouldBe: "Correct would be",
   },
   learn: {

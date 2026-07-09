@@ -156,7 +156,7 @@ export default function QuestionPanel({
                         onClick={() => onSelectStatement(i, opt)}
                         className={`flex h-8 w-14 items-center justify-center rounded-md border text-xs font-bold transition ${style}`}
                       >
-                        {opt}
+                        {opt === "Ja" ? t("practice.yesLabel") : t("practice.noLabel")}
                       </button>
                     );
                   })}
