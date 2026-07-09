@@ -2,18 +2,19 @@
 
 import { useState } from "react";
 import { Search, Award } from "lucide-react";
+import { useLocale } from "@/components/LocaleProvider";
 
 export default function CertificationsHero() {
   const [query, setQuery] = useState("");
+  const { t } = useLocale();
 
   return (
     <div className="relative overflow-hidden rounded-2xl border border-border-soft bg-gradient-to-br from-panel to-panel-alt p-6 md:p-10">
       <div className="relative z-10 grid grid-cols-1 items-center gap-8 lg:grid-cols-[1fr_220px]">
         <div>
-          <h1 className="text-3xl font-extrabold text-text md:text-4xl">Zertifizierungen</h1>
+          <h1 className="text-3xl font-extrabold text-text md:text-4xl">{t("certList.heroTitle")}</h1>
           <p className="mt-2 max-w-lg text-sm text-text-muted md:text-base">
-            Entdecke Zertifizierungen der besten Unternehmen und begleite deinen Weg zur nächsten
-            Karriere.
+            {t("certList.heroDesc")}
           </p>
 
           <div className="relative mt-6 max-w-xl">
@@ -21,7 +22,7 @@ export default function CertificationsHero() {
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Unternehmen oder Zertifizierung suchen..."
+              placeholder={t("certList.searchCompanyOrCert")}
               className="w-full rounded-xl border border-border-soft bg-panel py-3.5 pl-11 pr-4 text-sm text-text placeholder:text-text-faint focus:border-primary focus:outline-none"
             />
           </div>

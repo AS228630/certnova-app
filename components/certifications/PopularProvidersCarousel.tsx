@@ -5,9 +5,11 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { getCompanyIcon } from "@/lib/vendorIcons";
 import type { Company } from "@/lib/companiesData";
+import { useLocale } from "@/components/LocaleProvider";
 
 export default function PopularProvidersCarousel({ companies }: { companies: Company[] }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const { t } = useLocale();
 
   const scroll = (dir: 1 | -1) => {
     scrollerRef.current?.scrollBy({ left: dir * 280, behavior: "smooth" });
@@ -16,22 +18,22 @@ export default function PopularProvidersCarousel({ companies }: { companies: Com
   return (
     <div className="mt-8">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="font-bold text-text">Beliebte Anbieter</h2>
+        <h2 className="font-bold text-text">{t("certList.popularProviders")}</h2>
         <div className="flex items-center gap-3">
           <Link href="#alle-anbieter" className="text-sm font-semibold text-primary hover:text-primary-dark">
-            Alle anzeigen
+            {t("certList.viewAll")}
           </Link>
           <div className="flex items-center gap-1">
             <button
               onClick={() => scroll(-1)}
-              aria-label="Zurück"
+              aria-label={t("certList.carouselBack")}
               className="flex h-7 w-7 items-center justify-center rounded-full border border-border-soft text-text-muted hover:border-primary hover:text-primary"
             >
               <ChevronLeft size={15} />
             </button>
             <button
               onClick={() => scroll(1)}
-              aria-label="Weiter"
+              aria-label={t("certList.carouselNext")}
               className="flex h-7 w-7 items-center justify-center rounded-full border border-border-soft text-text-muted hover:border-primary hover:text-primary"
             >
               <ChevronRight size={15} />
@@ -52,7 +54,7 @@ export default function PopularProvidersCarousel({ companies }: { companies: Com
             </div>
             <div className="min-w-0">
               <p className="truncate font-semibold text-text">{c.name}</p>
-              <p className="text-xs text-text-faint">{c.totalCertCount} Zertifizierungen</p>
+              <p className="text-xs text-text-faint">{c.totalCertCount} {t("certList.certsSuffix")}</p>
             </div>
           </Link>
         ))}

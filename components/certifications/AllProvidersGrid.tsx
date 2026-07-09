@@ -4,15 +4,17 @@ import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import type { Company } from "@/lib/companiesData";
 import ProviderCardDetailed from "./ProviderCardDetailed";
+import { useLocale } from "@/components/LocaleProvider";
 
-const CATEGORIES = ["Alle Kategorien", "Cloud", "Security", "Netzwerk", "Software"];
-const LEVELS = ["Alle Niveaus", "Beginner", "Intermediate", "Advanced"];
+const CATEGORY_KEYS = ["catAll", "catCloud", "catSecurity", "catNetwork", "catSoftware"];
+const LEVEL_KEYS = ["levelAll", "levelBeginner", "levelIntermediate", "levelAdvanced"];
 const PAGE_SIZE = 12;
 
 export default function AllProvidersGrid({ companies }: { companies: Company[] }) {
+  const { t } = useLocale();
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState(CATEGORIES[0]);
-  const [level, setLevel] = useState(LEVELS[0]);
+  const [category, setCategory] = useState(CATEGORY_KEYS[0]);
+  const [level, setLevel] = useState(LEVEL_KEYS[0]);
   const [sort, setSort] = useState<"beliebt" | "az">("beliebt");
   const [visible, setVisible] = useState(PAGE_SIZE);
 
@@ -31,7 +33,7 @@ export default function AllProvidersGrid({ companies }: { companies: Company[] }
           <input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Nach Anbieter oder Zertifikat suchen..."
+            placeholder={t("certList.searchProviderOrCert")}
             className="w-full rounded-lg border border-border-soft bg-panel py-2.5 pl-9 pr-3 text-sm text-text placeholder:text-text-faint focus:border-primary focus:outline-none"
           />
         </div>
@@ -41,8 +43,8 @@ export default function AllProvidersGrid({ companies }: { companies: Company[] }
           onChange={(e) => setCategory(e.target.value)}
           className="rounded-lg border border-border-soft bg-panel px-3 py-2.5 text-sm text-text focus:border-primary focus:outline-none sm:w-44"
         >
-          {CATEGORIES.map((c) => (
-            <option key={c}>{c}</option>
+          {CATEGORY_KEYS.map((c) => (
+            <option key={c} value={c}>{t(`certList.${c}`)}</option>
           ))}
         </select>
 
@@ -51,8 +53,8 @@ export default function AllProvidersGrid({ companies }: { companies: Company[] }
           onChange={(e) => setLevel(e.target.value)}
           className="rounded-lg border border-border-soft bg-panel px-3 py-2.5 text-sm text-text focus:border-primary focus:outline-none sm:w-40"
         >
-          {LEVELS.map((l) => (
-            <option key={l}>{l}</option>
+          {LEVEL_KEYS.map((l) => (
+            <option key={l} value={l}>{t(`certList.${l}`)}</option>
           ))}
         </select>
 
@@ -61,12 +63,12 @@ export default function AllProvidersGrid({ companies }: { companies: Company[] }
           onChange={(e) => setSort(e.target.value as "beliebt" | "az")}
           className="rounded-lg border border-border-soft bg-panel px-3 py-2.5 text-sm text-text focus:border-primary focus:outline-none sm:w-44"
         >
-          <option value="beliebt">Sortieren: Beliebt</option>
-          <option value="az">Sortieren: A-Z</option>
+          <option value="beliebt">{t("certList.sortPopular")}</option>
+          <option value="az">{t("certList.sortAZ")}</option>
         </select>
       </div>
 
-      <h2 className="mb-4 font-bold text-text">Alle Zertifizierungsanbieter</h2>
+      <h2 className="mb-4 font-bold text-text">{t("certList.allProviders")}</h2>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {filtered.slice(0, visible).map((c) => (
@@ -75,7 +77,7 @@ export default function AllProvidersGrid({ companies }: { companies: Company[] }
       </div>
 
       {filtered.length === 0 && (
-        <p className="mt-6 text-sm text-text-muted">Kein Anbieter gefunden für „{query}“.</p>
+        <p className="mt-6 text-sm text-text-muted">{t("certList.noProviderFound")} „{query}“.</p>
       )}
 
       {visible < filtered.length && (
@@ -84,7 +86,7 @@ export default function AllProvidersGrid({ companies }: { companies: Company[] }
             onClick={() => setVisible((v) => v + PAGE_SIZE)}
             className="rounded-lg border border-border-soft px-6 py-2.5 text-sm font-semibold text-text hover:border-primary hover:text-primary"
           >
-            Mehr anzeigen
+            {t("certList.showMore")}
           </button>
         </div>
       )}
