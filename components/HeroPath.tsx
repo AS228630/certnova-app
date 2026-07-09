@@ -1,16 +1,20 @@
+"use client";
+
 import { BookOpenCheck, Dumbbell, ShieldCheck, UserCheck, Flag } from "lucide-react";
+import { useLocale } from "@/components/LocaleProvider";
 
 const points = [
-  { x: 8, y: 68, icon: BookOpenCheck, label: "Lernen", active: true },
-  { x: 29, y: 84, icon: Dumbbell, label: "Üben", active: false },
-  { x: 51, y: 52, icon: ShieldCheck, label: "Zertifizierung", active: false },
-  { x: 73, y: 34, icon: UserCheck, label: "Interview", active: false },
-  { x: 93, y: 12, icon: Flag, label: "Ziel erreichen", active: false, goal: true },
+  { x: 8, y: 68, icon: BookOpenCheck, labelKey: "dashboard2.pathLearn", active: true },
+  { x: 29, y: 84, icon: Dumbbell, labelKey: "dashboard2.pathPractice", active: false },
+  { x: 51, y: 52, icon: ShieldCheck, labelKey: "dashboard2.pathCertification", active: false },
+  { x: 73, y: 34, icon: UserCheck, labelKey: "dashboard2.pathInterview", active: false },
+  { x: 93, y: 12, icon: Flag, labelKey: "dashboard2.pathGoal", active: false, goal: true },
 ];
 
 const linePath = points.map((p) => `${p.x},${p.y}`).join(" ");
 
 export default function HeroPath() {
+  const { t } = useLocale();
   return (
     <div className="relative h-44 w-full sm:h-52">
       <svg
@@ -36,7 +40,7 @@ export default function HeroPath() {
 
       {points.map((p) => (
         <div
-          key={p.label}
+          key={p.labelKey}
           className="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5"
           style={{ left: `${p.x}%`, top: `${p.y}%` }}
         >
@@ -53,7 +57,7 @@ export default function HeroPath() {
             <p.icon size={18} className="hidden sm:block" />
           </div>
           <span className="whitespace-nowrap text-[9px] font-medium text-text-muted sm:text-[11px]">
-            {p.label}
+            {t(p.labelKey)}
           </span>
         </div>
       ))}

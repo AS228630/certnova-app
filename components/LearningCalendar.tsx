@@ -2,14 +2,16 @@
 
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useLocale } from "@/components/LocaleProvider";
 
-const weekdays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
-const monthNames = [
-  "Januar", "Februar", "März", "April", "Mai", "Juni",
-  "Juli", "August", "September", "Oktober", "November", "Dezember",
+const weekdayKeys = ["calendar.wdMon", "calendar.wdTue", "calendar.wdWed", "calendar.wdThu", "calendar.wdFri", "calendar.wdSat", "calendar.wdSun"];
+const monthKeys = [
+  "calendar.monthJan", "calendar.monthFeb", "calendar.monthMar", "calendar.monthApr", "calendar.monthMay", "calendar.monthJun",
+  "calendar.monthJul", "calendar.monthAug", "calendar.monthSep", "calendar.monthOct", "calendar.monthNov", "calendar.monthDec",
 ];
 
 export default function LearningCalendar() {
+  const { t } = useLocale();
   const today = new Date();
   const [viewDate, setViewDate] = useState(new Date(today.getFullYear(), today.getMonth(), 1));
 
@@ -30,21 +32,21 @@ export default function LearningCalendar() {
   return (
     <div className="rounded-2xl border border-border-soft bg-panel p-5">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="font-bold text-text">Lernkalender</h2>
+        <h2 className="font-bold text-text">{t("calendar.title")}</h2>
         <div className="flex items-center gap-2 text-xs text-text-muted">
           <span>
-            {monthNames[month]} {year}
+            {t(monthKeys[month])} {year}
           </span>
           <button
             onClick={() => setViewDate(new Date(year, month - 1, 1))}
-            aria-label="Vorheriger Monat"
+            aria-label={t("calendar.prevMonth")}
             className="rounded p-0.5 hover:bg-panel-alt hover:text-text"
           >
             <ChevronLeft size={14} />
           </button>
           <button
             onClick={() => setViewDate(new Date(year, month + 1, 1))}
-            aria-label="Nächster Monat"
+            aria-label={t("calendar.nextMonth")}
             className="rounded p-0.5 hover:bg-panel-alt hover:text-text"
           >
             <ChevronRight size={14} />
@@ -53,9 +55,9 @@ export default function LearningCalendar() {
       </div>
 
       <div className="grid grid-cols-7 gap-1 text-center text-[11px] text-text-faint">
-        {weekdays.map((d) => (
+        {weekdayKeys.map((d) => (
           <span key={d} className="py-1 font-medium">
-            {d}
+            {t(d)}
           </span>
         ))}
         {cells.map((day, i) =>

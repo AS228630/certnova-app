@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { ChevronRight, Star, Globe2 } from "lucide-react";
+import { useLocale } from "@/components/LocaleProvider";
 
 type LanguageCourse = {
   flag: string;
@@ -11,6 +12,7 @@ type LanguageCourse = {
 };
 
 export default function LanguageCoursesScroller({ courses }: { courses: LanguageCourse[] }) {
+  const { t } = useLocale();
   const scrollerRef = useRef<HTMLDivElement>(null);
 
   const scrollRight = () => {
@@ -50,7 +52,7 @@ export default function LanguageCoursesScroller({ courses }: { courses: Language
 
       <button
         onClick={scrollRight}
-        aria-label="Weitere Sprachkurse anzeigen"
+        aria-label={t("dashboard2.showMoreLangCourses")}
         className="absolute right-0 top-1/2 hidden h-9 w-9 -translate-y-1/2 translate-x-1/2 items-center justify-center rounded-full border border-border-soft bg-panel text-text-muted shadow-lg hover:text-text sm:flex"
       >
         <ChevronRight size={18} />
