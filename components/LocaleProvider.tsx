@@ -6,13 +6,12 @@ import en from "@/lib/i18n/dictionaries/en";
 import fa from "@/lib/i18n/dictionaries/fa";
 import ar from "@/lib/i18n/dictionaries/ar";
 import uk from "@/lib/i18n/dictionaries/uk";
+import es from "@/lib/i18n/dictionaries/es";
+import fr from "@/lib/i18n/dictionaries/fr";
+import ru from "@/lib/i18n/dictionaries/ru";
+import tr from "@/lib/i18n/dictionaries/tr";
 
-// Languages with a real dictionary today. Others in LanguageSwitcher.tsx
-// (es, fr, ru, tr) are on the roadmap but fall back to German until their
-// dictionaries are written with the same care as these — showing a
-// half-translated page would confuse users more than a consistent German
-// one, so untranslated locales intentionally do NOT switch anything yet.
-const dictionaries: Partial<Record<string, Dictionary>> = { de, en, fa, ar, uk };
+const dictionaries: Partial<Record<string, Dictionary>> = { de, en, fa, ar, uk, es, fr, ru, tr };
 const RTL_LOCALES = new Set(["fa", "ar"]);
 
 type LocaleContextValue = {
