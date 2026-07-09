@@ -503,6 +503,25 @@ const fa: Dictionary = {
     actionContinue: "ادامه",
     actionStart: "شروع",
   },
+  labs: {
+    backToCert: "بازگشت به",
+    labEnvironment: "محیط لب",
+    labInProgress: "یه لب عملی و تعاملی برای {company} در حال ساخته و به‌زودی اینجا در دسترس قرار می‌گیره — با همون تجربه‌ی شبیه‌ساز Azure ما.",
+    endLab: "پایان لب",
+    labsBreadcrumb: "لب‌ها",
+    remainingTimeL: "زمان باقی‌مانده",
+    labOverviewTab: "نمای کلی",
+    labGoal: "هدف لب",
+    labDetails: "جزئیات لب",
+    activeStatus: "فعال",
+    inactiveStatus: "غیرفعال",
+    readyStatus: "آماده",
+    lockedStatus: "قفل‌شده",
+    closeL: "بستن",
+    labInstructions: "دستورالعمل‌های لب",
+    instructionsTab: "دستورالعمل‌ها",
+    comingSoonLabel2: "به‌زودی",
+  },
 };
 
 export default fa;

@@ -503,6 +503,25 @@ const ru: Dictionary = {
     actionContinue: "Продолжить",
     actionStart: "Начать",
   },
+  labs: {
+    backToCert: "Назад к",
+    labEnvironment: "Лабораторная среда",
+    labInProgress: "Интерактивная практическая лабораторная для {company} разрабатывается и скоро появится здесь — с тем же опытом, что и наш симулятор Azure.",
+    endLab: "Завершить лабораторную",
+    labsBreadcrumb: "Лабораторные",
+    remainingTimeL: "Оставшееся время",
+    labOverviewTab: "Обзор",
+    labGoal: "Цель лабораторной",
+    labDetails: "Детали лабораторной",
+    activeStatus: "Активно",
+    inactiveStatus: "Неактивно",
+    readyStatus: "Готово",
+    lockedStatus: "Заблокировано",
+    closeL: "Закрыть",
+    labInstructions: "Инструкции лабораторной",
+    instructionsTab: "Инструкции",
+    comingSoonLabel2: "Скоро",
+  },
 };
 
 export default ru;

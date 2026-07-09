@@ -2,6 +2,7 @@
 
 import { CheckCircle2, Circle } from "lucide-react";
 import type { Lab, LabTask } from "@/lib/labsData";
+import { useLocale } from "@/components/LocaleProvider";
 
 export default function LabSidebar({
   lab,
@@ -14,6 +15,7 @@ export default function LabSidebar({
   onToggleTask: (id: string) => void;
   readOnly?: boolean;
 }) {
+  const { t } = useLocale();
   const done = tasks.filter((t) => t.done).length;
   const progress = tasks.length === 0 ? 0 : Math.round((done / tasks.length) * 100);
 
@@ -34,7 +36,7 @@ export default function LabSidebar({
                 {r.label}
               </span>
               <span className={r.active ? "text-xs font-semibold text-success" : "text-xs text-text-faint"}>
-                {r.active ? "Aktiv" : "Inaktiv"}
+                {r.active ? t("labs.activeStatus") : t("labs.inactiveStatus")}
               </span>
             </li>
           ))}

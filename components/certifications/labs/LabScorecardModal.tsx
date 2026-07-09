@@ -1,6 +1,7 @@
 "use client";
 
 import { Trophy, Clock, Target, X } from "lucide-react";
+import { useLocale } from "@/components/LocaleProvider";
 
 function formatDuration(ms: number) {
   const totalSec = Math.floor(ms / 1000);
@@ -20,6 +21,7 @@ export default function LabScorecardModal({
   onDismiss: () => void;
   onRestart: () => void;
 }) {
+  const { t } = useLocale();
   const accuracy = Math.max(0, 100 - mistakeCount * 10);
 
   return (
@@ -28,7 +30,7 @@ export default function LabScorecardModal({
         <button
           onClick={onDismiss}
           className="ml-auto mb-2 block text-text-faint hover:text-text"
-          aria-label="Schließen"
+          aria-label={t("labs.closeL")}
         >
           <X size={18} />
         </button>

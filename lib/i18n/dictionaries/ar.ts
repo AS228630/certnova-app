@@ -503,6 +503,25 @@ const ar: Dictionary = {
     actionContinue: "متابعة",
     actionStart: "بدء",
   },
+  labs: {
+    backToCert: "الرجوع إلى",
+    labEnvironment: "بيئة المختبر",
+    labInProgress: "مختبر تفاعلي عملي لـ {company} قيد التطوير وسيكون متاحاً هنا قريباً — بنفس تجربة محاكي Azure لدينا.",
+    endLab: "إنهاء المختبر",
+    labsBreadcrumb: "المختبرات",
+    remainingTimeL: "الوقت المتبقي",
+    labOverviewTab: "نظرة عامة",
+    labGoal: "هدف المختبر",
+    labDetails: "تفاصيل المختبر",
+    activeStatus: "نشط",
+    inactiveStatus: "غير نشط",
+    readyStatus: "جاهز",
+    lockedStatus: "مقفل",
+    closeL: "إغلاق",
+    labInstructions: "تعليمات المختبر",
+    instructionsTab: "التعليمات",
+    comingSoonLabel2: "قريباً",
+  },
 };
 
 export default ar;

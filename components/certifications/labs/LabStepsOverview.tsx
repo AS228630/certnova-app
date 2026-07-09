@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ChevronRight, ChevronLeft, CheckCircle2, Lock, Clock, Target, ListChecks, Info } from "lucide-react";
 import { Cloud24Filled } from "@fluentui/react-icons";
 import type { LabStep } from "@/lib/labsData";
+import { useLocale } from "@/components/LocaleProvider";
 
 function TaskDetail({ step, onBack, onOpen }: { step: LabStep; onBack: () => void; onOpen: () => void }) {
   return (
@@ -77,6 +78,7 @@ export default function LabStepsOverview({
   steps: LabStep[];
   onOpen: () => void;
 }) {
+  const { t } = useLocale();
   const [selected, setSelected] = useState<LabStep | null>(null);
 
   if (selected) {
@@ -133,7 +135,7 @@ export default function LabStepsOverview({
                 }`}
               >
                 {step.status === "ready" ? <CheckCircle2 size={14} /> : <Lock size={14} />}
-                {step.status === "ready" ? "Bereit" : "Gesperrt"}
+                {step.status === "ready" ? t("labs.readyStatus") : t("labs.lockedStatus")}
               </span>
               <ChevronRight size={16} className="shrink-0 text-text-faint" />
             </button>

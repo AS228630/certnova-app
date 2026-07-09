@@ -504,6 +504,25 @@ const de = {
     actionContinue: "Fortsetzen",
     actionStart: "Starten",
   },
+  labs: {
+    backToCert: "Zurück zu",
+    labEnvironment: "Lab-Umgebung",
+    labInProgress: "Ein interaktives Hands-on-Lab für {company} ist in Arbeit und wird hier bald verfügbar sein — mit der gleichen Erfahrung wie unser Azure-Simulator.",
+    endLab: "Lab beenden",
+    labsBreadcrumb: "Labs",
+    remainingTimeL: "Verbleibende Zeit",
+    labOverviewTab: "Übersicht",
+    labGoal: "Ziel des Labs",
+    labDetails: "Lab-Details",
+    activeStatus: "Aktiv",
+    inactiveStatus: "Inaktiv",
+    readyStatus: "Bereit",
+    lockedStatus: "Gesperrt",
+    closeL: "Schließen",
+    labInstructions: "Lab-Anweisungen",
+    instructionsTab: "Anleitungen",
+    comingSoonLabel2: "Demnächst verfügbar",
+  },
 };
 
 export default de;

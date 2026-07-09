@@ -4,23 +4,25 @@ import { useState } from "react";
 import { CheckCircle2 } from "lucide-react";
 import type { Lab } from "@/lib/labsData";
 import { VocabularyText } from "@/components/VocabularyTerm";
+import { useLocale } from "@/components/LocaleProvider";
 
 export default function LabOverviewPanel({ lab }: { lab: Lab }) {
+  const { t } = useLocale();
   const [tab, setTab] = useState<"uebersicht" | "anleitungen">("uebersicht");
 
   return (
     <div className="rounded-2xl border border-border-soft bg-panel p-5">
       <div className="mb-4 flex gap-5 border-b border-border-soft">
-        {(["uebersicht", "anleitungen"] as const).map((t) => (
+        {(["uebersicht", "anleitungen"] as const).map((key) => (
           <button
-            key={t}
-            onClick={() => setTab(t)}
+            key={key}
+            onClick={() => setTab(key)}
             className={`relative pb-3 text-sm font-semibold ${
-              tab === t ? "text-primary" : "text-text-muted hover:text-text"
+              tab === key ? "text-primary" : "text-text-muted hover:text-text"
             }`}
           >
-            {t === "uebersicht" ? "Übersicht" : "Anleitungen"}
-            {tab === t && <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-primary" />}
+            {key === "uebersicht" ? t("labs.labOverviewTab") : t("labs.instructionsTab")}
+            {tab === key && <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-primary" />}
           </button>
         ))}
       </div>
@@ -28,7 +30,7 @@ export default function LabOverviewPanel({ lab }: { lab: Lab }) {
       {tab === "uebersicht" ? (
         <div className="space-y-6">
           <div>
-            <p className="mb-2 text-sm font-bold text-text">Ziel des Labs</p>
+            <p className="mb-2 text-sm font-bold text-text">{t("labs.labGoal")}</p>
             <p className="mb-3 text-sm text-text-muted">{lab.goal}</p>
             <ul className="space-y-1.5">
               {lab.goalChecklist.map((item) => (
@@ -41,7 +43,7 @@ export default function LabOverviewPanel({ lab }: { lab: Lab }) {
           </div>
 
           <div>
-            <p className="mb-2 text-sm font-bold text-text">Lab-Details</p>
+            <p className="mb-2 text-sm font-bold text-text">{t("labs.labDetails")}</p>
             <dl className="space-y-1.5 text-sm">
               {lab.details.map((d) => (
                 <div key={d.label} className="flex items-center justify-between">
@@ -54,7 +56,7 @@ export default function LabOverviewPanel({ lab }: { lab: Lab }) {
         </div>
       ) : (
         <div>
-          <p className="mb-3 text-sm font-bold text-text">Lab-Anweisungen</p>
+          <p className="mb-3 text-sm font-bold text-text">{t("labs.labInstructions")}</p>
           <ol className="space-y-3">
             {lab.instructions.map((step, i) => (
               <li key={i} className="flex gap-3 text-sm text-text-muted">

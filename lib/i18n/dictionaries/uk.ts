@@ -503,6 +503,25 @@ const uk: Dictionary = {
     actionContinue: "Продовжити",
     actionStart: "Почати",
   },
+  labs: {
+    backToCert: "Назад до",
+    labEnvironment: "Лабораторне середовище",
+    labInProgress: "Інтерактивна практична лабораторна для {company} розробляється і незабаром з'явиться тут — з таким же досвідом, як наш симулятор Azure.",
+    endLab: "Завершити лабораторну",
+    labsBreadcrumb: "Лабораторні",
+    remainingTimeL: "Час, що залишився",
+    labOverviewTab: "Огляд",
+    labGoal: "Мета лабораторної",
+    labDetails: "Деталі лабораторної",
+    activeStatus: "Активний",
+    inactiveStatus: "Неактивний",
+    readyStatus: "Готово",
+    lockedStatus: "Заблоковано",
+    closeL: "Закрити",
+    labInstructions: "Інструкції лабораторної",
+    instructionsTab: "Інструкції",
+    comingSoonLabel2: "Незабаром",
+  },
 };
 
 export default uk;

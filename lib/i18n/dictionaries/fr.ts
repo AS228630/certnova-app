@@ -503,6 +503,25 @@ const fr: Dictionary = {
     actionContinue: "Continuer",
     actionStart: "Commencer",
   },
+  labs: {
+    backToCert: "Retour à",
+    labEnvironment: "Environnement de lab",
+    labInProgress: "Un lab interactif pratique pour {company} est en préparation et sera bientôt disponible ici — avec la même expérience que notre simulateur Azure.",
+    endLab: "Terminer le lab",
+    labsBreadcrumb: "Labs",
+    remainingTimeL: "Temps restant",
+    labOverviewTab: "Aperçu",
+    labGoal: "Objectif du lab",
+    labDetails: "Détails du lab",
+    activeStatus: "Actif",
+    inactiveStatus: "Inactif",
+    readyStatus: "Prêt",
+    lockedStatus: "Verrouillé",
+    closeL: "Fermer",
+    labInstructions: "Instructions du lab",
+    instructionsTab: "Instructions",
+    comingSoonLabel2: "Bientôt disponible",
+  },
 };
 
 export default fr;

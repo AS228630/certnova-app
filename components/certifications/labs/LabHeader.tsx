@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ChevronLeft, Clock3, Power, Monitor, ShieldCheck, RotateCcw, CheckCircle2, ListChecks } from "lucide-react";
 import type { Lab } from "@/lib/labsData";
+import { useLocale } from "@/components/LocaleProvider";
 
 const TAG_ICON: Record<string, typeof Monitor> = {
   "Online-Lab": Monitor,
@@ -44,6 +45,7 @@ export default function LabHeader({
   onEnd: () => void;
   compact?: boolean;
 }) {
+  const { t } = useLocale();
   if (compact) {
     return (
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border-soft bg-panel px-4 py-2.5">
@@ -51,7 +53,7 @@ export default function LabHeader({
           <Link
             href={`/certifications/${companySlug}/${certId}`}
             className="text-text-muted hover:text-text"
-            aria-label="Zurück"
+            aria-label={t("journey.back")}
           >
             <ChevronLeft size={16} />
           </Link>
@@ -70,7 +72,7 @@ export default function LabHeader({
             className="flex items-center gap-1.5 rounded-lg border border-danger/40 px-2.5 py-1.5 text-xs font-bold text-danger hover:bg-danger/10"
           >
             <Power size={13} />
-            Lab beenden
+            {t("labs.endLab")}
           </button>
         </div>
       </div>
@@ -80,10 +82,10 @@ export default function LabHeader({
   return (
     <div>
       <div className="mb-4 flex flex-wrap items-center gap-1.5 text-xs text-text-muted">
-        <Link href={`/certifications/${companySlug}/${certId}`} className="text-text-muted hover:text-text" aria-label="Zurück">
+        <Link href={`/certifications/${companySlug}/${certId}`} className="text-text-muted hover:text-text" aria-label={t("journey.back")}>
           <ChevronLeft size={16} />
         </Link>
-        <span>Labs</span>
+        <span>{t("labs.labsBreadcrumb")}</span>
         <span>/</span>
         <Link href={`/certifications/${companySlug}`} className="hover:text-primary">
           {companyName}
@@ -123,7 +125,7 @@ export default function LabHeader({
 
         <div className="flex flex-none items-center gap-3 rounded-xl border border-border-soft bg-panel p-3">
           <div>
-            <p className="text-[11px] text-text-muted">Verbleibende Zeit</p>
+            <p className="text-[11px] text-text-muted">{t("labs.remainingTimeL")}</p>
             <p className="font-mono text-lg font-bold text-text">{formatTime(remainingSeconds)}</p>
           </div>
           <button
@@ -131,7 +133,7 @@ export default function LabHeader({
             className="flex items-center gap-1.5 rounded-lg border border-danger/40 px-3 py-2 text-xs font-bold text-danger hover:bg-danger/10"
           >
             <Power size={13} />
-            Lab beenden
+            {t("labs.endLab")}
           </button>
         </div>
       </div>

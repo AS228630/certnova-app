@@ -503,6 +503,25 @@ const tr: Dictionary = {
     actionContinue: "Devam Et",
     actionStart: "Başla",
   },
+  labs: {
+    backToCert: "Geri dön",
+    labEnvironment: "Lab Ortamı",
+    labInProgress: "{company} için etkileşimli, uygulamalı bir lab geliştiriliyor ve yakında burada kullanıma sunulacak — Azure simülatörümüzle aynı deneyimle.",
+    endLab: "Labı Sonlandır",
+    labsBreadcrumb: "Lablar",
+    remainingTimeL: "Kalan Süre",
+    labOverviewTab: "Genel Bakış",
+    labGoal: "Lab Hedefi",
+    labDetails: "Lab Detayları",
+    activeStatus: "Aktif",
+    inactiveStatus: "Pasif",
+    readyStatus: "Hazır",
+    lockedStatus: "Kilitli",
+    closeL: "Kapat",
+    labInstructions: "Lab Talimatları",
+    instructionsTab: "Talimatlar",
+    comingSoonLabel2: "Yakında",
+  },
 };
 
 export default tr;
