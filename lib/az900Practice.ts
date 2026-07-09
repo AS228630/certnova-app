@@ -7383,3 +7383,53 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     explanation: "Für Blobs wird eine Gebühr für vorzeitiges Löschen erhoben, wenn sie gelöscht, überschrieben oder auf eine andere Ebene verschoben werden, bevor die für die Ebene erforderliche Mindestanzahl von Tagen verstrichen ist. Für ein Blob in der Cool-Ebene eines Allzweckkontos v2 wird eine Gebühr für vorzeitiges Löschen erhoben, wenn es vor Ablauf von 30 Tagen gelöscht oder auf eine andere Ebene verschoben wird. Diese Gebühr wird anteilig berechnet.",
   },
 ];
+
+// ---------------------------------------------------------------------
+// Locale-aware access. Overlays a per-language translation (see
+// lib/i18n/questions/) onto the German original, field by field, so a
+// question with only a translated prompt but no translated explanation
+// yet still shows the (correct, verified) German explanation rather than
+// an empty field. Untranslated questions fall back to German entirely.
+// ---------------------------------------------------------------------
+import type { QuestionTranslations } from "@/lib/i18n/questions/types";
+import az900_en from "@/lib/i18n/questions/az900.en";
+
+const AZ900_TRANSLATIONS: Partial<Record<string, QuestionTranslations>> = {
+  en: az900_en,
+};
+
+function applyTranslation(q: PracticeQuestion, tr: QuestionTranslations[string] | undefined): PracticeQuestion {
+  if (!tr) return q;
+  const merged = { ...q } as PracticeQuestion & { prompt: string; explanation: string };
+  if (tr.prompt) merged.prompt = tr.prompt;
+  if (tr.explanation) merged.explanation = tr.explanation;
+  if (tr.underlinedText && "underlinedText" in merged) (merged as SingleChoiceQuestion).underlinedText = tr.underlinedText;
+  if (tr.options && "options" in q) {
+    (merged as SingleChoiceQuestion).options = (q as SingleChoiceQuestion).options.map((o) => ({
+      ...o,
+      text: tr.options?.[o.id] ?? o.text,
+    }));
+  }
+  if (tr.statements && q.type === "yesno") {
+    (merged as YesNoQuestion).statements = (q as YesNoQuestion).statements.map((s, i) => ({
+      ...s,
+      text: tr.statements?.[i] ?? s.text,
+    }));
+  }
+  if (q.type === "matching") {
+    const mq = q as MatchingQuestion;
+    if (tr.items) (merged as MatchingQuestion).items = mq.items.map((it) => ({ ...it, label: tr.items?.[it.id] ?? it.label }));
+    if (tr.descriptions)
+      (merged as MatchingQuestion).descriptions = mq.descriptions.map((d) => ({ ...d, text: tr.descriptions?.[d.id] ?? d.text }));
+  }
+  return merged;
+}
+
+/** Returns AZ900_QUESTIONS with any available translations for the given
+ * locale applied. Falls back to German for locales with no translation
+ * file yet, and per-question for any field not yet translated. */
+export function getAz900Questions(locale: string): PracticeQuestion[] {
+  const translations = AZ900_TRANSLATIONS[locale];
+  if (!translations) return AZ900_QUESTIONS;
+  return AZ900_QUESTIONS.map((q) => applyTranslation(q, translations[q.id]));
+}
