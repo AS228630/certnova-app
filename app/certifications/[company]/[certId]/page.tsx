@@ -1,10 +1,6 @@
 import { notFound } from "next/navigation";
 import DashboardShell from "@/components/DashboardShell";
-import JourneyHeader from "@/components/certifications/journey/JourneyHeader";
-import JourneyTabs from "@/components/certifications/journey/JourneyTabs";
-import JourneyPhases from "@/components/certifications/journey/JourneyPhases";
-import ProgressChart from "@/components/certifications/journey/ProgressChart";
-import JourneyActivity from "@/components/certifications/journey/JourneyActivity";
+import JourneyPageClient from "@/components/certifications/journey/JourneyPageClient";
 import { getCompany, companies } from "@/lib/companiesData";
 import { getCertJourney } from "@/lib/journeyData";
 
@@ -26,16 +22,7 @@ export default async function CertJourneyPage({
   return (
     <DashboardShell requireAuth={false}>
       <main className="flex-1 p-4 md:p-8">
-        <JourneyHeader company={company} journey={journey} />
-
-        <JourneyTabs>
-          <JourneyPhases phases={journey.phases} companySlug={company.slug} certId={certId} certTitle={cert.title} />
-        </JourneyTabs>
-
-        <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-[1fr_360px]">
-          <ProgressChart points={journey.history} />
-          <JourneyActivity items={journey.activity} />
-        </div>
+        <JourneyPageClient company={company} cert={cert} companySlug={company.slug} certId={certId} />
       </main>
     </DashboardShell>
   );

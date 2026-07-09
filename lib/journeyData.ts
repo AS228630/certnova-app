@@ -1,4 +1,18 @@
 import { getCompany, type Certification } from "./companiesData";
+import de from "@/lib/i18n/dictionaries/de";
+import en from "@/lib/i18n/dictionaries/en";
+import fa from "@/lib/i18n/dictionaries/fa";
+import ar from "@/lib/i18n/dictionaries/ar";
+import uk from "@/lib/i18n/dictionaries/uk";
+import es from "@/lib/i18n/dictionaries/es";
+import fr from "@/lib/i18n/dictionaries/fr";
+import ru from "@/lib/i18n/dictionaries/ru";
+import tr from "@/lib/i18n/dictionaries/tr";
+
+const JOURNEY_DICTS: Record<string, typeof de> = { de, en, fa, ar, uk, es, fr, ru, tr };
+function journeyDict(locale: string) {
+  return (JOURNEY_DICTS[locale] ?? de).journeyGen;
+}
 
 export type PhaseStat = {
   label: string;
@@ -130,7 +144,8 @@ function hash(str: string) {
   return h;
 }
 
-function generateJourney(cert: Certification): CertJourney {
+function generateJourney(cert: Certification, locale: string = "de"): CertJourney {
+  const jt = journeyDict(locale);
   const h = hash(cert.id);
   const base = cert.progress ?? h % 60;
   const lernenPct = Math.min(100, base + (h % 15));
@@ -146,7 +161,7 @@ function generateJourney(cert: Certification): CertJourney {
     level: cert.level,
     rating: 4.4 + (h % 5) * 0.1,
     reviewCount: 200 + (h % 900),
-    duration: `${10 + (h % 15)}-${20 + (h % 15)} Stunden`,
+    duration: `${10 + (h % 15)}-${20 + (h % 15)} ${jt.hoursUnit}`,
     longDescription: cert.description,
     themesDone,
     themesTotal,
@@ -155,67 +170,139 @@ function generateJourney(cert: Certification): CertJourney {
       {
         key: "lernen",
         step: 1,
-        title: "Lernen",
-        subtitle: "Wissen aufbauen",
+        title: jt.phaseLearnTitle,
+        subtitle: jt.phaseLearnSubtitle,
         weight: 40,
         completion: lernenPct,
         stats: [
-          { label: "Module", done: Math.round((lernenPct / 100) * 20), total: 20 },
-          { label: "Videos", done: Math.round((lernenPct / 100) * 50), total: 50 },
-          { label: "Quiz", done: Math.round((lernenPct / 100) * 25), total: 25 },
-          { label: "Dauer", done: 8, total: 8, isTime: true },
+          { label: jt.statModulesJ, done: Math.round((lernenPct / 100) * 20), total: 20 },
+          { label: jt.statVideosJ, done: Math.round((lernenPct / 100) * 50), total: 50 },
+          { label: jt.statQuizJ, done: Math.round((lernenPct / 100) * 25), total: 25 },
+          { label: jt.statDurationJ, done: 8, total: 8, isTime: true },
         ],
-        cta: "Module anzeigen",
+        cta: jt.ctaShowModules,
         unlocked: true,
       },
       {
         key: "labore",
         step: 2,
-        title: "Praxis-Labore",
-        subtitle: "Fähigkeiten üben",
+        title: jt.phaseLabsTitle,
+        subtitle: jt.phaseLabsSubtitle,
         weight: 35,
         completion: laborePct,
         stats: [
-          { label: "Labs", done: Math.round((laborePct / 100) * 15), total: 15 },
-          { label: "Aufgaben", done: Math.round((laborePct / 100) * 30), total: 30 },
-          { label: "Dauer", done: 5, total: 5, isTime: true },
+          { label: jt.statLabsJ, done: Math.round((laborePct / 100) * 15), total: 15 },
+          { label: jt.statTasksJ, done: Math.round((laborePct / 100) * 30), total: 30 },
+          { label: jt.statDurationJ, done: 5, total: 5, isTime: true },
         ],
-        cta: "Labore anzeigen",
+        cta: jt.ctaShowLabs,
         unlocked: lernenPct >= 30,
-        unlockHint: lernenPct >= 30 ? undefined : "Wird freigeschaltet, wenn Lernen zu 30% abgeschlossen ist",
+        unlockHint: lernenPct >= 30 ? undefined : jt.unlockAt30,
       },
       {
         key: "pruefung",
         step: 3,
-        title: "Prüfungs-Simulation",
-        subtitle: "Prüfung vorbereiten",
+        title: jt.phaseExamTitle,
+        subtitle: jt.phaseExamSubtitle,
         weight: 25,
         completion: pruefungPct,
         stats: [
-          { label: "Übungstests", done: Math.round((pruefungPct / 100) * 6), total: 6 },
-          { label: "Fragen beantwortet", done: Math.round((pruefungPct / 100) * 150), total: 150 },
-          { label: "Durchschnitt", done: 60, total: 100 },
+          { label: jt.statPracticeTestsJ, done: Math.round((pruefungPct / 100) * 6), total: 6 },
+          { label: jt.statQuestionsAnsweredJ, done: Math.round((pruefungPct / 100) * 150), total: 150 },
+          { label: jt.statAverageJ, done: 60, total: 100 },
         ],
-        cta: "Übungstests anzeigen",
+        cta: jt.ctaShowPracticeTests,
         unlocked: true,
       },
     ],
     history: Array.from({ length: 7 }).map((_, i) => ({
-      label: `Woche ${i + 1}`,
+      label: `${jt.weekLabel} ${i + 1}`,
       value: Math.round((overall / 6) * i),
     })),
     activity: [
-      { icon: "graduation", title: "Modul abgeschlossen", subtitle: cert.title, timestamp: "Heute" },
-      { icon: "flask", title: "Lab abgeschlossen", subtitle: `Übung zu ${cert.title}`, timestamp: "Gestern" },
+      { icon: "graduation", title: jt.activityModuleCompleted, subtitle: cert.title, timestamp: jt.todayLabel },
+      { icon: "flask", title: jt.activityLabCompleted, subtitle: `${jt.activityExerciseFor} ${cert.title}`, timestamp: jt.yesterdayLabel },
     ],
   };
 }
 
-export function getCertJourney(companySlug: string, certId: string): CertJourney | undefined {
+export function getCertJourney(companySlug: string, certId: string, locale: string = "de"): CertJourney | undefined {
   const company = getCompany(companySlug);
   const cert = company?.certs.find((c) => c.id === certId);
   if (!company || !cert) return undefined;
 
-  if (companySlug === "microsoft" && certId === "az-104") return AZ_104_JOURNEY;
-  return generateJourney(cert);
+  if (companySlug === "microsoft" && certId === "az-104") return applyAz104Translation(AZ_104_JOURNEY, locale);
+  return generateJourney(cert, locale);
+}
+
+// AZ-104 has its own hand-authored journey (real numbers, not generated),
+// so it needs its own small override for the same repeated phase/stat/cta
+// strings plus its two unique prose fields (duration, longDescription).
+function applyAz104Translation(journey: CertJourney, locale: string): CertJourney {
+  const jt = journeyDict(locale);
+  const az104Duration: Partial<Record<string, string>> = {
+    en: "20-25 hours",
+    fa: "۲۰ تا ۲۵ ساعت",
+    ar: "20-25 ساعة",
+    uk: "20-25 годин",
+    es: "20-25 horas",
+    fr: "20-25 heures",
+    ru: "20-25 часов",
+    tr: "20-25 saat",
+  };
+  const az104Desc: Partial<Record<string, string>> = {
+    en: "Managing Azure identities, governance, storage, compute, and virtual networks in the cloud.",
+    fa: "مدیریت هویت‌های Azure، حاکمیت، ذخیره‌سازی، محاسبات و شبکه‌های مجازی تو کلاود.",
+    ar: "إدارة هويات Azure والحوكمة والتخزين والحوسبة والشبكات الظاهرية في السحابة.",
+    uk: "Керування ідентичностями Azure, врядуванням, сховищем, обчисленнями та віртуальними мережами в хмарі.",
+    es: "Gestión de identidades de Azure, gobernanza, almacenamiento, cómputo y redes virtuales en la nube.",
+    fr: "Gestion des identités Azure, de la gouvernance, du stockage, du calcul et des réseaux virtuels dans le cloud.",
+    ru: "Управление удостоверениями Azure, governance, хранилищем, вычислениями и виртуальными сетями в облаке.",
+    tr: "Bulutta Azure kimliklerini, yönetişimi, depolamayı, işlemi ve sanal ağları yönetme.",
+  };
+  return {
+    ...journey,
+    duration: az104Duration[locale] ?? journey.duration,
+    longDescription: az104Desc[locale] ?? journey.longDescription,
+    phases: journey.phases.map((p) => {
+      if (p.key === "lernen") {
+        return {
+          ...p,
+          title: jt.phaseLearnTitle,
+          subtitle: jt.phaseLearnSubtitle,
+          stats: p.stats.map((s) => ({
+            ...s,
+            label: { Module: jt.statModulesJ, Videos: jt.statVideosJ, Quiz: jt.statQuizJ, Dauer: jt.statDurationJ }[s.label] ?? s.label,
+          })),
+          cta: jt.ctaShowModules,
+        };
+      }
+      if (p.key === "labore") {
+        return {
+          ...p,
+          title: jt.phaseLabsTitle,
+          subtitle: jt.phaseLabsSubtitle,
+          stats: p.stats.map((s) => ({
+            ...s,
+            label: { Labs: jt.statLabsJ, Aufgaben: jt.statTasksJ, Dauer: jt.statDurationJ }[s.label] ?? s.label,
+          })),
+          cta: jt.ctaShowLabs,
+        };
+      }
+      return {
+        ...p,
+        title: jt.phaseExamTitle,
+        subtitle: jt.phaseExamSubtitle,
+        stats: p.stats.map((s) => ({
+          ...s,
+          label:
+            { Übungstests: jt.statPracticeTestsJ, "Fragen beantwortet": jt.statQuestionsAnsweredJ, Durchschnitt: jt.statAverageJ }[
+              s.label
+            ] ?? s.label,
+        })),
+        cta: jt.ctaShowPracticeTests,
+      };
+    }),
+    history: journey.history.map((h, i) => ({ ...h, label: `${jt.weekLabel} ${i + 1}` })),
+  };
 }

@@ -21,6 +21,7 @@ import ProgressRing from "@/components/certifications/journey/ProgressRing";
 import { moduleSummary, getLearnTrack, type Module, type Lesson } from "@/lib/learnData";
 import type { Company } from "@/lib/companiesData";
 import type { CertJourney } from "@/lib/journeyData";
+import { getCertJourney } from "@/lib/journeyData";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
@@ -184,7 +185,7 @@ function ModuleCard({
 
 export default function LearnClient({
   company,
-  journey,
+  journey: journeyFromServer,
   modules: _modulesFromServer,
 }: {
   company: Company;
@@ -197,7 +198,7 @@ export default function LearnClient({
   const [addingNote, setAddingNote] = useState(false);
   const { t, locale } = useLocale();
   const [tab, setTab] = useState<(typeof TAB_KEYS)[number]>("path");
-  const certId = journey.code.toLowerCase();
+  const certId = journeyFromServer.code.toLowerCase();
   const companySlug = company.slug;
   const { user } = useUser();
   const completionSet = useLessonCompletionStore((s) => s.completions[certId]);
@@ -208,10 +209,12 @@ export default function LearnClient({
   }, [user, certId, loadForCert]);
 
   // The Learn page is server-rendered in German (no client locale available
-  // there yet), so re-derive the module list on the client using the active
-  // locale for certs that fall back to the generic generator. Hand-authored
-  // LEARN_TRACKS entries aren't locale-aware yet, so this only changes
-  // anything for certs using the generic fallback.
+  // there yet), so re-derive both the journey (for JourneyHeader) and the
+  // module list on the client using the active locale.
+  const journey = useMemo(
+    () => getCertJourney(companySlug, certId, locale) ?? journeyFromServer,
+    [companySlug, certId, locale, journeyFromServer]
+  );
   const modules = useMemo(() => getLearnTrack(certId, journey.title, locale).modules, [certId, journey.title, locale]);
 
   // Merge the static module/lesson structure with each lesson's *real*,

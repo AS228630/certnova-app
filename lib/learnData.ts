@@ -18,6 +18,32 @@ function dict(locale: string) {
   return DICTS[locale] ?? de;
 }
 
+import learnTracks_en from "@/lib/i18n/questions/learnTracks.en";
+import type { LearnTrackTranslation } from "@/lib/i18n/questions/learnTracks.en";
+
+const LEARN_TRACK_TRANSLATIONS: Partial<Record<string, Record<string, LearnTrackTranslation>>> = {
+  en: learnTracks_en,
+};
+
+function applyTrackTranslation(certId: string, track: LearnTrack, locale: string): LearnTrack {
+  const tr = LEARN_TRACK_TRANSLATIONS[locale]?.[certId];
+  if (!tr) return track;
+  return {
+    ...track,
+    modules: track.modules.map((m) => {
+      const mt = tr.modules[m.id];
+      if (!mt) return m;
+      return {
+        ...m,
+        title: mt.title ?? m.title,
+        description: mt.description ?? m.description,
+        lockedHint: mt.lockedHint ?? m.lockedHint,
+        lessons: m.lessons.map((l) => ({ ...l, title: mt.lessons?.[l.id] ?? l.title })),
+      };
+    }),
+  };
+}
+
 export type LessonType = "video" | "quiz" | "reading";
 
 export type Lesson = {
@@ -213,7 +239,9 @@ function generateLearnTrack(certId: string, certTitle: string, locale: string = 
 }
 
 export function getLearnTrack(certId: string, certTitle = certId.toUpperCase(), locale: string = "de"): LearnTrack {
-  return LEARN_TRACKS[certId] ?? generateLearnTrack(certId, certTitle, locale);
+  const track = LEARN_TRACKS[certId];
+  if (track) return applyTrackTranslation(certId, track, locale);
+  return generateLearnTrack(certId, certTitle, locale);
 }
 
 export function getLearnProgress(certId: string): number {

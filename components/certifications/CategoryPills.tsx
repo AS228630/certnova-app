@@ -1,5 +1,8 @@
+"use client";
+
 import { Cloud, ShieldCheck, Sparkles, Database, Grid2x2, Layers } from "lucide-react";
 import type { CertCategoryDef, CertCategoryIcon, Certification } from "@/lib/companiesData";
+import { useLocale } from "@/components/LocaleProvider";
 
 const ICON_MAP: Record<CertCategoryIcon, typeof Cloud> = {
   cloud: Cloud,
@@ -21,6 +24,7 @@ export default function CategoryPills({
   active: string;
   onChange: (key: string) => void;
 }) {
+  const { t } = useLocale();
   const countFor = (key: string) => certs.filter((c) => c.categoryKey === key).length;
 
   return (
@@ -42,7 +46,7 @@ export default function CategoryPills({
               <Icon size={16} />
               {cat.label}
             </span>
-            <span className="text-xs text-text-faint">{countFor(cat.key)} Zertifizierungen</span>
+            <span className="text-xs text-text-faint">{countFor(cat.key)} {t("certList.certsSuffix")}</span>
           </button>
         );
       })}
