@@ -1,4 +1,4 @@
-import { getCompany, type Certification } from "./companiesData";
+import { getCompany, type Certification, translateCertDescription } from "./companiesData";
 import de from "@/lib/i18n/dictionaries/de";
 import en from "@/lib/i18n/dictionaries/en";
 import fa from "@/lib/i18n/dictionaries/fa";
@@ -162,7 +162,7 @@ function generateJourney(cert: Certification, locale: string = "de"): CertJourne
     rating: 4.4 + (h % 5) * 0.1,
     reviewCount: 200 + (h % 900),
     duration: `${10 + (h % 15)}-${20 + (h % 15)} ${jt.hoursUnit}`,
-    longDescription: cert.description,
+    longDescription: translateCertDescription(cert, cert.title.split(" ")[0], locale),
     themesDone,
     themesTotal,
     overallProgress: overall,

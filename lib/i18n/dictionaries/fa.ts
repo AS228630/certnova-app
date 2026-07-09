@@ -580,6 +580,17 @@ const fa: Dictionary = {
     todayLabel: "امروز",
     yesterdayLabel: "دیروز",
   },
+  companyGen: {
+    genericCatFundamentals: "مبانی",
+    genericCatAssociate: "همکار",
+    genericCatSecurity: "امنیت",
+    genericCatExpert: "متخصص",
+    genericCertDesc: "دانش پایه و عملی برای گواهینامه‌ی {cat} از {company}.",
+    genericPathBeginner: "{company} مبتدی",
+    genericPathPro: "{company} حرفه‌ای",
+    levelRangeBeginner: "مبتدی",
+    levelRangeAdvancedExpert: "پیشرفته تا متخصص",
+  },
 };
 
 export default fa;

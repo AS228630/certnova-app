@@ -580,6 +580,17 @@ const ru: Dictionary = {
     todayLabel: "Сегодня",
     yesterdayLabel: "Вчера",
   },
+  companyGen: {
+    genericCatFundamentals: "Основы",
+    genericCatAssociate: "Ассоциированный",
+    genericCatSecurity: "Безопасность",
+    genericCatExpert: "Эксперт",
+    genericCertDesc: "Базовые и практические знания для сертификации {cat} от {company}.",
+    genericPathBeginner: "{company} Начинающий",
+    genericPathPro: "{company} Профи",
+    levelRangeBeginner: "Начинающий",
+    levelRangeAdvancedExpert: "Продвинутый до эксперта",
+  },
 };
 
 export default ru;

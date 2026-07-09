@@ -187,6 +187,85 @@ function generatePaths(company: { name: string }): LearningPath[] {
   ];
 }
 
+// ---------------------------------------------------------------------
+// Locale-aware overlay for the generic (non-Microsoft) template strings
+// above (description, tagline, learning-path titles/levelRange). The
+// `companies` export below stays German (it's a module-level constant
+// used by server components at build time), so any client component that
+// displays this text should pass it through translateCompany()/
+// translateCert() for the active locale. Microsoft's hand-authored certs
+// aren't covered by this — see the separate translation work for those.
+// ---------------------------------------------------------------------
+import de from "@/lib/i18n/dictionaries/de";
+import en from "@/lib/i18n/dictionaries/en";
+import fa from "@/lib/i18n/dictionaries/fa";
+import ar from "@/lib/i18n/dictionaries/ar";
+import uk from "@/lib/i18n/dictionaries/uk";
+import es from "@/lib/i18n/dictionaries/es";
+import fr from "@/lib/i18n/dictionaries/fr";
+import ru from "@/lib/i18n/dictionaries/ru";
+import tr from "@/lib/i18n/dictionaries/tr";
+
+const COMPANY_DICTS: Record<string, typeof de> = { de, en, fa, ar, uk, es, fr, ru, tr };
+function companyGenDict(locale: string) {
+  return (COMPANY_DICTS[locale] ?? de).companyGen;
+}
+
+import msCertDesc_en from "@/lib/i18n/questions/msCertDesc.en";
+const MS_CERT_DESC: Partial<Record<string, Record<string, string>>> = { en: msCertDesc_en };
+
+const GENERIC_CAT_LABEL_KEY: Record<string, string> = {
+  Fundamentals: "genericCatFundamentals",
+  Associate: "genericCatAssociate",
+  Security: "genericCatSecurity",
+  Expert: "genericCatExpert",
+};
+
+/** Translates a single generic (non-Microsoft) cert's description for the
+ * given locale. Microsoft certs (hand-authored) and any cert not matching
+ * the generic template pattern are returned unchanged. */
+export function translateCertDescription(cert: Certification, companyName: string, locale: string): string {
+  const override = MS_CERT_DESC[locale]?.[cert.id];
+  if (override) return override;
+  const g = companyGenDict(locale);
+  const m = cert.description.match(/^Grundlagen- und Praxiswissen für die (.+)-Zertifizierung von (.+)\.$/);
+  if (!m) return cert.description;
+  const [, catLabel, company] = m;
+  const catKey = GENERIC_CAT_LABEL_KEY[catLabel];
+  const translatedCat = catKey ? g[catKey as keyof typeof g] : catLabel;
+  return g.genericCertDesc.replace("{cat}", translatedCat).replace("{company}", company || companyName);
+}
+
+export function translateCompanyTagline(company: { name: string; tagline: string }, locale: string): string {
+  const m = company.tagline.match(/^Entdecke alle (.+)-Zertifizierungen und bring deine Karriere voran\.$/);
+  if (!m) return company.tagline;
+  return locale === "de"
+    ? company.tagline
+    : {
+        en: `Discover all ${m[1]} certifications and advance your career.`,
+        fa: `همه‌ی گواهینامه‌های ${m[1]} رو کشف کن و شغلت رو پیش ببر.`,
+        ar: `اكتشف جميع شهادات ${m[1]} وطوّر مسيرتك المهنية.`,
+        uk: `Дослідь усі сертифікації ${m[1]} і розвивай кар'єру.`,
+        es: `Descubre todas las certificaciones de ${m[1]} e impulsa tu carrera.`,
+        fr: `Découvre toutes les certifications ${m[1]} et fais avancer ta carrière.`,
+        ru: `Изучи все сертификации ${m[1]} и продвигай свою карьеру.`,
+        tr: `Tüm ${m[1]} sertifikalarını keşfet ve kariyerini ilerlet.`,
+      }[locale] ?? company.tagline;
+}
+
+export function translateLearningPaths(paths: LearningPath[], companyName: string, locale: string): LearningPath[] {
+  const g = companyGenDict(locale);
+  return paths.map((p) => {
+    if (p.title === `${companyName} Einsteiger`) {
+      return { ...p, title: g.genericPathBeginner.replace("{company}", companyName), levelRange: g.levelRangeBeginner };
+    }
+    if (p.title === `${companyName} Profi`) {
+      return { ...p, title: g.genericPathPro.replace("{company}", companyName), levelRange: g.levelRangeAdvancedExpert };
+    }
+    return p;
+  });
+}
+
 export const companies: Company[] = COMPANY_SEED.map((seed) => {
   if (seed.slug === "microsoft") {
     return {

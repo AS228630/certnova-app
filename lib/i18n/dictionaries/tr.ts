@@ -580,6 +580,17 @@ const tr: Dictionary = {
     todayLabel: "Bugün",
     yesterdayLabel: "Dün",
   },
+  companyGen: {
+    genericCatFundamentals: "Temeller",
+    genericCatAssociate: "İlişkili",
+    genericCatSecurity: "Güvenlik",
+    genericCatExpert: "Uzman",
+    genericCertDesc: "{company} {cat} sertifikası için temel ve pratik bilgi.",
+    genericPathBeginner: "{company} Başlangıç",
+    genericPathPro: "{company} Profesyonel",
+    levelRangeBeginner: "Başlangıç",
+    levelRangeAdvancedExpert: "İleri Seviyeden Uzmana",
+  },
 };
 
 export default tr;

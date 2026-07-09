@@ -580,6 +580,17 @@ const uk: Dictionary = {
     todayLabel: "Сьогодні",
     yesterdayLabel: "Вчора",
   },
+  companyGen: {
+    genericCatFundamentals: "Основи",
+    genericCatAssociate: "Асоційований",
+    genericCatSecurity: "Безпека",
+    genericCatExpert: "Експерт",
+    genericCertDesc: "Базові та практичні знання для сертифікації {cat} від {company}.",
+    genericPathBeginner: "{company} для початківців",
+    genericPathPro: "{company} Профі",
+    levelRangeBeginner: "Початківець",
+    levelRangeAdvancedExpert: "Просунутий до експерта",
+  },
 };
 
 export default uk;

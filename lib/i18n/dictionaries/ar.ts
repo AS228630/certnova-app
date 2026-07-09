@@ -580,6 +580,17 @@ const ar: Dictionary = {
     todayLabel: "اليوم",
     yesterdayLabel: "أمس",
   },
+  companyGen: {
+    genericCatFundamentals: "الأساسيات",
+    genericCatAssociate: "مشارك",
+    genericCatSecurity: "الأمن",
+    genericCatExpert: "خبير",
+    genericCertDesc: "معرفة أساسية وعملية لشهادة {cat} من {company}.",
+    genericPathBeginner: "{company} مبتدئ",
+    genericPathPro: "{company} محترف",
+    levelRangeBeginner: "مبتدئ",
+    levelRangeAdvancedExpert: "متقدم إلى خبير",
+  },
 };
 
 export default ar;

@@ -580,6 +580,17 @@ const fr: Dictionary = {
     todayLabel: "Aujourd'hui",
     yesterdayLabel: "Hier",
   },
+  companyGen: {
+    genericCatFundamentals: "Fondamentaux",
+    genericCatAssociate: "Associé",
+    genericCatSecurity: "Sécurité",
+    genericCatExpert: "Expert",
+    genericCertDesc: "Connaissances fondamentales et pratiques pour la certification {cat} de {company}.",
+    genericPathBeginner: "{company} Débutant",
+    genericPathPro: "{company} Pro",
+    levelRangeBeginner: "Débutant",
+    levelRangeAdvancedExpert: "Avancé à expert",
+  },
 };
 
 export default fr;

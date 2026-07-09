@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Bookmark, Lock } from "lucide-react";
 import type { Certification } from "@/lib/companiesData";
+import { translateCertDescription } from "@/lib/companiesData";
 import { useUser } from "@/components/UserContext";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useLocale } from "@/components/LocaleProvider";
@@ -22,7 +23,7 @@ const LEVEL_LABEL_KEYS: Record<Certification["level"], string> = {
 };
 
 export default function CertCard({ cert, companySlug }: { cert: Certification; companySlug: string }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const [saved, setSaved] = useState(false);
   const { user } = useUser();
   const gated = cert.locked && !user;
@@ -48,7 +49,7 @@ export default function CertCard({ cert, companySlug }: { cert: Certification; c
         >
           {t(LEVEL_LABEL_KEYS[cert.level])}
         </span>
-        <p className="mt-2 line-clamp-2 text-sm text-text-muted">{cert.description}</p>
+        <p className="mt-2 line-clamp-2 text-sm text-text-muted">{translateCertDescription(cert, cert.title.split(" ")[0], locale)}</p>
       </Link>
 
       {gated ? (

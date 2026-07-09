@@ -581,6 +581,17 @@ const de = {
     todayLabel: "Heute",
     yesterdayLabel: "Gestern",
   },
+  companyGen: {
+    genericCatFundamentals: "Fundamentals",
+    genericCatAssociate: "Associate",
+    genericCatSecurity: "Security",
+    genericCatExpert: "Expert",
+    genericCertDesc: "Grundlagen- und Praxiswissen für die {cat}-Zertifizierung von {company}.",
+    genericPathBeginner: "{company} Einsteiger",
+    genericPathPro: "{company} Profi",
+    levelRangeBeginner: "Anfänger",
+    levelRangeAdvancedExpert: "Fortgeschritten bis Experte",
+  },
 };
 
 export default de;
