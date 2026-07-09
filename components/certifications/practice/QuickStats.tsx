@@ -1,4 +1,7 @@
+"use client";
+
 import { CheckCircle2, SkipForward, Bookmark, Clock3 } from "lucide-react";
+import { useLocale } from "@/components/LocaleProvider";
 
 function formatTime(totalSeconds: number) {
   const h = Math.floor(totalSeconds / 3600);
@@ -22,25 +25,26 @@ export default function QuickStats({
   remainingSeconds: number;
   totalSeconds: number;
 }) {
+  const { t } = useLocale();
   const remaining = Math.max(0, total - answered - skipped);
   const timePct = totalSeconds === 0 ? 0 : Math.max(0, Math.min(100, (remainingSeconds / totalSeconds) * 100));
 
   return (
     <div className="rounded-xl border border-border-soft bg-panel p-5">
-      <p className="mb-4 font-bold text-text">Mein Fortschritt</p>
+      <p className="mb-4 font-bold text-text">{t("practice.myProgress")}</p>
 
       <div className="grid grid-cols-2 gap-3">
-        <StatBox icon={CheckCircle2} value={answered} label="Beantwortet" color="text-success" bg="bg-success-light" />
-        <StatBox icon={SkipForward} value={skipped} label="Übersprungen" color="text-warning" bg="bg-warning/10" />
-        <StatBox icon={Bookmark} value={marked} label="Markiert" color="text-primary" bg="bg-primary-light" />
-        <StatBox icon={Clock3} value={remaining} label="Verbleibend" color="text-text-muted" bg="bg-panel-alt" />
+        <StatBox icon={CheckCircle2} value={answered} label={t("practice.answeredQ")} color="text-success" bg="bg-success-light" />
+        <StatBox icon={SkipForward} value={skipped} label={t("practice.skippedQ")} color="text-warning" bg="bg-warning/10" />
+        <StatBox icon={Bookmark} value={marked} label={t("practice.markedQ")} color="text-primary" bg="bg-primary-light" />
+        <StatBox icon={Clock3} value={remaining} label={t("practice.remainingQ")} color="text-text-muted" bg="bg-panel-alt" />
       </div>
 
       <div className="mt-5 border-t border-border-soft pt-4">
         <div className="mb-2 flex items-center justify-between text-sm">
           <span className="flex items-center gap-1.5 text-text-muted">
             <Clock3 size={13} />
-            Verbleibende Zeit
+            {t("practice.remainingTime")}
           </span>
           <span className="font-mono font-bold text-text">{formatTime(remainingSeconds)}</span>
         </div>

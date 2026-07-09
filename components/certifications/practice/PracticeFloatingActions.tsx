@@ -1,6 +1,7 @@
 "use client";
 
 import { Lightbulb, StickyNote, Sparkles } from "lucide-react";
+import { useLocale } from "@/components/LocaleProvider";
 
 export default function PracticeFloatingActions({
   onHint,
@@ -11,11 +12,12 @@ export default function PracticeFloatingActions({
   onNotes: () => void;
   onCoach: () => void;
 }) {
+  const { t } = useLocale();
   return (
     <div className="fixed bottom-5 right-5 z-30 flex flex-col gap-3">
-      <FabButton onClick={onHint} icon={Lightbulb} color="bg-warning" label="AI Hint" />
-      <FabButton onClick={onNotes} icon={StickyNote} color="bg-primary" label="Notizen" />
-      <FabButton onClick={onCoach} icon={Sparkles} color="bg-[#8b5cf6]" label="KI Coach" badge={1} />
+      <FabButton onClick={onHint} icon={Lightbulb} color="bg-warning" label={t("practice.aiHint")} />
+      <FabButton onClick={onNotes} icon={StickyNote} color="bg-primary" label={t("practice.notes")} />
+      <FabButton onClick={onCoach} icon={Sparkles} color="bg-[#8b5cf6]" label={t("practice.aiCoachBtn")} badge={1} />
     </div>
   );
 }

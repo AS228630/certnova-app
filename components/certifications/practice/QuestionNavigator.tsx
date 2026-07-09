@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp, Lock, Info } from "lucide-react";
 import { getSectionSize, getSectionCount, UNLOCK_THRESHOLD } from "@/lib/practiceSections";
+import { useLocale } from "@/components/LocaleProvider";
 
 type Status = "current" | "correct" | "wrong" | "marked" | "skipped" | "unanswered";
 
@@ -17,6 +18,7 @@ export default function QuestionNavigator({
   statusFor: (index: number) => Status;
   onJump: (index: number) => void;
 }) {
+  const { t } = useLocale();
   const SECTION_SIZE = getSectionSize(total);
   const sectionCount = getSectionCount(total);
   const currentSection = Math.floor(currentIndex / SECTION_SIZE);
@@ -67,14 +69,14 @@ export default function QuestionNavigator({
   return (
     <div className="rounded-xl border border-border-soft bg-panel p-5">
       <p className="mb-3 flex items-center gap-1.5 font-bold text-text">
-        Fragen-Navigator
+        {t("practice.questionNav")}
         <Info size={13} className="text-text-faint" />
       </p>
       <div className="mb-4 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-text-muted">
-        <Legend color="bg-success" label="Beantwortet" />
-        <Legend color="bg-warning" label="Markiert" />
-        <Legend color="bg-panel-alt" label="Übersprungen" />
-        <Legend color="border border-primary" label="Aktuell" />
+        <Legend color="bg-success" label={t("practice.answeredQ")} />
+        <Legend color="bg-warning" label={t("practice.markedQ")} />
+        <Legend color="bg-panel-alt" label={t("practice.skippedQ")} />
+        <Legend color="border border-primary" label={t("practice.currentQ")} />
       </div>
 
       <div className="max-h-[420px] space-y-2 overflow-y-auto pr-1">
@@ -100,7 +102,7 @@ export default function QuestionNavigator({
                       completed ? "bg-success" : unlocked ? "bg-primary" : "bg-text-faint"
                     }`}
                   />
-                  Abschnitt {s + 1}
+                  {t("practice.sectionN")} {s + 1}
                   <span className="text-[11px] text-text-faint">
                     ({start + 1}–{end})
                   </span>
@@ -118,8 +120,7 @@ export default function QuestionNavigator({
 
               {!unlocked && (
                 <p className="border-t border-border-soft px-3 py-2 text-[11px] text-text-faint">
-                  Für die Freischaltung muss Ihre Erfolgsquote im vorherigen Abschnitt über {UNLOCK_THRESHOLD}%
-                  liegen (aktuell {sectionAccuracy(s - 1)}%).
+                  {t("practice.unlockHintNav").replace("{threshold}", String(UNLOCK_THRESHOLD)).replace("{current}", String(sectionAccuracy(s - 1)))}
                 </p>
               )}
 
@@ -144,7 +145,7 @@ export default function QuestionNavigator({
 
               {unlocked && s > 0 && (
                 <p className="border-t border-border-soft px-3 py-1.5 text-[10px] text-text-faint">
-                  Erfolgsquote: {accuracy}%
+                  {t("practice.successRateNav")}: {accuracy}%
                 </p>
               )}
             </div>

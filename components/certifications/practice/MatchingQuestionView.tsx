@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { GripVertical, CheckCircle2, XCircle, X, Info, MousePointer2 } from "lucide-react";
 import type { MatchingQuestion } from "@/lib/az900Practice";
+import { useLocale } from "@/components/LocaleProvider";
 
 export default function MatchingQuestionView({
   question,
@@ -17,6 +18,7 @@ export default function MatchingQuestionView({
   onAssign: (descriptionId: string, itemId: string) => void;
   onClear: (descriptionId: string) => void;
 }) {
+  const { t } = useLocale();
   const [pickedItemId, setPickedItemId] = useState<string | null>(null);
 
   function handleDropZoneClick(descriptionId: string) {
@@ -38,7 +40,7 @@ export default function MatchingQuestionView({
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-text-faint">
-            Ressourcen
+            {t("practice.resources")}
             <Info size={12} />
           </p>
           <div className="space-y-2">
@@ -65,10 +67,10 @@ export default function MatchingQuestionView({
             <>
               <div className="mt-3 flex flex-col items-center justify-center gap-1.5 rounded-lg border border-dashed border-border-soft py-6 text-text-faint">
                 <MousePointer2 size={16} />
-                <span className="text-xs">Ziehen Sie eine Ressource hierher</span>
+                <span className="text-xs">{t("practice.dragResourceHere")}</span>
               </div>
               <p className="mt-2 text-[11px] text-text-faint">
-                Ressource antippen, dann die passende Beschreibung antippen.
+                {t("practice.tapResourceHint")}
               </p>
             </>
           )}
@@ -76,7 +78,7 @@ export default function MatchingQuestionView({
 
         <div>
           <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-text-faint">
-            Beschreibungen
+            {t("practice.descriptions")}
             <Info size={12} />
           </p>
           <div className="space-y-2">
@@ -103,7 +105,7 @@ export default function MatchingQuestionView({
                             : "border-border-soft text-text-faint hover:border-primary/40"
                     }`}
                   >
-                    <span>{assignedItem ? assignedItem.label : "Hier ablegen"}</span>
+                    <span>{assignedItem ? assignedItem.label : t("practice.dropHere")}</span>
                     <span className="flex items-center gap-1">
                       {isRight && <CheckCircle2 size={13} />}
                       {isWrong && <XCircle size={13} />}
@@ -119,7 +121,7 @@ export default function MatchingQuestionView({
                     </span>
                   </button>
                   {isWrong && correctItem && (
-                    <p className="mt-1.5 text-[11px] text-success">Richtig wäre: {correctItem.label}</p>
+                    <p className="mt-1.5 text-[11px] text-success">{t("practice.correctWouldBe")}: {correctItem.label}</p>
                   )}
                 </div>
               );

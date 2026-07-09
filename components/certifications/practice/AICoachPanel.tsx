@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Bot, X, Send } from "lucide-react";
 import type { PracticeQuestion } from "@/lib/az900Practice";
+import { useLocale } from "@/components/LocaleProvider";
 
 type ChatMessage = { role: "user" | "assistant"; text: string };
 
@@ -15,8 +16,9 @@ export default function AICoachPanel({
   isOpen: boolean;
   onClose: () => void;
 }) {
+  const { t } = useLocale();
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: "assistant", text: "Hi! Frag mich alles zu dieser Frage – ich erkläre es dir Schritt für Schritt." },
+    { role: "assistant", text: t("practice.aiCoachGreeting") },
   ]);
   const [input, setInput] = useState("");
 
@@ -42,7 +44,7 @@ export default function AICoachPanel({
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary">
               <Bot size={16} className="text-white" />
             </div>
-            <p className="font-bold text-text">KI Coach</p>
+            <p className="font-bold text-text">{t("practice.aiCoachBtn")}</p>
           </div>
           <button onClick={onClose} className="text-text-muted hover:text-text lg:hidden">
             <X size={18} />
@@ -67,7 +69,7 @@ export default function AICoachPanel({
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && send()}
-            placeholder="Frage zum Thema stellen..."
+            placeholder={t("practice.askAboutTopic")}
             className="w-full rounded-lg border border-border-soft bg-panel-alt px-3 py-2.5 text-sm text-text placeholder:text-text-faint focus:border-primary focus:outline-none"
           />
           <button

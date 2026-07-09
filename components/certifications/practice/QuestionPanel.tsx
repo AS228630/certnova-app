@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Bookmark, Sparkles, CheckCircle2, XCircle, ExternalLink, Lightbulb } from "lucide-react";
 import type { PracticeOptionId, PracticeQuestion } from "@/lib/az900Practice";
 import MatchingQuestionView from "./MatchingQuestionView";
+import { useLocale } from "@/components/LocaleProvider";
 
 type YesNoAnswers = Record<number, "Ja" | "Nein">;
 type MatchingAnswers = Record<string, string>;
@@ -48,8 +49,9 @@ export default function QuestionPanel({
   onToggleMark: () => void;
   onOpenAiCoach: () => void;
 }) {
+  const { t } = useLocale();
   const [showExplanation, setShowExplanation] = useState(false);
-  const hintText = deriveHint(question.explanation);
+  const hintText = deriveHint(question.explanation, t("practice.rememberHint"));
   const isYesNo = question.type === "yesno";
   const isMatching = question.type === "matching";
   const yesNoAnswers = (isYesNo ? (selected as YesNoAnswers) : {}) ?? {};
@@ -86,14 +88,14 @@ export default function QuestionPanel({
             }`}
           >
             <Bookmark size={13} className={marked ? "fill-warning" : ""} />
-            Markieren
+            {t("practice.markQ")}
           </button>
           <button
             onClick={onOpenAiCoach}
             className="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-bold text-white hover:bg-primary-dark"
           >
             <Sparkles size={13} />
-            KI Coach
+            {t("practice.aiCoachBtn")}
           </button>
         </div>
       </div>
@@ -110,7 +112,7 @@ export default function QuestionPanel({
       {"imageUrl" in question && question.imageUrl && (
         <div className="mb-5 overflow-hidden rounded-lg border border-border-soft">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={question.imageUrl} alt="Referenz-Screenshot zur Frage" className="w-full" />
+          <img src={question.imageUrl} alt={t("practice.referenceImgAlt")} className="w-full" />
         </div>
       )}
 
@@ -125,8 +127,8 @@ export default function QuestionPanel({
       ) : isYesNo ? (
         <div className="overflow-hidden rounded-lg border border-border-soft">
           <div className="grid grid-cols-[1fr_auto] gap-3 border-b border-border-soft bg-panel-alt px-3.5 py-2 text-xs font-semibold text-text-faint">
-            <span>Aussage</span>
-            <span>Antwort</span>
+            <span>{t("practice.statement")}</span>
+            <span>{t("practice.answerCol")}</span>
           </div>
           {question.statements.map((stmt, i) => {
             const picked = yesNoAnswers[i];
@@ -205,13 +207,13 @@ export default function QuestionPanel({
           {checked && (
             <p className={`mb-1.5 flex items-center gap-1.5 text-sm font-bold ${isCorrect ? "text-success" : "text-danger"}`}>
               {isCorrect ? <CheckCircle2 size={15} /> : <XCircle size={15} />}
-              {isCorrect ? "Richtige Antwort!" : "Nicht ganz richtig"}
+              {isCorrect ? t("practice.correctAnswerExcl") : t("practice.notQuiteRight")}
             </p>
           )}
           {!checked && (
             <p className="mb-1.5 flex items-center gap-1.5 text-sm font-bold text-primary">
               <Lightbulb size={15} />
-              Erklärung
+              {t("practice.explanationLabel")}
             </p>
           )}
           <p className="text-sm text-text-muted">{question.explanation}</p>
@@ -242,7 +244,7 @@ export default function QuestionPanel({
             disabled={index === 0}
             className="rounded-lg border border-border-soft px-5 py-2.5 text-sm font-semibold text-text hover:border-primary disabled:opacity-30"
           >
-            Zurück
+            {t("practice.backBtn")}
           </button>
           <button
             onClick={() => setShowExplanation((v) => !v)}
@@ -251,13 +253,13 @@ export default function QuestionPanel({
             }`}
           >
             <Lightbulb size={15} />
-            Erklärung
+            {t("practice.explanationLabel")}
           </button>
           <button
             onClick={onSkip}
             className="rounded-lg border border-border-soft px-5 py-2.5 text-sm font-semibold text-text hover:border-primary"
           >
-            Überspringen
+            {t("practice.skipBtn")}
           </button>
           {!checked ? (
             <button
@@ -265,7 +267,7 @@ export default function QuestionPanel({
               disabled={!canCheck}
               className="rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-white hover:bg-primary-dark disabled:opacity-40"
             >
-              Antwort prüfen
+              {t("practice.checkAnswer")}
             </button>
           ) : (
             <button
@@ -273,7 +275,7 @@ export default function QuestionPanel({
               disabled={index === total - 1}
               className="rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-white hover:bg-primary-dark disabled:opacity-40"
             >
-              Weiter →
+              {t("practice.nextBtn")}
             </button>
           )}
         </div>
@@ -285,7 +287,7 @@ export default function QuestionPanel({
             disabled={index === 0}
             className="rounded-lg border border-border-soft px-5 py-2.5 text-sm font-semibold text-text hover:border-primary disabled:opacity-30"
           >
-            Zurück
+            {t("practice.backBtn")}
           </button>
           <div className="flex gap-3">
             <button
@@ -332,11 +334,11 @@ export default function QuestionPanel({
  * clause/sentence, so it points the learner in the right direction without
  * revealing which option is correct.
  */
-function deriveHint(explanation: string): string {
+function deriveHint(explanation: string, rememberPrefix: string): string {
   const firstSentence = explanation.split(/[.!?]/)[0]?.trim();
   const words = firstSentence.split(/\s+/);
   const short = words.slice(0, 14).join(" ");
-  return `Denk daran: ${short}${words.length > 14 ? "…" : "."}`;
+  return `${rememberPrefix}: ${short}${words.length > 14 ? "…" : "."}`;
 }
 
 /**
