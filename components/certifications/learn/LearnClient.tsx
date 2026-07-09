@@ -25,8 +25,9 @@ import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
 import { useUser } from "@/components/UserContext";
+import { useLocale } from "@/components/LocaleProvider";
 
-const TABS = ["Lernpfad", "Übersicht", "Ressourcen", "Diskussionen"] as const;
+const TAB_KEYS = ["path", "overview", "resources", "discussions"] as const;
 
 const LESSON_ICON: Record<Lesson["type"], typeof PlayCircle> = {
   video: PlayCircle,
@@ -98,11 +99,12 @@ function ModuleCard({
   defaultOpen: boolean;
   onToggleLesson: (moduleId: string, lessonId: string) => void;
 }) {
+  const { t } = useLocale();
   const [open, setOpen] = useState(defaultOpen);
   const p = modulePct(m);
   const isDone = p === 100;
   const summary = moduleSummary(m);
-  const actionLabel = isDone ? "Wiederholen" : p > 0 ? "Fortsetzen" : "Starten";
+  const actionLabel = isDone ? t("learn.actionRepeat") : p > 0 ? t("learn.actionContinue") : t("learn.actionStart");
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border-soft bg-panel">
@@ -121,19 +123,19 @@ function ModuleCard({
           className={`min-w-0 flex-1 text-left ${m.locked ? "cursor-not-allowed opacity-60" : ""}`}
         >
           <p className="truncate text-sm font-bold text-text">
-            Modul {m.number}: {m.title}
+            {t("learn.moduleWord")} {m.number}: {m.title}
           </p>
           <p className="mb-2 truncate text-xs text-text-faint">{m.description}</p>
           {!m.locked && (
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-text-faint">
               <span className="flex items-center gap-1">
-                <BookOpen size={11} /> {summary.lessonCount} Lektionen
+                <BookOpen size={11} /> {summary.lessonCount} {t("learn.lessonsCountL")}
               </span>
               <span className="flex items-center gap-1">
-                <PlayCircle size={11} /> {summary.videos} Videos
+                <PlayCircle size={11} /> {summary.videos} {t("learn.videosCountL")}
               </span>
               <span className="flex items-center gap-1">
-                <ClipboardList size={11} /> {summary.quizzes} Quizfragen
+                <ClipboardList size={11} /> {summary.quizzes} {t("learn.quizQuestionsCountL")}
               </span>
               <span className="flex items-center gap-1">
                 <Clock3 size={11} /> {m.duration}
@@ -193,7 +195,8 @@ export default function LearnClient({
   const [notes, setNotes] = useState<{ id: string; text: string }[]>([]);
   const [draft, setDraft] = useState("");
   const [addingNote, setAddingNote] = useState(false);
-  const [tab, setTab] = useState<(typeof TABS)[number]>("Lernpfad");
+  const { t } = useLocale();
+  const [tab, setTab] = useState<(typeof TAB_KEYS)[number]>("path");
   const certId = journey.code.toLowerCase();
   const companySlug = company.slug;
   const { user } = useUser();
@@ -246,56 +249,64 @@ export default function LearnClient({
       <JourneyHeader company={company} journey={journey} />
 
       <div className="mb-6 mt-6 flex gap-6 overflow-x-auto border-b border-border-soft">
-        {TABS.map((t) => (
-          <button
-            key={t}
-            onClick={() => setTab(t)}
-            className={`relative shrink-0 pb-3 text-sm font-semibold transition-colors ${
-              tab === t ? "text-primary" : "text-text-muted hover:text-text"
-            }`}
-          >
-            {t}
-            {tab === t && <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-primary" />}
-          </button>
-        ))}
+        {TAB_KEYS.map((key) => {
+          const labelKey = {
+            path: "learn.tabLearningPath2",
+            overview: "learn.tabOverview2",
+            resources: "learn.tabResources2",
+            discussions: "learn.tabDiscussions",
+          }[key];
+          return (
+            <button
+              key={key}
+              onClick={() => setTab(key)}
+              className={`relative shrink-0 pb-3 text-sm font-semibold transition-colors ${
+                tab === key ? "text-primary" : "text-text-muted hover:text-text"
+              }`}
+            >
+              {t(labelKey)}
+              {tab === key && <span className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-primary" />}
+            </button>
+          );
+        })}
       </div>
 
-      {tab === "Übersicht" && (
-        <p className="text-sm text-text-muted">Eine allgemeine Übersicht zu dieser Zertifizierung folgt in Kürze.</p>
+      {tab === "overview" && (
+        <p className="text-sm text-text-muted">{t("learn.overviewComingSoon2")}</p>
       )}
-      {tab === "Diskussionen" && (
-        <p className="text-sm text-text-muted">Diskussionen für diese Zertifizierung folgen in Kürze.</p>
+      {tab === "discussions" && (
+        <p className="text-sm text-text-muted">{t("learn.discussionsComingSoon")}</p>
       )}
-      {tab === "Ressourcen" && (
-        <p className="text-sm text-text-muted">Weitere Ressourcen findest du in der Seitenleiste rechts.</p>
+      {tab === "resources" && (
+        <p className="text-sm text-text-muted">{t("learn.resourcesInSidebar")}</p>
       )}
 
-      {tab === "Lernpfad" && (
+      {tab === "path" && (
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_300px]">
         <div>
           {/* Stats row */}
           <div className="mb-5 grid grid-cols-2 gap-3 rounded-2xl border border-border-soft bg-panel p-4 sm:grid-cols-4 sm:p-5">
             <div>
-              <p className="text-xs text-text-faint">Module</p>
+              <p className="text-xs text-text-faint">{t("learn.modulesL")}</p>
               <p className="text-lg font-extrabold text-text">
                 {stats.modulesDone} / {stats.modulesTotal}
               </p>
             </div>
             <div>
-              <p className="text-xs text-text-faint">Videos gesehen</p>
+              <p className="text-xs text-text-faint">{t("learn.videosWatched")}</p>
               <p className="text-lg font-extrabold text-text">
                 {stats.videosDone} / {stats.videosTotal}
               </p>
             </div>
             <div>
-              <p className="text-xs text-text-faint">Quiz bestanden</p>
+              <p className="text-xs text-text-faint">{t("learn.quizPassed")}</p>
               <p className="text-lg font-extrabold text-text">
                 {stats.quizDone} / {stats.quizTotal}
               </p>
             </div>
             <div>
               <p className="flex items-center gap-1 text-xs text-text-faint">
-                <Clock3 size={11} /> Gesamtdauer
+                <Clock3 size={11} /> {t("learn.totalDuration")}
               </p>
               <p className="text-lg font-extrabold text-text">~{localModules.length * 45} Min</p>
             </div>
@@ -308,12 +319,12 @@ export default function LearnClient({
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="In diesem Abschnitt suchen..."
+                placeholder={t("learn.searchInSection")}
                 className="w-full rounded-lg border border-border-soft bg-panel-alt py-2 pl-9 pr-3 text-sm text-text placeholder:text-text-faint outline-none focus:border-primary"
               />
             </div>
             <button className="flex items-center gap-1.5 rounded-lg border border-border-soft px-3 py-2 text-sm text-text-muted hover:text-text">
-              <SlidersHorizontal size={14} /> Filter
+              <SlidersHorizontal size={14} /> {t("learn.filterL")}
             </button>
           </div>
 
@@ -322,27 +333,27 @@ export default function LearnClient({
             {filtered.map((m, i) => (
               <ModuleCard key={m.id} module={m} defaultOpen={i === firstOpenIndex} onToggleLesson={toggleLesson} />
             ))}
-            {filtered.length === 0 && <p className="text-sm text-text-faint">Keine Module gefunden.</p>}
+            {filtered.length === 0 && <p className="text-sm text-text-faint">{t("learn.noModulesFound")}</p>}
           </div>
         </div>
 
         {/* Sidebar */}
         <div className="space-y-4">
           <div className="rounded-2xl border border-border-soft bg-panel p-5 text-center">
-            <p className="mb-3 text-xs font-semibold text-text-muted">Dein Fortschritt</p>
+            <p className="mb-3 text-xs font-semibold text-text-muted">{t("learn.yourProgressL")}</p>
             <div className="flex justify-center">
               <ProgressRing value={(stats.modulesDone / Math.max(1, stats.modulesTotal)) * 100} size={88} stroke={7} />
             </div>
             <p className="mt-3 text-xs text-text-faint">
-              {stats.modulesDone} / {stats.modulesTotal} Module abgeschlossen
+              {stats.modulesDone} / {stats.modulesTotal} {t("learn.modulesCompletedL")}
             </p>
           </div>
 
           <div className="rounded-2xl border border-border-soft bg-panel p-5">
-            <p className="mb-3 text-xs font-semibold text-text-muted">Abschnittsübersicht</p>
+            <p className="mb-3 text-xs font-semibold text-text-muted">{t("learn.sectionOverviewL")}</p>
             <div className="space-y-2 text-sm">
               <div className="flex items-center justify-between rounded-lg bg-primary/10 px-3 py-2 font-semibold text-primary">
-                <span>1. Lernen</span>
+                <span>{t("learn.step1Learn")}</span>
                 <span>
                   {stats.modulesDone} / {stats.modulesTotal}
                 </span>
@@ -351,21 +362,21 @@ export default function LearnClient({
                 href={`/certifications/${companySlug}/${certId}/labs`}
                 className="flex items-center justify-between rounded-lg px-3 py-2 text-text-muted hover:bg-panel-alt hover:text-text"
               >
-                <span>2. Praxis-Labore</span>
-                <span className="text-text-faint">öffnen →</span>
+                <span>{t("learn.step2Labs")}</span>
+                <span className="text-text-faint">{t("learn.openArrow")}</span>
               </Link>
               <Link
                 href={`/certifications/${companySlug}/${certId}/practice`}
                 className="flex items-center justify-between rounded-lg px-3 py-2 text-text-muted hover:bg-panel-alt hover:text-text"
               >
-                <span>3. Prüfungs-Simulation</span>
-                <span className="text-text-faint">öffnen →</span>
+                <span>{t("learn.step3Exam")}</span>
+                <span className="text-text-faint">{t("learn.openArrow")}</span>
               </Link>
             </div>
           </div>
 
           <div className="rounded-2xl border border-border-soft bg-panel p-5">
-            <p className="mb-3 text-xs font-semibold text-text-muted">Empfohlene Ressourcen</p>
+            <p className="mb-3 text-xs font-semibold text-text-muted">{t("learn.recommendedResources")}</p>
             <div className="space-y-2 text-sm">
               <a
                 href={`https://learn.microsoft.com/de-de/credentials/certifications/${certId === "az-900" ? "azure-fundamentals" : "azure-administrator"}/`}
@@ -373,7 +384,7 @@ export default function LearnClient({
                 rel="noreferrer"
                 className="flex items-center gap-2 text-text-muted hover:text-primary"
               >
-                <BookOpen size={14} /> Microsoft Learn Pfad
+                <BookOpen size={14} /> {t("learn.msLearnPath")}
                 <ExternalLink size={11} className="ml-auto" />
               </a>
               <a
@@ -382,14 +393,14 @@ export default function LearnClient({
                 rel="noreferrer"
                 className="flex items-center gap-2 text-text-muted hover:text-primary"
               >
-                <FileText size={14} /> Offizielle Doku
+                <FileText size={14} /> {t("learn.officialDocs")}
                 <ExternalLink size={11} className="ml-auto" />
               </a>
               <Link
                 href={`/certifications/${companySlug}/${certId}/practice`}
                 className="flex items-center gap-2 text-text-muted hover:text-primary"
               >
-                <ClipboardList size={14} /> Übungsfragen
+                <ClipboardList size={14} /> {t("learn.practiceQuestionsL")}
               </Link>
             </div>
           </div>
@@ -397,12 +408,12 @@ export default function LearnClient({
           <div className="rounded-2xl border border-border-soft bg-panel p-5">
             <div className="mb-3 flex items-center justify-between">
               <p className="flex items-center gap-1.5 text-xs font-semibold text-text-muted">
-                <StickyNote size={13} /> Deine Notizen
+                <StickyNote size={13} /> {t("learn.yourNotes")}
               </p>
             </div>
 
             {notes.length === 0 && !addingNote && (
-              <p className="mb-3 text-sm text-text-faint">Noch keine Notizen für diesen Abschnitt.</p>
+              <p className="mb-3 text-sm text-text-faint">{t("learn.noNotesForSection")}</p>
             )}
 
             <div className="mb-3 space-y-2">
@@ -420,7 +431,7 @@ export default function LearnClient({
                   onChange={(e) => setDraft(e.target.value)}
                   autoFocus
                   rows={3}
-                  placeholder="Was möchtest du dir merken?"
+                  placeholder={t("learn.whatToRemember")}
                   className="w-full rounded-lg border border-border-soft bg-panel-alt p-2.5 text-xs text-text placeholder:text-text-faint outline-none focus:border-primary"
                 />
                 <div className="flex gap-2">
@@ -428,7 +439,7 @@ export default function LearnClient({
                     onClick={saveNote}
                     className="flex-1 rounded-lg bg-primary py-1.5 text-xs font-bold text-white hover:bg-primary-dark"
                   >
-                    Speichern
+                    {t("learn.saveL")}
                   </button>
                   <button
                     onClick={() => {
@@ -437,7 +448,7 @@ export default function LearnClient({
                     }}
                     className="rounded-lg border border-border-soft px-3 py-1.5 text-xs text-text-muted hover:text-text"
                   >
-                    Abbrechen
+                    {t("learn.cancelL")}
                   </button>
                 </div>
               </div>
@@ -446,7 +457,7 @@ export default function LearnClient({
                 onClick={() => setAddingNote(true)}
                 className="w-full rounded-lg border border-primary/40 py-2 text-xs font-bold text-primary hover:bg-primary-light"
               >
-                Neue Notiz
+                {t("learn.newNote")}
               </button>
             )}
           </div>
