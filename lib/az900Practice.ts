@@ -296,6 +296,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Identity Protection identifiziert Risiken in den folgenden Klassifizierungen: Die Risikosignale können Abhilfemaßnahmen auslösen, z. B. indem Benutzer aufgefordert werden, die Azure Multi-Factor Authentication durchzuführen, ihr Kennwort mithilfe der Self-Service-Kennwortzurücksetzung zurückzusetzen oder die Anwendung zu blockieren, bis ein Administrator Maßnahmen ergreift.br/>",
+    resources: [{ label: "Overview Identity Protection", url: "https://docs.microsoft.com/en-us/azure/active-directory/identity-protection/overview-identity-protection" }],
   },
   {
     id: "real-az900-17",
@@ -322,6 +323,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Ein zentraler Identitätsanbieter ist besonders nützlich für Apps mit Benutzern weltweit, die sich nicht unbedingt über das Unternehmensnetzwerk anmelden. Microsoft Identity Platform authentifiziert Benutzer und stellt Sicherheitstoken wie Zugriffstoken, Aktualisierungstoken und ID-Token bereit, die einer Clientanwendung den Zugriff auf geschützte Ressourcen auf einem Ressourcenserver ermöglichen. Ein Zugriffstoken ist ein Sicherheitstoken, das von einem Autorisierungsserver im Rahmen eines OAuth 2.0-Flows ausgestellt wird. Es enthält Informationen über den Benutzer und die App, für die das Token bestimmt ist. Diese können für den Zugriff auf Web-APIs und andere geschützte Ressourcen verwendet werden. Die Validierung des Tokens obliegt der App, für die das Token generiert wurde, der Web-App, die den Benutzer angemeldet hat, oder der aufgerufenen Web-API. Das Token wird vom Sicherheitstokenserver (STS) mit einem privaten Schlüssel signiert. Der STS veröffentlicht den entsprechenden öffentlichen Schlüssel. Zur Validierung eines Tokens überprüft die App die Signatur mithilfe des öffentlichen STS-Schlüssels, um sicherzustellen, dass die Signatur mit dem privaten Schlüssel erstellt wurde. Token sind nur zeitlich begrenzt gültig. In einer Azure-Umgebung fungiert Azure AD als Identitätsanbieter.",
+    resources: [{ label: "Security Tokens", url: "https://docs.microsoft.com/en-us/azure/active-directory/develop/security-tokens" }],
   },
   {
     id: "real-az900-19",
@@ -336,6 +338,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Azure Policy wertet Ressourcen in Azure aus, indem es die Eigenschaften dieser Ressourcen mit Geschäftsregeln vergleicht. Diese im JSON-Format beschriebenen Geschäftsregeln werden als Richtliniendefinitionen bezeichnet. Zur Vereinfachung der Verwaltung können mehrere Geschäftsregeln zu einer Richtlinieninitiative (manchmal auch als „PolicySet“ bezeichnet) zusammengefasst werden. Nachdem Ihre Geschäftsregeln erstellt wurden, wird die Richtliniendefinition oder -initiative jedem von Azure unterstützten Ressourcenbereich zugewiesen, z. B. Verwaltungsgruppen, Abonnements, Ressourcengruppen oder einzelnen Ressourcen. Die Zuweisung gilt für alle Ressourcen innerhalb dieses Bereichs. Unterbereiche können bei Bedarf ausgeschlossen werden. Azure Policy verwendet ein JSON-Format, um die Logik zu bilden, mit der die Auswertung ermittelt, ob eine Ressource konform ist oder nicht. Definitionen umfassen Metadaten und die Richtlinienregel. Die definierte Regel kann Funktionen, Parameter, logische Operatoren, Bedingungen und Eigenschaftsaliase verwenden, um genau dem gewünschten Szenario zu entsprechen. Die Richtlinienregel bestimmt, welche Ressourcen im Bereich der Zuweisung ausgewertet werden.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/governance/policy/overview" }],
   },
   {
     id: "real-az900-20",
@@ -360,6 +363,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Der Zugang zum technischen Support per E-Mail und Telefon ist in allen Support-Paketen außer dem Basic-Paket enthalten.",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-gb/support/plans/" }],
   },
   {
     id: "real-az900-22",
@@ -371,6 +375,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Der technische Support per E-Mail und Telefon ist rund um die Uhr in allen Support-Paketen (mit Ausnahme des Basic-Pakets) enthalten.",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-gb/support/plans/" }],
   },
   {
     id: "real-az900-23",
@@ -382,6 +387,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Der technische Support per E-Mail und Telefon ist rund um die Uhr in allen Support-Paketen (mit Ausnahme des Basic-Pakets) enthalten.",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-gb/support/plans/" }],
   },
   {
     id: "real-az900-24",
@@ -395,6 +401,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Während Developer und Standard allgemeine Architekturunterstützung beinhalten, umfasst der Premier-Support Architektur- und Codeüberprüfung.",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-gb/support/plans/" }, { label: "Premier", url: "https://azure.microsoft.com/en-us/support/plans/premier/" }],
   },
   {
     id: "real-az900-25",
@@ -408,6 +415,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Durch die Nutzung der Microsoft Cloud können Sie die technische Leistung Ihrer Geschäftsworkloads deutlich verbessern. Darüber hinaus können Sie Ihre Kosten und den Verwaltungsaufwand für Unternehmensressourcen senken. Diese Geschäftsmöglichkeit birgt jedoch auch Risiken, da Ihre Cloudbereitstellungen zu Verschwendung und Ineffizienzen führen können. Azure Cost Management + Billing ist eine Suite von Tools von Microsoft, mit denen Sie die Kosten Ihrer Workloads analysieren, verwalten und optimieren können. Mithilfe dieser Suite können Sie sicherstellen, dass Ihr Unternehmen die Vorteile der Cloud optimal nutzt. Stellen Sie sich Ihre Azure-Workloads wie die Lichter in Ihrem Zuhause vor. Wenn Sie das Haus verlassen, lassen Sie das Licht an? Könnten Sie andere, effizientere Glühbirnen verwenden, um Ihre monatliche Stromrechnung zu senken? Haben Sie in einem Raum mehr Lichter als nötig? Mit Azure Cost Management + Billing können Sie einen ähnlichen Denkprozess auf die Workloads Ihres Unternehmens anwenden. Bei Azure-Produkten und -Diensten zahlen Sie nur für das, was Sie tatsächlich nutzen. Wenn Sie Azure-Ressourcen erstellen und verwenden, werden Ihnen diese in Rechnung gestellt. Da die Bereitstellung neuer Ressourcen so einfach ist, können die Kosten Ihrer Workloads ohne entsprechende Analyse und Überwachung erheblich steigen. Sie verwenden die Azure-Kostenverwaltungs- und Abrechnungsfunktionen für Folgendes: • Führen Sie Abrechnungsverwaltungsaufgaben durch, z. B. die Bezahlung Ihrer Rechnung • Verwalten des Abrechnungszugriffs auf Kosten • Laden Sie die Kosten- und Nutzungsdaten herunter, die zur Erstellung Ihrer monatlichen Rechnung verwendet wurden • Wenden Sie proaktiv Datenanalysen auf Ihre Kosten an • Legen Sie Ausgabenschwellen fest • Identifizieren Sie Möglichkeiten zur Änderung der Arbeitsbelastung, die Ihre Ausgaben optimieren können Das Azure-Portal unterstützt derzeit die folgenden Arten von Abrechnungskonten: • Microsoft Online Services-Programm: Ein individuelles Abrechnungskonto für ein Microsoft Online Services-Programm wird erstellt, wenn Sie sich über die Azure- Website für Azure registrieren. Dies kann beispielsweise der Fall sein, wenn Sie sich für ein kostenloses Azure-Konto, ein Konto mit nutzungsbasierter Bezahlung oder als Visual Studio-Abonnent registrieren. • Enterprise Agreement: Ein Abrechnungskonto für ein Enterprise Agreement wird erstellt, wenn Ihre Organisation ein Enterprise Agreement (EA) zur Verwendung von Azure unterzeichnet. • Microsoft-Kundenvereinbarung: Ein Abrechnungskonto für eine Microsoft-Kundenvereinbarung wird erstellt, wenn Ihr Unternehmen mit einem Microsoft-Vertreter zusammenarbeitet, um eine Microsoft-Kundenvereinbarung zu unterzeichnen. Einige Kunden in ausgewählten Regionen, die sich über die Azure-Website für ein Konto mit nutzungsbasierter Bezahlung anmelden oder ihr kostenloses Azure-Konto aktualisieren, verfügen möglicherweise auch über ein Abrechnungskonto für eine Microsoft-Kundenvereinbarung.",
+    resources: [{ label: "Cost Management Billing Overview", url: "https://docs.microsoft.com/en-us/azure/cost-management-billing/cost-management-billing-overview" }],
   },
   {
     id: "real-az900-26",
@@ -421,6 +429,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure Firewall ist ein verwalteter, cloudbasierter Netzwerksicherheitsdienst zum Schutz Ihrer Azure Virtual Network-Ressourcen. Es handelt sich um eine vollständig zustandsbehaftete Firewall als Dienst mit integrierter Hochverfügbarkeit und uneingeschränkter Cloud-Skalierbarkeit. Sie können Anwendungs- und Netzwerkkonnektivitätsrichtlinien zentral über Abonnements und virtuelle Netzwerke hinweg erstellen, durchsetzen und protokollieren. Azure Firewall verwendet eine statische öffentliche IP-Adresse für Ihre virtuellen Netzwerkressourcen, sodass externe Firewalls den aus Ihrem virtuellen Netzwerk stammenden Datenverkehr identifizieren können. Der Dienst ist vollständig in Azure Monitor für Protokollierung und Analyse integriert.",
+    resources: [{ label: "Features", url: "https://docs.microsoft.com/en-us/azure/firewall/features" }],
   },
   {
     id: "real-az900-27",
@@ -537,6 +546,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Cosmos DB eignet sich hervorragend zum Speichern unstrukturierter und JSON-Daten. In Kombination mit Azure Functions ermöglicht Cosmos DB die schnelle und einfache Datenspeicherung mit deutlich weniger Code als in einer relationalen Datenbank.",
+    resources: [{ label: "Functions Integrate Store Unstructured Data Cosmosdb", url: "https://docs.microsoft.com/en-us/azure/azure-functions/functions-integrate-store-unstructured-data-cosmosdb?tabs=csharp" }],
   },
   {
     id: "real-az900-35",
@@ -612,6 +622,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Für alle virtuellen Maschinen, bei denen zwei oder mehr Instanzen in zwei oder mehr Verfügbarkeitszonen in derselben Azure-Region bereitgestellt sind, garantiert Microsoft mindestens 99,99 % Verfügbarkeit. Sie benötigen daher mindestens 2 virtuelle Maschinen in mindestens 2 Verfügbarkeitszonen.",
+    resources: [{ label: "V1 9", url: "https://azure.microsoft.com/en-us/support/legal/sla/virtual-machines/v1_9/" }],
   },
 
   {
@@ -684,6 +695,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Unternehmen können die im Service Level Agreement (SLA) garantierte Betriebszeit erhöhen, indem sie ... kaufen", correct: "Nein" },
     ],
     explanation: "Das Service Level Agreement (SLA) beschreibt die Verpflichtungen von Microsoft hinsichtlich Verfügbarkeit und Konnektivität. Die SLA für einzelne Azure-Dienste sind im folgenden Azure-Artikel aufgeführt. Service Level Agreements",
+    resources: [{ label: "Summary", url: "https://azure.microsoft.com/en-us/support/legal/sla/summary/" }],
   },
   {
     type: "yesno",
@@ -737,6 +749,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Azure Advisor ... konfiguriert die Netzwerkeinstellungen auf virtuellen Azure-Computern", correct: "Nein" },
     ],
     explanation: "Advisor ist ein personalisierter Cloudberater, der Sie bei der Optimierung Ihrer Azure-Bereitstellungen mithilfe bewährter Methoden unterstützt. Er analysiert Ihre Ressourcenkonfiguration und Nutzungstelemetrie und empfiehlt anschließend Lösungen, mit denen Sie die Kosteneffizienz, Leistung, Zuverlässigkeit (früher als Hochverfügbarkeit bezeichnet) und Sicherheit Ihrer Azure-Ressourcen verbessern können. Mit Advisor können Sie: • Erhalten Sie proaktive, umsetzbare und personalisierte Best Practices-Empfehlungen. • Verbessern Sie die Leistung, Sicherheit und Zuverlässigkeit Ihrer Ressourcen, indem Sie Möglichkeiten zur Reduzierung Ihrer Azure-Gesamtausgaben identifizieren. • Erhalten Sie Empfehlungen mit vorgeschlagenen Aktionen inline. Das Advisor-Dashboard zeigt personalisierte Empfehlungen für alle Ihre Abonnements an. Sie können Filter anwenden, um Empfehlungen für bestimmte Abonnements und Ressourcentypen anzuzeigen. Die Empfehlungen sind in fünf Kategorien unterteilt: • Zuverlässigkeit (früher Hochverfügbarkeit genannt): Um die Kontinuität Ihrer geschäftskritischen Anwendungen sicherzustellen und zu verbessern. • Sicherheit: Zum Erkennen von Bedrohungen und Schwachstellen, die zu Sicherheitsverletzungen führen könnten. • Leistung: Um die Geschwindigkeit Ihrer Anwendungen zu verbessern. • Kosten: Um Ihre gesamten Azure-Ausgaben zu optimieren und zu reduzieren. • Operative Exzellenz: Wir helfen Ihnen dabei, Prozess- und Arbeitsablaufeffizienz, Ressourcenverwaltung und Best Practices für die Bereitstellung zu erreichen.",
+    resources: [{ label: "Advisor Overview", url: "https://docs.microsoft.com/en-us/azure/advisor/advisor-overview" }],
   },
   {
     type: "matching",
@@ -864,6 +877,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Platform as a Service (PaaS) ist eine umfassende Entwicklungs- und Bereitstellungsumgebung in der Cloud mit Ressourcen, die Ihnen die Bereitstellung von Anwendungen aller Art ermöglichen – von einfachen Cloud-basierten Apps bis hin zu komplexen, Cloud-fähigen Unternehmensanwendungen. Sie erwerben die benötigten Ressourcen von einem Cloud-Service-Anbieter auf Pay-as-you-go-Basis und greifen über eine sichere Internetverbindung darauf zu. Wie IaaS umfasst PaaS die Infrastruktur – Server, Speicher und Netzwerke –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. PaaS unterstützt den gesamten Lebenszyklus von Webanwendungen: Erstellen, Testen, Bereitstellen, Verwalten und Aktualisieren. Mit PaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung von Softwarelizenzen, der zugrunde liegenden Anwendungsinfrastruktur und Middleware, Container-Orchestratoren wie Kubernetes oder der Entwicklungstools und anderer Ressourcen. Sie verwalten die von Ihnen entwickelten Anwendungen und Dienste, und der Cloud-Service-Anbieter kümmert sich in der Regel um alles Weitere. Durch die Bereitstellung von Infrastructure as a Service bietet PaaS dieselben Vorteile wie IaaS. Die zusätzlichen Funktionen – Middleware, Entwicklungstools und andere Business-Tools – bieten Ihnen jedoch weitere Vorteile.",
+    resources: [{ label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }],
   },
   {
     id: "real-az900-59",
@@ -875,6 +889,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Platform as a Service (PaaS) ist eine umfassende Entwicklungs- und Bereitstellungsumgebung in der Cloud mit Ressourcen, die Ihnen die Bereitstellung von Anwendungen aller Art ermöglichen – von einfachen Cloud-basierten Apps bis hin zu komplexen, Cloud-fähigen Unternehmensanwendungen. Sie erwerben die benötigten Ressourcen von einem Cloud-Service-Anbieter auf Pay-as-you-go-Basis und greifen über eine sichere Internetverbindung darauf zu. Wie IaaS umfasst PaaS die Infrastruktur – Server, Speicher und Netzwerke –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. PaaS unterstützt den gesamten Lebenszyklus von Webanwendungen: Erstellen, Testen, Bereitstellen, Verwalten und Aktualisieren. Mit PaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung von Softwarelizenzen, der zugrunde liegenden Anwendungsinfrastruktur und Middleware, Container-Orchestratoren wie Kubernetes oder der Entwicklungstools und anderer Ressourcen. Sie verwalten die von Ihnen entwickelten Anwendungen und Dienste, und der Cloud-Service-Anbieter kümmert sich in der Regel um alles Weitere. Durch die Bereitstellung von Infrastructure as a Service bietet PaaS dieselben Vorteile wie IaaS. Die zusätzlichen Funktionen – Middleware, Entwicklungstools und andere Business-Tools – bieten Ihnen jedoch weitere Vorteile.",
+    resources: [{ label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }],
   },
   {
     id: "real-az900-60",
@@ -886,6 +901,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Platform as a Service (PaaS) ist eine umfassende Entwicklungs- und Bereitstellungsumgebung in der Cloud mit Ressourcen, die Ihnen die Bereitstellung von Anwendungen aller Art ermöglichen – von einfachen Cloud-basierten Apps bis hin zu komplexen, Cloud-fähigen Unternehmensanwendungen. Sie erwerben die benötigten Ressourcen von einem Cloud-Service-Anbieter auf Pay-as-you-go-Basis und greifen über eine sichere Internetverbindung darauf zu. Wie IaaS umfasst PaaS die Infrastruktur – Server, Speicher und Netzwerke –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. PaaS unterstützt den gesamten Lebenszyklus von Webanwendungen: Erstellen, Testen, Bereitstellen, Verwalten und Aktualisieren. Mit PaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung von Softwarelizenzen, der zugrunde liegenden Anwendungsinfrastruktur und Middleware, Container-Orchestratoren wie Kubernetes oder der Entwicklungstools und anderer Ressourcen. Sie verwalten die von Ihnen entwickelten Anwendungen und Dienste, und der Cloud-Service-Anbieter kümmert sich in der Regel um alles Weitere. Durch die Bereitstellung von Infrastructure as a Service bietet PaaS dieselben Vorteile wie IaaS. Die zusätzlichen Funktionen – Middleware, Entwicklungstools und andere Business-Tools – bieten Ihnen jedoch weitere Vorteile. Referenzen: Was ist PaaS? Was ist IaaS?",
+    resources: [{ label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }, { label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }],
   },
   {
     id: "real-az900-61",
@@ -940,6 +956,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Unter Windows wird die Azure CLI über eine MSI-Datei installiert, die Ihnen den Zugriff auf die CLI über die Windows-Eingabeaufforderung (CMD) oder PowerShell ermöglicht. Bei der Installation für das Windows-Subsystem für Linux (WSL) stehen Pakete für Ihre Linux-Distribution zur Verfügung.",
+    resources: [{ label: "Azure", url: "https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest" }],
   },
   {
     id: "real-az900-65",
@@ -967,6 +984,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Verfügbarkeitszonen sind einzigartige physische Standorte mit unabhängiger Stromversorgung, Netzwerk und Kühlung. Jede Verfügbarkeitszone besteht aus einem oder mehreren Rechenzentren und beherbergt Infrastruktur zur Unterstützung hochverfügbarer, geschäftskritischer Anwendungen. Verfügbarkeitszonen sind durch Redundanz und logische Isolierung von Diensten tolerant gegenüber Rechenzentrumsausfällen.",
+    resources: [{ label: "Az Overview", url: "https://docs.microsoft.com/en-us/azure/availability-zones/az-overview" }],
   },
   {
     id: "real-az900-67",
@@ -994,6 +1012,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Eine Region besteht aus mehreren Rechenzentren, die innerhalb eines latenzdefinierten Umkreises bereitgestellt und über ein dediziertes regionales Netzwerk mit geringer Latenz verbunden sind. Azure bietet Ihnen die Flexibilität, Anwendungen dort bereitzustellen, wo Sie sie benötigen, auch über mehrere Regionen hinweg, um regionsübergreifende Ausfallsicherheit zu gewährleisten.",
+    resources: [{ label: "Az Overview", url: "https://docs.microsoft.com/en-us/azure/availability-zones/az-overview#terminology" }],
   },
   {
     id: "real-az900-69",
@@ -1021,6 +1040,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Azure DevTest Labs ermöglicht Entwicklern in Teams die effiziente Selbstverwaltung virtueller Maschinen (VMs) und PaaS-Ressourcen, ohne auf Genehmigungen warten zu müssen. DevTest Labs erstellt Labs, die aus vorkonfigurierten Basis- oder Azure Resource Manager-Vorlagen bestehen. Diese verfügen über alle erforderlichen Tools und Software, mit denen Sie Umgebungen erstellen können. Sie können Umgebungen in wenigen Minuten erstellen, anstatt in Stunden oder Tagen. Mithilfe von DevTest Labs können Sie die neuesten Versionen Ihrer Anwendungen testen, indem Sie die folgenden Aufgaben ausführen: • Stellen Sie Windows- und Linux-Umgebungen mithilfe wiederverwendbarer Vorlagen und Artefakte schnell bereit. • Integrieren Sie Ihre Bereitstellungspipeline problemlos mit DevTest Labs, um On-Demand-Umgebungen bereitzustellen. • Skalieren Sie Ihre Belastungstests, indem Sie mehrere Testagenten bereitstellen und vorab bereitgestellte Umgebungen für Schulungen und Demos erstellen. DevTest Labs bietet Entwicklern, die mit VMs arbeiten, die folgenden Funktionen: • Erstellen Sie VMs schnell in weniger als fünf einfachen Schritten. • Wählen Sie aus einer kuratierten Liste von VM-Basen, die vom Teamleiter oder der zentralen IT konfiguriert, genehmigt und autorisiert wurden. • Erstellen Sie VMs aus vorgefertigten benutzerdefinierten Images, auf denen die gesamte Software und alle Tools bereits installiert sind. • Erstellen Sie VMs anhand von Formeln, bei denen es sich im Wesentlichen um benutzerdefinierte Images handelt, kombiniert mit den neuesten Builds der Software, die beim Erstellen der VMs installiert wird. • Installieren Sie Artefakte, bei denen es sich um Erweiterungen handelt, die auf VMs bereitgestellt werden, nachdem diese bereitgestellt wurden. • Legen Sie Zeitpläne für das automatische Herunterfahren und Starten von VMs fest. • Fordern Sie eine vorab erstellte VM an, ohne den Erstellungsprozess durchlaufen zu müssen.",
+    resources: [{ label: "Devtest Lab Overview", url: "https://docs.microsoft.com/en-us/azure/devtest-labs/devtest-lab-overview" }],
   },
   {
     id: "real-az900-71",
@@ -1058,6 +1078,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Wir gehen davon aus, dass die virtuellen Maschinen dieselben Dienste ausführen. Es geht darum, sicherzustellen, dass mindestens eine der virtuellen Maschinen betriebsbereit ist. Um die Verfügbarkeit von mehreren VMs sicherzustellen, müssen wir die VMs in verschiedenen Update- und Fehlerdomänen bereitstellen. Dazu können wir Verfügbarkeitszonen nutzen. Eine Verfügbarkeitszone ist ein logisches Rechenzentrum in einer Region, das jedem Azure-Kunden zur Verfügung steht. Jede Zone einer Region verfügt über redundante und separate Stromversorgung, Netzwerk und Konnektivität, um die Wahrscheinlichkeit eines gleichzeitigen Ausfalls zweier Zonen zu verringern.",
+    resources: [{ label: "Az Overview", url: "https://docs.microsoft.com/en-us/azure/availability-zones/az-overview" }],
   },
   {
     id: "real-az900-74",
@@ -1069,6 +1090,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Wir gehen davon aus, dass die virtuellen Maschinen dieselben Dienste ausführen. Es geht darum, sicherzustellen, dass mindestens eine der virtuellen Maschinen betriebsbereit ist. Um die Verfügbarkeit von mehreren VMs sicherzustellen, müssen wir die VMs in verschiedenen Update- und Fehlerdomänen bereitstellen. Dazu können wir Verfügbarkeitszonen nutzen. Eine Verfügbarkeitszone ist ein logisches Rechenzentrum in einer Region, das jedem Azure-Kunden zur Verfügung steht. Jede Zone einer Region verfügt über redundante und separate Stromversorgung, Netzwerk und Konnektivität, um die Wahrscheinlichkeit eines gleichzeitigen Ausfalls zweier Zonen zu verringern.",
+    resources: [{ label: "Az Overview", url: "https://docs.microsoft.com/en-us/azure/availability-zones/az-overview" }],
   },
   {
     id: "real-az900-75",
@@ -1080,6 +1102,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Wenn wir Ressourcen in verschiedenen Azure-Regionen bereitstellen, werden die Ressourcen in verschiedenen Rechenzentren bereitgestellt.",
+    resources: [{ label: "Az Overview", url: "https://docs.microsoft.com/en-us/azure/availability-zones/az-overview" }],
   },
   {
     id: "real-az900-76",
@@ -1091,6 +1114,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Wir gehen davon aus, dass die virtuellen Maschinen dieselben Dienste ausführen. Es geht darum, sicherzustellen, dass mindestens eine der virtuellen Maschinen betriebsbereit ist. Um die Verfügbarkeit von mehreren VMs sicherzustellen, müssen wir die VMs in verschiedenen Update- und Fehlerdomänen bereitstellen. Dazu können wir Verfügbarkeitszonen nutzen. Eine Verfügbarkeitszone ist ein logisches Rechenzentrum in einer Region, das jedem Azure-Kunden zur Verfügung steht. Jede Zone einer Region verfügt über redundante und separate Stromversorgung, Netzwerk und Konnektivität, um die Wahrscheinlichkeit eines gleichzeitigen Ausfalls zweier Zonen zu verringern.",
+    resources: [{ label: "Az Overview", url: "https://docs.microsoft.com/en-us/azure/availability-zones/az-overview" }],
   },
   {
     id: "real-az900-77",
@@ -1119,6 +1143,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Ihre virtuellen Maschinen in Azure müssen nicht von Ihrer lokalen Umgebung isoliert sein. Um virtuelle Azure-Maschinen mit Ihren lokalen Netzwerkressourcen zu verbinden, müssen Sie ein standortübergreifendes virtuelles Azure-Netzwerk konfigurieren. In Azure benötigen wir ein virtuelles Netzwerk und ein Gateway-Subnetz mit einem virtuellen Netzwerk-Gateway (VPN-Gateway) und einem lokalen Netzwerk- Gateway. Da unsere Azure-Umgebung mehrere virtuelle Azure-Maschinen enthält, sollte auch ein VNET vorhanden sein.",
+    resources: [{ label: "Vpn Gateway Howto Site To Site Resource Manager Portal", url: "https://docs.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-portal" }],
   },
   {
     id: "real-az900-79",
@@ -1132,6 +1157,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Compliance Manager ist ein Tool für Organisationen, mit dem sie ihre Compliance mit den Sicherheits- und Complianceanforderungen von Microsoft bewerten und verwalten können. Compliance Manager bietet über 360 regulatorische Vorlagen, mit denen Sie schnell Bewertungen erstellen können. Auf Compliance Manager kann über das Microsoft Purview-Complianceportal und das Service Trust Portal zugegriffen werden.",
+    resources: [{ label: "Compliance Manager", url: "https://learn.microsoft.com/en-us/purview/compliance-manager" }],
   },
   {
     id: "real-az900-80",
@@ -1146,6 +1172,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Azure Information Protection (AIP) ist eine Cloud-basierte Lösung, die es Organisationen ermöglicht, Dokumente und E-Mails durch das Anwenden von Bezeichnungen zu klassifizieren und zu schützen. Der Inhalt der Kennzeichnung umfasst: • Eine Klassifizierung , die unabhängig davon erkannt werden kann, wo die Daten gespeichert sind oder mit wem sie geteilt werden. • Visuelle Markierungen , wie Kopf- und Fußzeilen oder Wasserzeichen. • Metadaten , die Dateien und E-Mail-Headern im Klartext hinzugefügt werden. Die Klartext-Metadaten stellen sicher, dass andere Dienste die Klassifizierung erkennen und entsprechende Maßnahmen ergreifen können.",
+    resources: [{ label: "What Is Information Protection", url: "https://docs.microsoft.com/en-us/azure/information-protection/what-is-information-protection" }],
   },
   {
     id: "real-az900-81",
@@ -1187,6 +1214,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure Policy unterstützt Sie bei der Durchsetzung organisatorischer Standards und der bedarfsgerechten Compliance-Bewertung. Das Compliance-Dashboard bietet eine aggregierte Ansicht zur Bewertung des Gesamtzustands der Umgebung mit der Möglichkeit, Details pro Ressource und Richtlinie anzuzeigen. Azure Policy trägt außerdem dazu bei, die Compliance Ihrer Ressourcen durch Massenkorrekturen für vorhandene und automatische Korrekturen für neue Ressourcen zu gewährleisten. Zu den gängigen Anwendungsfällen von Azure Policy gehören die Implementierung von Governance für Ressourcenkonsistenz, Einhaltung gesetzlicher Vorschriften, Sicherheit, Kosten und Verwaltung. Richtliniendefinitionen für diese häufigen Anwendungsfälle sind bereits in Ihrer Azure-Umgebung integriert und erleichtern Ihnen den Einstieg.",
+    resources: [{ label: "Policy", url: "https://docs.microsoft.com/en-us/azure/governance/policy/" }],
   },
   {
     id: "real-az900-84",
@@ -1253,6 +1281,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Azure Content Delivery Network (CDN) ist eine globale CDN-Lösung für die Bereitstellung von Inhalten mit hoher Bandbreite. Es kann in Azure oder an einem anderen Standort gehostet werden. Mit Azure CDN können Sie statische Objekte, die aus Azure Blob Storage, einer Webanwendung oder einem öffentlich zugänglichen Webserver geladen wurden, zwischenspeichern, indem Sie den nächstgelegenen Point of Presence (POP)-Server verwenden. Azure CDN kann auch dynamische Inhalte, die nicht zwischengespeichert werden können, durch verschiedene Netzwerk- und Routingoptimierungen beschleunigen.",
+    resources: [{ label: "Cdn", url: "https://docs.microsoft.com/en-us/azure/cdn/" }],
   },
   {
     id: "real-az900-89",
@@ -1267,6 +1296,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "IoT Hub ist ein verwalteter, in der Cloud gehosteter Dienst, der als zentraler Nachrichten-Hub für die bidirektionale Kommunikation zwischen Ihrer IoT-Anwendung und den von ihr verwalteten Geräten fungiert. Mit Azure IoT Hub können Sie IoT-Lösungen mit zuverlässiger und sicherer Kommunikation zwischen Millionen von IoT- Geräten und einem in der Cloud gehosteten Lösungs-Back-End erstellen. Sie können praktisch jedes Gerät mit IoT Hub verbinden. IoT Hub unterstützt die Kommunikation sowohl vom Gerät zur Cloud als auch von der Cloud zum Gerät. IoT Hub unterstützt mehrere Nachrichtenmuster wie Gerät-zu- Cloud-Telemetrie, Dateiupload von Geräten und Anforderung-Antwort-Methoden zur Steuerung Ihrer Geräte aus der Cloud. Die IoT Hub-Überwachung hilft Ihnen, die Integrität Ihrer Lösung zu erhalten, indem Ereignisse wie Geräteerstellung, Geräteausfälle und Geräteverbindungen nachverfolgt werden. Die Funktionen von IoT Hub unterstützen Sie beim Erstellen skalierbarer, voll funktionsfähiger IoT-Lösungen, z. B. zur Verwaltung von Industrieanlagen in der Fertigung, zur Nachverfolgung wertvoller Vermögenswerte im Gesundheitswesen und zur Überwachung der Bürogebäudenutzung. Ein IoT Hub verfügt über einen standardmäßig integrierten Endpunkt (Nachrichten/Ereignisse), der mit Event Hubs kompatibel ist. Sie können benutzerdefinierte Endpunkte zum Weiterleiten von Nachrichten erstellen, indem Sie andere Dienste in Ihrem Abonnement mit dem IoT Hub verknüpfen. IoT Hub unterstützt derzeit die folgenden Endpunkte: • Integrierter Endpunkt • Azure-Speicher • Service Bus-Warteschlangen und Service Bus-Themen • Ereignis-Hubs Referenzen: Was ist Azure IoT Hub? Verwenden Sie IoT Hub-Nachrichtenrouting, um Gerät-zu-Cloud-Nachrichten an verschiedene Endpunkte zu senden",
+    resources: [{ label: "About Iot Hub", url: "https://docs.microsoft.com/en-us/azure/iot-hub/about-iot-hub" }, { label: "Iot Hub Devguide Messages D2c", url: "https://docs.microsoft.com/en-us/azure/iot-hub/iot-hub-devguide-messages-d2c" }],
   },
   {
     id: "real-az900-90",
@@ -1280,6 +1310,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Sichere Schlüsselverwaltung ist unerlässlich, um Daten in der Cloud zu schützen. Verwenden Sie Azure Key Vault, um Schlüssel und kleine Geheimnisse wie Passwörter mithilfe von Schlüsseln zu verschlüsseln, die in Hardware-Sicherheitsmodulen (HSMs) gespeichert sind. Für mehr Sicherheit importieren oder generieren Sie Schlüssel in HSMs. Microsoft verarbeitet Ihre Schlüssel dann in FIPS-validierten HSMs (Hardware und Firmware) – FIPS 140-2 Level 2 für Tresore und FIPS 140-2 Level 3 für HSM-Pools. Mit Key Vault sieht oder extrahiert Microsoft Ihre Schlüssel nicht.",
+    resources: [{ label: "Basic Concepts", url: "https://docs.microsoft.com/en-us/azure/key-vault/general/basic-concepts" }],
   },
   {
     id: "real-az900-91",
@@ -1294,6 +1325,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure-Ressourcensperren gelten für alle Benutzer, einschließlich globaler Administratoren. Ressourcensperren verhindern, dass Benutzer und Administratoren in Ihrer Organisation versehentlich kritische Ressourcen löschen oder ändern.",
+    resources: [{ label: "Lock Resources", url: "https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources" }],
   },
   {
     id: "real-az900-92",
@@ -1307,6 +1339,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Web Application Firewall (WAF) auf Azure Application Gateway bietet zentralen Schutz für Ihre Webanwendungen vor gängigen Exploits und Sicherheitsrisiken. Webanwendungen sind zunehmend Ziel bösartiger Angriffe, die bekannte Sicherheitsrisiken ausnutzen. SQL-Injection und Cross-Site-Scripting gehören zu den häufigsten Angriffen. Hinweis: DoS Protection Standard wird auf öffentliche IP-Adressen angewendet, die mit in virtuellen Netzwerken bereitgestellten Ressourcen verknüpft sind, z. B. Azure Load Balancer, Azure Application Gateway und Azure Service Fabric-Instanzen. Dieser Schutz gilt jedoch NICHT für App Service-Umgebungen.",
+    resources: [{ label: "Ag Overview", url: "https://docs.microsoft.com/en-us/azure/web-application-firewall/ag/ag-overview" }],
   },
   {
     id: "real-az900-93",
@@ -1320,6 +1353,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Das Microsoft Trust Center ist für alle interessant, die wissen möchten, wie Microsoft weltweit Gesetze einhält.",
+    resources: [{ label: "Compliance Overview", url: "https://www.microsoft.com/en-us/trust-center/compliance/compliance-overview" }],
   },
   {
     id: "real-az900-94",
@@ -1334,6 +1368,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Durch die zentrale Speicherung von Anwendungsgeheimnissen in Azure Key Vault können Sie deren Verteilung steuern. Key Vault reduziert das Risiko eines versehentlichen Verlusts von Geheimnissen erheblich. Bei Verwendung von Key Vault müssen Anwendungsentwickler keine Sicherheitsinformationen mehr in ihrer Anwendung speichern. Da Sicherheitsinformationen nicht in Anwendungen gespeichert werden müssen, entfällt die Notwendigkeit, diese Informationen in den Code zu integrieren. Beispielsweise muss eine Anwendung möglicherweise eine Verbindung zu einer Datenbank herstellen. Anstatt die Verbindungszeichenfolge im Code der App zu speichern, können Sie sie sicher in Key Vault speichern. Azure Key Vault hilft bei der Lösung der folgenden Probleme: • Geheimnisverwaltung – Azure Key Vault kann verwendet werden, um Token, Passwörter, Zertifikate, API-Schlüssel und andere Geheimnisse sicher zu speichern und den Zugriff darauf streng zu kontrollieren. • Schlüsselverwaltung : Azure Key Vault kann auch als Schlüsselverwaltungslösung verwendet werden. Azure Key Vault erleichtert das Erstellen und Verwalten der Verschlüsselungsschlüssel, die zum Verschlüsseln Ihrer Daten verwendet werden. • Zertifikatsverwaltung – Azure Key Vault ist auch ein Dienst, mit dem Sie öffentliche und private Transport Layer Security/Secure Sockets Layer (TLS/SSL)- Zertifikate für die Verwendung mit Azure und Ihren intern verbundenen Ressourcen einfach bereitstellen, verwalten und einsetzen können. • Speichern Sie Geheimnisse, die durch Hardware-Sicherheitsmodule gesichert sind – Die Geheimnisse, Schlüssel und Zertifikate im Speicher werden entweder mit einem Softwareschlüssel (Standardstufe) oder einem FIPS 140-2 Level 2-validierten HSM-Schlüssel (Premiumstufe) verschlüsselt.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/key-vault/general/overview" }],
   },
   {
     id: "real-az900-95",
@@ -1347,6 +1382,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Für einige Dienste sind anpassbare Limits verfügbar. Wenn Sie das Limit oder Kontingent über das Standardlimit hinaus erhöhen möchten, können Sie kostenlos eine Online- Kundensupportanfrage stellen.",
+    resources: [{ label: "Resource Limits", url: "https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/resource-limits" }],
   },
   {
     id: "real-az900-96",
@@ -1360,6 +1396,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Sie wenden Tags auf Ihre Azure-Ressourcen, Ressourcengruppen und Abonnements an, um sie logisch in einer Taxonomie zu organisieren. Jedes Tag besteht aus einem Namen und einem Wert. Wir sollten die Ressourcen pro Büro taggen.",
+    resources: [{ label: "Tag Resources", url: "https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources" }],
   },
   {
     id: "real-az900-97",
@@ -1374,6 +1411,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Microsoft Azure Deutschland bietet eine Cloud-Plattform, die auf den Grundprinzipien von Sicherheit, Datenschutz, Compliance und Transparenz basiert. Azure Deutschland ist eine physisch isolierte Instanz von Microsoft Azure. Sie nutzt erstklassige Sicherheits- und Compliance-Dienste, die für die Einhaltung deutscher Datenschutzbestimmungen für alle auf ihrer Architektur basierenden Systeme und Anwendungen unerlässlich sind. Azure Deutschland steht berechtigten Kunden und Partnern weltweit zur Verfügung, die in der EU/EFTA, einschließlich Großbritannien, geschäftlich tätig sein möchten.",
+    resources: [{ label: "Germany Welcome", url: "https://docs.microsoft.com/en-us/azure/germany/germany-welcome" }],
   },
   {
     id: "real-az900-98",
@@ -1388,6 +1426,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Eine Netzwerksicherheitsgruppe enthält Sicherheitsregeln, die eingehenden Netzwerkverkehr zu bzw. ausgehenden Netzwerkverkehr von verschiedenen Azure- Ressourcen zulassen oder verweigern. Für jede Regel können Sie Quelle und Ziel, Port und Protokoll angeben. Eingehender Datenverkehr über Port 8080 TCP wird beim Erstellen einer neuen Azure-VM standardmäßig blockiert.",
+    resources: [{ label: "Network Security Groups Overview", url: "https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview" }],
   },
   {
     id: "real-az900-99",
@@ -1401,6 +1440,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Durch die zentrale Speicherung von Anwendungsgeheimnissen in Azure Key Vault können Sie deren Verteilung steuern. Key Vault reduziert das Risiko eines versehentlichen Verlusts von Geheimnissen erheblich. Bei Verwendung von Key Vault müssen Anwendungsentwickler keine Sicherheitsinformationen mehr in ihrer Anwendung speichern. Da Sicherheitsinformationen nicht in Anwendungen gespeichert werden müssen, entfällt die Notwendigkeit, diese Informationen in den Code zu integrieren. Beispielsweise muss eine Anwendung möglicherweise eine Verbindung zu einer Datenbank herstellen. Anstatt die Verbindungszeichenfolge im Code der App zu speichern, können Sie sie sicher in Key Vault speichern. Azure Key Vault hilft bei der Lösung der folgenden Probleme: • Geheimnisverwaltung – Azure Key Vault kann verwendet werden, um Token, Passwörter, Zertifikate, API-Schlüssel und andere Geheimnisse sicher zu speichern und den Zugriff darauf streng zu kontrollieren. • Schlüsselverwaltung : Azure Key Vault kann auch als Schlüsselverwaltungslösung verwendet werden. Azure Key Vault erleichtert das Erstellen und Verwalten der Verschlüsselungsschlüssel, die zum Verschlüsseln Ihrer Daten verwendet werden. • Zertifikatsverwaltung – Azure Key Vault ist auch ein Dienst, mit dem Sie öffentliche und private Transport Layer Security/Secure Sockets Layer (TLS/SSL)- Zertifikate für die Verwendung mit Azure und Ihren intern verbundenen Ressourcen einfach bereitstellen, verwalten und einsetzen können. • Speichern Sie Geheimnisse, die durch Hardware-Sicherheitsmodule gesichert sind – Die Geheimnisse, Schlüssel und Zertifikate im Speicher werden entweder mit einem Softwareschlüssel (Standardstufe) oder einem FIPS 140-2 Level 2-validierten HSM-Schlüssel (Premiumstufe) verschlüsselt.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/key-vault/general/overview" }],
   },
   {
     id: "real-az900-100",
@@ -1414,6 +1454,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure Policy wertet Ressourcen in Azure aus, indem es deren Eigenschaften mit Geschäftsregeln vergleicht. Diese im JSON-Format beschriebenen Geschäftsregeln werden als Richtliniendefinitionen bezeichnet. Zur Vereinfachung der Verwaltung können mehrere Geschäftsregeln zu einer Richtlinieninitiative (auch PolicySet genannt) zusammengefasst werden. Sobald Ihre Geschäftsregeln erstellt sind, wird die Richtliniendefinition oder -initiative jedem von Azure unterstützten Ressourcenbereich zugewiesen, z. B. Verwaltungsgruppen, Abonnements, Ressourcengruppen oder einzelnen Ressourcen. Die Zuweisung gilt für alle Ressourcen innerhalb des Resource Manager-Bereichs dieser Zuweisung. Unterbereiche können bei Bedarf ausgeschlossen werden. Weitere Informationen finden Sie unter Geltungsbereich in Azure Policy. Azure Policy verwendet ein JSON-Format, um die Logik zu erstellen, mit der die Auswertung ermittelt, ob eine Ressource konform ist oder nicht. Definitionen umfassen Metadaten und die Richtlinienregel. Die definierte Regel kann Funktionen, Parameter, logische Operatoren, Bedingungen und Eigenschaftsaliase verwenden, um genau dem gewünschten Szenario zu entsprechen. Die Richtlinienregel bestimmt, welche Ressourcen im Rahmen der Zuweisung ausgewertet werden.",
+    resources: [{ label: "Create And Manage", url: "https://docs.microsoft.com/en-us/azure/governance/policy/tutorials/create-and-manage" }],
   },
   {
     id: "real-az900-101",
@@ -1427,6 +1468,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure Information Protection (AIP) ist eine Cloud-basierte Lösung, die es Organisationen ermöglicht, Dokumente und E-Mails durch das Anwenden von Bezeichnungen zu klassifizieren und zu schützen. Ihr Administrator kann beispielsweise eine Bezeichnung mit Regeln konfigurieren, die vertrauliche Daten wie Kreditkarteninformationen erkennen. In diesem Fall wird jedem Benutzer, der Kreditkarteninformationen in einer Word-Datei speichert, oben im Dokument möglicherweise ein Tooltip mit der Empfehlung angezeigt, die entsprechende Bezeichnung für dieses Szenario anzuwenden. Etiketten können Ihre Dokumente sowohl klassifizieren als auch optional schützen (verschlüsseln)",
+    resources: [{ label: "What Is Information Protection", url: "https://docs.microsoft.com/en-us/azure/information-protection/what-is-information-protection" }],
   },
   {
     id: "real-az900-102",
@@ -1440,6 +1482,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Die Clusterkapazitätsplanung ist für jede Service Fabric-Produktionsumgebung wichtig. Wichtige Überlegungen sind: • Anfängliche Anzahl und Eigenschaften der Clusterknotentypen • Dauerhaftigkeitsstufe jedes Knotentyps , die die Service Fabric-VM-Berechtigungen innerhalb der Azure-Infrastruktur bestimmt • Zuverlässigkeitsstufe des Clusters , die die Stabilität der Service Fabric-Systemdienste und der gesamten Clusterfunktion bestimmt",
+    resources: [{ label: "Service Fabric Cluster Capacity", url: "https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-cluster-capacity" }],
   },
   {
     type: "matching",
@@ -1455,6 +1498,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d1", text: "Azure SQL-Datenbanken", correctItemId: "item1" },
     ],
     explanation: "Virtuelle Azure-Computer gelten im Allgemeinen als Infrastructure-as-a-Service (IaaS), da Sie weiterhin für das Patchen und Verwalten des Betriebssystems der virtuellen Maschine verantwortlich sind. Azure SQL-Datenbank ist eine vollständig verwaltete Platform-as-a-Service (PaaS)-Datenbank-Engine, die die meisten Datenbankverwaltungsfunktionen wie Upgrades, Patches, Sicherungen und Überwachung ohne Benutzereingriff übernimmt. Azure SQL-Datenbank wird manchmal auch als Database as a Service (DaaS) bezeichnet. Hinweis: IaaS und PaaS sind keine präzisen Fachbegriffe. Sie können PaaS-Dienste nutzen, die einen umfangreichen Konfigurations- und Wartungsaufwand erfordern, und IaaS-Dienste, die vollständig verwaltet werden.",
+    resources: [{ label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }, { label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }],
   },
   {
     type: "yesno",
@@ -1529,6 +1573,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Microsoft ist bereit, für Azure-Dienstausfälle, die nicht im Service Level Agreement (SLA) vereinbart wurden, eine Rückerstattung zu zahlen. In manchen Fällen geschieht dies automatisch. In der Regel muss der Kunde die Rückerstattung jedoch selbst beantragen. Was passiert, wenn Microsoft sein SLA nicht einhält? Es liegt in der Verantwortung des Kunden oder Partners, festzustellen, ob das Microsoft Azure Service Level Agreement nicht eingehalten wurde. Um einen Anspruch bezüglich eines Vorfalls geltend machen zu können, muss der Kunde den Kundensupport innerhalb von fünf Werktagen nach dem Vorfall über den Vorfall informieren. Der Kunde muss außerdem ausreichende Beweise zur Unterstützung des Anspruchs vorlegen. Sobald der Anspruch von Microsoft bestätigt wurde, wird für SLAs zwischen 99,5 % und 99 % eine Gutschrift von 10 % gewährt. Für SLAs unter 99 % wird für den jeweiligen Monat, in dem das SLA nicht eingehalten wurde, eine Gutschrift von 25 % ausgestellt. Weitere Informationen zum Azure SLA finden Sie im Service Level Agreement.",
+    resources: [{ label: "What Is The Microsoft Azure Service Level Agreement Sla", url: "https://community.dynamics.com/gp/b/roseaspdynamicsgphostingnews/posts/what-is-the-microsoft-azure-service-level-agreement-sla" }],
   },
   {
     id: "real-az900-109",
@@ -1556,6 +1601,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Bei Produkten, die der Modern-Lifecycle-Richtlinie unterliegen, benachrichtigt Microsoft Sie mindestens 12 Monate vor dem Ende des Supports, wenn kein Nachfolgeprodukt oder -dienst angeboten wird – ausgenommen kostenlose Dienste oder Vorabversionen. Modern-Lifecycle-Richtlinie",
+    resources: [{ label: "Modern", url: "https://docs.microsoft.com/en-us/lifecycle/policies/modern" }],
   },
   {
     type: "yesno",
@@ -1568,6 +1614,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Das Übertragen von Daten zwischen Azure-Speicherkonten in verschiedenen Azure-Regionen ist kostenlos...", correct: "Nein" },
     ],
     explanation: "Die Kosten für Azure Storage werden Ihnen basierend auf der Nutzung Ihres Speicherkontos in Rechnung gestellt. Alle Objekte in einem Speicherkonto werden zusammen als Gruppe abgerechnet. Die Lagerkosten werden nach folgenden Faktoren berechnet: • „Region“ bezieht sich auf die geografische Region, in der sich Ihr Konto befindet. • Der Kontotyp bezieht sich auf den Typ des von Ihnen verwendeten Speicherkontos. • Die Zugriffsebene bezieht sich auf das Datennutzungsmuster, das Sie für Ihr allgemeines v2- oder Blob-Speicherkonto angegeben haben. • Die Speicherkapazität gibt an, wie viel von Ihrem Speicherkontokontingent Sie zum Speichern von Daten verwenden. • Durch die Replikation wird bestimmt, wie viele Kopien Ihrer Daten gleichzeitig und an welchen Standorten aufbewahrt werden. • Transaktionen beziehen sich auf alle Lese- und Schreibvorgänge im Azure Storage. • Unter Datenausgang versteht man alle Daten, die aus einer Azure-Region übertragen werden. Wenn auf die Daten in Ihrem Speicherkonto von einer Anwendung zugegriffen wird, die nicht in derselben Region ausgeführt wird, werden Ihnen die Datenausgangskosten in Rechnung gestellt.",
+    resources: [{ label: "Storage Account Overview", url: "https://docs.microsoft.com/en-us/azure/storage/common/storage-account-overview" }],
   },
   {
     type: "yesno",
@@ -1580,6 +1627,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Das Azure-Ausgabenlimit ist festgelegt und kann nicht erhöht oder verringert werden", correct: "Ja" },
     ],
     explanation: "Um einen Benutzer zum Administrator eines Azure-Abonnements zu machen, weist ihm ein vorhandener Administrator die Rolle „Besitzer“ (eine Azure-Rolle) auf Abonnementebene zu. Die Rolle „Besitzer“ gewährt dem Benutzer Vollzugriff auf alle Ressourcen des Abonnements und berechtigt ihn, den Zugriff an andere zu delegieren. Sie können Ihr kostenloses Azure-Konto oder Ihr Azure for Students Starter-Konto im Azure-Portal auf die nutzungsbasierte Bezahlung upgraden. Das Ausgabenlimit in Azure verhindert Ausgaben über Ihr Guthaben. Bei allen Neukunden, die sich für ein kostenloses Azure-Konto oder Abonnementtypen mit Guthaben über mehrere Monate anmelden, ist das Ausgabenlimit standardmäßig aktiviert. Das Ausgabenlimit entspricht dem Guthaben und kann nicht geändert werden. Wenn Sie sich beispielsweise für ein kostenloses Azure-Konto angemeldet haben, beträgt Ihr Ausgabenlimit 200 $ und Sie können es nicht auf 500 $ ändern. Sie können das Ausgabenlimit jedoch entfernen. Sie haben also entweder kein Limit oder ein Limit in Höhe des Guthabens. Dadurch werden Sie von den meisten Arten von Ausgaben ausgeschlossen. Das Ausgabenlimit ist für Abonnements mit Verpflichtungsplänen oder nutzungsbasierter Bezahlung nicht verfügbar. Referenzen: Azure-Abonnementadministratoren hinzufügen oder ändern Upgrade Ihres kostenlosen Azure-Kontos oder Azure for Students Starter-Kontos Azure-Ausgabenlimit",
+    resources: [{ label: "Add Change Subscription Administrator", url: "https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/add-change-subscription-administrator" }, { label: "Upgrade Azure Subscription", url: "https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/upgrade-azure-subscription" }, { label: "Spending Limit", url: "https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/spending-limit" }],
   },
   {
     id: "real-az900-113",
@@ -1591,6 +1639,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Für Benutzerkonten, Gruppenkonten und ungenutzte Netzwerkschnittstellen fallen keine Kosten an. Die einzige ungenutzte Ressource, die dem Unternehmen in Rechnung gestellt wird, sind die öffentlichen IP-Adressen. Daher besteht die einzige Lösung zur Reduzierung der Azure-Kosten darin, einige oder alle ungenutzten öffentlichen IP-Adressen zu löschen.",
+    resources: [{ label: "Calculator", url: "https://azure.microsoft.com/en-us/pricing/calculator/" }],
   },
   {
     id: "real-az900-114",
@@ -1602,6 +1651,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Für Benutzerkonten, Gruppenkonten und ungenutzte Netzwerkschnittstellen fallen keine Kosten an. Die einzige ungenutzte Ressource, die dem Unternehmen in Rechnung gestellt wird, sind die öffentlichen IP-Adressen. Daher besteht die einzige Lösung zur Reduzierung der Azure-Kosten darin, einige oder alle ungenutzten öffentlichen IP-Adressen zu löschen.",
+    resources: [{ label: "Calculator", url: "https://azure.microsoft.com/en-us/pricing/calculator/" }],
   },
   {
     id: "real-az900-115",
@@ -1613,6 +1663,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Für Benutzerkonten, Gruppenkonten und ungenutzte Netzwerkschnittstellen fallen keine Kosten an. Die einzige ungenutzte Ressource, die dem Unternehmen in Rechnung gestellt wird, sind die öffentlichen IP-Adressen. Daher besteht die einzige Lösung zur Reduzierung der Azure-Kosten darin, einige oder alle ungenutzten öffentlichen IP-Adressen zu löschen.",
+    resources: [{ label: "Calculator", url: "https://azure.microsoft.com/en-us/pricing/calculator/" }],
   },
   {
     id: "real-az900-116",
@@ -1624,6 +1675,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Für Benutzerkonten, Gruppenkonten und ungenutzte Netzwerkschnittstellen fallen keine Kosten an. Die einzige ungenutzte Ressource, die dem Unternehmen in Rechnung gestellt wird, sind die öffentlichen IP-Adressen. Daher besteht die einzige Lösung zur Reduzierung der Azure-Kosten darin, einige oder alle ungenutzten öffentlichen IP-Adressen zu löschen.",
+    resources: [{ label: "Calculator", url: "https://azure.microsoft.com/en-us/pricing/calculator/" }],
   },
   {
     id: "real-az900-117",
@@ -1637,6 +1689,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Das Service Level Agreement (SLA) beschreibt die Verpflichtungen von Microsoft hinsichtlich Verfügbarkeit und Konnektivität.",
+    resources: [{ label: "Sla", url: "https://azure.microsoft.com/en-us/support/legal/sla/" }],
   },
   {
     id: "real-az900-118",
@@ -1651,6 +1704,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Active Directory stellt Updates und neue Funktionen in Form von Vorschauprogrammen bereit. Microsoft führt die Vorschauen phasenweise ein, um Microsoft und Kunden die Möglichkeit zu geben, die neue Funktion zu testen und zu verstehen, bevor sie Teil des Standarddienstes von Azure AD wird. Die Phasen sind wie folgt: 1. Private Vorschau – In dieser Phase laden wir einige Kunden ein, frühzeitig auf neue Konzepte und Funktionen zuzugreifen. Diese Phase beinhaltet keinen formellen Support. 2. Öffentliche Vorschau – In dieser Phase können alle Kunden mit der entsprechenden Azure AD-Lizenz die neue Funktion testen. Der Microsoft- Kundensupport bietet in dieser Phase Supportleistungen an, die üblichen Service Level Agreements gelten jedoch nicht. Bei neuen Funktionen im Azure AD- Portal werden Kunden in der Benutzeroberfläche Informationsbanner angezeigt, die auf die neue Funktion in der Vorschau aufmerksam machen. Durch Klicken auf das Informationsbanner können Kunden die Vorschau aktivieren. 3. Allgemein verfügbar (GA) – Nach Abschluss der öffentlichen Vorschau steht die Funktion allen lizenzierten Kunden zur Verfügung und wird über alle Microsoft-Supportkanäle unterstützt. Beachten Sie, dass sich die Nutzung der Funktion durch neue Funktionen ändern kann, wenn diese sich auf bestehende Funktionen auswirken. Für jedes Azure Active Directory-Vorschauprogramm gelten andere Opt-in-Anforderungen und Abhängigkeiten.",
+    resources: [{ label: "Preview Supplemental Terms", url: "https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/" }],
   },
   {
     id: "real-az900-119",
@@ -1664,6 +1718,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Eine häufige Herausforderung beim Erstellen von Cloudanwendungen besteht darin, die Anmeldeinformationen in Ihrem Code für die Authentifizierung bei Clouddiensten zu verwalten. Die Sicherheit der Anmeldeinformationen ist eine wichtige Aufgabe. Im Idealfall erscheinen die Anmeldeinformationen nie auf Entwicklerarbeitsstationen und werden nicht in die Quellcodeverwaltung eingecheckt. Azure Key Vault bietet eine Möglichkeit zum sicheren Speichern von Anmeldeinformationen, Geheimnissen und anderen Schlüsseln. Ihr Code muss sich jedoch bei Key Vault authentifizieren, um sie abzurufen. Die Funktion „Verwaltete Identitäten für Azure-Ressourcen“ in Azure Active Directory (Azure AD) löst dieses Problem. Die Funktion stellt Azure-Diensten eine automatisch verwaltete Identität in Azure AD bereit. Sie können die Identität verwenden, um sich bei jedem Dienst zu authentifizieren, der die Azure AD-Authentifizierung unterstützt, einschließlich Key Vault, ohne dass Ihr Code Anmeldeinformationen enthalten muss. Die Funktion „Verwaltete Identitäten für Azure-Ressourcen“ ist mit Azure AD für Azure-Abonnements kostenlos. Es fallen keine zusätzlichen Kosten an.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview" }],
   },
   {
     id: "real-az900-120",
@@ -1675,6 +1730,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure API Management kann innerhalb des virtuellen Netzwerks (VNET) bereitgestellt werden und ermöglicht so den Zugriff auf Back-End-Dienste innerhalb des Netzwerks. Das Entwicklerportal und das API-Gateway können so konfiguriert werden, dass sie entweder über das Internet oder nur innerhalb des virtuellen Netzwerks zugänglich sind. Wenn Sie die API Management-Instanz für die Bereitstellung in einem virtuellen Netzwerk konfigurieren, können Sie aus drei Zugriffstypen wählen. • Aus: Dies ist die Standardeinstellung. API Management wird nicht in einem virtuellen Netzwerk bereitgestellt. • Extern: Das API Management-Gateway und das Entwicklerportal sind über einen externen Lastenausgleich aus dem öffentlichen Internet zugänglich. Das Gateway kann auf Ressourcen innerhalb des virtuellen Netzwerks zugreifen. • Intern: Auf das API Management-Gateway und das Entwicklerportal kann nur innerhalb des virtuellen Netzwerks über einen internen Lastenausgleich zugegriffen werden. Das Gateway kann auf Ressourcen innerhalb des virtuellen Netzwerks zugreifen.",
+    resources: [{ label: "Api Management Using With Vnet", url: "https://docs.microsoft.com/en-us/azure/api-management/api-management-using-with-vnet" }],
   },
   {
     id: "real-az900-121",
@@ -1688,6 +1744,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Wir müssen alle Abfragen identifizieren, deren Gebühren 40 Einheiten überschreiten (Antwort A). Anschließend müssen wir eine Warnung auslösen, wenn solche Abfragen innerhalb eines 10-Minuten-Fensters (Zeitraum) mehr als 10 Mal (Häufigkeit) auftreten.",
+    resources: [{ label: "Monitor Cosmos Db", url: "https://docs.microsoft.com/en-us/azure/cosmos-db/monitor-cosmos-db" }],
   },
   {
     id: "real-az900-122",
@@ -1701,6 +1758,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Das Azure Cosmos DB-Datenmigrationstool kann Daten aus verschiedenen Quellen in Azure Cosmos-Container und -Tabellen importieren. Sie können Daten aus JSON- Dateien, CSV-Dateien, SQL, MongoDB, Azure Table Storage, Amazon DynamoDB und sogar Azure Cosmos DB SQL-API-Sammlungen importieren. Sie migrieren diese Daten in Sammlungen und Tabellen zur Verwendung mit Azure Cosmos DB. Das Datenmigrationstool kann auch bei der Migration von einer Sammlung mit einer einzelnen Partition zu einer Sammlung mit mehreren Partitionen für die SQL-API verwendet werden. Sie können die folgenden APIs verwenden, um Daten in Azure Cosmos DB zu importieren? • SQL-API – Sie können zum Importieren von Daten jede der im Datenmigrationstool bereitgestellten Quelloptionen verwenden. • Tabellen-API : Sie können das Datenmigrationstool oder AzCopy zum Importieren von Daten verwenden. Weitere Informationen finden Sie unter Importieren von Daten zur Verwendung mit der Azure Cosmos DB-Tabellen-API. • Azure Cosmos DB-API für MongoDB – Das Datenmigrationstool unterstützt derzeit die Azure Cosmos DB-API für MongoDB weder als Quelle noch als Ziel. • Gremlin-API – Das Datenmigrationstool ist derzeit kein unterstütztes Importtool für Gremlin-API-Konten.",
+    resources: [{ label: "Import Data", url: "https://docs.microsoft.com/en-us/azure/cosmos-db/import-data" }],
   },
   {
     id: "real-az900-123",
@@ -1714,6 +1772,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure Traffic Manager ist ein DNS-basierter Lastenausgleich, mit dem Sie den Datenverkehr optimal auf Dienste in globalen Azure-Regionen verteilen und gleichzeitig hohe Verfügbarkeit und Reaktionsfähigkeit gewährleisten können. Traffic Manager verwendet DNS, um Clientanforderungen basierend auf einer Datenverkehrsroutingmethode und der Integrität der Endpunkte an den am besten geeigneten Dienstendpunkt weiterzuleiten. Ein Endpunkt ist jeder internetbasierte Dienst, der innerhalb oder außerhalb von Azure gehostet wird. Traffic Manager bietet eine Reihe von Datenverkehrsroutingmethoden und Endpunktüberwachungsoptionen für unterschiedliche Anwendungsanforderungen und automatische Failovermodelle. Traffic Manager ist ausfallsicher, auch gegenüber dem Ausfall einer ganzen Azure-Region.",
+    resources: [{ label: "Traffic Manager Overview", url: "https://docs.microsoft.com/en-us/azure/traffic-manager/traffic-manager-overview" }],
   },
   {
     id: "real-az900-124",
@@ -1729,6 +1788,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Ein lokales Netzwerkgateway stellt das Hardware- oder Software-VPN-Gerät in Ihrem lokalen Netzwerk dar. Verwenden Sie es mit einer Verbindung, um eine Site-to-Site- VPN-Verbindung zwischen einem virtuellen Azure-Netzwerk und Ihrem lokalen Netzwerk einzurichten. Für die Erstellung lokaler Netzwerkgateways in Microsoft Azure fallen keine zusätzlichen Gebühren an.",
+    resources: [{ label: "Vpn Gateway", url: "https://docs.microsoft.com/en-us/azure/vpn-gateway/" }],
   },
   {
     type: "matching",
@@ -1762,6 +1822,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Application Insights, eine Funktion von Azure Monitor, ist ein erweiterbarer Dienst zur Anwendungsleistungsverwaltung (APM) für Entwickler und DevOps-Experten. Verwenden Sie ihn, um Ihre Live-Anwendungen zu überwachen. Er erkennt automatisch Leistungsanomalien und enthält leistungsstarke Analysetools, die Ihnen bei der Diagnose von Problemen helfen und Ihnen helfen zu verstehen, was Benutzer tatsächlich mit Ihrer App machen. Er wurde entwickelt, um Ihnen bei der kontinuierlichen Verbesserung von Leistung und Benutzerfreundlichkeit zu helfen. Er funktioniert für Apps auf einer Vielzahl von Plattformen, darunter .NET, Node.js, Java und Python, die lokal, hybrid oder in einer öffentlichen Cloud gehostet werden. Er lässt sich in Ihren DevOps-Prozess integrieren und verfügt über Verbindungspunkte zu einer Vielzahl von Entwicklungstools. Durch die Integration mit Visual Studio App Center kann er Telemetriedaten von mobilen Apps überwachen und analysieren. Referenzen: Was ist Application Insights? Benutzerbindungsanalyse für Webanwendungen mit Application Insights",
+    resources: [{ label: "App Insights Overview", url: "https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview" }, { label: "Usage Retention", url: "https://docs.microsoft.com/en-us/azure/azure-monitor/app/usage-retention" }],
   },
   {
     id: "real-az900-127",
@@ -1786,6 +1847,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Wenn Sie separate Datenträger für Daten- und Protokolldateien verwenden, aktivieren Sie den Lese-Cache auf den Datenträgern, auf denen Ihre Datendateien und TempDB- Datendateien gespeichert sind. Dies kann zu einer erheblichen Leistungssteigerung führen. Aktivieren Sie den Cache nicht auf dem Datenträger, auf dem sich die Protokolldatei befindet, da dies zu einer geringfügigen Leistungsminderung führt.",
+    resources: [{ label: "Performance Guidelines Best Practices", url: "https://docs.microsoft.com/en-us/azure/azure-sql/virtual-machines/windows/performance-guidelines-best-practices#disks-guidance" }],
   },
   {
     id: "real-az900-129",
@@ -1799,6 +1861,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Privileged Identity Management ermöglicht eine zeit- und genehmigungsbasierte Rollenaktivierung, um das Risiko übermäßiger, unnötiger oder missbräuchlicher Zugriffsberechtigungen auf wichtige Ressourcen zu minimieren. Hier sind einige der wichtigsten Funktionen von Privileged Identity Management: • Stellen Sie Just-in-Time-privilegierten Zugriff auf Azure AD und Azure-Ressourcen bereit • Weisen Sie Ressourcen mithilfe von Start- und Enddaten einen zeitgebundenen Zugriff zu • Genehmigung zur Aktivierung privilegierter Rollen erforderlich • Erzwingen Sie die Multi-Faktor-Authentifizierung, um jede Rolle zu aktivieren • Verwenden Sie Begründungen, um zu verstehen, warum Benutzer aktivieren • Erhalten Sie Benachrichtigungen, wenn privilegierte Rollen aktiviert werden • Führen Sie Zugriffsüberprüfungen durch, um sicherzustellen, dass Benutzer weiterhin Rollen benötigen • Laden Sie den Auditverlauf für interne oder externe Audits herunter",
+    resources: [{ label: "Pim Configure", url: "https://docs.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-configure" }],
   },
   {
     id: "real-az900-130",
@@ -1812,6 +1875,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Azure Monitor erfasst nur Ereignisse aus den in den Einstellungen angegebenen Windows-Ereignisprotokollen. Sie können ein Ereignisprotokoll hinzufügen, indem Sie den Namen des Protokolls eingeben und auf + klicken. Für jedes Protokoll werden nur die Ereignisse mit den ausgewählten Schweregraden erfasst. Ereignisse aus den Windows-Ereignisprotokollen werden in der Ereignistabelle gespeichert. In diesem Beispiel wird die Ereignistabelle nach Datensätzen durchsucht, in denen „EventLog“ „Anwendung“ und „RenderedDescription“ „Kryptografie“ enthält. Enthält Datensätze der letzten 24 Stunden. Event | where EventLog == \"Application\" | where TimeGenerated > ago(24h) | where RenderedDescription contains \"cryptographic\"",
+    resources: [{ label: "Data Sources Windows Events", url: "https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-sources-windows-events" }],
   },
   {
     id: "real-az900-131",
@@ -1825,6 +1889,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "yslog ist ein unter Linux verbreitetes Ereignisprotokollierungsprotokoll. Anwendungen senden Nachrichten, die auf dem lokalen Computer gespeichert oder an einen Syslog- Collector übermittelt werden können. Wenn der Log Analytics-Agent für Linux installiert ist, konfiguriert er den lokalen Syslog-Daemon so, dass Nachrichten an den Agent weitergeleitet werden. Der Agent sendet die Nachricht dann an Azure Monitor, wo ein entsprechender Datensatz erstellt wird. Die folgende Tabelle enthält verschiedene Beispiele für Protokollabfragen, die Syslog-Datensätze abrufen.",
+    resources: [{ label: "Data Sources Syslog", url: "https://docs.microsoft.com/en-us/azure/azure-monitor/platform/data-sources-syslog" }],
   },
   {
     type: "yesno",
@@ -1837,6 +1902,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Um den Microsoft-Support aufrechtzuerhalten, müssen Sie die Sicherheitsempfehlungen implementieren...", correct: "Nein" },
     ],
     explanation: "Advisor ist ein personalisierter Cloudberater, der Sie bei der Optimierung Ihrer Azure-Bereitstellungen mithilfe bewährter Methoden unterstützt. Er analysiert Ihre Ressourcenkonfiguration und Nutzungstelemetrie und empfiehlt anschließend Lösungen, mit denen Sie die Kosteneffizienz, Leistung, Zuverlässigkeit (früher als Hochverfügbarkeit bezeichnet) und Sicherheit Ihrer Azure-Ressourcen verbessern können. Mit Advisor können Sie: • Erhalten Sie proaktive, umsetzbare und personalisierte Best Practices-Empfehlungen. • Verbessern Sie die Leistung, Sicherheit und Zuverlässigkeit Ihrer Ressourcen, indem Sie Möglichkeiten zur Reduzierung Ihrer Azure-Gesamtausgaben identifizieren. • Erhalten Sie Empfehlungen mit vorgeschlagenen Aktionen inline. Das Advisor-Dashboard zeigt personalisierte Empfehlungen für alle Ihre Abonnements an. Sie können Filter anwenden, um Empfehlungen für bestimmte Abonnements und Ressourcentypen anzuzeigen. Die Empfehlungen sind in fünf Kategorien unterteilt: • Zuverlässigkeit (früher Hochverfügbarkeit genannt): Um die Kontinuität Ihrer geschäftskritischen Anwendungen sicherzustellen und zu verbessern. • Sicherheit: Zum Erkennen von Bedrohungen und Schwachstellen, die zu Sicherheitsverletzungen führen könnten. • Leistung: Um die Geschwindigkeit Ihrer Anwendungen zu verbessern. • Kosten: Um Ihre gesamten Azure-Ausgaben zu optimieren und zu reduzieren. • Operative Exzellenz: Wir helfen Ihnen dabei, Prozess- und Arbeitsablaufeffizienz, Ressourcenverwaltung und Best Practices für die Bereitstellung zu erreichen. Der Advisor-Score erhöht sich auf maximal 100 %, wenn alle Empfehlungen umgesetzt werden:",
+    resources: [{ label: "Advisor Get Started", url: "https://docs.microsoft.com/en-us/azure/advisor/advisor-get-started" }],
   },
   {
     type: "yesno",
@@ -1861,6 +1927,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Über Azure Service Health kann ein Administrator verhindern, dass ein Dienstausfall einen ... beeinträchtigt", correct: "Nein" },
     ],
     explanation: "Azure bietet eine Reihe von Funktionen, mit denen Sie über den Zustand Ihrer Cloudressourcen informiert bleiben. Diese Informationen umfassen aktuelle und bevorstehende Probleme wie Ereignisse mit Auswirkungen auf den Dienst, geplante Wartungsarbeiten und andere Änderungen, die sich auf Ihre Verfügbarkeit auswirken können. Azure Service Health ist eine Kombination aus drei separaten kleineren Diensten. Der Azure-Status informiert Sie auf der Azure-Statusseite über Dienstausfälle in Azure. Die Seite bietet eine globale Übersicht über den Zustand aller Azure-Dienste in allen Azure-Regionen. Die Statusseite ist eine gute Referenz für Vorfälle mit weitreichenden Auswirkungen. Wir empfehlen aktuellen Azure-Benutzern jedoch dringend, den Azure- Dienstzustand zu nutzen, um über Azure-Vorfälle und -Wartungsarbeiten auf dem Laufenden zu bleiben. Service Health bietet eine personalisierte Ansicht der Integrität der von Ihnen verwendeten Azure-Dienste und -Regionen. Hier finden Sie am besten Informationen zu Dienstausfällen, geplanten Wartungsaktivitäten und anderen Integritätshinweisen, da die authentifizierte Service Health-Erfahrung weiß, welche Dienste und Ressourcen Sie derzeit verwenden. Die beste Möglichkeit, Service Health zu nutzen, besteht darin, Service Health-Warnungen einzurichten, die Sie über Ihre bevorzugten Kommunikationskanäle benachrichtigen, wenn Serviceprobleme, geplante Wartungsarbeiten oder andere Änderungen die von Ihnen verwendeten Azure-Dienste und -Regionen beeinträchtigen können. Die Ressourcenintegrität liefert Informationen zum Zustand Ihrer einzelnen Cloudressourcen, z. B. einer bestimmten VM-Instanz. Mit Azure Monitor können Sie außerdem Warnungen konfigurieren, die Sie über Verfügbarkeitsänderungen Ihrer Cloudressourcen informieren. Dank der Ressourcenintegrität und der Azure Monitor-Benachrichtigungen sind Sie minütlich über die Verfügbarkeit Ihrer Ressourcen informiert und können schnell beurteilen, ob ein Problem auf Ihr Problem oder auf ein Azure-Plattformereignis zurückzuführen ist. Zusammen bieten Ihnen diese Erfahrungen einen umfassenden Einblick in den Zustand von Azure, und zwar in der für Sie relevantesten Granularität.",
+    resources: [{ label: "Service Health", url: "https://docs.microsoft.com/en-us/azure/service-health/" }],
   },
   {
     type: "yesno",
@@ -1873,6 +1940,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Alle zahlenden Azure-Kunden können eine Gutschrift beantragen, wenn ihr monatlicher Verfügbarkeitsprozentsatz... beträgt", correct: "Ja" },
     ],
     explanation: "Microsoft garantiert eine Verfügbarkeit von mindestens 99,9 % für die Azure Active Directory Basic- und Premium-Dienste. Für die kostenlose Version von Azure Active Directory wird kein SLA bereitgestellt. Was passiert, wenn Microsoft sein SLA nicht einhält? Es liegt in der Verantwortung des Kunden oder Partners, festzustellen, ob das Microsoft Azure Service Level Agreement nicht eingehalten wurde. Um einen Anspruch geltend machen zu können, muss der Kunde den Kundensupport innerhalb von fünf Werktagen nach dem Vorfall über den Vorfall informieren. Der Kunde muss außerdem ausreichende Beweise zur Untermauerung des Anspruchs vorlegen. Sobald der Anspruch von Microsoft bestätigt wurde, wird bei SLAs zwischen 99,5 % und 99 % eine Gutschrift von 10 % gewährt. Bei SLAs unter 99 % wird für den jeweiligen Monat, in dem das SLA nicht eingehalten wurde, eine Gutschrift von 25 % gewährt. Weitere Informationen zum Azure SLA finden Sie im Service Level Agreement. Referenzen: SLA für Azure Active Directory Was ist das Microsoft Azure Service Level Agreement (SLA)?",
+    resources: [{ label: "V1 0", url: "https://azure.microsoft.com/en-us/support/legal/sla/active-directory/v1_0/" }, { label: "What Is The Microsoft Azure Service Level Agreement Sla", url: "https://community.dynamics.com/gp/b/roseaspdynamicsgphostingnews/posts/what-is-the-microsoft-azure-service-level-agreement-sla" }],
   },
   {
     id: "real-az900-136",
@@ -1888,6 +1956,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "F",
     explanation: "„ Maximal verfügbare Minuten “ ist die Gesamtzahl der Minuten während eines Abrechnungsmonats für alle internetfähigen Rollen, von denen zwei oder mehr Instanzen in verschiedenen Updatedomänen bereitgestellt werden. Die maximal verfügbaren Minuten werden ab dem Zeitpunkt gemessen, an dem der Mandant bereitgestellt und die zugehörigen Rollen aufgrund einer vom Kunden initiierten Aktion gestartet wurden, bis zu dem Zeitpunkt, an dem der Kunde eine Aktion initiiert, die zum Stoppen oder Löschen des Mandanten führen würde. „ Ausfallzeit “ ist die Gesamtzahl der Minuten, die Teil der maximal verfügbaren Minuten sind, in denen keine externe Verbindung besteht. Die monatliche Betriebszeit in Prozent für Cloud-Dienste errechnet sich aus der Anzahl der maximal verfügbaren Minuten abzüglich der Ausfallzeit geteilt durch die Anzahl der maximal verfügbaren Minuten in einem Abrechnungsmonat für ein bestimmtes Microsoft Azure-Abonnement. Die monatliche Betriebszeit in Prozent wird durch die folgende Formel dargestellt: Monatliche Betriebszeit % = (Maximal verfügbare Minuten – Ausfallzeit) / Maximal verfügbare Minuten Für die Nutzung der Cloud-Dienste durch den Kunden gelten die folgenden Service-Levels und Service-Credits:",
+    resources: [{ label: "V1 0", url: "https://azure.microsoft.com/en-au/support/legal/sla/cloud-services/v1_0/" }],
   },
   {
     type: "yesno",
@@ -1900,6 +1969,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Wenn eine virtuelle Azure-Maschine gestoppt wird, zahlen Sie weiterhin die damit verbundenen Speicherkosten...", correct: "Ja" },
     ],
     explanation: "Sie können durch den Kauf von Reservierungen einen Rabatt auf Ihre Azure-Dienste erhalten. Indem Sie Microsoft im Voraus Einblick in Ihren Ressourcenbedarf für ein oder drei Jahre geben, können Sie effizienter arbeiten. Im Gegenzug geben Sie diese Einsparungen in Form von Rabatten von bis zu 72 Prozent an Sie weiter. Azure berechnet keine Kosten für eine VM, während sie gestoppt (freigegeben) ist. Es fallen jedoch weiterhin Kosten für den Azure-Speicher an, der für die Betriebssystemfestplatte der VM und alle angeschlossenen Datenfestplatten benötigt wird. Die monatlichen Kosten für eine Azure-VM hängen von der Betriebszeit der VM ab. Referenzen: Reservierungen von Azure Virtual Machines – Stoppen versus Stoppen (Freigeben)",
+    resources: [{ label: "Reservations", url: "https://azure.microsoft.com/en-us/reservations/" }, { label: "Azure Virtual Machines Stopping Versus Stopping Deallocating", url: "https://docs.microsoft.com/en-us/archive/blogs/uspartner_ts2team/azure-virtual-machines-stopping-versus-stopping-deallocating" }],
   },
   {
     id: "real-az900-138",
@@ -1914,6 +1984,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Der Basic-Supportplan ist für alle Azure-Kunden enthalten und bietet Ihnen Folgendes: • Unterstützung bei der Abrechnung und Abonnementverwaltung • Rund um die Uhr verfügbare Selbsthilferessourcen, darunter Microsoft Learn, Anleitungsvideos zum Azure-Portal, Dokumentation und Community-Support • Möglichkeit, so viele Support-Tickets einzureichen, wie Sie benötigen • Azure Advisor – Ihr kostenloser, personalisierter Leitfaden zu bewährten Methoden von Azure • Azure-Integritätsstatus und Benachrichtigungen Referenz Supportpläne vergleichen",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans/" }],
   },
   {
     id: "real-az900-139",
@@ -1928,6 +1999,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Es sind keine Änderungen erforderlich. Der Basis-Supportplan beinhaltet keinen 24/7-Zugang zum technischen Support und der Entwickler-Supportplan bietet technischen Support nur während der Geschäftszeiten und ausschließlich per E-Mail. Referenz Supportpläne vergleichen",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans/" }],
   },
   {
     id: "real-az900-140",
@@ -1942,6 +2014,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Azure kann Vorschau-, Beta- oder andere Vorabversionen von Funktionen, Diensten, Software oder Regionen enthalten, die von Microsoft angeboten werden („Vorschauen“). Vorschauen werden Ihnen im Rahmen Ihres Azure-Nutzungsvertrags lizenziert. Gemäß den Bedingungen Ihres Azure-Abonnements werden Vorschauen „WIE BESEHEN“, „MIT ALLEN FEHLERN“ UND „WIE VERFÜGBAR“ BEREITGESTELLT UND SIND VON DEN SERVICE LEVEL AGREEMENTS UND DER EINGESCHRÄNKTEN GARANTIE AUSGESCHLOSSEN. Vorschauen werden möglicherweise nicht durch den Kundensupport abgedeckt. Für Vorschauen können reduzierte oder andere Sicherheits-, Compliance- und Datenschutzverpflichtungen gelten. Ergänzende Nutzungsbedingungen für Microsoft Azure-Vorschauen",
+    resources: [{ label: "Preview Supplemental Terms", url: "https://azure.microsoft.com/en-gb/support/legal/preview-supplemental-terms/" }],
   },
   {
     id: "real-az900-141",
@@ -1968,6 +2041,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Bei Produkten, die der Modern Lifecycle Policy unterliegen, benachrichtigt Microsoft mindestens 12 Monate vor der Beendigung des Supports, wenn kein Nachfolgeprodukt oder -dienst angeboten wird – ausgenommen kostenlose Dienste oder Vorabversionen.",
+    resources: [{ label: "Modern", url: "https://docs.microsoft.com/en-us/lifecycle/policies/modern" }],
   },
   {
     id: "real-az900-143",
@@ -1982,6 +2056,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Budgetwarnungen benachrichtigen Sie, wenn Ausgaben (basierend auf Nutzung oder Kosten) den in der Warnungsbedingung des Budgets festgelegten Betrag erreichen oder überschreiten. Cost Management-Budgets werden über das Azure-Portal oder die Azure Consumption API erstellt. Im Azure-Portal werden Budgets nach Kosten definiert. Mit der Azure Consumption API werden Budgets nach Kosten oder nach Verbrauch definiert. Budgetwarnungen unterstützen sowohl kosten- als auch nutzungsbasierte Budgets. Budgetwarnungen werden automatisch generiert, wenn die Bedingungen für Budgetwarnungen erfüllt sind. Sie können alle Kostenwarnungen im Azure-Portal anzeigen. Wenn eine Warnung generiert wird, wird sie in den Kostenwarnungen angezeigt. Eine Warn-E-Mail wird auch an die Personen in der Liste der Warnungsempfänger des Budgets gesendet.",
+    resources: [{ label: "Cost Mgt Alerts Monitor Usage Spending%20target=", url: "https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/cost-mgt-alerts-monitor-usage-spending%20target=" }],
   },
   {
     type: "yesno",
@@ -1994,6 +2069,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Durch das Kopieren mehrerer GB Daten von Azure in ein lokales Netzwerk über ein VPN entstehen zusätzliche Daten...", correct: "Ja" },
     ],
     explanation: "Azure-Ressourcengruppen sind kostenlos. Das Einrichten eines virtuellen Netzwerks ist kostenlos. Microsoft berechnet jedoch Gebühren für das VPN-Gateway, das eine Verbindung zu lokalen und anderen virtuellen Netzwerken in Azure herstellt. Diese Gebühr basiert auf der Zeit, in der das Gateway bereitgestellt und verfügbar ist. Datenübertragungen über die VPN-Verbindungen zu Ihren lokalen Standorten oder dem Internet im Allgemeinen werden separat zum regulären Datenübertragungstarif berechnet. Eingehende Datenübertragungen sind kostenlos. Ausgehende Datenübertragungen werden berechnet. Referenzen: VPN Gateway-Preise Bandbreitenpreisdetails",
+    resources: [{ label: "Vpn Gateway", url: "https://azure.microsoft.com/en-us/pricing/details/vpn-gateway/" }, { label: "Bandwidth", url: "https://azure.microsoft.com/en-us/pricing/details/bandwidth/" }],
   },
   {
     id: "real-az900-145",
@@ -2009,6 +2085,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "F",
     explanation: "Sie können eine Erhöhung des Abonnementkontingents anfordern, indem Sie über das Blatt „Hilfe und Support“ im Azure-Portal eine Supportanfrage senden. Referenzen: Azure-Abonnement- und Dienstlimits, Kontingente und Einschränkungen Standardkontingent: Erhöhen Sie die Limits nach VM-Serien",
+    resources: [{ label: "Azure Subscription Service Limits", url: "https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits" }, { label: "Per Vm Quota Requests", url: "https://docs.microsoft.com/en-us/azure/azure-portal/supportability/per-vm-quota-requests" }],
   },
   {
     id: "real-az900-146",
@@ -2020,6 +2097,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Microsoft garantiert eine Verfügbarkeit von mindestens 99,9 % für die Azure Active Directory Basic- und Premium-Dienste. Für die kostenlose Version von Azure Active Directory wird kein SLA bereitgestellt.",
+    resources: [{ label: "V1 0", url: "https://azure.microsoft.com/en-us/support/legal/sla/active-directory/v1_0/" }],
   },
   {
     id: "real-az900-147",
@@ -2033,6 +2111,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Sie können Power BI-Arbeitsbereiche so konfigurieren, dass Datenflüsse im Azure Data Lake Storage Gen2-Konto Ihrer Organisation gespeichert werden. Dies ist günstiger als die Verwendung von Azure SQL-Datenbanken. Referenzen: Verbinden Sie Azure Data Lake Storage Gen2 für die Datenflussspeicherung. Preise für Azure Data Lake Storage Gen2. Preise für Azure SQL-Datenbank.",
+    resources: [{ label: "Service Dataflows Connect Azure Data Lake Storage Gen2", url: "https://docs.microsoft.com/en-us/power-bi/transform-model/service-dataflows-connect-azure-data-lake-storage-gen2" }, { label: "Data Lake", url: "https://azure.microsoft.com/en-us/pricing/details/storage/data-lake/" }, { label: "Single", url: "https://azure.microsoft.com/en-us/pricing/details/sql-database/single/" }],
   },
   {
     id: "real-az900-148",
@@ -2046,6 +2125,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Virtuelle Azure-Maschinen gelten im Allgemeinen als Infrastructure-as-a-Service, da Sie weiterhin für das Patchen und Verwalten des Betriebssystems der virtuellen Maschine verantwortlich sind.",
+    resources: [{ label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }],
   },
   {
     id: "real-az900-149",
@@ -2059,6 +2139,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Skalierungsgruppen werden aus virtuellen Computern erstellt. Mit Skalierungsgruppen werden die Verwaltungs- und Automatisierungsebenen zum Ausführen und Skalieren Ihrer Anwendungen bereitgestellt. Sie können stattdessen einzelne VMs manuell erstellen und verwalten oder vorhandene Tools integrieren, um ein ähnliches Maß an Automatisierung zu erreichen. Die folgende Tabelle zeigt die Vorteile von Skalierungsgruppen im Vergleich zur manuellen Verwaltung mehrerer VM-Instanzen. Für Skalierungsgruppen fallen keine zusätzlichen Kosten an. Sie zahlen nur für die zugrunde liegenden Computeressourcen wie VM-Instanzen, Load Balancer oder verwalteten Datenträgerspeicher. Für Verwaltungs- und Automatisierungsfunktionen wie Autoskalierung und Redundanz fallen keine zusätzlichen Kosten für die Nutzung von VMs an. Referenzen: Was sind virtuelle Maschinen-Skalierungsgruppen?",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview" }],
   },
   {
     id: "real-az900-150",
@@ -2086,6 +2167,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Der Basic-Supportplan ist kostenlos und für alle Azure-Kunden inklusive. Der Basic-Supportplan bietet Ihnen die im Satz genannten Dienste.",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans/" }],
   },
   {
     id: "real-az900-152",
@@ -2099,6 +2181,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Der technische Support per E-Mail und Telefon ist rund um die Uhr im Developer-Support-Plan und höher enthalten.",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans/" }],
   },
   {
     id: "real-az900-153",
@@ -2113,6 +2196,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure ermöglicht Ihnen das Erstellen und Verwalten von Supportanfragen (auch Supporttickets genannt). Sie können Anfragen im Azure-Portal erstellen und verwalten. Sie können Anfragen auch programmgesteuert erstellen und verwalten, indem Sie die Azure-Supportticket-REST-API verwenden. Sie können im Azure-Portal auf „Hilfe + Support“ zugreifen . Sie finden die Hilfe im Azure-Portalmenü, in der globalen Kopfzeile oder im Ressourcenmenü eines Dienstes. Bevor Sie eine Supportanfrage stellen können, benötigen Sie die entsprechenden Berechtigungen. Azure bietet unbegrenzten Support für die Abonnementverwaltung, einschließlich Abrechnung, Kontingentanpassungen und Kontoübertragungen. Für technischen Support benötigen Sie einen Supportplan.",
+    resources: [{ label: "How To Create Azure Support Request", url: "https://docs.microsoft.com/en-us/azure/azure-portal/supportability/how-to-create-azure-support-request" }],
   },
   {
     id: "real-az900-154",
@@ -2124,6 +2208,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure bietet unbegrenzten Support für die Abonnementverwaltung, einschließlich Abrechnung, Kontingentanpassungen und Kontoübertragungen. Für technischen Support benötigen Sie einen Supportplan. Der Basic-Supportplan bietet keinen technischen Support. Der Developer-Supportplan bietet ausschließlich technischen Support per E-Mail und ist nur während der Geschäftszeiten verfügbar. Die Supportpläne Standard, Professional Direct und Premier beinhalten technischen Support per E-Mail und Telefon.",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans/" }],
   },
   {
     id: "real-az900-155",
@@ -2135,6 +2220,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure bietet unbegrenzten Support für die Abonnementverwaltung, einschließlich Abrechnung, Kontingentanpassungen und Kontoübertragungen. Für technischen Support benötigen Sie einen Supportplan. Der Basic-Supportplan bietet keinen technischen Support. Der Developer-Supportplan bietet ausschließlich technischen Support per E-Mail und ist nur während der Geschäftszeiten verfügbar. Die Supportpläne Standard, Professional Direct und Premier beinhalten technischen Support per E-Mail und Telefon.",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans/" }],
   },
   {
     id: "real-az900-156",
@@ -2146,6 +2232,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure bietet unbegrenzten Support für die Abonnementverwaltung, einschließlich Abrechnung, Kontingentanpassungen und Kontoübertragungen. Für technischen Support benötigen Sie einen Supportplan. Der Basic-Supportplan bietet keinen technischen Support. Der Developer-Supportplan bietet ausschließlich technischen Support per E-Mail und ist nur während der Geschäftszeiten verfügbar. Die Supportpläne Standard, Professional Direct und Premier beinhalten technischen Support per E-Mail und Telefon.",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans/" }],
   },
   {
     id: "real-az900-157",
@@ -2157,6 +2244,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure bietet unbegrenzten Support für die Abonnementverwaltung, einschließlich Abrechnung, Kontingentanpassungen und Kontoübertragungen. Für technischen Support benötigen Sie einen Supportplan. Der Basic-Supportplan bietet keinen technischen Support. Der Developer-Supportplan bietet ausschließlich technischen Support per E-Mail und ist nur während der Geschäftszeiten verfügbar. Die Supportpläne Standard, Professional Direct und Premier beinhalten technischen Support per E-Mail und Telefon.",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans/" }],
   },
   {
     id: "real-az900-158",
@@ -2168,6 +2256,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure bietet unbegrenzten Support für die Abonnementverwaltung, einschließlich Abrechnung, Kontingentanpassungen und Kontoübertragungen. Für technischen Support benötigen Sie einen Supportplan. Der Basic-Supportplan bietet keinen technischen Support. Der Developer-Supportplan bietet ausschließlich technischen Support per E-Mail und ist nur während der Geschäftszeiten verfügbar. Die Supportpläne Standard, Professional Direct und Premier beinhalten technischen Support per E-Mail und Telefon.",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans/" }],
   },
   {
     id: "real-az900-159",
@@ -2194,6 +2283,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure Data Factory ermöglicht das Kopieren von Daten aus einer SQL Server-Datenbank in jeden unterstützten Senkendatenspeicher. Alternativ können Sie Daten aus jedem unterstützten Quelldatenspeicher in eine SQL Server-Datenbank kopieren. Insbesondere unterstützt der Azure Data Factory SQL Server-Connector: • SQL Server Version 2005 und höher. • Kopieren von Daten mithilfe von SQL oder Windows-Authentifizierung. • Als Quelle dient das Abrufen von Daten mithilfe einer SQL-Abfrage oder einer gespeicherten Prozedur. Sie können auch paralleles Kopieren aus einer SQL Server-Quelle wählen. Weitere Informationen finden Sie im Abschnitt „Paralleles Kopieren aus einer SQL-Datenbank“. • Als Senke: Automatisches Erstellen einer Zieltabelle, falls diese basierend auf dem Quellschema nicht vorhanden ist; Anhängen von Daten an eine Tabelle oder Aufrufen einer gespeicherten Prozedur mit benutzerdefinierter Logik während des Kopierens. Wenn sich Ihr Datenspeicher in einem lokalen Netzwerk, einem virtuellen Azure-Netzwerk oder einer Amazon Virtual Private Cloud befindet, müssen Sie eine selbstgehostete Integration Runtime einrichten, um eine Verbindung damit herzustellen.",
+    resources: [{ label: "Connector Sql Server", url: "https://docs.microsoft.com/en-us/azure/data-factory/connector-sql-server" }],
   },
   {
     type: "yesno",
@@ -2206,6 +2296,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Ein Azure Storage-Konto kann bis zu 2 TB Daten und bis zu eine Million Dateien enthalten", correct: "Nein" },
     ],
     explanation: "Das Azure-Speicherkonto enthält alle Ihre Azure Storage-Datenobjekte: Blobs, Dateien, Warteschlangen, Tabellen und Datenträger. Das Speicherkonto bietet einen eindeutigen Namespace für Ihre Azure Storage-Daten, auf den von überall auf der Welt über HTTP oder HTTPS zugegriffen werden kann. Die Daten in Ihrem Azure-Speicherkonto sind dauerhaft und hochverfügbar, sicher und massiv skalierbar. Azure Storage speichert immer mehrere Kopien (mindestens drei Kopien) Ihrer Daten, sodass diese vor geplanten und ungeplanten Ereignissen geschützt sind, einschließlich vorübergehender Hardwarefehler, Netzwerk- oder Stromausfälle und massiver Naturkatastrophen. Redundanz stellt sicher, dass Ihr Speicherkonto auch bei Ausfällen die Service Level Agreements (SLAs) für Azure Storage erfüllt. Jedes Azure-Abonnement kann bis zu 250 Speicherkonten mit jeweils bis zu 500 Terabyte Speicherplatz umfassen. Es gibt keine Begrenzung für die Anzahl der Blobs oder Dateien, die Sie in einem Speicherkonto ablegen können. Referenzen: Speicherkontoübersicht Azure Storage-Redundanz",
+    resources: [{ label: "Storage Account Overview", url: "https://docs.microsoft.com/en-us/azure/storage/common/storage-account-overview" }, { label: "Storage Redundancy", url: "https://docs.microsoft.com/en-us/azure/storage/common/storage-redundancy" }],
   },
   {
     type: "yesno",
@@ -2218,6 +2309,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Verfügbarkeitszonen werden verwendet, um Daten und Anwendungen in mehrere Regionen zu replizieren", correct: "Nein" },
     ],
     explanation: "Eine Region besteht aus mehreren Rechenzentren, die innerhalb eines latenzdefinierten Umkreises bereitgestellt und über ein dediziertes regionales Netzwerk mit geringer Latenz verbunden sind. Eine Verfügbarkeitszone ist ein eindeutiger physischer Standort innerhalb einer Region. Jede Zone besteht aus einem oder mehreren Rechenzentren mit unabhängiger Stromversorgung, Kühlung und Vernetzung. Verfügbarkeitszonen werden nicht von allen Regionen unterstützt. Eine Region kann mehrere Verfügbarkeitszonen haben.",
+    resources: [{ label: "Az Overview", url: "https://docs.microsoft.com/en-us/azure/availability-zones/az-overview" }],
   },
   {
     id: "real-az900-163",
@@ -2249,6 +2341,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Die URL portal.azure.com ermöglicht den Zugriff auf das Azure-Portal. Beachten Sie, dass admin.microsoft.com die URL des Microsoft 365 Admin Centers ist.",
+    resources: [{ label: "Azure Portal Overview", url: "https://docs.microsoft.com/en-us/azure/azure-portal/azure-portal-overview" }],
   },
   {
     id: "real-az900-165",
@@ -2262,6 +2355,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Betriebssystem- und Datenträger virtueller Azure-Computer werden als große Binärobjekte (Blobs) gespeichert. Normalerweise verwenden Azure-VMs verwaltete Datenträger, die vollständig von Microsoft verwaltet werden. Bei verwalteten Datenträgern müssen Sie lediglich die Datenträgergröße und den Datenträgertyp angeben und den Datenträger bereitstellen. Sobald Sie den Datenträger bereitgestellt haben, übernimmt Azure den Rest.",
+    resources: [{ label: "Managed Disks Overview", url: "https://docs.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview" }],
   },
   {
     type: "yesno",
@@ -2301,6 +2395,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Sie können bis zu 10 kostenlose Azure-Konten erstellen, indem Sie dasselbe Microsoft-Konto verwenden", correct: "Nein" },
     ],
     explanation: "Das kostenlose Azure-Konto umfasst den Zugriff auf eine Reihe von Azure-Produkten, die 12 Monate lang kostenlos sind, ein Guthaben von 200 US-Dollar für die ersten 30 Tage nach der Anmeldung und den Zugriff auf mehr als 25 Produkte, die immer kostenlos sind. Das kostenlose Azure-Konto steht allen neuen Azure-Kunden zur Verfügung. Auch wenn Sie Azure noch nie ausprobiert oder bezahlt haben, sind Sie berechtigt. Das kostenlose Azure-Konto bietet Zugriff auf alle Azure-Produkte und hindert Kunden nicht daran, ihre Ideen in die Produktion umzusetzen. Das kostenlose Azure-Konto enthält bestimmte Produkte – und bestimmte Mengen dieser Produkte – kostenlos. Um Ihre Produktionsszenarien zu ermöglichen, müssen Sie möglicherweise Ressourcen nutzen, die über die kostenlosen Mengen hinausgehen. Diese zusätzlichen Ressourcen werden Ihnen zu den nutzungsbasierten Tarifen in Rechnung gestellt. Es gibt maximal ein Konto mit 12 Monaten kostenlosem Produktzugriff und 200 $ Guthaben pro Neukunde. Sie können jedoch über die kostenlose Menge hinaus beliebig viele Produkte nutzen, indem Sie Ihr Konto auf Pay-as-you-go-Preise upgraden.",
+    resources: [{ label: "Free Account Faq", url: "https://azure.microsoft.com/en-us/free/free-account-faq/" }],
   },
   {
     type: "yesno",
@@ -2313,6 +2408,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Eine Azure-Ressourcengruppe enthält mehrere Azure-Abonnements", correct: "Nein" },
     ],
     explanation: "Ein Kontoadministrator ist der einzige Besitzer eines Abrechnungskontos für das Microsoft Online Service-Programm. Die Rolle wird einer Person zugewiesen, die sich für Azure registriert hat. Kontoadministratoren sind berechtigt, verschiedene Abrechnungsaufgaben auszuführen, z. B. Abonnements zu erstellen, Rechnungen anzuzeigen oder die Abrechnung für ein Abonnement zu ändern. Ein Azure-Abonnement kann mehrere Besitzer, aber nur einen Kontoadministrator haben. Ein Azure-Abonnement kann von einem Benutzer verwaltet werden, dem die Rolle „Besitzer“ für das Abonnement zugewiesen ist. Dies könnte sogar ein Gastkonto eines externen Cloud-Anbieters sein. Eine Ressourcengruppe ist ein logischer Container, in dem Azure-Ressourcen wie Webanwendungen, Datenbanken und Speicherkonten (aber keine Abonnements) bereitgestellt und verwaltet werden. Ein Azure-Abonnement kann mehrere Ressourcengruppen enthalten, Abonnements sind jedoch nicht in Ressourcengruppen enthalten. Referenzen: Zugriff auf Abrechnungsinformationen für Azure verwalten. Azure-Abonnementadministratoren hinzufügen oder ändern.",
+    resources: [{ label: "Manage Billing Access", url: "https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/manage-billing-access" }, { label: "Add Change Subscription Administrator", url: "https://docs.microsoft.com/en-us/azure/cost-management-billing/manage/add-change-subscription-administrator" }],
   },
   {
     id: "real-az900-170",
@@ -2327,6 +2423,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure ermöglicht Ihnen das Erstellen und Verwalten von Supportanfragen (auch Supporttickets genannt). Sie können Anfragen im Azure-Portal erstellen und verwalten. Sie können Anfragen auch programmgesteuert erstellen und verwalten, indem Sie die Azure-Supportticket-REST-API verwenden. Sie können im Azure-Portal auf „Hilfe + Support“ zugreifen . Sie finden die Hilfe im Azure-Portalmenü, in der globalen Kopfzeile oder im Ressourcenmenü eines Dienstes. Bevor Sie eine Supportanfrage stellen können, benötigen Sie die entsprechenden Berechtigungen. Azure bietet unbegrenzten Support für die Abonnementverwaltung, einschließlich Abrechnung, Kontingentanpassungen und Kontoübertragungen. Für technischen Support benötigen Sie einen Supportplan.",
+    resources: [{ label: "How To Create Azure Support Request", url: "https://docs.microsoft.com/en-us/azure/azure-portal/supportability/how-to-create-azure-support-request" }],
   },
   {
     type: "yesno",
@@ -2339,6 +2436,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Azure-Dienste in der öffentlichen Vorschau unterliegen einem Service Level Agreement (SLA)", correct: "Nein" },
     ],
     explanation: "Azure Active Directory stellt Updates und neue Funktionen in Form von Vorschauprogrammen bereit: Private Vorschau (frühzeitiger Zugriff für ausgewählte Kunden, kein formeller Support), Öffentliche Vorschau (alle Kunden mit passender Lizenz können testen, Support vorhanden, aber die üblichen SLAs gelten nicht) und Allgemein verfügbar (GA, voller Support über alle Kanäle).",
+    resources: [{ label: "Preview Supplemental Terms", url: "https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/" }],
   },
   {
     type: "yesno",
@@ -2351,6 +2449,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Support von MSDN-Foren wird nur Unternehmen angeboten, die...", correct: "Nein" },
     ],
     explanation: "Das kostenlose Azure-Konto bietet Zugriff auf zahlreiche Azure-Produkte (12 Monate lang kostenlos), ein Guthaben von 200 $ für die ersten 30 Tage nach der Registrierung sowie Zugriff auf über 25 Produkte, die immer kostenlos sind. Für alle Azure-Kunden ist nur der Basis-Support enthalten. Der Premier-Supportplan eignet sich gut für große oder globale Unternehmen, die strategisch und geschäftskritisch von Microsoft-Produkten wie Azure abhängig sind. Für alle Azure-Kunden und -Partner stehen zwei Azure-Onlineforen zur Verfügung : MSDN und Stack Overflow. MSDN ist ein Online-Angebot von Microsoft. Stack Overflow steht in keiner Verbindung zu Microsoft. Referenzen: Häufig gestellte Fragen zum kostenlosen Azure-Konto, Supportpläne vergleichen, Azure-Support: Premier",
+    resources: [{ label: "Free Account Faq", url: "https://azure.microsoft.com/en-us/free/free-account-faq/" }, { label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans/" }, { label: "Premier", url: "https://azure.microsoft.com/en-us/support/plans/premier/" }],
   },
   {
     type: "yesno",
@@ -2363,6 +2462,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Ein kostenloses Azure-Konto kann eine unbegrenzte Anzahl von Web-Apps enthalten", correct: "Nein" },
     ],
     explanation: "Das kostenlose Azure-Konto umfasst den Zugriff auf eine Reihe von Azure-Produkten, die 12 Monate lang kostenlos sind, ein Guthaben von 200 USD, das Sie in den ersten 30 Tagen nach der Anmeldung ausgeben können, und Zugriff auf über 25 Produkte, die immer kostenlos sind. Für alle Azure-Kunden ist nur der Basissupport enthalten. Das Ausgabenlimit in Azure verhindert Ausgaben über Ihren Guthabenbetrag hinaus. Bei allen Neukunden, die sich für ein kostenloses Azure-Konto oder Abonnementtypen anmelden, die Guthaben für mehrere Monate umfassen, ist das Ausgabenlimit standardmäßig aktiviert. Das Ausgabenlimit entspricht dem Guthabenbetrag und kann nicht geändert werden. Wenn Sie sich beispielsweise für ein kostenloses Azure-Konto angemeldet haben, beträgt Ihr Ausgabenlimit 200 USD und Sie können es nicht auf 500 USD ändern. Sie können das Ausgabenlimit jedoch entfernen. Sie haben also entweder kein Limit oder ein Limit in Höhe des Guthabenbetrags. Dies verhindert, dass Sie die meisten Arten von Ausgaben tätigen. Das Ausgabenlimit ist für Abonnements mit Verpflichtungsplänen oder mit nutzungsbasierter Bezahlung nicht verfügbar. Das kostenlose Azure-Konto hat ein Blobspeicherlimit von 5 GB und ein Dateispeicherlimit von 5 GB. Das kostenlose Azure-Konto ist auf 10 Web-, Mobil- oder API-Apps mit Azure App Service und 1 GB Speicherplatz beschränkt.",
+    resources: [{ label: "Free Account Faq", url: "https://azure.microsoft.com/en-us/free/free-account-faq/" }],
   },
   {
     type: "yesno",
@@ -2375,6 +2475,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Ein kostenloses Azure-Konto kann eine unbegrenzte Anzahl von Web-Apps enthalten", correct: "Nein" },
     ],
     explanation: "Das kostenlose Azure-Konto umfasst den Zugriff auf eine Reihe von Azure-Produkten, die 12 Monate lang kostenlos sind, ein Guthaben von 200 USD, das Sie in den ersten 30 Tagen nach der Anmeldung ausgeben können, und Zugriff auf über 25 Produkte, die immer kostenlos sind. Für alle Azure-Kunden ist nur der Basissupport enthalten. Das Ausgabenlimit in Azure verhindert Ausgaben über Ihren Guthabenbetrag hinaus. Bei allen Neukunden, die sich für ein kostenloses Azure-Konto oder Abonnementtypen anmelden, die Guthaben für mehrere Monate umfassen, ist das Ausgabenlimit standardmäßig aktiviert. Das Ausgabenlimit entspricht dem Guthabenbetrag und kann nicht geändert werden. Wenn Sie sich beispielsweise für ein kostenloses Azure-Konto angemeldet haben, beträgt Ihr Ausgabenlimit 200 USD und Sie können es nicht auf 500 USD ändern. Sie können das Ausgabenlimit jedoch entfernen. Sie haben also entweder kein Limit oder ein Limit in Höhe des Guthabenbetrags. Dies verhindert, dass Sie die meisten Arten von Ausgaben tätigen. Das Ausgabenlimit ist für Abonnements mit Verpflichtungsplänen oder mit nutzungsbasierter Bezahlung nicht verfügbar. Das kostenlose Azure-Konto hat ein Blobspeicherlimit von 5 GB und ein Dateispeicherlimit von 5 GB. Das kostenlose Azure-Konto ist auf 10 Web-, Mobil- oder API-Apps mit Azure App Service und 1 GB Speicherplatz beschränkt.",
+    resources: [{ label: "Free Account Faq", url: "https://azure.microsoft.com/en-us/free/free-account-faq/" }],
   },
   {
     type: "yesno",
@@ -2387,6 +2488,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Wenn Sie Azure-Ressourcen für einen Dienst in der öffentlichen Vorschau erstellen, müssen Sie die Ressourcen neu erstellen...", correct: "Nein" },
     ],
     explanation: "Öffentliche Vorschau bedeutet, dass sich der Dienst in der öffentlichen Betaphase befindet und von jedem mit einem Azure-Abonnement ausprobiert werden kann. Sie können diese Dienste oft zu einem ermäßigten Preis nutzen, solange sie sich in der Vorschauphase befinden. Dienste und Funktionen in der öffentlichen Vorschauphase werden im Azure-Portal mit dem Zusatz „(Vorschau)“ gekennzeichnet. Dienste und Funktionen in der Vorschauphase werden nahtlos in die allgemeine Verfügbarkeit überführt.",
+    resources: [{ label: "Preview Supplemental Terms", url: "https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/" }],
   },
   {
     type: "yesno",
@@ -2399,6 +2501,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Datenverkehr zwischen Azure-Diensten innerhalb derselben Azure-Region ist immer kostenlos", correct: "Ja" },
     ],
     explanation: "ExpressRoute ist ein Dienst, mit dem Sie private Verbindungen zwischen Azure-Rechenzentren und Infrastruktur vor Ort oder in einer Colocation-Umgebung herstellen können. ExpressRoute-Verbindungen laufen nicht über das öffentliche Internet und bieten mehr Zuverlässigkeit, höhere Geschwindigkeiten, geringere Latenzen und mehr Sicherheit als herkömmliche Internetverbindungen. Alle eingehenden Datenübertragungen sind kostenlos, für alle ausgehenden Datenübertragungen wird ein fester Tarif berechnet. Für den Datenverkehr zwischen Diensten in derselben Region fallen keine zusätzlichen Datenübertragungskosten an. Referenzen: Azure ExpressRoute-Preise, Bandbreitenpreisdetails",
+    resources: [{ label: "Expressroute", url: "https://azure.microsoft.com/en-us/pricing/details/expressroute/" }, { label: "Bandwidth", url: "https://azure.microsoft.com/en-us/pricing/details/bandwidth/" }],
   },
   {
     id: "real-az900-177",
@@ -2410,6 +2513,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure berechnet für eine VM keine Kosten, solange sie angehalten (deallocated) ist. Es fallen jedoch weiterhin Kosten für den Azure-Speicher an, der für die Betriebssystemfestplatte der VM und alle angeschlossenen Datenfestplatten benötigt wird. Die monatlichen Kosten für eine Azure-VM hängen von der Betriebszeit der VM ab.",
+    resources: [{ label: "Azure Virtual Machines Stopping Versus Stopping Deallocating", url: "https://docs.microsoft.com/en-us/archive/blogs/uspartner_ts2team/azure-virtual-machines-stopping-versus-stopping-deallocating" }],
   },
   {
     id: "real-az900-178",
@@ -2423,6 +2527,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure DevOps (ehemals Visual Studio Team Services) ist ein gehosteter Dienst, der Entwicklungs- und Kollaborationstools bereitstellt. Dank der kostenlosen Einstiegsstufe und ohne eigene Agenten können Sie die zahlreichen verfügbaren Tools schnell nutzen. Azure DevOps bietet Funktionen für Versionskontrolle, Reporting, Anforderungsmanagement, Projektmanagement, automatisierte Builds, Tests und Releasemanagement. Es deckt den gesamten Anwendungslebenszyklus ab und ermöglicht DevOps-Funktionen.",
+    resources: [{ label: "Devops", url: "https://azure.microsoft.com/en-us/services/devops/" }],
   },
   {
     id: "real-az900-179",
@@ -2434,6 +2539,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Es wird nicht empfohlen, Dienste, die von Azure in der öffentlichen Vorschau angeboten werden, in einer Produktionsumgebung zu verwenden. Unternehmen sollten sie also nicht in ihrer Produktionsumgebung verwenden. Die ergänzenden Nutzungsbedingungen für Microsoft Azure-Vorschauen enthalten die folgenden Informationen: VORSCHAUEN WERDEN „WIE BESEHEN“, „MIT ALLEN FEHLERN“ UND „WIE VERFÜGBAR“ BEREITGESTELLT UND SIND VON DEN SERVICE LEVEL AGREEMENTS UND DER EINGESCHRÄNKTEN GARANTIE AUSGESCHLOSSEN. Vorschauen werden möglicherweise nicht durch den Kundensupport abgedeckt. Für Vorschauen können reduzierte oder andere Sicherheits-, Compliance- und Datenschutzverpflichtungen gelten, wie in der Microsoft-Datenschutzerklärung, im Microsoft Azure Trust Center, in den Onlinedienstbedingungen und allen weiteren mit der Vorschau bereitgestellten Hinweisen näher erläutert. Die folgenden Bedingungen der DPA gelten nicht für Vorschauen: Verarbeitung personenbezogener Daten; DSGVO, Datensicherheit und HIPAA Business Associate. Kunden sollten Vorschauen nicht verwenden, um personenbezogene Daten oder andere Daten zu verarbeiten, die erhöhten gesetzlichen oder behördlichen Anforderungen unterliegen.",
+    resources: [{ label: "Preview Supplemental Terms", url: "https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/" }],
   },
   {
     id: "real-az900-180",
@@ -2445,6 +2551,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "In der folgenden Tabelle werden die Standardlimits für Azure-Konten vom Typ „Allgemeiner Zweck“ (v1, v2), „Blob Storage“ und „Block Blob Storage“ beschrieben. Das Eingangslimit bezieht sich auf alle Daten, die an ein Speicherkonto gesendet werden. Das Ausgangslimit bezieht sich auf alle Daten, die von einem Speicherkonto empfangen werden. Sie können sogar höhere Kapazitäts- und Eingangslimits anfordern.",
+    resources: [{ label: "Scalability Targets Standard Account", url: "https://docs.microsoft.com/en-us/azure/storage/common/scalability-targets-standard-account#scale-targets-for-standard-storage-accounts" }],
   },
   {
     id: "real-az900-181",
@@ -2458,6 +2565,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Microsoft Defender for Identity (früher Azure Advanced Threat Protection, auch bekannt als Azure ATP) ist eine cloudbasierte Sicherheitslösung, die Ihre lokalen Active Directory-Signale nutzt, um erweiterte Bedrohungen, kompromittierte Identitäten und böswillige Insider-Aktionen gegen Ihr Unternehmen zu identifizieren, zu erkennen und zu untersuchen.",
+    resources: [{ label: "What Is", url: "https://docs.microsoft.com/en-us/defender-for-identity/what-is" }],
   },
   {
     id: "real-az900-182",
@@ -2471,6 +2579,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Sie können eine Azure-Netzwerksicherheitsgruppe verwenden, um den Netzwerkverkehr zu und von Azure-Ressourcen in einem virtuellen Azure-Netzwerk zu filtern. Eine Netzwerksicherheitsgruppe enthält Sicherheitsregeln, die eingehenden Netzwerkverkehr zu bzw. ausgehenden Netzwerkverkehr von verschiedenen Arten von Azure-Ressourcen zulassen oder verweigern. Für jede Regel können Sie Quelle und Ziel, Port und Protokoll angeben.",
+    resources: [{ label: "Network Security Groups Overview", url: "https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview" }],
   },
   {
     id: "real-az900-183",
@@ -2482,6 +2591,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Es gibt zwei Arten von Vorschauen: private und öffentliche. Die private Vorschau steht nur bestimmten Azure-Kunden zu Evaluierungszwecken zur Verfügung. Die öffentliche Vorschau steht allen Azure-Kunden zur Verfügung. Um eine Vorschau der Azure-Funktionen anzuzeigen, navigieren Sie zur URL https://azure.microsoft.com/en-us/updates/?status=inpreview Auf dieser Webseite sind alle Azure-Funktionen aufgeführt, die sich derzeit in der Vorschauphase befinden und zur Evaluierung verfügbar sind. Die Funktionen sind chronologisch aufgelistet, die neueste Funktion steht oben. Klicken Sie auf den Link einer Funktion, um mehr über diese Funktion und ihre Verwendung zu erfahren. Azure-Portalspezifische Vorschaufunktionen finden Sie auf der Webseite mit den Portal-Vorschaufunktionen.",
+    resources: [{ label: "Updates", url: "https://azure.microsoft.com/en-us/updates/?status=inpreview" }],
   },
   {
     id: "real-az900-184",
@@ -2493,6 +2603,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Das Azure-Konto ist eine global eindeutige Entität, die Ihnen Zugriff auf Azure-Dienste und Ihre Azure-Abonnements gewährt. Sie können in Ihrem Azure-Konto mehrere Abonnements erstellen, um eine Trennung zu erreichen, z. B. für Abrechnungs- oder Verwaltungszwecke. In Ihren Abonnements können Sie Ressourcen in Ressourcengruppen verwalten. Azure-Abonnements können eine Vertrauensbeziehung mit einer Azure Active Directory (Azure AD)-Instanz haben.",
+    resources: [{ label: "Active Directory How Subscriptions Associated Directory", url: "https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-subscriptions-associated-directory" }],
   },
   {
     id: "real-az900-185",
@@ -2506,6 +2617,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Die Azure-Befehlszeilenschnittstelle (Azure CLI) umfasst eine Reihe von Befehlen zum Erstellen und Verwalten von Azure-Ressourcen. Die Azure CLI ist für alle Azure- Dienste verfügbar und soll Ihnen den schnellen Einstieg in die Arbeit mit Azure erleichtern, wobei der Schwerpunkt auf der Automatisierung liegt. Die Azure CLI-Funktionen erleichtern die Arbeit mit verschiedenen Programmiersprachen und Softwareumgebungen. Azure CLI bietet beispielsweise folgende Funktionen: • Kann in Windows-, macOS- und Linux-Umgebungen installiert werden. • Kann auch in Docker und Azure Cloud Shell ausgeführt werden. • Bietet Befehlszeilenflexibilität bei der Verwaltung einer Azure-Lösung. • Unterstützt lang andauernde Vorgänge. • Bietet die Möglichkeit, ein Abonnement für alle Befehle zu verwenden oder die Abonnements pro Befehl zu variieren. • Ermöglicht die Abfrage von Befehlszeilenergebnissen mit der Abfrageausgabe im Format Ihrer Wahl. • Bietet die Flexibilität, mit mehreren Clouds zu arbeiten. • Bietet konfigurierbare Einstellungen für Protokollierung, Datenerfassung und Standardargumentwerte. • Wird mit Resource Manager-Bereitstellungsvorlagen bereitgestellt. Unter Windows wird die Azure CLI über eine MSI installiert, die Ihnen über die Windows-Eingabeaufforderung (CMD) oder PowerShell Zugriff auf die CLI gewährt. Bei der Installation für das Windows-Subsystem für Linux (WSL) stehen Pakete für Ihre Linux-Distribution zur Verfügung.",
+    resources: [{ label: "Install Azure Cli Windows", url: "https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli" }],
   },
   {
     id: "real-az900-186",
@@ -2519,6 +2631,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Azure Resource Health unterstützt Sie bei der Diagnose und beim Erhalt von Support für Serviceprobleme, die Ihre Azure-Ressourcen betreffen. Es berichtet über den aktuellen und vergangenen Zustand Ihrer Ressourcen. Azure-Statusberichte zu Serviceproblemen, die eine breite Gruppe von Azure-Kunden betreffen. Resource Health bietet Ihnen ein personalisiertes Dashboard zum Zustand Ihrer Ressourcen. Resource Health zeigt alle Zeiten an, in denen Ihre Ressourcen aufgrund von Azure-Serviceproblemen nicht verfügbar waren. Anhand dieser Daten können Sie leicht erkennen, ob ein SLA verletzt wurde.",
+    resources: [{ label: "Resource Health Overview", url: "https://docs.microsoft.com/en-us/azure/service-health/resource-health-overview" }],
   },
   {
     id: "real-az900-187",
@@ -2558,6 +2671,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure-Ressourcensperren gelten für alle Benutzer, einschließlich globaler Administratoren. Ressourcensperren verhindern, dass Benutzer und Administratoren in Ihrer Organisation versehentlich kritische Ressourcen löschen oder ändern. Die Löschsperre muss entfernt werden, bevor die Ressource gelöscht werden kann.",
+    resources: [{ label: "Lock Resources", url: "https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources" }],
   },
   {
     id: "real-az900-190",
@@ -2571,6 +2685,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Azure Information Protection (AIP) ist eine Cloud-basierte Lösung, die es Organisationen ermöglicht, Dokumente und E-Mails durch das Anwenden von Bezeichnungen zu klassifizieren und zu schützen. Der Inhalt der Kennzeichnung umfasst: • Eine Klassifizierung , die unabhängig davon erkannt werden kann, wo die Daten gespeichert sind oder mit wem sie geteilt werden. • Visuelle Markierungen , wie Kopf- und Fußzeilen oder Wasserzeichen. • Metadaten , die Dateien und E-Mail-Headern im Klartext hinzugefügt werden. Die Klartext-Metadaten stellen sicher, dass andere Dienste die Klassifizierung erkennen und entsprechende Maßnahmen ergreifen können.",
+    resources: [{ label: "What Is Information Protection", url: "https://docs.microsoft.com/en-us/azure/information-protection/what-is-information-protection" }],
   },
   {
     type: "yesno",
@@ -2583,6 +2698,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Über Azure Service Health kann ein Administrator einen Dienstausfall verhindern", correct: "Nein" },
     ],
     explanation: "Azure bietet eine Reihe von Funktionen, mit denen Sie über den Zustand Ihrer Cloudressourcen informiert bleiben. Diese Informationen umfassen aktuelle und bevorstehende Probleme wie Ereignisse mit Auswirkungen auf den Dienst, geplante Wartungsarbeiten und andere Änderungen, die sich auf Ihre Verfügbarkeit auswirken können. Azure Service Health ist eine Kombination aus drei separaten kleineren Diensten. Der Azure-Status informiert Sie auf der Azure-Statusseite über Dienstausfälle in Azure. Die Seite bietet eine globale Übersicht über den Zustand aller Azure-Dienste in allen Azure-Regionen. Die Statusseite ist eine gute Referenz für Vorfälle mit weitreichenden Auswirkungen. Wir empfehlen aktuellen Azure-Benutzern jedoch dringend, den Azure- Dienstzustand zu nutzen, um über Azure-Vorfälle und -Wartungsarbeiten auf dem Laufenden zu bleiben. Service Health bietet eine personalisierte Ansicht der Integrität der von Ihnen verwendeten Azure-Dienste und -Regionen. Hier finden Sie am besten Informationen zu Dienstausfällen, geplanten Wartungsaktivitäten und anderen Integritätshinweisen, da die authentifizierte Service Health-Erfahrung weiß, welche Dienste und Ressourcen Sie derzeit verwenden. Die beste Möglichkeit, Service Health zu nutzen, besteht darin, Service Health-Warnungen einzurichten, die Sie über Ihre bevorzugten Kommunikationskanäle benachrichtigen, wenn Serviceprobleme, geplante Wartungsarbeiten oder andere Änderungen die von Ihnen verwendeten Azure-Dienste und -Regionen beeinträchtigen können. Die Ressourcenintegrität liefert Informationen zum Zustand Ihrer einzelnen Cloudressourcen, z. B. einer bestimmten VM-Instanz. Mit Azure Monitor können Sie außerdem Warnungen konfigurieren, die Sie über Verfügbarkeitsänderungen Ihrer Cloudressourcen informieren. Dank der Ressourcenintegrität und der Azure Monitor-Benachrichtigungen sind Sie minütlich über die Verfügbarkeit Ihrer Ressourcen informiert und können schnell beurteilen, ob ein Problem auf Ihr Problem oder auf ein Azure-Plattformereignis zurückzuführen ist. Zusammen bieten Ihnen diese Erfahrungen einen umfassenden Einblick in den Zustand von Azure, und zwar in der für Sie relevantesten Granularität.",
+    resources: [{ label: "Service Health", url: "https://docs.microsoft.com/en-us/azure/service-health/" }],
   },
   {
     id: "real-az900-192",
@@ -2609,6 +2725,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Sie können eine Azure-Netzwerksicherheitsgruppe verwenden, um den Netzwerkverkehr zu und von Azure-Ressourcen in einem virtuellen Azure-Netzwerk zu filtern. Eine Netzwerksicherheitsgruppe enthält Sicherheitsregeln, die eingehenden Netzwerkverkehr zu bzw. ausgehenden Netzwerkverkehr von verschiedenen Arten von Azure-Ressourcen zulassen oder verweigern. Für jede Regel können Sie Quelle und Ziel, Port und Protokoll angeben.",
+    resources: [{ label: "Network Security Groups Overview", url: "https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview" }],
   },
   {
     id: "real-az900-194",
@@ -2635,6 +2752,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure Firewall ist ein verwalteter, cloudbasierter Netzwerksicherheitsdienst zum Schutz Ihrer Azure Virtual Network-Ressourcen. Es handelt sich um eine vollständig zustandsbehaftete Firewall als Dienst mit integrierter Hochverfügbarkeit und uneingeschränkter Cloud-Skalierbarkeit. Netzwerksicherheitsgruppen filtern den Netzwerkverkehr zu und von Azure-Ressourcen in einem virtuellen Azure-Netzwerk. Eine Netzwerksicherheitsgruppe enthält Sicherheitsregeln, die eingehenden Netzwerkverkehr zu bzw. ausgehenden Netzwerkverkehr von verschiedenen Azure-Ressourcen zulassen oder verweigern. Für jede Regel können Sie Quelle und Ziel, Port und Protokoll angeben. Referenzen: Was ist Azure Firewall? Netzwerksicherheitsgruppen",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/firewall/overview" }, { label: "Network Security Groups Overview", url: "https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview" }],
   },
   {
     id: "real-az900-196",
@@ -2648,6 +2766,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Für Benutzerkonten, Gruppenkonten und ungenutzte Netzwerkschnittstellen fallen keine Kosten an. Die einzige ungenutzte Ressource, die dem Unternehmen in Rechnung gestellt wird, sind die öffentlichen IP-Adressen. Daher besteht die einzige Lösung zur Reduzierung der Azure-Kosten darin, einige oder alle ungenutzten öffentlichen IP-Adressen zu löschen.",
+    resources: [{ label: "Calculator", url: "https://azure.microsoft.com/en-us/pricing/calculator/" }],
   },
   {
     id: "real-az900-197",
@@ -2661,6 +2780,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Advisor ist ein personalisierter Cloudberater, der Sie bei der Optimierung Ihrer Azure-Bereitstellungen mithilfe bewährter Methoden unterstützt. Er analysiert Ihre Ressourcenkonfiguration und Nutzungstelemetrie und empfiehlt anschließend Lösungen, mit denen Sie die Kosteneffizienz, Leistung, Zuverlässigkeit (früher als Hochverfügbarkeit bezeichnet) und Sicherheit Ihrer Azure-Ressourcen verbessern können. Mit Advisor können Sie: • Erhalten Sie proaktive, umsetzbare und personalisierte Best Practices-Empfehlungen. • Verbessern Sie die Leistung, Sicherheit und Zuverlässigkeit Ihrer Ressourcen, indem Sie Möglichkeiten zur Reduzierung Ihrer Azure-Gesamtausgaben identifizieren. • Erhalten Sie Empfehlungen mit vorgeschlagenen Aktionen inline. Sie können über das Azure-Portal auf Advisor zugreifen. Melden Sie sich beim Portal an und suchen Sie im Navigationsmenü nach Advisor oder im Menü „Alle Dienste“.",
+    resources: [{ label: "Advisor Overview", url: "https://docs.microsoft.com/en-us/azure/advisor/advisor-overview" }],
   },
   {
     id: "real-az900-198",
@@ -2674,6 +2794,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Wenn Ihre Organisation über viele Abonnements verfügt, benötigen Sie möglicherweise eine Möglichkeit, Zugriff, Richtlinien und Compliance für diese Abonnements effizient zu verwalten. Azure-Verwaltungsgruppen bieten einen größeren Umfang als Abonnements. Sie organisieren Abonnements in Containern, sogenannten „Verwaltungsgruppen“, und wenden Ihre Governancebedingungen auf die Verwaltungsgruppen an. Alle Abonnements innerhalb einer Verwaltungsgruppe erben automatisch die auf die Verwaltungsgruppe angewendeten Bedingungen. Verwaltungsgruppen ermöglichen Ihnen unternehmensweite Verwaltung in großem Maßstab, unabhängig von der Art Ihrer Abonnements. Alle Abonnements innerhalb einer Verwaltungsgruppe müssen demselben Azure Active Directory-Mandanten vertrauen. Sie können beispielsweise Richtlinien auf eine Verwaltungsgruppe anwenden, die die für die Erstellung virtueller Computer (VMs) verfügbaren Regionen beschränkt. Diese Richtlinie würde auf alle Verwaltungsgruppen, Abonnements und Ressourcen dieser Verwaltungsgruppe angewendet, indem sie die Erstellung virtueller Computer nur in dieser Region zulässt. Azure-Verwaltungsgruppen unterstützen die rollenbasierte Zugriffssteuerung (Azure RBAC) für alle Ressourcenzugriffe und Rollendefinitionen. Diese Berechtigungen werden an untergeordnete Ressourcen in der Hierarchie vererbt. Jede Azure-Rolle kann einer Verwaltungsgruppe zugewiesen werden, die die Berechtigungen in der Hierarchie an die Ressourcen weitergibt. Beispielsweise kann die Azure-Rolle „VM-Mitwirkender“ einer Verwaltungsgruppe zugewiesen werden. Diese Rolle hat keine Auswirkungen auf die Verwaltungsgruppe, wird aber an alle VMs dieser Verwaltungsgruppe vererbt. Das folgende Diagramm zeigt die Liste der Rollen und die unterstützten Aktionen für Verwaltungsgruppen.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/governance/management-groups/overview" }],
   },
   {
     id: "real-az900-199",
@@ -2725,6 +2846,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure Storage bietet verschiedene Zugriffsebenen, mit denen Sie Blobobjektdaten möglichst kostengünstig speichern können. Die verfügbaren Zugriffsebenen umfassen: • Hot – Optimiert für die Speicherung von Daten, auf die häufig zugegriffen wird. • Cool – Optimiert für die Speicherung von Daten, auf die selten zugegriffen wird und die mindestens 30 Tage lang gespeichert werden. • Archiv – Optimiert für die Speicherung von Daten, auf die selten zugegriffen wird, und für mindestens 180 Tage mit flexiblen Latenzanforderungen (im Stundenbereich) gespeichert. Für die verschiedenen Zugriffsebenen gelten folgende Überlegungen: • Auf Kontoebene können nur die Zugriffsebenen „Hot“ und „Cool“ festgelegt werden. Die Archivzugriffsebene ist auf Kontoebene nicht verfügbar. • Heiße, kalte und Archivebenen können während oder nach dem Hochladen auf Blobebene festgelegt werden. • Daten in der Zugriffsebene „Kalte Daten“ vertragen eine etwas geringere Verfügbarkeit, erfordern aber dennoch eine hohe Haltbarkeit, Abruflatenz und Durchsatzeigenschaften, die denen von „heißen Daten“ ähneln. Bei „kalten Daten“ sind ein etwas geringeres Service-Level-Agreement (SLA) für die Verfügbarkeit und höhere Zugriffskosten im Vergleich zu „heißen Daten“ akzeptable Kompromisse zugunsten niedrigerer Speicherkosten. • Archivspeicher speichern Daten offline und bieten die niedrigsten Speicherkosten, aber auch die höchsten Kosten für die Datenrehydrierung und den Datenzugriff. Solange sich ein Blob in der Archivzugriffsebene befindet, gilt es als offline und kann weder gelesen noch geändert werden. Die Blobmetadaten bleiben online und verfügbar, sodass Sie das Blob und seine Eigenschaften auflisten können. Das Lesen und Ändern von Blobdaten ist nur in Onlineebenen wie „Heiß“ oder „Kalt“ möglich. Es gibt zwei Möglichkeiten, Daten abzurufen und auf sie zuzugreifen, die in der Archivzugriffsebene gespeichert sind. 1. Rehydrieren Sie einen archivierten Blob auf einer Onlineebene: Rehydrieren Sie einen archivierten Blob auf einer heißen oder kalten Ebene, indem Sie seine Ebene mithilfe der Operation „Blobebene festlegen“ ändern. 2. Kopieren Sie ein archiviertes Blob in eine Onlineebene: Erstellen Sie mithilfe des Vorgangs „Blob kopieren“ eine neue Kopie eines Archivblobs. Geben Sie einen anderen Blobnamen und die Zielebene „Heiß“ oder „Kalt“ an. Rehydrieren eines archivierten Blobs auf einer Onlineebene Um Daten im Archivspeicher zu lesen, müssen Sie zuerst die Ebene des Blobs in „Hot“ oder „Cool“ ändern. Dieser Vorgang wird als Rehydration bezeichnet und kann mehrere Stunden dauern. Für eine optimale Rehydrationsleistung empfehlen wir große Blobs. Die gleichzeitige Rehydration mehrerer kleiner Blobs kann zusätzliche Zeit in Anspruch nehmen. Derzeit gibt es zwei Rehydrationsprioritäten: „Hoch“ und „Standard“, die über die optionale Eigenschaft „x-ms-rehydrate-priority“ bei einem Vorgang zum Festlegen der Blob-Ebene oder zum Kopieren von Blobs festgelegt werden können.",
+    resources: [{ label: "Storage Blob Rehydration", url: "https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-rehydration?tabs=azure-portal" }],
   },
   {
     id: "real-az900-203",
@@ -2781,6 +2903,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Azure kann zum Erstellen einer Datenschutz-Grundverordnung (DSGVO)-konformen... verwendet werden", correct: "Ja" },
     ],
     explanation: "Die Datenschutz-Grundverordnung (DSGVO) führt neue Regeln für Organisationen ein, die Waren und Dienstleistungen für Personen in der Europäischen Union (EU) anbieten oder Daten von EU-Bürgern sammeln und analysieren, unabhängig davon, wo Sie oder Ihr Unternehmen ansässig sind.",
+    resources: [{ label: "Gdpr", url: "https://docs.microsoft.com/en-us/microsoft-365/compliance/gdpr?view=o365-worldwide" }],
   },
   {
     id: "real-az900-207",
@@ -2857,6 +2980,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Sie können eine Azure-Netzwerksicherheitsgruppe verwenden, um den Netzwerkverkehr zu und von Azure-Ressourcen in einem virtuellen Azure-Netzwerk zu filtern. Eine Netzwerksicherheitsgruppe enthält Sicherheitsregeln, die eingehenden Netzwerkverkehr zu bzw. ausgehenden Netzwerkverkehr von verschiedenen Arten von Azure-Ressourcen zulassen oder verweigern. Für jede Regel können Sie Quelle und Ziel, Port und Protokoll angeben.",
+    resources: [{ label: "Network Security Groups Overview", url: "https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview" }],
   },
   {
     id: "real-az900-213",
@@ -2870,6 +2994,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Die Zugriffsverwaltung für Cloud-Ressourcen ist eine wichtige Funktion für jedes Unternehmen, das die Cloud nutzt. Mit der rollenbasierten Zugriffssteuerung in Azure (Azure RBAC) können Sie verwalten, wer Zugriff auf Azure-Ressourcen hat, welche Aktionen diese Ressourcen ausführen dürfen und auf welche Bereiche Zugriff gewährt wird. Azure RBAC ist ein auf Azure Resource Manager basierendes Autorisierungssystem, das eine detaillierte Zugriffsverwaltung für Azure-Ressourcen ermöglicht.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/role-based-access-control/overview" }],
   },
   {
     id: "real-az900-214",
@@ -2909,6 +3034,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Unter Lastausgleich versteht man die gleichmäßige Verteilung der Last (eingehender Netzwerkverkehr) auf eine Gruppe von Backend-Ressourcen oder Servern. Azure Load Balancer wird auf Ebene vier des OSI-Modells (Open Systems Interconnection) ausgeführt. Es ist die zentrale Anlaufstelle für Clients. Load Balancer verteilt eingehende Datenflüsse, die am Front-End des Load Balancers ankommen, an Back-End-Poolinstanzen. Diese Datenflüsse basieren auf konfigurierten Lastenausgleichsregeln und Integritätstests. Bei den Back-End-Poolinstanzen kann es sich um Azure Virtual Machines oder Instanzen in einer VM-Skalierungsgruppe handeln. Ein öffentlicher Load Balancer kann ausgehende Verbindungen für virtuelle Maschinen (VMs) innerhalb Ihres virtuellen Netzwerks bereitstellen. Diese Verbindungen werden durch die Übersetzung ihrer privaten IP-Adressen in öffentliche IP-Adressen hergestellt. Öffentliche Load Balancer dienen zum Lastenausgleich des Internetverkehrs auf Ihre VMs. Ein interner (oder privater) Lastenausgleich wird verwendet, wenn private IPs nur am Front-End benötigt werden. Interne Lastenausgleiche dienen zum Lastenausgleich des Datenverkehrs innerhalb eines virtuellen Netzwerks. In einem Hybridszenario kann von einem lokalen Netzwerk aus auf ein Lastenausgleichs-Front-End zugegriffen werden.",
+    resources: [{ label: "Load Balancer Overview", url: "https://docs.microsoft.com/en-us/azure/load-balancer/load-balancer-overview" }],
   },
   {
     id: "real-az900-217",
@@ -2922,6 +3048,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure Active Directory ist in vier Editionen erhältlich: Free, Office 365 Apps, Premium P1 und Premium P2. Einen Funktionsvergleich der Azure AD-Editionen finden Sie hier: Azure Active Directory-Preise",
+    resources: [{ label: "Active Directory", url: "https://azure.microsoft.com/en-in/pricing/details/active-directory/" }],
   },
   {
     id: "real-az900-218",
@@ -2935,6 +3062,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure Data Lake Analytics ist ein On-Demand-Analysedienst, der Big Data vereinfacht. Anstatt Hardware bereitzustellen, zu konfigurieren und zu optimieren, schreiben Sie Abfragen, um Ihre Daten zu transformieren und wertvolle Erkenntnisse zu gewinnen. Der Analysedienst kann Aufträge jeder Größenordnung sofort verarbeiten, indem er die benötigte Leistung einstellt. Sie zahlen nur für Ihren Auftrag, wenn er ausgeführt wird, was ihn kostengünstig macht. Was ist Azure Data Lake Analytics?",
+    resources: [{ label: "Data Lake Analytics Overview", url: "https://docs.microsoft.com/en-us/azure/data-lake-analytics/data-lake-analytics-overview" }],
   },
   {
     type: "yesno",
@@ -2947,6 +3075,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Alle zahlenden Kunden erhalten eine Gutschrift, wenn ihr monatlicher Verfügbarkeitsprozentsatz unter... liegt", correct: "Ja" },
     ],
     explanation: "Wir garantieren eine Verfügbarkeit von mindestens 99,9 % für die Azure Active Directory Basic- und Premium-Dienste. Die Dienste gelten in den folgenden Szenarien als verfügbar: • Benutzer können sich beim Dienst anmelden, sich beim Zugriffsbereich anmelden, auf Anwendungen im Zugriffsbereich zugreifen und Kennwörter zurücksetzen. • IT-Administratoren können Einträge im Verzeichnis erstellen, lesen, schreiben und löschen oder Benutzern Anwendungen im Verzeichnis bereitstellen oder die Bereitstellung aufheben. Für die kostenlose Stufe von Azure Active Directory wird kein SLA bereitgestellt. So und wann können Sie bei Microsoft eine Gutschrift für ein Service-Level-Agreement (SLA) anfordern Sie können bei Microsoft Gutschriften für Service-Level-Agreements (SLA) anfordern, wenn ein Dienst, den Sie Ihren Kunden bereitstellen, ausfällt. SLA-Gutschriften von Microsoft richten sich nach den betroffenen Diensten. Wenn Ihr Kunde beispielsweise über eine Office 365-Suite verfügt, aber nur SharePoint ausgefallen ist, wird die SLA-Gutschrift nur für SharePoint und nicht für den gesamten Plan des Kunden gewährt. Der Cloud Solution Provider (CSP)-Partner muss den Anspruch und alle erforderlichen Informationen bis zum Ende des Kalendermonats nach dem Monat einreichen, in dem der Vorfall aufgetreten ist. Wenn der Vorfall beispielsweise am 15. Februar aufgetreten ist, muss Microsoft den Anspruch und alle erforderlichen Informationen bis zum 31. März erhalten haben. Endkunden und indirekte Wiederverkäufer können keine SLA-Gutschriftenansprüche einreichen. Entweder der indirekte Anbieter oder der Direktabrechnungspartner muss die Ansprüche in ihrem Namen einreichen. Referenzen: SLA für Azure Active Directory Wie und wann Sie eine Gutschrift für ein Service-Level-Agreement (SLA) von Microsoft anfordern",
+    resources: [{ label: "V1 0", url: "https://azure.microsoft.com/en-us/support/legal/sla/active-directory/v1_0/" }, { label: "Request Credit", url: "https://docs.microsoft.com/en-us/partner-center/request-credit" }],
   },
   {
     id: "real-az900-220",
@@ -2960,6 +3089,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Microsoft ist bereit, für Azure-Dienstausfälle, die nicht im Service Level Agreement (SLA) vereinbart wurden, eine Rückerstattung zu zahlen. In manchen Fällen geschieht dies automatisch. In der Regel muss der Kunde die Rückerstattung jedoch selbst beantragen. Was passiert, wenn Microsoft sein SLA nicht einhält? Es liegt in der Verantwortung des Kunden oder Partners, festzustellen, ob das Microsoft Azure Service Level Agreement nicht eingehalten wurde. Um einen Anspruch bezüglich eines Vorfalls geltend machen zu können, muss der Kunde den Kundensupport innerhalb von fünf Werktagen nach dem Vorfall über den Vorfall informieren. Der Kunde muss außerdem ausreichende Beweise zur Unterstützung des Anspruchs vorlegen. Sobald der Anspruch von Microsoft bestätigt wurde, wird für SLAs zwischen 99,5 % und 99 % eine Gutschrift von 10 % gewährt. Für SLAs unter 99 % wird für den jeweiligen Monat, in dem das SLA nicht eingehalten wurde, eine Gutschrift von 25 % ausgestellt. Weitere Informationen zum Azure SLA finden Sie im Service Level Agreement.",
+    resources: [{ label: "What Is The Microsoft Azure Service Level Agreement Sla", url: "https://community.dynamics.com/gp/b/roseaspdynamicsgphostingnews/posts/what-is-the-microsoft-azure-service-level-agreement-sla" }],
   },
   {
     type: "yesno",
@@ -2972,6 +3102,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Kopieren von 10 GB Daten von Azure in ein lokales Netzwerk über ein VPN verursacht zusätzliche Kosten", correct: "Ja" },
     ],
     explanation: "Azure-Ressourcengruppen sind kostenlos. Das Einrichten eines virtuellen Netzwerks ist kostenlos, jedoch berechnet Microsoft Gebühren für das VPN-Gateway. Eingehende Datenübertragungen (z. B. von lokal nach Azure) sind kostenlos, während ausgehende Datenübertragungen (von Azure nach lokal) berechnet werden.",
+    resources: [{ label: "Vpn Gateway", url: "https://azure.microsoft.com/en-us/pricing/details/vpn-gateway/" }, { label: "Bandwidth", url: "https://azure.microsoft.com/en-us/pricing/details/bandwidth/" }],
   },
   {
     id: "real-az900-222",
@@ -2985,6 +3116,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Das Verschieben zwischen Abonnements kann praktisch sein, wenn Sie eine VM ursprünglich in einem persönlichen Abonnement erstellt haben und diese nun in das Abonnement Ihres Unternehmens verschieben möchten, um Ihre Arbeit fortzusetzen. Sie müssen die VM zum Verschieben nicht anhalten und sie sollte während des Verschiebens weiterlaufen.",
+    resources: [{ label: "Networking Move Limitations", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/move-limitations/networking-move-limitations" }],
   },
   {
     id: "real-az900-223",
@@ -2998,6 +3130,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Wenn Sie Just-in-Time-VM-Zugriff aktivieren, können Sie die Ports auf der VM auswählen, zu denen eingehender Datenverkehr blockiert wird. Security Center stellt sicher, dass für Ihre ausgewählten Ports in der Netzwerksicherheitsgruppe (NSG) und in den Azure Firewall-Regeln Regeln zum „Verweigern des gesamten eingehenden Datenverkehrs“ vorhanden sind. Diese Regeln beschränken den Zugriff auf die Verwaltungsports Ihrer Azure-VMs und schützen sie vor Angriffen. Wenn für die ausgewählten Ports bereits andere Regeln vorhanden sind, haben diese Vorrang vor den neuen Regeln zum „Verweigern des gesamten eingehenden Datenverkehrs“. Wenn für die ausgewählten Ports keine Regeln vorhanden sind, haben die neuen Regeln in der NSG und der Azure Firewall höchste Priorität. Wenn ein Benutzer Zugriff auf eine VM anfordert, überprüft Security Center, ob der Benutzer über Berechtigungen für die rollenbasierte Zugriffssteuerung in Azure (Azure RBAC) für diese VM verfügt. Wenn die Anforderung genehmigt wird, konfiguriert Security Center die NSGs und die Azure Firewall so, dass eingehender Datenverkehr zu den ausgewählten Ports von der entsprechenden IP-Adresse (oder dem entsprechenden Bereich) für den angegebenen Zeitraum zugelassen wird. Nach Ablauf dieser Zeit stellt Security Center die NSGs in ihren vorherigen Zustand zurück. Bereits bestehende Verbindungen werden nicht unterbrochen.",
+    resources: [{ label: "Security Center Just In Time", url: "https://docs.microsoft.com/en-us/azure/security-center/security-center-just-in-time?tabs=jit-config-asc%2Cjit-request-asc#enable-jit-vm-access-" }],
   },
   {
     id: "real-az900-224",
@@ -3011,6 +3144,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Zusammengesetzte SLAs umfassen mehrere Dienste, die eine Anwendung unterstützen, und zwar jeweils mit unterschiedlichen Verfügbarkeitsstufen. Betrachten Sie beispielsweise eine App Service-Web-App, die in die Azure SQL-Datenbank schreibt. Zum Zeitpunkt der Erstellung dieses Artikels gelten für diese Azure-Dienste die folgenden SLAs: • App Service-Web-Apps = 99,95 % • SQL-Datenbank = 99,99 % Mit welcher maximalen Ausfallzeit ist für diese Anwendung zu rechnen? Fällt einer der beiden Dienste aus, fällt die gesamte Anwendung aus. Da die Ausfallwahrscheinlichkeit der einzelnen Dienste unabhängig ist, beträgt das kombinierte SLA für diese Anwendung 99,95 % × 99,99 % = 99,94 %. Das ist weniger als die einzelnen SLAs, was nicht verwunderlich ist, da eine Anwendung, die auf mehreren Diensten basiert, mehr potenzielle Fehlerquellen aufweist.",
+    resources: [{ label: "Business Metrics", url: "https://docs.microsoft.com/en-us/azure/architecture/framework/resiliency/business-metrics#understand-service-level-agreements" }],
   },
   {
     type: "yesno",
@@ -3023,6 +3157,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Verfügbarkeitszonen werden verwendet, um Daten und Anwendungen in mehrere Regionen zu replizieren", correct: "Nein" },
     ],
     explanation: "Eine Availability Zone ist ein Hochverfügbarkeitsangebot, das Ihre Anwendungen und Daten vor Rechenzentrumsausfällen schützt. Availability Zones sind eindeutige physische Standorte innerhalb einer Azure-Region. Jede Zone besteht aus einem oder mehreren Rechenzentren mit unabhängiger Stromversorgung, Kühlung und Netzwerk. Um Ausfallsicherheit zu gewährleisten, gibt es in allen aktivierten Regionen mindestens drei separate Zonen. Die physische Trennung der Availability Zones innerhalb einer Region schützt Anwendungen und Daten vor Rechenzentrumsausfällen. Zonenredundante Dienste replizieren Ihre Anwendungen und Daten über Availability Zones hinweg, um sie vor einzelnen Ausfallpunkten zu schützen. Mit Availability Zones bietet Azure das branchenweit beste SLA mit 99,99 % VM-Betriebszeit. Das vollständige Azure-SLA erklärt die garantierte Verfügbarkeit von Azure als Ganzes. Eine Verfügbarkeitszone in einer Azure-Region ist eine Kombination aus einer Fehlerdomäne und einer Updatedomäne. Wenn Sie beispielsweise drei oder mehr VMs in drei Zonen einer Azure-Region erstellen, werden Ihre VMs effektiv auf drei Fehlerdomänen und drei Updatedomänen verteilt. Die Azure-Plattform erkennt diese Verteilung auf Updatedomänen, um sicherzustellen, dass VMs in verschiedenen Zonen nicht gleichzeitig aktualisiert werden. Integrieren Sie Hochverfügbarkeit in Ihre Anwendungsarchitektur, indem Sie Ihre Rechen-, Speicher-, Netzwerk- und Datenressourcen innerhalb einer Zone zusammenlegen und in anderen Zonen replizieren. Azure-Dienste, die Verfügbarkeitszonen unterstützen, lassen sich in zwei Kategorien einteilen: • Zonale Dienste – bei denen eine Ressource an eine bestimmte Zone gebunden ist (z. B. virtuelle Maschinen, verwaltete Datenträger, Standard-IP-Adressen) oder • Zonenredundante Dienste – wenn die Azure-Plattform automatisch über Zonen hinweg repliziert wird (z. B. zonenredundanter Speicher, SQL-Datenbank). Um umfassende Geschäftskontinuität in Azure zu erreichen, erstellen Sie Ihre Anwendungsarchitektur mithilfe einer Kombination aus Verfügbarkeitszonen und Azure- Regionspaaren. Sie können Ihre Anwendungen und Daten mithilfe von Verfügbarkeitszonen innerhalb einer Azure-Region synchron replizieren, um Hochverfügbarkeit zu gewährleisten, und für den Notfallschutz eine asynchrone Replikation zwischen Azure-Regionen durchführen.",
+    resources: [{ label: "Az Overview", url: "https://docs.microsoft.com/en-us/azure/availability-zones/az-overview" }],
   },
   {
     id: "real-az900-226",
@@ -3036,6 +3171,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Microsoft hat eine Supportrichtlinie für das Gastbetriebssystem veröffentlicht. Im Folgenden wird beschrieben, wie die Richtlinie implementiert wird. Die Politik ist 1. Microsoft unterstützt mindestens die letzten beiden Familien des Gastbetriebssystems . Wenn eine Familie außer Dienst gestellt wird, haben Kunden ab dem offiziellen Außerdienststellungsdatum 12 Monate Zeit, auf eine neuere unterstützte Gastbetriebssystemfamilie zu aktualisieren. 2. Microsoft wird mindestens die letzten beiden Versionen der unterstützten Gastbetriebssystemfamilien unterstützen . 3. Microsoft unterstützt mindestens die letzten beiden Versionen des Azure SDK . Wenn eine Version des SDK eingestellt wird, haben Kunden ab dem offiziellen Einstellungsdatum 12 Monate Zeit, auf eine neuere Version zu aktualisieren. Die Supportrichtlinie bezieht sich auf das Azure-Gastbetriebssystem (Gastbetriebssystem) für Cloud Services-Worker- und Webrollen (PaaS). Sie gilt nicht für virtuelle Maschinen (IaaS).",
+    resources: [{ label: "Cloud Services Guestos Retirement Policy", url: "https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-guestos-retirement-policy" }],
   },
   {
     id: "real-az900-227",
@@ -3049,6 +3185,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Mit Azure Monitor können Sie die automatische Skalierung für VM-Skalierungsgruppen, Clouddienste, App Service – Web-Apps und API-Verwaltungsdienste konfigurieren.",
+    resources: [{ label: "Autoscale Get Started", url: "https://docs.microsoft.com/en-us/azure/azure-monitor/platform/autoscale-get-started" }],
   },
   {
     id: "real-az900-228",
@@ -3062,6 +3199,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Die Azure Diagnostics-Erweiterung ist ein Agent in Azure Monitor, der Überwachungsdaten vom Gastbetriebssystem der Azure-Computeressourcen, einschließlich virtueller Computer, sammelt. Der Log Analytics-Agent in Azure Monitor kann auch zum Erfassen von Überwachungsdaten vom Gastbetriebssystem virtueller Computer verwendet werden. Je nach Ihren Anforderungen können Sie einen oder beide Agenten verwenden. Die wichtigsten zu berücksichtigenden Unterschiede sind: • Die Azure-Diagnoseerweiterung kann nur mit virtuellen Azure-Computern verwendet werden. Der Log Analytics-Agent kann mit virtuellen Computern in Azure, anderen Clouds und lokal verwendet werden. • Die Azure-Diagnoseerweiterung sendet Daten an Azure Storage, Azure Monitor-Metriken (nur Windows) und Event Hubs. Der Log Analytics-Agent sammelt Daten in Azure Monitor-Protokollen. • Der Log Analytics-Agent wird für Lösungen, Azure Monitor für VMs und andere Dienste wie Azure Security Center benötigt. In den folgenden Tabellen sind die Daten aufgeführt, die von der Windows- und Linux-Diagnoseerweiterung erfasst werden können.",
+    resources: [{ label: "Diagnostics Extension Overview", url: "https://docs.microsoft.com/en-us/azure/azure-monitor/platform/diagnostics-extension-overview" }],
   },
   {
     id: "real-az900-229",
@@ -3075,6 +3213,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Azure Integration Services ist ein Microsoft-Cloud-Angebot für unternehmenskritische Integrationen. Es bietet serverloses Computing für mehr Konsistenz und Effizienz bei der Anwendungsanbindung. iPaaS ist eine Unterkategorie von PaaS (Platform as a Service) und bezeichnet die als Service angebotenen Integrationsplattformen. API Management, Logic Apps, Service Bus und Event Grid sind die von Azure bereitgestellten Produkte für Integrationslösungen, die Entwicklern die Arbeit erleichtern.",
+    resources: [{ label: "Integration", url: "https://azure.microsoft.com/en-us/product-categories/integration/" }],
   },
   {
     id: "real-az900-230",
@@ -3088,6 +3227,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Eine Hybrid Cloud – manchmal auch Cloud-Hybrid genannt – ist eine Computerumgebung, die ein lokales Rechenzentrum (auch Private Cloud genannt) mit einer öffentlichen Cloud kombiniert und so den gemeinsamen Daten- und Anwendungsaustausch ermöglicht. Manche definieren den Begriff Hybrid Cloud auch als Multicloud-Konfigurationen, bei denen ein Unternehmen zusätzlich zu seinem lokalen Rechenzentrum mehrere öffentliche Clouds nutzt.",
+    resources: [{ label: "What Is Hybrid Cloud Computing", url: "https://azure.microsoft.com/en-us/overview/what-is-hybrid-cloud-computing/" }],
   },
   {
     id: "real-az900-231",
@@ -3102,6 +3242,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure Marketplace ist ein Online-Katalog mit Tausenden von Anwendungen und Diensten, die für die öffentliche Azure-Cloud von Microsoft entwickelt und optimiert wurden. Microsoft und seine Technologiepartner entwickeln die Produkte und Dienste, die Sie im Azure Marketplace finden. Azure Marketplace ist die erste Adresse für all Ihre Softwareanforderungen – zertifiziert und optimiert für Azure.",
+    resources: [{ label: "Home", url: "https://azuremarketplace.microsoft.com/en-us/home" }],
   },
   {
     id: "real-az900-232",
@@ -3115,6 +3256,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure-VMs gelten im Allgemeinen als Infrastructure-as-a-Service, da Sie weiterhin für das Patchen und Verwalten des Betriebssystems der virtuellen Maschine verantwortlich sind. Hinweis: IaaS und PaaS sind keine präzisen Fachbegriffe. Es gibt PaaS-Dienste, die umfangreiche Konfiguration und laufende Wartung erfordern, und IaaS-Dienste, die vollständig verwaltet werden.",
+    resources: [{ label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }],
   },
   {
     id: "real-az900-233",
@@ -3128,6 +3270,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "IoT Hub ist eine PaaS-Lösung, IoT Central hingegen eine SaaS-Lösung. IoT Hub verfügt über ein SDK zur Integration in Ihre eigenen Projekte. IoT Central ist ideal, wenn Sie eine nahezu fertige Lösung wünschen und keine eigene, auf Ihre Bedürfnisse zugeschnittene IoT-Lösung entwickeln möchten. Bei Verwendung von IoT Central müssen Sie lediglich sicherstellen, dass die Geräte Telemetriedaten im richtigen Format senden, damit IoT Central diese verstehen kann. Azure IoT Hub IoT Hub ist ein verwalteter, in der Cloud gehosteter Dienst, der als zentraler Nachrichtenhub für die bidirektionale Kommunikation zwischen Ihrer IoT-Anwendung und den von ihr verwalteten Geräten fungiert. Sie können Azure IoT Hub verwenden, um IoT-Lösungen mit zuverlässiger und sicherer Kommunikation zwischen Millionen von IoT-Geräten und einem in der Cloud gehosteten Lösungs-Back-End zu erstellen. Sie können praktisch jedes Gerät mit IoT Hub verbinden. IoT Hub unterstützt die Kommunikation sowohl vom Gerät zur Cloud als auch von der Cloud zum Gerät. IoT Hub unterstützt mehrere Nachrichtenmuster wie Gerät-zu-Cloud- Telemetrie, Dateiupload von Geräten und Anforderungs-/Antwortmethoden zur Steuerung Ihrer Geräte aus der Cloud. Die IoT Hub-Überwachung hilft Ihnen, die Integrität Ihrer Lösung zu wahren, indem Ereignisse wie Geräteerstellung, Geräteausfälle und Geräteverbindungen nachverfolgt werden. Azure IoT-Technologien und -Dienste bieten Ihnen Optionen zum Erstellen einer großen Vielfalt an IoT-Lösungen, die die digitale Transformation Ihres Unternehmens ermöglichen. Azure IoT Central Die IoT Central-Anwendungsplattform reduziert den Aufwand und die Kosten für die Entwicklung, Verwaltung und Wartung von IoT-Lösungen auf Unternehmensniveau. Mit der anpassbaren Web-Benutzeroberfläche von IoT Central können Sie Gerätezustände überwachen, Regeln erstellen und Millionen von Geräten und deren Daten während ihres gesamten Lebenszyklus verwalten. Die API-Oberfläche in IoT Central bietet Ihnen programmgesteuerten Zugriff zur Konfiguration und Interaktion mit Ihrer IoT-Lösung. Azure IoT Central ist eine vollständig verwaltete Anwendungsplattform, mit der Sie benutzerdefinierte IoT-Lösungen erstellen können. IoT Central verwendet Anwendungsvorlagen zum Erstellen von Lösungen. Es gibt Vorlagen für generische Lösungen und für spezifische Branchen wie Energie, Gesundheitswesen, Behörden und Einzelhandel. Mit IoT Central-Anwendungsvorlagen können Sie in wenigen Minuten eine IoT Central-Anwendung bereitstellen, die Sie anschließend mit Designs, Dashboards und Ansichten anpassen können. Wählen Sie Geräte aus dem Azure Certified for IoT-Gerätekatalog, um schnell eine Verbindung zu Ihrer Lösung herzustellen. Überwachen und verwalten Sie Ihre Geräte über die IoT Central-Weboberfläche, um deren Funktionsfähigkeit und Verbindung aufrechtzuerhalten. Integrieren Sie Ihre IoT Central-Anwendung mithilfe von Connectors und APIs in andere Geschäftsanwendungen. Als vollständig verwaltete Anwendungsplattform verfügt IoT Central über ein einfaches, vorhersehbares Preismodell. Azure IoT-Lösungsbeschleuniger Die Azure IoT Solution Accelerators (einschließlich IoT Hub) sind eine Sammlung anpassbarer Lösungen auf Unternehmensniveau. Sie können diese Lösungen unverändert bereitstellen oder mithilfe des Open-Source-Java- oder .NET-Quellcodes eine benutzerdefinierte IoT-Lösung entwickeln. Azure IoT Solution Accelerators bieten Ihnen ein hohes Maß an Kontrolle über Ihre IoT-Lösung. Die Solution Accelerators enthalten vorgefertigte Lösungen für gängige IoT- Szenarien, die Sie innerhalb weniger Minuten in Ihrem Azure-Abonnement bereitstellen können. Zu den Szenarien gehören: • Vernetzte Fabrik • Gerätesimulation Die Open-Source-Codebasis für alle Lösungsbeschleuniger ist auf GitHub verfügbar. Laden Sie den Code herunter, um einen Lösungsbeschleuniger an Ihre spezifischen IoT- Anforderungen anzupassen. Die Lösungsbeschleuniger verwenden Azure-Dienste wie Azure IoT Hub und Azure Storage, die Sie in Ihrem Azure-Abonnement verwalten müssen. Sowohl Azure IoT Hub als auch Azure IoT Central ermöglichen die Authentifizierung und damit die Identifizierung von Geräten. Referenzen: Welche Azure-Technologien und -Dienste können Sie zum Erstellen von IoT-Lösungen verwenden? Authentifizierungsoptionen für IoT-Geräte",
+    resources: [{ label: "Iot Services And Technologies", url: "https://docs.microsoft.com/en-us/azure/iot-fundamentals/iot-services-and-technologies" }, { label: "Iot Device Authentication Options", url: "https://azure.microsoft.com/de-de/blog/iot-device-authentication-options/" }],
   },
   {
     id: "real-az900-234",
@@ -3141,6 +3284,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure Resource Manager ist der Bereitstellungs- und Verwaltungsdienst für Azure. Er bietet eine Verwaltungsebene, mit der Sie Ressourcen in Ihrem Azure-Konto erstellen, aktualisieren und löschen können. Sie verwenden Verwaltungsfunktionen wie Zugriffskontrolle, Sperren und Tags, um Ihre Ressourcen nach der Bereitstellung zu sichern und zu organisieren. t authentifiziert und autorisiert die Anforderung. Resource Manager sendet die Anforderung an den Azure-Dienst, der die angeforderte Aktion ausführt. Da alle Anforderungen über dieselbe API verarbeitet werden, sehen Sie in allen verschiedenen Tools konsistente Ergebnisse und Funktionen. Die folgende Abbildung zeigt die Rolle von Azure Resource Manager bei der Verarbeitung von Azure-Anfragen. Alle im Portal verfügbaren Funktionen sind auch über PowerShell, Azure CLI, REST-APIs und Client-SDKs verfügbar. Funktionen, die zunächst über APIs veröffentlicht wurden, werden innerhalb von 180 Tagen nach der Erstveröffentlichung im Portal dargestellt.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/overview" }],
   },
   {
     id: "real-az900-235",
@@ -3154,6 +3298,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Das Azure-Portal ist eine webbasierte, einheitliche Konsole, die eine Alternative zu Befehlszeilentools bietet. Mit dem Azure-Portal verwalten Sie Ihr Azure- Abonnement über eine grafische Benutzeroberfläche. Sie können alles erstellen, verwalten und überwachen – von einfachen Web-Apps bis hin zu komplexen Cloud- Bereitstellungen. Erstellen Sie benutzerdefinierte Dashboards für eine übersichtliche Ressourcenansicht. Konfigurieren Sie Barrierefreiheitsoptionen für ein optimales Erlebnis. Das Azure-Portal ist auf Ausfallsicherheit und kontinuierliche Verfügbarkeit ausgelegt und in jedem Azure-Rechenzentrum verfügbar. Diese Konfiguration macht das Azure-Portal widerstandsfähig gegenüber einzelnen Rechenzentrumsausfällen und vermeidet Netzwerkverlangsamungen durch die Nähe zum Benutzer. Das Azure- Portal wird kontinuierlich aktualisiert und erfordert keine Ausfallzeiten für Wartungsarbeiten.",
+    resources: [{ label: "Azure Portal Overview", url: "https://docs.microsoft.com/en-us/azure/azure-portal/azure-portal-overview" }],
   },
   {
     id: "real-az900-236",
@@ -3167,6 +3312,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Verfügbarkeitszonen sind physisch getrennte Gruppen von Rechenzentren innerhalb jeder Azure-Region. Wenn eine Zone ausfällt, können Dienste auf eine der verbleibenden Zonen umgeschaltet werden. Azure Load Balancer unterstützt Verfügbarkeitszonenszenarien. Mit Standard Load Balancer können Sie die Verfügbarkeit in Ihrem Szenario erhöhen, indem Sie Ressourcen an Zonen ausrichten und über Zonen verteilen.",
+    resources: [{ label: "Reliability Load Balancer", url: "https://learn.microsoft.com/en-us/azure/reliability/reliability-load-balancer" }],
   },
   {
     id: "real-az900-237",
@@ -3178,6 +3324,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Firewall ist ein verwalteter, cloudbasierter Netzwerksicherheitsdienst, der Ihre Azure Virtual Network-Ressourcen schützt. Es handelt sich um eine vollständig zustandsbehaftete Firewall als Dienst mit integrierter Hochverfügbarkeit und uneingeschränkter Cloud-Skalierbarkeit. Sie können Anwendungs- und Netzwerkkonnektivitätsrichtlinien für Abonnements und virtuelle Netzwerke zentral erstellen, durchsetzen und protokollieren. Azure Firewall verwendet eine statische öffentliche IP-Adresse für Ihre virtuellen Netzwerkressourcen, sodass externe Firewalls den aus Ihrem virtuellen Netzwerk stammenden Datenverkehr identifizieren können. Der Dienst ist vollständig in Azure Monitor für Protokollierung und Analyse integriert. Die folgende Azure Firewall-Netzwerkregel lässt Webdatenverkehr (Port 80, 443) von VNet1\\Subnet1 zu VNet1\\Subnet2 zu.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/firewall/overview" }],
   },
   {
     id: "real-az900-238",
@@ -3189,6 +3336,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Die Web Application Firewall (WAF) bietet zentralen Schutz für Ihre Webanwendungen vor gängigen Exploits und Sicherheitslücken. WAF kann mit Azure Application Gateway, Azure Front Door und dem Azure Content Delivery Network (CDN) von Microsoft bereitgestellt werden. WAF auf Azure CDN befindet sich derzeit in der öffentlichen Vorschauphase. WAF verfügt über Funktionen, die für jeden Dienst individuell angepasst sind. WAF wird verwendet, um den Zugriff auf Back-End-Pools zu steuern, die ein VM-Skalierungsset, eine virtuelle Maschine, App Services oder eine IP-Adresse enthalten. WAF eignet sich nicht zum Schutz des Datenverkehrs zwischen Subnetzen.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/web-application-firewall/overview" }],
   },
   {
     id: "real-az900-239",
@@ -3200,6 +3348,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Sie können eine Azure-Netzwerksicherheitsgruppe verwenden, um den Netzwerkverkehr zu und von Azure-Ressourcen in einem virtuellen Azure-Netzwerk zu filtern. Eine Netzwerksicherheitsgruppe enthält Sicherheitsregeln, die eingehenden Netzwerkverkehr zu oder ausgehenden Netzwerkverkehr von verschiedenen Arten von Azure-Ressourcen zulassen oder verweigern. Für jede Regel können Sie Quelle und Ziel, Port und Protokoll angeben. Eine Netzwerksicherheitsgruppe enthält keine oder beliebig viele Regeln im Rahmen der Azure-Abonnementbeschränkungen. Jede Regel gibt die folgenden Eigenschaften an: Die Sicherheitsregeln der Netzwerksicherheitsgruppe werden anhand der 5-Tupel-Informationen (Quelle, Quellport, Ziel, Zielport und Protokoll) nach Priorität ausgewertet, um den Datenverkehr zuzulassen oder zu verweigern.",
+    resources: [{ label: "Network Security Groups Overview", url: "https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview" }],
   },
   {
     id: "real-az900-240",
@@ -3227,6 +3376,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Policy wertet Ressourcen in Azure aus, indem es die Eigenschaften dieser Ressourcen mit Geschäftsregeln vergleicht. Diese im JSON-Format beschriebenen Geschäftsregeln werden als Richtliniendefinitionen bezeichnet. Zur Vereinfachung der Verwaltung können mehrere Geschäftsregeln zu einer Richtlinieninitiative (manchmal auch als „PolicySet“ bezeichnet) zusammengefasst werden. Nachdem Ihre Geschäftsregeln erstellt wurden, wird die Richtliniendefinition oder -initiative jedem von Azure unterstützten Ressourcenbereich zugewiesen, z. B. Verwaltungsgruppen, Abonnements, Ressourcengruppen oder einzelnen Ressourcen. Die Zuweisung gilt für alle Ressourcen innerhalb dieses Bereichs. Unterbereiche können bei Bedarf ausgeschlossen werden. Azure Policy verwendet ein JSON-Format, um die Logik zu bilden, mit der die Auswertung ermittelt, ob eine Ressource konform ist oder nicht. Definitionen umfassen Metadaten und die Richtlinienregel. Die definierte Regel kann Funktionen, Parameter, logische Operatoren, Bedingungen und Eigenschaftsaliase verwenden, um genau dem gewünschten Szenario zu entsprechen. Die Richtlinienregel bestimmt, welche Ressourcen im Bereich der Zuweisung ausgewertet werden.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/governance/policy/overview" }],
   },
   {
     id: "real-az900-242",
@@ -3240,6 +3390,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Ein Azure Professional Direct (ProDirect) Serviceplan unterscheidet drei Schweregrade: • Minimale Auswirkungen auf das Geschäft (Schweregrad C): Antwort innerhalb von vier Geschäftsstunden • Mäßige Auswirkungen auf das Geschäft (Schweregrad B): Reaktion innerhalb von zwei Stunden • Kritische Auswirkungen auf das Geschäft (Schweregrad A): Reaktion innerhalb einer Stunde",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans/" }],
   },
   {
     id: "real-az900-243",
@@ -3253,6 +3404,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure Cloud Shell ist eine interaktive, authentifizierte und browserbasierte Shell zur Verwaltung von Azure-Ressourcen. Sie bietet Ihnen die Flexibilität, die Shell- Oberfläche zu wählen, die am besten zu Ihrer Arbeitsweise passt: Bash oder PowerShell. Beim ersten Start fordert Cloud Shell Sie auf, eine Ressourcengruppe, ein Speicherkonto und eine Azure Files-Freigabe zu erstellen. Dieser Schritt ist einmalig und wird automatisch für alle Sitzungen angehängt. Eine einzelne Dateifreigabe kann zugeordnet werden und wird sowohl von Bash als auch von PowerShell in Cloud Shell verwendet.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/cloud-shell/overview" }],
   },
   {
     id: "real-az900-244",
@@ -3266,6 +3418,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Eine virtuelle Azure-Maschine ist ein Beispiel für Infrastructure as a Service (IaaS). Azure-Web-Apps, Azure-Logik-Apps und Azure-SQL-Datenbanken sind allesamt Beispiele für Platform as a Service (PaaS). Referenzen: Was ist IaaS? Was ist PaaS?",
+    resources: [{ label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }, { label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }],
   },
   {
     id: "real-az900-245",
@@ -3279,6 +3432,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Die Private Cloud umfasst Computing-Dienste, die entweder über das Internet oder ein privates internes Netzwerk angeboten werden und nur ausgewählten Nutzern und nicht der breiten Öffentlichkeit zugänglich sind. Private Cloud Computing, auch als interne oder Unternehmens-Cloud bezeichnet, bietet Unternehmen viele der Vorteile einer öffentlichen Cloud – darunter Self-Service, Skalierbarkeit und Flexibilität – mit zusätzlicher Kontrolle und Anpassungsmöglichkeiten durch dedizierte Ressourcen über eine lokal gehostete Computing-Infrastruktur. Darüber hinaus bieten Private Clouds ein höheres Maß an Sicherheit und Datenschutz durch Unternehmens-Firewalls und internes Hosting, um sicherzustellen, dass Vorgänge und vertrauliche Daten nicht für Drittanbieter zugänglich sind. Ein Nachteil besteht darin, dass die IT-Abteilung des Unternehmens für die Kosten und die Verwaltung der Private Cloud verantwortlich ist. Daher erfordern Private Clouds die gleichen Personal-, Verwaltungs- und Wartungskosten wie herkömmliche Rechenzentren. In einer Private Cloud können zwei Modelle für Cloud-Dienste bereitgestellt werden. Das erste ist Infrastructure as a Service (IaaS), das es Unternehmen ermöglicht, Infrastrukturressourcen wie Rechenleistung, Netzwerk und Speicher als Service zu nutzen. Das zweite ist Platform as a Service (PaaS), das Unternehmen die Bereitstellung von einfachen Cloud-Anwendungen bis hin zu anspruchsvollen Unternehmensanwendungen ermöglicht. Private Clouds können auch mit öffentlichen Clouds zu einer Hybrid Cloud kombiniert werden. So kann das Unternehmen die Vorteile von Cloud Bursting nutzen, um mehr Speicherplatz freizugeben und bei steigendem Rechenbedarf Rechendienste in die öffentliche Cloud zu skalieren. Eine Hybrid Cloud – manchmal auch Cloud Hybrid genannt – ist eine Rechenumgebung, die ein lokales Rechenzentrum (auch Private Cloud genannt) mit einer öffentlichen Cloud kombiniert und den Austausch von Daten und Anwendungen ermöglicht. Referenzen: Was ist eine Private Cloud? Was ist eine Public Cloud? Was ist eine Hybrid Cloud?",
+    resources: [{ label: "What Is A Private Cloud", url: "https://azure.microsoft.com/en-us/overview/what-is-a-private-cloud/" }, { label: "What Is A Public Cloud", url: "https://azure.microsoft.com/en-us/overview/what-is-a-public-cloud/" }, { label: "What Is Hybrid Cloud Computing", url: "https://azure.microsoft.com/en-us/overview/what-is-hybrid-cloud-computing/" }],
   },
   {
     id: "real-az900-246",
@@ -3291,6 +3445,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Eine Hybrid Cloud – manchmal auch Cloud-Hybrid genannt – ist eine Computerumgebung, die ein lokales Rechenzentrum (auch Private Cloud genannt) mit einer öffentlichen Cloud kombiniert und die gemeinsame Nutzung von Daten und Anwendungen ermöglicht. Manche definieren den Begriff Hybrid Cloud auch als Multicloud-Konfigurationen, bei denen ein Unternehmen zusätzlich zu seinem lokalen Rechenzentrum mehrere öffentliche Clouds nutzt. Referenzen: Was ist eine Private Cloud? Was ist eine Public Cloud? Was ist eine Hybrid Cloud?",
+    resources: [{ label: "What Is A Private Cloud", url: "https://azure.microsoft.com/en-us/overview/what-is-a-private-cloud/" }, { label: "What Is A Public Cloud", url: "https://azure.microsoft.com/en-us/overview/what-is-a-public-cloud/" }, { label: "What Is Hybrid Cloud Computing", url: "https://azure.microsoft.com/en-us/overview/what-is-hybrid-cloud-computing/" }],
   },
   {
     id: "real-az900-247",
@@ -3302,6 +3457,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Platform as a Service (PaaS) ist eine umfassende Entwicklungs- und Bereitstellungsumgebung in der Cloud mit Ressourcen, die Ihnen die Bereitstellung von Anwendungen aller Art ermöglichen – von einfachen Cloud-basierten Apps bis hin zu komplexen, Cloud-fähigen Unternehmensanwendungen. Sie erwerben die benötigten Ressourcen von einem Cloud-Service-Anbieter auf Pay-as-you-go-Basis und greifen über eine sichere Internetverbindung darauf zu. Wie IaaS umfasst PaaS die Infrastruktur – Server, Speicher und Netzwerke –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. PaaS unterstützt den gesamten Lebenszyklus von Webanwendungen: Erstellen, Testen, Bereitstellen, Verwalten und Aktualisieren. Mit PaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung von Softwarelizenzen, der zugrunde liegenden Anwendungsinfrastruktur und Middleware, Container-Orchestratoren wie Kubernetes oder der Entwicklungstools und anderer Ressourcen. Sie verwalten die von Ihnen entwickelten Anwendungen und Dienste, und der Cloud-Service-Anbieter kümmert sich in der Regel um alles Weitere. Durch die Bereitstellung von Infrastructure as a Service bietet PaaS dieselben Vorteile wie IaaS. Die zusätzlichen Funktionen – Middleware, Entwicklungstools und andere Business-Tools – bieten Ihnen jedoch weitere Vorteile. Hinweis: Während Azure SQL-Datenbanken und Azure Storage-Konten Platform-as-a-Service-Lösungen (PaaS) sind, handelt es sich bei Azure Virtual Machines um eine Infrastructure-as-a-Service-Lösung (IaaS). Auf einer VM können Sie verwalten, welches Betriebssystem ausgeführt und welche Software installiert wird. Referenzen: Was ist PaaS? Was ist IaaS?",
+    resources: [{ label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }, { label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }],
   },
   {
     id: "real-az900-248",
@@ -3314,6 +3470,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Da es sich um benutzerdefinierte Anwendungen handelt, die jeweils Zugriff auf mehrere Hilfsanwendungen und -dienste haben, müssen wir für die Bereitstellung virtuelle Maschinen verwenden. Virtuelle Maschinen gehören zu Infrastructure as a Service (IaaS). Referenzen: Was ist PaaS? Was ist IaaS? Was ist SaaS?",
+    resources: [{ label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }, { label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }, { label: "What Is Saas", url: "https://azure.microsoft.com/en-us/overview/what-is-saas/" }],
   },
   {
     id: "real-az900-249",
@@ -3325,6 +3482,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Die Befehlszeile verwendet die Azure-Befehlszeilenschnittstelle (CLI), um eine virtuelle Linux-Maschine (VM) in Azure bereitzustellen. Die Azure CLI dient zum Erstellen und Verwalten von Azure-Ressourcen über die Befehlszeile oder in Skripten. Zur Ausführung des Befehls können Sie die lokal installierte Azure Cloud Shell oder die Azure CLI verwenden. Die Azure Cloud Shell ist eine kostenlose interaktive Shell, die Sie über das Azure-Portal nutzen können. Sie enthält gängige Azure-Tools, die für die Verwendung mit Ihrem Konto vorinstalliert und konfiguriert sind. Um die Cloud Shell zu öffnen, wählen Sie einfach das Cloud Shell-Symbol in der oberen rechten Ecke des Azure- Portals. Sie können die Cloud Shell auch in einem separaten Browser-Tab unter https://shell.azure.com/bash öffnen. Hinweis: Der Befehl verwendet die Azure CLI. Um Azure CLI-Befehle auszuführen, sollte in der Cloud Shell Bash anstelle von PowerShell ausgewählt werden. Der Azure CLI-Befehl funktioniert jedoch auch ordnungsgemäß, wenn Sie die Cloud Shell auf PowerShell einstellen.",
+    resources: [{ label: "Quick Create Cli", url: "https://docs.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli" }],
   },
   {
     id: "real-az900-250",
@@ -3336,6 +3494,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Die Befehlszeile verwendet die Azure-Befehlszeilenschnittstelle (CLI), um eine virtuelle Linux-Maschine (VM) in Azure bereitzustellen. Die Azure CLI dient zum Erstellen und Verwalten von Azure-Ressourcen über die Befehlszeile oder in Skripts. Zur Ausführung des Befehls können Sie die Azure Cloud Shell oder die lokal installierte Azure CLI verwenden. Nach der Installation der Azure CLI auf Ihrem Windows 10-Computer können Sie die Azure CLI mit dem Befehl „az“ entweder über die Windows-Eingabeaufforderung oder PowerShell ausführen.",
+    resources: [{ label: "Install Azure Cli Windows", url: "https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli#run-the-azure-cli" }],
   },
   {
     id: "real-az900-251",
@@ -3347,6 +3506,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Die Befehlszeile verwendet die Azure-Befehlszeilenschnittstelle (CLI), um eine virtuelle Linux-Maschine (VM) in Azure bereitzustellen. Die Azure CLI dient zum Erstellen und Verwalten von Azure-Ressourcen über die Befehlszeile oder in Skripts. Zur Ausführung des Befehls können Sie die Azure Cloud Shell oder die lokal installierte Azure CLI verwenden. Nach der Installation der Azure CLI auf Ihrem Windows 10-Computer können Sie die Azure CLI mit dem Befehl „az“ entweder über die Windows-Eingabeaufforderung oder PowerShell ausführen.",
+    resources: [{ label: "Install Azure Cli Windows", url: "https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-windows?tabs=azure-cli#run-the-azure-cli" }],
   },
   {
     id: "real-az900-252",
@@ -3358,6 +3518,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Die Befehlszeile verwendet die Azure-Befehlszeilenschnittstelle (CLI), um eine virtuelle Linux-Maschine (VM) in Azure bereitzustellen. Die Azure CLI dient zum Erstellen und Verwalten von Azure-Ressourcen über die Befehlszeile oder in Skripts. Zur Ausführung des Befehls können wir die lokal installierte Azure Cloud Shell oder Azure CLI verwenden. Die Azure Cloud Shell ist eine kostenlose interaktive Shell, die Sie über das Azure-Portal nutzen können. Sie enthält gängige Azure-Tools, die für die Verwendung mit Ihrem Konto vorinstalliert und konfiguriert sind. Um die Cloud Shell zu öffnen, wählen Sie einfach das Cloud Shell-Symbol in der oberen rechten Ecke des Azure- Portals aus. Sie können die Cloud Shell auch in einem separaten Browser-Tab unter https://shell.azure.com/bash öffnen.",
+    resources: [{ label: "Quick Create Cli", url: "https://docs.microsoft.com/en-us/azure/virtual-machines/linux/quick-create-cli" }],
   },
   {
     id: "real-az900-253",
@@ -3371,6 +3532,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Repos ist eine Reihe von Versionskontrolltools, mit denen Sie Ihren Code verwalten können. Unabhängig davon, ob Ihr Softwareprojekt groß oder klein ist, ist es ratsam, so früh wie möglich eine Versionskontrolle zu verwenden. Versionskontrollsysteme sind Software, mit der Sie Änderungen, die Sie im Laufe der Zeit an Ihrem Code vornehmen, nachverfolgen können. Wenn Sie Ihren Code bearbeiten, weisen Sie das Versionskontrollsystem an, einen Snapshot Ihrer Dateien zu erstellen. Das Versionskontrollsystem speichert diesen Snapshot dauerhaft, sodass Sie ihn später bei Bedarf abrufen können. Verwenden Sie die Versionskontrolle, um Ihre Arbeit zu speichern und Codeänderungen im gesamten Team zu koordinieren. Selbst wenn Sie nur ein einzelner Entwickler sind, hilft Ihnen die Versionskontrolle dabei, den Überblick zu behalten, während Sie Fehler beheben und neue Funktionen entwickeln. Die Versionskontrolle speichert einen Verlauf Ihrer Entwicklung, sodass Sie jede Version Ihres Codes problemlos überprüfen und sogar zu einer beliebigen Version zurückkehren können. Azure Repos bietet zwei Arten der Versionskontrolle: • Git: verteilte Versionskontrolle • Team Foundation Version Control (TFVC): zentralisierte Versionskontrolle",
+    resources: [{ label: "What Is Repos", url: "https://docs.microsoft.com/en-us/azure/devops/repos/get-started/what-is-repos?view=azure-devops" }],
   },
   {
     id: "real-az900-254",
@@ -3385,6 +3547,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Das Azure-Portal ist eine webbasierte, einheitliche Konsole, die eine Alternative zu Befehlszeilentools bietet. Mit dem Azure-Portal verwalten Sie Ihr Azure- Abonnement über eine grafische Benutzeroberfläche. Sie können alles erstellen, verwalten und überwachen – von einfachen Web-Apps bis hin zu komplexen Cloud- Bereitstellungen. Erstellen Sie benutzerdefinierte Dashboards für eine übersichtliche Ressourcenansicht. Konfigurieren Sie Barrierefreiheitsoptionen für ein optimales Erlebnis. Das Azure-Portal ist auf Ausfallsicherheit und kontinuierliche Verfügbarkeit ausgelegt und in jedem Azure-Rechenzentrum verfügbar. Diese Konfiguration macht das Azure-Portal widerstandsfähig gegenüber einzelnen Rechenzentrumsausfällen und vermeidet Netzwerkverlangsamungen durch die Nähe zum Benutzer. Das Azure- Portal wird kontinuierlich aktualisiert und erfordert keine Ausfallzeiten für Wartungsarbeiten. Azure Cloud Shell ist eine webbasierte Befehlszeile zur Verwaltung von Azure. Der Zugriff auf Azure Cloud Shell erfolgt über das Azure-Portal. Webbasierte Verwaltungstools können auf jedem internetfähigen Gerät, einschließlich iPhones, verwendet werden.",
+    resources: [{ label: "Azure Portal Overview", url: "https://docs.microsoft.com/en-us/azure/azure-portal/azure-portal-overview" }],
   },
   {
     id: "real-az900-255",
@@ -3412,6 +3575,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Eine Region besteht aus mehreren Rechenzentren, die innerhalb eines latenzdefinierten Umkreises bereitgestellt und über ein dediziertes regionales Netzwerk mit geringer Latenz verbunden sind. Eine Verfügbarkeitszone ist ein eindeutiger physischer Standort innerhalb einer Region. Jede Zone besteht aus einem oder mehreren Rechenzentren mit unabhängiger Stromversorgung, Kühlung und Vernetzung. Verfügbarkeitszonen werden nicht von allen Regionen unterstützt. Eine Region kann mehrere Verfügbarkeitszonen haben.",
+    resources: [{ label: "Az Overview", url: "https://docs.microsoft.com/en-us/azure/availability-zones/az-overview" }],
   },
   {
     id: "real-az900-257",
@@ -3423,6 +3587,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure PowerShell ist für die Verwaltung von Azure-Ressourcen über die Befehlszeile konzipiert. Verwenden Sie Azure PowerShell, wenn Sie automatisierte Tools erstellen möchten, die das Azure Resource Manager-Modell verwenden. Testen Sie es in Ihrem Browser mit Azure Cloud Shell oder installieren Sie es auf Ihrem lokalen Computer. Das Azure PowerShell-Modul kann auf Windows-, macOS- und Linux-Plattformen installiert werden.",
+    resources: [{ label: "Install Az Ps", url: "https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-4.6.1" }],
   },
   {
     id: "real-az900-258",
@@ -3437,6 +3602,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Databricks ist eine für die Microsoft Azure-Clouddienstplattform optimierte Datenanalyseplattform. Azure Databricks bietet zwei Umgebungen für die Entwicklung datenintensiver Anwendungen: Azure Databricks SQL Analytics und Azure Databricks Workspace. Azure Databricks SQL Analytics bietet eine benutzerfreundliche Plattform für Analysten, die SQL-Abfragen in ihrem Data Lake ausführen, mehrere Visualisierungstypen erstellen möchten, um Abfrageergebnisse aus verschiedenen Perspektiven zu untersuchen, und Dashboards erstellen und freigeben möchten. Azure Databricks Workspace bietet einen interaktiven Arbeitsbereich, der die Zusammenarbeit zwischen Dateningenieuren, Datenwissenschaftlern und Ingenieuren für maschinelles Lernen ermöglicht. Für eine Big Data-Pipeline werden die Daten (roh oder strukturiert) über Azure Data Factory in Batches in Azure aufgenommen oder mit Apache Kafka, Event Hub oder IoT Hub nahezu in Echtzeit gestreamt. Diese Daten landen in einem Data Lake zur langfristigen persistenten Speicherung in Azure Blob Storage oder Azure Data Lake Storage. Verwenden Sie im Rahmen Ihres Analyse-Workflows Azure Databricks, um Daten aus mehreren Datenquellen zu lesen und sie mit Spark in bahnbrechende Erkenntnisse umzuwandeln. Azure Databricks bietet die neuesten Versionen von Apache Spark und ermöglicht Ihnen die nahtlose Integration mit Open-Source-Bibliotheken",
+    resources: [{ label: "What Is Azure Databricks", url: "https://docs.microsoft.com/en-us/azure/databricks/scenarios/what-is-azure-databricks" }],
   },
   {
     id: "real-az900-259",
@@ -3451,6 +3617,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Das Azure-Portal ist eine webbasierte, einheitliche Konsole, die eine Alternative zu Befehlszeilentools bietet. Mit dem Azure-Portal verwalten Sie Ihr Azure- Abonnement über eine grafische Benutzeroberfläche. Sie können alles erstellen, verwalten und überwachen – von einfachen Web-Apps bis hin zu komplexen Cloud- Bereitstellungen. Erstellen Sie benutzerdefinierte Dashboards für eine übersichtliche Ressourcenansicht. Konfigurieren Sie Barrierefreiheitsoptionen für ein optimales Erlebnis. Azure Cloud Shell ist über das Azure-Portal zugänglich. Azure Cloud Shell ist eine interaktive, authentifizierte und browserbasierte Shell zur Verwaltung von Azure- Ressourcen. Sie bietet Ihnen die Flexibilität, die Shell-Oberfläche zu wählen, die am besten zu Ihrer Arbeitsweise passt: Bash oder PowerShell. Beim ersten Start fordert Cloud Shell Sie auf, eine Ressourcengruppe, ein Speicherkonto und eine Azure Files-Freigabe in Ihrem Namen zu erstellen. Dieser Schritt ist einmalig und wird automatisch für alle Sitzungen angehängt. Eine einzelne Dateifreigabe kann zugeordnet werden und wird sowohl von Bash als auch von PowerShell in Cloud Shell verwendet. Alles, was Sie für die Nutzung des Azure-Portals und der Azure Cloud Shell benötigen, ist ein Webbrowser. Referenzen: Übersicht über Azure Cloud Shell Übersicht über das Azure-Portal",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/cloud-shell/overview" }, { label: "Azure Portal Overview", url: "https://docs.microsoft.com/en-us/azure/azure-portal/azure-portal-overview" }],
   },
   {
     id: "real-az900-260",
@@ -3475,6 +3642,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Firewall ist ein verwalteter, cloudbasierter Netzwerksicherheitsdienst zum Schutz Ihrer Azure Virtual Network-Ressourcen. Es handelt sich um eine vollständig zustandsbehaftete Firewall-as-a-Service-Lösung mit integrierter Hochverfügbarkeit und uneingeschränkter Cloud-Skalierbarkeit. Sie können Anwendungs- und Netzwerkkonnektivitätsrichtlinien für Abonnements und virtuelle Netzwerke zentral erstellen, durchsetzen und protokollieren.",
+    resources: [{ label: "Firewall Faq", url: "https://docs.microsoft.com/en-us/azure/firewall/firewall-faq#what-is-azure-firewall" }],
   },
   {
     type: "yesno",
@@ -3548,6 +3716,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Sie können Verfügbarkeitszonen in Azure verwenden, um verwaltete Azure-Datenträger vor einem Rechenzentrumsausfall zu schützen", correct: "Ja" },
     ],
     explanation: "Eine Availability Zone ist ein Hochverfügbarkeitsangebot, das Ihre Anwendungen und Daten vor Rechenzentrumsausfällen schützt. Availability Zones sind eindeutige physische Standorte innerhalb einer Azure-Region. Jede Zone besteht aus einem oder mehreren Rechenzentren mit unabhängiger Stromversorgung, Kühlung und Netzwerk. Um Ausfallsicherheit zu gewährleisten, gibt es in allen aktivierten Regionen mindestens drei separate Zonen. Die physische Trennung der Availability Zones innerhalb einer Region schützt Anwendungen und Daten vor Rechenzentrumsausfällen. Zonenredundante Dienste replizieren Ihre Anwendungen und Daten über Availability Zones hinweg, um sie vor einzelnen Ausfallpunkten zu schützen. Mit Availability Zones bietet Azure das branchenweit beste SLA mit 99,99 % VM-Betriebszeit. Das vollständige Azure-SLA erklärt die garantierte Verfügbarkeit von Azure als Ganzes. Eine Verfügbarkeitszone in einer Azure-Region ist eine Kombination aus einer Fehlerdomäne und einer Updatedomäne. Wenn Sie beispielsweise drei oder mehr VMs in drei Zonen einer Azure-Region erstellen, werden Ihre VMs effektiv auf drei Fehlerdomänen und drei Updatedomänen verteilt. Die Azure-Plattform erkennt diese Verteilung auf Updatedomänen, um sicherzustellen, dass VMs in verschiedenen Zonen nicht gleichzeitig aktualisiert werden. Integrieren Sie Hochverfügbarkeit in Ihre Anwendungsarchitektur, indem Sie Ihre Rechen-, Speicher-, Netzwerk- und Datenressourcen innerhalb einer Zone zusammenlegen und in anderen Zonen replizieren. Azure-Dienste, die Verfügbarkeitszonen unterstützen, lassen sich in zwei Kategorien einteilen: • Zonale Dienste – bei denen eine Ressource an eine bestimmte Zone gebunden ist (z. B. virtuelle Maschinen, verwaltete Datenträger, Standard-IP-Adressen) oder • Zonenredundante Dienste – wenn die Azure-Plattform automatisch über Zonen hinweg repliziert wird (z. B. zonenredundanter Speicher, SQL-Datenbank). Um umfassende Geschäftskontinuität in Azure zu erreichen, erstellen Sie Ihre Anwendungsarchitektur mithilfe einer Kombination aus Verfügbarkeitszonen und Azure- Regionspaaren. Sie können Ihre Anwendungen und Daten mithilfe von Verfügbarkeitszonen innerhalb einer Azure-Region synchron replizieren, um Hochverfügbarkeit zu gewährleisten, und für den Notfallschutz eine asynchrone Replikation zwischen Azure-Regionen durchführen. Referenzen: Regionen und Verfügbarkeitszonen in Azure. Einführung in Azure Managed Disks.",
+    resources: [{ label: "Az Overview", url: "https://docs.microsoft.com/en-us/azure/availability-zones/az-overview" }, { label: "Managed Disks Overview", url: "https://docs.microsoft.com/en-us/azure/virtual-machines/managed-disks-overview" }],
   },
   {
     id: "real-az900-268",
@@ -3580,6 +3749,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d3", text: "Platzhalter 4", correctItemId: "item3" },
     ],
     explanation: "Maschinelles Lernen ist eine datenwissenschaftliche Technik, die es Computern ermöglicht, anhand vorhandener Daten zukünftige Verhaltensweisen, Ergebnisse und Trends vorherzusagen. Durch maschinelles Lernen lernen Computer, ohne explizit programmiert zu werden. Prognosen oder Vorhersagen durch maschinelles Lernen können Apps und Geräte intelligenter machen. Wenn Sie beispielsweise online einkaufen, hilft Ihnen maschinelles Lernen dabei, Ihnen basierend auf Ihren Einkäufen andere Produkte zu empfehlen, die Sie interessieren könnten. Oder wenn Ihre Kreditkarte durchgezogen wird, vergleicht maschinelles Lernen die Transaktion mit einer Datenbank von Transaktionen und hilft bei der Erkennung von Betrug. Und wenn Ihr Staubsaugerroboter einen Raum saugt, hilft ihm maschinelles Lernen bei der Entscheidung, ob die Arbeit erledigt ist. Azure Synapse ist ein integrierter Analysedienst, der die Zeit bis zur Erkenntnisgewinnung über Data Warehouses und Big Data-Systeme hinweg beschleunigt. Azure Synapse vereint die besten SQL-Technologien für Enterprise Data Warehousing, Spark-Technologien für Big Data, Pipelines für Datenintegration und ETL/ELT sowie eine tiefe Integration mit anderen Azure-Diensten wie Power BI, CosmosDB und AzureML. IoT Hub ist ein verwalteter, in der Cloud gehosteter Dienst, der als zentraler Nachrichten-Hub für die bidirektionale Kommunikation zwischen Ihrer IoT-Anwendung und den von ihr verwalteten Geräten fungiert. Mit Azure IoT Hub erstellen Sie IoT-Lösungen mit zuverlässiger und sicherer Kommunikation zwischen Millionen von IoT- Geräten und einem Cloud-basierten Lösungs-Backend. Sie können praktisch jedes Gerät mit IoT Hub verbinden. IoT Hub unterstützt die Kommunikation sowohl vom Gerät zur Cloud als auch von der Cloud zum Gerät. IoT Hub unterstützt verschiedene Messaging-Muster wie Gerät-zu-Cloud-Telemetrie, Datei-Uploads von Geräten und Request-Reply-Methoden zur Steuerung Ihrer Geräte aus der Cloud. Die IoT Hub-Überwachung unterstützt Sie bei der Aufrechterhaltung der Integrität Ihrer Lösung durch die Verfolgung von Ereignissen wie Geräteerstellung, Geräteausfällen und Geräteverbindungen. Azure Functions ist eine serverlose Lösung, mit der Sie weniger Code schreiben, weniger Infrastruktur pflegen und Kosten sparen. Anstatt sich um die Bereitstellung und Wartung von Servern zu kümmern, bietet die Cloud-Infrastruktur alle aktuellen Ressourcen, die Sie für den Betrieb Ihrer Anwendungen benötigen. Referenzen: Was ist Azure Machine Learning? Was ist Azure Synapse Analytics? Was ist Azure IoT Hub? Einführung in Azure Functions",
+    resources: [{ label: "Overview What Is Azure Ml", url: "https://docs.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-ml" }, { label: "Overview What Is", url: "https://docs.microsoft.com/en-gb/azure/synapse-analytics/overview-what-is" }, { label: "About Iot Hub", url: "https://docs.microsoft.com/en-us/azure/iot-hub/about-iot-hub" }, { label: "Functions Overview", url: "https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview" }],
   },
   {
     type: "yesno",
@@ -3592,6 +3762,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Von Azure Monitor aus können Sie Warnungen erstellen", correct: "Ja" },
     ],
     explanation: "Azure Monitor hilft Ihnen, die Verfügbarkeit und Leistung Ihrer Anwendungen und Dienste zu maximieren. Es bietet eine umfassende Lösung zum Erfassen, Analysieren und Reagieren auf Telemetriedaten aus Ihren Cloud- und lokalen Umgebungen. Anhand dieser Informationen können Sie die Leistung Ihrer Anwendungen nachvollziehen und Probleme, die diese und die von ihnen abhängigen Ressourcen betreffen, proaktiv erkennen. Hier sind nur einige Beispiele für die Möglichkeiten von Azure Monitor: • Erkennen und diagnostizieren Sie Probleme über Anwendungen und Abhängigkeiten hinweg mit Application Insights. • Korrelieren Sie Infrastrukturprobleme mit VM-Erkenntnissen und Container-Erkenntnissen. • Untersuchen Sie Ihre Überwachungsdaten mit Log Analytics zur Fehlerbehebung und für eine umfassende Diagnose. • Unterstützen Sie Vorgänge im großen Maßstab mit intelligenten Warnmeldungen und automatisierten Aktionen. • Erstellen Sie Visualisierungen mit Azure-Dashboards und -Arbeitsmappen. • Sammeln Sie Daten von überwachten Ressourcen mithilfe von Azure Monitor-Metriken. Sie können Azure Active Directory (Azure AD)-Aktivitätsprotokolle an verschiedene Endpunkte weiterleiten, darunter Azure Monitor/Azure Log Analytics, um Daten langfristig aufzubewahren und Einblicke in sie zu gewinnen. Referenzen: Azure Monitor-Übersicht, Azure AD-Aktivitätsprotokolle in Azure Monitor",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/azure-monitor/overview" }, { label: "Concept Activity Logs Azure Monitor", url: "https://docs.microsoft.com/en-us/azure/active-directory/reports-monitoring/concept-activity-logs-azure-monitor" }],
   },
   {
     id: "real-az900-271",
@@ -3605,6 +3776,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Azure Policy wertet Ressourcen in Azure aus, indem es ihre Eigenschaften mit Geschäftsregeln (Richtliniendefinitionen) vergleicht. Diese können jedem unterstützten Ressourcenbereich zugewiesen werden — Verwaltungsgruppen, Abonnements, Ressourcengruppen oder einzelnen Ressourcen — um die Konformität über mehrere Abonnements hinweg zu verwalten.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/governance/policy/overview" }],
   },
   {
     id: "real-az900-272",
@@ -3618,6 +3790,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Active Directory stellt Updates und neue Funktionen in Form von Vorschauprogrammen bereit. Microsoft führt die Vorschauen phasenweise ein, um Microsoft und Kunden die Möglichkeit zu geben, die neue Funktion zu testen und zu verstehen, bevor sie Teil des Standarddienstes von Azure AD wird. Die Phasen sind wie folgt: 1. Private Vorschau – In dieser Phase laden wir einige Kunden ein, frühzeitig auf neue Konzepte und Funktionen zuzugreifen. Diese Phase beinhaltet keinen formellen Support. 2. Öffentliche Vorschau – In dieser Phase können alle Kunden mit der entsprechenden Azure AD-Lizenz die neue Funktion testen. Der Microsoft- Kundensupport bietet in dieser Phase Supportleistungen an, die üblichen Service Level Agreements gelten jedoch nicht. Bei neuen Funktionen im Azure AD- Portal werden Kunden in der Benutzeroberfläche Informationsbanner angezeigt, die auf die neue Funktion in der Vorschau aufmerksam machen. Durch Klicken auf das Informationsbanner können Kunden die Vorschau aktivieren. 3. Allgemein verfügbar (GA) – Nach Abschluss der öffentlichen Vorschau steht die Funktion allen lizenzierten Kunden zur Verfügung und wird über alle Microsoft-Supportkanäle unterstützt. Beachten Sie, dass sich die Nutzung der Funktion durch neue Funktionen ändern kann, wenn diese sich auf bestehende Funktionen auswirken. Für jedes Azure Active Directory-Vorschauprogramm gelten andere Opt-in-Anforderungen und Abhängigkeiten.",
+    resources: [{ label: "Preview Supplemental Terms", url: "https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/" }],
   },
   {
     id: "real-az900-273",
@@ -3632,6 +3805,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Microsoft Compliance Manager ist eine Funktion im Microsoft 365 Compliance Center, mit der Sie die Compliance-Anforderungen Ihres Unternehmens einfacher und bequemer verwalten können. Compliance Manager unterstützt Sie auf Ihrem gesamten Weg zur Compliance – von der Bestandsaufnahme Ihrer Datenschutzrisiken über die Verwaltung der Komplexität der Implementierung von Kontrollen, die Einhaltung aktueller Vorschriften und Zertifizierungen bis hin zur Berichterstattung an Prüfer. Compliance Manager vereinfacht die Einhaltung von Vorschriften und reduziert Risiken durch folgende Funktionen: • Vorgefertigte Bewertungen für gängige Branchen- und regionale Standards und Vorschriften oder benutzerdefinierte Bewertungen, um Ihre individuellen Compliance- Anforderungen zu erfüllen (die verfügbaren Bewertungen hängen von Ihrer Lizenzvereinbarung ab). • Workflow-Funktionen helfen Ihnen, Ihre Risikobewertungen effizient mit einem einzigen Tool durchzuführen. • Detaillierte Schritt-für-Schritt-Anleitungen zu vorgeschlagenen Verbesserungsmaßnahmen, die Ihnen dabei helfen, die für Ihr Unternehmen relevantesten Standards und Vorschriften einzuhalten. Für von Microsoft verwaltete Aktionen werden Implementierungsdetails und Überwachungsergebnisse angezeigt. • Ein risikobasierter Compliance-Score, der Ihnen hilft, Ihre Compliance-Haltung zu verstehen, indem er Ihren Fortschritt bei der Durchführung von Verbesserungsmaßnahmen misst.",
+    resources: [{ label: "Compliance Manager", url: "https://docs.microsoft.com/en-us/microsoft-365/compliance/compliance-manager?view=o365-worldwide" }],
   },
   {
     id: "real-az900-274",
@@ -3645,6 +3819,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Azure kann Vorschau-, Beta- oder andere Vorabversionen von Funktionen, Diensten, Software oder Regionen enthalten, die von Microsoft angeboten werden („Vorschauen“). Vorschauen werden Ihnen im Rahmen Ihres Azure-Nutzungsvertrags lizenziert. Gemäß den Bedingungen Ihres Azure-Abonnements werden Vorschauen „WIE BESEHEN“, „MIT ALLEN FEHLERN“ UND „WIE VERFÜGBAR“ BEREITGESTELLT UND SIND VON DEN SERVICE LEVEL AGREEMENTS UND DER EINGESCHRÄNKTEN GARANTIE AUSGESCHLOSSEN. Vorschauen werden möglicherweise nicht durch den Kundensupport abgedeckt. Für Vorschauen können reduzierte oder andere Sicherheits-, Compliance- und Datenschutzverpflichtungen gelten. Ergänzende Nutzungsbedingungen für Microsoft Azure-Vorschauen",
+    resources: [{ label: "Preview Supplemental Terms", url: "https://azure.microsoft.com/en-gb/support/legal/preview-supplemental-terms/" }],
   },
   {
     type: "yesno",
@@ -3657,6 +3832,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Datenübertragungen zwischen Azure-Diensten in verschiedenen Azure-Regionen sind immer kostenlos", correct: "Nein" },
     ],
     explanation: "Nordamerika verfügt über mehrere Azure-Regionen, darunter „USA im Westen“, „USA im Zentrum“, „USA im Süden im Zentrum“, „USA im Osten“ und „Kanada im Osten“. Eine Region ist ein geografisches Gebiet auf der Erde, das mindestens ein, möglicherweise aber auch mehrere Rechenzentren umfasst, die nahe beieinander liegen und über ein Netzwerk mit geringer Latenz miteinander verbunden sind. Ausgehende Datenübertragungen zwischen Azure-Diensten in verschiedenen Regionen werden zum Normaltarif abgerechnet, eingehende Datenübertragungen sind kostenlos. Referenzen: Azure-Geografien, Regionen und Verfügbarkeitszonen in Azure, Beschreibung der physischen Azure-Infrastruktur, Bandbreite, Preisdetails",
+    resources: [{ label: "Geographies", url: "https://azure.microsoft.com/en-us/global-infrastructure/geographies/" }, { label: "Az Overview", url: "https://docs.microsoft.com/en-us/azure/availability-zones/az-overview" }, { label: "5 Describe Azure Physical Infrastructure", url: "https://learn.microsoft.com/en-us/training/modules/describe-core-architectural-components-of-azure/5-describe-azure-physical-infrastructure" }, { label: "Bandwidth", url: "https://azure.microsoft.com/en-us/pricing/details/bandwidth/" }],
   },
   {
     id: "real-az900-276",
@@ -3682,6 +3858,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Azure Monitor kann Warnungen basierend auf Daten in einem Azure Log Analytics-Arbeitsbereich auslösen", correct: "Ja" },
     ],
     explanation: "Azure Monitor hilft Ihnen, die Verfügbarkeit und Leistung Ihrer Anwendungen und Dienste zu maximieren. Es bietet eine umfassende Lösung zum Erfassen, Analysieren und Reagieren auf Telemetriedaten aus Ihren Cloud- und lokalen Umgebungen. Anhand dieser Informationen können Sie die Leistung Ihrer Anwendungen nachvollziehen und Probleme, die diese und die von ihnen abhängigen Ressourcen betreffen, proaktiv erkennen. Hier sind nur einige Beispiele für die Möglichkeiten von Azure Monitor: • Erkennen und diagnostizieren Sie Probleme über Anwendungen und Abhängigkeiten hinweg mit Application Insights. • Korrelieren Sie Infrastrukturprobleme mit VM-Erkenntnissen und Container-Erkenntnissen. • Untersuchen Sie Ihre Überwachungsdaten mit Log Analytics zur Fehlerbehebung und für eine umfassende Diagnose. • Unterstützen Sie Vorgänge im großen Maßstab mit intelligenten Warnmeldungen und automatisierten Aktionen. • Erstellen Sie Visualisierungen mit Azure-Dashboards und -Arbeitsmappen. • Sammeln Sie Daten von überwachten Ressourcen mithilfe von Azure Monitor-Metriken. Sie können Azure Active Directory (Azure AD)-Aktivitätsprotokolle an verschiedene Endpunkte weiterleiten, darunter Azure Monitor/Azure Log Analytics, um Daten langfristig aufzubewahren und Einblicke in die Daten zu gewinnen. Außerdem können Sie Warnungen basierend auf Daten in einem Azure Log Analytics- Arbeitsbereich auslösen. Azure Monitor kann Warnungen an in Aktionsgruppen angegebene E-Mail-Adressen senden, jedoch nicht direkt an Azure Active Directory (Azure AD)- Sicherheitsgruppen. Referenzen: Azure Monitor-Übersicht, Azure AD-Aktivitätsprotokolle in Azure Monitor",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/azure-monitor/overview" }, { label: "Concept Activity Logs Azure Monitor", url: "https://docs.microsoft.com/en-us/azure/active-directory/reports-monitoring/concept-activity-logs-azure-monitor" }],
   },
   {
     id: "real-az900-278",
@@ -3695,6 +3872,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Eine Netzwerksicherheitsgruppe enthält Sicherheitsregeln, die eingehenden Netzwerkverkehr zu bzw. ausgehenden Netzwerkverkehr von verschiedenen Azure- Ressourcen zulassen oder verweigern. Für jede Regel können Sie Quelle und Ziel, Port und Protokoll angeben. Eingehender Datenverkehr über Port 8080 TCP wird beim Erstellen einer neuen Azure-VM standardmäßig blockiert.",
+    resources: [{ label: "Network Security Groups Overview", url: "https://docs.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview" }],
   },
   {
     type: "yesno",
@@ -3707,6 +3885,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Sie können Android mit Azure Active Directory (Azure AD) verbinden", correct: "Nein" },
     ],
     explanation: "Azure Active Directory (Azure AD) ist der cloudbasierte Identitäts- und Zugriffsverwaltungsdienst von Microsoft. Azure Active Directory (Azure AD) unterstützt keine Gruppenrichtlinien. Stattdessen verwenden Sie Intune-Konfigurationsrichtlinien für die Geräteverwaltung. Sie können Windows 10-Geräte bei Azure AD registrieren, verbinden oder hybrid verbinden. Android- und iOS-Geräte können bei Azure AD registriert, aber nicht verbunden werden. Die Registrierung eines Geräts bei Azure AD ermöglicht die Geräteauthentifizierung und entspricht einem Arbeitsplatzbeitritt in einer lokalen Active Directory-Domäne. Referenzen: Was ist Azure Active Directory? Vergleich von Active Directory und Azure Active Directory",
+    resources: [{ label: "Active Directory Whatis", url: "https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-whatis" }, { label: "Active Directory Compare Azure Ad To Ad", url: "https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-compare-azure-ad-to-ad" }],
   },
   {
     id: "real-az900-280",
@@ -3720,6 +3899,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Die Datenschutzerklärung für Microsoft Online Services erläutert, welche personenbezogenen Daten Microsoft verarbeitet, wie Microsoft sie verarbeitet und zu welchen Zwecken.",
+    resources: [{ label: "Privacystatement", url: "https://privacy.microsoft.com/en-us/privacystatement" }],
   },
   {
     type: "yesno",
@@ -3732,6 +3912,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Sie können Azure-Blaupausen verwenden, um einer Ressource Berechtigungen zu erteilen", correct: "Ja" },
     ],
     explanation: "Blueprints sind eine deklarative Möglichkeit, die Bereitstellung verschiedener Ressourcenvorlagen und anderer Artefakte zu orchestrieren, wie beispielsweise: • Rollenzuweisungen • Richtlinienzuweisungen • Azure Resource Manager-Vorlagen (ARM-Vorlagen) • Ressourcengruppen Der Azure Blueprints-Dienst wird durch die global verteilte Azure Cosmos DB unterstützt. Blueprint-Objekte werden in mehrere Azure-Regionen repliziert. Der Dienst unterstützt Sie bei der Einrichtung Ihrer Umgebung . Diese besteht häufig aus Ressourcengruppen, Richtlinien, Rollenzuweisungen und ARM- Vorlagenbereitstellungen. Ein Blueprint ist ein Paket, das alle diese Artefakttypen zusammenführt und Ihnen die Erstellung und Versionierung dieses Pakets ermöglicht, auch über eine CI/CD-Pipeline (Continuous Integration und Continuous Delivery). Schließlich wird jedes Artefakt in einem einzigen Vorgang einem Abonnement zugewiesen, das geprüft und nachverfolgt werden kann. Fast alles, was Sie für die Bereitstellung in Azure Blueprints einschließen möchten, lässt sich mit einer ARM-Vorlage erreichen. Eine ARM-Vorlage ist jedoch ein Dokument, das in Azure nicht nativ vorhanden ist – jedes Dokument wird entweder lokal oder in der Quellcodeverwaltung gespeichert. Die Vorlage wird für die Bereitstellung einer oder mehrerer Azure-Ressourcen verwendet. Sobald diese Ressourcen bereitgestellt sind, besteht jedoch keine aktive Verbindung oder Beziehung mehr zur Vorlage. Mit Azure Blueprints bleibt die Beziehung zwischen der Blaupausendefinition (was bereitgestellt werden soll ) und der Blaupausenzuweisung (was bereitgestellt wurde ) erhalten. Diese Verbindung unterstützt eine verbesserte Nachverfolgung und Überwachung von Bereitstellungen. Azure Blueprints kann auch mehrere Abonnements gleichzeitig aktualisieren, die derselben Blaupause unterliegen. Sie müssen sich nicht zwischen einer ARM-Vorlage und einer Blaupause entscheiden. Jede Blaupause kann aus null oder mehreren ARM-Vorlagenartefakten bestehen . Diese Unterstützung bedeutet, dass frühere Bemühungen zur Entwicklung und Verwaltung einer Bibliothek von ARM-Vorlagen in Azure Blueprints wiederverwendet werden können. Eine Blaupause besteht aus Artefakten . Azure Blueprints unterstützt derzeit die folgenden Ressourcen als Artefakte:",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/governance/blueprints/overview" }],
   },
   {
     type: "yesno",
@@ -3744,6 +3925,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Azure Government ist nur für US-Regierungsbehörden und deren Partner verfügbar", correct: "Ja" },
     ],
     explanation: "Microsoft Azure, betrieben von 21Vianet (Azure China), ist eine physisch getrennte Instanz von Cloud-Diensten mit Standort in China. Betrieb und Abwicklung erfolgen unabhängig durch Shanghai Blue Cloud Technology Co., Ltd. („21Vianet“), eine hundertprozentige Tochtergesellschaft der Beijing 21Vianet Broadband Data Center Co., Ltd. Azure Government bietet eine dedizierte Cloud, die es Regierungsbehörden und ihren Partnern ermöglicht, unternehmenskritische Workloads in die Cloud zu verlagern. Azure Government-Dienste verarbeiten Daten, die bestimmten staatlichen Vorschriften und Anforderungen unterliegen, wie z. B. FedRAMP, NIST 800.171 (DIB), ITAR, IRS 1075, DoD L4 und CJIS. Um Ihnen ein Höchstmaß an Sicherheit und Compliance zu bieten, verwendet Azure Government physisch isolierte Rechenzentren und Netzwerke (nur in den USA). Azure Government verwendet dieselben zugrunde liegenden Technologien wie das globale Azure, darunter die Kernkomponenten Infrastructure-as-a-Service (IaaS), Platform-as-a-Service (PaaS) und Software-as-a-Service (SaaS). Referenzen: Was ist Azure China? Was ist Azure Government?",
+    resources: [{ label: "Overview Operations", url: "https://docs.microsoft.com/en-us/azure/china/overview-operations" }, { label: "Documentation Government Welcome", url: "https://docs.microsoft.com/en-us/azure/azure-government/documentation-government-welcome" }],
   },
   {
     id: "real-az900-283",
@@ -3757,6 +3939,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Event Hubs ist eine Big-Data-Streaming-Plattform und ein Ereigniserfassungsdienst. Sie kann Millionen von Ereignissen pro Sekunde empfangen und verarbeiten. An einen Event Hub gesendete Daten können mithilfe von Echtzeitanalyseanbietern oder Batch-/Speicheradaptern transformiert und gespeichert werden. Azure Event Hubs ermöglicht die Erfassung, Pufferung, Speicherung und Verarbeitung Ihres Streams in Echtzeit, um verwertbare Erkenntnisse zu gewinnen. Event Hubs verwendet ein partitioniertes Consumer-Modell, das es mehreren Anwendungen ermöglicht, den Stream gleichzeitig zu verarbeiten, und Ihnen die Kontrolle über die Verarbeitungsgeschwindigkeit gibt. Azure Event Hubs kann Ihre Daten nahezu in Echtzeit in einem Azure Blob Storage oder Azure Data Lake Storage zur langfristigen Aufbewahrung oder Mikro-Batch- Verarbeitung erfassen.",
+    resources: [{ label: "Event Hubs About", url: "https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-about" }],
   },
   {
     id: "real-az900-284",
@@ -3770,6 +3953,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Databricks ist eine für die Microsoft Azure-Clouddienstplattform optimierte Datenanalyseplattform. Azure Databricks bietet zwei Umgebungen für die Entwicklung datenintensiver Anwendungen: Azure Databricks SQL Analytics und Azure Databricks Workspace. Azure Databricks SQL Analytics bietet eine benutzerfreundliche Plattform für Analysten, die SQL-Abfragen in ihrem Data Lake ausführen, mehrere Visualisierungstypen erstellen möchten, um Abfrageergebnisse aus verschiedenen Perspektiven zu untersuchen, und Dashboards erstellen und freigeben möchten. Azure Databricks Workspace bietet einen interaktiven Arbeitsbereich, der die Zusammenarbeit zwischen Dateningenieuren, Datenwissenschaftlern und Ingenieuren für maschinelles Lernen ermöglicht. Für eine Big Data-Pipeline werden die Daten (roh oder strukturiert) über Azure Data Factory in Batches in Azure aufgenommen oder mit Apache Kafka, Event Hub oder IoT Hub nahezu in Echtzeit gestreamt. Diese Daten landen in einem Data Lake zur langfristigen persistenten Speicherung in Azure Blob Storage oder Azure Data Lake Storage. Verwenden Sie im Rahmen Ihres Analyse-Workflows Azure Databricks, um Daten aus mehreren Datenquellen zu lesen und sie mit Spark in bahnbrechende Erkenntnisse umzuwandeln. Azure Databricks bietet die neuesten Versionen von Apache Spark und ermöglicht Ihnen die nahtlose Integration mit Open-Source-Bibliotheken",
+    resources: [{ label: "What Is Azure Databricks", url: "https://docs.microsoft.com/en-us/azure/databricks/scenarios/what-is-azure-databricks" }],
   },
   {
     id: "real-az900-285",
@@ -3783,6 +3967,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Eine Availability Zone ist ein Hochverfügbarkeitsangebot, das Ihre Anwendungen und Daten vor Rechenzentrumsausfällen schützt. Availability Zones sind eindeutige physische Standorte innerhalb einer Azure-Region. Jede Zone besteht aus einem oder mehreren Rechenzentren mit unabhängiger Stromversorgung, Kühlung und Netzwerk. Um Ausfallsicherheit zu gewährleisten, gibt es in allen aktivierten Regionen mindestens drei separate Zonen. Die physische Trennung der Availability Zones innerhalb einer Region schützt Anwendungen und Daten vor Rechenzentrumsausfällen. Zonenredundante Dienste replizieren Ihre Anwendungen und Daten über Availability Zones hinweg, um sie vor einzelnen Ausfallpunkten zu schützen. Mit Availability Zones bietet Azure das branchenweit beste SLA mit 99,99 % VM-Betriebszeit. Das vollständige Azure-SLA erklärt die garantierte Verfügbarkeit von Azure als Ganzes. Eine Verfügbarkeitszone in einer Azure-Region ist eine Kombination aus einer Fehlerdomäne und einer Updatedomäne. Wenn Sie beispielsweise drei oder mehr VMs in drei Zonen einer Azure-Region erstellen, werden Ihre VMs effektiv auf drei Fehlerdomänen und drei Updatedomänen verteilt. Die Azure-Plattform erkennt diese Verteilung auf Updatedomänen, um sicherzustellen, dass VMs in verschiedenen Zonen nicht gleichzeitig aktualisiert werden. Integrieren Sie Hochverfügbarkeit in Ihre Anwendungsarchitektur, indem Sie Ihre Rechen-, Speicher-, Netzwerk- und Datenressourcen innerhalb einer Zone zusammenlegen und in anderen Zonen replizieren. Azure-Dienste, die Verfügbarkeitszonen unterstützen, lassen sich in zwei Kategorien einteilen: • Zonale Dienste – bei denen eine Ressource an eine bestimmte Zone gebunden ist (z. B. virtuelle Maschinen, verwaltete Datenträger, Standard-IP-Adressen) oder • Zonenredundante Dienste – wenn die Azure-Plattform automatisch über Zonen hinweg repliziert wird (z. B. zonenredundanter Speicher, SQL-Datenbank). Um umfassende Geschäftskontinuität in Azure zu erreichen, erstellen Sie Ihre Anwendungsarchitektur mithilfe einer Kombination aus Verfügbarkeitszonen und Azure- Regionspaaren. Sie können Ihre Anwendungen und Daten mithilfe von Verfügbarkeitszonen innerhalb einer Azure-Region synchron replizieren, um Hochverfügbarkeit zu gewährleisten, und für den Notfallschutz eine asynchrone Replikation zwischen Azure-Regionen durchführen.",
+    resources: [{ label: "Az Overview", url: "https://docs.microsoft.com/en-us/azure/availability-zones/az-overview" }],
   },
   {
     id: "real-az900-286",
@@ -3796,6 +3981,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Die Einhaltung gesetzlicher Vorschriften und aller Anforderungen von Benchmark-Standards kann in einer Cloud- oder Hybridumgebung eine erhebliche Herausforderung darstellen. Die Ermittlung der durchzuführenden Bewertungen, die Bewertung des Status und die Behebung von Lücken können eine äußerst anspruchsvolle Aufgabe sein. Azure Security Center (ASC) unterstützt diesen Prozess jetzt mit dem neuen Dashboard zur Einhaltung gesetzlicher Vorschriften, das kürzlich als öffentliche Vorschau veröffentlicht wurde. Das Dashboard zur Einhaltung gesetzlicher Vorschriften bietet Einblicke in Ihren Compliance-Status für eine Reihe unterstützter Standards und Vorschriften, basierend auf kontinuierlichen Bewertungen Ihrer Azure-Umgebung. Die von Azure Security Center durchgeführten Bewertungen analysieren Risikofaktoren in Ihrer Hybrid Cloud-Umgebung gemäß bewährten Sicherheitsmethoden. Diese Bewertungen werden ausgewählten Compliancekontrollen aus einem unterstützten Satz von Standards zugeordnet. Im Dashboard zur Einhaltung gesetzlicher Vorschriften erhalten Sie eine zentrale Ansicht des Status aller Bewertungen in Ihrer Umgebung im Kontext eines bestimmten Standards oder einer bestimmten Vorschrift. Wenn Sie die Empfehlungen umsetzen und Risikofaktoren in Ihrer Umgebung reduzieren, können Sie Ihre Compliance-Situation verbessern.",
+    resources: [{ label: "Regulatory Compliance Dashboard In Azure Security Center Now Available", url: "https://azure.microsoft.com/en-us/blog/regulatory-compliance-dashboard-in-azure-security-center-now-available/" }],
   },
   {
     id: "real-az900-287",
@@ -3809,6 +3995,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure Disk Encryption schützt Ihre Daten und erfüllt so die Sicherheits- und Compliance-Anforderungen Ihres Unternehmens. Die Lösung nutzt die BitLocker-Funktion von Windows, um die Volumeverschlüsselung für Betriebssystem und Datenträger virtueller Azure-Computer (VMs) zu gewährleisten. Durch die Integration mit Azure Key Vault können Sie die Verschlüsselungsschlüssel und Geheimnisse für die Datenträger steuern und verwalten. Azure Disk Encryption erfordert einen Azure Key Vault zur Steuerung und Verwaltung von Datenträgerverschlüsselungsschlüsseln und -geheimnissen. Ihr Schlüsseltresor und Ihre VMs müssen sich in derselben Azure-Region und im selben Azure-Abonnement befinden. Referenzen: Azure Disk Encryption für Windows-VMs Erstellen und Konfigurieren eines Schlüsseltresors für Azure Disk Encryption auf einer Windows-VM",
+    resources: [{ label: "Disk Encryption Overview", url: "https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-overview" }, { label: "Disk Encryption Key Vault", url: "https://docs.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-key-vault" }],
   },
   {
     id: "real-az900-288",
@@ -3822,6 +4009,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure bietet eine Reihe von Funktionen, mit denen Sie über den Zustand Ihrer Cloudressourcen informiert bleiben. Diese Informationen umfassen aktuelle und bevorstehende Probleme wie Ereignisse mit Auswirkungen auf den Dienst, geplante Wartungsarbeiten und andere Änderungen, die sich auf Ihre Verfügbarkeit auswirken können. Azure Service Health ist eine Kombination aus drei separaten kleineren Diensten. Der Azure-Status informiert Sie auf der Azure-Statusseite über Dienstausfälle in Azure. Die Seite bietet eine globale Übersicht über den Zustand aller Azure-Dienste in allen Azure-Regionen. Die Statusseite ist eine gute Referenz für Vorfälle mit weitreichenden Auswirkungen. Wir empfehlen aktuellen Azure-Benutzern jedoch dringend, den Azure- Dienstzustand zu nutzen, um über Azure-Vorfälle und -Wartungsarbeiten auf dem Laufenden zu bleiben. Service Health bietet eine personalisierte Ansicht der Integrität der von Ihnen verwendeten Azure-Dienste und -Regionen. Hier finden Sie am besten Informationen zu Dienstausfällen, geplanten Wartungsaktivitäten und anderen Integritätshinweisen, da die authentifizierte Service Health-Erfahrung weiß, welche Dienste und Ressourcen Sie derzeit verwenden. Die beste Möglichkeit, Service Health zu nutzen, besteht darin, Service Health-Warnungen einzurichten, die Sie über Ihre bevorzugten Kommunikationskanäle benachrichtigen, wenn Serviceprobleme, geplante Wartungsarbeiten oder andere Änderungen die von Ihnen verwendeten Azure-Dienste und -Regionen beeinträchtigen können. Die Ressourcenintegrität liefert Informationen zum Zustand Ihrer einzelnen Cloudressourcen, z. B. einer bestimmten VM-Instanz. Mit Azure Monitor können Sie außerdem Warnungen konfigurieren, die Sie über Verfügbarkeitsänderungen Ihrer Cloudressourcen informieren. Dank der Ressourcenintegrität und der Azure Monitor- Benachrichtigungen sind Sie minütlich über die Verfügbarkeit Ihrer Ressourcen informiert und können schnell beurteilen, ob ein Problem auf Ihr Problem oder auf ein Azure- Plattformereignis zurückzuführen ist. Zusammen bieten Ihnen diese Erfahrungen einen umfassenden Einblick in den Zustand von Azure, und zwar in der für Sie relevantesten Granularität.",
+    resources: [{ label: "Reader.aspx", url: "https://www.cert2brain.com/Server/Reader.aspx" }],
   },
   {
     id: "real-az900-289",
@@ -3835,6 +4023,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Der Azure Hybrid Benefit ist ein Kostenvorteil, mit dem Sie Ihre vorhandenen lokalen Windows Server- und SQL Server-Lizenzen mit aktiver Software Assurance oder Abonnements zu Azure übertragen können. Sparen Sie bis zu 85 Prozent im Vergleich zu herkömmlichen Pay-as-you-go-Tarifen und erzielen Sie die niedrigsten Betriebskosten, indem Sie den Azure Hybrid Benefit, Reservierungsersparnisse und erweiterte Sicherheitsupdates kombinieren. Der Azure Hybrid Benefit gilt auch für SQL on Azure und Azure Dedicated Host. Darüber hinaus erhalten Sie 180 Tage Dual-Use-Rechte, sodass Sie Ihren lokalen Betrieb während der Migration zu Azure aufrechterhalten können. Dieser Vorteil gilt jetzt auch für RedHat- und SUSE Linux-Abonnements.",
+    resources: [{ label: "Hybrid Benefit", url: "https://azure.microsoft.com/en-us/pricing/hybrid-benefit/" }],
   },
   {
     type: "yesno",
@@ -3847,6 +4036,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Mit der Funktion „Meine Bibliothek“ können Sie Dokumente und Ressourcen des Microsoft Service Trust Portal an einem einzigen Ort speichern", correct: "Ja" },
     ],
     explanation: "Das Microsoft Service Trust Portal bietet eine Vielzahl von Inhalten, Tools und anderen Ressourcen zu den Sicherheits-, Datenschutz- und Compliance-Praktiken von Microsoft. Das Service Trust Portal enthält Details zur Implementierung von Kontrollen und Prozessen durch Microsoft zum Schutz unserer Cloud-Dienste und der darin enthaltenen Kundendaten. Um auf einige Ressourcen im Service Trust Portal zugreifen zu können, müssen Sie sich als authentifizierter Benutzer mit Ihrem Microsoft Cloud Services-Konto (entweder einem Azure Active Directory-Organisationskonto oder einem Microsoft-Konto) anmelden und die Microsoft-Vertraulichkeitsvereinbarung für Compliance- Materialien lesen und akzeptieren. Mit der Funktion „Meine Bibliothek“ können Sie Dokumente speichern (oder anheften ), um schnell auf Ihrer Seite „Meine Bibliothek“ darauf zugreifen zu können. Sie können auch Benachrichtigungen einrichten, sodass Microsoft Ihnen eine E-Mail-Nachricht sendet, wenn Dokumente in Ihrer „Meine Bibliothek“ aktualisiert werden. Microsoft Compliance Manager ist eine Funktion im Microsoft 365 Compliance Center, mit der Sie die Compliance-Anforderungen Ihres Unternehmens einfacher und bequemer verwalten können. Compliance Manager unterstützt Sie auf Ihrem gesamten Weg zur Compliance – von der Bestandsaufnahme Ihrer Datenschutzrisiken über die Verwaltung der Komplexität der Implementierung von Kontrollen, die Einhaltung aktueller Vorschriften und Zertifizierungen bis hin zur Berichterstattung an Prüfer. Compliance Manager vereinfacht die Einhaltung von Vorschriften und reduziert Risiken durch folgende Funktionen: • Vorgefertigte Bewertungen für gängige Branchen- und regionale Standards und Vorschriften oder benutzerdefinierte Bewertungen, um Ihre individuellen Compliance- Anforderungen zu erfüllen. • Workflow-Funktionen helfen Ihnen, Ihre Risikobewertungen effizient mit einem einzigen Tool durchzuführen. • Detaillierte Schritt-für-Schritt-Anleitungen zu vorgeschlagenen Verbesserungsmaßnahmen, die Ihnen dabei helfen, die für Ihr Unternehmen relevantesten Standards und Vorschriften einzuhalten. Für von Microsoft verwaltete Aktionen werden Implementierungsdetails und Überwachungsergebnisse angezeigt. • Ein risikobasierter Compliance-Score, der Ihnen hilft, Ihre Compliance-Haltung zu verstehen, indem er Ihren Fortschritt bei der Durchführung von Verbesserungsmaßnahmen misst. Ihr Compliance Manager-Dashboard zeigt Ihren aktuellen Compliance-Score an, hilft Ihnen zu erkennen, was Aufmerksamkeit erfordert, und führt Sie zu wichtigen Verbesserungsmaßnahmen. Referenzen: Erste Schritte mit dem Microsoft Service Trust Portal. Was ist Compliance Manager?",
+    resources: [{ label: "Get Started With Service Trust Portal", url: "https://docs.microsoft.com/en-us/microsoft-365/compliance/get-started-with-service-trust-portal?view=o365-worldwide" }, { label: "Compliance Manager", url: "https://docs.microsoft.com/en-us/microsoft-365/compliance/compliance-manager?view=o365-worldwide" }],
   },
   {
     id: "real-az900-291",
@@ -3860,6 +4050,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure Security Center trägt mithilfe des Dashboards zur Einhaltung gesetzlicher Vorschriften dazu bei, den Prozess zur Erfüllung gesetzlicher Vorschriften zu optimieren. Security Center bewertet Ihre Hybrid Cloud-Umgebung kontinuierlich, um die Risikofaktoren entsprechend den Kontrollen und bewährten Methoden der Standards zu analysieren, die Sie auf Ihre Abonnements angewendet haben. Das Dashboard zeigt den Status Ihrer Konformität mit diesen Standards an. Das Dashboard zur Einhaltung gesetzlicher Vorschriften zeigt den Status aller Bewertungen in Ihrer Umgebung für die von Ihnen gewählten Standards und Vorschriften an. Indem Sie die Empfehlungen umsetzen und Risikofaktoren in Ihrer Umgebung reduzieren, verbessern Sie Ihre Compliance-Situation.",
+    resources: [{ label: "Security Center Compliance Dashboard", url: "https://docs.microsoft.com/en-us/azure/security-center/security-center-compliance-dashboard" }],
   },
   {
     id: "real-az900-292",
@@ -3873,6 +4064,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Mit Azure Spot Virtual Machines können Sie ungenutzte Kapazitäten zu erheblichen Kosteneinsparungen nutzen. Sobald Azure die Kapazität wieder benötigt, werden die Azure-Infrastrukturen die Azure Spot Virtual Machines entfernen. Daher eignen sich Azure Spot Virtual Machines hervorragend für Workloads, die Unterbrechungen bewältigen können, wie z. B. Batchverarbeitungsaufträge, Entwicklungs-/Testumgebungen, große Rechenlasten und mehr. Die verfügbare Kapazität kann je nach Größe, Region, Tageszeit usw. variieren. Beim Bereitstellen von Azure Spot Virtual Machines weist Azure die VMs zu, sofern Kapazität verfügbar ist. Für diese VMs gibt es jedoch kein SLA. Eine Azure Spot Virtual Machine bietet keine Hochverfügbarkeitsgarantie. Wenn Azure die Kapazität wieder benötigt, wird die Azure-Infrastruktur die Azure Spot Virtual Machines mit einer Vorlaufzeit von 30 Sekunden entfernen. Räumungsrichtlinie VMs können basierend auf der Kapazität oder dem von Ihnen festgelegten Höchstpreis entfernt werden. Beim Erstellen einer Azure Spot Virtual Machine können Sie die Entfernungsrichtlinie auf Deallocate (Standard) oder Delete festlegen . Die Richtlinie „Deallocate“ versetzt Ihre VM in den Zustand „Stopped-Deallocated“, sodass Sie sie später erneut bereitstellen können. Es gibt jedoch keine Garantie dafür, dass die Zuweisung erfolgreich ist. Die freigegebenen VMs werden auf Ihr Kontingent angerechnet, und Ihnen werden Speicherkosten für die zugrunde liegenden Datenträger in Rechnung gestellt. Wenn Ihre VM beim Räumungsvorgang gelöscht werden soll, können Sie die Räumungsrichtlinie auf „ Löschen“ setzen . Die geräumten VMs werden zusammen mit den zugrunde liegenden Datenträgern gelöscht, sodass Ihnen für den Speicher keine weiteren Kosten entstehen.",
+    resources: [{ label: "Spot Vms", url: "https://docs.microsoft.com/en-us/azure/virtual-machines/spot-vms" }],
   },
   {
     type: "matching",
@@ -3891,6 +4083,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Anwendungen können schnell entwickelt, getestet und eingeführt werden.", correctItemId: "i2" },
     ],
     explanation: "Skalierbarkeit bedeutet, Ressourcen dynamisch an sich ändernde Anforderungen anzupassen. Geo-Verteilung bedeutet die Bereitstellung von Anwendungen und Daten in mehreren Regionen. Agilität bedeutet, Anwendungen schnell entwickeln, testen und einführen zu können.",
+    resources: [{ label: "Intro To Azure Fundamentals", url: "https://docs.microsoft.com/en-us/learn/modules/intro-to-azure-fundamentals/" }],
   },
   {
     id: "real-az900-294",
@@ -3932,6 +4125,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Budgetwarnungen benachrichtigen Sie, wenn Ausgaben (basierend auf Nutzung oder Kosten) den in der Warnungsbedingung des Budgets festgelegten Betrag erreichen oder überschreiten. Cost Management-Budgets werden über das Azure-Portal oder die Azure Consumption API erstellt. Im Azure-Portal werden Budgets nach Kosten definiert. Mit der Azure Consumption API werden Budgets nach Kosten oder nach Verbrauch definiert. Budgetwarnungen unterstützen sowohl kosten- als auch nutzungsbasierte Budgets. Budgetwarnungen werden automatisch generiert, wenn die Bedingungen für Budgetwarnungen erfüllt sind. Sie können alle Kostenwarnungen im Azure-Portal anzeigen. Wenn eine Warnung generiert wird, wird sie in den Kostenwarnungen angezeigt. Eine Warn-E-Mail wird auch an die Personen in der Liste der Warnungsempfänger des Budgets gesendet.",
+    resources: [{ label: "Cost Mgt Alerts Monitor Usage Spending%20target=", url: "https://docs.microsoft.com/en-us/azure/cost-management-billing/costs/cost-mgt-alerts-monitor-usage-spending%20target=" }],
   },
   {
     type: "matching",
@@ -3950,6 +4144,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Eine Software- und Hardwarelösung, die Kommunikations- und Sicherheitsfunktionen für IoT-Geräte bietet.", correctItemId: "i2" },
     ],
     explanation: "Azure IoT Hub ist ein verwalteter, cloudgehosteter Dienst, der als zentraler Nachrichtenhub für die bidirektionale Kommunikation zwischen IoT-Anwendungen und Geräten fungiert. IoT Central ist eine vollständig verwaltete SaaS-Lösung für die IoT-Geräteverwaltung im großen Maßstab. Azure Sphere ist eine Hardware- und Softwarelösung mit integrierten Sicherheitsfunktionen für IoT-Geräte.",
+    resources: [{ label: "What Is Azure Sphere", url: "https://docs.microsoft.com/en-us/azure-sphere/product-overview/what-is-azure-sphere" }, { label: "Overview Iot Central", url: "https://docs.microsoft.com/en-us/azure/iot-central/core/overview-iot-central" }, { label: "About Iot Hub", url: "https://docs.microsoft.com/en-us/azure/iot-hub/about-iot-hub" }],
   },
   {
     type: "yesno",
@@ -3962,6 +4157,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Einer Ressourcengruppe kann die Rolle „Besitzer“ mehreren Benutzern zugewiesen werden", correct: "Ja" },
     ],
     explanation: "Die Zugriffsverwaltung für Cloudressourcen ist eine wichtige Funktion für jedes Unternehmen, das die Cloud nutzt. Mit der rollenbasierten Zugriffssteuerung von Azure (Azure RBAC) können Sie verwalten, wer Zugriff auf Azure-Ressourcen hat, welche Aktionen diese Personen ausführen können und auf welche Bereiche sie Zugriff haben. Mit Azure RBAC steuern Sie den Zugriff auf Ressourcen durch die Zuweisung von Azure-Rollen. Dies ist ein wichtiges Konzept, das Sie verstehen müssen – so werden Berechtigungen erzwungen. Eine Rollenzuweisung besteht aus drei Elementen: Sicherheitsprinzipal, Rollendefinition und Umfang. Eine Rollendefinition ist eine Sammlung von Berechtigungen. Sie wird normalerweise einfach als Rolle bezeichnet . Eine Rollendefinition listet die ausführbaren Vorgänge auf, z. B. Lesen, Schreiben und Löschen. Rollen können allgemeiner Natur sein, z. B. Besitzer, oder spezifisch, z. B. Leser virtueller Maschinen. Azure enthält mehrere integrierte Rollen, die Sie verwenden können. Beispielsweise ermöglicht die Rolle „Mitwirkender virtueller Computer“ einem Benutzer das Erstellen und Verwalten virtueller Computer. Wenn die integrierten Rollen die spezifischen Anforderungen Ihrer Organisation nicht erfüllen, können Sie eigene benutzerdefinierte Azure- Rollen erstellen. Eine Ressourcengruppe ist ein Container, der zusammengehörige Ressourcen für eine Azure-Lösung enthält. Die Ressourcengruppe kann alle Ressourcen für die Lösung enthalten oder nur die Ressourcen, die Sie als Gruppe verwalten möchten. Sie entscheiden, wie Sie Ressourcen den Ressourcengruppen zuordnen möchten, je nachdem, was für Ihre Organisation am sinnvollsten ist. Fügen Sie Ressourcen mit demselben Lebenszyklus grundsätzlich derselben Ressourcengruppe hinzu, damit Sie sie problemlos als Gruppe bereitstellen, aktualisieren und löschen können. Sie können der Besitzerrolle einer Ressourcengruppe mehrere Benutzer zuweisen, wie in der folgenden Abbildung gezeigt. Referenzen: Was ist die rollenbasierte Zugriffssteuerung in Azure (Azure RBAC)? Verwalten von Azure Resource Manager-Ressourcengruppen mithilfe des Azure-Portals",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/role-based-access-control/overview" }, { label: "Manage Resource Groups Portal", url: "https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal" }],
   },
   {
     id: "real-az900-299",
@@ -3975,6 +4171,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Advisor hilft Ihnen, Ihre Azure-Gesamtausgaben zu optimieren und zu reduzieren, indem es ungenutzte und nicht ausgelastete Ressourcen identifiziert. Kostenempfehlungen erhalten Sie auf der Registerkarte „Kosten “ im Advisor-Dashboard. Obwohl bestimmte Anwendungsszenarien konzeptbedingt zu einer geringen Auslastung führen können, können Sie durch die Verwaltung der Größe und Anzahl Ihrer virtuellen Maschinen häufig Geld sparen. Die empfohlenen Aktionen sind Herunterfahren oder Größenänderung, spezifisch für die zu bewertende Ressource. Das erweiterte Auswertungsmodell in Advisor erwägt das Herunterfahren virtueller Maschinen, wenn alle folgenden Aussagen zutreffen: • P95 des Maximalwerts der CPU-Auslastung liegt unter 3 %. • Die Netzwerkauslastung beträgt über einen Zeitraum von sieben Tagen weniger als 2 %. • Der Speicherdruck liegt unter den Schwellenwerten Der Advisor erwägt eine Größenänderung virtueller Computer, wenn es möglich ist, die aktuelle Auslastung in eine kleinere SKU (innerhalb derselben SKU-Familie) oder eine geringere Anzahl von Instanzen zu integrieren, sodass: • Die aktuelle Auslastung übersteigt bei Workloads, die nicht benutzerorientiert sind, nicht 80 %. • Bei benutzerorientierten Workloads übersteigt die Auslastung nicht 40 %. Hier ermittelt Advisor die Art der Arbeitslast durch Analyse der CPU-Auslastungsmerkmale der Arbeitslast. Der Advisor zeigt die geschätzten Kosteneinsparungen für die empfohlene Aktion an: Größenänderung oder Herunterfahren. Für die Größenänderung stellt der Advisor aktuelle und Ziel-SKU-Informationen bereit. Wenn Sie bei der Identifizierung nicht ausgelasteter virtueller Maschinen aggressiver vorgehen möchten, können Sie die CPU-Auslastungsregel für jedes Abonnement einzeln anpassen.",
+    resources: [{ label: "Advisor Cost Recommendations", url: "https://docs.microsoft.com/en-us/azure/advisor/advisor-cost-recommendations" }],
   },
   {
     id: "real-az900-300",
@@ -3988,6 +4185,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure Policy unterstützt Sie bei der Durchsetzung organisatorischer Standards und der umfassenden Compliance-Bewertung. Das Compliance-Dashboard bietet eine aggregierte Ansicht zur Bewertung des Gesamtzustands der Umgebung mit der Möglichkeit, bis auf die Granularität pro Ressource und Richtlinie herunterzubrechen. Darüber hinaus trägt es dazu bei, die Compliance Ihrer Ressourcen durch Massenkorrekturen für vorhandene Ressourcen und automatische Korrekturen für neue Ressourcen zu gewährleisten. Zu den gängigen Anwendungsfällen für Azure Policy gehört die Implementierung von Governance für Ressourcenkonsistenz, Einhaltung gesetzlicher Vorschriften, Sicherheit, Kosten und Verwaltung. Richtliniendefinitionen für diese häufigen Anwendungsfälle sind in Ihrer Azure-Umgebung bereits integriert, um Ihnen den Einstieg zu erleichtern. Ressourcen werden zu bestimmten Zeitpunkten während des Ressourcenlebenszyklus, des Lebenszyklus der Richtlinienzuweisung und zur regelmäßigen laufenden Compliance- Evaluierung ausgewertet. Die folgenden Zeitpunkte oder Ereignisse führen zur Auswertung einer Ressource: • Eine Ressource wird in einem Bereich mit einer Richtlinienzuweisung erstellt, aktualisiert oder gelöscht. • Eine Richtlinie oder Initiative wird einem neuen Geltungsbereich zugewiesen. • Eine Richtlinie oder Initiative, die bereits einem Bereich zugewiesen ist, wird aktualisiert. • Während des standardmäßigen Compliance-Bewertungszyklus, der alle 24 Stunden stattfindet. Wir sollten die integrierte Richtliniendefinition „Zulässige Standorte“ verwenden und die Richtlinie dem Abonnement zuweisen.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/governance/policy/overview" }],
   },
 
   {
@@ -4002,6 +4200,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Mit dem TCO-Rechner können Sie die Kosteneinsparungen abschätzen, die sich durch den Betrieb Ihrer Lösung auf Azure im Laufe der Zeit ergeben, anstatt in Ihrem lokalen Rechenzentrum. Der Begriff „Gesamtbetriebskosten“ wird häufig im Finanzwesen verwendet. Es kann schwierig sein, alle versteckten Kosten zu erkennen, die mit dem Betrieb einer Technologie vor Ort verbunden sind. Softwarelizenzen und Hardware sind zusätzliche Kosten. Mit dem TCO-Rechner geben Sie die Details Ihrer lokalen Workloads ein. Anschließend überprüfen Sie die empfohlenen durchschnittlichen Branchenkosten (die Sie anpassen können) für die zugehörigen Betriebskosten. Diese Kosten umfassen Strom, Netzwerkwartung und IT-Arbeit. Anschließend wird Ihnen ein Vergleichsbericht angezeigt. Mithilfe des Berichts können Sie diese Kosten mit denselben Workloads vergleichen, die in Azure ausgeführt werden. Der TCO-Rechner kann von jedem genutzt werden. Referenzen: Vergleichen Sie die Kosten mit dem Total Cost of Ownership-Rechner Total Cost of Ownership (TCO)-Rechner",
+    resources: [{ label: "2 Compare Costs Tco Calculator", url: "https://docs.microsoft.com/en-us/learn/modules/plan-manage-azure-costs/2-compare-costs-tco-calculator" }, { label: "Calculator", url: "https://azure.microsoft.com/en-us/pricing/tco/calculator/" }],
   },
   {
     type: "matching",
@@ -4032,6 +4231,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Azure DevOps Services kann zum Erstellen und Hosten von Web-Apps verwendet werden", correct: "Nein" },
     ],
     explanation: "Azure DevOps bietet Entwicklerdienste für Supportteams zur Arbeitsplanung, zur Zusammenarbeit bei der Codeentwicklung sowie zum Erstellen und Bereitstellen von Anwendungen. Azure DevOps unterstützt eine Kultur und eine Reihe von Prozessen, die Entwickler, Projektmanager und Mitwirkende zusammenbringen, um die Softwareentwicklung abzuschließen. Dadurch können Unternehmen Produkte schneller erstellen und verbessern als mit herkömmlichen Softwareentwicklungsansätzen. Sie können mit Azure DevOps Services in der Cloud oder vor Ort mit Azure DevOps Server arbeiten. Azure DevOps bietet integrierte Funktionen, auf die Sie über Ihren Webbrowser oder IDE-Client zugreifen können. Sie können je nach Ihren Geschäftsanforderungen einen oder mehrere der folgenden eigenständigen Dienste verwenden: • Azure Repos bietet Git-Repositorys oder Team Foundation Version Control (TFVC) zur Quellcodeverwaltung Ihres Codes. • Azure Pipelines bietet Build- und Releasedienste zur Unterstützung der kontinuierlichen Integration und Bereitstellung Ihrer Anwendungen. • Azure Boards bietet eine Reihe agiler Tools zur Unterstützung der Planung und Nachverfolgung von Arbeit, Codefehlern und Problemen mithilfe von Kanban- und Scrum-Methoden. • Azure Test Plans bietet mehrere Tools zum Testen Ihrer Apps, darunter manuelles/exploratives Testen und kontinuierliches Testen. • Azure Artifacts ermöglicht es Teams, Pakete wie Maven, npm, NuGet und mehr aus öffentlichen und privaten Quellen freizugeben und die Paketfreigabe in Ihre Pipelines zu integrieren. Referenzen: Was ist Azure DevOps? Was ist Azure Pipelines?",
+    resources: [{ label: "What Is Azure Devops", url: "https://docs.microsoft.com/en-us/azure/devops/user-guide/what-is-azure-devops?view=azure-devops" }, { label: "What Is Azure Pipelines", url: "https://docs.microsoft.com/en-us/azure/devops/pipelines/get-started/what-is-azure-pipelines?view=azure-devops" }],
   },
   {
     type: "yesno",
@@ -4044,6 +4244,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Azure Backup ist ein Beispiel für Platform as a Service (PaaS)", correct: "Ja" },
     ],
     explanation: "Software as a Service (SaaS) ist ein Softwarelizenzierungs- und Bereitstellungsmodell, bei dem Software an einen Benutzer lizenziert wird. Der Zugriff auf die Software bzw. Anwendung erfolgt über das Internet und einen Webbrowser. Sie müssen die Software nicht lokal installieren und warten. Sie können sofort mit der Konfiguration und Nutzung beginnen. Infrastructure as a Service (IaaS) ist ein Cloud-Computing-Dienst, der wichtige Rechen-, Speicher- und Netzwerkressourcen bedarfsgerecht und nutzungsbasiert bereitstellt. Mit IaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung physischer Server und Rechenzentrumsinfrastruktur. Jede Ressource wird als separate Servicekomponente angeboten, und Sie zahlen nur für die jeweilige Ressource, solange Sie sie benötigen. Ein Cloud-Computing-Dienstanbieter wie Azure verwaltet die Infrastruktur, während Sie Ihre eigene Software – einschließlich Betriebssystemen, Middleware und Anwendungen – kaufen, installieren, konfigurieren und verwalten. Wie IaaS umfasst PaaS Infrastruktur – Server, Speicher und Netzwerk –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. Azure Backup ist ein Beispiel für eine PaaS-Lösung. Referenzen: Was ist PaaS? Was ist IaaS? Was ist SaaS?",
+    resources: [{ label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }, { label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }, { label: "What Is Saas", url: "https://azure.microsoft.com/en-us/overview/what-is-saas/" }],
   },
   {
     type: "yesno",
@@ -4056,6 +4257,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Sie können eine Azure SQL-Datenbankinstanz stoppen, um die Kosten zu senken", correct: "Nein" },
     ],
     explanation: "Die Kosten für Ressourcen können in verschiedenen Regionen teilweise erheblich voneinander abweichen. Beispielsweise beträgt der Unterschied zwischen den Regionen „USA, Osten 2“ und „Japan, Osten“ bei bestimmten VM-Größen etwa 58 %. Mit Azure-Reservierungen können Sie Geld sparen, indem Sie sich für Ein- oder Dreijahrespläne für mehrere Produkte entscheiden. Durch die Verpflichtung erhalten Sie einen Rabatt auf die von Ihnen genutzten Ressourcen. Reservierungen können Ihre Ressourcenkosten im Vergleich zu nutzungsbasierten Preisen um bis zu 72 % senken. Reservierungen bieten einen Rechnungsrabatt und wirken sich nicht auf den Laufzeitstatus Ihrer Ressourcen aus. Nachdem Sie eine Reservierung erworben haben, wird der Rabatt automatisch auf die entsprechenden Ressourcen angewendet. Azure SQL-Datenbank ist eine vollständig verwaltete Platform-as-a-Service (PaaS)-Datenbank-Engine, die die meisten Datenbankverwaltungsfunktionen wie Upgrades, Patches, Sicherungen und Überwachung ohne Benutzereingriff übernimmt. Azure SQL-Datenbank bietet keinen Zugriff auf den zugrunde liegenden SQL Server und ermöglicht daher nicht das Starten oder Stoppen einer Datenbank. Referenzen: Durchschnittspreis pro Azure-Region. Was sind Azure-Reservierungen? Was ist eine Azure SQL-Datenbank?",
+    resources: [{ label: "Regions", url: "https://azureprice.net/regions" }, { label: "Save Compute Costs Reservations", url: "https://docs.microsoft.com/en-us/azure/cost-management-billing/reservations/save-compute-costs-reservations" }, { label: "Sql Database Paas Overview", url: "https://docs.microsoft.com/en-us/azure/azure-sql/database/sql-database-paas-overview" }],
   },
   {
     id: "real-az900-306",
@@ -4069,6 +4271,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Indem Sie eine VM stoppen (Zuweisung aufheben), stoppen Sie nicht nur das Betriebssystem der VM, sondern geben auch die Hardware- und Netzwerkressourcen frei, die Azure zuvor dafür bereitgestellt hat (ein Vorgang, der als Freigabe bezeichnet wird). Sofern Sie keine statischen Adressen konfiguriert haben, geben Sie auch die interne DIP-Adresse sowie die öffentliche VIP-Adresse frei (sofern keine anderen VMs die öffentliche VIP verwenden, da die VIP dem Clouddienst und nicht direkt der virtuellen Maschine zugewiesen ist). Wenn Sie die VM neu starten, erhält sie eine neue öffentliche VIP (sofern sie nicht einem Clouddienst beitritt, der bereits eine hat) sowie eine neue DIP. Das Betriebssystem und die Datenträger der VM bleiben im Azure-Speicher intakt und können verwendet werden, um die VM später neu zu starten. Der mit der VM verknüpfte temporäre Datenträger (Scratch-Datenträger) wird jedoch freigegeben und alle Daten darauf können verloren gehen. Azure berechnet keine Gebühren für die VM-Kernstunden, während sie gestoppt (zuweisungsfreigegeben) ist. Es fallen weiterhin Gebühren für den Azure-Speicher an, der für den Betriebssystemdatenträger der VM und alle angeschlossenen Datenträger benötigt wird. Bei Premium-Datenträgern fallen Gebühren für die gesamte verwendete oder nicht verwendete Datenträgergröße an, während bei Standardspeichern Gebühren für den verwendeten Speicherplatz anfallen.",
+    resources: [{ label: "Azure Virtual Machines Stopping Versus Stopping Deallocating", url: "https://docs.microsoft.com/en-us/archive/blogs/uspartner_ts2team/azure-virtual-machines-stopping-versus-stopping-deallocating" }],
   },
   {
     id: "real-az900-307",
@@ -4082,6 +4285,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Wenn Ihre VM nicht ausgeführt wird, weist sie einen von zwei Zuständen auf: „Gestoppt“ oder „Gestoppt (Zuweisung aufgehoben). Azure-Status „Gestoppt“: Wenn Sie beim Betriebssystem einer Azure-VM angemeldet sind, können Sie den Server herunterfahren. Dadurch werden Sie aus dem Betriebssystem ausgeschlossen und alle Prozesse gestoppt, die zugewiesene Hardware (einschließlich der aktuell zugewiesenen IP-Adressen) bleibt jedoch erhalten. Wenn Sie die VM in der Azure-Konsole finden, wird der Status „Gestoppt“ angezeigt. Wichtig zu wissen: Für diese Instanz werden Ihnen weiterhin stundenweise Gebühren berechnet . Azure-Status „Freigegeben“: Sie können Ihre virtuelle Maschine auch über Azure selbst stoppen, sei es über die Konsole, PowerShell oder die Azure-Befehlszeilenschnittstelle. Wenn Sie eine VM über Azure und nicht über das Betriebssystem stoppen, wechselt sie in den Status „Gestoppt (Freigegeben)“. Das bedeutet, dass alle nicht statischen öffentlichen IP-Adressen freigegeben werden, Sie aber auch keine Rechenkosten mehr für die VM zahlen . So sparen Sie Geld bei Ihren Azure-Kosten, wenn Sie diese VMs nicht benötigen.",
+    resources: [{ label: "What39s The Difference Between Deallocated And Sto.html", url: "https://docs.microsoft.com/en-us/answers/questions/574969/what39s-the-difference-between-deallocated-and-sto.html" }],
   },
   {
     id: "real-az900-308",
@@ -4095,6 +4299,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Microsoft Azure, betrieben von 21Vianet (Azure China), ist eine physisch getrennte Instanz von Cloud-Diensten mit Sitz in China. Die unabhängige Verwaltung und Abwicklung erfolgt durch Shanghai Blue Cloud Technology Co., Ltd. („21Vianet“), eine hundertprozentige Tochtergesellschaft der Beijing 21Vianet Broadband Data Center Co., Ltd. Azure China weist eine Feature-Paritätslücke auf, die sich jedoch verringert.",
+    resources: [{ label: "Overview Operations", url: "https://docs.microsoft.com/en-us/azure/china/overview-operations" }],
   },
   {
     id: "real-az900-309",
@@ -4108,6 +4313,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Der Microsoft Azure Marketplace ist ein Online-Shop, der Anwendungen und Dienste anbietet, die entweder auf der öffentlichen Azure-Cloud von Microsoft basieren oder für die Integration in diese konzipiert sind. Die über den Microsoft Azure Marketplace verkauften Produkte und Dienste stammen entweder direkt von Microsoft oder von seinen Technologiepartnern. Bevor sie im Marketplace zum Kauf angeboten werden, werden alle Dienste und Produkte durch das Microsoft Azure Certified-Programm zertifiziert, um die Kompatibilität mit der öffentlichen Azure-Cloud sicherzustellen.",
+    resources: [{ label: "Marketplace", url: "https://azure.microsoft.com/en-us/marketplace/" }],
   },
   {
     type: "matching",
@@ -4125,6 +4331,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Läuft nur in der Cloud", correctItemId: "item2" },
     ],
     explanation: "Azure Logic Apps ist eine cloudbasierte Plattform zum Erstellen und Ausführen automatisierter Logik-App-Workflows , die Ihre Apps, Daten, Dienste und Systeme integrieren. Mit dieser Plattform können Sie schnell hoch skalierbare Integrationslösungen für Ihr Unternehmen und Business-to-Business (B2B)-Szenarien entwickeln. Zum Erstellen einer Logik-App verwenden Sie entweder den Ressourcentyp „Logik-App (Verbrauch)“ oder den Ressourcentyp „Logik-App (Standard)“. Der Ressourcentyp „Verbrauch“ wird in der mehrinstanzenfähigen Azure Logic Apps- oder Integrationsdienstumgebung ausgeführt , während der Ressourcentyp „Standard“ in einer Azure Logic Apps-Umgebung mit einem Mandanten ausgeführt wird . Mit dem Ressourcentyp „Logik-App (Standard)“ können Sie diese Workflowtypen innerhalb derselben Logik-App erstellen: • Zustandsbehaftet Erstellen Sie einen zustandsbehafteten Workflow, wenn Sie Daten aus früheren Ereignissen behalten, überprüfen oder referenzieren müssen. Diese Workflows speichern und übertragen alle Ein- und Ausgaben für jede Aktion und deren Status in einen externen Speicher. So können Sie nach Abschluss jedes Laufs die Ausführungsdetails und den Verlauf überprüfen. • Staatenlos Erstellen Sie einen zustandslosen Workflow, wenn Sie Daten aus vorherigen Ereignissen nach Abschluss jedes Laufs nicht zur späteren Überprüfung im externen Speicher aufbewahren, überprüfen oder referenzieren müssen. Diese Workflows speichern alle Ein- und Ausgaben für jede Aktion und ihre Zustände nur im Arbeitsspeicher , nicht im externen Speicher. Dadurch haben zustandslose Workflows kürzere Läufe (in der Regel weniger als 5 Minuten), eine schnellere Leistung mit schnelleren Reaktionszeiten, einen höheren Durchsatz und geringere Betriebskosten, da die Laufdetails und der Verlauf nicht im externen Speicher gespeichert werden. Azure Functions ist eine serverlose Lösung, mit der Sie weniger Code schreiben, weniger Infrastruktur pflegen und Kosten sparen. Anstatt sich um die Bereitstellung und Wartung von Servern zu kümmern, bietet die Cloud-Infrastruktur alle aktuellen Ressourcen, die Sie für den Betrieb Ihrer Anwendungen benötigen. Sie konzentrieren sich auf die für Sie wichtigsten Codeteile, Azure Functions erledigt den Rest. Referenzen: Single-Tenant- versus Multi-Tenant- und Integrationsdienstumgebung für Azure Logic Apps. Einführung in Azure Functions",
+    resources: [{ label: "Single Tenant Overview Compare", url: "https://docs.microsoft.com/en-us/azure/logic-apps/single-tenant-overview-compare#stateful-stateless" }, { label: "Functions Overview", url: "https://docs.microsoft.com/en-us/azure/azure-functions/functions-overview" }],
   },
   {
     type: "matching",
@@ -4142,6 +4349,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Stellen Sie eine vollständige Azure-Anwendungsumgebung einschließlich Ressourcen bereit...", correctItemId: "item2" },
     ],
     explanation: "Azure Policy unterstützt Sie bei der Durchsetzung organisatorischer Standards und der umfassenden Compliance-Bewertung. Das Compliance-Dashboard bietet eine aggregierte Ansicht zur Bewertung des Gesamtzustands der Umgebung mit der Möglichkeit, bis auf die Granularität pro Ressource und Richtlinie herunterzubrechen. Darüber hinaus trägt es dazu bei, die Compliance Ihrer Ressourcen durch Massenkorrekturen für vorhandene Ressourcen und automatische Korrekturen für neue Ressourcen zu gewährleisten. Zu den gängigen Anwendungsfällen für Azure Policy gehört die Implementierung von Governance für Ressourcenkonsistenz, Einhaltung gesetzlicher Vorschriften, Sicherheit, Kosten und Verwaltung. Richtliniendefinitionen für diese häufigen Anwendungsfälle sind in Ihrer Azure-Umgebung bereits integriert, um Ihnen den Einstieg zu erleichtern. Sie wenden Tags auf Ihre Azure-Ressourcen, Ressourcengruppen und Abonnements an, um sie logisch in einer Taxonomie zu organisieren. Jedes Tag besteht aus einem Namen und einem Wertepaar. Sie können beispielsweise allen Ressourcen in der Produktion den Namen „ Umgebung“ und den Wert „Produktion“ zuweisen. Ressourcentags unterstützen alle kostenintensiven Dienste. Um sicherzustellen, dass kostenintensive Dienste mit einem Tag bereitgestellt werden, verwenden Sie eine der Tag- Richtlinien. So wie ein Ingenieur oder Architekt mit einem Blueprint die Entwurfsparameter eines Projekts skizzieren kann, ermöglicht Azure Blueprints Cloudarchitekten und zentralen IT-Gruppen die Definition eines wiederholbaren Satzes von Azure-Ressourcen, der die Standards, Muster und Anforderungen einer Organisation implementiert und einhält. Azure Blueprints ermöglicht es Entwicklungsteams, schnell neue Umgebungen zu erstellen und einzurichten. Dabei bauen sie auf die Einhaltung der Organisationsrichtlinien mit integrierten Komponenten wie Netzwerken auf und beschleunigen so Entwicklung und Bereitstellung. Blueprints sind eine deklarative Möglichkeit, die Bereitstellung verschiedener Ressourcenvorlagen und anderer Artefakte zu orchestrieren, wie beispielsweise: • Rollenzuweisungen • Richtlinienzuweisungen • Azure Resource Manager-Vorlagen (ARM-Vorlagen) • Ressourcengruppen Als Administrator können Sie mithilfe von Ressourcensperren ein Abonnement, eine Ressourcengruppe oder eine Ressource sperren, um zu verhindern, dass andere Benutzer in Ihrer Organisation versehentlich wichtige Ressourcen löschen oder ändern. Die Sperre überschreibt alle Berechtigungen des Benutzers. Referenzen: Was ist Azure Policy? Verwenden Sie Tags, um Ihre Azure-Ressourcen und die Verwaltungshierarchie zu organisieren. Was ist Azure Blueprints? Sperren Sie Ressourcen, um unerwartete Änderungen zu verhindern.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/governance/policy/overview" }, { label: "Tag Resources", url: "https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources?tabs=json" }, { label: "Overview", url: "https://docs.microsoft.com/en-us/azure/governance/blueprints/overview" }, { label: "Lock Resources", url: "https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources?tabs=json" }],
   },
   {
     id: "real-az900-312",
@@ -4155,6 +4363,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Automatisierungsregeln unterstützen Sie bei der Vorfallklassifizierung in Microsoft Sentinel. Sie können damit Vorfälle automatisch dem richtigen Personal zuweisen, verdächtige Vorfälle oder bekannte Fehlalarme schließen, ihren Schweregrad ändern und Tags hinzufügen. Sie dienen auch als Mechanismus zum Ausführen von Playbooks als Reaktion auf Vorfälle. Playbooks sind Sammlungen von Prozeduren, die von Microsoft Sentinel als Reaktion auf eine Warnung oder einen Vorfall ausgeführt werden können. Ein Playbook kann Ihnen dabei helfen, Ihre Reaktion zu automatisieren und zu orchestrieren. Es kann so eingestellt werden, dass es automatisch ausgeführt wird, wenn bestimmte Warnungen oder Vorfälle generiert werden, indem es an eine Analyseregel bzw. eine Automatisierungsregel angehängt wird. Es kann auch bei Bedarf manuell ausgeführt werden. Playbooks in Microsoft Sentinel basieren auf in Azure Logic Apps erstellten Workflows . Das bedeutet, dass Sie die gesamte Leistung, Anpassbarkeit und integrierten Vorlagen von Logic Apps nutzen können. Jedes Playbook wird für das jeweilige Abonnement erstellt, zu dem es gehört. In der Playbook-Anzeige werden jedoch alle für die ausgewählten Abonnements verfügbaren Playbooks angezeigt. Referenzen: Automatisieren Sie die Reaktion auf Bedrohungen mit Playbooks in Microsoft Sentinel. Tutorial: Verwenden Sie Playbooks mit Automatisierungsregeln in Microsoft Sentinel.",
+    resources: [{ label: "Automate Responses With Playbooks", url: "https://docs.microsoft.com/en-us/azure/sentinel/automate-responses-with-playbooks" }, { label: "Tutorial Respond Threats Playbook", url: "https://docs.microsoft.com/en-us/azure/sentinel/tutorial-respond-threats-playbook" }],
   },
   {
     type: "yesno",
@@ -4167,6 +4376,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Das Trust Center bietet Informationen zu den Azure-Compliance-Angeboten", correct: "Ja" },
     ],
     explanation: "Das Trust Center präsentiert die Grundsätze von Microsoft zur Wahrung der Datenintegrität in der Cloud und zeigt, wie Microsoft Sicherheit, Datenschutz, Compliance und Transparenz in allen Microsoft-Cloud-Produkten implementiert. Es ist frei zugänglich und erfordert kein Azure-Abonnement.",
+    resources: [{ label: "Trust Center", url: "https://www.microsoft.com/en-us/trust-center" }],
   },
   {
     type: "yesno",
@@ -4179,6 +4389,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Eine Azure-Ressource erbt Tags von der Ressourcengruppe, in der die Ressource bereitgestellt wird", correct: "Nein" },
     ],
     explanation: "Sie wenden Tags auf Ihre Azure-Ressourcen, Ressourcengruppen und Abonnements an, um sie logisch in einer Taxonomie zu organisieren. Jedes Tag besteht aus einem Namen-Wert-Paar. Sie können beispielsweise allen Ressourcen in der Produktion den Namen „Umgebung“ und den Wert „Produktion“ zuweisen. Sie können einer Azure-Ressource keine, ein oder mehrere Tags hinzufügen. Sie können Azure Policy verwenden, um Tagging-Regeln und -Konventionen durchzusetzen. Durch das Erstellen einer Richtlinie vermeiden Sie, dass in Ihrem Abonnement Ressourcen bereitgestellt werden, die nicht über die erwarteten Tags für Ihre Organisation verfügen. Anstatt Tags manuell anzuwenden oder nach nicht konformen Ressourcen zu suchen, erstellen Sie eine Richtlinie, die während der Bereitstellung automatisch die benötigten Tags anwendet. Mit dem neuen Effekt „Ändern“ und einer Korrekturaufgabe können jetzt auch Tags auf vorhandene Ressourcen angewendet werden. Eine Azure-Ressource erbt Berechtigungen, jedoch keine Tags von der Ressourcengruppe, in der die Ressource bereitgestellt wird. Referenzen: Zuweisen von Richtliniendefinitionen für die Tag-Compliance Verwenden von Tags zum Organisieren Ihrer Azure-Ressourcen und Verwaltungshierarchie Tutorial: Verwalten der Tag-Governance mit Azure Policy",
+    resources: [{ label: "Tag Policies", url: "https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/tag-policies" }, { label: "Tag Resources", url: "https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources?tabs=json" }, { label: "Govern Tags", url: "https://docs.microsoft.com/en-us/azure/governance/policy/tutorials/govern-tags" }],
   },
   {
     type: "matching",
@@ -4197,6 +4408,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d3", text: "Enthält Ausnahmen und zusätzliche Verpflichtungen für zentrale Onlinedienste, ergänzend zum Nachtrag zum Datenschutz.", correctItemId: "ost" },
     ],
     explanation: "Die Microsoft-Datenschutzerklärung erläutert, welche personenbezogenen Daten Microsoft verarbeitet, wie und zu welchen Zwecken. Der Nachtrag zum Datenschutz (DPA) legt die Verpflichtungen von Kunde und Microsoft hinsichtlich der Verarbeitung und Sicherheit von Kundendaten fest. Die Bedingungen für Onlinedienste enthalten weitere Ausnahmen und Verpflichtungen für zentrale Onlinedienste, ergänzend zum DPA.",
+    resources: [{ label: "Legal", url: "https://azure.microsoft.com/en-us/support/legal/" }],
   },
   {
     id: "real-az900-316",
@@ -4210,6 +4422,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Bei der Multi-Faktor-Authentifizierung handelt es sich um einen Prozess, bei dem Benutzer während des Anmeldevorgangs aufgefordert werden, eine zusätzliche Form der Identifizierung einzugeben, beispielsweise einen Code auf ihrem Mobiltelefon oder einen Fingerabdruckscan. Wenn Sie zur Authentifizierung eines Benutzers ausschließlich ein Kennwort verwenden, ist dies ein unsicherer Angriffspunkt. Ist das Kennwort schwach oder anderweitig bekannt, könnte ein Angreifer es nutzen, um Zugriff zu erhalten. Wenn Sie eine zweite Authentifizierungsform verlangen, erhöht sich die Sicherheit, da dieser zusätzliche Faktor für einen Angreifer nicht so leicht zu erlangen oder zu duplizieren ist. Azure AD Multi-Factor Authentication erfordert zwei oder mehr der folgenden Authentifizierungsmethoden: • Etwas, das Sie wissen, normalerweise ein Passwort. • Etwas, das Sie besitzen, beispielsweise ein vertrauenswürdiges Gerät, das nicht so leicht dupliziert werden kann, wie ein Telefon oder ein Hardwareschlüssel. • Etwas, das Sie sind – biometrische Daten wie ein Fingerabdruck oder ein Gesichtsscan. Azure AD Multi-Factor Authentication kann die Kennwortzurücksetzung zusätzlich absichern. Wenn sich Benutzer für Azure AD Multi-Factor Authentication registrieren, können sie sich in einem Schritt auch für die Self-Service-Kennwortzurücksetzung registrieren. Administratoren können Formen der sekundären Authentifizierung auswählen und basierend auf Konfigurationsentscheidungen Herausforderungen für MFA konfigurieren. Hinweis: Das Beantworten einer Sicherheitsfrage ist zwar kein wirkliches Beispiel für MFA, aber es ist die einzige sinnvolle Antwort.",
+    resources: [{ label: "Concept Mfa Howitworks", url: "https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks" }],
   },
   {
     id: "real-az900-317",
@@ -4223,6 +4436,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "In Azure beschreibt das Service Level Agreement die Verpflichtungen von Microsoft hinsichtlich Verfügbarkeit und Konnektivität. Wenn das SLA für einen bestimmten Dienst ist , können Sie davon ausgehen, dass der Dienst rund um die Uhr 99.9%verfügbar ist . Für verschiedene Dienste gelten unterschiedliche SLAs.99.9% Das Azure-SLA enthält außerdem Bestimmungen für den Erhalt einer Servicegutschrift bei Nichteinhaltung des SLA sowie spezifische Definitionen der Verfügbarkeit für jeden Dienst. Dieser Aspekt des SLA dient als Durchsetzungsrichtlinie. Zusammengesetzte SLAs Zusammengesetzte SLAs umfassen mehrere Dienste, die eine Anwendung unterstützen, und jeweils unterschiedliche Verfügbarkeitsstufen aufweisen. Betrachten Sie beispielsweise eine App Service-Web-App, die in Azure SQL-Datenbank schreibt. Zum Zeitpunkt der Veröffentlichung gelten für diese Azure-Dienste die folgenden SLAs: • App Service-Web-Apps = 99.95% • SQL-Datenbank = 99.99% Mit welcher maximalen Ausfallzeit ist für diese Anwendung zu rechnen? Fällt einer der beiden Dienste aus, fällt die gesamte Anwendung aus. Da die Ausfallwahrscheinlichkeit der einzelnen Dienste unabhängig ist, beträgt das kombinierte SLA für diese Anwendung 99.95% × 99.99% = 99.94%. Das ist niedriger als die einzelnen SLAs, was nicht überraschend ist, da eine Anwendung, die auf mehreren Diensten basiert, mehr potenzielle Fehlerquellen aufweist.",
+    resources: [{ label: "Business Metrics", url: "https://docs.microsoft.com/en-us/azure/architecture/framework/resiliency/business-metrics#composite-slas" }],
   },
   {
     id: "real-az900-318",
@@ -4236,6 +4450,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Microsoft Sentinel ist eine skalierbare, Cloud-native SIEM-Lösung (Security Information and Event Management) sowie SOAR- Lösung (Security Orchestration, Automation and Response). Microsoft Sentinel bietet intelligente Sicherheitsanalysen und Bedrohungsinformationen für das gesamte Unternehmen und stellt eine zentrale Lösung für Angriffserkennung, Bedrohungstransparenz, proaktive Bedrohungssuche und Bedrohungsreaktion bereit. Microsoft Sentinel bietet Ihnen einen umfassenden Überblick über das gesamte Unternehmen und lindert den Stress durch immer raffiniertere Angriffe, eine steigende Anzahl von Warnmeldungen und lange Zeiträume zur Problemlösung. • Sammeln Sie Daten im Cloud-Maßstab über alle Benutzer, Geräte, Anwendungen und Infrastrukturen hinweg, sowohl vor Ort als auch in mehreren Clouds. • Erkennen Sie bisher unentdeckte Bedrohungen und minimieren Sie Fehlalarme mithilfe der Analysefunktionen und beispiellosen Bedrohungsinformationen von Microsoft. • Untersuchen Sie Bedrohungen mit künstlicher Intelligenz und suchen Sie in großem Umfang nach verdächtigen Aktivitäten, indem Sie auf die jahrelange Erfahrung von Microsoft im Bereich Cybersicherheit zurückgreifen. • Reagieren Sie schnell auf Vorfälle mit integrierter Orchestrierung und Automatisierung gängiger Aufgaben.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/sentinel/overview" }],
   },
   {
     id: "real-az900-319",
@@ -4249,6 +4464,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Platform as a Service (PaaS) ist eine umfassende Entwicklungs- und Bereitstellungsumgebung in der Cloud mit Ressourcen, die Ihnen die Bereitstellung von Anwendungen aller Art ermöglichen – von einfachen Cloud-basierten Apps bis hin zu komplexen, Cloud-fähigen Unternehmensanwendungen. Sie erwerben die benötigten Ressourcen von einem Cloud-Service-Anbieter auf Pay-as-you-go-Basis und greifen über eine sichere Internetverbindung darauf zu. Wie IaaS umfasst PaaS die Infrastruktur – Server, Speicher und Netzwerke –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. PaaS unterstützt den gesamten Lebenszyklus von Webanwendungen: Erstellen, Testen, Bereitstellen, Verwalten und Aktualisieren. Mit PaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung von Softwarelizenzen, der zugrunde liegenden Anwendungsinfrastruktur und Middleware, Container-Orchestratoren wie Kubernetes oder der Entwicklungstools und anderer Ressourcen. Sie verwalten die von Ihnen entwickelten Anwendungen und Dienste, und der Cloud-Service-Anbieter kümmert sich in der Regel um alles Weitere. Durch die Bereitstellung von Infrastructure as a Service bietet PaaS dieselben Vorteile wie IaaS. Die zusätzlichen Funktionen – Middleware, Entwicklungstools und andere Business-Tools – bieten Ihnen jedoch weitere Vorteile.",
+    resources: [{ label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }],
   },
   {
     id: "real-az900-320",
@@ -4262,6 +4478,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Um die Migration der Legacy-Datenbank auf eine moderne Cloud-basierte Datenbank zu vermeiden, müssen wir eine virtuelle Azure-Maschine zum Hosten der Buchhaltungsanwendung und der Legacy-Datenbank verwenden. Eine virtuelle Azure-Maschine ist eine Infrastructure-as-a-Service-Lösung (IaaS). Azure-Web-Apps und Azure-SQL-Datenbanken wären Platform-as-a-Service-Lösungen (PaaS).",
+    resources: [{ label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }],
   },
   {
     id: "real-az900-321",
@@ -4275,6 +4492,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Bei einer reservierten Azure-VM-Instanz zahlen Sie im Voraus für die Nutzung einer virtuellen Maschine für einen bestimmten Zeitraum (1 oder 3 Jahre). Sie können Geld sparen, da Sie einen Rabatt auf die Kosten einer VM erhalten, wenn Sie für eine reservierte Instanz im Voraus bezahlen.",
+    resources: [{ label: "Save Compute Costs Reservations", url: "https://docs.microsoft.com/en-us/azure/cost-management-billing/reservations/save-compute-costs-reservations" }],
   },
   {
     id: "real-az900-322",
@@ -4288,6 +4506,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Distributed-Denial-of-Service-Angriffe (DDoS) gehören zu den größten Verfügbarkeits- und Sicherheitsproblemen für Kunden, die ihre Anwendungen in die Cloud verlagern. Ein DDoS-Angriff zielt darauf ab, die Ressourcen einer Anwendung zu erschöpfen und sie so für legitime Benutzer unzugänglich zu machen. DDoS-Angriffe können auf jeden öffentlich über das Internet erreichbaren Endpunkt abzielen. Azure DDoS Protection Standard bietet in Kombination mit bewährten Methoden für das Anwendungsdesign erweiterte DDoS-Minderungsfunktionen zum Schutz vor DDoS- Angriffen. Die automatische Optimierung schützt Ihre spezifischen Azure-Ressourcen in einem virtuellen Netzwerk. Der Schutz lässt sich in jedem neuen oder vorhandenen virtuellen Netzwerk einfach aktivieren und erfordert keine Anwendungs- oder Ressourcenänderungen. DDoS Protection Standard ist für Dienste konzipiert, die in einem virtuellen Netzwerk bereitgestellt werden. Für andere Dienste gilt der standardmäßige DDoS-Schutz auf Infrastrukturebene, der vor gängigen Angriffen auf Netzwerkebene schützt. Der DDoS-Schutz wird auf der Netzwerkebene implementiert und auf der Perimeterebene zum Herausfiltern von Angriffen verwendet. Referenzen: Übersicht zum Azure DDoS Protection Standard DDoS Protection-Referenzarchitekturen",
+    resources: [{ label: "Ddos Protection Overview", url: "https://docs.microsoft.com/en-us/azure/ddos-protection/ddos-protection-overview" }, { label: "Ddos Protection Reference Architectures", url: "https://docs.microsoft.com/en-us/azure/ddos-protection/ddos-protection-reference-architectures" }],
   },
   {
     id: "real-az900-323",
@@ -4301,6 +4520,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Playbooks sind Sammlungen von Prozeduren, die von Microsoft Sentinel als Reaktion auf eine Warnung oder einen Vorfall ausgeführt werden können. Ein Playbook kann Ihnen dabei helfen, Ihre Reaktion zu automatisieren und zu orchestrieren. Es kann so eingestellt werden, dass es automatisch ausgeführt wird, wenn bestimmte Warnungen oder Vorfälle generiert werden, indem es an eine Analyseregel bzw. eine Automatisierungsregel angehängt wird. Es kann auch bei Bedarf manuell ausgeführt werden. Playbooks in Microsoft Sentinel basieren auf in Azure Logic Apps erstellten Workflows . Das bedeutet, dass Sie die gesamte Leistung, Anpassbarkeit und integrierten Vorlagen von Logic Apps nutzen können. Jedes Playbook wird für das jeweilige Abonnement erstellt, zu dem es gehört. In der Playbook-Anzeige werden jedoch alle für die ausgewählten Abonnements verfügbaren Playbooks angezeigt. Referenzen: Automatisieren Sie die Reaktion auf Bedrohungen mit Playbooks in Microsoft Sentinel. Tutorial: Verwenden Sie Playbooks mit Automatisierungsregeln in Microsoft Sentinel.",
+    resources: [{ label: "Automate Responses With Playbooks", url: "https://docs.microsoft.com/en-us/azure/sentinel/automate-responses-with-playbooks" }, { label: "Tutorial Respond Threats Playbook", url: "https://docs.microsoft.com/en-us/azure/sentinel/tutorial-respond-threats-playbook" }],
   },
   {
     type: "yesno",
@@ -4313,6 +4533,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Sie können Azure Cost Management verwenden, um die Nutzung von VMs während der letzten drei Monate anzuzeigen", correct: "Ja" },
     ],
     explanation: "Cost Management zeigt mithilfe erweiterter Analysen organisatorische Kosten- und Nutzungsmuster an. Berichte in Cost Management zeigen die nutzungsbasierten Kosten von Azure-Diensten und Marketplace-Angeboten von Drittanbietern. Die Kosten basieren auf ausgehandelten Preisen und berücksichtigen Reservierungs- und Azure- Hybridvorteilsrabatte. Sie können den Berichtsbereich auf Verwaltungsgruppen, Abonnements oder einzelne Ressourcengruppen festlegen und einen bestimmten Datumsbereich auswählen. Anschließend können Sie Filter für einzelne Ressourcen hinzufügen.",
+    resources: [{ label: "Cost Management Billing Overview", url: "https://docs.microsoft.com/en-us/azure/cost-management-billing/cost-management-billing-overview" }],
   },
   {
     id: "real-az900-325",
@@ -4326,6 +4547,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Eine Region besteht aus mehreren Rechenzentren, die innerhalb eines latenzdefinierten Umkreises bereitgestellt und über ein dediziertes regionales Netzwerk mit geringer Latenz verbunden sind. Azure bietet Ihnen die Flexibilität, Anwendungen dort bereitzustellen, wo Sie sie benötigen, auch über mehrere Regionen hinweg, um regionsübergreifende Ausfallsicherheit zu gewährleisten.",
+    resources: [{ label: "Az Overview", url: "https://docs.microsoft.com/en-us/azure/availability-zones/az-overview#terminology" }],
   },
   {
     type: "yesno",
@@ -4338,6 +4560,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Die Cool-Zugriffsebene wird für langfristige Sicherungen empfohlen", correct: "Nein" },
     ],
     explanation: "Die in der Cloud gespeicherten Daten wachsen exponentiell. Um die Kosten für Ihren wachsenden Speicherbedarf im Griff zu behalten, kann es hilfreich sein, Ihre Daten nach Zugriffshäufigkeit und Aufbewahrungsdauer zu organisieren. Azure Storage bietet verschiedene Zugriffsebenen, sodass Sie Ihre Blobdaten je nach Verwendungszweck möglichst kostengünstig speichern können. Zu den Zugriffsebenen von Azure Storage gehören: • Hot Tier – Eine Online-Ebene, die für die Speicherung von Daten optimiert ist, auf die häufig zugegriffen oder die häufig geändert werden. Die Hot Tier verursacht die höchsten Speicherkosten, aber die niedrigsten Zugriffskosten. • Cool Tier – Eine Online-Ebene, die für die Speicherung selten abgerufener oder geänderter Daten optimiert ist. Daten in der Cool Tier sollten mindestens 30 Tage lang gespeichert werden. Die Cool Tier hat im Vergleich zur Hot Tier geringere Speicherkosten und höhere Zugriffskosten. • Archivebene : Eine Offlineebene, die für die Speicherung selten abgerufener Daten optimiert ist und flexible Latenzanforderungen im Stundenbereich hat. Daten in der Archivebene sollten mindestens 180 Tage lang gespeichert werden. Die Kapazitätsgrenzen von Azure Storage werden auf Kontoebene und nicht nach Zugriffsebene festgelegt. Sie können die Kapazitätsauslastung in einer Ebene maximieren oder die Kapazität auf zwei oder mehr Ebenen verteilen. Online-Zugriffsebenen Wenn Ihre Daten in einer Online-Zugriffsebene (Hot oder Cool) gespeichert sind, können Benutzer sofort darauf zugreifen. Die Hot-Ebene eignet sich am besten für aktiv genutzte Daten, während die Cool-Ebene ideal für Daten ist, auf die seltener zugegriffen wird, die aber dennoch zum Lesen und Schreiben verfügbar sein müssen. Zu den Beispiel-Nutzungsszenarien für die Hot-Tier-Ebene gehören: • Daten, die aktiv verwendet werden oder bei denen häufig gelesen und geschrieben werden soll. • Daten, die für die Verarbeitung und die anschließende Migration in die Cool-Zugriffsebene bereitgestellt werden. Zu den Nutzungsszenarien für die Zugriffsebene „Cool“ gehören: • Kurzfristige Datensicherung und Notfallwiederherstellung. • Ältere Datensätze, die nicht häufig verwendet werden, aber voraussichtlich sofort verfügbar sein werden. • Große Datensätze, die kostengünstig gespeichert werden müssen, während zusätzliche Daten zur Verarbeitung gesammelt werden. Daten in der Cool-Tier-Stufe weisen eine etwas geringere Verfügbarkeit auf, bieten aber die gleiche hohe Haltbarkeit, Abruflatenz und Durchsatzeigenschaften wie die Hot-Tier- Stufe. Bei Daten in der Cool-Tier-Stufe können eine etwas geringere Verfügbarkeit und höhere Zugriffskosten im Vergleich zur Hot-Tier-Stufe ein akzeptabler Kompromiss für niedrigere Gesamtspeicherkosten sein. Für einen Blob in der Cool-Stufe eines allgemeinen v2-Kontos fällt eine Gebühr für vorzeitiges Löschen an, wenn er vor Ablauf von 30 Tagen gelöscht oder in eine andere Stufe verschoben wird. Diese Gebühr wird anteilig berechnet. Wenn ein Blob beispielsweise in die Cool-Stufe verschoben und nach 21 Tagen gelöscht wird, wird Ihnen eine Gebühr für vorzeitiges Löschen in Höhe von 9 (30 minus 21) Tagen berechnet, die Sie für die Speicherung dieses Blobs in der Cool-Stufe aufgewendet haben. Die Hot- und Cool-Stufen unterstützen alle Redundanzkonfigurationen. Archivzugriffsebene Die Archivebene ist eine Offlineebene zum Speichern selten abgerufener Daten. Die Archivzugriffsebene weist im Vergleich zu den Ebenen „Hot“ und „Cool“ die niedrigsten Speicherkosten, aber höhere Datenabrufkosten und eine höhere Latenz auf. Beispiele für Anwendungsszenarien für die Archivzugriffsebene: • Langzeitsicherung, Sekundärsicherung und Archivierung von Datensätzen • Originaldaten (Rohdaten), die auch nach der Verarbeitung in eine endgültige, nutzbare Form erhalten bleiben müssen • Compliance- und Archivdaten, die lange gespeichert werden müssen und auf die kaum zugegriffen wird",
+    resources: [{ label: "Access Tiers Overview", url: "https://docs.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview" }],
   },
   {
     type: "matching",
@@ -4355,6 +4578,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Microsoft Dynamics 365", correctItemId: "item2" },
     ],
     explanation: "Software as a Service (SaaS) ist ein Softwarelizenzierungs- und Bereitstellungsmodell, bei dem Software an einen Benutzer lizenziert wird. Der Zugriff auf die Software bzw. Anwendung erfolgt über das Internet und einen Webbrowser. Sie müssen die Software nicht lokal installieren und warten. Sie können sofort mit der Konfiguration und Nutzung beginnen. Infrastructure as a Service (IaaS) ist ein Cloud-Computing-Dienst, der wichtige Rechen-, Speicher- und Netzwerkressourcen bedarfsgerecht und nutzungsbasiert bereitstellt. Mit IaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung physischer Server und Rechenzentrumsinfrastruktur. Jede Ressource wird als separate Servicekomponente angeboten, und Sie zahlen nur für die jeweilige Ressource, solange Sie sie benötigen. Ein Cloud-Computing-Dienstanbieter wie Azure verwaltet die Infrastruktur, während Sie Ihre eigene Software – einschließlich Betriebssystemen, Middleware und Anwendungen – kaufen, installieren, konfigurieren und verwalten. Wie IaaS umfasst PaaS Infrastruktur – Server, Speicher und Netzwerk –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. Azure Backup ist ein Beispiel für eine PaaS-Lösung. Referenzen: Was ist PaaS? Was ist IaaS? Was ist SaaS?",
+    resources: [{ label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }, { label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }, { label: "What Is Saas", url: "https://azure.microsoft.com/en-us/overview/what-is-saas/" }],
   },
   {
     id: "real-az900-328",
@@ -4369,6 +4593,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Container bieten gegenüber virtuellen Maschinen (VMs) erhebliche Startvorteile. Azure Container Instances können Container in Azure in Sekundenschnelle starten, ohne dass VMs bereitgestellt und verwaltet werden müssen. Azure Container Instances ist eine hervorragende Lösung für alle Szenarien, die in isolierten Containern ausgeführt werden können, einschließlich einfacher Anwendungen, Aufgabenautomatisierung und Buildaufträgen. Für Szenarien, in denen Sie eine vollständige Containerorchestrierung benötigen, einschließlich Diensterkennung über mehrere Container hinweg, automatischer Skalierung und koordinierter Anwendungsupgrades, empfiehlt Microsoft Azure Kubernetes Service (AKS). Referenzen: Was ist Azure Container Instances? Azure Kubernetes Service",
+    resources: [{ label: "Container Instances Overview", url: "https://docs.microsoft.com/en-us/azure/container-instances/container-instances-overview" }, { label: "Intro Kubernetes", url: "https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes" }],
   },
   {
     id: "real-az900-329",
@@ -4382,6 +4607,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Platform as a Service (PaaS) ist eine umfassende Entwicklungs- und Bereitstellungsumgebung in der Cloud mit Ressourcen, die Ihnen die Bereitstellung von Anwendungen aller Art ermöglichen – von einfachen Cloud-basierten Apps bis hin zu komplexen, Cloud-fähigen Unternehmensanwendungen. Sie erwerben die benötigten Ressourcen von einem Cloud-Service-Anbieter auf Pay-as-you-go-Basis und greifen über eine sichere Internetverbindung darauf zu. Wie IaaS umfasst PaaS die Infrastruktur – Server, Speicher und Netzwerke –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. PaaS unterstützt den gesamten Lebenszyklus von Webanwendungen: Erstellen, Testen, Bereitstellen, Verwalten und Aktualisieren. Mit PaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung von Softwarelizenzen, der zugrunde liegenden Anwendungsinfrastruktur und Middleware, Container-Orchestratoren wie Kubernetes oder der Entwicklungstools und anderer Ressourcen. Sie verwalten die von Ihnen entwickelten Anwendungen und Dienste, und der Cloud-Service-Anbieter kümmert sich in der Regel um alles Weitere. Durch die Bereitstellung von Infrastructure as a Service bietet PaaS dieselben Vorteile wie IaaS. Die zusätzlichen Funktionen – Middleware, Entwicklungstools und andere Business-Tools – bieten Ihnen jedoch weitere Vorteile. Hinweis: Eine Azure SQL-Datenbank kann auch als Datenbank als Service (DaaS) bezeichnet werden.",
+    resources: [{ label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }],
   },
   {
     id: "real-az900-330",
@@ -4408,6 +4634,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Mit Azure Spot Virtual Machines können Sie ungenutzte Kapazitäten zu erheblichen Kosteneinsparungen nutzen. Sobald Azure die Kapazität wieder benötigt, werden die Azure-Infrastrukturen die Azure Spot Virtual Machines entfernen. Daher eignen sich Azure Spot Virtual Machines hervorragend für Workloads, die Unterbrechungen bewältigen können, wie z. B. Batchverarbeitungsaufträge, Entwicklungs-/Testumgebungen, große Rechenlasten und mehr. Die verfügbare Kapazität kann je nach Größe, Region, Tageszeit usw. variieren. Beim Bereitstellen von Azure Spot Virtual Machines weist Azure die VMs zu, sofern Kapazität verfügbar ist. Für diese VMs gibt es jedoch kein SLA. Eine Azure Spot Virtual Machine bietet keine Hochverfügbarkeitsgarantie. Wenn Azure die Kapazität wieder benötigt, wird die Azure-Infrastruktur die Azure Spot Virtual Machines mit einer Vorlaufzeit von 30 Sekunden entfernen. Räumungsrichtlinie VMs können basierend auf der Kapazität oder dem von Ihnen festgelegten Höchstpreis entfernt werden. Beim Erstellen einer Azure Spot Virtual Machine können Sie die Entfernungsrichtlinie auf Deallocate (Standard) oder Delete festlegen . Die Richtlinie „Deallocate“ versetzt Ihre VM in den Zustand „Stopped-Deallocated“, sodass Sie sie später erneut bereitstellen können. Es gibt jedoch keine Garantie dafür, dass die Zuweisung erfolgreich ist. Die freigegebenen VMs werden auf Ihr Kontingent angerechnet, und Ihnen werden Speicherkosten für die zugrunde liegenden Datenträger in Rechnung gestellt. Wenn Ihre VM beim Räumungsvorgang gelöscht werden soll, können Sie die Räumungsrichtlinie auf „ Löschen“ setzen . Die geräumten VMs werden zusammen mit den zugrunde liegenden Datenträgern gelöscht, sodass Ihnen für den Speicher keine weiteren Kosten entstehen.",
+    resources: [{ label: "Spot Vms", url: "https://docs.microsoft.com/en-us/azure/virtual-machines/spot-vms" }],
   },
   {
     id: "real-az900-332",
@@ -4421,6 +4648,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Distributed-Denial-of-Service-Angriffe (DDoS) gehören zu den größten Verfügbarkeits- und Sicherheitsproblemen für Kunden, die ihre Anwendungen in die Cloud verlagern. Ein DDoS-Angriff zielt darauf ab, die Ressourcen einer Anwendung zu erschöpfen und sie so für legitime Benutzer unzugänglich zu machen. DDoS-Angriffe können auf jeden öffentlich über das Internet erreichbaren Endpunkt abzielen. Azure DDoS Protection Standard bietet in Kombination mit bewährten Methoden für das Anwendungsdesign erweiterte DDoS-Minderungsfunktionen zum Schutz vor DDoS- Angriffen. Die automatische Optimierung schützt Ihre spezifischen Azure-Ressourcen in einem virtuellen Netzwerk. Der Schutz lässt sich in jedem neuen oder vorhandenen virtuellen Netzwerk einfach aktivieren und erfordert keine Anwendungs- oder Ressourcenänderungen. DDoS Protection Standard ist für Dienste konzipiert, die in einem virtuellen Netzwerk bereitgestellt werden. Für andere Dienste gilt der standardmäßige DDoS-Schutz auf Infrastrukturebene, der vor gängigen Angriffen auf Netzwerkebene schützt. Der DDoS-Schutz wird auf der Netzwerkebene implementiert und auf der Perimeterebene zum Herausfiltern von Angriffen verwendet. Referenzen: Übersicht zum Azure DDoS Protection Standard DDoS Protection-Referenzarchitekturen",
+    resources: [{ label: "Ddos Protection Overview", url: "https://docs.microsoft.com/en-us/azure/ddos-protection/ddos-protection-overview" }, { label: "Ddos Protection Reference Architectures", url: "https://docs.microsoft.com/en-us/azure/ddos-protection/ddos-protection-reference-architectures" }],
   },
   {
     id: "real-az900-333",
@@ -4434,6 +4662,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Der Microsoft Azure Marketplace ist ein Online-Shop, der Anwendungen und Dienste anbietet, die entweder auf der öffentlichen Azure-Cloud von Microsoft basieren oder für die Integration in diese konzipiert sind. Die über den Microsoft Azure Marketplace verkauften Produkte und Dienste stammen entweder direkt von Microsoft oder von seinen Technologiepartnern. Bevor sie im Marketplace zum Kauf angeboten werden, werden alle Dienste und Produkte durch das Microsoft Azure Certified-Programm zertifiziert, um die Kompatibilität mit der öffentlichen Azure-Cloud sicherzustellen.",
+    resources: [{ label: "Marketplace", url: "https://azure.microsoft.com/en-us/marketplace/" }],
   },
   {
     id: "real-az900-334",
@@ -4447,6 +4676,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Cloud Computing ist die Bereitstellung von Computerdiensten über das Internet nach einem Pay-as-you-go-Preismodell. Sie zahlen in der Regel nur für die Cloud-Dienste, die Sie tatsächlich nutzen. Dies bietet Ihnen folgende Vorteile: • Senken Sie Ihre Betriebskosten. • Betreiben Sie Ihre Infrastruktur effizienter. • Skalieren Sie, wenn sich Ihre Geschäftsanforderungen ändern. Skalierbarkeit ist die Fähigkeit eines Systems, skaliert zu werden, um die gewünschte Arbeitslast zu unterstützen. Skalierung ist der Prozess der Zuweisung (Hinzufügen) und Freigabe (Entfernen) von Ressourcen zur Unterstützung der gewünschten Arbeitslast. • Es gibt zwei Arten der Skalierung: o Vertikale Skalierung: Bei dieser Skalierungsart wird die Rechenkapazität einer vorhandenen Ressource durch Hinzufügen von mehr Rechenleistung (RAM oder CPU) erhöht, um die gestiegene Arbeitslast zu bewältigen. Später kann die Rechenleistung wieder reduziert werden, wenn die Arbeitslast abnimmt. Das Hinzufügen von mehr Rechenleistung bezeichnet eine Skalierung nach oben, das Reduzieren derselben eine Skalierung nach unten. o Horizontale Skalierung: Bei dieser Skalierungsart kann die Rechenkapazität durch Hinzufügen weiterer Instanzen erhöht werden, um eine erhöhte Arbeitslast zu bewältigen. Ebenso können wir die Anzahl der aktiven Instanzen reduzieren, sobald die Arbeitslast sinkt. Das Hinzufügen weiterer Instanzen zur Skalierung wird als Skalierung nach außen bezeichnet, die Reduzierung der Instanzanzahl als Skalierung nach innen. Agilität ist die Fähigkeit, schnell zu reagieren. In der Cloud dauert es ein bis zwei Minuten, bis eine virtuelle Maschine betriebsbereit ist. Von der Anfrage zum Kauf eines physischen Servers bis zur Auslieferung vergehen dagegen Tage oder Wochen. Durch die Agilität können Benutzer Ressourcen sehr schnell zuweisen und freigeben, und das ist ein großer Vorteil der Cloud.",
+    resources: [{ label: "Intro To Azure Fundamentals", url: "https://docs.microsoft.com/en-us/learn/modules/intro-to-azure-fundamentals/" }],
   },
   {
     id: "real-az900-335",
@@ -4460,6 +4690,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Firewall ist ein cloudnativer und intelligenter Netzwerk-Firewall-Sicherheitsdienst, der erstklassigen Bedrohungsschutz für Ihre in Azure ausgeführten Cloud-Workloads bietet. Es handelt sich um eine vollständig zustandsbehaftete Firewall als Dienst mit integrierter Hochverfügbarkeit und uneingeschränkter Cloud-Skalierbarkeit. Sie bietet sowohl Ost-West- als auch Nord-Süd-Verkehrsprüfung. Azure Firewall ermöglicht den Schutz von Ressourcen in virtuellen Netzwerken.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/firewall/overview" }],
   },
   {
     id: "real-az900-336",
@@ -4473,6 +4704,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Wenn Ihre VM nicht ausgeführt wird, weist sie einen von zwei Zuständen auf: „Gestoppt“ oder „Gestoppt (Zuweisung aufgehoben). Azure-Status „Gestoppt“: Wenn Sie beim Betriebssystem einer Azure-VM angemeldet sind, können Sie den Server herunterfahren. Dadurch werden Sie aus dem Betriebssystem ausgeschlossen und alle Prozesse gestoppt, die zugewiesene Hardware (einschließlich der aktuell zugewiesenen IP-Adressen) bleibt jedoch erhalten. Wenn Sie die VM in der Azure-Konsole finden, wird der Status „Gestoppt“ angezeigt. Wichtig zu wissen: Für diese Instanz werden Ihnen weiterhin stundenweise Gebühren berechnet . Azure-Status „Freigegeben“: Sie können Ihre virtuelle Maschine auch über Azure selbst stoppen, sei es über die Konsole, PowerShell oder die Azure-Befehlszeilenschnittstelle. Wenn Sie eine VM über Azure und nicht über das Betriebssystem stoppen, wechselt sie in den Status „Gestoppt (Freigegeben)“. Das bedeutet, dass alle nicht statischen öffentlichen IP-Adressen freigegeben werden, Sie aber auch keine Rechenkosten mehr für die VM zahlen . So sparen Sie Geld bei Ihren Azure-Kosten, wenn Sie diese VMs nicht benötigen.",
+    resources: [{ label: "What39s The Difference Between Deallocated And Sto.html", url: "https://docs.microsoft.com/en-us/answers/questions/574969/what39s-the-difference-between-deallocated-and-sto.html" }],
   },
   {
     id: "real-az900-337",
@@ -4486,6 +4718,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure Functions ist eine serverlose Lösung, mit der Sie weniger Code schreiben, weniger Infrastruktur pflegen und Kosten sparen. Anstatt sich um die Bereitstellung und Wartung von Servern zu kümmern, bietet die Cloud-Infrastruktur alle aktuellen Ressourcen, die Sie für den Betrieb Ihrer Anwendungen benötigen.",
+    resources: [{ label: "Functions Overview", url: "https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview" }],
   },
   {
     id: "real-az900-338",
@@ -4499,6 +4732,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure kann Vorschau-, Beta- oder andere Vorabversionen von Funktionen, Diensten, Software oder Regionen enthalten, die von Microsoft angeboten werden („Vorschauen“). Vorschauen werden Ihnen im Rahmen Ihres Azure-Nutzungsvertrags lizenziert. Gemäß den Bedingungen Ihres Azure-Abonnements werden Vorschauen „WIE BESEHEN“, „MIT ALLEN FEHLERN“ UND „WIE VERFÜGBAR“ BEREITGESTELLT UND SIND VON DEN SERVICE LEVEL AGREEMENTS UND DER EINGESCHRÄNKTEN GARANTIE AUSGESCHLOSSEN. Vorschauen werden möglicherweise nicht durch den Kundensupport abgedeckt. Für Vorschauen können reduzierte oder andere Sicherheits-, Compliance- und Datenschutzverpflichtungen gelten. Ergänzende Nutzungsbedingungen für Microsoft Azure-Vorschauen",
+    resources: [{ label: "Preview Supplemental Terms", url: "https://azure.microsoft.com/en-gb/support/legal/preview-supplemental-terms/" }],
   },
   {
     id: "real-az900-339",
@@ -4512,6 +4746,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Software as a Service (SaaS) ermöglicht es Benutzern, sich über das Internet mit Cloud-basierten Apps zu verbinden und diese zu nutzen. Gängige Beispiele sind E-Mail, Kalender und Office-Tools (wie Microsoft Office 365). SaaS bietet eine komplette Softwarelösung, die Sie auf Pay-as-you-go-Basis von einem Cloud-Service-Anbieter erwerben. Sie mieten die Nutzung einer App für Ihr Unternehmen, und Ihre Benutzer verbinden sich über das Internet damit, in der Regel mit einem Webbrowser. Die gesamte zugrunde liegende Infrastruktur, Middleware, App- Software und App-Daten befinden sich im Rechenzentrum des Service-Anbieters. Der Service-Anbieter verwaltet die Hard- und Software und gewährleistet mit dem entsprechenden Servicevertrag die Verfügbarkeit und Sicherheit der App und Ihrer Daten. SaaS ermöglicht Ihrem Unternehmen eine schnelle und nutzungsbereite App mit minimalen Vorlaufkosten.",
+    resources: [{ label: "What Is Saas", url: "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-saas/" }],
   },
   {
     id: "real-az900-340",
@@ -4525,6 +4760,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Indem Sie eine VM stoppen (Zuweisung aufheben), stoppen Sie nicht nur das Betriebssystem der VM, sondern geben auch die Hardware- und Netzwerkressourcen frei, die Azure zuvor dafür bereitgestellt hat (ein Vorgang, der als Freigabe bezeichnet wird). Sofern Sie keine statischen Adressen konfiguriert haben, geben Sie auch die interne DIP-Adresse sowie die öffentliche VIP-Adresse frei (sofern keine anderen VMs die öffentliche VIP verwenden, da die VIP dem Clouddienst und nicht direkt der virtuellen Maschine zugewiesen ist). Wenn Sie die VM neu starten, erhält sie eine neue öffentliche VIP (sofern sie nicht einem Clouddienst beitritt, der bereits eine hat) sowie eine neue DIP. Das Betriebssystem und die Datenträger der VM bleiben im Azure-Speicher intakt und können verwendet werden, um die VM später neu zu starten. Der mit der VM verknüpfte temporäre Datenträger (Scratch-Datenträger) wird jedoch freigegeben und alle Daten darauf können verloren gehen. Azure berechnet keine Gebühren für die VM-Kernstunden, während sie gestoppt (zuweisungsfreigegeben) ist. Es fallen weiterhin Gebühren für den Azure-Speicher an, der für den Betriebssystemdatenträger der VM und alle angeschlossenen Datenträger benötigt wird. Bei Premium-Datenträgern fallen Gebühren für die gesamte verwendete oder nicht verwendete Datenträgergröße an, während bei Standardspeichern Gebühren für den verwendeten Speicherplatz anfallen.",
+    resources: [{ label: "Azure Virtual Machines Stopping Versus Stopping Deallocating", url: "https://docs.microsoft.com/en-us/archive/blogs/uspartner_ts2team/azure-virtual-machines-stopping-versus-stopping-deallocating" }],
   },
   {
     id: "real-az900-341",
@@ -4537,6 +4773,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Eine Hybrid Cloud – manchmal auch Cloud-Hybrid genannt – ist eine Computerumgebung, die ein lokales Rechenzentrum (auch Private Cloud genannt) mit einer öffentlichen Cloud kombiniert und so den gemeinsamen Daten- und Anwendungsaustausch ermöglicht. Manche definieren den Begriff Hybrid Cloud auch als Multicloud-Konfigurationen, bei denen ein Unternehmen zusätzlich zu seinem lokalen Rechenzentrum mehrere öffentliche Clouds nutzt.",
+    resources: [{ label: "What Is Hybrid Cloud Computing", url: "https://azure.microsoft.com/en-us/overview/what-is-hybrid-cloud-computing/" }],
   },
   {
     id: "real-az900-342",
@@ -4550,6 +4787,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Distributed-Denial-of-Service-Angriffe (DDoS) gehören zu den größten Verfügbarkeits- und Sicherheitsproblemen für Kunden, die ihre Anwendungen in die Cloud verlagern. Ein DDoS-Angriff zielt darauf ab, die Ressourcen einer Anwendung zu erschöpfen und sie so für legitime Benutzer unzugänglich zu machen. DDoS-Angriffe können auf jeden öffentlich über das Internet erreichbaren Endpunkt abzielen. Azure DDoS Protection Standard bietet in Kombination mit bewährten Methoden für das Anwendungsdesign erweiterte DDoS-Minderungsfunktionen zum Schutz vor DDoS- Angriffen. Die automatische Optimierung schützt Ihre spezifischen Azure-Ressourcen in einem virtuellen Netzwerk. Der Schutz lässt sich in jedem neuen oder vorhandenen virtuellen Netzwerk einfach aktivieren und erfordert keine Anwendungs- oder Ressourcenänderungen. DDoS Protection Standard ist für Dienste konzipiert, die in einem virtuellen Netzwerk bereitgestellt werden. Für andere Dienste gilt der standardmäßige DDoS-Schutz auf Infrastrukturebene, der vor gängigen Angriffen auf Netzwerkebene schützt. Der DDoS-Schutz wird auf der Netzwerkebene implementiert und auf der Perimeterebene zum Herausfiltern von Angriffen verwendet. Referenzen: Übersicht zum Azure DDoS Protection Standard DDoS Protection-Referenzarchitekturen",
+    resources: [{ label: "Ddos Protection Overview", url: "https://docs.microsoft.com/en-us/azure/ddos-protection/ddos-protection-overview" }, { label: "Ddos Protection Reference Architectures", url: "https://docs.microsoft.com/en-us/azure/ddos-protection/ddos-protection-reference-architectures" }],
   },
   {
     id: "real-az900-343",
@@ -4562,6 +4800,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Sie können NAT-Regeln, Netzwerkregeln und Anwendungsregeln in Azure Firewall entweder mithilfe klassischer Regeln oder einer Firewallrichtlinie konfigurieren. Azure Firewall verweigert standardmäßig den gesamten Datenverkehr, bis manuell Regeln zum Zulassen des Datenverkehrs konfiguriert werden. Eingehende Internetverbindungen können durch Konfigurieren der Zielnetzwerkadressübersetzung (Destination Network Address Translation, DNAT) aktiviert werden. NAT- Regeln werden vorrangig vor Netzwerkregeln angewendet. Wenn eine Übereinstimmung gefunden wird, wird implizit eine entsprechende Netzwerkregel hinzugefügt, um den übersetzten Datenverkehr zuzulassen. Aus Sicherheitsgründen wird empfohlen, eine bestimmte Internetquelle hinzuzufügen, um DNAT-Zugriff auf das Netzwerk zu ermöglichen und die Verwendung von Platzhaltern zu vermeiden.",
+    resources: [{ label: "Rule Processing", url: "https://learn.microsoft.com/en-us/azure/firewall/rule-processing" }],
   },
   {
     id: "real-az900-344",
@@ -4575,6 +4814,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Azure-Regionen und -Verfügbarkeitszonen sollen Ihnen helfen, Resilienz und Zuverlässigkeit für Ihre geschäftskritischen Workloads zu erreichen. Azure unterhält mehrere geografische Regionen. Diese diskreten Abgrenzungen definieren die Grenzen für Notfallwiederherstellung und Datenspeicherung über eine oder mehrere Azure-Regionen hinweg. Durch die Bereitstellung mehrerer Regionen wird sichergestellt, dass Kunden weltweit unterstützt werden. Regionen Jede Azure-Region verfügt über Rechenzentren, die innerhalb eines durch Latenz definierten Umkreises bereitgestellt werden. Sie sind über ein dediziertes regionales Netzwerk mit geringer Latenz verbunden. Dieses Design stellt sicher, dass Azure-Dienste in jeder Region die bestmögliche Leistung und Sicherheit bieten. Verfügbarkeitszonen Azure- Verfügbarkeitszonen sind physisch getrennte Standorte innerhalb jeder Azure-Region, die gegenüber lokalen Ausfällen tolerant sind. Ausfälle können von Software- und Hardwarefehlern bis hin zu Ereignissen wie Erdbeben, Überschwemmungen und Bränden reichen. Die Ausfalltoleranz wird durch Redundanz und logische Isolierung der Azure-Dienste erreicht. Um die Resilienz zu gewährleisten, sind in allen Regionen mit Verfügbarkeitszonen mindestens drei separate Verfügbarkeitszonen vorhanden. Azure-Verfügbarkeitszonen sind über ein Hochleistungsnetzwerk mit einer Roundtrip-Latenz von weniger als 2 ms verbunden. Sie sorgen dafür, dass Ihre Daten auch bei Problemen synchronisiert und zugänglich bleiben. Jede Zone besteht aus einem oder mehreren Rechenzentren mit unabhängiger Stromversorgung, Kühlung und Netzwerkinfrastruktur. Verfügbarkeitszonen sind so konzipiert, dass bei einer Beeinträchtigung einer Zone regionale Dienste, Kapazität und Hochverfügbarkeit von den beiden verbleibenden Zonen unterstützt werden.",
+    resources: [{ label: "Az Overview", url: "https://learn.microsoft.com/en-us/azure/availability-zones/az-overview" }],
   },
   {
     id: "real-az900-345",
@@ -4588,6 +4828,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Microsoft Sentinel ist eine skalierbare, Cloud-native SIEM-Lösung (Security Information and Event Management) sowie SOAR- Lösung (Security Orchestration, Automation and Response). Microsoft Sentinel bietet intelligente Sicherheitsanalysen und Bedrohungsinformationen für das gesamte Unternehmen und stellt eine zentrale Lösung für Angriffserkennung, Bedrohungstransparenz, proaktive Bedrohungssuche und Bedrohungsreaktion bereit. Microsoft Sentinel bietet Ihnen einen umfassenden Überblick über das gesamte Unternehmen und lindert den Stress durch immer raffiniertere Angriffe, eine steigende Anzahl von Warnmeldungen und lange Zeiträume zur Problemlösung. • Sammeln Sie Daten im Cloud-Maßstab über alle Benutzer, Geräte, Anwendungen und Infrastrukturen hinweg, sowohl vor Ort als auch in mehreren Clouds. • Erkennen Sie bisher unentdeckte Bedrohungen und minimieren Sie Fehlalarme mithilfe der Analysefunktionen und beispiellosen Bedrohungsinformationen von Microsoft. • Untersuchen Sie Bedrohungen mit künstlicher Intelligenz und suchen Sie in großem Umfang nach verdächtigen Aktivitäten, indem Sie auf die jahrelange Erfahrung von Microsoft im Bereich Cybersicherheit zurückgreifen. • Reagieren Sie schnell auf Vorfälle mit integrierter Orchestrierung und Automatisierung gängiger Aufgaben.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/sentinel/overview" }],
   },
   {
     id: "real-az900-346",
@@ -4601,6 +4842,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure-Verfügbarkeitszonen sind physisch getrennte Standorte innerhalb jeder Azure-Region, die tolerant gegenüber lokalen Ausfällen sind. Ausfälle können von Software- und Hardwarefehlern bis hin zu Ereignissen wie Erdbeben, Überschwemmungen und Bränden reichen. Die Ausfalltoleranz wird durch Redundanz und logische Isolierung der Azure-Dienste erreicht. Um die Ausfallsicherheit zu gewährleisten, sind in allen Regionen mit Verfügbarkeitszonen mindestens drei separate Verfügbarkeitszonen vorhanden. Azure-Verfügbarkeitszonen sind über ein Hochleistungsnetzwerk mit einer Roundtrip-Latenz von weniger als 2 ms verbunden. Sie sorgen dafür, dass Ihre Daten auch bei Störungen synchronisiert und zugänglich bleiben. Jede Zone besteht aus einem oder mehreren Rechenzentren mit unabhängiger Stromversorgung, Kühlung und Netzwerkinfrastruktur. Verfügbarkeitszonen sind so konzipiert, dass bei einer Beeinträchtigung einer Zone regionale Dienste, Kapazität und Hochverfügbarkeit von den beiden verbleibenden Zonen unterstützt werden. Die Standorte der Rechenzentren werden anhand strenger Kriterien zur Risikobewertung von Schwachstellen ausgewählt. Dieser Prozess identifiziert alle signifikanten rechenzentrumsspezifischen Risiken und berücksichtigt gemeinsame Risiken zwischen den Verfügbarkeitszonen. Mit Verfügbarkeitszonen können Sie Anwendungen und Datenbanken entwickeln und betreiben, die automatisch und unterbrechungsfrei zwischen den Zonen wechseln. Azure- Verfügbarkeitszonen sind hochverfügbar, fehlertolerant und skalierbarer als herkömmliche Infrastrukturen mit einem oder mehreren Rechenzentren. Jedes Rechenzentrum ist einer physischen Zone zugewiesen. Physische Zonen werden logischen Zonen in Ihrem Azure-Abonnement zugeordnet. Azure-Abonnements erhalten diese Zuordnung automatisch beim Erstellen eines Abonnements. Sie können die dedizierte ARM-API namens checkZonePeers verwenden, um die Zonenzuordnung für robuste Lösungen zu vergleichen, die sich über mehrere Abonnements erstrecken. Sie können robuste Lösungen entwickeln, indem Sie Azure-Dienste verwenden, die Verfügbarkeitszonen verwenden. Platzieren Sie Ihre Rechen-, Speicher-, Netzwerk- und Datenressourcen in einer Verfügbarkeitszone und replizieren Sie diese Anordnung in anderen Verfügbarkeitszonen. Dienste mit Azure-Verfügbarkeitszonen sind darauf ausgelegt, das richtige Maß an Ausfallsicherheit und Flexibilität zu bieten. Sie können auf zwei Arten konfiguriert werden. Sie können entweder zonenredundant sein, mit automatischer zonenübergreifender Replikation, oder zonal, mit Instanzen, die an eine bestimmte Zone gebunden sind. Sie können diese Ansätze auch kombinieren. Einige Organisationen benötigen eine hohe Verfügbarkeit von Verfügbarkeitszonen und Schutz vor Großereignissen und regionalen Katastrophen. Azure-Regionen sind so konzipiert, dass sie durch die Nutzung einer anderen Region Schutz vor lokalen Katastrophen mit Verfügbarkeitszonen und durch die Notfallwiederherstellung Schutz vor regionalen oder großräumigen Katastrophen bieten.",
+    resources: [{ label: "Az Overview", url: "https://learn.microsoft.com/en-us/azure/availability-zones/az-overview" }],
   },
   {
     id: "real-az900-347",
@@ -4615,6 +4857,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Wir müssen eine Site-to-Site-VPN-Verbindung oder eine ExpressRoute-Verbindung implementieren. Dazu müssen wir unserem vorhandenen virtuellen Netzwerk ein Gateway- Subnetz hinzufügen und dem Gateway-Subnetz ein virtuelles Netzwerk-Gateway hinzufügen. Ein virtuelles Netzwerk-Gateway besteht aus zwei oder mehr VMs, die automatisch konfiguriert und in einem von Ihnen erstellten Subnetz, dem sogenannten Gateway-Subnetz, bereitgestellt werden. Die Gateway-VMs enthalten Routingtabellen und führen bestimmte Gateway-Dienste aus. Sie können die VMs, die Teil des virtuellen Netzwerk- Gateways sind, nicht direkt konfigurieren, obwohl die von Ihnen bei der Konfiguration Ihres Gateways ausgewählten Einstellungen die erstellten Gateway-VMs beeinflussen. Wenn Sie ein virtuelles Netzwerk-Gateway konfigurieren, konfigurieren Sie eine Einstellung, die den Gateway-Typ angibt. Der Gateway-Typ bestimmt, wie das virtuelle Netzwerk-Gateway verwendet wird und welche Aktionen das Gateway ausführt. Der Gateway-Typ „VPN“ gibt an, dass es sich bei dem erstellten virtuellen Netzwerk-Gateway um ein „VPN-Gateway“ handelt. Dies unterscheidet es von einem ExpressRoute-Gateway, das einen anderen Gateway-Typ verwendet. Ein virtuelles Netzwerk kann zwei virtuelle Netzwerk-Gateways haben: ein VPN-Gateway und ein ExpressRoute-Gateway. Referenzen: Was ist VPN Gateway? Tutorial: Erstellen einer Site-to-Site-VPN-Verbindung im Azure-Portal",
+    resources: [{ label: "Vpn Gateway About Vpngateways", url: "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways" }, { label: "Tutorial Site To Site Portal", url: "https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-site-to-site-portal" }],
   },
   {
     id: "real-az900-348",
@@ -4627,6 +4870,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Eine Hybrid Cloud – manchmal auch Cloud-Hybrid genannt – ist eine Computerumgebung, die ein lokales Rechenzentrum (auch Private Cloud genannt) mit einer öffentlichen Cloud kombiniert und so den gemeinsamen Daten- und Anwendungsaustausch ermöglicht. Manche definieren den Begriff Hybrid Cloud auch als Multicloud-Konfigurationen, bei denen ein Unternehmen zusätzlich zu seinem lokalen Rechenzentrum mehrere öffentliche Clouds nutzt.",
+    resources: [{ label: "What Is Hybrid Cloud Computing", url: "https://azure.microsoft.com/en-us/overview/what-is-hybrid-cloud-computing/" }],
   },
   {
     id: "real-az900-349",
@@ -4640,6 +4884,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Um zu verhindern, dass Datenverkehr aus einem virtuellen Azure-Netzwerk über das Internet an ein Azure Storage-Konto weitergeleitet wird, können Sie entweder einen privaten Endpunkt oder einen Dienstendpunkt verwenden. Der Dienstendpunkt eines virtuellen Netzwerks (VNet) bietet sichere und direkte Konnektivität zu Azure-Diensten über eine optimierte Route über das Azure-Backbone- Netzwerk. Mit Endpunkten können Sie Ihre kritischen Azure-Dienstressourcen ausschließlich auf Ihre virtuellen Netzwerke beschränken. Dienstendpunkte ermöglichen es privaten IP-Adressen im VNet, den Endpunkt eines Azure-Dienstes zu erreichen, ohne dass eine öffentliche IP-Adresse im VNet erforderlich ist.",
+    resources: [{ label: "Virtual Network Service Endpoints Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-service-endpoints-overview" }],
   },
   {
     id: "real-az900-350",
@@ -4653,6 +4898,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Horizontale Skalierung ist eine Erhöhung oder Verringerung der Anzahl von Ressourceninstanzen. Beispielsweise bedeutet horizontale Skalierung in einem VM-Skalierungssatz das Hinzufügen weiterer virtueller Maschinen. Herunterskalierung bedeutet das Entfernen virtueller Maschinen. Horizontale Skalierung ist in einer Cloud-Situation flexibel, da Sie damit eine große Anzahl von VMs ausführen können, um die Last zu bewältigen. Im Gegensatz dazu bleibt bei vertikaler Skalierung die Anzahl der Ressourcen konstant, aber sie erhalten mehr Kapazität in Bezug auf Arbeitsspeicher, CPU-Geschwindigkeit, Festplattenspeicher und Netzwerk. Das Hinzufügen oder Entfernen von Kapazität bei vertikaler Skalierung wird als Herunter- oder Hochskalierung bezeichnet. Vertikale Skalierung wird durch die Verfügbarkeit größerer Hardware begrenzt, die schließlich eine Obergrenze erreicht. Die Verfügbarkeit von Hardwaregrößen variiert in Azure je nach Region. Vertikale Skalierung kann auch einen Neustart der virtuellen Maschine während des Skalierungsvorgangs erfordern.",
+    resources: [{ label: "Autoscale Overview", url: "https://learn.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-overview#horizontal-vs-vertical-scaling" }],
   },
   {
     type: "yesno",
@@ -4683,6 +4929,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Schicht 3", correctItemId: "item2" },
     ],
     explanation: "Das Ziel der mehrstufigen Verteidigung besteht darin, Informationen zu schützen und deren Diebstahl zu verhindern. Eine Defense-in-Depth-Strategie nutzt eine Reihe von Mechanismen, um das Voranschreiten eines Angriffs zu verlangsamen, der darauf abzielt, sich unbefugten Zugriff auf Daten zu verschaffen. Tiefgreifende Verteidigungsebenen Sie können sich die tiefgreifende Verteidigung als eine Reihe von Schichten vorstellen, in deren Mitte die zu sichernden Daten stehen. Jede Schicht bietet Schutz, sodass bei einem Angriff auf eine Schicht bereits eine weitere Schicht vorhanden ist, um weitere Angriffe zu verhindern. Dieser Ansatz macht die Abhängigkeit von einer einzelnen Schutzschicht überflüssig. Er verlangsamt einen Angriff und liefert Telemetrie-Alarme, auf die Sicherheitsteams automatisch oder manuell reagieren können. Hier ist ein kurzer Überblick über die Rolle jeder Ebene: • Die physische Sicherheitsebene ist die erste Verteidigungslinie zum Schutz der Computerhardware im Rechenzentrum. • Die Identitäts- und Zugriffsebene steuert den Zugriff auf die Infrastruktur und die Änderungskontrolle. • Die Perimeterschicht nutzt DDoS-Schutz (Distributed Denial of Service), um groß angelegte Angriffe zu filtern, bevor sie zu einer Dienstverweigerung für Benutzer führen können. • Die Netzwerkschicht begrenzt die Kommunikation zwischen Ressourcen durch Segmentierung und Zugriffskontrollen. • Die Compute -Schicht sichert den Zugriff auf virtuelle Maschinen. • Die Anwendungsschicht trägt dazu bei, sicherzustellen, dass Anwendungen sicher und frei von Sicherheitslücken sind. • Die Datenschicht steuert den Zugriff auf Geschäfts- und Kundendaten, die Sie schützen müssen. Diese Ebenen dienen Ihnen als Leitfaden für Entscheidungen zur Sicherheitskonfiguration auf allen Ebenen Ihrer Anwendungen.",
+    resources: [{ label: "2 What Is Defense In Depth", url: "https://learn.microsoft.com/en-us/training/modules/secure-network-connectivity-azure/2-what-is-defense-in-depth" }],
   },
   {
     id: "real-az900-353",
@@ -4696,6 +4943,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Azure Sphere ist eine sichere, hochrangige Anwendungsplattform mit integrierten Kommunikations- und Sicherheitsfunktionen für internetfähige Geräte. Sie umfasst eine sichere, vernetzte Crossover-Mikrocontrollereinheit (MCU), ein benutzerdefiniertes, hochrangiges Linux-basiertes Betriebssystem (OS) und einen cloudbasierten Sicherheitsdienst, der kontinuierliche, erneuerbare Sicherheit bietet. Die Azure Sphere MCU integriert Echtzeitverarbeitungsfunktionen mit der Fähigkeit, ein übergeordnetes Betriebssystem auszuführen. Eine Azure Sphere MCU ermöglicht zusammen mit ihrem Betriebssystem und ihrer Anwendungsplattform die Erstellung sicherer, mit dem Internet verbundener Geräte, die remote aktualisiert, gesteuert, überwacht und gewartet werden können. Ein verbundenes Gerät mit einer Azure Sphere MCU – entweder zusätzlich zu oder anstelle einer vorhandenen MCU – bietet verbesserte Sicherheit, Produktivität und mehr Möglichkeiten. Beispiel: • Eine gesicherte Anwendungsumgebung, authentifizierte Verbindungen und die Opt-in-Nutzung von Peripheriegeräten minimieren Sicherheitsrisiken, die unter anderem durch Spoofing, betrügerische Software oder Denial-of-Service-Angriffe entstehen. • Software-Updates können automatisch aus der Cloud auf jedes verbundene Gerät verteilt werden, um Probleme zu beheben, neue Funktionen bereitzustellen oder neuen Angriffsmethoden entgegenzuwirken und so die Produktivität des Supportpersonals zu steigern. • Produktnutzungsdaten können über eine sichere Verbindung an die Cloud gemeldet werden, um bei der Diagnose von Problemen und der Entwicklung neuer Produkte zu helfen und so die Möglichkeit für Produktservice, positive Kundeninteraktionen und zukünftige Entwicklungen zu verbessern. Der Azure Sphere Security Service ist ein integraler Bestandteil von Azure Sphere. Mit diesem Dienst verbinden sich Azure Sphere MCUs sicher mit der Cloud und dem Internet. Der Dienst stellt sicher, dass das Gerät nur mit einer autorisierten Version originaler, freigegebener Software bootet. Darüber hinaus bietet er einen sicheren Kanal, über den Microsoft automatisch Betriebssystem-Updates auf im Einsatz befindliche Geräte herunterladen und installieren kann, um Sicherheitsprobleme zu minimieren. Weder Hersteller noch Endbenutzer müssen eingreifen, wodurch eine häufige Sicherheitslücke geschlossen wird.",
+    resources: [{ label: "What Is Azure Sphere", url: "https://learn.microsoft.com/en-us/azure-sphere/product-overview/what-is-azure-sphere" }],
   },
   {
     id: "real-az900-354",
@@ -4709,6 +4957,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Wenn Sie zur Authentifizierung eines Benutzers ausschließlich ein Kennwort verwenden, ist dies ein unsicherer Angriffspunkt. Ist das Kennwort schwach oder anderweitig bekannt, könnte ein Angreifer es nutzen, um Zugriff zu erhalten. Wenn Sie eine zweite Authentifizierungsform verlangen, erhöht sich die Sicherheit, da dieser zusätzliche Faktor für einen Angreifer nicht so leicht zu erlangen oder zu duplizieren ist. Azure AD Multi-Factor Authentication erfordert zwei oder mehr der folgenden Authentifizierungsmethoden: • Etwas, das Sie wissen, normalerweise ein Passwort. • Etwas, das Sie besitzen, beispielsweise ein vertrauenswürdiges Gerät, das nicht so leicht dupliziert werden kann, wie ein Telefon oder ein Hardwareschlüssel. • Etwas, das Sie sind – biometrische Daten wie ein Fingerabdruck oder ein Gesichtsscan. Azure AD Multi-Factor Authentication kann die Kennwortzurücksetzung zusätzlich absichern. Wenn sich Benutzer für Azure AD Multi-Factor Authentication registrieren, können sie sich in einem Schritt auch für die Self-Service-Kennwortzurücksetzung registrieren. Administratoren können Formen der sekundären Authentifizierung auswählen und basierend auf Konfigurationsentscheidungen Herausforderungen für MFA konfigurieren.",
+    resources: [{ label: "Concept Mfa Howitworks", url: "https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks" }],
   },
   {
     id: "real-az900-355",
@@ -4722,6 +4971,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Monitor-Protokolle sind eine Funktion von Azure Monitor, die Protokoll- und Leistungsdaten von überwachten Ressourcen sammelt und organisiert. Mehrere Funktionen von Azure Monitor speichern ihre Daten in Protokollen und präsentieren diese auf verschiedene Weise, um Sie bei der Überwachung der Leistung und Verfügbarkeit Ihrer Cloud- und Hybridanwendungen und deren unterstützenden Komponenten zu unterstützen. Azure Monitor-Protokolle speichern die gesammelten Daten in einem oder mehreren Log Analytics-Arbeitsbereichen. Sie müssen mindestens einen Arbeitsbereich erstellen, um Azure Monitor-Protokolle verwenden zu können. Referenzen: Übersicht über Azure Monitor-Protokolle Übersicht über Log Analytics in Azure Monitor",
+    resources: [{ label: "Data Platform Logs", url: "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/data-platform-logs" }, { label: "Log Analytics Overview", url: "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-overview" }],
   },
   {
     type: "yesno",
@@ -4754,6 +5004,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d3", text: "Erhöht die Rechenkapazität von Apps in der Cloud dynamisch je nach Bedarf.", correctItemId: "i3" },
     ],
     explanation: "Notfallwiederherstellung stellt Zugriff und Funktionalität nach einem Ausfall wieder her. Geo-Distribution bringt Apps und Daten näher an die Benutzer in mehreren Regionen. Hohe Verfügbarkeit sorgt für ein unterbrechungsfreies Benutzererlebnis. Skalierbarkeit erhöht oder verringert die Rechenkapazität dynamisch je nach Bedarf.",
+    resources: [{ label: "Benefits Of Cloud Computing", url: "https://learn.microsoft.com/en-us/training/modules/fundamental-azure-concepts/benefits-of-cloud-computing" }],
   },
   {
     id: "real-az900-358",
@@ -4769,6 +5020,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Die rollenbasierte Zugriffssteuerung von Azure (Azure RBAC) ist das Autorisierungssystem, mit dem Sie den Zugriff auf Azure-Ressourcen verwalten. Um Zugriff zu gewähren, weisen Sie Benutzern, Gruppen, Dienstprinzipalen oder verwalteten Identitäten Rollen in einem bestimmten Bereich zu. Zugriffssteuerung (IAM) ist die Seite, die Sie normalerweise verwenden, um Rollen zuzuweisen und so Zugriff auf Azure-Ressourcen zu gewähren. Sie wird auch als Identitäts- und Zugriffsverwaltung (IAM) bezeichnet.",
+    resources: [{ label: "Role Assignments Portal", url: "https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal" }],
   },
   {
     type: "yesno",
@@ -4781,6 +5033,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Teil einer Hybrid Cloud ist die öffentliche Cloud", correct: "Ja" },
     ],
     explanation: "Azure Dedicated Host bietet physische Server, auf denen ein oder mehrere virtuelle Azure-Computer gehostet werden. Ihr Server ist Ihrer Organisation und Ihren Workloads gewidmet – die Kapazität wird nicht mit anderen Kunden geteilt. Diese Server gehören nicht den Kunden, sondern Microsoft. Die private Cloud umfasst Computing-Dienste, die entweder über das Internet oder ein privates internes Netzwerk und nur ausgewählten Benutzern statt der breiten Öffentlichkeit angeboten werden. Eine Hybrid Cloud – manchmal auch Cloud-Hybrid genannt – ist eine Computing-Umgebung, die ein lokales Rechenzentrum (auch Private Cloud genannt) mit einer öffentlichen Cloud kombiniert und die gemeinsame Nutzung von Daten und Anwendungen ermöglicht. Referenzen: Azure Dedicated Host Was ist eine private Cloud? Was ist eine Hybrid Cloud?",
+    resources: [{ label: "Dedicated Host", url: "https://azure.microsoft.com/en-us/products/virtual-machines/dedicated-host/#overview" }, { label: "What Is A Private Cloud", url: "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-a-private-cloud/" }, { label: "What Is Hybrid Cloud Computing", url: "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-hybrid-cloud-computing/" }],
   },
   {
     type: "yesno",
@@ -4806,6 +5059,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Premium-Blockblob-Speicherkonten stellen Daten über Hochleistungshardware bereit. Die Daten werden auf Solid-State-Laufwerken (SSDs) gespeichert, die für geringe Latenz optimiert sind. SSDs bieten einen höheren Durchsatz als herkömmliche Festplatten. Die Dateiübertragung ist deutlich schneller, da die Daten auf sofort zugänglichen Speicherchips gespeichert werden. Alle Teile eines Laufwerks sind gleichzeitig zugänglich. Im Gegensatz dazu hängt die Leistung einer Festplatte (HDD) von der Nähe der Daten zu den Lese-/Schreibköpfen ab. Premium-Blockblob-Speicherkonten unterstützen nur zonenredundanten Speicher (ZRS) und lokal redundanten Speicher (LRS). Referenzen: Premium-Blockblob-Speicherkonten Azure Storage-Redundanz",
+    resources: [{ label: "Storage Blob Block Blob Premium", url: "https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-block-blob-premium" }, { label: "Storage Redundancy", url: "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy" }],
   },
   {
     type: "yesno",
@@ -4818,6 +5072,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Das Trust Center bietet Informationen zu den Azure-Compliance-Angeboten", correct: "Ja" },
     ],
     explanation: "Das Trust Center präsentiert die Grundsätze von Microsoft zur Wahrung der Datenintegrität in der Cloud und zeigt, wie Microsoft Sicherheit, Datenschutz, Compliance und Transparenz in allen Microsoft-Cloud-Produkten implementiert. Es ist frei zugänglich und erfordert kein Azure-Abonnement.",
+    resources: [{ label: "Product Overview", url: "https://www.microsoft.com/en-ww/trust-center/product-overview" }, { label: "Trust Center", url: "https://www.microsoft.com/en-ww/trust-center" }],
   },
   {
     id: "real-az900-363",
@@ -4831,6 +5086,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Bei der Multi-Faktor-Authentifizierung handelt es sich um einen Prozess, bei dem Benutzer während des Anmeldevorgangs aufgefordert werden, eine zusätzliche Form der Identifizierung einzugeben, beispielsweise einen Code auf ihrem Mobiltelefon oder einen Fingerabdruckscan. Wenn Sie zur Authentifizierung eines Benutzers ausschließlich ein Kennwort verwenden, ist dies ein unsicherer Angriffspunkt. Ist das Kennwort schwach oder anderweitig bekannt, könnte ein Angreifer es nutzen, um Zugriff zu erhalten. Wenn Sie eine zweite Authentifizierungsform verlangen, erhöht sich die Sicherheit, da dieser zusätzliche Faktor für einen Angreifer nicht so leicht zu erlangen oder zu duplizieren ist. Azure AD Multi-Factor Authentication erfordert zwei oder mehr der folgenden Authentifizierungsmethoden: • Etwas, das Sie wissen, normalerweise ein Passwort. • Etwas, das Sie besitzen, beispielsweise ein vertrauenswürdiges Gerät, das nicht so leicht dupliziert werden kann, wie ein Telefon oder ein Hardwareschlüssel. • Etwas, das Sie sind – biometrische Daten wie ein Fingerabdruck oder ein Gesichtsscan. Azure AD Multi-Factor Authentication kann die Kennwortzurücksetzung zusätzlich absichern. Wenn sich Benutzer für Azure AD Multi-Factor Authentication registrieren, können sie sich in einem Schritt auch für die Self-Service-Kennwortzurücksetzung registrieren. Administratoren können Formen der sekundären Authentifizierung auswählen und basierend auf Konfigurationsentscheidungen Herausforderungen für MFA konfigurieren. Hinweis: Das Beantworten einer Sicherheitsfrage ist zwar kein wirkliches Beispiel für MFA, aber es ist die einzige sinnvolle Antwort.",
+    resources: [{ label: "Concept Mfa Howitworks", url: "https://docs.microsoft.com/en-us/azure/active-directory/authentication/concept-mfa-howitworks" }],
   },
   {
     id: "real-az900-364",
@@ -4846,6 +5102,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure-Dateifreigaben werden in Speicherkonten bereitgestellt. Dabei handelt es sich um Objekte der obersten Ebene, die einen gemeinsam genutzten Speicherpool darstellen. Dieser Speicherpool kann zum Bereitstellen mehrerer Dateifreigaben verwendet werden.",
+    resources: [{ label: "Storage How To Create File Share", url: "https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share?tabs=azure-portal" }],
   },
   {
     type: "matching",
@@ -4861,6 +5118,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d1", text: "Physische Sicherheit", correctItemId: "item1" },
     ],
     explanation: "Bei der mehrstufigen Verteidigung handelt es sich um eine Strategie, die eine Reihe von Mechanismen nutzt, um das Voranschreiten eines Angriffs zu verlangsamen, der auf unbefugten Zugriff auf Informationen abzielt. Jede Ebene bietet Schutz, sodass bei einem Durchbruch einer Ebene bereits eine weitere Ebene vorhanden ist, um weitere Angriffe zu verhindern. Microsoft verfolgt einen mehrschichtigen Sicherheitsansatz, sowohl in seinen physischen Rechenzentren als auch in allen Azure-Diensten. Ziel der mehrstufigen Verteidigung ist es, Informationen zu schützen und deren Diebstahl durch unbefugte Personen zu verhindern. Die allgemeinen Prinzipien zur Definition einer Sicherheitslage sind Vertraulichkeit, Integrität und Verfügbarkeit (zusammengefasst als CIA). • Vertraulichkeit: Das Prinzip der geringsten Privilegien beschränkt den Zugriff auf Informationen auf Personen, denen dieser ausdrücklich gewährt wurde. Zu diesen Informationen gehört der Schutz von Benutzerkennwörtern, Remote-Zugriffszertifikaten und E-Mail-Inhalten. • Integrität: Ziel ist es, unbefugte Änderungen an gespeicherten oder übertragenen Informationen zu verhindern. Ein gängiger Ansatz bei der Datenübertragung besteht darin, dass der Absender mithilfe eines Einweg-Hashing-Algorithmus einen eindeutigen Fingerabdruck der Daten erstellt. Dieser Hash wird zusammen mit den Daten an den Empfänger gesendet. Der Empfänger berechnet den Hash der Daten neu und vergleicht ihn mit dem Original, um sicherzustellen, dass die Daten während der Übertragung nicht verloren gegangen oder verändert wurden. • Verfügbarkeit: Stellen Sie sicher, dass die Dienste für autorisierte Benutzer verfügbar sind. Denial-of-Service-Angriffe sind eine häufige Ursache für den Verlust der Verfügbarkeit für Benutzer. Naturkatastrophen erfordern außerdem die Systementwicklung, um einzelne Ausfallpunkte zu vermeiden und mehrere Instanzen einer Anwendung an geografisch verteilten Standorten bereitzustellen. Jede Schicht kann eines oder mehrere der CIA-Anliegen implementieren:",
+    resources: [{ label: "2 Defense In Depth", url: "https://learn.microsoft.com/en-us/training/modules/azure-well-architected-security/2-defense-in-depth" }],
   },
 
   {
@@ -4880,6 +5138,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Die Fähigkeit, die verfügbaren Ressourcen einer Cloud-App dynamisch zu skalieren.", correctItemId: "i2" },
     ],
     explanation: "Notfallwiederherstellung nutzt cloudbasierte Sicherungsdienste zur Wiederherstellung nach einem Ausfall. Agilität ermöglicht die schnelle Bereitstellung und Konfiguration von Ressourcen bei sich ändernden Anforderungen. Elastizität ermöglicht die dynamische Skalierung der verfügbaren Ressourcen einer Cloud-App.",
+    resources: [{ label: "Article.aspx", url: "https://www.microsoftpressstore.com/articles/article.aspx?p=2979073" }],
   },
   {
     type: "yesno",
@@ -4892,6 +5151,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Nachdem Blobs in einen Azure Storage-Container hochgeladen wurden, wird die Zugriffsebene des...", correct: "Ja" },
     ],
     explanation: "Die in der Cloud gespeicherten Daten wachsen exponentiell. Um die Kosten für Ihren wachsenden Speicherbedarf im Griff zu behalten, kann es hilfreich sein, Ihre Daten nach Zugriffshäufigkeit und Aufbewahrungsdauer zu organisieren. Azure Storage bietet verschiedene Zugriffsebenen, sodass Sie Ihre Blobdaten je nach Verwendungszweck möglichst kostengünstig speichern können. Zu den Zugriffsebenen von Azure Storage gehören: • Hot Tier – Eine Online-Ebene, die für die Speicherung von Daten optimiert ist, auf die häufig zugegriffen oder die häufig geändert werden. Die Hot Tier verursacht die höchsten Speicherkosten, aber die niedrigsten Zugriffskosten. • Cool Tier – Eine Online-Ebene, die für die Speicherung selten abgerufener oder geänderter Daten optimiert ist. Daten in der Cool Tier sollten mindestens 30 Tage lang gespeichert werden. Die Cool Tier hat im Vergleich zur Hot Tier geringere Speicherkosten und höhere Zugriffskosten. • Archivebene : Eine Offlineebene, die für die Speicherung selten abgerufener Daten optimiert ist und flexible Latenzanforderungen im Stundenbereich hat. Daten in der Archivebene sollten mindestens 180 Tage lang gespeichert werden. Die Kapazitätsgrenzen von Azure Storage werden auf Kontoebene und nicht nach Zugriffsebene festgelegt. Sie können die Kapazitätsauslastung in einer Ebene maximieren oder die Kapazität auf zwei oder mehr Ebenen verteilen. Online-Zugriffsebenen Wenn Ihre Daten in einer Online-Zugriffsebene (Hot oder Cool) gespeichert sind, können Benutzer sofort darauf zugreifen. Die Hot-Ebene eignet sich am besten für aktiv genutzte Daten, während die Cool-Ebene ideal für Daten ist, auf die seltener zugegriffen wird, die aber dennoch zum Lesen und Schreiben verfügbar sein müssen. Zu den Beispiel-Nutzungsszenarien für die Hot-Tier-Ebene gehören: • Daten, die aktiv verwendet werden oder bei denen häufig gelesen und geschrieben werden soll. • Daten, die für die Verarbeitung und die anschließende Migration in die Cool-Zugriffsebene bereitgestellt werden. Zu den Nutzungsszenarien für die Zugriffsebene „Cool“ gehören: • Kurzfristige Datensicherung und Notfallwiederherstellung. • Ältere Datensätze, die nicht häufig verwendet werden, aber voraussichtlich sofort verfügbar sein werden. • Große Datensätze, die kostengünstig gespeichert werden müssen, während zusätzliche Daten zur Verarbeitung gesammelt werden. Daten in der Cool-Tier-Stufe weisen eine etwas geringere Verfügbarkeit auf, bieten aber die gleiche hohe Haltbarkeit, Abruflatenz und Durchsatzeigenschaften wie die Hot-Tier- Stufe. Bei Daten in der Cool-Tier-Stufe können eine etwas geringere Verfügbarkeit und höhere Zugriffskosten im Vergleich zur Hot-Tier-Stufe ein akzeptabler Kompromiss für niedrigere Gesamtspeicherkosten sein. Für einen Blob in der Cool-Stufe eines allgemeinen v2-Kontos fällt eine Gebühr für vorzeitiges Löschen an, wenn er vor Ablauf von 30 Tagen gelöscht oder in eine andere Stufe verschoben wird. Diese Gebühr wird anteilig berechnet. Wenn ein Blob beispielsweise in die Cool-Stufe verschoben und nach 21 Tagen gelöscht wird, wird Ihnen eine Gebühr für vorzeitiges Löschen in Höhe von 9 (30 minus 21) Tagen berechnet, die Sie für die Speicherung dieses Blobs in der Cool-Stufe aufgewendet haben. Die Hot- und Cool-Stufen unterstützen alle Redundanzkonfigurationen. Archivzugriffsebene Die Archivebene ist eine Offlineebene zum Speichern selten abgerufener Daten. Die Archivzugriffsebene weist im Vergleich zu den Ebenen „Hot“ und „Cool“ die niedrigsten Speicherkosten, aber höhere Datenabrufkosten und eine höhere Latenz auf. Beispiele für Anwendungsszenarien für die Archivzugriffsebene: • Langzeitsicherung, Sekundärsicherung und Archivierung von Datensätzen • Originaldaten (Rohdaten), die auch nach der Verarbeitung in eine endgültige, nutzbare Form erhalten bleiben müssen • Compliance- und Archivdaten, die lange gespeichert werden müssen und auf die kaum zugegriffen wird",
+    resources: [{ label: "Access Tiers Overview", url: "https://docs.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview" }],
   },
   {
     id: "real-az900-368",
@@ -4905,6 +5165,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Container Instances ist eine hervorragende Lösung für alle Szenarien, die in isolierten Containern ausgeführt werden können, einschließlich einfacher Anwendungen, Aufgabenautomatisierung und Buildaufträgen. Für Szenarien, in denen Sie eine vollständige Containerorchestrierung benötigen, einschließlich Diensterkennung über mehrere Container hinweg, automatischer Skalierung und koordinierter Anwendungsupgrades, empfehlen wir Azure Kubernetes Service (AKS). Container bieten gegenüber virtuellen Maschinen (VMs) erhebliche Startvorteile. Azure Container Instances können Container in Azure in Sekundenschnelle starten, ohne dass VMs bereitgestellt und verwaltet werden müssen. Bringen Sie Linux- oder Windows-Containerimages von Docker Hub, einem privaten Azure-Containerregister oder einem anderen Cloud-basierten Docker-Register. Azure Container Instances ermöglicht die direkte Bereitstellung Ihrer Containergruppen im Internet mit einer IP-Adresse und einem vollqualifizierten Domänennamen (FQDN). Beim Erstellen einer Containerinstanz können Sie eine benutzerdefinierte DNS-Namensbezeichnung angeben, sodass Ihre Anwendung unter customlabel . azureregion .azurecontainer.io erreichbar ist. Azure Container Instances unterstützt außerdem die Ausführung von Befehlen in einem laufenden Container. Dazu stellt es eine interaktive Shell bereit, die bei der Anwendungsentwicklung und Fehlerbehebung hilft. Der Zugriff erfolgt über HTTPS, wobei TLS zur Sicherung der Clientverbindungen verwendet wird.",
+    resources: [{ label: "Container Instances Overview", url: "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-overview" }],
   },
   {
     type: "yesno",
@@ -4917,6 +5178,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Azure PowerShell kann auf Computern verwendet werden, auf denen Windows, Linux oder macOS ausgeführt wird", correct: "Ja" },
     ],
     explanation: "Azure Cloud Shell ist eine interaktive, authentifizierte und browserbasierte Shell zur Verwaltung von Azure-Ressourcen. Sie bietet Ihnen die Flexibilität, die Shell-Oberfläche zu wählen, die am besten zu Ihrer Arbeitsweise passt: Bash oder PowerShell. Azure Cloud Shell wird, wie der Name schon sagt, in der Cloud ausgeführt. Die Azure CLI kann in Windows-, macOS- und Linux-Umgebungen installiert werden. Sie kann auch in einem Docker-Container und in Azure Cloud Shell ausgeführt werden. Die Azure CLI ist auf keinem Betriebssystem standardmäßig installiert. Azure PowerShell ist für Windows-, Linux- und macOS-Plattformen verfügbar. Referenzen: Übersicht über Azure Cloud Shell So installieren Sie die Azure CLI Installieren Sie das Azure Az PowerShell-Modul",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/cloud-shell/overview" }, { label: "Install Azure Cli", url: "https://learn.microsoft.com/en-us/cli/azure/install-azure-cli" }, { label: "Install Az Ps", url: "https://learn.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-9.0.0" }],
   },
   {
     type: "yesno",
@@ -4929,6 +5191,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Die Cool-Zugriffsebene kann auf Speicherkontoebene konfiguriert werden", correct: "Ja" },
     ],
     explanation: "Azure Storage-Zugriffsebenen sind nur für Blob Storage verfügbar (nicht für Dateifreigaben). Zu den Azure Storage-Zugriffsebenen gehören: • Hot Tier – Eine Online-Schicht, die für die Speicherung von Daten optimiert ist, auf die häufig zugegriffen oder die häufig geändert werden. Die Hot Tier verursacht die höchsten Speicherkosten, aber die niedrigsten Zugriffskosten. • Cool Tier – Eine Online-Ebene, die für die Speicherung selten abgerufener oder geänderter Daten optimiert ist. Daten in der Cool Tier sollten mindestens 30 Tage lang gespeichert werden. Die Cool Tier verursacht im Vergleich zur Hot Tier geringere Speicherkosten und höhere Zugriffskosten. • Archivebene : Eine Offlineebene, die für die Speicherung selten abgerufener Daten optimiert ist und flexible Latenzanforderungen im Stundenbereich hat. Daten in der Archivebene sollten mindestens 180 Tage lang gespeichert werden. Speicherkonten verfügen über eine Standardeinstellung für die Zugriffsebene, die die Onlineebene angibt, auf der ein neues Blob erstellt wird. Die Standardeinstellung für die Zugriffsebene kann auf „Heiß“ oder „Kalt“ festgelegt werden. Benutzer können die Standardeinstellung für ein einzelnes Blob überschreiben, wenn sie das Blob hochladen oder seine Ebene ändern. Die Archivebene muss auf Blobebene konfiguriert werden.",
+    resources: [{ label: "Access Tiers Overview", url: "https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview" }],
   },
   {
     id: "real-az900-371",
@@ -4942,6 +5205,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Das Trust Center bietet: • Ausführliche Informationen zu Sicherheit, Datenschutz, Compliance-Angeboten, Richtlinien, Funktionen und Praktiken für alle Microsoft-Cloudprodukte. • Zusätzliche Ressourcen zu jedem Thema. • Links zu Blogs zu Sicherheit, Datenschutz und Compliance sowie zu bevorstehenden Veranstaltungen. Das Trust Center ist eine hervorragende Ressource für andere Personen in Ihrem Unternehmen, die möglicherweise eine Rolle in den Bereichen Sicherheit, Datenschutz und Compliance spielen. Zu diesen Personen gehören Geschäftsführer, Risikobewertungs- und Datenschutzbeauftragte sowie Teams für die Einhaltung gesetzlicher Vorschriften.",
+    resources: [{ label: "Explore The Microsoft Trust Center", url: "https://www.azureguru.org/explore-the-microsoft-trust-center/" }],
   },
   {
     id: "real-az900-372",
@@ -4955,6 +5219,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Verwenden Sie Azure Resource Manager-Vorlagen (ARM-Vorlagen), um Infrastruktur als Code für Ihre Azure-Lösungen zu implementieren. Die Vorlage ist eine JSON-Datei (JavaScript Object Notation), die die Infrastruktur und Konfiguration für Ihr Projekt definiert. Die Vorlage verwendet eine deklarative Syntax, mit der Sie angeben können, was Sie bereitstellen möchten, ohne die Abfolge der Programmierbefehle zum Erstellen schreiben zu müssen. In der Vorlage geben Sie die bereitzustellenden Ressourcen und die Eigenschaften für diese Ressourcen an.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview" }],
   },
   {
     id: "real-az900-373",
@@ -4968,6 +5233,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Wenn Sie eine virtuelle Maschine (VM) erstellen, erstellen Sie ein virtuelles Netzwerk oder verwenden ein vorhandenes. Sie können ein virtuelles Netzwerk erstellen, bevor Sie eine virtuelle Maschine erstellen, oder Sie können das virtuelle Netzwerk erstellen, während Sie eine virtuelle Maschine erstellen. Sie erstellen diese Ressourcen, um die Kommunikation mit einer virtuellen Maschine zu unterstützen: • Netzwerkschnittstellen • IP-Adressen • Virtuelles Netzwerk und Subnetze Berücksichtigen Sie außerdem diese optionalen Ressourcen: • Netzwerksicherheitsgruppen • Lastenausgleichsmodule",
+    resources: [{ label: "Network Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-network/network-overview" }],
   },
   {
     id: "real-az900-374",
@@ -4981,6 +5247,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Für Anwendungen, die eine hohe Dauerhaftigkeit erfordern, können Sie die Daten Ihres Speicherkontos zusätzlich in eine sekundäre Region kopieren, die Hunderte von Kilometern von der primären Region entfernt ist. Wenn Ihr Speicherkonto in eine sekundäre Region kopiert wird, sind Ihre Daten auch bei einem vollständigen regionalen Ausfall oder einer Katastrophe, bei der die primäre Region nicht wiederhergestellt werden kann, dauerhaft. Wenn Sie ein Speicherkonto erstellen, wählen Sie die primäre Region für das Konto aus. Die gekoppelte sekundäre Region wird anhand der primären Region bestimmt und kann nicht geändert werden. Azure Storage bietet zwei Optionen zum Kopieren Ihrer Daten in eine sekundäre Region: • Georedundanter Speicher (GRS) kopiert Ihre Daten mithilfe von LRS dreimal synchron innerhalb eines einzelnen physischen Standorts in der primären Region. Anschließend werden Ihre Daten asynchron an einen einzelnen physischen Standort in der sekundären Region kopiert. Innerhalb der sekundären Region werden Ihre Daten mithilfe von LRS dreimal synchron kopiert. • Geozonenredundanter Speicher (GZRS) kopiert Ihre Daten mithilfe von ZRS synchron über drei Azure-Verfügbarkeitszonen in der primären Region. Anschließend werden Ihre Daten asynchron an einen einzelnen physischen Speicherort in der sekundären Region kopiert. Innerhalb der sekundären Region werden Ihre Daten mithilfe von LRS dreimal synchron kopiert.",
+    resources: [{ label: "Storage Redundancy", url: "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy" }],
   },
   {
     type: "yesno",
@@ -4993,6 +5260,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Beim bedingten Zugriff werden während des Anmeldevorgangs von einem Benutzer erfasste Signale verwendet, um zu entscheiden, ob...", correct: "Ja" },
     ],
     explanation: "Single Sign-On ist eine Authentifizierungsmethode, die es Benutzern ermöglicht, sich mit einem Satz Anmeldeinformationen bei mehreren unabhängigen Softwaresystemen anzumelden. Durch die Verwendung von SSO muss sich ein Benutzer nicht bei jeder verwendeten Anwendung erneut anmelden. Mit SSO können Benutzer auf alle benötigten Anwendungen zugreifen, ohne sich mit unterschiedlichen Anmeldeinformationen authentifizieren zu müssen. Für SSO ist die Verwendung der Microsoft Authenticator-App nicht erforderlich. Bei der Autorisierung wird festgelegt, welche Zugriffsebene ein authentifizierter Benutzer oder Dienst hat. Bedingter Zugriff führt Signale zusammen, um Entscheidungen zu treffen und Unternehmensrichtlinien durchzusetzen. Richtlinien für bedingten Zugriff sind im einfachsten Fall Wenn-Dann-Anweisungen: Wenn ein Benutzer auf eine Ressource zugreifen möchte, muss er eine Aktion ausführen. Beispiel: Ein Lohnbuchhalter möchte auf die Lohn- und Gehaltsabrechnungsanwendung zugreifen und muss dafür eine mehrstufige Authentifizierung durchführen. Referenzen: Was ist Single Sign-On in Azure Active Directory? Was ist bedingter Zugriff?",
+    resources: [{ label: "What Is Single Sign On", url: "https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/what-is-single-sign-on" }, { label: "Overview", url: "https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/overview" }],
   },
   {
     type: "yesno",
@@ -5005,6 +5273,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "iOS-Geräte können in Azure Active Directory (Azure AD) registriert werden", correct: "Ja" },
     ],
     explanation: "Der Anwendungsproxy von Azure Active Directory bietet sicheren Remotezugriff auf lokale Webanwendungen. Nach einmaligem Anmelden bei Azure AD können Benutzer über eine externe URL oder ein internes Anwendungsportal sowohl auf Cloud- als auch auf lokale Anwendungen zugreifen. Beispielsweise kann der Anwendungsproxy Remotezugriff und einmaliges Anmelden für Remotedesktop-, SharePoint-, Teams-, Tableau-, Qlik- und Branchenanwendungen (LOB) bereitstellen. Einmaliges Anmelden ist eine Authentifizierungsmethode, mit der sich Benutzer mit einem Satz Anmeldeinformationen bei mehreren unabhängigen Softwaresystemen anmelden können. Durch die Verwendung von SSO muss sich ein Benutzer nicht bei jeder verwendeten Anwendung anmelden. Mit SSO können Benutzer auf alle benötigten Anwendungen zugreifen, ohne sich mit unterschiedlichen Anmeldeinformationen authentifizieren zu müssen. In Azure AD sind bereits viele Anwendungen vorhanden, die Sie mit SSO verwenden können. Das Ziel von in Azure AD registrierten – auch als „Workplace Joined“ bezeichneten – Geräten besteht darin, Ihren Benutzern Unterstützung für BYOD-Szenarien (Bring Your Own Device) oder Mobilgeräte bereitzustellen. In diesen Szenarien kann ein Benutzer mit einem persönlichen Gerät auf die Ressourcen Ihrer Organisation zugreifen. Azure AD unterstützt die Registrierung von Geräten mit den folgenden Betriebssystemen: Windows 10 oder neuer, iOS, Android, macOS, Ubuntu 20.04/22.04. Referenzen: Remotezugriff auf lokale Anwendungen über Azure AD-Anwendungsproxy. Was ist Single Sign-On in Azure Active Directory? Azure AD-registrierte Geräte",
+    resources: [{ label: "Application Proxy", url: "https://learn.microsoft.com/en-us/azure/active-directory/app-proxy/application-proxy" }, { label: "What Is Single Sign On", url: "https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/what-is-single-sign-on" }, { label: "Concept Azure Ad Register", url: "https://learn.microsoft.com/en-us/azure/active-directory/devices/concept-azure-ad-register" }],
   },
   {
     type: "yesno",
@@ -5017,6 +5286,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Jede bereitzustellende Azure-Ressource erfordert eine separate Azure Resource Manager (ARM)-Vorlage", correct: "Nein" },
     ],
     explanation: "Verwenden Sie Azure Resource Manager-Vorlagen (ARM-Vorlagen), um Infrastruktur als Code für Ihre Azure-Lösungen zu implementieren. Die Vorlage ist eine JSON-Datei (JavaScript Object Notation), die die Infrastruktur und Konfiguration für Ihr Projekt definiert. Die Vorlage verwendet eine deklarative Syntax, mit der Sie angeben können, was Sie bereitstellen möchten, ohne die Abfolge der Programmierbefehle zum Erstellen schreiben zu müssen. In der Vorlage geben Sie die bereitzustellenden Ressourcen und die Eigenschaften für diese Ressourcen an.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview" }],
   },
   {
     type: "yesno",
@@ -5029,6 +5299,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Microsoft Intune ist ein Beispiel für Software as a Service (SaaS)", correct: "Ja" },
     ],
     explanation: "Software as a Service (SaaS) ist ein Softwarelizenzierungs- und Bereitstellungsmodell, bei dem Software an einen Benutzer lizenziert wird. Der Zugriff auf die Software bzw. Anwendung erfolgt über das Internet und einen Webbrowser. Sie müssen die Software nicht lokal installieren und warten. Sie können sofort mit der Konfiguration und Nutzung beginnen. Infrastructure as a Service (IaaS) ist ein Cloud-Computing-Dienst, der wichtige Rechen-, Speicher- und Netzwerkressourcen bedarfsgerecht und nutzungsbasiert bereitstellt. Mit IaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung physischer Server und Rechenzentrumsinfrastruktur. Jede Ressource wird als separate Servicekomponente angeboten, und Sie zahlen nur für die jeweilige Ressource, solange Sie sie benötigen. Ein Cloud-Computing-Dienstanbieter wie Azure verwaltet die Infrastruktur, während Sie Ihre eigene Software – einschließlich Betriebssystemen, Middleware und Anwendungen – kaufen, installieren, konfigurieren und verwalten. Wie IaaS umfasst PaaS Infrastruktur – Server, Speicher und Netzwerk –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. Azure Backup ist ein Beispiel für eine PaaS-Lösung. Referenzen: Was ist PaaS? Was ist IaaS? Was ist SaaS?",
+    resources: [{ label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }, { label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }, { label: "What Is Saas", url: "https://azure.microsoft.com/en-us/overview/what-is-saas/" }],
   },
   {
     type: "yesno",
@@ -5041,6 +5312,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Die Anzahl der Azure-VMs in einer VM-Skalierungsgruppe kann automatisch verringert werden", correct: "Ja" },
     ],
     explanation: "Mit Azure-VM-Skalierungsgruppen können Sie eine Gruppe von VMs mit Lastenausgleich erstellen und verwalten. Die Anzahl der VM-Instanzen kann je nach Bedarf oder nach einem definierten Zeitplan automatisch erhöht oder verringert werden. Skalierungsgruppen bieten die folgenden Hauptvorteile: • Einfaches Erstellen und Verwalten mehrerer VMs • Bietet hohe Verfügbarkeit und Anwendungsausfallsicherheit durch die Verteilung von VMs auf Verfügbarkeitszonen oder Fehlerdomänen • Ermöglicht die automatische Skalierung Ihrer Anwendung bei sich änderndem Ressourcenbedarf • Arbeiten im großen Maßstab",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview" }],
   },
   {
     id: "real-az900-380",
@@ -5054,6 +5326,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Mit dem TCO-Rechner können Sie die Kosteneinsparungen schätzen, die sich im Laufe der Zeit durch den Betrieb Ihrer Lösung auf Azure im Vergleich zum Betrieb in Ihrem lokalen Rechenzentrum ergeben. Der Begriff Gesamtbetriebskosten wird häufig im Finanzwesen verwendet. Es kann schwierig sein, alle versteckten Kosten zu erkennen, die mit dem Betrieb einer Technologie vor Ort verbunden sind. Softwarelizenzen und Hardware verursachen zusätzliche Kosten. Mit dem TCO-Rechner geben Sie die Details Ihrer lokalen Workloads ein. Anschließend können Sie die vorgeschlagenen durchschnittlichen Branchenkosten (die Sie anpassen können) für die zugehörigen Betriebskosten überprüfen. Diese Kosten umfassen Strom, Netzwerkwartung und IT-Arbeit. Ihnen wird dann ein Vergleichsbericht angezeigt. Mithilfe des Berichts können Sie diese Kosten mit denselben Workloads vergleichen, die auf Azure ausgeführt werden.",
+    resources: [{ label: "2 Compare Costs Tco Calculator", url: "https://learn.microsoft.com/en-us/training/modules/plan-manage-azure-costs/2-compare-costs-tco-calculator" }],
   },
   {
     type: "yesno",
@@ -5066,6 +5339,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Cloud Computing nutzt Virtualisierung, um Dienste für mehrere Kunden gleichzeitig bereitzustellen", correct: "Ja" },
     ],
     explanation: "Cloud Computing bedeutet einen großen Wandel im Vergleich zur traditionellen Denkweise von Unternehmen hinsichtlich IT-Ressourcen. Hier sind sieben häufige Gründe, warum Unternehmen auf Cloud Computing-Dienste zurückgreifen: Kosten – Cloud Computing macht die Anschaffung von Hard- und Software sowie die Einrichtung und den Betrieb von Rechenzentren vor Ort überflüssig – die Server-Racks, die rund um die Uhr verfügbare Stromversorgung und Kühlung sowie die IT-Experten für die Verwaltung der Infrastruktur. Das summiert sich schnell. Geschwindigkeit – Die meisten Cloud-Computing-Dienste werden im Self-Service und auf Abruf bereitgestellt, sodass selbst große Mengen an Rechenressourcen in wenigen Minuten, in der Regel mit nur wenigen Mausklicks, bereitgestellt werden können. Dies bietet Unternehmen ein hohes Maß an Flexibilität und verringert den Druck bei der Kapazitätsplanung. Globale Skalierung – Zu den Vorteilen von Cloud-Computing-Diensten gehört die Möglichkeit der elastischen Skalierung. In der Cloud-Sprache bedeutet dies, dass die richtige Menge an IT-Ressourcen – beispielsweise mehr oder weniger Rechenleistung, Speicher oder Bandbreite – genau dann bereitgestellt wird, wenn sie benötigt werden, und zwar vom richtigen geografischen Standort aus. Produktivität – Vor-Ort-Rechenzentren erfordern in der Regel viel „Racking and Stacking“ – Hardware-Setup, Software-Patches und andere zeitaufwändige IT-Management- Aufgaben. Cloud Computing macht viele dieser Aufgaben überflüssig, sodass IT-Teams Zeit für wichtigere Geschäftsziele haben. Leistung – Die größten Cloud-Computing-Dienste laufen in einem weltweiten Netzwerk sicherer Rechenzentren, die regelmäßig auf die neueste Generation schneller und effizienter Computerhardware aktualisiert werden. Dies bietet gegenüber einem einzelnen Unternehmensrechenzentrum mehrere Vorteile, darunter eine geringere Netzwerklatenz für Anwendungen und höhere Skaleneffekte. Zuverlässigkeit – Cloud Computing vereinfacht und reduziert die Kosten für Datensicherung, Notfallwiederherstellung und Geschäftskontinuität, da Daten an mehreren redundanten Standorten im Netzwerk des Cloud-Anbieters gespiegelt werden können. Sicherheit – Viele Cloud-Anbieter bieten eine breite Palette an Richtlinien, Technologien und Kontrollen an, die Ihre Sicherheitslage insgesamt stärken und dazu beitragen, Ihre Daten, Apps und Infrastruktur vor potenziellen Bedrohungen zu schützen.",
+    resources: [{ label: "What Is Cloud Computing", url: "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-cloud-computing/#benefits" }],
   },
   {
     id: "real-az900-382",
@@ -5079,6 +5353,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure Blob Storage ist die Objektspeicherlösung von Microsoft für die Cloud. Blob Storage ist für die Speicherung großer Mengen unstrukturierter Daten optimiert. Unstrukturierte Daten sind Daten, die keinem bestimmten Datenmodell oder keiner bestimmten Definition entsprechen, wie z. B. Text- oder Binärdaten. Blob-Speicher ist für Folgendes konzipiert: • Bilder oder Dokumente direkt an einen Browser senden. • Speichern von Dateien für verteilten Zugriff. • Streaming von Video und Audio. • Schreiben in Protokolldateien. • Speichern von Daten für Sicherung und Wiederherstellung, Notfallwiederherstellung und Archivierung. • Speichern von Daten zur Analyse durch einen lokalen oder in Azure gehosteten Dienst. Benutzer oder Clientanwendungen können von überall auf der Welt über HTTP/HTTPS auf Objekte im Blob-Speicher zugreifen.",
+    resources: [{ label: "Storage Blobs Introduction", url: "https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction" }],
   },
   {
     type: "yesno",
@@ -5091,6 +5366,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Azure Virtual Desktop unterstützt Desktop- und App-Virtualisierung", correct: "Ja" },
     ],
     explanation: "Azure Virtual Desktop ist ein Desktop- und App-Virtualisierungsdienst, der in der Cloud ausgeführt wird. Folgendes können Sie tun, wenn Sie Azure Virtual Desktop auf Azure ausführen: • Richten Sie eine Multisession-Bereitstellung von Windows 11 oder Windows 10 ein, die ein vollständiges Windows-Erlebnis mit Skalierbarkeit bietet • Präsentieren Sie Microsoft 365 Apps für Unternehmen und optimieren Sie sie für die Ausführung in virtuellen Mehrbenutzerszenarien. • Versorgen Sie virtuelle Windows 7-Desktops mit kostenlosen erweiterten Sicherheitsupdates • Bringen Sie Ihre vorhandenen Remote Desktop Services (RDS) und Windows Server-Desktops und -Apps auf jeden Computer • Virtualisieren Sie sowohl Desktops als auch Apps • Verwalten Sie Desktops und Apps von verschiedenen Windows- und Windows Server-Betriebssystemen mit einer einheitlichen Verwaltungserfahrung Mit Azure Virtual Desktop können Sie eine skalierbare und flexible Umgebung einrichten: • Erstellen Sie in Ihrem Azure-Abonnement eine vollständige Desktopvirtualisierungsumgebung, ohne Gatewayserver auszuführen. • Veröffentlichen Sie Hostpools nach Bedarf, um Ihren unterschiedlichen Arbeitslasten gerecht zu werden. • Bringen Sie Ihr eigenes Image für Produktionsworkloads mit oder testen Sie es aus der Azure Gallery. • Reduzieren Sie Kosten mit gepoolten Multisession-Ressourcen. Mit der neuen Multisession-Funktion von Windows 11 und Windows 10 Enterprise, die exklusiv für Azure Virtual Desktop und die RDSH-Rolle (Remote Desktop Session Host) unter Windows Server verfügbar ist, können Sie die Anzahl der virtuellen Maschinen und den Betriebssystem-Overhead erheblich reduzieren und Ihren Benutzern dennoch dieselben Ressourcen zur Verfügung stellen. • Gewährleisten Sie individuelles Eigentum durch persönliche (persistente) Desktops. • Verwenden Sie die automatische Skalierung, um die Kapazität je nach Tageszeit, bestimmten Wochentagen oder Bedarfsänderungen automatisch zu erhöhen oder zu verringern und so die Kosten im Griff zu behalten.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-desktop/overview" }],
   },
   {
     id: "real-az900-384",
@@ -5104,6 +5380,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure Virtual Desktop verwendet die rollenbasierte Zugriffssteuerung (RBAC) von Azure, um den Zugriff auf Ressourcen zu steuern. Es gibt eine Reihe integrierter Rollen für Azure Virtual Desktop, die eine Sammlung von Berechtigungen darstellen. Sie weisen Benutzern und Administratoren Rollen zu, die ihnen die Berechtigung zum Ausführen bestimmter Aufgaben erteilen.",
+    resources: [{ label: "Rbac", url: "https://learn.microsoft.com/en-us/azure/virtual-desktop/rbac" }],
   },
   {
     id: "real-az900-385",
@@ -5117,6 +5394,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Advisor ist ein personalisierter Cloudberater, der Sie bei der Optimierung Ihrer Azure-Bereitstellungen mithilfe bewährter Methoden unterstützt. Er analysiert Ihre Ressourcenkonfiguration und Nutzungstelemetrie und empfiehlt anschließend Lösungen, mit denen Sie die Kosteneffizienz, Leistung, Zuverlässigkeit (früher als Hochverfügbarkeit bezeichnet) und Sicherheit Ihrer Azure-Ressourcen verbessern können. Mit Advisor können Sie: • Erhalten Sie proaktive, umsetzbare und personalisierte Best Practices-Empfehlungen. • Verbessern Sie die Leistung, Sicherheit und Zuverlässigkeit Ihrer Ressourcen, indem Sie Möglichkeiten zur Reduzierung Ihrer Azure-Gesamtausgaben identifizieren. • Erhalten Sie Empfehlungen mit vorgeschlagenen Aktionen inline. Sie können über das Azure-Portal auf Advisor zugreifen. Melden Sie sich beim Portal an und suchen Sie im Navigationsmenü nach Advisor oder im Menü „Alle Dienste“ .",
+    resources: [{ label: "Advisor Overview", url: "https://learn.microsoft.com/en-us/azure/advisor/advisor-overview" }],
   },
   {
     id: "real-az900-386",
@@ -5130,6 +5408,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Cloud Shell ist eine interaktive, authentifizierte und browserbasierte Shell zur Verwaltung von Azure-Ressourcen. Sie bietet die Flexibilität, die Shell-Oberfläche auszuwählen, die am besten zu Ihrer Arbeitsweise passt: Bash oder PowerShell. Sie können auf drei Arten auf die Cloud Shell zugreifen: • Direkter Link: Öffnen Sie einen Browser und rufen Sie https://shell.azure.com auf. • Azure-Portal: Wählen Sie das Cloud Shell-Symbol im Azure-Portal aus: • Codeausschnitte: Wählen Sie in der technischen Dokumentation und den Schulungsressourcen von Microsoft die Schaltfläche „Ausprobieren“ aus , die mit den Codeausschnitten von Azure CLI und Azure PowerShell angezeigt wird:",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/cloud-shell/overview" }],
   },
   {
     id: "real-az900-387",
@@ -5143,6 +5422,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Storage speichert immer mehrere Kopien Ihrer Daten, sodass diese vor geplanten und ungeplanten Ereignissen geschützt sind, darunter vorübergehende Hardwarefehler, Netzwerk- oder Stromausfälle und massive Naturkatastrophen. Daten in einem Azure Storage-Konto werden in der primären Region immer dreimal repliziert. Azure Storage bietet zwei Optionen für die Replikation Ihrer Daten in der primären Region: • Lokal redundanter Speicher (LRS) kopiert Ihre Daten dreimal synchron an einem einzigen physischen Standort in der primären Region. LRS ist die kostengünstigste Replikationsoption, wird jedoch nicht für Anwendungen empfohlen, die hohe Verfügbarkeit oder Haltbarkeit erfordern. • Zonenredundanter Speicher (ZRS) kopiert Ihre Daten synchron über drei Azure-Verfügbarkeitszonen in der primären Region. Für Anwendungen, die Hochverfügbarkeit erfordern, empfiehlt Microsoft die Verwendung von ZRS in der primären Region und die Replikation in eine sekundäre Region.",
+    resources: [{ label: "Storage Redundancy", url: "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy" }],
   },
   {
     id: "real-az900-388",
@@ -5156,6 +5436,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Märkte verändern sich heute schneller als je zuvor. Eine Studie aus dem Jahr 2016, die sich mit der Fluktuationsrate von Fortune-500-Unternehmen befasste, ergab, dass von den 500 Unternehmen, die 1955 auf der Fortune-500-Liste standen, 61 Jahre später nur noch 57 auf der Liste standen. Die Fluktuationsrate von 88,6 Prozent deutet auf ein beispielloses Tempo des Marktwandels hin. IT-Agilität oder sogar geschäftliche Agilität werden die Listung eines Unternehmens in den Fortune 500 wahrscheinlich nicht beeinflussen, aber diese Zahlen helfen uns zu verstehen, wie schnell sich Märkte weiterhin verändern. Sowohl für Emporkömmlinge als auch für etablierte Unternehmen kann geschäftliche Agilität den Unterschied zwischen Erfolg und Misserfolg einer Geschäftsinitiative ausmachen. Sich rasch an Marktveränderungen anzupassen, kann einem Unternehmen helfen, bestehende Kunden zu binden oder Marktanteile von der Konkurrenz zu erobern. Die agilitätsbezogenen Ergebnisse in den folgenden Abschnitten können Ihnen dabei helfen, den Wert der Migration in die Cloud im Rahmen der Transformation zu verdeutlichen.",
+    resources: [{ label: "Agility Outcomes", url: "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/strategy/business-outcomes/agility-outcomes#why-is-agility-so-important" }],
   },
   {
     id: "real-az900-389",
@@ -5169,6 +5450,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Horizontale Skalierung ist eine Erhöhung oder Verringerung der Anzahl von Ressourceninstanzen. Beispielsweise bedeutet horizontale Skalierung in einem VM- Skalierungssatz das Hinzufügen weiterer virtueller Maschinen. Herunterskalierung bedeutet das Entfernen virtueller Maschinen. Horizontale Skalierung ist in einer Cloudsituation flexibel, da Sie damit eine große Anzahl von VMs ausführen können, um die Last zu bewältigen. Im Gegensatz dazu bleibt bei vertikaler Skalierung die Anzahl der Ressourcen konstant, aber sie erhalten mehr Kapazität in Bezug auf Arbeitsspeicher, CPU-Geschwindigkeit, Festplattenspeicher und Netzwerk. Das Hinzufügen oder Entfernen von Kapazität bei vertikaler Skalierung wird als Herunter- oder Hochskalierung bezeichnet. Vertikale Skalierung wird durch die Verfügbarkeit größerer Hardware begrenzt, die schließlich eine Obergrenze erreicht. Die Verfügbarkeit von Hardwaregrößen variiert in Azure je nach Region. Bei vertikaler Skalierung ist während des Skalierungsvorgangs möglicherweise auch ein Neustart der virtuellen Maschine erforderlich.",
+    resources: [{ label: "Autoscale Overview", url: "https://learn.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-overview#horizontal-vs-vertical-scaling" }],
   },
   {
     id: "real-az900-390",
@@ -5182,6 +5464,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Bei einer reservierten Azure-VM-Instanz zahlen Sie im Voraus für die Nutzung einer virtuellen Maschine für einen bestimmten Zeitraum (1 oder 3 Jahre). Sie können Geld sparen, da Sie einen Rabatt auf die Kosten einer VM erhalten, wenn Sie für eine reservierte Instanz im Voraus bezahlen.",
+    resources: [{ label: "Save Compute Costs Reservations", url: "https://docs.microsoft.com/en-us/azure/cost-management-billing/reservations/save-compute-costs-reservations" }],
   },
   {
     type: "yesno",
@@ -5194,6 +5477,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Der Adressraum des virtuellen Azure-Netzwerks muss innerhalb eines Abonnements eindeutig sein", correct: "Nein" },
     ],
     explanation: "Azure Virtual Network (VNet) ist der grundlegende Baustein für Ihr privates Netzwerk in Azure. VNet ermöglicht vielen Arten von Azure-Ressourcen, z. B. Azure Virtual Machines (VM), die sichere Kommunikation untereinander, mit dem Internet und mit lokalen Netzwerken. VNet ähnelt einem herkömmlichen Netzwerk, das Sie in Ihrem eigenen Rechenzentrum betreiben, bietet jedoch zusätzliche Vorteile der Azure-Infrastruktur wie Skalierbarkeit, Verfügbarkeit und Isolation. In derselben Azure-Region oder im selben Azure-Abonnement bereitgestellte virtuelle Azure-Netzwerke sind standardmäßig nicht verbunden. Sie müssen virtuelles Netzwerk- Peering konfigurieren, um die Kommunikation zwischen verschiedenen virtuellen Netzwerken zu ermöglichen. In derselben Ressourcengruppe bereitgestellte virtuelle Netzwerke müssen eindeutige Namen haben. Sie können virtuelle Netzwerke mit demselben Namen jedoch in verschiedenen Ressourcengruppen innerhalb desselben Abonnements bereitstellen. Der Adressraum des virtuellen Azure-Netzwerks muss innerhalb eines Abonnements nicht eindeutig sein. Wenn Sie jedoch virtuelles Netzwerk-Peering konfigurieren möchten, müssen die Adressräume des virtuellen Netzwerks eindeutig sein. Referenzen: Was ist Azure Virtual Network? Azure Virtual Network-Konzepte und Best Practices",
+    resources: [{ label: "Virtual Networks Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview" }, { label: "Concepts And Best Practices", url: "https://learn.microsoft.com/en-us/azure/virtual-network/concepts-and-best-practices" }],
   },
   {
     type: "yesno",
@@ -5219,6 +5503,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Sie können NAT-Regeln, Netzwerkregeln und Anwendungsregeln in Azure Firewall entweder mithilfe klassischer Regeln oder einer Firewallrichtlinie konfigurieren. Azure Firewall verweigert standardmäßig den gesamten Datenverkehr, bis manuell Regeln zum Zulassen des Datenverkehrs konfiguriert werden. Eingehende Internetverbindungen können durch Konfigurieren der Zielnetzwerkadressübersetzung (Destination Network Address Translation, DNAT) aktiviert werden. NAT- Regeln werden vorrangig vor Netzwerkregeln angewendet. Wenn eine Übereinstimmung gefunden wird, wird implizit eine entsprechende Netzwerkregel hinzugefügt, um den übersetzten Datenverkehr zuzulassen. Aus Sicherheitsgründen wird empfohlen, eine bestimmte Internetquelle hinzuzufügen, um DNAT-Zugriff auf das Netzwerk zu ermöglichen und die Verwendung von Platzhaltern zu vermeiden.",
+    resources: [{ label: "Rule Processing", url: "https://learn.microsoft.com/en-us/azure/firewall/rule-processing" }],
   },
   {
     type: "yesno",
@@ -5231,6 +5516,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Microsoft definiert die Preisstruktur aller über Azure Marketplace verkauften Dienste von Drittanbietern", correct: "Nein" },
     ],
     explanation: "Bandbreite bezieht sich auf den Datenverkehr in und aus Azure-Rechenzentren sowie auf den Datenverkehr zwischen Azure-Rechenzentren; andere Übertragungen werden ausdrücklich durch das Content Delivery Network, die ExpressRoute-Preise oder Peering abgedeckt. Die Kosten für ausgehenden Datenverkehr von Azure variieren je nach Quellkontinent. Beim Erwerb von Azure-Diensten über ein Enterprise Agreement (EA) ist eine Vorauszahlung erforderlich. Unternehmensadministratoren können im Azure Enterprise-Portal eine Zusammenfassung ihrer Nutzungsdaten, der verbrauchten Azure-Vorauszahlung und der mit zusätzlicher Nutzung verbundenen Gebühren anzeigen. Azure Marketplace ist ein Onlineshop mit Tausenden von IT-Softwareanwendungen und -Diensten branchenführender Technologieunternehmen. Im Azure Marketplace können Sie die Software und Dienste finden, testen, kaufen und bereitstellen, die Sie zum Erstellen neuer Lösungen und Verwalten Ihrer Cloud-Infrastruktur benötigen. Der Katalog enthält Lösungen für verschiedene Branchen und technische Bereiche, kostenlose Testversionen sowie Beratungsdienste von Microsoft-Partnern. Der Softwareanbieter legt Preis, Endbenutzer-Lizenzvereinbarung und Datenschutzrichtlinien fest. Referenzen: Bandbreitenpreise, Rechnungen für die Azure Enterprise-Registrierung. Was ist Azure Marketplace?",
+    resources: [{ label: "Bandwidth", url: "https://azure.microsoft.com/en-us/pricing/details/bandwidth/" }, { label: "Ea Portal Enrollment Invoices", url: "https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/ea-portal-enrollment-invoices" }, { label: "Azure Marketplace Overview", url: "https://learn.microsoft.com/en-us/marketplace/azure-marketplace-overview" }],
   },
   {
     type: "yesno",
@@ -5243,6 +5529,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Eine virtuelle Azure-Maschine ist ein Beispiel für ein Infrastructure-as-a-Service (IaaS)-Cloud-Servicemodell", correct: "Ja" },
     ],
     explanation: "Software as a Service (SaaS) ist ein Softwarelizenzierungs- und Bereitstellungsmodell, bei dem Software an einen Benutzer lizenziert wird. Der Zugriff auf die Software bzw. Anwendung erfolgt über das Internet und einen Webbrowser. Sie müssen die Software nicht lokal installieren und warten. Sie können sofort mit der Konfiguration und Nutzung beginnen. Infrastructure as a Service (IaaS) ist ein Cloud-Computing-Dienst, der wichtige Rechen-, Speicher- und Netzwerkressourcen bedarfsgerecht und nutzungsbasiert bereitstellt. Mit IaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung physischer Server und Rechenzentrumsinfrastruktur. Jede Ressource wird als separate Servicekomponente angeboten, und Sie zahlen nur für die jeweilige Ressource, solange Sie sie benötigen. Ein Cloud-Computing-Dienstanbieter wie Azure verwaltet die Infrastruktur, während Sie Ihre eigene Software – einschließlich Betriebssystemen, Middleware und Anwendungen – kaufen, installieren, konfigurieren und verwalten. Wie IaaS umfasst PaaS Infrastruktur – Server, Speicher und Netzwerk –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. Azure Backup ist ein Beispiel für eine PaaS-Lösung. Referenzen: Was ist PaaS? Was ist IaaS? Was ist SaaS? Hosting-Modelle verstehen",
+    resources: [{ label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }, { label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }, { label: "What Is Saas", url: "https://azure.microsoft.com/en-us/overview/what-is-saas/" }, { label: "Compute Decision Tree", url: "https://learn.microsoft.com/en-us/azure/architecture/guide/technology-choices/compute-decision-tree#understand-the-hosting-models" }],
   },
   {
     type: "yesno",
@@ -5255,6 +5542,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Für Microsoft Defender für Cloud können Sie einen Bericht zur Einhaltung gesetzlicher Vorschriften herunterladen", correct: "Ja" },
     ],
     explanation: "Microsoft Defender für Cloud ist eine Cloud Security Posture Management- (CSPM) und Cloud Workload Protection-Plattform (CWPP) für alle Ihre Azure-, lokalen und Multicloud-Ressourcen (Amazon AWS und Google GCP). Defender für Cloud erfüllt drei wichtige Anforderungen bei der Verwaltung der Sicherheit Ihrer Ressourcen und Workloads in der Cloud und vor Ort: • Der Defender for Cloud-Sicherheitswert bewertet kontinuierlich Ihre Sicherheitslage, sodass Sie neue Sicherheitschancen verfolgen und präzise Berichte über den Fortschritt Ihrer Sicherheitsbemühungen erstellen können. • Die Empfehlungen von Defender für die Cloud sichern Ihre Workloads mit schrittweisen Aktionen, die Ihre Workloads vor bekannten Sicherheitsrisiken schützen. • Defender for Cloud-Warnungen schützen Ihre Workloads in Echtzeit, sodass Sie sofort reagieren und die Entstehung von Sicherheitsereignissen verhindern können. Das kostenlose Angebot von Microsoft Defender für die Cloud umfasst den Sicherheits-Score und zugehörige Tools. Durch die Aktivierung der erweiterten Sicherheit (kostenpflichtig) werden alle Microsoft Defender-Pläne aktiviert und bieten eine Reihe von Sicherheitsvorteilen für alle Ihre Ressourcen in Azure-, Hybrid- und Multicloud- Umgebungen. Microsoft Defender für die Cloud vergleicht die Konfiguration Ihrer Ressourcen kontinuierlich mit den Anforderungen von Branchenstandards, Vorschriften und Benchmarks. Das Dashboard zur Einhaltung gesetzlicher Vorschriften bietet Einblicke in Ihren Compliance-Status basierend darauf, wie Sie bestimmte Compliance-Anforderungen erfüllen. Über das Dashboard zur Einhaltung gesetzlicher Vorschriften können Sie PDF-/CSV-Berichte herunterladen. Referenzen: Was ist Microsoft Defender für die Cloud? Grundlegende und erweiterte Sicherheitsfunktionen von Microsoft Defender für die Cloud. Passen Sie die Standards in Ihrem Dashboard zur Einhaltung gesetzlicher Vorschriften an.",
+    resources: [{ label: "Defender For Cloud Introduction", url: "https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-cloud-introduction" }, { label: "Enhanced Security Features Overview", url: "https://learn.microsoft.com/en-us/azure/defender-for-cloud/enhanced-security-features-overview" }, { label: "Update Regulatory Compliance Packages", url: "https://learn.microsoft.com/en-us/azure/defender-for-cloud/update-regulatory-compliance-packages" }],
   },
   {
     id: "real-az900-397",
@@ -5266,6 +5554,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Virtuelle Azure-Maschinen gelten im Allgemeinen als Infrastructure-as-a-Service, da Sie weiterhin für das Patchen und Verwalten des Betriebssystems der virtuellen Maschine verantwortlich sind.",
+    resources: [{ label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }],
   },
   {
     id: "real-az900-398",
@@ -5277,6 +5566,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Virtuelle Azure-Maschinen gelten im Allgemeinen als Infrastructure-as-a-Service, da Sie weiterhin für das Patchen und Verwalten des Betriebssystems der virtuellen Maschine verantwortlich sind.",
+    resources: [{ label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }],
   },
   {
     id: "real-az900-399",
@@ -5288,6 +5578,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Virtuelle Azure-Maschinen gelten im Allgemeinen als Infrastructure-as-a-Service, da Sie weiterhin für das Patchen und Verwalten des Betriebssystems der virtuellen Maschine verantwortlich sind.",
+    resources: [{ label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }],
   },
   {
     id: "real-az900-400",
@@ -5301,6 +5592,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Die Standardstufe ist die günstigste, die alle Anforderungen erfüllt.",
+    resources: [{ label: "Windows", url: "https://azure.microsoft.com/en-us/pricing/details/app-service/windows/" }],
   },
   {
     id: "real-az900-401",
@@ -5312,6 +5604,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Die Verwendung separater Azure Active Directory (Azure AD)-Verzeichnisse pro Abteilung wäre eine sinnvolle Lösung, um die Berechtigungen für die Ressourcen jeder Abteilung zu segmentieren, erfüllt jedoch nicht die Anforderung, den Verwaltungsaufwand auf ein Minimum zu beschränken. Wir sollten Bereiche für Azure RBAC nutzen, um administrative Berechtigungen für die Abteilungen zu segmentieren. In Azure können Sie einen Bereich auf vier Ebenen angeben: Verwaltungsgruppe, Abonnement, Ressourcengruppe und Ressource. Bereiche sind in einer über-/untergeordneten Beziehung strukturiert. Jede Hierarchieebene präzisiert den Bereich. Sie können auf jeder dieser Ebenen Rollen zuweisen. Die gewählte Ebene bestimmt den Umfang der Rolle. Niedrigere Ebenen erben Rollenberechtigungen von höheren Ebenen.",
+    resources: [{ label: "Scope Overview", url: "https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview" }],
   },
   {
     id: "real-az900-402",
@@ -5323,6 +5616,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Verwaltungseinheiten können nur Benutzer und Gruppen enthalten. Verwaltungseinheiten können nicht zur segmentierten Verwaltung von Benutzern und Gruppen verwendet werden, jedoch nicht zur segmentierten Verwaltung anderer Ressourcentypen. Wir sollten Bereiche für Azure RBAC nutzen, um administrative Berechtigungen für die Abteilungen zu segmentieren. In Azure können Sie einen Bereich auf vier Ebenen angeben: Verwaltungsgruppe, Abonnement, Ressourcengruppe und Ressource. Bereiche sind in einer über-/untergeordneten Beziehung strukturiert. Jede Hierarchieebene präzisiert den Bereich. Sie können auf jeder dieser Ebenen Rollen zuweisen. Die gewählte Ebene bestimmt den Umfang der Rolle. Niedrigere Ebenen erben Rollenberechtigungen von höheren Ebenen. Referenzen: Umfang der Azure RBAC- Verwaltungseinheiten in Azure Active Directory verstehen",
+    resources: [{ label: "Scope Overview", url: "https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview" }, { label: "Administrative Units", url: "https://learn.microsoft.com/en-us/azure/active-directory/roles/administrative-units" }],
   },
   {
     id: "real-az900-403",
@@ -5334,6 +5628,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Wir sollten Bereiche für Azure RBAC nutzen, um administrative Berechtigungen für die Abteilungen zu segmentieren. In Azure können Sie einen Bereich auf vier Ebenen angeben: Verwaltungsgruppe, Abonnement, Ressourcengruppe und Ressource. Bereiche sind in einer über-/untergeordneten Beziehung strukturiert. Jede Hierarchieebene präzisiert den Bereich. Sie können auf jeder dieser Ebenen Rollen zuweisen. Die gewählte Ebene bestimmt den Umfang der Rolle. Niedrigere Ebenen erben Rollenberechtigungen von höheren Ebenen.",
+    resources: [{ label: "Scope Overview", url: "https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview" }],
   },
   {
     id: "real-az900-404",
@@ -5345,6 +5640,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Wir sollten Bereiche für Azure RBAC nutzen, um administrative Berechtigungen für die Abteilungen zu segmentieren. In Azure können Sie einen Bereich auf vier Ebenen angeben: Verwaltungsgruppe, Abonnement, Ressourcengruppe und Ressource. Bereiche sind in einer über-/untergeordneten Beziehung strukturiert. Jede Hierarchieebene präzisiert den Bereich. Sie können auf jeder dieser Ebenen Rollen zuweisen. Die gewählte Ebene bestimmt den Umfang der Rolle. Niedrigere Ebenen erben Rollenberechtigungen von höheren Ebenen.",
+    resources: [{ label: "Scope Overview", url: "https://learn.microsoft.com/en-us/azure/role-based-access-control/scope-overview" }],
   },
   {
     id: "real-az900-405",
@@ -5358,6 +5654,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Die Standardstufe ist die günstigste, die alle Anforderungen erfüllt. Hinweis: Secure Sockets Layer (SSL)-Zertifikate für benutzerdefinierte Domänen sind in den Tarifen Basic, Standard und Premium verfügbar. SSL-Zertifikate ermöglichen sichere Verbindungen (https://) zu Ihrer benutzerdefinierten Domänenwebsite.",
+    resources: [{ label: "Windows", url: "https://azure.microsoft.com/en-us/pricing/details/app-service/windows/" }],
   },
   {
     id: "real-az900-406",
@@ -5405,6 +5702,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "E",
     explanation: "Microsoft bietet die folgenden Supportpläne an, die Azure, Microsoft 365 und Dynamics 365 umfassen.",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans/" }],
   },
   {
     id: "real-az900-410",
@@ -5418,6 +5716,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Georedundanter Speicher (mit GRS oder GZRS) repliziert Ihre Daten an einen anderen physischen Standort in der sekundären Region, um sie vor regionalen Ausfällen zu schützen. Bei einem für GRS oder GZRS konfigurierten Konto sind die Daten in der sekundären Region für Benutzer oder Anwendungen nicht direkt zugänglich, es sei denn, es kommt zu einem Failover. Der Failoverprozess aktualisiert den von Azure Storage bereitgestellten DNS-Eintrag, sodass der sekundäre Endpunkt zum neuen primären Endpunkt für Ihr Speicherkonto wird. Während des Failovers sind Ihre Daten nicht zugänglich. Nach Abschluss des Failovers können Sie Daten in der neuen primären Region lesen und schreiben. Wenn Ihre Anwendungen Hochverfügbarkeit erfordern, können Sie Ihr Speicherkonto für Lesezugriff auf die sekundäre Region konfigurieren. Wenn Sie den Lesezugriff auf die sekundäre Region aktivieren, können Ihre Daten immer aus der sekundären Region gelesen werden, auch wenn die primäre Region nicht verfügbar ist. Konfigurationen für georedundanten Speicher mit Lesezugriff (RA-GRS) oder geozonenredundanten Speicher mit Lesezugriff (RA-GZRS) ermöglichen Lesezugriff auf die sekundäre Region.",
+    resources: [{ label: "Storage Redundancy", url: "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy" }],
   },
   {
     id: "real-az900-411",
@@ -5429,6 +5728,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Architekturunterstützung wird in den Tarifen Developer, Standard und Professional Direct angeboten. Um die Kosten möglichst gering zu halten, sollten Sie den Tarif Developer wählen.",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans" }],
   },
   {
     id: "real-az900-412",
@@ -5440,6 +5740,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Architekturunterstützung wird in den Tarifen Developer, Standard und Professional Direct angeboten. Um die Kosten möglichst gering zu halten, sollten Sie den Tarif Developer wählen.",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans" }],
   },
   {
     id: "real-az900-413",
@@ -5451,6 +5752,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Architekturunterstützung wird in den Tarifen Developer, Standard und Professional Direct angeboten. Um die Kosten möglichst gering zu halten, sollten Sie den Tarif Developer wählen.",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans" }],
   },
   {
     id: "real-az900-414",
@@ -5462,6 +5764,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Architekturunterstützung wird in den Tarifen Developer, Standard und Professional Direct angeboten. Um die Kosten möglichst gering zu halten, sollten Sie den Tarif Developer wählen.",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans" }],
   },
   {
     id: "real-az900-415",
@@ -5473,6 +5776,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Wir sollten Azure Machine Learning Studio nutzen. Microsoft Azure Machine Learning Studio ist ein kollaboratives Drag-and-Drop-Tool, mit dem Sie prädiktive Analyselösungen für Ihre Daten erstellen, testen und bereitstellen können. Machine Learning Studio veröffentlicht Modelle als Webdienste, die problemlos von benutzerdefinierten Apps oder BI-Tools wie Excel genutzt werden können. Zur Entwicklung eines prädiktiven Analysemodells verwenden Sie in der Regel Daten aus einer oder mehreren Quellen, transformieren und analysieren diese mithilfe verschiedener Datenmanipulations- und Statistikfunktionen und generieren Ergebnisse. Die Entwicklung eines solchen Modells ist ein iterativer Prozess. Durch die Anpassung der verschiedenen Funktionen und ihrer Parameter konvergieren die Ergebnisse, bis Sie mit einem trainierten, effektiven Modell zufrieden sind. Azure Machine Learning Studio bietet Ihnen einen interaktiven, visuellen Arbeitsbereich zum einfachen Erstellen, Testen und Iterieren eines prädiktiven Analysemodells. Sie ziehen Datensätze und Analysemodule per Drag-and-Drop auf eine interaktive Arbeitsfläche und verbinden sie zu einem Experiment, das Sie in Machine Learning Studio ausführen. Um Ihr Modelldesign zu iterieren, bearbeiten Sie das Experiment, speichern bei Bedarf eine Kopie und führen es erneut aus. Wenn Sie bereit sind, können Sie Ihr Trainingsexperiment in ein Vorhersageexperiment umwandeln und es dann als Webdienst veröffentlichen, damit andere auf Ihr Modell zugreifen können. Referenzen: Was ist Azure Machine Learning? Was ist Azure Machine Learning Studio?",
+    resources: [{ label: "Overview What Is Azure Machine Learning", url: "https://learn.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-machine-learning?view=azureml-api-2" }, { label: "Machine Learning What Is Ml Studio.md", url: "https://github.com/Huachao/azure-content/blob/master/articles/machine-learning/machine-learning-what-is-ml-studio.md" }],
   },
   {
     id: "real-az900-416",
@@ -5484,6 +5788,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Wir sollten Azure Machine Learning Studio nutzen. Microsoft Azure Machine Learning Studio ist ein kollaboratives Drag-and-Drop-Tool, mit dem Sie prädiktive Analyselösungen für Ihre Daten erstellen, testen und bereitstellen können. Machine Learning Studio veröffentlicht Modelle als Webdienste, die problemlos von benutzerdefinierten Apps oder BI-Tools wie Excel genutzt werden können. Zur Entwicklung eines prädiktiven Analysemodells verwenden Sie in der Regel Daten aus einer oder mehreren Quellen, transformieren und analysieren diese mithilfe verschiedener Datenmanipulations- und Statistikfunktionen und generieren Ergebnisse. Die Entwicklung eines solchen Modells ist ein iterativer Prozess. Durch die Anpassung der verschiedenen Funktionen und ihrer Parameter konvergieren die Ergebnisse, bis Sie mit einem trainierten, effektiven Modell zufrieden sind. Azure Machine Learning Studio bietet Ihnen einen interaktiven, visuellen Arbeitsbereich zum einfachen Erstellen, Testen und Iterieren eines prädiktiven Analysemodells. Sie ziehen Datensätze und Analysemodule per Drag-and-Drop auf eine interaktive Arbeitsfläche und verbinden sie zu einem Experiment, das Sie in Machine Learning Studio ausführen. Um Ihr Modelldesign zu iterieren, bearbeiten Sie das Experiment, speichern bei Bedarf eine Kopie und führen es erneut aus. Wenn Sie bereit sind, können Sie Ihr Trainingsexperiment in ein Vorhersageexperiment umwandeln und es dann als Webdienst veröffentlichen, damit andere auf Ihr Modell zugreifen können. Referenzen: Was ist Azure Machine Learning? Was ist Azure Machine Learning Studio?",
+    resources: [{ label: "Overview What Is Azure Machine Learning", url: "https://learn.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-machine-learning?view=azureml-api-2" }, { label: "Machine Learning What Is Ml Studio.md", url: "https://github.com/Huachao/azure-content/blob/master/articles/machine-learning/machine-learning-what-is-ml-studio.md" }],
   },
   {
     id: "real-az900-417",
@@ -5495,6 +5800,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Wir sollten Azure Machine Learning Studio nutzen. Microsoft Azure Machine Learning Studio ist ein kollaboratives Drag-and-Drop-Tool, mit dem Sie prädiktive Analyselösungen für Ihre Daten erstellen, testen und bereitstellen können. Machine Learning Studio veröffentlicht Modelle als Webdienste, die problemlos von benutzerdefinierten Apps oder BI-Tools wie Excel genutzt werden können. Zur Entwicklung eines prädiktiven Analysemodells verwenden Sie in der Regel Daten aus einer oder mehreren Quellen, transformieren und analysieren diese mithilfe verschiedener Datenmanipulations- und Statistikfunktionen und generieren Ergebnisse. Die Entwicklung eines solchen Modells ist ein iterativer Prozess. Durch die Anpassung der verschiedenen Funktionen und ihrer Parameter konvergieren die Ergebnisse, bis Sie mit einem trainierten, effektiven Modell zufrieden sind. Azure Machine Learning Studio bietet Ihnen einen interaktiven, visuellen Arbeitsbereich zum einfachen Erstellen, Testen und Iterieren eines prädiktiven Analysemodells. Sie ziehen Datensätze und Analysemodule per Drag-and-Drop auf eine interaktive Arbeitsfläche und verbinden sie zu einem Experiment, das Sie in Machine Learning Studio ausführen. Um Ihr Modelldesign zu iterieren, bearbeiten Sie das Experiment, speichern bei Bedarf eine Kopie und führen es erneut aus. Wenn Sie bereit sind, können Sie Ihr Trainingsexperiment in ein Vorhersageexperiment umwandeln und es dann als Webdienst veröffentlichen, damit andere auf Ihr Modell zugreifen können. Referenzen: Was ist Azure Machine Learning? Was ist Azure Machine Learning Studio?",
+    resources: [{ label: "Overview What Is Azure Machine Learning", url: "https://learn.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-machine-learning?view=azureml-api-2" }, { label: "Machine Learning What Is Ml Studio.md", url: "https://github.com/Huachao/azure-content/blob/master/articles/machine-learning/machine-learning-what-is-ml-studio.md" }],
   },
   {
     id: "real-az900-418",
@@ -5506,6 +5812,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Um diese Herausforderungen zu meistern, können wir Bereitstellungen automatisieren und die Praxis der Infrastruktur als Code verwenden . Im Code definieren Sie die Infrastruktur, die bereitgestellt werden muss. Der Infrastrukturcode wird Teil Ihres Projekts. Genau wie Anwendungscode speichern Sie den Infrastrukturcode in einem Quellrepository und versionieren ihn. Jeder in Ihrem Team kann den Code ausführen und ähnliche Umgebungen bereitstellen. Verwenden Sie Azure Resource Manager- Vorlagen (ARM-Vorlagen) , um Infrastruktur als Code für Ihre Azure-Lösungen zu implementieren. Die Vorlage ist eine JSON-Datei (JavaScript Object Notation), die die Infrastruktur und Konfiguration für Ihr Projekt definiert. Die Vorlage verwendet eine deklarative Syntax, sodass Sie angeben können, was Sie bereitstellen möchten, ohne die Abfolge von Programmierbefehlen zum Erstellen schreiben zu müssen. In der Vorlage geben Sie die bereitzustellenden Ressourcen und die Eigenschaften für diese Ressourcen an. Alternativ könnten wir Azure Blueprints verwenden . Azure Blueprints ermöglicht Cloudarchitekten und zentralen IT-Gruppen die Definition eines wiederholbaren Satzes von Azure-Ressourcen, der die Standards, Muster und Anforderungen einer Organisation implementiert und einhält. Azure Blueprints ermöglicht Entwicklungsteams die schnelle Erstellung und Inbetriebnahme neuer Umgebungen im Vertrauen auf die Einhaltung der Organisationsrichtlinien mit integrierten Komponenten, z. B. Netzwerken, um Entwicklung und Bereitstellung zu beschleunigen. Referenzen: Was sind ARM-Vorlagen? Was sind Azure Blueprints?",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview" }, { label: "Overview", url: "https://learn.microsoft.com/en-us/azure/governance/blueprints/overview" }],
   },
   {
     id: "real-az900-419",
@@ -5517,6 +5824,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Um diese Herausforderungen zu meistern, können wir Bereitstellungen automatisieren und die Praxis der Infrastruktur als Code verwenden . Im Code definieren Sie die Infrastruktur, die bereitgestellt werden muss. Der Infrastrukturcode wird Teil Ihres Projekts. Genau wie Anwendungscode speichern Sie den Infrastrukturcode in einem Quellrepository und versionieren ihn. Jeder in Ihrem Team kann den Code ausführen und ähnliche Umgebungen bereitstellen. Verwenden Sie Azure Resource Manager- Vorlagen (ARM-Vorlagen) , um Infrastruktur als Code für Ihre Azure-Lösungen zu implementieren. Die Vorlage ist eine JSON-Datei (JavaScript Object Notation), die die Infrastruktur und Konfiguration für Ihr Projekt definiert. Die Vorlage verwendet eine deklarative Syntax, sodass Sie angeben können, was Sie bereitstellen möchten, ohne die Abfolge von Programmierbefehlen zum Erstellen schreiben zu müssen. In der Vorlage geben Sie die bereitzustellenden Ressourcen und die Eigenschaften für diese Ressourcen an. Alternativ könnten wir Azure Blueprints verwenden . Azure Blueprints ermöglicht Cloudarchitekten und zentralen IT-Gruppen die Definition eines wiederholbaren Satzes von Azure-Ressourcen, der die Standards, Muster und Anforderungen einer Organisation implementiert und einhält. Azure Blueprints ermöglicht Entwicklungsteams die schnelle Erstellung und Inbetriebnahme neuer Umgebungen im Vertrauen auf die Einhaltung der Organisationsrichtlinien mit integrierten Komponenten, z. B. Netzwerken, um Entwicklung und Bereitstellung zu beschleunigen. Referenzen: Was sind ARM-Vorlagen? Was sind Azure Blueprints?",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview" }, { label: "Overview", url: "https://learn.microsoft.com/en-us/azure/governance/blueprints/overview" }],
   },
   {
     id: "real-az900-420",
@@ -5528,6 +5836,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Um diese Herausforderungen zu meistern, können wir Bereitstellungen automatisieren und die Praxis der Infrastruktur als Code verwenden . Im Code definieren Sie die Infrastruktur, die bereitgestellt werden muss. Der Infrastrukturcode wird Teil Ihres Projekts. Genau wie Anwendungscode speichern Sie den Infrastrukturcode in einem Quellrepository und versionieren ihn. Jeder in Ihrem Team kann den Code ausführen und ähnliche Umgebungen bereitstellen. Verwenden Sie Azure Resource Manager- Vorlagen (ARM-Vorlagen) , um Infrastruktur als Code für Ihre Azure-Lösungen zu implementieren. Die Vorlage ist eine JSON-Datei (JavaScript Object Notation), die die Infrastruktur und Konfiguration für Ihr Projekt definiert. Die Vorlage verwendet eine deklarative Syntax, sodass Sie angeben können, was Sie bereitstellen möchten, ohne die Abfolge von Programmierbefehlen zum Erstellen schreiben zu müssen. In der Vorlage geben Sie die bereitzustellenden Ressourcen und die Eigenschaften für diese Ressourcen an. Alternativ könnten wir Azure Blueprints verwenden . Azure Blueprints ermöglicht Cloudarchitekten und zentralen IT-Gruppen die Definition eines wiederholbaren Satzes von Azure-Ressourcen, der die Standards, Muster und Anforderungen einer Organisation implementiert und einhält. Azure Blueprints ermöglicht Entwicklungsteams die schnelle Erstellung und Inbetriebnahme neuer Umgebungen im Vertrauen auf die Einhaltung der Organisationsrichtlinien mit integrierten Komponenten, z. B. Netzwerken, um Entwicklung und Bereitstellung zu beschleunigen. Referenzen: Was sind ARM-Vorlagen? Was sind Azure Blueprints?",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview" }, { label: "Overview", url: "https://learn.microsoft.com/en-us/azure/governance/blueprints/overview" }],
   },
   {
     id: "real-az900-421",
@@ -5539,6 +5848,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Um diese Herausforderungen zu meistern, können wir Bereitstellungen automatisieren und die Praxis der Infrastruktur als Code verwenden . Im Code definieren Sie die Infrastruktur, die bereitgestellt werden muss. Der Infrastrukturcode wird Teil Ihres Projekts. Genau wie Anwendungscode speichern Sie den Infrastrukturcode in einem Quellrepository und versionieren ihn. Jeder in Ihrem Team kann den Code ausführen und ähnliche Umgebungen bereitstellen. Verwenden Sie Azure Resource Manager- Vorlagen (ARM-Vorlagen) , um Infrastruktur als Code für Ihre Azure-Lösungen zu implementieren. Die Vorlage ist eine JSON-Datei (JavaScript Object Notation), die die Infrastruktur und Konfiguration für Ihr Projekt definiert. Die Vorlage verwendet eine deklarative Syntax, sodass Sie angeben können, was Sie bereitstellen möchten, ohne die Abfolge von Programmierbefehlen zum Erstellen schreiben zu müssen. In der Vorlage geben Sie die bereitzustellenden Ressourcen und die Eigenschaften für diese Ressourcen an. Alternativ könnten wir Azure Blueprints verwenden . Azure Blueprints ermöglicht Cloudarchitekten und zentralen IT-Gruppen die Definition eines wiederholbaren Satzes von Azure-Ressourcen, der die Standards, Muster und Anforderungen einer Organisation implementiert und einhält. Azure Blueprints ermöglicht Entwicklungsteams die schnelle Erstellung und Inbetriebnahme neuer Umgebungen im Vertrauen auf die Einhaltung der Organisationsrichtlinien mit integrierten Komponenten, z. B. Netzwerken, um Entwicklung und Bereitstellung zu beschleunigen. Referenzen: Was sind ARM-Vorlagen? Was sind Azure Blueprints?",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview" }, { label: "Overview", url: "https://learn.microsoft.com/en-us/azure/governance/blueprints/overview" }],
   },
   {
     id: "real-az900-422",
@@ -5550,6 +5860,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Microsoft Managed Desktop ist ein Dienst von Microsoft, der Endbenutzern eine verwaltete Desktop-Erfahrung bietet, einschließlich Geräteverwaltung, Sicherheits- und Compliance-Funktionen. Er ist nicht dafür ausgelegt, die wöchentliche Bereitstellung und Entfernung benutzerdefinierter virtueller Maschinen zu verwalten. Wir sollten stattdessen Azure DevTest Labs verwenden. Azure DevTest Labs ist ein Dienst zum einfachen Erstellen, Verwenden und Verwalten von virtuellen IaaS- (Infrastructure-as-a-Service) Maschinen (VMs) und PaaS- Umgebungen (Platform-as-a-Service) in Laboren. Labore bieten vorkonfigurierte Grundlagen und Artefakte zum Erstellen von VMs sowie ARM-Vorlagen (Azure Resource Manager) zum Erstellen von Umgebungen wie Azure Web Apps oder SharePoint-Farmen. Laborbesitzer können vorkonfigurierte VMs erstellen, die über die von Laborbenutzern benötigten Tools und Software verfügen. Laborbenutzer können vorkonfigurierte VMs beanspruchen oder ihre eigenen VMs und Umgebungen erstellen und konfigurieren. Laborrichtlinien und andere Methoden verfolgen und kontrollieren die Labornutzung und - kosten. Referenzen: Was ist Azure DevTest Labs? Was ist Microsoft Managed Desktop?",
+    resources: [{ label: "Devtest Lab Overview", url: "https://learn.microsoft.com/en-us/azure/devtest-labs/devtest-lab-overview" }, { label: "Service Plan", url: "https://learn.microsoft.com/en-us/managed-desktop/overview/service-plan" }],
   },
   {
     id: "real-az900-423",
@@ -5561,6 +5872,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Eine Azure Reserved Virtual Machine Instance (RI) ist eine virtuelle Maschine (VM) in der öffentlichen Microsoft Azure-Cloud, die für die dedizierte Nutzung für ein oder drei Jahre reserviert wurde. Wir sollten stattdessen Azure DevTest Labs verwenden. Azure DevTest Labs ist ein Dienst zum einfachen Erstellen, Verwenden und Verwalten von virtuellen Maschinen (VMs) mit Infrastructure-as-a-Service (IaaS) und Platform-as- a-Service (PaaS)-Umgebungen in Laboren. Labore bieten vorkonfigurierte Grundlagen und Artefakte zum Erstellen von VMs sowie Azure Resource Manager (ARM)-Vorlagen zum Erstellen von Umgebungen wie Azure Web Apps oder SharePoint-Farmen. Laborbesitzer können vorkonfigurierte VMs erstellen, die über die von Laborbenutzern benötigten Tools und Software verfügen. Laborbenutzer können vorkonfigurierte VMs beanspruchen oder ihre eigenen VMs und Umgebungen erstellen und konfigurieren. Laborrichtlinien und andere Methoden verfolgen und kontrollieren die Labornutzung und - kosten. Referenzen: Was ist Azure DevTest Labs? Was sind Azure-Reservierungen?",
+    resources: [{ label: "Devtest Lab Overview", url: "https://learn.microsoft.com/en-us/azure/devtest-labs/devtest-lab-overview" }, { label: "Save Compute Costs Reservations", url: "https://learn.microsoft.com/en-in/azure/cost-management-billing/reservations/save-compute-costs-reservations" }],
   },
   {
     id: "real-az900-424",
@@ -5572,6 +5884,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure DevTest Labs ist ein Dienst zum einfachen Erstellen, Verwenden und Verwalten von virtuellen IaaS-Computern (Infrastructure-as-a-Service) und PaaS-Umgebungen (Platform-as-a-Service) in Labs. Labs bieten vorkonfigurierte Grundlagen und Artefakte zum Erstellen von VMs sowie ARM-Vorlagen (Azure Resource Manager) zum Erstellen von Umgebungen wie Azure Web Apps oder SharePoint-Farmen. Lab-Besitzer können vorkonfigurierte VMs erstellen, die über die von Lab-Benutzern benötigten Tools und Software verfügen. Lab-Benutzer können vorkonfigurierte VMs beanspruchen oder eigene VMs und Umgebungen erstellen und konfigurieren. Lab-Richtlinien und andere Methoden verfolgen und steuern die Lab-Nutzung und -Kosten.",
+    resources: [{ label: "Devtest Lab Overview", url: "https://learn.microsoft.com/de-de/azure/devtest-labs/devtest-lab-overview" }],
   },
   {
     id: "real-az900-425",
@@ -5587,6 +5900,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "F",
     explanation: "Azure Government ist die unternehmenskritische Cloud, die US-Regierungskunden und ihren Partnern bahnbrechende Innovationen bietet. Nur US-Bundes-, Landes-, Kommunal- und Stammesregierungen sowie deren Partner haben Zugriff auf diese dedizierte Instanz, deren Betrieb von überprüften US-Bürgern kontrolliert wird. Azure Government bietet das umfassendste Zertifizierungsniveau aller Cloud-Anbieter und vereinfacht so selbst die kritischsten Compliance-Anforderungen der Regierung.",
+    resources: [{ label: "Get Started", url: "https://azure.microsoft.com/en-us/explore/global-infrastructure/government/get-started/" }],
   },
   {
     type: "yesno",
@@ -5599,6 +5913,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Azure Cosmos DB ist ein Beispiel für Software as a Service (SaaS)", correct: "Nein" },
     ],
     explanation: "Platform as a Service (PaaS) ist eine umfassende Entwicklungs- und Bereitstellungsumgebung in der Cloud mit Ressourcen, die Ihnen die Bereitstellung von Anwendungen aller Art ermöglichen – von einfachen Cloud-basierten Apps bis hin zu komplexen, Cloud-fähigen Unternehmensanwendungen. Sie erwerben die benötigten Ressourcen von einem Cloud-Service-Anbieter auf Pay-as-you-go-Basis und greifen über eine sichere Internetverbindung darauf zu. Wie IaaS umfasst PaaS die Infrastruktur – Server, Speicher und Netzwerke –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. PaaS unterstützt den gesamten Lebenszyklus von Webanwendungen: Erstellen, Testen, Bereitstellen, Verwalten und Aktualisieren. Mit PaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung von Softwarelizenzen, der zugrunde liegenden Anwendungsinfrastruktur und Middleware, Container-Orchestratoren wie Kubernetes oder der Entwicklungstools und anderer Ressourcen. Sie verwalten die von Ihnen entwickelten Anwendungen und Dienste, und der Cloud-Service-Anbieter kümmert sich in der Regel um alles Weitere. Durch die Bereitstellung von Infrastructure as a Service bietet PaaS dieselben Vorteile wie IaaS. Die zusätzlichen Funktionen – Middleware, Entwicklungstools und andere Business-Tools – bieten Ihnen jedoch weitere Vorteile. Software as a Service (SaaS) ist ein Softwarelizenzierungs- und Bereitstellungsmodell, bei dem Software an einen Benutzer lizenziert wird. Der Zugriff auf die Software bzw. Anwendung erfolgt über das Internet und einen Webbrowser. Sie müssen die Software nicht lokal installieren und warten. Sie können sofort mit der Konfiguration und Nutzung beginnen. Infrastructure as a Service (IaaS) ist ein Cloud-Computing-Dienst, der wichtige Rechen-, Speicher- und Netzwerkressourcen bedarfsgerecht und nutzungsbasiert bereitstellt. Mit IaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung physischer Server und Rechenzentrumsinfrastruktur. Jede Ressource wird als separate Servicekomponente angeboten, und Sie zahlen nur für die jeweilige Ressource, solange Sie sie benötigen. Ein Cloud-Computing-Dienstanbieter wie Azure verwaltet die Infrastruktur, während Sie Ihre eigene Software – einschließlich Betriebssysteme, Middleware und Anwendungen – kaufen, installieren, konfigurieren und verwalten. Microsoft SQL Server 2019, installiert auf einer virtuellen Azure-Maschine, ist ein Beispiel für Infrastructure as a Service (IaaS). Azure Cosmos DB ist ein Beispiel für einen Platform as a Service (PaaS)-Cloud-Datenbankanbieter. Referenzen: Was ist PaaS? Was ist IaaS? Was ist SaaS?",
+    resources: [{ label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }, { label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }, { label: "What Is Saas", url: "https://azure.microsoft.com/en-us/overview/what-is-saas/" }],
   },
   {
     type: "yesno",
@@ -5611,6 +5926,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Die Kosten für die Erhöhung der Cloud Computing-Kapazität sind geringer als die Kosten...", correct: "Ja" },
     ],
     explanation: "Vereinfacht ausgedrückt ist Cloud Computing die Bereitstellung von Computerdiensten – einschließlich Servern, Speicher, Datenbanken, Netzwerken, Software, Analysen und Informationen – über das Internet („die Cloud“), um schnellere Innovationen, flexible Ressourcen und Skaleneffekte zu ermöglichen. Sie zahlen in der Regel nur für die Cloud- Dienste, die Sie tatsächlich nutzen. Das hilft Ihnen, Ihre Betriebskosten zu senken, Ihre Infrastruktur effizienter zu betreiben und sie an veränderte Geschäftsanforderungen anzupassen. Cloud Computing bedeutet einen großen Wandel im Vergleich zur traditionellen Denkweise von Unternehmen hinsichtlich IT-Ressourcen. Hier sind sieben häufige Gründe, warum Unternehmen auf Cloud-Computing-Dienste zurückgreifen: • Kosten – Der Umstieg auf die Cloud hilft Unternehmen, ihre IT-Kosten zu optimieren. Denn Cloud Computing eliminiert die Investitionskosten für Hard- und Software sowie die Einrichtung und den Betrieb von Rechenzentren vor Ort – die Server-Racks, die rund um die Uhr verfügbare Stromversorgung und Kühlung sowie die IT-Experten für die Verwaltung der Infrastruktur. Das summiert sich schnell. • Geschwindigkeit – Die meisten Cloud-Computing-Dienste werden im Self-Service und auf Abruf bereitgestellt, sodass selbst große Mengen an Rechenressourcen in wenigen Minuten, in der Regel mit nur wenigen Mausklicks, bereitgestellt werden können. Dies bietet Unternehmen ein hohes Maß an Flexibilität und verringert den Druck bei der Kapazitätsplanung. • Globale Skalierung – Zu den Vorteilen von Cloud-Computing-Diensten gehört die Möglichkeit der elastischen Skalierung. In der Cloud-Sprache bedeutet dies, dass die richtige Menge an IT-Ressourcen – beispielsweise mehr oder weniger Rechenleistung, Speicher oder Bandbreite – genau dann bereitgestellt wird, wenn sie benötigt werden, und zwar vom richtigen geografischen Standort aus. • Produktivität – Rechenzentren vor Ort erfordern in der Regel viel „Racking and Stacking“ – Hardware-Setup, Software-Patches und andere zeitaufwändige IT- Verwaltungsaufgaben. Cloud Computing macht viele dieser Aufgaben überflüssig, sodass IT-Teams Zeit für wichtigere Geschäftsziele haben. • Leistung – Die größten Cloud-Computing-Dienste laufen in einem weltweiten Netzwerk sicherer Rechenzentren, die regelmäßig auf die neueste Generation schneller und effizienter Computerhardware aktualisiert werden. Dies bietet gegenüber einem einzelnen Unternehmensrechenzentrum mehrere Vorteile, darunter eine geringere Netzwerklatenz für Anwendungen und höhere Skaleneffekte. • Zuverlässigkeit – Cloud Computing vereinfacht und reduziert die Kosten für Datensicherung, Notfallwiederherstellung und Geschäftskontinuität, da Daten an mehreren redundanten Standorten im Netzwerk des Cloud-Anbieters gespiegelt werden können. • Sicherheit – Viele Cloud-Anbieter bieten eine breite Palette an Richtlinien, Technologien und Kontrollen an, die Ihre Sicherheitslage insgesamt stärken und dazu beitragen, Ihre Daten, Apps und Infrastruktur vor potenziellen Bedrohungen zu schützen.",
+    resources: [{ label: "What Is Cloud Computing", url: "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-cloud-computing/" }],
   },
   {
     id: "real-az900-428",
@@ -5624,6 +5940,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Der Azure Site Recovery-Dienst unterstützt Ihre Strategie für Geschäftskontinuität und Notfallwiederherstellung (BCDR), indem er Ihre Geschäftsanwendungen bei geplanten und ungeplanten Ausfällen online hält. Site Recovery verwaltet und orchestriert die Notfallwiederherstellung von lokalen Computern und virtuellen Azure-Computern (VM), einschließlich Replikation, Failover und Wiederherstellung. Referenzen: Informationen zum Site Recovery -Schnellstart: Einrichten der Notfallwiederherstellung in einer sekundären Azure-Region für eine Azure-VM",
+    resources: [{ label: "Site Recovery Overview", url: "https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-overview" }, { label: "Azure To Azure Quickstart", url: "https://learn.microsoft.com/en-us/azure/site-recovery/azure-to-azure-quickstart" }],
   },
   {
     id: "real-az900-429",
@@ -5647,6 +5964,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Elastic Computing ermöglicht es, Rechenleistung, Arbeitsspeicher und Speicherressourcen schnell zu erweitern oder zu reduzieren, um wechselnden Anforderungen gerecht zu werden, ohne sich um Kapazitätsplanung und -planung für Spitzenlasten kümmern zu müssen. Elastic Computing wird in der Regel durch Systemüberwachungstools gesteuert und gleicht die zugewiesene Ressourcenmenge mit der tatsächlich benötigten Ressourcenmenge ab, ohne den laufenden Betrieb zu unterbrechen. Dank Cloud-Elastizität vermeidet ein Unternehmen die Kosten für ungenutzte Kapazitäten oder ungenutzte Ressourcen und muss sich nicht um den Kauf oder die Wartung zusätzlicher Ressourcen und Geräte kümmern. Obwohl Sicherheit und eingeschränkte Kontrolle beim Elastic Cloud Computing zu berücksichtigen sind, bietet es viele Vorteile. Elastic Computing ist effizienter als eine herkömmliche IT-Infrastruktur, in der Regel automatisiert, sodass es nicht rund um die Uhr auf menschliche Administratoren angewiesen ist, und bietet durch die Vermeidung unnötiger Verlangsamungen oder Dienstunterbrechungen kontinuierliche Serviceverfügbarkeit. Referenzen: Was ist Elastic Computing oder Cloud-Elastizität? Übersicht über die automatische Skalierung mit Azure Virtual Machine Scale Sets",
+    resources: [{ label: "What Is Elastic Computing", url: "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-elastic-computing" }, { label: "Virtual Machine Scale Sets Autoscale Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-autoscale-overview" }],
   },
   {
     id: "real-az900-431",
@@ -5658,6 +5976,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Wir gehen davon aus, dass die virtuellen Maschinen dieselben Dienste ausführen. Es geht darum, sicherzustellen, dass mindestens eine der virtuellen Maschinen betriebsbereit ist. Um die Verfügbarkeit von mehreren VMs sicherzustellen, müssen wir die VMs in verschiedenen Update- und Fehlerdomänen bereitstellen. Dazu können wir Verfügbarkeitszonen nutzen. Eine Verfügbarkeitszone ist ein logisches Rechenzentrum in einer Region, das jedem Azure-Kunden zur Verfügung steht. Jede Zone einer Region verfügt über redundante und separate Stromversorgung, Netzwerk und Konnektivität, um die Wahrscheinlichkeit eines gleichzeitigen Ausfalls zweier Zonen zu verringern.",
+    resources: [{ label: "Az Overview", url: "https://docs.microsoft.com/en-us/azure/availability-zones/az-overview" }],
   },
   {
     type: "matching",
@@ -5689,6 +6008,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure Sphere ist eine sichere, hochrangige Anwendungsplattform mit integrierten Kommunikations- und Sicherheitsfunktionen für internetfähige Geräte. Sie umfasst eine sichere, vernetzte Crossover-Mikrocontrollereinheit (MCU), ein benutzerdefiniertes, hochrangiges Linux-basiertes Betriebssystem (OS) und einen cloudbasierten Sicherheitsdienst, der kontinuierliche, erneuerbare Sicherheit bietet. Die Azure Sphere MCU integriert Echtzeitverarbeitungsfunktionen mit der Fähigkeit, ein übergeordnetes Betriebssystem auszuführen. Eine Azure Sphere MCU ermöglicht zusammen mit ihrem Betriebssystem und ihrer Anwendungsplattform die Erstellung sicherer, mit dem Internet verbundener Geräte, die remote aktualisiert, gesteuert, überwacht und gewartet werden können. Ein verbundenes Gerät mit einer Azure Sphere MCU – entweder zusätzlich zu oder anstelle einer vorhandenen MCU – bietet verbesserte Sicherheit, Produktivität und mehr Möglichkeiten. Beispiel: • Eine gesicherte Anwendungsumgebung, authentifizierte Verbindungen und die Opt-in-Nutzung von Peripheriegeräten minimieren Sicherheitsrisiken, die unter anderem durch Spoofing, betrügerische Software oder Denial-of-Service-Angriffe entstehen. • Software-Updates können automatisch aus der Cloud auf jedes verbundene Gerät verteilt werden, um Probleme zu beheben, neue Funktionen bereitzustellen oder neuen Angriffsmethoden entgegenzuwirken und so die Produktivität des Supportpersonals zu steigern. • Produktnutzungsdaten können über eine sichere Verbindung an die Cloud gemeldet werden, um bei der Diagnose von Problemen und der Entwicklung neuer Produkte zu helfen und so die Möglichkeit für Produktservice, positive Kundeninteraktionen und zukünftige Entwicklungen zu verbessern. Der Azure Sphere Security Service ist ein integraler Bestandteil von Azure Sphere. Mit diesem Dienst verbinden sich Azure Sphere MCUs sicher mit der Cloud und dem Internet. Der Dienst stellt sicher, dass das Gerät nur mit einer autorisierten Version originaler, freigegebener Software bootet. Darüber hinaus bietet er einen sicheren Kanal, über den Microsoft automatisch Betriebssystem-Updates auf im Einsatz befindliche Geräte herunterladen und installieren kann, um Sicherheitsprobleme zu minimieren. Weder Hersteller noch Endbenutzer müssen eingreifen, wodurch eine häufige Sicherheitslücke geschlossen wird. Referenzen: Azure Arc-Übersicht Was ist Azure IoT Central? IoT-Konzepte und Azure IoT Hub Was ist Azure Sphere?",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/azure-arc/overview" }, { label: "Overview Iot Central", url: "https://learn.microsoft.com/en-us/azure/iot-central/core/overview-iot-central" }, { label: "Iot Concepts And Iot Hub", url: "https://learn.microsoft.com/en-us/azure/iot-hub/iot-concepts-and-iot-hub" }, { label: "What Is Azure Sphere", url: "https://learn.microsoft.com/en-us/azure-sphere/product-overview/what-is-azure-sphere" }],
   },
   {
     type: "matching",
@@ -5706,6 +6026,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Ein Cloud-basierter Dienst für benutzerdefinierte Apps", correctItemId: "item2" },
     ],
     explanation: "Platform as a Service (PaaS) ist eine umfassende Entwicklungs- und Bereitstellungsumgebung in der Cloud mit Ressourcen, die Ihnen die Bereitstellung von Anwendungen aller Art ermöglichen – von einfachen Cloud-basierten Apps bis hin zu komplexen, Cloud-fähigen Unternehmensanwendungen. Sie erwerben die benötigten Ressourcen von einem Cloud-Service-Anbieter auf Pay-as-you-go-Basis und greifen über eine sichere Internetverbindung darauf zu. Wie IaaS umfasst PaaS die Infrastruktur – Server, Speicher und Netzwerke –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. PaaS unterstützt den gesamten Lebenszyklus von Webanwendungen: Erstellen, Testen, Bereitstellen, Verwalten und Aktualisieren. Mit PaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung von Softwarelizenzen, der zugrunde liegenden Anwendungsinfrastruktur und Middleware, Container-Orchestratoren wie Kubernetes oder der Entwicklungstools und anderer Ressourcen. Sie verwalten die von Ihnen entwickelten Anwendungen und Dienste, und der Cloud-Service-Anbieter kümmert sich in der Regel um alles Weitere. Durch die Bereitstellung von Infrastructure as a Service bietet PaaS dieselben Vorteile wie IaaS. Die zusätzlichen Funktionen – Middleware, Entwicklungstools und andere Business-Tools – bieten Ihnen jedoch weitere Vorteile. Software as a Service (SaaS) ist ein Softwarelizenzierungs- und Bereitstellungsmodell, bei dem Software an einen Benutzer lizenziert wird. Der Zugriff auf die Software bzw. Anwendung erfolgt über das Internet und einen Webbrowser. Sie müssen die Software nicht lokal installieren und warten. Sie können sofort mit der Konfiguration und Nutzung beginnen. Infrastructure as a Service (IaaS) ist ein Cloud-Computing-Dienst, der wichtige Rechen-, Speicher- und Netzwerkressourcen bedarfsgerecht und nutzungsbasiert bereitstellt. Mit IaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung physischer Server und Rechenzentrumsinfrastruktur. Jede Ressource wird als separate Servicekomponente angeboten, und Sie zahlen nur für die jeweilige Ressource, solange Sie sie benötigen. Ein Cloud-Computing-Dienstanbieter wie Azure verwaltet die Infrastruktur, während Sie Ihre eigene Software – einschließlich Betriebssysteme, Middleware und Anwendungen – kaufen, installieren, konfigurieren und verwalten. Microsoft SQL Server 2019, installiert auf einer virtuellen Azure-Maschine, ist ein Beispiel für Infrastructure as a Service (IaaS). Azure Cosmos DB ist ein Beispiel für einen Platform as a Service (PaaS)-Cloud-Datenbankanbieter. Referenzen: Was ist PaaS? Was ist IaaS? Was ist SaaS?",
+    resources: [{ label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }, { label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }, { label: "What Is Saas", url: "https://azure.microsoft.com/en-us/overview/what-is-saas/" }],
   },
   {
     id: "real-az900-435",
@@ -5719,6 +6040,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Application Insights, eine Funktion von Azure Monitor, ist ein erweiterbarer Dienst zur Anwendungsleistungsverwaltung (APM) für Entwickler und DevOps-Experten. Verwenden Sie ihn, um Ihre Live-Anwendungen zu überwachen. Er erkennt automatisch Leistungsanomalien und enthält leistungsstarke Analysetools, die Ihnen bei der Diagnose von Problemen helfen und Ihnen helfen zu verstehen, was Benutzer tatsächlich mit Ihrer App machen. Er wurde entwickelt, um Ihnen bei der kontinuierlichen Verbesserung von Leistung und Benutzerfreundlichkeit zu helfen. Er funktioniert für Apps auf einer Vielzahl von Plattformen, darunter .NET, Node.js, Java und Python, die lokal, hybrid oder in einer öffentlichen Cloud gehostet werden. Er lässt sich in Ihren DevOps-Prozess integrieren und verfügt über Verbindungspunkte zu einer Vielzahl von Entwicklungstools. Durch die Integration mit Visual Studio App Center kann er Telemetriedaten von mobilen Apps überwachen und analysieren. Referenzen: Was ist Application Insights? Benutzerbindungsanalyse für Webanwendungen mit Application Insights",
+    resources: [{ label: "App Insights Overview", url: "https://docs.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview" }, { label: "Usage Retention", url: "https://docs.microsoft.com/en-us/azure/azure-monitor/app/usage-retention" }],
   },
   {
     id: "real-az900-436",
@@ -5730,6 +6052,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Wir implementieren Azure AD Connect und synchronisieren alle Benutzerkonten vom lokalen Active Directory mit Azure AD. Anschließend deaktivieren wir die lokale Active Directory-Domäne und konvertieren die Hybrididentitäten in Azure AD in reine Cloud-Identitäten. Durch die Synchronisierung aller Active Directory-Benutzerkonten mit Azure AD können die Benutzer nach der Migration nahtlos und ohne größere Unterbrechungen auf ihre Cloud-Ressourcen zugreifen. Referenzen: Was ist Azure AD Connect? Konvertieren Sie synchronisierte Benutzer in reine Cloud-Benutzer",
+    resources: [{ label: "Whatis Azure Ad Connect", url: "https://learn.microsoft.com/en-us/azure/active-directory/hybrid/whatis-azure-ad-connect" }, { label: "Microsoft Learn", url: "https://www.blogabout.cloud/2019/08/871/" }],
   },
   {
     id: "real-az900-437",
@@ -5741,6 +6064,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Wir implementieren Azure AD Connect und synchronisieren alle Benutzerkonten vom lokalen Active Directory mit Azure AD. Anschließend deaktivieren wir die lokale Active Directory-Domäne und konvertieren die Hybrididentitäten in Azure AD in reine Cloud-Identitäten. Durch die Synchronisierung aller Active Directory-Benutzerkonten mit Azure AD können die Benutzer nach der Migration nahtlos und ohne größere Unterbrechungen auf ihre Cloud-Ressourcen zugreifen. Referenzen: Was ist Azure AD Connect? Konvertieren Sie synchronisierte Benutzer in reine Cloud-Benutzer",
+    resources: [{ label: "Whatis Azure Ad Connect", url: "https://learn.microsoft.com/en-us/azure/active-directory/hybrid/whatis-azure-ad-connect" }, { label: "Microsoft Learn", url: "https://www.blogabout.cloud/2019/08/871/" }],
   },
   {
     id: "real-az900-438",
@@ -5752,6 +6076,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Wir implementieren Azure AD Connect und synchronisieren alle Benutzerkonten vom lokalen Active Directory mit Azure AD. Anschließend deaktivieren wir die lokale Active Directory-Domäne und konvertieren die Hybrididentitäten in Azure AD in reine Cloud-Identitäten. Durch die Synchronisierung aller Active Directory-Benutzerkonten mit Azure AD können die Benutzer nach der Migration nahtlos und ohne größere Unterbrechungen auf ihre Cloud-Ressourcen zugreifen. Referenzen: Was ist Azure AD Connect? Konvertieren Sie synchronisierte Benutzer in reine Cloud-Benutzer",
+    resources: [{ label: "Whatis Azure Ad Connect", url: "https://learn.microsoft.com/en-us/azure/active-directory/hybrid/whatis-azure-ad-connect" }, { label: "Microsoft Learn", url: "https://www.blogabout.cloud/2019/08/871/" }],
   },
   {
     id: "real-az900-439",
@@ -5763,6 +6088,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Ausfälle können von Software- und Hardwarefehlern bis hin zu Ereignissen wie Erdbeben, Überschwemmungen und Bränden reichen. Die Ausfalltoleranz wird durch Redundanz und logische Isolierung der Azure-Dienste erreicht. Um die Resilienz zu gewährleisten, sind in allen Regionen mit Verfügbarkeitszonen mindestens drei separate Verfügbarkeitszonen vorhanden. Azure-Verfügbarkeitszonen sind über ein Hochleistungsnetzwerk mit einer Roundtrip-Latenz von weniger als 2 ms verbunden. Sie sorgen dafür, dass Ihre Daten auch bei Problemen synchronisiert und zugänglich bleiben. Jede Zone besteht aus einem oder mehreren Rechenzentren mit unabhängiger Stromversorgung, Kühlung und Netzwerkinfrastruktur. Verfügbarkeitszonen sind so konzipiert, dass bei einer Beeinträchtigung einer Zone regionale Dienste, Kapazität und Hochverfügbarkeit von den beiden verbleibenden Zonen unterstützt werden. SLA für virtuelle Maschinen • Für alle virtuellen Maschinen, bei denen zwei oder mehr Instanzen in zwei oder mehr Verfügbarkeitszonen in derselben Azure-Region bereitgestellt sind, garantiert Microsoft, dass Sie in mindestens 99,99 % der Fälle über eine virtuelle Maschinenkonnektivität mit mindestens einer Instanz verfügen. • Für alle virtuellen Maschinen, bei denen zwei oder mehr Instanzen im selben Verfügbarkeitssatz oder in derselben dedizierten Hostgruppe bereitgestellt sind, garantiert Microsoft, dass Sie in mindestens 99,95 % der Fälle über eine virtuelle Maschinenkonnektivität mit mindestens einer Instanz verfügen. • Für jede virtuelle Einzelinstanzmaschine, die Premium SSD oder Ultra Disk für alle Betriebssystem- und Datenfestplatten verwendet, garantiert Microsoft eine Konnektivität der virtuellen Maschine von mindestens 99,9 %. • Für jede virtuelle Maschine mit einer einzigen Instanz, die verwaltete SSD-Standarddatenträger für Betriebssystemdatenträger und Datenträger verwendet, garantiert Microsoft eine Konnektivität der virtuellen Maschine von mindestens 99,5 %. • Für jede virtuelle Maschine mit einer einzigen Instanz, die verwaltete Standard-HDD-Datenträger für Betriebssystemdatenträger und Datenträger verwendet, garantiert Microsoft eine Konnektivität der virtuellen Maschine von mindestens 95 %. Referenzen: Was sind Azure-Regionen und Verfügbarkeitszonen? SLA für virtuelle Maschinen",
+    resources: [{ label: "Availability Zones Overview", url: "https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview" }, { label: "Virtual Machines", url: "https://www.azure.cn/en-us/support/sla/virtual-machines/" }],
   },
   {
     id: "real-az900-440",
@@ -5774,6 +6100,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Ausfälle können von Software- und Hardwarefehlern bis hin zu Ereignissen wie Erdbeben, Überschwemmungen und Bränden reichen. Die Ausfalltoleranz wird durch Redundanz und logische Isolierung der Azure-Dienste erreicht. Um die Resilienz zu gewährleisten, sind in allen Regionen mit Verfügbarkeitszonen mindestens drei separate Verfügbarkeitszonen vorhanden. Azure-Verfügbarkeitszonen sind über ein Hochleistungsnetzwerk mit einer Roundtrip-Latenz von weniger als 2 ms verbunden. Sie sorgen dafür, dass Ihre Daten auch bei Problemen synchronisiert und zugänglich bleiben. Jede Zone besteht aus einem oder mehreren Rechenzentren mit unabhängiger Stromversorgung, Kühlung und Netzwerkinfrastruktur. Verfügbarkeitszonen sind so konzipiert, dass bei einer Beeinträchtigung einer Zone regionale Dienste, Kapazität und Hochverfügbarkeit von den beiden verbleibenden Zonen unterstützt werden. SLA für virtuelle Maschinen • Für alle virtuellen Maschinen, bei denen zwei oder mehr Instanzen in zwei oder mehr Verfügbarkeitszonen in derselben Azure-Region bereitgestellt sind, garantiert Microsoft, dass Sie in mindestens 99,99 % der Fälle über eine virtuelle Maschinenkonnektivität mit mindestens einer Instanz verfügen. • Für alle virtuellen Maschinen, bei denen zwei oder mehr Instanzen im selben Verfügbarkeitssatz oder in derselben dedizierten Hostgruppe bereitgestellt sind, garantiert Microsoft, dass Sie in mindestens 99,95 % der Fälle über eine virtuelle Maschinenkonnektivität mit mindestens einer Instanz verfügen. • Für jede virtuelle Einzelinstanzmaschine, die Premium SSD oder Ultra Disk für alle Betriebssystem- und Datenfestplatten verwendet, garantiert Microsoft eine Konnektivität der virtuellen Maschine von mindestens 99,9 %. • Für jede virtuelle Maschine mit einer einzigen Instanz, die verwaltete SSD-Standarddatenträger für Betriebssystemdatenträger und Datenträger verwendet, garantiert Microsoft eine Konnektivität der virtuellen Maschine von mindestens 99,5 %. • Für jede virtuelle Maschine mit einer einzigen Instanz, die verwaltete Standard-HDD-Datenträger für Betriebssystemdatenträger und Datenträger verwendet, garantiert Microsoft eine Konnektivität der virtuellen Maschine von mindestens 95 %. Referenzen: Was sind Azure-Regionen und Verfügbarkeitszonen? SLA für virtuelle Maschinen",
+    resources: [{ label: "Availability Zones Overview", url: "https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview" }, { label: "Virtual Machines", url: "https://www.azure.cn/en-us/support/sla/virtual-machines/" }],
   },
   {
     id: "real-az900-441",
@@ -5785,6 +6112,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Ausfälle können von Software- und Hardwarefehlern bis hin zu Ereignissen wie Erdbeben, Überschwemmungen und Bränden reichen. Die Ausfalltoleranz wird durch Redundanz und logische Isolierung der Azure-Dienste erreicht. Um die Resilienz zu gewährleisten, sind in allen Regionen mit Verfügbarkeitszonen mindestens drei separate Verfügbarkeitszonen vorhanden. Azure-Verfügbarkeitszonen sind über ein Hochleistungsnetzwerk mit einer Roundtrip-Latenz von weniger als 2 ms verbunden. Sie sorgen dafür, dass Ihre Daten auch bei Problemen synchronisiert und zugänglich bleiben. Jede Zone besteht aus einem oder mehreren Rechenzentren mit unabhängiger Stromversorgung, Kühlung und Netzwerkinfrastruktur. Verfügbarkeitszonen sind so konzipiert, dass bei einer Beeinträchtigung einer Zone regionale Dienste, Kapazität und Hochverfügbarkeit von den beiden verbleibenden Zonen unterstützt werden. SLA für virtuelle Maschinen • Für alle virtuellen Maschinen, bei denen zwei oder mehr Instanzen in zwei oder mehr Verfügbarkeitszonen in derselben Azure-Region bereitgestellt sind, garantiert Microsoft, dass Sie in mindestens 99,99 % der Fälle über eine virtuelle Maschinenkonnektivität mit mindestens einer Instanz verfügen. • Für alle virtuellen Maschinen, bei denen zwei oder mehr Instanzen im selben Verfügbarkeitssatz oder in derselben dedizierten Hostgruppe bereitgestellt sind, garantiert Microsoft, dass Sie in mindestens 99,95 % der Fälle über eine virtuelle Maschinenkonnektivität mit mindestens einer Instanz verfügen. • Für jede virtuelle Einzelinstanzmaschine, die Premium SSD oder Ultra Disk für alle Betriebssystem- und Datenfestplatten verwendet, garantiert Microsoft eine Konnektivität der virtuellen Maschine von mindestens 99,9 %. • Für jede virtuelle Maschine mit einer einzigen Instanz, die verwaltete SSD-Standarddatenträger für Betriebssystemdatenträger und Datenträger verwendet, garantiert Microsoft eine Konnektivität der virtuellen Maschine von mindestens 99,5 %. • Für jede virtuelle Maschine mit einer einzigen Instanz, die verwaltete Standard-HDD-Datenträger für Betriebssystemdatenträger und Datenträger verwendet, garantiert Microsoft eine Konnektivität der virtuellen Maschine von mindestens 95 %. Referenzen: Was sind Azure-Regionen und Verfügbarkeitszonen? SLA für virtuelle Maschinen",
+    resources: [{ label: "Availability Zones Overview", url: "https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview" }, { label: "Virtual Machines", url: "https://www.azure.cn/en-us/support/sla/virtual-machines/" }],
   },
   {
     type: "yesno",
@@ -5797,6 +6125,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Eine Ressourcengruppe kann Ressourcen aus mehreren Azure-Regionen enthalten", correct: "Ja" },
     ],
     explanation: "Eine Ressourcengruppe ist ein Container, der zusammengehörige Ressourcen für eine Azure-Lösung enthält. Die Ressourcengruppe kann alle Ressourcen für die Lösung enthalten oder nur die Ressourcen, die Sie als Gruppe verwalten möchten. Sie entscheiden, wie Sie Ressourcen den Ressourcengruppen zuordnen möchten, je nachdem, was für Ihr Unternehmen am sinnvollsten ist. Fügen Sie Ressourcen mit demselben Lebenszyklus grundsätzlich derselben Ressourcengruppe hinzu, damit Sie sie problemlos als Gruppe bereitstellen, aktualisieren und löschen können. Die Ressourcengruppe speichert Metadaten zu den Ressourcen. Wenn Sie also einen Speicherort für die Ressourcengruppe angeben, geben Sie an, wo diese Metadaten gespeichert werden. Aus Compliancegründen müssen Sie möglicherweise sicherstellen, dass Ihre Daten in einer bestimmten Region gespeichert werden. Beim Definieren Ihrer Ressourcengruppe müssen Sie einige wichtige Faktoren berücksichtigen: • Alle Ressourcen in Ihrer Ressourcengruppe sollten denselben Lebenszyklus haben. Sie werden gemeinsam bereitgestellt, aktualisiert und gelöscht. Wenn eine Ressource, z. B. ein Server, einen anderen Bereitstellungszyklus benötigt, sollte sie sich in einer anderen Ressourcengruppe befinden. • Jede Ressource kann nur in einer Ressourcengruppe vorhanden sein. • Sie können einer Ressourcengruppe jederzeit eine Ressource hinzufügen oder daraus entfernen. • Sie können eine Ressource von einer Ressourcengruppe in eine andere Gruppe verschieben. • Die Ressourcen in einer Ressourcengruppe können sich in anderen Regionen als die Ressourcengruppe selbst befinden. • Wenn Sie eine Ressourcengruppe erstellen, müssen Sie einen Speicherort für diese Ressourcengruppe angeben. Sie fragen sich vielleicht: „Warum benötigt eine Ressourcengruppe einen Standort? Und wenn die Ressourcen andere Standorte als die Ressourcengruppe haben können, warum ist der Standort der Ressourcengruppe dann überhaupt wichtig?“ Die Ressourcengruppe speichert Metadaten zu den Ressourcen. Wenn Sie einen Speicherort für die Ressourcengruppe angeben, geben Sie an, wo diese Metadaten gespeichert werden. Aus Compliancegründen müssen Sie möglicherweise sicherstellen, dass Ihre Daten in einer bestimmten Region gespeichert werden. Um die Statuskonsistenz für die Ressourcengruppe sicherzustellen, werden alle Steuerungsebenenvorgänge über den Standort der Ressourcengruppe geleitet. Bei der Auswahl eines Ressourcengruppenstandorts empfehlen wir Ihnen, einen Standort in der Nähe des Ursprungsorts Ihrer Steuerungsvorgänge auszuwählen. Normalerweise ist dies der Standort, der Ihrem aktuellen Standort am nächsten liegt. Diese Routinganforderung gilt nur für Steuerungsebenenvorgänge der Ressourcengruppe. Sie wirkt sich nicht auf Anforderungen aus, die an Ihre Anwendungen gesendet werden. Wenn die Region einer Ressourcengruppe vorübergehend nicht verfügbar ist, können Sie die Ressourcen in der Ressourcengruppe nicht aktualisieren, da die Metadaten nicht verfügbar sind. Die Ressourcen in anderen Regionen funktionieren weiterhin wie erwartet, können aber nicht aktualisiert werden. Dieser Zustand gilt nicht für globale Ressourcen wie Azure Content Delivery Network, Azure DNS, Azure DNS Private Zones, Azure Traffic Manager und Azure Front Door. • Mithilfe einer Ressourcengruppe können Sie die Zugriffssteuerung für administrative Aktionen festlegen. Zum Verwalten einer Ressourcengruppe können Sie Azure- Richtlinien, Azure-Rollen oder Ressourcensperren zuweisen. • Sie können Tags auf eine Ressourcengruppe anwenden. Die Ressourcen in der Ressourcengruppe erben diese Tags nicht. • Eine Ressource kann eine Verbindung mit Ressourcen in anderen Ressourcengruppen herstellen. Dieses Szenario tritt häufig auf, wenn die beiden Ressourcen zwar miteinander verknüpft sind, aber nicht denselben Lebenszyklus aufweisen. Beispielsweise kann eine Web-App eine Verbindung mit einer Datenbank in einer anderen Ressourcengruppe herstellen. • Wenn Sie eine Ressourcengruppe löschen, werden auch alle Ressourcen in der Ressourcengruppe gelöscht. • Sie können in jeder Ressourcengruppe bis zu 800 Instanzen eines Ressourcentyps bereitstellen. Einige Ressourcentypen sind von der Beschränkung auf 800 Instanzen ausgenommen. Weitere Informationen finden Sie unter Ressourcengruppenbeschränkungen. • Einige Ressourcen können außerhalb einer Ressourcengruppe vorhanden sein. Diese Ressourcen werden im Abonnement, in der Verwaltungsgruppe oder im Mandanten bereitgestellt. In diesen Bereichen werden nur bestimmte Ressourcentypen unterstützt. • Zum Erstellen einer Ressourcengruppe können Sie das Portal, PowerShell, Azure CLI oder eine ARM-Vorlage verwenden. Referenzen: Verwalten von Azure-Ressourcengruppen mithilfe des Azure-Portals. Was ist Azure Resource Manager?",
+    resources: [{ label: "Manage Resource Groups Portal", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal" }, { label: "Overview", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/overview" }],
   },
   {
     id: "real-az900-443",
@@ -5810,6 +6139,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Eine Cloud-Umgebung bietet gegenüber einer physischen Umgebung mehrere Vorteile, die ein Unternehmen nach der Migration zu Azure nutzen kann. • Hohe Verfügbarkeit: Abhängig von der von Ihnen gewählten Service-Level-Vereinbarung (SLA) können Ihre Cloud-basierten Apps ein kontinuierliches Benutzererlebnis ohne erkennbare Ausfallzeiten bieten, selbst wenn etwas schiefgeht. • Skalierbarkeit: Apps in der Cloud können vertikal und horizontal skaliert werden : o Skalieren Sie vertikal, um die Rechenkapazität zu erhöhen, indem Sie einer virtuellen Maschine RAM oder CPUs hinzufügen. o Durch horizontales Skalieren wird die Rechenkapazität durch das Hinzufügen von Ressourceninstanzen erhöht, beispielsweise durch das Hinzufügen von VMs zur Konfiguration. • Elastizität: Sie können Cloud-basierte Apps so konfigurieren, dass sie die Vorteile der automatischen Skalierung nutzen, sodass Ihre Apps immer über die Ressourcen verfügen, die sie benötigen. • Agilität: Stellen Sie cloudbasierte Ressourcen schnell bereit und konfigurieren Sie sie, wenn sich die Anforderungen Ihrer App ändern. • Geo-Verteilung: Sie können Apps und Daten in regionalen Rechenzentren auf der ganzen Welt bereitstellen und so sicherstellen, dass Ihre Kunden in ihrer Region immer die beste Leistung erhalten. • Notfallwiederherstellung: Durch die Nutzung cloudbasierter Sicherungsdienste, Datenreplikation und Geoverteilung können Sie Ihre Apps mit der Gewissheit bereitstellen, dass Ihre Daten im Katastrophenfall sicher sind.",
+    resources: [{ label: "Benefits Of Cloud Computing", url: "https://learn.microsoft.com/en-us/training/modules/fundamental-azure-concepts/benefits-of-cloud-computing" }],
   },
   {
     id: "real-az900-444",
@@ -5825,6 +6155,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "E",
     explanation: "Lokal redundanter Speicher (LRS) kopiert Daten dreimal synchron an einem einzigen Standort — die kostengünstigste, am wenigsten redundante Option. Zonenredundanter Speicher (ZRS) repliziert über mehrere Verfügbarkeitszonen hinweg — mehr Redundanz als LRS. Georedundanter Speicher (GRS) repliziert zusätzlich in eine entfernte Region — die redundanteste Option.",
+    resources: [{ label: "Storage Redundancy", url: "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy" }],
   },
 
   {
@@ -5851,6 +6182,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Sie können Cloud-Dienste von jedem modernen Webbrowser aus verwalten", correct: "Ja" },
     ],
     explanation: "Vereinfacht ausgedrückt ist Cloud Computing die Bereitstellung von Computerdiensten – einschließlich Servern, Speicher, Datenbanken, Netzwerken, Software, Analysen und Informationen – über das Internet („die Cloud“), um schnellere Innovationen, flexible Ressourcen und Skaleneffekte zu ermöglichen. Sie zahlen in der Regel nur für die Cloud- Dienste, die Sie tatsächlich nutzen. Das hilft Ihnen, Ihre Betriebskosten zu senken, Ihre Infrastruktur effizienter zu betreiben und sie an veränderte Geschäftsanforderungen anzupassen. Cloud Computing bedeutet einen großen Wandel im Vergleich zur traditionellen Denkweise von Unternehmen hinsichtlich IT-Ressourcen. Hier sind sieben häufige Gründe, warum Unternehmen auf Cloud-Computing-Dienste zurückgreifen: • Kosten – Der Umstieg auf die Cloud hilft Unternehmen, ihre IT-Kosten zu optimieren. Denn Cloud Computing eliminiert die Investitionskosten für Hard- und Software sowie die Einrichtung und den Betrieb von Rechenzentren vor Ort – die Server-Racks, die rund um die Uhr verfügbare Stromversorgung und Kühlung sowie die IT-Experten für die Verwaltung der Infrastruktur. Das summiert sich schnell. • Geschwindigkeit – Die meisten Cloud-Computing-Dienste werden im Self-Service und auf Abruf bereitgestellt, sodass selbst große Mengen an Rechenressourcen in wenigen Minuten, in der Regel mit nur wenigen Mausklicks, bereitgestellt werden können. Dies bietet Unternehmen ein hohes Maß an Flexibilität und verringert den Druck bei der Kapazitätsplanung. • Globale Skalierung – Zu den Vorteilen von Cloud-Computing-Diensten gehört die Möglichkeit der elastischen Skalierung. In der Cloud-Sprache bedeutet dies, dass die richtige Menge an IT-Ressourcen – beispielsweise mehr oder weniger Rechenleistung, Speicher oder Bandbreite – genau dann bereitgestellt wird, wenn sie benötigt werden, und zwar vom richtigen geografischen Standort aus. • Produktivität – Rechenzentren vor Ort erfordern in der Regel viel „Racking and Stacking“ – Hardware-Setup, Software-Patches und andere zeitaufwändige IT- Verwaltungsaufgaben. Cloud Computing macht viele dieser Aufgaben überflüssig, sodass IT-Teams Zeit für wichtigere Geschäftsziele haben. • Leistung – Die größten Cloud-Computing-Dienste laufen in einem weltweiten Netzwerk sicherer Rechenzentren, die regelmäßig auf die neueste Generation schneller und effizienter Computerhardware aktualisiert werden. Dies bietet gegenüber einem einzelnen Unternehmensrechenzentrum mehrere Vorteile, darunter eine geringere Netzwerklatenz für Anwendungen und höhere Skaleneffekte. • Zuverlässigkeit – Cloud Computing vereinfacht und reduziert die Kosten für Datensicherung, Notfallwiederherstellung und Geschäftskontinuität, da Daten an mehreren redundanten Standorten im Netzwerk des Cloud-Anbieters gespiegelt werden können. • Sicherheit – Viele Cloud-Anbieter bieten eine breite Palette an Richtlinien, Technologien und Kontrollen an, die Ihre Sicherheitslage insgesamt stärken und dazu beitragen, Ihre Daten, Apps und Infrastruktur vor potenziellen Bedrohungen zu schützen.",
+    resources: [{ label: "What Is Cloud Computing", url: "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-cloud-computing/" }],
   },
   {
     id: "real-az900-447",
@@ -5864,6 +6196,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Unternehmen haben heute Schwierigkeiten, zunehmend komplexe Umgebungen zu kontrollieren und zu verwalten, die sich über Rechenzentren, mehrere Clouds und Edge- Umgebungen erstrecken. Jede Umgebung und Cloud verfügt über eigene Verwaltungstools, und neue DevOps- und ITOps-Betriebsmodelle lassen sich nur schwer ressourcenübergreifend implementieren. Azure Arc vereinfacht Governance und Verwaltung durch die Bereitstellung einer konsistenten Multicloud- und lokalen Verwaltungsplattform. Azure Arc bietet eine zentralisierte, einheitliche Möglichkeit für: • Verwalten Sie Ihre gesamte Umgebung gemeinsam, indem Sie Ihre vorhandenen Nicht-Azure- und/oder lokalen Ressourcen in Azure Resource Manager projizieren. • Verwalten Sie virtuelle Maschinen, Kubernetes-Cluster und Datenbanken, als würden sie in Azure ausgeführt. • Nutzen Sie vertraute Azure-Dienste und Verwaltungsfunktionen, unabhängig davon, wo sie sich befinden. • Verwenden Sie weiterhin traditionelle ITOps, während Sie DevOps-Praktiken einführen, um neue Cloud-native Muster in Ihrer Umgebung zu unterstützen. • Konfigurieren Sie benutzerdefinierte Standorte als Abstraktionsebene über Azure Arc-fähigen Kubernetes-Clustern und Clustererweiterungen. Derzeit können Sie mit Azure Arc die folgenden Ressourcentypen verwalten, die außerhalb von Azure gehostet werden: • Server: Verwalten Sie physische Windows- und Linux-Server und virtuelle Maschinen, die außerhalb von Azure gehostet werden. • Kubernetes-Cluster: Verbinden und konfigurieren Sie Kubernetes-Cluster, die überall ausgeführt werden können, mit mehreren unterstützten Distributionen. • Azure-Datendienste: Führen Sie Azure-Datendienste vor Ort, am Edge und in öffentlichen Clouds mit Kubernetes und der Infrastruktur Ihrer Wahl aus. SQL Managed Instance und PostgreSQL (Vorschau) sind derzeit verfügbar. • SQL Server: Erweitern Sie Azure-Dienste auf SQL Server-Instanzen, die außerhalb von Azure gehostet werden. • Virtuelle Maschinen (Vorschau): Bereitstellen, Ändern der Größe, Löschen und Verwalten virtueller Maschinen basierend auf VMware vSphere oder Azure Stack HCI und Aktivieren der VM-Selbstbedienung durch rollenbasierten Zugriff.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/azure-arc/overview" }],
   },
   {
     type: "yesno",
@@ -5876,6 +6209,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Microsoft Sentinel kann Windows Defender Firewall-Protokolle von virtuellen Azure-Computern erfassen", correct: "Ja" },
     ],
     explanation: "Microsoft Sentinel ist eine skalierbare, Cloud-native SIEM-Lösung (Security Information and Event Management) sowie SOAR- Lösung (Security Orchestration, Automation and Response). Microsoft Sentinel bietet intelligente Sicherheitsanalysen und Bedrohungsinformationen für das gesamte Unternehmen und stellt eine zentrale Lösung für Angriffserkennung, Bedrohungstransparenz, proaktive Bedrohungssuche und Bedrohungsreaktion bereit. Microsoft Sentinel bietet Ihnen einen umfassenden Überblick über das gesamte Unternehmen und lindert den Stress durch immer raffiniertere Angriffe, eine steigende Anzahl von Warnmeldungen und lange Zeiträume zur Problemlösung. • Sammeln Sie Daten im Cloud-Maßstab über alle Benutzer, Geräte, Anwendungen und Infrastrukturen hinweg, sowohl vor Ort als auch in mehreren Clouds. • Erkennen Sie bisher unentdeckte Bedrohungen und minimieren Sie Fehlalarme mithilfe der Analysefunktionen und beispiellosen Bedrohungsinformationen von Microsoft. • Untersuchen Sie Bedrohungen mit künstlicher Intelligenz und suchen Sie in großem Umfang nach verdächtigen Aktivitäten, indem Sie auf die jahrelange Erfahrung von Microsoft im Bereich Cybersicherheit zurückgreifen. • Reagieren Sie schnell auf Vorfälle mit integrierter Orchestrierung und Automatisierung gängiger Aufgaben.",
+    resources: [{ label: "Overview", url: "https://docs.microsoft.com/en-us/azure/sentinel/overview" }],
   },
   {
     type: "matching",
@@ -5894,6 +6228,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Speichert Kennwörter zur Verwendung durch Azure Function-Anwendungen.", correctItemId: "i2" },
     ],
     explanation: "Microsoft Sentinel ist eine skalierbare, Cloud-native SIEM/SOAR-Lösung zur Sicherheitsanalyse. Microsoft Defender für Cloud zeigt den Sicherheitsstatus (Secure Score) eines Abonnements an. Azure Key Vault speichert sicher Geheimnisse wie Kennwörter für Anwendungen.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/sentinel/overview" }, { label: "Defender For Cloud Introduction", url: "https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-cloud-introduction" }, { label: "Overview", url: "https://learn.microsoft.com/en-us/azure/key-vault/general/overview" }],
   },
   {
     id: "real-az900-450",
@@ -5907,6 +6242,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Sie können das Azure-Portal verwenden, um einmaliges Anmelden (Single Sign-On, SSO) für eine Unternehmensanwendung zu aktivieren, die Sie Ihrem Azure Active Directory-Mandanten (Azure AD) hinzugefügt haben. Nachdem Sie SSO konfiguriert haben, können sich Ihre Benutzer mit ihren Azure AD-Anmeldeinformationen anmelden. Darüber hinaus verfügt Azure AD über eine Galerie mit Tausenden vorintegrierten Anwendungen, die SSO verwenden.",
+    resources: [{ label: "Add Application Portal Setup Sso", url: "https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/add-application-portal-setup-sso" }],
   },
   {
     type: "matching",
@@ -5925,6 +6261,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Rechenkapazität dynamisch erhöhen, indem RAM oder CPU zu einer virtuellen Maschine hinzugefügt wird.", correctItemId: "i2" },
     ],
     explanation: "Hohe Verfügbarkeit sorgt für ein kontinuierliches Erlebnis trotz Ressourcenausfällen. Geo-Verteilung bringt Apps und Daten näher an die Benutzer. Skalierbarkeit erhöht die Rechenkapazität dynamisch, z. B. durch Hinzufügen von RAM oder CPU.",
+    resources: [{ label: "Solution Deployment Guide Geo Distributed", url: "https://learn.microsoft.com/en-us/azure/architecture/hybrid/deployments/solution-deployment-guide-geo-distributed" }, { label: "Design Scale", url: "https://learn.microsoft.com/en-us/azure/well-architected/scalability/design-scale" }],
   },
   {
     id: "real-az900-452",
@@ -5938,6 +6275,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Dank der Vorhersagbarkeit in der Cloud können Sie Ihre Aufgaben mit Zuversicht erledigen. Dabei kann der Schwerpunkt auf der Leistungs- oder Kostenvorhersagbarkeit liegen. Sowohl die Leistungs- als auch die Kostenvorhersagbarkeit werden maßgeblich vom Microsoft Azure Well-Architected Framework beeinflusst. Stellen Sie eine Lösung bereit, die auf diesem Framework basiert, und Sie erhalten eine Lösung mit vorhersagbaren Kosten und Leistungen. Bei der Leistungsvorhersage geht es darum, die Ressourcen vorherzusagen, die für ein positives Kundenerlebnis erforderlich sind. Autoscaling, Lastausgleich und Hochverfügbarkeit sind nur einige der Cloud-Konzepte, die die Leistungsvorhersage unterstützen. Wenn Sie plötzlich mehr Ressourcen benötigen, kann Autoscaling zusätzliche Ressourcen bereitstellen, um den Bedarf zu decken, und diese dann wieder reduzieren, wenn der Bedarf sinkt. Oder wenn der Datenverkehr stark auf einen Bereich konzentriert ist, hilft Lastausgleich dabei, einen Teil der Überlastung auf weniger belastete Bereiche umzuleiten. Bei der Kostenvorhersagbarkeit geht es darum, die Kosten der Cloud-Ausgaben vorherzusagen oder zu prognostizieren. Mit der Cloud können Sie Ihre Ressourcennutzung in Echtzeit verfolgen, Ressourcen überwachen, um sicherzustellen, dass Sie sie optimal nutzen, und Datenanalysen anwenden, um Muster und Trends zu erkennen, die eine bessere Planung der Ressourcenbereitstellung ermöglichen. Durch den Betrieb in der Cloud und die Nutzung von Cloud-Analysen und -Informationen können Sie zukünftige Kosten vorhersagen und Ihre Ressourcen bei Bedarf anpassen. Sie können sogar Tools wie die Gesamtbetriebskosten (TCO) oder den Preisrechner verwenden, um eine Schätzung der potenziellen Cloud-Ausgaben zu erhalten.",
+    resources: [{ label: "3 Reliability Predictability Cloud", url: "https://learn.microsoft.com/en-us/training/modules/describe-benefits-use-cloud-services/3-reliability-predictability-cloud" }],
   },
   {
     id: "real-az900-453",
@@ -5953,6 +6291,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Active Directory (AD) ist die zentralisierte Identitäts- und Zugriffsverwaltungslösung für Azure-Ressourcen. Um einen neuen Benutzer für ein Azure-Abonnement zu erstellen, verwenden Sie das Azure Active Directory (Azure AD) Admin Center. Sie können einen neuen Benutzer erstellen, indem Sie Ihrem Azure AD-Mandanten ein neues Konto hinzufügen und dem Benutzer dann die entsprechende Rolle zuweisen, um auf Ressourcen innerhalb des Azure-Abonnements zuzugreifen und diese zu verwalten.",
+    resources: [{ label: "Add Users Azure Active Directory", url: "https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory" }],
   },
   {
     id: "real-az900-454",
@@ -5966,6 +6305,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Das Microsoft Cloud Adoption Framework für Azure ist ein Framework für den gesamten Lebenszyklus, das Cloudarchitekten, IT-Experten und Entscheidungsträgern in Unternehmen dabei hilft, ihre Ziele bei der Cloudeinführung zu erreichen. Es bietet bewährte Methoden, Dokumentation und Tools, die Sie bei der Erstellung und Implementierung von Geschäfts- und Technologiestrategien für die Cloud unterstützen. Das Cloud Adoption Framework unterstützt Sie in jeder Phase Ihrer Cloudeinführung. Das folgende Diagramm veranschaulicht, wie das Framework Methoden als Ansätze zur Überwindung häufiger Hindernisse einsetzt.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/overview" }],
   },
   {
     id: "real-az900-455",
@@ -5978,6 +6318,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Eine Site-to-Site-VPN-Verbindung (S2S) ist eine Verbindung über einen IPsec/IKE-VPN-Tunnel (IKEv1 oder IKEv2). S2S-Verbindungen können für standortübergreifende und Hybridkonfigurationen verwendet werden. Für eine S2S-Verbindung ist ein lokales VPN-Gerät mit zugewiesener öffentlicher IP-Adresse und ein Azure-VPN-Gateway erforderlich. VPN Gateway kann im Aktiv-Standby-Modus mit einer öffentlichen IP-Adresse oder im Aktiv-Aktiv-Modus mit zwei öffentlichen IP-Adressen konfiguriert werden. Im Aktiv- Standby-Modus ist ein IPsec-Tunnel aktiv und der andere im Standby-Modus. In dieser Konfiguration fließt der Datenverkehr durch den aktiven Tunnel. Tritt ein Problem mit diesem Tunnel auf, wird auf den Standby-Tunnel umgeschaltet. Es wird empfohlen , VPN Gateway im Aktiv-Aktiv-Modus einzurichten , in dem beide IPsec-Tunnel gleichzeitig aktiv sind und die Daten gleichzeitig durch beide Tunnel fließen. Ein weiterer Vorteil des Aktiv-Aktiv-Modus ist der höhere Durchsatz. Sie können von Ihrem virtuellen Netzwerkgateway aus mehrere VPN-Verbindungen erstellen, die in der Regel Verbindungen zu mehreren lokalen Standorten herstellen. Wenn Sie mit mehreren Verbindungen arbeiten, müssen Sie einen routenbasierten VPN-Typ verwenden (bei klassischen VNets als dynamisches Gateway bezeichnet). Da jedes virtuelle Netzwerk nur über ein VPN-Gateway verfügen kann, teilen sich alle Verbindungen über das Gateway die verfügbare Bandbreite. Dieser Verbindungstyp wird manchmal als „Multisite-Verbindung“ bezeichnet.",
+    resources: [{ label: "Design", url: "https://learn.microsoft.com/en-us/azure/vpn-gateway/design#s2smulti" }],
   },
   {
     id: "real-az900-456",
@@ -5991,6 +6332,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Mit ExpressRoute können Sie Ihre lokalen Netzwerke mithilfe eines Konnektivitätsanbieters über eine private Verbindung in die Microsoft-Cloud erweitern. Mit ExpressRoute können Sie Verbindungen zu Microsoft-Clouddiensten wie Microsoft Azure und Microsoft 365 herstellen. ExpressRoute-Verbindungen verlaufen nicht über das öffentliche Internet. Dadurch bieten ExpressRoute-Verbindungen mehr Zuverlässigkeit, höhere Geschwindigkeiten, konsistente Latenzen und höhere Sicherheit als herkömmliche Verbindungen über das Internet. Die Architektur besteht aus den folgenden Komponenten. • Lokales Unternehmensnetzwerk. Ein privates lokales Netzwerk, das innerhalb einer Organisation ausgeführt wird. • ExpressRoute-Verbindung. Eine vom Konnektivitätsanbieter bereitgestellte Verbindung der Schicht 2 oder 3, die das lokale Netzwerk über die Edgerouter mit Azure verbindet. Die Verbindung nutzt die vom Konnektivitätsanbieter verwaltete Hardwareinfrastruktur. • Lokale Edge-Router. Router, die das lokale Netzwerk mit dem vom Anbieter verwalteten Schaltkreis verbinden. Je nachdem, wie Ihre Verbindung bereitgestellt wird, müssen Sie möglicherweise die von den Routern verwendeten öffentlichen IP-Adressen angeben. • Microsoft Edge-Router. Zwei Router in einer Aktiv-Aktiv-Konfiguration mit hoher Verfügbarkeit. Diese Router ermöglichen es einem Konnektivitätsanbieter, seine Leitungen direkt mit seinem Rechenzentrum zu verbinden. Je nachdem, wie Ihre Verbindung bereitgestellt wird, müssen Sie möglicherweise die von den Routern verwendeten öffentlichen IP-Adressen angeben. • Virtuelle Azure-Netzwerke (VNets). Jedes VNet befindet sich in einer einzelnen Azure-Region und kann mehrere Anwendungsebenen hosten. Anwendungsebenen können mithilfe von Subnetzen in jedem VNet segmentiert werden. • Öffentliche Azure-Dienste. Azure-Dienste, die in einer Hybridanwendung verwendet werden können. Diese Dienste sind auch über das Internet verfügbar, der Zugriff über eine ExpressRoute-Verbindung bietet jedoch eine geringere Latenz und eine vorhersehbarere Leistung, da der Datenverkehr nicht über das Internet läuft. • Microsoft 365-Dienste. Die öffentlich verfügbaren Microsoft 365-Anwendungen und -Dienste von Microsoft. Verbindungen werden über Microsoft Peering hergestellt, mit Adressen, die entweder Ihrem Unternehmen gehören oder von Ihrem Konnektivitätsanbieter bereitgestellt werden. Sie können über Microsoft Peering auch eine direkte Verbindung zu Microsoft CRM Online herstellen. • Konnektivitätsanbieter. Unternehmen, die eine Verbindung zwischen Ihrem Rechenzentrum und einem Azure-Rechenzentrum bereitstellen, entweder über Layer-2- oder Layer-3-Konnektivität. Referenzen: Was ist Azure ExpressRoute? Erweitern Sie ein lokales Netzwerk mit ExpressRoute",
+    resources: [{ label: "Expressroute Introduction", url: "https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction" }, { label: "Expressroute", url: "https://learn.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/expressroute" }],
   },
   {
     id: "real-az900-457",
@@ -6004,6 +6346,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Sie können eine Azure-Netzwerksicherheitsgruppe verwenden, um den Netzwerkverkehr zwischen Azure-Ressourcen in einem virtuellen Azure-Netzwerk zu filtern. Eine Netzwerksicherheitsgruppe enthält Sicherheitsregeln, die eingehenden Netzwerkverkehr zu bzw. ausgehenden Netzwerkverkehr von verschiedenen Arten von Azure-Ressourcen zulassen oder verweigern. Für jede Regel können Sie Quelle und Ziel, Port und Protokoll angeben. Eine Netzwerksicherheitsgruppe enthält keine oder beliebig viele Regeln im Rahmen der Azure-Abonnementbeschränkungen. Jede Regel gibt die folgenden Eigenschaften an:",
+    resources: [{ label: "Network Security Groups Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview" }],
   },
   {
     id: "real-az900-458",
@@ -6017,6 +6360,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Richtlinien für bedingten Zugriff sind im einfachsten Fall Wenn-Dann-Anweisungen. Wenn ein Benutzer auf eine Ressource zugreifen möchte, muss er eine Aktion ausführen. Beispiel: Ein Lohnbuchhalter möchte auf die Lohnbuchhaltungsanwendung zugreifen und muss hierfür eine mehrstufige Authentifizierung durchführen. Administratoren stehen vor zwei Hauptzielen: • Ermöglichen Sie Benutzern, jederzeit und überall produktiv zu sein • Schützen Sie die Vermögenswerte der Organisation Wir sollten eine Endpoint Manager-Compliance-Richtlinie verwenden, um den Aktualisierungsstatus der Geräte auszuwerten und eine Richtlinie für bedingten Zugriff zu konfigurieren, die die Geräteeigenschaft „IsCompliant“ verwendet, um Zugriff zu gewähren.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/overview" }],
   },
   {
     id: "real-az900-459",
@@ -6030,6 +6374,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "So wie ein Ingenieur oder Architekt mit einem Blueprint die Entwurfsparameter eines Projekts skizzieren kann, ermöglicht Azure Blueprints Cloudarchitekten und zentralen IT- Gruppen die Definition eines wiederholbaren Satzes von Azure-Ressourcen, der die Standards, Muster und Anforderungen einer Organisation implementiert und einhält. Azure Blueprints ermöglicht es Entwicklungsteams, schnell neue Umgebungen zu erstellen und zu starten. Dabei bauen sie auf die Einhaltung der Organisationsrichtlinien mit integrierten Komponenten wie Netzwerken auf und beschleunigen so Entwicklung und Bereitstellung. Blueprints sind eine deklarative Möglichkeit, die Bereitstellung verschiedener Ressourcenvorlagen und anderer Artefakte zu orchestrieren, wie beispielsweise: • Rollenzuweisungen • Richtlinienzuweisungen • Azure Resource Manager-Vorlagen (ARM-Vorlagen) • Ressourcengruppen Sperrmodi und -zustände Der Sperrmodus gilt für die Blaupausenzuweisung und bietet drei Optionen: Nicht sperren , Nur lesen oder Nicht löschen . Der Sperrmodus wird während der Artefaktbereitstellung bei einer Blaupausenzuweisung konfiguriert. Durch Aktualisieren der Blaupausenzuweisung kann ein anderer Sperrmodus festgelegt werden. Sperrmodi können jedoch außerhalb von Azure Blueprints nicht geändert werden.",
+    resources: [{ label: "Resource Locking", url: "https://learn.microsoft.com/en-us/azure/governance/blueprints/concepts/resource-locking" }],
   },
   {
     id: "real-az900-460",
@@ -6043,6 +6388,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure DNS ist ein Hostingdienst für DNS-Domänen, der die Namensauflösung mithilfe der Microsoft Azure-Infrastruktur ermöglicht. Durch das Hosten Ihrer Domänen in Azure können Sie Ihre DNS-Einträge mit denselben Anmeldeinformationen, APIs, Tools und Abrechnungsmethoden wie bei Ihren anderen Azure-Diensten verwalten. Azure DNS unterstützt DNSSEC derzeit nicht. In den meisten Fällen können Sie den Bedarf an DNSSEC reduzieren, indem Sie in Ihren Anwendungen durchgängig HTTPS/TLS verwenden. Wenn DNSSEC eine wichtige Anforderung für Ihre DNS-Zonen ist, können Sie diese Zonen bei externen DNS-Hostinganbietern hosten.",
+    resources: [{ label: "Dns Overview", url: "https://learn.microsoft.com/en-us/azure/dns/dns-overview" }],
   },
   {
     id: "real-az900-461",
@@ -6056,6 +6402,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure Active Directory B2C bietet Business-to-Customer-Identität als Dienst. Ihre Kunden verwenden ihre bevorzugten Social-Media-, Unternehmens- oder lokalen Kontoidentitäten, um per Single Sign-On auf Ihre Anwendungen und APIs zuzugreifen. Azure AD B2C ist eine CIAM-Lösung (Customer Identity Access Management), die Millionen von Benutzern und Milliarden von Authentifizierungen pro Tag unterstützt. Sie kümmert sich um die Skalierung und Sicherheit der Authentifizierungsplattform, die Überwachung und automatische Behandlung von Bedrohungen wie Denial-of-Service-, Kennwortspray- oder Brute-Force-Angriffen.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/active-directory-b2c/overview" }],
   },
   {
     id: "real-az900-462",
@@ -6069,6 +6416,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure File Sync ermöglicht die Zentralisierung der Dateifreigaben Ihres Unternehmens in Azure Files und bietet gleichzeitig die Flexibilität, Leistung und Kompatibilität eines Windows-Dateiservers. Manche Benutzer speichern ihre Daten zwar lokal, Azure File Sync bietet jedoch zusätzlich die Möglichkeit, Windows Server in einen schnellen Cache Ihrer Azure-Dateifreigabe zu verwandeln. Sie können jedes auf Windows Server verfügbare Protokoll verwenden, um lokal auf Ihre Daten zuzugreifen, einschließlich SMB, NFS und FTPS. Sie können weltweit beliebig viele Caches einrichten. Bei aktiviertem Cloud-Tiering werden Ihre am häufigsten aufgerufenen Dateien auf Ihrem lokalen Server zwischengespeichert und die am seltensten aufgerufenen Dateien in die Cloud ausgelagert. Sie können steuern, wie viel lokaler Speicherplatz für das Caching verwendet wird. Tiered-Dateien können bei Bedarf schnell abgerufen werden. Das sorgt für ein nahtloses Erlebnis und ermöglicht Ihnen gleichzeitig, Kosten zu sparen, da Sie nur einen Bruchteil Ihrer Daten vor Ort speichern müssen. Hinweis: Die Antwortoptionen A, B und C beschreiben die Funktionen von Azure Storage.",
+    resources: [{ label: "File Sync Introduction", url: "https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-introduction" }],
   },
   {
     type: "yesno",
@@ -6081,6 +6429,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Sie können Cloud-Dienste mithilfe eines Webbrowsers verwalten", correct: "Ja" },
     ],
     explanation: "Sie können die Azure-Befehlszeilenschnittstelle (Azure CLI), Azure PowerShell oder das Azure-Portal verwenden, um Azure-Clouddienste zu verwalten. Die Azure CLI kann in Windows-, macOS- und Linux-Umgebungen installiert werden. Sie kann auch in einem Docker-Container und in Azure Cloud Shell ausgeführt werden. Das Azure-Portal ist von jedem modernen Webbrowser aus zugänglich.",
+    resources: [{ label: "Azure", url: "https://learn.microsoft.com/en-us/cli/azure/" }],
   },
   {
     type: "yesno",
@@ -6093,6 +6442,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Netzwerksicherheitsgruppen (NSGs) enthalten immer eingehende und ausgehende Sicherheitsregeln", correct: "Ja" },
     ],
     explanation: "Sie können eine Azure-Netzwerksicherheitsgruppe verwenden, um den Netzwerkverkehr zwischen Azure-Ressourcen in einem virtuellen Azure-Netzwerk zu filtern. Eine Netzwerksicherheitsgruppe enthält Sicherheitsregeln, die eingehenden oder ausgehenden Netzwerkverkehr zu verschiedenen Arten von Azure-Ressourcen zulassen oder verweigern. Für jede Regel können Sie Quelle und Ziel, Port und Protokoll angeben. Azure erstellt in jeder Netzwerksicherheitsgruppe Standardregeln, die den Datenverkehr zwischen virtuellen Netzwerken, eingehenden Datenverkehr zum Azure Load Balancer und ausgehenden Datenverkehr ins Internet zulassen. Mit Anwendungssicherheitsgruppen können Sie die Netzwerksicherheit als natürliche Erweiterung der Anwendungsstruktur konfigurieren, virtuelle Computer gruppieren und Netzwerksicherheitsregeln basierend auf diesen Gruppen definieren. Sie können Ihre Sicherheitsrichtlinie in großem Umfang wiederverwenden, ohne explizite IP-Adressen manuell pflegen zu müssen. Referenzen: Netzwerksicherheitsgruppen Anwendungssicherheitsgruppen",
+    resources: [{ label: "Network Security Groups Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview" }, { label: "Application Security Groups", url: "https://learn.microsoft.com/en-us/azure/virtual-network/application-security-groups" }],
   },
   {
     id: "real-az900-465",
@@ -6106,6 +6456,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Das Service Trust Portal ist die öffentliche Website von Microsoft zur Veröffentlichung von Prüfberichten und anderen Compliance-bezogenen Informationen zu den Microsoft- Clouddiensten. STP-Benutzer können Prüfberichte externer Prüfer herunterladen und sich in von Microsoft verfassten Whitepapern informieren, die detailliert beschreiben, wie Microsoft-Clouddienste Ihre Daten schützen und wie Sie die Cloud-Datensicherheit und -Compliance für Ihr Unternehmen verwalten können. Um auf einige Ressourcen im Service Trust Portal zugreifen zu können, müssen Sie sich als authentifizierter Benutzer mit Ihrem Microsoft-Clouddienstkonto (Azure Active Directory-Organisationskonto) anmelden und die Microsoft-Vertraulichkeitsvereinbarung für Compliance-Materialien lesen und akzeptieren.",
+    resources: [{ label: "Get Started With Service Trust Portal", url: "https://learn.microsoft.com/en-us/microsoft-365/compliance/get-started-with-service-trust-portal?view=o365-worldwide" }],
   },
   {
     type: "matching",
@@ -6124,6 +6475,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Bietet eine verschlüsselte Verbindung von lokalen Netzwerken zu Azure über ein öffentliches Netzwerk.", correctItemId: "i2" },
     ],
     explanation: "ExpressRoute erweitert lokale Netzwerke über eine private, dedizierte Verbindung zu Microsoft. Virtuelles Netzwerk-Peering verbindet zwei oder mehr Azure-VNets zu einem logischen Netzwerk. VPN-Gateway bietet eine verschlüsselte Verbindung über das öffentliche Internet zu Azure.",
+    resources: [{ label: "Expressroute Introduction", url: "https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction" }, { label: "Virtual Network Peering Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview" }, { label: "Vpn Gateway About Vpngateways", url: "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways" }],
   },
   {
     id: "real-az900-467",
@@ -6138,6 +6490,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Elastic Computing ermöglicht es, Rechenleistung, Arbeitsspeicher und Speicherressourcen schnell zu erweitern oder zu reduzieren, um wechselnden Anforderungen gerecht zu werden, ohne sich um Kapazitätsplanung und -planung für Spitzenlasten kümmern zu müssen. Elastic Computing wird in der Regel durch Systemüberwachungstools gesteuert und gleicht die zugewiesene Ressourcenmenge mit der tatsächlich benötigten Ressourcenmenge ab, ohne den laufenden Betrieb zu unterbrechen. Dank Cloud-Elastizität vermeidet ein Unternehmen die Kosten für ungenutzte Kapazitäten oder ungenutzte Ressourcen und muss sich nicht um den Kauf oder die Wartung zusätzlicher Ressourcen und Geräte kümmern. Obwohl Sicherheit und eingeschränkte Kontrolle beim Elastic Cloud Computing zu berücksichtigen sind, bietet es viele Vorteile. Elastic Computing ist effizienter als eine herkömmliche IT-Infrastruktur, in der Regel automatisiert, sodass es nicht rund um die Uhr auf menschliche Administratoren angewiesen ist, und bietet durch die Vermeidung unnötiger Verlangsamungen oder Dienstunterbrechungen kontinuierliche Serviceverfügbarkeit.",
+    resources: [{ label: "What Is Elastic Computing", url: "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-elastic-computing" }],
   },
   {
     type: "yesno",
@@ -6150,6 +6503,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Premium-Speicherkonten können als StorageV2-Speicher konfiguriert werden", correct: "Nein" },
     ],
     explanation: "Azure Storage bietet verschiedene Arten von Speicherkonten. Jeder Typ unterstützt unterschiedliche Features und verfügt über ein eigenes Preismodell. In der folgenden Tabelle werden die von Microsoft für die meisten Szenarien empfohlenen Speicherkontotypen beschrieben.",
+    resources: [{ label: "Storage Account Overview", url: "https://learn.microsoft.com/en-us/azure/storage/common/storage-account-overview#types-of-storage-accounts" }],
   },
   {
     id: "real-az900-469",
@@ -6177,6 +6531,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Mit einer Point-to-Site-VPN-Gatewayverbindung (P2S) können Sie von einem einzelnen Clientcomputer aus eine sichere Verbindung zu Ihrem virtuellen Netzwerk herstellen. Eine P2S-Verbindung wird hergestellt, indem sie vom Clientcomputer aus gestartet wird. Diese Lösung ist nützlich für Telearbeiter, die von einem Remotestandort aus, z. B. von zu Hause oder einer Konferenz, eine Verbindung zu Azure VNets herstellen möchten. P2S-VPN ist auch eine nützliche Lösung anstelle von S2S-VPN, wenn nur wenige Clients eine Verbindung zu einem VNet herstellen müssen.",
+    resources: [{ label: "Point To Site About", url: "https://learn.microsoft.com/en-us/azure/vpn-gateway/point-to-site-about" }],
   },
   {
     id: "real-az900-471",
@@ -6188,6 +6543,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure Information Protection (AIP) ist eine Cloud-basierte Lösung, die es Unternehmen ermöglicht, Dokumente und E-Mails durch die Kennzeichnung von Inhalten zu erkennen, zu klassifizieren und zu schützen. Azure Information Protection eignet sich nicht zum Speichern von Administratoranmeldeinformationen für Azure Resource Manager (ARM)-Vorlagen. Verwenden Sie stattdessen Azure Key Vault. Anstatt einen sicheren Wert (z. B. ein Kennwort) direkt in Ihre Vorlage oder Parameterdatei einzugeben, können Sie den Wert während einer Bereitstellung aus Azure Key Vault abrufen. Sie rufen den Wert ab, indem Sie in Ihrer Parameterdatei auf den Schlüsseltresor und das Geheimnis verweisen. Der Wert wird nie angezeigt, da Sie nur auf die Schlüsseltresor-ID verweisen. Azure Key Vault ist eine von mehreren Schlüsselverwaltungslösungen in Azure und hilft bei der Lösung der folgenden Probleme: • Geheimnisverwaltung – Azure Key Vault kann verwendet werden, um Token, Passwörter, Zertifikate, API-Schlüssel und andere Geheimnisse sicher zu speichern und den Zugriff darauf streng zu kontrollieren. • Schlüsselverwaltung : Azure Key Vault kann als Schlüsselverwaltungslösung verwendet werden. Azure Key Vault erleichtert das Erstellen und Verwalten der Verschlüsselungsschlüssel, die zum Verschlüsseln Ihrer Daten verwendet werden. • Zertifikatsverwaltung – Mit Azure Key Vault können Sie öffentliche und private Transport Layer Security/Secure Sockets Layer (TLS/SSL)-Zertifikate für die Verwendung mit Azure und Ihren intern verbundenen Ressourcen einfach bereitstellen, verwalten und einsetzen. Azure Key Vault verfügt über zwei Dienstebenen: Standard, das mit einem Softwareschlüssel verschlüsselt, und eine Premiumebene, die durch ein Hardware-Sicherheitsmodul (HSM) geschützte Schlüssel enthält. Referenzen: Informationen zu Azure Key Vault Verwenden Sie Azure Key Vault, um während der Bereitstellung sichere Parameterwerte zu übergeben",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/key-vault/general/overview" }, { label: "Key Vault Parameter", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/key-vault-parameter?tabs=azure-cli" }],
   },
   {
     id: "real-az900-472",
@@ -6199,6 +6555,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure Multi-Factor Authentication (MFA) erweitert den Authentifizierungsprozess um eine zusätzliche Ebene, speichert Ihre Anmeldeinformationen jedoch unverschlüsselt. Verwenden Sie stattdessen Azure Key Vault. Anstatt einen sicheren Wert (z. B. ein Kennwort) direkt in Ihre Vorlage oder Parameterdatei einzugeben, können Sie den Wert während einer Bereitstellung aus einem Azure Key Vault abrufen. Sie rufen den Wert ab, indem Sie in Ihrer Parameterdatei auf den Schlüsseltresor und das Geheimnis verweisen. Der Wert wird nie offengelegt, da Sie nur auf die Schlüsseltresor-ID verweisen. Azure Key Vault ist eine von mehreren Schlüsselverwaltungslösungen in Azure und hilft bei der Lösung der folgenden Probleme: • Geheimnisverwaltung – Azure Key Vault kann verwendet werden, um Token, Passwörter, Zertifikate, API-Schlüssel und andere Geheimnisse sicher zu speichern und den Zugriff darauf streng zu kontrollieren. • Schlüsselverwaltung : Azure Key Vault kann als Schlüsselverwaltungslösung verwendet werden. Azure Key Vault erleichtert das Erstellen und Verwalten der Verschlüsselungsschlüssel, die zum Verschlüsseln Ihrer Daten verwendet werden. • Zertifikatsverwaltung – Mit Azure Key Vault können Sie öffentliche und private Transport Layer Security/Secure Sockets Layer (TLS/SSL)-Zertifikate für die Verwendung mit Azure und Ihren intern verbundenen Ressourcen einfach bereitstellen, verwalten und einsetzen. Azure Key Vault verfügt über zwei Dienstebenen: Standard, das mit einem Softwareschlüssel verschlüsselt, und eine Premiumebene, die durch ein Hardware-Sicherheitsmodul (HSM) geschützte Schlüssel enthält. Referenzen: Informationen zu Azure Key Vault Verwenden Sie Azure Key Vault, um während der Bereitstellung sichere Parameterwerte zu übergeben",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/key-vault/general/overview" }, { label: "Key Vault Parameter", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/key-vault-parameter?tabs=azure-cli" }],
   },
   {
     id: "real-az900-473",
@@ -6210,6 +6567,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Anstatt einen sicheren Wert (z. B. ein Kennwort) direkt in Ihre Vorlage oder Parameterdatei einzufügen, können Sie den Wert während einer Bereitstellung aus einem Azure Key Vault abrufen. Sie rufen den Wert ab, indem Sie in Ihrer Parameterdatei auf den Schlüsseltresor und das Geheimnis verweisen. Der Wert wird nie offengelegt, da Sie nur auf die Schlüsseltresor-ID verweisen. Azure Key Vault ist eine von mehreren Schlüsselverwaltungslösungen in Azure und hilft bei der Lösung der folgenden Probleme: • Geheimnisverwaltung – Azure Key Vault kann verwendet werden, um Token, Passwörter, Zertifikate, API-Schlüssel und andere Geheimnisse sicher zu speichern und den Zugriff darauf streng zu kontrollieren. • Schlüsselverwaltung : Azure Key Vault kann als Schlüsselverwaltungslösung verwendet werden. Azure Key Vault erleichtert das Erstellen und Verwalten der Verschlüsselungsschlüssel, die zum Verschlüsseln Ihrer Daten verwendet werden. • Zertifikatsverwaltung – Mit Azure Key Vault können Sie öffentliche und private Transport Layer Security/Secure Sockets Layer (TLS/SSL)-Zertifikate für die Verwendung mit Azure und Ihren intern verbundenen Ressourcen einfach bereitstellen, verwalten und einsetzen. Azure Key Vault verfügt über zwei Dienstebenen: Standard, das mit einem Softwareschlüssel verschlüsselt, und eine Premiumebene, die durch ein Hardware-Sicherheitsmodul (HSM) geschützte Schlüssel enthält. Referenzen: Informationen zu Azure Key Vault Verwenden Sie Azure Key Vault, um während der Bereitstellung sichere Parameterwerte zu übergeben",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/key-vault/general/overview" }, { label: "Key Vault Parameter", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/key-vault-parameter?tabs=azure-cli" }],
   },
   {
     id: "real-az900-474",
@@ -6224,6 +6582,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure verlagert die Entwicklungskosten von den Kapitalausgaben (CapEx) für den Aufbau und die Wartung der Infrastruktur und Einrichtungen auf die Betriebsausgaben (OpEx) für die Anmietung der Infrastruktur nach Bedarf, sei es Rechenleistung, Speicher, Netzwerk usw. Die Betriebskosten können durch viele Faktoren beeinflusst werden. Einige der Einflussfaktoren sind: • Ressourcentyp • Verbrauch • Wartung • Geographie • Abonnementtyp • Azure Marketplace Netzwerkverkehr Abrechnungszonen sind ein Faktor bei der Bestimmung der Kosten einiger Azure-Dienste. Bandbreite bezieht sich auf Daten, die in Azure-Rechenzentren hinein- und herausbewegt werden. Einige eingehende Datenübertragungen (Daten, die in Azure-Rechenzentren eingehen) sind kostenlos. Für ausgehende Datenübertragungen (Daten, die Azure-Rechenzentren verlassen) basieren die Preise für Datenübertragungen auf Zonen. Eine Zone ist eine geografische Gruppierung von Azure-Regionen für Abrechnungszwecke. Azure-Regionen Die Kosten eines Azure-Dienstes können je nach Bedarf und lokalen Infrastrukturkosten je nach Standort variieren. Azure-Dienstebenen Preisstufen ermöglichen die Klassifizierung von Azure-Ressourcen nach Kosten. Sie ermöglichen außerdem die Gruppierung von Ressourcen, sodass Sie ganz einfach die Ressourcen finden, die Ihren Anforderungen am besten entsprechen. Azure bietet drei Preisstufen: Basic, Standard und Premium. Die Basic-Stufe ist die günstigste Option und bietet eine begrenzte Anzahl von Ressourcen. Referenzen: Beschreiben Sie Faktoren, die die Kosten in Azure Azure-Regionen beeinflussen können",
+    resources: [{ label: "2 Describe Factors Affect Costs Azure", url: "https://learn.microsoft.com/en-us/training/modules/describe-cost-management-azure/2-describe-factors-affect-costs-azure" }, { label: "Design Regions", url: "https://learn.microsoft.com/en-us/azure/well-architected/cost/design-regions" }],
   },
   {
     id: "real-az900-475",
@@ -6235,6 +6594,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Ja. Wir können Azure-Netzwerksicherheitsgruppen verwenden, um den Netzwerkverkehr zwischen Azure-Ressourcen zu filtern, die in virtuellen Azure-Netzwerken bereitgestellt sind. Wir sollten die Webserver und die Datenbankserver in verschiedenen virtuellen Netzwerken platzieren und den Verkehr zwischen diesen beiden virtuellen Netzwerken mithilfe von Netzwerksicherheitsgruppen (NSGs) steuern.",
+    resources: [{ label: "Network Security Groups Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview" }],
   },
   {
     id: "real-az900-476",
@@ -6246,6 +6606,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Ein lokales Netzwerkgateway ist ein spezifisches Objekt, das Ihren lokalen Standort für Routingzwecke darstellt. Ein lokales Netzwerkgateway ist nicht geeignet, den Netzwerkverkehr zwischen Azure-Ressourcen zu steuern. Stattdessen sollten wir Netzwerksicherheitsgruppen verwenden. Wir sollten die Webserver und die Datenbankserver in verschiedenen virtuellen Netzwerken platzieren und den Datenverkehr zwischen diesen beiden virtuellen Netzwerken mithilfe von Netzwerksicherheitsgruppen (NSGs) steuern.",
+    resources: [{ label: "Network Security Groups Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview" }],
   },
   {
     id: "real-az900-477",
@@ -6257,6 +6618,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Eine Site-to-Site-VPN-Verbindung ermöglicht die Netzwerkkonnektivität zwischen einem lokalen Standort und virtuellen Azure-Netzwerken. Eine Site-to-Site-VPN- Verbindung eignet sich nicht zur Steuerung des Netzwerkverkehrs zwischen Azure-Ressourcen. Stattdessen sollten Netzwerksicherheitsgruppen verwendet werden. Wir sollten die Webserver und die Datenbankserver in verschiedenen virtuellen Netzwerken platzieren und den Datenverkehr zwischen diesen beiden virtuellen Netzwerken mithilfe von Netzwerksicherheitsgruppen (NSGs) steuern.",
+    resources: [{ label: "Network Security Groups Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview" }],
   },
   {
     id: "real-az900-478",
@@ -6270,6 +6632,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Durch die Integration eines virtuellen Netzwerks (VNet) für einen Azure-Dienst können Sie den Zugriff auf den Dienst auf Ihre virtuelle Netzwerkinfrastruktur beschränken. Die VNet-Infrastruktur umfasst auch virtuelle Peering-Netzwerke und lokale Netzwerke. Die VNet-Integration bietet Azure-Diensten die Vorteile der Netzwerkisolation und kann mit einer oder mehreren der folgenden Methoden erreicht werden: • Bereitstellen dedizierter Instanzen des Dienstes in einem virtuellen Netzwerk. Auf die Dienste kann dann privat innerhalb des virtuellen Netzwerks und von lokalen Netzwerken aus zugegriffen werden. • Verwenden Sie einen privaten Endpunkt, der Sie privat und sicher mit einem Dienst verbindet, der von Azure Private Link unterstützt wird. Der private Endpunkt verwendet eine private IP-Adresse aus Ihrem VNet und bindet den Dienst effektiv in Ihr virtuelles Netzwerk ein. • Zugriff auf den Dienst über öffentliche Endpunkte durch Erweiterung eines virtuellen Netzwerks auf den Dienst über Dienstendpunkte. Dienstendpunkte ermöglichen die Sicherung von Dienstressourcen im virtuellen Netzwerk. • Verwenden Sie Diensttags, um Datenverkehr zu Ihren Azure-Ressourcen von und zu öffentlichen IP-Endpunkten zuzulassen oder zu verweigern. Segmentierung ist ein Modell, bei dem Sie Ihren Netzwerk-Footprint mithilfe der in Microsoft Azure verfügbaren Tools softwaredefinierte Perimeter erstellen. Anschließend legen Sie Regeln fest, die den Datenverkehr von/zu diesen Perimetern steuern, sodass Sie für verschiedene Teile Ihres Netzwerks unterschiedliche Sicherheitsvorkehrungen treffen können. Indem Sie verschiedene Anwendungen (oder Teile einer bestimmten Anwendung) in diese Perimeter platzieren, können Sie die Kommunikation zwischen diesen segmentierten Einheiten steuern. Sollte ein Teil Ihres Anwendungsstapels kompromittiert werden, können Sie die Auswirkungen dieser Sicherheitsverletzung besser eindämmen und eine laterale Ausbreitung im restlichen Netzwerk verhindern. Diese Fähigkeit ist ein zentrales Prinzip des von Microsoft veröffentlichten Zero-Trust-Modells, das darauf abzielt, erstklassiges Sicherheitsdenken in Ihr Unternehmen zu bringen. Referenzen: Integrieren Sie Azure-Dienste mit virtuellen Netzwerken zur Netzwerkisolierung. Sichern und steuern Sie Workloads mit Segmentierung auf Netzwerkebene.",
+    resources: [{ label: "Vnet Integration For Azure Services", url: "https://learn.microsoft.com/en-us/azure/virtual-network/vnet-integration-for-azure-services" }, { label: "Network Level Segmentation", url: "https://learn.microsoft.com/en-us/azure/architecture/reference-architectures/hybrid-networking/network-level-segmentation" }],
   },
   {
     id: "real-az900-479",
@@ -6283,6 +6646,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Wenn Sie eine Anwendung, einen Dienst oder IT-Ressourcen bereitstellen, ist es wichtig, dass die Ressourcen bei Bedarf verfügbar sind. Bei Hochverfügbarkeit geht es darum, maximale Verfügbarkeit sicherzustellen, unabhängig von Störungen oder Ereignissen. Beim Entwerfen Ihrer Lösung müssen Sie Garantien für die Dienstverfügbarkeit berücksichtigen. Azure ist eine hochverfügbare Cloudumgebung mit dienstabhängigen Betriebszeitgarantien. Diese Garantien sind Teil der Service Level Agreements (SLAs).",
+    resources: [{ label: "2 High Availability Scalability Cloud", url: "https://learn.microsoft.com/en-us/training/modules/describe-benefits-use-cloud-services/2-high-availability-scalability-cloud" }],
   },
   {
     id: "real-az900-480",
@@ -6296,6 +6660,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Ausfälle können von Software- und Hardwarefehlern bis hin zu Ereignissen wie Erdbeben, Überschwemmungen und Bränden reichen. Die Ausfalltoleranz wird durch Redundanz und logische Isolierung der Azure-Dienste erreicht. Um die Ausfallsicherheit zu gewährleisten, sind in allen Regionen mit Verfügbarkeitszonen mindestens drei separate Verfügbarkeitszonen vorhanden. Azure-Verfügbarkeitszonen sind über ein Hochleistungsnetzwerk mit einer Roundtrip-Latenz von weniger als 2 ms verbunden. Sie sorgen dafür, dass Ihre Daten auch bei Problemen synchronisiert und zugänglich bleiben. Jede Zone besteht aus einem oder mehreren Rechenzentren mit unabhängiger Stromversorgung, Kühlung und Netzwerkinfrastruktur. Verfügbarkeitszonen sind so konzipiert, dass bei einer Beeinträchtigung einer Zone regionale Dienste, Kapazität und Hochverfügbarkeit von den beiden verbleibenden Zonen unterstützt werden.",
+    resources: [{ label: "Availability Zones Overview", url: "https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview" }],
   },
   {
     id: "real-az900-481",
@@ -6309,6 +6674,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Microsoft Defender für Cloud verfolgt zwei Hauptziele: • um Ihnen zu helfen, Ihre aktuelle Sicherheitslage zu verstehen • um Ihnen zu helfen, Ihre Sicherheit effizient und effektiv zu verbessern Die zentrale Funktion in Defender for Cloud, die es Ihnen ermöglicht, diese Ziele zu erreichen, ist der Sicherheits-Score . Defender for Cloud prüft Ihre Cloud-übergreifenden Ressourcen kontinuierlich auf Sicherheitsprobleme. Anschließend werden alle Ergebnisse in einer einzigen Bewertung zusammengefasst, sodass Sie Ihre aktuelle Sicherheitslage auf einen Blick erkennen können: Je höher die Bewertung, desto geringer das erkannte Risikoniveau.",
+    resources: [{ label: "Secure Score Security Controls", url: "https://docs.microsoft.com/en-us/azure/defender-for-cloud/secure-score-security-controls" }],
   },
   {
     id: "real-az900-482",
@@ -6322,6 +6688,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Die Microsoft-Datenschutzerklärung erläutert, welche personenbezogenen Daten Microsoft verarbeitet, wie Microsoft sie verarbeitet und zu welchen Zwecken. Ihr geltender Servicevertrag oder die zusätzlichen Bedingungen für die Vorschau können für einige Vorschaudienste geringere oder andere Datenschutzmaßnahmen vorsehen.",
+    resources: [{ label: "Privacystatement", url: "https://privacy.microsoft.com/en-us/privacystatement" }],
   },
   {
     id: "real-az900-483",
@@ -6334,6 +6701,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Software as a Service (SaaS) ist aus Produktsicht das umfassendste Cloud-Service-Modell. Bei SaaS mieten oder nutzen Sie im Wesentlichen eine vollständig entwickelte Anwendung. E-Mail, Finanzsoftware, Messaging-Anwendungen und Konnektivitätssoftware sind gängige Beispiele für eine SaaS-Implementierung. Das SaaS-Modell ist zwar am wenigsten flexibel, lässt sich aber auch am einfachsten implementieren. Für die vollständige Nutzung sind die geringsten technischen Kenntnisse oder Fachkenntnisse erforderlich. Das Modell der geteilten Verantwortung gilt für alle Cloud-Servicetypen. SaaS ist das Modell, bei dem die größte Verantwortung beim Cloud-Anbieter und die geringste beim Benutzer liegt. In einer SaaS-Umgebung sind Sie für die Daten verantwortlich, die Sie in das System eingeben, für die Geräte, denen Sie die Verbindung zum System erlauben, und für die Benutzer, die Zugriff haben. Fast alles andere fällt in die Zuständigkeit des Cloud-Anbieters. Der Cloud-Anbieter ist für die physische Sicherheit der Rechenzentren, die Stromversorgung, die Netzwerkkonnektivität sowie die Anwendungsentwicklung und das Patchen verantwortlich.",
+    resources: [{ label: "4 Describe Software Service", url: "https://learn.microsoft.com/en-us/training/modules/describe-cloud-service-types/4-describe-software-service" }],
   },
   {
     id: "real-az900-484",
@@ -6348,6 +6716,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Log Analytics ist ein Tool im Azure-Portal, das zum Bearbeiten und Ausführen von Protokollabfragen für Daten im Azure Monitor-Protokollspeicher verwendet wird. Sie können eine einfache Abfrage schreiben, die eine Reihe von Datensätzen zurückgibt, und diese dann mithilfe der Funktionen von Log Analytics sortieren, filtern und analysieren. Oder Sie schreiben eine komplexere Abfrage, um statistische Analysen durchzuführen und die Ergebnisse in einem Diagramm zu visualisieren, um einen bestimmten Trend zu erkennen. Unabhängig davon, ob Sie interaktiv mit den Ergebnissen Ihrer Abfragen arbeiten oder sie mit anderen Azure Monitor-Funktionen wie Protokollabfragewarnungen oder Arbeitsmappen verwenden, ist Log Analytics das Tool, mit dem Sie sie schreiben und testen.",
+    resources: [{ label: "Log Analytics Overview", url: "https://learn.microsoft.com/en-us/azure/azure-monitor/logs/log-analytics-overview" }],
   },
   {
     id: "real-az900-485",
@@ -6361,6 +6730,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Kostenkontrolle ist ein entscheidender Faktor für die Wertmaximierung Ihrer Cloud-Investition. Es gibt verschiedene Szenarien, in denen Kostentransparenz, Reporting und kostenbasierte Orchestrierung für den fortlaufenden Geschäftsbetrieb entscheidend sind. Kostenverwaltungs-APIs bieten eine Reihe von APIs zur Unterstützung dieser Szenarien. Die APIs liefern Nutzungsdetails, sodass Sie die Kosten auf Instanzebene detailliert anzeigen können. Budgets werden häufig im Rahmen der Kostenkontrolle verwendet. Budgets können in Azure bereichsbezogen sein. Sie können Ihre Budgetansicht beispielsweise basierend auf Abonnements, Ressourcengruppen oder einer Ressourcensammlung eingrenzen. Zusätzlich zur Verwendung der Budget-API, die Sie per E-Mail benachrichtigt, wenn ein Budgetschwellenwert erreicht wird, können Sie Azure Monitor-Aktionsgruppen verwenden, um eine orchestrierte Reihe von Aktionen auszulösen, die sich aus einem Budgetereignis ergeben. Ein typisches Budgetszenario für Kunden mit nicht kritischen Workloads könnte beispielsweise darin bestehen, ein Budget einzuhalten und gleichzeitig die Kosten für die monatliche Rechnung vorhersehbar zu gestalten. Dieses Szenario erfordert eine kostenbasierte Orchestrierung der Ressourcen der Azure-Umgebung. In diesem Szenario wird ein monatliches Budget von 1.000 US-Dollar für das Abonnement festgelegt. Außerdem werden Benachrichtigungsschwellenwerte festgelegt, um einige Orchestrierungen auszulösen. Dieses Szenario beginnt mit einem Kostenschwellenwert von 80 %, der alle VMs in der Ressourcengruppe „Optional“ stoppt. Beim Kostenschwellenwert von 100 % werden dann alle VM-Instanzen gestoppt.",
+    resources: [{ label: "Cost Management Budget Scenario", url: "https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/cost-management-budget-scenario" }],
   },
   {
     id: "real-az900-486",
@@ -6374,6 +6744,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Microsoft Global Azure und Azure Government bieten die folgenden drei kennwortlosen Authentifizierungsoptionen, die in Azure Active Directory (Azure AD) integriert sind: • Windows Hello für Unternehmen • Microsoft Authenticator • FIDO2-Sicherheitsschlüssel",
+    resources: [{ label: "Concept Authentication Passwordless", url: "https://learn.microsoft.com/en-us/azure/active-directory/authentication/concept-authentication-passwordless" }],
   },
   {
     id: "real-az900-487",
@@ -6387,6 +6758,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Advisor ist ein personalisierter Cloudberater, der Sie bei der Optimierung Ihrer Azure-Bereitstellungen mithilfe bewährter Methoden unterstützt. Er analysiert Ihre Ressourcenkonfiguration und Nutzungstelemetrie und empfiehlt anschließend Lösungen, mit denen Sie die Kosteneffizienz, Leistung, Zuverlässigkeit (früher als Hochverfügbarkeit bezeichnet) und Sicherheit Ihrer Azure-Ressourcen verbessern können. Mit Advisor können Sie: • Erhalten Sie proaktive, umsetzbare und personalisierte Best Practices-Empfehlungen. • Verbessern Sie die Leistung, Sicherheit und Zuverlässigkeit Ihrer Ressourcen, indem Sie Möglichkeiten zur Reduzierung Ihrer Azure-Gesamtausgaben identifizieren. • Erhalten Sie Empfehlungen mit vorgeschlagenen Aktionen inline. Sie können über das Azure-Portal auf Advisor zugreifen. Melden Sie sich beim Portal an und suchen Sie im Navigationsmenü nach Advisor oder im Menü „Alle Dienste“ . Das Advisor-Dashboard zeigt personalisierte Empfehlungen für alle Ihre Abonnements an. Sie können Filter anwenden, um Empfehlungen für bestimmte Abonnements und Ressourcentypen anzuzeigen. Die Empfehlungen sind in fünf Kategorien unterteilt: • Zuverlässigkeit (früher Hochverfügbarkeit genannt): Um die Kontinuität Ihrer geschäftskritischen Anwendungen sicherzustellen und zu verbessern. • Sicherheit: Zum Erkennen von Bedrohungen und Schwachstellen, die zu Sicherheitsverletzungen führen könnten. • Leistung: Um die Geschwindigkeit Ihrer Anwendungen zu verbessern. • Kosten: Um Ihre gesamten Azure-Ausgaben zu optimieren und zu reduzieren. • Operative Exzellenz: Wir helfen Ihnen dabei, Prozess- und Arbeitsablaufeffizienz, Ressourcenverwaltung und Best Practices für die Bereitstellung zu erreichen.",
+    resources: [{ label: "Advisor Overview", url: "https://learn.microsoft.com/en-us/azure/advisor/advisor-overview" }],
   },
   {
     id: "real-az900-488",
@@ -6400,6 +6772,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Sie können Azure Active Directory (Azure AD) verwenden, um Anforderungen an Azure-Speicherressourcen mithilfe von Azure RBAC zu autorisieren. Azure RBAC unterstützt Sie bei der Verwaltung des Ressourcenzugriffs, indem es mithilfe von Rollendefinitionen und Rollenzuweisungen definiert, wer Zugriff auf Ressourcen hat und welche Aktionen damit ausgeführt werden können. Azure Storage definiert eine Reihe integrierter Azure-Rollen, die allgemeine Berechtigungssätze für den Zugriff auf Azure- Speicherdaten umfassen. Sie können auch benutzerdefinierte Rollen mit ausgewählten Berechtigungssätzen definieren. Azure Storage unterstützt Rollenzuweisungen sowohl für Speicherkonten als auch für Blobcontainer. Wir sollten Benutzer1 eine Datenzugriffsrolle zuweisen, beispielsweise „Storage Blob Data Reader“ .",
+    resources: [{ label: "Assign Azure Role Data Access", url: "https://learn.microsoft.com/en-us/azure/storage/blobs/assign-azure-role-data-access?tabs=portal" }],
   },
   {
     id: "real-az900-489",
@@ -6411,6 +6784,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Mit Identity Protection können Organisationen drei wichtige Aufgaben erfüllen: • Automatisieren Sie die Erkennung und Behebung identitätsbasierter Risiken. • Untersuchen Sie Risiken mithilfe der Daten im Portal. • Exportieren Sie Daten zur Risikoerkennung in andere Tools. Zu den Risikoerkennungen in Azure AD Identity Protection gehören alle identifizierten verdächtigen Aktionen im Zusammenhang mit Benutzerkonten im Verzeichnis. Zum Schutz Ihrer Benutzer können Sie in Azure Active Directory (Azure AD) risikobasierte Richtlinien konfigurieren, die automatisch auf riskantes Verhalten reagieren. Azure AD Identity Protection-Richtlinien können Anmeldeversuche automatisch blockieren oder zusätzliche Aktionen erfordern, z. B. eine Kennwortänderung oder die Aufforderung zur Azure AD Multi-Factor Authentication. Referenzen: Was ist Identitätsschutz? Aktivieren Sie die Benutzerrisikorichtlinie für die Kennwortänderung",
+    resources: [{ label: "Overview Identity Protection", url: "https://learn.microsoft.com/en-us/azure/active-directory/identity-protection/overview-identity-protection" }, { label: "Tutorial Risk Based Sspr Mfa", url: "https://learn.microsoft.com/en-us/azure/active-directory/authentication/tutorial-risk-based-sspr-mfa#enable-user-risk-policy-for-password-change" }],
   },
   {
     id: "real-az900-490",
@@ -6422,6 +6796,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure AD Privileged Identity Management eignet sich nicht, um bei riskanten Anmeldungen Kennwortänderungen zu erzwingen. Wir sollten stattdessen Azure AD Identity Protection verwenden. Mit Identity Protection können Organisationen drei wichtige Aufgaben erfüllen: • Automatisieren Sie die Erkennung und Behebung identitätsbasierter Risiken. • Untersuchen Sie Risiken mithilfe der Daten im Portal. • Exportieren Sie Daten zur Risikoerkennung in andere Tools. Zu den Risikoerkennungen in Azure AD Identity Protection gehören alle identifizierten verdächtigen Aktionen im Zusammenhang mit Benutzerkonten im Verzeichnis. Zum Schutz Ihrer Benutzer können Sie in Azure Active Directory (Azure AD) risikobasierte Richtlinien konfigurieren, die automatisch auf riskantes Verhalten reagieren. Azure AD Identity Protection-Richtlinien können Anmeldeversuche automatisch blockieren oder zusätzliche Aktionen erfordern, z. B. eine Kennwortänderung oder die Aufforderung zur Azure AD Multi-Factor Authentication. Referenzen: Was ist Identitätsschutz? Aktivieren Sie die Benutzerrisikorichtlinie für die Kennwortänderung",
+    resources: [{ label: "Overview Identity Protection", url: "https://learn.microsoft.com/en-us/azure/active-directory/identity-protection/overview-identity-protection" }, { label: "Tutorial Risk Based Sspr Mfa", url: "https://learn.microsoft.com/en-us/azure/active-directory/authentication/tutorial-risk-based-sspr-mfa#enable-user-risk-policy-for-password-change" }],
   },
   {
     id: "real-az900-491",
@@ -6433,6 +6808,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Der Azure AD-Kennwortschutz eignet sich nicht dazu, bei riskanten Anmeldungen Kennwortänderungen zu erzwingen. Stattdessen sollten wir den Azure AD-Identitätsschutz verwenden. Mit Identity Protection können Organisationen drei wichtige Aufgaben erfüllen: • Automatisieren Sie die Erkennung und Behebung identitätsbasierter Risiken. • Untersuchen Sie Risiken mithilfe der Daten im Portal. • Exportieren Sie Daten zur Risikoerkennung in andere Tools. Zu den Risikoerkennungen in Azure AD Identity Protection gehören alle identifizierten verdächtigen Aktionen im Zusammenhang mit Benutzerkonten im Verzeichnis. Zum Schutz Ihrer Benutzer können Sie in Azure Active Directory (Azure AD) risikobasierte Richtlinien konfigurieren, die automatisch auf riskantes Verhalten reagieren. Azure AD Identity Protection-Richtlinien können Anmeldeversuche automatisch blockieren oder zusätzliche Aktionen erfordern, z. B. eine Kennwortänderung oder die Aufforderung zur Azure AD Multi-Factor Authentication. Referenzen: Was ist Identitätsschutz? Aktivieren Sie die Benutzerrisikorichtlinie für die Kennwortänderung",
+    resources: [{ label: "Overview Identity Protection", url: "https://learn.microsoft.com/en-us/azure/active-directory/identity-protection/overview-identity-protection" }, { label: "Tutorial Risk Based Sspr Mfa", url: "https://learn.microsoft.com/en-us/azure/active-directory/authentication/tutorial-risk-based-sspr-mfa#enable-user-risk-policy-for-password-change" }],
   },
   {
     id: "real-az900-492",
@@ -6446,6 +6822,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure Functions ist eine serverlose Lösung, mit der Sie weniger Code schreiben, weniger Infrastruktur pflegen und Kosten sparen. Anstatt sich um die Bereitstellung und Wartung von Servern zu kümmern, bietet die Cloud-Infrastruktur alle aktuellen Ressourcen, die Sie für den Betrieb Ihrer Anwendungen benötigen. Sie konzentrieren sich auf den Code, der für Sie am wichtigsten ist, in der für Sie produktivsten Sprache, und Azure Functions erledigt den Rest. Wir erstellen häufig Systeme, um auf eine Reihe kritischer Ereignisse zu reagieren. Ob Sie eine Web-API erstellen, auf Datenbankänderungen reagieren, IoT-Datenströme verarbeiten oder sogar Nachrichtenwarteschlangen verwalten – jede Anwendung muss Code ausführen können, wenn diese Ereignisse eintreten. Um diesem Bedarf gerecht zu werden, bietet Azure Functions „Compute on demand“ auf zwei wichtige Arten. Erstens können Sie mit Azure Functions die Logik Ihres Systems in sofort verfügbare Codeblöcke implementieren. Diese Codeblöcke werden als „Funktionen“ bezeichnet. Verschiedene Funktionen können jederzeit ausgeführt werden, wenn Sie auf kritische Ereignisse reagieren müssen. Zweitens erfüllt Azure Functions bei steigenden Anforderungen die Nachfrage mit so vielen Ressourcen und Funktionsinstanzen wie nötig – aber nur so lange, wie sie benötigt werden. Wenn die Anforderungen sinken, werden alle zusätzlichen Ressourcen und Anwendungsinstanzen automatisch abgeschaltet. Woher kommen all die Rechenressourcen? Azure Functions stellt so viele oder so wenige Rechenressourcen bereit, wie benötigt werden, um die Nachfrage Ihrer Anwendung zu erfüllen. Die Bereitstellung von Rechenressourcen on demand ist die Essenz des serverlosen Computing in Azure Functions.",
+    resources: [{ label: "Functions Overview", url: "https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview" }],
   },
   {
     type: "matching",
@@ -6464,6 +6841,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Kann für die Verwendung der Archiv-Zugriffsebene konfiguriert werden.", correctItemId: "i2" },
     ],
     explanation: "Azure Queue Storage wird für zuverlässiges Messaging zwischen Anwendungskomponenten verwendet. Azure Files kann als Netzwerkfreigabe direkt von Windows-Geräten aus eingebunden werden. Azure Blob Storage kann für die Archiv-Zugriffsebene konfiguriert werden, um selten genutzte Daten kostengünstig zu speichern.",
+    resources: [{ label: "Storage Blobs Introduction", url: "https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction" }, { label: "Storage Files Introduction", url: "https://learn.microsoft.com/en-us/azure/storage/files/storage-files-introduction" }, { label: "Storage Queues Introduction", url: "https://learn.microsoft.com/en-us/azure/storage/queues/storage-queues-introduction" }, { label: "Disks", url: "https://azure.microsoft.com/en-us/products/storage/disks" }],
   },
   {
     id: "real-az900-494",
@@ -6477,6 +6855,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Das Azure Service Level Agreement (SLA) beschreibt Microsofts Verpflichtungen hinsichtlich Verfügbarkeit und Konnektivität für einzelne Azure-Dienste. Jeder Azure-Dienst verfügt über ein eigenes SLA mit zugehörigen Bedingungen, Einschränkungen und Servicegutschriften. Einige (kostenlose) Dienste, z. B. Azure DevTest Labs, haben kein SLA. Andere Dienste, wie z. B. virtuelle Maschinen, erfordern eine spezielle Konfiguration. Das SLA beginnt bei niedrigen 95 % für virtuelle Maschinen mit Einzelinstanzen und Standard-HDD-Festplatten und reicht bis zu 99,99 % für virtuelle Maschinen mit mehreren Instanzen, die in zwei oder mehr Verfügbarkeitszonen in derselben Azure-Region bereitgestellt werden. SLAs werden regelmäßig aktualisiert und haben daher immer eine Versionsnummer.",
+    resources: [{ label: "Service Level Agreements SLA For Online Services", url: "https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services?lang=1" }],
   },
   {
     id: "real-az900-495",
@@ -6502,6 +6881,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Wenn einer Ressourcengruppe eine Azure-Richtlinie zugewiesen wird, können nur konforme Ressourcen in der Gruppe bereitgestellt werden", correct: "Ja" },
     ],
     explanation: "Azure Policy wertet Ressourcen und Aktionen in Azure aus, indem die Eigenschaften dieser Ressourcen mit Geschäftsregeln verglichen werden. Diese im JSON-Format beschriebenen Geschäftsregeln werden als Richtliniendefinitionen bezeichnet. Zur Vereinfachung der Verwaltung können mehrere Geschäftsregeln zu einer Richtlinieninitiative (manchmal auch als „PolicySet“ bezeichnet) zusammengefasst werden. Nachdem Ihre Geschäftsregeln erstellt wurden, wird die Richtliniendefinition oder Initiative einem beliebigen von Azure unterstützten Ressourcenbereich zugewiesen, z. B. Verwaltungsgruppen, Abonnements, Ressourcengruppen oder einzelnen Ressourcen. Die Zuweisung gilt für alle Ressourcen innerhalb des Resource Manager-Bereichs dieser Zuweisung. Unterbereiche können bei Bedarf ausgeschlossen werden. Standardmäßig wirkt sich Azure Policy nur dann auf eine Ressource aus, wenn diese erstellt oder aktualisiert wird.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/governance/policy/overview" }],
   },
   {
     id: "real-az900-497",
@@ -6515,6 +6895,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Unternehmen haben heute Schwierigkeiten, zunehmend komplexe Umgebungen zu kontrollieren und zu verwalten, die sich über Rechenzentren, mehrere Clouds und Edge- Umgebungen erstrecken. Jede Umgebung und Cloud verfügt über eigene Verwaltungstools, und neue DevOps- und ITOps-Betriebsmodelle lassen sich nur schwer ressourcenübergreifend implementieren. Azure Arc vereinfacht Governance und Verwaltung durch die Bereitstellung einer konsistenten Multicloud- und lokalen Verwaltungsplattform. Azure Arc bietet eine zentralisierte, einheitliche Möglichkeit für: • Verwalten Sie Ihre gesamte Umgebung gemeinsam, indem Sie Ihre vorhandenen Nicht-Azure- und/oder lokalen Ressourcen in Azure Resource Manager projizieren. • Verwalten Sie virtuelle Maschinen, Kubernetes-Cluster und Datenbanken, als würden sie in Azure ausgeführt. • Nutzen Sie vertraute Azure-Dienste und Verwaltungsfunktionen, unabhängig davon, wo sie sich befinden. • Verwenden Sie weiterhin traditionelle ITOps, während Sie DevOps-Praktiken einführen, um neue Cloud-native Muster in Ihrer Umgebung zu unterstützen. • Konfigurieren Sie benutzerdefinierte Standorte als Abstraktionsebene über Azure Arc-fähigen Kubernetes-Clustern und Clustererweiterungen. Derzeit können Sie mit Azure Arc die folgenden Ressourcentypen verwalten, die außerhalb von Azure gehostet werden: • Server: Verwalten Sie physische Windows- und Linux-Server und virtuelle Maschinen, die außerhalb von Azure gehostet werden. • Kubernetes-Cluster: Verbinden und konfigurieren Sie Kubernetes-Cluster, die überall ausgeführt werden können, mit mehreren unterstützten Distributionen. • Azure-Datendienste: Führen Sie Azure-Datendienste vor Ort, am Edge und in öffentlichen Clouds mit Kubernetes und der Infrastruktur Ihrer Wahl aus. SQL Managed Instance und PostgreSQL (Vorschau) sind derzeit verfügbar. • SQL Server: Erweitern Sie Azure-Dienste auf SQL Server-Instanzen, die außerhalb von Azure gehostet werden. • Virtuelle Maschinen (Vorschau): Bereitstellen, Ändern der Größe, Löschen und Verwalten virtueller Maschinen basierend auf VMware vSphere oder Azure Stack HCI und Aktivieren der VM-Selbstbedienung durch rollenbasierten Zugriff.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/azure-arc/overview" }],
   },
   {
     id: "real-az900-498",
@@ -6528,6 +6909,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Application Insights ist eine Erweiterung von Azure Monitor und bietet Funktionen zur Anwendungsleistungsüberwachung (APM). APM-Tools sind nützlich, um Anwendungen von der Entwicklung über den Test bis hin zur Produktion auf folgende Weise zu überwachen: • Verstehen Sie proaktiv, wie eine Anwendung funktioniert. • Überprüfen Sie reaktiv die Anwendungsausführungsdaten, um die Ursache eines Vorfalls zu ermitteln. Application Insights unterstützt die verteilte Ablaufverfolgung, auch als verteilte Komponentenkorrelation bezeichnet. Mit dieser Funktion können Sie einen End-to-End-Flow einer bestimmten Ausführung oder Transaktion suchen und visualisieren.",
+    resources: [{ label: "App Insights Overview", url: "https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net" }],
   },
   {
     id: "real-az900-499",
@@ -6541,6 +6923,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Hochverfügbarkeit (HA) bezeichnet die Fähigkeit eines Systems, über einen bestimmten Zeitraum hinweg störungsfrei zu arbeiten. HA stellt sicher, dass ein System ein vereinbartes Leistungsniveau erreicht. In der Informationstechnologie (IT) ist die sogenannte 99,999 %-Verfügbarkeit ein weit verbreiteter, aber schwer zu erreichender Verfügbarkeitsstandard. Dies bedeutet, dass das System oder Produkt zu 99,999 % der Zeit verfügbar ist. Um Hochverfügbarkeit auch bei hohem Benutzerzugriff auf ein System zu gewährleisten, ist Lastausgleich erforderlich. Lastausgleich verteilt Arbeitslasten automatisch auf die Systemressourcen, beispielsweise durch das Senden verschiedener Datenanfragen an unterschiedliche Dienste in einer Hybrid-Cloud-Architektur. Der Lastausgleich entscheidet, welche Systemressource welche Arbeitslast am effizientesten bewältigen kann. Durch den Einsatz mehrerer Lastausgleicher wird sichergestellt, dass keine Ressource überlastet wird. Die Server eines HA-Systems sind in Clustern angeordnet und in einer mehrstufigen Architektur organisiert, um auf Anfragen der Lastausgleicher reagieren zu können. Fällt ein Server im Cluster aus, kann ein replizierter Server in einem anderen Cluster die für den ausgefallenen Server vorgesehene Arbeitslast bewältigen. Diese Art der Redundanz ermöglicht ein Failover, bei dem eine sekundäre Komponente die Aufgabe einer primären Komponente übernimmt, wenn die erste Komponente ausfällt, mit minimalen Auswirkungen auf die Leistung.",
+    resources: [{ label: "High Availability", url: "https://www.techtarget.com/searchdatacenter/definition/high-availability" }],
   },
   {
     id: "real-az900-500",
@@ -6554,6 +6937,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Sowohl Desktop- als auch Webanwendungen sollten Web-APIs wie Microsoft Graph, andere Microsoft-APIs oder Ihre eigene Web-API aufrufen, um mit Azure oder privaten Cloud-basierten Ressourcen zu interagieren.",
+    resources: [{ label: "Scenario Desktop Overview", url: "https://learn.microsoft.com/en-us/azure/active-directory/develop/scenario-desktop-overview" }],
   },
   {
     id: "real-az900-501",
@@ -6567,6 +6951,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Unternehmen haben heute Schwierigkeiten, zunehmend komplexe Umgebungen zu kontrollieren und zu verwalten, die sich über Rechenzentren, mehrere Clouds und Edge- Umgebungen erstrecken. Jede Umgebung und Cloud verfügt über eigene Verwaltungstools, und neue DevOps- und ITOps-Betriebsmodelle lassen sich nur schwer ressourcenübergreifend implementieren. Azure Arc vereinfacht Governance und Verwaltung durch die Bereitstellung einer konsistenten Multicloud- und lokalen Verwaltungsplattform. Azure Arc bietet eine zentralisierte, einheitliche Möglichkeit für: • Verwalten Sie Ihre gesamte Umgebung gemeinsam, indem Sie Ihre vorhandenen Nicht-Azure- und/oder lokalen Ressourcen in Azure Resource Manager projizieren. • Verwalten Sie virtuelle Maschinen, Kubernetes-Cluster und Datenbanken, als würden sie in Azure ausgeführt. • Nutzen Sie vertraute Azure-Dienste und Verwaltungsfunktionen, unabhängig davon, wo sie sich befinden. • Verwenden Sie weiterhin traditionelle ITOps, während Sie DevOps-Praktiken einführen, um neue Cloud-native Muster in Ihrer Umgebung zu unterstützen. • Konfigurieren Sie benutzerdefinierte Standorte als Abstraktionsebene über Azure Arc-fähigen Kubernetes-Clustern und Clustererweiterungen. Derzeit können Sie mit Azure Arc die folgenden Ressourcentypen verwalten, die außerhalb von Azure gehostet werden: • Server: Verwalten Sie physische Windows- und Linux-Server und virtuelle Maschinen, die außerhalb von Azure gehostet werden. • Kubernetes-Cluster: Verbinden und konfigurieren Sie Kubernetes-Cluster, die überall ausgeführt werden können, mit mehreren unterstützten Distributionen. • Azure-Datendienste: Führen Sie Azure-Datendienste vor Ort, am Edge und in öffentlichen Clouds mit Kubernetes und der Infrastruktur Ihrer Wahl aus. SQL Managed Instance und PostgreSQL (Vorschau) sind derzeit verfügbar. • SQL Server: Erweitern Sie Azure-Dienste auf SQL Server-Instanzen, die außerhalb von Azure gehostet werden. • Virtuelle Maschinen (Vorschau): Bereitstellen, Ändern der Größe, Löschen und Verwalten virtueller Maschinen basierend auf VMware vSphere oder Azure Stack HCI und Aktivieren der VM-Selbstbedienung durch rollenbasierten Zugriff.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/azure-arc/overview" }],
   },
   {
     type: "yesno",
@@ -6579,6 +6964,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Azure File Sync synchronisiert Dateien und Ordner zwischen Azure Files und Windows-Dateiservern", correct: "Ja" },
     ],
     explanation: "AzCopy ist ein herunterladbares Befehlszeilenprogramm, mit dem Sie Blobs oder Dateien von oder in ein Speicherkonto kopieren können. Azure Storage Explorer ist eine Desktopanwendung mit grafischer Benutzeroberfläche, mit der Sie Ihre Azure-Cloudspeicherressourcen von Ihrem Desktop aus verwalten können . Azure File Sync ermöglicht die Zentralisierung der Dateifreigaben Ihres Unternehmens in Azure Files und bietet gleichzeitig die Flexibilität, Leistung und Kompatibilität eines Windows-Dateiservers. Während manche Benutzer eine vollständige Kopie ihrer Daten lokal speichern möchten, bietet Azure File Sync zusätzlich die Möglichkeit, Windows Server in einen schnellen Cache Ihrer Azure-Dateifreigabe zu verwandeln. Sie können jedes unter Windows Server verfügbare Protokoll verwenden, um lokal auf Ihre Daten zuzugreifen, einschließlich SMB, NFS und FTPS. Sie können weltweit beliebig viele Caches einrichten. Referenzen: Erste Schritte mit AzCopy Azure Storage Explorer. Was ist Azure File Sync?",
+    resources: [{ label: "Storage Use Azcopy V10", url: "https://learn.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-v10" }, { label: "Storage Explorer", url: "https://azure.microsoft.com/en-us/products/storage/storage-explorer" }, { label: "File Sync Introduction", url: "https://learn.microsoft.com/en-us/azure/storage/file-sync/file-sync-introduction" }],
   },
   {
     id: "real-az900-503",
@@ -6592,6 +6978,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Mit der Microsoft Azure Data Box-Cloudlösung können Sie schnell, kostengünstig und zuverlässig Terabyte an Daten in und aus Azure übertragen. Die sichere Datenübertragung wird durch die Lieferung eines proprietären Data Box-Speichergeräts beschleunigt. Jedes Speichergerät verfügt über eine maximal nutzbare Speicherkapazität von 80 TB und wird durch einen regionalen Spediteur zu Ihrem Rechenzentrum transportiert. Das Gerät verfügt über ein robustes Gehäuse zum Schutz und zur Sicherung der Daten während des Transports.",
+    resources: [{ label: "Data Box Overview", url: "https://learn.microsoft.com/en-us/azure/databox/data-box-overview" }],
   },
   {
     type: "yesno",
@@ -6604,6 +6991,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Azure Arc kann eine Datenbanklösung eines Drittanbieters verwalten, die außerhalb von Azure gehostet wird", correct: "Nein" },
     ],
     explanation: "Unternehmen haben heute Schwierigkeiten, zunehmend komplexe Umgebungen zu kontrollieren und zu verwalten, die sich über Rechenzentren, mehrere Clouds und Edge- Umgebungen erstrecken. Jede Umgebung und Cloud verfügt über eigene Verwaltungstools, und neue DevOps- und ITOps-Betriebsmodelle lassen sich nur schwer ressourcenübergreifend implementieren. Azure Arc vereinfacht Governance und Verwaltung durch die Bereitstellung einer konsistenten Multicloud- und lokalen Verwaltungsplattform. Azure Arc bietet eine zentralisierte, einheitliche Möglichkeit für: • Verwalten Sie Ihre gesamte Umgebung gemeinsam, indem Sie Ihre vorhandenen Nicht-Azure- und/oder lokalen Ressourcen in Azure Resource Manager projizieren. • Verwalten Sie virtuelle Maschinen, Kubernetes-Cluster und Datenbanken, als würden sie in Azure ausgeführt. • Nutzen Sie vertraute Azure-Dienste und Verwaltungsfunktionen, unabhängig davon, wo sie sich befinden. • Verwenden Sie weiterhin traditionelle ITOps, während Sie DevOps-Praktiken einführen, um neue Cloud-native Muster in Ihrer Umgebung zu unterstützen. • Konfigurieren Sie benutzerdefinierte Standorte als Abstraktionsebene über Azure Arc-fähigen Kubernetes-Clustern und Clustererweiterungen. Derzeit können Sie mit Azure Arc die folgenden Ressourcentypen verwalten, die außerhalb von Azure gehostet werden: • Server: Verwalten Sie physische Windows- und Linux-Server und virtuelle Maschinen, die außerhalb von Azure gehostet werden. • Kubernetes-Cluster: Verbinden und konfigurieren Sie Kubernetes-Cluster, die überall ausgeführt werden können, mit mehreren unterstützten Distributionen. • Azure-Datendienste: Führen Sie Azure-Datendienste vor Ort, am Edge und in öffentlichen Clouds mit Kubernetes und der Infrastruktur Ihrer Wahl aus. SQL Managed Instance und PostgreSQL (Vorschau) sind derzeit verfügbar. • SQL Server: Erweitern Sie Azure-Dienste auf SQL Server-Instanzen, die außerhalb von Azure gehostet werden. • Virtuelle Maschinen (Vorschau): Bereitstellen, Ändern der Größe, Löschen und Verwalten virtueller Maschinen basierend auf VMware vSphere oder Azure Stack HCI und Aktivieren der VM-Selbstbedienung durch rollenbasierten Zugriff.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/azure-arc/overview" }],
   },
   {
     id: "real-az900-505",
@@ -6617,6 +7005,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Unternehmen haben heute Schwierigkeiten, zunehmend komplexe Umgebungen zu kontrollieren und zu verwalten, die sich über Rechenzentren, mehrere Clouds und Edge- Umgebungen erstrecken. Jede Umgebung und Cloud verfügt über eigene Verwaltungstools, und neue DevOps- und ITOps-Betriebsmodelle lassen sich nur schwer ressourcenübergreifend implementieren. Azure Arc vereinfacht Governance und Verwaltung durch die Bereitstellung einer konsistenten Multicloud- und lokalen Verwaltungsplattform. Azure Arc bietet eine zentralisierte, einheitliche Möglichkeit für: • Verwalten Sie Ihre gesamte Umgebung gemeinsam, indem Sie Ihre vorhandenen Nicht-Azure- und/oder lokalen Ressourcen in Azure Resource Manager projizieren. • Verwalten Sie virtuelle Maschinen, Kubernetes-Cluster und Datenbanken, als würden sie in Azure ausgeführt. • Nutzen Sie vertraute Azure-Dienste und Verwaltungsfunktionen, unabhängig davon, wo sie sich befinden. • Verwenden Sie weiterhin traditionelle ITOps, während Sie DevOps-Praktiken einführen, um neue Cloud-native Muster in Ihrer Umgebung zu unterstützen. • Konfigurieren Sie benutzerdefinierte Standorte als Abstraktionsebene über Azure Arc-fähigen Kubernetes-Clustern und Clustererweiterungen. Derzeit können Sie mit Azure Arc die folgenden Ressourcentypen verwalten, die außerhalb von Azure gehostet werden: • Server: Verwalten Sie physische Windows- und Linux-Server und virtuelle Maschinen, die außerhalb von Azure gehostet werden. • Kubernetes-Cluster: Verbinden und konfigurieren Sie Kubernetes-Cluster, die überall ausgeführt werden können, mit mehreren unterstützten Distributionen. • Azure-Datendienste: Führen Sie Azure-Datendienste vor Ort, am Edge und in öffentlichen Clouds mit Kubernetes und der Infrastruktur Ihrer Wahl aus. SQL Managed Instance und PostgreSQL (Vorschau) sind derzeit verfügbar. • SQL Server: Erweitern Sie Azure-Dienste auf SQL Server-Instanzen, die außerhalb von Azure gehostet werden. • Virtuelle Maschinen (Vorschau): Bereitstellen, Ändern der Größe, Löschen und Verwalten virtueller Maschinen basierend auf VMware vSphere oder Azure Stack HCI und Aktivieren der VM-Selbstbedienung durch rollenbasierten Zugriff.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/azure-arc/overview" }],
   },
   {
     type: "yesno",
@@ -6629,6 +7018,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Azure Advisor kann Empfehlungen für mehrere Azure-Abonnements bereitstellen", correct: "Ja" },
     ],
     explanation: "Advisor ist ein personalisierter Cloudberater, der Sie bei der Optimierung Ihrer Azure-Bereitstellungen mithilfe bewährter Methoden unterstützt. Er analysiert Ihre Ressourcenkonfiguration und Nutzungstelemetrie und empfiehlt anschließend Lösungen, mit denen Sie die Kosteneffizienz, Leistung, Zuverlässigkeit (früher als Hochverfügbarkeit bezeichnet) und Sicherheit Ihrer Azure-Ressourcen verbessern können. Mit Advisor können Sie: • Erhalten Sie proaktive, umsetzbare und personalisierte Best Practices-Empfehlungen. • Verbessern Sie die Leistung, Sicherheit und Zuverlässigkeit Ihrer Ressourcen, indem Sie Möglichkeiten zur Reduzierung Ihrer Azure-Gesamtausgaben identifizieren. • Erhalten Sie Empfehlungen mit vorgeschlagenen Aktionen inline. Sie können über das Azure-Portal auf Advisor zugreifen. Melden Sie sich beim Portal an und suchen Sie im Navigationsmenü nach Advisor oder im Menü „Alle Dienste“ . Das Advisor-Dashboard zeigt personalisierte Empfehlungen für alle Ihre Abonnements an. Sie können Filter anwenden, um Empfehlungen für bestimmte Abonnements und Ressourcentypen anzuzeigen. Die Empfehlungen sind in fünf Kategorien unterteilt: • Zuverlässigkeit (früher Hochverfügbarkeit genannt): Um die Kontinuität Ihrer geschäftskritischen Anwendungen sicherzustellen und zu verbessern. • Sicherheit: Zum Erkennen von Bedrohungen und Schwachstellen, die zu Sicherheitsverletzungen führen könnten. • Leistung: Um die Geschwindigkeit Ihrer Anwendungen zu verbessern. • Kosten: Um Ihre gesamten Azure-Ausgaben zu optimieren und zu reduzieren. • Operative Exzellenz: Wir helfen Ihnen dabei, Prozess- und Arbeitsablaufeffizienz, Ressourcenverwaltung und Best Practices für die Bereitstellung zu erreichen.",
+    resources: [{ label: "Advisor Overview", url: "https://learn.microsoft.com/en-us/azure/advisor/advisor-overview" }],
   },
   {
     id: "real-az900-507",
@@ -6641,6 +7031,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Kunden mit Software Assurance- oder Abonnementlizenzen können mit dem Azure-Hybridvorteil für Windows Server ihre lokalen Windows Server-Lizenzen nutzen, um virtuelle Windows-Computer zu reduzierten Kosten in Azure zu erhalten. Mit dem Azure-Hybridvorteil für Windows Server können Sie neue virtuelle Computer mit Windows- Betriebssystem bereitstellen.",
+    resources: [{ label: "Hybrid Use Benefit Licensing", url: "https://learn.microsoft.com/en-us/azure/virtual-machines/windows/hybrid-use-benefit-licensing" }],
   },
   {
     id: "real-az900-508",
@@ -6655,6 +7046,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Sobald Sie eine Azure-Ressource erstellen, wird Azure Monitor aktiviert und beginnt mit der Erfassung von Metriken und Aktivitätsprotokollen. Mit etwas Konfiguration können Sie weitere Überwachungsdaten erfassen und weitere Funktionen aktivieren. Die Azure Monitor-Datenplattform besteht aus Metriken und Protokollen. Jede Funktion erfasst unterschiedliche Arten von Daten und aktiviert unterschiedliche Azure Monitor-Funktionen. • Azure Monitor-Metriken speichern numerische Daten aus überwachten Ressourcen in einer Zeitreihendatenbank. Die Metrikdatenbank wird automatisch für jedes Azure-Abonnement erstellt. Verwenden Sie den Metrik-Explorer, um Daten aus Azure Monitor-Metriken zu analysieren. • Azure Monitor-Protokolle erfassen Protokolle und Leistungsdaten, die mithilfe von Protokollabfragen abgerufen und auf unterschiedliche Weise analysiert werden können. Zum Erfassen von Protokolldaten müssen Sie einen Log Analytics-Arbeitsbereich erstellen. Verwenden Sie Log Analytics, um Daten aus Azure Monitor-Protokollen zu analysieren. Application Insights ist eine Erweiterung von Azure Monitor und bietet Funktionen zur Anwendungsleistungsüberwachung (APM). Referenzen: Überwachen von Azure-Ressourcen mit Azure Monitor Application Insights – Übersicht",
+    resources: [{ label: "Monitor Azure Resource", url: "https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/monitor-azure-resource" }, { label: "App Insights Overview", url: "https://learn.microsoft.com/en-us/azure/azure-monitor/app/app-insights-overview?tabs=net" }],
   },
   {
     id: "real-az900-509",
@@ -6668,6 +7060,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Mit der Umstellung auf die Cloud haben viele Teams agile Entwicklungsmethoden übernommen. Diese Teams iterieren schnell. Sie müssen ihre Lösungen wiederholt in der Cloud bereitstellen und sich darauf verlassen können, dass ihre Infrastruktur zuverlässig ist. Da die Infrastruktur Teil des iterativen Prozesses geworden ist, ist die Trennung zwischen Betrieb und Entwicklung aufgehoben. Teams müssen Infrastruktur und Anwendungscode über einen einheitlichen Prozess verwalten. Um diese Herausforderungen zu meistern, können Sie Bereitstellungen automatisieren und Infrastruktur als Code nutzen. Im Code definieren Sie die Infrastruktur, die bereitgestellt werden soll. Der Infrastrukturcode wird Teil Ihres Projekts. Genau wie Anwendungscode speichern Sie den Infrastrukturcode in einem Quellrepository und versionieren ihn. Jeder in Ihrem Team kann den Code ausführen und ähnliche Umgebungen bereitstellen. Verwenden Sie Azure Resource Manager-Vorlagen (ARM-Vorlagen), um Infrastruktur als Code für Ihre Azure-Lösungen zu implementieren. Die Vorlage ist eine JSON-Datei (JavaScript Object Notation), die die Infrastruktur und Konfiguration für Ihr Projekt definiert. Die Vorlage verwendet eine deklarative Syntax, mit der Sie angeben können, was Sie bereitstellen möchten, ohne die Abfolge der Programmierbefehle zum Erstellen schreiben zu müssen. In der Vorlage geben Sie die bereitzustellenden Ressourcen und die Eigenschaften für diese Ressourcen an.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview" }],
   },
   {
     type: "yesno",
@@ -6680,6 +7073,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Sie können mehrere ExpressRoute-Schaltungen konfigurieren, um ein lokales Rechenzentrum mit Azure zu verbinden", correct: "Ja" },
     ],
     explanation: "Mit ExpressRoute können Sie Ihre lokalen Netzwerke mithilfe eines Konnektivitätsanbieters über eine private Verbindung in die Microsoft-Cloud erweitern. Mit ExpressRoute können Sie Verbindungen zu Microsoft-Clouddiensten wie Microsoft Azure und Microsoft 365 herstellen. Die Konnektivität kann über ein Any-to-Any-Netzwerk (IP VPN), ein Point-to-Point-Ethernet-Netzwerk oder eine virtuelle Querverbindung über einen Konnektivitätsanbieter in einer Colocation-Einrichtung erfolgen. ExpressRoute-Verbindungen laufen nicht über das öffentliche Internet. Dadurch bieten ExpressRoute-Verbindungen mehr Zuverlässigkeit, höhere Geschwindigkeiten, konsistente Latenzen und höhere Sicherheit als herkömmliche Verbindungen über das Internet. Hauptvorteile • Layer-3-Konnektivität zwischen Ihrem lokalen Netzwerk und der Microsoft Cloud über einen Konnektivitätsanbieter. Die Konnektivität kann über ein Any-to- Any-Netzwerk (IPVPN), eine Punkt-zu-Punkt-Ethernet-Verbindung oder eine virtuelle Querverbindung über einen Ethernet-Austausch erfolgen. • Konnektivität zu Microsoft-Clouddiensten in allen Regionen der geopolitischen Region. • Globale Konnektivität zu Microsoft-Diensten in allen Regionen mit dem ExpressRoute-Premium-Add-On. • Dynamisches Routing zwischen Ihrem Netzwerk und Microsoft über BGP. • Integrierte Redundanz an jedem Peering-Standort für höhere Zuverlässigkeit. • SLA für die Verbindungsverfügbarkeit. • QoS-Unterstützung für Skype for Business. Sie können Hochverfügbarkeit erreichen, indem Sie bis zu vier ExpressRoute-Verbindungen am selben Peeringstandort mit Ihrem virtuellen Netzwerk verbinden. Sie können auch bis zu 16 ExpressRoute-Verbindungen an verschiedenen Peeringstandorten mit Ihrem virtuellen Netzwerk verbinden. Referenzen: Was ist Azure ExpressRoute? ExpressRoute-FAQ",
+    resources: [{ label: "Expressroute Introduction", url: "https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction" }, { label: "Expressroute Faqs", url: "https://learn.microsoft.com/en-au/azure/expressroute/expressroute-faqs" }],
   },
   {
     id: "real-az900-511",
@@ -6732,6 +7126,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Durch die zentrale Speicherung von Anwendungsgeheimnissen in Azure Key Vault können Sie deren Verteilung steuern. Key Vault reduziert das Risiko eines versehentlichen Verlusts von Geheimnissen erheblich. Bei Verwendung von Key Vault müssen Anwendungsentwickler keine Sicherheitsinformationen mehr in ihrer Anwendung speichern. Da Sicherheitsinformationen nicht in Anwendungen gespeichert werden müssen, entfällt die Notwendigkeit, diese Informationen in den Code zu integrieren. Beispielsweise muss eine Anwendung möglicherweise eine Verbindung zu einer Datenbank herstellen. Anstatt die Verbindungszeichenfolge im Code der App zu speichern, können Sie sie sicher in Key Vault speichern. Azure Key Vault hilft bei der Lösung der folgenden Probleme: • Geheimnisverwaltung – Azure Key Vault kann verwendet werden, um Token, Passwörter, Zertifikate, API-Schlüssel und andere Geheimnisse sicher zu speichern und den Zugriff darauf streng zu kontrollieren. • Schlüsselverwaltung : Azure Key Vault kann auch als Schlüsselverwaltungslösung verwendet werden. Azure Key Vault erleichtert das Erstellen und Verwalten der Verschlüsselungsschlüssel, die zum Verschlüsseln Ihrer Daten verwendet werden. • Zertifikatsverwaltung – Azure Key Vault ist auch ein Dienst, mit dem Sie öffentliche und private Transport Layer Security/Secure Sockets Layer (TLS/SSL)- Zertifikate für die Verwendung mit Azure und Ihren intern verbundenen Ressourcen einfach bereitstellen, verwalten und einsetzen können. • Speichern Sie Geheimnisse, die durch Hardware-Sicherheitsmodule gesichert sind – Die Geheimnisse, Schlüssel und Zertifikate im Speicher werden entweder mit einem Softwareschlüssel (Standardstufe) oder einem FIPS 140-2 Level 2-validierten HSM-Schlüssel (Premiumstufe) verschlüsselt.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/key-vault/general/overview" }],
   },
   {
     id: "real-az900-515",
@@ -6745,6 +7140,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Microsoft ist bereit, für Azure-Dienstausfälle, die nicht im Service Level Agreement (SLA) vereinbart wurden, eine Rückerstattung zu zahlen. In manchen Fällen geschieht dies automatisch. In der Regel muss der Kunde die Rückerstattung jedoch selbst beantragen. Was passiert, wenn Microsoft sein SLA nicht einhält? Es liegt in der Verantwortung des Kunden oder Partners, festzustellen, ob das Microsoft Azure Service Level Agreement nicht eingehalten wurde. Um einen Anspruch bezüglich eines Vorfalls geltend machen zu können, muss der Kunde den Kundensupport innerhalb von fünf Werktagen nach dem Vorfall über den Vorfall informieren. Der Kunde muss außerdem ausreichende Beweise zur Unterstützung des Anspruchs vorlegen. Sobald der Anspruch von Microsoft bestätigt wurde, wird für SLAs zwischen 99,5 % und 99 % eine Gutschrift von 10 % gewährt. Für SLAs unter 99 % wird für den jeweiligen Monat, in dem das SLA nicht eingehalten wurde, eine Gutschrift von 25 % ausgestellt. Weitere Informationen zum Azure SLA finden Sie im Service Level Agreement.",
+    resources: [{ label: "What Is The Microsoft Azure Service Level Agreement Sla", url: "https://community.dynamics.com/gp/b/roseaspdynamicsgphostingnews/posts/what-is-the-microsoft-azure-service-level-agreement-sla" }],
   },
   {
     id: "real-az900-516",
@@ -6758,6 +7154,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Bei Produkten, die der Modern-Lifecycle-Richtlinie unterliegen, benachrichtigt Microsoft Sie mindestens 12 Monate vor dem Ende des Supports, wenn kein Nachfolgeprodukt oder -dienst angeboten wird – ausgenommen kostenlose Dienste oder Vorabversionen. Modern-Lifecycle-Richtlinie",
+    resources: [{ label: "Modern", url: "https://learn.microsoft.com/en-us/lifecycle/policies/modern" }],
   },
   {
     id: "real-az900-517",
@@ -6771,6 +7168,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure Monitor ist eine umfassende Überwachungslösung zum Sammeln, Analysieren und Reagieren auf Überwachungsdaten aus Ihren Cloud- und lokalen Umgebungen. Mit Azure Monitor können Sie die Verfügbarkeit und Leistung Ihrer Anwendungen und Dienste maximieren. Es hilft Ihnen, die Leistung Ihrer Anwendungen zu verstehen und ermöglicht Ihnen, manuell und programmgesteuert auf Systemereignisse zu reagieren. Azure Monitor speichert Ereignisdaten in einem Log Analytics-Arbeitsbereich.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/azure-monitor/overview" }],
   },
   {
     id: "real-az900-518",
@@ -6799,6 +7197,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Infrastructure as a Service (IaaS) ist ein Cloud-Computing-Dienst, der wichtige Rechen-, Speicher- und Netzwerkressourcen bedarfsgerecht und nutzungsbasiert bereitstellt. IaaS ist neben Software as a Service (SaaS), Platform as a Service (PaaS) und Serverless einer der vier Cloud-Diensttypen. Durch die Migration der Infrastruktur Ihres Unternehmens zu einer IaaS-Lösung reduzieren Sie den Wartungsaufwand für lokale Rechenzentren, sparen Hardwarekosten und erhalten Geschäftseinblicke in Echtzeit. IaaS-Lösungen bieten Ihnen die Flexibilität, Ihre IT-Ressourcen bedarfsgerecht zu skalieren. Sie unterstützen Sie außerdem bei der schnellen Bereitstellung neuer Anwendungen und erhöhen die Zuverlässigkeit Ihrer zugrunde liegenden Infrastruktur. Mit IaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung physischer Server und Rechenzentrumsinfrastruktur. Jede Ressource wird als separate Servicekomponente angeboten, und Sie zahlen nur für die jeweilige Ressource, solange Sie sie benötigen. Ein Cloud-Computing-Dienstanbieter wie Azure verwaltet die Infrastruktur, während Sie Ihre eigene Software – einschließlich Betriebssysteme, Middleware und Anwendungen – kaufen, installieren, konfigurieren und verwalten.",
+    resources: [{ label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-iaas" }],
   },
   {
     type: "yesno",
@@ -6811,6 +7210,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Jedem Benutzerkonto in Microsoft Entra ID kann nur eine Microsoft 365-Lizenz zugewiesen werden", correct: "Nein" },
     ],
     explanation: "Die erste Aussage ist Unsinn. Microsoft Entra ID ist eine integrierte Cloud-Identitäts- und Zugriffslösung und führend im Markt für die Verwaltung von Verzeichnissen, die Ermöglichung des Anwendungszugriffs und den Schutz von Identitäten. Microsoft Entra ID bietet Authentifizierungsdienste für Azure und Microsoft 365. Jedem Benutzer in Microsoft Entra ID können mehrere Lizenzen zugewiesen werden. Es ist auch möglich, demselben Benutzer eine Microsoft 365 E3- und eine Microsoft 365 E5-Lizenz zuzuweisen. Referenzen: Was ist die Microsoft Entra ID? Zuweisen oder Aufheben der Zuweisung von Lizenzen für Benutzer im Microsoft 365 Admin Center",
+    resources: [{ label: "Whatis", url: "https://learn.microsoft.com/en-us/entra/fundamentals/whatis" }, { label: "Assign Licenses To Users", url: "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/assign-licenses-to-users?view=o365-worldwide" }],
   },
   {
     id: "real-az900-521",
@@ -6824,6 +7224,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Es sind keine Änderungen erforderlich. Der Basis-Supportplan beinhaltet keinen 24/7-Zugang zum technischen Support und der Entwickler-Supportplan bietet technischen Support nur während der Geschäftszeiten und ausschließlich per E-Mail. Referenz Supportpläne vergleichen",
+    resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans/" }],
   },
   {
     id: "real-az900-522",
@@ -6850,6 +7251,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Microsoft Compliance Manager ist eine Funktion im Microsoft 365 Compliance Center, mit der Sie die Compliance-Anforderungen Ihres Unternehmens einfacher und bequemer verwalten können. Compliance Manager unterstützt Sie auf Ihrem gesamten Weg zur Compliance – von der Bestandsaufnahme Ihrer Datenschutzrisiken über die Verwaltung der Komplexität der Implementierung von Kontrollen, die Einhaltung aktueller Vorschriften und Zertifizierungen bis hin zur Berichterstattung an Prüfer. Compliance Manager vereinfacht die Einhaltung von Vorschriften und reduziert Risiken durch folgende Funktionen: • Vorgefertigte Bewertungen für gängige Branchen- und regionale Standards und Vorschriften oder benutzerdefinierte Bewertungen, um Ihre individuellen Compliance- Anforderungen zu erfüllen (die verfügbaren Bewertungen hängen von Ihrer Lizenzvereinbarung ab). • Workflow-Funktionen helfen Ihnen, Ihre Risikobewertungen effizient mit einem einzigen Tool durchzuführen. • Detaillierte Schritt-für-Schritt-Anleitungen zu vorgeschlagenen Verbesserungsmaßnahmen, die Ihnen dabei helfen, die für Ihr Unternehmen relevantesten Standards und Vorschriften einzuhalten. Für von Microsoft verwaltete Aktionen werden Implementierungsdetails und Überwachungsergebnisse angezeigt. • Ein risikobasierter Compliance-Score, der Ihnen hilft, Ihre Compliance-Haltung zu verstehen, indem er Ihren Fortschritt bei der Durchführung von Verbesserungsmaßnahmen misst.",
+    resources: [{ label: "Compliance Manager", url: "https://docs.microsoft.com/en-us/microsoft-365/compliance/compliance-manager?view=o365-worldwide" }],
   },
   {
     id: "real-az900-524",
@@ -6863,6 +7265,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Der Azure-Status bietet Ihnen einen globalen Überblick über den Zustand von Azure-Diensten und -Regionen. Mit dem Azure-Status erhalten Sie Informationen zur Dienstverfügbarkeit. Der Azure-Status ist für alle verfügbar, um alle Dienste anzuzeigen, die ihren Dienstzustand melden, sowie Vorfälle mit weitreichenden Auswirkungen.",
+    resources: [{ label: "Azure Status Overview", url: "https://learn.microsoft.com/en-us/azure/service-health/azure-status-overview" }],
   },
   {
     type: "yesno",
@@ -6875,6 +7278,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Beim Cloud-Dienst Software as a Service (SaaS) wird die Identitätsverwaltung zwischen dem Kunden und Microsoft geteilt", correct: "Nein" },
     ],
     explanation: "In einem lokalen Rechenzentrum besitzen Sie den gesamten Stack. Beim Wechsel in die Cloud gehen einige Verantwortlichkeiten auf Microsoft über. Das folgende Diagramm veranschaulicht die Verantwortungsbereiche zwischen Ihnen und Microsoft je nach Art der Bereitstellung Ihres Stacks. Bei allen Cloudbereitstellungstypen sind Sie Eigentümer Ihrer Daten und Identitäten. Sie sind für den Schutz Ihrer Daten und Identitäten, Ihrer lokalen Ressourcen und der von Ihnen kontrollierten Cloudkomponenten verantwortlich. Die von Ihnen kontrollierten Cloudkomponenten variieren je nach Diensttyp. Unabhängig von der Art des Einsatzes behalten Sie immer die folgenden Verantwortlichkeiten: • Daten • Endpunkte • Konto • Zugriffsverwaltung",
+    resources: [{ label: "Shared Responsibility", url: "https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility" }],
   },
   {
     id: "real-az900-526",
@@ -6888,6 +7292,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Verfügbarkeitsgruppen sind logische Gruppierungen von VMs, die die Wahrscheinlichkeit korrelierter Fehler verringern, die gleichzeitig zum Absturz verwandter VMs führen. Verfügbarkeitsgruppen platzieren VMs in verschiedenen Fehlerdomänen, um die Zuverlässigkeit zu verbessern. Dies ist besonders nützlich, wenn eine Region keine Verfügbarkeitszonen unterstützt. Erstellen Sie bei Verwendung von Verfügbarkeitsgruppen zwei oder mehr VMs innerhalb einer Verfügbarkeitsgruppe. Die Verwendung von zwei oder mehr VMs in einer Verfügbarkeitsgruppe unterstützt hochverfügbare Anwendungen und erfüllt die Azure-SLA zu 99,95 %. Für die Verwendung von Verfügbarkeitsgruppen entstehen keine zusätzlichen Kosten. Sie zahlen nur für jede erstellte VM-Instanz. Verfügbarkeitsgruppen bieten im Vergleich zu Verfügbarkeitszonen verbesserte Latenzen zwischen VMs, da VMs in einer Verfügbarkeitsgruppe näher beieinander liegen. Verfügbarkeitsgruppen verfügen über eine Fehlerisolierung für viele mögliche Fehler, minimieren einzelne Fehlerpunkte und bieten Hochverfügbarkeit. Verfügbarkeitsgruppen sind dennoch anfällig für bestimmte Ausfälle gemeinsam genutzter Infrastrukturen, z. B. Netzwerkausfälle im Rechenzentrum, die mehrere Fehlerdomänen betreffen können. Wie funktionieren Verfügbarkeitsgruppen? Jeder virtuellen Maschine in Ihrem Verfügbarkeitssatz wird von der zugrunde liegenden Azure-Plattform eine Updatedomäne und eine Fehlerdomäne zugewiesen . Jeder Verfügbarkeitssatz kann mit bis zu 3 Fehlerdomänen und 20 Updatedomänen konfiguriert werden. Diese Konfigurationen können nach dem Erstellen des Verfügbarkeitssatzes nicht mehr geändert werden. Updatedomänen geben Gruppen von virtuellen Maschinen und zugrunde liegender physischer Hardware an, die gleichzeitig neu gestartet werden können. Wenn mehr als fünf virtuelle Maschinen innerhalb eines einzelnen Verfügbarkeitssatzes mit fünf Updatedomänen konfiguriert sind, wird die sechste virtuelle Maschine in derselben Updatedomäne wie die erste virtuelle Maschine platziert, die siebte in derselben Updatedomäne wie die zweite virtuelle Maschine usw. Die Reihenfolge des Neustarts der Updatedomänen kann während der geplanten Wartung unterschiedlich sein, aber es wird immer nur eine Updatedomäne neu gestartet. Einer neu gestarteten Updatedomäne werden 30 Minuten Zeit zur Wiederherstellung gegeben, bevor die Wartung einer anderen Updatedomäne gestartet wird. Fehlerdomänen definieren die Gruppe von virtuellen Maschinen, die eine gemeinsame Stromquelle und einen gemeinsamen Netzwerk-Switch verwenden. Standardmäßig sind die in Ihrem Verfügbarkeitssatz konfigurierten virtuellen Maschinen auf bis zu drei Fehlerdomänen verteilt. Das Platzieren Ihrer virtuellen Maschinen in einem Verfügbarkeitssatz schützt Ihre Anwendung zwar nicht vor Betriebssystem- oder anwendungsspezifischen Fehlern, begrenzt jedoch die Auswirkungen potenzieller physischer Hardwarefehler, Netzwerkausfälle oder Stromunterbrechungen.",
+    resources: [{ label: "Availability Set Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-machines/availability-set-overview" }],
   },
   {
     id: "real-az900-527",
@@ -6901,6 +7306,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Microsoft empfiehlt, alle Ihre Speicherkonten mit einer Azure Resource Manager-Sperre zu sperren, um ein versehentliches oder böswilliges Löschen des Speicherkontos zu verhindern. Sie können Sperren festlegen, die entweder Löschungen oder Änderungen verhindern. Im Portal heißen diese Sperren Löschen und Schreibgeschützt . In der Befehlszeile heißen diese Sperren CanNotDelete und ReadOnly . • „CanNotDelete“ bedeutet, dass autorisierte Benutzer eine Ressource lesen und ändern, aber nicht löschen können. • ReadOnly bedeutet, dass autorisierte Benutzer eine Ressource lesen, aber nicht löschen oder aktualisieren können. Das Anwenden dieser Sperre entspricht der Beschränkung aller autorisierten Benutzer auf die Berechtigungen der Leserrolle. Referenzen: Wenden Sie eine Azure Resource Manager-Sperre auf ein Speicherkonto an. Sperren Sie Ihre Ressourcen, um Ihre Infrastruktur zu schützen.",
+    resources: [{ label: "Lock Account Resource", url: "https://learn.microsoft.com/en-us/azure/storage/common/lock-account-resource?tabs=portal" }, { label: "Lock Resources", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources?tabs=json" }],
   },
   {
     type: "yesno",
@@ -6913,6 +7319,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Horizontale Skalierung kann automatisch oder manuell erfolgen", correct: "Ja" },
     ],
     explanation: "Während sich horizontale Skalierung auf das Hinzufügen zusätzlicher Knoten bezieht, beschreibt vertikale Skalierung das Hinzufügen von mehr Leistung zu Ihren aktuellen Maschinen. Wenn Ihr Server beispielsweise mehr Verarbeitungsleistung benötigt, bedeutet vertikale Skalierung ein Upgrade der CPUs. Sie können auch den Arbeitsspeicher, den Speicherplatz oder die Netzwerkgeschwindigkeit vertikal skalieren. Horizontale Skalierung ist eine Erhöhung oder Verringerung der Anzahl von Ressourceninstanzen. Beispielsweise bedeutet Skalierung nach außen bei einem VM- Skalierungssatz das Hinzufügen weiterer virtueller Maschinen. Skalierung nach innen bedeutet das Entfernen virtueller Maschinen. Horizontale Skalierung ist in einer Cloudsituation flexibel, da Sie damit eine große Anzahl von VMs ausführen können, um die Last zu bewältigen. Im Gegensatz dazu bleibt bei der vertikalen Skalierung die Anzahl der Ressourceninstanzen konstant, aber sie erhalten mehr Kapazität in Bezug auf Arbeitsspeicher, CPU- Geschwindigkeit, Festplattenspeicher und Netzwerk. Vertikale Skalierung wird durch die Verfügbarkeit größerer Hardware begrenzt, die schließlich eine Obergrenze erreicht. Die Verfügbarkeit von Hardwaregrößen variiert in Azure je nach Region. Vertikale Skalierung kann während des Skalierungsvorgangs auch einen Neustart der VM erfordern.",
+    resources: [{ label: "Autoscale Overview", url: "https://learn.microsoft.com/en-us/azure/azure-monitor/autoscale/autoscale-overview" }],
   },
   {
     id: "real-az900-529",
@@ -6925,6 +7332,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Lift-and-Shift – auch Rehosting genannt – ist eine Migrationsstrategie, bei der Daten und Anwendungen von einem lokalen Standort auf Azure-basierte virtuelle Maschinen (IaaS) in der Cloud verschoben werden. Dieser Ansatz ist beliebt, vor allem weil er relativ schnell und unkompliziert ist. Mit Lift-and-Shift können Unternehmen ihre Anwendungen mit minimalen Änderungen und Unterbrechungen weiter ausführen. Sie profitieren von allen erweiterten Plattformfunktionen und der Skalierbarkeit von Azure, ohne im Vorfeld in die Neuarchitektur von Anwendungen oder die Umgestaltung von Code investieren zu müssen. Hauptvorteile von Lift-and-Shift: • Schnellere und einfachere Migration • Reduziertes Risiko und geringere Kosten • Minimale Neuarchitektur und Refactoring • Geringe Anfangskosten im Vergleich zur Neuplattformierung • Minimale oder keine Ausfallzeiten Referenzen: Von On Prem in die Cloud: Lift and Shift (Ep 2) LIFT-AND-SHIFT ZU AZURE",
+    resources: [{ label: "On Prem To The Cloud Lift And Shift Ep 2", url: "https://devblogs.microsoft.com/devops/on-prem-to-the-cloud-lift-and-shift-ep-2/" }, { label: "Lift And Shift", url: "https://www.also.com/ec/cms5/da_2800/2800-msportal/products-and-solutions/azure-cloud-platform/lift-and-shift/" }],
   },
   {
     type: "yesno",
@@ -6937,6 +7345,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Tags können verwendet werden, um Namensstandards für Azure-Ressourcen durchzusetzen", correct: "Nein" },
     ],
     explanation: "Tags sind Metadatenelemente, die Sie auf Ihre Azure-Ressourcen anwenden. Es handelt sich um Schlüssel-Wert-Paare, mit denen Sie Ressourcen anhand von für Ihre Organisation relevanten Einstellungen identifizieren können. Wenn Sie die Bereitstellungsumgebung für Ihre Ressourcen verfolgen möchten, fügen Sie einen Schlüssel mit dem Namen „Umgebung“ hinzu. Um die in der Produktion bereitgestellten Ressourcen zu identifizieren, weisen Sie ihnen den Wert „Produktion“ zu. Das vollständige Schlüssel- Wert-Paar lautet „Umgebung = Produktion“. Sie können Tags auf Ihre Azure-Ressourcen, Ressourcengruppen und Abonnements anwenden. Jeder Ressource können keine, ein oder mehrere Tags zugewiesen werden. Referenzen: Verwenden Sie Tags, um Ihre Azure-Ressourcen und Verwaltungshierarchie zu organisieren. Wenden Sie Tags mit dem Azure-Portal an.",
+    resources: [{ label: "Tag Resources", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources" }, { label: "Tag Resources Portal", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/tag-resources-portal" }],
   },
   {
     id: "real-az900-531",
@@ -6950,6 +7359,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Der moderne Sicherheitsperimeter geht über den Netzwerkperimeter einer Organisation hinaus und umfasst auch die Benutzer- und Geräteidentität. Organisationen nutzen heute identitätsbasierte Signale als Teil ihrer Zugriffskontrollentscheidungen. Microsoft Entra Conditional Access führt Signale zusammen, um Entscheidungen zu treffen und Unternehmensrichtlinien durchzusetzen. Conditional Access ist die Zero Trust-Richtlinien-Engine von Microsoft, die Signale aus verschiedenen Quellen bei der Durchsetzung von Richtlinienentscheidungen berücksichtigt. Richtlinien für bedingten Zugriff sind im einfachsten Fall Wenn-Dann-Anweisungen. Wenn ein Benutzer auf eine Ressource zugreifen möchte, muss er eine Aktion ausführen. Beispiel: Wenn ein Benutzer auf eine Anwendung oder einen Dienst wie Microsoft 365 zugreifen möchte, muss er eine mehrstufige Authentifizierung durchführen, um Zugriff zu erhalten.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/entra/identity/conditional-access/overview" }],
   },
   {
     type: "yesno",
@@ -6962,6 +7372,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Der Total Cost of Ownership (TCO)-Rechner generiert grafische Berichte", correct: "Ja" },
     ],
     explanation: "Mit dem TCO-Rechner (Total Cost of Ownership) von Microsoft Azure können Sie potenzielle Kosteneinsparungen ermitteln, wenn Sie lokale Anwendungsworkloads zu Microsoft Azure migrieren. Sie geben die Details Ihrer vorhandenen Infrastruktur sowie verschiedene Kostenannahmen an, mit denen das Tool arbeiten soll. Anschließend erhalten Sie einen Bericht, der die lokalen Kosten mit den Microsoft Azure-Kosten vergleicht.",
+    resources: [{ label: "Calculator", url: "https://azure.microsoft.com/en-us/pricing/tco/calculator/" }],
   },
   {
     type: "yesno",
@@ -6974,6 +7385,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Eine benutzerdefinierte Route (UDR) kann nur den Netzwerkverkehr zwischen Subnetzen eines einzelnen virtuellen Netzwerks steuern", correct: "Nein" },
     ],
     explanation: "Eine Netzwerksicherheitsgruppe enthält eine oder mehrere Sicherheitsregeln, die eingehenden oder ausgehenden Netzwerkverkehr zu verschiedenen Arten von Azure- Ressourcen zulassen oder verweigern. Für jede Regel können Sie Quelle und Ziel, Port und Protokoll angeben. Azure bietet VM-Images, mit denen Sie die Netzwerk-, Sicherheits- und anderen Funktionen Ihres bevorzugten Anbieters für eine vertraute Erfahrung in Azure integrieren können – und zwar mithilfe der Kenntnisse, die Ihr Team bereits besitzt. Virtuelle Maschinen, auf denen diese Images ausgeführt werden, werden auch als virtuelle Netzwerkgeräte bezeichnet. Sie können in Azure benutzerdefinierte oder benutzerdefinierte (statische) Routen erstellen, um die Standardsystemrouten von Azure zu überschreiben oder um der Routentabelle eines Subnetzes weitere Routen hinzuzufügen. In Azure erstellen Sie eine Routentabelle und ordnen diese dann null oder mehreren virtuellen Netzwerksubnetzen zu. Jedem Subnetz kann null oder eine Routentabelle zugeordnet sein. Referenzen: Netzwerksicherheitsgruppen, Netzwerkgeräte, Routing des virtuellen Netzwerkverkehrs",
+    resources: [{ label: "Network Security Groups Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview" }, { label: "Network Appliances", url: "https://azure.microsoft.com/en-us/solutions/network-appliances" }, { label: "Virtual Networks Udr Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-udr-overview" }],
   },
   {
     id: "real-az900-534",
@@ -6986,6 +7398,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Azure Storage bietet verschiedene Zugriffsebenen, sodass Sie Ihre Blobdaten je nach Verwendungszweck möglichst kostengünstig speichern können. Zu den Azure Storage- Zugriffsebenen gehören: • Hot Tier – Eine Online-Schicht, die für die Speicherung von Daten optimiert ist, auf die häufig zugegriffen oder die häufig geändert werden. Die Hot Tier verursacht die höchsten Speicherkosten, aber die niedrigsten Zugriffskosten. • Cool Tier – Eine Online-Ebene, die für die Speicherung selten abgerufener oder geänderter Daten optimiert ist. Daten in der Cool Tier sollten mindestens 30 Tage lang gespeichert werden. Die Cool Tier verursacht im Vergleich zur Hot Tier geringere Speicherkosten und höhere Zugriffskosten. • Cold Tier – Eine Online-Schicht, die für die Speicherung von Daten optimiert ist, auf die selten zugegriffen oder die selten geändert werden, die aber dennoch schnell abgerufen werden müssen. Daten in der Cold Tier sollten mindestens 90 Tage lang gespeichert werden. Die Cold Tier verursacht im Vergleich zur Cool Tier geringere Speicherkosten und höhere Zugriffskosten. • Archivebene : Eine Offlineebene, die für die Speicherung selten abgerufener Daten optimiert ist und flexible Latenzanforderungen im Stundenbereich hat. Daten in der Archivebene sollten mindestens 180 Tage lang gespeichert werden.",
+    resources: [{ label: "Access Tiers Overview", url: "https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview" }],
   },
   {
     id: "real-az900-535",
@@ -6999,6 +7412,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Azure Cloud Shell ist ein interaktives, authentifiziertes und über den Browser zugängliches Terminal zur Verwaltung von Azure-Ressourcen. Sie können flexibel die Shell- Oberfläche auswählen, die am besten zu Ihrer Arbeitsweise passt: Bash oder PowerShell. Cloud Shell wird auf einem temporären Host ausgeführt, der pro Sitzung und pro Benutzer bereitgestellt wird. Ihre Cloud Shell-Sitzung läuft nach 20 Minuten ohne interaktive Aktivität ab. Cloud Shell speichert Ihre Dateien an Ihrem $HOMEStandort mithilfe einer 5 GB großen Dateifreigabe.",
+    resources: [{ label: "Overview", url: "https://learn.microsoft.com/en-us/azure/cloud-shell/overview" }],
   },
   {
     type: "yesno",
@@ -7011,6 +7425,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Das Konfigurieren des Benutzerzugriffs auf ein Platform-as-a-Service-Clouddienstmodell (PaaS) liegt in der Verantwortung des Kunden", correct: "Ja" },
     ],
     explanation: "In einem lokalen Rechenzentrum besitzen Sie den gesamten Stack. Beim Wechsel in die Cloud gehen einige Verantwortlichkeiten auf Microsoft über. Das folgende Diagramm veranschaulicht die Verantwortungsbereiche zwischen Ihnen und Microsoft je nach Art der Bereitstellung Ihres Stacks. Bei allen Cloudbereitstellungstypen sind Sie Eigentümer Ihrer Daten und Identitäten. Sie sind für den Schutz Ihrer Daten und Identitäten, Ihrer lokalen Ressourcen und der von Ihnen kontrollierten Cloudkomponenten verantwortlich. Die von Ihnen kontrollierten Cloudkomponenten variieren je nach Diensttyp. Unabhängig von der Art des Einsatzes behalten Sie immer die folgenden Verantwortlichkeiten: • Daten • Endpunkte • Konto • Zugriffsverwaltung",
+    resources: [{ label: "Shared Responsibility", url: "https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility" }],
   },
   {
     type: "matching",
@@ -7027,6 +7442,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d1", text: "Ermöglicht die Virtualisierung des Betriebssystems.", correctItemId: "i1" },
     ],
     explanation: "Azure Container Instances startet isolierte Container in Sekundenschnelle, ohne dass virtuelle Maschinen bereitgestellt und verwaltet werden müssen — es emuliert dabei einen physischen Computer per Software. Azure Virtual Machine Scale Sets ermöglicht die Erstellung und Verwaltung einer Gruppe lastverteilter, virtualisierter VMs, deren Anzahl automatisch angepasst werden kann.",
+    resources: [{ label: "Container Instances Overview", url: "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-overview" }, { label: "Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview" }],
   },
   {
     type: "yesno",
@@ -7039,6 +7455,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Azure Advisor bietet Empfehlungen zur Verbesserung der Leistung von Ressourcen", correct: "Ja" },
     ],
     explanation: "Advisor ist ein digitaler Cloud-Assistent, der Sie bei der Optimierung Ihrer Azure-Bereitstellungen mithilfe bewährter Methoden unterstützt. Er analysiert Ihre Ressourcenkonfiguration und -nutzungstelemetrie und empfiehlt anschließend Lösungen, mit denen Sie die Kosteneffizienz, Leistung, Zuverlässigkeit und Sicherheit Ihrer Azure-Ressourcen verbessern können. Mit Advisor können Sie: • Erhalten Sie proaktive, umsetzbare und personalisierte Best Practices-Empfehlungen. • Verbessern Sie die Leistung, Sicherheit und Zuverlässigkeit Ihrer Ressourcen, indem Sie Möglichkeiten zur Reduzierung Ihrer Azure-Gesamtausgaben identifizieren. • Erhalten Sie Empfehlungen mit vorgeschlagenen Aktionen inline. Das Advisor-Dashboard zeigt personalisierte Empfehlungen für alle Ihre Abonnements an. Die Empfehlungen sind in fünf Kategorien unterteilt: • Zuverlässigkeit: Um die Kontinuität Ihrer geschäftskritischen Anwendungen sicherzustellen und zu verbessern. • Sicherheit: Zum Erkennen von Bedrohungen und Schwachstellen, die zu Sicherheitsverletzungen führen könnten. • Leistung: Um die Geschwindigkeit Ihrer Anwendungen zu verbessern. • Kosten: Um Ihre gesamten Azure-Ausgaben zu optimieren und zu reduzieren. • Operative Exzellenz: Wir helfen Ihnen dabei, Prozess- und Arbeitsablaufeffizienz, Ressourcenverwaltung und Best Practices für die Bereitstellung zu erreichen. Wenn Azure Advisor eine neue Empfehlung für eine Ihrer Ressourcen erkennt, wird ein Ereignis im Azure-Aktivitätsprotokoll gespeichert. Sie können Warnungen für diese Ereignisse von Azure Advisor aus einrichten, indem Sie eine empfehlungsspezifische Warnungserstellungsfunktion verwenden. Sie können ein Abonnement und optional eine Ressourcengruppe auswählen, um die Ressourcen anzugeben, für die Sie Warnungen erhalten möchten. Sie können Filter anwenden, um Empfehlungen für bestimmte Abonnements und Ressourcentypen anzuzeigen, jedoch nicht für Verwaltungseinheiten. Referenzen: Einführung in Azure Advisor Erstellen Sie Azure Advisor-Benachrichtigungen zu neuen Empfehlungen mithilfe des Azure-Portals",
+    resources: [{ label: "Advisor Overview", url: "https://learn.microsoft.com/en-us/azure/advisor/advisor-overview" }, { label: "Advisor Alerts Portal", url: "https://learn.microsoft.com/en-us/azure/advisor/advisor-alerts-portal" }],
   },
   {
     id: "real-az900-539",
@@ -7052,6 +7469,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Als Administrator können Sie ein Azure-Abonnement, eine Ressourcengruppe oder eine Ressource sperren, um sie vor versehentlichem Löschen und Ändern durch Benutzer zu schützen. Die Sperre überschreibt alle Benutzerberechtigungen. Sie können Sperren festlegen, die entweder Löschungen oder Änderungen verhindern. Im Portal heißen diese Sperren Löschen und Schreibgeschützt . In der Befehlszeile heißen diese Sperren CanNotDelete und ReadOnly . • „CanNotDelete“ bedeutet, dass autorisierte Benutzer eine Ressource lesen und ändern, aber nicht löschen können. • ReadOnly bedeutet, dass autorisierte Benutzer eine Ressource lesen, aber nicht löschen oder aktualisieren können. Das Anwenden dieser Sperre entspricht der Beschränkung aller autorisierten Benutzer auf die Berechtigungen der Leserrolle . Anders als bei der rollenbasierten Zugriffskontrolle (RBAC) verwenden Sie Verwaltungssperren, um eine Einschränkung auf alle Benutzer und Rollen anzuwenden. Wenn Sie eine Sperre auf einen übergeordneten Bereich anwenden, erben alle Ressourcen innerhalb dieses Bereichs dieselbe Sperre. Auch später hinzugefügte Ressourcen erben dieselbe übergeordnete Sperre. Die restriktivste Sperre in der Vererbungskette hat Vorrang.",
+    resources: [{ label: "Lock Resources", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources" }],
   },
   {
     id: "real-az900-540",
@@ -7066,6 +7484,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Betriebssysteme können auf Rechenressourcen wie virtuellen Maschinen und Containern installiert werden. Diese Dienste gelten als Infrastructure-as-a-Service. Die Verantwortung für das Patchen und Verwalten eines Betriebssystems ist die Kerndefinition von Infrastructure-as-a-Service.",
+    resources: [{ label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }],
   },
   {
     id: "real-az900-541",
@@ -7079,6 +7498,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "D",
     explanation: "Mithilfe von virtuellem Netzwerk-Peering können Sie zwei oder mehr virtuelle Netzwerke in Azure nahtlos miteinander verbinden. Die virtuellen Netzwerke werden aus Konnektivitätsgründen als ein einziges Netzwerk angezeigt. Der Datenverkehr zwischen virtuellen Computern in virtuellen Peering-Netzwerken nutzt die Microsoft-Backbone- Infrastruktur. Der Datenverkehr wird ausschließlich über das private Microsoft- Netzwerk geleitet. Azure unterstützt die folgenden Peeringtypen: • Virtuelles Netzwerk-Peering: Verbinden Sie virtuelle Netzwerke innerhalb derselben Azure-Region. • Globales virtuelles Netzwerk-Peering: Verbinden Sie virtuelle Netzwerke über Azure-Regionen hinweg.",
+    resources: [{ label: "Virtual Network Peering Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview" }],
   },
   {
     id: "real-az900-542",
@@ -7092,6 +7512,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Als Administrator können Sie ein Azure-Abonnement, eine Ressourcengruppe oder eine Ressource sperren, um sie vor versehentlichem Löschen und Ändern durch Benutzer zu schützen. Die Sperre überschreibt alle Benutzerberechtigungen. Sie können Sperren festlegen, die entweder Löschungen oder Änderungen verhindern. Im Portal heißen diese Sperren Löschen und Schreibgeschützt . In der Befehlszeile heißen diese Sperren CanNotDelete und ReadOnly . • „CanNotDelete“ bedeutet, dass autorisierte Benutzer eine Ressource lesen und ändern, aber nicht löschen können. • ReadOnly bedeutet, dass autorisierte Benutzer eine Ressource lesen, aber nicht löschen oder aktualisieren können. Das Anwenden dieser Sperre entspricht der Beschränkung aller autorisierten Benutzer auf die Berechtigungen der Leserrolle . Anders als bei der rollenbasierten Zugriffskontrolle (RBAC) verwenden Sie Verwaltungssperren, um eine Einschränkung auf alle Benutzer und Rollen anzuwenden. Wenn Sie eine Sperre auf einen übergeordneten Bereich anwenden, erben alle Ressourcen innerhalb dieses Bereichs dieselbe Sperre. Auch später hinzugefügte Ressourcen erben dieselbe übergeordnete Sperre. Die restriktivste Sperre in der Vererbungskette hat Vorrang.",
+    resources: [{ label: "Lock Resources", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources" }],
   },
   {
     type: "yesno",
@@ -7104,6 +7525,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Die Archive-Zugriffsebene in Azure Storage ist für mindestens 180 Tage Datenspeicherung optimiert", correct: "Ja" },
     ],
     explanation: "Um die Kosten für Ihren wachsenden Speicherbedarf im Griff zu behalten, kann es hilfreich sein, Ihre Daten nach Zugriffshäufigkeit und Aufbewahrungsdauer zu organisieren. Azure Storage bietet verschiedene Zugriffsebenen, sodass Sie Ihre Blobdaten je nach Verwendungszweck möglichst kostengünstig speichern können. Zu den Zugriffsebenen von Azure Storage gehören: • Hot Tier – Eine Online-Schicht, die für die Speicherung von Daten optimiert ist, auf die häufig zugegriffen oder die häufig geändert werden. Die Hot Tier verursacht die höchsten Speicherkosten, aber die niedrigsten Zugriffskosten. • Cool Tier – Eine Online-Ebene, die für die Speicherung selten abgerufener oder geänderter Daten optimiert ist. Daten in der Cool Tier sollten mindestens 30 Tage lang gespeichert werden . Die Cool Tier verursacht im Vergleich zur Hot Tier geringere Speicherkosten und höhere Zugriffskosten. • Cold Tier – Eine Online-Schicht, die für die Speicherung von Daten optimiert ist, auf die selten zugegriffen oder die selten geändert werden, die aber dennoch schnell abgerufen werden müssen. Daten in der Cold Tier sollten mindestens 90 Tage lang gespeichert werden . Die Cold Tier verursacht im Vergleich zur Cool Tier geringere Speicherkosten und höhere Zugriffskosten. • Archivebene : Eine Offlineebene, die für die Speicherung selten abgerufener Daten optimiert ist und flexible Latenzanforderungen im Stundenbereich hat. Daten in der Archivebene sollten mindestens 180 Tage lang gespeichert werden .",
+    resources: [{ label: "Access Tiers Overview", url: "https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview" }],
   },
   {
     type: "yesno",
@@ -7116,6 +7538,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Skalierung kann verwendet werden, um Kosten basierend auf der Nachfrage eines Dienstes zu verwalten", correct: "Ja" },
     ],
     explanation: "Horizontale Skalierung (auch Skalierung nach außen genannt) bezieht sich auf das Hinzufügen zusätzlicher Knoten oder Maschinen zu Ihrer Infrastruktur, um neuen Anforderungen gerecht zu werden. Wenn Sie eine Anwendung auf einem Server hosten und feststellen, dass dieser nicht mehr über die Kapazität oder die Möglichkeiten verfügt, den Datenverkehr zu bewältigen, kann das Hinzufügen eines Servers Ihre Lösung sein. Es ist ziemlich ähnlich, als würden Sie Arbeitslast auf mehrere Mitarbeiter verteilen, anstatt auf einen. Der Nachteil hierbei kann jedoch die zusätzliche Komplexität Ihres Betriebs sein. Sie müssen entscheiden, welche Maschine was macht und wie Ihre neuen Maschinen mit Ihren alten Maschinen zusammenarbeiten. Sie können dies als das Gegenteil von vertikaler Skalierung betrachten. Vertikale Skalierung (auch Skalierung nach oben genannt) beschreibt das Hinzufügen zusätzlicher Ressourcen zu einem System, um die Nachfrage zu decken. Wie unterscheidet sich dies von horizontaler Skalierung? Während sich horizontale Skalierung auf das Hinzufügen zusätzlicher Knoten bezieht, beschreibt vertikale Skalierung das Hinzufügen von mehr Leistung zu Ihren aktuellen Maschinen. Vertikale Skalierung würde beispielsweise bedeuten, die CPUs aufzurüsten, wenn Ihr Server mehr Rechenleistung benötigt. Sie können auch den Arbeitsspeicher, den Speicherplatz oder die Netzwerkgeschwindigkeit vertikal skalieren. Vertikale Skalierung kann auch den vollständigen Austausch eines Servers oder die Verlagerung der Arbeitslast eines Servers auf einen aktualisierten Server beschreiben.",
+    resources: [{ label: "Scaling Out Vs Scaling Up", url: "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/scaling-out-vs-scaling-up" }],
   },
   {
     type: "yesno",
@@ -7128,6 +7551,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Sie können die Eigenschaften einer Azure-Ressource ändern, die über eine Löschsperre verfügt", correct: "Ja" },
     ],
     explanation: "Als Administrator können Sie ein Azure-Abonnement, eine Ressourcengruppe oder eine Ressource sperren, um sie vor versehentlichem Löschen und Ändern durch Benutzer zu schützen. Die Sperre überschreibt alle Benutzerberechtigungen. Sie können Sperren festlegen, die entweder Löschungen oder Änderungen verhindern. Im Portal heißen diese Sperren Löschen und Schreibgeschützt . In der Befehlszeile heißen diese Sperren CanNotDelete und ReadOnly . • „CanNotDelete“ bedeutet, dass autorisierte Benutzer eine Ressource lesen und ändern, aber nicht löschen können. • ReadOnly bedeutet, dass autorisierte Benutzer eine Ressource lesen, aber nicht löschen oder aktualisieren können. Das Anwenden dieser Sperre entspricht der Beschränkung aller autorisierten Benutzer auf die Berechtigungen der Leserrolle . Anders als bei der rollenbasierten Zugriffskontrolle (RBAC) verwenden Sie Verwaltungssperren, um eine Einschränkung auf alle Benutzer und Rollen anzuwenden. Wenn Sie eine Sperre auf einen übergeordneten Bereich anwenden, erben alle Ressourcen innerhalb dieses Bereichs dieselbe Sperre. Auch später hinzugefügte Ressourcen erben dieselbe übergeordnete Sperre. Die restriktivste Sperre in der Vererbungskette hat Vorrang. Sie können derselben Ressource mehrere Ressourcensperren (auch mehrere Sperren desselben Typs) hinzufügen. Sie können keine Sperren auf Benutzer und Gruppen anwenden.",
+    resources: [{ label: "Lock Resources", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources" }],
   },
   {
     type: "yesno",
@@ -7140,6 +7564,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Azure DNS kann eine benutzerdefinierte DNS-Domäne hosten", correct: "Ja" },
     ],
     explanation: "Das Domain Name System (DNS) ist für die Übersetzung (Auflösung) eines Dienstnamens in eine IP-Adresse verantwortlich. Azure DNS bietet DNS-Hosting, Auflösung und Lastenausgleich für Ihre Anwendungen mithilfe der Microsoft Azure-Infrastruktur. Azure DNS unterstützt sowohl internetbasierte DNS-Domänen als auch private DNS-Zonen und bietet die folgenden Dienste: • Azure Public DNS ist ein Hostingdienst für DNS-Domänen. Wenn Sie Ihre Domänen in Azure hosten, können Sie Ihre DNS-Einträge mit denselben Anmeldeinformationen, APIs, Tools und Abrechnungsmethoden wie bei Ihren anderen Azure-Diensten verwalten. • Azure Private DNS ist ein DNS-Dienst für Ihre virtuellen Netzwerke. Azure Private DNS verwaltet und löst Domänennamen im virtuellen Netzwerk auf, ohne dass eine benutzerdefinierte DNS-Lösung konfiguriert werden muss. • Azure DNS Private Resolver ist ein Dienst, mit dem Sie private Azure DNS-Zonen aus einer lokalen Umgebung und umgekehrt abfragen können, ohne VM-basierte DNS-Server bereitzustellen. • Azure Traffic Manager ist ein DNS-basierter Lastenausgleich für den Datenverkehr. Mit diesem Dienst können Sie den Datenverkehr an Ihre öffentlichen Anwendungen in den globalen Azure-Regionen verteilen. Azure DNS ermöglicht mehrere Szenarien, darunter: • Hosten und Auflösen öffentlicher Domänen • Verwalten der DNS-Auflösung in Ihren virtuellen Netzwerken • Aktivieren der automatischen Registrierung für VMs • Aktivieren der Namensauflösung zwischen Azure und Ihren lokalen Ressourcen • Sicheres Hybridnetzwerk • Überwachen Sie DNS-Metriken und -Warnungen • Integration mit Ihren anderen Azure-Diensten • Führen Sie eine Private Link- und DNS-Integration im großen Maßstab durch • Schützen Sie Ihre öffentlichen und privaten DNS-Zonen und -Einträge • Aktivieren Sie die automatische Fehlertoleranz und das Failover für die DNS-Auflösung • Lastenausgleich für Ihre Anwendungen • Erhöhen Sie die Anwendungsverfügbarkeit und -leistung • Überwachen Sie die Verkehrsmuster Ihrer Anwendungen",
+    resources: [{ label: "Dns Overview", url: "https://learn.microsoft.com/en-us/azure/dns/dns-overview" }],
   },
   {
     type: "yesno",
@@ -7152,6 +7577,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Microsoft Purview bietet Datenklassifizierung", correct: "Ja" },
     ],
     explanation: "Microsoft Purview ist ein umfassendes Lösungspaket, das Ihr Unternehmen bei der Verwaltung, dem Schutz und der Verwaltung von Daten unterstützt, unabhängig davon, wo diese gespeichert sind. Microsoft Purview-Lösungen bieten eine integrierte Abdeckung und helfen, die Fragmentierung von Daten in Unternehmen, die mangelnde Transparenz, die Datenschutz und -verwaltung beeinträchtigt, sowie die Vermischung traditioneller IT-Management-Rollen zu beheben. Microsoft Purview ermöglicht das Erkennen und Klassifizieren von in Microsoft 365-Diensten gespeicherten Daten. Microsoft Purview bietet keine integrierte automatische Sicherungs- und Wiederherstellungsfunktion für seine Datenverwaltungslösungen. Kunden sind derzeit für die Implementierung eigener Sicherungs- und Wiederherstellungsstrategien für Microsoft Purview-Konten verantwortlich.",
+    resources: [{ label: "Purview", url: "https://learn.microsoft.com/en-us/purview/purview" }],
   },
   {
     id: "real-az900-548",
@@ -7165,6 +7591,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Advisor ist ein digitaler Cloud-Assistent, der Sie bei der Optimierung Ihrer Azure-Bereitstellungen mithilfe bewährter Methoden unterstützt. Er analysiert Ihre Ressourcenkonfiguration und -nutzungstelemetrie und empfiehlt anschließend Lösungen, mit denen Sie die Kosteneffizienz, Leistung, Zuverlässigkeit und Sicherheit Ihrer Azure-Ressourcen verbessern können. Mit Advisor können Sie: • Erhalten Sie proaktive, umsetzbare und personalisierte Best Practices-Empfehlungen. • Verbessern Sie die Leistung, Sicherheit und Zuverlässigkeit Ihrer Ressourcen, indem Sie Möglichkeiten zur Reduzierung Ihrer Azure-Gesamtausgaben identifizieren. • Erhalten Sie Empfehlungen mit vorgeschlagenen Aktionen inline. Sie können über das Azure-Portal auf Advisor zugreifen. Das Advisor-Dashboard zeigt personalisierte Empfehlungen für alle Ihre Abonnements an. Die Empfehlungen sind in fünf Kategorien unterteilt: • Zuverlässigkeit: Um die Kontinuität Ihrer geschäftskritischen Anwendungen sicherzustellen und zu verbessern. • Sicherheit: Zum Erkennen von Bedrohungen und Schwachstellen, die zu Sicherheitsverletzungen führen könnten. • Leistung: Um die Geschwindigkeit Ihrer Anwendungen zu verbessern. • Kosten: Um Ihre gesamten Azure-Ausgaben zu optimieren und zu reduzieren. • Operative Exzellenz: Wir helfen Ihnen dabei, Prozess- und Workflow-Effizienz, Ressourcenverwaltung und Best Practices für die Bereitstellung zu erreichen.",
+    resources: [{ label: "Advisor Overview", url: "https://learn.microsoft.com/en-us/azure/advisor/advisor-overview" }],
   },
   {
     id: "real-az900-549",
@@ -7178,6 +7605,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Verwaltungsgruppen bieten einen Governancebereich über Abonnements hinaus. Sie können eine flexible Struktur aus Verwaltungsgruppen und Abonnements erstellen, um Ihre Ressourcen in einer Hierarchie zu organisieren und so eine einheitliche Richtlinien- und Zugriffsverwaltung zu ermöglichen. Eine Ressourcengruppe ist ein Container, der zusammengehörige Ressourcen für eine Azure-Lösung enthält. Die Ressourcengruppe kann alle Ressourcen für die Lösung enthalten oder nur die Ressourcen, die Sie als Gruppe verwalten möchten. Sie entscheiden, wie Sie Ressourcen den Ressourcengruppen zuweisen, je nachdem, was für Ihr Unternehmen am sinnvollsten ist. Fügen Sie Ressourcen mit demselben Lebenszyklus grundsätzlich derselben Ressourcengruppe hinzu, damit Sie sie problemlos als Gruppe bereitstellen, aktualisieren und löschen können. Eine Verwaltungsgruppe kann ein oder mehrere Abonnements enthalten. Ein Abonnement kann eine oder mehrere Ressourcengruppen enthalten und eine Ressourcengruppe kann eine oder mehrere Ressourcen wie virtuelle Computer enthalten. Referenzen: Verwenden Sie das Azure-Portal und Azure Resource Manager, um Ressourcengruppen zu verwalten. Was sind Azure-Verwaltungsgruppen?",
+    resources: [{ label: "Manage Resource Groups Portal", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal" }, { label: "Overview", url: "https://learn.microsoft.com/en-us/azure/governance/management-groups/overview" }],
   },
   {
     id: "real-az900-550",
@@ -7191,6 +7619,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Advisor ist ein digitaler Cloud-Assistent, der Sie bei der Optimierung Ihrer Azure-Bereitstellungen mithilfe bewährter Methoden unterstützt. Er analysiert Ihre Ressourcenkonfiguration und -nutzungstelemetrie und empfiehlt anschließend Lösungen, mit denen Sie die Kosteneffizienz, Leistung, Zuverlässigkeit und Sicherheit Ihrer Azure-Ressourcen verbessern können. Mit Advisor können Sie: • Erhalten Sie proaktive, umsetzbare und personalisierte Best Practices-Empfehlungen. • Verbessern Sie die Leistung, Sicherheit und Zuverlässigkeit Ihrer Ressourcen, indem Sie Möglichkeiten zur Reduzierung Ihrer Azure-Gesamtausgaben identifizieren. • Erhalten Sie Empfehlungen mit vorgeschlagenen Aktionen inline. Sie können über das Azure-Portal auf Advisor zugreifen. Das Advisor-Dashboard zeigt personalisierte Empfehlungen für alle Ihre Abonnements an. Die Empfehlungen sind in fünf Kategorien unterteilt: • Zuverlässigkeit: Um die Kontinuität Ihrer geschäftskritischen Anwendungen sicherzustellen und zu verbessern. • Sicherheit: Zum Erkennen von Bedrohungen und Schwachstellen, die zu Sicherheitsverletzungen führen könnten. • Leistung: Um die Geschwindigkeit Ihrer Anwendungen zu verbessern. • Kosten: Um Ihre gesamten Azure-Ausgaben zu optimieren und zu reduzieren. • Operative Exzellenz: Wir helfen Ihnen dabei, Prozess- und Workflow-Effizienz, Ressourcenverwaltung und Best Practices für die Bereitstellung zu erreichen.",
+    resources: [{ label: "Advisor Overview", url: "https://learn.microsoft.com/en-us/azure/advisor/advisor-overview" }],
   },
   {
     id: "real-az900-551",
@@ -7204,6 +7633,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Mithilfe von Initiativen können Sie mehrere zusammengehörige Richtliniendefinitionen gruppieren, um Zuweisungen und Verwaltung zu vereinfachen, da Sie mit einer Gruppe als einem einzigen Element arbeiten. Sie können beispielsweise zusammengehörige Tagging-Richtliniendefinitionen in einer einzigen Initiative gruppieren. Anstatt jede Richtlinie einzeln zuzuweisen, wenden Sie die Initiative an. Sie verwenden JSON, um eine Richtlinieninitiativendefinition zu erstellen. Die Richtlinieninitiativendefinition enthält Elemente für: • Anzeigename • Beschreibung • Metadaten • Version • Parameter • Richtliniendefinitionen • Richtliniengruppen (diese Eigenschaft ist Teil der Funktion „Regulatory Compliance (Vorschau)“)",
+    resources: [{ label: "Initiative Definition Structure", url: "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/initiative-definition-structure" }],
   },
   {
     id: "real-az900-552",
@@ -7217,6 +7647,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Serverloses Computing ermöglicht Entwicklern, Anwendungen schneller zu erstellen, da sie die Infrastruktur nicht mehr verwalten müssen. Bei serverlosen Anwendungen stellt der Cloud-Dienstanbieter die zum Ausführen des Codes erforderliche Infrastruktur automatisch bereit, skaliert und verwaltet sie. Für das Verständnis der Definition von serverlosem Computing ist es wichtig zu wissen, dass der Code weiterhin auf Servern ausgeführt wird. Der Name „serverlos“ rührt daher, dass die mit der Bereitstellung und Verwaltung der Infrastruktur verbundenen Aufgaben für den Entwickler unsichtbar sind. Dieser Ansatz ermöglicht es Entwicklern, sich stärker auf die Geschäftslogik zu konzentrieren und dem Kerngeschäft mehr Wert zu verleihen. Serverloses Computing hilft Teams, ihre Produktivität zu steigern und Produkte schneller auf den Markt zu bringen. Unternehmen können Ressourcen besser optimieren und sich auf Innovationen konzentrieren. Azure Functions ist der primäre serverlose Dienst und ermöglicht die ereignisgesteuerte Codeausführung. Andere Dienste wie Azure Logic Apps und Azure SQL Database bieten ebenfalls serverlose Optionen.",
+    resources: [{ label: "What Is Serverless Computing", url: "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-serverless-computing" }],
   },
   {
     id: "real-az900-553",
@@ -7230,6 +7661,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Geozonenredundanter Speicher (GZRS) kombiniert die durch Redundanz über Verfügbarkeitszonen hinweg gebotene Hochverfügbarkeit mit dem durch Georeplikation gewährleisteten Schutz vor regionalen Ausfällen. Daten in einem GZRS-Konto werden über drei Azure-Verfügbarkeitszonen in der primären Region kopiert. Darüber hinaus werden sie zum Schutz vor regionalen Katastrophen auch in eine sekundäre geografische Region repliziert. Microsoft empfiehlt die Verwendung von GZRS für Anwendungen, die maximale Konsistenz, Haltbarkeit und Verfügbarkeit, hervorragende Leistung und Resilienz für die Notfallwiederherstellung erfordern. Mit einem GZRS-Konto können Sie weiterhin Daten lesen und schreiben, wenn eine Verfügbarkeitszone nicht verfügbar ist oder nicht wiederhergestellt werden kann. Darüber hinaus bleiben Ihre Daten auch bei einem vollständigen regionalen Ausfall oder einer Katastrophe, bei der die primäre Region nicht wiederherstellbar ist, haltbar. GZRS ist darauf ausgelegt, eine Objekthaltbarkeit von mindestens 99,99999999999999 % (16 9er) über ein Jahr hinweg zu gewährleisten. Das folgende Diagramm zeigt, wie Ihre Daten mit GZRS oder RA-GZRS repliziert werden:",
+    resources: [{ label: "Storage Redundancy", url: "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy#geo-zone-redundant-storage" }],
   },
   {
     type: "yesno",
@@ -7242,6 +7674,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { text: "Alle Azure-Ressourcen erben die Sperren, die ihrer übergeordneten Ressourcengruppe zugewiesen sind", correct: "Ja" },
     ],
     explanation: "Als Administrator können Sie ein Azure-Abonnement, eine Ressourcengruppe oder eine Ressource sperren, um sie vor versehentlichem Löschen und Ändern durch Benutzer zu schützen. Die Sperre überschreibt alle Benutzerberechtigungen. Sie können Sperren festlegen, die entweder Löschungen oder Änderungen verhindern. Im Portal heißen diese Sperren Löschen und Schreibgeschützt . In der Befehlszeile heißen diese Sperren CanNotDelete und ReadOnly . • „CanNotDelete“ bedeutet, dass autorisierte Benutzer eine Ressource lesen und ändern, aber nicht löschen können. • ReadOnly bedeutet, dass autorisierte Benutzer eine Ressource lesen, aber nicht löschen oder aktualisieren können. Das Anwenden dieser Sperre entspricht der Beschränkung aller autorisierten Benutzer auf die Berechtigungen der Leserrolle . Anders als bei der rollenbasierten Zugriffskontrolle (RBAC) verwenden Sie Verwaltungssperren, um eine Einschränkung auf alle Benutzer und Rollen anzuwenden. Wenn Sie eine Sperre auf einen übergeordneten Bereich anwenden, erben alle Ressourcen innerhalb dieses Bereichs dieselbe Sperre. Auch später hinzugefügte Ressourcen erben dieselbe übergeordnete Sperre. Die restriktivste Sperre in der Vererbungskette hat Vorrang.",
+    resources: [{ label: "Lock Resources", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/lock-resources" }],
   },
   {
     id: "real-az900-555",
@@ -7254,6 +7687,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Software as a Service (SaaS) ist aus Produktsicht das umfassendste Cloud-Service-Modell. Bei SaaS mieten oder nutzen Sie im Wesentlichen eine vollständig entwickelte Anwendung. E-Mail, Finanzsoftware, Messaging-Anwendungen und Konnektivitätssoftware sind gängige Beispiele für eine SaaS-Implementierung. Das SaaS-Modell ist zwar am wenigsten flexibel, lässt sich aber auch am einfachsten implementieren. Für die vollständige Nutzung sind die geringsten technischen Kenntnisse oder Fachkenntnisse erforderlich. Das Modell der geteilten Verantwortung gilt für alle Cloud-Servicetypen. SaaS ist das Modell, bei dem die größte Verantwortung beim Cloud-Anbieter und die geringste beim Benutzer liegt. In einer SaaS-Umgebung sind Sie für die Daten verantwortlich, die Sie in das System eingeben, für die Geräte, denen Sie die Verbindung zum System erlauben, und für die Benutzer, die Zugriff haben. Fast alles andere fällt in die Zuständigkeit des Cloud-Anbieters. Der Cloud-Anbieter ist für die physische Sicherheit der Rechenzentren, die Stromversorgung, die Netzwerkkonnektivität sowie die Anwendungsentwicklung und das Patchen verantwortlich. Infrastructure as a Service (IaaS) ist ein Cloud-Computing-Dienst, der wichtige Rechen-, Speicher- und Netzwerkressourcen bedarfsgerecht und nutzungsbasiert bereitstellt. Mit IaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung physischer Server und Rechenzentrumsinfrastruktur. Jede Ressource wird als separate Servicekomponente angeboten, und Sie zahlen nur für die jeweilige Ressource, solange Sie sie benötigen. Ein Cloud-Computing-Dienstanbieter wie Azure verwaltet die Infrastruktur, während Sie Ihre eigene Software – einschließlich Betriebssysteme, Middleware und Anwendungen – kaufen, installieren, konfigurieren und verwalten. Wie IaaS umfasst PaaS die Infrastruktur – Server, Speicher und Netzwerke –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankverwaltungssysteme und mehr. Azure Backup ist ein Beispiel für eine PaaS-Lösung. Referenzen: Was ist PaaS? Was ist IaaS? Beschreiben Sie Software as a Service",
+    resources: [{ label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }, { label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }, { label: "4 Describe Software Service", url: "https://learn.microsoft.com/en-us/training/modules/describe-cloud-service-types/4-describe-software-service" }],
   },
   {
     type: "matching",
@@ -7271,6 +7705,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Wird zum Hosten virtueller Azure-Computer verwendet", correctItemId: "item2" },
     ],
     explanation: "Software as a Service (SaaS) ist ein Softwarelizenzierungs- und Bereitstellungsmodell, bei dem Software an einen Benutzer lizenziert wird. Der Zugriff auf die Software bzw. Anwendung erfolgt über das Internet und einen Webbrowser. Sie müssen die Software nicht lokal installieren und warten. Sie können sofort mit der Konfiguration und Nutzung beginnen. Infrastructure as a Service (IaaS) ist ein Cloud-Computing-Dienst, der wichtige Rechen-, Speicher- und Netzwerkressourcen bedarfsgerecht und nutzungsbasiert bereitstellt. Mit IaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung physischer Server und Rechenzentrumsinfrastruktur. Jede Ressource wird als separate Servicekomponente angeboten, und Sie zahlen nur für die jeweilige Ressource, solange Sie sie benötigen. Ein Cloud-Computing-Dienstanbieter wie Azure verwaltet die Infrastruktur, während Sie Ihre eigene Software – einschließlich Betriebssystemen, Middleware und Anwendungen – kaufen, installieren, konfigurieren und verwalten. Wie IaaS umfasst PaaS Infrastruktur – Server, Speicher und Netzwerk –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. Azure Backup ist ein Beispiel für eine PaaS-Lösung. Referenzen: Was ist PaaS? Was ist IaaS? Was ist SaaS?",
+    resources: [{ label: "What Is Paas", url: "https://azure.microsoft.com/en-us/overview/what-is-paas/" }, { label: "What Is Iaas", url: "https://azure.microsoft.com/en-us/overview/what-is-iaas/" }, { label: "What Is Saas", url: "https://azure.microsoft.com/en-us/overview/what-is-saas/" }],
   },
   {
     id: "real-az900-557",
@@ -7284,6 +7719,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Azure-Regionen sind geografische Gebiete, in denen Microsoft Azure seine Clouddienste anbietet. Jede Region umfasst mehrere Rechenzentren und bietet spezifische Dienste und Funktionen. Bei der Bereitstellung von Ressourcen in Azure wählen Sie eine Region basierend auf Faktoren wie Latenz, Complianceanforderungen und Verfügbarkeitsoptionen aus. Geografien vs. Regionen: Azure-Geografien sind definierte Gebiete (wie die USA, Europa oder der Asien-Pazifik-Raum), die bestimmte Anforderungen an Datenaufbewahrung und Compliance erfüllen. Regionen sind bestimmte Standorte innerhalb einer Geografie, die die physischen Rechenzentren enthalten. Ausfallsicherheit: Azure-Regionen bieten verschiedene Ausfallsicherheitsoptionen, darunter Verfügbarkeitszonen (isolierte Standorte innerhalb einer Region) und gepaarte Regionen (für die Notfallwiederherstellung). Auswahl einer Region: Berücksichtigen Sie bei der Auswahl einer Region Faktoren wie: • Latenz: Wie nah die Region an Ihren Benutzern ist. • Compliance: Gesetzliche Anforderungen an die Datenaufbewahrung. • Ausfallsicherheit: Ob Sie Verfügbarkeitszonen oder gepaarte Regionen benötigen. • Kosten: Die Preise für Ressourcen können je nach Region variieren. Globale Verteilung: Azure verfügt über mehr als 60 Regionen weltweit, weitere werden in Kürze folgen, sodass eine große Auswahl an Standorten zur Verfügung steht. Beispiele: Einige Azure-Regionen sind: Osten der USA, Westen der USA, Nordeuropa, Südostasien und viele mehr. Referenzen: Was sind Azure-Regionen? Liste der Azure-Regionen",
+    resources: [{ label: "Regions Overview", url: "https://learn.microsoft.com/en-us/azure/reliability/regions-overview" }, { label: "Regions List", url: "https://learn.microsoft.com/en-us/azure/reliability/regions-list" }],
   },
   {
     type: "matching",
@@ -7301,6 +7737,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Bietet eine vollständige Desktop- und App-Virtualisierungsumgebung, die in Azure ausgeführt wird", correctItemId: "item2" },
     ],
     explanation: "Container Instances bieten schnelle, isolierte Rechenleistung, um Spitzenlasten zu bewältigen, ohne dass Server verwaltet werden müssen. Beispielsweise verwendet AKS Virtual Kubelet, um Pods in Container Instances bereitzustellen, die in Sekundenschnelle starten. AKS läuft mit gerade genug Kapazität für Ihre durchschnittliche Arbeitslast. Wenn die Kapazität Ihres AKS-Clusters erschöpft ist, können Sie zusätzliche Pods in Container Instances skalieren, ohne zusätzliche Server verwalten zu müssen. Azure Virtual Desktop ist ein Desktop- und App-Virtualisierungsdienst, der auf Azure ausgeführt wird. Hier sind einige der wichtigsten Highlights: • Bieten Sie ein umfassendes Windows-Erlebnis mit Windows 11, Windows 10 oder Windows Server. Verwenden Sie Einzelsitzungen, um Geräte einem einzelnen Benutzer zuzuweisen, oder Multisitzungen für Skalierbarkeit. • Bieten Sie vollständige Desktops an oder verwenden Sie RemoteApp, um einzelne Apps bereitzustellen. • Präsentieren Sie Microsoft 365 Apps für Unternehmen und optimieren Sie sie für die Ausführung in virtuellen Mehrbenutzerszenarien. • Installieren Sie Ihre Branchen- oder benutzerdefinierten Apps, die Sie von überall aus ausführen können, einschließlich Apps in den Formaten Win32, MSIX und Appx. • Stellen Sie Software-as-a-Service (SaaS) für die externe Nutzung bereit. • Ersetzen Sie vorhandene Remote Desktop Services (RDS)-Bereitstellungen. • Verwalten Sie Desktops und Apps von verschiedenen Windows- und Windows Server-Betriebssystemen mit einer einheitlichen Verwaltungserfahrung. • Hosten Sie Desktops und Apps vor Ort in einer Hybridkonfiguration mit Azure Local. Mit ExpressRoute können Sie Ihre lokalen Netzwerke mithilfe eines Konnektivitätsanbieters über eine private Verbindung in die Microsoft-Cloud erweitern. Mit ExpressRoute können Sie Verbindungen zu Microsoft-Clouddiensten wie Microsoft Azure und Microsoft 365 herstellen. Die Konnektivität kann über ein Any-to-Any-Netzwerk (IP VPN), ein Point-to-Point-Ethernet-Netzwerk oder eine virtuelle Querverbindung über einen Konnektivitätsanbieter in einer Colocation-Einrichtung erfolgen. ExpressRoute-Verbindungen bieten mehr Zuverlässigkeit, höhere Geschwindigkeiten, konsistente Latenzen und höhere Sicherheit als typische Verbindungen über das Internet, da sie nicht über das öffentliche Internet laufen. Azure Virtual Private Network (VPN) ermöglicht sichere Verbindungen zwischen Ihren lokalen Netzwerken und virtuellen Azure-Netzwerken oder zwischen virtuellen Azure-Netzwerken untereinander. Azure VPN verwendet Azure VPN Gateway. Azure VPN Gateway ist ein Dienst, mit dem verschlüsselter Datenverkehr zwischen einem virtuellen Azure-Netzwerk und lokalen Standorten über das öffentliche Internet gesendet werden kann. Sie können VPN Gateway auch verwenden, um verschlüsselten Datenverkehr zwischen virtuellen Azure- Netzwerken über das Microsoft-Netzwerk zu senden. VPN Gateway verwendet einen bestimmten Typ von Azure Virtual Network Gateway, das sogenannte VPN-Gateway. Es können mehrere Verbindungen zum selben VPN-Gateway hergestellt werden. Wenn Sie mehrere Verbindungen herstellen, teilen sich alle VPN-Tunnel die verfügbare Gateway- Bandbreite. Referenzen: Was ist ein Container? Was ist Azure Virtual Desktop? Was ist Azure ExpressRoute? Was ist Azure VPN Gateway?",
+    resources: [{ label: "What Is A Container", url: "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-a-container" }, { label: "Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-desktop/overview" }, { label: "Expressroute Introduction", url: "https://learn.microsoft.com/en-us/azure/expressroute/expressroute-introduction" }, { label: "Vpn Gateway About Vpngateways", url: "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-about-vpngateways" }],
   },
   {
     id: "real-az900-559",
@@ -7314,6 +7751,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Bei der Prüfung und Bewertung öffentlicher Cloud-Dienste ist es wichtig, das Modell der geteilten Verantwortung zu verstehen und zu wissen, welche Sicherheitsaufgaben der Cloud-Anbieter und welche Sie übernehmen. Die Workload-Verantwortlichkeiten variieren je nachdem, ob der Workload auf Software as a Service (SaaS), Platform as a Service (PaaS), Infrastructure as a Service (IaaS) oder in einem lokalen Rechenzentrum gehostet wird. Aufteilung der Verantwortung In einem lokalen Rechenzentrum besitzen Sie den gesamten Stack. Beim Wechsel in die Cloud gehen einige Verantwortlichkeiten auf Microsoft über. Das folgende Diagramm veranschaulicht die Verantwortungsbereiche zwischen Ihnen und Microsoft je nach Art der Bereitstellung Ihres Stacks. Bei allen Cloudbereitstellungstypen sind Sie Eigentümer Ihrer Daten und Identitäten. Sie sind für den Schutz Ihrer Daten und Identitäten, Ihrer lokalen Ressourcen und der von Ihnen kontrollierten Cloudkomponenten verantwortlich. Die von Ihnen kontrollierten Cloudkomponenten variieren je nach Diensttyp. Unabhängig von der Art des Einsatzes behalten Sie immer die folgenden Verantwortlichkeiten: • Daten • Endpunkte • Konto • Zugriffsverwaltung",
+    resources: [{ label: "Shared Responsibility", url: "https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility" }],
   },
   {
     id: "real-az900-560",
@@ -7327,6 +7765,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Bei der Prüfung und Bewertung öffentlicher Cloud-Dienste ist es wichtig, das Modell der geteilten Verantwortung zu verstehen und zu wissen, welche Sicherheitsaufgaben der Cloud-Anbieter und welche Sie übernehmen. Die Workload-Verantwortlichkeiten variieren je nachdem, ob der Workload auf Software as a Service (SaaS), Platform as a Service (PaaS), Infrastructure as a Service (IaaS) oder in einem lokalen Rechenzentrum gehostet wird. Aufteilung der Verantwortung In einem lokalen Rechenzentrum besitzen Sie den gesamten Stack. Beim Wechsel in die Cloud gehen einige Verantwortlichkeiten auf Microsoft über. Das folgende Diagramm veranschaulicht die Verantwortungsbereiche zwischen Ihnen und Microsoft je nach Art der Bereitstellung Ihres Stacks. Bei allen Cloudbereitstellungstypen sind Sie Eigentümer Ihrer Daten und Identitäten. Sie sind für den Schutz Ihrer Daten und Identitäten, Ihrer lokalen Ressourcen und der von Ihnen kontrollierten Cloudkomponenten verantwortlich. Die von Ihnen kontrollierten Cloudkomponenten variieren je nach Diensttyp. Unabhängig von der Art des Einsatzes behalten Sie immer die folgenden Verantwortlichkeiten: • Daten • Endpunkte • Konto • Zugriffsverwaltung",
+    resources: [{ label: "Shared Responsibility", url: "https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility" }],
   },
   {
     id: "real-az900-561",
@@ -7340,6 +7779,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "B",
     explanation: "Eine Azure-Ressourcengruppe ist ein Container, der zusammengehörige Ressourcen für eine Azure-Lösung logisch organisiert. Diese Ressourcen, z. B. virtuelle Computer, Speicherkonten und virtuelle Netzwerke, können gemeinsam als Einheit verwaltet werden. Ressourcengruppen vereinfachen die Bereitstellung, Verwaltung und Löschung von Ressourcen, indem sie Ressourcen mit einem gemeinsamen Lebenszyklus gruppieren.",
+    resources: [{ label: "Manage Resource Groups Portal", url: "https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal" }],
   },
   {
     type: "matching",
@@ -7358,6 +7798,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Die am wenigsten sichere gängige Anmeldemethode, die durch sicherere Methoden ersetzt werden sollte.", correctItemId: "i2" },
     ],
     explanation: "Microsoft empfiehlt kennwortlose Authentifizierungsmethoden wie Windows Hello, Passkeys (FIDO2) und die Microsoft Authenticator-App als sicherste Anmeldung. Mehrstufige Authentifizierung (MFA) bietet zusätzliche Sicherheit gegenüber reiner Kennwortanmeldung. Reine Kennwort-Authentifizierung gilt als am wenigsten sicher und sollte ersetzt werden.",
+    resources: [{ label: "Concept Authentication Methods", url: "https://learn.microsoft.com/en-us/entra/identity/authentication/concept-authentication-methods" }],
   },
   {
     id: "real-az900-563",
@@ -7371,6 +7812,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "Die Service Level Agreements (SLA) beschreiben die Zusagen von Microsoft hinsichtlich Betriebszeit und Konnektivität für Microsoft Online Services. Die Dienstverfügbarkeit gibt an, wie lange der Dienst eines Anbieters zur Verfügung steht. Dies wird manchmal in einem Zeitfenster gemessen. Beispielsweise kann Ihr SLA festlegen, dass der Dienst eines Anbieters täglich für ein bestimmtes 12-Stunden-Fenster mit einer Kapazität von mindestens 99,5 % verfügbar ist.",
+    resources: [{ label: "Service Level Agreements SLA For Online Services", url: "https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services" }],
   },
 
   {
@@ -7385,6 +7827,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Für Blobs wird eine Gebühr für vorzeitiges Löschen erhoben, wenn sie gelöscht, überschrieben oder auf eine andere Ebene verschoben werden, bevor die für die Ebene erforderliche Mindestanzahl von Tagen verstrichen ist. Für ein Blob in der Cool-Ebene eines Allzweckkontos v2 wird eine Gebühr für vorzeitiges Löschen erhoben, wenn es vor Ablauf von 30 Tagen gelöscht oder auf eine andere Ebene verschoben wird. Diese Gebühr wird anteilig berechnet.",
+    resources: [{ label: "Access Tiers Overview", url: "https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview" }],
   },
 ];
 
