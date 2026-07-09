@@ -20,7 +20,7 @@ const LEVEL_STYLES: Record<string, string> = {
 };
 
 export default function JourneyHeader({ company, journey }: { company: Company; journey: CertJourney }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const [showCalc, setShowCalc] = useState(false);
   const certId = journey.code.toLowerCase();
   const { user } = useUser();
@@ -32,7 +32,7 @@ export default function JourneyHeader({ company, journey }: { company: Company; 
     if (user) loadForCert(user.id, certId);
   }, [user, certId, loadForCert]);
 
-  const track = getLearnTrack(certId, journey.title);
+  const track = getLearnTrack(certId, journey.title, locale);
   const totalLessons = track.modules.flatMap((m) => m.lessons).length;
   const doneLessons = user && completionSet ? completionSet.size : 0;
 

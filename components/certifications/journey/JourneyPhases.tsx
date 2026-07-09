@@ -102,7 +102,7 @@ export default function JourneyPhases({
   certId: string;
   certTitle: string;
 }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const { user } = useUser();
   const completionSet = useLessonCompletionStore((s) => s.completions[certId]);
   const loadForCert = useLessonCompletionStore((s) => s.loadForCert);
@@ -114,7 +114,7 @@ export default function JourneyPhases({
 
   const realPhases: JourneyPhase[] = phases.map((phase) => {
     if (phase.key === "lernen") {
-      const track = getLearnTrack(certId, certTitle);
+      const track = getLearnTrack(certId, certTitle, locale);
       const allLessons = track.modules.flatMap((m) => m.lessons);
       const videos = allLessons.filter((l) => l.type === "video");
       const quizzes = allLessons.filter((l) => l.type === "quiz");

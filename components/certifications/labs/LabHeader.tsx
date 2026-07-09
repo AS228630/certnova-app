@@ -13,10 +13,26 @@ const TAG_ICON: Record<string, typeof Monitor> = {
   "Schritt-für-Schritt-Anleitung": ListChecks,
 };
 
+const TAG_LABEL_KEY: Record<string, string> = {
+  "Online-Lab": "labs.tagOnlineLab",
+  "Sichere Umgebung": "labs.tagSecureEnv",
+  "Reset möglich": "labs.tagResetPossible",
+  "Auto-Validierung": "labs.tagAutoValidation",
+  "Schritt-für-Schritt-Anleitung": "labs.tagStepByStep",
+  "Echtzeit-Validierung": "labs.tagRealtimeValidation",
+  "Portal + CLI": "labs.tagPortalCli",
+};
+
 const LEVEL_STYLES: Record<string, string> = {
   Beginner: "bg-success-light text-success",
   Intermediate: "bg-warning/10 text-warning",
   Advanced: "bg-danger/10 text-danger",
+};
+
+const LEVEL_LABEL_KEY: Record<string, string> = {
+  Beginner: "certList.levelBeginnerShort",
+  Intermediate: "certList.levelIntermediateShort",
+  Advanced: "certList.levelAdvancedShort",
 };
 
 function formatTime(seconds: number) {
@@ -59,7 +75,7 @@ export default function LabHeader({
           </Link>
           <span className="truncate font-bold text-text">{lab.title}</span>
           <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-bold ${LEVEL_STYLES[lab.level]}`}>
-            {lab.level}
+            {t(LEVEL_LABEL_KEY[lab.level] ?? "")}
           </span>
         </div>
         <div className="flex shrink-0 items-center gap-3">
@@ -102,7 +118,7 @@ export default function LabHeader({
         <div>
           <div className="flex flex-wrap items-center gap-3">
             <h1 className="text-xl font-extrabold text-text sm:text-2xl">{lab.title}</h1>
-            <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${LEVEL_STYLES[lab.level]}`}>{lab.level}</span>
+            <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${LEVEL_STYLES[lab.level]}`}>{t(LEVEL_LABEL_KEY[lab.level] ?? "")}</span>
             <span className="flex items-center gap-1 text-xs text-text-muted">
               <Clock3 size={13} />
               {lab.durationLabel}
@@ -113,10 +129,11 @@ export default function LabHeader({
           <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-text-faint">
             {lab.tags.map((tag) => {
               const Icon = TAG_ICON[tag] ?? CheckCircle2;
+              const labelKey = TAG_LABEL_KEY[tag];
               return (
                 <span key={tag} className="flex items-center gap-1.5">
                   <Icon size={12} />
-                  {tag}
+                  {labelKey ? t(labelKey) : tag}
                 </span>
               );
             })}

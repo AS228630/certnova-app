@@ -3,6 +3,21 @@
 // and navigable, not the full published curriculum. Extend LEARN_TRACKS with
 // more certIds / modules / lessons as real content is written.
 
+import de from "@/lib/i18n/dictionaries/de";
+import en from "@/lib/i18n/dictionaries/en";
+import fa from "@/lib/i18n/dictionaries/fa";
+import ar from "@/lib/i18n/dictionaries/ar";
+import uk from "@/lib/i18n/dictionaries/uk";
+import es from "@/lib/i18n/dictionaries/es";
+import fr from "@/lib/i18n/dictionaries/fr";
+import ru from "@/lib/i18n/dictionaries/ru";
+import tr from "@/lib/i18n/dictionaries/tr";
+
+const DICTS: Record<string, typeof de> = { de, en, fa, ar, uk, es, fr, ru, tr };
+function dict(locale: string) {
+  return DICTS[locale] ?? de;
+}
+
 export type LessonType = "video" | "quiz" | "reading";
 
 export type Lesson = {
@@ -175,34 +190,30 @@ export const LEARN_TRACKS: Record<string, LearnTrack> = {
  * just with generic module titles and everything after module 1 locked.
  * Replace with real content in LEARN_TRACKS above as it gets written.
  */
-function generateLearnTrack(certId: string, certTitle: string): LearnTrack {
-  const sections = [
-    "Grundlagen und Einführung",
-    "Kernkonzepte im Detail",
-    "Praktische Anwendung",
-    "Vertiefung und Best Practices",
-  ];
+function generateLearnTrack(certId: string, certTitle: string, locale: string = "de"): LearnTrack {
+  const d = dict(locale).dataGen;
+  const sections = [d.genSection1, d.genSection2, d.genSection3, d.genSection4];
 
   const modules: Module[] = sections.map((title, i) => ({
     id: `modul-${i + 1}`,
     number: i + 1,
     title,
-    description: `Baue dein Wissen zu „${certTitle}“ Schritt für Schritt auf.`,
-    duration: "45min",
+    description: d.genModuleDesc.replace("{cert}", certTitle),
+    duration: `45${d.genMinutes}`,
     locked: i > 0,
-    lockedHint: i > 0 ? `Schließe Modul ${i} ab, um freizuschalten` : undefined,
+    lockedHint: i > 0 ? d.genUnlockHint.replace("{n}", String(i)) : undefined,
     lessons: [
-      { id: "l1", title: `${title}: Video-Einführung`, type: "video", duration: "10 Min", completed: false },
-      { id: "l2", title: `${title}: Lesematerial`, type: "reading", duration: "8 Min", completed: false },
-      { id: "l3", title: `Quiz: ${title}`, type: "quiz", duration: "10 Fragen", completed: false },
+      { id: "l1", title: `${title}: ${d.genVideoIntro}`, type: "video", duration: `10 ${d.genMinutes}`, completed: false },
+      { id: "l2", title: `${title}: ${d.genReadingMaterial}`, type: "reading", duration: `8 ${d.genMinutes}`, completed: false },
+      { id: "l3", title: `${d.genQuizPrefix}: ${title}`, type: "quiz", duration: `10 ${d.genQuestionsWord}`, completed: false },
     ],
   }));
 
   return { certId, modules };
 }
 
-export function getLearnTrack(certId: string, certTitle = certId.toUpperCase()): LearnTrack {
-  return LEARN_TRACKS[certId] ?? generateLearnTrack(certId, certTitle);
+export function getLearnTrack(certId: string, certTitle = certId.toUpperCase(), locale: string = "de"): LearnTrack {
+  return LEARN_TRACKS[certId] ?? generateLearnTrack(certId, certTitle, locale);
 }
 
 export function getLearnProgress(certId: string): number {

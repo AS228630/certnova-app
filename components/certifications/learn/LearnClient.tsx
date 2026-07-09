@@ -18,7 +18,7 @@ import {
 } from "lucide-react";
 import JourneyHeader from "@/components/certifications/journey/JourneyHeader";
 import ProgressRing from "@/components/certifications/journey/ProgressRing";
-import { moduleSummary, type Module, type Lesson } from "@/lib/learnData";
+import { moduleSummary, getLearnTrack, type Module, type Lesson } from "@/lib/learnData";
 import type { Company } from "@/lib/companiesData";
 import type { CertJourney } from "@/lib/journeyData";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
@@ -185,7 +185,7 @@ function ModuleCard({
 export default function LearnClient({
   company,
   journey,
-  modules,
+  modules: _modulesFromServer,
 }: {
   company: Company;
   journey: CertJourney;
@@ -195,7 +195,7 @@ export default function LearnClient({
   const [notes, setNotes] = useState<{ id: string; text: string }[]>([]);
   const [draft, setDraft] = useState("");
   const [addingNote, setAddingNote] = useState(false);
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const [tab, setTab] = useState<(typeof TAB_KEYS)[number]>("path");
   const certId = journey.code.toLowerCase();
   const companySlug = company.slug;
@@ -206,6 +206,13 @@ export default function LearnClient({
   useEffect(() => {
     if (user) loadForCert(user.id, certId);
   }, [user, certId, loadForCert]);
+
+  // The Learn page is server-rendered in German (no client locale available
+  // there yet), so re-derive the module list on the client using the active
+  // locale for certs that fall back to the generic generator. Hand-authored
+  // LEARN_TRACKS entries aren't locale-aware yet, so this only changes
+  // anything for certs using the generic fallback.
+  const modules = useMemo(() => getLearnTrack(certId, journey.title, locale).modules, [certId, journey.title, locale]);
 
   // Merge the static module/lesson structure with each lesson's *real*,
   // persisted completion state. Falls back to the static demo flags only

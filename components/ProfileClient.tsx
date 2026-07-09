@@ -311,11 +311,11 @@ function LearnTab({
   progressMap: Record<string, number>;
   lessonCompletions: Record<string, Set<string>>;
 }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const certIds = Object.keys(progressMap);
   const rows = certIds
     .map((certId) => {
-      const track = getLearnTrack(certId, certId);
+      const track = getLearnTrack(certId, certId, locale);
       const allLessons = track.modules.flatMap((m) => m.lessons);
       const done = lessonCompletions[certId]?.size ?? 0;
       const total = allLessons.length;
@@ -419,7 +419,7 @@ function CertificatesTab({
   displayName: string;
   studyHours: number;
 }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const [generating, setGenerating] = useState<string | null>(null);
 
   function findCert(certId: string) {
@@ -432,7 +432,7 @@ function CertificatesTab({
 
   const eligible = Object.keys(progressMap)
     .map((certId) => {
-      const track = getLearnTrack(certId, certId);
+      const track = getLearnTrack(certId, certId, locale);
       const totalLessons = track.modules.flatMap((m) => m.lessons).length;
       const doneLessons = lessonCompletions[certId]?.size ?? 0;
       const lessonsPct = totalLessons === 0 ? 0 : Math.round((doneLessons / totalLessons) * 100);
