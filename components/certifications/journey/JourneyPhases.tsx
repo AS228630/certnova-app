@@ -10,6 +10,7 @@ import { useUser } from "@/components/UserContext";
 import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { getLearnTrack } from "@/lib/learnData";
+import { useLocale } from "@/components/LocaleProvider";
 
 const RING_COLORS: Record<JourneyPhase["key"], string> = {
   lernen: "#6d4cff",
@@ -18,6 +19,7 @@ const RING_COLORS: Record<JourneyPhase["key"], string> = {
 };
 
 function PhaseCard({ phase, href }: { phase: JourneyPhase; href?: string }) {
+  const { t } = useLocale();
   const isReady = phase.unlocked && !!href;
 
   return (
@@ -35,7 +37,7 @@ function PhaseCard({ phase, href }: { phase: JourneyPhase; href?: string }) {
       <PhaseIllustration phaseKey={phase.key} />
 
       <div className="my-4 flex justify-center">
-        <ProgressRing value={phase.completion} size={72} stroke={6} color={RING_COLORS[phase.key]} label="Abgeschlossen" />
+        <ProgressRing value={phase.completion} size={72} stroke={6} color={RING_COLORS[phase.key]} label={t("journey.completed")} />
       </div>
 
       <div className="mb-4 space-y-2 text-xs text-text-muted">
@@ -74,7 +76,7 @@ function PhaseCard({ phase, href }: { phase: JourneyPhase; href?: string }) {
 
       {isReady ? (
         <span className="flex items-center justify-center gap-1.5 rounded-lg bg-success-light py-1.5 text-[11px] font-semibold text-success">
-          <CheckCircle2 size={12} /> Verfügbar
+          <CheckCircle2 size={12} /> {t("journey.available")}
         </span>
       ) : !phase.unlocked ? (
         <span className="flex items-center justify-center gap-1.5 rounded-lg bg-panel-alt py-1.5 text-center text-[11px] font-semibold text-text-faint">
@@ -82,7 +84,7 @@ function PhaseCard({ phase, href }: { phase: JourneyPhase; href?: string }) {
         </span>
       ) : (
         <span className="flex items-center justify-center gap-1.5 rounded-lg bg-panel-alt py-1.5 text-center text-[11px] font-semibold text-text-faint">
-          <Clock3 size={11} /> Inhalte werden vorbereitet
+          <Clock3 size={11} /> {t("journey.contentBeingPrepared")}
         </span>
       )}
     </div>
@@ -100,6 +102,7 @@ export default function JourneyPhases({
   certId: string;
   certTitle: string;
 }) {
+  const { t } = useLocale();
   const { user } = useUser();
   const completionSet = useLessonCompletionStore((s) => s.completions[certId]);
   const loadForCert = useLessonCompletionStore((s) => s.loadForCert);
@@ -126,9 +129,9 @@ export default function JourneyPhases({
         ...phase,
         completion,
         stats: [
-          { label: "Module", done: doneModules, total: track.modules.length },
-          { label: "Videos", done: doneVideos, total: videos.length },
-          { label: "Quiz", done: doneQuizzes, total: quizzes.length },
+          { label: t("journey.modules"), done: doneModules, total: track.modules.length },
+          { label: t("journey.videos"), done: doneVideos, total: videos.length },
+          { label: t("journey.quiz"), done: doneQuizzes, total: quizzes.length },
         ],
       };
     }
@@ -137,7 +140,7 @@ export default function JourneyPhases({
       return {
         ...phase,
         completion: certDetail.labCompleted ? 100 : 0,
-        stats: [{ label: "Lab-Status", done: certDetail.labCompleted ? 1 : 0, total: 1 }],
+        stats: [{ label: t("journey.labStatus"), done: certDetail.labCompleted ? 1 : 0, total: 1 }],
       };
     }
 
@@ -149,8 +152,8 @@ export default function JourneyPhases({
       ...phase,
       completion: answered === 0 ? 0 : Math.min(100, Math.round((answered / 20) * 100)),
       stats: [
-        { label: "Fragen beantwortet", done: answered, total: Math.max(answered, 1) },
-        { label: "Durchschnitt", done: accuracy, total: 100 },
+        { label: t("journey.questionsAnsweredJ"), done: answered, total: Math.max(answered, 1) },
+        { label: t("journey.average"), done: accuracy, total: 100 },
       ],
     };
   });

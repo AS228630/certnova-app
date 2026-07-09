@@ -11,6 +11,7 @@ import { useUser } from "@/components/UserContext";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
 import { getLearnTrack } from "@/lib/learnData";
+import { useLocale } from "@/components/LocaleProvider";
 
 const LEVEL_STYLES: Record<string, string> = {
   Beginner: "bg-success-light text-success",
@@ -19,6 +20,7 @@ const LEVEL_STYLES: Record<string, string> = {
 };
 
 export default function JourneyHeader({ company, journey }: { company: Company; journey: CertJourney }) {
+  const { t } = useLocale();
   const [showCalc, setShowCalc] = useState(false);
   const certId = journey.code.toLowerCase();
   const { user } = useUser();
@@ -41,11 +43,11 @@ export default function JourneyHeader({ company, journey }: { company: Company; 
   return (
     <div>
       <div className="mb-4 flex items-center gap-2 text-sm text-text-muted">
-        <Link href={`/certifications/${company.slug}`} className="text-text-muted hover:text-text" aria-label="Zurück">
+        <Link href={`/certifications/${company.slug}`} className="text-text-muted hover:text-text" aria-label={t("journey.back")}>
           <ChevronLeft size={18} />
         </Link>
         <Link href="/certifications" className="hover:text-primary">
-          Zertifizierungen
+          {t("nav.certifications")}
         </Link>
         <span>/</span>
         <Link href={`/certifications/${company.slug}`} className="hover:text-primary">
@@ -74,7 +76,7 @@ export default function JourneyHeader({ company, journey }: { company: Company; 
               <p className="mt-3 max-w-lg text-sm text-text-muted">{journey.longDescription}</p>
             </div>
           </div>
-          <button aria-label="Merken" className="self-start text-text-faint hover:text-primary">
+          <button aria-label={t("journey.save")} className="self-start text-text-faint hover:text-primary">
             <Bookmark size={18} />
           </button>
         </div>
@@ -82,9 +84,9 @@ export default function JourneyHeader({ company, journey }: { company: Company; 
         {/* Overall progress card */}
         <div className="relative rounded-2xl border border-border-soft bg-panel p-5">
           <div className="mb-2 flex items-center justify-between">
-            <p className="text-xs font-semibold text-text-muted">Gesamtfortschritt</p>
+            <p className="text-xs font-semibold text-text-muted">{t("journey.overallProgress")}</p>
             <button
-              aria-label="Wie wird der Gesamtfortschritt berechnet?"
+              aria-label={t("journey.howCalculated")}
               onClick={() => setShowCalc((v) => !v)}
               className="text-text-faint hover:text-primary"
             >
@@ -97,7 +99,7 @@ export default function JourneyHeader({ company, journey }: { company: Company; 
             <div>
               <p className="text-2xl font-extrabold text-text">{overallProgress}%</p>
               <p className="text-[11px] text-text-faint">
-                {themesDone} / {themesTotal} Themen abgeschlossen
+                {themesDone} / {themesTotal} {t("journey.themesCompleted")}
               </p>
             </div>
           </div>
@@ -106,21 +108,21 @@ export default function JourneyHeader({ company, journey }: { company: Company; 
             href="#phasen"
             className="mt-4 block rounded-lg bg-primary py-2 text-center text-sm font-bold text-white hover:bg-primary-dark"
           >
-            Weiterlernen
+            {t("journey.continueLearning")}
           </Link>
 
           <Link
             href={`/certifications/${company.slug}/${journey.code.toLowerCase()}/practice`}
             className="mt-2 block rounded-lg border border-primary py-2 text-center text-sm font-bold text-primary hover:bg-primary-light"
           >
-            Übungsfragen starten
+            {t("journey.startPracticeQ")}
           </Link>
 
           {showCalc && (
             <div className="absolute right-0 top-full z-20 mt-2 w-72 rounded-xl border border-border-soft bg-panel-alt p-4 shadow-xl sm:left-0 sm:right-auto">
-              <p className="mb-3 text-sm font-bold text-text">Wie wird der Gesamtfortschritt berechnet?</p>
+              <p className="mb-3 text-sm font-bold text-text">{t("journey.howCalculated")}</p>
               <p className="mb-3 text-xs text-text-muted">
-                Der Gesamtfortschritt basiert auf einem gewichteten Durchschnitt der drei Phasen.
+                {t("journey.calcExplain")}
               </p>
               <div className="space-y-1.5 text-xs text-text-muted">
                 {journey.phases.map((p) => (
@@ -135,7 +137,7 @@ export default function JourneyHeader({ company, journey }: { company: Company; 
                 ))}
               </div>
               <div className="mt-3 flex items-center justify-between border-t border-border-soft pt-2 text-xs font-bold text-text">
-                <span>Gesamtfortschritt</span>
+                <span>{t("journey.overallProgress")}</span>
                 <span>{overallProgress}%</span>
               </div>
             </div>

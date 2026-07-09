@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { GraduationCap, FlaskConical, ClipboardList, CheckCircle2, ArrowRight } from "lucide-react";
 import type { ActivityItem } from "@/lib/journeyData";
+import { useLocale } from "@/components/LocaleProvider";
 
 const ICONS = {
   book: GraduationCap,
@@ -10,12 +13,13 @@ const ICONS = {
 };
 
 export default function JourneyActivity({ items }: { items: ActivityItem[] }) {
+  const { t } = useLocale();
   return (
     <div className="rounded-2xl border border-border-soft bg-panel p-5">
       <div className="mb-4 flex items-center justify-between">
-        <p className="font-bold text-text">Letzte Aktivitäten</p>
+        <p className="font-bold text-text">{t("journey.recentActivity")}</p>
         <Link href="#" className="flex items-center gap-1 text-xs font-semibold text-primary hover:underline">
-          Alle anzeigen <ArrowRight size={12} />
+          {t("journey.viewAllJ")} <ArrowRight size={12} />
         </Link>
       </div>
       <div className="space-y-4">

@@ -1,6 +1,10 @@
+"use client";
+
 import type { ProgressPoint } from "@/lib/journeyData";
+import { useLocale } from "@/components/LocaleProvider";
 
 export default function ProgressChart({ points }: { points: ProgressPoint[] }) {
+  const { t } = useLocale();
   const w = 560;
   const h = 200;
   const padL = 36;
@@ -22,7 +26,7 @@ export default function ProgressChart({ points }: { points: ProgressPoint[] }) {
 
   return (
     <div className="rounded-2xl border border-border-soft bg-panel p-5">
-      <p className="mb-4 font-bold text-text">Fortschrittsverlauf</p>
+      <p className="mb-4 font-bold text-text">{t("journey.progressHistory")}</p>
       <svg viewBox={`0 0 ${w} ${h + 10}`} className="w-full">
         <defs>
           <linearGradient id="progressFill" x1="0" y1="0" x2="0" y2="1">
