@@ -542,6 +542,16 @@ const tr: Dictionary = {
     genMinutes: "dk",
     genQuestionsWord: "soru",
   },
+  labData: {
+    "lab_resource-group-basics_title": "Lab: İlk Kaynak Grubunu Oluştur",
+    "lab_resource-group-basics_desc": "İlk Azure kaynak grubunu oluştur — portal üzerinden veya doğrudan Cloud Shell'de Azure CLI ile. Bu simülasyon sonucunu gerçek zamanlı olarak kontrol eder.",
+    "lab_az104-vm-creation_title": "Lab: İlk Sanal Makineyi Oluştur",
+    "lab_az104-vm-creation_desc": "Bir kaynak grubu ve içinde bir sanal makine oluştur — portal üzerinden veya doğrudan Cloud Shell'de Azure CLI ile. Bu simülasyon sonucunu gerçek zamanlı olarak kontrol eder.",
+    "lab_az104-vnet-creation_title": "Lab: Sanal Ağ Oluştur",
+    "lab_az104-vnet-creation_desc": "Bir kaynak grubu ve içinde bir alt ağa sahip sanal ağ oluştur — portal üzerinden veya doğrudan Cloud Shell'de Azure CLI ile. Bu simülasyon sonucunu gerçek zamanlı olarak kontrol eder.",
+    "lab_b2c-identitaeten_title": "Lab: Azure Kimliklerini Yönetme (B2C)",
+    "lab_b2c-identitaeten_desc": "Harici kullanıcılar için Azure AD B2C'yi yapılandır ve yönet (B2C = İşletmeden Müşteriye).",
+  },
 };
 
 export default tr;

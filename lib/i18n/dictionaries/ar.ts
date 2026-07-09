@@ -542,6 +542,16 @@ const ar: Dictionary = {
     genMinutes: "دقيقة",
     genQuestionsWord: "أسئلة",
   },
+  labData: {
+    "lab_resource-group-basics_title": "مختبر: إنشاء أول مجموعة موارد",
+    "lab_resource-group-basics_desc": "أنشئ أول مجموعة موارد Azure لديك — إما عبر البوابة أو مباشرة عبر Azure CLI في Cloud Shell. يتحقق هذا المحاكي من نتيجتك في الوقت الفعلي.",
+    "lab_az104-vm-creation_title": "مختبر: إنشاء أول جهاز ظاهري",
+    "lab_az104-vm-creation_desc": "أنشئ مجموعة موارد وجهازاً ظاهرياً بداخلها — إما عبر البوابة أو مباشرة عبر Azure CLI في Cloud Shell. يتحقق هذا المحاكي من نتيجتك في الوقت الفعلي.",
+    "lab_az104-vnet-creation_title": "مختبر: إنشاء شبكة ظاهرية",
+    "lab_az104-vnet-creation_desc": "أنشئ مجموعة موارد وشبكة ظاهرية بها شبكة فرعية بداخلها — إما عبر البوابة أو مباشرة عبر Azure CLI في Cloud Shell. يتحقق هذا المحاكي من نتيجتك في الوقت الفعلي.",
+    "lab_b2c-identitaeten_title": "مختبر: إدارة هويات Azure (B2C)",
+    "lab_b2c-identitaeten_desc": "قم بتكوين وإدارة Azure AD B2C للمستخدمين الخارجيين (B2C = من الشركة إلى العميل).",
+  },
 };
 
 export default ar;

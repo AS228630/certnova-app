@@ -542,6 +542,16 @@ const fr: Dictionary = {
     genMinutes: "min",
     genQuestionsWord: "questions",
   },
+  labData: {
+    "lab_resource-group-basics_title": "Lab : Créer ton premier groupe de ressources",
+    "lab_resource-group-basics_desc": "Crée ton premier groupe de ressources Azure — via le portail ou directement via Azure CLI dans Cloud Shell. Cette simulation vérifie ton résultat en temps réel.",
+    "lab_az104-vm-creation_title": "Lab : Créer ta première machine virtuelle",
+    "lab_az104-vm-creation_desc": "Crée un groupe de ressources et une machine virtuelle à l'intérieur — via le portail ou directement via Azure CLI dans Cloud Shell. Cette simulation vérifie ton résultat en temps réel.",
+    "lab_az104-vnet-creation_title": "Lab : Créer un réseau virtuel",
+    "lab_az104-vnet-creation_desc": "Crée un groupe de ressources et un réseau virtuel avec un sous-réseau à l'intérieur — via le portail ou directement via Azure CLI dans Cloud Shell. Cette simulation vérifie ton résultat en temps réel.",
+    "lab_b2c-identitaeten_title": "Lab : Gestion des identités Azure (B2C)",
+    "lab_b2c-identitaeten_desc": "Configure et gère Azure AD B2C pour les utilisateurs externes (B2C = Business to Customer).",
+  },
 };
 
 export default fr;

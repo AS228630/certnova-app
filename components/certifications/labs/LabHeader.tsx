@@ -23,6 +23,17 @@ const TAG_LABEL_KEY: Record<string, string> = {
   "Portal + CLI": "labs.tagPortalCli",
 };
 
+// Hand-authored labs (title/description only for now — the deeper
+// instructions/checklist/task content is still German). Falls back to the
+// German original for any lab.id not in this map (generated/other-provider
+// labs), which is the correct behavior since there's nothing to translate.
+const LAB_TEXT_KEY: Record<string, { title: string; desc: string }> = {
+  "resource-group-basics": { title: "labData.lab_resource-group-basics_title", desc: "labData.lab_resource-group-basics_desc" },
+  "az104-vm-creation": { title: "labData.lab_az104-vm-creation_title", desc: "labData.lab_az104-vm-creation_desc" },
+  "az104-vnet-creation": { title: "labData.lab_az104-vnet-creation_title", desc: "labData.lab_az104-vnet-creation_desc" },
+  "b2c-identitaeten": { title: "labData.lab_b2c-identitaeten_title", desc: "labData.lab_b2c-identitaeten_desc" },
+};
+
 const LEVEL_STYLES: Record<string, string> = {
   Beginner: "bg-success-light text-success",
   Intermediate: "bg-warning/10 text-warning",
@@ -62,6 +73,9 @@ export default function LabHeader({
   compact?: boolean;
 }) {
   const { t } = useLocale();
+  const labText = LAB_TEXT_KEY[lab.id];
+  const resolvedTitle = labText ? t(labText.title) : lab.title;
+  const resolvedDesc = labText ? t(labText.desc) : lab.description;
   if (compact) {
     return (
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border-soft bg-panel px-4 py-2.5">
@@ -73,7 +87,7 @@ export default function LabHeader({
           >
             <ChevronLeft size={16} />
           </Link>
-          <span className="truncate font-bold text-text">{lab.title}</span>
+          <span className="truncate font-bold text-text">{resolvedTitle}</span>
           <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-bold ${LEVEL_STYLES[lab.level]}`}>
             {t(LEVEL_LABEL_KEY[lab.level] ?? "")}
           </span>
@@ -111,20 +125,20 @@ export default function LabHeader({
           {certCode}
         </Link>
         <span>/</span>
-        <span className="text-text">{lab.title}</span>
+        <span className="text-text">{resolvedTitle}</span>
       </div>
 
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="text-xl font-extrabold text-text sm:text-2xl">{lab.title}</h1>
+            <h1 className="text-xl font-extrabold text-text sm:text-2xl">{resolvedTitle}</h1>
             <span className={`rounded-full px-2.5 py-1 text-xs font-bold ${LEVEL_STYLES[lab.level]}`}>{t(LEVEL_LABEL_KEY[lab.level] ?? "")}</span>
             <span className="flex items-center gap-1 text-xs text-text-muted">
               <Clock3 size={13} />
               {lab.durationLabel}
             </span>
           </div>
-          <p className="mt-1.5 max-w-2xl text-sm text-text-muted">{lab.description}</p>
+          <p className="mt-1.5 max-w-2xl text-sm text-text-muted">{resolvedDesc}</p>
 
           <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-text-faint">
             {lab.tags.map((tag) => {

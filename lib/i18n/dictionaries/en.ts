@@ -542,6 +542,16 @@ const en: Dictionary = {
     genMinutes: "min",
     genQuestionsWord: "Questions",
   },
+  labData: {
+    "lab_resource-group-basics_title": "Lab: Create Your First Resource Group",
+    "lab_resource-group-basics_desc": "Create your first Azure resource group — either through the portal or directly via the Azure CLI in Cloud Shell. This simulation checks your result in real time.",
+    "lab_az104-vm-creation_title": "Lab: Create Your First Virtual Machine",
+    "lab_az104-vm-creation_desc": "Create a resource group and a virtual machine inside it — either through the portal or directly via the Azure CLI in Cloud Shell. This simulation checks your result in real time.",
+    "lab_az104-vnet-creation_title": "Lab: Create a Virtual Network",
+    "lab_az104-vnet-creation_desc": "Create a resource group and a virtual network with a subnet inside it — either through the portal or directly via the Azure CLI in Cloud Shell. This simulation checks your result in real time.",
+    "lab_b2c-identitaeten_title": "Lab: Managing Azure Identities (B2C)",
+    "lab_b2c-identitaeten_desc": "Configure and manage Azure AD B2C for external users (B2C = Business to Customer).",
+  },
 };
 
 export default en;

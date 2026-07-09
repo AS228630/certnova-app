@@ -542,6 +542,16 @@ const fa: Dictionary = {
     genMinutes: "دقیقه",
     genQuestionsWord: "سوال",
   },
+  labData: {
+    "lab_resource-group-basics_title": "لب: اولین گروه منبع رو بساز",
+    "lab_resource-group-basics_desc": "اولین گروه منبع Azure‌ات رو بساز — یا از طریق پورتال یا مستقیم با Azure CLI تو Cloud Shell. این شبیه‌سازی نتیجه‌ات رو بلادرنگ بررسی می‌کنه.",
+    "lab_az104-vm-creation_title": "لب: اولین ماشین مجازی رو بساز",
+    "lab_az104-vm-creation_desc": "یه گروه منبع و داخلش یه ماشین مجازی بساز — یا از طریق پورتال یا مستقیم با Azure CLI تو Cloud Shell. این شبیه‌سازی نتیجه‌ات رو بلادرنگ بررسی می‌کنه.",
+    "lab_az104-vnet-creation_title": "لب: یه شبکه‌ی مجازی بساز",
+    "lab_az104-vnet-creation_desc": "یه گروه منبع و داخلش یه شبکه‌ی مجازی با زیرشبکه بساز — یا از طریق پورتال یا مستقیم با Azure CLI تو Cloud Shell. این شبیه‌سازی نتیجه‌ات رو بلادرنگ بررسی می‌کنه.",
+    "lab_b2c-identitaeten_title": "لب: مدیریت هویت‌های Azure (B2C)",
+    "lab_b2c-identitaeten_desc": "Azure AD B2C رو برای کاربران خارجی پیکربندی و مدیریت کن (B2C = کسب‌وکار به مشتری).",
+  },
 };
 
 export default fa;

@@ -542,6 +542,16 @@ const uk: Dictionary = {
     genMinutes: "хв",
     genQuestionsWord: "питань",
   },
+  labData: {
+    "lab_resource-group-basics_title": "Лабораторна: Створи свою першу групу ресурсів",
+    "lab_resource-group-basics_desc": "Створи свою першу групу ресурсів Azure — через портал або безпосередньо через Azure CLI в Cloud Shell. Ця симуляція перевіряє твій результат у реальному часі.",
+    "lab_az104-vm-creation_title": "Лабораторна: Створи свою першу віртуальну машину",
+    "lab_az104-vm-creation_desc": "Створи групу ресурсів і віртуальну машину в ній — через портал або безпосередньо через Azure CLI в Cloud Shell. Ця симуляція перевіряє твій результат у реальному часі.",
+    "lab_az104-vnet-creation_title": "Лабораторна: Створи віртуальну мережу",
+    "lab_az104-vnet-creation_desc": "Створи групу ресурсів і віртуальну мережу з підмережею в ній — через портал або безпосередньо через Azure CLI в Cloud Shell. Ця симуляція перевіряє твій результат у реальному часі.",
+    "lab_b2c-identitaeten_title": "Лабораторна: Керування ідентичностями Azure (B2C)",
+    "lab_b2c-identitaeten_desc": "Налаштуй і керуй Azure AD B2C для зовнішніх користувачів (B2C = бізнес для клієнта).",
+  },
 };
 
 export default uk;

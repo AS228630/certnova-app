@@ -543,6 +543,16 @@ const de = {
     genMinutes: "Min",
     genQuestionsWord: "Fragen",
   },
+  labData: {
+    "lab_resource-group-basics_title": "Lab: Erste Ressourcengruppe erstellen",
+    "lab_resource-group-basics_desc": "Erstelle deine erste Azure-Ressourcengruppe — entweder über das Portal oder direkt per Azure CLI in der Cloud Shell. Diese Simulation prüft dein Ergebnis in Echtzeit.",
+    "lab_az104-vm-creation_title": "Lab: Erste virtuelle Maschine erstellen",
+    "lab_az104-vm-creation_desc": "Erstelle eine Ressourcengruppe und darin eine virtuelle Maschine — über das Portal oder direkt per Azure CLI in der Cloud Shell. Diese Simulation prüft dein Ergebnis in Echtzeit.",
+    "lab_az104-vnet-creation_title": "Lab: Virtuelles Netzwerk erstellen",
+    "lab_az104-vnet-creation_desc": "Erstelle eine Ressourcengruppe und darin ein virtuelles Netzwerk mit Subnetz — über das Portal oder direkt per Azure CLI in der Cloud Shell. Diese Simulation prüft dein Ergebnis in Echtzeit.",
+    "lab_b2c-identitaeten_title": "Lab: Verwalten von Azure-Identitäten (B2C)",
+    "lab_b2c-identitaeten_desc": "Konfigurieren und verwalten Sie Azure AD B2C für externe Benutzer (B2C = Business to Customer).",
+  },
 };
 
 export default de;
