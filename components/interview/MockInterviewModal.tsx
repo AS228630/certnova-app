@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { X, Send, Loader2, Square } from "lucide-react";
 import type { CareerPath } from "@/lib/careerPathsData";
 import type { InterviewTopic } from "@/lib/interviewData";
-import { askAiCoach, AiCoachRequestError, type SimpleChatMessage } from "@/lib/aiCoachClient";
+import { askAiCoach, AiCoachRequestError, languageInstruction, type SimpleChatMessage } from "@/lib/aiCoachClient";
 import { useInterviewStore } from "@/lib/store/interviewStore";
 import { useLocale } from "@/components/LocaleProvider";
 import AiCoachMessageContent from "@/components/AiCoachMessageContent";
@@ -22,7 +22,7 @@ export default function MockInterviewModal({
   topic?: InterviewTopic;
   onClose: () => void;
 }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const startSession = useInterviewStore((s) => s.startSession);
   const completeSession = useInterviewStore((s) => s.completeSession);
 
@@ -41,9 +41,12 @@ export default function MockInterviewModal({
       if (!cancelled) setSessionId(id);
     });
 
-    const contextPrompt = topic
-      ? `Führe ein Mock-Interview für die Position "${path.title}" durch, mit Fokus auf das Thema "${topic.title}". Beginne jetzt mit der ersten Frage.`
-      : `Führe ein vollständiges Mock-Interview für die Position "${path.title}" durch (Mix aus technischen und Verhaltensfragen). Beginne jetzt mit der ersten Frage.`;
+    const topicTitle = topic ? t(topic.titleKey) : undefined;
+    const contextPrompt =
+      languageInstruction(locale) +
+      (topic
+        ? `Führe ein Mock-Interview für die Position "${path.title}" durch, mit Fokus auf das Thema "${topicTitle}". Beginne jetzt mit der ersten Frage.`
+        : `Führe ein vollständiges Mock-Interview für die Position "${path.title}" durch (Mix aus technischen und Verhaltensfragen). Beginne jetzt mit der ersten Frage.`);
 
     askAiCoach([{ role: "user", content: contextPrompt }], { mode: "interview" })
       .then((reply) => {
@@ -68,7 +71,7 @@ export default function MockInterviewModal({
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [messages, sending]);
 
-  async function send(text?: string) {
+  async function send(text?: string, isEndingInterview = false) {
     const content = (text ?? input).trim();
     if (!content || sending || ended) return;
     setInput("");
@@ -82,7 +85,7 @@ export default function MockInterviewModal({
     try {
       const reply = await askAiCoach(history, { mode: "interview" });
       setMessages((m) => [...m, { role: "assistant", text: reply }]);
-      if (content.toLowerCase().includes("interview beenden")) {
+      if (isEndingInterview) {
         finishSession();
       }
     } catch (err) {
@@ -109,7 +112,7 @@ export default function MockInterviewModal({
         <div className="flex items-center justify-between border-b border-border-soft p-4">
           <div>
             <p className="font-bold text-text">{t("interview.mockInterviewTitle")}</p>
-            <p className="text-xs text-text-faint">{path.title}{topic ? ` · ${topic.title}` : ""}</p>
+            <p className="text-xs text-text-faint">{path.title}{topic ? ` · ${t(topic.titleKey)}` : ""}</p>
           </div>
           <button
             onClick={() => {
@@ -177,7 +180,7 @@ export default function MockInterviewModal({
               </button>
             </div>
             <button
-              onClick={() => send("Interview beenden")}
+              onClick={() => send(`${t("interview.endInterview")} [END_INTERVIEW]`, true)}
               disabled={sending}
               className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-text-faint hover:text-danger disabled:opacity-40"
             >

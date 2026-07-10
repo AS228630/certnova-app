@@ -29,13 +29,13 @@ type AiCoachState = {
   load: (userId: string) => Promise<void>;
   startNewConversation: () => void;
   selectConversation: (conversationId: string) => Promise<void>;
-  sendMessage: (content: string) => Promise<void>;
+  sendMessage: (content: string, newChatFallbackTitle: string) => Promise<void>;
   reset: () => void;
 };
 
-async function deriveTitle(content: string): Promise<string> {
+function deriveTitle(content: string, fallback: string): string {
   const trimmed = content.trim().replace(/\s+/g, " ");
-  return trimmed.length > 48 ? trimmed.slice(0, 48) + "…" : trimmed || "Neuer Chat";
+  return trimmed.length > 48 ? trimmed.slice(0, 48) + "…" : trimmed || fallback;
 }
 
 export const useAiCoachStore = create<AiCoachState>((set, get) => ({
@@ -96,7 +96,7 @@ export const useAiCoachStore = create<AiCoachState>((set, get) => ({
     });
   },
 
-  sendMessage: async (content: string) => {
+  sendMessage: async (content: string, newChatFallbackTitle: string) => {
     const trimmedContent = content.trim();
     if (!trimmedContent) return;
     const userId = get().userId;
@@ -109,7 +109,7 @@ export const useAiCoachStore = create<AiCoachState>((set, get) => ({
     // Create the conversation lazily, on first message, so we never leave
     // empty "Neuer Chat" rows behind for chats the user never actually started.
     if (!conversationId) {
-      const title = await deriveTitle(trimmedContent);
+      const title = deriveTitle(trimmedContent, newChatFallbackTitle);
       const { data, error } = await supabase
         .from("ai_conversations")
         .insert({ user_id: userId, title })

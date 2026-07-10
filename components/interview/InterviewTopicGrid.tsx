@@ -46,7 +46,7 @@ export default function InterviewTopicGrid({
           const pct = topic.questionCount === 0 ? 0 : Math.min(100, Math.round((answered / topic.questionCount) * 100));
           return (
             <div key={topic.id} className="rounded-xl border border-border-soft bg-panel p-4">
-              <p className="mb-1 text-sm font-bold text-text">{topic.title}</p>
+              <p className="mb-1 text-sm font-bold text-text">{t(topic.titleKey)}</p>
               <p className="mb-3 text-xs text-text-faint">
                 {topic.questionCount.toLocaleString("de-DE")} {t("interview.questionsSuffix")}
               </p>

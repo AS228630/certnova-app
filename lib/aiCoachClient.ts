@@ -1,5 +1,28 @@
 export type SimpleChatMessage = { role: "user" | "assistant"; content: string };
 
+/** Human-readable language names (with English gloss) for building an
+ * explicit "reply in this language" instruction. Used whenever the AI's
+ * opening message can't infer the language from what the user typed
+ * (e.g. an auto-generated greeting or interview opener) — otherwise the
+ * model has no signal and defaults to German regardless of the site's
+ * selected UI language. */
+export const AI_LANGUAGE_NAMES: Record<string, string> = {
+  de: "German (Deutsch)",
+  en: "English",
+  es: "Spanish (Español)",
+  fr: "French (Français)",
+  ru: "Russian (Русский)",
+  tr: "Turkish (Türkçe)",
+  uk: "Ukrainian (Українська)",
+  ar: "Arabic (العربية)",
+  fa: "Persian/Farsi (فارسی)",
+};
+
+export function languageInstruction(locale: string): string {
+  const name = AI_LANGUAGE_NAMES[locale] ?? AI_LANGUAGE_NAMES.de;
+  return `[Anweisung: Antworte in dieser Sprache: ${name}.]\n\n`;
+}
+
 export class AiCoachRequestError extends Error {
   isRateLimit: boolean;
   constructor(message: string, isRateLimit: boolean) {

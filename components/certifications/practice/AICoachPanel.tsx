@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Bot, X, Send, Loader2 } from "lucide-react";
 import type { PracticeQuestion } from "@/lib/az900Practice";
 import { useLocale } from "@/components/LocaleProvider";
-import { askAiCoach, AiCoachRequestError, type SimpleChatMessage } from "@/lib/aiCoachClient";
+import { askAiCoach, AiCoachRequestError, languageInstruction, type SimpleChatMessage } from "@/lib/aiCoachClient";
 import AiCoachMessageContent from "@/components/AiCoachMessageContent";
 
 type ChatMessage = { role: "user" | "assistant"; text: string };
@@ -28,7 +28,7 @@ export default function AICoachPanel({
   isOpen: boolean;
   onClose: () => void;
 }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const [messages, setMessages] = useState<ChatMessage[]>([
     { role: "assistant", text: t("practice.aiCoachGreeting") },
   ]);
@@ -53,7 +53,7 @@ export default function AICoachPanel({
     const history: SimpleChatMessage[] = [
       {
         role: "user",
-        content: `Kontext zur aktuellen Übungsfrage (nutze dies, um präzise zu antworten, aber wiederhole es nicht wörtlich):\n${questionContext(question)}`,
+        content: `${languageInstruction(locale)}Kontext zur aktuellen Übungsfrage (nutze dies, um präzise zu antworten, aber wiederhole es nicht wörtlich):\n${questionContext(question)}`,
       },
       { role: "assistant", content: "Verstanden, ich helfe dir bei dieser Frage." },
       ...nextMessages.map((m) => ({ role: m.role, content: m.text }) as SimpleChatMessage),

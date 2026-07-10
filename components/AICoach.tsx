@@ -7,13 +7,13 @@ import { useUser } from "@/components/UserContext";
 import { getFirstName } from "@/lib/supabase/useUser";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useLocale } from "@/components/LocaleProvider";
-import { askAiCoach } from "@/lib/aiCoachClient";
+import { askAiCoach, languageInstruction } from "@/lib/aiCoachClient";
 
 export default function AICoach() {
   const { user } = useUser();
   const firstName = getFirstName(user);
   const progress = useUserProgressStore((s) => s.progress);
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const answered = progress?.questions_answered ?? 0;
   const correct = progress?.questions_correct ?? 0;
   const accuracy = answered === 0 ? 0 : Math.round((correct / answered) * 100);
@@ -28,9 +28,10 @@ export default function AICoach() {
     let cancelled = false;
 
     const prompt =
-      answered === 0
+      languageInstruction(locale) +
+      (answered === 0
         ? `Der Nutzer heißt ${firstName} und hat noch keine Übungsfragen beantwortet. Schreibe eine kurze (max. 2 Sätze), motivierende Begrüßung, die ihn einlädt, mit dem Üben zu starten.`
-        : `Der Nutzer heißt ${firstName} und hat bisher ${answered} Übungsfragen beantwortet, davon ${correct} richtig (${accuracy}% Trefferquote). Schreibe eine kurze (max. 2 Sätze), persönliche Rückmeldung zu diesem Stand — ermutigend, ohne generisch zu klingen.`;
+        : `Der Nutzer heißt ${firstName} und hat bisher ${answered} Übungsfragen beantwortet, davon ${correct} richtig (${accuracy}% Trefferquote). Schreibe eine kurze (max. 2 Sätze), persönliche Rückmeldung zu diesem Stand — ermutigend, ohne generisch zu klingen.`);
 
     askAiCoach([{ role: "user", content: prompt }])
       .then((reply) => {
@@ -53,7 +54,7 @@ export default function AICoach() {
       cancelled = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [answered, correct, accuracy, firstName]);
+  }, [answered, correct, accuracy, firstName, locale]);
 
   return (
     <div className="relative overflow-hidden rounded-2xl border border-border-soft bg-panel p-5">

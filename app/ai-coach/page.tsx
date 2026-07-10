@@ -69,7 +69,7 @@ function AiCoachBody() {
   function handleSend(text?: string) {
     const content = text ?? input;
     if (!content.trim() || sending) return;
-    sendMessage(content);
+    sendMessage(content, t("aiCoach.newChat"));
     setInput("");
   }
 

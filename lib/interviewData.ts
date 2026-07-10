@@ -10,7 +10,7 @@ export type InterviewCategory = "technical" | "hr" | "practical" | "systems";
 
 export type InterviewTopic = {
   id: string;
-  title: string;
+  titleKey: string;
   category: InterviewCategory;
   questionCount: number;
 };
@@ -24,129 +24,129 @@ export const interviewJobData: InterviewJobData[] = [
   {
     careerPathSlug: "it-support-specialist",
     topics: [
-      { id: "windows-support", title: "Windows Support", category: "technical", questionCount: 120 },
-      { id: "active-directory", title: "Active Directory", category: "technical", questionCount: 110 },
-      { id: "microsoft-365", title: "Microsoft 365", category: "technical", questionCount: 140 },
-      { id: "netzwerk-grundlagen", title: "Netzwerk Grundlagen", category: "technical", questionCount: 130 },
-      { id: "troubleshooting", title: "Troubleshooting", category: "practical", questionCount: 150 },
-      { id: "ticketing-systeme", title: "Ticketing Systeme", category: "practical", questionCount: 90 },
-      { id: "hardware-support", title: "Hardware Support", category: "systems", questionCount: 100 },
-      { id: "drucker-scanner", title: "Drucker & Scanner", category: "systems", questionCount: 80 },
+      { id: "windows-support", titleKey: "interviewTopics.windows-support", category: "technical", questionCount: 120 },
+      { id: "active-directory", titleKey: "interviewTopics.active-directory", category: "technical", questionCount: 110 },
+      { id: "microsoft-365", titleKey: "interviewTopics.microsoft-365", category: "technical", questionCount: 140 },
+      { id: "netzwerk-grundlagen", titleKey: "interviewTopics.netzwerk-grundlagen", category: "technical", questionCount: 130 },
+      { id: "troubleshooting", titleKey: "interviewTopics.troubleshooting", category: "practical", questionCount: 150 },
+      { id: "ticketing-systeme", titleKey: "interviewTopics.ticketing-systeme", category: "practical", questionCount: 90 },
+      { id: "hardware-support", titleKey: "interviewTopics.hardware-support", category: "systems", questionCount: 100 },
+      { id: "drucker-scanner", titleKey: "interviewTopics.drucker-scanner", category: "systems", questionCount: 80 },
     ],
   },
   {
     careerPathSlug: "help-desk-technician",
     topics: [
-      { id: "incident-management", title: "Incident Management", category: "technical", questionCount: 110 },
-      { id: "remote-support-tools", title: "Remote-Support-Tools", category: "technical", questionCount: 90 },
-      { id: "sla-management", title: "SLA-Management", category: "practical", questionCount: 70 },
-      { id: "eskalationsprozesse", title: "Eskalationsprozesse", category: "practical", questionCount: 80 },
+      { id: "incident-management", titleKey: "interviewTopics.incident-management", category: "technical", questionCount: 110 },
+      { id: "remote-support-tools", titleKey: "interviewTopics.remote-support-tools", category: "technical", questionCount: 90 },
+      { id: "sla-management", titleKey: "interviewTopics.sla-management", category: "practical", questionCount: 70 },
+      { id: "eskalationsprozesse", titleKey: "interviewTopics.eskalationsprozesse", category: "practical", questionCount: 80 },
     ],
   },
   {
     careerPathSlug: "desktop-support-engineer",
     topics: [
-      { id: "hardware-diagnose", title: "Hardware-Diagnose", category: "technical", questionCount: 100 },
-      { id: "os-deployment", title: "Betriebssystem-Deployment", category: "technical", questionCount: 90 },
-      { id: "endpoint-management", title: "Endpoint Management", category: "technical", questionCount: 100 },
+      { id: "hardware-diagnose", titleKey: "interviewTopics.hardware-diagnose", category: "technical", questionCount: 100 },
+      { id: "os-deployment", titleKey: "interviewTopics.os-deployment", category: "technical", questionCount: 90 },
+      { id: "endpoint-management", titleKey: "interviewTopics.endpoint-management", category: "technical", questionCount: 100 },
     ],
   },
   {
     careerPathSlug: "system-administrator",
     topics: [
-      { id: "windows-server", title: "Windows Server Administration", category: "technical", questionCount: 150 },
-      { id: "group-policy", title: "Active Directory & Group Policy", category: "technical", questionCount: 130 },
-      { id: "virtualisierung", title: "Virtualisierung", category: "technical", questionCount: 110 },
-      { id: "backup-recovery", title: "Backup & Disaster Recovery", category: "practical", questionCount: 90 },
-      { id: "powershell", title: "PowerShell-Scripting", category: "technical", questionCount: 100 },
+      { id: "windows-server", titleKey: "interviewTopics.windows-server", category: "technical", questionCount: 150 },
+      { id: "group-policy", titleKey: "interviewTopics.group-policy", category: "technical", questionCount: 130 },
+      { id: "virtualisierung", titleKey: "interviewTopics.virtualisierung", category: "technical", questionCount: 110 },
+      { id: "backup-recovery", titleKey: "interviewTopics.backup-recovery", category: "practical", questionCount: 90 },
+      { id: "powershell", titleKey: "interviewTopics.powershell", category: "technical", questionCount: 100 },
     ],
   },
   {
     careerPathSlug: "azure-administrator",
     topics: [
-      { id: "azure-identitaeten", title: "Azure-Identitäten & Governance", category: "technical", questionCount: 130 },
-      { id: "azure-storage-compute", title: "Azure Storage & Compute", category: "technical", questionCount: 140 },
-      { id: "virtuelle-netzwerke", title: "Virtuelle Netzwerke", category: "technical", questionCount: 120 },
-      { id: "azure-monitor", title: "Azure Monitor", category: "practical", questionCount: 80 },
-      { id: "kostenmanagement", title: "Kostenmanagement", category: "practical", questionCount: 60 },
+      { id: "azure-identitaeten", titleKey: "interviewTopics.azure-identitaeten", category: "technical", questionCount: 130 },
+      { id: "azure-storage-compute", titleKey: "interviewTopics.azure-storage-compute", category: "technical", questionCount: 140 },
+      { id: "virtuelle-netzwerke", titleKey: "interviewTopics.virtuelle-netzwerke", category: "technical", questionCount: 120 },
+      { id: "azure-monitor", titleKey: "interviewTopics.azure-monitor", category: "practical", questionCount: 80 },
+      { id: "kostenmanagement", titleKey: "interviewTopics.kostenmanagement", category: "practical", questionCount: 60 },
     ],
   },
   {
     careerPathSlug: "cloud-engineer",
     topics: [
-      { id: "multi-cloud-architektur", title: "Multi-Cloud-Architektur", category: "technical", questionCount: 140 },
-      { id: "infrastructure-as-code", title: "Infrastructure as Code", category: "technical", questionCount: 120 },
-      { id: "container-kubernetes", title: "Container & Kubernetes", category: "technical", questionCount: 130 },
-      { id: "cicd-pipelines", title: "CI/CD-Pipelines", category: "technical", questionCount: 100 },
+      { id: "multi-cloud-architektur", titleKey: "interviewTopics.multi-cloud-architektur", category: "technical", questionCount: 140 },
+      { id: "infrastructure-as-code", titleKey: "interviewTopics.infrastructure-as-code", category: "technical", questionCount: 120 },
+      { id: "container-kubernetes", titleKey: "interviewTopics.container-kubernetes", category: "technical", questionCount: 130 },
+      { id: "cicd-pipelines", titleKey: "interviewTopics.cicd-pipelines", category: "technical", questionCount: 100 },
     ],
   },
   {
     careerPathSlug: "network-administrator",
     topics: [
-      { id: "routing-switching", title: "Routing & Switching", category: "technical", questionCount: 140 },
-      { id: "firewall-konfiguration", title: "Firewall-Konfiguration", category: "technical", questionCount: 110 },
-      { id: "vpn-netzwerksicherheit", title: "VPN & Netzwerksicherheit", category: "technical", questionCount: 100 },
-      { id: "netzwerk-monitoring", title: "Netzwerk-Monitoring", category: "practical", questionCount: 70 },
+      { id: "routing-switching", titleKey: "interviewTopics.routing-switching", category: "technical", questionCount: 140 },
+      { id: "firewall-konfiguration", titleKey: "interviewTopics.firewall-konfiguration", category: "technical", questionCount: 110 },
+      { id: "vpn-netzwerksicherheit", titleKey: "interviewTopics.vpn-netzwerksicherheit", category: "technical", questionCount: 100 },
+      { id: "netzwerk-monitoring", titleKey: "interviewTopics.netzwerk-monitoring", category: "practical", questionCount: 70 },
     ],
   },
   {
     careerPathSlug: "cyber-security-analyst",
     topics: [
-      { id: "threat-detection", title: "Threat Detection & Response", category: "technical", questionCount: 130 },
-      { id: "siem-tools", title: "SIEM-Tools", category: "technical", questionCount: 100 },
-      { id: "vulnerability-management", title: "Vulnerability-Management", category: "technical", questionCount: 110 },
-      { id: "incident-response", title: "Incident-Response", category: "practical", questionCount: 90 },
+      { id: "threat-detection", titleKey: "interviewTopics.threat-detection", category: "technical", questionCount: 130 },
+      { id: "siem-tools", titleKey: "interviewTopics.siem-tools", category: "technical", questionCount: 100 },
+      { id: "vulnerability-management", titleKey: "interviewTopics.vulnerability-management", category: "technical", questionCount: 110 },
+      { id: "incident-response", titleKey: "interviewTopics.incident-response", category: "practical", questionCount: 90 },
     ],
   },
   {
     careerPathSlug: "devops-engineer",
     topics: [
-      { id: "cicd-pipelines-devops", title: "CI/CD-Pipelines", category: "technical", questionCount: 130 },
-      { id: "docker-kubernetes", title: "Docker & Kubernetes", category: "technical", questionCount: 140 },
-      { id: "iac-devops", title: "Infrastructure as Code", category: "technical", questionCount: 110 },
-      { id: "monitoring-logging", title: "Monitoring & Logging", category: "practical", questionCount: 80 },
+      { id: "cicd-pipelines-devops", titleKey: "interviewTopics.cicd-pipelines-devops", category: "technical", questionCount: 130 },
+      { id: "docker-kubernetes", titleKey: "interviewTopics.docker-kubernetes", category: "technical", questionCount: 140 },
+      { id: "iac-devops", titleKey: "interviewTopics.iac-devops", category: "technical", questionCount: 110 },
+      { id: "monitoring-logging", titleKey: "interviewTopics.monitoring-logging", category: "practical", questionCount: 80 },
     ],
   },
   {
     careerPathSlug: "database-engineer",
     topics: [
-      { id: "sql-datenmodellierung", title: "SQL & Datenmodellierung", category: "technical", questionCount: 140 },
-      { id: "performance-tuning", title: "Datenbank-Performance-Tuning", category: "technical", questionCount: 100 },
-      { id: "backup-recovery-db", title: "Backup & Recovery", category: "practical", questionCount: 70 },
+      { id: "sql-datenmodellierung", titleKey: "interviewTopics.sql-datenmodellierung", category: "technical", questionCount: 140 },
+      { id: "performance-tuning", titleKey: "interviewTopics.performance-tuning", category: "technical", questionCount: 100 },
+      { id: "backup-recovery-db", titleKey: "interviewTopics.backup-recovery-db", category: "practical", questionCount: 70 },
     ],
   },
   {
     careerPathSlug: "ai-engineer",
     topics: [
-      { id: "ml-grundlagen", title: "Machine-Learning-Grundlagen", category: "technical", questionCount: 130 },
-      { id: "python-data-engineering", title: "Python & Data Engineering", category: "technical", questionCount: 120 },
-      { id: "model-deployment", title: "Modell-Deployment & MLOps", category: "technical", questionCount: 100 },
-      { id: "prompt-engineering", title: "Prompt Engineering", category: "practical", questionCount: 60 },
+      { id: "ml-grundlagen", titleKey: "interviewTopics.ml-grundlagen", category: "technical", questionCount: 130 },
+      { id: "python-data-engineering", titleKey: "interviewTopics.python-data-engineering", category: "technical", questionCount: 120 },
+      { id: "model-deployment", titleKey: "interviewTopics.model-deployment", category: "technical", questionCount: 100 },
+      { id: "prompt-engineering", titleKey: "interviewTopics.prompt-engineering", category: "practical", questionCount: 60 },
     ],
   },
   {
     careerPathSlug: "software-developer",
     topics: [
-      { id: "programmiersprachen", title: "Programmiersprachen", category: "technical", questionCount: 150 },
-      { id: "git-versionskontrolle", title: "Versionskontrolle (Git)", category: "technical", questionCount: 80 },
-      { id: "apis-web-services", title: "APIs & Web-Services", category: "technical", questionCount: 110 },
-      { id: "testing-debugging", title: "Testing & Debugging", category: "practical", questionCount: 90 },
+      { id: "programmiersprachen", titleKey: "interviewTopics.programmiersprachen", category: "technical", questionCount: 150 },
+      { id: "git-versionskontrolle", titleKey: "interviewTopics.git-versionskontrolle", category: "technical", questionCount: 80 },
+      { id: "apis-web-services", titleKey: "interviewTopics.apis-web-services", category: "technical", questionCount: 110 },
+      { id: "testing-debugging", titleKey: "interviewTopics.testing-debugging", category: "practical", questionCount: 90 },
     ],
   },
   {
     careerPathSlug: "data-analyst",
     topics: [
-      { id: "excel-power-bi", title: "Excel & Power BI", category: "technical", questionCount: 110 },
-      { id: "sql-grundlagen", title: "SQL-Grundlagen", category: "technical", questionCount: 100 },
-      { id: "datenvisualisierung", title: "Datenvisualisierung", category: "practical", questionCount: 70 },
+      { id: "excel-power-bi", titleKey: "interviewTopics.excel-power-bi", category: "technical", questionCount: 110 },
+      { id: "sql-grundlagen", titleKey: "interviewTopics.sql-grundlagen", category: "technical", questionCount: 100 },
+      { id: "datenvisualisierung", titleKey: "interviewTopics.datenvisualisierung", category: "practical", questionCount: 70 },
     ],
   },
   {
     careerPathSlug: "it-project-manager",
     topics: [
-      { id: "agile-scrum", title: "Agile & Scrum", category: "technical", questionCount: 100 },
-      { id: "projektplanung", title: "Projektplanung & Budgetierung", category: "practical", questionCount: 90 },
-      { id: "stakeholder-management", title: "Stakeholder-Management", category: "practical", questionCount: 70 },
+      { id: "agile-scrum", titleKey: "interviewTopics.agile-scrum", category: "technical", questionCount: 100 },
+      { id: "projektplanung", titleKey: "interviewTopics.projektplanung", category: "practical", questionCount: 90 },
+      { id: "stakeholder-management", titleKey: "interviewTopics.stakeholder-management", category: "practical", questionCount: 70 },
     ],
   },
 ];
