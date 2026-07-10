@@ -1,0 +1,45 @@
+export type SimpleChatMessage = { role: "user" | "assistant"; content: string };
+
+export class AiCoachRequestError extends Error {
+  isRateLimit: boolean;
+  constructor(message: string, isRateLimit: boolean) {
+    super(message);
+    this.name = "AiCoachRequestError";
+    this.isRateLimit = isRateLimit;
+  }
+}
+
+/** Calls the real KI Coach backend (/api/ai-coach) with a message history
+ * and returns the assistant's reply text. Throws AiCoachRequestError with a
+ * user-facing German message on failure (network error, timeout, rate
+ * limit, or provider error) so callers can display it directly. */
+export async function askAiCoach(messages: SimpleChatMessage[], timeoutMs = 45_000): Promise<string> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const res = await fetch("/api/ai-coach", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages }),
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
+
+    const data = await res.json();
+    if (!res.ok) {
+      throw new AiCoachRequestError(data.error ?? "Etwas ist schiefgelaufen.", res.status === 429);
+    }
+    return data.reply as string;
+  } catch (err) {
+    clearTimeout(timeoutId);
+    if (err instanceof AiCoachRequestError) throw err;
+    const isTimeout = err instanceof DOMException && err.name === "AbortError";
+    throw new AiCoachRequestError(
+      isTimeout
+        ? "Die Antwort hat zu lange gedauert. Bitte versuche es erneut."
+        : "Der KI Coach ist gerade nicht erreichbar. Bitte versuche es erneut.",
+      false
+    );
+  }
+}

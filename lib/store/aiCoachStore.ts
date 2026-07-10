@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { supabase } from "@/lib/supabase/client";
+import { askAiCoach, AiCoachRequestError } from "@/lib/aiCoachClient";
 
 export type ChatRole = "user" | "assistant";
 
@@ -147,28 +148,12 @@ export const useAiCoachStore = create<AiCoachState>((set, get) => ({
         .messages.slice(-20)
         .map((m) => ({ role: m.role, content: m.content }));
 
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 45_000);
-
-      const res = await fetch("/api/ai-coach", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: history }),
-        signal: controller.signal,
-      });
-      clearTimeout(timeoutId);
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        set({ sending: false, error: data.error ?? "Etwas ist schiefgelaufen." });
-        return;
-      }
+      const reply = await askAiCoach(history);
 
       const assistantMessage: ChatMessage = {
         id: crypto.randomUUID(),
         role: "assistant",
-        content: data.reply,
+        content: reply,
         createdAt: new Date().toISOString(),
       };
       set((s) => ({ messages: [...s.messages, assistantMessage], sending: false }));
@@ -177,20 +162,15 @@ export const useAiCoachStore = create<AiCoachState>((set, get) => ({
         conversation_id: conversationId,
         user_id: userId,
         role: "assistant",
-        content: data.reply,
+        content: reply,
       });
       await supabase
         .from("ai_conversations")
         .update({ updated_at: new Date().toISOString() })
         .eq("id", conversationId);
     } catch (err) {
-      const isTimeout = err instanceof DOMException && err.name === "AbortError";
-      set({
-        sending: false,
-        error: isTimeout
-          ? "Die Antwort hat zu lange gedauert. Bitte versuche es erneut."
-          : "Der KI Coach ist gerade nicht erreichbar. Bitte versuche es erneut.",
-      });
+      const message = err instanceof AiCoachRequestError ? err.message : "Der KI Coach ist gerade nicht erreichbar.";
+      set({ sending: false, error: message });
     }
   },
 

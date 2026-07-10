@@ -359,7 +359,7 @@ export default function PracticeClient({
           />
 
           <div className="hidden lg:block">
-            <AICoachPanel question={current} isOpen={true} onClose={() => {}} />
+            <AICoachPanel key={current.id} question={current} isOpen={true} onClose={() => {}} />
           </div>
         </div>
 
@@ -382,7 +382,7 @@ export default function PracticeClient({
       </div>
 
       <div className="lg:hidden">
-        <AICoachPanel question={current} isOpen={coachOpen} onClose={() => setCoachOpen(false)} />
+        <AICoachPanel key={current.id} question={current} isOpen={coachOpen} onClose={() => setCoachOpen(false)} />
       </div>
 
       <PracticeNotesPanel isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
