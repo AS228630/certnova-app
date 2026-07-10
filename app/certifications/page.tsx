@@ -11,7 +11,7 @@ export default function CertificationsPage() {
   const featured = companies.slice(0, 4);
 
   return (
-    <DashboardShell requireAuth={false}>
+    <DashboardShell>
       <main className="flex-1 p-4 md:p-8">
         <CertificationsHero />
         <CertificationsStats />
