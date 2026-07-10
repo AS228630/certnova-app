@@ -460,6 +460,464 @@ const ab900_en: QuestionTranslations = {
       D: "From the Microsoft Teams admin center, you can prevent users from creating teams.",
     },
   },
+  // Batch 6: questions 51-70.
+  "real-ab900-51": {
+    prompt: "Your organization has a Microsoft 365 subscription. All users have Microsoft 365 Copilot licenses. You need to identify where sensitive content is being used during Copilot interactions, analyze the content's usage patterns, and provide recommendations for applying appropriate protections. What should you use?",
+    options: {
+      A: "Microsoft Viva Insights",
+      B: "The Microsoft Purview DSPM for AI solution",
+      C: "Microsoft Security Copilot",
+      D: "The Microsoft Purview Insider Risk Management solution",
+    },
+  },
+  "real-ab900-52": {
+    prompt: "Your organization has a Microsoft 365 subscription. All users have been assigned Microsoft 365 Copilot licenses. Some users report that they're receiving Copilot responses that include information from a Microsoft SharePoint site named Finance. The users state that the information is commercially sensitive. You need to prevent Copilot from providing responses that include information from the Finance site. What should you do?",
+    options: {
+      A: "Create an Information Barrier (IB) policy in Microsoft Purview.",
+      B: "Create a data connector in Microsoft Defender.",
+      C: "Create a Conditional Access policy in Microsoft Entra.",
+      D: "Configure the permissions on the Finance site.",
+    },
+  },
+  "real-ab900-53": {
+    prompt: "A manager asks: \"What is the main difference in capabilities between Microsoft 365 Copilot integrated into Word/Excel and a custom AI agent built in Copilot Studio?\" What is the correct answer?",
+    options: {
+      A: "Only the built-in Copilot can access and summarize Microsoft Graph data.",
+      B: "The built-in Copilot is a general-purpose productivity assistant. Custom AI agents are designed for specific multi-step tasks and integrations with external systems.",
+      C: "Only custom AI agents can ground responses in organizational data.",
+      D: "Custom agents are only accessible via the Copilot Studio portal, whereas Copilot is embedded in apps.",
+    },
+  },
+  "real-ab900-54": {
+    prompt: "A department head has developed a high-impact, complex Microsoft 365 Copilot prompt for analyzing weekly sales data. The head wants all 30 members of their sales team to have easy, consistent access to this particular prompt template. Which method is recommended to ensure this valuable template is used consistently by the entire team?",
+    options: {
+      A: "Use the Copilot Studio interface to publish the prompt as a new agent.",
+      B: "Email the prompt text to the team and instruct them to save it in their personal OneDrive.",
+      C: "Share the prompt template directly from the Microsoft 365 Copilot prompt library.",
+      D: "Create a Power Automate flow that runs the prompt weekly.",
+    },
+  },
+  "real-ab900-55": {
+    prompt: "You are evaluating Microsoft Purview solutions. For each of the following statements, select Yes if the statement is true. Otherwise, select No.",
+    statements: [
+      "A Communication Compliance policy can detect inappropriate text in Microsoft Teams messages",
+      "A Communication Compliance policy can detect offensive language in Microsoft 365 Copilot prompts",
+      "A Communication Compliance policy can be used to retain email messages for 10 years",
+    ],
+  },
+  "real-ab900-56": {
+    prompt: "For each of the following statements, select Yes if the statement is true. Otherwise, select No. (NOTE: Each correct selection is worth one point.)",
+    statements: [
+      "From the Copilot prompt gallery, you can edit a saved prompt",
+      "From the Copilot prompt gallery, you can share a saved prompt with a Microsoft Teams team",
+      "You can create a shared link for a prompt that is NOT saved in the Copilot prompt gallery",
+    ],
+  },
+  "real-ab900-57": {
+    prompt: "Your organization has a Microsoft 365 subscription. You discover that some users are unable to sign in to Microsoft 365. You need to view the failed Microsoft 365 sign-in attempts. What should you use?",
+    options: {
+      A: "The Microsoft Defender portal",
+      B: "The Microsoft Entra admin center",
+      C: "The Microsoft Purview portal",
+      D: "The Microsoft 365 admin center",
+    },
+  },
+  "real-ab900-58": {
+    prompt: "Your organization has a Microsoft 365 subscription that contains a Microsoft SharePoint site named Site1. You need to prevent users from sharing Site1's content with external users. What should you use?",
+    options: {
+      A: "Site1's content",
+      B: "The SharePoint admin center",
+      C: "The Microsoft 365 admin center",
+      D: "The Microsoft Entra admin center",
+    },
+  },
+  "real-ab900-59": {
+    prompt: "Which statement correctly describes Microsoft Defender XDR?",
+    options: {
+      A: "Microsoft Defender XDR is a unified enterprise suite that coordinates detection, prevention, investigation, and response across endpoints, identities, email, and applications to provide integrated protection against sophisticated attacks.",
+      B: "Microsoft Entra Conditional Access is a unified enterprise suite that coordinates detection, prevention, investigation, and response across endpoints, identities, email, and applications to provide integrated protection against sophisticated attacks.",
+      C: "Microsoft Entra ID Protection is a unified enterprise suite that coordinates detection, prevention, investigation, and response across endpoints, identities, email, and applications to provide integrated protection against sophisticated attacks.",
+      D: "Microsoft Purview is a unified enterprise suite that coordinates detection, prevention, investigation, and response across endpoints, identities, email, and applications to provide integrated protection against sophisticated attacks.",
+    },
+  },
+  "real-ab900-60": {
+    prompt: "Your organization has a Microsoft 365 subscription. A user named Alex Wilber is assigned an admin role as shown in the following exhibit.",
+    options: {
+      A: "Alex Wilber can view all the users in the Microsoft Entra tenant.",
+      B: "Alex Wilber can view all the content on Microsoft SharePoint sites.",
+      C: "Alex Wilber can read all the content in Microsoft Exchange mailboxes.",
+      D: "Alex Wilber can perform eDiscovery of Microsoft 365 Copilot prompts.",
+    },
+  },
+  "real-ab900-61": {
+    prompt: "For each of the following statements, select Yes if the statement is true. Otherwise, select No. (NOTE: Each correct selection is worth one point.)",
+    statements: [
+      "You can use a Microsoft Entra security group to assign permissions to Microsoft Entra ID resources",
+      "You can use a Microsoft Entra security group to assign Microsoft 365 licenses",
+      "You can use a Microsoft Entra security group to assign permissions to Microsoft Exchange mailboxes",
+    ],
+  },
+  "real-ab900-62": {
+    prompt: "Which statement accurately describes authorization in Microsoft 365?",
+    options: {
+      A: "A process that verifies whether an identity is actually who it claims to be",
+      B: "A process that requires additional authentication methods before an identity can access resources",
+      C: "A process that verifies whether an identity is allowed to access a resource",
+      D: "A process that validates an identity from an external system",
+    },
+  },
+  "real-ab900-63": {
+    prompt: "For each of the following statements, select Yes if the statement is true. Otherwise, select No. (NOTE: Each correct selection is worth one point.)",
+    statements: [
+      "A member of a Microsoft SharePoint site can invite users to access the site's content",
+      "A site owner of a Microsoft SharePoint site can add Microsoft 365 groups as members of the site",
+      "A site owner of a Microsoft SharePoint site can remove another site owner from the site",
+    ],
+  },
+  "real-ab900-64": {
+    prompt: "Your organization has a Microsoft 365 subscription. Which two tasks can you perform by using the Exchange admin center? (Each correct answer presents part of the solution. NOTE: Each correct selection is worth one point.)",
+    options: {
+      A: "Assign a Microsoft Exchange license.",
+      B: "Create a mail flow rule.",
+      C: "Create a shared mailbox.",
+      D: "Add a custom domain.",
+    },
+  },
+  "real-ab900-65": {
+    prompt: "Select the answer that correctly completes the sentence.",
+    options: {
+      A: "In Microsoft Entra Privileged Identity Management (PIM), an administrator has made you eligible for the User Administrator role. Before you can create a user account, you must activate the role.",
+      B: "In Microsoft Entra Privileged Identity Management (PIM), an administrator has made you eligible for the User Administrator role. Before you can create a user account, you must install the Microsoft Authenticator app.",
+      C: "In Microsoft Entra Privileged Identity Management (PIM), an administrator has made you eligible for the User Administrator role. Before you can create a user account, you must request a license.",
+      D: "In Microsoft Entra Privileged Identity Management (PIM), an administrator has made you eligible for the User Administrator role. Before you can create a user account, you must update your location information.",
+    },
+  },
+  "real-ab900-66": {
+    prompt: "You open the Microsoft Entra admin center as shown in the following exhibit.",
+    options: {
+      A: "Remediating the 'Do not expire passwords' recommendation will improve the Identity Secure Score the most.",
+      B: "Remediating the 'Use least privileged administrative roles' recommendation will improve the Identity Secure Score the most.",
+      C: "Remediating the 'Enable policy to block legacy authentication' recommendation will improve the Identity Secure Score the most.",
+      D: "Remediating the 'Require multifactor authentication for administrative roles' recommendation will improve the Identity Secure Score the most.",
+    },
+  },
+  "real-ab900-67": {
+    prompt: "What can you use to automatically lock a user account when a risky sign-in is detected?",
+    options: {
+      A: "Microsoft Defender for Identity",
+      B: "Microsoft Entra ID Protection",
+      C: "Microsoft Defender for Office 365",
+      D: "Microsoft Entra Privileged Identity Management (PIM)",
+    },
+  },
+  "real-ab900-68": {
+    prompt: "You are reviewing your company's security policies as part of a Zero Trust strategy. Which statement accurately describes Zero Trust principles?",
+    options: {
+      A: "Zero Trust improves the user experience by minimizing authentication prompts.",
+      B: "Zero Trust assumes breach and verifies each request explicitly.",
+      C: "Zero Trust treats all requests from your corporate network as trusted.",
+      D: "Zero Trust removes the need to regularly review and adjust access permissions.",
+    },
+  },
+  "real-ab900-69": {
+    prompt: "Your organization has a Microsoft 365 subscription. You need to generate a report that shows the permissions and active sharing links of content stored in Microsoft OneDrive accounts. What should you use?",
+    options: {
+      A: "Audit in the Microsoft Defender portal",
+      B: "Reports in the Microsoft 365 admin center",
+      C: "Data access governance in the SharePoint admin center",
+      D: "eDiscovery in the Microsoft Purview portal",
+    },
+  },
+  "real-ab900-70": {
+    prompt: "For each of the following statements, select Yes if the statement is true. Otherwise, select No. (NOTE: Each correct selection is worth one point.)",
+    statements: [
+      "Prompts and responses issued by users in Microsoft 365 Copilot are used by Microsoft to train models",
+      "Content retrieved from Microsoft Graph is used by Microsoft to train models",
+      "Microsoft 365 Copilot honors the security permissions in your Microsoft 365 subscription",
+    ],
+  },
+  // Batch 7: questions 71-90.
+  "real-ab900-71": {
+    prompt: "Your company uses pay-as-you-go billing for Microsoft 365 Copilot. The company wants better visibility into Copilot usage costs and the ability to forecast departmental spending. You need to ensure that you can view Copilot costs by department. What should you use? (To answer, select the appropriate options in the answer area. NOTE: Each correct selection is worth one point.)",
+    options: {
+      A: "Portal: The Microsoft 365 admin center; Feature: A billing policy",
+      B: "Portal: The Microsoft 365 admin center; Feature: A Copilot connector",
+      C: "Portal: The Microsoft Entra admin center; Feature: An auto-claim policy",
+      D: "Portal: The Microsoft Entra admin center; Feature: A billing policy",
+      E: "Portal: The Microsoft Purview portal; Feature: A Copilot connector",
+      F: "Portal: The Microsoft Purview portal; Feature: An auto-claim policy",
+    },
+  },
+  "real-ab900-72": {
+    prompt: "For each of the following statements, select Yes if the statement is true. Otherwise, select No. (NOTE: Each correct selection is worth one point.)",
+    statements: [
+      "Users assigned a Microsoft 365 E5 license cannot create web-based Microsoft 365 Copilot agents",
+      "Users must be assigned a Microsoft 365 Copilot license to use the Analyst agent",
+      "Users can use a natural-language prompt to create a Microsoft 365 Copilot agent",
+    ],
+  },
+  "real-ab900-73": {
+    prompt: "Select the answer that correctly completes the sentence.",
+    options: {
+      A: "You can use the Audit Microsoft Purview solution to find all content related to the term \"Project Falcon\" in emails exchanged between two users.",
+      B: "You can use the Data Catalog Microsoft Purview solution to find all content related to the term \"Project Falcon\" in emails exchanged between two users.",
+      C: "You can use the eDiscovery Microsoft Purview solution to find all content related to the term \"Project Falcon\" in emails exchanged between two users.",
+      D: "You can use the Insider Risk Management Microsoft Purview solution to find all content related to the term \"Project Falcon\" in emails exchanged between two users.",
+    },
+  },
+  "real-ab900-74": {
+    prompt: "Your company uses Microsoft Purview Data Loss Prevention (DLP) policies. A user named User1 shares sensitive information with an external user over Microsoft Teams. You need to identify the shared sensitive content. What should you use in the Microsoft Purview portal?",
+    options: {
+      A: "Diagnostics",
+      B: "Data Explorer",
+      C: "Content Explorer",
+      D: "Activity Explorer",
+    },
+  },
+  "real-ab900-75": {
+    prompt: "For each of the following statements, select Yes if the statement is true. Otherwise, select No. (NOTE: Each correct selection is worth one point.)",
+    statements: [
+      "Zero Trust requires an Azure subscription",
+      "Zero Trust is a security strategy, NOT a specific product",
+      "You can enable Zero Trust for your organization from the Microsoft 365 admin center",
+    ],
+  },
+  "real-ab900-76": {
+    prompt: "Select the answer that correctly completes the sentence.",
+    options: {
+      A: "Microsoft Copilot Studio contains signals such as collaboration history, document relevance, and communication frequency that influence Microsoft 365 Copilot's responses.",
+      B: "Microsoft Graph contains signals such as collaboration history, document relevance, and communication frequency that influence Microsoft 365 Copilot's responses.",
+      C: "Microsoft Purview contains signals such as collaboration history, document relevance, and communication frequency that influence Microsoft 365 Copilot's responses.",
+      D: "Microsoft Viva Insights contains signals such as collaboration history, document relevance, and communication frequency that influence Microsoft 365 Copilot's responses.",
+    },
+  },
+  "real-ab900-77": {
+    prompt: "For each of the following statements, select Yes if the statement is true. Otherwise, select No. (NOTE: Each correct selection is worth one point.)",
+    statements: [
+      "Users can use Microsoft 365 Copilot anonymously",
+      "Administrators can allow self-service purchase of Microsoft 365 Copilot licenses",
+      "Microsoft 365 Copilot licenses can be assigned to Microsoft Entra ID guest users from other organizations",
+    ],
+  },
+  "real-ab900-78": {
+    prompt: "Your organization has a Microsoft 365 subscription. You need to use Microsoft Purview to meet the following requirements: • Discover and classify sensitive data across multiple platforms. • Block users from sharing intellectual property with external users. Which Microsoft Purview solution should you use for each requirement? (To answer, select the appropriate options in the answer area. NOTE: Each correct selection is worth one point.)",
+    options: {
+      A: "Discover and classify sensitive data across multiple platforms: Communication Compliance / Block users from sharing intellectual property with external users: Data Loss Prevention",
+      B: "Discover and classify sensitive data across multiple platforms: Data Loss Prevention / Block users from sharing intellectual property with external users: Information Protection",
+      C: "Discover and classify sensitive data across multiple platforms: Data Loss Prevention / Block users from sharing intellectual property with external users: Insider Risk Management",
+      D: "Discover and classify sensitive data across multiple platforms: Information Protection / Block users from sharing intellectual property with external users: Communication Compliance",
+      E: "Discover and classify sensitive data across multiple platforms: Information Protection / Block users from sharing intellectual property with external users: Insider Risk Management",
+      F: "Discover and classify sensitive data across multiple platforms: Insider Risk Management / Block users from sharing intellectual property with external users: Data Loss Prevention",
+    },
+  },
+  "real-ab900-79": {
+    prompt: "Your organization has a Microsoft 365 E5 subscription. You need to prevent users from sharing internal company financial data with external users. What should you use?",
+    options: {
+      A: "Role groups",
+      B: "Data Loss Prevention (DLP) policies",
+      C: "Insider Risk Management policies",
+      D: "Retention labels",
+    },
+  },
+  "real-ab900-80": {
+    prompt: "You need to identify files and emails that contain Social Security numbers (SSNs) and credit card numbers. What should you use in the Microsoft Purview portal?",
+    options: {
+      A: "Data Explorer",
+      B: "Information Protection reports",
+      C: "Information Protection policies",
+      D: "Activity Explorer",
+    },
+  },
+  "real-ab900-81": {
+    prompt: "Select the answer that correctly completes the sentence.",
+    options: {
+      A: "Microsoft Purview sensitivity labels can be applied to Azure Blob Storage.",
+      B: "Microsoft Purview sensitivity labels can be applied to Microsoft 365 Copilot conversations.",
+      C: "Microsoft Purview sensitivity labels can be applied to Microsoft SharePoint sites.",
+    },
+  },
+  "real-ab900-82": {
+    prompt: "Select the answer that correctly completes the sentence.",
+    options: {
+      A: "Restricted SharePoint Search lets you restrict administrator access to Microsoft SharePoint sites, without preventing users from accessing the files and content they have permissions for.",
+      B: "Restricted SharePoint Search lets you restrict guest user access to Microsoft SharePoint sites, without preventing users from accessing the files and content they have permissions for.",
+      C: "Restricted SharePoint Search lets you restrict Microsoft 365 Copilot's access to Microsoft SharePoint sites, without preventing users from accessing the files and content they have permissions for.",
+      D: "Restricted SharePoint Search lets you restrict Microsoft Purview eDiscovery's access to Microsoft SharePoint sites, without preventing users from accessing the files and content they have permissions for.",
+    },
+  },
+  "real-ab900-83": {
+    prompt: "Your organization has a Microsoft 365 E5 subscription. You create a Microsoft Purview sensitivity label named \"Label1\". You need to ensure that users can apply \"Label1\" to files in Microsoft 365. What should you use?",
+    options: {
+      A: "A sensitivity label policy",
+      B: "A trainable classifier",
+      C: "A retention label policy",
+      D: "An auto-labeling policy",
+    },
+  },
+  "real-ab900-84": {
+    prompt: "Your company has a written compliance policy requiring that all emails be retained for seven years and then permanently deleted. Which Microsoft Purview solution should you use?",
+    options: {
+      A: "Information Protection",
+      B: "Data Lifecycle Management",
+      C: "Data Loss Prevention",
+      D: "Insider Risk Management",
+    },
+  },
+  "real-ab900-85": {
+    prompt: "Select the answer that correctly completes the sentence.",
+    options: {
+      A: "In the Microsoft 365 admin center, the 'Credits used' metric in the Copilot credits report shows the total number of credits consumed by users in your organization who use Microsoft Teams and interact with work-based agents in Microsoft 365 Copilot Chat.",
+      B: "In the Microsoft 365 admin center, the 'Credits used' metric in the Copilot credits report shows the total number of credits consumed by users who do not belong to your organization and interact with business agents in Microsoft 365 Copilot Chat.",
+      C: "In the Microsoft 365 admin center, the 'Credits used' metric in the Copilot credits report shows the total number of credits consumed by users in your organization who are assigned a Microsoft 365 Copilot license and interact with work-based agents in Microsoft 365 Copilot Chat.",
+      D: "In the Microsoft 365 admin center, the 'Credits used' metric in the Copilot credits report shows the total number of credits consumed by users in your organization who are NOT assigned a Microsoft 365 Copilot license and interact with work-based agents in Microsoft 365 Copilot Chat.",
+    },
+  },
+  "real-ab900-86": {
+    prompt: "You have a Microsoft SharePoint site named \"Site1\" and a security group named \"Group1\". You want to prevent all users who currently have access to \"Site1\" from accessing the site's content, unless the user is also a member of \"Group1\". Which settings should you configure? (To answer, select the appropriate settings in the answer area.)",
+    options: {
+      A: "Email",
+      B: "Privacy",
+      C: "External sharing",
+      D: "Sensitivity label",
+      E: "Restrict content discovery",
+      F: "Restricted access to the site",
+    },
+  },
+  "real-ab900-87": {
+    prompt: "For each of the following statements, select Yes if the statement is true. Otherwise, select No. (NOTE: Each correct selection is worth one point.)",
+    statements: [
+      "Microsoft 365 Copilot honors Microsoft Purview sensitivity labels",
+      "Microsoft 365 Copilot ignores Microsoft Purview data loss prevention (DLP) policies",
+    ],
+  },
+  "real-ab900-88": {
+    prompt: "For each of the following statements, select Yes if the statement is true. Otherwise, select No. (NOTE: Each correct selection is worth one point.)",
+    statements: [
+      "A sensitivity label can be applied to a Microsoft SharePoint site",
+      "A sensitivity label can be applied to an email message in Microsoft Exchange",
+      "A sensitivity label can be applied to Windows 11 devices",
+    ],
+  },
+  "real-ab900-89": {
+    prompt: "Your organization has a Microsoft 365 subscription. Your company recently purchased Microsoft 365 Copilot licenses for some users. You need to determine how many unlicensed users have used Copilot in Microsoft Teams. Which usage report should you use in the Microsoft 365 admin center?",
+    options: {
+      A: "Microsoft 365 Copilot Chat",
+      B: "Microsoft 365 Copilot Search",
+      C: "Microsoft 365 Apps",
+      D: "Microsoft 365 Copilot",
+    },
+  },
+  "real-ab900-90": {
+    prompt: "A user named \"User1\" is responsible for quarterly revenue reporting. \"User1\" needs to identify performance trends, gain visual insights, and produce a summary of anomalies across multiple files containing different datasets. What should you use?",
+    options: {
+      A: "The \"Analyst\" agent in Microsoft 365 Copilot",
+      B: "The \"Researcher\" agent in Microsoft 365 Copilot",
+      C: "Microsoft 365 Copilot Search",
+      D: "Copilot in Excel",
+    },
+  },
+  // Batch 8 (final): questions 91-101.
+  "real-ab900-91": {
+    prompt: "Your company is currently reviewing Microsoft 365 Copilot licensing. In which scenario should you use pay-as-you-go billing?",
+    options: {
+      A: "To give users access to the AI assistant in Copilot in Word",
+      B: "To summarize the actions from Microsoft Teams meetings",
+      C: "To generate images in premium chats",
+      D: "To provide a custom agent to unlicensed users",
+    },
+  },
+  "real-ab900-92": {
+    prompt: "You use Microsoft 365 Copilot. You want to schedule a prompt to run at midnight. Which task should you include in your solution?",
+    options: {
+      A: "Create an agent.",
+      B: "Create a notebook.",
+      C: "Run the prompt.",
+      D: "Save the prompt.",
+    },
+  },
+  "real-ab900-93": {
+    prompt: "Your company plans to deploy Microsoft 365 Copilot. You need to give a user the ability to use Microsoft 365 Copilot, including the \"Researcher\" and \"Analyst\" agents. What should you use?",
+    options: {
+      A: "The Microsoft 365 admin center",
+      B: "The Microsoft Purview portal",
+      C: "The Microsoft Entra admin center",
+      D: "The Microsoft Defender portal",
+    },
+  },
+  "real-ab900-94": {
+    prompt: "Your company is considering using Microsoft 365 Copilot on a pay-as-you-go basis instead of purchasing a Microsoft 365 Copilot license. In which scenario does pay-as-you-go billing apply?",
+    options: {
+      A: "Performing multi-step reasoning using the Researcher agent",
+      B: "Creating a summary of a Microsoft Teams meeting",
+      C: "Using a custom agent grounded in work data",
+      D: "Using the AI assistant to edit a document in Copilot in Word",
+    },
+  },
+  "real-ab900-95": {
+    prompt: "Your company has a Microsoft SharePoint site named \"Site1\". \"Site1\" contains all the company's HR department policies. The policies are stored as Microsoft Word documents. All users have read access to \"Site1\". The head of HR reports that user questions about the policies are NOT being answered in a timely manner, especially around major holidays. You need to propose a solution that lets users find the HR department's policies. The solution must provide users with a list of frequently asked questions and ensure that answers are grounded exclusively in Site1. What should you include in the recommendation?",
+    options: {
+      A: "The personal assistant in Copilot in Word",
+      B: "A custom Microsoft 365 Copilot agent",
+      C: "The Researcher agent in Microsoft 365 Copilot",
+      D: "A Microsoft 365 Copilot notebook",
+    },
+  },
+  "real-ab900-96": {
+    prompt: "Select the answer that correctly completes the sentence.",
+    options: {
+      A: "From the Microsoft Purview portal, you can use Data Explorer to create and manage data protection policies.",
+      B: "From the Microsoft Purview portal, you can use Data Explorer to search for content in mailboxes and sites.",
+      C: "From the Microsoft Purview portal, you can use Data Explorer to identify sensitive information and determine its storage locations.",
+      D: "From the Microsoft Purview portal, you can use Data Explorer to review the effectiveness of your Data Loss Prevention (DLP) policies.",
+    },
+  },
+  "real-ab900-97": {
+    prompt: "Your organization has a Microsoft 365 subscription that contains a Microsoft SharePoint site named \"Site1\". You need to identify all the changes a site administrator made to \"Site1\"'s site settings. Which report should you use in the SharePoint admin center? (To answer, select the appropriate report in the answer area.)",
+    options: {
+      A: "Agent insights",
+      B: "App insights",
+      C: "Catalog management",
+      D: "Change history",
+      E: "Data access governance",
+      F: "OneDrive accounts",
+    },
+  },
+  "real-ab900-98": {
+    prompt: "For each of the following statements, select Yes if the statement is true. Otherwise, select No. (NOTE: Each correct selection is worth one point.)",
+    statements: [
+      "Microsoft Purview Communications Compliance can detect offensive text in images stored on Microsoft SharePoint sites",
+      "Microsoft Purview Communications Compliance anonymizes user identities by default during investigations",
+      "Microsoft Purview Communications Compliance adds a disclaimer to all monitored communications",
+    ],
+  },
+  "real-ab900-99": {
+    prompt: "Your organization has a Microsoft 365 subscription. All users have been assigned a Microsoft 365 Copilot license. You need to prevent users from generating images with Copilot. What should you use?",
+    options: {
+      A: "The Microsoft Defender portal",
+      B: "The Microsoft Entra admin center",
+      C: "The Microsoft Purview portal",
+      D: "The Microsoft 365 admin center",
+    },
+  },
+  "real-ab900-100": {
+    prompt: "For each of the following statements, select Yes if the statement is true. Otherwise, select No. (NOTE: Each correct selection is worth one point.)",
+    statements: [
+      "Administrators can block specific sites from being used by Microsoft 365 Copilot",
+      "Administrators can prevent Microsoft 365 Copilot from using web search when answering user queries",
+      "Administrators can block access to the Researcher agent in Microsoft 365 Copilot while still allowing access to the Analyst agent",
+    ],
+  },
+  "real-ab900-101": {
+    prompt: "You need to ensure that users can use an external system as a knowledge source for custom Microsoft 365 Copilot agents. What should you configure in the Microsoft 365 admin center? (To answer, select the appropriate settings in the answer area.)",
+    options: {
+      A: "Copilot - Connectors",
+      B: "Copilot - Search",
+      C: "Copilot - Settings",
+      D: "Agents - Overview",
+      E: "Agents - Tools",
+      F: "Agents - Settings",
+    },
+  },
 };
 
 export default ab900_en;
