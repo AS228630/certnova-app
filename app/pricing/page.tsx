@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import Link from "next/link";
 import {
   Wallet,
@@ -25,11 +24,9 @@ import {
   LifeBuoy,
   BarChart3,
   Languages,
-  Loader2,
 } from "lucide-react";
 import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
-import { supabase } from "@/lib/supabase/client";
 
 type Billing = "monthly" | "yearly";
 
@@ -180,39 +177,6 @@ const faqs = [
 export default function PricingPage() {
   const [billing, setBilling] = useState<Billing>("yearly");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [checked, setChecked] = useState(false);
-  const router = useRouter();
-
-  useEffect(() => {
-    let mounted = true;
-    supabase.auth.getSession().then(({ data }) => {
-      if (!mounted) return;
-      if (!data.session) {
-        router.replace("/register");
-        return;
-      }
-      setChecked(true);
-    });
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (!session) {
-        router.replace("/register");
-        return;
-      }
-      setChecked(true);
-    });
-    return () => {
-      mounted = false;
-      listener.subscription.unsubscribe();
-    };
-  }, [router]);
-
-  if (!checked) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-bg">
-        <Loader2 size={22} className="animate-spin text-text-faint" />
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-bg">
