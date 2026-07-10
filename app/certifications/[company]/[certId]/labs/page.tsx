@@ -30,7 +30,7 @@ export default async function LabPage({
   const lab = infrastructureType === "AZURE" ? getLab(certId, cert.title, cert.level) : undefined;
 
   return (
-    <DashboardShell requireAuth={false}>
+    <DashboardShell>
       <main className="min-w-0 flex-1 overflow-x-hidden">
         <UniversalLabStage infrastructureType={infrastructureType} company={company} cert={cert} lab={lab} />
       </main>

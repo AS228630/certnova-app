@@ -20,7 +20,7 @@ export default async function CertJourneyPage({
   if (!company || !journey || !cert) notFound();
 
   return (
-    <DashboardShell requireAuth={false}>
+    <DashboardShell>
       <main className="flex-1 p-4 md:p-8">
         <JourneyPageClient company={company} cert={cert} companySlug={company.slug} certId={certId} />
       </main>

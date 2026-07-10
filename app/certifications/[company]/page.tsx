@@ -19,7 +19,7 @@ export default async function CompanyDetailPage({
   if (!company) notFound();
 
   return (
-    <DashboardShell requireAuth={false}>
+    <DashboardShell>
       <main className="flex-1 p-4 md:p-8">
         <CompanyDetailHeader companySlug={company.slug} companyName={company.name} certCount={company.totalCertCount} />
 

@@ -194,7 +194,7 @@ const fa: Dictionary = {
     freePlan: "پلن رایگان",
   },
   landingNav: {
-    courses: "گواهینامه‌ها",
+    courses: "دوره‌ها",
     certifications: "گواهینامه‌ها",
     learningPaths: "مسیرهای یادگیری",
     resources: "راهنما و منابع",

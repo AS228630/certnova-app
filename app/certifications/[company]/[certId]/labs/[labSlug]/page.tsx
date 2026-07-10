@@ -41,7 +41,7 @@ export default async function LabSlugPage({
   if (infrastructureType === "AZURE" && lab?.slug && lab.slug !== labSlug) notFound();
 
   return (
-    <DashboardShell requireAuth={false}>
+    <DashboardShell>
       <main className="min-w-0 flex-1 overflow-x-hidden">
         <UniversalLabStage infrastructureType={infrastructureType} company={company} cert={cert} lab={lab} />
       </main>

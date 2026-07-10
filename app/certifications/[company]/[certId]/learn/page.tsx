@@ -28,7 +28,7 @@ export default async function LearnPage({
   const track = getLearnTrack(certId, cert.title);
 
   return (
-    <DashboardShell requireAuth={false}>
+    <DashboardShell>
       <main className="flex-1 p-4 md:p-8">
         <LearnClient company={company} journey={journey} modules={track.modules} />
       </main>

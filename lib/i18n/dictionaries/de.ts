@@ -195,7 +195,7 @@ const de = {
     freePlan: "Kostenloser Plan",
   },
   landingNav: {
-    courses: "Zertifizierungen",
+    courses: "Kurse",
     certifications: "Zertifizierungen",
     learningPaths: "Lernpfade",
     resources: "Hilfe & Ressourcen",

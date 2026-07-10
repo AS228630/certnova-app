@@ -34,7 +34,7 @@ export default async function PracticePage({
   const bank = PRACTICE_BANKS[certId] ?? generatePracticeBank(certId, cert.title, cert, company);
 
   return (
-    <DashboardShell requireAuth={false}>
+    <DashboardShell>
       <main className="flex-1 p-4 md:p-8">
         <PracticeClient
           companyName={company.name}

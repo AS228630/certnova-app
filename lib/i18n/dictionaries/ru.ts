@@ -194,7 +194,7 @@ const ru: Dictionary = {
     freePlan: "Бесплатный план",
   },
   landingNav: {
-    courses: "Сертификации",
+    courses: "Курсы",
     certifications: "Сертификации",
     learningPaths: "Учебные пути",
     resources: "Справка и ресурсы",

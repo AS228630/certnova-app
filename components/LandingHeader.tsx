@@ -9,6 +9,7 @@ import { supabase } from "@/lib/supabase/client";
 
 const navLinks = [
   { labelKey: "landingNav.courses", href: "/certifications" },
+  { labelKey: "landingNav.certifications", href: "/certifications" },
   { labelKey: "landingNav.learningPaths", href: "/learning-paths" },
   { labelKey: "landingNav.resources", href: "/help" },
   { labelKey: "landingNav.business", href: "/business" },
