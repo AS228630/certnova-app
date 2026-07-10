@@ -18,7 +18,7 @@ export type LanguageCourse = {
   languageCode: string; // ISO 639-1, used for the flag/locale mapping
   name: string;
   levelRange: string; // e.g. "A1 - C2"
-  flagEmoji: string;
+  countryCode: string; // ISO 3166-1 alpha-2, used to fetch a real flag image (flag emoji don't render on Windows)
   heroImageQuery: string; // used for the card background image search/placeholder
   rating: number;
   ratingCount: string; // e.g. "12K" — display string, matches companiesData.ts convention
@@ -32,7 +32,7 @@ export const languageCourses: LanguageCourse[] = [
     languageCode: "de",
     name: "Deutsch",
     levelRange: "A1 - C2",
-    flagEmoji: "🇩🇪",
+    countryCode: "de",
     heroImageQuery: "Brandenburg Gate Berlin",
     rating: 4.8,
     ratingCount: "12K",
@@ -44,7 +44,7 @@ export const languageCourses: LanguageCourse[] = [
     languageCode: "en",
     name: "English",
     levelRange: "A1 - C2",
-    flagEmoji: "🇬🇧",
+    countryCode: "gb",
     heroImageQuery: "Big Ben London",
     rating: 4.9,
     ratingCount: "18K",
@@ -56,7 +56,7 @@ export const languageCourses: LanguageCourse[] = [
     languageCode: "es",
     name: "Español",
     levelRange: "A1 - B2",
-    flagEmoji: "🇪🇸",
+    countryCode: "es",
     heroImageQuery: "Sagrada Familia Barcelona",
     rating: 4.7,
     ratingCount: "8K",
@@ -68,7 +68,7 @@ export const languageCourses: LanguageCourse[] = [
     languageCode: "fr",
     name: "Français",
     levelRange: "A1 - B2",
-    flagEmoji: "🇫🇷",
+    countryCode: "fr",
     heroImageQuery: "Eiffel Tower Paris",
     rating: 4.6,
     ratingCount: "6K",
@@ -80,7 +80,7 @@ export const languageCourses: LanguageCourse[] = [
     languageCode: "zh",
     name: "中文",
     levelRange: "HSK 1-4",
-    flagEmoji: "🇨🇳",
+    countryCode: "cn",
     heroImageQuery: "Great Wall China",
     rating: 4.7,
     ratingCount: "5K",
@@ -92,7 +92,7 @@ export const languageCourses: LanguageCourse[] = [
     languageCode: "ja",
     name: "日本語",
     levelRange: "N5 - N3",
-    flagEmoji: "🇯🇵",
+    countryCode: "jp",
     heroImageQuery: "Mount Fuji Japan",
     rating: 4.6,
     ratingCount: "4K",
@@ -104,7 +104,7 @@ export const languageCourses: LanguageCourse[] = [
     languageCode: "it",
     name: "Italiano",
     levelRange: "A1 - B1",
-    flagEmoji: "🇮🇹",
+    countryCode: "it",
     heroImageQuery: "Colosseum Rome",
     rating: 4.5,
     ratingCount: "3K",
@@ -116,7 +116,7 @@ export const languageCourses: LanguageCourse[] = [
     languageCode: "tr",
     name: "Türkçe",
     levelRange: "A1 - B1",
-    flagEmoji: "🇹🇷",
+    countryCode: "tr",
     heroImageQuery: "Hagia Sophia Istanbul",
     rating: 4.5,
     ratingCount: "2K",

@@ -14,7 +14,12 @@ export default function LanguageCourseCard({ course }: { course: LanguageCourse 
   return (
     <div className="flex flex-col overflow-hidden rounded-2xl border border-border-soft bg-panel">
       <div className="relative flex h-28 items-center justify-center bg-gradient-to-br from-primary/30 via-panel-alt to-panel-alt">
-        <span className="text-5xl">{course.flagEmoji}</span>
+        <img
+          src={`https://flagcdn.com/w160/${course.countryCode}.png`}
+          srcSet={`https://flagcdn.com/w320/${course.countryCode}.png 2x`}
+          alt={`${course.name} ${t("languageCourses.badge")}`}
+          className="h-14 w-20 rounded-md object-cover shadow-lg"
+        />
         <span className="absolute right-3 top-3 rounded-full bg-black/40 px-2 py-1 text-[11px] font-bold text-white backdrop-blur-sm">
           {course.levelRange}
         </span>
