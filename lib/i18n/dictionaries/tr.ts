@@ -385,6 +385,15 @@ const tr: Dictionary = {
     badgeHighAchiever: "Yüksek Başarı",
     badgeHighAchieverDesc: "En az 20 soruda ort. %90+",
   },
+  certPreview: {
+    badge: "250'den fazla sertifika",
+    title: "CertCoach'taki tüm sertifikaları keşfet",
+    subtitle: "Microsoft ve AWS'den CompTIA ve Cisco'ya kadar — kurslara başlamak, ilerlemeni takip etmek ve sertifika kazanmak için ücretsiz bir hesap oluştur.",
+    ctaMain: "Ücretsiz kaydol",
+    certsSuffix: "sertifika",
+    bottomCtaTitle: "İlk sertifikana başlamaya hazır mısın?",
+    bottomCtaDesc: "Ücretsiz hesabını oluştur ve 250'den fazla sertifika arasından seç.",
+  },
   landing: {
     badge: "DACH'ta #1 BT Öğrenme Platformu",
     heroTitle1: "Geleceğin",

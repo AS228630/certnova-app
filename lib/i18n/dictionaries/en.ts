@@ -385,6 +385,15 @@ const en: Dictionary = {
     badgeHighAchiever: "High Achiever",
     badgeHighAchieverDesc: "Avg. 90%+ on at least 20 questions",
   },
+  certPreview: {
+    badge: "250+ Certifications",
+    title: "Discover all certifications on CertCoach",
+    subtitle: "From Microsoft and AWS to CompTIA and Cisco — create a free account to start courses, track progress, and earn certificates.",
+    ctaMain: "Register for free",
+    certsSuffix: "certificates",
+    bottomCtaTitle: "Ready to start your first certification?",
+    bottomCtaDesc: "Create your free account and choose from 250+ certifications.",
+  },
   landing: {
     badge: "#1 IT Learning Platform in DACH",
     heroTitle1: "Your future begins",

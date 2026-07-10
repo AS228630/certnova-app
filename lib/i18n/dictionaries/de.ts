@@ -386,6 +386,15 @@ const de = {
     badgeHighAchiever: "High Achiever",
     badgeHighAchieverDesc: "Ø 90%+ bei mind. 20 Fragen",
   },
+  certPreview: {
+    badge: "250+ Zertifizierungen",
+    title: "Entdecke alle Zertifizierungen auf CertCoach",
+    subtitle: "Von Microsoft und AWS bis CompTIA und Cisco — erstelle ein kostenloses Konto, um Kurse zu starten, Fortschritt zu verfolgen und Zertifikate zu erhalten.",
+    ctaMain: "Kostenlos registrieren",
+    certsSuffix: "Zertifikate",
+    bottomCtaTitle: "Bereit, deine erste Zertifizierung zu starten?",
+    bottomCtaDesc: "Erstelle dein kostenloses Konto und wähle aus über 250 Zertifizierungen.",
+  },
   landing: {
     badge: "#1 IT Learning Platform in DACH",
     heroTitle1: "Deine Zukunft beginnt",

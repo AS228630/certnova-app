@@ -8,8 +8,8 @@ import { useLocale } from "@/components/LocaleProvider";
 import { supabase } from "@/lib/supabase/client";
 
 const navLinks = [
-  { labelKey: "landingNav.courses", href: "/certifications" },
-  { labelKey: "landingNav.certifications", href: "/certifications" },
+  { labelKey: "landingNav.courses", href: "/zertifizierungen" },
+  { labelKey: "landingNav.certifications", href: "/zertifizierungen" },
   { labelKey: "landingNav.learningPaths", href: "/learning-paths" },
   { labelKey: "landingNav.resources", href: "/help" },
   { labelKey: "landingNav.business", href: "/business" },

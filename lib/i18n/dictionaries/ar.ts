@@ -385,6 +385,15 @@ const ar: Dictionary = {
     badgeHighAchiever: "الأكثر إنجازاً",
     badgeHighAchieverDesc: "متوسط 90%+ على 20 سؤالاً على الأقل",
   },
+  certPreview: {
+    badge: "أكثر من 250 شهادة",
+    title: "اكتشف جميع الشهادات على CertCoach",
+    subtitle: "من Microsoft وAWS إلى CompTIA وCisco — أنشئ حسابًا مجانيًا لبدء الدورات وتتبع التقدم والحصول على الشهادات.",
+    ctaMain: "التسجيل مجانًا",
+    certsSuffix: "شهادة",
+    bottomCtaTitle: "هل أنت مستعد لبدء أول شهادة لك؟",
+    bottomCtaDesc: "أنشئ حسابك المجاني واختر من بين أكثر من 250 شهادة.",
+  },
   landing: {
     badge: "منصة التعلم رقم 1 لتقنية المعلومات في ألمانيا والنمسا وسويسرا",
     heroTitle1: "مستقبلك يبدأ",

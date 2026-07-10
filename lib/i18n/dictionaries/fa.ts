@@ -385,6 +385,15 @@ const fa: Dictionary = {
     badgeHighAchiever: "موفق برتر",
     badgeHighAchieverDesc: "میانگین ۹۰٪+ در حداقل ۲۰ سوال",
   },
+  certPreview: {
+    badge: "بیش از ۲۵۰ گواهینامه",
+    title: "همه‌ی گواهینامه‌های CertCoach رو کشف کن",
+    subtitle: "از Microsoft و AWS تا CompTIA و Cisco — یک حساب رایگان بساز تا دوره‌ها رو شروع کنی، پیشرفتت رو دنبال کنی و گواهینامه بگیری.",
+    ctaMain: "ثبت‌نام رایگان",
+    certsSuffix: "گواهینامه",
+    bottomCtaTitle: "آماده‌ای اولین گواهینامه‌ت رو شروع کنی؟",
+    bottomCtaDesc: "حساب رایگانت رو بساز و از بین بیش از ۲۵۰ گواهینامه انتخاب کن.",
+  },
   landing: {
     badge: "پلتفرم شماره یک آموزش فناوری اطلاعات در آلمان، اتریش و سوئیس",
     heroTitle1: "آینده‌ات از اینجا شروع می‌شه",

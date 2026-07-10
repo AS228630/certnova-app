@@ -385,6 +385,15 @@ const ru: Dictionary = {
     badgeHighAchiever: "Высокие достижения",
     badgeHighAchieverDesc: "Среднее 90%+ на как минимум 20 вопросах",
   },
+  certPreview: {
+    badge: "Более 250 сертификаций",
+    title: "Изучи все сертификации на CertCoach",
+    subtitle: "От Microsoft и AWS до CompTIA и Cisco — создай бесплатный аккаунт, чтобы начать курсы, отслеживать прогресс и получать сертификаты.",
+    ctaMain: "Зарегистрироваться бесплатно",
+    certsSuffix: "сертификатов",
+    bottomCtaTitle: "Готов начать свою первую сертификацию?",
+    bottomCtaDesc: "Создай бесплатный аккаунт и выбери из более чем 250 сертификаций.",
+  },
   landing: {
     badge: "ИТ-платформа обучения №1 в DACH",
     heroTitle1: "Твоё будущее начинается",
