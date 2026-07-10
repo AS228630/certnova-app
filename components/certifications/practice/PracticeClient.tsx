@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
 import { getAz900Questions } from "@/lib/az900Practice";
+import { getAb900Questions } from "@/lib/ab900Practice";
 import { useLocale } from "@/components/LocaleProvider";
 import { getSectionForIndex, getSectionRange, getSectionCount } from "@/lib/practiceSections";
 import PracticeToolbar from "./PracticeToolbar";
@@ -45,13 +46,15 @@ export default function PracticeClient({
   questions: PracticeQuestion[];
 }) {
   const { locale } = useLocale();
-  // az-900 has real translations available (see lib/i18n/questions/); every
-  // other cert's question bank isn't translated yet, so it always uses the
-  // server-provided (German or generic) questions unchanged.
-  const questions = useMemo(
-    () => (certId === "az-900" ? getAz900Questions(locale) : questionsFromServer),
-    [certId, locale, questionsFromServer]
-  );
+  // az-900 and ab-900 have real translations available (see
+  // lib/i18n/questions/); every other cert's question bank isn't
+  // translated yet, so it always uses the server-provided (German or
+  // generic) questions unchanged.
+  const questions = useMemo(() => {
+    if (certId === "az-900") return getAz900Questions(locale);
+    if (certId === "ab-900") return getAb900Questions(locale);
+    return questionsFromServer;
+  }, [certId, locale, questionsFromServer]);
   const router = useRouter();
   const [order, setOrder] = useState<string[] | null>(null); // null = authored order, else shuffled question ids
   const [index, setIndex] = useState(0);

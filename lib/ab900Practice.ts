@@ -22,7 +22,7 @@
 // correct raw paragraph) — nothing was invented. See scripts/ab900-extraction/
 // for the extraction/parsing/patch scripts used.
 
-import type { PracticeQuestion, PracticeTopic } from "./az900Practice";
+import type { PracticeQuestion, PracticeTopic, SingleChoiceQuestion, YesNoQuestion } from "./az900Practice";
 
 export const AB900_TOPICS: PracticeTopic[] = [
   { id: "copilot-grundlagen", title: "Microsoft 365 Copilot Grundlagen", totalQuestions: 32 },
@@ -1345,3 +1345,50 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
     explanation: "",
   },
 ];
+
+// ---------------------------------------------------------------------
+// Locale translations. Same pattern as lib/az900Practice.ts's
+// getAz900Questions/applyTranslation — see that file for the detailed
+// rationale. Each locale file in lib/i18n/questions/ab900.<locale>.ts is
+// optional and can be filled in incrementally; any question id not yet
+// present in a given locale's file falls back to the German original
+// above, so a partially-translated language never shows an empty field.
+// ---------------------------------------------------------------------
+import type { QuestionTranslations } from "@/lib/i18n/questions/types";
+import ab900_en from "@/lib/i18n/questions/ab900.en";
+
+const AB900_TRANSLATIONS: Partial<Record<string, QuestionTranslations>> = {
+  en: ab900_en,
+};
+
+function applyAb900Translation(
+  q: PracticeQuestion,
+  tr: QuestionTranslations[string] | undefined
+): PracticeQuestion {
+  if (!tr) return q;
+  const merged = { ...q } as PracticeQuestion & { prompt: string; explanation: string };
+  if (tr.prompt) merged.prompt = tr.prompt;
+  if (tr.explanation) merged.explanation = tr.explanation;
+  if (tr.options && "options" in q) {
+    (merged as SingleChoiceQuestion).options = (q as SingleChoiceQuestion).options.map((o) => ({
+      ...o,
+      text: tr.options?.[o.id] ?? o.text,
+    }));
+  }
+  if (tr.statements && q.type === "yesno") {
+    (merged as YesNoQuestion).statements = (q as YesNoQuestion).statements.map((s, i) => ({
+      ...s,
+      text: tr.statements?.[i] ?? s.text,
+    }));
+  }
+  return merged;
+}
+
+/** Returns AB900_QUESTIONS with any available translations for the given
+ * locale applied. Falls back to German for locales with no translation
+ * file yet, and per-question for any field not yet translated. */
+export function getAb900Questions(locale: string): PracticeQuestion[] {
+  const translations = AB900_TRANSLATIONS[locale];
+  if (!translations) return AB900_QUESTIONS;
+  return AB900_QUESTIONS.map((q) => applyAb900Translation(q, translations[q.id]));
+}
