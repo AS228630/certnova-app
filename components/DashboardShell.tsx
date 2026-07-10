@@ -14,6 +14,7 @@ import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
 import { useAiCoachStore } from "@/lib/store/aiCoachStore";
 import { useInterviewStore } from "@/lib/store/interviewStore";
+import { useLanguageCourseStore } from "@/lib/store/languageCourseStore";
 import { getFullName } from "@/lib/supabase/useUser";
 
 export default function DashboardShell({
@@ -41,6 +42,7 @@ export default function DashboardShell({
       useCertProgressStore.getState().loadAll(u.id);
       useAiCoachStore.getState().load(u.id);
       useInterviewStore.getState().load(u.id);
+      useLanguageCourseStore.getState().load(u.id);
     }
 
     async function checkSession() {
@@ -90,6 +92,7 @@ export default function DashboardShell({
         useCertProgressStore.getState().reset();
         useAiCoachStore.getState().reset();
         useInterviewStore.getState().reset();
+        useLanguageCourseStore.getState().reset();
         useLessonCompletionStore.getState().reset();
         if (requireAuth) {
           router.replace("/login");
