@@ -4,6 +4,7 @@ import PracticeClient from "@/components/certifications/practice/PracticeClient"
 import { getCompany, companies } from "@/lib/companiesData";
 import { AZ900_TOPICS, AZ900_QUESTIONS } from "@/lib/az900Practice";
 import { AZ104_TOPICS, AZ104_QUESTIONS } from "@/lib/az104Practice";
+import { AB900_TOPICS, AB900_QUESTIONS } from "@/lib/ab900Practice";
 import { generatePracticeBank } from "@/lib/genericPractice";
 
 // Registry of hand-authored practice-question banks by certId. Any certId
@@ -14,6 +15,7 @@ import { generatePracticeBank } from "@/lib/genericPractice";
 const PRACTICE_BANKS: Record<string, { topics: typeof AZ900_TOPICS; questions: typeof AZ900_QUESTIONS }> = {
   "az-900": { topics: AZ900_TOPICS, questions: AZ900_QUESTIONS },
   "az-104": { topics: AZ104_TOPICS, questions: AZ104_QUESTIONS },
+  "ab-900": { topics: AB900_TOPICS, questions: AB900_QUESTIONS },
 };
 
 export function generateStaticParams() {
