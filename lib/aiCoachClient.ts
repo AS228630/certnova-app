@@ -12,8 +12,14 @@ export class AiCoachRequestError extends Error {
 /** Calls the real KI Coach backend (/api/ai-coach) with a message history
  * and returns the assistant's reply text. Throws AiCoachRequestError with a
  * user-facing German message on failure (network error, timeout, rate
- * limit, or provider error) so callers can display it directly. */
-export async function askAiCoach(messages: SimpleChatMessage[], timeoutMs = 45_000): Promise<string> {
+ * limit, or provider error) so callers can display it directly.
+ * `mode: "interview"` switches the backend to the interview-persona system
+ * prompt (one question at a time, feedback, stays in character). */
+export async function askAiCoach(
+  messages: SimpleChatMessage[],
+  options?: { timeoutMs?: number; mode?: "general" | "interview" }
+): Promise<string> {
+  const timeoutMs = options?.timeoutMs ?? 45_000;
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
@@ -21,7 +27,7 @@ export async function askAiCoach(messages: SimpleChatMessage[], timeoutMs = 45_0
     const res = await fetch("/api/ai-coach", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages }),
+      body: JSON.stringify({ messages, mode: options?.mode ?? "general" }),
       signal: controller.signal,
     });
     clearTimeout(timeoutId);

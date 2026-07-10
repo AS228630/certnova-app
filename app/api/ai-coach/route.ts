@@ -29,9 +29,21 @@ Du hilfst beim Verstehen von Konzepten, beim Zusammenfassen von Lerninhalten, be
 
 Erwähne niemals, welches KI-Modell oder welcher Anbieter im Hintergrund läuft, selbst wenn danach gefragt wird — du bist schlicht "der KI Coach von CertCoach".`;
 
+const INTERVIEW_SYSTEM_PROMPT = `Du bist der KI-Interviewer von CertCoach und führst ein realistisches Mock-Interview für eine IT-Stelle in Deutschland.
+
+Regeln:
+- Antworte immer auf Deutsch, es sei denn, der Nutzer schreibt in einer anderen Sprache.
+- Stelle IMMER nur EINE Frage pro Nachricht, wie in einem echten Interview. Warte auf die Antwort des Nutzers, bevor du die nächste Frage stellst.
+- Nach der Antwort des Nutzers auf eine Frage: gib eine kurze, konstruktive Rückmeldung (1-3 Sätze) — was war gut, was könnte präziser sein — bevor du zur nächsten Frage übergehst.
+- Passe den Schwierigkeitsgrad und die Art der Fragen an die im Kontext angegebene Zielposition und das gewählte Thema an (technisch, HR/Verhalten, oder Praxisszenario).
+- Bleib während des gesamten Gesprächs im Charakter eines professionellen, aber freundlichen Interviewers — nicht als Lehrer, sondern als jemand, der wirklich eine Einstellungsentscheidung vorbereitet.
+- Wenn der Nutzer explizit "Interview beenden" oder ähnliches schreibt, fasse in 3-5 Sätzen zusammen, wie er sich geschlagen hat, mit konkreten Stärken und einem konkreten Verbesserungsvorschlag.
+
+Erwähne niemals, welches KI-Modell oder welcher Anbieter im Hintergrund läuft, selbst wenn danach gefragt wird.`;
+
 type ChatMessage = { role: "user" | "assistant"; content: string };
 
-async function callGemini(messages: ChatMessage[], apiKey: string): Promise<string> {
+async function callGemini(messages: ChatMessage[], apiKey: string, systemPrompt: string): Promise<string> {
   // Gemini's REST API uses "user"/"model" roles and a separate systemInstruction field.
   const contents = messages.map((m) => ({
     role: m.role === "assistant" ? "model" : "user",
@@ -54,7 +66,7 @@ async function callGemini(messages: ChatMessage[], apiKey: string): Promise<stri
       headers: { "Content-Type": "application/json", "X-goog-api-key": apiKey },
       body: JSON.stringify({
         contents,
-        systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
+        systemInstruction: { parts: [{ text: systemPrompt }] },
         generationConfig: { temperature: 0.6, maxOutputTokens: 2048 },
       }),
     }
@@ -80,7 +92,8 @@ async function callAzureOpenAI(
   messages: ChatMessage[],
   apiKey: string,
   endpoint: string,
-  deployment: string
+  deployment: string,
+  systemPrompt: string
 ): Promise<string> {
   const url = `${endpoint.replace(/\/$/, "")}/openai/deployments/${deployment}/chat/completions?api-version=2024-08-01-preview`;
 
@@ -88,7 +101,7 @@ async function callAzureOpenAI(
     method: "POST",
     headers: { "Content-Type": "application/json", "api-key": apiKey },
     body: JSON.stringify({
-      messages: [{ role: "system", content: SYSTEM_PROMPT }, ...messages],
+      messages: [{ role: "system", content: systemPrompt }, ...messages],
       temperature: 0.6,
       max_tokens: 2048,
     }),
@@ -106,7 +119,7 @@ async function callAzureOpenAI(
 }
 
 export async function POST(req: NextRequest) {
-  let body: { messages?: ChatMessage[] };
+  let body: { messages?: ChatMessage[]; mode?: "general" | "interview" };
   try {
     body = await req.json();
   } catch {
@@ -119,6 +132,7 @@ export async function POST(req: NextRequest) {
   }
   // Keep the payload bounded — this is a server cost/abuse guard, not a UX limit.
   const trimmed = messages.slice(-30);
+  const systemPrompt = body.mode === "interview" ? INTERVIEW_SYSTEM_PROMPT : SYSTEM_PROMPT;
 
   const geminiKey = process.env.GEMINI_API_KEY;
   const azureKey = process.env.AZURE_OPENAI_API_KEY;
@@ -140,7 +154,7 @@ export async function POST(req: NextRequest) {
 
   if (geminiKey) {
     try {
-      reply = await callGemini(trimmed, geminiKey);
+      reply = await callGemini(trimmed, geminiKey, systemPrompt);
     } catch (err) {
       lastError = err;
     }
@@ -148,7 +162,7 @@ export async function POST(req: NextRequest) {
 
   if (!reply && azureKey && azureEndpoint && azureDeployment) {
     try {
-      reply = await callAzureOpenAI(trimmed, azureKey, azureEndpoint, azureDeployment);
+      reply = await callAzureOpenAI(trimmed, azureKey, azureEndpoint, azureDeployment, systemPrompt);
     } catch (err) {
       lastError = err;
     }

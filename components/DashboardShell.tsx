@@ -13,6 +13,7 @@ import { useProfileStore } from "@/lib/store/profileStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
 import { useAiCoachStore } from "@/lib/store/aiCoachStore";
+import { useInterviewStore } from "@/lib/store/interviewStore";
 import { getFullName } from "@/lib/supabase/useUser";
 
 export default function DashboardShell({
@@ -48,6 +49,7 @@ export default function DashboardShell({
       useProfileStore.getState().load(data.session.user.id);
       useCertProgressStore.getState().loadAll(data.session.user.id);
       useAiCoachStore.getState().load(data.session.user.id);
+      useInterviewStore.getState().load(data.session.user.id);
     });
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -57,6 +59,7 @@ export default function DashboardShell({
         useProfileStore.getState().reset();
         useCertProgressStore.getState().reset();
         useAiCoachStore.getState().reset();
+        useInterviewStore.getState().reset();
         useLessonCompletionStore.getState().reset();
         if (requireAuth) {
           router.replace("/login");
@@ -69,6 +72,7 @@ export default function DashboardShell({
       useProfileStore.getState().load(session.user.id);
       useCertProgressStore.getState().loadAll(session.user.id);
       useAiCoachStore.getState().load(session.user.id);
+      useInterviewStore.getState().load(session.user.id);
     });
 
     return () => {
