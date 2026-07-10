@@ -7,10 +7,14 @@ import Footer from "@/components/Footer";
 import { companies } from "@/lib/companiesData";
 import { getCompanyIcon } from "@/lib/vendorIcons";
 import { useLocale } from "@/components/LocaleProvider";
+import { useGuestOnlyRedirect } from "@/lib/useGuestOnlyRedirect";
 
 export default function ZertifizierungenPreviewPage() {
   const { t } = useLocale();
   const sorted = [...companies].sort((a, b) => b.rating - a.rating);
+  const { checking } = useGuestOnlyRedirect();
+
+  if (checking) return null;
 
   return (
     <div className="min-h-screen bg-bg">

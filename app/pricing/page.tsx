@@ -27,6 +27,7 @@ import {
 } from "lucide-react";
 import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
+import { useGuestOnlyRedirect } from "@/lib/useGuestOnlyRedirect";
 
 type Billing = "monthly" | "yearly";
 
@@ -177,6 +178,9 @@ const faqs = [
 export default function PricingPage() {
   const [billing, setBilling] = useState<Billing>("yearly");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const { checking } = useGuestOnlyRedirect();
+
+  if (checking) return null;
 
   return (
     <div className="min-h-screen bg-bg">

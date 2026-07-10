@@ -96,6 +96,98 @@ const ab900_en: QuestionTranslations = {
       D: "Microsoft Entra Privileged Identity Management (PIM) provides time-bound role activation.",
     },
   },
+  // Batch 2: questions 11-20.
+  "real-ab900-11": {
+    prompt: "A user named User5 navigates to https://myapps.microsoft.com. After entering their username and password, User5 receives the following message on their mobile device. Use the drop-down menus to select the answer choice that completes the statement based on the information presented in the graphic.",
+    options: {
+      A: "User5 is using email OTP for multifactor authentication (MFA).",
+      B: "User5 is using the Microsoft Authenticator app for multifactor authentication (MFA).",
+      C: "User5 is using SMS for multifactor authentication (MFA).",
+      D: "User5 is using a Temporary Access Pass for multifactor authentication (MFA).",
+    },
+  },
+  "real-ab900-12": {
+    prompt: "For each of the following statements, select Yes if the statement is true. Otherwise, select No. (NOTE: Each correct selection is worth one point.)",
+    statements: [
+      "Microsoft Defender for Office 365 provides protection from phishing and malware attacks",
+      "Microsoft Defender for Identity monitors identities in Active Directory domains",
+      "Microsoft Defender Vulnerability Management provides protection for software as a service (SaaS) applications",
+    ],
+  },
+  "real-ab900-13": {
+    prompt: "Your organization has a Microsoft 365 subscription that contains a Microsoft SharePoint site named Site1. The permissions for Site1 are configured as shown in the following exhibit. You create a new user named User1 in the subscription. Use the drop-down menus to select the answer choice that completes the statement based on the information presented in the graphic.",
+    options: {
+      A: "User1 is a site visitor of Site1.",
+      B: "User1 is a site owner of Site1.",
+      C: "User1 is a site member of Site1.",
+      D: "User1 is prevented from accessing Site1.",
+    },
+  },
+  "real-ab900-14": {
+    prompt: "A multinational corporation with over 5,000 users is rolling out Microsoft 365 Copilot. The company currently has a mix of Microsoft 365 E3 and Office 365 E3 licenses for its information workers. The IT administrator must ensure that all users can access the full generative AI capabilities of Copilot within applications like Word and Excel. What is the minimum licensing action required to provide all existing information workers with access to Microsoft 365 Copilot?",
+    options: {
+      A: "Upgrade all existing Office 365 E3 licenses to Microsoft 365 E5 licenses.",
+      B: "Purchase the separate Microsoft 365 Copilot add-on license for all users.",
+      C: "Switch all existing licenses from Enterprise plans to Microsoft 365 Business Premium plans.",
+      D: "Only purchase the Microsoft 365 Copilot add-on for users with Microsoft 365 E3 licenses, as Office 365 E3 is not eligible.",
+    },
+  },
+  "real-ab900-15": {
+    prompt: "Select the answer that correctly completes the sentence.",
+    options: {
+      A: "If a user shares a Microsoft 365 Copilot agent, you can use Microsoft Foundry to block users from using the agent.",
+      B: "If a user shares a Microsoft 365 Copilot agent, you can use Microsoft Copilot Studio to block users from using the agent.",
+      C: "If a user shares a Microsoft 365 Copilot agent, you can use the Microsoft 365 admin center to block users from using the agent.",
+      D: "If a user shares a Microsoft 365 Copilot agent, you can use the Power Apps portal to block users from using the agent.",
+    },
+  },
+  "real-ab900-16": {
+    prompt: "The IT administration team at your organization, Contoso Ltd., has acquired a new domain name, contosoglobal.com, and needs to add it to their Microsoft 365 environment. This new domain will be used for all new user principal names (UPNs) and email addresses. Which section of the Microsoft 365 admin center must the administrator use to manage, verify, and set the new domain as the default for new users?",
+    options: {
+      A: "Settings > Org settings > Services",
+      B: "Billing > Licenses > Product List",
+      C: "Setup > Domain setup > Connect domain",
+      D: "Settings > Domains",
+    },
+  },
+  "real-ab900-17": {
+    prompt: "A Finance user received a sophisticated phishing email with a malicious link that was neutralized. The security team needs a single, centralized view to review the incident timeline, related alerts (email and endpoint), and recommended actions to harden posture across email and endpoints. Which Defender XDR capability or portal area gives the security operations team that unified incident timeline and improvement recommendations?",
+    options: {
+      A: "Microsoft Defender for Identity",
+      B: "Microsoft Defender for Office 365",
+      C: "Microsoft Defender Vulnerability Management",
+      D: "The unified Incidents and Alerts experience plus Secure Score in the Microsoft Defender portal",
+    },
+  },
+  "real-ab900-18": {
+    prompt: "A user is blocked from signing in and the admin suspects Conditional Access or a risky sign-in detection. Which two tools in the Microsoft Entra admin center should the administrator use first to identify the exact sign-in failure and which policy caused it? (Each correct selection presents part of the solution. NOTE: Each correct selection is worth one point.)",
+    options: {
+      A: "Conditional Access What If tool",
+      B: "Microsoft 365 Service Health dashboard",
+      C: "Sign-in logs and Troubleshoot and support in Microsoft Entra ID",
+      D: "Exchange Online Message Trace",
+      E: "Microsoft Entra ID Application proxy",
+    },
+  },
+  "real-ab900-19": {
+    prompt: "For each of the following statements, select Yes if the statement is true. Otherwise, select No. (NOTE: Each correct selection is worth one point.)",
+    statements: [
+      "Microsoft Purview Compliance Manager provides a risk-based compliance score to help you understand your compliance posture",
+      "Microsoft Purview Compliance Manager provides step-by-step guidance to remediate compliance issues",
+      "Compliance Manager is part of Microsoft Defender",
+    ],
+  },
+  "real-ab900-20": {
+    prompt: "Your organization has a Microsoft 365 subscription. You discover that Microsoft SharePoint files are being shared to users outside your organization. You need to identify which files are being shared to the external users. Which report should you use in the SharePoint admin center? (To answer, select the appropriate report in the answer area.)",
+    options: {
+      A: "Agent insights",
+      B: "App insights",
+      C: "Change history",
+      D: "Data access governance",
+      E: "OneDrive accounts",
+      F: "Site policy comparison",
+    },
+  },
 };
 
 export default ab900_en;

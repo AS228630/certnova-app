@@ -24,6 +24,7 @@ import { getVendorIcon, getCompanyIcon } from "@/lib/vendorIcons";
 import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
 import { useLocale } from "@/components/LocaleProvider";
+import { useGuestOnlyRedirect } from "@/lib/useGuestOnlyRedirect";
 
 const heroStats = [
   { icon: Users, value: "120K+", labelKey: "landing.statActiveLearners" },
@@ -109,6 +110,9 @@ const trustLogos = [
 
 export default function LandingPage() {
   const { t } = useLocale();
+  const { checking } = useGuestOnlyRedirect();
+
+  if (checking) return null;
   return (
     <div className="min-h-screen bg-bg">
       {/* Nav */}
