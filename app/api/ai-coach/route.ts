@@ -45,7 +45,10 @@ async function callGemini(messages: ChatMessage[], apiKey: string): Promise<stri
   // `X-goog-api-key` header instead. The header form works for both key
   // formats, so we always use it.
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`,
+    // gemini-2.0-flash was deprecated on June 1, 2026 — gemini-2.5-flash is
+    // the current free-tier-eligible replacement (as of this writing; check
+    // https://ai.google.dev/gemini-api/docs/models for the latest).
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json", "X-goog-api-key": apiKey },
@@ -59,6 +62,11 @@ async function callGemini(messages: ChatMessage[], apiKey: string): Promise<stri
 
   if (!res.ok) {
     const errText = await res.text().catch(() => "");
+    if (res.status === 429) {
+      const err = new Error(`Gemini rate limit: ${errText.slice(0, 300)}`);
+      err.name = "RateLimitError";
+      throw err;
+    }
     throw new Error(`Gemini request failed (${res.status}): ${errText.slice(0, 300)}`);
   }
 
@@ -148,9 +156,14 @@ export async function POST(req: NextRequest) {
 
   if (!reply) {
     console.error("AI Coach provider error:", lastError);
+    const isRateLimit = lastError instanceof Error && lastError.name === "RateLimitError";
     return Response.json(
-      { error: "Der KI Coach ist gerade nicht erreichbar. Bitte versuche es in Kürze erneut." },
-      { status: 502 }
+      {
+        error: isRateLimit
+          ? "Das kostenlose Nutzungslimit des KI Coach ist für den Moment erreicht. Bitte versuche es in ein paar Minuten erneut."
+          : "Der KI Coach ist gerade nicht erreichbar. Bitte versuche es in Kürze erneut.",
+      },
+      { status: isRateLimit ? 429 : 502 }
     );
   }
 
