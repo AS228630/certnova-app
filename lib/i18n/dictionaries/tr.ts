@@ -56,6 +56,7 @@ const tr: Dictionary = {
     certifications: "Sertifikalar",
     learningPaths: "Öğrenme Yolları",
     resources: "Yardım ve Kaynaklar",
+    business: "Kurumsal",
     pricing: "Fiyatlandırma",
     login: "Giriş Yap",
     getStarted: "Başla",
@@ -71,6 +72,7 @@ const tr: Dictionary = {
   footer: {
     platform: "Platform",
     resources: "Kaynaklar",
+    business: "Kurumsal",
     legal: "Yasal",
     pricing: "Fiyatlandırma",
     terms: "Kullanım Şartları",
@@ -79,6 +81,11 @@ const tr: Dictionary = {
     copyright: "© 2026 CertCoach · Almanya'da ❤️ ile yapıldı",
     getTheApp: "Uygulamayı al",
     comingSoonBadge: "yakında",
+    sslEncrypted: "SSL şifreleme",
+    securePayment: "Güvenli ödeme",
+    gdprCompliant: "GDPR uyumlu",
+    communitySupport: "Topluluk desteği",
+    serverInGermany: "Almanya'da sunucular",
   },
   common: {
     save: "Kaydet",
@@ -296,6 +303,7 @@ const tr: Dictionary = {
     role2: "Azure Yöneticisi",
     role3: "Güvenlik Analisti",
     footerLegal: "Yasal",
+    trustedByTitle: "Dünyanın önde gelen şirketlerinde tanınan sertifikalar",
   },
   certList: {
     heroTitle: "Sertifikalar",

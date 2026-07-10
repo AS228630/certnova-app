@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import {
-  Search,
-  ChevronDown,
   ArrowRight,
   Play,
   Users,
@@ -18,17 +16,13 @@ import {
   Route,
   Laptop,
   TrendingUp,
-  Lock,
-  CreditCard,
-  Globe2,
   BadgeCheck,
-  Apple,
   AlignLeft,
 } from "lucide-react";
-import { FaLinkedin, FaGithub, FaYoutube, FaFacebook, FaInstagram } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { SiGoogle, SiSiemens } from "react-icons/si";
 import { getVendorIcon, getCompanyIcon } from "@/lib/vendorIcons";
 import LandingHeader from "@/components/LandingHeader";
+import Footer from "@/components/Footer";
 import { useLocale } from "@/components/LocaleProvider";
 
 const heroStats = [
@@ -104,38 +98,14 @@ const testimonials = [
   },
 ];
 
-const footerColumns = [
-  {
-    titleKey: "landing.footerPlatform",
-    links: ["Kurse", "Lernpfade", "Zertifizierungen", "Labs", "KI Coach", "Community"],
-  },
-  {
-    titleKey: "landing.footerResources",
-    links: ["Blog", "Success Stories", "Learning Guides", "Interview Fragen", "Practice Exams", "FAQ"],
-  },
-  {
-    titleKey: "landing.footerLegal",
-    links: ["Impressum", "Datenschutz (GDPR)", "Nutzungsbedingungen", "AGB", "Widerrufsrecht"],
-  },
+const trustLogos = [
+  { name: "Google", render: () => <SiGoogle size={22} /> },
+  { name: "Microsoft", render: () => getCompanyIcon("microsoft", 22) },
+  { name: "AWS", render: () => getCompanyIcon("aws", 22) },
+  { name: "IBM", render: () => getCompanyIcon("ibm", 22) },
+  { name: "Siemens", render: () => <SiSiemens size={22} /> },
+  { name: "Deloitte", render: null },
 ];
-
-const trustBadges = [
-  { icon: Lock, labelKey: "landing.sslEncrypted", color: "#22c55e" },
-  { icon: CreditCard, labelKey: "landing.securePayment", color: "#6d4cff" },
-  { icon: ShieldCheck, labelKey: "landing.gdprCompliant", color: "#0ea5e9" },
-  { icon: Users, labelKey: "landing.communitySupport", color: "#f59e0b" },
-  { icon: Globe2, labelKey: "landing.serverInGermany", color: "#ef4444" },
-];
-
-function GermanFlag({ size = 16 }: { size?: number }) {
-  return (
-    <svg width={size} height={(size * 3) / 5} viewBox="0 0 5 3" aria-hidden="true" className="rounded-[2px]">
-      <rect width="5" height="1" y="0" fill="#000000" />
-      <rect width="5" height="1" y="1" fill="#DD0000" />
-      <rect width="5" height="1" y="2" fill="#FFCE00" />
-    </svg>
-  );
-}
 
 export default function LandingPage() {
   const { t } = useLocale();
@@ -291,6 +261,21 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Trusted by / certification recognition */}
+      <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        <p className="mb-6 text-center text-xs font-semibold uppercase tracking-wide text-text-faint">
+          {t("landing.trustedByTitle")}
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 opacity-70 grayscale">
+          {trustLogos.map((l) => (
+            <span key={l.name} className="flex items-center gap-2 text-text-muted">
+              {l.render ? l.render() : <span className="text-lg font-semibold italic">{l.name}.</span>}
+              {l.render && <span className="text-base font-semibold">{l.name}</span>}
+            </span>
+          ))}
+        </div>
+      </section>
+
       {/* Popular learning paths */}
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="mb-6 flex items-center justify-between">
@@ -413,132 +398,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="mt-10 border-t border-border-soft bg-panel">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5">
-            <div className="lg:col-span-2">
-              <div className="mb-3 flex items-center gap-2">
-                <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white">
-                  C
-                </div>
-                <span className="text-lg font-bold text-text">CertCoach</span>
-              </div>
-              <p className="mb-4 max-w-xs text-sm text-text-faint">
-                {t("landing.footerTagline")}
-              </p>
-              <div className="flex items-center gap-2.5">
-                {[
-                  { Icon: FaLinkedin, label: "LinkedIn", href: "https://linkedin.com", color: "#0A66C2" },
-                  { Icon: FaGithub, label: "GitHub", href: "https://github.com", color: "#f2f3f9" },
-                  { Icon: FaYoutube, label: "YouTube", href: "https://youtube.com", color: "#FF0000" },
-                  { Icon: FaXTwitter, label: "X", href: "https://x.com", color: "#f2f3f9" },
-                  { Icon: FaFacebook, label: "Facebook", href: "https://facebook.com", color: "#1877F2" },
-                  { Icon: FaInstagram, label: "Instagram", href: "https://instagram.com", color: "#E1306C" },
-                ].map(({ Icon, label, href, color }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={label}
-                    className="flex h-9 w-9 items-center justify-center rounded-full bg-panel-alt transition-transform hover:-translate-y-0.5"
-                    style={{ color }}
-                  >
-                    <Icon size={17} />
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {footerColumns.map((col) => (
-              <div key={col.titleKey}>
-                <p className="mb-3 text-sm font-bold text-text">{t(col.titleKey)}</p>
-                <ul className="space-y-2">
-                  {col.links.map((l) => (
-                    <li key={l}>
-                      <Link href="#" className="text-sm text-text-faint hover:text-text">
-                        {l}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-10 rounded-xl border border-border-soft p-5">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="text-sm font-bold text-text">{t("landing.stayUpdated")}</p>
-                <p className="text-xs text-text-faint">
-                  {t("landing.newsletterDesc")}
-                </p>
-              </div>
-              <div className="flex flex-col gap-2 sm:flex-row">
-                <input
-                  type="email"
-                  placeholder={t("landing.emailPlaceholder")}
-                  className="rounded-lg border border-border-soft bg-panel-alt px-4 py-2 text-sm text-text placeholder:text-text-faint focus:outline-none sm:w-56"
-                />
-                <button className="rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white hover:bg-primary-dark">
-                  {t("landing.subscribe")}
-                </button>
-              </div>
-            </div>
-            <div className="mt-4 flex gap-3">
-              <a
-                href="#"
-                className="flex items-center gap-2.5 rounded-lg border border-white/10 bg-black px-3.5 py-2 transition-opacity hover:opacity-80"
-              >
-                <Apple size={22} className="text-white" />
-                <div className="text-left leading-none">
-                  <p className="text-[9px] text-gray-300">Download on the</p>
-                  <p className="text-sm font-semibold text-white">App Store</p>
-                </div>
-              </a>
-              <a
-                href="#"
-                className="flex items-center gap-2.5 rounded-lg border border-white/10 bg-black px-3.5 py-2 transition-opacity hover:opacity-80"
-              >
-                <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="googlePlayGradient" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stopColor="#00C2FF" />
-                      <stop offset="35%" stopColor="#00E676" />
-                      <stop offset="65%" stopColor="#FFD600" />
-                      <stop offset="100%" stopColor="#FF3D57" />
-                    </linearGradient>
-                  </defs>
-                  <path d="M5 3l14 9-14 9V3z" fill="url(#googlePlayGradient)" />
-                </svg>
-                <div className="text-left leading-none">
-                  <p className="text-[9px] text-gray-300">GET IT ON</p>
-                  <p className="text-sm font-semibold text-white">Google Play</p>
-                </div>
-              </a>
-            </div>
-          </div>
-
-          <div className="mt-8 flex flex-col items-center gap-4 border-t border-border-soft pt-6 sm:flex-row sm:justify-between">
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              {trustBadges.map((b) => (
-                <span key={b.labelKey} className="flex items-center gap-1.5 text-[11px] text-text-muted">
-                  <b.icon size={13} style={{ color: b.color }} />
-                  {t(b.labelKey)}
-                </span>
-              ))}
-            </div>
-            <div className="flex items-center gap-4 text-xs text-text-faint">
-              <span>{t("landing.copyright")}</span>
-              <button className="flex items-center gap-1.5">
-                <GermanFlag size={16} />
-                {t("landing.language")}
-              </button>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

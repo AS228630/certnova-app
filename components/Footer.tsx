@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useLocale } from "@/components/LocaleProvider";
-import { Linkedin, Youtube, Twitter, Instagram, Facebook } from "lucide-react";
+import { Linkedin, Youtube, Twitter, Instagram, Facebook, Lock, CreditCard, ShieldCheck, Users, Globe2 } from "lucide-react";
 
 const columns = [
   {
@@ -26,6 +26,10 @@ const columns = [
     ],
   },
   {
+    titleKey: "footer.business",
+    links: [{ labelKey: "landingNav.business", href: "/business" }],
+  },
+  {
     titleKey: "footer.legal",
     links: [
       { labelKey: "footer.terms", href: "/agb" },
@@ -34,12 +38,20 @@ const columns = [
   },
 ];
 
+const trustBadges = [
+  { icon: Lock, labelKey: "footer.sslEncrypted", color: "#22c55e" },
+  { icon: CreditCard, labelKey: "footer.securePayment", color: "#6d4cff" },
+  { icon: ShieldCheck, labelKey: "footer.gdprCompliant", color: "#0ea5e9" },
+  { icon: Users, labelKey: "footer.communitySupport", color: "#f59e0b" },
+  { icon: Globe2, labelKey: "footer.serverInGermany", color: "#ef4444" },
+];
+
 export default function Footer() {
   const { t } = useLocale();
   return (
     <footer className="mt-10 rounded-2xl border border-border-soft bg-panel p-6 md:p-8">
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-        <div>
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="lg:col-span-1">
           <div className="mb-3 flex items-center gap-2">
             <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary">
               <span className="h-2.5 w-2.5 rotate-45 rounded-[2px] bg-white" />
@@ -50,11 +62,21 @@ export default function Footer() {
             {t("footer.tagline")}
           </p>
           <div className="flex items-center gap-3 text-text-faint">
-            <Linkedin size={17} />
-            <Youtube size={17} />
-            <Twitter size={17} />
-            <Instagram size={17} />
-            <Facebook size={17} />
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Linkedin size={17} />
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+              <Youtube size={17} />
+            </a>
+            <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X">
+              <Twitter size={17} />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <Instagram size={17} />
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <Facebook size={17} />
+            </a>
           </div>
         </div>
 
@@ -89,6 +111,14 @@ export default function Footer() {
       </div>
 
       <div className="mt-6 flex flex-col gap-4 border-t border-border-soft pt-6 text-xs text-text-faint sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+        <div className="flex flex-wrap gap-4">
+          {trustBadges.map((b) => (
+            <span key={b.labelKey} className="flex items-center gap-1.5">
+              <b.icon size={13} style={{ color: b.color }} />
+              {t(b.labelKey)}
+            </span>
+          ))}
+        </div>
         <p>{t("footer.copyright")}</p>
       </div>
     </footer>

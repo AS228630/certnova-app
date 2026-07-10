@@ -56,6 +56,7 @@ const fa: Dictionary = {
     certifications: "گواهینامه‌ها",
     learningPaths: "مسیرهای یادگیری",
     resources: "راهنما و منابع",
+    business: "برای سازمان‌ها",
     pricing: "قیمت‌گذاری",
     login: "ورود",
     getStarted: "همین حالا شروع کن",
@@ -71,6 +72,7 @@ const fa: Dictionary = {
   footer: {
     platform: "پلتفرم",
     resources: "منابع",
+    business: "سازمان‌ها",
     legal: "حقوقی",
     pricing: "قیمت‌گذاری",
     terms: "شرایط استفاده",
@@ -79,6 +81,11 @@ const fa: Dictionary = {
     copyright: "© ۲۰۲۶ CertCoach · با ❤️ در آلمان ساخته شده",
     getTheApp: "اپلیکیشن رو دریافت کن",
     comingSoonBadge: "به‌زودی",
+    sslEncrypted: "رمزنگاری SSL",
+    securePayment: "پرداخت امن",
+    gdprCompliant: "منطبق با GDPR",
+    communitySupport: "پشتیبانی انجمن",
+    serverInGermany: "سرور در آلمان",
   },
   common: {
     save: "ذخیره",
@@ -296,6 +303,7 @@ const fa: Dictionary = {
     role2: "مدیر Azure",
     role3: "تحلیل‌گر امنیت",
     footerLegal: "حقوقی",
+    trustedByTitle: "گواهینامه‌های شناخته‌شده در شرکت‌های پیشرو دنیا",
   },
   certList: {
     heroTitle: "گواهینامه‌ها",

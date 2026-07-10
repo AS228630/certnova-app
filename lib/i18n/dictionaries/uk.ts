@@ -56,6 +56,7 @@ const uk: Dictionary = {
     certifications: "Сертифікації",
     learningPaths: "Навчальні шляхи",
     resources: "Довідка та ресурси",
+    business: "Для бізнесу",
     pricing: "Тарифи",
     login: "Увійти",
     getStarted: "Почати зараз",
@@ -71,6 +72,7 @@ const uk: Dictionary = {
   footer: {
     platform: "Платформа",
     resources: "Ресурси",
+    business: "Бізнес",
     legal: "Правова інформація",
     pricing: "Тарифи",
     terms: "Умови використання",
@@ -79,6 +81,11 @@ const uk: Dictionary = {
     copyright: "© 2026 CertCoach · Зроблено з ❤️ у Німеччині",
     getTheApp: "Завантажити застосунок",
     comingSoonBadge: "незабаром",
+    sslEncrypted: "SSL-шифрування",
+    securePayment: "Безпечна оплата",
+    gdprCompliant: "Відповідність GDPR",
+    communitySupport: "Підтримка спільноти",
+    serverInGermany: "Сервери в Німеччині",
   },
   common: {
     save: "Зберегти",
@@ -296,6 +303,7 @@ const uk: Dictionary = {
     role2: "Адміністратор Azure",
     role3: "Аналітик безпеки",
     footerLegal: "Правова інформація",
+    trustedByTitle: "Сертифікації, визнані провідними компаніями світу",
   },
   certList: {
     heroTitle: "Сертифікації",

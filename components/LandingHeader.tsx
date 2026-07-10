@@ -11,6 +11,7 @@ const navLinks = [
   { labelKey: "landingNav.courses", href: "/certifications" },
   { labelKey: "landingNav.learningPaths", href: "/learning-paths" },
   { labelKey: "landingNav.resources", href: "/help" },
+  { labelKey: "landingNav.business", href: "/business" },
   { labelKey: "landingNav.pricing", href: "/pricing" },
 ];
 

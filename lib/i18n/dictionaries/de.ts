@@ -57,6 +57,7 @@ const de = {
     certifications: "Zertifizierungen",
     learningPaths: "Lernpfade",
     resources: "Hilfe & Ressourcen",
+    business: "Für Unternehmen",
     pricing: "Preise",
     login: "Anmelden",
     getStarted: "Jetzt starten",
@@ -72,6 +73,7 @@ const de = {
   footer: {
     platform: "Plattform",
     resources: "Ressourcen",
+    business: "Unternehmen",
     legal: "Rechtliches",
     pricing: "Preise",
     terms: "AGB",
@@ -80,6 +82,11 @@ const de = {
     copyright: "© 2026 CertCoach · Made with ❤️ in Germany",
     getTheApp: "App herunterladen",
     comingSoonBadge: "bald verfügbar",
+    sslEncrypted: "SSL verschlüsselt",
+    securePayment: "Sichere Zahlung",
+    gdprCompliant: "DSGVO-konform",
+    communitySupport: "Community-Support",
+    serverInGermany: "Server in Deutschland",
   },
   common: {
     save: "Speichern",
@@ -297,6 +304,7 @@ const de = {
     role2: "Azure Administrator",
     role3: "Security Analyst",
     footerLegal: "Rechtliches",
+    trustedByTitle: "Zertifizierungen anerkannt bei führenden Unternehmen weltweit",
   },
   certList: {
     heroTitle: "Zertifizierungen",

@@ -56,6 +56,7 @@ const ru: Dictionary = {
     certifications: "Сертификации",
     learningPaths: "Учебные пути",
     resources: "Справка и ресурсы",
+    business: "Для бизнеса",
     pricing: "Тарифы",
     login: "Войти",
     getStarted: "Начать",
@@ -71,6 +72,7 @@ const ru: Dictionary = {
   footer: {
     platform: "Платформа",
     resources: "Ресурсы",
+    business: "Бизнесу",
     legal: "Правовая информация",
     pricing: "Тарифы",
     terms: "Условия использования",
@@ -79,6 +81,11 @@ const ru: Dictionary = {
     copyright: "© 2026 CertCoach · Сделано с ❤️ в Германии",
     getTheApp: "Скачать приложение",
     comingSoonBadge: "скоро",
+    sslEncrypted: "SSL-шифрование",
+    securePayment: "Безопасная оплата",
+    gdprCompliant: "Соответствие GDPR",
+    communitySupport: "Поддержка сообщества",
+    serverInGermany: "Серверы в Германии",
   },
   common: {
     save: "Сохранить",
@@ -296,6 +303,7 @@ const ru: Dictionary = {
     role2: "Администратор Azure",
     role3: "Аналитик безопасности",
     footerLegal: "Правовая информация",
+    trustedByTitle: "Сертификации, признанные ведущими компаниями по всему миру",
   },
   certList: {
     heroTitle: "Сертификации",

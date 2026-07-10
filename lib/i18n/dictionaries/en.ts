@@ -56,6 +56,7 @@ const en: Dictionary = {
     certifications: "Certifications",
     learningPaths: "Learning Paths",
     resources: "Help & Resources",
+    business: "For Business",
     pricing: "Pricing",
     login: "Log in",
     getStarted: "Get Started",
@@ -71,6 +72,7 @@ const en: Dictionary = {
   footer: {
     platform: "Platform",
     resources: "Resources",
+    business: "Business",
     legal: "Legal",
     pricing: "Pricing",
     terms: "Terms",
@@ -79,6 +81,11 @@ const en: Dictionary = {
     copyright: "© 2026 CertCoach · Made with ❤️ in Germany",
     getTheApp: "Get the app",
     comingSoonBadge: "coming soon",
+    sslEncrypted: "SSL encrypted",
+    securePayment: "Secure payment",
+    gdprCompliant: "GDPR compliant",
+    communitySupport: "Community support",
+    serverInGermany: "Servers in Germany",
   },
   common: {
     save: "Save",
@@ -296,6 +303,7 @@ const en: Dictionary = {
     role2: "Azure Administrator",
     role3: "Security Analyst",
     footerLegal: "Legal",
+    trustedByTitle: "Certifications recognized at leading companies worldwide",
   },
   certList: {
     heroTitle: "Certifications",
