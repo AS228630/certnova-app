@@ -38,11 +38,17 @@ async function callGemini(messages: ChatMessage[], apiKey: string): Promise<stri
     parts: [{ text: m.content }],
   }));
 
+  // Google now issues newer "Auth key" API keys (prefixed "AQ.") by default
+  // instead of the older "AIzaSy..." Standard keys. AQ. keys are rejected
+  // when passed as the `?key=` query parameter (401 UNAUTHENTICATED /
+  // ACCESS_TOKEN_TYPE_UNSUPPORTED) — they must be sent via the
+  // `X-goog-api-key` header instead. The header form works for both key
+  // formats, so we always use it.
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`,
     {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "X-goog-api-key": apiKey },
       body: JSON.stringify({
         contents,
         systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },

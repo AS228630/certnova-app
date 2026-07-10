@@ -147,11 +147,16 @@ export const useAiCoachStore = create<AiCoachState>((set, get) => ({
         .messages.slice(-20)
         .map((m) => ({ role: m.role, content: m.content }));
 
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 45_000);
+
       const res = await fetch("/api/ai-coach", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: history }),
+        signal: controller.signal,
       });
+      clearTimeout(timeoutId);
 
       const data = await res.json();
 
@@ -178,8 +183,14 @@ export const useAiCoachStore = create<AiCoachState>((set, get) => ({
         .from("ai_conversations")
         .update({ updated_at: new Date().toISOString() })
         .eq("id", conversationId);
-    } catch {
-      set({ sending: false, error: "Der KI Coach ist gerade nicht erreichbar. Bitte versuche es erneut." });
+    } catch (err) {
+      const isTimeout = err instanceof DOMException && err.name === "AbortError";
+      set({
+        sending: false,
+        error: isTimeout
+          ? "Die Antwort hat zu lange gedauert. Bitte versuche es erneut."
+          : "Der KI Coach ist gerade nicht erreichbar. Bitte versuche es erneut.",
+      });
     }
   },
 
