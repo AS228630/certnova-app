@@ -94,6 +94,25 @@ export async function getLeaderboard(currentUserId: string, limit = 10): Promise
   return rows;
 }
 
+/** Real percentile rank (1-100, higher is better) for a user's XP among all
+ * leaderboard entries. Returns null if there's no data to compare against
+ * (e.g. brand-new leaderboard) rather than guessing. */
+export async function getXpPercentile(userXp: number): Promise<number | null> {
+  const { count: total } = await supabase
+    .from("leaderboard_entries")
+    .select("*", { count: "exact", head: true });
+
+  if (!total || total < 5) return null; // too few users for a meaningful percentile
+
+  const { count: below } = await supabase
+    .from("leaderboard_entries")
+    .select("*", { count: "exact", head: true })
+    .lt("xp", userXp);
+
+  if (below == null) return null;
+  return Math.max(1, Math.round(100 - (below / total) * 100));
+}
+
 export const useUserProgressStore = create<UserProgressState>((set, get) => ({
   progress: null,
   loading: true,

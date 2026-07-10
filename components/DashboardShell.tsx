@@ -12,6 +12,7 @@ import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useProfileStore } from "@/lib/store/profileStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
+import { useAiCoachStore } from "@/lib/store/aiCoachStore";
 import { getFullName } from "@/lib/supabase/useUser";
 
 export default function DashboardShell({
@@ -46,6 +47,7 @@ export default function DashboardShell({
       useUserProgressStore.getState().load(data.session.user.id, getFullName(data.session.user));
       useProfileStore.getState().load(data.session.user.id);
       useCertProgressStore.getState().loadAll(data.session.user.id);
+      useAiCoachStore.getState().load(data.session.user.id);
     });
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
@@ -54,6 +56,7 @@ export default function DashboardShell({
         useUserProgressStore.getState().reset();
         useProfileStore.getState().reset();
         useCertProgressStore.getState().reset();
+        useAiCoachStore.getState().reset();
         useLessonCompletionStore.getState().reset();
         if (requireAuth) {
           router.replace("/login");
@@ -65,6 +68,7 @@ export default function DashboardShell({
       useUserProgressStore.getState().load(session.user.id, getFullName(session.user));
       useProfileStore.getState().load(session.user.id);
       useCertProgressStore.getState().loadAll(session.user.id);
+      useAiCoachStore.getState().load(session.user.id);
     });
 
     return () => {
