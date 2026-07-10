@@ -33,24 +33,54 @@ export default function DashboardShell({
   useEffect(() => {
     let mounted = true;
 
-    supabase.auth.getSession().then(({ data }) => {
+    function loadForUser(u: User) {
+      setUser(u);
+      setChecked(true);
+      useUserProgressStore.getState().load(u.id, getFullName(u));
+      useProfileStore.getState().load(u.id);
+      useCertProgressStore.getState().loadAll(u.id);
+      useAiCoachStore.getState().load(u.id);
+      useInterviewStore.getState().load(u.id);
+    }
+
+    async function checkSession() {
+      const { data } = await supabase.auth.getSession();
       if (!mounted) return;
-      if (!data.session) {
-        if (requireAuth) {
-          router.replace("/login");
-          return;
-        }
+
+      if (data.session) {
+        loadForUser(data.session.user);
+        return;
+      }
+
+      if (!requireAuth) {
         setChecked(true);
         return;
       }
-      setUser(data.session.user);
-      setChecked(true);
-      useUserProgressStore.getState().load(data.session.user.id, getFullName(data.session.user));
-      useProfileStore.getState().load(data.session.user.id);
-      useCertProgressStore.getState().loadAll(data.session.user.id);
-      useAiCoachStore.getState().load(data.session.user.id);
-      useInterviewStore.getState().load(data.session.user.id);
-    });
+
+      // getSession() reads from local storage and is documented to
+      // sometimes return null momentarily right after a navigation, even
+      // though the user is genuinely still signed in (the session just
+      // hasn't finished rehydrating yet). Before redirecting to /login,
+      // double-check with getUser(), which verifies against Supabase's
+      // servers rather than trusting local state — this avoids bouncing a
+      // legitimately signed-in user out of the app when clicking between
+      // pages.
+      const { data: userData } = await supabase.auth.getUser();
+      if (!mounted) return;
+
+      if (userData.user) {
+        const { data: refreshed } = await supabase.auth.getSession();
+        if (!mounted) return;
+        if (refreshed.session) {
+          loadForUser(refreshed.session.user);
+          return;
+        }
+      }
+
+      router.replace("/login");
+    }
+
+    checkSession();
 
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       if (!session) {
@@ -66,13 +96,7 @@ export default function DashboardShell({
         }
         return;
       }
-      setUser(session.user);
-      setChecked(true);
-      useUserProgressStore.getState().load(session.user.id, getFullName(session.user));
-      useProfileStore.getState().load(session.user.id);
-      useCertProgressStore.getState().loadAll(session.user.id);
-      useAiCoachStore.getState().load(session.user.id);
-      useInterviewStore.getState().load(session.user.id);
+      loadForUser(session.user);
     });
 
     return () => {
