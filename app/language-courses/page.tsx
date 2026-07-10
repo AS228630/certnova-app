@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Languages, Search, ChevronDown, Sparkles, Target, MessageCircle, Award } from "lucide-react";
 import DashboardShell from "@/components/DashboardShell";
 import LanguageCourseCard from "@/components/languageCourses/LanguageCourseCard";
+import LanguageCoursesHero from "@/components/languageCourses/LanguageCoursesHero";
 import { languageCourses } from "@/lib/languageCoursesData";
 import { useLocale } from "@/components/LocaleProvider";
 
@@ -44,8 +45,8 @@ function LanguageCoursesBody() {
             </button>
           </div>
         </div>
-        <div className="flex h-40 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-fuchsia-500/10 text-6xl">
-          🌐
+        <div className="flex h-40 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-fuchsia-500/10">
+          <LanguageCoursesHero className="h-full w-full" />
         </div>
       </section>
 
