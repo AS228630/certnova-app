@@ -80,14 +80,6 @@ export default function VideoCallRoom({
             // config.js rather than interface_config.js, which the free
             // public server may honor differently).
             conferenceHeader: { disabled: true },
-            // Prevents the "waiting for a moderator, please log in"
-            // screen we hit on repeated test rooms. That screen appears
-            // when Jitsi's lobby/member-only feature kicks in for a
-            // room; explicitly disabling it here (rather than relying
-            // on defaults) keeps every room open-entry, so the first
-            // person in just joins directly with no Google login step.
-            enableLobby: false,
-            hideLobbyButton: true,
             requireDisplayName: false,
             prejoinConfig: { enabled: false },
           },
@@ -213,6 +205,26 @@ export default function VideoCallRoom({
           <div className="absolute inset-0 z-10 flex flex-col items-center gap-4 bg-black pt-24">
             <Loader2 size={28} className="animate-spin text-white/60" />
             <p className="max-w-xs text-center text-xs text-white/50">{status}</p>
+          </div>
+        )}
+
+        {/* One-time guidance for whoever opens a brand-new room first
+            (normally the coach). The free public Jitsi server requires
+            the very first person in any room to either wait or claim
+            the moderator role via a login button it shows on its own
+            screen — this is a policy of meet.jit.si itself since 2023,
+            not something our config can turn off. Once that first
+            person has done this, everyone else who joins the same
+            room afterwards connects immediately with no prompt at all,
+            so this only ever affects the person starting the session. */}
+        {!error && !loading && (
+          <div className="pointer-events-none absolute inset-x-0 bottom-24 z-30 flex justify-center px-4">
+            <div className="pointer-events-auto max-w-sm rounded-xl border border-white/10 bg-black/80 px-4 py-3 text-center text-xs text-white/70 backdrop-blur-lg">
+              Falls „Warten auf Moderator&rdquo; erscheint: einfach oben auf{" "}
+              <span className="font-bold text-white">„Log-in&rdquo;</span> tippen und mit
+              einem Google-Konto bestätigen — das betrifft nur die Person, die den
+              Raum als Erste öffnet.
+            </div>
           </div>
         )}
 
