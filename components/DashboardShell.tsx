@@ -16,6 +16,7 @@ import { useAiCoachStore } from "@/lib/store/aiCoachStore";
 import { useInterviewStore } from "@/lib/store/interviewStore";
 import { useLanguageCourseStore } from "@/lib/store/languageCourseStore";
 import { useCommunityStore } from "@/lib/store/communityStore";
+import { useLiveRoomStore } from "@/lib/store/liveRoomStore";
 import { getFullName } from "@/lib/supabase/useUser";
 
 export default function DashboardShell({
@@ -45,6 +46,8 @@ export default function DashboardShell({
       useInterviewStore.getState().load(u.id);
       useLanguageCourseStore.getState().load(u.id);
       useCommunityStore.getState().load(u.id, getFullName(u));
+      useLiveRoomStore.getState().setUser(u.id, getFullName(u));
+      useLiveRoomStore.getState().loadRooms();
     }
 
     async function checkSession() {
@@ -96,6 +99,7 @@ export default function DashboardShell({
         useInterviewStore.getState().reset();
         useLanguageCourseStore.getState().reset();
         useCommunityStore.getState().reset();
+        useLiveRoomStore.getState().reset();
         useLessonCompletionStore.getState().reset();
         if (requireAuth) {
           router.replace("/login");

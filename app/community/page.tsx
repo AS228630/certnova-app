@@ -6,6 +6,7 @@ import DashboardShell from "@/components/DashboardShell";
 import ComposePost from "@/components/community/ComposePost";
 import CommunityPostCard from "@/components/community/CommunityPostCard";
 import CommunitySidebar from "@/components/community/CommunitySidebar";
+import LiveStudyModal from "@/components/community/LiveStudyModal";
 import { useCommunityStore } from "@/lib/store/communityStore";
 import { useLocale } from "@/components/LocaleProvider";
 
@@ -30,6 +31,7 @@ function CommunityBody() {
   const loaded = useCommunityStore((s) => s.loaded);
   const [activeTab, setActiveTab] = useState<(typeof tabs)[number]>("tabForYou");
   const [visibleCount, setVisibleCount] = useState(10);
+  const [showLiveStudy, setShowLiveStudy] = useState(false);
 
   const filtered = posts.filter((p) => {
     if (activeTab === "tabQA") return p.postType === "question";
@@ -105,10 +107,13 @@ function CommunityBody() {
               <span className="rounded-full bg-panel-alt px-2 py-0.5 text-[10px] font-bold text-text-faint">BETA</span>
             </div>
             <p className="mt-1.5 max-w-md text-sm text-text-muted">{t("community.liveStudyDesc")}</p>
-            <div className="mt-3 flex items-center gap-2 text-xs text-text-faint">
+            <button
+              onClick={() => setShowLiveStudy(true)}
+              className="mt-3 flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white hover:bg-primary-dark"
+            >
               <Video size={13} />
-              {t("community.liveStudyComingSoon")}
-            </div>
+              {t("community.liveStudyOpenCta")}
+            </button>
           </div>
 
           {!loaded ? (
@@ -150,6 +155,8 @@ function CommunityBody() {
           </button>
         </div>
       </div>
+
+      {showLiveStudy && <LiveStudyModal onClose={() => setShowLiveStudy(false)} />}
     </main>
   );
 }
