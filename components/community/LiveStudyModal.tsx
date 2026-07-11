@@ -17,6 +17,7 @@ export default function LiveStudyModal({ onClose }: { onClose: () => void }) {
   const rooms = useLiveRoomStore((s) => s.rooms);
   const activeRoomId = useLiveRoomStore((s) => s.activeRoomId);
   const messages = useLiveRoomStore((s) => s.messages);
+  const error = useLiveRoomStore((s) => s.error);
   const loadRooms = useLiveRoomStore((s) => s.loadRooms);
   const createRoom = useLiveRoomStore((s) => s.createRoom);
   const joinRoomChat = useLiveRoomStore((s) => s.joinRoomChat);
@@ -107,6 +108,12 @@ export default function LiveStudyModal({ onClose }: { onClose: () => void }) {
               </button>
             </div>
           </div>
+
+          {error && (
+            <div className="mx-3 mt-3 rounded-lg border border-danger/30 bg-danger/10 px-3 py-2 text-xs text-danger">
+              {error}
+            </div>
+          )}
 
           {!activeRoom ? (
             <div className="flex flex-1 items-center justify-center p-6 text-center">

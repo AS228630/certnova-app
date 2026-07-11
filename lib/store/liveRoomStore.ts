@@ -26,6 +26,7 @@ type LiveRoomState = {
   activeRoomId: string | null;
   messages: RoomMessage[];
   channel: RealtimeChannel | null;
+  error: string | null;
 
   loadRooms: () => Promise<void>;
   createRoom: (name: string, topic?: string) => Promise<LiveRoom | null>;
@@ -43,18 +44,25 @@ export const useLiveRoomStore = create<LiveRoomState>((set, get) => ({
   activeRoomId: null,
   messages: [],
   channel: null,
+  error: null,
 
   setUser: (userId, userName) => set({ userId, userName }),
 
   loadRooms: async () => {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("community_rooms")
       .select("*")
       .eq("is_active", true)
       .order("created_at", { ascending: false })
       .limit(20);
 
+    if (error) {
+      set({ error: "Live-Study-Räume sind noch nicht eingerichtet. Der Betreiber muss die Datenbank-Migration ausführen." });
+      return;
+    }
+
     set({
+      error: null,
       rooms: (data ?? []).map((r) => ({
         id: r.id,
         name: r.name,
@@ -73,22 +81,30 @@ export const useLiveRoomStore = create<LiveRoomState>((set, get) => ({
       .insert({ created_by: userId, name, topic: topic ?? null })
       .select("*")
       .single();
-    if (error || !data) return null;
+    if (error || !data) {
+      set({ error: "Raum konnte nicht erstellt werden. Bitte versuche es erneut." });
+      return null;
+    }
 
     const room: LiveRoom = { id: data.id, name: data.name, topic: data.topic, createdBy: data.created_by, createdAt: data.created_at };
-    set((s) => ({ rooms: [room, ...s.rooms] }));
+    set((s) => ({ rooms: [room, ...s.rooms], error: null }));
     return room;
   },
 
   joinRoomChat: async (roomId: string) => {
     get().leaveRoomChat();
 
-    const { data: history } = await supabase
+    const { data: history, error } = await supabase
       .from("community_room_messages")
       .select("*, profiles:user_id(full_name)")
       .eq("room_id", roomId)
       .order("created_at", { ascending: true })
       .limit(200);
+
+    if (error) {
+      set({ error: "Chat konnte nicht geladen werden. Bitte versuche es erneut." });
+      return;
+    }
 
     const mapped: RoomMessage[] = (history ?? []).map((m) => ({
       id: m.id,
@@ -144,18 +160,22 @@ export const useLiveRoomStore = create<LiveRoomState>((set, get) => ({
       .insert({ room_id: activeRoomId, user_id: userId, body: body.trim() })
       .select("*")
       .single();
-    if (error || !data) return;
+    if (error || !data) {
+      set({ error: "Nachricht konnte nicht gesendet werden. Bitte versuche es erneut." });
+      return;
+    }
 
     set((s) => ({
       messages: [
         ...s.messages,
         { id: data.id, roomId: data.room_id, userId: data.user_id, authorName: userName, body: data.body, createdAt: data.created_at },
       ],
+      error: null,
     }));
   },
 
   reset: () => {
     get().leaveRoomChat();
-    set({ userId: null, userName: "", rooms: [], activeRoomId: null, messages: [], channel: null });
+    set({ userId: null, userName: "", rooms: [], activeRoomId: null, messages: [], channel: null, error: null });
   },
 }));
