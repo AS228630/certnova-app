@@ -44,11 +44,12 @@ export default function DatenschutzPage() {
             <p className="text-text-muted">
               Dieser Entwurf deckt die nach Art. 13 DSGVO gesetzlich vorgeschriebenen Angaben strukturell ab
               und beschreibt wahrheitsgemäß, welche Dienste CertCoach aktuell technisch einsetzt (Supabase als
-              Hosting- und Datenbank-Anbieter; aktuell kein Google Analytics oder vergleichbare Tracking-Dienste
-              im Einsatz). Alle mit <Fill>[…]</Fill> markierten Stellen müssen mit den echten Angaben des
-              Betreibers ausgefüllt werden. Bitte diesen Text vor der Veröffentlichung von einem Rechtsanwalt
-              oder Datenschutzbeauftragten prüfen lassen — insbesondere sobald Zahlungsdienste (z. B. PayPal)
-              oder weitere Drittanbieter hinzukommen, muss der entsprechende Abschnitt ergänzt werden.
+              Hosting- und Datenbank-Anbieter; Jitsi/8x8 Inc. für die optionale Video- und Sprachanruf-Funktion
+              in Coach Live; aktuell kein Google Analytics oder vergleichbare Tracking-Dienste im Einsatz). Alle
+              mit <Fill>[…]</Fill> markierten Stellen müssen mit den echten Angaben des Betreibers ausgefüllt
+              werden. Bitte diesen Text vor der Veröffentlichung von einem Rechtsanwalt oder
+              Datenschutzbeauftragten prüfen lassen — insbesondere sobald Zahlungsdienste (z. B. PayPal) oder
+              weitere Drittanbieter hinzukommen, muss der entsprechende Abschnitt ergänzt werden.
             </p>
           </div>
         </div>
@@ -119,7 +120,27 @@ export default function DatenschutzPage() {
           </p>
         </Section>
 
-        <Section title="6. Zahlungsabwicklung">
+        <Section title="6. Video- und Sprachanrufe (Coach Live)">
+          <p>
+            Die optionale Funktion „Coach Live&rdquo; ermöglicht Video- und Sprachanrufe zwischen Nutzern. Hierfür
+            setzen wir den Open-Source-Dienst Jitsi Meet in Form der öffentlichen, kostenlosen Instanz{" "}
+            <code className="rounded bg-panel-alt px-1 py-0.5 font-mono text-xs">meet.jit.si</code> ein, die vom
+            Unternehmen 8x8, Inc. betrieben wird. Sobald Sie einen Video- oder Sprachanruf starten, wird Ihr
+            Bild-, Ton- und Videodatenstrom über die Server von 8x8, Inc. geleitet, da eine Verbindung zwischen
+            mehreren Teilnehmern (Gruppenanrufe) technisch eine vermittelnde Infrastruktur erfordert. Nach
+            unserer Kenntnis werden Anrufinhalte von 8x8 nicht dauerhaft gespeichert und nach Beendigung des
+            Anrufs gelöscht, sofern keine Aufzeichnungsfunktion aktiv genutzt wird (diese Funktion ist in Coach
+            Live aktuell nicht implementiert). 8x8, Inc. kann jedoch technische Verbindungsdaten (z. B.
+            IP-Adressen) im Rahmen des Betriebs seiner Server verarbeiten. Rechtsgrundlage ist unser berechtigtes
+            Interesse an der Bereitstellung dieser optionalen Funktion (Art. 6 Abs. 1 lit. f DSGVO) bzw. Ihre
+            Einwilligung durch aktive Nutzung der Funktion. Weitere Informationen finden Sie in der
+            Datenschutzerklärung von 8x8/Jitsi unter <Fill>https://jitsi.org/meet-jit-si-privacy/</Fill> bzw.{" "}
+            <Fill>https://www.8x8.com/terms-and-conditions/privacy-policy</Fill>. Die Nutzung von Coach Live ist
+            freiwillig; alle übrigen Funktionen der Plattform sind ohne diese Funktion vollständig nutzbar.
+          </p>
+        </Section>
+
+        <Section title="7. Zahlungsabwicklung">
           <p>
             <Fill>
               [Diesen Abschnitt ausfüllen, sobald ein Zahlungsdienstleister aktiv genutzt wird — z. B.: „Für
@@ -132,7 +153,7 @@ export default function DatenschutzPage() {
           </p>
         </Section>
 
-        <Section title="7. Cookies">
+        <Section title="8. Cookies">
           <p>
             Unsere Website verwendet ausschließlich technisch notwendige Cookies bzw. vergleichbare
             Speichertechnologien (z. B. zur Aufrechterhaltung Ihrer Anmeldesitzung). Diese sind gemäß § 25 Abs.
@@ -144,7 +165,7 @@ export default function DatenschutzPage() {
           </p>
         </Section>
 
-        <Section title="8. Speicherdauer">
+        <Section title="9. Speicherdauer">
           <p>
             Personenbezogene Daten werden gelöscht, sobald der Zweck der Speicherung entfällt bzw. sobald Sie
             Ihr Nutzerkonto löschen, soweit keine gesetzlichen Aufbewahrungspflichten (z. B. handels- oder
@@ -152,7 +173,7 @@ export default function DatenschutzPage() {
           </p>
         </Section>
 
-        <Section title="9. Ihre Rechte">
+        <Section title="10. Ihre Rechte">
           <p>Sie haben jederzeit das Recht:</p>
           <ul className="ml-5 list-disc space-y-1.5">
             <li>Auskunft über Ihre bei uns gespeicherten personenbezogenen Daten zu verlangen (Art. 15 DSGVO),</li>
@@ -171,7 +192,7 @@ export default function DatenschutzPage() {
           </p>
         </Section>
 
-        <Section title="10. Kontakt für Datenschutzanfragen">
+        <Section title="11. Kontakt für Datenschutzanfragen">
           <p>
             Für Auskünfte, Berichtigungen, Löschungen oder sonstige Anliegen zum Datenschutz wenden Sie sich
             bitte an: <Fill>[Datenschutz-E-Mail-Adresse]</Fill>
