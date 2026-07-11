@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { X, Send, Video, Plus, Users, Hash, MessageSquare, Phone } from "lucide-react";
+import { X, Send, Video, Plus, Users, Hash, MessageSquare, Phone, ArrowLeft } from "lucide-react";
 import { useLiveRoomStore } from "@/lib/store/liveRoomStore";
 import { useLocale } from "@/components/LocaleProvider";
 import VideoCallRoom from "@/components/community/VideoCallRoom";
@@ -35,6 +35,7 @@ export default function LiveStudyModal({ onClose }: { onClose: () => void }) {
   const [showNewRoomInput, setShowNewRoomInput] = useState(false);
   const [input, setInput] = useState("");
   const [showVideoCall, setShowVideoCall] = useState(false);
+  const [mobileView, setMobileView] = useState<"rooms" | "chat">("rooms");
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -55,7 +56,10 @@ export default function LiveStudyModal({ onClose }: { onClose: () => void }) {
     const room = await createRoom(name);
     setNewRoomName("");
     setShowNewRoomInput(false);
-    if (room) joinRoomChat(room.id);
+    if (room) {
+      joinRoomChat(room.id);
+      setMobileView("chat");
+    }
   }
 
   async function handleSend() {
@@ -88,8 +92,12 @@ export default function LiveStudyModal({ onClose }: { onClose: () => void }) {
       )}
 
       <div className="flex min-h-0 flex-1">
-        {/* Room sidebar */}
-        <div className="hidden w-72 shrink-0 flex-col border-r border-border-soft bg-panel sm:flex">
+        {/* Room sidebar — full width on mobile when viewing rooms, always visible on sm+ */}
+        <div
+          className={`w-full shrink-0 flex-col border-r border-border-soft bg-panel sm:flex sm:w-72 ${
+            mobileView === "rooms" ? "flex" : "hidden"
+          }`}
+        >
           <div className="border-b border-border-soft p-4">
             {showNewRoomInput ? (
               <div className="flex gap-1.5">
@@ -132,7 +140,10 @@ export default function LiveStudyModal({ onClose }: { onClose: () => void }) {
               rooms.map((r) => (
                 <button
                   key={r.id}
-                  onClick={() => joinRoomChat(r.id)}
+                  onClick={() => {
+                    joinRoomChat(r.id);
+                    setMobileView("chat");
+                  }}
                   className={`flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-left text-sm font-semibold transition-colors ${
                     activeRoomId === r.id ? "bg-primary text-white" : "text-text-muted hover:bg-panel-alt"
                   }`}
@@ -145,8 +156,8 @@ export default function LiveStudyModal({ onClose }: { onClose: () => void }) {
           </div>
         </div>
 
-        {/* Main chat area */}
-        <div className="flex flex-1 flex-col">
+        {/* Main chat area — full width on mobile when viewing chat, always visible on sm+ */}
+        <div className={`flex-1 flex-col sm:flex ${mobileView === "chat" ? "flex" : "hidden"}`}>
           {!activeRoom ? (
             <div className="flex flex-1 flex-col items-center justify-center gap-3 p-8 text-center">
               <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-light text-primary">
@@ -158,6 +169,12 @@ export default function LiveStudyModal({ onClose }: { onClose: () => void }) {
             <>
               <div className="flex items-center justify-between border-b border-border-soft px-5 py-3.5">
                 <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => setMobileView("rooms")}
+                    className="mr-1 text-text-faint hover:text-text sm:hidden"
+                  >
+                    <ArrowLeft size={18} />
+                  </button>
                   <Hash size={16} className="text-text-faint" />
                   <p className="text-sm font-extrabold text-text">{activeRoom.name}</p>
                 </div>

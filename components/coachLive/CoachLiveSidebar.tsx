@@ -31,12 +31,16 @@ export default function CoachLiveSidebar({
   onOpenChat,
   onComingSoon,
   active,
+  open,
+  onClose,
 }: {
   onNewMeeting: () => void;
   onVoiceCall: () => void;
   onOpenChat: () => void;
   onComingSoon: (label: string) => void;
   active: "home" | "video" | "voice" | "chat";
+  open: boolean;
+  onClose: () => void;
 }) {
   const unreadRoomCount = useLiveRoomStore((s) => s.rooms.length);
 
@@ -59,10 +63,17 @@ export default function CoachLiveSidebar({
     else if (item.action === "voice") onVoiceCall();
     else if (item.action === "chat") onOpenChat();
     else if (item.action === "soon") onComingSoon(item.label);
+    onClose();
   }
 
   return (
-    <div className="flex h-full w-60 shrink-0 flex-col border-r border-border-soft bg-panel">
+    <>
+      {open && <div className="fixed inset-0 z-40 bg-black/60 lg:hidden" onClick={onClose} />}
+      <div
+        className={`fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] -translate-x-full flex-col overflow-y-auto bg-panel transition-transform duration-200 lg:static lg:h-full lg:w-60 lg:max-w-none lg:shrink-0 lg:translate-x-0 lg:border-r lg:border-border-soft ${
+          open ? "translate-x-0" : ""
+        }`}
+      >
       <div className="flex items-center gap-2 px-5 py-5">
         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-sm font-extrabold text-white">C</div>
         <p className="text-base font-extrabold text-text">Coach Live</p>
@@ -70,7 +81,10 @@ export default function CoachLiveSidebar({
 
       <div className="px-4">
         <button
-          onClick={onNewMeeting}
+          onClick={() => {
+            onNewMeeting();
+            onClose();
+          }}
           className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-2.5 text-sm font-bold text-white hover:bg-primary-dark"
         >
           <Plus size={16} />
@@ -122,6 +136,7 @@ export default function CoachLiveSidebar({
           ← Zurück zur Community
         </Link>
       </div>
-    </div>
+      </div>
+    </>
   );
 }

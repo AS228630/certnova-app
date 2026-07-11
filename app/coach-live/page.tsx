@@ -17,6 +17,7 @@ import {
   Mic,
   PenTool,
   CircleDot,
+  Menu,
 } from "lucide-react";
 import DashboardShell from "@/components/DashboardShell";
 import CoachLiveSidebar from "@/components/coachLive/CoachLiveSidebar";
@@ -58,6 +59,7 @@ function CoachLiveBody() {
   const firstName = getFirstName(user);
 
   const [toast, setToast] = useState<string | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [showCall, setShowCall] = useState<"video" | "voice" | null>(null);
 
@@ -80,6 +82,8 @@ function CoachLiveBody() {
     <div className="flex h-screen overflow-hidden bg-bg">
       <CoachLiveSidebar
         active="home"
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
         onNewMeeting={() => setShowCall("video")}
         onVoiceCall={() => setShowCall("voice")}
         onOpenChat={() => setShowChat(true)}
@@ -88,8 +92,11 @@ function CoachLiveBody() {
 
       <div className="flex-1 overflow-y-auto">
         {/* Top bar */}
-        <div className="flex items-center justify-between border-b border-border-soft bg-panel px-6 py-3.5">
-          <div className="flex w-full max-w-md items-center gap-2 rounded-lg border border-border-soft bg-panel-alt px-3 py-2 text-sm text-text-faint">
+        <div className="flex items-center justify-between gap-3 border-b border-border-soft bg-panel px-4 py-3.5 sm:px-6">
+          <button onClick={() => setSidebarOpen(true)} className="text-text-faint hover:text-text lg:hidden">
+            <Menu size={22} />
+          </button>
+          <div className="hidden w-full max-w-md items-center gap-2 rounded-lg border border-border-soft bg-panel-alt px-3 py-2 text-sm text-text-faint sm:flex">
             <Search size={15} />
             Suchen in Coach Live...
             <kbd className="ml-auto rounded border border-border-soft px-1.5 py-0.5 text-[10px]">Ctrl / K</kbd>
@@ -122,7 +129,7 @@ function CoachLiveBody() {
           </div>
         </div>
 
-        <main className="mx-auto max-w-6xl space-y-6 p-6">
+        <main className="mx-auto max-w-6xl space-y-6 p-4 sm:p-6">
           {/* Hero */}
           <section className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/20 via-panel to-fuchsia-500/10 p-6">
             <h1 className="text-2xl font-extrabold text-text">Guten Morgen, {firstName}! 👋</h1>
