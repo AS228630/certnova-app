@@ -194,20 +194,21 @@ export default function VideoCallRoom({
 
         <div ref={containerRef} className="h-full w-full" />
 
-        {/* Visual patch covering Jitsi's logo/watermark in the top-left
-            corner. The official branding-removal config options
-            (SHOW_JITSI_WATERMARK etc.) are silently ignored on the free
-            public meet.jit.si server — a known limitation confirmed by
-            other developers hitting the same issue, not something fixable
-            via configuration alone. This overlay hides it visually with a
-            matching background block rather than truly removing it from
-            the underlying iframe (which we can't reach — it's on a
-            different domain, so cross-origin restrictions block any DOM/
-            CSS access into it). Position is an approximation based on
-            where the logo has been observed to render; may not cover it
-            perfectly in every screen size or call state. */}
+        {/* Covers Jitsi's logo/watermark in the top-left corner with our
+            own small Coach Live badge, in the same spot. The official
+            branding-removal config options (SHOW_JITSI_WATERMARK etc.)
+            are silently ignored on the free public meet.jit.si server —
+            a known limitation confirmed by other developers hitting the
+            same issue, not something fixable via configuration alone.
+            Placing our own logo here (rather than a plain color block)
+            reads as intentional branding instead of an obvious patch.
+            Position/size is an approximation based on where the Jitsi
+            logo has been observed to render; may not align perfectly in
+            every screen size or call state. */}
         {!error && !loading && (
-          <div className="pointer-events-none absolute left-0 top-0 z-20 h-16 w-48 bg-black" />
+          <div className="pointer-events-none absolute left-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-xs font-extrabold text-white shadow-lg">
+            C
+          </div>
         )}
       </div>
     </div>
