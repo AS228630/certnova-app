@@ -71,7 +71,7 @@ export default function VideoCallRoom({
           userInfo: { displayName: userName || "Teilnehmer" },
           width: "100%",
           height: "100%",
-          configOverwrite: { prejoinPageEnabled: false, startWithVideoMuted: audioOnly },
+          configOverwrite: { startWithVideoMuted: audioOnly },
           interfaceConfigOverwrite: {
             TOOLBAR_BUTTONS: [
               "microphone", "camera", "desktop", "chat", "raisehand",
@@ -96,11 +96,15 @@ export default function VideoCallRoom({
           iframe.setAttribute("allow", "camera; microphone; display-capture; autoplay; clipboard-write");
         }
 
-        setStatus("Verbinde mit Kamera/Mikrofon...");
-        api.addEventListener("videoConferenceJoined", () => {
-          clearTimeout(timeoutId);
-          setLoading(false);
-        });
+        // The prejoin screen (camera preview + join button) now renders
+        // inside the iframe and needs to be visible/interactive — stop
+        // showing our own loading overlay here rather than waiting for
+        // videoConferenceJoined, which only fires after the user
+        // actually clicks Jitsi's own join button on that screen.
+        clearTimeout(timeoutId);
+        setLoading(false);
+
+        api.addEventListener("videoConferenceJoined", () => setLoading(false));
         api.addEventListener("readyToClose", onClose);
         api.addEventListener("errorOccurred", (e: unknown) => {
           setStatus(`Jitsi-Fehler: ${JSON.stringify(e)}`);
