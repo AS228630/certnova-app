@@ -42,7 +42,17 @@ export default function VideoCallRoom({
 
   useEffect(() => {
     let cancelled = false;
-    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+    // Covers the ENTIRE connection process — script loading, Jitsi
+    // initialization, and joining — not just the post-script-load phase.
+    // A prior version only started this timer inside initJitsi(), which
+    // meant a stalled/blocked script load (no error, just never firing
+    // onload) left the spinner stuck forever with no timeout ever
+    // running. Starting it here as soon as the component mounts closes
+    // that gap.
+    const timeoutId = setTimeout(() => {
+      if (!cancelled) setError(t("community.callTimeout"));
+    }, 15000);
 
     function initJitsi() {
       if (cancelled || !containerRef.current || !window.JitsiMeetExternalAPI) return;
@@ -63,20 +73,12 @@ export default function VideoCallRoom({
         });
         apiRef.current = api;
         api.addEventListener("videoConferenceJoined", () => {
-          if (timeoutId) clearTimeout(timeoutId);
+          clearTimeout(timeoutId);
           setLoading(false);
         });
         api.addEventListener("readyToClose", onClose);
-
-        // Some browsers (especially restrictive in-app webviews) can
-        // silently block camera/mic access without ever firing
-        // videoConferenceJoined or an error event, leaving the spinner
-        // stuck forever. Show a clear, actionable error after a
-        // reasonable wait instead of spinning indefinitely.
-        timeoutId = setTimeout(() => {
-          if (!cancelled) setError(t("community.callTimeout"));
-        }, 15000);
       } catch {
+        clearTimeout(timeoutId);
         setError(t("community.callUnavailable"));
       }
     }
@@ -92,14 +94,17 @@ export default function VideoCallRoom({
         script.src = JITSI_SCRIPT_URL;
         script.async = true;
         script.onload = initJitsi;
-        script.onerror = () => setError(t("community.callUnavailable"));
+        script.onerror = () => {
+          clearTimeout(timeoutId);
+          setError(t("community.callUnavailable"));
+        };
         document.body.appendChild(script);
       }
     }
 
     return () => {
       cancelled = true;
-      if (timeoutId) clearTimeout(timeoutId);
+      clearTimeout(timeoutId);
       apiRef.current?.dispose();
       apiRef.current = null;
     };
