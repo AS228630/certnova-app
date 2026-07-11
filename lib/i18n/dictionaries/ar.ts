@@ -148,7 +148,7 @@ const ar: Dictionary = {
     recommendedTopicsTitle: "مواضيع موصى بها لك",
     viewAll: "عرض الكل",
     newBadge: "جديد",
-    liveStudyTitle: "الدراسة والتعاون المباشر",
+    liveStudyTitle: "Coach Live",
     liveStudyDesc: "تعلّم واعمل معًا وساعد الآخرين في الوقت الفعلي — بمكالمات صوتية وفيديو ودردشة ومشاركة الشاشة والمزيد.",
     liveStudyComingSoon: "مكالمات الفيديو والصوت ومشاركة الشاشة والمختبرات والمواد التعليمية المشتركة قيد التطوير.",
     discoverGroupsCta: "اكتشف المجموعات",

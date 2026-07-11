@@ -148,7 +148,7 @@ const es: Dictionary = {
     recommendedTopicsTitle: "Temas recomendados para ti",
     viewAll: "Ver todo",
     newBadge: "Nuevo",
-    liveStudyTitle: "Estudio y colaboración en vivo",
+    liveStudyTitle: "Coach Live",
     liveStudyDesc: "Aprende, trabaja en equipo y ayuda a otros en tiempo real, con llamadas de voz y vídeo, chat, uso compartido de pantalla y más.",
     liveStudyComingSoon: "Las llamadas de vídeo y voz, el uso compartido de pantalla y los laboratorios y materiales compartidos están en desarrollo.",
     discoverGroupsCta: "Descubrir grupos",

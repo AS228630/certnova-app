@@ -148,7 +148,7 @@ const tr: Dictionary = {
     recommendedTopicsTitle: "Senin için önerilen konular",
     viewAll: "Tümünü gör",
     newBadge: "Yeni",
-    liveStudyTitle: "Canlı Çalışma ve İşbirliği",
+    liveStudyTitle: "Coach Live",
     liveStudyDesc: "Gerçek zamanlı olarak öğren, birlikte çalış ve başkalarına yardım et — sesli ve görüntülü aramalar, sohbet, ekran paylaşımı ve daha fazlasıyla.",
     liveStudyComingSoon: "Görüntülü ve sesli aramalar, ekran paylaşımı ile paylaşılan laboratuvarlar ve ders materyalleri geliştirilmektedir.",
     discoverGroupsCta: "Grupları keşfet",

@@ -149,7 +149,7 @@ const de = {
     recommendedTopicsTitle: "Empfohlene Themen für dich",
     viewAll: "Alle anzeigen",
     newBadge: "Neu",
-    liveStudyTitle: "Live Study & Collaboration",
+    liveStudyTitle: "Coach Live",
     liveStudyDesc: "Lerne, arbeite zusammen und hilf anderen in Echtzeit — mit Sprach-, Videoanrufen, Chat, Screen Sharing und mehr.",
     liveStudyComingSoon: "Video- und Sprachanrufe, Bildschirmfreigabe sowie gemeinsame Labs und Lerninhalte sind in Entwicklung.",
     discoverGroupsCta: "Gruppen entdecken",

@@ -148,7 +148,7 @@ const fr: Dictionary = {
     recommendedTopicsTitle: "Sujets recommandés pour toi",
     viewAll: "Tout voir",
     newBadge: "Nouveau",
-    liveStudyTitle: "Étude et collaboration en direct",
+    liveStudyTitle: "Coach Live",
     liveStudyDesc: "Apprends, travaille en équipe et aide les autres en temps réel — avec des appels vocaux et vidéo, un chat, le partage d'écran et plus encore.",
     liveStudyComingSoon: "Les appels vidéo et vocaux, le partage d'écran ainsi que les labs et supports de cours partagés sont en développement.",
     discoverGroupsCta: "Découvrir les groupes",

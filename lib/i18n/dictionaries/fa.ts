@@ -148,7 +148,7 @@ const fa: Dictionary = {
     recommendedTopicsTitle: "موضوعات پیشنهادی برای تو",
     viewAll: "مشاهده همه",
     newBadge: "جدید",
-    liveStudyTitle: "مطالعه و همکاری زنده",
+    liveStudyTitle: "Coach Live",
     liveStudyDesc: "یاد بگیر، با هم کار کن و به بقیه کمک کن در لحظه — با تماس صوتی و تصویری، چت، اشتراک صفحه و بیشتر.",
     liveStudyComingSoon: "تماس تصویری و صوتی، اشتراک صفحه، و لب‌ها و محتوای درسی مشترک در حال توسعه هستند.",
     discoverGroupsCta: "کشف گروه‌ها",
