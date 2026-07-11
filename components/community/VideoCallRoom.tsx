@@ -213,11 +213,11 @@ export default function VideoCallRoom({
             logo has been observed to render; may not align perfectly in
             every screen size or call state. */}
         {!error && !loading && (
-          <div className="pointer-events-none absolute left-2 top-2 z-20 flex h-16 min-w-[180px] items-center gap-2 rounded-lg bg-black px-3 py-2 shadow-lg">
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-primary text-xs font-extrabold text-white">
+          <div className="pointer-events-none absolute left-2 top-2 z-20 flex h-9 w-44 items-center gap-1.5 rounded-md bg-black px-2 shadow-lg">
+            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-primary text-[10px] font-extrabold text-white">
               C
             </span>
-            <span className="text-sm font-bold text-white">Coach Live</span>
+            <span className="text-xs font-bold text-white">Coach Live</span>
           </div>
         )}
       </div>
