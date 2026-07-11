@@ -16,7 +16,7 @@ declare global {
   interface Window {
     JitsiMeetExternalAPI?: new (domain: string, options: Record<string, unknown>) => {
       dispose: () => void;
-      addEventListener: (event: string, cb: () => void) => void;
+      addEventListener: (event: string, cb: (data?: unknown) => void) => void;
     };
   }
 }
@@ -102,6 +102,9 @@ export default function VideoCallRoom({
           setLoading(false);
         });
         api.addEventListener("readyToClose", onClose);
+        api.addEventListener("errorOccurred", (e: unknown) => {
+          setStatus(`Jitsi-Fehler: ${JSON.stringify(e)}`);
+        });
       } catch (e) {
         clearTimeout(timeoutId);
         setStatus(`Fehler bei Initialisierung: ${e instanceof Error ? e.message : String(e)}`);
@@ -141,7 +144,9 @@ export default function VideoCallRoom({
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-black">
       <div className="flex items-center justify-between border-b border-white/10 bg-panel px-4 py-3">
-        <p className="text-sm font-bold text-white">{roomName}</p>
+        <p className="text-sm font-bold text-white">
+          {roomName} <span className="text-[10px] font-normal text-white/30">(v2)</span>
+        </p>
         <button onClick={onClose} className="text-white/70 hover:text-white">
           <X size={20} />
         </button>
