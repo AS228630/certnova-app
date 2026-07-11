@@ -214,11 +214,7 @@ export default function VideoCallRoom({
             every screen size or call state. */}
         {!error && !loading && (
           <>
-            <div
-              className="pointer-events-none absolute left-2 top-2 z-20 h-14 w-52 rounded-full opacity-90 blur-xl"
-              style={{ background: "radial-gradient(ellipse at center, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 55%, rgba(255,255,255,0) 100%)" }}
-            />
-            <div className="pointer-events-none absolute left-2 top-2 z-20 h-14 w-52 backdrop-blur-lg" />
+            <div className="pointer-events-none absolute left-2 top-2 z-20 h-14 w-52 rounded-lg backdrop-blur-2xl backdrop-brightness-110 backdrop-saturate-150" />
             <div className="pointer-events-none absolute left-3 top-3 z-20 flex items-center gap-1.5">
               <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-primary text-[10px] font-extrabold text-white shadow">
                 C
