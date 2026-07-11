@@ -39,6 +39,7 @@ export default function VideoCallRoom({
   const apiRef = useRef<InstanceType<NonNullable<typeof window.JitsiMeetExternalAPI>> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [status, setStatus] = useState("Wird initialisiert...");
 
   useEffect(() => {
     let cancelled = false;
@@ -55,7 +56,14 @@ export default function VideoCallRoom({
     }, 15000);
 
     function initJitsi() {
-      if (cancelled || !containerRef.current || !window.JitsiMeetExternalAPI) return;
+      if (cancelled) return;
+      setStatus("Skript geladen, initialisiere Anruf...");
+      if (!containerRef.current || !window.JitsiMeetExternalAPI) {
+        setStatus(
+          `Fehler: ${!containerRef.current ? "kein Container" : "API nicht verfügbar"}`
+        );
+        return;
+      }
       try {
         const api = new window.JitsiMeetExternalAPI(JITSI_DOMAIN, {
           roomName,
@@ -72,13 +80,15 @@ export default function VideoCallRoom({
           },
         });
         apiRef.current = api;
+        setStatus("Verbinde mit Kamera/Mikrofon...");
         api.addEventListener("videoConferenceJoined", () => {
           clearTimeout(timeoutId);
           setLoading(false);
         });
         api.addEventListener("readyToClose", onClose);
-      } catch {
+      } catch (e) {
         clearTimeout(timeoutId);
+        setStatus(`Fehler bei Initialisierung: ${e instanceof Error ? e.message : String(e)}`);
         setError(t("community.callUnavailable"));
       }
     }
@@ -96,6 +106,7 @@ export default function VideoCallRoom({
         script.onload = initJitsi;
         script.onerror = () => {
           clearTimeout(timeoutId);
+          setStatus("Fehler: Skript konnte nicht geladen werden (Netzwerk blockiert?)");
           setError(t("community.callUnavailable"));
         };
         document.body.appendChild(script);
@@ -122,18 +133,20 @@ export default function VideoCallRoom({
 
       <div className="relative flex-1">
         {error && (
-          <div className="flex h-full items-center justify-center p-6 text-center">
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-black p-6 text-center">
             <p className="max-w-sm text-sm text-white/80">{error}</p>
+            <p className="max-w-sm text-xs text-white/40">{status}</p>
           </div>
         )}
 
         {!error && loading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black">
+          <div className="absolute inset-0 z-10 flex flex-col items-center gap-4 bg-black pt-24">
             <Loader2 size={28} className="animate-spin text-white/60" />
+            <p className="max-w-xs text-center text-xs text-white/50">{status}</p>
           </div>
         )}
 
-        {!error && <div ref={containerRef} className="h-full w-full" />}
+        <div ref={containerRef} className="h-full w-full" />
       </div>
     </div>
   );
