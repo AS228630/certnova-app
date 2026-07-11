@@ -80,11 +80,28 @@ export default function VideoCallRoom({
             // config.js rather than interface_config.js, which the free
             // public server may honor differently).
             conferenceHeader: { disabled: true },
+            // Prevents the "waiting for a moderator, please log in"
+            // screen we hit on repeated test rooms. That screen appears
+            // when Jitsi's lobby/member-only feature kicks in for a
+            // room; explicitly disabling it here (rather than relying
+            // on defaults) keeps every room open-entry, so the first
+            // person in just joins directly with no Google login step.
+            enableLobby: false,
+            hideLobbyButton: true,
+            requireDisplayName: false,
+            prejoinConfig: { enabled: false },
           },
           interfaceConfigOverwrite: {
+            // "fullscreen" removed on purpose: it calls the browser's
+            // native requestFullscreen() on the Jitsi iframe, which
+            // breaks out of our layout, can expose the site's own menu
+            // during the transition, and is the button most likely to
+            // be tapped by mistake. Our own overlay is already
+            // fixed/inset-0, so there's no real gain from Jitsi's
+            // native fullscreen anyway — removing it costs nothing.
             TOOLBAR_BUTTONS: [
               "microphone", "camera", "desktop", "chat", "raisehand",
-              "tileview", "hangup", "fullscreen", "settings",
+              "tileview", "hangup", "settings",
             ],
             // Hide all Jitsi branding so the call reads as part of
             // Coach Live rather than a third-party product — documented
