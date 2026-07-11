@@ -160,6 +160,7 @@ const es: Dictionary = {
     liveStudyOpenCta: "Descubrir ahora",
     notSignedIn: "No has iniciado sesión.",
     callUnavailable: "La llamada no está disponible en este momento. Inténtalo de nuevo más tarde.",
+    callTimeout: "La conexión está tardando más de lo habitual. Comprueba los permisos de cámara/micrófono e inténtalo de nuevo, o abre la página en otro navegador.",
     joinCallCta: "Unirse a la llamada",
     selectOrCreateRoom: "Selecciona una sala o crea una nueva para empezar a chatear.",
     noRoomsYet: "Aún no hay salas. ¡Crea la primera!",

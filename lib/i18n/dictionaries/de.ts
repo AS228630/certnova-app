@@ -161,6 +161,7 @@ const de = {
     liveStudyOpenCta: "Jetzt entdecken",
     notSignedIn: "Du bist nicht angemeldet.",
     callUnavailable: "Der Anruf ist gerade nicht verfügbar. Bitte versuche es später erneut.",
+    callTimeout: "Die Verbindung dauert ungewöhnlich lange. Bitte überprüfe deine Kamera-/Mikrofonberechtigungen und versuche es erneut, oder öffne die Seite in einem anderen Browser.",
     joinCallCta: "Anruf beitreten",
     selectOrCreateRoom: "Wähle einen Raum aus oder erstelle einen neuen, um mit dem Chatten zu beginnen.",
     noRoomsYet: "Noch keine Räume. Erstelle den ersten!",

@@ -160,6 +160,7 @@ const tr: Dictionary = {
     liveStudyOpenCta: "Şimdi keşfet",
     notSignedIn: "Giriş yapmadın.",
     callUnavailable: "Arama şu anda kullanılamıyor. Lütfen daha sonra tekrar dene.",
+    callTimeout: "Bağlantı olağandışı şekilde uzun sürüyor. Kamera/mikrofon izinlerini kontrol edip tekrar dene veya sayfayı başka bir tarayıcıda aç.",
     joinCallCta: "Aramaya katıl",
     selectOrCreateRoom: "Sohbete başlamak için bir oda seç veya yeni bir tane oluştur.",
     noRoomsYet: "Henüz oda yok. İlkini oluştur!",

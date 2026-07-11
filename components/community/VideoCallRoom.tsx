@@ -42,6 +42,7 @@ export default function VideoCallRoom({
 
   useEffect(() => {
     let cancelled = false;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
     function initJitsi() {
       if (cancelled || !containerRef.current || !window.JitsiMeetExternalAPI) return;
@@ -61,8 +62,20 @@ export default function VideoCallRoom({
           },
         });
         apiRef.current = api;
-        api.addEventListener("videoConferenceJoined", () => setLoading(false));
+        api.addEventListener("videoConferenceJoined", () => {
+          if (timeoutId) clearTimeout(timeoutId);
+          setLoading(false);
+        });
         api.addEventListener("readyToClose", onClose);
+
+        // Some browsers (especially restrictive in-app webviews) can
+        // silently block camera/mic access without ever firing
+        // videoConferenceJoined or an error event, leaving the spinner
+        // stuck forever. Show a clear, actionable error after a
+        // reasonable wait instead of spinning indefinitely.
+        timeoutId = setTimeout(() => {
+          if (!cancelled) setError(t("community.callTimeout"));
+        }, 15000);
       } catch {
         setError(t("community.callUnavailable"));
       }
@@ -86,6 +99,7 @@ export default function VideoCallRoom({
 
     return () => {
       cancelled = true;
+      if (timeoutId) clearTimeout(timeoutId);
       apiRef.current?.dispose();
       apiRef.current = null;
     };

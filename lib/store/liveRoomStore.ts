@@ -96,7 +96,7 @@ export const useLiveRoomStore = create<LiveRoomState>((set, get) => ({
 
     const { data: history, error } = await supabase
       .from("community_room_messages")
-      .select("*, profiles:user_id(full_name)")
+      .select("*")
       .eq("room_id", roomId)
       .order("created_at", { ascending: true })
       .limit(200);
@@ -106,11 +106,17 @@ export const useLiveRoomStore = create<LiveRoomState>((set, get) => ({
       return;
     }
 
+    const userIds = Array.from(new Set((history ?? []).map((m) => m.user_id)));
+    const { data: profiles } = userIds.length
+      ? await supabase.from("profiles").select("id, full_name").in("id", userIds)
+      : { data: [] };
+    const nameByUserId = new Map((profiles ?? []).map((p) => [p.id, p.full_name as string | null]));
+
     const mapped: RoomMessage[] = (history ?? []).map((m) => ({
       id: m.id,
       roomId: m.room_id,
       userId: m.user_id,
-      authorName: (m as { profiles?: { full_name?: string } }).profiles?.full_name ?? "—",
+      authorName: nameByUserId.get(m.user_id) ?? "—",
       body: m.body,
       createdAt: m.created_at,
     }));
