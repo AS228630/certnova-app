@@ -71,7 +71,7 @@ export default function VideoCallRoom({
           userInfo: { displayName: userName || "Teilnehmer" },
           width: "100%",
           height: "100%",
-          configOverwrite: { startWithVideoMuted: audioOnly },
+          configOverwrite: { startWithVideoMuted: audioOnly, disableDeepLinking: true },
           interfaceConfigOverwrite: {
             TOOLBAR_BUTTONS: [
               "microphone", "camera", "desktop", "chat", "raisehand",
