@@ -24,7 +24,15 @@ declare global {
 const JITSI_DOMAIN = "meet.jit.si";
 const JITSI_SCRIPT_URL = `https://${JITSI_DOMAIN}/external_api.js`;
 
-export default function VideoCallRoom({ roomName, onClose }: { roomName: string; onClose: () => void }) {
+export default function VideoCallRoom({
+  roomName,
+  onClose,
+  audioOnly = false,
+}: {
+  roomName: string;
+  onClose: () => void;
+  audioOnly?: boolean;
+}) {
   const { t } = useLocale();
   const userName = useCommunityStore((s) => s.userName);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -44,7 +52,7 @@ export default function VideoCallRoom({ roomName, onClose }: { roomName: string;
           userInfo: { displayName: userName || "Teilnehmer" },
           width: "100%",
           height: "100%",
-          configOverwrite: { prejoinPageEnabled: false },
+          configOverwrite: { prejoinPageEnabled: false, startWithVideoMuted: audioOnly },
           interfaceConfigOverwrite: {
             TOOLBAR_BUTTONS: [
               "microphone", "camera", "desktop", "chat", "raisehand",
@@ -82,7 +90,7 @@ export default function VideoCallRoom({ roomName, onClose }: { roomName: string;
       apiRef.current = null;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [roomName]);
+  }, [roomName, audioOnly]);
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-black">
