@@ -127,6 +127,13 @@ export default function VideoCallRoom({
 
         api.addEventListener("videoConferenceJoined", () => setLoading(false));
         api.addEventListener("readyToClose", onClose);
+        // videoConferenceLeft fires the moment the user hangs up — much
+        // earlier than readyToClose, which only fires after Jitsi's own
+        // internal post-call flow finishes (including, on the free
+        // public server, a promotional 'powered by Jitsi / Jitsi as a
+        // Service' page). Closing here prevents that page from ever
+        // being shown to our users.
+        api.addEventListener("videoConferenceLeft", onClose);
         api.addEventListener("errorOccurred", (e: unknown) => {
           setStatus(`Jitsi-Fehler: ${JSON.stringify(e)}`);
         });
