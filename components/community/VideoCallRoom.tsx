@@ -71,7 +71,16 @@ export default function VideoCallRoom({
           userInfo: { displayName: userName || "Teilnehmer" },
           width: "100%",
           height: "100%",
-          configOverwrite: { startWithVideoMuted: audioOnly, disableDeepLinking: true },
+          configOverwrite: {
+            startWithVideoMuted: audioOnly,
+            disableDeepLinking: true,
+            // Hides the top header bar showing the long room-ID text
+            // (a different UI element from the watermark/logo, and a
+            // genuinely new config path — worth trying since it targets
+            // config.js rather than interface_config.js, which the free
+            // public server may honor differently).
+            conferenceHeader: { disabled: true },
+          },
           interfaceConfigOverwrite: {
             TOOLBAR_BUTTONS: [
               "microphone", "camera", "desktop", "chat", "raisehand",
