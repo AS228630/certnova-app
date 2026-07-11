@@ -166,6 +166,12 @@ const ru: Dictionary = {
     newRoomPlaceholder: "Новая комната...",
     messagePlaceholder: "Напиши сообщение...",
     noMessagesYet: "Пока нет сообщений. Напиши первое!",
+    liveStudySubtitle: "Общайся и учись вместе с другими в реальном времени.",
+    newRoomCta: "Новая комната",
+    roomsTitle: "Комнаты",
+    today: "Сегодня",
+    you: "Ты",
+    inviteOthersHint: "Пригласи других учащихся, чтобы общаться вместе или начать звонок.",
   },
   interview: {
     badge: "Pro",

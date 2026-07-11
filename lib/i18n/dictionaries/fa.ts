@@ -166,6 +166,12 @@ const fa: Dictionary = {
     newRoomPlaceholder: "اتاق جدید...",
     messagePlaceholder: "پیام بنویس...",
     noMessagesYet: "هنوز پیامی نیست. اولین رو بنویس!",
+    liveStudySubtitle: "با بقیه در لحظه چت کن و با هم یاد بگیر.",
+    newRoomCta: "اتاق جدید",
+    roomsTitle: "اتاق‌ها",
+    today: "امروز",
+    you: "تو",
+    inviteOthersHint: "زبان‌آموزهای دیگه رو دعوت کن تا با هم چت کنید یا تماس شروع کنید.",
   },
   interview: {
     badge: "Pro",

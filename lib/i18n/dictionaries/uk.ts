@@ -166,6 +166,12 @@ const uk: Dictionary = {
     newRoomPlaceholder: "Нова кімната...",
     messagePlaceholder: "Напиши повідомлення...",
     noMessagesYet: "Ще немає повідомлень. Напиши перше!",
+    liveStudySubtitle: "Спілкуйся та навчайся разом з іншими в реальному часі.",
+    newRoomCta: "Нова кімната",
+    roomsTitle: "Кімнати",
+    today: "Сьогодні",
+    you: "Ти",
+    inviteOthersHint: "Запроси інших учнів, щоб спілкуватися разом або почати дзвінок.",
   },
   interview: {
     badge: "Pro",

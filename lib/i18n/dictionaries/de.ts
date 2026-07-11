@@ -167,6 +167,12 @@ const de = {
     newRoomPlaceholder: "Neuer Raum...",
     messagePlaceholder: "Nachricht schreiben...",
     noMessagesYet: "Noch keine Nachrichten. Schreib die erste!",
+    liveStudySubtitle: "Chatte und lerne gemeinsam mit anderen in Echtzeit.",
+    newRoomCta: "Neuer Raum",
+    roomsTitle: "Räume",
+    today: "Heute",
+    you: "Du",
+    inviteOthersHint: "Lade andere Lernende ein, um gemeinsam zu chatten oder einen Anruf zu starten.",
   },
   interview: {
     badge: "Pro",

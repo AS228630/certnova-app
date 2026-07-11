@@ -166,6 +166,12 @@ const tr: Dictionary = {
     newRoomPlaceholder: "Yeni oda...",
     messagePlaceholder: "Bir mesaj yaz...",
     noMessagesYet: "Henüz mesaj yok. İlkini yaz!",
+    liveStudySubtitle: "Diğerleriyle gerçek zamanlı sohbet et ve birlikte öğren.",
+    newRoomCta: "Yeni oda",
+    roomsTitle: "Odalar",
+    today: "Bugün",
+    you: "Sen",
+    inviteOthersHint: "Birlikte sohbet etmek veya arama başlatmak için diğer öğrencileri davet et.",
   },
   interview: {
     badge: "Pro",

@@ -166,6 +166,12 @@ const en: Dictionary = {
     newRoomPlaceholder: "New room...",
     messagePlaceholder: "Write a message...",
     noMessagesYet: "No messages yet. Write the first one!",
+    liveStudySubtitle: "Chat and learn together with others in real time.",
+    newRoomCta: "New room",
+    roomsTitle: "Rooms",
+    today: "Today",
+    you: "You",
+    inviteOthersHint: "Invite other learners to chat together or start a call.",
   },
   interview: {
     badge: "Pro",

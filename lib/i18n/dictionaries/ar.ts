@@ -166,6 +166,12 @@ const ar: Dictionary = {
     newRoomPlaceholder: "غرفة جديدة...",
     messagePlaceholder: "اكتب رسالة...",
     noMessagesYet: "لا توجد رسائل بعد. اكتب الأولى!",
+    liveStudySubtitle: "تحدث وتعلم مع الآخرين في الوقت الفعلي.",
+    newRoomCta: "غرفة جديدة",
+    roomsTitle: "الغرف",
+    today: "اليوم",
+    you: "أنت",
+    inviteOthersHint: "ادعُ متعلمين آخرين للدردشة معًا أو بدء مكالمة.",
   },
   interview: {
     badge: "Pro",
