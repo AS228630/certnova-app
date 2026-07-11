@@ -62,6 +62,7 @@ function CoachLiveBody() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showChat, setShowChat] = useState(false);
   const [showCall, setShowCall] = useState<"video" | "voice" | null>(null);
+  const [callRoomName, setCallRoomName] = useState("");
 
   useEffect(() => {
     if (!toast) return;
@@ -69,14 +70,24 @@ function CoachLiveBody() {
     return () => clearTimeout(timer);
   }, [toast]);
 
+  // Generate a fresh, unique room name for every new call session instead
+  // of reusing one fixed name tied only to the user's id. Reusing the
+  // exact same room name across many repeated sessions (as we did while
+  // testing) appears to make the public Jitsi server treat it as
+  // requiring authenticated moderation on later joins, showing a
+  // 'waiting for moderator' screen instead of connecting directly. A
+  // fresh room per session avoids that entirely.
+  function startCall(kind: "video" | "voice") {
+    setCallRoomName(`coach-live-${user?.id ?? "guest"}-${crypto.randomUUID().slice(0, 8)}`);
+    setShowCall(kind);
+  }
+
   function handleAction(kind: QuickAction["kind"], label: string) {
-    if (kind === "video") setShowCall("video");
-    else if (kind === "voice") setShowCall("voice");
+    if (kind === "video") startCall("video");
+    else if (kind === "voice") startCall("voice");
     else if (kind === "chat") setShowChat(true);
     else setToast(label);
   }
-
-  const roomName = `coach-live-${user?.id ?? "guest"}`;
 
   return (
     <div className="flex h-screen overflow-hidden bg-bg">
@@ -84,8 +95,8 @@ function CoachLiveBody() {
         active="home"
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
-        onNewMeeting={() => setShowCall("video")}
-        onVoiceCall={() => setShowCall("voice")}
+        onNewMeeting={() => startCall("video")}
+        onVoiceCall={() => startCall("voice")}
         onOpenChat={() => setShowChat(true)}
         onComingSoon={(label) => setToast(label)}
       />
@@ -164,7 +175,7 @@ function CoachLiveBody() {
                 <Calendar size={22} className="text-text-faint" />
                 <p className="text-xs text-text-faint">Noch keine geplanten Meetings.</p>
                 <button
-                  onClick={() => setShowCall("video")}
+                  onClick={() => startCall("video")}
                   className="mt-1 text-xs font-bold text-primary hover:underline"
                 >
                   Jetzt ein Meeting starten
@@ -227,7 +238,7 @@ function CoachLiveBody() {
       {showChat && <LiveStudyModal onClose={() => setShowChat(false)} />}
       {showCall && (
         <VideoCallRoom
-          roomName={roomName}
+          roomName={callRoomName}
           audioOnly={showCall === "voice"}
           onClose={() => setShowCall(null)}
         />
