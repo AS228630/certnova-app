@@ -80,6 +80,22 @@ export default function VideoCallRoom({
           },
         });
         apiRef.current = api;
+
+        // Explicitly grant the underlying iframe permission to access
+        // camera/microphone/screen-share. JitsiMeetExternalAPI creates
+        // its iframe dynamically via JS, and on some browsers (notably
+        // mobile Chrome) a dynamically-created iframe does NOT
+        // automatically get camera/microphone permission delegated to it
+        // even though the parent page has that permission — the
+        // getUserMedia() call inside the iframe then just hangs forever
+        // with no permission prompt ever shown and no error thrown. This
+        // exactly matches: script loads fine, API constructs fine, but
+        // it's stuck indefinitely at "connecting to camera/mic".
+        const iframe = (api as unknown as { getIFrame?: () => HTMLIFrameElement }).getIFrame?.();
+        if (iframe) {
+          iframe.setAttribute("allow", "camera; microphone; display-capture; autoplay; clipboard-write");
+        }
+
         setStatus("Verbinde mit Kamera/Mikrofon...");
         api.addEventListener("videoConferenceJoined", () => {
           clearTimeout(timeoutId);
