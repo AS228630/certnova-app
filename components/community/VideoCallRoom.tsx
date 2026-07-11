@@ -213,12 +213,19 @@ export default function VideoCallRoom({
             logo has been observed to render; may not align perfectly in
             every screen size or call state. */}
         {!error && !loading && (
-          <div className="pointer-events-none absolute left-2 top-2 z-20 flex h-9 w-44 items-center gap-1.5 rounded-md bg-black px-2 shadow-lg">
-            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-primary text-[10px] font-extrabold text-white">
-              C
-            </span>
-            <span className="text-xs font-bold text-white">Coach Live</span>
-          </div>
+          <>
+            <div
+              className="pointer-events-none absolute left-2 top-2 z-20 h-14 w-52 rounded-full opacity-90 blur-xl"
+              style={{ background: "radial-gradient(ellipse at center, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.25) 55%, rgba(255,255,255,0) 100%)" }}
+            />
+            <div className="pointer-events-none absolute left-2 top-2 z-20 h-14 w-52 backdrop-blur-lg" />
+            <div className="pointer-events-none absolute left-3 top-3 z-20 flex items-center gap-1.5">
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded bg-primary text-[10px] font-extrabold text-white shadow">
+                C
+              </span>
+              <span className="text-xs font-bold text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.6)]">Coach Live</span>
+            </div>
+          </>
         )}
       </div>
     </div>
