@@ -77,6 +77,18 @@ export default function VideoCallRoom({
               "microphone", "camera", "desktop", "chat", "raisehand",
               "tileview", "hangup", "fullscreen", "settings",
             ],
+            // Hide all Jitsi branding so the call reads as part of
+            // Coach Live rather than a third-party product — documented
+            // IFrame API options, available on the free public server.
+            SHOW_JITSI_WATERMARK: false,
+            SHOW_WATERMARK_FOR_GUESTS: false,
+            SHOW_BRAND_WATERMARK: false,
+            SHOW_POWERED_BY: false,
+            DEFAULT_BACKGROUND: "#0a0a12",
+            APP_NAME: "Coach Live",
+            NATIVE_APP_NAME: "Coach Live",
+            PROVIDER_NAME: "Coach Live",
+            HIDE_DEEP_LINKING_LOGO: true,
           },
         });
         apiRef.current = api;
