@@ -1174,7 +1174,9 @@ const en: Dictionary = {
     deleteAccountDesc:
       "This action can't be undone. We'll open an email to our support team with your deletion request — a team member will verify your identity and permanently delete your account along with all data.",
     cancel: "Cancel",
-    confirmDeleteAccount: "Request Deletion by Email",
+    confirmDeleteAccount: "Request Deletion",
+    deletionRequestedTitle: "Deletion request sent",
+    deletionRequestedDesc: "We've received your request and will reach out to confirm.",
     subscriptionTitle: "Manage Your Subscription",
     subscriptionDesc: "Here you can view, change, or upgrade your current plan.",
     currentPlanLabel: "Current Plan",
@@ -1195,6 +1197,12 @@ const en: Dictionary = {
     resStatusPageTitle: "Status Page",
     resStatusPageDesc: "Current maintenance information",
     footerNote: "Didn't find what you were looking for? Our support team is happy to help.",
+    messageSentTitle: "Message sent!",
+    messageSentDesc: "Thanks! We'll get back to you as soon as possible.",
+    close: "Close",
+    formName: "Name",
+    formEmail: "Email address",
+    formMessage: "Your message",
   },
 };
 

@@ -1,13 +1,108 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { Bot, Mail, Users, Clock, Globe2, CalendarClock } from "lucide-react";
+import { Bot, Mail, Users, Clock, Globe2, CalendarClock, X, Loader2, Check } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
+import { useUser } from "@/components/UserContext";
+import { getFullName } from "@/lib/supabase/useUser";
+import { useSupportMessageStore } from "@/lib/store/supportMessageStore";
 
-const SUPPORT_EMAIL = "support@certcoach.de";
+// A real contact form that saves into the support_messages table
+// (migration 013) instead of a mailto: link — this keeps the owner's
+// personal email address out of the frontend entirely while still
+// genuinely delivering the message somewhere real (Supabase Table
+// Editor → support_messages) rather than nowhere.
+function EmailSupportModal({ onClose }: { onClose: () => void }) {
+  const { t } = useLocale();
+  const { user } = useUser();
+  const submit = useSupportMessageStore((s) => s.submit);
+  const sending = useSupportMessageStore((s) => s.sending);
+  const sent = useSupportMessageStore((s) => s.sent);
+  const error = useSupportMessageStore((s) => s.error);
+
+  const [name, setName] = useState(user ? getFullName(user) : "");
+  const [email, setEmail] = useState(user?.email ?? "");
+  const [message, setMessage] = useState("");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!user || !name.trim() || !email.trim() || !message.trim()) return;
+    await submit(user.id, name, email, message);
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+      <div className="w-full max-w-md rounded-2xl border border-border-soft bg-panel p-5">
+        <div className="mb-4 flex items-center justify-between">
+          <h3 className="font-bold text-text">{t("help.emailSupportTitle")}</h3>
+          <button onClick={onClose} className="text-text-faint hover:text-text">
+            <X size={18} />
+          </button>
+        </div>
+
+        {sent ? (
+          <div className="flex flex-col items-center gap-3 py-6 text-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-success-light text-success">
+              <Check size={22} />
+            </div>
+            <p className="text-sm font-semibold text-text">{t("help.messageSentTitle")}</p>
+            <p className="text-xs text-text-faint">{t("help.messageSentDesc")}</p>
+            <button onClick={onClose} className="mt-2 rounded-lg bg-primary px-5 py-2 text-sm font-bold text-white hover:bg-primary-dark">
+              {t("help.close")}
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-3">
+            <div>
+              <label className="mb-1 block text-xs font-semibold text-text-muted">{t("help.formName")}</label>
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                className="w-full rounded-lg border border-border-soft bg-panel-alt px-3 py-2 text-sm text-text focus:border-primary focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-xs font-semibold text-text-muted">{t("help.formEmail")}</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full rounded-lg border border-border-soft bg-panel-alt px-3 py-2 text-sm text-text focus:border-primary focus:outline-none"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-xs font-semibold text-text-muted">{t("help.formMessage")}</label>
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                required
+                rows={4}
+                className="w-full resize-none rounded-lg border border-border-soft bg-panel-alt px-3 py-2 text-sm text-text focus:border-primary focus:outline-none"
+              />
+            </div>
+            {error && <p className="text-xs font-medium text-danger">{error}</p>}
+            <button
+              type="submit"
+              disabled={sending}
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-2.5 text-sm font-bold text-white hover:bg-primary-dark disabled:opacity-60"
+            >
+              {sending && <Loader2 size={14} className="animate-spin" />}
+              {t("help.sendEmail")}
+            </button>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function ContactSupportSection() {
   const { t } = useLocale();
+  const [modalOpen, setModalOpen] = useState(false);
+  const reset = useSupportMessageStore((s) => s.reset);
 
   return (
     <section>
@@ -42,12 +137,15 @@ export default function ContactSupportSection() {
           </div>
           <p className="text-sm font-bold text-text">{t("help.emailSupportTitle")}</p>
           <p className="mb-3 text-xs text-text-faint">{t("help.emailSupportDesc")}</p>
-          <a
-            href={`mailto:${SUPPORT_EMAIL}`}
+          <button
+            onClick={() => {
+              reset();
+              setModalOpen(true);
+            }}
             className="mt-auto rounded-lg bg-primary py-2 text-center text-xs font-bold text-white hover:bg-primary-dark"
           >
             {t("help.sendEmail")}
-          </a>
+          </button>
         </div>
 
         <div className="flex flex-col rounded-xl border border-border-soft bg-panel p-4">
@@ -79,6 +177,8 @@ export default function ContactSupportSection() {
           {t("help.aiCoachAvailability")}
         </div>
       </div>
+
+      {modalOpen && <EmailSupportModal onClose={() => setModalOpen(false)} />}
     </section>
   );
 }

@@ -1167,7 +1167,9 @@ const es: Dictionary = {
     deleteAccountTitle: "¿Realmente eliminar tu cuenta?",
     deleteAccountDesc: "Esta acción no se puede deshacer. Abriremos un correo a nuestro equipo de soporte con tu solicitud de eliminación — un miembro del equipo verificará tu identidad y eliminará tu cuenta permanentemente junto con todos los datos.",
     cancel: "Cancelar",
-    confirmDeleteAccount: "Solicitar eliminación por correo",
+    confirmDeleteAccount: "Solicitar eliminación",
+    deletionRequestedTitle: "Solicitud de eliminación enviada",
+    deletionRequestedDesc: "Hemos recibido tu solicitud y te contactaremos para confirmar.",
     subscriptionTitle: "Gestiona tu suscripción",
     subscriptionDesc: "Aquí puedes ver, cambiar o actualizar tu plan actual.",
     currentPlanLabel: "Plan actual",
@@ -1188,6 +1190,12 @@ const es: Dictionary = {
     resStatusPageTitle: "Página de estado",
     resStatusPageDesc: "Información actual de mantenimiento",
     footerNote: "¿No encontraste lo que buscabas? Nuestro equipo de soporte está feliz de ayudar.",
+    messageSentTitle: "¡Mensaje enviado!",
+    messageSentDesc: "¡Gracias! Te responderemos lo antes posible.",
+    close: "Cerrar",
+    formName: "Nombre",
+    formEmail: "Correo electrónico",
+    formMessage: "Tu mensaje",
   },
 };
 

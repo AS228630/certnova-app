@@ -1175,7 +1175,9 @@ const de = {
     deleteAccountDesc:
       "Diese Aktion kann nicht rückgängig gemacht werden. Wir öffnen eine E-Mail an unser Support-Team mit deiner Löschanfrage – ein Teammitglied bestätigt deine Identität und löscht dein Konto samt aller Daten dauerhaft.",
     cancel: "Abbrechen",
-    confirmDeleteAccount: "Löschung per E-Mail anfragen",
+    confirmDeleteAccount: "Löschung anfragen",
+    deletionRequestedTitle: "Löschanfrage gesendet",
+    deletionRequestedDesc: "Wir haben deine Anfrage erhalten und melden uns zur Bestätigung bei dir.",
     subscriptionTitle: "Dein Abonnement verwalten",
     subscriptionDesc: "Hier kannst du deinen aktuellen Plan einsehen, ändern oder erweitern.",
     currentPlanLabel: "Aktueller Plan",
@@ -1196,6 +1198,12 @@ const de = {
     resStatusPageTitle: "Status-Seite",
     resStatusPageDesc: "Aktuelle Informationen zu Wartungen",
     footerNote: "Noch nicht fündig geworden? Unser Support-Team hilft dir gerne weiter.",
+    messageSentTitle: "Nachricht gesendet!",
+    messageSentDesc: "Danke! Wir melden uns so schnell wie möglich bei dir.",
+    close: "Schließen",
+    formName: "Name",
+    formEmail: "E-Mail-Adresse",
+    formMessage: "Deine Nachricht",
   },
 };
 

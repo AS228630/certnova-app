@@ -1167,7 +1167,9 @@ const ar: Dictionary = {
     deleteAccountTitle: "هل تريد حقًا حذف حسابك؟",
     deleteAccountDesc: "لا يمكن التراجع عن هذا الإجراء. سنفتح بريدًا إلكترونيًا لفريق الدعم لدينا يتضمن طلب الحذف الخاص بك — سيتحقق أحد أعضاء الفريق من هويتك ويحذف حسابك نهائيًا مع جميع البيانات.",
     cancel: "إلغاء",
-    confirmDeleteAccount: "طلب الحذف عبر البريد الإلكتروني",
+    confirmDeleteAccount: "طلب الحذف",
+    deletionRequestedTitle: "تم إرسال طلب الحذف",
+    deletionRequestedDesc: "تلقينا طلبك وسنتواصل معك للتأكيد.",
     subscriptionTitle: "إدارة اشتراكك",
     subscriptionDesc: "هنا يمكنك عرض خطتك الحالية أو تغييرها أو ترقيتها.",
     currentPlanLabel: "الخطة الحالية",
@@ -1188,6 +1190,12 @@ const ar: Dictionary = {
     resStatusPageTitle: "صفحة الحالة",
     resStatusPageDesc: "معلومات الصيانة الحالية",
     footerNote: "لم تجد ما كنت تبحث عنه؟ يسعد فريق الدعم لدينا مساعدتك.",
+    messageSentTitle: "تم إرسال الرسالة!",
+    messageSentDesc: "شكرًا! سنتواصل معك في أقرب وقت ممكن.",
+    close: "إغلاق",
+    formName: "الاسم",
+    formEmail: "عنوان البريد الإلكتروني",
+    formMessage: "رسالتك",
   },
 };
 

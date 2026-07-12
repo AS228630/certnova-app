@@ -1167,7 +1167,9 @@ const ru: Dictionary = {
     deleteAccountTitle: "Действительно удалить аккаунт?",
     deleteAccountDesc: "Это действие нельзя отменить. Мы откроем письмо для нашей службы поддержки с вашим запросом на удаление — сотрудник проверит вашу личность и навсегда удалит ваш аккаунт вместе со всеми данными.",
     cancel: "Отмена",
-    confirmDeleteAccount: "Запросить удаление по email",
+    confirmDeleteAccount: "Запросить удаление",
+    deletionRequestedTitle: "Запрос на удаление отправлен",
+    deletionRequestedDesc: "Мы получили ваш запрос и свяжемся с вами для подтверждения.",
     subscriptionTitle: "Управление подпиской",
     subscriptionDesc: "Здесь вы можете просмотреть, изменить или улучшить свой текущий тариф.",
     currentPlanLabel: "Текущий тариф",
@@ -1188,6 +1190,12 @@ const ru: Dictionary = {
     resStatusPageTitle: "Страница статуса",
     resStatusPageDesc: "Актуальная информация о техническом обслуживании",
     footerNote: "Не нашли то, что искали? Наша служба поддержки с радостью поможет.",
+    messageSentTitle: "Сообщение отправлено!",
+    messageSentDesc: "Спасибо! Мы ответим вам как можно скорее.",
+    close: "Закрыть",
+    formName: "Имя",
+    formEmail: "Электронная почта",
+    formMessage: "Ваше сообщение",
   },
 };
 

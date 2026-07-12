@@ -7,7 +7,6 @@ import HelpHero from "@/components/help/HelpHero";
 import QuickHelpGrid from "@/components/help/QuickHelpGrid";
 import PopularArticles from "@/components/help/PopularArticles";
 import ContactSupportSection from "@/components/help/ContactSupportSection";
-import AccountManagementSection from "@/components/help/AccountManagementSection";
 import SubscriptionSection from "@/components/help/SubscriptionSection";
 import HelpResourcesSection from "@/components/help/HelpResourcesSection";
 import ComingSoonToast from "@/components/coachLive/ComingSoonToast";
@@ -23,7 +22,6 @@ export default function HelpPage() {
         <QuickHelpGrid />
         <PopularArticles />
         <ContactSupportSection />
-        <AccountManagementSection />
         <SubscriptionSection />
         <HelpResourcesSection onNotAvailable={(label) => setToast(label)} />
 

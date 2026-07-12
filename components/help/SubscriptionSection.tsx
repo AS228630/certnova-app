@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, FileText, Wallet } from "lucide-react";
+import { ArrowUpRight, Wallet } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
 
 // Every account on the platform is, honestly, on the Free plan — there
@@ -10,6 +10,9 @@ import { useLocale } from "@/components/LocaleProvider";
 // "VISA •••• 4242" on file here would be actively misleading. This
 // shows the one plan that's actually active, with a real link to start
 // upgrading, rather than a paid-plan mockup nobody has really bought.
+// "View invoices" was removed entirely rather than pointed anywhere —
+// with no real payments made yet, there are genuinely no invoices to
+// show or request.
 export default function SubscriptionSection() {
   const { t } = useLocale();
 
@@ -50,16 +53,6 @@ export default function SubscriptionSection() {
               </span>
               <ArrowUpRight size={14} className="text-text-faint" />
             </Link>
-            <a
-              href="mailto:support@certcoach.de?subject=Rechnungen"
-              className="flex items-center justify-between rounded-lg px-2 py-2.5 text-sm text-text hover:bg-panel-alt"
-            >
-              <span className="flex items-center gap-2">
-                <FileText size={15} className="text-text-muted" />
-                {t("help.viewInvoices")}
-              </span>
-              <ArrowUpRight size={14} className="text-text-faint" />
-            </a>
           </div>
           <p className="mt-3 rounded-lg bg-panel-alt px-3 py-2 text-xs text-text-faint">{t("help.noActiveSubscriptionNote")}</p>
         </div>

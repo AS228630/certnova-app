@@ -1167,7 +1167,9 @@ const fr: Dictionary = {
     deleteAccountTitle: "Vraiment supprimer ton compte ?",
     deleteAccountDesc: "Cette action est irréversible. Nous ouvrirons un e-mail à notre équipe de support avec ta demande de suppression — un membre de l'équipe vérifiera ton identité et supprimera définitivement ton compte ainsi que toutes les données.",
     cancel: "Annuler",
-    confirmDeleteAccount: "Demander la suppression par e-mail",
+    confirmDeleteAccount: "Demander la suppression",
+    deletionRequestedTitle: "Demande de suppression envoyée",
+    deletionRequestedDesc: "Nous avons reçu ta demande et te contacterons pour confirmer.",
     subscriptionTitle: "Gérer ton abonnement",
     subscriptionDesc: "Ici tu peux voir, changer ou mettre à niveau ton forfait actuel.",
     currentPlanLabel: "Forfait actuel",
@@ -1188,6 +1190,12 @@ const fr: Dictionary = {
     resStatusPageTitle: "Page de statut",
     resStatusPageDesc: "Informations actuelles sur la maintenance",
     footerNote: "Tu n'as pas trouvé ce que tu cherchais ? Notre équipe de support est ravie de t'aider.",
+    messageSentTitle: "Message envoyé !",
+    messageSentDesc: "Merci ! Nous te répondrons dès que possible.",
+    close: "Fermer",
+    formName: "Nom",
+    formEmail: "Adresse e-mail",
+    formMessage: "Ton message",
   },
 };
 

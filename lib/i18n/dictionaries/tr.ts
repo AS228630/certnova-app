@@ -1167,7 +1167,9 @@ const tr: Dictionary = {
     deleteAccountTitle: "Hesabını gerçekten silmek istiyor musun?",
     deleteAccountDesc: "Bu işlem geri alınamaz. Silme talebinle destek ekibimize bir e-posta açacağız — ekip üyelerimizden biri kimliğini doğrulayacak ve hesabını tüm verilerinle birlikte kalıcı olarak silecek.",
     cancel: "İptal",
-    confirmDeleteAccount: "E-posta ile Silme Talep Et",
+    confirmDeleteAccount: "Silme Talep Et",
+    deletionRequestedTitle: "Silme talebi gönderildi",
+    deletionRequestedDesc: "Talebini aldık ve onaylamak için seninle iletişime geçeceğiz.",
     subscriptionTitle: "Aboneliğini Yönet",
     subscriptionDesc: "Burada mevcut planını görüntüleyebilir, değiştirebilir veya yükseltebilirsin.",
     currentPlanLabel: "Mevcut Plan",
@@ -1188,6 +1190,12 @@ const tr: Dictionary = {
     resStatusPageTitle: "Durum Sayfası",
     resStatusPageDesc: "Güncel bakım bilgileri",
     footerNote: "Aradığını bulamadın mı? Destek ekibimiz yardımcı olmaktan mutluluk duyar.",
+    messageSentTitle: "Mesaj gönderildi!",
+    messageSentDesc: "Teşekkürler! En kısa sürede sana geri döneceğiz.",
+    close: "Kapat",
+    formName: "İsim",
+    formEmail: "E-posta adresi",
+    formMessage: "Mesajın",
   },
 };
 

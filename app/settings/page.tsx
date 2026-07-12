@@ -12,6 +12,7 @@ import { useLocale } from "@/components/LocaleProvider";
 import { LANGUAGES } from "@/components/LanguageSwitcher";
 import { supabase } from "@/lib/supabase/client";
 import { getFullName, getFirstName } from "@/lib/supabase/useUser";
+import DeleteAccountButton from "@/components/settings/DeleteAccountButton";
 
 function ProfileForm({ user, profile }: { user: NonNullable<ReturnType<typeof useUser>["user"]>; profile: ReturnType<typeof useProfileStore.getState>["profile"] }) {
   const { t } = useLocale();
@@ -262,12 +263,15 @@ function SettingsBody() {
       {/* Account */}
       <div className="rounded-2xl border border-border-soft bg-panel p-5 sm:p-6">
         <h2 className="mb-4 font-bold text-text">{t("settings.accountSection")}</h2>
-        <button
-          onClick={handleLogout}
-          className="rounded-lg border border-danger/30 px-5 py-2.5 text-sm font-bold text-danger transition-colors hover:bg-danger/10"
-        >
-          {t("nav.logout")}
-        </button>
+        <div className="flex flex-wrap gap-3">
+          <button
+            onClick={handleLogout}
+            className="rounded-lg border border-border-soft px-5 py-2.5 text-sm font-bold text-text transition-colors hover:bg-panel-alt"
+          >
+            {t("nav.logout")}
+          </button>
+          <DeleteAccountButton />
+        </div>
       </div>
     </main>
   );

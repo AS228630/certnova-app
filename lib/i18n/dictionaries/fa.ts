@@ -1167,7 +1167,9 @@ const fa: Dictionary = {
     deleteAccountTitle: "واقعاً حساب حذف شود؟",
     deleteAccountDesc: "این عمل قابل بازگشت نیست. یک ایمیل به تیم پشتیبانی ما با درخواست حذف شما باز می‌کنیم — یکی از اعضای تیم هویت شما را تأیید کرده و حساب شما را همراه با تمام داده‌ها به‌طور دائم حذف می‌کند.",
     cancel: "انصراف",
-    confirmDeleteAccount: "درخواست حذف از طریق ایمیل",
+    confirmDeleteAccount: "درخواست حذف",
+    deletionRequestedTitle: "درخواست حذف ارسال شد",
+    deletionRequestedDesc: "درخواست شما دریافت شد و برای تأیید با شما تماس می‌گیریم.",
     subscriptionTitle: "مدیریت اشتراک شما",
     subscriptionDesc: "اینجا می‌توانید پلن فعلی خود را مشاهده، تغییر یا ارتقا دهید.",
     currentPlanLabel: "پلن فعلی",
@@ -1188,6 +1190,12 @@ const fa: Dictionary = {
     resStatusPageTitle: "صفحه‌ی وضعیت",
     resStatusPageDesc: "اطلاعات به‌روز درباره‌ی نگهداری سیستم",
     footerNote: "چیزی که دنبالش بودید پیدا نکردید؟ تیم پشتیبانی ما خوشحال می‌شود کمکتان کند.",
+    messageSentTitle: "پیام ارسال شد!",
+    messageSentDesc: "ممنون! در اسرع وقت با شما تماس می‌گیریم.",
+    close: "بستن",
+    formName: "نام",
+    formEmail: "آدرس ایمیل",
+    formMessage: "پیام شما",
   },
 };
 
