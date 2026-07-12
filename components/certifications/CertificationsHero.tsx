@@ -1,11 +1,15 @@
 "use client";
 
-import { useState } from "react";
 import { Search, Award } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
 
-export default function CertificationsHero() {
-  const [query, setQuery] = useState("");
+export default function CertificationsHero({
+  query,
+  onQueryChange,
+}: {
+  query: string;
+  onQueryChange: (value: string) => void;
+}) {
   const { t } = useLocale();
 
   return (
@@ -21,7 +25,7 @@ export default function CertificationsHero() {
             <Search size={17} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-faint" />
             <input
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => onQueryChange(e.target.value)}
               placeholder={t("certList.searchCompanyOrCert")}
               className="w-full rounded-xl border border-border-soft bg-panel py-3.5 pl-11 pr-4 text-sm text-text placeholder:text-text-faint focus:border-primary focus:outline-none"
             />

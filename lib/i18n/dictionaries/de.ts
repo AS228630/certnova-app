@@ -625,6 +625,7 @@ const de = {
   certList: {
     heroTitle: "Zertifizierungen",
     heroDesc: "Entdecke Zertifizierungen der besten Unternehmen und begleite deinen Weg zur nächsten Karriere.",
+    resultsFor: "Ergebnisse für",
     searchCompanyOrCert: "Unternehmen oder Zertifizierung suchen...",
     statCertifications2: "Zertifizierungen",
     statProviders: "Anbieter",

@@ -624,6 +624,7 @@ const ar: Dictionary = {
   certList: {
     heroTitle: "الشهادات",
     heroDesc: "اكتشف شهادات من كبرى الشركات وانطلق نحو مسيرتك المهنية القادمة.",
+    resultsFor: "نتيجة لـ",
     searchCompanyOrCert: "البحث عن شركة أو شهادة...",
     statCertifications2: "الشهادات",
     statProviders: "المزودون",

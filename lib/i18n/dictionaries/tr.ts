@@ -624,6 +624,7 @@ const tr: Dictionary = {
   certList: {
     heroTitle: "Sertifikalar",
     heroDesc: "En iyi şirketlerin sertifikalarını keşfet ve kariyerinde bir sonraki adımı at.",
+    resultsFor: "sonuç:",
     searchCompanyOrCert: "Şirket veya sertifika ara...",
     statCertifications2: "Sertifikalar",
     statProviders: "Sağlayıcılar",

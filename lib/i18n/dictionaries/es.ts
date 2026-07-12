@@ -624,6 +624,7 @@ const es: Dictionary = {
   certList: {
     heroTitle: "Certificaciones",
     heroDesc: "Descubre certificaciones de las mejores empresas y da el siguiente paso en tu carrera.",
+    resultsFor: "resultados para",
     searchCompanyOrCert: "Buscar empresa o certificación...",
     statCertifications2: "Certificaciones",
     statProviders: "Proveedores",

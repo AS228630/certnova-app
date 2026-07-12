@@ -10,9 +10,16 @@ const CATEGORY_KEYS = ["catAll", "catCloud", "catSecurity", "catNetwork", "catSo
 const LEVEL_KEYS = ["levelAll", "levelBeginner", "levelIntermediate", "levelAdvanced"];
 const PAGE_SIZE = 12;
 
-export default function AllProvidersGrid({ companies }: { companies: Company[] }) {
+export default function AllProvidersGrid({
+  companies,
+  query,
+  onQueryChange,
+}: {
+  companies: Company[];
+  query: string;
+  onQueryChange: (value: string) => void;
+}) {
   const { t } = useLocale();
-  const [query, setQuery] = useState("");
   const [category, setCategory] = useState(CATEGORY_KEYS[0]);
   const [level, setLevel] = useState(LEVEL_KEYS[0]);
   const [sort, setSort] = useState<"beliebt" | "az">("beliebt");
@@ -32,7 +39,7 @@ export default function AllProvidersGrid({ companies }: { companies: Company[] }
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-text-faint" />
           <input
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => onQueryChange(e.target.value)}
             placeholder={t("certList.searchProviderOrCert")}
             className="w-full rounded-lg border border-border-soft bg-panel py-2.5 pl-9 pr-3 text-sm text-text placeholder:text-text-faint focus:border-primary focus:outline-none"
           />

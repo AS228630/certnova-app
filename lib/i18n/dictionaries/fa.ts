@@ -624,6 +624,7 @@ const fa: Dictionary = {
   certList: {
     heroTitle: "گواهینامه‌ها",
     heroDesc: "گواهینامه‌های بهترین شرکت‌ها رو کشف کن و راهت رو به سمت شغل بعدی هموار کن.",
+    resultsFor: "نتیجه برای",
     searchCompanyOrCert: "جستجوی شرکت یا گواهینامه...",
     statCertifications2: "گواهینامه‌ها",
     statProviders: "ارائه‌دهندگان",

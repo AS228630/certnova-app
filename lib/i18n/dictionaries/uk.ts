@@ -624,6 +624,7 @@ const uk: Dictionary = {
   certList: {
     heroTitle: "Сертифікації",
     heroDesc: "Дослідь сертифікації від провідних компаній і зроби наступний крок у кар'єрі.",
+    resultsFor: "результатів для",
     searchCompanyOrCert: "Пошук компанії або сертифікації...",
     statCertifications2: "Сертифікації",
     statProviders: "Провайдери",
