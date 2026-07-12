@@ -288,6 +288,8 @@ const ar: Dictionary = {
     darkMode: "الوضع الداكن",
   },
   header: {
+    notifications: "الإشعارات",
+    searchNoResults: "لم يتم العثور على نتائج.",
     searchPlaceholder: "ابحث عن الدورات والمختبرات والأسئلة...",
     freePlan: "الخطة المجانية",
   },

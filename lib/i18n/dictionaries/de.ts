@@ -289,6 +289,8 @@ const de = {
     darkMode: "Dark Mode",
   },
   header: {
+    notifications: "Benachrichtigungen",
+    searchNoResults: "Keine Ergebnisse gefunden.",
     searchPlaceholder: "Nach Kursen, Labs, Fragen suchen...",
     freePlan: "Kostenloser Plan",
   },

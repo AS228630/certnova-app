@@ -288,6 +288,8 @@ const es: Dictionary = {
     darkMode: "Modo oscuro",
   },
   header: {
+    notifications: "Notificaciones",
+    searchNoResults: "No se encontraron resultados.",
     searchPlaceholder: "Buscar cursos, laboratorios, preguntas...",
     freePlan: "Plan gratuito",
   },

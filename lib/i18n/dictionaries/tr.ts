@@ -288,6 +288,8 @@ const tr: Dictionary = {
     darkMode: "Karanlık Mod",
   },
   header: {
+    notifications: "Bildirimler",
+    searchNoResults: "Sonuç bulunamadı.",
     searchPlaceholder: "Kurs, lab, soru ara...",
     freePlan: "Ücretsiz Plan",
   },

@@ -288,6 +288,8 @@ const ru: Dictionary = {
     darkMode: "Тёмная тема",
   },
   header: {
+    notifications: "Уведомления",
+    searchNoResults: "Ничего не найдено.",
     searchPlaceholder: "Поиск курсов, лабораторных, вопросов...",
     freePlan: "Бесплатный план",
   },

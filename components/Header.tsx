@@ -1,13 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { Search, Bell, Moon, Sun, ChevronDown, Menu } from "lucide-react";
+import { Moon, Sun, ChevronDown, Menu } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
 import { useLocale } from "@/components/LocaleProvider";
 import { useUser } from "@/components/UserContext";
 import { getFullName } from "@/lib/supabase/useUser";
 import { useProfileStore } from "@/lib/store/profileStore";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import SearchBox from "@/components/SearchBox";
+import NotificationBell from "@/components/NotificationBell";
 
 export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   const { theme, toggleTheme } = useTheme();
@@ -36,16 +38,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
             <span className="text-base font-bold tracking-tight text-text">CertCoach</span>
           </div>
 
-          <div className="hidden w-full max-w-md items-center gap-2 rounded-lg border border-border-soft bg-panel-alt px-3 py-2 lg:flex">
-            <Search size={16} className="text-text-faint" />
-            <input
-              placeholder={t("header.searchPlaceholder")}
-              className="w-full bg-transparent text-sm text-text outline-none placeholder:text-text-faint"
-            />
-            <kbd className="hidden rounded border border-border-soft bg-panel px-1.5 py-0.5 text-[10px] text-text-faint md:inline">
-              ⌘K
-            </kbd>
-          </div>
+          <SearchBox variant="desktop" />
         </div>
 
         <div className="flex shrink-0 items-center gap-3 sm:gap-4">
@@ -63,12 +56,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
 
           {user ? (
             <>
-              <button className="relative text-text-muted hover:text-text" aria-label="Benachrichtigungen">
-                <Bell size={19} />
-                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-danger text-[9px] font-bold text-white">
-                  3
-                </span>
-              </button>
+              <NotificationBell />
 
               <Link href="/profile" className="flex items-center gap-2 hover:opacity-80">
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-primary to-fuchsia-500 text-xs font-bold text-white">
@@ -105,12 +93,8 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
         </div>
       </div>
 
-      <div className="mt-3 flex items-center gap-2 rounded-lg border border-border-soft bg-panel-alt px-3 py-2.5 lg:hidden">
-        <Search size={16} className="text-text-faint" />
-        <input
-          placeholder={t("header.searchPlaceholder")}
-          className="w-full bg-transparent text-sm text-text outline-none placeholder:text-text-faint"
-        />
+      <div className="mt-3 lg:hidden">
+        <SearchBox variant="mobile" />
       </div>
     </header>
   );

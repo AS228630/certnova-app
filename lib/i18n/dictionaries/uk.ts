@@ -288,6 +288,8 @@ const uk: Dictionary = {
     darkMode: "Темний режим",
   },
   header: {
+    notifications: "Сповіщення",
+    searchNoResults: "Нічого не знайдено.",
     searchPlaceholder: "Пошук курсів, лабораторних робіт, питань...",
     freePlan: "Безкоштовний план",
   },

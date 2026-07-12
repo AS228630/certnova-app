@@ -288,6 +288,8 @@ const fa: Dictionary = {
     darkMode: "حالت تاریک",
   },
   header: {
+    notifications: "اعلان‌ها",
+    searchNoResults: "نتیجه‌ای یافت نشد.",
     searchPlaceholder: "جستجو در دوره‌ها، لب‌ها، سوالات...",
     freePlan: "پلن رایگان",
   },
