@@ -6,30 +6,23 @@ import { useLocale } from "@/components/LocaleProvider";
 
 export type PlanId = "free" | "monthly" | "yearly" | "enterprise";
 
-const PLAN_ICONS: Record<PlanId, typeof Wallet> = {
-  free: Wallet,
-  monthly: CalendarDays,
-  yearly: Crown,
-  enterprise: Gift,
-};
-
 function usePlans() {
   const { t } = useLocale();
   return [
     {
       id: "free" as PlanId,
-      icon: PLAN_ICONS.free,
+      icon: Wallet,
       iconClass: "bg-white/10 text-text",
-      name: "Kostenlos",
-      tag: "Free Plan",
+      name: t("upgrade.planFreeName"),
+      tag: t("upgrade.planFreeTag"),
       price: "€0",
       period: "",
       features: [
-        "Zugriff auf kostenlose Kurse",
-        "1 aktive Lab-Umgebung",
-        "3 Exam-Simulationen / Monat",
-        "KI Coach – begrenzter Zugriff",
-        "Community-Zugang",
+        t("upgrade.planFreeFeature1"),
+        t("upgrade.planFreeFeature2"),
+        t("upgrade.planFreeFeature3"),
+        t("upgrade.planFreeFeature4"),
+        t("upgrade.planFreeFeature5"),
       ],
       cta: t("upgrade.currentPlan"),
       disabled: true,
@@ -37,18 +30,18 @@ function usePlans() {
     },
     {
       id: "monthly" as PlanId,
-      icon: PLAN_ICONS.monthly,
+      icon: CalendarDays,
       iconClass: "bg-primary-light text-primary",
-      name: "Monatlich",
-      tag: "Monthly Plan",
+      name: t("upgrade.planMonthlyName"),
+      tag: t("upgrade.planMonthlyTag"),
       price: "€19",
       period: "Monat",
       features: [
-        "Unbegrenzte Kurse & Labs",
-        "Unbegrenzter KI-Coach-Zugriff",
-        "Praxisnahe Projekte",
-        "Zertifikats-Downloads",
-        "Priority Support",
+        t("upgrade.planMonthlyFeature1"),
+        t("upgrade.planMonthlyFeature2"),
+        t("upgrade.planMonthlyFeature3"),
+        t("upgrade.planMonthlyFeature4"),
+        t("upgrade.planMonthlyFeature5"),
       ],
       cta: t("upgrade.selectPlan"),
       disabled: false,
@@ -56,20 +49,20 @@ function usePlans() {
     },
     {
       id: "yearly" as PlanId,
-      icon: PLAN_ICONS.yearly,
+      icon: Crown,
       iconClass: "bg-primary text-white",
-      name: "Jährlich",
-      tag: "Annual Plan",
+      name: t("upgrade.planYearlyName"),
+      tag: t("upgrade.planYearlyTag"),
       badge: t("upgrade.save40"),
       price: "€159",
       strikePrice: "€228",
       period: "Jahr",
       features: [
-        "Alles im Monatsabo",
-        "2 Monate kostenlos",
-        "Exklusive Inhalte",
-        "Früher Zugriff auf neue Kurse",
-        "Priority Support",
+        t("upgrade.planYearlyFeature1"),
+        t("upgrade.planYearlyFeature2"),
+        t("upgrade.planYearlyFeature3"),
+        t("upgrade.planYearlyFeature4"),
+        t("upgrade.planYearlyFeature5"),
       ],
       cta: t("upgrade.selectPlan"),
       disabled: false,
@@ -77,7 +70,7 @@ function usePlans() {
     },
     {
       id: "enterprise" as PlanId,
-      icon: PLAN_ICONS.enterprise,
+      icon: Gift,
       iconClass: "bg-warning/15 text-warning",
       name: t("upgrade.enterpriseTitle"),
       tag: "Enterprise Plan",
@@ -230,9 +223,7 @@ export default function PlanSelectionStep({
             ) : (
               <button
                 onClick={() => onSelectPlan(plan.id, plan.name, plan.period ? `${plan.price} / ${plan.period}` : plan.price)}
-                className={`mt-5 rounded-lg px-4 py-2.5 text-center text-sm font-bold transition-colors ${
-                  plan.featured ? "bg-primary text-white hover:bg-primary-dark" : "bg-primary text-white hover:bg-primary-dark"
-                }`}
+                className="mt-5 rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-bold text-white transition-colors hover:bg-primary-dark"
               >
                 {plan.cta}
               </button>

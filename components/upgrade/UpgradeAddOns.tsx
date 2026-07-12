@@ -13,66 +13,70 @@ import {
 } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
 
-const addOns = [
-  {
-    icon: BookOpen,
-    name: "Kurse einzeln kaufen",
-    tag: "Single Course Purchase",
-    price: "ab €29",
-    period: "Kurs",
-    features: ["Lebenslanger Zugriff", "Zertifikat inklusive", "Für jedes Level"],
-    cta: "Kurse entdecken",
-    href: "/certifications",
-  },
-  {
-    icon: MonitorSmartphone,
-    name: "Lab-Zugang",
-    tag: "Cloud Labs Access",
-    price: "ab €9",
-    period: "Monat",
-    features: ["Hands-on Labs", "Cloud-Umgebung", "Schritt-für-Schritt-Anleitungen"],
-    cta: "Labs entdecken",
-    href: "/certifications",
-  },
-  {
-    icon: FileQuestion,
-    name: "Exam-Simulation",
-    tag: "Practice Exams",
-    price: "ab €14",
-    period: "Monat",
-    features: ["Aktuelle Fragenpools", "Zeitgesteuerte Tests", "Detaillierte Auswertung"],
-    cta: "Jetzt üben",
-    href: "/certifications",
-  },
-  {
-    icon: Sparkles,
-    name: "KI Coach",
-    tag: "AI Learning Assistant",
-    price: "ab €9",
-    period: "Monat",
-    features: ["Persönlicher KI-Assistent", "Lernempfehlungen", "24/7 verfügbar"],
-    cta: "KI Coach testen",
-    href: "/ai-coach",
-  },
-  {
-    icon: Route,
-    name: "Lernpfade",
-    tag: "Career Paths",
-    price: "ab €29",
-    period: "Monat",
-    features: ["Strukturierte Lernpfade", "Zertifikate inklusive", "Job-Ready Skills"],
-    cta: "Pfad wählen",
-    href: "/learning-paths",
-  },
-];
+function useAddOns() {
+  const { t } = useLocale();
+  return [
+    {
+      icon: BookOpen,
+      name: t("upgrade.addonCourseName"),
+      tag: t("upgrade.addonCourseTag"),
+      price: "ab €29",
+      period: "Kurs",
+      features: [t("upgrade.addonCourseFeature1"), t("upgrade.addonCourseFeature2"), t("upgrade.addonCourseFeature3")],
+      cta: t("upgrade.addonCourseCta"),
+      href: "/certifications",
+    },
+    {
+      icon: MonitorSmartphone,
+      name: t("upgrade.addonLabName"),
+      tag: t("upgrade.addonLabTag"),
+      price: "ab €9",
+      period: "Monat",
+      features: [t("upgrade.addonLabFeature1"), t("upgrade.addonLabFeature2"), t("upgrade.addonLabFeature3")],
+      cta: t("upgrade.addonLabCta"),
+      href: "/certifications",
+    },
+    {
+      icon: FileQuestion,
+      name: t("upgrade.addonExamName"),
+      tag: t("upgrade.addonExamTag"),
+      price: "ab €14",
+      period: "Monat",
+      features: [t("upgrade.addonExamFeature1"), t("upgrade.addonExamFeature2"), t("upgrade.addonExamFeature3")],
+      cta: t("upgrade.addonExamCta"),
+      href: "/certifications",
+    },
+    {
+      icon: Sparkles,
+      name: t("upgrade.addonAiCoachName"),
+      tag: t("upgrade.addonAiCoachTag"),
+      price: "ab €9",
+      period: "Monat",
+      features: [t("upgrade.addonAiCoachFeature1"), t("upgrade.addonAiCoachFeature2"), t("upgrade.addonAiCoachFeature3")],
+      cta: t("upgrade.addonAiCoachCta"),
+      href: "/ai-coach",
+    },
+    {
+      icon: Route,
+      name: t("upgrade.addonPathName"),
+      tag: t("upgrade.addonPathTag"),
+      price: "ab €29",
+      period: "Monat",
+      features: [t("upgrade.addonPathFeature1"), t("upgrade.addonPathFeature2"), t("upgrade.addonPathFeature3")],
+      cta: t("upgrade.addonPathCta"),
+      href: "/learning-paths",
+    },
+  ];
+}
 
 export default function UpgradeAddOns({ onNotAvailable }: { onNotAvailable: (label: string) => void }) {
   const { t } = useLocale();
+  const addOns = useAddOns();
 
   return (
     <div className="mt-12 space-y-8">
       <section>
-        <h2 className="mb-4 text-base font-bold text-text">Weitere Optionen &amp; Add-ons</h2>
+        <h2 className="mb-4 text-base font-bold text-text">{t("upgrade.addOnsHeading")}</h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {addOns.map((a) => (
             <div key={a.name} className="flex flex-col rounded-xl border border-border-soft bg-panel p-4">
@@ -111,18 +115,18 @@ export default function UpgradeAddOns({ onNotAvailable }: { onNotAvailable: (lab
           </div>
           <div className="flex-1">
             <p className="flex flex-wrap items-center gap-2 text-sm font-bold text-text">
-              Student Discount
-              <span className="rounded-full bg-primary-light px-2 py-0.5 text-[10px] font-bold text-primary">Bis zu 50% Rabatt</span>
+              {t("upgrade.studentDiscountTitle")}
+              <span className="rounded-full bg-primary-light px-2 py-0.5 text-[10px] font-bold text-primary">
+                {t("upgrade.studentDiscountBadge")}
+              </span>
             </p>
-            <p className="mt-0.5 text-xs text-text-muted">
-              Du bist Student? Profitiere von einem exklusiven Rabatt auf alle kostenpflichtigen Pläne.
-            </p>
+            <p className="mt-0.5 text-xs text-text-muted">{t("upgrade.studentDiscountDesc")}</p>
           </div>
           <button
-            onClick={() => onNotAvailable("Student Discount")}
+            onClick={() => onNotAvailable(t("upgrade.studentDiscountTitle"))}
             className="shrink-0 rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-white hover:bg-primary-dark"
           >
-            Rabatt sichern
+            {t("upgrade.studentDiscountCta")}
           </button>
         </section>
 
