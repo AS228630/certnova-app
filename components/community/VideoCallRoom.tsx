@@ -81,7 +81,15 @@ export default function VideoCallRoom({
             // public server may honor differently).
             conferenceHeader: { disabled: true },
             requireDisplayName: false,
-            prejoinConfig: { enabled: false },
+            // NOTE: prejoinConfig.enabled was previously set to false
+            // here to skip the camera-preview screen. That turned out
+            // to also hide the "Log-in" button that the free public
+            // server shows on the very first join of a new room (the
+            // only way to become moderator and actually start the
+            // call) — leaving that first user stuck with no visible
+            // way forward. Leaving prejoin at its default (enabled)
+            // keeps that button available; it only appears for the
+            // first person into a brand-new room.
           },
           interfaceConfigOverwrite: {
             // "fullscreen" removed on purpose: it calls the browser's
