@@ -11,13 +11,12 @@ import { useLocale } from "@/components/LocaleProvider";
 // made the most progress on (0-99%). A brand-new user with no progress
 // on anything sees an honest empty state — but the mountain illustration
 // (this page's one deliberate visual flourish) still renders, dimmed to
-// monochrome grey with no glowing path or flag, so the layout always
+// cool blue-grey with no glowing path or flag, so the layout always
 // looks intentional while the "the summit is lit" detail stays reserved
 // for someone who has actually started climbing it. The illustration
-// renders on every screen size: a short horizontal strip above the text
-// on mobile, a taller side panel on larger screens (sm and up) — it must
-// never be display:none, since that's what caused it to silently
-// disappear on narrow viewports before.
+// renders on every screen size: a short strip above the text on mobile,
+// a taller side panel on larger screens — never display:none, since
+// that's what caused it to silently disappear on narrow viewports.
 export default function NextGoalCard() {
   const progressMap = useCertProgressStore((s) => s.progressMap);
   const detailMap = useCertProgressStore((s) => s.detailMap);
@@ -36,7 +35,7 @@ export default function NextGoalCard() {
   if (!active) {
     return (
       <div className="overflow-hidden rounded-2xl border border-border-soft bg-panel">
-        <div className="h-28 w-full sm:hidden">
+        <div className="h-32 w-full sm:hidden">
           <MountainIllustration dimmed />
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto]">
@@ -51,7 +50,7 @@ export default function NextGoalCard() {
               <ArrowRight size={15} />
             </Link>
           </div>
-          <div className="relative hidden w-52 shrink-0 overflow-hidden sm:block">
+          <div className="relative hidden w-64 shrink-0 overflow-hidden sm:block">
             <MountainIllustration dimmed />
           </div>
         </div>
@@ -72,7 +71,7 @@ export default function NextGoalCard() {
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border-soft bg-panel">
-      <div className="h-28 w-full sm:hidden">
+      <div className="h-32 w-full sm:hidden">
         <MountainIllustration />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto]">
@@ -119,7 +118,7 @@ export default function NextGoalCard() {
             signalling "the summit ahead", matching the design brief. The
             mobile strip above handles small screens; this side panel
             takes over from sm upward. */}
-        <div className="relative hidden w-52 shrink-0 overflow-hidden sm:block">
+        <div className="relative hidden w-64 shrink-0 overflow-hidden sm:block">
           <MountainIllustration />
         </div>
       </div>
@@ -137,82 +136,107 @@ export default function NextGoalCard() {
   );
 }
 
-// `dimmed` renders a monochrome-grey version with no glowing path and no
+// `dimmed` renders a cool blue-grey version with no glowing path and no
 // flag — those two details specifically represent "progress toward a
 // goal", so they're reserved for someone with a real goal in progress.
-// The mountain shapes themselves (the atmosphere/brand flourish) stay
-// visible either way, so the card never looks broken or unfinished.
+// The mountain atmosphere (sky, peaks, stars) stays visible either way,
+// so the card never looks broken or unfinished.
 function MountainIllustration({ dimmed = false }: { dimmed?: boolean }) {
-  const backFill = dimmed ? "url(#mtnBackGrey)" : "url(#mtnBack)";
-  const frontFill = dimmed ? "url(#mtnFrontGrey)" : "url(#mtnFront)";
-
   return (
-    <svg viewBox="0 0 200 200" className="h-full w-full" preserveAspectRatio="xMidYMid slice">
+    <svg viewBox="0 0 320 240" className="h-full w-full" preserveAspectRatio="xMidYMid slice">
       <defs>
+        <radialGradient id="sunGlow" cx="72%" cy="58%" r="55%">
+          <stop offset="0%" stopColor={dimmed ? "#3a4160" : "#ffb877"} stopOpacity={dimmed ? 0.35 : 0.9} />
+          <stop offset="35%" stopColor={dimmed ? "#2b3350" : "#e8794f"} stopOpacity={dimmed ? 0.25 : 0.55} />
+          <stop offset="100%" stopColor={dimmed ? "#161a2c" : "#2a1840"} stopOpacity="0" />
+        </radialGradient>
         <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={dimmed ? "#1b2033" : "#1b1440"} />
+          <stop offset="0%" stopColor={dimmed ? "#1a1f33" : "#241333"} />
+          <stop offset="55%" stopColor={dimmed ? "#151a2c" : "#1c1240"} />
           <stop offset="100%" stopColor="#0a0d1a" />
         </linearGradient>
         <linearGradient id="mtnBack" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#3d3466" />
-          <stop offset="100%" stopColor="#241f47" />
+          <stop offset="0%" stopColor={dimmed ? "#3d4560" : "#4a3a72"} />
+          <stop offset="100%" stopColor={dimmed ? "#242a42" : "#291f4a"} />
+        </linearGradient>
+        <linearGradient id="mtnMid" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={dimmed ? "#2c3249" : "#332a5c"} />
+          <stop offset="100%" stopColor={dimmed ? "#1c2135" : "#1e1838"} />
         </linearGradient>
         <linearGradient id="mtnFront" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#1e1b3a" />
-          <stop offset="100%" stopColor="#12102a" />
+          <stop offset="0%" stopColor={dimmed ? "#1e2336" : "#221a3a"} />
+          <stop offset="100%" stopColor={dimmed ? "#121522" : "#120e24"} />
         </linearGradient>
-        <linearGradient id="mtnBackGrey" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#4a5170" />
-          <stop offset="100%" stopColor="#2e3348" />
+        <linearGradient id="trailGlow" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stopColor="#c4b5fd" stopOpacity="0.9" />
+          <stop offset="100%" stopColor="#f5f3ff" stopOpacity="1" />
         </linearGradient>
-        <linearGradient id="mtnFrontGrey" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#262a3c" />
-          <stop offset="100%" stopColor="#181b28" />
-        </linearGradient>
+        <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
       </defs>
-      <rect width="200" height="200" fill="url(#skyGrad)" />
-      {[...Array(14)].map((_, i) => (
+
+      <rect width="320" height="240" fill="url(#skyGrad)" />
+      <rect width="320" height="240" fill="url(#sunGlow)" />
+
+      {[...Array(20)].map((_, i) => (
         <circle
           key={i}
-          cx={(i * 37 + 13) % 200}
-          cy={(i * 53 + 7) % 90}
-          r={i % 3 === 0 ? 1.1 : 0.6}
+          cx={(i * 41 + 17) % 320}
+          cy={(i * 31 + 9) % 110}
+          r={i % 4 === 0 ? 1.2 : 0.7}
           fill="#ffffff"
-          opacity={dimmed ? 0.4 : 0.5}
+          opacity={dimmed ? 0.35 : 0.55}
         />
       ))}
-      <polygon points="0,200 30,90 70,200" fill={backFill} opacity="0.85" />
-      <polygon points="60,200 110,50 160,200" fill={backFill} />
-      <polygon points="130,200 175,75 200,120 200,200" fill={frontFill} />
-      {dimmed && (
+
+      {/* Far ridge */}
+      <polygon points="0,240 20,150 55,190 90,120 130,200 150,150 175,240" fill="url(#mtnBack)" opacity="0.7" />
+      {/* Mid ridge */}
+      <polygon points="60,240 100,110 145,175 190,80 230,170 260,130 290,240" fill="url(#mtnMid)" opacity="0.9" />
+      {/* Near peak (the summit the trail climbs) */}
+      <polygon points="140,240 205,60 240,130 280,95 320,150 320,240" fill="url(#mtnFront)" />
+
+      {/* Trail up the near peak, with genuine glow via the blur filter —
+          only lit up once the user has real progress on a goal. */}
+      {dimmed ? (
+        <polyline
+          points="165,230 185,195 175,165 205,145 195,120 215,95 208,70"
+          fill="none"
+          stroke="#4b5270"
+          strokeWidth="2"
+          strokeDasharray="2 6"
+          strokeLinecap="round"
+          opacity="0.55"
+        />
+      ) : (
         <>
-          {/* A faint unlit trail hints at the path without claiming
-              progress — clearly dimmer and without the flag, so it
-              reads as "not started" rather than "in progress". */}
           <polyline
-            points="35,190 55,150 45,120 75,95 65,70 100,55"
+            points="165,230 185,195 175,165 205,145 195,120 215,95 208,70"
             fill="none"
-            stroke="#5b6280"
-            strokeWidth="1.5"
-            strokeDasharray="3 5"
+            stroke="url(#trailGlow)"
+            strokeWidth="3"
             strokeLinecap="round"
-            opacity="0.5"
+            filter="url(#softGlow)"
           />
-        </>
-      )}
-      {!dimmed && (
-        <>
-          <polyline
-            points="35,190 55,150 45,120 75,95 65,70 100,55"
-            fill="none"
-            stroke="#a78bfa"
-            strokeWidth="2"
-            strokeDasharray="4 4"
-            strokeLinecap="round"
-            opacity="0.8"
-          />
-          <path d="M100,55 L100,38 L112,44 L100,50 Z" fill="#6d4cff" />
-          <line x1="100" y1="38" x2="100" y2="55" stroke="#a78bfa" strokeWidth="1.5" />
+          {[
+            [165, 230],
+            [185, 195],
+            [175, 165],
+            [205, 145],
+            [195, 120],
+            [215, 95],
+          ].map(([cx, cy], i) => (
+            <circle key={i} cx={cx} cy={cy} r={1.6} fill="#f5f3ff" filter="url(#softGlow)" />
+          ))}
+          {/* Flag at the summit */}
+          <line x1="208" y1="70" x2="208" y2="46" stroke="#e9e4ff" strokeWidth="1.8" />
+          <path d="M208,46 L208,54 L224,50 Z" fill="#8b5cf6" />
+          <circle cx="208" cy="46" r="2.4" fill="#f5f3ff" filter="url(#softGlow)" />
         </>
       )}
     </svg>

@@ -705,6 +705,9 @@ const de = {
   },
   dashboard2: {
     goodMorning: "Guten Morgen",
+    goodAfternoon: "Guten Tag",
+    goodEvening: "Guten Abend",
+    goodNight: "Gute Nacht",
     heroLine1: "Deine Reise. Deine Skills.",
     heroLine2: "IT & Sprachen meistern.",
     heroDesc2: "Lerne, übe, werde zertifiziert und erreiche deine Ziele mit KI-Unterstützung.",

@@ -25,13 +25,24 @@ import CtaBanner from "@/components/dashboard/CtaBanner";
 import Footer from "@/components/Footer";
 import ComingSoonToast from "@/components/coachLive/ComingSoonToast";
 
+// Picks the greeting that actually matches the time of day right now,
+// instead of always saying "good morning" — checked against the local
+// device clock, same as any calendar/clock app would.
+function timeOfDayGreetingKey(): string {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 12) return "dashboard2.goodMorning";
+  if (hour >= 12 && hour < 17) return "dashboard2.goodAfternoon";
+  if (hour >= 17 && hour < 22) return "dashboard2.goodEvening";
+  return "dashboard2.goodNight";
+}
+
 // Rendered *inside* DashboardShell so it sits below UserContext.Provider in the tree.
 function Greeting() {
   const { user } = useUser();
   const { t } = useLocale();
   return (
     <h1 className="text-xl font-extrabold leading-snug text-text sm:text-2xl">
-      {t("dashboard2.goodMorning")}, {getFirstName(user)}! 👋
+      {t(timeOfDayGreetingKey())}, {getFirstName(user)}! 👋
     </h1>
   );
 }

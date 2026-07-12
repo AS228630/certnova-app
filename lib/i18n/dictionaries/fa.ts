@@ -704,6 +704,9 @@ const fa: Dictionary = {
   },
   dashboard2: {
     goodMorning: "صبح بخیر",
+    goodAfternoon: "ظهر بخیر",
+    goodEvening: "عصر بخیر",
+    goodNight: "شب بخیر",
     heroLine1: "سفر تو. مهارت‌های تو.",
     heroLine2: "تسلط بر فناوری اطلاعات و زبان‌ها.",
     heroDesc2: "یاد بگیر، تمرین کن، گواهی بگیر و با کمک هوش مصنوعی به هدفت برس.",

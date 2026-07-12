@@ -704,6 +704,9 @@ const tr: Dictionary = {
   },
   dashboard2: {
     goodMorning: "Günaydın",
+    goodAfternoon: "İyi günler",
+    goodEvening: "İyi akşamlar",
+    goodNight: "İyi geceler",
     heroLine1: "Senin yolculuğun. Senin becerilerin.",
     heroLine2: "BT ve Dillerde Ustalaş.",
     heroDesc2: "Öğren, pratik yap, sertifika al ve yapay zeka desteğiyle hedeflerine ulaş.",

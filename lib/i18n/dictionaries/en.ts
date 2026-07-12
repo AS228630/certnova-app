@@ -704,6 +704,9 @@ const en: Dictionary = {
   },
   dashboard2: {
     goodMorning: "Good morning",
+    goodAfternoon: "Good afternoon",
+    goodEvening: "Good evening",
+    goodNight: "Good night",
     heroLine1: "Your journey. Your skills.",
     heroLine2: "Master IT & Languages.",
     heroDesc2: "Learn, practice, get certified, and reach your goals with AI support.",

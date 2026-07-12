@@ -704,6 +704,9 @@ const ar: Dictionary = {
   },
   dashboard2: {
     goodMorning: "صباح الخير",
+    goodAfternoon: "طاب يومك",
+    goodEvening: "مساء الخير",
+    goodNight: "تصبح على خير",
     heroLine1: "رحلتك. مهاراتك.",
     heroLine2: "أتقن تقنية المعلومات واللغات.",
     heroDesc2: "تعلم، تدرب، احصل على شهادة، وحقق أهدافك بدعم الذكاء الاصطناعي.",

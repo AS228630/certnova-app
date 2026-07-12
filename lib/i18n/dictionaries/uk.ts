@@ -704,6 +704,9 @@ const uk: Dictionary = {
   },
   dashboard2: {
     goodMorning: "Доброго ранку",
+    goodAfternoon: "Доброго дня",
+    goodEvening: "Доброго вечора",
+    goodNight: "Надобраніч",
     heroLine1: "Твоя подорож. Твої навички.",
     heroLine2: "Опануй ІТ та мови.",
     heroDesc2: "Навчайся, тренуйся, отримуй сертифікати та досягай цілей за підтримки ШІ.",

@@ -704,6 +704,9 @@ const fr: Dictionary = {
   },
   dashboard2: {
     goodMorning: "Bonjour",
+    goodAfternoon: "Bon après-midi",
+    goodEvening: "Bonsoir",
+    goodNight: "Bonne nuit",
     heroLine1: "Ton parcours. Tes compétences.",
     heroLine2: "Maîtrise l'IT et les langues.",
     heroDesc2: "Apprends, entraîne-toi, certifie-toi et atteins tes objectifs avec le soutien de l'IA.",
