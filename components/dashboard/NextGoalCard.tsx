@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Compass } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { findCertByCertId } from "@/lib/companiesData";
 import { getVendorIcon } from "@/lib/vendorIcons";
@@ -9,7 +9,11 @@ import { useLocale } from "@/components/LocaleProvider";
 
 // Real "next goal" derived from whichever certification the user has
 // made the most progress on (0-99%). A brand-new user with no progress
-// on anything sees an honest empty state instead of a fabricated goal.
+// on anything sees an honest empty state — but the mountain illustration
+// (this page's one deliberate visual flourish) still renders, dimmed to
+// monochrome grey with no glowing path or flag, so the layout always
+// looks intentional while the "the summit is lit" detail stays reserved
+// for someone who has actually started climbing it.
 export default function NextGoalCard() {
   const progressMap = useCertProgressStore((s) => s.progressMap);
   const detailMap = useCertProgressStore((s) => s.detailMap);
@@ -27,16 +31,23 @@ export default function NextGoalCard() {
 
   if (!active) {
     return (
-      <div className="rounded-2xl border border-border-soft bg-panel p-6 text-center">
-        <Compass size={22} className="mx-auto mb-3 text-text-faint" />
-        <p className="mb-4 text-sm text-text-faint">{t("nextGoal.noCertYet")}</p>
-        <Link
-          href="/certifications"
-          className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white hover:bg-primary-dark"
-        >
-          {t("nextGoal.chooseCert")}
-          <ArrowRight size={15} />
-        </Link>
+      <div className="overflow-hidden rounded-2xl border border-border-soft bg-panel">
+        <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto]">
+          <div className="flex flex-col justify-center p-6 text-center sm:text-left">
+            <h2 className="mb-2 font-bold text-text">{t("nextGoal.title")}</h2>
+            <p className="mb-4 text-sm text-text-faint">{t("nextGoal.noCertYet")}</p>
+            <Link
+              href="/certifications"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white hover:bg-primary-dark"
+            >
+              {t("nextGoal.chooseCert")}
+              <ArrowRight size={15} />
+            </Link>
+          </div>
+          <div className="relative hidden w-52 shrink-0 overflow-hidden sm:block">
+            <MountainIllustration dimmed />
+          </div>
+        </div>
       </div>
     );
   }
@@ -115,12 +126,20 @@ export default function NextGoalCard() {
   );
 }
 
-function MountainIllustration() {
+// `dimmed` renders a monochrome-grey version with no glowing path and no
+// flag — those two details specifically represent "progress toward a
+// goal", so they're reserved for someone with a real goal in progress.
+// The mountain shapes themselves (the atmosphere/brand flourish) stay
+// visible either way, so the card never looks broken or unfinished.
+function MountainIllustration({ dimmed = false }: { dimmed?: boolean }) {
+  const backFill = dimmed ? "url(#mtnBackGrey)" : "url(#mtnBack)";
+  const frontFill = dimmed ? "url(#mtnFrontGrey)" : "url(#mtnFront)";
+
   return (
     <svg viewBox="0 0 200 200" className="h-full w-full" preserveAspectRatio="xMidYMid slice">
       <defs>
         <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#1b1440" />
+          <stop offset="0%" stopColor={dimmed ? "#1a1a22" : "#1b1440"} />
           <stop offset="100%" stopColor="#0a0d1a" />
         </linearGradient>
         <linearGradient id="mtnBack" x1="0" y1="0" x2="0" y2="1">
@@ -131,25 +150,44 @@ function MountainIllustration() {
           <stop offset="0%" stopColor="#1e1b3a" />
           <stop offset="100%" stopColor="#12102a" />
         </linearGradient>
+        <linearGradient id="mtnBackGrey" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#3a3a42" />
+          <stop offset="100%" stopColor="#26262e" />
+        </linearGradient>
+        <linearGradient id="mtnFrontGrey" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#232329" />
+          <stop offset="100%" stopColor="#16161b" />
+        </linearGradient>
       </defs>
       <rect width="200" height="200" fill="url(#skyGrad)" />
       {[...Array(14)].map((_, i) => (
-        <circle key={i} cx={(i * 37 + 13) % 200} cy={(i * 53 + 7) % 90} r={i % 3 === 0 ? 1.1 : 0.6} fill="#ffffff" opacity={0.5} />
+        <circle
+          key={i}
+          cx={(i * 37 + 13) % 200}
+          cy={(i * 53 + 7) % 90}
+          r={i % 3 === 0 ? 1.1 : 0.6}
+          fill="#ffffff"
+          opacity={dimmed ? 0.25 : 0.5}
+        />
       ))}
-      <polygon points="0,200 30,90 70,200" fill="url(#mtnBack)" opacity="0.85" />
-      <polygon points="60,200 110,50 160,200" fill="url(#mtnBack)" />
-      <polygon points="130,200 175,75 200,120 200,200" fill="url(#mtnFront)" />
-      <polyline
-        points="35,190 55,150 45,120 75,95 65,70 100,55"
-        fill="none"
-        stroke="#a78bfa"
-        strokeWidth="2"
-        strokeDasharray="4 4"
-        strokeLinecap="round"
-        opacity="0.8"
-      />
-      <path d="M100,55 L100,38 L112,44 L100,50 Z" fill="#6d4cff" />
-      <line x1="100" y1="38" x2="100" y2="55" stroke="#a78bfa" strokeWidth="1.5" />
+      <polygon points="0,200 30,90 70,200" fill={backFill} opacity="0.85" />
+      <polygon points="60,200 110,50 160,200" fill={backFill} />
+      <polygon points="130,200 175,75 200,120 200,200" fill={frontFill} />
+      {!dimmed && (
+        <>
+          <polyline
+            points="35,190 55,150 45,120 75,95 65,70 100,55"
+            fill="none"
+            stroke="#a78bfa"
+            strokeWidth="2"
+            strokeDasharray="4 4"
+            strokeLinecap="round"
+            opacity="0.8"
+          />
+          <path d="M100,55 L100,38 L112,44 L100,50 Z" fill="#6d4cff" />
+          <line x1="100" y1="38" x2="100" y2="55" stroke="#a78bfa" strokeWidth="1.5" />
+        </>
+      )}
     </svg>
   );
 }

@@ -101,17 +101,64 @@ function ContinueLearningSection() {
 
   const inProgress = [...certItems, ...langItems].sort((a, b) => b.pct - a.pct).slice(0, 4);
 
+  // Honest empty state that still looks intentional: instead of a bare
+  // "no progress yet" message, show real catalog entries (one popular
+  // cert, a few real language courses with their real flags) as "start
+  // here" cards. This is catalog-level content — same category as a
+  // course rating or lesson count — not fabricated personal progress;
+  // every card honestly reads 0% and links to the real starting point.
   if (inProgress.length === 0) {
+    const starterCert = findCertByCertId("az-900");
+    const starterLangs = languageCourses.slice(0, 3);
     return (
-      <div className="rounded-xl border border-dashed border-border-soft bg-panel p-8 text-center">
+      <div>
         <p className="mb-4 text-sm text-text-faint">{t("dashboard2.noProgressYet")}</p>
-        <Link
-          href="/certifications"
-          className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white hover:bg-primary-dark"
-        >
-          <Compass size={15} />
-          {t("dashboard2.discoverPaths")}
-        </Link>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {starterCert && (
+            <Link
+              href={`/certifications/${starterCert.company.slug}/${starterCert.cert.id}`}
+              className="rounded-xl border border-dashed border-border-soft bg-panel p-4 transition-colors hover:border-primary/40"
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <span className="rounded-full bg-panel-alt px-2 py-0.5 text-[10px] font-bold text-text-faint">
+                  {starterCert.cert.code}
+                </span>
+                <span className="text-lg">{getVendorIcon(starterCert.company.name, 22)}</span>
+              </div>
+              <p className="mb-3 text-sm font-bold leading-snug text-text">{starterCert.cert.title}</p>
+              <span className="flex items-center gap-1 text-xs font-bold text-primary">
+                <Compass size={13} />
+                {t("dashboard2.discoverPaths")}
+              </span>
+            </Link>
+          )}
+          {starterLangs.map((course) => (
+            <Link
+              key={course.slug}
+              href="/language-courses"
+              className="rounded-xl border border-dashed border-border-soft bg-panel p-4 transition-colors hover:border-primary/40"
+            >
+              <div className="mb-3 flex items-center justify-between">
+                <span className="rounded-full bg-panel-alt px-2 py-0.5 text-[10px] font-bold text-text-faint">
+                  {course.levelRange}
+                </span>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`https://flagcdn.com/24x18/${course.countryCode}.png`}
+                  alt={course.name}
+                  width={22}
+                  height={16}
+                  className="rounded-[2px]"
+                />
+              </div>
+              <p className="mb-3 text-sm font-bold leading-snug text-text">{course.name}</p>
+              <span className="flex items-center gap-1 text-xs font-bold text-primary">
+                <Compass size={13} />
+                {t("dashboard2.discoverPaths")}
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
     );
   }
