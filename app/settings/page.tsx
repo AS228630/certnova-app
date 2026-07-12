@@ -13,6 +13,7 @@ import { LANGUAGES } from "@/components/LanguageSwitcher";
 import { supabase } from "@/lib/supabase/client";
 import { getFullName, getFirstName } from "@/lib/supabase/useUser";
 import DeleteAccountButton from "@/components/settings/DeleteAccountButton";
+import SubscriptionSection from "@/components/help/SubscriptionSection";
 
 function ProfileForm({ user, profile }: { user: NonNullable<ReturnType<typeof useUser>["user"]>; profile: ReturnType<typeof useProfileStore.getState>["profile"] }) {
   const { t } = useLocale();
@@ -203,6 +204,9 @@ function SettingsBody() {
           )}
         </div>
       </form>
+
+      {/* Subscription — honest free-plan view, matches Help page */}
+      <SubscriptionSection />
 
       {/* Preferences */}
       <div className="rounded-2xl border border-border-soft bg-panel p-5 sm:p-6">
