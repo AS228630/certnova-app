@@ -25,7 +25,7 @@ export default function CtaBanner() {
           <p className="mt-2 max-w-md text-sm text-text-muted">{t("ctaBanner.desc")}</p>
         </div>
         <Link
-          href="/pricing"
+          href="/upgrade"
           className="flex shrink-0 items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-primary-dark"
         >
           {t("ctaBanner.upgradeBtn")}

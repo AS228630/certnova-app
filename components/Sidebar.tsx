@@ -135,9 +135,13 @@ export default function Sidebar({
             <p className="text-xs leading-relaxed text-text-muted">
               {t("sidebar.proUpgradeDesc")}
             </p>
-            <button className="mt-3 w-full rounded-lg bg-primary py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark">
+            <Link
+              href="/upgrade"
+              onClick={onClose}
+              className="mt-3 flex w-full items-center justify-center rounded-lg bg-primary py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark"
+            >
               {t("sidebar.upgradeNow")}
-            </button>
+            </Link>
           </div>
 
           <div className="rounded-xl border border-border-soft p-4">
