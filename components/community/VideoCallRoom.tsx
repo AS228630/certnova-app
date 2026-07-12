@@ -39,7 +39,6 @@ export default function VideoCallRoom({
   }, [roomName]);
 
   const params = new URLSearchParams();
-  params.set("room", roomName);
   if (userName) params.set("name", userName);
   if (audioOnly) params.set("video", "0");
   params.set("audio", "1");
@@ -47,7 +46,7 @@ export default function VideoCallRoom({
   params.set("hide", "0");
   params.set("notify", "0");
 
-  const url = `${CALL_SERVER}/join/?${params.toString()}`;
+  const url = `${CALL_SERVER}/join/${encodeURIComponent(roomName)}?${params.toString()}`;
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col bg-black">
