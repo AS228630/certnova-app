@@ -32,7 +32,8 @@ function DeleteAccountModal({ onClose }: { onClose: () => void }) {
       user.id,
       getFullName(user),
       user.email ?? "",
-      `Kontolöschung angefragt für ${user.email}. Bitte Konto und alle zugehörigen Daten dauerhaft löschen.`
+      `Kontolöschung angefragt für ${user.email}. Bitte Konto und alle zugehörigen Daten dauerhaft löschen.`,
+      "⚠️ Konto löschen"
     );
   }
 
