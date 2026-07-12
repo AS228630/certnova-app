@@ -1,21 +1,25 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { X, Loader2 } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { ExternalLink, X } from "lucide-react";
 import { useCommunityStore } from "@/lib/store/communityStore";
 
-// Video/voice calling via our own self-hosted Coach Live server
-// (MiroTalk P2P, open-source, running on Render's free tier at
-// coach-live-server.onrender.com). We moved here from the free public
-// meet.jit.si after hitting two hard limits with it: a 5-minute
-// disconnect on embedded calls, and no way to remove Jitsi's own
-// branding on the public server. Because we host this instance
-// ourselves, both are solved — calls run as long as needed, and the
-// UI is fully rebranded as "Coach Live" (see coach-live-server repo,
-// app/src/config.template.js). The only trade-off of the free Render
-// tier: if the server has been idle, the first person to open a room
-// may wait up to ~50s for it to spin back up before the call starts.
-const CALL_SERVER = "https://coach-live-server.onrender.com";
+// Video/voice calling via Jitsi Meet's free public server (meet.jit.si).
+//
+// IMPORTANT — why this opens a new tab instead of an embedded iframe:
+// meet.jit.si officially disconnects any call after 5 minutes when it
+// detects it's running inside an iframe on a third-party site (their
+// own wording: "Embedding meet.jit.si is intended only for demo
+// purposes, so this call will disconnect in 5 minutes"). This has been
+// their policy since May 2023 and is enforced server-side — no
+// configOverwrite/interfaceConfigOverwrite option can turn it off, so
+// the previous iframe-based implementation was unusable for real
+// sessions. Opening meet.jit.si directly in its own browser tab (not
+// embedded) is not subject to that 5-minute limit and remains
+// completely free with no account and no time cap. The trade-off is
+// that the call now runs in a separate tab instead of inside our own
+// page chrome.
+const JITSI_DOMAIN = "meet.jit.si";
 
 export default function VideoCallRoom({
   roomName,
@@ -27,56 +31,46 @@ export default function VideoCallRoom({
   audioOnly?: boolean;
 }) {
   const userName = useCommunityStore((s) => s.userName);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [loading, setLoading] = useState(true);
+  const openedRef = useRef(false);
 
   useEffect(() => {
-    // The free Render instance can take up to ~50s to wake from sleep,
-    // so we don't show an error for a while — just keep the spinner
-    // with a reassuring status message.
-    const timer = setTimeout(() => setLoading(false), 60000);
-    return () => clearTimeout(timer);
-  }, [roomName]);
+    if (openedRef.current) return;
+    openedRef.current = true;
 
-  const params = new URLSearchParams();
-  if (userName) params.set("name", userName);
-  if (audioOnly) params.set("video", "0");
-  params.set("audio", "1");
-  params.set("screen", "0");
-  params.set("hide", "0");
-  params.set("notify", "0");
+    const params = new URLSearchParams();
+    if (userName) params.set("userInfo.displayName", userName);
+    if (audioOnly) params.set("config.startWithVideoMuted", "true");
+    const query = params.toString();
+    const url = `https://${JITSI_DOMAIN}/${encodeURIComponent(roomName)}${
+      query ? `#${query}` : ""
+    }`;
 
-  const url = `${CALL_SERVER}/join/${encodeURIComponent(roomName)}?${params.toString()}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  }, [roomName, audioOnly, userName]);
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-black">
-      <div className="flex items-center justify-between border-b border-white/10 bg-panel px-4 py-3">
-        <p className="text-sm font-bold text-white">
-          {roomName} <span className="text-[10px] font-normal text-white/30">(Coach Live)</span>
-        </p>
-        <button onClick={onClose} className="text-white/70 hover:text-white">
-          <X size={20} />
-        </button>
-      </div>
-
-      <div className="relative flex-1">
-        {loading && (
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-black">
-            <Loader2 size={28} className="animate-spin text-white/60" />
-            <p className="max-w-xs text-center text-xs text-white/50">
-              Verbindung wird hergestellt... Falls der Raum eine Weile nicht
-              genutzt wurde, kann der erste Aufbau bis zu 50 Sekunden dauern.
-            </p>
-          </div>
-        )}
-        <iframe
-          ref={iframeRef}
-          src={url}
-          allow="camera; microphone; display-capture; autoplay; clipboard-write; fullscreen"
-          className="h-full w-full border-0"
-          onLoad={() => setLoading(false)}
-        />
-      </div>
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-4 bg-black/90 p-6 text-center">
+      <button
+        onClick={onClose}
+        className="absolute right-4 top-4 text-white/70 hover:text-white"
+      >
+        <X size={22} />
+      </button>
+      <ExternalLink size={32} className="text-white/60" />
+      <p className="max-w-sm text-sm text-white/80">
+        Der Anruf wurde in einem neuen Tab geöffnet (meet.jit.si). Falls sich
+        kein Tab geöffnet hat, hat dein Browser das Öffnen evtl. blockiert —
+        bitte Pop-ups für diese Seite erlauben und erneut versuchen.
+      </p>
+      <p className="max-w-sm text-xs text-white/40">
+        Raum: {roomName}
+      </p>
+      <button
+        onClick={onClose}
+        className="mt-2 rounded-full bg-primary px-5 py-2 text-sm font-bold text-white"
+      >
+        Schließen
+      </button>
     </div>
   );
 }

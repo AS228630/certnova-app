@@ -23,7 +23,6 @@ import DashboardShell from "@/components/DashboardShell";
 import CoachLiveSidebar from "@/components/coachLive/CoachLiveSidebar";
 import ComingSoonToast from "@/components/coachLive/ComingSoonToast";
 import LiveStudyModal from "@/components/community/LiveStudyModal";
-import VideoCallRoom from "@/components/community/VideoCallRoom";
 import { useUser } from "@/components/UserContext";
 import { useProfileStore } from "@/lib/store/profileStore";
 import { getFirstName } from "@/lib/supabase/useUser";
@@ -61,8 +60,6 @@ function CoachLiveBody() {
   const [toast, setToast] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [showChat, setShowChat] = useState(false);
-  const [showCall, setShowCall] = useState<"video" | "voice" | null>(null);
-  const [callRoomName, setCallRoomName] = useState("");
 
   useEffect(() => {
     if (!toast) return;
@@ -70,21 +67,22 @@ function CoachLiveBody() {
     return () => clearTimeout(timer);
   }, [toast]);
 
-  // Generate a fresh, unique room name for every new call session instead
-  // of reusing one fixed name tied only to the user's id. Reusing the
-  // exact same room name across many repeated sessions (as we did while
-  // testing) appears to make the public Jitsi server treat it as
-  // requiring authenticated moderation on later joins, showing a
-  // 'waiting for moderator' screen instead of connecting directly. A
-  // fresh room per session avoids that entirely.
-  function startCall(kind: "video" | "voice") {
-    setCallRoomName(`coach-live-${user?.id ?? "guest"}-${crypto.randomUUID().slice(0, 8)}`);
-    setShowCall(kind);
+  // NOTE (temporary): Video/voice calls are disabled for now while we
+  // evaluate a stable, self-hosted, properly branded solution for
+  // group calls of 20-30+ people — every free option we tried (public
+  // Jitsi, MiroTalk P2P, 8x8, Matrix/Element Call) turned out to
+  // require either a paid tier, a dedicated always-on server we don't
+  // yet have, or breaks down at this group size. Rather than ship a
+  // call feature that's unreliable or shows a third party's branding,
+  // we're being upfront with a "coming soon" state here — text chat
+  // (Supabase Realtime, already solid) stays fully available below.
+  function startCall() {
+    setToast("Video-/Sprachanrufe (bald verfügbar)");
   }
 
   function handleAction(kind: QuickAction["kind"], label: string) {
-    if (kind === "video") startCall("video");
-    else if (kind === "voice") startCall("voice");
+    if (kind === "video") startCall();
+    else if (kind === "voice") startCall();
     else if (kind === "chat") setShowChat(true);
     else setToast(label);
   }
@@ -95,8 +93,8 @@ function CoachLiveBody() {
         active="home"
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
-        onNewMeeting={() => startCall("video")}
-        onVoiceCall={() => startCall("voice")}
+        onNewMeeting={() => startCall()}
+        onVoiceCall={() => startCall()}
         onOpenChat={() => setShowChat(true)}
         onComingSoon={(label) => setToast(label)}
       />
@@ -175,7 +173,7 @@ function CoachLiveBody() {
                 <Calendar size={22} className="text-text-faint" />
                 <p className="text-xs text-text-faint">Noch keine geplanten Meetings.</p>
                 <button
-                  onClick={() => startCall("video")}
+                  onClick={() => startCall()}
                   className="mt-1 text-xs font-bold text-primary hover:underline"
                 >
                   Jetzt ein Meeting starten
@@ -236,13 +234,6 @@ function CoachLiveBody() {
 
       {toast && <ComingSoonToast label={toast} onClose={() => setToast(null)} />}
       {showChat && <LiveStudyModal onClose={() => setShowChat(false)} />}
-      {showCall && (
-        <VideoCallRoom
-          roomName={callRoomName}
-          audioOnly={showCall === "voice"}
-          onClose={() => setShowCall(null)}
-        />
-      )}
     </div>
   );
 }

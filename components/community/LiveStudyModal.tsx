@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { X, Send, Video, Plus, Users, Hash, MessageSquare, Phone, ArrowLeft } from "lucide-react";
 import { useLiveRoomStore } from "@/lib/store/liveRoomStore";
 import { useLocale } from "@/components/LocaleProvider";
-import VideoCallRoom from "@/components/community/VideoCallRoom";
 
 function timeLabel(iso: string, locale: string) {
   return new Date(iso).toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit" });
@@ -34,7 +33,6 @@ export default function LiveStudyModal({ onClose }: { onClose: () => void }) {
   const [newRoomName, setNewRoomName] = useState("");
   const [showNewRoomInput, setShowNewRoomInput] = useState(false);
   const [input, setInput] = useState("");
-  const [showVideoCall, setShowVideoCall] = useState(false);
   const [mobileView, setMobileView] = useState<"rooms" | "chat">("rooms");
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -183,11 +181,12 @@ export default function LiveStudyModal({ onClose }: { onClose: () => void }) {
                     <Users size={12} />1
                   </span>
                   <button
-                    onClick={() => setShowVideoCall(true)}
-                    className="flex items-center gap-1.5 rounded-lg bg-primary px-3.5 py-2 text-xs font-bold text-white hover:bg-primary-dark"
+                    disabled
+                    title="Video-Anrufe: bald verfügbar"
+                    className="flex cursor-not-allowed items-center gap-1.5 rounded-lg bg-panel-alt px-3.5 py-2 text-xs font-bold text-text-faint opacity-60"
                   >
                     <Video size={14} />
-                    {t("community.joinCallCta")}
+                    {t("community.joinCallCta")} · bald
                   </button>
                 </div>
               </div>
@@ -272,10 +271,6 @@ export default function LiveStudyModal({ onClose }: { onClose: () => void }) {
           )}
         </div>
       </div>
-
-      {showVideoCall && activeRoom && (
-        <VideoCallRoom roomName={`study-${activeRoom.id}`} onClose={() => setShowVideoCall(false)} />
-      )}
     </div>
   );
 }
