@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 
 import ThemeProvider from "@/components/ThemeProvider";
 import LocaleProvider from "@/components/LocaleProvider";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function RootLayout({
   children,
@@ -30,6 +31,15 @@ try{var l=localStorage.getItem('certcoach-locale')||'de';document.documentElemen
         <ThemeProvider>
           <LocaleProvider>{children}</LocaleProvider>
         </ThemeProvider>
+        {/* Real visitor analytics (page views, referrers, countries,
+            devices) via Vercel's built-in analytics — free on the plan
+            this project already runs on, zero extra config beyond this
+            component, and view the numbers at vercel.com under this
+            project's "Analytics" tab. This tracks visits, not purchases:
+            there is no real payment system on the site yet (the
+            "Upgrade to Pro" button has no backend behind it), so nobody
+            has actually purchased anything to report on. */}
+        <Analytics />
       </body>
     </html>
   );
