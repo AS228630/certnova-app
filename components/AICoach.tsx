@@ -78,11 +78,32 @@ export default function AICoach() {
         )}
       </div>
 
+      <div className="mt-4 flex flex-wrap gap-2">
+        <Link
+          href="/ai-coach"
+          className="rounded-lg border border-border-soft px-3 py-1.5 text-xs font-semibold text-text-muted hover:border-primary/40 hover:text-text"
+        >
+          {t("aiCoachQuick.studyPlan")}
+        </Link>
+        <Link
+          href="/certifications"
+          className="rounded-lg border border-border-soft px-3 py-1.5 text-xs font-semibold text-text-muted hover:border-primary/40 hover:text-text"
+        >
+          {t("aiCoachQuick.quickQuiz")}
+        </Link>
+        <Link
+          href="/ai-coach"
+          className="rounded-lg border border-border-soft px-3 py-1.5 text-xs font-semibold text-text-muted hover:border-primary/40 hover:text-text"
+        >
+          {t("aiCoachQuick.explain")}
+        </Link>
+      </div>
+
       <Link
-        href="/certifications"
+        href="/ai-coach"
         className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-primary py-2.5 text-sm font-bold text-white transition-colors hover:bg-primary-dark"
       >
-        {t("dashboard.aiCoachCta")}
+        {t("aiCoachQuick.chatBtn")}
         <ArrowRight size={15} />
       </Link>
     </div>

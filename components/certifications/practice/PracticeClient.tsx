@@ -18,6 +18,8 @@ import SectionScorecard from "./SectionScorecard";
 import ExamCompleteScreen from "./ExamCompleteScreen";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
+import { useTopicMasteryStore } from "@/lib/store/topicMasteryStore";
+import { useActivityLogStore } from "@/lib/store/activityLogStore";
 
 const EXAM_TOTAL_SECONDS = 2 * 60 * 60; // 2h, matches a real certification exam
 
@@ -282,6 +284,18 @@ export default function PracticeClient({
             onViewFinalResult={() => {
               setScorecardSection(null);
               setExamComplete(true);
+              const answeredQuestions = activeQuestions.filter((q) => checked.has(q.id));
+              const correctCount = answeredQuestions.filter((q) => isCorrectAnswer(q, answers[q.id])).length;
+              const scorePercent =
+                answeredQuestions.length === 0 ? 0 : Math.round((correctCount / answeredQuestions.length) * 100);
+              // Only log the milestone for exams that were meaningfully
+              // attempted and passed — avoids cluttering the activity feed
+              // with abandoned or near-empty attempts.
+              if (answeredQuestions.length >= 5 && scorePercent >= 70) {
+                useActivityLogStore
+                  .getState()
+                  .recordActivity("exam_passed", `Mock Exam bestanden: ${certTitle}`, 100, { scorePercent });
+              }
             }}
           />
         </div>
@@ -340,6 +354,7 @@ export default function PracticeClient({
               const isCorrect = isCorrectAnswer(current, answers[current.id]);
               useUserProgressStore.getState().recordAnswer(isCorrect);
               useCertProgressStore.getState().recordAnswerForCert(certId, isCorrect);
+              useTopicMasteryStore.getState().recordAnswerForTopic(current.topicId, isCorrect);
               if (isCorrect) useCertProgressStore.getState().recordModuleCompletion(certId, 2);
               maybeShowScorecard(current.id, next);
             }}

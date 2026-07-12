@@ -15,6 +15,8 @@ import { useK8sLabStore, TARGET_DEPLOYMENT_NAME } from "@/lib/store/k8sLabStore"
 import { useCiscoLabStore, TARGET_HOSTNAME, TARGET_IP, TARGET_MASK } from "@/lib/store/ciscoLabStore";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
+import { useActivityLogStore } from "@/lib/store/activityLogStore";
+import { findCertByCertId } from "@/lib/companiesData";
 import LabHeader from "./LabHeader";
 import LabStepsOverview from "./LabStepsOverview";
 import LabOverviewPanel from "./LabOverviewPanel";
@@ -108,6 +110,12 @@ function InteractiveResourceGroupLab({
       // straight to 100% after the first one.
       useCertProgressStore.getState().recordModuleCompletion(certId, 15);
       useCertProgressStore.getState().recordLabCompletionForCert(certId);
+      const match = findCertByCertId(certId);
+      useActivityLogStore.getState().recordActivity(
+        "lab_completed",
+        match ? `Lab abgeschlossen: ${match.cert.title}` : "Lab abgeschlossen",
+        50
+      );
     }
     if (!allDone && completedAt !== null) {
       setCompletedAt(null);

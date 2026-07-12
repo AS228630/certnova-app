@@ -10,6 +10,8 @@ export type UserProgress = {
   study_minutes_total: number;
   questions_answered: number;
   questions_correct: number;
+  questions_answered_today: number;
+  daily_question_goal: number;
   labs_completed: number;
   daily_goal_minutes: number;
 };
@@ -22,6 +24,8 @@ const ZERO_PROGRESS: Omit<UserProgress, "user_id"> = {
   study_minutes_total: 0,
   questions_answered: 0,
   questions_correct: 0,
+  questions_answered_today: 0,
+  daily_question_goal: 20,
   labs_completed: 0,
   daily_goal_minutes: 20,
 };
@@ -47,6 +51,7 @@ function rollForNewDay(p: UserProgress): UserProgress {
     ...p,
     streak_days: continuesStreak ? p.streak_days + 1 : p.last_active_date ? 1 : 0,
     study_minutes_today: 0,
+    questions_answered_today: 0,
     last_active_date: today,
   };
 }
@@ -136,6 +141,7 @@ export const useUserProgressStore = create<UserProgressState>((set, get) => ({
       await persist(userId, {
         streak_days: rolled.streak_days,
         study_minutes_today: rolled.study_minutes_today,
+        questions_answered_today: rolled.questions_answered_today,
         last_active_date: rolled.last_active_date,
       });
     }
@@ -152,6 +158,7 @@ export const useUserProgressStore = create<UserProgressState>((set, get) => ({
       ...rolled,
       questions_answered: rolled.questions_answered + 1,
       questions_correct: rolled.questions_correct + (correct ? 1 : 0),
+      questions_answered_today: rolled.questions_answered_today + 1,
       xp: rolled.xp + (correct ? 15 : 5),
       study_minutes_today: rolled.study_minutes_today + 2,
       study_minutes_total: rolled.study_minutes_total + 2,

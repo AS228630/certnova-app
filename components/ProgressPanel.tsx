@@ -2,6 +2,7 @@
 
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useLocale } from "@/components/LocaleProvider";
+import SkillsRadar from "@/components/dashboard/SkillsRadar";
 
 function formatMinutes(total: number) {
   const h = Math.floor(total / 60);
@@ -83,6 +84,11 @@ export default function ProgressPanel() {
             </div>
           </div>
         )}
+      </div>
+
+      <div className="border-t border-border-soft pt-5">
+        <p className="mb-3 text-xs font-semibold text-text-muted">{t("mastery.title")}</p>
+        <SkillsRadar />
       </div>
     </div>
   );

@@ -1,8 +1,24 @@
 "use client";
 
-import { Flame, Target } from "lucide-react";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useLocale } from "@/components/LocaleProvider";
+
+function ProgressRow({ label, done, goal }: { label: string; done: number; goal: number }) {
+  const percent = goal === 0 ? 0 : Math.min(100, Math.round((done / goal) * 100));
+  return (
+    <div>
+      <div className="mb-1.5 flex items-center justify-between text-xs">
+        <span className="text-text-muted">{label}</span>
+        <span className="font-semibold text-text">
+          {done} / {goal}
+        </span>
+      </div>
+      <div className="h-2 w-full overflow-hidden rounded-full bg-panel-alt">
+        <div className="h-2 rounded-full bg-primary transition-all" style={{ width: `${percent}%` }} />
+      </div>
+    </div>
+  );
+}
 
 export default function DailyPlan() {
   const progress = useUserProgressStore((s) => s.progress);
@@ -10,61 +26,15 @@ export default function DailyPlan() {
 
   const minutesDone = progress?.study_minutes_today ?? 0;
   const minutesGoal = progress?.daily_goal_minutes ?? 20;
-  const questionsAnswered = progress?.questions_answered ?? 0;
-  const streakDays = progress?.streak_days ?? 0;
-
-  const percent = minutesGoal === 0 ? 0 : Math.min(100, Math.round((minutesDone / minutesGoal) * 100));
-  const circumference = 2 * Math.PI * 40;
-  const dashOffset = circumference * (1 - percent / 100);
-  const weeklyGoalDays = 5;
-  const weeklyDaysActive = Math.min(weeklyGoalDays, streakDays);
+  const questionsToday = progress?.questions_answered_today ?? 0;
+  const questionsGoal = progress?.daily_question_goal ?? 20;
 
   return (
     <div className="rounded-2xl border border-border-soft bg-panel p-5">
       <h2 className="mb-4 font-bold text-text">{t("dashboard.dailyGoal")}</h2>
-
-      <div className="flex items-center gap-5">
-        <div className="relative flex h-24 w-24 shrink-0 items-center justify-center">
-          <svg viewBox="0 0 100 100" className="h-24 w-24 -rotate-90">
-            <circle cx="50" cy="50" r="40" fill="none" strokeWidth="8" className="stroke-panel-alt" />
-            <circle
-              cx="50"
-              cy="50"
-              r="40"
-              fill="none"
-              strokeWidth="8"
-              strokeLinecap="round"
-              className="stroke-primary"
-              strokeDasharray={circumference}
-              strokeDashoffset={dashOffset}
-            />
-          </svg>
-          <div className="absolute flex flex-col items-center">
-            <span className="text-lg font-extrabold text-text">{minutesDone}</span>
-            <span className="text-[10px] text-text-faint">/ {minutesGoal} {t("dashboard.min")}</span>
-          </div>
-        </div>
-
-        <div className="flex-1 space-y-3 text-sm">
-          <div>
-            <p className="text-text-faint">{t("dashboard.questionsToday")}</p>
-            <p className="font-semibold text-text">{questionsAnswered}</p>
-          </div>
-          <div className="flex items-center gap-2">
-            <Flame size={16} className="text-warning" />
-            <div>
-              <p className="font-semibold text-text">{streakDays} {streakDays === 1 ? t("dashboard.day") : t("dashboard.days")}</p>
-              <p className="text-[10px] text-text-faint">{t("dashboard.streakLabel")}</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Target size={16} className="text-primary" />
-            <div>
-              <p className="font-semibold text-text">{weeklyDaysActive} / {weeklyGoalDays} {t("dashboard.days")}</p>
-              <p className="text-[10px] text-text-faint">{t("dashboard.weeklyGoal")}</p>
-            </div>
-          </div>
-        </div>
+      <div className="space-y-4">
+        <ProgressRow label={t("dashboard.processingTime")} done={minutesDone} goal={minutesGoal} />
+        <ProgressRow label={t("dashboard.questionsSolved")} done={questionsToday} goal={questionsGoal} />
       </div>
     </div>
   );
