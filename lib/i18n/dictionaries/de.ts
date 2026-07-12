@@ -374,7 +374,7 @@ const de = {
     thisMonth: "Diesen Monat",
   },
   activity: {
-    title: "Activity Feed",
+    title: "Aktivitätsverlauf",
     empty: "Noch keine Aktivität. Starte mit deiner ersten Lektion!",
     labCompleted: "Lab abgeschlossen",
     examPassed: "Mock Exam bestanden",
@@ -384,7 +384,7 @@ const de = {
     xpSuffix: "XP",
   },
   nextGoal: {
-    title: "Your Next Goal",
+    title: "Dein nächstes Ziel",
     questionsRemaining: "Fragen übrig",
     labsRemaining: "Labs übrig",
     estimatedTime: "Geschätzte Zeit",
@@ -393,7 +393,7 @@ const de = {
     chooseCert: "Zertifizierung wählen",
   },
   todaysFocus: {
-    title: "Today's Focus",
+    title: "Heutiger Fokus",
     editGoals: "Ziele bearbeiten",
     continueLesson: "Weiter lernen",
     solveQuestions: "Fragen lösen",
@@ -401,7 +401,7 @@ const de = {
     completed: "abgeschlossen",
   },
   recommended: {
-    title: "Recommended for You",
+    title: "Für dich empfohlen",
     viewAll: "Alle anzeigen",
   },
   readyForMore: {

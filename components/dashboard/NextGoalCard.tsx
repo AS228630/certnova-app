@@ -13,7 +13,11 @@ import { useLocale } from "@/components/LocaleProvider";
 // (this page's one deliberate visual flourish) still renders, dimmed to
 // monochrome grey with no glowing path or flag, so the layout always
 // looks intentional while the "the summit is lit" detail stays reserved
-// for someone who has actually started climbing it.
+// for someone who has actually started climbing it. The illustration
+// renders on every screen size: a short horizontal strip above the text
+// on mobile, a taller side panel on larger screens (sm and up) — it must
+// never be display:none, since that's what caused it to silently
+// disappear on narrow viewports before.
 export default function NextGoalCard() {
   const progressMap = useCertProgressStore((s) => s.progressMap);
   const detailMap = useCertProgressStore((s) => s.detailMap);
@@ -32,6 +36,9 @@ export default function NextGoalCard() {
   if (!active) {
     return (
       <div className="overflow-hidden rounded-2xl border border-border-soft bg-panel">
+        <div className="h-28 w-full sm:hidden">
+          <MountainIllustration dimmed />
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto]">
           <div className="flex flex-col justify-center p-6 text-center sm:text-left">
             <h2 className="mb-2 font-bold text-text">{t("nextGoal.title")}</h2>
@@ -65,6 +72,9 @@ export default function NextGoalCard() {
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border-soft bg-panel">
+      <div className="h-28 w-full sm:hidden">
+        <MountainIllustration />
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto]">
         <div className="p-5 sm:p-6">
           <div className="mb-4 flex items-center justify-between">
@@ -106,8 +116,9 @@ export default function NextGoalCard() {
         </div>
 
         {/* Decorative mountain-path illustration — a visual reward
-            signalling "the summit ahead", matching the design brief.
-            Hidden on small screens to keep the card compact there. */}
+            signalling "the summit ahead", matching the design brief. The
+            mobile strip above handles small screens; this side panel
+            takes over from sm upward. */}
         <div className="relative hidden w-52 shrink-0 overflow-hidden sm:block">
           <MountainIllustration />
         </div>
