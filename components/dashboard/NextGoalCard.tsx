@@ -150,7 +150,7 @@ function MountainIllustration({ dimmed = false }: { dimmed?: boolean }) {
     <svg viewBox="0 0 200 200" className="h-full w-full" preserveAspectRatio="xMidYMid slice">
       <defs>
         <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={dimmed ? "#1a1a22" : "#1b1440"} />
+          <stop offset="0%" stopColor={dimmed ? "#1b2033" : "#1b1440"} />
           <stop offset="100%" stopColor="#0a0d1a" />
         </linearGradient>
         <linearGradient id="mtnBack" x1="0" y1="0" x2="0" y2="1">
@@ -162,12 +162,12 @@ function MountainIllustration({ dimmed = false }: { dimmed?: boolean }) {
           <stop offset="100%" stopColor="#12102a" />
         </linearGradient>
         <linearGradient id="mtnBackGrey" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#3a3a42" />
-          <stop offset="100%" stopColor="#26262e" />
+          <stop offset="0%" stopColor="#4a5170" />
+          <stop offset="100%" stopColor="#2e3348" />
         </linearGradient>
         <linearGradient id="mtnFrontGrey" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#232329" />
-          <stop offset="100%" stopColor="#16161b" />
+          <stop offset="0%" stopColor="#262a3c" />
+          <stop offset="100%" stopColor="#181b28" />
         </linearGradient>
       </defs>
       <rect width="200" height="200" fill="url(#skyGrad)" />
@@ -178,12 +178,28 @@ function MountainIllustration({ dimmed = false }: { dimmed?: boolean }) {
           cy={(i * 53 + 7) % 90}
           r={i % 3 === 0 ? 1.1 : 0.6}
           fill="#ffffff"
-          opacity={dimmed ? 0.25 : 0.5}
+          opacity={dimmed ? 0.4 : 0.5}
         />
       ))}
       <polygon points="0,200 30,90 70,200" fill={backFill} opacity="0.85" />
       <polygon points="60,200 110,50 160,200" fill={backFill} />
       <polygon points="130,200 175,75 200,120 200,200" fill={frontFill} />
+      {dimmed && (
+        <>
+          {/* A faint unlit trail hints at the path without claiming
+              progress — clearly dimmer and without the flag, so it
+              reads as "not started" rather than "in progress". */}
+          <polyline
+            points="35,190 55,150 45,120 75,95 65,70 100,55"
+            fill="none"
+            stroke="#5b6280"
+            strokeWidth="1.5"
+            strokeDasharray="3 5"
+            strokeLinecap="round"
+            opacity="0.5"
+          />
+        </>
+      )}
       {!dimmed && (
         <>
           <polyline
