@@ -32,7 +32,7 @@ function FocusCard({
   );
 }
 
-export default function TodaysFocus() {
+export default function TodaysFocus({ onEditGoals }: { onEditGoals: () => void }) {
   const progress = useUserProgressStore((s) => s.progress);
   const progressMap = useCertProgressStore((s) => s.progressMap);
   const activityEntries = useActivityLogStore((s) => s.entries);
@@ -57,6 +57,9 @@ export default function TodaysFocus() {
     <div>
       <div className="mb-4 flex items-center justify-between">
         <h2 className="font-bold text-text">{t("todaysFocus.title")}</h2>
+        <button onClick={onEditGoals} className="text-xs font-semibold text-primary hover:underline">
+          {t("todaysFocus.editGoals")}
+        </button>
       </div>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <FocusCard

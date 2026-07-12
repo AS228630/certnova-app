@@ -414,6 +414,16 @@ const es: Dictionary = {
     explain: "Explicar",
     chatBtn: "Chatear con la IA",
   },
+  ctaBanner: {
+    title: "¿Listo para dar forma a tu futuro? 🚀",
+    desc: "Únete a más de 128.420+ estudiantes y alcanza tus metas con CertCoach.",
+    upgradeBtn: "Actualizar a Pro",
+    activeLearners: "Estudiantes activos",
+    certsEarned: "Certificados obtenidos",
+    countries: "Países",
+    avgRating: "Valoración media",
+    aiSessions: "Sesiones de coaching con IA",
+  },
   comingSoon: {
     agb: { title: "Términos y condiciones", description: "Nuestros términos y condiciones se están finalizando legalmente." },
     aiCoach: { title: "Coach de IA", description: "Tu coach de aprendizaje con IA personal, con recomendaciones y explicaciones a medida, está en desarrollo." },

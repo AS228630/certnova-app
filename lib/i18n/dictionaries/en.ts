@@ -414,6 +414,16 @@ const en: Dictionary = {
     explain: "Explain",
     chatBtn: "Chat with AI",
   },
+  ctaBanner: {
+    title: "Ready to shape your future? 🚀",
+    desc: "Join over 128,420+ learners and reach your goals with CertCoach.",
+    upgradeBtn: "Upgrade to Pro",
+    activeLearners: "Active Learners",
+    certsEarned: "Certificates Earned",
+    countries: "Countries",
+    avgRating: "Average Rating",
+    aiSessions: "AI Coaching Sessions",
+  },
   comingSoon: {
     agb: { title: "Terms & Conditions", description: "Our terms and conditions are currently being finalized legally." },
     aiCoach: { title: "AI Coach", description: "Your personal AI learning coach with tailored recommendations and explanations is in the works." },

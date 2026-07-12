@@ -415,6 +415,16 @@ const de = {
     explain: "Erklären",
     chatBtn: "Mit KI chatten",
   },
+  ctaBanner: {
+    title: "Bereit, deine Zukunft zu gestalten? 🚀",
+    desc: "Schließe dich über 128.420+ Lernenden an und erreiche deine Ziele mit CertCoach.",
+    upgradeBtn: "Upgrade to Pro",
+    activeLearners: "Aktive Lernende",
+    certsEarned: "Zertifikate erhalten",
+    countries: "Länder",
+    avgRating: "Durchschnittsbewertung",
+    aiSessions: "KI-Coaching Sessions",
+  },
   comingSoon: {
     agb: { title: "AGB", description: "Unsere allgemeinen Geschäftsbedingungen werden aktuell rechtlich finalisiert." },
     aiCoach: { title: "KI Coach", description: "Dein persönlicher KI-Lerncoach mit individuellen Empfehlungen und Erklärungen ist in Arbeit." },

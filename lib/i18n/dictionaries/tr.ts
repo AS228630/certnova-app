@@ -414,6 +414,16 @@ const tr: Dictionary = {
     explain: "Açıkla",
     chatBtn: "Yapay Zeka ile Sohbet",
   },
+  ctaBanner: {
+    title: "Geleceğini şekillendirmeye hazır mısın? 🚀",
+    desc: "128.420+ öğrenciye katıl ve hedeflerine CertCoach ile ulaş.",
+    upgradeBtn: "Pro'ya Yükselt",
+    activeLearners: "Aktif Öğrenci",
+    certsEarned: "Kazanılan Sertifika",
+    countries: "Ülke",
+    avgRating: "Ortalama Puan",
+    aiSessions: "Yapay Zeka Koçluk Oturumu",
+  },
   comingSoon: {
     agb: { title: "Kullanım Koşulları", description: "Kullanım koşullarımız şu anda hukuki olarak son haline getiriliyor." },
     aiCoach: { title: "Yapay Zeka Koçu", description: "Kişiselleştirilmiş önerileri ve açıklamalarıyla kişisel yapay zeka öğrenme koçun geliştiriliyor." },
