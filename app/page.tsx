@@ -255,19 +255,22 @@ export default function LandingPage() {
         </div>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {careerPaths.slice(0, 4).map((p) => (
-            <div key={p.slug} className="rounded-2xl border border-border-soft bg-panel p-5">
-              <div className="mb-4 flex items-center justify-between">
-                <span className="rounded-full bg-primary-light px-2.5 py-1 text-[11px] font-bold text-primary">
-                  {t(`learningPaths.level${p.level}`)}
-                </span>
-                <span className="text-primary">{renderCareerPathIcon(p.icon, 24)}</span>
+          {["cloud-engineer", "cyber-security-analyst", "azure-administrator", "software-developer"]
+            .map((slug) => careerPaths.find((p) => p.slug === slug))
+            .filter((p): p is NonNullable<typeof p> => !!p)
+            .map((p) => (
+              <div key={p.slug} className="rounded-2xl border border-border-soft bg-panel p-5">
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="rounded-full bg-primary-light px-2.5 py-1 text-[11px] font-bold text-primary">
+                    {t(`learningPaths.level${p.level}`)}
+                  </span>
+                  <span className="text-primary">{renderCareerPathIcon(p.icon, 24)}</span>
+                </div>
+                <h3 className="mb-1 font-bold text-text">{p.title}</h3>
+                <p className="text-xs text-text-faint">{p.duration}</p>
+                <p className="mt-1 text-xs font-semibold text-text-muted">~{p.salaryRange}</p>
               </div>
-              <h3 className="mb-1 font-bold text-text">{p.title}</h3>
-              <p className="text-xs text-text-faint">{p.duration}</p>
-              <p className="mt-1 text-xs font-semibold text-text-muted">~{p.salaryRange}</p>
-            </div>
-          ))}
+            ))}
         </div>
       </section>
 
