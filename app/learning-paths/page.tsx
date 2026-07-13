@@ -16,6 +16,7 @@ import HowItWorksSteps from "@/components/learningPathsLanding/HowItWorksSteps";
 import WhyCertCoach from "@/components/learningPathsLanding/WhyCertCoach";
 import SuccessStories from "@/components/learningPathsLanding/SuccessStories";
 import FinalCta from "@/components/learningPathsLanding/FinalCta";
+import SectionErrorBoundary from "@/components/SectionErrorBoundary";
 
 function DashboardLearningPathsBody() {
   const { t } = useLocale();
@@ -58,12 +59,24 @@ function GuestLearningPathsBody() {
   return (
     <div className="min-h-screen bg-bg">
       <LandingHeader />
-      <LearningPathsHero />
-      <PopularPathsGrid />
-      <HowItWorksSteps />
-      <WhyCertCoach />
-      <SuccessStories />
-      <FinalCta />
+      <SectionErrorBoundary>
+        <LearningPathsHero />
+      </SectionErrorBoundary>
+      <SectionErrorBoundary>
+        <PopularPathsGrid />
+      </SectionErrorBoundary>
+      <SectionErrorBoundary>
+        <HowItWorksSteps />
+      </SectionErrorBoundary>
+      <SectionErrorBoundary>
+        <WhyCertCoach />
+      </SectionErrorBoundary>
+      <SectionErrorBoundary>
+        <SuccessStories />
+      </SectionErrorBoundary>
+      <SectionErrorBoundary>
+        <FinalCta />
+      </SectionErrorBoundary>
       <Footer />
     </div>
   );
