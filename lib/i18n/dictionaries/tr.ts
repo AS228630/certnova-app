@@ -294,6 +294,8 @@ const tr: Dictionary = {
     freePlan: "Ücretsiz Plan",
   },
   landingNav: {
+    career: "Kariyer",
+    search: "Ara",
     courses: "Kurslar",
     certifications: "Sertifikalar",
     learningPaths: "Öğrenme Yolları",

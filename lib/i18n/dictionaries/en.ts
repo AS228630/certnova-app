@@ -294,6 +294,8 @@ const en: Dictionary = {
     freePlan: "Free Plan",
   },
   landingNav: {
+    career: "Career",
+    search: "Search",
     courses: "Courses",
     certifications: "Certifications",
     learningPaths: "Learning Paths",

@@ -116,15 +116,8 @@ export default function LandingPage() {
             </div>
 
             <div className="mt-8 flex items-center gap-3">
-              <div className="flex -space-x-3">
-                {["Alex", "Bella", "Chris", "Dana"].map((seed) => (
-                  <img
-                    key={seed}
-                    src={`https://api.dicebear.com/9.x/personas/svg?seed=${seed}&backgroundColor=6d4cff,f59e0b,22c55e,ef4444`}
-                    alt=""
-                    className="h-9 w-9 rounded-full border-2 border-bg bg-panel-alt object-cover"
-                  />
-                ))}
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-light text-primary">
+                <Users size={18} />
               </div>
               <div className="text-sm">
                 <p className="font-bold text-text">120K+</p>

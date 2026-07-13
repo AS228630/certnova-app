@@ -294,6 +294,8 @@ const ar: Dictionary = {
     freePlan: "الخطة المجانية",
   },
   landingNav: {
+    career: "المهنة",
+    search: "بحث",
     courses: "الدورات",
     certifications: "الشهادات",
     learningPaths: "مسارات التعلم",

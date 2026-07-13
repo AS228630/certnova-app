@@ -294,6 +294,8 @@ const uk: Dictionary = {
     freePlan: "Безкоштовний план",
   },
   landingNav: {
+    career: "Кар'єра",
+    search: "Пошук",
     courses: "Курси",
     certifications: "Сертифікації",
     learningPaths: "Навчальні шляхи",

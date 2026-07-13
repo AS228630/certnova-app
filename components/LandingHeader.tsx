@@ -2,17 +2,16 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLocale } from "@/components/LocaleProvider";
 import { supabase } from "@/lib/supabase/client";
 
 const navLinks = [
-  { labelKey: "landingNav.courses", href: "/zertifizierungen" },
   { labelKey: "landingNav.certifications", href: "/zertifizierungen" },
   { labelKey: "landingNav.learningPaths", href: "/learning-paths" },
+  { labelKey: "landingNav.career", href: "/interview" },
   { labelKey: "landingNav.resources", href: "/help" },
-  { labelKey: "landingNav.business", href: "/business" },
   { labelKey: "landingNav.pricing", href: "/pricing" },
 ];
 
@@ -58,6 +57,13 @@ export default function LandingHeader() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+          <Link
+            href="/zertifizierungen"
+            aria-label={t("landingNav.search")}
+            className="hidden h-9 w-9 items-center justify-center rounded-lg border border-border-soft text-text-muted hover:text-text lg:flex"
+          >
+            <Search size={16} />
+          </Link>
           <LanguageSwitcher variant="dark" />
           {signedIn ? (
             <Link
