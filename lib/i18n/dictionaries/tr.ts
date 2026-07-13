@@ -590,6 +590,7 @@ const tr: Dictionary = {
     featFlexDesc: "İstediğin zaman, istediğin yerde, herhangi bir cihazda öğren.",
     featCareerTitle: "Kariyer artışı",
     featCareerDesc: "Mülakatlara hazırlan ve hayalindeki işi bul.",
+    beispielBadge: "Örnek",
     testimonialsTitle: "Öğrencilerimiz ne diyor",
     viewAllReviews: "Tüm değerlendirmeleri görüntüle",
     ctaReadyTitle: "Geleceğini şekillendirmeye hazır mısın?",

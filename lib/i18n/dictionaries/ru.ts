@@ -590,6 +590,7 @@ const ru: Dictionary = {
     featFlexDesc: "Учись когда и где хочешь, на любом устройстве.",
     featCareerTitle: "Карьерный буст",
     featCareerDesc: "Готовься к собеседованиям и найди работу мечты.",
+    beispielBadge: "Пример",
     testimonialsTitle: "Что говорят наши ученики",
     viewAllReviews: "Посмотреть все отзывы",
     ctaReadyTitle: "Готов формировать своё будущее?",

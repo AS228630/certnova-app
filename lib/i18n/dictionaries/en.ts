@@ -590,6 +590,7 @@ const en: Dictionary = {
     featFlexDesc: "Learn whenever and wherever you want, on any device.",
     featCareerTitle: "Career boost",
     featCareerDesc: "Prepare for interviews and find your dream job.",
+    beispielBadge: "Example",
     testimonialsTitle: "What our learners say",
     viewAllReviews: "View all reviews",
     ctaReadyTitle: "Ready to shape your future?",

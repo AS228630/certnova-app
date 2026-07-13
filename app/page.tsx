@@ -19,8 +19,10 @@ import {
   BadgeCheck,
   AlignLeft,
 } from "lucide-react";
-import { SiGoogle, SiSiemens } from "react-icons/si";
-import { getVendorIcon, getCompanyIcon } from "@/lib/vendorIcons";
+import { SiGoogle } from "react-icons/si";
+import { getCompanyIcon } from "@/lib/vendorIcons";
+import { careerPaths } from "@/lib/careerPathsData";
+import { renderCareerPathIcon } from "@/lib/careerPathIcons";
 import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
 import { useLocale } from "@/components/LocaleProvider";
@@ -34,41 +36,6 @@ const heroStats = [
   { icon: Star, value: "4.9/5", labelKey: "landing.statAvgRating" },
 ];
 
-const learningPaths = [
-  {
-    tag: "AWS",
-    tagClass: "bg-warning/15 text-warning",
-    icon: () => getVendorIcon("aws", 26),
-    title: "AWS Cloud Practitioner",
-    levelKey: "landing.beginner",
-    progress: 65,
-  },
-  {
-    tagKey: "landing.tagSecurity",
-    tagClass: "bg-success-light text-success",
-    icon: () => <ShieldCheck size={24} className="text-success" />,
-    title: "Cyber Security Fundamentals",
-    levelKey: "landing.beginner",
-    progress: 42,
-  },
-  {
-    tag: "Microsoft",
-    tagClass: "bg-primary-light text-primary",
-    icon: () => getVendorIcon("azure", 26),
-    title: "Azure Administrator Associate",
-    levelKey: "landing.intermediate",
-    progress: 30,
-  },
-  {
-    tagKey: "landing.tagDevelopment",
-    tagClass: "bg-danger/15 text-danger",
-    icon: () => <Code2 size={24} className="text-danger" />,
-    title: "Full Stack Developer Bootcamp",
-    levelKey: "landing.beginner",
-    progress: 20,
-  },
-];
-
 const features = [
   { icon: Laptop, titleKey: "landing.featPracticalTitle", descKey: "landing.featPracticalDesc" },
   { icon: BadgeCheck, titleKey: "landing.featCertsTitle", descKey: "landing.featCertsDesc" },
@@ -80,22 +47,19 @@ const features = [
 
 const testimonials = [
   {
-    name: "Lukas Weber",
+    initials: "LW",
     roleKey: "landing.role1",
     quoteKey: "landing.quote1",
-    seed: "Lukas-Weber",
   },
   {
-    name: "Sarah Müller",
+    initials: "SM",
     roleKey: "landing.role2",
     quoteKey: "landing.quote2",
-    seed: "Sarah-Mueller",
   },
   {
-    name: "David Krause",
+    initials: "DK",
     roleKey: "landing.role3",
     quoteKey: "landing.quote3",
-    seed: "David-Krause",
   },
 ];
 
@@ -104,8 +68,8 @@ const trustLogos = [
   { name: "Microsoft", render: () => getCompanyIcon("microsoft", 22) },
   { name: "AWS", render: () => getCompanyIcon("aws", 22) },
   { name: "IBM", render: () => getCompanyIcon("ibm", 22) },
-  { name: "Siemens", render: () => <SiSiemens size={22} /> },
-  { name: "Deloitte", render: null },
+  { name: "Cisco", render: () => getCompanyIcon("cisco", 22) },
+  { name: "Oracle", render: () => getCompanyIcon("oracle", 22) },
 ];
 
 export default function LandingPage() {
@@ -273,8 +237,8 @@ export default function LandingPage() {
         <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 opacity-70 grayscale">
           {trustLogos.map((l) => (
             <span key={l.name} className="flex items-center gap-2 text-text-muted">
-              {l.render ? l.render() : <span className="text-lg font-semibold italic">{l.name}.</span>}
-              {l.render && <span className="text-base font-semibold">{l.name}</span>}
+              {l.render()}
+              <span className="text-base font-semibold">{l.name}</span>
             </span>
           ))}
         </div>
@@ -291,18 +255,17 @@ export default function LandingPage() {
         </div>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {learningPaths.map((p) => (
-            <div key={p.title} className="rounded-2xl border border-border-soft bg-panel p-5">
+          {careerPaths.slice(0, 4).map((p) => (
+            <div key={p.slug} className="rounded-2xl border border-border-soft bg-panel p-5">
               <div className="mb-4 flex items-center justify-between">
-                <span className={`rounded-full px-2.5 py-1 text-[11px] font-bold ${p.tagClass}`}>{p.tagKey ? t(p.tagKey) : p.tag}</span>
-                {p.icon()}
+                <span className="rounded-full bg-primary-light px-2.5 py-1 text-[11px] font-bold text-primary">
+                  {t(`learningPaths.level${p.level}`)}
+                </span>
+                <span className="text-primary">{renderCareerPathIcon(p.icon, 24)}</span>
               </div>
               <h3 className="mb-1 font-bold text-text">{p.title}</h3>
-              <p className="mb-4 text-xs text-text-faint">{t(p.levelKey)}</p>
-              <div className="h-1.5 w-full rounded-full bg-panel-alt">
-                <div className="h-1.5 rounded-full bg-primary" style={{ width: `${p.progress}%` }} />
-              </div>
-              <p className="mt-2 text-xs text-text-faint">{p.progress}% {t("landing.completedSuffix")}</p>
+              <p className="text-xs text-text-faint">{p.duration}</p>
+              <p className="mt-1 text-xs font-semibold text-text-muted">~{p.salaryRange}</p>
             </div>
           ))}
         </div>
@@ -336,15 +299,15 @@ export default function LandingPage() {
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((tst) => (
-            <div key={tst.name} className="rounded-2xl border border-border-soft bg-panel p-5">
+            <div key={tst.initials} className="relative rounded-2xl border border-border-soft bg-panel p-5">
+              <span className="absolute right-4 top-4 rounded-full bg-panel-alt px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide text-text-faint">
+                {t("landing.beispielBadge")}
+              </span>
               <div className="mb-3 flex items-center gap-3">
-                <img
-                  src={`https://api.dicebear.com/9.x/personas/svg?seed=${tst.seed}`}
-                  alt=""
-                  className="h-11 w-11 shrink-0 rounded-full bg-panel-alt object-cover"
-                />
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary-light text-sm font-bold text-primary">
+                  {tst.initials}
+                </div>
                 <div>
-                  <p className="text-sm font-bold text-text">{tst.name}</p>
                   <p className="text-xs text-text-faint">{t(tst.roleKey)}</p>
                 </div>
               </div>

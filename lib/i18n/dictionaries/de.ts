@@ -591,6 +591,7 @@ const de = {
     featFlexDesc: "Lerne wann und wo du willst, auf allen Geräten.",
     featCareerTitle: "Karriere boost",
     featCareerDesc: "Bereite dich auf Interviews vor und finde deinen Traumjob.",
+    beispielBadge: "Beispiel",
     testimonialsTitle: "Was unsere Lernenden sagen",
     viewAllReviews: "Alle Bewertungen anzeigen",
     ctaReadyTitle: "Bereit, deine Zukunft zu gestalten?",

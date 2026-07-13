@@ -590,6 +590,7 @@ const fa: Dictionary = {
     featFlexDesc: "هر وقت و هر جا که بخوای، رو هر دستگاهی یاد بگیر.",
     featCareerTitle: "جهش شغلی",
     featCareerDesc: "برای مصاحبه‌ها آماده شو و شغل رویاییت رو پیدا کن.",
+    beispielBadge: "نمونه",
     testimonialsTitle: "یادگیرندگان ما چی می‌گن",
     viewAllReviews: "همه‌ی نظرات رو ببین",
     ctaReadyTitle: "آماده‌ای آینده‌ات رو بسازی؟",

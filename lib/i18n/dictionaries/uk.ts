@@ -590,6 +590,7 @@ const uk: Dictionary = {
     featFlexDesc: "Навчайся коли і де завгодно, на будь-якому пристрої.",
     featCareerTitle: "Кар'єрний буст",
     featCareerDesc: "Готуйся до співбесід і знайди роботу своєї мрії.",
+    beispielBadge: "Приклад",
     testimonialsTitle: "Що кажуть наші учні",
     viewAllReviews: "Переглянути всі відгуки",
     ctaReadyTitle: "Готовий формувати своє майбутнє?",
