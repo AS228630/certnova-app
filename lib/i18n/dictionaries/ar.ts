@@ -1064,6 +1064,12 @@ const ar: Dictionary = {
     teamLicensingFeature2: "إدارة المستخدمين والأدوار",
     teamLicensingFeature3: "تدريب وتأهيل مخصص",
     teamLicensingFeature4: "أسعار خاصة للفرق",
+    notLoggedIn: "يرجى تسجيل الدخول مرة أخرى للمتابعة.",
+    checkoutError: "تعذر بدء الدفع. يرجى المحاولة مرة أخرى.",
+    readyToPayTitle: "جاهز للخطوة التالية",
+    readyToPayDesc: "سيتم توجيهك إلى صفحة الدفع الآمنة الخاصة بنا، حيث يمكنك الاختيار بين بطاقة الائتمان وPayPal وKlarna.",
+    securePaymentNote: "معالجة دفع آمنة عبر Stripe",
+    proceedToPayment: "المتابعة إلى الدفع",
     paymentNotAvailableTitle: "الدفع عبر الإنترنت غير متاح بعد",
     paymentNotAvailableDesc:
       "نعمل على تفعيل الدفع عبر الإنترنت قريبًا. لن يتم خصم أي مبلغ من خطتك المختارة — لا شيء نشط حتى الآن. لأي أسئلة حول الأسعار أو للحصول على عرض مخصص، فريق الدعم لدينا متاح دائمًا.",

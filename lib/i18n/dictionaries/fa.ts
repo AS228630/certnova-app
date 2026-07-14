@@ -1064,6 +1064,12 @@ const fa: Dictionary = {
     teamLicensingFeature2: "مدیریت کاربران و نقش‌ها",
     teamLicensingFeature3: "آموزش و ورود اختصاصی",
     teamLicensingFeature4: "قیمت ویژه برای تیم‌ها",
+    notLoggedIn: "لطفاً دوباره وارد شو تا ادامه بدهی.",
+    checkoutError: "پرداخت شروع نشد. لطفاً دوباره امتحان کن.",
+    readyToPayTitle: "آماده‌ی قدم بعدی",
+    readyToPayDesc: "به صفحه‌ی پرداخت امن ما هدایت می‌شوی، جایی که می‌توانی بین کارت اعتباری، PayPal و Klarna انتخاب کنی.",
+    securePaymentNote: "پردازش امن پرداخت از طریق Stripe",
+    proceedToPayment: "ادامه به پرداخت",
     paymentNotAvailableTitle: "پرداخت آنلاین هنوز در دسترس نیست",
     paymentNotAvailableDesc:
       "ما در حال کار روی فعال‌سازی پرداخت آنلاین هستیم. پلن انتخابی شما هزینه‌ای نخواهد داشت — هنوز چیزی فعال نشده است. برای سوالات مربوط به قیمت یا پیشنهاد اختصاصی، تیم پشتیبانی ما همیشه در دسترس است.",

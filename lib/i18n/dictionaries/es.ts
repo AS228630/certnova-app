@@ -1064,6 +1064,12 @@ const es: Dictionary = {
     teamLicensingFeature2: "Gestión de usuarios y roles",
     teamLicensingFeature3: "Formación e incorporación personalizadas",
     teamLicensingFeature4: "Precios especiales para equipos",
+    notLoggedIn: "Inicia sesión de nuevo para continuar.",
+    checkoutError: "No se pudo iniciar el pago. Inténtalo de nuevo.",
+    readyToPayTitle: "Listo para el siguiente paso",
+    readyToPayDesc: "Serás redirigido a nuestra página de pago segura, donde podrás elegir entre tarjeta de crédito, PayPal y Klarna.",
+    securePaymentNote: "Procesamiento de pago seguro vía Stripe",
+    proceedToPayment: "Continuar al pago",
     paymentNotAvailableTitle: "El pago en línea aún no está disponible",
     paymentNotAvailableDesc:
       "Estamos trabajando para habilitar los pagos en línea pronto. No se cobrará nada por el plan seleccionado — todavía nada está activo. Para preguntas sobre precios o una cotización personalizada, nuestro equipo de soporte está disponible en cualquier momento.",

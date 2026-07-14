@@ -40,7 +40,7 @@ export default function UpgradePage() {
         <div className="mt-8">
           {step === 1 && <PlanSelectionStep onSelectPlan={handleSelectPlan} />}
           {step === 2 && selectedPlan && (
-            <PaymentStep planName={selectedPlan.name} planPrice={selectedPlan.price} onBack={() => setStep(1)} />
+            <PaymentStep planId={selectedPlan.id} planName={selectedPlan.name} planPrice={selectedPlan.price} onBack={() => setStep(1)} />
           )}
         </div>
 

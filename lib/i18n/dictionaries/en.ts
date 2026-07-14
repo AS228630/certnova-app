@@ -1064,6 +1064,12 @@ const en: Dictionary = {
     teamLicensingFeature2: "User & role management",
     teamLicensingFeature3: "Custom training & onboarding",
     teamLicensingFeature4: "Special team pricing",
+    notLoggedIn: "Please log in again to continue.",
+    checkoutError: "Payment could not be started. Please try again.",
+    readyToPayTitle: "Ready for the next step",
+    readyToPayDesc: "You'll be redirected to our secure payment page, where you can choose between credit card, PayPal, and Klarna.",
+    securePaymentNote: "Secure payment processing via Stripe",
+    proceedToPayment: "Proceed to Payment",
     paymentNotAvailableTitle: "Online payment isn't available yet",
     paymentNotAvailableDesc:
       "We're working on enabling online payments soon. Your selected plan won't be charged — nothing is active yet. For pricing questions or a custom quote, our support team is here anytime.",

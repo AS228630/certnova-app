@@ -1064,6 +1064,12 @@ const tr: Dictionary = {
     teamLicensingFeature2: "Kullanıcı ve rol yönetimi",
     teamLicensingFeature3: "Özel eğitim ve katılım",
     teamLicensingFeature4: "Takımlar için özel fiyatlandırma",
+    notLoggedIn: "Devam etmek için lütfen tekrar giriş yap.",
+    checkoutError: "Ödeme başlatılamadı. Lütfen tekrar dene.",
+    readyToPayTitle: "Sonraki adım için hazır",
+    readyToPayDesc: "Kredi kartı, PayPal ve Klarna arasında seçim yapabileceğin güvenli ödeme sayfamıza yönlendirileceksin.",
+    securePaymentNote: "Stripe üzerinden güvenli ödeme işlemi",
+    proceedToPayment: "Ödemeye Geç",
     paymentNotAvailableTitle: "Çevrimiçi ödeme henüz kullanılamıyor",
     paymentNotAvailableDesc:
       "Çevrimiçi ödemeleri yakında etkinleştirmek için çalışıyoruz. Seçtiğin plan için ücret alınmayacak — henüz hiçbir şey aktif değil. Fiyatlandırma soruları veya özel teklif için destek ekibimize her zaman ulaşabilirsin.",

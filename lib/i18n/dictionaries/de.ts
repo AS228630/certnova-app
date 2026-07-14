@@ -1065,6 +1065,12 @@ const de = {
     teamLicensingFeature2: "Nutzer- & Rollenverwaltung",
     teamLicensingFeature3: "Individuelle Trainings & Onboarding",
     teamLicensingFeature4: "Sonderkonditionen für Teams",
+    notLoggedIn: "Bitte melde dich erneut an, um fortzufahren.",
+    checkoutError: "Die Zahlung konnte nicht gestartet werden. Bitte versuche es erneut.",
+    readyToPayTitle: "Bereit für den nächsten Schritt",
+    readyToPayDesc: "Du wirst zu unserer sicheren Zahlungsseite weitergeleitet, wo du zwischen Kreditkarte, PayPal und Klarna wählen kannst.",
+    securePaymentNote: "Sichere Zahlungsabwicklung über Stripe",
+    proceedToPayment: "Weiter zur Zahlung",
     paymentNotAvailableTitle: "Online-Zahlung ist noch nicht verfügbar",
     paymentNotAvailableDesc:
       "Wir arbeiten daran, Online-Zahlungen bald zu ermöglichen. Dein gewählter Plan wird nicht berechnet — hier ist noch nichts aktiv. Bei Fragen zu Preisen oder für ein individuelles Angebot erreichst du unseren Support jederzeit.",
