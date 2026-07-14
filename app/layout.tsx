@@ -3,9 +3,43 @@ import "@fontsource-variable/inter";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "CertCoach – Lerne. Übe. Zertifiziere dich.",
+  metadataBase: new URL("https://www.certcoach.de"),
+  title: {
+    default: "CertCoach – Lerne. Übe. Zertifiziere dich.",
+    template: "%s | CertCoach",
+  },
   description:
     "CertCoach: Deine All-in-One-Plattform, um IT-Skills aufzubauen, Zertifikate zu erhalten und deinen Traumjob zu bekommen.",
+  keywords: [
+    "IT-Zertifizierung",
+    "AWS Zertifikat",
+    "Microsoft Zertifizierung",
+    "Azure Prüfung",
+    "IT-Weiterbildung",
+    "Online-Lernplattform",
+    "Cloud-Zertifizierung",
+    "Praxisprüfung",
+  ],
+  authors: [{ name: "CertCoach" }],
+  openGraph: {
+    type: "website",
+    locale: "de_DE",
+    url: "https://www.certcoach.de",
+    siteName: "CertCoach",
+    title: "CertCoach – Lerne. Übe. Zertifiziere dich.",
+    description:
+      "Deine All-in-One-Plattform, um IT-Skills aufzubauen, Zertifikate zu erhalten und deinen Traumjob zu bekommen.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CertCoach – Lerne. Übe. Zertifiziere dich.",
+    description:
+      "Deine All-in-One-Plattform, um IT-Skills aufzubauen, Zertifikate zu erhalten und deinen Traumjob zu bekommen.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 import ThemeProvider from "@/components/ThemeProvider";
