@@ -33,7 +33,7 @@ export default function DatenschutzPage() {
           </div>
           <div>
             <h1 className="text-2xl font-extrabold text-text">Datenschutzerklärung</h1>
-            <p className="text-sm text-text-faint">Stand: <Fill>[Datum einfügen]</Fill></p>
+            <p className="text-sm text-text-faint">Stand: 14. Juli 2026</p>
           </div>
         </div>
 
@@ -42,14 +42,14 @@ export default function DatenschutzPage() {
           <div>
             <p className="mb-1 font-bold">Hinweis vor Veröffentlichung</p>
             <p className="text-text-muted">
-              Dieser Entwurf deckt die nach Art. 13 DSGVO gesetzlich vorgeschriebenen Angaben strukturell ab
-              und beschreibt wahrheitsgemäß, welche Dienste CertCoach aktuell technisch einsetzt (Supabase als
-              Hosting- und Datenbank-Anbieter; Jitsi/8x8 Inc. für die optionale Video- und Sprachanruf-Funktion
-              in Coach Live; aktuell kein Google Analytics oder vergleichbare Tracking-Dienste im Einsatz). Alle
-              mit <Fill>[…]</Fill> markierten Stellen müssen mit den echten Angaben des Betreibers ausgefüllt
-              werden. Bitte diesen Text vor der Veröffentlichung von einem Rechtsanwalt oder
-              Datenschutzbeauftragten prüfen lassen — insbesondere sobald Zahlungsdienste (z. B. PayPal) oder
-              weitere Drittanbieter hinzukommen, muss der entsprechende Abschnitt ergänzt werden.
+              Dieser Text beschreibt wahrheitsgemäß, welche Dienste CertCoach aktuell technisch einsetzt
+              (Supabase als Datenbank- und Authentifizierungs-Anbieter, Vercel als Hosting-Anbieter; kein
+              Video-/Sprachanruf-Dienst mehr im Einsatz; aktuell kein Google Analytics oder vergleichbare
+              Tracking-Dienste). Die verbleibenden mit <Fill>[…]</Fill> markierten Stellen betreffen Angaben,
+              die nur der Betreiber selbst bestätigen kann (z. B. ob ein Auftragsverarbeitungsvertrag mit
+              Supabase bereits unterschrieben wurde). Bitte diesen Text vor der Veröffentlichung von einem
+              Rechtsanwalt oder Datenschutzbeauftragten prüfen lassen — insbesondere sobald Zahlungsdienste
+              hinzukommen, muss Abschnitt 7 ergänzt werden.
             </p>
           </div>
         </div>
@@ -57,19 +57,15 @@ export default function DatenschutzPage() {
         <Section title="1. Verantwortlicher">
           <p>Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:</p>
           <p>
-            <Fill>[Firmenname / Name des Betreibers]</Fill>
+            Ataullah Senmas
             <br />
-            <Fill>[Straße und Hausnummer]</Fill>
+            Mudweg 17
             <br />
-            <Fill>[PLZ und Ort]</Fill>
+            63897 Miltenberg
             <br />
-            <Fill>[Land]</Fill>
+            Deutschland
           </p>
-          <p>
-            E-Mail: <Fill>[E-Mail-Adresse]</Fill>
-            <br />
-            Telefon: <Fill>[Telefonnummer, optional]</Fill>
-          </p>
+          <p>E-Mail: info@certcoach.de</p>
         </Section>
 
         <Section title="2. Allgemeines zur Datenverarbeitung">
@@ -84,13 +80,18 @@ export default function DatenschutzPage() {
 
         <Section title="3. Hosting und Server-Logfiles">
           <p>
-            Diese Website wird bei <Fill>[Hosting-Anbieter, z. B. Vercel Inc.]</Fill> gehostet. Bei jedem
-            Aufruf der Website erfasst der Hosting-Anbieter automatisch Informationen in sogenannten
+            Diese Website wird bei Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA gehostet. Bei
+            jedem Aufruf der Website erfasst der Hosting-Anbieter automatisch Informationen in sogenannten
             Server-Logfiles, die Ihr Browser automatisch übermittelt. Dies sind: IP-Adresse, Datum und Uhrzeit
             der Anfrage, Browsertyp und -version, verwendetes Betriebssystem sowie die zuvor besuchte Seite
             (Referrer-URL). Diese Daten sind nicht bestimmten Personen zuordenbar und werden ausschließlich zur
             Gewährleistung eines störungsfreien Betriebs sowie zur Verbesserung unseres Angebots ausgewertet.
-            Rechtsgrundlage ist unser berechtigtes Interesse gemäß Art. 6 Abs. 1 lit. f DSGVO.
+            Rechtsgrundlage ist unser berechtigtes Interesse gemäß Art. 6 Abs. 1 lit. f DSGVO. Da Vercel Inc.
+            ihren Sitz in den USA hat, kann eine Datenübermittlung in ein Drittland stattfinden; Vercel hat sich
+            hierfür{" "}
+            <Fill>[Angemessenheitsbeschluss / EU-US Data Privacy Framework / Standardvertragsklauseln –
+            bitte bei Vercel prüfen und ergänzen]</Fill>{" "}
+            verpflichtet.
           </p>
         </Section>
 
@@ -104,9 +105,13 @@ export default function DatenschutzPage() {
           </p>
           <p>
             Die technische Speicherung erfolgt über unseren Datenbank- und Authentifizierungs-Dienstleister
-            Supabase Inc. Weitere Informationen zur Datenverarbeitung durch Supabase finden Sie unter{" "}
-            <Fill>[Link zur Datenschutzerklärung von Supabase]</Fill>. Mit Supabase besteht{" "}
-            <Fill>[ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO / noch abzuschließen]</Fill>.
+            Supabase, Inc. Weitere Informationen zur Datenverarbeitung durch Supabase finden Sie unter{" "}
+            <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+              https://supabase.com/privacy
+            </a>
+            . Mit Supabase besteht{" "}
+            <Fill>[ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO / noch abzuschließen – Supabase
+            stellt hierfür ein DPA über PandaDoc bereit, siehe supabase.com/legal/dpa]</Fill>.
           </p>
         </Section>
 
@@ -120,23 +125,13 @@ export default function DatenschutzPage() {
           </p>
         </Section>
 
-        <Section title="6. Video- und Sprachanrufe (Coach Live)">
+        <Section title="6. Coach Live (Chat-Funktion)">
           <p>
-            Die optionale Funktion „Coach Live&rdquo; ermöglicht Video- und Sprachanrufe zwischen Nutzern. Hierfür
-            setzen wir den Open-Source-Dienst Jitsi Meet in Form der öffentlichen, kostenlosen Instanz{" "}
-            <code className="rounded bg-panel-alt px-1 py-0.5 font-mono text-xs">meet.jit.si</code> ein, die vom
-            Unternehmen 8x8, Inc. betrieben wird. Sobald Sie einen Video- oder Sprachanruf starten, wird Ihr
-            Bild-, Ton- und Videodatenstrom über die Server von 8x8, Inc. geleitet, da eine Verbindung zwischen
-            mehreren Teilnehmern (Gruppenanrufe) technisch eine vermittelnde Infrastruktur erfordert. Nach
-            unserer Kenntnis werden Anrufinhalte von 8x8 nicht dauerhaft gespeichert und nach Beendigung des
-            Anrufs gelöscht, sofern keine Aufzeichnungsfunktion aktiv genutzt wird (diese Funktion ist in Coach
-            Live aktuell nicht implementiert). 8x8, Inc. kann jedoch technische Verbindungsdaten (z. B.
-            IP-Adressen) im Rahmen des Betriebs seiner Server verarbeiten. Rechtsgrundlage ist unser berechtigtes
-            Interesse an der Bereitstellung dieser optionalen Funktion (Art. 6 Abs. 1 lit. f DSGVO) bzw. Ihre
-            Einwilligung durch aktive Nutzung der Funktion. Weitere Informationen finden Sie in der
-            Datenschutzerklärung von 8x8/Jitsi unter <Fill>https://jitsi.org/meet-jit-si-privacy/</Fill> bzw.{" "}
-            <Fill>https://www.8x8.com/terms-and-conditions/privacy-policy</Fill>. Die Nutzung von Coach Live ist
-            freiwillig; alle übrigen Funktionen der Plattform sind ohne diese Funktion vollständig nutzbar.
+            Die Funktion „Coach Live&rdquo; ermöglicht aktuell einen Echtzeit-Textchat zwischen Nutzern. Diese
+            Chat-Funktion läuft technisch vollständig über unseren Datenbank-Dienstleister Supabase (siehe
+            Abschnitt 4) und benötigt keinen zusätzlichen Drittanbieter. Eine Video- oder Sprachanruf-Funktion
+            ist in Coach Live derzeit nicht aktiv; sollte diese Funktion künftig wieder eingeführt werden, wird
+            dieser Abschnitt vor der Aktivierung um den dann genutzten Anbieter ergänzt.
           </p>
         </Section>
 
@@ -186,16 +181,29 @@ export default function DatenschutzPage() {
           </ul>
           <p>
             Sie haben zudem das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, wenn Sie der
-            Ansicht sind, dass die Verarbeitung Ihrer Daten gegen die DSGVO verstößt. Zuständig ist in der
-            Regel die Aufsichtsbehörde Ihres gewöhnlichen Aufenthaltsorts oder die für den Verantwortlichen
-            zuständige Behörde: <Fill>[zuständige Landesdatenschutzbehörde einfügen]</Fill>.
+            Ansicht sind, dass die Verarbeitung Ihrer Daten gegen die DSGVO verstößt. Für den Verantwortlichen
+            mit Sitz in Miltenberg, Bayern, ist zuständig:
+          </p>
+          <p>
+            Bayerisches Landesamt für Datenschutzaufsicht (BayLDA)
+            <br />
+            Promenade 18
+            <br />
+            91522 Ansbach
+            <br />
+            <a href="https://www.lda.bayern.de" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+              www.lda.bayern.de
+            </a>
           </p>
         </Section>
 
         <Section title="11. Kontakt für Datenschutzanfragen">
           <p>
             Für Auskünfte, Berichtigungen, Löschungen oder sonstige Anliegen zum Datenschutz wenden Sie sich
-            bitte an: <Fill>[Datenschutz-E-Mail-Adresse]</Fill>
+            bitte an:{" "}
+            <a href="mailto:info@certcoach.de" className="text-primary hover:underline">
+              info@certcoach.de
+            </a>
           </p>
         </Section>
       </main>
