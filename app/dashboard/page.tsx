@@ -21,8 +21,6 @@ import TodaysFocus from "@/components/dashboard/TodaysFocus";
 import ActivityFeed from "@/components/dashboard/ActivityFeed";
 import RecommendedForYou from "@/components/dashboard/RecommendedForYou";
 import ReadyForMoreCard from "@/components/dashboard/ReadyForMoreCard";
-import CtaBanner from "@/components/dashboard/CtaBanner";
-import Footer from "@/components/Footer";
 import ComingSoonToast from "@/components/coachLive/ComingSoonToast";
 
 // Picks the greeting that actually matches the time of day right now,
@@ -257,10 +255,6 @@ export default function DashboardPage() {
           <ReadyForMoreCard onInvite={() => setToast(t("readyForMore.inviteBtn"))} />
         </div>
       </main>
-      <div className="px-3 pb-6 sm:px-4 md:px-8">
-        <CtaBanner />
-        <Footer />
-      </div>
       {toast && <ComingSoonToast label={toast} onClose={() => setToast(null)} />}
     </DashboardShell>
   );

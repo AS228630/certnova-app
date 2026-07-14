@@ -20,6 +20,8 @@ import { useLiveRoomStore } from "@/lib/store/liveRoomStore";
 import { useTopicMasteryStore } from "@/lib/store/topicMasteryStore";
 import { useActivityLogStore } from "@/lib/store/activityLogStore";
 import { getFullName } from "@/lib/supabase/useUser";
+import CtaBanner from "@/components/dashboard/CtaBanner";
+import Footer from "@/components/Footer";
 
 export default function DashboardShell({
   children,
@@ -137,6 +139,10 @@ export default function DashboardShell({
         <div className="flex min-w-0 flex-1 flex-col pb-16 lg:pb-0">
           <Header onMenuClick={() => setSidebarOpen(true)} />
           {children}
+          <div className="mx-auto w-full max-w-6xl px-3 sm:px-4 md:px-8">
+            <CtaBanner />
+            <Footer />
+          </div>
           <BottomNav />
         </div>
       </div>
