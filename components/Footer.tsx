@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLocale } from "@/components/LocaleProvider";
 import {
@@ -19,57 +19,74 @@ import {
 } from "lucide-react";
 import { supabase } from "@/lib/supabase/client";
 
-const columns = [
-  {
-    titleKey: "footer.platform",
-    links: [
-      { labelKey: "nav.dashboard", href: "/dashboard" },
-      { labelKey: "nav.learningPaths", href: "/learning-paths" },
-      { labelKey: "nav.certifications", href: "/certifications" },
-      { labelKey: "nav.languageCourses", href: "/language-courses" },
-      { labelKey: "nav.projects", href: "/projects" },
-      { labelKey: "nav.community", href: "/community" },
-      { labelKey: "nav.analytics", href: "/analytics" },
-      { labelKey: "nav.aiCoach", href: "/ai-coach" },
-      { labelKey: "nav.interview", href: "/interview" },
-    ],
-  },
-  {
-    titleKey: "footer.resources",
-    links: [
-      { labelKey: "footer.blog", href: "/blog" },
-      { labelKey: "footer.guides", href: "/resources/guides" },
-      { labelKey: "footer.successStories", href: "/erfolgsgeschichten" },
-      { labelKey: "footer.practiceQuestions", href: "/certifications" },
-      { labelKey: "footer.practiceExams", href: "/certifications" },
-      { labelKey: "footer.faq", href: "/faq" },
-      { labelKey: "nav.help", href: "/help" },
-    ],
-  },
-  {
-    titleKey: "footer.business",
-    links: [
-      { labelKey: "footer.aboutUs", href: "/ueber-uns" },
-      { labelKey: "footer.careers", href: "/karriere" },
-      { labelKey: "footer.partners", href: "/partner" },
-      { labelKey: "footer.contact", href: "/kontakt" },
-      { labelKey: "footer.press", href: "/presse" },
-      { labelKey: "footer.affiliate", href: "/affiliate" },
-    ],
-  },
-  {
-    titleKey: "footer.legal",
-    links: [
-      { labelKey: "footer.imprint", href: "/impressum" },
-      { labelKey: "footer.privacy", href: "/datenschutz" },
-      { labelKey: "footer.cookies", href: "/cookie-einstellungen" },
-      { labelKey: "footer.terms", href: "/agb" },
-      { labelKey: "footer.withdrawal", href: "/widerrufsrecht" },
-      { labelKey: "footer.accessibility", href: "/barrierefreiheit" },
-      { labelKey: "footer.security", href: "/sicherheit" },
-    ],
-  },
-];
+// The footer is shown on both guest pages and signed-in dashboard
+// pages. "Zertifizierungen" needs to point to the guest-accessible
+// catalog (/zertifizierungen) when the visitor isn't logged in —
+// otherwise clicking it from a guest page would bounce them straight to
+// /login, which is confusing UX for someone just browsing.
+function useCertificationsHref() {
+  const [signedIn, setSignedIn] = useState(false);
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => setSignedIn(!!data.session));
+    const { data: listener } = supabase.auth.onAuthStateChange((_e, session) => setSignedIn(!!session));
+    return () => listener.subscription.unsubscribe();
+  }, []);
+  return signedIn ? "/certifications" : "/zertifizierungen";
+}
+
+function useColumns(certificationsHref: string) {
+  return [
+    {
+      titleKey: "footer.platform",
+      links: [
+        { labelKey: "nav.dashboard", href: "/dashboard" },
+        { labelKey: "nav.learningPaths", href: "/learning-paths" },
+        { labelKey: "nav.certifications", href: certificationsHref },
+        { labelKey: "nav.languageCourses", href: "/language-courses" },
+        { labelKey: "nav.projects", href: "/projects" },
+        { labelKey: "nav.community", href: "/community" },
+        { labelKey: "nav.analytics", href: "/analytics" },
+        { labelKey: "nav.aiCoach", href: "/ai-coach" },
+        { labelKey: "nav.interview", href: "/interview" },
+      ],
+    },
+    {
+      titleKey: "footer.resources",
+      links: [
+        { labelKey: "footer.blog", href: "/blog" },
+        { labelKey: "footer.guides", href: "/resources/guides" },
+        { labelKey: "footer.successStories", href: "/erfolgsgeschichten" },
+        { labelKey: "footer.practiceQuestions", href: certificationsHref },
+        { labelKey: "footer.practiceExams", href: certificationsHref },
+        { labelKey: "footer.faq", href: "/faq" },
+        { labelKey: "nav.help", href: "/help" },
+      ],
+    },
+    {
+      titleKey: "footer.business",
+      links: [
+        { labelKey: "footer.aboutUs", href: "/ueber-uns" },
+        { labelKey: "footer.careers", href: "/karriere" },
+        { labelKey: "footer.partners", href: "/partner" },
+        { labelKey: "footer.contact", href: "/kontakt" },
+        { labelKey: "footer.press", href: "/presse" },
+        { labelKey: "footer.affiliate", href: "/affiliate" },
+      ],
+    },
+    {
+      titleKey: "footer.legal",
+      links: [
+        { labelKey: "footer.imprint", href: "/impressum" },
+        { labelKey: "footer.privacy", href: "/datenschutz" },
+        { labelKey: "footer.cookies", href: "/cookie-einstellungen" },
+        { labelKey: "footer.terms", href: "/agb" },
+        { labelKey: "footer.withdrawal", href: "/widerrufsrecht" },
+        { labelKey: "footer.accessibility", href: "/barrierefreiheit" },
+        { labelKey: "footer.security", href: "/sicherheit" },
+      ],
+    },
+  ];
+}
 
 const trustBadges = [
   { icon: Lock, labelKey: "footer.sslEncrypted", color: "#22c55e" },
@@ -129,6 +146,8 @@ function NewsletterForm() {
 
 export default function Footer() {
   const { t, locale, setLocale } = useLocale();
+  const certificationsHref = useCertificationsHref();
+  const columns = useColumns(certificationsHref);
   return (
     <footer className="mt-10 rounded-2xl border border-border-soft bg-panel p-6 md:p-8">
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-6">
