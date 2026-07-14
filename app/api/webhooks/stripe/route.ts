@@ -2,17 +2,18 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "");
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY ?? "");
+}
 
 // Uses the Supabase service role key (server-only, never exposed to the
 // browser) because writing subscription status must bypass the RLS
 // policy that otherwise only allows users to read (not write) their own
 // row — a paid plan must only ever be granted by a verified Stripe
 // event, never by a client-side request.
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
-  process.env.SUPABASE_SERVICE_ROLE_KEY ?? ""
-);
+function getSupabaseAdmin() {
+  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL ?? "", process.env.SUPABASE_SERVICE_ROLE_KEY ?? "");
+}
 
 export async function POST(req: NextRequest) {
   const body = await req.text();
@@ -27,7 +28,7 @@ export async function POST(req: NextRequest) {
   try {
     // Verifies the request genuinely came from Stripe (not spoofed) —
     // critical, since this endpoint grants paid access.
-    event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
+    event = getStripe().webhooks.constructEvent(body, signature, webhookSecret);
   } catch (err) {
     console.error("Webhook signature verification failed:", err);
     return NextResponse.json({ error: "Invalid signature" }, { status: 400 });
@@ -40,12 +41,12 @@ export async function POST(req: NextRequest) {
         const userId = session.client_reference_id;
         if (!userId || !session.subscription) break;
 
-        const subscription = await stripe.subscriptions.retrieve(session.subscription as string);
+        const subscription = await getStripe().subscriptions.retrieve(session.subscription as string);
         const priceAmount = subscription.items.data[0]?.price?.unit_amount ?? 0;
         const plan = priceAmount >= 15000 ? "yearly" : "monthly";
         const periodEnd = (subscription as unknown as { current_period_end: number }).current_period_end;
 
-        await supabaseAdmin.from("subscriptions").upsert(
+        await getSupabaseAdmin().from("subscriptions").upsert(
           {
             user_id: userId,
             stripe_customer_id: session.customer as string,
@@ -66,7 +67,7 @@ export async function POST(req: NextRequest) {
         if (!userId) break;
 
         const periodEnd = (subscription as unknown as { current_period_end: number }).current_period_end;
-        await supabaseAdmin
+        await getSupabaseAdmin()
           .from("subscriptions")
           .update({
             status: subscription.status === "active" ? "active" : subscription.status === "past_due" ? "past_due" : "canceled",
@@ -79,7 +80,7 @@ export async function POST(req: NextRequest) {
 
       case "customer.subscription.deleted": {
         const subscription = event.data.object as Stripe.Subscription;
-        await supabaseAdmin
+        await getSupabaseAdmin()
           .from("subscriptions")
           .update({ plan: "free", status: "canceled", updated_at: new Date().toISOString() })
           .eq("stripe_subscription_id", subscription.id);

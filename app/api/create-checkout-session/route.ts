@@ -3,10 +3,14 @@ import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
 import { PLAN_PRICES } from "@/lib/stripeConfig";
 
-// Server-only: the secret key never reaches the browser. Reads from an
-// environment variable that must be set in Vercel (Settings →
-// Environment Variables → STRIPE_SECRET_KEY) — never hardcoded here.
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY ?? "");
+// Initialized lazily (inside the handler, not at module load time) so
+// that Next.js collecting page data during `next build` — which runs
+// before the environment variable is guaranteed to be available in
+// that exact build context — doesn't crash the whole build. The key is
+// only actually needed once a real request comes in at runtime.
+function getStripe() {
+  return new Stripe(process.env.STRIPE_SECRET_KEY ?? "");
+}
 
 export async function POST(req: NextRequest) {
   try {
@@ -38,7 +42,7 @@ export async function POST(req: NextRequest) {
     const priceInfo = PLAN_PRICES[plan];
     const origin = req.headers.get("origin") ?? "https://www.certcoach.de";
 
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       mode: "subscription",
       // Dynamic payment methods: Stripe automatically shows whichever
       // methods (card, PayPal, Klarna) are enabled in the Dashboard —
