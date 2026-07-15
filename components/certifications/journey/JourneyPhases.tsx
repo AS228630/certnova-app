@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, Lock, Clock3 } from "lucide-react";
+import { CheckCircle2, Lock, Clock3, ArrowRight } from "lucide-react";
 import { useEffect } from "react";
 import Link from "next/link";
 import type { JourneyPhase } from "@/lib/journeyData";
@@ -26,13 +26,30 @@ const ACCENT_GRADIENT: Record<JourneyPhase["key"], string> = {
   pruefung: "from-fuchsia-400 via-fuchsia-400/50 to-transparent",
 };
 
+// Small connector chip shown on the right edge of a card to indicate it
+// leads into the next one. Positioned absolutely so it never affects the
+// equal-width grid track sizing of the cards themselves — only visible at
+// the xl breakpoint where all 4 cards sit in a single row (at narrower
+// breakpoints cards stack vertically, where a rightward arrow wouldn't
+// make sense).
+function ConnectorChip() {
+  return (
+    <div className="pointer-events-none absolute -right-5 top-1/2 z-10 hidden -translate-y-1/2 xl:flex">
+      <div className="flex h-6 w-6 items-center justify-center rounded-full border border-border-soft bg-bg text-text-faint">
+        <ArrowRight size={12} />
+      </div>
+    </div>
+  );
+}
+
 function PhaseCard({ phase, href }: { phase: JourneyPhase; href?: string }) {
   const { t } = useLocale();
   const isReady = phase.unlocked && !!href;
 
   return (
-    <div className="group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border-soft bg-panel p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20">
-      <div className={`absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r ${ACCENT_GRADIENT[phase.key]}`} />
+    <div className="group relative flex h-full min-w-0 flex-col rounded-2xl border border-border-soft bg-panel p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20">
+      <div className={`absolute inset-x-0 top-0 h-[3px] rounded-t-2xl bg-gradient-to-r ${ACCENT_GRADIENT[phase.key]}`} />
+      <ConnectorChip />
 
       <div className="mb-3 flex items-center gap-2">
         <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">

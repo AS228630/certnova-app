@@ -27,8 +27,8 @@ export default function ExamInfoCard({
   const { t } = useLocale();
 
   return (
-    <div className="group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border-soft bg-panel p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20">
-      <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-amber-400 via-amber-400/50 to-transparent" />
+    <div className="group relative flex h-full min-w-0 flex-col rounded-2xl border border-border-soft bg-panel p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20">
+      <div className="absolute inset-x-0 top-0 h-[3px] rounded-t-2xl bg-gradient-to-r from-amber-400 via-amber-400/50 to-transparent" />
 
       <div className="mb-3 flex items-center gap-2">
         <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-500 text-xs font-bold text-white">
