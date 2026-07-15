@@ -15,6 +15,25 @@ function getSupabaseAdmin() {
   return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL ?? "", process.env.SUPABASE_SERVICE_ROLE_KEY ?? "");
 }
 
+// Stripe moved `current_period_end` off the top-level Subscription object
+// and onto each subscription item in newer API versions. Read it from
+// whichever location has it, and never hand toISOString() a bad value —
+// an unexpected shape here should skip the field, not crash the whole
+// webhook (which would otherwise leave the paid status stuck as free).
+function extractPeriodEndIso(subscription: Stripe.Subscription): string | null {
+  const topLevel = (subscription as unknown as { current_period_end?: number }).current_period_end;
+  const itemLevel = (
+    subscription.items?.data?.[0] as unknown as { current_period_end?: number } | undefined
+  )?.current_period_end;
+  const periodEnd = topLevel ?? itemLevel;
+
+  if (typeof periodEnd !== "number" || !Number.isFinite(periodEnd)) {
+    return null;
+  }
+  const date = new Date(periodEnd * 1000);
+  return Number.isNaN(date.getTime()) ? null : date.toISOString();
+}
+
 export async function POST(req: NextRequest) {
   const body = await req.text();
   const signature = req.headers.get("stripe-signature");
@@ -44,20 +63,19 @@ export async function POST(req: NextRequest) {
         const subscription = await getStripe().subscriptions.retrieve(session.subscription as string);
         const priceAmount = subscription.items.data[0]?.price?.unit_amount ?? 0;
         const plan = priceAmount >= 15000 ? "yearly" : "monthly";
-        const periodEnd = (subscription as unknown as { current_period_end: number }).current_period_end;
 
-        await getSupabaseAdmin().from("subscriptions").upsert(
-          {
-            user_id: userId,
-            stripe_customer_id: session.customer as string,
-            stripe_subscription_id: subscription.id,
-            plan,
-            status: "active",
-            current_period_end: new Date(periodEnd * 1000).toISOString(),
-            updated_at: new Date().toISOString(),
-          },
-          { onConflict: "user_id" }
-        );
+        const row: Record<string, unknown> = {
+          user_id: userId,
+          stripe_customer_id: session.customer as string,
+          stripe_subscription_id: subscription.id,
+          plan,
+          status: "active",
+          updated_at: new Date().toISOString(),
+        };
+        const periodEndIso = extractPeriodEndIso(subscription);
+        if (periodEndIso) row.current_period_end = periodEndIso;
+
+        await getSupabaseAdmin().from("subscriptions").upsert(row, { onConflict: "user_id" });
         break;
       }
 
@@ -66,14 +84,16 @@ export async function POST(req: NextRequest) {
         const userId = subscription.metadata?.supabase_user_id;
         if (!userId) break;
 
-        const periodEnd = (subscription as unknown as { current_period_end: number }).current_period_end;
+        const updateRow: Record<string, unknown> = {
+          status: subscription.status === "active" ? "active" : subscription.status === "past_due" ? "past_due" : "canceled",
+          updated_at: new Date().toISOString(),
+        };
+        const periodEndIso = extractPeriodEndIso(subscription);
+        if (periodEndIso) updateRow.current_period_end = periodEndIso;
+
         await getSupabaseAdmin()
           .from("subscriptions")
-          .update({
-            status: subscription.status === "active" ? "active" : subscription.status === "past_due" ? "past_due" : "canceled",
-            current_period_end: new Date(periodEnd * 1000).toISOString(),
-            updated_at: new Date().toISOString(),
-          })
+          .update(updateRow)
           .eq("stripe_subscription_id", subscription.id);
         break;
       }
