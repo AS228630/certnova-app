@@ -27,7 +27,7 @@ export default function ExamInfoCard({
   const { t } = useLocale();
 
   return (
-    <div className="group relative flex h-full flex-1 basis-0 flex-col overflow-hidden rounded-2xl border border-border-soft bg-panel p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20">
+    <div className="group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border-soft bg-panel p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20">
       <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-amber-400 via-amber-400/50 to-transparent" />
 
       <div className="mb-3 flex items-center gap-2">
@@ -43,35 +43,41 @@ export default function ExamInfoCard({
       <ExamIllustration />
 
       <div className="my-4 space-y-2 text-xs text-text-muted">
-        <div className="flex items-center justify-between">
-          <span className="flex items-center gap-1.5">
+        <div className="flex items-center justify-between gap-2">
+          <span className="flex shrink-0 items-center gap-1.5">
             <HelpCircle size={12} className="text-text-faint" />
             {t("examInfo.statQuestions")}
           </span>
           <span className="font-semibold text-text">{examInfo.questionRange}</span>
         </div>
-        <div className="flex items-center justify-between">
-          <span className="flex items-center gap-1.5">
+        <div className="flex items-center justify-between gap-2">
+          <span className="flex shrink-0 items-center gap-1.5">
             <Clock3 size={12} className="text-text-faint" />
             {t("examInfo.statDuration")}
           </span>
-          <span className="font-semibold text-text">
+          <span className="whitespace-nowrap font-semibold text-text">
             {examInfo.durationMinutes} {t("examInfo.minutesUnit")}
           </span>
         </div>
-        <div className="flex items-center justify-between">
-          <span className="flex items-center gap-1.5">
+        <div className="flex items-center justify-between gap-2">
+          <span className="flex shrink-0 items-center gap-1.5">
             <Target size={12} className="text-text-faint" />
             {t("examInfo.statPassingScore")}
           </span>
-          <span className="font-semibold text-text">{examInfo.passingScore}</span>
+          <span className="whitespace-nowrap font-semibold text-text">{examInfo.passingScore}</span>
         </div>
-        <div className="flex items-center justify-between">
-          <span className="flex items-center gap-1.5">
+        <div>
+          <span className="mb-1.5 flex items-center gap-1.5">
             <Monitor size={12} className="text-text-faint" />
             {t("examInfo.statFormat")}
           </span>
-          <span className="max-w-[60%] text-right font-semibold text-text">{examInfo.format}</span>
+          <div className="flex flex-wrap gap-1">
+            {examInfo.format.map((tag) => (
+              <span key={tag} className="rounded-md bg-panel-alt px-1.5 py-0.5 text-[10px] font-semibold text-text">
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
 

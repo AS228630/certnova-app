@@ -1,7 +1,7 @@
 "use client";
 
-import { ArrowRight, CheckCircle2, Lock, Clock3 } from "lucide-react";
-import { Fragment, useEffect } from "react";
+import { CheckCircle2, Lock, Clock3 } from "lucide-react";
+import { useEffect } from "react";
 import Link from "next/link";
 import type { JourneyPhase } from "@/lib/journeyData";
 import type { ExamInfo } from "@/lib/examInfoData";
@@ -31,7 +31,7 @@ function PhaseCard({ phase, href }: { phase: JourneyPhase; href?: string }) {
   const isReady = phase.unlocked && !!href;
 
   return (
-    <div className="group relative flex h-full flex-1 basis-0 flex-col overflow-hidden rounded-2xl border border-border-soft bg-panel p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20">
+    <div className="group relative flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border-soft bg-panel p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20">
       <div className={`absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r ${ACCENT_GRADIENT[phase.key]}`} />
 
       <div className="mb-3 flex items-center gap-2">
@@ -186,20 +186,11 @@ export default function JourneyPhases({
   }
 
   return (
-    <div id="phasen" className="flex flex-1 flex-col items-stretch gap-4 lg:flex-row lg:items-stretch">
-      {realPhases.map((phase, i) => (
-        <Fragment key={phase.key}>
-          <PhaseCard phase={phase} href={destinationFor(phase)} />
-          {i < realPhases.length - 1 && (
-            <div className="flex items-center justify-center py-1 lg:py-0 lg:self-center">
-              <ArrowRight size={18} className="rotate-90 text-text-faint lg:rotate-0" />
-            </div>
-          )}
-        </Fragment>
+    <div id="phasen" className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      {realPhases.map((phase) => (
+        <PhaseCard key={phase.key} phase={phase} href={destinationFor(phase)} />
       ))}
-      <div className="flex flex-1 basis-0">
-        <ExamInfoCard companySlug={companySlug} certId={certId} examInfo={examInfo} />
-      </div>
+      <ExamInfoCard companySlug={companySlug} certId={certId} examInfo={examInfo} />
     </div>
   );
 }

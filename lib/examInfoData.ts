@@ -17,7 +17,7 @@ export type ExamInfo = {
   questionRange: string; // e.g. "40–60"
   durationMinutes: string; // e.g. "45–60"
   passingScore: string; // e.g. "700 / 1000"
-  format: string;
+  format: string[]; // short tags, rendered as pills
   deliveredBy: string;
   price?: string;
   languages?: string;
@@ -36,7 +36,7 @@ export const VERIFIED_EXAM_INFO: Record<string, ExamInfo> = {
     questionRange: "40–60",
     durationMinutes: "45–60",
     passingScore: "700 / 1000",
-    format: "Multiple Choice, Multiple Response, Drag-and-Drop, Hotspot",
+    format: ["Multiple Choice", "Multiple Response", "Drag-and-Drop", "Hotspot"],
     deliveredBy: "Pearson VUE (Testcenter oder Online-Proctoring)",
     price: "99 $",
     languages: "Verfügbar in Deutsch und weiteren Sprachen",
@@ -49,7 +49,7 @@ export const VERIFIED_EXAM_INFO: Record<string, ExamInfo> = {
     questionRange: "40–60",
     durationMinutes: "100–120",
     passingScore: "700 / 1000",
-    format: "Multiple Choice, Fallstudien, Drag-and-Drop, Szenario-Fragen",
+    format: ["Multiple Choice", "Fallstudien", "Drag-and-Drop", "Szenario"],
     deliveredBy: "Pearson VUE (Testcenter oder Online-Proctoring)",
     price: "165 $",
     languages: "Verfügbar in Deutsch und weiteren Sprachen",
@@ -62,7 +62,7 @@ export const VERIFIED_EXAM_INFO: Record<string, ExamInfo> = {
     questionRange: "40–60",
     durationMinutes: "45–60",
     passingScore: "700 / 1000",
-    format: "Multiple Choice, Multiple Response, Szenario-Fragen",
+    format: ["Multiple Choice", "Multiple Response", "Szenario"],
     deliveredBy: "Pearson VUE (Testcenter oder Online-Proctoring)",
     price: "99 $",
     languages: "Aktuell auf Englisch verfügbar",
@@ -81,7 +81,7 @@ export const GENERIC_EXAM_INFO: ExamInfo = {
   questionRange: "meist 40–60",
   durationMinutes: "meist 45–120",
   passingScore: "meist 700 / 1000",
-  format: "Multiple Choice und/oder Szenario-Fragen (je nach Anbieter)",
+  format: ["Multiple Choice", "Szenario-Fragen"],
   deliveredBy: "je nach Anbieter (z. B. Pearson VUE)",
   sourceNote: "Allgemeine Richtwerte — die exakten Prüfungsdetails für dieses Zertifikat werden noch ergänzt.",
   simQuestionCount: 20,
