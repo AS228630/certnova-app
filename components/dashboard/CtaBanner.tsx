@@ -3,6 +3,7 @@
 import { Users, Award, Globe2, Star, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useLocale } from "@/components/LocaleProvider";
+import { useSubscriptionStore } from "@/lib/store/subscriptionStore";
 
 // Platform-level marketing stats (not personal user progress) — the one
 // honest exception under the project's no-fabricated-data rule, same
@@ -17,6 +18,11 @@ const stats = [
 
 export default function CtaBanner() {
   const { t } = useLocale();
+  // A "become Pro" pitch makes no sense to show someone who already
+  // is — same real subscription check as the Sidebar prompt.
+  const isPro = useSubscriptionStore((s) => s.isPro);
+  if (isPro) return null;
+
   return (
     <div className="mt-6 overflow-hidden rounded-2xl border border-border-soft bg-gradient-to-br from-primary/20 via-panel to-fuchsia-500/10 p-6 sm:p-8">
       <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
