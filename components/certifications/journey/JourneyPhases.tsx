@@ -172,7 +172,7 @@ export default function JourneyPhases({
   }
 
   return (
-    <div id="phasen" className="flex flex-col items-stretch gap-4 lg:flex-row lg:items-start">
+    <div id="phasen" className="flex flex-1 flex-col items-stretch gap-4 lg:flex-row lg:items-start">
       {realPhases.map((phase, i) => (
         <Fragment key={phase.key}>
           <PhaseCard phase={phase} href={destinationFor(phase)} />
