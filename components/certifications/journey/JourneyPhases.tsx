@@ -4,8 +4,10 @@ import { ArrowRight, CheckCircle2, Lock, Clock3 } from "lucide-react";
 import { Fragment, useEffect } from "react";
 import Link from "next/link";
 import type { JourneyPhase } from "@/lib/journeyData";
+import type { ExamInfo } from "@/lib/examInfoData";
 import ProgressRing from "./ProgressRing";
 import PhaseIllustration from "./PhaseIllustration";
+import ExamInfoCard from "./ExamInfoCard";
 import { useUser } from "@/components/UserContext";
 import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
@@ -18,14 +20,22 @@ const RING_COLORS: Record<JourneyPhase["key"], string> = {
   pruefung: "#a855f7",
 };
 
+const ACCENT_GRADIENT: Record<JourneyPhase["key"], string> = {
+  lernen: "from-primary via-primary/60 to-transparent",
+  labore: "from-sky-400 via-sky-400/50 to-transparent",
+  pruefung: "from-fuchsia-400 via-fuchsia-400/50 to-transparent",
+};
+
 function PhaseCard({ phase, href }: { phase: JourneyPhase; href?: string }) {
   const { t } = useLocale();
   const isReady = phase.unlocked && !!href;
 
   return (
-    <div className="flex flex-1 flex-col rounded-2xl border border-border-soft bg-panel p-5">
+    <div className="group relative flex h-full flex-1 basis-0 flex-col overflow-hidden rounded-2xl border border-border-soft bg-panel p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20">
+      <div className={`absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r ${ACCENT_GRADIENT[phase.key]}`} />
+
       <div className="mb-3 flex items-center gap-2">
-        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
           {phase.step}
         </span>
         <div>
@@ -58,35 +68,37 @@ function PhaseCard({ phase, href }: { phase: JourneyPhase; href?: string }) {
         ))}
       </div>
 
-      {isReady ? (
-        <Link
-          href={href}
-          className="mb-3 block w-full rounded-lg border border-primary/40 py-2 text-center text-xs font-bold text-primary transition-colors hover:bg-primary hover:text-white"
-        >
-          {phase.cta}
-        </Link>
-      ) : (
-        <button
-          disabled
-          className="mb-3 w-full cursor-not-allowed rounded-lg border border-border-soft py-2 text-xs font-bold text-text-faint"
-        >
-          {phase.cta}
-        </button>
-      )}
+      <div className="mt-auto">
+        {isReady ? (
+          <Link
+            href={href}
+            className="mb-3 block w-full rounded-lg border border-primary/40 py-2 text-center text-xs font-bold text-primary transition-colors hover:bg-primary hover:text-white"
+          >
+            {phase.cta}
+          </Link>
+        ) : (
+          <button
+            disabled
+            className="mb-3 w-full cursor-not-allowed rounded-lg border border-border-soft py-2 text-xs font-bold text-text-faint"
+          >
+            {phase.cta}
+          </button>
+        )}
 
-      {isReady ? (
-        <span className="flex items-center justify-center gap-1.5 rounded-lg bg-success-light py-1.5 text-[11px] font-semibold text-success">
-          <CheckCircle2 size={12} /> {t("journey.available")}
-        </span>
-      ) : !phase.unlocked ? (
-        <span className="flex items-center justify-center gap-1.5 rounded-lg bg-panel-alt py-1.5 text-center text-[11px] font-semibold text-text-faint">
-          <Lock size={11} /> {phase.unlockHint}
-        </span>
-      ) : (
-        <span className="flex items-center justify-center gap-1.5 rounded-lg bg-panel-alt py-1.5 text-center text-[11px] font-semibold text-text-faint">
-          <Clock3 size={11} /> {t("journey.contentBeingPrepared")}
-        </span>
-      )}
+        {isReady ? (
+          <span className="flex items-center justify-center gap-1.5 rounded-lg bg-success-light py-1.5 text-[11px] font-semibold text-success">
+            <CheckCircle2 size={12} /> {t("journey.available")}
+          </span>
+        ) : !phase.unlocked ? (
+          <span className="flex items-center justify-center gap-1.5 rounded-lg bg-panel-alt py-1.5 text-center text-[11px] font-semibold text-text-faint">
+            <Lock size={11} /> {phase.unlockHint}
+          </span>
+        ) : (
+          <span className="flex items-center justify-center gap-1.5 rounded-lg bg-panel-alt py-1.5 text-center text-[11px] font-semibold text-text-faint">
+            <Clock3 size={11} /> {t("journey.contentBeingPrepared")}
+          </span>
+        )}
+      </div>
     </div>
   );
 }
@@ -96,11 +108,13 @@ export default function JourneyPhases({
   companySlug,
   certId,
   certTitle,
+  examInfo,
 }: {
   phases: JourneyPhase[];
   companySlug: string;
   certId: string;
   certTitle: string;
+  examInfo: ExamInfo;
 }) {
   const { t, locale } = useLocale();
   const { user } = useUser();
@@ -172,17 +186,20 @@ export default function JourneyPhases({
   }
 
   return (
-    <div id="phasen" className="flex flex-1 flex-col items-stretch gap-4 lg:flex-row lg:items-start">
+    <div id="phasen" className="flex flex-1 flex-col items-stretch gap-4 lg:flex-row lg:items-stretch">
       {realPhases.map((phase, i) => (
         <Fragment key={phase.key}>
           <PhaseCard phase={phase} href={destinationFor(phase)} />
           {i < realPhases.length - 1 && (
-            <div className="flex items-center justify-center py-2 lg:py-0 lg:pt-24">
+            <div className="flex items-center justify-center py-1 lg:py-0 lg:self-center">
               <ArrowRight size={18} className="rotate-90 text-text-faint lg:rotate-0" />
             </div>
           )}
         </Fragment>
       ))}
+      <div className="flex flex-1 basis-0">
+        <ExamInfoCard companySlug={companySlug} certId={certId} examInfo={examInfo} />
+      </div>
     </div>
   );
 }

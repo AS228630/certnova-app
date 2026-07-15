@@ -27,9 +27,11 @@ export default function ExamInfoCard({
   const { t } = useLocale();
 
   return (
-    <div className="flex flex-1 flex-col rounded-2xl border border-border-soft bg-panel p-5">
+    <div className="group relative flex h-full flex-1 basis-0 flex-col overflow-hidden rounded-2xl border border-border-soft bg-panel p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20">
+      <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-amber-400 via-amber-400/50 to-transparent" />
+
       <div className="mb-3 flex items-center gap-2">
-        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-amber-500 text-xs font-bold text-white">
+        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-500 text-xs font-bold text-white">
           4
         </span>
         <div>
@@ -80,17 +82,19 @@ export default function ExamInfoCard({
         </div>
       )}
 
-      <Link
-        href={`/certifications/${companySlug}/${certId}/mock-exam`}
-        className="mb-3 flex items-center justify-center gap-1.5 rounded-lg bg-amber-500 py-2 text-center text-xs font-bold text-white transition-colors hover:bg-amber-600"
-      >
-        {t("examInfo.ctaStartMockExam")}
-        <ArrowRight size={14} />
-      </Link>
+      <div className="mt-auto">
+        <Link
+          href={`/certifications/${companySlug}/${certId}/mock-exam`}
+          className="mb-3 flex items-center justify-center gap-1.5 rounded-lg bg-amber-500 py-2 text-center text-xs font-bold text-white transition-colors hover:bg-amber-600"
+        >
+          {t("examInfo.ctaStartMockExam")}
+          <ArrowRight size={14} />
+        </Link>
 
-      <span className="flex items-center justify-center gap-1.5 rounded-lg bg-panel-alt py-1.5 text-center text-[11px] font-semibold text-text-faint">
-        {t("examInfo.simulationHint")}
-      </span>
+        <span className="flex items-center justify-center gap-1.5 rounded-lg bg-panel-alt py-1.5 text-center text-[11px] font-semibold text-text-faint">
+          {t("examInfo.simulationHint")}
+        </span>
+      </div>
     </div>
   );
 }

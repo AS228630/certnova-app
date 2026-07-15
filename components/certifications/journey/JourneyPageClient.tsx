@@ -3,7 +3,6 @@
 import JourneyHeader from "./JourneyHeader";
 import JourneyTabs from "./JourneyTabs";
 import JourneyPhases from "./JourneyPhases";
-import ExamInfoCard from "./ExamInfoCard";
 import ProgressChart from "./ProgressChart";
 import JourneyActivity from "./JourneyActivity";
 import { getCertJourney } from "@/lib/journeyData";
@@ -32,12 +31,13 @@ export default function JourneyPageClient({
       <JourneyHeader company={company} journey={journey} />
 
       <JourneyTabs>
-        <div className="flex flex-col items-stretch gap-4 xl:flex-row xl:items-start">
-          <JourneyPhases phases={journey.phases} companySlug={companySlug} certId={certId} certTitle={cert.title} />
-          <div className="flex xl:w-[280px] xl:shrink-0">
-            <ExamInfoCard companySlug={companySlug} certId={certId} examInfo={examInfo} />
-          </div>
-        </div>
+        <JourneyPhases
+          phases={journey.phases}
+          companySlug={companySlug}
+          certId={certId}
+          certTitle={cert.title}
+          examInfo={examInfo}
+        />
       </JourneyTabs>
 
       <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-[1fr_360px]">
