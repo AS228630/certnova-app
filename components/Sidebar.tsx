@@ -24,6 +24,7 @@ import { useLocale } from "@/components/LocaleProvider";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
+import { useSubscriptionStore } from "@/lib/store/subscriptionStore";
 
 const navItems = [
   { href: "/dashboard", labelKey: "nav.dashboard", icon: LayoutDashboard },
@@ -53,6 +54,10 @@ export default function Sidebar({
   const router = useRouter();
   const progress = useUserProgressStore((s) => s.progress);
   const streakDaysCount = progress?.streak_days ?? 0;
+  // Only a real "active" paid subscription (read from the subscriptions
+  // table, never assumed) hides this prompt — a brand-new or free user
+  // still sees it, since they genuinely have no plan yet.
+  const isPro = useSubscriptionStore((s) => s.isPro);
   // Honest simplification: without a full per-day activity log, we mark the
   // last N weekdays as done based on the current streak count (capped at 7).
   const streakDone = streakDayLabels.map((_, i) => i >= streakDayLabels.length - streakDaysCount);
@@ -127,22 +132,24 @@ export default function Sidebar({
         </nav>
 
         <div className="space-y-3 px-4 py-4">
-          <div className="rounded-xl bg-panel-alt p-4">
-            <div className="mb-2 flex items-center gap-2 text-warning">
-              <Crown size={16} />
-              <p className="text-sm font-bold text-text">{t("sidebar.proUpgrade")}</p>
+          {!isPro && (
+            <div className="rounded-xl bg-panel-alt p-4">
+              <div className="mb-2 flex items-center gap-2 text-warning">
+                <Crown size={16} />
+                <p className="text-sm font-bold text-text">{t("sidebar.proUpgrade")}</p>
+              </div>
+              <p className="text-xs leading-relaxed text-text-muted">
+                {t("sidebar.proUpgradeDesc")}
+              </p>
+              <Link
+                href="/upgrade"
+                onClick={onClose}
+                className="mt-3 flex w-full items-center justify-center rounded-lg bg-primary py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark"
+              >
+                {t("sidebar.upgradeNow")}
+              </Link>
             </div>
-            <p className="text-xs leading-relaxed text-text-muted">
-              {t("sidebar.proUpgradeDesc")}
-            </p>
-            <Link
-              href="/upgrade"
-              onClick={onClose}
-              className="mt-3 flex w-full items-center justify-center rounded-lg bg-primary py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark"
-            >
-              {t("sidebar.upgradeNow")}
-            </Link>
-          </div>
+          )}
 
           <div className="rounded-xl border border-border-soft p-4">
             <p className="text-sm font-bold text-text">{t("sidebar.streak")}</p>

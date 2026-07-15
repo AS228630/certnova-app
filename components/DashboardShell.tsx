@@ -19,6 +19,7 @@ import { useCommunityStore } from "@/lib/store/communityStore";
 import { useLiveRoomStore } from "@/lib/store/liveRoomStore";
 import { useTopicMasteryStore } from "@/lib/store/topicMasteryStore";
 import { useActivityLogStore } from "@/lib/store/activityLogStore";
+import { useSubscriptionStore } from "@/lib/store/subscriptionStore";
 import { getFullName } from "@/lib/supabase/useUser";
 import CtaBanner from "@/components/dashboard/CtaBanner";
 import Footer from "@/components/Footer";
@@ -54,6 +55,7 @@ export default function DashboardShell({
       useLiveRoomStore.getState().loadRooms();
       useTopicMasteryStore.getState().load(u.id);
       useActivityLogStore.getState().load(u.id);
+      useSubscriptionStore.getState().load(u.id);
     }
 
     async function checkSession() {
@@ -109,6 +111,7 @@ export default function DashboardShell({
         useLessonCompletionStore.getState().reset();
         useTopicMasteryStore.getState().reset();
         useActivityLogStore.getState().reset();
+        useSubscriptionStore.getState().reset();
         if (requireAuth) {
           router.replace("/login");
         }
