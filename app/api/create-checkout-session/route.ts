@@ -14,13 +14,25 @@ function getStripe() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { plan, accessToken } = (await req.json()) as { plan: "monthly" | "yearly"; accessToken: string };
+    const { plan, accessToken, widerrufConsent } = (await req.json()) as {
+      plan: "monthly" | "yearly";
+      accessToken: string;
+      widerrufConsent?: boolean;
+    };
 
     if (!plan || !PLAN_PRICES[plan]) {
       return NextResponse.json({ error: "Invalid plan" }, { status: 400 });
     }
     if (!accessToken) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+    }
+    // Without this explicit, recorded consent, the early-expiry clause in
+    // § 356 Abs. 4 BGB never applies, and the customer would retain a
+    // full 14-day withdrawal right even after we've granted access — so
+    // this isn't optional, it's the actual legal basis for selling
+    // immediate-access digital subscriptions at all.
+    if (!widerrufConsent) {
+      return NextResponse.json({ error: "Widerrufsrecht-Zustimmung erforderlich" }, { status: 400 });
     }
 
     // Verify the user's Supabase session server-side using their access
@@ -62,7 +74,11 @@ export async function POST(req: NextRequest) {
         },
       ],
       subscription_data: {
-        metadata: { supabase_user_id: user.id },
+        metadata: {
+          supabase_user_id: user.id,
+          widerruf_consent: "true",
+          widerruf_consent_at: new Date().toISOString(),
+        },
       },
       success_url: `${origin}/upgrade?success=true`,
       cancel_url: `${origin}/upgrade?canceled=true`,

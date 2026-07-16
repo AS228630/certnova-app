@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { CreditCard, ArrowLeft, Loader2, ShieldCheck } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
 import { supabase } from "@/lib/supabase/client";
@@ -24,9 +25,11 @@ export default function PaymentStep({
   const { t } = useLocale();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [widerrufConsent, setWiderrufConsent] = useState(false);
 
   async function handleCheckout() {
     if (planId !== "monthly" && planId !== "yearly") return;
+    if (!widerrufConsent) return;
     setLoading(true);
     setError(null);
 
@@ -42,7 +45,7 @@ export default function PaymentStep({
       const res = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan: planId, accessToken }),
+        body: JSON.stringify({ plan: planId, accessToken, widerrufConsent: true }),
       });
       const json = await res.json();
       if (json.url) {
@@ -72,10 +75,25 @@ export default function PaymentStep({
 
       <h2 className="mb-2 text-lg font-bold text-text">{t("upgrade.readyToPayTitle")}</h2>
       <p className="mb-2 text-sm leading-relaxed text-text-muted">{t("upgrade.readyToPayDesc")}</p>
-      <p className="mb-6 flex items-center justify-center gap-1.5 text-xs text-text-faint">
+      <p className="mb-4 flex items-center justify-center gap-1.5 text-xs text-text-faint">
         <ShieldCheck size={13} />
         {t("upgrade.securePaymentNote")}
       </p>
+
+      <label className="mb-6 flex items-start gap-2.5 rounded-xl border border-border-soft bg-panel-alt p-3.5 text-left text-xs leading-relaxed text-text-muted">
+        <input
+          type="checkbox"
+          checked={widerrufConsent}
+          onChange={(e) => setWiderrufConsent(e.target.checked)}
+          className="mt-0.5 h-4 w-4 shrink-0 accent-primary"
+        />
+        <span>
+          {t("upgrade.widerrufConsentText")}{" "}
+          <Link href="/widerrufsrecht" target="_blank" className="text-primary hover:underline">
+            {t("footer.withdrawal")}
+          </Link>
+        </span>
+      </label>
 
       {error && <p className="mb-4 text-xs font-medium text-danger">{error}</p>}
 
@@ -90,7 +108,7 @@ export default function PaymentStep({
         </button>
         <button
           onClick={handleCheckout}
-          disabled={loading}
+          disabled={loading || !widerrufConsent}
           className="flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white hover:bg-primary-dark disabled:opacity-60"
         >
           {loading && <Loader2 size={15} className="animate-spin" />}
