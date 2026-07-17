@@ -1229,7 +1229,7 @@ const de = {
     popularArticlesTitle: "Beliebte Hilfeartikel",
     article1Q: "Wie kann ich mein Abonnement kündigen?",
     article1A:
-      "Aktuell befindet sich jedes Konto automatisch im kostenlosen Plan – es gibt noch keine aktive, kostenpflichtige Buchung, die gekündigt werden müsste. Sobald Online-Zahlungen verfügbar sind, kannst du dein Abonnement jederzeit über „Dein Abonnement verwalten\" auf dieser Seite kündigen.",
+      "Du kannst dein CertCoach-Pro-Abonnement jederzeit über unsere Kündigungsseite unter www.certcoach.de/kuendigen online kündigen — ganz ohne Login-Zwang. Der Zugriff bleibt bis zum Ende der bereits bezahlten Abrechnungsperiode bestehen.",
     article2Q: "Wie ändere ich meinen Plan?",
     article2A:
       "Gehe zu „Dein Abonnement verwalten\" weiter unten auf dieser Seite oder direkt zur Upgrade-Seite über die Seitenleiste. Dort kannst du einen Plan auswählen. Die Online-Zahlung befindet sich aktuell noch im Aufbau, dein gewählter Plan wird also noch nicht berechnet.",

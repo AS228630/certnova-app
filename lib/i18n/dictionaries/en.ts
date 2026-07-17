@@ -1227,8 +1227,7 @@ const en: Dictionary = {
     catGeneralDesc: "Platform, features, and usage",
     popularArticlesTitle: "Popular Help Articles",
     article1Q: "How do I cancel my subscription?",
-    article1A:
-      "Every account is currently automatically on the free plan — there's no active paid subscription yet that would need cancelling. Once online payments are available, you'll be able to cancel your subscription anytime under \"Manage Subscription\" on this page.",
+    article1A: "You can cancel your CertCoach Pro subscription online at any time via our cancellation page at www.certcoach.de/kuendigen — no login required. Access remains active until the end of the period you've already paid for.",
     article2Q: "How do I change my plan?",
     article2A:
       "Go to \"Manage Subscription\" further down this page, or directly to the Upgrade page via the sidebar. You can select a plan there. Online payment is still being built, so your selected plan won't be charged yet.",

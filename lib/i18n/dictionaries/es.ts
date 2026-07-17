@@ -1227,7 +1227,7 @@ const es: Dictionary = {
     catGeneralDesc: "Plataforma, funciones y uso",
     popularArticlesTitle: "Artículos de ayuda populares",
     article1Q: "¿Cómo cancelo mi suscripción?",
-    article1A: "Actualmente cada cuenta está automáticamente en el plan gratuito — todavía no hay una suscripción pagada activa que necesite cancelarse. En cuanto los pagos en línea estén disponibles, podrás cancelar tu suscripción en cualquier momento en \"Gestionar suscripción\" en esta página.",
+    article1A: "Puedes cancelar tu suscripción a CertCoach Pro en línea en cualquier momento a través de nuestra página de cancelación en www.certcoach.de/kuendigen, sin necesidad de iniciar sesión. El acceso permanece activo hasta el final del período ya pagado.",
     article2Q: "¿Cómo cambio mi plan?",
     article2A: "Ve a \"Gestionar suscripción\" más abajo en esta página, o directamente a la página de actualización a través de la barra lateral. Allí puedes seleccionar un plan. El pago en línea todavía se está desarrollando, así que tu plan seleccionado aún no será cobrado.",
     article3Q: "Me cobraron dos veces — ¿qué puedo hacer?",

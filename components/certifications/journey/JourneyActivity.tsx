@@ -18,7 +18,7 @@ export default function JourneyActivity({ items }: { items: ActivityItem[] }) {
     <div className="rounded-2xl border border-border-soft bg-panel p-5">
       <div className="mb-4 flex items-center justify-between">
         <p className="font-bold text-text">{t("journey.recentActivity")}</p>
-        <Link href="#" className="flex items-center gap-1 text-xs font-semibold text-primary hover:underline">
+        <Link href="/dashboard" className="flex items-center gap-1 text-xs font-semibold text-primary hover:underline">
           {t("journey.viewAllJ")} <ArrowRight size={12} />
         </Link>
       </div>

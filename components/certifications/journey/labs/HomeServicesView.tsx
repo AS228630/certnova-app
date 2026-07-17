@@ -171,7 +171,12 @@ export default function HomeServicesView() {
       <h4 className="mb-2 text-sm font-semibold text-[#201f1e]">Nützliche Links</h4>
       <div className="mb-6 grid grid-cols-2 gap-y-2 text-[11px]">
         {USEFUL_LINKS.map((l) => (
-          <a key={l} href="#" className="flex items-center gap-1 text-[#0078d4] hover:underline">
+          <a
+            key={l}
+            href="#"
+            onClick={(e) => e.preventDefault()}
+            className="flex items-center gap-1 text-[#0078d4] hover:underline"
+          >
             {l}
             <ExternalLink size={10} />
           </a>

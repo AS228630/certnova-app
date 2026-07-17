@@ -1227,7 +1227,7 @@ const fr: Dictionary = {
     catGeneralDesc: "Plateforme, fonctionnalités et utilisation",
     popularArticlesTitle: "Articles d'aide populaires",
     article1Q: "Comment annuler mon abonnement ?",
-    article1A: "Chaque compte est actuellement automatiquement sur le forfait gratuit — il n'y a pas encore d'abonnement payant actif à annuler. Dès que les paiements en ligne seront disponibles, tu pourras annuler ton abonnement à tout moment dans \"Gérer l'abonnement\" sur cette page.",
+    article1A: "Tu peux résilier ton abonnement CertCoach Pro en ligne à tout moment via notre page de résiliation sur www.certcoach.de/kuendigen, sans avoir besoin de te connecter. L'accès reste actif jusqu'à la fin de la période déjà payée.",
     article2Q: "Comment changer mon forfait ?",
     article2A: "Va dans \"Gérer l'abonnement\" plus bas sur cette page, ou directement sur la page de mise à niveau via la barre latérale. Tu peux y sélectionner un forfait. Le paiement en ligne est encore en cours de développement, donc ton forfait sélectionné ne sera pas encore facturé.",
     article3Q: "J'ai été facturé deux fois — que faire ?",

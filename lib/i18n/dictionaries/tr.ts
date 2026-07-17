@@ -1227,7 +1227,7 @@ const tr: Dictionary = {
     catGeneralDesc: "Platform, özellikler ve kullanım",
     popularArticlesTitle: "Popüler Yardım Makaleleri",
     article1Q: "Aboneliğimi nasıl iptal ederim?",
-    article1A: "Her hesap şu anda otomatik olarak ücretsiz plandadır — henüz iptal edilmesi gereken aktif bir ücretli abonelik yoktur. Çevrimiçi ödemeler kullanılabilir hale gelir gelmez, bu sayfadaki \"Aboneliği Yönet\" bölümünden aboneliğini istediğin zaman iptal edebilirsin.",
+    article1A: "CertCoach Pro aboneliğini www.certcoach.de/kuendigen adresindeki iptal sayfamız üzerinden, giriş yapmaya gerek kalmadan istediğin zaman çevrimiçi olarak iptal edebilirsin. Erişim, zaten ödediğin dönemin sonuna kadar aktif kalır.",
     article2Q: "Planımı nasıl değiştiririm?",
     article2A: "Bu sayfanın altındaki \"Aboneliği Yönet\" bölümüne veya kenar çubuğu üzerinden doğrudan Yükseltme sayfasına git. Orada bir plan seçebilirsin. Çevrimiçi ödeme hâlâ geliştirilme aşamasında, bu yüzden seçtiğin plan için henüz ücret alınmayacak.",
     article3Q: "İki kez ücret alındı — ne yapabilirim?",
