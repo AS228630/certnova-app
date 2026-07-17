@@ -1,5 +1,7 @@
 export type SimpleChatMessage = { role: "user" | "assistant"; content: string };
 
+import { supabase } from "@/lib/supabase/client";
+
 /** Human-readable language names (with English gloss) for building an
  * explicit "reply in this language" instruction. Used whenever the AI's
  * opening message can't infer the language from what the user typed
@@ -47,10 +49,17 @@ export async function askAiCoach(
   const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
+    const { data: sessionData } = await supabase.auth.getSession();
+    const accessToken = sessionData.session?.access_token;
+    if (!accessToken) {
+      clearTimeout(timeoutId);
+      throw new AiCoachRequestError("Bitte melde dich an, um den KI Coach zu nutzen.", false);
+    }
+
     const res = await fetch("/api/ai-coach", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages, mode: options?.mode ?? "general" }),
+      body: JSON.stringify({ messages, mode: options?.mode ?? "general", accessToken }),
       signal: controller.signal,
     });
     clearTimeout(timeoutId);

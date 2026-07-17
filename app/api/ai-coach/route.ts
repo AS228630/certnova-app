@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { createClient } from "@supabase/supabase-js";
 
 export const runtime = "nodejs";
 
@@ -119,11 +120,53 @@ async function callAzureOpenAI(
 }
 
 export async function POST(req: NextRequest) {
-  let body: { messages?: ChatMessage[]; mode?: "general" | "interview" };
+  let body: { messages?: ChatMessage[]; mode?: "general" | "interview"; accessToken?: string };
   try {
     body = await req.json();
   } catch {
     return Response.json({ error: "Ungültige Anfrage." }, { status: 400 });
+  }
+
+  // Require a real, logged-in user — this endpoint calls a paid external
+  // API on our behalf, so it must never be reachable anonymously (someone
+  // could otherwise script requests directly against it and drain our
+  // Gemini/Azure quota with no cost to themselves).
+  if (!body.accessToken) {
+    return Response.json({ error: "Bitte melde dich an, um den KI Coach zu nutzen." }, { status: 401 });
+  }
+  const authSupabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? ""
+  );
+  const {
+    data: { user },
+  } = await authSupabase.auth.getUser(body.accessToken);
+  if (!user) {
+    return Response.json({ error: "Bitte melde dich an, um den KI Coach zu nutzen." }, { status: 401 });
+  }
+
+  // Simple per-user abuse guard: count this user's own messages sent in
+  // the last hour (using the same ai_messages table the chat UI already
+  // writes to) and block once a generous ceiling is hit. This is a cost
+  // control, not a product limit — real usage should never come close.
+  const RATE_LIMIT_PER_HOUR = 60;
+  const serviceSupabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
+    process.env.SUPABASE_SERVICE_ROLE_KEY ?? ""
+  );
+  const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+  const { count } = await serviceSupabase
+    .from("ai_messages")
+    .select("id", { count: "exact", head: true })
+    .eq("user_id", user.id)
+    .eq("role", "user")
+    .gte("created_at", oneHourAgo);
+
+  if ((count ?? 0) >= RATE_LIMIT_PER_HOUR) {
+    return Response.json(
+      { error: "Du hast das stündliche Nachrichtenlimit des KI Coach erreicht. Bitte versuche es später erneut." },
+      { status: 429 }
+    );
   }
 
   const messages = body.messages;
