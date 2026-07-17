@@ -1,9 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { GripVertical, CheckCircle2, XCircle, X, Info, MousePointer2 } from "lucide-react";
 import type { MatchingQuestion } from "@/lib/az900Practice";
 import { useLocale } from "@/components/LocaleProvider";
+
+// Deterministic string hash -> used to seed a stable shuffle per question,
+// so the same question always shows items in the same shuffled order
+// within a session/reload (not re-shuffling on every keystroke), but
+// different questions get different, unpredictable orderings.
+function seededShuffle<T>(arr: T[], seed: string): T[] {
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
+  const rand = () => {
+    h = (h * 1664525 + 1013904223) >>> 0;
+    return h / 4294967296;
+  };
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(rand() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
 
 export default function MatchingQuestionView({
   question,
@@ -20,6 +39,17 @@ export default function MatchingQuestionView({
 }) {
   const { t } = useLocale();
   const [pickedItemId, setPickedItemId] = useState<string | null>(null);
+
+  // The source data stores items[i] as the natural match for
+  // descriptions[i], which — if both lists render in their stored order —
+  // visually lines up every correct answer directly across from its
+  // description, letting users guess by position instead of reading. The
+  // description column order is left as authored; only the resource
+  // column is shuffled, which is enough to break that alignment.
+  const shuffledItems = useMemo(
+    () => seededShuffle(question.items, question.id),
+    [question.items, question.id]
+  );
 
   function handleDropZoneClick(descriptionId: string) {
     if (checked) return;
@@ -44,7 +74,7 @@ export default function MatchingQuestionView({
             <Info size={12} />
           </p>
           <div className="space-y-2">
-            {question.items.map((item) => {
+            {shuffledItems.map((item) => {
               const isPicked = pickedItemId === item.id;
               return (
                 <button
