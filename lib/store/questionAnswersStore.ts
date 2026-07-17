@@ -1,6 +1,12 @@
 import { create } from "zustand";
 import { supabase } from "@/lib/supabase/client";
 
+// Stable reference for "no answers recorded yet" so getCorrectness never
+// returns a fresh object identity on repeated calls — returning a new {}
+// each time breaks Zustand's useSyncExternalStore equality check and causes
+// an infinite render loop ("Maximum update depth exceeded" / React #185).
+const EMPTY_CORRECTNESS: Record<string, boolean> = {};
+
 type QuestionAnswersState = {
   /** certId -> questionId -> was the last submitted answer correct. */
   answersByCert: Record<string, Record<string, boolean>>;
@@ -58,7 +64,7 @@ export const useQuestionAnswersStore = create<QuestionAnswersState>((set, get) =
     );
   },
 
-  getCorrectness: (certId: string) => get().answersByCert[certId] ?? {},
+  getCorrectness: (certId: string) => get().answersByCert[certId] ?? EMPTY_CORRECTNESS,
 
   reset: () => set({ answersByCert: {}, loadedCerts: new Set(), userId: null }),
 }));
