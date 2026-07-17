@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight, Clock3, X, AlertTriangle } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
 import type { PracticeQuestion, PracticeOptionId } from "@/lib/az900Practice";
+import { isSingleChoiceAnswerCorrect, isMultiSelectQuestion } from "@/lib/az900Practice";
 import type { ExamInfo } from "@/lib/examInfoData";
 import MockExamIntro from "./MockExamIntro";
 import MockExamQuestion, { type MockAnswer } from "./MockExamQuestion";
@@ -26,7 +27,7 @@ function isCorrect(q: PracticeQuestion, answer: MockAnswer | undefined): boolean
     const a = answer as MatchingAnswers;
     return q.descriptions.every((d) => a[d.id] === d.correctItemId);
   }
-  return answer === q.correct;
+  return isSingleChoiceAnswerCorrect(q, answer as PracticeOptionId | PracticeOptionId[]);
 }
 
 function formatTime(totalSeconds: number): string {
@@ -220,7 +221,15 @@ export default function MockExamClient({
             total={activeQuestions.length}
             answer={answers[current.id]}
             marked={marked.has(current.id)}
-            onSelectSingle={(id: PracticeOptionId) => setAnswers((a) => ({ ...a, [current.id]: id }))}
+            onSelectSingle={(id: PracticeOptionId) => {
+              const multi = current.type !== "yesno" && current.type !== "matching" && isMultiSelectQuestion(current);
+              setAnswers((a) => {
+                if (!multi) return { ...a, [current.id]: id };
+                const existing = (a[current.id] as PracticeOptionId[] | undefined) ?? [];
+                const next = existing.includes(id) ? existing.filter((x) => x !== id) : [...existing, id];
+                return { ...a, [current.id]: next };
+              });
+            }}
             onSelectYesNo={(i, val) =>
               setAnswers((a) => ({
                 ...a,

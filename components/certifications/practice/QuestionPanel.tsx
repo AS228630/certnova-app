@@ -3,12 +3,13 @@
 import { useState } from "react";
 import { Bookmark, Sparkles, CheckCircle2, XCircle, ExternalLink, Lightbulb } from "lucide-react";
 import type { PracticeOptionId, PracticeQuestion } from "@/lib/az900Practice";
+import { isMultiSelectQuestion, correctOptionIds } from "@/lib/az900Practice";
 import MatchingQuestionView from "./MatchingQuestionView";
 import { useLocale } from "@/components/LocaleProvider";
 
 type YesNoAnswers = Record<number, "Ja" | "Nein">;
 type MatchingAnswers = Record<string, string>;
-type Answer = PracticeOptionId | YesNoAnswers | MatchingAnswers;
+type Answer = PracticeOptionId | PracticeOptionId[] | YesNoAnswers | MatchingAnswers;
 
 export default function QuestionPanel({
   question,
@@ -54,14 +55,18 @@ export default function QuestionPanel({
   const hintText = deriveHint(question.explanation, t("practice.rememberHint"));
   const isYesNo = question.type === "yesno";
   const isMatching = question.type === "matching";
+  const isMultiSelect = !isYesNo && !isMatching && isMultiSelectQuestion(question);
   const yesNoAnswers = (isYesNo ? (selected as YesNoAnswers) : {}) ?? {};
   const matchingAnswers = (isMatching ? (selected as MatchingAnswers) : {}) ?? {};
-  const singleSelected = isYesNo || isMatching ? null : (selected as PracticeOptionId | null);
+  const singleSelected = isYesNo || isMatching || isMultiSelect ? null : (selected as PracticeOptionId | null);
+  const multiSelected = isMultiSelect ? ((selected as PracticeOptionId[] | null) ?? []) : [];
   const canCheck = isYesNo
     ? question.statements.every((_, i) => yesNoAnswers[i])
     : isMatching
       ? question.descriptions.every((d) => !!matchingAnswers[d.id])
-      : !!singleSelected;
+      : isMultiSelect
+        ? multiSelected.length > 0
+        : !!singleSelected;
   const explanationVisible = checked || showExplanation;
 
   const [lastQuestionId, setLastQuestionId] = useState(question.id);
@@ -107,7 +112,7 @@ export default function QuestionPanel({
         </div>
       )}
 
-      <p className="mb-5 text-base font-medium leading-relaxed text-text">{renderPrompt(question)}</p>
+      <p className="mb-5 whitespace-pre-line text-base font-medium leading-relaxed text-text">{renderPrompt(question)}</p>
 
       {"imageUrl" in question && question.imageUrl && (
         <div className="mb-5 overflow-hidden rounded-lg border border-border-soft">
@@ -137,7 +142,7 @@ export default function QuestionPanel({
             return (
               <div
                 key={i}
-                className={`grid grid-cols-[1fr_auto] items-center gap-3 border-b border-border-soft px-3.5 py-3 text-sm last:border-b-0 ${
+                className={`grid grid-cols-[1fr_auto] items-center gap-3 border-b border-border-soft px-3.5 py-3 text-base last:border-b-0 ${
                   isRowCorrect ? "bg-success-light" : isRowWrong ? "bg-danger/10" : ""
                 }`}
               >
@@ -203,9 +208,14 @@ export default function QuestionPanel({
       )}
       {!isYesNo && !isMatching && (
         <div className="space-y-2.5">
+          {isMultiSelect && !checked && (
+            <p className="mb-1 text-xs font-semibold text-primary">
+              {t("practice.selectMultipleHint").replace("{count}", String(correctOptionIds(question).length))}
+            </p>
+          )}
           {question.options.map((opt) => {
-            const isSelected = singleSelected === opt.id;
-            const isRight = opt.id === question.correct;
+            const isSelected = isMultiSelect ? multiSelected.includes(opt.id) : singleSelected === opt.id;
+            const isRight = isMultiSelect ? correctOptionIds(question).includes(opt.id) : opt.id === question.correct;
             let style = "border-border-soft hover:border-primary/40";
             if (checked && isRight) style = "border-success bg-success-light";
             else if (checked && isSelected && !isRight) style = "border-danger bg-danger/10";
@@ -216,10 +226,14 @@ export default function QuestionPanel({
                 key={opt.id}
                 disabled={checked}
                 onClick={() => onSelect(opt.id)}
-                className={`flex w-full items-center gap-3 rounded-lg border p-3.5 text-left text-sm transition ${style}`}
+                className={`flex w-full items-center gap-3 rounded-lg border p-3.5 text-left text-base transition ${style}`}
               >
-                <span className="flex h-6 w-6 flex-none items-center justify-center rounded-md border border-border-soft text-xs font-bold text-text-muted">
-                  {opt.id}
+                <span
+                  className={`flex h-6 w-6 flex-none items-center justify-center border text-xs font-bold ${
+                    isMultiSelect ? "rounded-md" : "rounded-full"
+                  } ${isSelected ? "border-primary bg-primary text-white" : "border-border-soft text-text-muted"}`}
+                >
+                  {isMultiSelect ? (isSelected ? "✓" : opt.id) : opt.id}
                 </span>
                 <span className="flex-1 text-text">{opt.text}</span>
                 {checked && isRight && <CheckCircle2 size={17} className="flex-none text-success" />}

@@ -18,12 +18,13 @@ import {
   ExternalLink,
 } from "lucide-react";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
+import { isSingleChoiceAnswerCorrect, correctOptionIds } from "@/lib/az900Practice";
 import { getSectionCount, getSectionRange } from "@/lib/practiceSections";
 import { useLocale } from "@/components/LocaleProvider";
 
 type YesNoAnswers = Record<number, "Ja" | "Nein">;
 type MatchingAnswers = Record<string, string>;
-type Answer = PracticeOptionId | YesNoAnswers | MatchingAnswers;
+type Answer = PracticeOptionId | PracticeOptionId[] | YesNoAnswers | MatchingAnswers;
 
 const SECTION_ICONS = [Target, BookOpen, CheckCircle2, Star, Trophy, Target];
 
@@ -32,6 +33,27 @@ function optionText(q: PracticeQuestion, optionId: string | undefined): string {
   if (q.type === "matching" || q.type === "yesno") return "—";
   const opt = q.options.find((o) => o.id === optionId);
   return opt ? opt.text : "—";
+}
+
+/** Same as optionText, but for the correct-answer display, which may be
+ * multiple options for a "select all that apply" question. */
+function correctAnswerText(q: PracticeQuestion): string {
+  if (q.type === "matching" || q.type === "yesno") return "—";
+  return correctOptionIds(q)
+    .map((id) => optionText(q, id))
+    .join(" · ");
+}
+
+/** Same as optionText, but for displaying what the user actually
+ * selected, which may be an array of option ids for a multi-select
+ * question. */
+function userAnswerText(q: PracticeQuestion, answer: Answer | undefined): string {
+  if (q.type === "matching" || q.type === "yesno" || !answer) return "—";
+  if (Array.isArray(answer)) {
+    if (answer.length === 0) return "—";
+    return answer.map((id) => optionText(q, id)).join(" · ");
+  }
+  return optionText(q, answer as string);
 }
 
 function isCorrectAnswer(q: PracticeQuestion, answer: Answer | undefined): boolean {
@@ -44,7 +66,7 @@ function isCorrectAnswer(q: PracticeQuestion, answer: Answer | undefined): boole
     const a = answer as MatchingAnswers;
     return q.descriptions.every((d) => a[d.id] === d.correctItemId);
   }
-  return answer === q.correct;
+  return isSingleChoiceAnswerCorrect(q, answer as PracticeOptionId | PracticeOptionId[]);
 }
 
 export default function SectionScorecard({
@@ -368,10 +390,10 @@ export default function SectionScorecard({
                     {wasWrong && q.type !== "matching" && q.type !== "yesno" && (
                       <div className="mb-2 space-y-1 text-xs">
                         <p className="text-danger">
-                          {t("practice.yourAnswer")}: <span className="font-semibold">{optionText(q, answers[q.id] as PracticeOptionId)}</span>
+                          {t("practice.yourAnswer")}: <span className="font-semibold">{userAnswerText(q, answers[q.id])}</span>
                         </p>
                         <p className="text-success">
-                          {t("practice.correctAnswerSC")}: <span className="font-semibold">{optionText(q, q.correct)}</span>
+                          {t("practice.correctAnswerSC")}: <span className="font-semibold">{correctAnswerText(q)}</span>
                         </p>
                       </div>
                     )}

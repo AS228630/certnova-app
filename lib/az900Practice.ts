@@ -42,7 +42,10 @@ export type SingleChoiceQuestion = {
    * Portal navigation panel), shown above the answer options. */
   imageUrl?: string;
   options: { id: PracticeOptionId; text: string }[];
-  correct: PracticeOptionId;
+  /** A single letter for normal single-choice questions, or an array of
+   * letters for "select all that apply" / multi-response questions (real
+   * AZ-900 exam questions include both types — e.g. "Welche zwei..."). */
+  correct: PracticeOptionId | PracticeOptionId[];
   explanation: string;
   resources?: { label: string; url: string }[];
 };
@@ -81,6 +84,34 @@ export type MatchingQuestion = {
 };
 
 export type PracticeQuestion = SingleChoiceQuestion | YesNoQuestion | MatchingQuestion;
+
+/** True for "select all that apply" questions (question.correct is an
+ * array of letters instead of a single letter). */
+export function isMultiSelectQuestion(q: SingleChoiceQuestion): boolean {
+  return Array.isArray(q.correct);
+}
+
+/** Always returns the correct answer(s) as an array, regardless of
+ * whether the question is single- or multi-select. */
+export function correctOptionIds(q: SingleChoiceQuestion): PracticeOptionId[] {
+  return Array.isArray(q.correct) ? q.correct : [q.correct];
+}
+
+/** Checks a single-choice/multi-select answer against the question's
+ * correct answer(s), treating the given answer as either one letter
+ * (single-select) or an array of letters (multi-select) — correct only
+ * if the sets match exactly, with no missing or extra selections. */
+export function isSingleChoiceAnswerCorrect(
+  q: SingleChoiceQuestion,
+  answer: PracticeOptionId | PracticeOptionId[] | undefined
+): boolean {
+  if (answer === undefined) return false;
+  const correctIds = correctOptionIds(q);
+  const givenIds = Array.isArray(answer) ? answer : [answer];
+  if (correctIds.length !== givenIds.length) return false;
+  const correctSet = new Set(correctIds);
+  return givenIds.every((id) => correctSet.has(id));
+}
 
 export type PracticeTopic = {
   id: string;

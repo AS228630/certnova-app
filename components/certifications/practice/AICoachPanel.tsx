@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Bot, X, Send, Loader2 } from "lucide-react";
 import type { PracticeQuestion } from "@/lib/az900Practice";
+import { correctOptionIds } from "@/lib/az900Practice";
 import { useLocale } from "@/components/LocaleProvider";
 import { askAiCoach, AiCoachRequestError, languageInstruction, type SimpleChatMessage } from "@/lib/aiCoachClient";
 import AiCoachMessageContent from "@/components/AiCoachMessageContent";
@@ -13,7 +14,7 @@ function questionContext(question: PracticeQuestion): string {
   const parts = [`Frage: ${question.prompt}`];
   if (question.type === "single" || !question.type) {
     parts.push(`Antwortoptionen: ${question.options.map((o) => `${o.id}) ${o.text}`).join(" | ")}`);
-    parts.push(`Richtige Antwort: ${question.correct}`);
+    parts.push(`Richtige Antwort: ${correctOptionIds(question).join(", ")}`);
   }
   parts.push(`Offizielle Erklärung: ${question.explanation}`);
   return parts.join("\n");

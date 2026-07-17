@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
-import { getAz900Questions } from "@/lib/az900Practice";
+import { getAz900Questions, isSingleChoiceAnswerCorrect, isMultiSelectQuestion } from "@/lib/az900Practice";
 import { getAb900Questions } from "@/lib/ab900Practice";
 import { useLocale } from "@/components/LocaleProvider";
 import { getSectionForIndex, getSectionRange, getSectionCount } from "@/lib/practiceSections";
@@ -27,7 +27,7 @@ const EXAM_TOTAL_SECONDS = 2 * 60 * 60; // 2h, matches a real certification exam
 
 type YesNoAnswers = Record<number, "Ja" | "Nein">;
 type MatchingAnswers = Record<string, string>;
-type Answer = PracticeOptionId | YesNoAnswers | MatchingAnswers;
+type Answer = PracticeOptionId | PracticeOptionId[] | YesNoAnswers | MatchingAnswers;
 
 export default function PracticeClient({
   companyName,
@@ -107,7 +107,7 @@ export default function PracticeClient({
       const a = answer as MatchingAnswers;
       return q.descriptions.every((d) => a[d.id] === d.correctItemId);
     }
-    return answer === q.correct;
+    return isSingleChoiceAnswerCorrect(q, answer as PracticeOptionId | PracticeOptionId[]);
   }
 
   const answeredCount = useMemo(() => {
@@ -348,7 +348,15 @@ export default function PracticeClient({
             marked={marked.has(current.id)}
             isCorrect={isCorrectAnswer(current, answers[current.id])}
             hintOpen={hintOpen}
-            onSelect={(id) => setAnswers((a) => ({ ...a, [current.id]: id }))}
+            onSelect={(id) => {
+              const multi = current.type !== "yesno" && current.type !== "matching" && isMultiSelectQuestion(current);
+              setAnswers((a) => {
+                if (!multi) return { ...a, [current.id]: id };
+                const existing = (a[current.id] as PracticeOptionId[] | undefined) ?? [];
+                const next = existing.includes(id) ? existing.filter((x) => x !== id) : [...existing, id];
+                return { ...a, [current.id]: next };
+              });
+            }}
             onSelectStatement={(i, val) =>
               setAnswers((a) => ({
                 ...a,

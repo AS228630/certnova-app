@@ -19,11 +19,12 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
+import { isSingleChoiceAnswerCorrect } from "@/lib/az900Practice";
 import { getCompanyIcon } from "@/lib/vendorIcons";
 
 type YesNoAnswers = Record<number, "Ja" | "Nein">;
 type MatchingAnswers = Record<string, string>;
-type Answer = PracticeOptionId | YesNoAnswers | MatchingAnswers;
+type Answer = PracticeOptionId | PracticeOptionId[] | YesNoAnswers | MatchingAnswers;
 
 const PASS_THRESHOLD = 70;
 const CONGRATS_THRESHOLD = 90;
@@ -38,7 +39,7 @@ function isCorrectAnswer(q: PracticeQuestion, answer: Answer | undefined): boole
     const a = answer as MatchingAnswers;
     return q.descriptions.every((d) => a[d.id] === d.correctItemId);
   }
-  return answer === q.correct;
+  return isSingleChoiceAnswerCorrect(q, answer as PracticeOptionId | PracticeOptionId[]);
 }
 
 export default function ExamCompleteScreen({

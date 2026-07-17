@@ -3,10 +3,11 @@
 import { Flag } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
 import type { PracticeQuestion, PracticeOptionId } from "@/lib/az900Practice";
+import { isMultiSelectQuestion, correctOptionIds } from "@/lib/az900Practice";
 
 type YesNoAnswers = Record<number, "Ja" | "Nein">;
 type MatchingAnswers = Record<string, string>;
-export type MockAnswer = PracticeOptionId | YesNoAnswers | MatchingAnswers;
+export type MockAnswer = PracticeOptionId | PracticeOptionId[] | YesNoAnswers | MatchingAnswers;
 
 export default function MockExamQuestion({
   question,
@@ -104,8 +105,16 @@ export default function MockExamQuestion({
         </div>
       ) : (
         <div className="space-y-2.5">
+          {isMultiSelectQuestion(question) && (
+            <p className="mb-1 text-xs font-semibold text-amber-500">
+              {t("mockExam.selectMultipleHint").replace("{count}", String(correctOptionIds(question).length))}
+            </p>
+          )}
           {question.options.map((opt) => {
-            const selected = answer === opt.id;
+            const multi = isMultiSelectQuestion(question);
+            const selected = multi
+              ? Array.isArray(answer) && answer.includes(opt.id)
+              : answer === opt.id;
             return (
               <button
                 key={opt.id}
@@ -117,11 +126,11 @@ export default function MockExamQuestion({
                 }`}
               >
                 <span
-                  className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border text-[10px] font-bold ${
-                    selected ? "border-amber-500 bg-amber-500 text-white" : "border-border-soft text-text-faint"
-                  }`}
+                  className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center border text-[10px] font-bold ${
+                    multi ? "rounded-md" : "rounded-full"
+                  } ${selected ? "border-amber-500 bg-amber-500 text-white" : "border-border-soft text-text-faint"}`}
                 >
-                  {opt.id}
+                  {multi ? (selected ? "✓" : opt.id) : opt.id}
                 </span>
                 {opt.text}
               </button>
