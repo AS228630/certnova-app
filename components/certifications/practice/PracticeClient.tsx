@@ -20,6 +20,8 @@ import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useTopicMasteryStore } from "@/lib/store/topicMasteryStore";
 import { useActivityLogStore } from "@/lib/store/activityLogStore";
+import { useQuestionAnswersStore } from "@/lib/store/questionAnswersStore";
+import { useUser } from "@/components/UserContext";
 
 const EXAM_TOTAL_SECONDS = 2 * 60 * 60; // 2h, matches a real certification exam
 
@@ -76,6 +78,15 @@ export default function PracticeClient({
     return () => clearInterval(t);
   }, []);
 
+  const { user } = useUser();
+  const persistedCorrectness = useQuestionAnswersStore((s) => s.getCorrectness(certId));
+  const loadPersistedAnswers = useQuestionAnswersStore((s) => s.loadForCert);
+  const recordPersistedAnswer = useQuestionAnswersStore((s) => s.recordAnswer);
+
+  useEffect(() => {
+    if (user) loadPersistedAnswers(user.id, certId);
+  }, [user, certId, loadPersistedAnswers]);
+
   // The practice exam always covers the full authored question set for this
   // cert — no topic filter, matching a real certification exam simulation.
   const activeQuestions = useMemo(() => {
@@ -99,7 +110,11 @@ export default function PracticeClient({
     return answer === q.correct;
   }
 
-  const answeredCount = checked.size;
+  const answeredCount = useMemo(() => {
+    const ids = new Set(checked);
+    for (const id of Object.keys(persistedCorrectness)) ids.add(id);
+    return ids.size;
+  }, [checked, persistedCorrectness]);
 
   function shuffle() {
     const ids = questions.map((q) => q.id);
@@ -120,8 +135,13 @@ export default function PracticeClient({
     const q = activeQuestions[i];
     if (!q) return "unanswered";
     if (marked.has(q.id)) return "marked";
-    if (skipped.has(q.id) && !checked.has(q.id)) return "skipped";
-    if (checked.has(q.id)) return isCorrectAnswer(q, answers[q.id]) ? "correct" : "wrong";
+    const isAnswered = checked.has(q.id) || persistedCorrectness[q.id] !== undefined;
+    if (skipped.has(q.id) && !isAnswered) return "skipped";
+    if (isAnswered) {
+      const localAnswer = answers[q.id];
+      const isCorrect = localAnswer !== undefined ? isCorrectAnswer(q, localAnswer) : (persistedCorrectness[q.id] ?? false);
+      return isCorrect ? "correct" : "wrong";
+    }
     return "unanswered";
   }
 
@@ -355,6 +375,7 @@ export default function PracticeClient({
               useUserProgressStore.getState().recordAnswer(isCorrect);
               useCertProgressStore.getState().recordAnswerForCert(certId, isCorrect);
               useTopicMasteryStore.getState().recordAnswerForTopic(current.topicId, isCorrect);
+              if (user) recordPersistedAnswer(user.id, certId, current.id, isCorrect);
               if (isCorrect) useCertProgressStore.getState().recordModuleCompletion(certId, 2);
               maybeShowScorecard(current.id, next);
             }}
