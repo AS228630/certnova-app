@@ -107,6 +107,12 @@ const ar: Dictionary = {
     featureCertificateDesc: "تحصل على شهادة معتمدة بعد الإتمام.",
     bottomCtaTitle: "هل أنت مستعد لتعلم لغة جديدة؟",
     bottomCtaDesc: "ابدأ دورتك اللغوية اليوم وحقق أهدافك.",
+    backToOverview: "العودة إلى النظرة العامة",
+    lessonsLabel: "الدروس",
+    progressLabel: "التقدم",
+    lessonsComingSoonTitle: "جارٍ إعداد الدروس",
+    lessonsComingSoonDesc: "الدروس التفاعلية لهذه اللغة غير جاهزة بعد. نعمل بنشاط على إضافة محتوى حقيقي — دون عناصر نائبة أو تمارين وهمية.",
+    notifyHint: "بمجرد توفر دروس هذه الدورة، ستراها هنا تلقائيًا.",
   },
   community: {
     title: "المجتمع",

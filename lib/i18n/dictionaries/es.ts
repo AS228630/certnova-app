@@ -107,6 +107,12 @@ const es: Dictionary = {
     featureCertificateDesc: "Recibe un certificado reconocido al finalizar.",
     bottomCtaTitle: "¿Listo para aprender un nuevo idioma?",
     bottomCtaDesc: "Comienza hoy tu curso de idiomas y alcanza tus metas.",
+    backToOverview: "Volver a la vista general",
+    lessonsLabel: "Lecciones",
+    progressLabel: "Progreso",
+    lessonsComingSoonTitle: "Las lecciones se están creando",
+    lessonsComingSoonDesc: "Las lecciones interactivas para este idioma aún no están listas. Estamos trabajando activamente en añadir contenido real, sin marcadores de posición ni ejercicios inventados.",
+    notifyHint: "En cuanto las lecciones de este curso estén disponibles, las verás aquí automáticamente.",
   },
   community: {
     title: "Comunidad",

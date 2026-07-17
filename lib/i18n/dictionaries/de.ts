@@ -108,6 +108,12 @@ const de = {
     featureCertificateDesc: "Nach Abschluss erhältst du ein anerkanntes Zertifikat.",
     bottomCtaTitle: "Bereit, eine neue Sprache zu lernen?",
     bottomCtaDesc: "Starte noch heute deinen Sprachkurs und erreiche deine Ziele.",
+    backToOverview: "Zurück zur Übersicht",
+    lessonsLabel: "Lektionen",
+    progressLabel: "Fortschritt",
+    lessonsComingSoonTitle: "Lektionen werden gerade erstellt",
+    lessonsComingSoonDesc: "Für diese Sprache stehen die interaktiven Lektionen noch nicht bereit. Wir arbeiten aktiv daran, echte Inhalte hinzuzufügen — ohne Platzhalter oder erfundene Übungen.",
+    notifyHint: "Sobald Lektionen für diesen Kurs verfügbar sind, siehst du sie automatisch hier.",
   },
   community: {
     title: "Community",

@@ -107,6 +107,12 @@ const fa: Dictionary = {
     featureCertificateDesc: "بعد از اتمام، یک گواهینامه‌ی معتبر دریافت می‌کنی.",
     bottomCtaTitle: "آماده‌ای یک زبان جدید یاد بگیری؟",
     bottomCtaDesc: "همین امروز دوره‌ی زبانت رو شروع کن و به هدفت برس.",
+    backToOverview: "بازگشت به نمای کلی",
+    lessonsLabel: "دروس",
+    progressLabel: "پیشرفت",
+    lessonsComingSoonTitle: "دروس در حال ساخته شدن است",
+    lessonsComingSoonDesc: "دروس تعاملی برای این زبان هنوز آماده نیستند. ما فعالانه در حال اضافه کردن محتوای واقعی هستیم — بدون placeholder یا تمرین‌های ساختگی.",
+    notifyHint: "به‌محض این‌که دروس این دوره آماده شوند، به‌طور خودکار اینجا نمایش داده می‌شوند.",
   },
   community: {
     title: "انجمن",

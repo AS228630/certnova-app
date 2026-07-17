@@ -107,6 +107,12 @@ const tr: Dictionary = {
     featureCertificateDesc: "Tamamladıktan sonra tanınmış bir sertifika alırsın.",
     bottomCtaTitle: "Yeni bir dil öğrenmeye hazır mısın?",
     bottomCtaDesc: "Dil kursuna bugün başla ve hedeflerine ulaş.",
+    backToOverview: "Genel bakışa dön",
+    lessonsLabel: "Dersler",
+    progressLabel: "İlerleme",
+    lessonsComingSoonTitle: "Dersler hazırlanıyor",
+    lessonsComingSoonDesc: "Bu dil için etkileşimli dersler henüz hazır değil. Gerçek içerik eklemek için aktif olarak çalışıyoruz — yer tutucu veya uydurma alıştırmalar olmadan.",
+    notifyHint: "Bu kursun dersleri kullanılabilir hale gelir gelmez, burada otomatik olarak göreceksiniz.",
   },
   community: {
     title: "Topluluk",
