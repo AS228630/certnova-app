@@ -13,14 +13,6 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-function Fill({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="rounded bg-warning/15 px-1.5 py-0.5 font-mono text-xs font-semibold text-warning">
-      {children}
-    </span>
-  );
-}
-
 export default function DatenschutzPage() {
   return (
     <div className="min-h-screen bg-bg">
@@ -43,13 +35,12 @@ export default function DatenschutzPage() {
             <p className="mb-1 font-bold">Hinweis vor Veröffentlichung</p>
             <p className="text-text-muted">
               Dieser Text beschreibt wahrheitsgemäß, welche Dienste CertCoach aktuell technisch einsetzt
-              (Supabase als Datenbank- und Authentifizierungs-Anbieter, Vercel als Hosting-Anbieter; kein
-              Video-/Sprachanruf-Dienst mehr im Einsatz; aktuell kein Google Analytics oder vergleichbare
-              Tracking-Dienste). Die verbleibenden mit <Fill>[…]</Fill> markierten Stellen betreffen Angaben,
-              die nur der Betreiber selbst bestätigen kann (z. B. ob ein Auftragsverarbeitungsvertrag mit
-              Supabase bereits unterschrieben wurde). Bitte diesen Text vor der Veröffentlichung von einem
-              Rechtsanwalt oder Datenschutzbeauftragten prüfen lassen — insbesondere sobald Zahlungsdienste
-              hinzukommen, muss Abschnitt 7 ergänzt werden.
+              (Supabase als Datenbank- und Authentifizierungs-Anbieter, Vercel als Hosting- und
+              Analytics-Anbieter, Stripe als Zahlungsdienstleister; kein Video-/Sprachanruf-Dienst im Einsatz;
+              kein Google Analytics oder vergleichbare Drittanbieter-Tracking-Tools). Da sich die Kombination
+              aus Zahlungsabwicklung, internationalen Datenübermittlungen und Auftragsverarbeitung schnell
+              ändern kann, empfehlen wir, diesen Text vor dem Livegang mit Zahlungsfunktion einmalig von einem
+              Rechtsanwalt oder Datenschutzbeauftragten prüfen zu lassen.
             </p>
           </div>
         </div>
@@ -87,11 +78,9 @@ export default function DatenschutzPage() {
             (Referrer-URL). Diese Daten sind nicht bestimmten Personen zuordenbar und werden ausschließlich zur
             Gewährleistung eines störungsfreien Betriebs sowie zur Verbesserung unseres Angebots ausgewertet.
             Rechtsgrundlage ist unser berechtigtes Interesse gemäß Art. 6 Abs. 1 lit. f DSGVO. Da Vercel Inc.
-            ihren Sitz in den USA hat, kann eine Datenübermittlung in ein Drittland stattfinden; Vercel hat sich
-            hierfür{" "}
-            <Fill>[Angemessenheitsbeschluss / EU-US Data Privacy Framework / Standardvertragsklauseln –
-            bitte bei Vercel prüfen und ergänzen]</Fill>{" "}
-            verpflichtet.
+            ihren Sitz in den USA hat, findet eine Datenübermittlung in ein Drittland statt; Vercel stützt sich
+            hierfür auf die EU-Standardvertragsklauseln (Durchführungsbeschluss (EU) 2021/914) sowie das
+            UK-Addendum als Übermittlungsmechanismus gemäß Art. 46 DSGVO.
           </p>
         </Section>
 
@@ -109,9 +98,13 @@ export default function DatenschutzPage() {
             <a href="https://supabase.com/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
               https://supabase.com/privacy
             </a>
-            . Mit Supabase besteht{" "}
-            <Fill>[ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO / noch abzuschließen – Supabase
-            stellt hierfür ein DPA über PandaDoc bereit, siehe supabase.com/legal/dpa]</Fill>.
+            . Mit Supabase besteht ein Auftragsverarbeitungsvertrag gemäß Art. 28 DSGVO, der die von der
+            EU-Kommission genehmigten Standardvertragsklausen (Durchführungsbeschluss (EU) 2021/914) sowie das
+            UK-Addendum für internationale Datenübermittlungen einschließt (abrufbar unter{" "}
+            <a href="https://supabase.com/legal/dpa" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+              supabase.com/legal/dpa
+            </a>
+            ).
           </p>
         </Section>
 
@@ -137,14 +130,18 @@ export default function DatenschutzPage() {
 
         <Section title="7. Zahlungsabwicklung">
           <p>
-            <Fill>
-              [Diesen Abschnitt ausfüllen, sobald ein Zahlungsdienstleister aktiv genutzt wird — z. B.: „Für
-              die Abwicklung von Zahlungen nutzen wir den Zahlungsdienstleister PayPal (Europe) S.à r.l. et
-              Cie, S.C.A., 22-24 Boulevard Royal, L-2449 Luxembourg. Im Rahmen der Zahlungsabwicklung werden
-              die von Ihnen eingegebenen Zahlungsdaten an PayPal übermittelt. Rechtsgrundlage ist Art. 6 Abs. 1
-              lit. b DSGVO (Vertragserfüllung). Weitere Informationen entnehmen Sie der Datenschutzerklärung
-              von PayPal: https://www.paypal.com/de/webapps/mpp/ua/privacy-full“.]
-            </Fill>
+            Für die Abwicklung von Zahlungen nutzen wir den Zahlungsdienstleister Stripe Payments Europe,
+            Limited, 1 Grand Canal Street Lower, Grand Canal Dock, Dublin, Irland. Über die von Stripe
+            bereitgestellte Zahlungsseite („Stripe Checkout&rdquo;) können Sie je nach Verfügbarkeit per
+            Kreditkarte, PayPal oder Klarna bezahlen; die jeweiligen Zahlungsdaten werden dabei direkt an Stripe
+            bzw. den von Ihnen gewählten Zahlungsanbieter (PayPal, Klarna) als Unterauftragsverarbeiter
+            übermittelt und nicht auf unseren eigenen Servern gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit.
+            b DSGVO (Vertragserfüllung). Weitere Informationen entnehmen Sie der Datenschutzerklärung von
+            Stripe:{" "}
+            <a href="https://stripe.com/de/privacy" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
+              stripe.com/de/privacy
+            </a>
+            .
           </p>
         </Section>
 
@@ -153,10 +150,13 @@ export default function DatenschutzPage() {
             Unsere Website verwendet ausschließlich technisch notwendige Cookies bzw. vergleichbare
             Speichertechnologien (z. B. zur Aufrechterhaltung Ihrer Anmeldesitzung). Diese sind gemäß § 25 Abs.
             2 TDDDG bzw. Art. 6 Abs. 1 lit. f DSGVO ohne gesonderte Einwilligung zulässig, da sie für den
-            Betrieb der Website unbedingt erforderlich sind. Derzeit setzen wir keine Analyse-, Marketing- oder
-            Tracking-Cookies von Drittanbietern ein.{" "}
-            <Fill>[Bei Einsatz von Analyse-Tools wie Google Analytics: Cookie-Banner mit Einwilligung
-            einbauen und diesen Abschnitt entsprechend erweitern.]</Fill>
+            Betrieb der Website unbedingt erforderlich sind. Zur Analyse der Websitenutzung setzen wir Vercel
+            Web Analytics ein; dieser Dienst arbeitet ohne Cookies oder vergleichbare Speichertechnologien und
+            identifiziert Besucher stattdessen über einen aus der jeweiligen Anfrage gebildeten, nicht
+            dauerhaft gespeicherten Hash-Wert (Sitzungsdauer max. 24 Stunden). Wir setzen aktuell keine
+            Marketing- oder Tracking-Cookies von Drittanbietern ein. Sollte sich dies künftig ändern (z. B. durch
+            Einsatz von Google Analytics), werden wir vor der Umsetzung ein Cookie-Consent-Banner mit
+            Einwilligungsmöglichkeit einbauen und diesen Abschnitt entsprechend erweitern.
           </p>
         </Section>
 

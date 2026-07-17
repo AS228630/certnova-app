@@ -81,6 +81,7 @@ function useColumns(certificationsHref: string) {
         { labelKey: "footer.cookies", href: "/cookie-einstellungen" },
         { labelKey: "footer.terms", href: "/agb" },
         { labelKey: "footer.withdrawal", href: "/widerrufsrecht" },
+        { labelKey: "footer.cancelSubscription", href: "/kuendigen" },
         { labelKey: "footer.accessibility", href: "/barrierefreiheit" },
         { labelKey: "footer.security", href: "/sicherheit" },
       ],
