@@ -38,6 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/agb",
     "/cookie-einstellungen",
     "/widerrufsrecht",
+    "/kuendigen",
     "/barrierefreiheit",
     "/login",
     "/register",
