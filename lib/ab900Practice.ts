@@ -1356,9 +1356,11 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
 // ---------------------------------------------------------------------
 import type { QuestionTranslations } from "@/lib/i18n/questions/types";
 import ab900_en from "@/lib/i18n/questions/ab900.en";
+import ab900_fa from "@/lib/i18n/questions/ab900.fa";
 
 const AB900_TRANSLATIONS: Partial<Record<string, QuestionTranslations>> = {
   en: ab900_en,
+  fa: ab900_fa,
 };
 
 function applyAb900Translation(

@@ -5,9 +5,8 @@ import type { QuestionTranslations } from "./types";
 // against the original English text in the source PDF where available
 // (not blindly re-translated from the German extraction, since the PDF
 // itself is bilingual and Microsoft's own English wording is the most
-// accurate source). PROGRESS: 10 of 101 questions translated
-// (real-ab900-1 through real-ab900-10). Extend incrementally; anything
-// not listed here falls back to German.
+// accurate source). PROGRESS: all 101 of 101 questions translated
+// (real-ab900-1 through real-ab900-101).
 
 const ab900_en: QuestionTranslations = {
   // Batch 1: questions 1-10, verified against the original English text
