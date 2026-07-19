@@ -16,6 +16,7 @@ export default function RecommendedForYou() {
   const progressMap = useCertProgressStore((s) => s.progressMap);
 
   const notStarted = companies
+    .filter((company) => company.featured)
     .flatMap((company) => company.certs.map((cert) => ({ company, cert })))
     .filter(({ cert }) => !cert.locked && (progressMap[cert.id] ?? 0) === 0)
     .slice(0, 4);

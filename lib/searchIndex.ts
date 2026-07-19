@@ -24,14 +24,19 @@ const PAGE_RESULTS: SearchResult[] = [
 let cachedIndex: SearchResult[] | null = null;
 
 function buildIndex(): SearchResult[] {
-  const certResults: SearchResult[] = companies.flatMap((company) =>
-    company.certs.map((cert) => ({
-      kind: "certification" as const,
-      title: `${cert.code} — ${cert.title}`,
-      subtitle: `${company.name} · ${cert.level}`,
-      href: `/certifications/${company.slug}/${cert.id}`,
-    }))
-  );
+  // Only featured companies (see companiesData.ts) are searchable — the
+  // other 15 stay in the dataset but shouldn't be discoverable via
+  // search either, matching the rest of the catalog's visibility rule.
+  const certResults: SearchResult[] = companies
+    .filter((company) => company.featured)
+    .flatMap((company) =>
+      company.certs.map((cert) => ({
+        kind: "certification" as const,
+        title: `${cert.code} — ${cert.title}`,
+        subtitle: `${company.name} · ${cert.level}`,
+        href: `/certifications/${company.slug}/${cert.id}`,
+      }))
+    );
 
   const langResults: SearchResult[] = languageCourses.map((course) => ({
     kind: "language" as const,

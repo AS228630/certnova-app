@@ -49,20 +49,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "" ? 1 : 0.7,
   }));
 
-  const certRoutes = companies.flatMap((company) => [
-    {
-      url: `${base}/certifications/${company.slug}`,
-      lastModified: now,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    },
-    ...company.certs.map((cert) => ({
-      url: `${base}/certifications/${company.slug}/${cert.id}`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 0.9,
-    })),
-  ]);
+  // Only featured companies (see the `featured` flag in companiesData.ts)
+  // get sitemap entries — the other 15 are intentionally not indexed
+  // while they're hidden from the UI.
+  const certRoutes = companies
+    .filter((company) => company.featured)
+    .flatMap((company) => [
+      {
+        url: `${base}/certifications/${company.slug}`,
+        lastModified: now,
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      },
+      ...company.certs.map((cert) => ({
+        url: `${base}/certifications/${company.slug}/${cert.id}`,
+        lastModified: now,
+        changeFrequency: "monthly" as const,
+        priority: 0.9,
+      })),
+    ]);
 
   return [...staticRoutes, ...certRoutes];
 }

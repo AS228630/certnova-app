@@ -9,12 +9,17 @@ import { useLocale } from "@/components/LocaleProvider";
 
 type FlatCert = { company: Company; cert: Certification };
 
-// Flattens every real certification from every real company in the
+// Flattens every real certification from every *featured* company in the
 // catalog into one list, so this page can show individual certs (as in
 // the reference design) rather than only company tiles. No cert here is
-// invented — all come straight from companiesData.ts.
+// invented — all come straight from companiesData.ts. Non-featured
+// companies are deliberately excluded (launch scope: 6 companies only —
+// see the `featured` flag in companiesData.ts).
 function useFlatCerts(): FlatCert[] {
-  return useMemo(() => companies.flatMap((company) => company.certs.map((cert) => ({ company, cert }))), []);
+  return useMemo(
+    () => companies.filter((c) => c.featured).flatMap((company) => company.certs.map((cert) => ({ company, cert }))),
+    []
+  );
 }
 
 const featuredIds = [
@@ -34,7 +39,7 @@ export default function CertificationsGuestPage() {
   const [query, setQuery] = useState("");
 
   const totalCertCount = allCerts.length;
-  const totalProviders = companies.length;
+  const totalProviders = companies.filter((c) => c.featured).length;
 
   const featured = featuredIds
     .map((id) => allCerts.find((fc) => fc.cert.id === id))

@@ -38,6 +38,14 @@ export type Company = {
   categories: CertCategoryDef[];
   certs: Certification[];
   learningPaths: LearningPath[];
+  /** Featured companies (6 for launch: Microsoft, AWS, Cisco, CompTIA,
+   * Linux, ITIL) are fully open. Non-featured companies still show up
+   * everywhere in the catalog — grid, carousel, search — so the full
+   * roadmap stays visible, but their cards render locked (dimmed +
+   * lock icon, not clickable through to content) until real content
+   * is authored for them. Nothing is hidden or deleted; unlocking one
+   * later is a one-line flip of this flag. */
+  featured?: boolean;
 };
 
 // Companies shown in the grid. `certCount` drives the badge on the tile in
@@ -45,19 +53,19 @@ export type Company = {
 // content matching the approved design; every other company gets realistic
 // placeholder content generated below so every tile is clickable and the
 // detail page never 404s.
-const COMPANY_SEED: { slug: string; name: string; certCount: number }[] = [
-  { slug: "microsoft", name: "Microsoft", certCount: 58 },
-  { slug: "aws", name: "AWS", certCount: 15 },
+const COMPANY_SEED: { slug: string; name: string; certCount: number; featured?: boolean }[] = [
+  { slug: "microsoft", name: "Microsoft", certCount: 58, featured: true },
+  { slug: "aws", name: "AWS", certCount: 15, featured: true },
   { slug: "google-cloud", name: "Google Cloud", certCount: 10 },
-  { slug: "cisco", name: "Cisco", certCount: 8 },
-  { slug: "comptia", name: "CompTIA", certCount: 14 },
+  { slug: "cisco", name: "Cisco", certCount: 8, featured: true },
+  { slug: "comptia", name: "CompTIA", certCount: 14, featured: true },
   { slug: "oracle", name: "Oracle", certCount: 9 },
   { slug: "ibm", name: "IBM", certCount: 7 },
-  { slug: "linux", name: "Linux", certCount: 6 },
+  { slug: "linux", name: "Linux", certCount: 6, featured: true },
   { slug: "docker", name: "Docker", certCount: 4 },
   { slug: "kubernetes", name: "Kubernetes", certCount: 4 },
   { slug: "redhat", name: "Red Hat", certCount: 6 },
-  { slug: "itil", name: "ITIL", certCount: 5 },
+  { slug: "itil", name: "ITIL", certCount: 5, featured: true },
   { slug: "vmware", name: "VMware", certCount: 4 },
   { slug: "adobe", name: "Adobe", certCount: 4 },
   { slug: "eccouncil", name: "EC-Council", certCount: 6 },
