@@ -11,6 +11,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes = [
     "",
+    "/en",
+    "/fa",
     "/zertifizierungen",
     "/learning-paths",
     "/resources",
