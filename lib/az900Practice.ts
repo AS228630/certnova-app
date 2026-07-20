@@ -3,9 +3,8 @@
 // AZ900_QUESTIONS now contains REAL exam-prep questions extracted directly
 // from the user's authoritative German PDF (Pruefungsfragen_AZ-900_De.pdf,
 // 564 questions total, one per PDF page in reverse page order — page N =
-// Frage (565-N)). Extraction/parsing script + intermediate JSON live in the
-// sandbox at /home/claude/az900_extract/ (parse_final.py + fix_combinatorial.py)
-// for reference when extracting the next batch.
+// Frage (565-N)). Extraction/parsing scripts (parse_final.py,
+// fix_combinatorial.py) were used locally and are not part of this repo.
 //
 // PROGRESS: 100% COMPLETE. All 564 questions from the PDF are present
 // (real-az900-1 through real-az900-564 — zero missing, zero duplicates,
