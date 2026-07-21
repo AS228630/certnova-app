@@ -825,6 +825,7 @@ const fa: Dictionary = {
     questionNav: "ناوبر سوالات",
     currentQ: "فعلی",
     sectionN: "بخش",
+    questionsWord: "سؤال",
     unlockHintNav: "برای باز شدن، درصد موفقیتت تو بخش قبلی باید بالای {threshold}٪ باشه (فعلاً {current}٪).",
     successRateNav: "درصد موفقیت",
     markQ: "علامت‌گذاری",

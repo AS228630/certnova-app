@@ -826,6 +826,7 @@ const de = {
     questionNav: "Fragen-Navigator",
     currentQ: "Aktuell",
     sectionN: "Abschnitt",
+    questionsWord: "Fragen",
     unlockHintNav: "Für die Freischaltung muss Ihre Erfolgsquote im vorherigen Abschnitt über {threshold}% liegen (aktuell {current}%).",
     successRateNav: "Erfolgsquote",
     markQ: "Markieren",

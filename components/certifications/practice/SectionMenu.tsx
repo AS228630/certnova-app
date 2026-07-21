@@ -77,12 +77,12 @@ export default function SectionMenu({
   }
 
   const styles: Record<Status, string> = {
-    current: "border-2 border-primary text-primary bg-primary-light",
-    correct: "bg-success text-white",
-    wrong: "bg-danger text-white",
-    marked: "bg-warning text-white",
-    skipped: "bg-panel-alt text-text-faint",
-    unanswered: "border border-border-soft text-text-muted hover:border-primary/40",
+    current: "bg-primary text-white shadow-md shadow-primary/30 scale-105",
+    correct: "bg-success text-white shadow-sm",
+    wrong: "bg-danger text-white shadow-sm",
+    marked: "bg-warning text-white shadow-sm",
+    skipped: "bg-panel-alt text-text-faint border border-border-soft",
+    unanswered: "bg-panel border border-border-soft text-text-muted shadow-sm hover:border-primary/50 hover:text-primary",
   };
 
   return (
@@ -100,7 +100,7 @@ export default function SectionMenu({
       </button>
 
       {menuOpen && (
-        <div className="absolute left-0 right-0 z-30 mt-2 max-h-[70vh] overflow-y-auto rounded-xl border border-border-soft bg-panel p-3 shadow-lg sm:right-auto sm:w-[420px]">
+        <div className="absolute left-0 right-0 z-30 mt-2 max-h-[70vh] overflow-y-auto rounded-xl border border-border-soft bg-panel p-3 shadow-lg sm:right-auto sm:w-[460px]">
           {Array.from({ length: sectionCount }).map((_, s) => {
             const [start, end] = sectionRange(s);
             const unlocked = sectionUnlocked(s);
@@ -117,15 +117,17 @@ export default function SectionMenu({
                     unlocked ? "text-text hover:bg-panel-alt" : "cursor-not-allowed text-text-faint"
                   }`}
                 >
-                  <span className="flex items-center gap-2">
+                  <span className="flex items-center gap-2.5">
                     <span
-                      className={`h-2 w-2 rounded-full ${
+                      className={`h-2 w-2 shrink-0 rounded-full ${
                         completed ? "bg-success" : unlocked ? "bg-primary" : "bg-text-faint"
                       }`}
                     />
-                    {t("practice.sectionN")} {s + 1}
-                    <span className="text-[11px] text-text-faint">
-                      ({start + 1}–{end})
+                    <span>
+                      {t("practice.sectionN")} {s + 1}
+                    </span>
+                    <span className="rounded-full bg-panel-alt px-2 py-0.5 text-[10.5px] font-semibold text-text-faint">
+                      {start + 1}–{end} · {end - start} {t("practice.questionsWord")}
                     </span>
                   </span>
                   {unlocked ? (
@@ -144,7 +146,7 @@ export default function SectionMenu({
                 )}
 
                 {open && (
-                  <div className="grid max-h-64 grid-cols-6 gap-1.5 overflow-y-auto border-t border-border-soft p-3 sm:grid-cols-8">
+                  <div className="grid max-h-72 grid-cols-7 gap-2 overflow-y-auto border-t border-border-soft bg-panel-alt/40 p-3.5 sm:grid-cols-9">
                     {Array.from({ length: end - start }).map((_, j) => {
                       const i = start + j;
                       return (
@@ -154,7 +156,7 @@ export default function SectionMenu({
                             onJump(i);
                             setMenuOpen(false);
                           }}
-                          className={`flex h-8 w-8 items-center justify-center rounded-lg text-xs font-semibold transition ${
+                          className={`flex h-10 w-10 items-center justify-center rounded-xl text-[13px] font-bold transition-all duration-150 ${
                             styles[i === currentIndex ? "current" : statusFor(i)]
                           }`}
                         >

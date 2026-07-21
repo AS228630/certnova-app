@@ -825,6 +825,7 @@ const tr: Dictionary = {
     questionNav: "Soru Gezgini",
     currentQ: "Mevcut",
     sectionN: "Bölüm",
+    questionsWord: "soru",
     unlockHintNav: "Kilidi açmak için önceki bölümdeki başarı oranının %{threshold} üzerinde olması gerekir (şu anda %{current}).",
     successRateNav: "Başarı Oranı",
     markQ: "İşaretle",

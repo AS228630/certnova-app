@@ -825,6 +825,7 @@ const ar: Dictionary = {
     questionNav: "متصفح الأسئلة",
     currentQ: "الحالي",
     sectionN: "القسم",
+    questionsWord: "سؤال",
     unlockHintNav: "للفتح، يجب أن يكون معدل نجاحك في القسم السابق أعلى من {threshold}% (حالياً {current}%).",
     successRateNav: "معدل النجاح",
     markQ: "تحديد",

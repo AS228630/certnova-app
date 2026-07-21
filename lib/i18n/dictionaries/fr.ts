@@ -825,6 +825,7 @@ const fr: Dictionary = {
     questionNav: "Navigateur de questions",
     currentQ: "Actuel",
     sectionN: "Section",
+    questionsWord: "questions",
     unlockHintNav: "Pour débloquer, ta précision dans la section précédente doit dépasser {threshold}% (actuellement {current}%).",
     successRateNav: "Taux de réussite",
     markQ: "Marquer",

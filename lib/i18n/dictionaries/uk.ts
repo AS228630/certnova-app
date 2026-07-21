@@ -825,6 +825,7 @@ const uk: Dictionary = {
     questionNav: "Навігатор питань",
     currentQ: "Поточне",
     sectionN: "Розділ",
+    questionsWord: "питань",
     unlockHintNav: "Щоб розблокувати, твоя точність у попередньому розділі має бути вище {threshold}% (зараз {current}%).",
     successRateNav: "Точність",
     markQ: "Позначити",

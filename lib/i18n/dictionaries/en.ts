@@ -825,6 +825,7 @@ const en: Dictionary = {
     questionNav: "Question Navigator",
     currentQ: "Current",
     sectionN: "Section",
+    questionsWord: "questions",
     unlockHintNav: "To unlock, your accuracy in the previous section must be above {threshold}% (currently {current}%).",
     successRateNav: "Accuracy",
     markQ: "Mark",

@@ -825,6 +825,7 @@ const ru: Dictionary = {
     questionNav: "Навигатор вопросов",
     currentQ: "Текущий",
     sectionN: "Раздел",
+    questionsWord: "вопросов",
     unlockHintNav: "Чтобы разблокировать, твоя точность в предыдущем разделе должна быть выше {threshold}% (сейчас {current}%).",
     successRateNav: "Точность",
     markQ: "Отметить",
