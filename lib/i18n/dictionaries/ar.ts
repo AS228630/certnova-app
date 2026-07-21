@@ -851,6 +851,7 @@ const ar: Dictionary = {
     toggleStats: "إظهار/إخفاء الإحصائيات",
     wronglyAnswered: "إجابة خاطئة",
     notAnswered: "لم تتم الإجابة",
+    ofWord: "من",
     referenceImgAlt: "لقطة شاشة مرجعية للسؤال",
     rememberHint: "تذكر",
     aiCoachGreeting: "مرحباً! اسألني أي شيء عن هذا السؤال — سأشرحه لك خطوة بخطوة.",

@@ -851,6 +851,7 @@ const es: Dictionary = {
     toggleStats: "Mostrar/ocultar estadísticas",
     wronglyAnswered: "Respondida incorrectamente",
     notAnswered: "Sin responder",
+    ofWord: "de",
     referenceImgAlt: "Captura de referencia de la pregunta",
     rememberHint: "Recuerda",
     aiCoachGreeting: "¡Hola! Pregúntame lo que quieras sobre esta pregunta — te la explico paso a paso.",

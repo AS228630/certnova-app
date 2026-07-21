@@ -852,6 +852,7 @@ const de = {
     toggleStats: "Statistik ein-/ausblenden",
     wronglyAnswered: "Falsch beantwortet",
     notAnswered: "Nicht beantwortet",
+    ofWord: "von",
     referenceImgAlt: "Referenz-Screenshot zur Frage",
     rememberHint: "Denk daran",
     aiCoachGreeting: "Hi! Frag mich alles zu dieser Frage – ich erkläre es dir Schritt für Schritt.",

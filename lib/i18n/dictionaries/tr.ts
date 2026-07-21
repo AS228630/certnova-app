@@ -851,6 +851,7 @@ const tr: Dictionary = {
     toggleStats: "İstatistikleri göster/gizle",
     wronglyAnswered: "Yanlış cevaplanan",
     notAnswered: "Cevaplanmayan",
+    ofWord: "/",
     referenceImgAlt: "Soru için referans ekran görüntüsü",
     rememberHint: "Unutma",
     aiCoachGreeting: "Merhaba! Bu soru hakkında bana istediğini sor — sana adım adım açıklayayım.",

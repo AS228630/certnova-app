@@ -851,6 +851,7 @@ const ru: Dictionary = {
     toggleStats: "Показать/скрыть статистику",
     wronglyAnswered: "Отвечено неправильно",
     notAnswered: "Без ответа",
+    ofWord: "из",
     referenceImgAlt: "Справочный скриншот к вопросу",
     rememberHint: "Помни",
     aiCoachGreeting: "Привет! Спрашивай меня что угодно об этом вопросе — объясню шаг за шагом.",

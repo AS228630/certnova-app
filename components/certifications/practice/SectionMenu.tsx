@@ -86,22 +86,21 @@ export default function SectionMenu({
   };
 
   return (
-    <div className="relative sm:flex-none" ref={ref}>
+    <div className="relative flex flex-wrap items-center gap-3 sm:flex-none" ref={ref}>
       <button
         onClick={() => setMenuOpen((v) => !v)}
-        className="flex w-full items-center justify-between gap-3 rounded-xl border border-border-soft bg-panel px-4 py-3 text-sm font-bold text-text transition-colors hover:bg-panel-alt sm:w-auto"
+        className="flex items-center gap-2 rounded-xl border border-border-soft bg-panel px-4 py-3 text-sm font-bold text-text transition-colors hover:bg-panel-alt"
       >
-        <span className="flex items-center gap-2">
-          <ListChecks size={16} className="text-primary" />
-          {t("practice.sectionN")} {currentSection + 1}
-          <span className="font-normal text-text-faint">/ {sectionCount}</span>
-        </span>
-        <span className="rounded-full bg-panel-alt px-2.5 py-1 text-[11px] font-semibold text-text-faint">
-          {sectionRange(currentSection)[0] + 1}–{sectionRange(currentSection)[1]} · {sectionRange(currentSection)[1] - sectionRange(currentSection)[0]}{" "}
-          {t("practice.questionsWord")}
-        </span>
+        <ListChecks size={16} className="text-primary" />
+        {t("practice.sectionN")} {currentSection + 1}
+        <span className="font-normal text-text-faint">/ {sectionCount}</span>
         <ChevronDown size={15} className={`transition-transform ${menuOpen ? "rotate-180" : ""}`} />
       </button>
+
+      <span className="whitespace-nowrap text-[13px] text-text-faint">
+        {sectionRange(currentSection)[0] + 1}–{sectionRange(currentSection)[1]} {t("practice.ofWord")}{" "}
+        {sectionRange(currentSection)[1] - sectionRange(currentSection)[0]} {t("practice.questionsWord")}
+      </span>
 
       {menuOpen && (
         <div className="absolute left-0 right-0 z-30 mt-2 max-h-[70vh] overflow-y-auto rounded-xl border border-border-soft bg-panel p-3 shadow-lg sm:right-auto sm:w-[460px]">

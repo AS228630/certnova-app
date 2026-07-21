@@ -851,6 +851,7 @@ const en: Dictionary = {
     toggleStats: "Show/hide statistics",
     wronglyAnswered: "Incorrectly answered",
     notAnswered: "Not answered",
+    ofWord: "of",
     referenceImgAlt: "Reference screenshot for the question",
     rememberHint: "Remember",
     aiCoachGreeting: "Hi! Ask me anything about this question — I'll explain it step by step.",

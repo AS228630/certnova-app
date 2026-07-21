@@ -851,6 +851,7 @@ const uk: Dictionary = {
     toggleStats: "Показати/сховати статистику",
     wronglyAnswered: "Неправильно відповіли",
     notAnswered: "Без відповіді",
+    ofWord: "з",
     referenceImgAlt: "Довідковий скріншот до питання",
     rememberHint: "Пам'ятай",
     aiCoachGreeting: "Привіт! Питай мене будь-що про це питання — поясню крок за кроком.",

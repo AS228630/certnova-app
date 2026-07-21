@@ -851,6 +851,7 @@ const fa: Dictionary = {
     toggleStats: "نمایش/پنهان‌کردن آمار",
     wronglyAnswered: "غلط جواب داده‌شده",
     notAnswered: "جواب داده‌نشده",
+    ofWord: "از",
     referenceImgAlt: "اسکرین‌شات مرجع سوال",
     rememberHint: "یادت باشه",
     aiCoachGreeting: "سلام! هر چیزی درباره‌ی این سوال بپرس — قدم‌به‌قدم توضیحش می‌دم.",
