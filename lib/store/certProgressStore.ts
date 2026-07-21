@@ -24,6 +24,13 @@ type CertProgressState = {
   setProgress: (certId: string, percent: number) => Promise<void>;
   recordLabCompletionForCert: (certId: string) => Promise<void>;
   recordAnswerForCert: (certId: string, correct: boolean) => Promise<void>;
+  /** Resets question-answer counters (questionsAnswered/questionsCorrect)
+   * for a cert back to 0. Used by the practice exam's "start over"
+   * feature. Deliberately leaves progress_percent and labCompleted
+   * untouched — progress_percent is a shared, increment-only metric fed
+   * by multiple activities (labs, modules, practice), so it can't be
+   * safely recomputed here without knowing the other contributions. */
+  resetPracticeDetail: (certId: string) => Promise<void>;
   reset: () => void;
 };
 
@@ -122,6 +129,19 @@ export const useCertProgressStore = create<CertProgressState>((set, get) => ({
         questions_answered: next.questionsAnswered,
         questions_correct: next.questionsCorrect,
       },
+      { onConflict: "user_id,cert_id" }
+    );
+  },
+
+  resetPracticeDetail: async (certId: string) => {
+    const userId = get().userId;
+    if (!userId) return;
+    const current = get().detailMap[certId] ?? EMPTY_DETAIL;
+    const next: CertDetail = { ...current, questionsAnswered: 0, questionsCorrect: 0 };
+
+    set((s) => ({ detailMap: { ...s.detailMap, [certId]: next } }));
+    await supabase.from("user_cert_progress").upsert(
+      { user_id: userId, cert_id: certId, questions_answered: 0, questions_correct: 0 },
       { onConflict: "user_id,cert_id" }
     );
   },

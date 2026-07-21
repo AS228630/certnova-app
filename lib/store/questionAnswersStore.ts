@@ -16,6 +16,9 @@ type QuestionAnswersState = {
   loadForCert: (userId: string, certId: string) => Promise<void>;
   recordAnswer: (userId: string, certId: string, questionId: string, correct: boolean) => Promise<void>;
   getCorrectness: (certId: string) => Record<string, boolean>;
+  /** Deletes all recorded answers for this user+cert (Supabase + local
+   * state), used by the practice exam's "start over" feature. */
+  clearForCert: (userId: string, certId: string) => Promise<void>;
   reset: () => void;
 };
 
@@ -65,6 +68,22 @@ export const useQuestionAnswersStore = create<QuestionAnswersState>((set, get) =
   },
 
   getCorrectness: (certId: string) => get().answersByCert[certId] ?? EMPTY_CORRECTNESS,
+
+  clearForCert: async (userId: string, certId: string) => {
+    // Clear local state first so the UI (section locks, colors) reflects
+    // the reset immediately, even if the network call is still in flight.
+    set((s) => {
+      const cacheKey = `${userId}:${certId}`;
+      const nextLoaded = new Set(s.loadedCerts);
+      nextLoaded.delete(cacheKey);
+      return {
+        answersByCert: { ...s.answersByCert, [certId]: {} },
+        loadedCerts: nextLoaded,
+      };
+    });
+
+    await supabase.from("user_question_answers").delete().eq("user_id", userId).eq("cert_id", certId);
+  },
 
   reset: () => set({ answersByCert: {}, loadedCerts: new Set(), userId: null }),
 }));

@@ -16,6 +16,7 @@ import PracticeNotesPanel from "./PracticeNotesPanel";
 import PracticeFloatingActions from "./PracticeFloatingActions";
 import SectionScorecard from "./SectionScorecard";
 import ExamCompleteScreen from "./ExamCompleteScreen";
+import RestartConfirmModal from "./RestartConfirmModal";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useTopicMasteryStore } from "@/lib/store/topicMasteryStore";
@@ -72,6 +73,8 @@ export default function PracticeClient({
   const [remainingSeconds, setRemainingSeconds] = useState(EXAM_TOTAL_SECONDS);
   const [scorecardSection, setScorecardSection] = useState<number | null>(null);
   const [examComplete, setExamComplete] = useState(false);
+  const [restartModalOpen, setRestartModalOpen] = useState(false);
+  const [restarting, setRestarting] = useState(false);
 
   useEffect(() => {
     const t = setInterval(() => setRemainingSeconds((s) => Math.max(0, s - 1)), 1000);
@@ -82,6 +85,8 @@ export default function PracticeClient({
   const persistedCorrectness = useQuestionAnswersStore((s) => s.getCorrectness(certId));
   const loadPersistedAnswers = useQuestionAnswersStore((s) => s.loadForCert);
   const recordPersistedAnswer = useQuestionAnswersStore((s) => s.recordAnswer);
+  const clearPersistedAnswers = useQuestionAnswersStore((s) => s.clearForCert);
+  const resetCertPracticeDetail = useCertProgressStore((s) => s.resetPracticeDetail);
 
   useEffect(() => {
     if (user) loadPersistedAnswers(user.id, certId);
@@ -124,6 +129,37 @@ export default function PracticeClient({
     }
     setOrder(ids);
     setIndex(0);
+  }
+
+  // Full "start over": wipes every persisted answer for this cert (so
+  // sections re-lock from Abschnitt 1), resets all local session state,
+  // and reshuffles the full question order so it's never the same as any
+  // previous attempt.
+  async function restartFromScratch() {
+    setRestarting(true);
+    try {
+      if (user) {
+        await clearPersistedAnswers(user.id, certId);
+        await resetCertPracticeDetail(certId);
+      }
+      const ids = questions.map((q) => q.id);
+      for (let i = ids.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [ids[i], ids[j]] = [ids[j], ids[i]];
+      }
+      setOrder(ids);
+      setAnswers({});
+      setChecked(new Set());
+      setMarked(new Set());
+      setSkipped(new Set());
+      setScorecardSection(null);
+      setExamComplete(false);
+      setRemainingSeconds(EXAM_TOTAL_SECONDS);
+      setIndex(0);
+    } finally {
+      setRestarting(false);
+      setRestartModalOpen(false);
+    }
   }
 
   function goTo(i: number) {
@@ -228,18 +264,17 @@ export default function PracticeClient({
             skipped={skipped}
             elapsedSeconds={EXAM_TOTAL_SECONDS - remainingSeconds}
             onBackToPath={() => router.push(`/certifications/${companySlug}/${certId}/learn`)}
-            onRetryAll={() => {
-              setAnswers({});
-              setChecked(new Set());
-              setSkipped(new Set());
-              setMarked(new Set());
-              setExamComplete(false);
-              setScorecardSection(null);
-              goTo(0);
-            }}
+            onRetryAll={() => setRestartModalOpen(true)}
           />
         </div>
         <PracticeNotesPanel isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
+        {restartModalOpen && (
+          <RestartConfirmModal
+            onConfirm={restartFromScratch}
+            onCancel={() => setRestartModalOpen(false)}
+            loading={restarting}
+          />
+        )}
       </div>
     );
   }
