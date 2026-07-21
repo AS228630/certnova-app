@@ -1359,12 +1359,14 @@ import ab900_en from "@/lib/i18n/questions/ab900.en";
 import ab900_fa from "@/lib/i18n/questions/ab900.fa";
 import ab900_ar from "@/lib/i18n/questions/ab900.ar";
 import ab900_uk from "@/lib/i18n/questions/ab900.uk";
+import ab900_es from "@/lib/i18n/questions/ab900.es";
 
 const AB900_TRANSLATIONS: Partial<Record<string, QuestionTranslations>> = {
   en: ab900_en,
   fa: ab900_fa,
   ar: ab900_ar,
   uk: ab900_uk,
+  es: ab900_es,
 };
 
 function applyAb900Translation(
