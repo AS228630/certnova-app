@@ -64,7 +64,7 @@ export default function SectionMenu({
   }
 
   function sectionUnlocked(s: number): boolean {
-    return s <= 1 || sectionAccuracy(s - 1) >= UNLOCK_THRESHOLD;
+    return s <= 1 || (sectionCompleted(s - 1) && sectionAccuracy(s - 1) >= UNLOCK_THRESHOLD);
   }
 
   function sectionCompleted(s: number): boolean {
