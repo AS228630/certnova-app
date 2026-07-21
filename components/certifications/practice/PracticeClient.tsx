@@ -9,7 +9,7 @@ import { useLocale } from "@/components/LocaleProvider";
 import { getSectionForIndex, getSectionRange, getSectionCount } from "@/lib/practiceSections";
 import PracticeToolbar from "./PracticeToolbar";
 import QuestionPanel from "./QuestionPanel";
-import QuestionNavigator from "./QuestionNavigator";
+import SectionMenu from "./SectionMenu";
 import QuickStats from "./QuickStats";
 import AICoachPanel from "./AICoachPanel";
 import PracticeNotesPanel from "./PracticeNotesPanel";
@@ -337,6 +337,13 @@ export default function PracticeClient({
         onShuffle={shuffle}
       />
 
+      <SectionMenu
+        total={activeQuestions.length}
+        currentIndex={index}
+        statusFor={statusFor}
+        onJump={goTo}
+      />
+
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_300px]">
         <div className="space-y-6">
           <QuestionPanel
@@ -411,12 +418,6 @@ export default function PracticeClient({
         </div>
 
         <div className="space-y-6">
-          <QuestionNavigator
-            total={activeQuestions.length}
-            currentIndex={index}
-            statusFor={statusFor}
-            onJump={goTo}
-          />
           <QuickStats
             answered={answeredCount}
             skipped={skipped.size}
