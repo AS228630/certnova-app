@@ -344,7 +344,7 @@ export default function PracticeClient({
         onJump={goTo}
       />
 
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_300px]">
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_340px]">
         <div className="space-y-6">
           <QuestionPanel
             question={current}
@@ -411,14 +411,11 @@ export default function PracticeClient({
             }
             onOpenAiCoach={() => setCoachOpen(true)}
           />
-
-          <div className="hidden lg:block">
-            <AICoachPanel key={current.id} question={current} isOpen={true} onClose={() => {}} />
-          </div>
         </div>
 
-        <div className="space-y-6">
+        <div className="hidden space-y-4 lg:block">
           <QuickStats
+            compact
             answered={answeredCount}
             skipped={skipped.size}
             marked={marked.size}
@@ -426,7 +423,23 @@ export default function PracticeClient({
             remainingSeconds={remainingSeconds}
             totalSeconds={EXAM_TOTAL_SECONDS}
           />
+          <div className="h-[560px]">
+            <AICoachPanel key={current.id} question={current} isOpen={true} onClose={() => {}} />
+          </div>
         </div>
+      </div>
+
+      {/* Mobile: compact stats stay visible; AI coach opens as a full-screen overlay via the floating button */}
+      <div className="mt-6 lg:hidden">
+        <QuickStats
+          compact
+          answered={answeredCount}
+          skipped={skipped.size}
+          marked={marked.size}
+          total={activeQuestions.length}
+          remainingSeconds={remainingSeconds}
+          totalSeconds={EXAM_TOTAL_SECONDS}
+        />
       </div>
 
       <div className="lg:hidden">

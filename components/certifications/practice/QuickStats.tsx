@@ -17,6 +17,7 @@ export default function QuickStats({
   total,
   remainingSeconds,
   totalSeconds,
+  compact = false,
 }: {
   answered: number;
   skipped: number;
@@ -24,10 +25,37 @@ export default function QuickStats({
   total: number;
   remainingSeconds: number;
   totalSeconds: number;
+  compact?: boolean;
 }) {
   const { t } = useLocale();
   const remaining = Math.max(0, total - answered - skipped);
   const timePct = totalSeconds === 0 ? 0 : Math.max(0, Math.min(100, (remainingSeconds / totalSeconds) * 100));
+
+  if (compact) {
+    return (
+      <div className="rounded-xl border border-border-soft bg-panel p-3.5">
+        <div className="flex items-center justify-between gap-2">
+          <CompactStat icon={CheckCircle2} value={answered} label={t("practice.answeredQ")} color="text-success" />
+          <CompactStat icon={SkipForward} value={skipped} label={t("practice.skippedQ")} color="text-warning" />
+          <CompactStat icon={Bookmark} value={marked} label={t("practice.markedQ")} color="text-primary" />
+          <CompactStat icon={Clock3} value={remaining} label={t("practice.remainingQ")} color="text-text-muted" />
+        </div>
+        <div className="mt-3 flex items-center justify-between gap-2 border-t border-border-soft pt-2.5 text-[11px]">
+          <span className="flex items-center gap-1 text-text-muted">
+            <Clock3 size={11} />
+            {t("practice.remainingTime")}
+          </span>
+          <span className="font-mono font-bold text-text">{formatTime(remainingSeconds)}</span>
+        </div>
+        <div className="mt-1.5 h-1 w-full rounded-full bg-panel-alt">
+          <div
+            className={`h-1 rounded-full transition-all ${timePct < 15 ? "bg-danger" : "bg-primary"}`}
+            style={{ width: `${timePct}%` }}
+          />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="rounded-xl border border-border-soft bg-panel p-5">
@@ -55,6 +83,25 @@ export default function QuickStats({
           />
         </div>
       </div>
+    </div>
+  );
+}
+
+function CompactStat({
+  icon: Icon,
+  value,
+  label,
+  color,
+}: {
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  value: number;
+  label: string;
+  color: string;
+}) {
+  return (
+    <div className="flex flex-1 flex-col items-center gap-0.5 text-center" title={label}>
+      <Icon size={13} className={color} />
+      <p className={`text-sm font-extrabold ${color}`}>{value}</p>
     </div>
   );
 }

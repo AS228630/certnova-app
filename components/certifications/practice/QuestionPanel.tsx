@@ -112,7 +112,7 @@ export default function QuestionPanel({
         </div>
       )}
 
-      <p className="mb-5 whitespace-pre-line text-base font-medium leading-relaxed text-text">{renderPrompt(question)}</p>
+      <p className="mb-5 max-w-[75ch] whitespace-pre-line text-[15.5px] font-medium leading-[1.85] tracking-[0.005em] text-text">{renderPrompt(question)}</p>
 
       {"imageUrl" in question && question.imageUrl && (
         <div className="mb-5 overflow-hidden rounded-lg border border-border-soft">
@@ -235,7 +235,7 @@ export default function QuestionPanel({
                 >
                   {isMultiSelect ? (isSelected ? "✓" : opt.id) : opt.id}
                 </span>
-                <span className="flex-1 text-text">{opt.text}</span>
+                <span className="flex-1 whitespace-pre-line leading-relaxed text-text">{opt.text}</span>
                 {checked && isRight && <CheckCircle2 size={17} className="flex-none text-success" />}
                 {checked && isSelected && !isRight && <XCircle size={17} className="flex-none text-danger" />}
               </button>
