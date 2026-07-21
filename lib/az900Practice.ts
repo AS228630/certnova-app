@@ -7992,9 +7992,11 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
 // ---------------------------------------------------------------------
 import type { QuestionTranslations } from "@/lib/i18n/questions/types";
 import az900_en from "@/lib/i18n/questions/az900.en";
+import az900_fa from "@/lib/i18n/questions/az900.fa";
 
 const AZ900_TRANSLATIONS: Partial<Record<string, QuestionTranslations>> = {
   en: az900_en,
+  fa: az900_fa,
 };
 
 function applyTranslation(q: PracticeQuestion, tr: QuestionTranslations[string] | undefined): PracticeQuestion {
