@@ -365,7 +365,7 @@ export default function PracticeClient({
   }
 
   return (
-    <div>
+    <div className="px-1">
       <PracticeToolbar
         companyName={companyName}
         companySlug={companySlug}
@@ -377,32 +377,39 @@ export default function PracticeClient({
         onShuffle={shuffle}
       />
 
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
-        <SectionMenu
-          total={activeQuestions.length}
+      {/* This wrapper (header row + number grid) sits at the same vertical
+          height as the fixed SectionStatsPanel, so it reserves space for it
+          on large screens to avoid a visual collision. QuestionPanel below
+          is NOT wrapped this way — it's further down the page, past the
+          stats panel's height, so it stays genuinely edge-to-edge. */}
+      <div className="lg:pr-64">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
+          <SectionMenu
+            total={activeQuestions.length}
+            currentIndex={index}
+            statusFor={statusFor}
+            onJump={goTo}
+          />
+          <SectionProgressBar
+            start={currentSectionStart}
+            end={currentSectionEnd}
+            sectionNumber={currentSectionIdx + 1}
+            statusFor={statusFor}
+          />
+        </div>
+
+        {/* Always visible for the current section — no click required,
+            unlike the Abschnitt switcher above. Normal document flow (not
+            absolute), so it pushes the question panel down instead of
+            overlaying it. */}
+        <SectionQuestionGrid
+          start={currentSectionStart}
+          end={currentSectionEnd}
           currentIndex={index}
           statusFor={statusFor}
           onJump={goTo}
         />
-        <SectionProgressBar
-          start={currentSectionStart}
-          end={currentSectionEnd}
-          sectionNumber={currentSectionIdx + 1}
-          statusFor={statusFor}
-        />
       </div>
-
-      {/* Always visible for the current section — no click required,
-          unlike the Abschnitt switcher above. Normal document flow (not
-          absolute), so it pushes the question panel down instead of
-          overlaying it. */}
-      <SectionQuestionGrid
-        start={currentSectionStart}
-        end={currentSectionEnd}
-        currentIndex={index}
-        statusFor={statusFor}
-        onJump={goTo}
-      />
 
       {/* Floating, fixed-position card — overlays empty screen space in the
           top-right corner and never takes width away from the question

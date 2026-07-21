@@ -37,7 +37,7 @@ export default async function PracticePage({
 
   return (
     <DashboardShell>
-      <main className="flex-1 px-2 py-4 md:px-3 md:py-8">
+      <main className="flex-1 py-4 md:py-8">
         <PracticeClient
           companyName={company.name}
           companySlug={company.slug}
