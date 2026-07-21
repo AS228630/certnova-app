@@ -344,76 +344,78 @@ export default function PracticeClient({
         onJump={goTo}
       />
 
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_340px]">
-        <div className="space-y-6">
-          <QuestionPanel
-            question={current}
-            index={index}
-            total={activeQuestions.length}
-            selected={answers[current.id] ?? null}
-            checked={checked.has(current.id)}
-            marked={marked.has(current.id)}
-            isCorrect={isCorrectAnswer(current, answers[current.id])}
-            hintOpen={hintOpen}
-            onSelect={(id) => {
-              const multi = current.type !== "yesno" && current.type !== "matching" && isMultiSelectQuestion(current);
-              setAnswers((a) => {
-                if (!multi) return { ...a, [current.id]: id };
-                const existing = (a[current.id] as PracticeOptionId[] | undefined) ?? [];
-                const next = existing.includes(id) ? existing.filter((x) => x !== id) : [...existing, id];
-                return { ...a, [current.id]: next };
-              });
-            }}
-            onSelectStatement={(i, val) =>
-              setAnswers((a) => ({
-                ...a,
-                [current.id]: { ...((a[current.id] as YesNoAnswers) ?? {}), [i]: val },
-              }))
-            }
-            onSelectMatch={(descriptionId, itemId) =>
-              setAnswers((a) => ({
-                ...a,
-                [current.id]: { ...((a[current.id] as MatchingAnswers) ?? {}), [descriptionId]: itemId },
-              }))
-            }
-            onClearMatch={(descriptionId) =>
-              setAnswers((a) => {
-                const next = { ...((a[current.id] as MatchingAnswers) ?? {}) };
-                delete next[descriptionId];
-                return { ...a, [current.id]: next };
-              })
-            }
-            onCheck={() => {
-              const next = new Set(checked).add(current.id);
-              setChecked(next);
-              const isCorrect = isCorrectAnswer(current, answers[current.id]);
-              useUserProgressStore.getState().recordAnswer(isCorrect);
-              useCertProgressStore.getState().recordAnswerForCert(certId, isCorrect);
-              useTopicMasteryStore.getState().recordAnswerForTopic(current.topicId, isCorrect);
-              if (user) recordPersistedAnswer(user.id, certId, current.id, isCorrect);
-              if (isCorrect) useCertProgressStore.getState().recordModuleCompletion(certId, 2);
-              maybeShowScorecard(current.id, next);
-            }}
-            onNext={() => goTo(index + 1)}
-            onPrev={() => goTo(index - 1)}
-            onSkip={() => {
-              setSkipped((s) => new Set(s).add(current.id));
-              maybeShowScorecard(current.id, checked);
-              goTo(index + 1);
-            }}
-            onToggleMark={() =>
-              setMarked((s) => {
-                const next = new Set(s);
-                if (next.has(current.id)) next.delete(current.id);
-                else next.add(current.id);
-                return next;
-              })
-            }
-            onOpenAiCoach={() => setCoachOpen(true)}
-          />
-        </div>
+      <div className="mt-6">
+        <QuestionPanel
+          question={current}
+          index={index}
+          total={activeQuestions.length}
+          selected={answers[current.id] ?? null}
+          checked={checked.has(current.id)}
+          marked={marked.has(current.id)}
+          isCorrect={isCorrectAnswer(current, answers[current.id])}
+          hintOpen={hintOpen}
+          onSelect={(id) => {
+            const multi = current.type !== "yesno" && current.type !== "matching" && isMultiSelectQuestion(current);
+            setAnswers((a) => {
+              if (!multi) return { ...a, [current.id]: id };
+              const existing = (a[current.id] as PracticeOptionId[] | undefined) ?? [];
+              const next = existing.includes(id) ? existing.filter((x) => x !== id) : [...existing, id];
+              return { ...a, [current.id]: next };
+            });
+          }}
+          onSelectStatement={(i, val) =>
+            setAnswers((a) => ({
+              ...a,
+              [current.id]: { ...((a[current.id] as YesNoAnswers) ?? {}), [i]: val },
+            }))
+          }
+          onSelectMatch={(descriptionId, itemId) =>
+            setAnswers((a) => ({
+              ...a,
+              [current.id]: { ...((a[current.id] as MatchingAnswers) ?? {}), [descriptionId]: itemId },
+            }))
+          }
+          onClearMatch={(descriptionId) =>
+            setAnswers((a) => {
+              const next = { ...((a[current.id] as MatchingAnswers) ?? {}) };
+              delete next[descriptionId];
+              return { ...a, [current.id]: next };
+            })
+          }
+          onCheck={() => {
+            const next = new Set(checked).add(current.id);
+            setChecked(next);
+            const isCorrect = isCorrectAnswer(current, answers[current.id]);
+            useUserProgressStore.getState().recordAnswer(isCorrect);
+            useCertProgressStore.getState().recordAnswerForCert(certId, isCorrect);
+            useTopicMasteryStore.getState().recordAnswerForTopic(current.topicId, isCorrect);
+            if (user) recordPersistedAnswer(user.id, certId, current.id, isCorrect);
+            if (isCorrect) useCertProgressStore.getState().recordModuleCompletion(certId, 2);
+            maybeShowScorecard(current.id, next);
+          }}
+          onNext={() => goTo(index + 1)}
+          onPrev={() => goTo(index - 1)}
+          onSkip={() => {
+            setSkipped((s) => new Set(s).add(current.id));
+            maybeShowScorecard(current.id, checked);
+            goTo(index + 1);
+          }}
+          onToggleMark={() =>
+            setMarked((s) => {
+              const next = new Set(s);
+              if (next.has(current.id)) next.delete(current.id);
+              else next.add(current.id);
+              return next;
+            })
+          }
+          onOpenAiCoach={() => setCoachOpen(true)}
+        />
+      </div>
 
-        <div className="hidden space-y-4 lg:block">
+      {/* Progress + AI coach now live below the question, not beside it, so the
+          question panel itself can use the full page width. */}
+      <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-[280px_1fr]">
+        <div className="hidden lg:block">
           <QuickStats
             compact
             answered={answeredCount}
@@ -423,9 +425,9 @@ export default function PracticeClient({
             remainingSeconds={remainingSeconds}
             totalSeconds={EXAM_TOTAL_SECONDS}
           />
-          <div className="h-[560px]">
-            <AICoachPanel key={current.id} question={current} isOpen={true} onClose={() => {}} />
-          </div>
+        </div>
+        <div className="hidden h-[420px] lg:block">
+          <AICoachPanel key={current.id} question={current} isOpen={true} onClose={() => {}} />
         </div>
       </div>
 
