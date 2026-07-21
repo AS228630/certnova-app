@@ -6,9 +6,9 @@ import type { QuestionTranslations } from "./types";
 // standard practice in Arabic technical/IT writing (same convention
 // already established in ab900.fa.ts for Farsi).
 //
-// PROGRESS: 50 of 101 questions translated so far (real-ab900-1 through
-// real-ab900-50). First installment of an ongoing effort — extend in
-// future sessions. Anything not listed here falls back to German.
+// PROGRESS: 100% COMPLETE. All 101 of 101 questions translated
+// (real-ab900-1 through real-ab900-101). Anything not listed here
+// falls back to German (shouldn't occur, but kept as a safety net).
 
 const ab900_ar: QuestionTranslations = {
   "real-ab900-1": {
@@ -483,6 +483,470 @@ const ab900_ar: QuestionTranslations = {
       B: "من مركز إدارة Microsoft Teams، يمكنك نشر عميل Teams.",
       C: "من مركز إدارة Microsoft Teams، يمكنك إدارة جهاز غرفة Teams.",
       D: "من مركز إدارة Microsoft Teams، يمكنك منع المستخدمين من إنشاء فرق (Teams).",
+    },
+  },
+  "real-ab900-51": {
+    prompt:
+      "لدى مؤسستك اشتراك Microsoft 365. جميع المستخدمين لديهم تراخيص Microsoft 365 Copilot. يجب عليك تحديد أين يُستخدم المحتوى الحساس أثناء تفاعلات Copilot، وتحليل أنماط استخدام المحتوى، وتقديم توصيات لتطبيق الحماية المناسبة. ماذا يجب أن تستخدم؟",
+    options: {
+      A: "Microsoft Viva Insights",
+      B: "حل Microsoft Purview DSPM for AI",
+      C: "Microsoft Security Copilot",
+      D: "حل Microsoft Purview Insider Risk Management",
+    },
+  },
+  "real-ab900-52": {
+    prompt:
+      "لدى مؤسستك اشتراك Microsoft 365. تم تعيين تراخيص Microsoft 365 Copilot لجميع المستخدمين. يُبلّغ بعض المستخدمين عن تلقّي إجابات من Copilot تحتوي على معلومات من موقع Microsoft SharePoint يُدعى Finance. يذكر المستخدمون أن هذه المعلومات حساسة تجارياً. يجب عليك منع Copilot من تقديم إجابات تحتوي على معلومات من موقع Finance. ماذا يجب أن تفعل؟",
+    options: {
+      A: "إنشاء سياسة Information Barrier (IB) في Microsoft Purview.",
+      B: "إنشاء موصل بيانات (data connector) في Microsoft Defender.",
+      C: "إنشاء سياسة Conditional Access في Microsoft Entra.",
+      D: "تهيئة الأذونات على موقع Finance.",
+    },
+  },
+  "real-ab900-53": {
+    prompt:
+      "يسأل مدير: \"ما الفرق الرئيسي في القدرات بين Microsoft 365 Copilot المدمج في Word/Excel، ووكيل ذكاء اصطناعي مخصص تم إنشاؤه في Copilot Studio؟\" ما هي الإجابة الصحيحة؟",
+    options: {
+      A: "فقط Copilot المدمج يمكنه الوصول إلى بيانات Microsoft Graph وتلخيصها.",
+      B: "Copilot المدمج هو مساعد إنتاجية عام. الوكلاء المخصصون مصمَّمون لمهام محددة متعددة الخطوات وتكاملات مع أنظمة خارجية.",
+      C: "فقط الوكلاء المخصصون يمكنهم الاستناد في إجاباتهم إلى بيانات تنظيمية.",
+      D: "الوكلاء المخصصون متاحون فقط عبر بوابة Copilot Studio، بينما Copilot مدمج في التطبيقات.",
+    },
+  },
+  "real-ab900-54": {
+    prompt:
+      "طوّر رئيس قسم مطالبة (prompt) معقدة وعالية التأثير في Microsoft 365 Copilot لتحليل بيانات المبيعات الأسبوعية. يريد الرئيس أن يتمتع جميع أعضاء فريق المبيعات الثلاثين بوصول سهل ومتّسق إلى قالب المطالبة هذا. ما هي الطريقة الموصى بها لضمان استخدام هذا القالب القيّم بشكل موحّد من قبل الفريق بأكمله؟",
+    options: {
+      A: "استخدام واجهة Copilot Studio لنشر المطالبة كوكيل جديد.",
+      B: "إرسال نص المطالبة عبر البريد الإلكتروني إلى الفريق وتوجيههم لحفظه في OneDrive الشخصي الخاص بهم.",
+      C: "مشاركة قالب المطالبة مباشرةً من مكتبة مطالبات Microsoft 365 Copilot.",
+      D: "إنشاء تدفق Power Automate يُشغِّل المطالبة أسبوعياً.",
+    },
+  },
+  "real-ab900-55": {
+    statements: [
+      "يمكن لسياسة Communication Compliance اكتشاف نصوص غير لائقة في رسائل Microsoft Teams",
+      "يمكن لسياسة Communication Compliance اكتشاف لغة مسيئة في مطالبات (prompts) Microsoft 365 Copilot",
+      "يمكن استخدام سياسة Communication Compliance للاحتفاظ برسائل البريد الإلكتروني لمدة 10 سنوات",
+    ],
+  },
+  "real-ab900-56": {
+    statements: [
+      "من معرض مطالبات Copilot، يمكنك تحرير مطالبة محفوظة",
+      "من معرض مطالبات Copilot، يمكنك مشاركة مطالبة محفوظة مع فريق Microsoft Teams",
+      "يمكنك إنشاء رابط مشاركة لمطالبة لم تُحفظ في معرض مطالبات Copilot",
+    ],
+  },
+  "real-ab900-57": {
+    prompt:
+      "لدى مؤسستك اشتراك Microsoft 365. تلاحظ أن بعض المستخدمين لا يستطيعون تسجيل الدخول إلى Microsoft 365. يجب عليك عرض محاولات تسجيل الدخول الفاشلة في Microsoft 365. ماذا يجب أن تستخدم؟",
+    options: {
+      A: "بوابة Microsoft Defender",
+      B: "مركز إدارة Microsoft Entra",
+      C: "بوابة Microsoft Purview",
+      D: "مركز إدارة Microsoft 365",
+    },
+  },
+  "real-ab900-58": {
+    prompt:
+      "لدى مؤسستك اشتراك Microsoft 365 يحتوي على موقع Microsoft SharePoint يُدعى Site1. يجب عليك منع المستخدمين من مشاركة محتوى Site1 مع مستخدمين خارجيين. ماذا يجب أن تستخدم؟",
+    options: {
+      A: "محتوى Site1",
+      B: "مركز إدارة SharePoint",
+      C: "مركز إدارة Microsoft 365",
+      D: "مركز إدارة Microsoft Entra",
+    },
+  },
+  "real-ab900-59": {
+    prompt: "أي عبارة تصف Microsoft Defender XDR بشكل صحيح؟",
+    options: {
+      A: "Microsoft Defender XDR هو مجموعة أدوات مؤسسية موحّدة تنسّق الكشف والوقاية والتحقيق والاستجابة عبر نقاط النهاية والهويات والبريد الإلكتروني والتطبيقات لتوفير حماية متكاملة ضد الهجمات المتطورة.",
+      B: "Microsoft Entra Conditional Access هو مجموعة أدوات مؤسسية موحّدة تنسّق الكشف والوقاية والتحقيق والاستجابة عبر نقاط النهاية والهويات والبريد الإلكتروني والتطبيقات لتوفير حماية متكاملة ضد الهجمات المتطورة.",
+      C: "Microsoft Entra ID Protection هو مجموعة أدوات مؤسسية موحّدة تنسّق الكشف والوقاية والتحقيق والاستجابة عبر نقاط النهاية والهويات والبريد الإلكتروني والتطبيقات لتوفير حماية متكاملة ضد الهجمات المتطورة.",
+      D: "Microsoft Purview هو مجموعة أدوات مؤسسية موحّدة تنسّق الكشف والوقاية والتحقيق والاستجابة عبر نقاط النهاية والهويات والبريد الإلكتروني والتطبيقات لتوفير حماية متكاملة ضد الهجمات المتطورة.",
+    },
+  },
+  "real-ab900-60": {
+    prompt:
+      "لدى مؤسستك اشتراك Microsoft 365. تم تعيين مستخدم يُدعى Alex Wilber لدور إداري كما هو موضح في الصورة التالية.",
+    options: {
+      A: "يمكن لـ Alex Wilber عرض جميع المستخدمين في مستأجر Microsoft Entra.",
+      B: "يمكن لـ Alex Wilber عرض جميع المحتوى في مواقع Microsoft SharePoint.",
+      C: "يمكن لـ Alex Wilber قراءة جميع المحتوى في صناديق بريد Microsoft Exchange.",
+      D: "يمكن لـ Alex Wilber إجراء eDiscovery على مطالبات Microsoft 365 Copilot.",
+    },
+  },
+  "real-ab900-61": {
+    statements: [
+      "يمكنك استخدام مجموعة أمان Microsoft Entra لتعيين أذونات لموارد Microsoft Entra ID",
+      "يمكنك استخدام مجموعة أمان Microsoft Entra لتعيين تراخيص Microsoft 365",
+      "يمكنك استخدام مجموعة أمان Microsoft Entra لتعيين أذونات لصناديق بريد Microsoft Exchange",
+    ],
+  },
+  "real-ab900-62": {
+    prompt: "أي عبارة تصف التفويض (authorization) في Microsoft 365 بدقة؟",
+    options: {
+      A: "عملية للتحقق من أن هوية ما هي بالفعل ما تدّعيه",
+      B: "عملية تتطلب طرق مصادقة إضافية قبل أن تتمكن هوية من الوصول إلى الموارد",
+      C: "عملية للتحقق من السماح لهوية بالوصول إلى مورد",
+      D: "عملية للتحقق من صحة هوية من نظام خارجي",
+    },
+  },
+  "real-ab900-63": {
+    statements: [
+      "يمكن لعضو موقع Microsoft SharePoint دعوة مستخدمين للوصول إلى محتوى الموقع",
+      "يمكن لمالك موقع Microsoft SharePoint إضافة مجموعات Microsoft 365 كأعضاء في الموقع",
+      "يمكن لمالك موقع Microsoft SharePoint إزالة مالك آخر من الموقع",
+    ],
+  },
+  "real-ab900-64": {
+    prompt:
+      "لدى مؤسستك اشتراك Microsoft 365. ما هما المهمتان اللتان يمكنك تنفيذهما باستخدام مركز إدارة Exchange؟ (كل إجابة صحيحة تشكّل جزءاً من الحل. ملاحظة: كل اختيار صحيح يستحق نقطة واحدة.)",
+    options: {
+      A: "تعيين ترخيص Microsoft Exchange.",
+      B: "إنشاء قاعدة تدفق بريد (mail flow rule).",
+      C: "إنشاء صندوق بريد مشترك.",
+      D: "إضافة نطاق مخصص.",
+    },
+  },
+  "real-ab900-65": {
+    prompt: "اختر الإجابة التي تكمل الجملة بشكل صحيح.",
+    options: {
+      A: "في Microsoft Entra Privileged Identity Management (PIM)، أهّلك مسؤول لدور مسؤول المستخدمين. قبل أن تتمكن من إنشاء حساب مستخدم، يجب عليك تفعيل الدور.",
+      B: "في Microsoft Entra Privileged Identity Management (PIM)، أهّلك مسؤول لدور مسؤول المستخدمين. قبل أن تتمكن من إنشاء حساب مستخدم، يجب عليك تثبيت تطبيق Microsoft Authenticator.",
+      C: "في Microsoft Entra Privileged Identity Management (PIM)، أهّلك مسؤول لدور مسؤول المستخدمين. قبل أن تتمكن من إنشاء حساب مستخدم، يجب عليك طلب ترخيص.",
+      D: "في Microsoft Entra Privileged Identity Management (PIM)، أهّلك مسؤول لدور مسؤول المستخدمين. قبل أن تتمكن من إنشاء حساب مستخدم، يجب عليك تحديث معلومات موقعك.",
+    },
+  },
+  "real-ab900-66": {
+    prompt:
+      "تفتح مركز إدارة Microsoft Entra كما هو موضح في الصورة التالية. أي إجراء سيُحسّن Identity Secure Score أكثر من غيره؟",
+    options: {
+      B: "معالجة توصية \"استخدام أدوار إدارية بأقل الصلاحيات\" ستُحسّن Identity Secure Score أكثر من غيرها.",
+      C: "معالجة توصية \"تفعيل سياسة حظر المصادقة القديمة\" ستُحسّن Identity Secure Score أكثر من غيرها.",
+      D: "معالجة توصية \"إلزام المصادقة متعددة العوامل للأدوار الإدارية\" ستُحسّن Identity Secure Score أكثر من غيرها.",
+    },
+  },
+  "real-ab900-67": {
+    prompt: "بماذا يمكنك قفل حساب مستخدم تلقائياً عند اكتشاف تسجيل دخول محفوف بالمخاطر؟",
+    options: {
+      A: "Microsoft Defender for Identity",
+      B: "Microsoft Entra ID Protection",
+      C: "Microsoft Defender for Office 365",
+      D: "Microsoft Entra Privileged Identity Management (PIM)",
+    },
+  },
+  "real-ab900-68": {
+    prompt: "تراجع سياسات الأمان في شركتك كجزء من استراتيجية Zero Trust. أي عبارة تصف مبادئ Zero Trust بدقة؟",
+    options: {
+      A: "يُحسّن Zero Trust تجربة المستخدم عن طريق تقليل طلبات المصادقة.",
+      B: "يفترض Zero Trust وقوع اختراق أمني ويتحقق من كل طلب.",
+      C: "يعامل Zero Trust جميع الطلبات القادمة من شبكة شركتك على أنها موثوقة.",
+      D: "يُلغي Zero Trust الحاجة إلى مراجعة أذونات الوصول وتعديلها بانتظام.",
+    },
+  },
+  "real-ab900-69": {
+    prompt:
+      "لدى مؤسستك اشتراك Microsoft 365. يجب عليك إنشاء تقرير يُظهر الأذونات وروابط المشاركة النشطة للمحتوى المخزّن في حسابات Microsoft OneDrive. ماذا يجب أن تستخدم؟",
+    options: {
+      A: "Audit في بوابة Microsoft Defender",
+      B: "التقارير في مركز إدارة Microsoft 365",
+      C: "إدارة الوصول إلى البيانات في مركز إدارة SharePoint",
+      D: "eDiscovery في بوابة Microsoft Purview",
+    },
+  },
+  "real-ab900-70": {
+    statements: [
+      "تستخدم مايكروسوفت المطالبات والإجابات الصادرة من المستخدمين في Microsoft 365 Copilot لتدريب النماذج",
+      "تستخدم مايكروسوفت المحتوى المسترجَع من Microsoft Graph لتدريب النماذج",
+      "يحترم Microsoft 365 Copilot أذونات الأمان في اشتراك Microsoft 365 الخاص بك",
+    ],
+  },
+  "real-ab900-71": {
+    prompt:
+      "تستخدم شركتك الفوترة حسب الاستخدام (Pay-as-you-go) لـ Microsoft 365 Copilot. تريد الشركة رؤية أفضل لتكاليف استخدام Copilot والقدرة على التنبؤ بإنفاق الأقسام. يجب عليك التأكد من قدرتك على عرض تكاليف Copilot حسب القسم. ماذا يجب أن تستخدم؟ (للإجابة، اختر الخيارات المناسبة في منطقة الإجابة. ملاحظة: كل اختيار صحيح يستحق نقطة واحدة.)",
+    options: {
+      A: "البوابة: مركز إدارة Microsoft 365 / الميزة: سياسة فوترة",
+      B: "البوابة: مركز إدارة Microsoft 365 / الميزة: موصل Copilot",
+      C: "البوابة: مركز إدارة Microsoft Entra / الميزة: سياسة مطالبة تلقائية",
+      D: "البوابة: مركز إدارة Microsoft Entra / الميزة: سياسة فوترة",
+      E: "البوابة: بوابة Microsoft Purview / الميزة: موصل Copilot",
+      F: "البوابة: بوابة Microsoft Purview / الميزة: سياسة مطالبة تلقائية",
+    },
+  },
+  "real-ab900-72": {
+    statements: [
+      "لا يمكن للمستخدمين الذين لديهم ترخيص Microsoft 365 E5 إنشاء وكلاء Microsoft 365 Copilot قائمين على الويب",
+      "يحتاج المستخدمون إلى تعيين ترخيص Microsoft 365 Copilot لاستخدام وكيل Analyst",
+      "يمكن للمستخدمين استخدام مطالبة بلغة طبيعية لإنشاء وكيل Microsoft 365 Copilot",
+    ],
+  },
+  "real-ab900-73": {
+    prompt: "اختر الإجابة التي تكمل الجملة بشكل صحيح.",
+    options: {
+      A: "يمكنك استخدام حل Audit من Microsoft Purview للعثور على كل المحتوى المتعلق بمصطلح \"Project Falcon\" في رسائل البريد الإلكتروني المتبادلة بين مستخدمَين.",
+      B: "يمكنك استخدام حل Data Catalog من Microsoft Purview للعثور على كل المحتوى المتعلق بمصطلح \"Project Falcon\" في رسائل البريد الإلكتروني المتبادلة بين مستخدمَين.",
+      C: "يمكنك استخدام حل eDiscovery من Microsoft Purview للعثور على كل المحتوى المتعلق بمصطلح \"Project Falcon\" في رسائل البريد الإلكتروني المتبادلة بين مستخدمَين.",
+      D: "يمكنك استخدام حل Insider Risk Management من Microsoft Purview للعثور على كل المحتوى المتعلق بمصطلح \"Project Falcon\" في رسائل البريد الإلكتروني المتبادلة بين مستخدمَين.",
+    },
+  },
+  "real-ab900-74": {
+    prompt:
+      "تستخدم شركتك سياسات Microsoft Purview Data Loss Prevention (DLP). يشارك مستخدم يُدعى User1 معلومات حساسة مع مستخدم خارجي عبر Microsoft Teams. يجب عليك تحديد المحتوى الحساس المشارَك. ماذا يجب أن تستخدم في بوابة Microsoft Purview؟",
+    options: {
+      A: "التشخيصات (Diagnostics)",
+      B: "مستكشف البيانات (Data Explorer)",
+      C: "مستكشف المحتوى (Content Explorer)",
+      D: "مستكشف النشاط (Activity Explorer)",
+    },
+  },
+  "real-ab900-75": {
+    statements: [
+      "يتطلب Zero Trust اشتراك Azure",
+      "Zero Trust استراتيجية أمنية، وليست منتجاً محدداً",
+      "من خلال مركز إدارة Microsoft 365، يمكنك تفعيل Zero Trust لمؤسستك",
+    ],
+  },
+  "real-ab900-76": {
+    prompt: "اختر الإجابة التي تكمل الجملة بشكل صحيح.",
+    options: {
+      A: "يحتوي Microsoft Copilot Studio على إشارات مثل سجل التعاون وأهمية المستندات وتكرار التواصل، والتي تؤثر على إجابات Microsoft 365 Copilot.",
+      B: "يحتوي Microsoft Graph على إشارات مثل سجل التعاون وأهمية المستندات وتكرار التواصل، والتي تؤثر على إجابات Microsoft 365 Copilot.",
+      C: "يحتوي Microsoft Purview على إشارات مثل سجل التعاون وأهمية المستندات وتكرار التواصل، والتي تؤثر على إجابات Microsoft 365 Copilot.",
+      D: "يحتوي Microsoft Viva Insights على إشارات مثل سجل التعاون وأهمية المستندات وتكرار التواصل، والتي تؤثر على إجابات Microsoft 365 Copilot.",
+    },
+  },
+  "real-ab900-77": {
+    statements: [
+      "يمكن للمستخدمين استخدام Microsoft 365 Copilot بشكل مجهول",
+      "يمكن للمسؤولين السماح بالشراء الذاتي لتراخيص Microsoft 365 Copilot",
+      "يمكن تعيين تراخيص Microsoft 365 Copilot لمستخدمين ضيوف (guest) في Microsoft Entra ID من مؤسسات أخرى",
+    ],
+  },
+  "real-ab900-78": {
+    prompt:
+      "لدى مؤسستك اشتراك Microsoft 365. يجب عليك استخدام Microsoft Purview لتلبية المتطلبات التالية: • اكتشاف وتصنيف البيانات الحساسة عبر منصات متعددة. • منع المستخدمين من مشاركة الملكية الفكرية مع مستخدمين خارجيين. أي حل من Microsoft Purview يجب أن تستخدمه لكل متطلب؟ (للإجابة، اختر الخيارات المناسبة في منطقة الإجابة. ملاحظة: كل اختيار صحيح يستحق نقطة واحدة.)",
+    options: {
+      A: "اكتشاف وتصنيف البيانات الحساسة عبر منصات متعددة: Communication Compliance / منع مشاركة الملكية الفكرية: Data Loss Prevention",
+      B: "اكتشاف وتصنيف البيانات الحساسة عبر منصات متعددة: Data Loss Prevention / منع مشاركة الملكية الفكرية: Information Protection",
+      C: "اكتشاف وتصنيف البيانات الحساسة عبر منصات متعددة: Data Loss Prevention / منع مشاركة الملكية الفكرية: Insider Risk Management",
+      D: "اكتشاف وتصنيف البيانات الحساسة عبر منصات متعددة: Information Protection / منع مشاركة الملكية الفكرية: Communication Compliance",
+      E: "اكتشاف وتصنيف البيانات الحساسة عبر منصات متعددة: Information Protection / منع مشاركة الملكية الفكرية: Insider Risk Management",
+      F: "اكتشاف وتصنيف البيانات الحساسة عبر منصات متعددة: Insider Risk Management / منع مشاركة الملكية الفكرية: Data Loss Prevention",
+    },
+  },
+  "real-ab900-79": {
+    prompt: "لدى مؤسستك اشتراك Microsoft 365 E5. يجب عليك منع المستخدمين من مشاركة بيانات مالية داخلية للشركة مع مستخدمين خارجيين. ماذا يجب أن تستخدم؟",
+    options: {
+      A: "مجموعات الأدوار (Role groups)",
+      B: "سياسات منع فقدان البيانات (DLP)",
+      C: "سياسات إدارة مخاطر الداخل",
+      D: "تسميات الاحتفاظ (Retention labels)",
+    },
+  },
+  "real-ab900-80": {
+    prompt: "يجب عليك تحديد الملفات ورسائل البريد الإلكتروني التي تحتوي على أرقام الضمان الاجتماعي (SSNs) وأرقام بطاقات الائتمان. ماذا يجب أن تستخدم في بوابة Microsoft Purview؟",
+    options: {
+      A: "مستكشف البيانات",
+      B: "تقارير حماية المعلومات",
+      C: "سياسات حماية المعلومات",
+      D: "مستكشف النشاط",
+    },
+  },
+  "real-ab900-81": {
+    prompt: "اختر الإجابة التي تكمل الجملة بشكل صحيح.",
+    options: {
+      A: "يمكن تطبيق تسميات الحساسية من Microsoft Purview على Azure Blob Storage.",
+      B: "يمكن تطبيق تسميات الحساسية من Microsoft Purview على محادثات Microsoft 365 Copilot.",
+      C: "يمكن تطبيق تسميات الحساسية من Microsoft Purview على مواقع Microsoft SharePoint.",
+    },
+  },
+  "real-ab900-82": {
+    prompt: "اختر الإجابة التي تكمل الجملة بشكل صحيح.",
+    options: {
+      A: "يتيح لك البحث المقيّد في SharePoint تقييد وصول المسؤولين إلى مواقع Microsoft SharePoint، دون منع المستخدمين من الوصول إلى الملفات والمحتوى الذي يملكون أذونات له.",
+      B: "يتيح لك البحث المقيّد في SharePoint تقييد وصول المستخدمين الضيوف إلى مواقع Microsoft SharePoint، دون منع المستخدمين من الوصول إلى الملفات والمحتوى الذي يملكون أذونات له.",
+      C: "يتيح لك البحث المقيّد في SharePoint تقييد وصول Microsoft 365 Copilot إلى مواقع Microsoft SharePoint، دون منع المستخدمين من الوصول إلى الملفات والمحتوى الذي يملكون أذونات له.",
+      D: "يتيح لك البحث المقيّد في SharePoint تقييد وصول Microsoft Purview eDiscovery إلى مواقع Microsoft SharePoint، دون منع المستخدمين من الوصول إلى الملفات والمحتوى الذي يملكون أذونات له.",
+    },
+  },
+  "real-ab900-83": {
+    prompt:
+      "لدى مؤسستك اشتراك Microsoft 365 E5. تُنشئ تسمية حساسية من Microsoft Purview تُدعى \"Label1\". يجب عليك التأكد من قدرة المستخدمين على تطبيق \"Label1\" على الملفات في Microsoft 365. ماذا يجب أن تستخدم؟",
+    options: {
+      A: "سياسة تسميات الحساسية",
+      B: "مُصنِّف قابل للتدريب (trainable classifier)",
+      C: "سياسة تسميات الاحتفاظ",
+      D: "سياسة وسم تلقائي (auto-labeling)",
+    },
+  },
+  "real-ab900-84": {
+    prompt: "لدى شركتك سياسة امتثال مكتوبة تقضي بالاحتفاظ بجميع رسائل البريد الإلكتروني لمدة سبع سنوات ثم حذفها نهائياً. أي حل من Microsoft Purview يجب أن تستخدمه؟",
+    options: {
+      A: "حماية المعلومات",
+      B: "إدارة دورة حياة البيانات",
+      C: "منع فقدان البيانات",
+      D: "إدارة مخاطر الداخل",
+    },
+  },
+  "real-ab900-85": {
+    prompt: "اختر الإجابة التي تكمل الجملة بشكل صحيح.",
+    options: {
+      A: "في مركز إدارة Microsoft 365، يعرض مقياس \"الاعتمادات المُستخدَمة\" في تقرير اعتمادات Copilot إجمالي عدد الاعتمادات التي استهلكها مستخدمو مؤسستك الذين يستخدمون Microsoft Teams ويتفاعلون مع وكلاء قائمين على العمل في محادثة Microsoft 365 Copilot.",
+      B: "في مركز إدارة Microsoft 365، يعرض مقياس \"الاعتمادات المُستخدَمة\" في تقرير اعتمادات Copilot إجمالي عدد الاعتمادات التي استهلكها مستخدمون لا ينتمون إلى مؤسستك ويتفاعلون مع وكلاء أعمال في محادثة Microsoft 365 Copilot.",
+      C: "في مركز إدارة Microsoft 365، يعرض مقياس \"الاعتمادات المُستخدَمة\" في تقرير اعتمادات Copilot إجمالي عدد الاعتمادات التي استهلكها مستخدمو مؤسستك الذين تم تعيين ترخيص Microsoft 365 Copilot لهم ويتفاعلون مع وكلاء قائمين على العمل في محادثة Microsoft 365 Copilot.",
+      D: "في مركز إدارة Microsoft 365، يعرض مقياس \"الاعتمادات المُستخدَمة\" في تقرير اعتمادات Copilot إجمالي عدد الاعتمادات التي استخدمها مستخدمو مؤسستك الذين لم يُعيَّن لهم ترخيص Microsoft 365 Copilot ويتفاعلون مع وكلاء قائمين على العمل في محادثة Microsoft 365 Copilot.",
+    },
+  },
+  "real-ab900-86": {
+    prompt:
+      "لديك موقع Microsoft SharePoint يُدعى \"Site1\" ومجموعة أمان تُدعى \"Group1\". تريد منع جميع المستخدمين الذين يملكون حالياً وصولاً إلى \"Site1\" من الوصول إلى محتوى الموقع، إلا إذا كان المستخدم أيضاً عضواً في مجموعة \"Group1\". أي إعدادات يجب أن تُهيّئ؟ (للإجابة، اختر الإعدادات المناسبة في منطقة الإجابة.)",
+    options: {
+      A: "البريد الإلكتروني",
+      B: "الخصوصية",
+      C: "مشاركة الملفات الخارجية",
+      D: "تسمية الحساسية",
+      E: "تقييد اكتشاف المحتوى",
+      F: "الوصول المقيّد للموقع",
+    },
+  },
+  "real-ab900-87": {
+    statements: [
+      "يحترم Microsoft 365 Copilot تسميات الحساسية من Microsoft Purview",
+      "يتجاهل Microsoft 365 Copilot سياسات منع فقدان البيانات (DLP) من Microsoft Purview",
+    ],
+  },
+  "real-ab900-88": {
+    statements: [
+      "يمكن تطبيق تسمية الحساسية على موقع Microsoft SharePoint",
+      "يمكن تطبيق تسمية الحساسية على رسالة بريد إلكتروني في Microsoft Exchange",
+      "يمكن تطبيق تسمية الحساسية على أجهزة Windows 11",
+    ],
+  },
+  "real-ab900-89": {
+    prompt:
+      "لدى مؤسستك اشتراك Microsoft 365. اشترت شركتك مؤخراً تراخيص Microsoft 365 Copilot لبعض المستخدمين. يجب عليك تحديد عدد المستخدمين غير المرخَّصين الذين استخدموا Copilot في Microsoft Teams. أي تقرير استخدام يجب أن تستخدمه في مركز إدارة Microsoft 365؟",
+    options: {
+      A: "Microsoft 365 Copilot Chat",
+      B: "Microsoft 365 Copilot Search",
+      C: "Microsoft 365 Apps",
+      D: "Microsoft 365 Copilot",
+    },
+  },
+  "real-ab900-90": {
+    prompt:
+      "مستخدم يُدعى \"User1\" مسؤول عن تقرير الإيرادات الفصلي. يحتاج \"User1\" إلى اكتشاف اتجاهات الأداء، والحصول على رؤى بصرية، وإنشاء ملخص للحالات الشاذة عبر عدة ملفات تحتوي على مجموعات بيانات مختلفة. ماذا يجب أن يستخدم؟",
+    options: {
+      A: "وكيل \"Analyst\" في Microsoft 365 Copilot",
+      B: "وكيل \"Researcher\" في Microsoft 365 Copilot",
+      C: "بحث Microsoft 365 Copilot",
+      D: "Copilot في Excel",
+    },
+  },
+  "real-ab900-91": {
+    prompt: "تراجع شركتك حالياً ترخيص Microsoft 365 Copilot. في أي سيناريو يجب استخدام الفوترة حسب الاستخدام (usage-based billing)؟",
+    options: {
+      A: "لمنح المستخدمين وصولاً إلى مساعد الذكاء الاصطناعي في Copilot في Word",
+      B: "لتلخيص الإجراءات في اجتماعات Microsoft Teams",
+      C: "لتوليد صور في محادثات Premium",
+      D: "لتوفير وكيل مخصص لمستخدمين غير مرخَّصين",
+    },
+  },
+  "real-ab900-92": {
+    prompt: "تستخدم Microsoft 365 Copilot. تريد جدولة مطالبة (prompt) لتُنفَّذ عند منتصف الليل. أي مهمة يجب أن تُدرجها في حلّك؟",
+    options: {
+      A: "إنشاء وكيل.",
+      B: "إنشاء دفتر ملاحظات.",
+      C: "تنفيذ المطالبة.",
+      D: "حفظ المطالبة.",
+    },
+  },
+  "real-ab900-93": {
+    prompt:
+      "تخطط شركتك لنشر Microsoft 365 Copilot. يجب عليك تمكين مستخدم من استخدام Microsoft 365 Copilot، بما في ذلك وكيلَي \"Researcher\" و\"Analyst\". ماذا يجب أن تستخدم؟",
+    options: {
+      A: "مركز إدارة Microsoft 365",
+      B: "بوابة Microsoft Purview",
+      C: "مركز إدارة Microsoft Entra",
+      D: "بوابة Microsoft Defender",
+    },
+  },
+  "real-ab900-94": {
+    prompt:
+      "تفكّر شركتك في استخدام Microsoft 365 Copilot على أساس الفوترة حسب الاستخدام (Pay-as-you-go) بدلاً من شراء ترخيص Microsoft 365 Copilot. في أي سيناريو تنطبق الفوترة حسب الاستخدام؟",
+    options: {
+      A: "إجراء استدلال متعدد الخطوات باستخدام وكيل Researcher",
+      B: "إنشاء ملخص لاجتماع Microsoft Teams",
+      C: "استخدام وكيل مخصص يعتمد على بيانات العمل",
+      D: "استخدام مساعد الذكاء الاصطناعي لتحرير مستند في Copilot في Word",
+    },
+  },
+  "real-ab900-95": {
+    prompt:
+      "لدى شركتك موقع Microsoft SharePoint يُدعى \"Site1\". يحتوي \"Site1\" على جميع سياسات قسم الموارد البشرية في الشركة. تُخزَّن السياسات كمستندات Microsoft Word. جميع المستخدمين لديهم صلاحية قراءة على \"Site1\". يُبلّغ رئيس الموارد البشرية أن استفسارات المستخدمين حول السياسات لا تُعالَج في الوقت المناسب، خاصةً حول العطلات الرئيسية. يجب عليك اقتراح حل يمكّن المستخدمين من العثور على سياسات الموارد البشرية. يجب أن يوفر الحل للمستخدمين قائمة بالأسئلة الشائعة ويضمن استناد الإجابات حصراً إلى Site1. ماذا يجب أن تُدرج في توصيتك؟",
+    options: {
+      A: "المساعد الشخصي في Copilot في Word",
+      B: "وكيل Microsoft 365 Copilot مخصص",
+      C: "وكيل Researcher في Microsoft 365 Copilot",
+      D: "دفتر ملاحظات Microsoft 365 Copilot",
+    },
+  },
+  "real-ab900-96": {
+    prompt: "اختر الإجابة التي تكمل الجملة بشكل صحيح.",
+    options: {
+      A: "من بوابة Microsoft Purview، يمكنك استخدام Data Explorer لإنشاء وإدارة سياسات الخصوصية.",
+      B: "من بوابة Microsoft Purview، يمكنك استخدام Data Explorer للبحث عن محتوى في صناديق البريد والمواقع.",
+      C: "من بوابة Microsoft Purview، يمكنك استخدام Data Explorer لتحديد المعلومات الحساسة ومواقع تخزينها.",
+      D: "من بوابة Microsoft Purview، يمكنك استخدام Data Explorer للتحقق من فعالية سياسات منع فقدان البيانات (DLP) الخاصة بك.",
+    },
+  },
+  "real-ab900-97": {
+    prompt:
+      "لدى مؤسستك اشتراك Microsoft 365 يحتوي على موقع Microsoft SharePoint يُدعى \"Site1\". يجب عليك تحديد جميع التغييرات التي أجراها مسؤول الموقع على إعدادات موقع \"Site1\". أي تقرير يجب أن تستخدمه في مركز إدارة SharePoint؟ (للإجابة، اختر التقرير المناسب في منطقة الإجابة.)",
+    options: {
+      A: "Agent Insights",
+      B: "إدارة كتالوج App Insights",
+      D: "سجل التغييرات",
+      E: "حوكمة الوصول إلى البيانات",
+      F: "حسابات OneDrive",
+    },
+  },
+  "real-ab900-98": {
+    statements: [
+      "يمكن لـ Microsoft Purview Communications Compliance اكتشاف نصوص مسيئة في صور مخزّنة على مواقع Microsoft SharePoint",
+      "يُخفي Microsoft Purview Communications Compliance هوية المستخدمين افتراضياً أثناء التحقيقات",
+      "يُضيف Microsoft Purview Communications Compliance إخلاء مسؤولية إلى جميع الاتصالات الخاضعة للمراقبة",
+    ],
+  },
+  "real-ab900-99": {
+    prompt:
+      "لدى مؤسستك اشتراك Microsoft 365. تم تعيين ترخيص Microsoft 365 Copilot لجميع المستخدمين. يجب عليك منع المستخدمين من إنشاء صور باستخدام Copilot. ماذا يجب أن تستخدم؟",
+    options: {
+      A: "بوابة Microsoft Defender",
+      B: "مركز إدارة Microsoft Entra",
+      C: "بوابة Microsoft Purview",
+      D: "مركز إدارة Microsoft 365",
+    },
+  },
+  "real-ab900-100": {
+    statements: [
+      "يمكن للمسؤولين حظر مواقع معينة من استخدام Microsoft 365 Copilot لها",
+      "يمكن للمسؤولين منع Microsoft 365 Copilot من استخدام بحث الويب عند الإجابة عن استفسارات المستخدمين",
+      "يمكن للمسؤولين حظر الوصول إلى وكيل Researcher في Microsoft 365 Copilot مع السماح بالوصول إلى وكيل Analyst",
+    ],
+  },
+  "real-ab900-101": {
+    prompt:
+      "يجب عليك التأكد من قدرة المستخدمين على استخدام نظام خارجي كمصدر معرفة لوكلاء Microsoft 365 Copilot المخصصين. ماذا يجب أن تُهيّئ في مركز إدارة Microsoft 365؟ (للإجابة، اختر الإعدادات المناسبة في منطقة الإجابة.)",
+    options: {
+      A: "Copilot – الموصلات (Connectors)",
+      B: "Copilot – البحث",
+      C: "Copilot – الإعدادات",
+      D: "الوكلاء – نظرة عامة",
+      E: "الوكلاء – الأدوات",
+      F: "الوكلاء – الإعدادات",
     },
   },
 };
