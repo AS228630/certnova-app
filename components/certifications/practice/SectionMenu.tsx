@@ -1,20 +1,17 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { ChevronDown, Lock, ListChecks } from "lucide-react";
+import { ChevronDown, Lock, ListChecks, Check } from "lucide-react";
 import { getSectionSize, getSectionCount, UNLOCK_THRESHOLD } from "@/lib/practiceSections";
 import { useLocale } from "@/components/LocaleProvider";
 
 type Status = "current" | "correct" | "wrong" | "marked" | "skipped" | "unanswered";
 
-// Top-of-page dropdown version of the section list (Abschnitte). Replaces
-// the old right-sidebar panel so the question area gets full width and
-// works better on narrower screens. Locking logic is unchanged: a section
-// unlocks once the accuracy of the section before it reaches
-// UNLOCK_THRESHOLD (90%). Progress is driven by `statusFor`, which reads
-// from the same persisted per-user answer store as before — so a 90%
-// section stays unlocked for that user on any future visit, it is never
-// re-locked.
+// Dropdown used only to SWITCH between sections (Abschnitte) — a simple
+// list of section names with lock state and accuracy. The actual question
+// number grid for whichever section is active is a separate, always-
+// visible component (SectionQuestionGrid) rendered by the parent, so it
+// never requires a click to appear.
 export default function SectionMenu({
   total,
   currentIndex,
@@ -32,7 +29,6 @@ export default function SectionMenu({
   const currentSection = Math.floor(currentIndex / SECTION_SIZE);
 
   const [menuOpen, setMenuOpen] = useState(false);
-  const [openSection, setOpenSection] = useState(currentSection);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -63,10 +59,6 @@ export default function SectionMenu({
     return answered === 0 ? 0 : Math.round((correct / answered) * 100);
   }
 
-  function sectionUnlocked(s: number): boolean {
-    return s <= 1 || (sectionCompleted(s - 1) && sectionAccuracy(s - 1) >= UNLOCK_THRESHOLD);
-  }
-
   function sectionCompleted(s: number): boolean {
     const [start, end] = sectionRange(s);
     for (let i = start; i < end; i++) {
@@ -76,14 +68,9 @@ export default function SectionMenu({
     return true;
   }
 
-  const styles: Record<Status, string> = {
-    current: "bg-primary text-white shadow-md shadow-primary/30 scale-105",
-    correct: "bg-success text-white shadow-sm",
-    wrong: "bg-danger text-white shadow-sm",
-    marked: "bg-warning text-white shadow-sm",
-    skipped: "bg-panel-alt text-text-faint border border-border-soft",
-    unanswered: "bg-panel border border-border-soft text-text-muted shadow-sm hover:border-primary/50 hover:text-primary",
-  };
+  function sectionUnlocked(s: number): boolean {
+    return s <= 1 || (sectionCompleted(s - 1) && sectionAccuracy(s - 1) >= UNLOCK_THRESHOLD);
+  }
 
   return (
     <div className="relative flex flex-wrap items-center gap-3 sm:flex-none" ref={ref}>
@@ -103,79 +90,46 @@ export default function SectionMenu({
       </span>
 
       {menuOpen && (
-        <div className="absolute left-0 right-0 z-30 mt-2 max-h-[70vh] overflow-y-auto rounded-xl border border-border-soft bg-panel p-3 shadow-lg sm:right-auto sm:w-[460px]">
+        <div className="absolute left-0 top-full z-30 mt-2 max-h-[70vh] w-full min-w-[280px] overflow-y-auto rounded-xl border border-border-soft bg-panel p-2 shadow-lg sm:w-80">
           {Array.from({ length: sectionCount }).map((_, s) => {
             const [start, end] = sectionRange(s);
             const unlocked = sectionUnlocked(s);
-            const open = openSection === s && unlocked;
             const accuracy = sectionAccuracy(s);
             const completed = unlocked && sectionCompleted(s);
+            const isCurrent = s === currentSection;
 
             return (
-              <div key={s} className="mb-2 rounded-lg border border-border-soft last:mb-0">
-                <button
-                  onClick={() => unlocked && setOpenSection(open ? -1 : s)}
-                  disabled={!unlocked}
-                  className={`flex w-full items-center justify-between px-3 py-2.5 text-left text-sm ${
-                    unlocked ? "text-text hover:bg-panel-alt" : "cursor-not-allowed text-text-faint"
-                  }`}
-                >
-                  <span className="flex items-center gap-2.5">
-                    <span
-                      className={`h-2 w-2 shrink-0 rounded-full ${
-                        completed ? "bg-success" : unlocked ? "bg-primary" : "bg-text-faint"
-                      }`}
-                    />
-                    <span>
-                      {t("practice.sectionN")} {s + 1}
-                    </span>
-                    <span className="rounded-full bg-panel-alt px-2 py-0.5 text-[10.5px] font-semibold text-text-faint">
-                      {start + 1}–{end} · {end - start} {t("practice.questionsWord")}
-                    </span>
-                  </span>
-                  {unlocked ? (
-                    <ChevronDown size={14} className={open ? "rotate-180" : ""} />
+              <button
+                key={s}
+                onClick={() => {
+                  if (!unlocked) return;
+                  onJump(start);
+                  setMenuOpen(false);
+                }}
+                disabled={!unlocked}
+                className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm transition-colors ${
+                  isCurrent ? "bg-primary-light text-primary" : unlocked ? "text-text hover:bg-panel-alt" : "cursor-not-allowed text-text-faint"
+                }`}
+              >
+                <span className="flex items-center gap-2">
+                  {completed ? (
+                    <Check size={14} className="text-success" />
+                  ) : unlocked ? (
+                    <span className="h-2 w-2 rounded-full bg-primary" />
                   ) : (
                     <Lock size={12} />
                   )}
-                </button>
-
-                {!unlocked && (
-                  <p className="border-t border-border-soft px-3 py-2 text-[11px] text-text-faint">
-                    {t("practice.unlockHintNav")
-                      .replace("{threshold}", String(UNLOCK_THRESHOLD))
-                      .replace("{current}", String(sectionAccuracy(s - 1)))}
-                  </p>
-                )}
-
-                {open && (
-                  <div className="grid max-h-72 grid-cols-7 gap-2 overflow-y-auto border-t border-border-soft bg-panel-alt/40 p-3.5 sm:grid-cols-9">
-                    {Array.from({ length: end - start }).map((_, j) => {
-                      const i = start + j;
-                      return (
-                        <button
-                          key={i}
-                          onClick={() => {
-                            onJump(i);
-                            setMenuOpen(false);
-                          }}
-                          className={`flex h-10 w-10 items-center justify-center rounded-xl text-[13px] font-bold transition-all duration-150 ${
-                            styles[i === currentIndex ? "current" : statusFor(i)]
-                          }`}
-                        >
-                          {i + 1}
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-
+                  <span className="font-semibold">
+                    {t("practice.sectionN")} {s + 1}
+                  </span>
+                  <span className="text-[11px] text-text-faint">
+                    ({start + 1}–{end})
+                  </span>
+                </span>
                 {unlocked && s > 0 && (
-                  <p className="border-t border-border-soft px-3 py-1.5 text-[10px] text-text-faint">
-                    {t("practice.successRateNav")}: {accuracy}%
-                  </p>
+                  <span className="text-[11px] font-semibold text-text-faint">{accuracy}%</span>
                 )}
-              </div>
+              </button>
             );
           })}
         </div>

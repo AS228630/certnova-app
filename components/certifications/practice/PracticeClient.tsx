@@ -10,6 +10,7 @@ import { getSectionForIndex, getSectionRange, getSectionCount } from "@/lib/prac
 import PracticeToolbar from "./PracticeToolbar";
 import QuestionPanel from "./QuestionPanel";
 import SectionMenu from "./SectionMenu";
+import SectionQuestionGrid from "./SectionQuestionGrid";
 import SectionProgressBar from "./SectionProgressBar";
 import SectionStatsPanel from "./SectionStatsPanel";
 import QuickStats from "./QuickStats";
@@ -390,6 +391,18 @@ export default function PracticeClient({
           statusFor={statusFor}
         />
       </div>
+
+      {/* Always visible for the current section — no click required,
+          unlike the Abschnitt switcher above. Normal document flow (not
+          absolute), so it pushes the question panel down instead of
+          overlaying it. */}
+      <SectionQuestionGrid
+        start={currentSectionStart}
+        end={currentSectionEnd}
+        currentIndex={index}
+        statusFor={statusFor}
+        onJump={goTo}
+      />
 
       {/* Floating, fixed-position card — overlays empty screen space in the
           top-right corner and never takes width away from the question
