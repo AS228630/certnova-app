@@ -10,6 +10,8 @@ import { getSectionForIndex, getSectionRange, getSectionCount } from "@/lib/prac
 import PracticeToolbar from "./PracticeToolbar";
 import QuestionPanel from "./QuestionPanel";
 import SectionMenu from "./SectionMenu";
+import SectionProgressBar from "./SectionProgressBar";
+import SectionStatsPanel from "./SectionStatsPanel";
 import QuickStats from "./QuickStats";
 import AICoachPanel from "./AICoachPanel";
 import PracticeNotesPanel from "./PracticeNotesPanel";
@@ -101,6 +103,8 @@ export default function PracticeClient({
 
   const current = activeQuestions[index];
   const sectionCount = getSectionCount(activeQuestions.length);
+  const currentSectionIdx = getSectionForIndex(activeQuestions.length, index);
+  const [currentSectionStart, currentSectionEnd] = getSectionRange(activeQuestions.length, currentSectionIdx);
 
   function isCorrectAnswer(q: PracticeQuestion, answer: Answer | undefined): boolean {
     if (!answer) return false;
@@ -372,12 +376,25 @@ export default function PracticeClient({
         onShuffle={shuffle}
       />
 
-      <SectionMenu
-        total={activeQuestions.length}
-        currentIndex={index}
-        statusFor={statusFor}
-        onJump={goTo}
-      />
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
+        <SectionMenu
+          total={activeQuestions.length}
+          currentIndex={index}
+          statusFor={statusFor}
+          onJump={goTo}
+        />
+        <SectionProgressBar
+          start={currentSectionStart}
+          end={currentSectionEnd}
+          sectionNumber={currentSectionIdx + 1}
+          statusFor={statusFor}
+        />
+      </div>
+
+      {/* Floating, fixed-position card — overlays empty screen space in the
+          top-right corner and never takes width away from the question
+          panel below it (per the owner's explicit layout requirement). */}
+      <SectionStatsPanel start={currentSectionStart} end={currentSectionEnd} statusFor={statusFor} />
 
       <div className="mt-6">
         <QuestionPanel
@@ -447,26 +464,17 @@ export default function PracticeClient({
         />
       </div>
 
-      {/* Progress + AI coach now live below the question, not beside it, so the
-          question panel itself can use the full page width. */}
-      <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-[280px_1fr]">
-        <div className="hidden lg:block">
-          <QuickStats
-            compact
-            answered={answeredCount}
-            skipped={skipped.size}
-            marked={marked.size}
-            total={activeQuestions.length}
-            remainingSeconds={remainingSeconds}
-            totalSeconds={EXAM_TOTAL_SECONDS}
-          />
-        </div>
-        <div className="hidden h-[420px] lg:block">
-          <AICoachPanel key={current.id} question={current} isOpen={true} onClose={() => {}} />
-        </div>
+      {/* AI coach now spans the full width below the question — the stats
+          card is a fixed floating overlay (SectionStatsPanel above), so it
+          no longer reserves a column here. */}
+      <div className="mt-6 hidden h-[420px] lg:block">
+        <AICoachPanel key={current.id} question={current} isOpen={true} onClose={() => {}} />
       </div>
 
-      {/* Mobile: compact stats stay visible; AI coach opens as a full-screen overlay via the floating button */}
+      {/* Mobile: SectionStatsPanel is desktop-only (fixed overlay would
+          cover content on small screens), so mobile keeps a compact inline
+          stats bar; AI coach opens as a full-screen overlay via the
+          floating action button instead. */}
       <div className="mt-6 lg:hidden">
         <QuickStats
           compact

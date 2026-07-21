@@ -86,7 +86,7 @@ export default function SectionMenu({
   };
 
   return (
-    <div className="relative mb-4" ref={ref}>
+    <div className="relative sm:flex-none" ref={ref}>
       <button
         onClick={() => setMenuOpen((v) => !v)}
         className="flex w-full items-center justify-between gap-3 rounded-xl border border-border-soft bg-panel px-4 py-3 text-sm font-bold text-text transition-colors hover:bg-panel-alt sm:w-auto"
