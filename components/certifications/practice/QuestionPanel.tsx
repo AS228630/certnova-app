@@ -330,8 +330,11 @@ export default function QuestionPanel({
           )}
         </div>
 
-        {/* Desktop: Zurück on the left, the rest clustered on the right */}
-        <div className="hidden sm:flex sm:items-center sm:justify-between">
+        {/* Desktop: Zurück on the left, the rest clustered on the right.
+            pr-24 keeps this row clear of PracticeFloatingActions, which is
+            fixed to the bottom-right corner of the viewport and would
+            otherwise sit on top of "Antwort prüfen". */}
+        <div className="hidden sm:flex sm:items-center sm:justify-between sm:pr-24">
           <button
             onClick={onPrev}
             disabled={index === 0}
@@ -347,13 +350,13 @@ export default function QuestionPanel({
               }`}
             >
               <Lightbulb size={15} />
-              Erklärung
+              {t("practice.explanationLabel")}
             </button>
             <button
               onClick={onSkip}
               className="rounded-lg border border-border-soft px-5 py-2.5 text-sm font-semibold text-text hover:border-primary"
             >
-              Überspringen
+              {t("practice.skipBtn")}
             </button>
             {!checked ? (
               <button
@@ -361,7 +364,7 @@ export default function QuestionPanel({
                 disabled={!canCheck}
                 className="rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-white hover:bg-primary-dark disabled:opacity-40"
               >
-                Antwort prüfen
+                {t("practice.checkAnswer")}
               </button>
             ) : (
               <button
@@ -369,7 +372,7 @@ export default function QuestionPanel({
                 disabled={index === total - 1}
                 className="rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-white hover:bg-primary-dark disabled:opacity-40"
               >
-                Weiter →
+                {t("practice.nextBtn")}
               </button>
             )}
           </div>
