@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useLocale } from "@/components/LocaleProvider";
 import {
   Download,
   Share2,
@@ -68,6 +69,7 @@ export default function ExamCompleteScreen({
   onBackToPath: () => void;
   onRetryAll: () => void;
 }) {
+  const { t } = useLocale();
   const [feedback, setFeedback] = useState<string | null>(null);
 
   const total = questions.length;
@@ -79,12 +81,12 @@ export default function ExamCompleteScreen({
   const passed = score >= PASS_THRESHOLD;
   const isHighScore = score >= CONGRATS_THRESHOLD;
 
-  const topicStats = topics.map((t) => {
-    const tQuestions = questions.filter((q) => q.topicId === t.id);
+  const topicStats = topics.map((topic) => {
+    const tQuestions = questions.filter((q) => q.topicId === topic.id);
     const tCorrect = tQuestions.filter((q) => checked.has(q.id) && isCorrectAnswer(q, answers[q.id])).length;
     const tAnswered = tQuestions.filter((q) => checked.has(q.id)).length;
     const pct = tAnswered === 0 ? 0 : Math.round((tCorrect / tAnswered) * 100);
-    return { title: t.title, pct, answered: tAnswered };
+    return { title: topic.title, pct, answered: tAnswered };
   });
 
   function formatElapsed(s: number) {
@@ -279,21 +281,21 @@ export default function ExamCompleteScreen({
             </svg>
             <div className="absolute flex flex-col items-center">
               <span className="text-3xl font-extrabold text-text">{score}%</span>
-              <span className="text-[11px] text-text-faint">Gesamtpunktzahl</span>
+              <span className="text-[11px] text-text-faint">{t("practice.totalScore")}</span>
             </div>
           </div>
           <div className="mt-4 grid w-full grid-cols-2 gap-3 text-sm">
-            <Stat icon={CheckCircle2} value={correct} label="Richtig beantwortet" color="text-success" />
-            <Stat icon={XCircle} value={wrong} label="Falsch beantwortet" color="text-danger" />
-            <Stat icon={SkipForward} value={skippedCount} label="Übersprungen" color="text-warning" />
-            <Stat icon={Clock3} value={formatElapsed(elapsedSeconds)} label="Gesamtzeit" color="text-primary" />
+            <Stat icon={CheckCircle2} value={correct} label={t("practice.correctlyAnswered")} color="text-success" />
+            <Stat icon={XCircle} value={wrong} label={t("practice.wronglyAnswered")} color="text-danger" />
+            <Stat icon={SkipForward} value={skippedCount} label={t("practice.skippedQ")} color="text-warning" />
+            <Stat icon={Clock3} value={formatElapsed(elapsedSeconds)} label={t("practice.totalTime")} color="text-primary" />
           </div>
           <span
             className={`mt-4 rounded-full px-4 py-1.5 text-xs font-bold ${
               passed ? "bg-success-light text-success" : "bg-danger/10 text-danger"
             }`}
           >
-            {passed ? "✓ Bestanden!" : "Noch nicht bestanden"}
+            {passed ? `✓ ${t("practice.passedLabel")}` : t("practice.notPassedLabel")}
           </span>
         </div>
 
