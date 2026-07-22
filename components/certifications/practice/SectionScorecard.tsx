@@ -241,7 +241,8 @@ export default function SectionScorecard({
           </button>
           <button
             onClick={handleDownload}
-            className="flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white hover:bg-primary-dark"
+            className="flex items-center gap-1.5 rounded-2xl px-4 py-2 text-xs font-bold text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)] transition-all duration-200 ease-in-out hover:brightness-110"
+            style={{ background: "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
           >
             <Download size={14} />
             {t("practice.downloadResult")}
@@ -444,7 +445,7 @@ export default function SectionScorecard({
         {hasNextSection ? (
           <button
             onClick={onNextSection}
-            className="flex-1 rounded-lg bg-primary py-3 text-sm font-bold text-white hover:bg-primary-dark"
+            className="flex-1 rounded-2xl py-3 text-sm font-bold text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)] transition-all duration-200 ease-in-out hover:brightness-110" style={{ background: "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
           >
             {t("practice.nextSectionBtn")}
           </button>
@@ -452,7 +453,7 @@ export default function SectionScorecard({
           onViewFinalResult && (
             <button
               onClick={onViewFinalResult}
-              className="flex-1 rounded-lg bg-primary py-3 text-sm font-bold text-white hover:bg-primary-dark"
+              className="flex-1 rounded-2xl py-3 text-sm font-bold text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)] transition-all duration-200 ease-in-out hover:brightness-110" style={{ background: "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
             >
               {t("practice.viewFinalResultBtn")}
             </button>

@@ -225,7 +225,11 @@ export default function ExamCompleteScreen({
           <p className="mt-1 text-sm text-text-muted">Großartig! Du bist auf dem richtigen Weg. Bleib dran und erreiche dein Ziel! 🚀</p>
           {feedback && <p className="mt-2 text-xs font-semibold text-primary">{feedback}</p>}
           <div className="mt-4 flex justify-center gap-2 sm:justify-start">
-            <button onClick={handleDownload} className="flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white hover:bg-primary-dark">
+            <button
+              onClick={handleDownload}
+              className="flex items-center gap-1.5 rounded-2xl px-4 py-2 text-xs font-bold text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)] transition-all duration-200 ease-in-out hover:brightness-110"
+              style={{ background: "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
+            >
               <Download size={14} />
               Ergebnis herunterladen
             </button>

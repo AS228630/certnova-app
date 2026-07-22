@@ -42,7 +42,8 @@ export default function PracticeNotesPanel({ isOpen, onClose }: { isOpen: boolea
         </div>
         <button
           onClick={save}
-          className="mb-4 rounded-lg bg-primary py-2 text-sm font-bold text-white hover:bg-primary-dark"
+          className="mb-4 rounded-2xl py-2 text-sm font-bold text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)] transition-all duration-200 ease-in-out hover:brightness-110"
+          style={{ background: "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
         >
           {t("practice.saveNote")}
         </button>
