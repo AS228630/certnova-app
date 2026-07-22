@@ -2,13 +2,19 @@
 @import "@fontsource-variable/inter";
 
 @theme {
-  --color-bg: #0a0d1a;
-  --color-panel: #12152b;
+  --color-bg: #070b17;
+  --color-sidebar-bg: #0b1020;
+  --color-topbar-bg: #0a1020;
+  --color-panel: #12182b;
   --color-panel-alt: #171a35;
+  --color-question-panel: #0f172a;
   --color-border-soft: rgba(255, 255, 255, 0.08);
-  --color-primary: #6d4cff;
-  --color-primary-dark: #5636e0;
-  --color-primary-light: rgba(109, 76, 255, 0.14);
+  --color-divider: rgba(255, 255, 255, 0.05);
+  --color-primary: #7c3aed;
+  --color-primary-dark: #6d28d9;
+  --color-primary-hover: #8b5cf6;
+  --color-primary-light: rgba(124, 58, 237, 0.14);
+  --color-accent-blue: #3b82f6;
   --color-text: #f2f3f9;
   --color-text-muted: #8991ae;
   --color-text-faint: #5c6485;
@@ -17,17 +23,24 @@
   --color-warning: #f59e0b;
   --color-danger: #ef4444;
   --color-danger-light: rgba(239, 68, 68, 0.14);
+  --color-info: #3b82f6;
   --color-navy: #1e293b;
 }
 
 html.light {
   --color-bg: #f5f6fb;
+  --color-sidebar-bg: #ffffff;
+  --color-topbar-bg: #ffffff;
   --color-panel: #ffffff;
   --color-panel-alt: #f0f1f8;
+  --color-question-panel: #ffffff;
   --color-border-soft: rgba(15, 23, 42, 0.08);
-  --color-primary: #6d4cff;
-  --color-primary-dark: #5636e0;
-  --color-primary-light: rgba(109, 76, 255, 0.1);
+  --color-divider: rgba(15, 23, 42, 0.05);
+  --color-primary: #7c3aed;
+  --color-primary-dark: #6d28d9;
+  --color-primary-hover: #8b5cf6;
+  --color-primary-light: rgba(124, 58, 237, 0.1);
+  --color-accent-blue: #3b82f6;
   --color-text: #0f1222;
   --color-text-muted: #5b6178;
   --color-text-faint: #9198ad;
@@ -36,6 +49,7 @@ html.light {
   --color-warning: #d97706;
   --color-danger: #dc2626;
   --color-danger-light: rgba(220, 38, 38, 0.1);
+  --color-info: #3b82f6;
   --color-navy: #1e293b;
 }
 

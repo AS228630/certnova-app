@@ -3,12 +3,12 @@
 type Status = "current" | "correct" | "wrong" | "marked" | "skipped" | "unanswered";
 
 const styles: Record<Status, string> = {
-  current: "bg-primary text-white shadow-md shadow-primary/30 scale-105",
-  correct: "bg-success text-white shadow-sm",
-  wrong: "bg-danger text-white shadow-sm",
-  marked: "bg-warning text-white shadow-sm",
+  current: "bg-primary text-white shadow-[0_0_0_4px_rgba(124,58,237,0.25),0_4px_14px_rgba(124,58,237,0.5)] scale-105",
+  correct: "bg-success text-white shadow-[0_0_10px_rgba(34,197,94,0.35)]",
+  wrong: "bg-danger text-white shadow-[0_0_10px_rgba(239,68,68,0.35)]",
+  marked: "border-2 border-warning bg-panel text-warning",
   skipped: "bg-panel-alt text-text-faint border border-border-soft",
-  unanswered: "bg-panel border border-border-soft text-text-muted shadow-sm hover:border-primary/50 hover:text-primary",
+  unanswered: "bg-panel border border-border-soft text-text-muted hover:border-primary/60 hover:text-primary hover:shadow-[0_0_8px_rgba(124,58,237,0.25)]",
 };
 
 // Always-visible number grid for the CURRENT section — no click needed to
@@ -36,7 +36,7 @@ export default function SectionQuestionGrid({
           <button
             key={i}
             onClick={() => onJump(i)}
-            className={`flex h-9 w-9 items-center justify-center rounded-xl text-[13px] font-bold transition-all duration-150 ${
+            className={`flex h-9 w-9 items-center justify-center rounded-xl text-[13px] font-bold transition-all duration-200 ease-in-out hover:scale-[1.06] ${
               styles[i === currentIndex ? "current" : statusFor(i)]
             }`}
           >

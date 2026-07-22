@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Shuffle, StickyNote } from "lucide-react";
+import { Shuffle, StickyNote, BarChart3 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
 import { getAz900Questions, isSingleChoiceAnswerCorrect, isMultiSelectQuestion } from "@/lib/az900Practice";
@@ -79,6 +79,7 @@ export default function PracticeClient({
   const [examComplete, setExamComplete] = useState(false);
   const [restartModalOpen, setRestartModalOpen] = useState(false);
   const [restarting, setRestarting] = useState(false);
+  const [statsDrawerOpen, setStatsDrawerOpen] = useState(false);
 
   useEffect(() => {
     const t = setInterval(() => setRemainingSeconds((s) => Math.max(0, s - 1)), 1000);
@@ -380,6 +381,13 @@ export default function PracticeClient({
             sectionNumber={currentSectionIdx + 1}
             statusFor={statusFor}
           />
+          <button
+            onClick={() => setStatsDrawerOpen(true)}
+            className="flex items-center gap-2 rounded-xl border border-primary/40 bg-panel px-4 py-3 text-sm font-bold text-primary transition-colors hover:bg-primary-light"
+          >
+            <BarChart3 size={16} />
+            {t("practice.sectionStats")}
+          </button>
         </div>
 
         {/* Always visible for the current section — no click required,
@@ -394,6 +402,14 @@ export default function PracticeClient({
           onJump={goTo}
         />
       </div>
+
+      <SectionStatsPanel
+        start={currentSectionStart}
+        end={currentSectionEnd}
+        statusFor={statusFor}
+        open={statsDrawerOpen}
+        onClose={() => setStatsDrawerOpen(false)}
+      />
 
       <div className="mt-6">
         <QuestionPanel
@@ -468,11 +484,10 @@ export default function PracticeClient({
         <AICoachPanel key={current.id} question={current} isOpen={true} onClose={() => {}} />
       </div>
 
-      {/* Section stats + Mischen/Notizen moved down here (desktop) — they
-          were cluttering the top of the page, colliding visually with the
-          Abschnitt/progress row right below them. */}
+      {/* Mischen/Notizen moved down here (desktop) — they were cluttering
+          the top of the page. Section stats are now a drawer, triggered
+          from the "Fortschritt" button in the header row above. */}
       <div className="mt-6 hidden flex-wrap items-start gap-3 lg:flex">
-        <SectionStatsPanel start={currentSectionStart} end={currentSectionEnd} statusFor={statusFor} />
         <button
           onClick={shuffle}
           className="flex h-10 items-center gap-1.5 rounded-lg border border-border-soft bg-panel px-3.5 text-xs font-semibold text-text-muted hover:border-primary hover:text-primary"

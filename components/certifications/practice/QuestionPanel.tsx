@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { CSSProperties } from "react";
 import { Bookmark, Sparkles, CheckCircle2, XCircle, ExternalLink, Lightbulb } from "lucide-react";
 import type { PracticeOptionId, PracticeQuestion } from "@/lib/az900Practice";
 import { isMultiSelectQuestion, correctOptionIds } from "@/lib/az900Practice";
@@ -112,7 +113,7 @@ export default function QuestionPanel({
         </div>
       )}
 
-      <p className="mb-5 whitespace-pre-line text-[15.5px] font-medium leading-[1.85] tracking-[0.005em] text-text">{renderPrompt(question)}</p>
+      <p className="mb-5 whitespace-pre-line text-[19px] font-bold leading-[1.6] tracking-[0.005em] text-text">{renderPrompt(question)}</p>
 
       {"imageUrl" in question && question.imageUrl && (
         <div className="mb-5 overflow-hidden rounded-lg border border-border-soft">
@@ -216,26 +217,33 @@ export default function QuestionPanel({
           {question.options.map((opt) => {
             const isSelected = isMultiSelect ? multiSelected.includes(opt.id) : singleSelected === opt.id;
             const isRight = isMultiSelect ? correctOptionIds(question).includes(opt.id) : opt.id === question.correct;
-            let style = "border-border-soft hover:border-primary/40";
+            let style = "border-border-soft hover:border-primary/50 hover:shadow-[0_0_16px_rgba(124,58,237,0.18)]";
+            let bgStyle: CSSProperties | undefined;
             if (checked && isRight) style = "border-success bg-success-light";
             else if (checked && isSelected && !isRight) style = "border-danger bg-danger/10";
-            else if (!checked && isSelected) style = "border-primary bg-primary-light";
+            else if (!checked && isSelected) {
+              style = "border-primary text-white shadow-[0_4px_20px_rgba(124,58,237,0.35)]";
+              bgStyle = { background: "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" };
+            }
 
             return (
               <button
                 key={opt.id}
                 disabled={checked}
                 onClick={() => onSelect(opt.id)}
-                className={`flex w-full items-center gap-3 rounded-lg border p-3.5 text-left text-base transition ${style}`}
+                style={bgStyle}
+                className={`flex min-h-[72px] w-full items-center gap-3 rounded-[18px] border p-4 text-left text-base transition-all duration-200 ease-in-out ${style}`}
               >
                 <span
-                  className={`flex h-6 w-6 flex-none items-center justify-center border text-xs font-bold ${
+                  className={`flex h-7 w-7 flex-none items-center justify-center border text-xs font-bold ${
                     isMultiSelect ? "rounded-md" : "rounded-full"
-                  } ${isSelected ? "border-primary bg-primary text-white" : "border-border-soft text-text-muted"}`}
+                  } ${isSelected ? "border-white/60 bg-white/20 text-white" : "border-border-soft text-text-muted"}`}
                 >
                   {isMultiSelect ? (isSelected ? "✓" : opt.id) : opt.id}
                 </span>
-                <span className="flex-1 whitespace-pre-line leading-relaxed text-text">{opt.text}</span>
+                <span className={`flex-1 whitespace-pre-line leading-relaxed ${!checked && isSelected ? "text-white" : "text-text"}`}>
+                  {opt.text}
+                </span>
                 {checked && isRight && <CheckCircle2 size={17} className="flex-none text-success" />}
                 {checked && isSelected && !isRight && <XCircle size={17} className="flex-none text-danger" />}
               </button>
@@ -315,7 +323,7 @@ export default function QuestionPanel({
             <button
               onClick={onCheck}
               disabled={!canCheck}
-              className="rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-white hover:bg-primary-dark disabled:opacity-40"
+              className="rounded-2xl px-6 py-2.5 text-sm font-bold text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)] transition-all duration-200 ease-in-out hover:brightness-110 disabled:opacity-40" style={{ background: "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
             >
               {t("practice.checkAnswer")}
             </button>
@@ -323,7 +331,7 @@ export default function QuestionPanel({
             <button
               onClick={onNext}
               disabled={index === total - 1}
-              className="rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-white hover:bg-primary-dark disabled:opacity-40"
+              className="rounded-2xl px-6 py-2.5 text-sm font-bold text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)] transition-all duration-200 ease-in-out hover:brightness-110 disabled:opacity-40" style={{ background: "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
             >
               {t("practice.nextBtn")}
             </button>
@@ -362,7 +370,7 @@ export default function QuestionPanel({
               <button
                 onClick={onCheck}
                 disabled={!canCheck}
-                className="rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-white hover:bg-primary-dark disabled:opacity-40"
+                className="rounded-2xl px-6 py-2.5 text-sm font-bold text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)] transition-all duration-200 ease-in-out hover:brightness-110 disabled:opacity-40" style={{ background: "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
               >
                 {t("practice.checkAnswer")}
               </button>
@@ -370,7 +378,7 @@ export default function QuestionPanel({
               <button
                 onClick={onNext}
                 disabled={index === total - 1}
-                className="rounded-lg bg-primary px-6 py-2.5 text-sm font-bold text-white hover:bg-primary-dark disabled:opacity-40"
+                className="rounded-2xl px-6 py-2.5 text-sm font-bold text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)] transition-all duration-200 ease-in-out hover:brightness-110 disabled:opacity-40" style={{ background: "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
               >
                 {t("practice.nextBtn")}
               </button>
