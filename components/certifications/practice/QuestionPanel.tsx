@@ -78,7 +78,7 @@ export default function QuestionPanel({
 
 
   return (
-    <div className="rounded-xl border border-border-soft bg-panel p-5 md:p-6">
+    <div className="rounded-[18px] border border-border-soft bg-question-panel p-5 md:p-8">
       <div className="mb-5 flex items-start justify-between gap-3">
         <div className="flex items-start gap-3">
           <span className="flex h-8 w-8 flex-none items-center justify-center rounded-lg bg-primary text-sm font-bold text-white">
@@ -300,7 +300,7 @@ export default function QuestionPanel({
           <button
             onClick={onPrev}
             disabled={index === 0}
-            className="rounded-lg border border-border-soft px-5 py-2.5 text-sm font-semibold text-text hover:border-primary disabled:opacity-30"
+            className="rounded-2xl border border-border-soft px-5 py-2.5 text-sm font-semibold text-text transition-all duration-200 ease-in-out hover:border-primary/60 hover:shadow-[0_0_12px_rgba(124,58,237,0.15)] disabled:opacity-30"
           >
             {t("practice.backBtn")}
           </button>
@@ -315,7 +315,7 @@ export default function QuestionPanel({
           </button>
           <button
             onClick={onSkip}
-            className="rounded-lg border border-border-soft px-5 py-2.5 text-sm font-semibold text-text hover:border-primary"
+            className="rounded-2xl border border-border-soft px-5 py-2.5 text-sm font-semibold text-text transition-all duration-200 ease-in-out hover:border-primary/60 hover:shadow-[0_0_12px_rgba(124,58,237,0.15)]"
           >
             {t("practice.skipBtn")}
           </button>
@@ -346,7 +346,7 @@ export default function QuestionPanel({
           <button
             onClick={onPrev}
             disabled={index === 0}
-            className="rounded-lg border border-border-soft px-5 py-2.5 text-sm font-semibold text-text hover:border-primary disabled:opacity-30"
+            className="rounded-2xl border border-border-soft px-5 py-2.5 text-sm font-semibold text-text transition-all duration-200 ease-in-out hover:border-primary/60 hover:shadow-[0_0_12px_rgba(124,58,237,0.15)] disabled:opacity-30"
           >
             {t("practice.backBtn")}
           </button>
@@ -362,7 +362,7 @@ export default function QuestionPanel({
             </button>
             <button
               onClick={onSkip}
-              className="rounded-lg border border-border-soft px-5 py-2.5 text-sm font-semibold text-text hover:border-primary"
+              className="rounded-2xl border border-border-soft px-5 py-2.5 text-sm font-semibold text-text transition-all duration-200 ease-in-out hover:border-primary/60 hover:shadow-[0_0_12px_rgba(124,58,237,0.15)]"
             >
               {t("practice.skipBtn")}
             </button>

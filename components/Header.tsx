@@ -20,8 +20,8 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   const initial = displayName.charAt(0).toUpperCase();
 
   return (
-    <header className="sticky top-0 z-30 border-b border-border-soft bg-panel px-3 py-3 sm:px-4 md:px-8">
-      <div className="flex items-center justify-between gap-3">
+    <header className="sticky top-0 z-30 flex h-20 items-center border-b border-border-soft bg-topbar-bg px-3 sm:px-4 md:px-8">
+      <div className="flex w-full items-center justify-between gap-3">
         <div className="flex min-w-0 flex-1 items-center gap-3">
           <button
             onClick={onMenuClick}

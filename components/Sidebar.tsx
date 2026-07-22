@@ -78,7 +78,7 @@ export default function Sidebar({
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] -translate-x-full flex-col overflow-y-auto bg-bg transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:w-[280px] lg:max-w-none lg:shrink-0 lg:translate-x-0 lg:border-r lg:border-border-soft ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] -translate-x-full flex-col overflow-y-auto bg-sidebar-bg transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:w-[280px] lg:max-w-none lg:shrink-0 lg:translate-x-0 lg:border-r lg:border-border-soft ${
           open ? "translate-x-0" : ""
         }`}
       >
@@ -107,10 +107,10 @@ export default function Sidebar({
                 key={item.href}
                 href={item.href}
                 onClick={onClose}
-                className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+                className={`flex items-center gap-3 rounded-lg border px-3 py-2.5 text-sm font-medium transition-all duration-200 ease-in-out ${
                   active
-                    ? "bg-primary text-white"
-                    : "text-text-muted hover:bg-panel-alt hover:text-text"
+                    ? "border-primary/50 bg-primary/10 text-primary shadow-[0_0_16px_rgba(124,58,237,0.25)]"
+                    : "border-transparent text-text-muted hover:bg-panel-alt hover:text-text"
                 }`}
               >
                 <Icon size={18} />
