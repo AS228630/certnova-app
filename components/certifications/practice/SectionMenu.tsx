@@ -17,11 +17,18 @@ export default function SectionMenu({
   currentIndex,
   statusFor,
   onJump,
+  isUnlocked,
 }: {
   total: number;
   currentIndex: number;
   statusFor: (index: number) => Status;
   onJump: (index: number) => void;
+  /** Permanent, DB-backed unlock check (lib/store/sectionAttemptsStore.ts) —
+   * once a section clears the mastery bar once, it stays unlocked forever,
+   * even if a later retry scores lower. Falls back to the old live
+   * accuracy computation only if not provided, so nothing breaks for any
+   * caller that hasn't been updated yet. */
+  isUnlocked?: (sectionIndex: number) => boolean;
 }) {
   const { t } = useLocale();
   const SECTION_SIZE = getSectionSize(total);
@@ -68,8 +75,12 @@ export default function SectionMenu({
     return true;
   }
 
-  function sectionUnlocked(s: number): boolean {
+  function sectionUnlockedFallback(s: number): boolean {
     return s <= 1 || (sectionCompleted(s - 1) && sectionAccuracy(s - 1) >= UNLOCK_THRESHOLD);
+  }
+
+  function sectionUnlocked(s: number): boolean {
+    return isUnlocked ? isUnlocked(s) : sectionUnlockedFallback(s);
   }
 
   return (

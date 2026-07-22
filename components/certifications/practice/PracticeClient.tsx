@@ -15,6 +15,7 @@ import SectionProgressBar from "./SectionProgressBar";
 import SectionStatsPanel from "./SectionStatsPanel";
 import QuickStats from "./QuickStats";
 import AICoachPanel from "./AICoachPanel";
+import SectionHistoryPanel from "./SectionHistoryPanel";
 import PracticeNotesPanel from "./PracticeNotesPanel";
 import SectionScorecard from "./SectionScorecard";
 import ExamCompleteScreen from "./ExamCompleteScreen";
@@ -24,6 +25,7 @@ import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useTopicMasteryStore } from "@/lib/store/topicMasteryStore";
 import { useActivityLogStore } from "@/lib/store/activityLogStore";
 import { useQuestionAnswersStore } from "@/lib/store/questionAnswersStore";
+import { useSectionAttemptsStore } from "@/lib/store/sectionAttemptsStore";
 import { useUser } from "@/components/UserContext";
 
 const EXAM_TOTAL_SECONDS = 2 * 60 * 60; // 2h, matches a real certification exam
@@ -90,10 +92,16 @@ export default function PracticeClient({
   const recordPersistedAnswer = useQuestionAnswersStore((s) => s.recordAnswer);
   const clearPersistedAnswers = useQuestionAnswersStore((s) => s.clearForCert);
   const resetCertPracticeDetail = useCertProgressStore((s) => s.resetPracticeDetail);
+  const loadSectionAttempts = useSectionAttemptsStore((s) => s.loadForCert);
+  const recordSectionAttempt = useSectionAttemptsStore((s) => s.recordAttempt);
+  const isSectionPermanentlyUnlocked = useSectionAttemptsStore((s) => s.isSectionPermanentlyUnlocked);
 
   useEffect(() => {
-    if (user) loadPersistedAnswers(user.id, certId);
-  }, [user, certId, loadPersistedAnswers]);
+    if (user) {
+      loadPersistedAnswers(user.id, certId);
+      loadSectionAttempts(user.id, certId);
+    }
+  }, [user, certId, loadPersistedAnswers, loadSectionAttempts]);
 
   // The practice exam always covers the full authored question set for this
   // cert — no topic filter, matching a real certification exam simulation.
@@ -198,6 +206,21 @@ export default function PracticeClient({
       if (!resolved) return;
     }
     setScorecardSection(sectionIdx);
+
+    // Record this as a completed attempt at the section — every
+    // completion, not just the first, and never overwritten (spec: full
+    // history, unlimited retries). If it clears the mastery bar, the
+    // NEXT section unlocks permanently right here, even on a retry.
+    if (user) {
+      let correctCount = 0;
+      for (let i = start; i < end; i++) {
+        const q = activeQuestions[i];
+        if (!q) continue;
+        const isChecked = q.id === justResolvedId || nowChecked.has(q.id);
+        if (isChecked && isCorrectAnswer(q, answers[q.id])) correctCount++;
+      }
+      recordSectionAttempt(user.id, certId, sectionIdx, correctCount, end - start);
+    }
   }
 
   function resetSection(sectionIdx: number) {
@@ -349,6 +372,7 @@ export default function PracticeClient({
             currentIndex={index}
             statusFor={statusFor}
             onJump={goTo}
+            isUnlocked={(s) => isSectionPermanentlyUnlocked(certId, s)}
           />
           <SectionProgressBar
             start={currentSectionStart}
@@ -488,6 +512,8 @@ export default function PracticeClient({
       <div className="lg:hidden">
         <AICoachPanel key={current.id} question={current} isOpen={coachOpen} onClose={() => setCoachOpen(false)} />
       </div>
+
+      <SectionHistoryPanel certId={certId} certLabel={`${certCode}: ${certTitle}`} />
 
       <PracticeNotesPanel isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
     </div>
