@@ -904,6 +904,8 @@ const fa: Dictionary = {
     minutesShort: "دقیقه",
     completionRateMetric: "نرخ تکمیل",
     closeDrawer: "بستن",
+    startPrefix: "شروع",
+    unlockHint: "به‌محض این‌که {section} را با دقت بالای {threshold}٪ درست حل کنید، این بخش باز می‌شود.",
     viewAnalytics: "مشاهده‌ی تحلیل‌ها",
     referenceImgAlt: "اسکرین‌شات مرجع سوال",
     rememberHint: "یادت باشه",

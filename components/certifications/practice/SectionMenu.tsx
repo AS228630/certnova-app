@@ -99,37 +99,47 @@ export default function SectionMenu({
             const isCurrent = s === currentSection;
 
             return (
-              <button
-                key={s}
-                onClick={() => {
-                  if (!unlocked) return;
-                  onJump(start);
-                  setMenuOpen(false);
-                }}
-                disabled={!unlocked}
-                className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm transition-colors ${
-                  isCurrent ? "bg-primary-light text-primary" : unlocked ? "text-text hover:bg-panel-alt" : "cursor-not-allowed text-text-faint"
-                }`}
-              >
-                <span className="flex items-center gap-2">
-                  {completed ? (
-                    <Check size={14} className="text-success" />
-                  ) : unlocked ? (
-                    <span className="h-2 w-2 rounded-full bg-primary" />
-                  ) : (
-                    <Lock size={12} />
+              <div key={s}>
+                <button
+                  onClick={() => {
+                    if (!unlocked) return;
+                    onJump(start);
+                    setMenuOpen(false);
+                  }}
+                  disabled={!unlocked}
+                  className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm transition-colors ${
+                    isCurrent ? "bg-primary-light text-primary" : unlocked ? "text-text hover:bg-panel-alt" : "cursor-not-allowed text-text-faint"
+                  }`}
+                >
+                  <span className="flex items-center gap-2">
+                    {completed ? (
+                      <Check size={14} className="text-success" />
+                    ) : unlocked ? (
+                      <span className="h-2 w-2 rounded-full bg-primary" />
+                    ) : (
+                      <Lock size={12} />
+                    )}
+                    <span className="font-semibold">
+                      {unlocked && !completed
+                        ? `${t("practice.startPrefix")} ${t("practice.sectionN")} ${s + 1}`
+                        : `${t("practice.sectionN")} ${s + 1}`}
+                    </span>
+                    <span className="text-[11px] text-text-faint">
+                      ({start + 1}–{end})
+                    </span>
+                  </span>
+                  {unlocked && s > 0 && (
+                    <span className="text-[11px] font-semibold text-text-faint">{accuracy}%</span>
                   )}
-                  <span className="font-semibold">
-                    {t("practice.sectionN")} {s + 1}
-                  </span>
-                  <span className="text-[11px] text-text-faint">
-                    ({start + 1}–{end})
-                  </span>
-                </span>
-                {unlocked && s > 0 && (
-                  <span className="text-[11px] font-semibold text-text-faint">{accuracy}%</span>
+                </button>
+                {!unlocked && (
+                  <p className="px-3 pb-2 pt-0.5 text-[11px] leading-relaxed text-text-faint">
+                    {t("practice.unlockHint")
+                      .replace("{section}", `${t("practice.sectionN")} ${s}`)
+                      .replace("{threshold}", String(UNLOCK_THRESHOLD))}
+                  </p>
                 )}
-              </button>
+              </div>
             );
           })}
         </div>
