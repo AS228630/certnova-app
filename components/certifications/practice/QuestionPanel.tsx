@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { CSSProperties } from "react";
-import { Bookmark, Sparkles, CheckCircle2, XCircle, ExternalLink, Lightbulb } from "lucide-react";
+import { Bookmark, Sparkles, CheckCircle2, XCircle, ExternalLink, Lightbulb, Shuffle, StickyNote } from "lucide-react";
 import type { PracticeOptionId, PracticeQuestion } from "@/lib/az900Practice";
 import { isMultiSelectQuestion, correctOptionIds } from "@/lib/az900Practice";
 import MatchingQuestionView from "./MatchingQuestionView";
@@ -32,6 +32,8 @@ export default function QuestionPanel({
   onSkip,
   onToggleMark,
   onOpenAiCoach,
+  onShuffle,
+  onOpenNotes,
 }: {
   question: PracticeQuestion;
   index: number;
@@ -52,6 +54,8 @@ export default function QuestionPanel({
   onSkip: () => void;
   onToggleMark: () => void;
   onOpenAiCoach: () => void;
+  onShuffle: () => void;
+  onOpenNotes: () => void;
 }) {
   const { t } = useLocale();
   const [showExplanation, setShowExplanation] = useState(false);
@@ -299,6 +303,22 @@ export default function QuestionPanel({
       <div className="mt-6 border-t border-border-soft pt-5">
         {/* Mobile: 3-column grid — Zurück/Tipp/Erklärung on top,
             Überspringen + the primary CTA (spanning 2 cols) below */}
+        <div className="mb-2.5 flex gap-2.5 sm:hidden">
+          <button
+            onClick={onShuffle}
+            className="flex flex-1 items-center justify-center gap-1.5 rounded-2xl border border-border-soft px-3 py-2 text-xs font-semibold text-text"
+          >
+            <Shuffle size={13} />
+            {t("practice.shuffle")}
+          </button>
+          <button
+            onClick={onOpenNotes}
+            className="flex flex-1 items-center justify-center gap-1.5 rounded-2xl border border-border-soft px-3 py-2 text-xs font-semibold text-text"
+          >
+            <StickyNote size={13} />
+            {t("practice.notes")}
+          </button>
+        </div>
         <div className="grid grid-cols-3 gap-2.5 sm:hidden">
           <button
             onClick={onPrev}
@@ -356,13 +376,29 @@ export default function QuestionPanel({
             already on this card (Notizen at the page bottom, KI Coach
             button above, and Tipp here). */}
         <div className="hidden sm:flex sm:items-center sm:justify-between">
-          <button
-            onClick={onPrev}
-            disabled={index === 0}
-            className="rounded-2xl border border-border-soft px-5 py-2.5 text-sm font-semibold text-text transition-all duration-200 ease-in-out hover:border-primary/60 hover:shadow-[0_0_12px_rgba(124,58,237,0.15)] disabled:opacity-30"
-          >
-            {t("practice.backBtn")}
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={onPrev}
+              disabled={index === 0}
+              className="rounded-2xl border border-border-soft px-5 py-2.5 text-sm font-semibold text-text transition-all duration-200 ease-in-out hover:border-primary/60 hover:shadow-[0_0_12px_rgba(124,58,237,0.15)] disabled:opacity-30"
+            >
+              {t("practice.backBtn")}
+            </button>
+            <button
+              onClick={onShuffle}
+              className="flex items-center gap-1.5 rounded-2xl border border-border-soft px-5 py-2.5 text-sm font-semibold text-text transition-all duration-200 ease-in-out hover:border-primary/60 hover:shadow-[0_0_12px_rgba(124,58,237,0.15)]"
+            >
+              <Shuffle size={15} />
+              {t("practice.shuffle")}
+            </button>
+            <button
+              onClick={onOpenNotes}
+              className="flex items-center gap-1.5 rounded-2xl border border-border-soft px-5 py-2.5 text-sm font-semibold text-text transition-all duration-200 ease-in-out hover:border-primary/60 hover:shadow-[0_0_12px_rgba(124,58,237,0.15)]"
+            >
+              <StickyNote size={15} />
+              {t("practice.notes")}
+            </button>
+          </div>
           <div className="flex gap-3">
             <button
               onClick={onToggleHint}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Shuffle, StickyNote, BarChart3 } from "lucide-react";
+import { BarChart3 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
 import { getAz900Questions, isSingleChoiceAnswerCorrect, isMultiSelectQuestion } from "@/lib/az900Practice";
@@ -458,6 +458,8 @@ export default function PracticeClient({
             })
           }
           onOpenAiCoach={() => setCoachOpen(true)}
+          onShuffle={shuffle}
+          onOpenNotes={() => setNotesOpen(true)}
         />
       </div>
 
@@ -466,32 +468,12 @@ export default function PracticeClient({
         <AICoachPanel key={current.id} question={current} isOpen={true} onClose={() => {}} />
       </div>
 
-      {/* Mischen/Notizen moved down here (desktop) — they were cluttering
-          the top of the page. Section stats are now a drawer, triggered
-          from the "Fortschritt" button in the header row above. */}
-      <div className="mt-6 hidden flex-wrap items-start gap-3 lg:flex">
-        <button
-          onClick={shuffle}
-          className="flex h-10 items-center gap-1.5 rounded-lg border border-border-soft bg-panel px-3.5 text-xs font-semibold text-text-muted hover:border-primary hover:text-primary"
-        >
-          <Shuffle size={14} />
-          {t("practice.shuffle")}
-        </button>
-        <button
-          onClick={() => setNotesOpen(true)}
-          className="flex h-10 items-center gap-1.5 rounded-lg border border-border-soft bg-panel px-3.5 text-xs font-semibold text-text-muted hover:border-primary hover:text-primary"
-        >
-          <StickyNote size={14} />
-          {t("practice.notes")}
-        </button>
-      </div>
-
       {/* Mobile: SectionStatsPanel is desktop-only above (fixed overlay
           would cover content on small screens), so mobile keeps a compact
-          inline stats bar plus the same two utility buttons; AI coach
-          opens as a full-screen overlay via the floating action button
-          instead. */}
-      <div className="mt-6 space-y-3 lg:hidden">
+          inline stats bar; Mischen/Notizen now live in QuestionPanel's own
+          button row above instead of duplicated here. AI coach opens as a
+          full-screen overlay via the floating action button instead. */}
+      <div className="mt-6 lg:hidden">
         <QuickStats
           compact
           answered={answeredCount}
@@ -501,22 +483,6 @@ export default function PracticeClient({
           remainingSeconds={remainingSeconds}
           totalSeconds={EXAM_TOTAL_SECONDS}
         />
-        <div className="flex flex-wrap gap-2">
-          <button
-            onClick={shuffle}
-            className="flex h-9 flex-1 items-center justify-center gap-1.5 rounded-lg border border-border-soft bg-panel px-3 text-xs font-semibold text-text-muted"
-          >
-            <Shuffle size={13} />
-            {t("practice.shuffle")}
-          </button>
-          <button
-            onClick={() => setNotesOpen(true)}
-            className="flex h-9 flex-1 items-center justify-center gap-1.5 rounded-lg border border-border-soft bg-panel px-3 text-xs font-semibold text-text-muted"
-          >
-            <StickyNote size={13} />
-            {t("practice.notes")}
-          </button>
-        </div>
       </div>
 
       <div className="lg:hidden">
