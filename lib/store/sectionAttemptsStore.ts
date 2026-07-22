@@ -35,6 +35,13 @@ const SECTION_PASS_THRESHOLD = 90;
 // (section_best_scores), so neither is affected by this cap.
 type BestScoreEntry = { bestScorePercent: number; totalAttempts: number };
 
+// Stable reference for "no attempts recorded yet" so getAttempts never
+// returns a fresh array identity on repeated calls — the exact bug pattern
+// that previously caused an infinite render loop in questionAnswersStore's
+// getCorrectness (returning a fresh {} broke Zustand's useSyncExternalStore
+// reference-equality check). Same fix, same reason.
+const EMPTY_ATTEMPTS: SectionAttempt[] = [];
+
 type SectionAttemptsState = {
   attemptsByCert: Record<string, SectionAttempt[]>;
   unlockedByCert: Record<string, Set<number>>;
@@ -261,7 +268,7 @@ export const useSectionAttemptsStore = create<SectionAttemptsState>((set, get) =
     return get().unlockedByCert[certId]?.has(sectionIndex) ?? false;
   },
 
-  getAttempts: (certId: string) => get().attemptsByCert[certId] ?? [],
+  getAttempts: (certId: string) => get().attemptsByCert[certId] ?? EMPTY_ATTEMPTS,
 
   getBestScore: (certId: string, sectionIndex: number) => {
     return get().bestScoresByCert[certId]?.[sectionIndex]?.bestScorePercent ?? null;
