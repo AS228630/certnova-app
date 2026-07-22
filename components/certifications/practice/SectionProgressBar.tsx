@@ -5,7 +5,7 @@ import { useLocale } from "@/components/LocaleProvider";
 type Status = "correct" | "wrong" | "marked" | "skipped" | "unanswered";
 
 // Shows progress within the CURRENT section only (e.g. "12 / 50 · 24%"),
-// distinct from PracticeToolbar's overall exam progress bar. Sits next to
+// distinct from the overall exam progress shown elsewhere. Sits next to
 // SectionMenu in the header row.
 export default function SectionProgressBar({
   start,

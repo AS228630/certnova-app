@@ -8,7 +8,6 @@ import { getAz900Questions, isSingleChoiceAnswerCorrect, isMultiSelectQuestion }
 import { getAb900Questions } from "@/lib/ab900Practice";
 import { useLocale } from "@/components/LocaleProvider";
 import { getSectionForIndex, getSectionRange, getSectionCount } from "@/lib/practiceSections";
-import PracticeToolbar from "./PracticeToolbar";
 import QuestionPanel from "./QuestionPanel";
 import SectionMenu from "./SectionMenu";
 import SectionQuestionGrid from "./SectionQuestionGrid";
@@ -247,12 +246,7 @@ export default function PracticeClient({
   if (examComplete) {
     return (
       <div>
-        <PracticeToolbar
-          companySlug={companySlug}
-          certCode={certCode}
-        />
-        <div className="mt-6">
-          <ExamCompleteScreen
+        <ExamCompleteScreen
             companySlug={companySlug}
             companyName={companyName}
             certCode={certCode}
@@ -266,7 +260,6 @@ export default function PracticeClient({
             onBackToPath={() => router.push(`/certifications/${companySlug}/${certId}/learn`)}
             onRetryAll={() => setRestartModalOpen(true)}
           />
-        </div>
         <PracticeNotesPanel isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
         {restartModalOpen && (
           <RestartConfirmModal
@@ -282,17 +275,12 @@ export default function PracticeClient({
   if (scorecardSection !== null) {
     return (
       <div>
-        <PracticeToolbar
-          companySlug={companySlug}
-          certCode={certCode}
-        />
-        <div className="mt-6">
-          <SectionScorecard
-            sectionIndex={scorecardSection}
-            questions={activeQuestions}
-            topics={topics}
-            answers={answers}
-            checked={checked}
+        <SectionScorecard
+          sectionIndex={scorecardSection}
+          questions={activeQuestions}
+          topics={topics}
+          answers={answers}
+          checked={checked}
             skipped={skipped}
             marked={marked}
             elapsedSeconds={EXAM_TOTAL_SECONDS - remainingSeconds}
@@ -347,7 +335,6 @@ export default function PracticeClient({
               }
             }}
           />
-        </div>
         <PracticeNotesPanel isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
       </div>
     );
@@ -355,11 +342,6 @@ export default function PracticeClient({
 
   return (
     <div className="px-1">
-      <PracticeToolbar
-        companySlug={companySlug}
-        certCode={certCode}
-      />
-
       <div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
           <SectionMenu
