@@ -20,8 +20,8 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   const initial = displayName.charAt(0).toUpperCase();
 
   return (
-    <header className="sticky top-0 z-30 flex h-20 items-center border-b border-border-soft bg-topbar-bg px-3 sm:px-4 md:px-8">
-      <div className="flex w-full items-center justify-between gap-3">
+    <header className="sticky top-0 z-30 flex min-h-20 flex-col justify-center border-b border-border-soft bg-topbar-bg px-3 py-3 sm:px-4 md:px-8">
+      <div className="flex w-full items-center justify-between gap-2 sm:gap-3">
         <div className="flex min-w-0 flex-1 items-center gap-3">
           <button
             onClick={onMenuClick}
@@ -41,14 +41,12 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
           <SearchBox variant="desktop" />
         </div>
 
-        <div className="flex shrink-0 items-center gap-3 sm:gap-4">
-          <div className="hidden md:block">
-            <LanguageSwitcher variant="dark" />
-          </div>
+        <div className="flex shrink-0 items-center gap-2 sm:gap-4">
+          <LanguageSwitcher variant="dark" />
 
           <button
             onClick={toggleTheme}
-            className="hidden text-text-muted hover:text-text sm:block"
+            className="text-text-muted hover:text-text"
             aria-label="Design wechseln"
           >
             {theme === "dark" ? <Moon size={19} /> : <Sun size={19} />}
