@@ -461,23 +461,55 @@ function deriveHint(explanation: string, rememberPrefix: string): string {
 }
 
 /**
- * Renders a question's prompt as plain text, unless it has an
- * `underlinedText` marker (for "check the underlined text" questions), in
- * which case that exact substring is rendered with a visible underline so
- * the student knows what to evaluate.
+ * Renders a question's prompt, unless it has an `underlinedText` marker (for
+ * "check the underlined text" questions), in which case:
+ *  1. that exact substring is rendered with a visible underline, and
+ *  2. the "Hinweis: ..." lead-in sentence and the "( Anleitung: ...)"
+ *     trailing parenthetical — both present in the source data as part of
+ *     one long run-on string — are detected and split into their own
+ *     visually distinct paragraphs, matching the PDF's original layout
+ *     (bold "Hinweis:" line, the statement itself, then a muted
+ *     instruction line) instead of one flat block of text.
  */
 function renderPrompt(question: PracticeQuestion) {
   const underline = "underlinedText" in question ? question.underlinedText : undefined;
   if (!underline) return question.prompt;
 
-  const idx = question.prompt.indexOf(underline);
-  if (idx === -1) return question.prompt;
+  let rest = question.prompt;
+  let hint: string | null = null;
+  let instruction: string | null = null;
+
+  const hintMatch = rest.match(/^(Hinweis:.*?\.)\s+/);
+  if (hintMatch) {
+    hint = hintMatch[1];
+    rest = rest.slice(hintMatch[0].length);
+  }
+
+  const instructionMatch = rest.match(/\s*\(\s*(Anleitung:[\s\S]*)\)\s*$/);
+  if (instructionMatch) {
+    instruction = instructionMatch[1].trim();
+    rest = rest.slice(0, rest.length - instructionMatch[0].length);
+  }
+
+  const idx = rest.indexOf(underline);
+  const statement =
+    idx === -1 ? (
+      rest
+    ) : (
+      <>
+        {rest.slice(0, idx)}
+        <span className="underline decoration-2 underline-offset-2">{underline}</span>
+        {rest.slice(idx + underline.length)}
+      </>
+    );
+
+  if (!hint && !instruction) return statement;
 
   return (
     <>
-      {question.prompt.slice(0, idx)}
-      <span className="underline decoration-2 underline-offset-2">{underline}</span>
-      {question.prompt.slice(idx + underline.length)}
+      {hint && <span className="mb-3 block font-bold">{hint}</span>}
+      <span className="block">{statement}</span>
+      {instruction && <span className="mt-3 block text-[15px] font-normal text-text-muted">({instruction})</span>}
     </>
   );
 }
