@@ -916,6 +916,7 @@ const en: Dictionary = {
     historyColAttempt: "Attempt",
     failedLabel: "Not passed",
     attemptWord: "Attempt",
+    bestScoreLabel: "Best",
     viewAnalytics: "View Analytics",
     referenceImgAlt: "Reference screenshot for the question",
     rememberHint: "Remember",

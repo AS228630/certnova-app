@@ -916,6 +916,7 @@ const fa: Dictionary = {
     historyColAttempt: "تلاش",
     failedLabel: "قبول نشد",
     attemptWord: "تلاش",
+    bestScoreLabel: "بهترین",
     viewAnalytics: "مشاهده‌ی تحلیل‌ها",
     referenceImgAlt: "اسکرین‌شات مرجع سوال",
     rememberHint: "یادت باشه",

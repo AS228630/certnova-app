@@ -916,6 +916,7 @@ const ru: Dictionary = {
     historyColAttempt: "Попытка",
     failedLabel: "Не сдано",
     attemptWord: "Попытка",
+    bestScoreLabel: "Лучший",
     viewAnalytics: "Смотреть аналитику",
     referenceImgAlt: "Справочный скриншот к вопросу",
     rememberHint: "Помни",

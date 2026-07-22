@@ -95,6 +95,7 @@ export default function PracticeClient({
   const loadSectionAttempts = useSectionAttemptsStore((s) => s.loadForCert);
   const recordSectionAttempt = useSectionAttemptsStore((s) => s.recordAttempt);
   const isSectionPermanentlyUnlocked = useSectionAttemptsStore((s) => s.isSectionPermanentlyUnlocked);
+  const getBestScore = useSectionAttemptsStore((s) => s.getBestScore);
 
   useEffect(() => {
     if (user) {
@@ -373,6 +374,7 @@ export default function PracticeClient({
             statusFor={statusFor}
             onJump={goTo}
             isUnlocked={(s) => isSectionPermanentlyUnlocked(certId, s)}
+            getBestScore={(s) => getBestScore(certId, s)}
           />
           <SectionProgressBar
             start={currentSectionStart}

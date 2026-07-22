@@ -916,6 +916,7 @@ const fr: Dictionary = {
     historyColAttempt: "Essai",
     failedLabel: "Non réussi",
     attemptWord: "Essai",
+    bestScoreLabel: "Meilleur",
     viewAnalytics: "Voir les analyses",
     referenceImgAlt: "Capture de référence pour la question",
     rememberHint: "Rappelle-toi",

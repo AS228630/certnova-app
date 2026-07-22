@@ -18,6 +18,7 @@ export default function SectionMenu({
   statusFor,
   onJump,
   isUnlocked,
+  getBestScore,
 }: {
   total: number;
   currentIndex: number;
@@ -29,6 +30,11 @@ export default function SectionMenu({
    * accuracy computation only if not provided, so nothing breaks for any
    * caller that hasn't been updated yet. */
   isUnlocked?: (sectionIndex: number) => boolean;
+  /** Best-ever score for a section, from the permanent attempt history
+   * (lib/store/sectionAttemptsStore.ts) — distinct from the live
+   * in-session accuracy below it, per spec section 7 ("نمایش بهترین
+   * نتیجه"). Returns null if the section has never been attempted. */
+  getBestScore?: (sectionIndex: number) => number | null;
 }) {
   const { t } = useLocale();
   const SECTION_SIZE = getSectionSize(total);
@@ -105,7 +111,6 @@ export default function SectionMenu({
           {Array.from({ length: sectionCount }).map((_, s) => {
             const [start, end] = sectionRange(s);
             const unlocked = sectionUnlocked(s);
-            const accuracy = sectionAccuracy(s);
             const completed = unlocked && sectionCompleted(s);
             const isCurrent = s === currentSection;
 
@@ -139,9 +144,12 @@ export default function SectionMenu({
                       ({start + 1}–{end})
                     </span>
                   </span>
-                  {unlocked && s > 0 && (
-                    <span className="text-[11px] font-semibold text-text-faint">{accuracy}%</span>
-                  )}
+                  {unlocked && s > 0 && (() => {
+                    const best = getBestScore?.(s);
+                    return best !== null && best !== undefined ? (
+                      <span className="text-[11px] font-semibold text-success">{t("practice.bestScoreLabel")}: {best}%</span>
+                    ) : null;
+                  })()}
                 </button>
                 {!unlocked && (
                   <p className="px-3 pb-2 pt-0.5 text-[11px] leading-relaxed text-text-faint">

@@ -916,6 +916,7 @@ const ar: Dictionary = {
     historyColAttempt: "المحاولة",
     failedLabel: "لم ينجح",
     attemptWord: "المحاولة",
+    bestScoreLabel: "الأفضل",
     viewAnalytics: "عرض التحليلات",
     referenceImgAlt: "لقطة شاشة مرجعية للسؤال",
     rememberHint: "تذكر",

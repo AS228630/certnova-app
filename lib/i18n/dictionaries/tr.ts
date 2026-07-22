@@ -916,6 +916,7 @@ const tr: Dictionary = {
     historyColAttempt: "Deneme",
     failedLabel: "Geçilmedi",
     attemptWord: "Deneme",
+    bestScoreLabel: "En iyi",
     viewAnalytics: "Analizleri Görüntüle",
     referenceImgAlt: "Soru için referans ekran görüntüsü",
     rememberHint: "Unutma",

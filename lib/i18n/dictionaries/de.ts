@@ -917,6 +917,7 @@ const de = {
     historyColAttempt: "Versuch",
     failedLabel: "Nicht bestanden",
     attemptWord: "Versuch",
+    bestScoreLabel: "Beste",
     viewAnalytics: "Analysen ansehen",
     referenceImgAlt: "Referenz-Screenshot zur Frage",
     rememberHint: "Denk daran",

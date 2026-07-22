@@ -916,6 +916,7 @@ const uk: Dictionary = {
     historyColAttempt: "Спроба",
     failedLabel: "Не складено",
     attemptWord: "Спроба",
+    bestScoreLabel: "Найкраще",
     viewAnalytics: "Переглянути аналітику",
     referenceImgAlt: "Довідковий скріншот до питання",
     rememberHint: "Пам'ятай",
