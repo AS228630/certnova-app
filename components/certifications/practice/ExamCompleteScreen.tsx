@@ -109,36 +109,36 @@ export default function ExamCompleteScreen({
   // (>= 90%) gets the congratulatory message; anything else gets the
   // encouraging one. Never both, and never the wrong one for the score.
   const congratsLines = [
-    "Herzlichen Glückwunsch!",
-    "Du hast es geschafft! Deine harte Arbeit hat sich ausgezahlt.",
-    "- Du hast das Wissen — jetzt kommt die Zertifizierung.",
-    "- Bleib fokussiert und gib nicht auf.",
-    "- Jeder Schritt bringt dich näher zum Ziel!",
-    "Du bist bereit für die nächste Herausforderung!",
+    t("practice.congratsTitle"),
+    t("practice.congratsDesc"),
+    `- ${t("practice.congratsItem1")}`,
+    `- ${t("practice.congratsItem2")}`,
+    `- ${t("practice.congratsItem3")}`,
+    t("practice.congratsFooter"),
   ];
   const encourageLines = [
-    "Nicht aufgegeben — weiter geht's!",
-    "Jedes Ergebnis ist eine Chance, besser zu werden. Du bist auf dem richtigen Weg.",
-    "- Fehler sind Lernchancen, keine Rückschläge.",
-    "- Übung macht den Meister — gib nicht auf!",
-    "- Mit jedem Versuch wirst du stärker!",
-    "Du schaffst das! Wir glauben an dich.",
+    t("practice.encourageTitle"),
+    t("practice.encourageDesc"),
+    `- ${t("practice.encourageItem1")}`,
+    `- ${t("practice.encourageItem2")}`,
+    `- ${t("practice.encourageItem3")}`,
+    t("practice.encourageFooter"),
   ];
   const resultMessageLines = isHighScore ? congratsLines : encourageLines;
 
   const summaryText = [
-    `CertCoach – Ergebnis`,
-    `${certCode}: ${certTitle} – Practice Exam (${total} Fragen)`,
-    `Abgeschlossen am: ${dateStr}`,
+    `CertCoach – ${t("practice.totalScore")}`,
+    `${certCode}: ${certTitle} – ${t("practice.practiceExam")} (${total} ${t("practice.questionsWord")})`,
+    `${t("practice.completedOn")}: ${dateStr}`,
     ``,
-    `Gesamtpunktzahl: ${score}% (${passed ? "Bestanden" : "Nicht bestanden"})`,
-    `Richtig beantwortet: ${correct}`,
-    `Falsch beantwortet: ${wrong}`,
-    `Übersprungen: ${skippedCount}`,
-    `Gesamtzeit: ${formatElapsed(elapsedSeconds)}`,
+    `${t("practice.totalScore")}: ${score}% (${passed ? t("practice.passedLabel") : t("practice.notPassedLabel")})`,
+    `${t("practice.correctlyAnswered")}: ${correct}`,
+    `${t("practice.wronglyAnswered")}: ${wrong}`,
+    `${t("practice.skippedQ")}: ${skippedCount}`,
+    `${t("practice.totalTime")}: ${formatElapsed(elapsedSeconds)}`,
     ``,
-    `Leistung nach Themen:`,
-    ...topicStats.map((t) => `- ${t.title}: ${t.answered > 0 ? t.pct + "%" : "keine Daten"}`),
+    `${t("practice.performanceByTopic")}:`,
+    ...topicStats.map((topic) => `- ${topic.title}: ${topic.answered > 0 ? topic.pct + "%" : t("practice.noDataShort")}`),
     ``,
     ...resultMessageLines,
   ].join("\n");
@@ -163,8 +163,8 @@ export default function ExamCompleteScreen({
   async function handleShare() {
     if (typeof navigator !== "undefined" && "share" in navigator) {
       try {
-        await navigator.share({ title: "Mein CertCoach Ergebnis", text: summaryText });
-        setFeedback("Ergebnis geteilt!");
+        await navigator.share({ title: `CertCoach – ${t("practice.totalScore")}`, text: summaryText });
+        setFeedback(t("practice.toastShared"));
         return;
       } catch {
         // fall through
@@ -173,12 +173,12 @@ export default function ExamCompleteScreen({
     try {
       if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(summaryText);
-        setFeedback("Ergebnis wurde in die Zwischenablage kopiert.");
+        setFeedback(t("practice.toastCopied"));
         return;
       }
       throw new Error("no clipboard API");
     } catch {
-      setFeedback(legacyCopy(summaryText) ? "Ergebnis wurde in die Zwischenablage kopiert." : "Teilen wird von diesem Browser nicht unterstützt.");
+      setFeedback(legacyCopy(summaryText) ? t("practice.toastCopied") : t("practice.toastShareUnsupported"));
     }
   }
 
@@ -193,13 +193,13 @@ export default function ExamCompleteScreen({
       a.click();
       a.remove();
       URL.revokeObjectURL(url);
-      setFeedback("Download gestartet.");
+      setFeedback(t("practice.toastDownloadStarted"));
     } catch {
       try {
         window.open(`data:text/plain;charset=utf-8,${encodeURIComponent(summaryText)}`, "_blank");
-        setFeedback("Ergebnis in neuem Tab geöffnet — dort speichern.");
+        setFeedback(t("practice.toastOpenedNewTab"));
       } catch {
-        setFeedback("Download wird von diesem Browser nicht unterstützt.");
+        setFeedback(t("practice.toastDownloadUnsupported"));
       }
     }
   }
@@ -214,17 +214,17 @@ export default function ExamCompleteScreen({
       <div className="mb-4 flex justify-end">
         <button onClick={onBackToPath} className="flex items-center gap-1.5 text-sm font-semibold text-text-muted hover:text-text">
           <ChevronLeft size={15} />
-          Zurück zur Praxis
+          {t("practice.backToPractice")}
         </button>
       </div>
 
       <div className="mb-4 flex flex-col items-center gap-4 rounded-2xl border border-border-soft bg-panel p-6 text-center sm:flex-row sm:items-center sm:text-left">
         <div className="flex-1">
           <p className="flex items-center justify-center gap-2 text-2xl font-extrabold text-text sm:justify-start">
-            Dein Ergebnis ist bereit!
+            {t("practice.resultReadyTitle")}
             <PartyPopper size={22} className="text-warning" />
           </p>
-          <p className="mt-1 text-sm text-text-muted">Großartig! Du bist auf dem richtigen Weg. Bleib dran und erreiche dein Ziel! 🚀</p>
+          <p className="mt-1 text-sm text-text-muted">{t("practice.resultReadySubtitle")}</p>
           {feedback && <p className="mt-2 text-xs font-semibold text-primary">{feedback}</p>}
           <div className="mt-4 flex justify-center gap-2 sm:justify-start">
             <button
@@ -233,11 +233,11 @@ export default function ExamCompleteScreen({
               style={{ background: "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
             >
               <Download size={14} />
-              Ergebnis herunterladen
+              {t("practice.downloadResult")}
             </button>
             <button onClick={handleShare} className="flex items-center gap-1.5 rounded-lg border border-border-soft px-4 py-2 text-xs font-semibold text-text hover:border-primary">
               <Share2 size={14} />
-              Ergebnis teilen
+              {t("practice.shareResult")}
             </button>
           </div>
         </div>
@@ -253,11 +253,11 @@ export default function ExamCompleteScreen({
             <p className="font-bold text-text">
               {certCode}: {certTitle}
             </p>
-            <p className="text-xs text-text-faint">Practice Exam • {total} Fragen</p>
+            <p className="text-xs text-text-faint">{t("practice.practiceExam")} • {total} {t("practice.questionsWord")}</p>
           </div>
         </div>
         <div className="text-left text-xs text-text-faint sm:text-right">
-          <p>Abgeschlossen am</p>
+          <p>{t("practice.completedOn")}</p>
           <p className="font-semibold text-text-muted">{dateStr}</p>
         </div>
       </div>
@@ -300,18 +300,18 @@ export default function ExamCompleteScreen({
         </div>
 
         <div className="rounded-xl border border-border-soft bg-panel p-5">
-          <p className="mb-4 font-bold text-text">Leistung nach Themen</p>
+          <p className="mb-4 font-bold text-text">{t("practice.performanceByTopic")}</p>
           <div className="space-y-3">
-            {topicStats.map((t) => (
-              <div key={t.title}>
+            {topicStats.map((topic) => (
+              <div key={topic.title}>
                 <div className="mb-1 flex items-center justify-between text-xs">
-                  <span className="text-text-muted">{t.title}</span>
-                  <span className="font-semibold text-text">{t.answered > 0 ? `${t.pct}%` : "–"}</span>
+                  <span className="text-text-muted">{topic.title}</span>
+                  <span className="font-semibold text-text">{topic.answered > 0 ? `${topic.pct}%` : "–"}</span>
                 </div>
                 <div className="h-2 w-full rounded-full bg-panel-alt">
                   <div
-                    className={`h-2 rounded-full ${t.pct >= 80 ? "bg-success" : t.pct >= 50 ? "bg-warning" : "bg-danger"}`}
-                    style={{ width: `${t.answered > 0 ? t.pct : 0}%` }}
+                    className={`h-2 rounded-full ${topic.pct >= 80 ? "bg-success" : topic.pct >= 50 ? "bg-warning" : "bg-danger"}`}
+                    style={{ width: `${topic.answered > 0 ? topic.pct : 0}%` }}
                   />
                 </div>
               </div>
@@ -321,58 +321,58 @@ export default function ExamCompleteScreen({
       </div>
 
       <div className="mb-4 rounded-xl border border-border-soft bg-panel p-5">
-        <p className="mb-4 font-bold text-text">Deine Stärken auf einen Blick</p>
+        <p className="mb-4 font-bold text-text">{t("practice.strengthsOverview")}</p>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <Strength icon={Trophy} title="Stark gemacht!" desc="Du hast bewiesen, dass du die Kernkonzepte verstanden hast." />
-          <Strength icon={Target} title="Weiter so!" desc="Kontinuität ist der Schlüssel zum Erfolg. Du bist auf dem besten Weg!" />
-          <Strength icon={BookOpen} title="Lernen & Wachsen" desc="Analysiere deine Fehler und vertiefe dein Wissen in den schwächeren Themen." />
+          <Strength icon={Trophy} title={t("practice.strength1Title")} desc={t("practice.strength1Desc")} />
+          <Strength icon={Target} title={t("practice.strength2Title")} desc={t("practice.strength2Desc")} />
+          <Strength icon={BookOpen} title={t("practice.strength3Title")} desc={t("practice.strength3Desc")} />
         </div>
       </div>
 
       <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="rounded-xl border border-success/30 bg-success-light p-5">
-          <p className="mb-1 flex items-center gap-1.5 font-bold text-success">🎉 Herzlichen Glückwunsch!</p>
-          <p className="mb-3 text-sm text-text-muted">Du hast es geschafft! Deine harte Arbeit hat sich ausgezahlt.</p>
+          <p className="mb-1 flex items-center gap-1.5 font-bold text-success">🎉 {t("practice.congratsTitle")}</p>
+          <p className="mb-3 text-sm text-text-muted">{t("practice.congratsDesc")}</p>
           <ul className="mb-3 space-y-1.5 text-xs text-text-muted">
-            <li className="flex items-center gap-1.5"><CheckCircle2 size={13} className="text-success" /> Du hast das Wissen — jetzt kommt die Zertifizierung.</li>
-            <li className="flex items-center gap-1.5"><CheckCircle2 size={13} className="text-success" /> Bleib fokussiert und gib nicht auf.</li>
-            <li className="flex items-center gap-1.5"><CheckCircle2 size={13} className="text-success" /> Jeder Schritt bringt dich näher zum Ziel!</li>
+            <li className="flex items-center gap-1.5"><CheckCircle2 size={13} className="text-success" /> {t("practice.congratsItem1")}</li>
+            <li className="flex items-center gap-1.5"><CheckCircle2 size={13} className="text-success" /> {t("practice.congratsItem2")}</li>
+            <li className="flex items-center gap-1.5"><CheckCircle2 size={13} className="text-success" /> {t("practice.congratsItem3")}</li>
           </ul>
-          <div className="rounded-lg bg-success/15 py-2 text-center text-xs font-bold text-success">Du bist bereit für die nächste Herausforderung! 🚀</div>
+          <div className="rounded-lg bg-success/15 py-2 text-center text-xs font-bold text-success">{t("practice.congratsFooter")} 🚀</div>
         </div>
         <div className="rounded-xl border border-warning/30 bg-warning/10 p-5">
-          <p className="mb-1 flex items-center gap-1.5 font-bold text-warning">💪 Nicht aufgegeben – weiter geht&apos;s!</p>
-          <p className="mb-3 text-sm text-text-muted">Jedes Ergebnis ist eine Chance, besser zu werden. Du bist auf dem richtigen Weg.</p>
+          <p className="mb-1 flex items-center gap-1.5 font-bold text-warning">💪 {t("practice.encourageTitle")}</p>
+          <p className="mb-3 text-sm text-text-muted">{t("practice.encourageDesc")}</p>
           <ul className="mb-3 space-y-1.5 text-xs text-text-muted">
-            <li className="flex items-center gap-1.5"><Target size={13} className="text-warning" /> Fehler sind Lernchancen, keine Rückschläge.</li>
-            <li className="flex items-center gap-1.5"><Target size={13} className="text-warning" /> Übung macht den Meister — gib nicht auf!</li>
-            <li className="flex items-center gap-1.5"><Target size={13} className="text-warning" /> Mit jedem Versuch wirst du stärker!</li>
+            <li className="flex items-center gap-1.5"><Target size={13} className="text-warning" /> {t("practice.encourageItem1")}</li>
+            <li className="flex items-center gap-1.5"><Target size={13} className="text-warning" /> {t("practice.encourageItem2")}</li>
+            <li className="flex items-center gap-1.5"><Target size={13} className="text-warning" /> {t("practice.encourageItem3")}</li>
           </ul>
-          <div className="rounded-lg bg-warning/20 py-2 text-center text-xs font-bold text-warning">Du schaffst das! Wir glauben an dich. ☀️</div>
+          <div className="rounded-lg bg-warning/20 py-2 text-center text-xs font-bold text-warning">{t("practice.encourageFooter")} ☀️</div>
         </div>
       </div>
 
-      <p className="mb-3 text-center text-sm font-semibold text-text-muted">Was möchtest du als Nächstes tun?</p>
+      <p className="mb-3 text-center text-sm font-semibold text-text-muted">{t("practice.whatNextLabel")}</p>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
         <button onClick={onRetryAll} className="flex items-center gap-3 rounded-xl border border-border-soft bg-panel p-4 text-left hover:border-primary">
           <GraduationCap size={20} className="text-primary" />
           <div>
-            <p className="text-sm font-bold text-text">Themen wiederholen</p>
-            <p className="text-xs text-text-faint">Schwächen gezielt trainieren</p>
+            <p className="text-sm font-bold text-text">{t("practice.reviewTopicsTitle")}</p>
+            <p className="text-xs text-text-faint">{t("practice.reviewTopicsDesc")}</p>
           </div>
         </button>
         <button onClick={onRetryAll} className="flex items-center gap-3 rounded-xl border border-border-soft bg-panel p-4 text-left hover:border-primary">
           <ClipboardList size={20} className="text-primary" />
           <div>
-            <p className="text-sm font-bold text-text">Weitere Praxis</p>
-            <p className="text-xs text-text-faint">Neue Übung starten</p>
+            <p className="text-sm font-bold text-text">{t("practice.morePracticeTitle")}</p>
+            <p className="text-xs text-text-faint">{t("practice.morePracticeDesc")}</p>
           </div>
         </button>
         <Link href={`/certifications/${companySlug}`} className="flex items-center gap-3 rounded-xl border border-border-soft bg-panel p-4 hover:border-primary">
           <Award size={20} className="text-primary" />
           <div>
-            <p className="text-sm font-bold text-text">Zur Zertifizierung</p>
-            <p className="text-xs text-text-faint">Dein nächster Schritt</p>
+            <p className="text-sm font-bold text-text">{t("practice.goToCertTitle")}</p>
+            <p className="text-xs text-text-faint">{t("practice.goToCertDesc")}</p>
           </div>
         </Link>
       </div>
