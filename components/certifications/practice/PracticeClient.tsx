@@ -17,7 +17,6 @@ import SectionStatsPanel from "./SectionStatsPanel";
 import QuickStats from "./QuickStats";
 import AICoachPanel from "./AICoachPanel";
 import PracticeNotesPanel from "./PracticeNotesPanel";
-import PracticeFloatingActions from "./PracticeFloatingActions";
 import SectionScorecard from "./SectionScorecard";
 import ExamCompleteScreen from "./ExamCompleteScreen";
 import RestartConfirmModal from "./RestartConfirmModal";
@@ -421,6 +420,7 @@ export default function PracticeClient({
           marked={marked.has(current.id)}
           isCorrect={isCorrectAnswer(current, answers[current.id])}
           hintOpen={hintOpen}
+          onToggleHint={() => setHintOpen((v) => !v)}
           onSelect={(id) => {
             const multi = current.type !== "yesno" && current.type !== "matching" && isMultiSelectQuestion(current);
             setAnswers((a) => {
@@ -542,12 +542,6 @@ export default function PracticeClient({
       </div>
 
       <PracticeNotesPanel isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
-
-      <PracticeFloatingActions
-        onHint={() => setHintOpen((v) => !v)}
-        onNotes={() => setNotesOpen(true)}
-        onCoach={() => setCoachOpen(true)}
-      />
     </div>
   );
 }

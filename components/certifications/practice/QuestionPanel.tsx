@@ -21,6 +21,7 @@ export default function QuestionPanel({
   marked,
   isCorrect,
   hintOpen,
+  onToggleHint,
   onSelect,
   onSelectStatement,
   onSelectMatch,
@@ -40,6 +41,7 @@ export default function QuestionPanel({
   marked: boolean;
   isCorrect: boolean;
   hintOpen: boolean;
+  onToggleHint: () => void;
   onSelect: (id: PracticeOptionId) => void;
   onSelectStatement: (i: number, value: "Ja" | "Nein") => void;
   onSelectMatch: (descriptionId: string, itemId: string) => void;
@@ -295,27 +297,37 @@ export default function QuestionPanel({
       )}
 
       <div className="mt-6 border-t border-border-soft pt-5">
-        {/* Mobile: clean 2x2 grid */}
-        <div className="grid grid-cols-2 gap-3 sm:hidden">
+        {/* Mobile: 3-column grid — Zurück/Tipp/Erklärung on top,
+            Überspringen + the primary CTA (spanning 2 cols) below */}
+        <div className="grid grid-cols-3 gap-2.5 sm:hidden">
           <button
             onClick={onPrev}
             disabled={index === 0}
-            className="rounded-2xl border border-border-soft px-5 py-2.5 text-sm font-semibold text-text transition-all duration-200 ease-in-out hover:border-primary/60 hover:shadow-[0_0_12px_rgba(124,58,237,0.15)] disabled:opacity-30"
+            className="rounded-2xl border border-border-soft px-3 py-2.5 text-xs font-semibold text-text transition-all duration-200 ease-in-out hover:border-primary/60 hover:shadow-[0_0_12px_rgba(124,58,237,0.15)] disabled:opacity-30"
           >
             {t("practice.backBtn")}
           </button>
           <button
+            onClick={onToggleHint}
+            disabled={checked}
+            className={`flex items-center justify-center gap-1 rounded-2xl border px-3 py-2.5 text-xs font-semibold disabled:opacity-30 ${
+              hintOpen ? "border-warning text-warning" : "border-border-soft text-text hover:border-primary/60"
+            }`}
+          >
+            <Lightbulb size={14} />
+            {t("practice.aiHint")}
+          </button>
+          <button
             onClick={() => setShowExplanation((v) => !v)}
-            className={`flex items-center justify-center gap-1.5 rounded-lg border px-5 py-2.5 text-sm font-semibold ${
+            className={`flex items-center justify-center gap-1 rounded-2xl border px-3 py-2.5 text-xs font-semibold ${
               showExplanation ? "border-primary text-primary" : "border-border-soft text-text hover:border-primary"
             }`}
           >
-            <Lightbulb size={15} />
             {t("practice.explanationLabel")}
           </button>
           <button
             onClick={onSkip}
-            className="rounded-2xl border border-border-soft px-5 py-2.5 text-sm font-semibold text-text transition-all duration-200 ease-in-out hover:border-primary/60 hover:shadow-[0_0_12px_rgba(124,58,237,0.15)]"
+            className="rounded-2xl border border-border-soft px-3 py-2.5 text-xs font-semibold text-text transition-all duration-200 ease-in-out hover:border-primary/60 hover:shadow-[0_0_12px_rgba(124,58,237,0.15)]"
           >
             {t("practice.skipBtn")}
           </button>
@@ -323,7 +335,7 @@ export default function QuestionPanel({
             <button
               onClick={onCheck}
               disabled={!canCheck}
-              className="rounded-2xl px-6 py-2.5 text-sm font-bold text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)] transition-all duration-200 ease-in-out hover:brightness-110 disabled:opacity-40" style={{ background: "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
+              className="col-span-2 rounded-2xl px-6 py-2.5 text-sm font-bold text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)] transition-all duration-200 ease-in-out hover:brightness-110 disabled:opacity-40" style={{ background: "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
             >
               {t("practice.checkAnswer")}
             </button>
@@ -331,7 +343,7 @@ export default function QuestionPanel({
             <button
               onClick={onNext}
               disabled={index === total - 1}
-              className="rounded-2xl px-6 py-2.5 text-sm font-bold text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)] transition-all duration-200 ease-in-out hover:brightness-110 disabled:opacity-40" style={{ background: "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
+              className="col-span-2 rounded-2xl px-6 py-2.5 text-sm font-bold text-white shadow-[0_4px_14px_rgba(124,58,237,0.35)] transition-all duration-200 ease-in-out hover:brightness-110 disabled:opacity-40" style={{ background: "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
             >
               {t("practice.nextBtn")}
             </button>
@@ -339,10 +351,11 @@ export default function QuestionPanel({
         </div>
 
         {/* Desktop: Zurück on the left, the rest clustered on the right.
-            pr-24 keeps this row clear of PracticeFloatingActions, which is
-            fixed to the bottom-right corner of the viewport and would
-            otherwise sit on top of "Antwort prüfen". */}
-        <div className="hidden sm:flex sm:items-center sm:justify-between sm:pr-24">
+            No more pr-24 reservation — the floating action buttons (notes,
+            AI coach, hint) were removed since they duplicated controls
+            already on this card (Notizen at the page bottom, KI Coach
+            button above, and Tipp here). */}
+        <div className="hidden sm:flex sm:items-center sm:justify-between">
           <button
             onClick={onPrev}
             disabled={index === 0}
@@ -352,12 +365,21 @@ export default function QuestionPanel({
           </button>
           <div className="flex gap-3">
             <button
+              onClick={onToggleHint}
+              disabled={checked}
+              className={`flex items-center gap-1.5 rounded-lg border px-5 py-2.5 text-sm font-semibold disabled:opacity-30 ${
+                hintOpen ? "border-warning text-warning" : "border-border-soft text-text hover:border-primary"
+              }`}
+            >
+              <Lightbulb size={15} />
+              {t("practice.aiHint")}
+            </button>
+            <button
               onClick={() => setShowExplanation((v) => !v)}
               className={`flex items-center gap-1.5 rounded-lg border px-5 py-2.5 text-sm font-semibold ${
                 showExplanation ? "border-primary text-primary" : "border-border-soft text-text hover:border-primary"
               }`}
             >
-              <Lightbulb size={15} />
               {t("practice.explanationLabel")}
             </button>
             <button
