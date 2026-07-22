@@ -46,26 +46,54 @@ type SectionAttemptsState = {
   getAttempts: (certId: string) => SectionAttempt[];
   getBestScore: (certId: string, sectionIndex: number) => number | null;
   reset: () => void;
+  /** False until we've successfully talked to section_attempts /
+   * unlocked_sections at least once. If the SQL migration hasn't been
+   * run yet, those tables don't exist — Supabase returns a query error
+   * (not a thrown exception) in that case, but callers should still
+   * know to fall back to the old live-computed unlock logic instead of
+   * trusting an empty result set as "nothing is unlocked". */
+  migrationReady: boolean;
 };
 
 export const useSectionAttemptsStore = create<SectionAttemptsState>((set, get) => ({
   attemptsByCert: {},
   unlockedByCert: {},
   loadedCerts: new Set(),
+  migrationReady: true,
 
   loadForCert: async (userId: string, certId: string) => {
     const cacheKey = `${userId}:${certId}`;
     if (get().loadedCerts.has(cacheKey)) return;
 
-    const [attemptsRes, unlockedRes] = await Promise.all([
-      supabase
-        .from("section_attempts")
-        .select("id, cert_id, section_index, attempt_number, score_percent, correct_count, total_count, passed, completed_at")
-        .eq("user_id", userId)
-        .eq("cert_id", certId)
-        .order("completed_at", { ascending: false }),
-      supabase.from("unlocked_sections").select("section_index").eq("user_id", userId).eq("cert_id", certId),
-    ]);
+    let attemptsRes, unlockedRes;
+    try {
+      [attemptsRes, unlockedRes] = await Promise.all([
+        supabase
+          .from("section_attempts")
+          .select("id, cert_id, section_index, attempt_number, score_percent, correct_count, total_count, passed, completed_at")
+          .eq("user_id", userId)
+          .eq("cert_id", certId)
+          .order("completed_at", { ascending: false }),
+        supabase.from("unlocked_sections").select("section_index").eq("user_id", userId).eq("cert_id", certId),
+      ]);
+    } catch (err) {
+      // Network failure or (most likely) the migration hasn't been run
+      // yet, so these tables don't exist. Either way, don't crash the
+      // practice page over it — just flag that this data source isn't
+      // ready so callers fall back to the old logic.
+      console.error("section_attempts/unlocked_sections not available yet:", err);
+      set({ migrationReady: false });
+      return;
+    }
+
+    if (attemptsRes.error || unlockedRes.error) {
+      console.error(
+        "section_attempts/unlocked_sections query error (migration likely not run yet):",
+        attemptsRes.error ?? unlockedRes.error
+      );
+      set({ migrationReady: false });
+      return;
+    }
 
     const attempts: SectionAttempt[] = (attemptsRes.data ?? []).map((r) => ({
       id: r.id,
@@ -85,6 +113,7 @@ export const useSectionAttemptsStore = create<SectionAttemptsState>((set, get) =
       attemptsByCert: { ...s.attemptsByCert, [certId]: attempts },
       unlockedByCert: { ...s.unlockedByCert, [certId]: unlocked },
       loadedCerts: new Set(s.loadedCerts).add(cacheKey),
+      migrationReady: true,
     }));
   },
 
@@ -95,20 +124,30 @@ export const useSectionAttemptsStore = create<SectionAttemptsState>((set, get) =
     const priorForSection = existing.filter((a) => a.sectionIndex === sectionIndex);
     const attemptNumber = priorForSection.length + 1;
 
-    const { data, error } = await supabase
-      .from("section_attempts")
-      .insert({
-        user_id: userId,
-        cert_id: certId,
-        section_index: sectionIndex,
-        attempt_number: attemptNumber,
-        score_percent: scorePercent,
-        correct_count: correctCount,
-        total_count: totalCount,
-        passed,
-      })
-      .select("id, completed_at")
-      .single();
+    let data: { id: string; completed_at: string } | null = null;
+    let error: { code?: string } | null = null;
+    try {
+      const res = await supabase
+        .from("section_attempts")
+        .insert({
+          user_id: userId,
+          cert_id: certId,
+          section_index: sectionIndex,
+          attempt_number: attemptNumber,
+          score_percent: scorePercent,
+          correct_count: correctCount,
+          total_count: totalCount,
+          passed,
+        })
+        .select("id, completed_at")
+        .single();
+      data = res.data;
+      error = res.error;
+    } catch (err) {
+      console.error("Failed to save section attempt (table may not exist yet):", err);
+      set({ migrationReady: false });
+      return { scorePercent, passed, justUnlockedNext: false };
+    }
 
     const newAttempt: SectionAttempt = {
       id: data?.id ?? `local-${Date.now()}`,
@@ -137,20 +176,24 @@ export const useSectionAttemptsStore = create<SectionAttemptsState>((set, get) =
     let justUnlockedNext = false;
     const alreadyUnlocked = get().unlockedByCert[certId]?.has(sectionIndex + 1) ?? false;
     if (passed && !alreadyUnlocked) {
-      const { error: unlockError } = await supabase
-        .from("unlocked_sections")
-        .insert({ user_id: userId, cert_id: certId, section_index: sectionIndex + 1 })
-        .select()
-        .maybeSingle();
-      // Ignore unique-constraint conflicts (already unlocked by a
-      // concurrent request) — the outcome is the same either way.
-      if (!unlockError || unlockError.code === "23505") {
-        justUnlockedNext = true;
-        set((s) => {
-          const next = new Set(s.unlockedByCert[certId] ?? []);
-          next.add(sectionIndex + 1);
-          return { unlockedByCert: { ...s.unlockedByCert, [certId]: next } };
-        });
+      try {
+        const { error: unlockError } = await supabase
+          .from("unlocked_sections")
+          .insert({ user_id: userId, cert_id: certId, section_index: sectionIndex + 1 })
+          .select()
+          .maybeSingle();
+        // Ignore unique-constraint conflicts (already unlocked by a
+        // concurrent request) — the outcome is the same either way.
+        if (!unlockError || unlockError.code === "23505") {
+          justUnlockedNext = true;
+          set((s) => {
+            const next = new Set(s.unlockedByCert[certId] ?? []);
+            next.add(sectionIndex + 1);
+            return { unlockedByCert: { ...s.unlockedByCert, [certId]: next } };
+          });
+        }
+      } catch (err) {
+        console.error("Failed to save unlock (table may not exist yet):", err);
       }
     }
 
@@ -170,5 +213,5 @@ export const useSectionAttemptsStore = create<SectionAttemptsState>((set, get) =
     return Math.max(...attempts.map((a) => a.scorePercent));
   },
 
-  reset: () => set({ attemptsByCert: {}, unlockedByCert: {}, loadedCerts: new Set() }),
+  reset: () => set({ attemptsByCert: {}, unlockedByCert: {}, loadedCerts: new Set(), migrationReady: true }),
 }));
