@@ -383,10 +383,15 @@ export default function PracticeClient({
           />
           <button
             onClick={() => setStatsDrawerOpen(true)}
-            className="flex items-center gap-2 rounded-xl border border-primary/40 bg-panel px-4 py-3 text-sm font-bold text-primary transition-colors hover:bg-primary-light"
+            style={{ width: 170, height: 44 }}
+            className={`flex flex-none items-center justify-center gap-2 rounded-[14px] border px-4 text-[15px] font-semibold text-white transition-all duration-200 ease-in-out ${
+              statsDrawerOpen
+                ? "border-primary bg-primary/15 shadow-[0_0_20px_rgba(124,58,237,0.25)]"
+                : "border-white/10 bg-transparent hover:border-primary hover:bg-primary/15 hover:shadow-[0_0_20px_rgba(124,58,237,0.25)]"
+            }`}
           >
-            <BarChart3 size={16} />
-            {t("practice.sectionStats")}
+            <BarChart3 size={17} className="text-white" />
+            {t("practice.progressBtn")}
           </button>
         </div>
 
@@ -407,6 +412,7 @@ export default function PracticeClient({
         start={currentSectionStart}
         end={currentSectionEnd}
         statusFor={statusFor}
+        elapsedSeconds={EXAM_TOTAL_SECONDS - remainingSeconds}
         open={statsDrawerOpen}
         onClose={() => setStatsDrawerOpen(false)}
       />
