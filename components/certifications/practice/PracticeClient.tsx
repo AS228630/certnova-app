@@ -249,10 +249,8 @@ export default function PracticeClient({
     return (
       <div>
         <PracticeToolbar
-          companyName={companyName}
           companySlug={companySlug}
           certCode={certCode}
-          certTitle={certTitle}
         />
         <div className="mt-6">
           <ExamCompleteScreen
@@ -286,10 +284,8 @@ export default function PracticeClient({
     return (
       <div>
         <PracticeToolbar
-          companyName={companyName}
           companySlug={companySlug}
           certCode={certCode}
-          certTitle={certTitle}
         />
         <div className="mt-6">
           <SectionScorecard
@@ -361,10 +357,8 @@ export default function PracticeClient({
   return (
     <div className="px-1">
       <PracticeToolbar
-        companyName={companyName}
         companySlug={companySlug}
         certCode={certCode}
-        certTitle={certTitle}
       />
 
       <div>
