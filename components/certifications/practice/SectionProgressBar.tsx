@@ -33,8 +33,11 @@ export default function SectionProgressBar({
       <span className="hidden shrink-0 text-xs font-semibold text-text-muted sm:inline">
         {t("practice.sectionProgress")} {sectionNumber}
       </span>
-      <div className="h-2 min-w-[80px] flex-1 rounded-full bg-panel-alt">
-        <div className="h-2 rounded-full bg-primary transition-all" style={{ width: `${pct}%` }} />
+      <div className="h-2 min-w-[80px] flex-1 overflow-hidden rounded-full bg-panel-alt">
+        <div
+          className="h-2 rounded-full transition-all duration-300 ease-in-out"
+          style={{ width: `${pct}%`, background: "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
+        />
       </div>
       <span className="shrink-0 text-xs font-bold text-text">
         {resolved} / {size}

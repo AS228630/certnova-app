@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale } from "@/components/LocaleProvider";
+
 type Status = "current" | "correct" | "wrong" | "marked" | "skipped" | "unanswered";
 
 const styles: Record<Status, string> = {
@@ -28,16 +30,25 @@ export default function SectionQuestionGrid({
   statusFor: (index: number) => Status;
   onJump: (index: number) => void;
 }) {
+  const { t } = useLocale();
   return (
     <div className="mt-3 grid grid-cols-5 gap-2 rounded-xl border border-border-soft bg-panel p-4 sm:grid-cols-10 md:[grid-template-columns:repeat(13,minmax(0,1fr))] lg:[grid-template-columns:repeat(25,minmax(0,1fr))]">
       {Array.from({ length: end - start }).map((_, j) => {
         const i = start + j;
+        const st = i === currentIndex ? "current" : statusFor(i);
+        const statusLabel =
+          st === "correct" ? t("practice.correctlyAnswered")
+          : st === "wrong" ? t("practice.wronglyAnswered")
+          : st === "unanswered" || st === "skipped" ? t("practice.notAnswered")
+          : "";
         return (
           <button
             key={i}
             onClick={() => onJump(i)}
+            aria-label={`${i + 1}${statusLabel ? ` — ${statusLabel}` : ""}`}
+            aria-current={i === currentIndex ? "true" : undefined}
             className={`flex h-9 w-9 items-center justify-center rounded-xl text-[13px] font-bold transition-all duration-200 ease-in-out hover:scale-[1.06] ${
-              styles[i === currentIndex ? "current" : statusFor(i)]
+              styles[st]
             }`}
           >
             {i + 1}

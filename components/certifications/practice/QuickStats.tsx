@@ -49,8 +49,8 @@ export default function QuickStats({
         </div>
         <div className="mt-1.5 h-1 w-full rounded-full bg-panel-alt">
           <div
-            className={`h-1 rounded-full transition-all ${timePct < 15 ? "bg-danger" : "bg-primary"}`}
-            style={{ width: `${timePct}%` }}
+            className={`h-1 rounded-full transition-all duration-300 ease-in-out ${timePct < 15 ? "bg-danger" : ""}`}
+            style={{ width: `${timePct}%`, background: timePct < 15 ? undefined : "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
           />
         </div>
       </div>
@@ -78,8 +78,8 @@ export default function QuickStats({
         </div>
         <div className="h-1.5 w-full rounded-full bg-panel-alt">
           <div
-            className={`h-1.5 rounded-full transition-all ${timePct < 15 ? "bg-danger" : "bg-primary"}`}
-            style={{ width: `${timePct}%` }}
+            className={`h-1.5 rounded-full transition-all duration-300 ease-in-out ${timePct < 15 ? "bg-danger" : ""}`}
+            style={{ width: `${timePct}%`, background: timePct < 15 ? undefined : "linear-gradient(90deg, #7C3AED 0%, #3B82F6 100%)" }}
           />
         </div>
       </div>
