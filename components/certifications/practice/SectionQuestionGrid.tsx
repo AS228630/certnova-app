@@ -29,7 +29,7 @@ export default function SectionQuestionGrid({
   onJump: (index: number) => void;
 }) {
   return (
-    <div className="mt-3 grid grid-cols-8 gap-2 rounded-xl border border-border-soft bg-panel p-4 sm:grid-cols-12 md:grid-cols-14 lg:grid-cols-16">
+    <div className="mt-3 grid grid-cols-5 gap-2 rounded-xl border border-border-soft bg-panel p-4 sm:grid-cols-10 md:[grid-template-columns:repeat(13,minmax(0,1fr))] lg:[grid-template-columns:repeat(25,minmax(0,1fr))]">
       {Array.from({ length: end - start }).map((_, j) => {
         const i = start + j;
         return (

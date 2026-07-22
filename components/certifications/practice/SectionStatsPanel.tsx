@@ -6,11 +6,11 @@ import { useLocale } from "@/components/LocaleProvider";
 
 type Status = "correct" | "wrong" | "marked" | "skipped" | "unanswered";
 
-// Floating stats card scoped to the CURRENT section (not the whole exam
-// — "Gesamt Fragen" always equals the section size). Fixed to the
-// top-right corner of the viewport, below the KI Chat button, so it
-// overlays empty screen space and never takes width away from the
-// question panel below it. Collapsible via the chevron button.
+// Collapsible stats card scoped to the CURRENT section (not the whole
+// exam — "Gesamt Fragen" always equals the section size). Now rendered
+// inline at the bottom of the page (below the AI coach panel) instead of
+// as a fixed floating overlay — the floating version was colliding with
+// the header row and the question-number grid on wide screens.
 export default function SectionStatsPanel({
   start,
   end,
@@ -21,7 +21,7 @@ export default function SectionStatsPanel({
   statusFor: (index: number) => Status;
 }) {
   const { t } = useLocale();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   let correct = 0;
   let wrong = 0;
@@ -34,7 +34,7 @@ export default function SectionStatsPanel({
   const unanswered = total - correct - wrong;
 
   return (
-    <div className="fixed right-5 top-24 z-30 hidden w-56 rounded-xl border border-border-soft bg-panel shadow-lg lg:block">
+    <div className="w-full rounded-xl border border-border-soft bg-panel sm:w-64">
       <button
         onClick={() => setOpen((v) => !v)}
         className="flex w-full items-center justify-between gap-1.5 px-3.5 py-2.5 text-text-muted hover:text-text"

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { Shuffle, StickyNote } from "lucide-react";
 import { useRouter } from "next/navigation";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
 import { getAz900Questions, isSingleChoiceAnswerCorrect, isMultiSelectQuestion } from "@/lib/az900Practice";
@@ -53,7 +54,7 @@ export default function PracticeClient({
   topics: PracticeTopic[];
   questions: PracticeQuestion[];
 }) {
-  const { locale } = useLocale();
+  const { locale, t } = useLocale();
   // az-900 and ab-900 have real translations available (see
   // lib/i18n/questions/); every other cert's question bank isn't
   // translated yet, so it always uses the server-provided (German or
@@ -251,10 +252,6 @@ export default function PracticeClient({
           companySlug={companySlug}
           certCode={certCode}
           certTitle={certTitle}
-          index={index}
-          total={activeQuestions.length}
-          onToggleNotes={() => setNotesOpen(true)}
-          onShuffle={shuffle}
         />
         <div className="mt-6">
           <ExamCompleteScreen
@@ -292,10 +289,6 @@ export default function PracticeClient({
           companySlug={companySlug}
           certCode={certCode}
           certTitle={certTitle}
-          index={index}
-          total={activeQuestions.length}
-          onToggleNotes={() => setNotesOpen(true)}
-          onShuffle={shuffle}
         />
         <div className="mt-6">
           <SectionScorecard
@@ -371,18 +364,9 @@ export default function PracticeClient({
         companySlug={companySlug}
         certCode={certCode}
         certTitle={certTitle}
-        index={index}
-        total={activeQuestions.length}
-        onToggleNotes={() => setNotesOpen(true)}
-        onShuffle={shuffle}
       />
 
-      {/* This wrapper (header row + number grid) sits at the same vertical
-          height as the fixed SectionStatsPanel, so it reserves space for it
-          on large screens to avoid a visual collision. QuestionPanel below
-          is NOT wrapped this way — it's further down the page, past the
-          stats panel's height, so it stays genuinely edge-to-edge. */}
-      <div className="lg:pr-64">
+      <div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
           <SectionMenu
             total={activeQuestions.length}
@@ -410,11 +394,6 @@ export default function PracticeClient({
           onJump={goTo}
         />
       </div>
-
-      {/* Floating, fixed-position card — overlays empty screen space in the
-          top-right corner and never takes width away from the question
-          panel below it (per the owner's explicit layout requirement). */}
-      <SectionStatsPanel start={currentSectionStart} end={currentSectionEnd} statusFor={statusFor} />
 
       <div className="mt-6">
         <QuestionPanel
@@ -484,18 +463,38 @@ export default function PracticeClient({
         />
       </div>
 
-      {/* AI coach now spans the full width below the question — the stats
-          card is a fixed floating overlay (SectionStatsPanel above), so it
-          no longer reserves a column here. */}
+      {/* AI coach now spans the full width below the question. */}
       <div className="mt-6 hidden h-[420px] lg:block">
         <AICoachPanel key={current.id} question={current} isOpen={true} onClose={() => {}} />
       </div>
 
-      {/* Mobile: SectionStatsPanel is desktop-only (fixed overlay would
-          cover content on small screens), so mobile keeps a compact inline
-          stats bar; AI coach opens as a full-screen overlay via the
-          floating action button instead. */}
-      <div className="mt-6 lg:hidden">
+      {/* Section stats + Mischen/Notizen moved down here (desktop) — they
+          were cluttering the top of the page, colliding visually with the
+          Abschnitt/progress row right below them. */}
+      <div className="mt-6 hidden flex-wrap items-start gap-3 lg:flex">
+        <SectionStatsPanel start={currentSectionStart} end={currentSectionEnd} statusFor={statusFor} />
+        <button
+          onClick={shuffle}
+          className="flex h-10 items-center gap-1.5 rounded-lg border border-border-soft bg-panel px-3.5 text-xs font-semibold text-text-muted hover:border-primary hover:text-primary"
+        >
+          <Shuffle size={14} />
+          {t("practice.shuffle")}
+        </button>
+        <button
+          onClick={() => setNotesOpen(true)}
+          className="flex h-10 items-center gap-1.5 rounded-lg border border-border-soft bg-panel px-3.5 text-xs font-semibold text-text-muted hover:border-primary hover:text-primary"
+        >
+          <StickyNote size={14} />
+          {t("practice.notes")}
+        </button>
+      </div>
+
+      {/* Mobile: SectionStatsPanel is desktop-only above (fixed overlay
+          would cover content on small screens), so mobile keeps a compact
+          inline stats bar plus the same two utility buttons; AI coach
+          opens as a full-screen overlay via the floating action button
+          instead. */}
+      <div className="mt-6 space-y-3 lg:hidden">
         <QuickStats
           compact
           answered={answeredCount}
@@ -505,6 +504,22 @@ export default function PracticeClient({
           remainingSeconds={remainingSeconds}
           totalSeconds={EXAM_TOTAL_SECONDS}
         />
+        <div className="flex flex-wrap gap-2">
+          <button
+            onClick={shuffle}
+            className="flex h-9 flex-1 items-center justify-center gap-1.5 rounded-lg border border-border-soft bg-panel px-3 text-xs font-semibold text-text-muted"
+          >
+            <Shuffle size={13} />
+            {t("practice.shuffle")}
+          </button>
+          <button
+            onClick={() => setNotesOpen(true)}
+            className="flex h-9 flex-1 items-center justify-center gap-1.5 rounded-lg border border-border-soft bg-panel px-3 text-xs font-semibold text-text-muted"
+          >
+            <StickyNote size={13} />
+            {t("practice.notes")}
+          </button>
+        </div>
       </div>
 
       <div className="lg:hidden">
