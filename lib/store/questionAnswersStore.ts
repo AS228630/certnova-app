@@ -19,6 +19,12 @@ type QuestionAnswersState = {
   /** Deletes all recorded answers for this user+cert (Supabase + local
    * state), used by the practice exam's "start over" feature. */
   clearForCert: (userId: string, certId: string) => Promise<void>;
+  /** Clears only the given question IDs for this cert (local + Supabase).
+   * Used by the practice exam's per-section "try this section again",
+   * so retaking just Abschnitt 1 doesn't leave its old green checkmarks
+   * behind from persisted state that clearForCert (whole-cert) wouldn't
+   * touch. */
+  clearQuestions: (userId: string, certId: string, questionIds: string[]) => Promise<void>;
   reset: () => void;
 };
 
@@ -83,6 +89,23 @@ export const useQuestionAnswersStore = create<QuestionAnswersState>((set, get) =
     });
 
     await supabase.from("user_question_answers").delete().eq("user_id", userId).eq("cert_id", certId);
+  },
+
+  clearQuestions: async (userId: string, certId: string, questionIds: string[]) => {
+    if (questionIds.length === 0) return;
+
+    set((s) => {
+      const certMap = { ...(s.answersByCert[certId] ?? {}) };
+      for (const id of questionIds) delete certMap[id];
+      return { answersByCert: { ...s.answersByCert, [certId]: certMap } };
+    });
+
+    await supabase
+      .from("user_question_answers")
+      .delete()
+      .eq("user_id", userId)
+      .eq("cert_id", certId)
+      .in("question_id", questionIds);
   },
 
   reset: () => set({ answersByCert: {}, loadedCerts: new Set(), userId: null }),

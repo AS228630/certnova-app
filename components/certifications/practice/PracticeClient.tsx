@@ -97,6 +97,7 @@ export default function PracticeClient({
   const loadPersistedAnswers = useQuestionAnswersStore((s) => s.loadForCert);
   const recordPersistedAnswer = useQuestionAnswersStore((s) => s.recordAnswer);
   const clearPersistedAnswers = useQuestionAnswersStore((s) => s.clearForCert);
+  const clearPersistedQuestions = useQuestionAnswersStore((s) => s.clearQuestions);
   const resetCertPracticeDetail = useCertProgressStore((s) => s.resetPracticeDetail);
   const loadSectionAttempts = useSectionAttemptsStore((s) => s.loadForCert);
   const recordSectionAttempt = useSectionAttemptsStore((s) => s.recordAttempt);
@@ -260,6 +261,14 @@ export default function PracticeClient({
   function resetSection(sectionIdx: number) {
     const [start, end] = getSectionRange(activeQuestions.length, sectionIdx);
     const ids = activeQuestions.slice(start, end).map((q) => q.id);
+
+    // Clear the persisted (Supabase-backed) correctness for just these
+    // questions too — otherwise the question navigator keeps showing them
+    // as green/complete after "try this section again", since that comes
+    // from persistedCorrectness, not just the local `checked` set below.
+    if (user) {
+      clearPersistedQuestions(user.id, certId, ids);
+    }
 
     // Shuffle just this section's question order (Fisher-Yates), so
     // retaking a section shows the same pool of questions but never in the
