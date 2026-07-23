@@ -71,6 +71,12 @@ export default function PracticeClient({
   const [checked, setChecked] = useState<Set<string>>(new Set());
   const [marked, setMarked] = useState<Set<string>>(new Set());
   const [skipped, setSkipped] = useState<Set<string>>(new Set());
+  // Questions explicitly reopened via resetSection (retaking an
+  // already-completed section). persistedCorrectness from Supabase still
+  // has these marked correct/wrong from the PREVIOUS attempt — without
+  // this override, statusFor would immediately show them as already
+  // answered again, defeating the point of retaking the section.
+  const [reopenedIds, setReopenedIds] = useState<Set<string>>(new Set());
   const [coachOpen, setCoachOpen] = useState(false);
   const [notesOpen, setNotesOpen] = useState(false);
   const [hintOpen, setHintOpen] = useState(false);
@@ -167,6 +173,7 @@ export default function PracticeClient({
       setChecked(new Set());
       setMarked(new Set());
       setSkipped(new Set());
+      setReopenedIds(new Set(ids));
       setScorecardSection(null);
       setExamComplete(false);
       setRemainingSeconds(EXAM_TOTAL_SECONDS);
@@ -182,11 +189,36 @@ export default function PracticeClient({
     setHintOpen(false);
   }
 
+  // Called when the user opens a section from the SectionMenu dropdown
+  // (as opposed to the in-section question grid, or the "Wiederholen"
+  // button right after finishing it). If that section was already fully
+  // answered before, reshuffle it first — otherwise every retry from the
+  // menu would replay the exact same question order, letting the user
+  // "solve" it from memorized positions instead of actually re-answering.
+  // Matches resetSection's shuffle logic; unfinished/never-attempted
+  // sections are left in authored order.
+  function jumpToSection(sectionIdx: number, targetIndex: number) {
+    const [start, end] = getSectionRange(activeQuestions.length, sectionIdx);
+    let alreadyCompleted = true;
+    for (let i = start; i < end; i++) {
+      const st = statusFor(i);
+      if (st !== "correct" && st !== "wrong") {
+        alreadyCompleted = false;
+        break;
+      }
+    }
+    if (alreadyCompleted) {
+      resetSection(sectionIdx);
+    } else {
+      goTo(targetIndex);
+    }
+  }
+
   function statusFor(i: number): "correct" | "wrong" | "marked" | "skipped" | "unanswered" {
     const q = activeQuestions[i];
     if (!q) return "unanswered";
     if (marked.has(q.id)) return "marked";
-    const isAnswered = checked.has(q.id) || persistedCorrectness[q.id] !== undefined;
+    const isAnswered = checked.has(q.id) || (persistedCorrectness[q.id] !== undefined && !reopenedIds.has(q.id));
     if (skipped.has(q.id) && !isAnswered) return "skipped";
     if (isAnswered) {
       const localAnswer = answers[q.id];
@@ -258,6 +290,7 @@ export default function PracticeClient({
       ids.forEach((id) => delete next[id]);
       return next;
     });
+    setReopenedIds((s) => new Set([...s, ...ids]));
   }
 
   if (!current) {
@@ -340,6 +373,7 @@ export default function PracticeClient({
                 delete next[questionId];
                 return next;
               });
+              setReopenedIds((s) => new Set(s).add(questionId));
               setScorecardSection(null);
               goTo(qIndex);
             }}
@@ -373,8 +407,7 @@ export default function PracticeClient({
             total={activeQuestions.length}
             currentIndex={index}
             statusFor={statusFor}
-            onJump={goTo}
-            isUnlocked={attemptsMigrationReady ? (s) => isSectionPermanentlyUnlocked(certId, s) : undefined}
+            onJump={(i, sectionIdx) => (sectionIdx !== undefined ? jumpToSection(sectionIdx, i) : goTo(i))}
             getBestScore={attemptsMigrationReady ? (s) => getBestScore(certId, s) : undefined}
           />
           <SectionProgressBar
@@ -461,6 +494,12 @@ export default function PracticeClient({
           onCheck={() => {
             const next = new Set(checked).add(current.id);
             setChecked(next);
+            setReopenedIds((s) => {
+              if (!s.has(current.id)) return s;
+              const n = new Set(s);
+              n.delete(current.id);
+              return n;
+            });
             const isCorrect = isCorrectAnswer(current, answers[current.id]);
             useUserProgressStore.getState().recordAnswer(isCorrect);
             useCertProgressStore.getState().recordAnswerForCert(certId, isCorrect);

@@ -23,7 +23,7 @@ export default function SectionMenu({
   total: number;
   currentIndex: number;
   statusFor: (index: number) => Status;
-  onJump: (index: number) => void;
+  onJump: (index: number, sectionIndex?: number) => void;
   /** Permanent, DB-backed unlock check (lib/store/sectionAttemptsStore.ts) —
    * once a section clears the mastery bar once, it stays unlocked forever,
    * even if a later retry scores lower. Falls back to the old live
@@ -119,7 +119,7 @@ export default function SectionMenu({
                 <button
                   onClick={() => {
                     if (!unlocked) return;
-                    onJump(start);
+                    onJump(start, s);
                     setMenuOpen(false);
                   }}
                   disabled={!unlocked}
