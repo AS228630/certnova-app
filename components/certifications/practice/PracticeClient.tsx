@@ -88,6 +88,14 @@ export default function PracticeClient({
   // this must never record an Attempt or touch History/Best-Score/Unlock.
   const [reviewQueue, setReviewQueue] = useState<{ sectionIndex: number; questionIds: string[] } | null>(null);
   const [reviewIndex, setReviewIndex] = useState(0);
+  // Tracks a question re-opened via the single-question "Retry" button next
+  // to an individual wrong answer in the section scorecard (as opposed to
+  // the batch "Review Wrong Answers" mode, which uses reviewQueue above).
+  // Same purpose as reviewQueue: fixing up just this one answer for your
+  // own learning must NEVER be treated as completing/re-completing the
+  // whole section, so it must never reach maybeShowScorecard/recordAttempt
+  // — spec section 8 applies here just as much as to the batch review mode.
+  const [singleRetryId, setSingleRetryId] = useState<string | null>(null);
   const [examComplete, setExamComplete] = useState(false);
   const [restartModalOpen, setRestartModalOpen] = useState(false);
   const [restarting, setRestarting] = useState(false);
@@ -167,6 +175,7 @@ export default function PracticeClient({
   // previous attempt.
   async function restartFromScratch() {
     setRestarting(true);
+    setSingleRetryId(null);
     try {
       if (user) {
         await clearPersistedAnswers(user.id, certId);
@@ -302,6 +311,7 @@ export default function PracticeClient({
   // only their order — section boundaries (global indices) stay stable
   // for the rest of the exam.
   function resetSection(sectionIdx: number, shuffle: boolean) {
+    setSingleRetryId(null);
     const [start, end] = getSectionRange(activeQuestions.length, sectionIdx);
     const currentIds = activeQuestions.slice(start, end).map((q) => q.id);
     const originalIds = questions.slice(start, end).map((q) => q.id);
@@ -455,10 +465,12 @@ export default function PracticeClient({
                 return next;
               });
               setReopenedIds((s) => new Set(s).add(questionId));
+              setSingleRetryId(questionId);
               setScorecardSection(null);
               goTo(qIndex);
             }}
             onReviewWrong={() => {
+              setSingleRetryId(null);
               const [start, end] = getSectionRange(activeQuestions.length, scorecardSection);
               const wrongIds = activeQuestions
                 .slice(start, end)
@@ -511,6 +523,7 @@ export default function PracticeClient({
             currentIndex={index}
             statusFor={statusFor}
             onJump={(i, sectionIdx) => (sectionIdx !== undefined ? jumpToSection(sectionIdx, i) : goTo(i))}
+            isUnlocked={attemptsMigrationReady ? (s) => isSectionPermanentlyUnlocked(certId, s) : undefined}
             getBestScore={attemptsMigrationReady ? (s) => getBestScore(certId, s) : undefined}
           />
           <SectionProgressBar
@@ -637,11 +650,18 @@ export default function PracticeClient({
             useTopicMasteryStore.getState().recordAnswerForTopic(current.topicId, isCorrect);
             if (user) recordPersistedAnswer(user.id, certId, current.id, isCorrect);
             if (isCorrect) useCertProgressStore.getState().recordModuleCompletion(certId, 2);
-            // Review mode (spec section 8): never touches Attempts, History,
-            // Best Score, or section-unlock state — maybeShowScorecard is
-            // the only place that records an attempt, so it must never be
-            // reached from here, regardless of how many questions are left.
-            if (!reviewQueue) maybeShowScorecard(current.id, next);
+            // Review mode (spec section 8) AND an isolated single-question
+            // "Retry" from the wrong-answers list: neither must ever touch
+            // Attempts, History, Best Score, or section-unlock state —
+            // maybeShowScorecard is the only place that records an
+            // attempt, so it must never be reached from either of these,
+            // regardless of how many questions are left in the section.
+            if (singleRetryId === current.id) {
+              setSingleRetryId(null);
+              setScorecardSection(getSectionForIndex(activeQuestions.length, index));
+            } else if (!reviewQueue) {
+              maybeShowScorecard(current.id, next);
+            }
           }}
           onNext={() => {
             if (reviewQueue) {
@@ -661,6 +681,11 @@ export default function PracticeClient({
             setSkipped((s) => new Set(s).add(current.id));
             if (reviewQueue) {
               if (reviewIndex < reviewQueue.questionIds.length - 1) setReviewIndex(reviewIndex + 1);
+              return;
+            }
+            if (singleRetryId === current.id) {
+              setSingleRetryId(null);
+              setScorecardSection(getSectionForIndex(activeQuestions.length, index));
               return;
             }
             maybeShowScorecard(current.id, checked);
