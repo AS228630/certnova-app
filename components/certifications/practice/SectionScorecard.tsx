@@ -16,6 +16,7 @@ import {
   Target,
   BookOpen,
   ExternalLink,
+  Shuffle,
 } from "lucide-react";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
 import { isSingleChoiceAnswerCorrect, correctOptionIds } from "@/lib/az900Practice";
@@ -82,6 +83,7 @@ export default function SectionScorecard({
   onBackToPath,
   onNextSection,
   onRetry,
+  onRetryShuffled,
   onRetryQuestion,
   onReviewWrong,
   onViewFinalResult,
@@ -97,7 +99,14 @@ export default function SectionScorecard({
   hasNextSection: boolean;
   onBackToPath: () => void;
   onNextSection: () => void;
+  /** "Wiederholen" — same section, questions kept in their existing
+   * (already-selected) order. Progress is wiped to 0, no new order is
+   * generated. */
   onRetry: () => void;
+  /** "Gemischt wiederholen" — same section, same set of questions, but a
+   * brand-new random order is generated on every click (never re-using
+   * the immediately-previous order). Progress is wiped to 0. */
+  onRetryShuffled: () => void;
   onRetryQuestion: (questionId: string) => void;
   /** Practice-only re-attempt of just the wrong questions from this
    * section — per spec section 8, this must NEVER record a new Attempt,
@@ -478,11 +487,22 @@ export default function SectionScorecard({
         )}
         <button
           onClick={onRetry}
+          title={t("practice.retrySameOrderHint")}
           className="flex-1 rounded-lg border border-border-soft py-3 text-sm font-semibold text-text hover:border-primary"
         >
           <span className="inline-flex items-center gap-1.5">
             <RotateCcw size={14} />
-            {t("practice.practiceAgain")}
+            {t("practice.retrySameOrderBtn")}
+          </span>
+        </button>
+        <button
+          onClick={onRetryShuffled}
+          title={t("practice.retryShuffledHint")}
+          className="flex-1 rounded-lg border border-border-soft py-3 text-sm font-semibold text-text hover:border-primary"
+        >
+          <span className="inline-flex items-center gap-1.5">
+            <Shuffle size={14} />
+            {t("practice.retryShuffledBtn")}
           </span>
         </button>
       </div>

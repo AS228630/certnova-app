@@ -217,7 +217,7 @@ export default function PracticeClient({
       }
     }
     if (alreadyCompleted) {
-      resetSection(sectionIdx);
+      resetSection(sectionIdx, true);
     } else {
       goTo(targetIndex);
     }
@@ -266,7 +266,22 @@ export default function PracticeClient({
     }
   }
 
-  function resetSection(sectionIdx: number) {
+  // Restarts just one section, always wiping all progress for its
+  // questions back to zero (0 correct, 0 wrong, 0%, empty progress bar).
+  // `shuffle` picks between the two restart buttons on the section
+  // scorecard:
+  //   - false ("Wiederholen"): the exact same questions, in the exact
+  //     same order they were already shown in (whatever `activeQuestions`
+  //     currently holds for this section — NOT re-derived from the
+  //     original authored order, so it also works correctly if the
+  //     section was already shuffled earlier in this session).
+  //   - true ("Gemischt wiederholen"): the exact same questions, but
+  //     reshuffled into a brand-new random order every single time it's
+  //     called — including repeated clicks in a row.
+  // Either way, the *set* of questions in this section never changes,
+  // only their order — section boundaries (global indices) stay stable
+  // for the rest of the exam.
+  function resetSection(sectionIdx: number, shuffle: boolean) {
     const [start, end] = getSectionRange(activeQuestions.length, sectionIdx);
     const ids = activeQuestions.slice(start, end).map((q) => q.id);
 
@@ -278,18 +293,19 @@ export default function PracticeClient({
       clearPersistedQuestions(user.id, certId, ids);
     }
 
-    // Shuffle just this section's question order (Fisher-Yates), so
-    // retaking a section shows the same pool of questions but never in the
-    // same order twice — keeps section boundaries (global indices) stable
-    // for the rest of the exam.
-    const shuffledIds = [...ids];
-    for (let i = shuffledIds.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffledIds[i], shuffledIds[j]] = [shuffledIds[j], shuffledIds[i]];
+    const nextIds = [...ids];
+    if (shuffle) {
+      // Fisher-Yates — a fresh random order every call, so repeated
+      // "Gemischt wiederholen" clicks in the same session keep producing
+      // different orders rather than settling into a fixed alternate one.
+      for (let i = nextIds.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [nextIds[i], nextIds[j]] = [nextIds[j], nextIds[i]];
+      }
     }
     const baseOrder = order ?? questions.map((q) => q.id);
     const newOrder = [...baseOrder];
-    newOrder.splice(start, shuffledIds.length, ...shuffledIds);
+    newOrder.splice(start, nextIds.length, ...nextIds);
     setOrder(newOrder);
 
     setChecked((s) => {
@@ -305,6 +321,11 @@ export default function PracticeClient({
     setAnswers((a) => {
       const next = { ...a };
       ids.forEach((id) => delete next[id]);
+      return next;
+    });
+    setMarked((s) => {
+      const next = new Set(s);
+      ids.forEach((id) => next.delete(id));
       return next;
     });
     setReopenedIds((s) => new Set([...s, ...ids]));
@@ -367,7 +388,16 @@ export default function PracticeClient({
               goTo(Math.min(end, activeQuestions.length - 1));
             }}
             onRetry={() => {
-              resetSection(scorecardSection);
+              // "Wiederholen" — same order every time, per spec.
+              resetSection(scorecardSection, false);
+              const [start] = getSectionRange(activeQuestions.length, scorecardSection);
+              setScorecardSection(null);
+              goTo(start);
+            }}
+            onRetryShuffled={() => {
+              // "Gemischt wiederholen" — a brand-new random order on
+              // every click, per spec.
+              resetSection(scorecardSection, true);
               const [start] = getSectionRange(activeQuestions.length, scorecardSection);
               setScorecardSection(null);
               goTo(start);
