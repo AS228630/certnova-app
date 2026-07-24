@@ -83,6 +83,7 @@ export default function SectionScorecard({
   onNextSection,
   onRetry,
   onRetryQuestion,
+  onReviewWrong,
   onViewFinalResult,
 }: {
   sectionIndex: number;
@@ -98,6 +99,11 @@ export default function SectionScorecard({
   onNextSection: () => void;
   onRetry: () => void;
   onRetryQuestion: (questionId: string) => void;
+  /** Practice-only re-attempt of just the wrong questions from this
+   * section — per spec section 8, this must NEVER record a new Attempt,
+   * change History, Best Score, or section-unlock state. Undefined when
+   * there are no wrong questions to review. */
+  onReviewWrong?: () => void;
   onViewFinalResult?: () => void;
 }) {
   const { t } = useLocale();
@@ -458,6 +464,17 @@ export default function SectionScorecard({
               {t("practice.viewFinalResultBtn")}
             </button>
           )
+        )}
+        {onReviewWrong && wrongQuestions.length > 0 && (
+          <button
+            onClick={onReviewWrong}
+            className="flex-1 rounded-lg border border-border-soft py-3 text-sm font-semibold text-text hover:border-primary"
+          >
+            <span className="inline-flex items-center gap-1.5">
+              <XCircle size={14} />
+              {t("practice.reviewWrongBtn")} ({wrongQuestions.length})
+            </span>
+          </button>
         )}
         <button
           onClick={onRetry}

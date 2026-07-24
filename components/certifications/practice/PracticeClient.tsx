@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { BarChart3 } from "lucide-react";
+import { BarChart3, RefreshCcw } from "lucide-react";
 import { useRouter } from "next/navigation";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
 import { getAz900Questions, isSingleChoiceAnswerCorrect, isMultiSelectQuestion } from "@/lib/az900Practice";
@@ -82,6 +82,12 @@ export default function PracticeClient({
   const [hintOpen, setHintOpen] = useState(false);
   const [remainingSeconds, setRemainingSeconds] = useState(EXAM_TOTAL_SECONDS);
   const [scorecardSection, setScorecardSection] = useState<number | null>(null);
+  // Review-only mode: practicing just the wrong questions from a section.
+  // Intentionally kept separate from the normal question flow (order/index)
+  // so maybeShowScorecard is never reached from here — per spec section 8,
+  // this must never record an Attempt or touch History/Best-Score/Unlock.
+  const [reviewQueue, setReviewQueue] = useState<{ sectionIndex: number; questionIds: string[] } | null>(null);
+  const [reviewIndex, setReviewIndex] = useState(0);
   const [examComplete, setExamComplete] = useState(false);
   const [restartModalOpen, setRestartModalOpen] = useState(false);
   const [restarting, setRestarting] = useState(false);
@@ -119,7 +125,9 @@ export default function PracticeClient({
     return questions;
   }, [order, questions]);
 
-  const current = activeQuestions[index];
+  const current = reviewQueue
+    ? activeQuestions.find((q) => q.id === reviewQueue.questionIds[reviewIndex])
+    : activeQuestions[index];
   const sectionCount = getSectionCount(activeQuestions.length);
   const currentSectionIdx = getSectionForIndex(activeQuestions.length, index);
   const [currentSectionStart, currentSectionEnd] = getSectionRange(activeQuestions.length, currentSectionIdx);
@@ -386,6 +394,28 @@ export default function PracticeClient({
               setScorecardSection(null);
               goTo(qIndex);
             }}
+            onReviewWrong={() => {
+              const [start, end] = getSectionRange(activeQuestions.length, scorecardSection);
+              const wrongIds = activeQuestions
+                .slice(start, end)
+                .filter((q) => checked.has(q.id) && !isCorrectAnswer(q, answers[q.id]))
+                .map((q) => q.id);
+              if (wrongIds.length === 0) return;
+              setChecked((s) => {
+                const next = new Set(s);
+                wrongIds.forEach((id) => next.delete(id));
+                return next;
+              });
+              setAnswers((a) => {
+                const next = { ...a };
+                wrongIds.forEach((id) => delete next[id]);
+                return next;
+              });
+              setReopenedIds((s) => new Set([...s, ...wrongIds]));
+              setReviewQueue({ sectionIndex: scorecardSection, questionIds: wrongIds });
+              setReviewIndex(0);
+              setScorecardSection(null);
+            }}
             onViewFinalResult={() => {
               setScorecardSection(null);
               setExamComplete(true);
@@ -443,13 +473,41 @@ export default function PracticeClient({
             unlike the Abschnitt switcher above. Normal document flow (not
             absolute), so it pushes the question panel down instead of
             overlaying it. */}
-        <SectionQuestionGrid
-          start={currentSectionStart}
-          end={currentSectionEnd}
-          currentIndex={index}
-          statusFor={statusFor}
-          onJump={goTo}
-        />
+        {reviewQueue ? (
+          <div className="rounded-xl border border-warning/30 bg-warning/10 p-4">
+            <p className="flex items-center gap-2 text-sm font-bold text-warning">
+              <RefreshCcw size={15} />
+              {t("practice.reviewModeTitle")}
+            </p>
+            <p className="mt-1 text-xs text-text-muted">{t("practice.reviewModeHint")}</p>
+            <div className="mt-3 flex items-center justify-between">
+              <span className="text-xs font-semibold text-text-faint">
+                {t("practice.reviewModeProgress")
+                  .replace("{current}", String(reviewIndex + 1))
+                  .replace("{total}", String(reviewQueue.questionIds.length))}
+              </span>
+              <button
+                onClick={() => {
+                  const finishedSectionIdx = reviewQueue.sectionIndex;
+                  setReviewQueue(null);
+                  setReviewIndex(0);
+                  setScorecardSection(finishedSectionIdx);
+                }}
+                className="rounded-lg border border-warning/40 px-3 py-1.5 text-xs font-semibold text-warning hover:bg-warning/10"
+              >
+                {t("practice.reviewModeDone")}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <SectionQuestionGrid
+            start={currentSectionStart}
+            end={currentSectionEnd}
+            currentIndex={index}
+            statusFor={statusFor}
+            onJump={goTo}
+          />
+        )}
       </div>
 
       <SectionStatsPanel
@@ -515,12 +573,32 @@ export default function PracticeClient({
             useTopicMasteryStore.getState().recordAnswerForTopic(current.topicId, isCorrect);
             if (user) recordPersistedAnswer(user.id, certId, current.id, isCorrect);
             if (isCorrect) useCertProgressStore.getState().recordModuleCompletion(certId, 2);
-            maybeShowScorecard(current.id, next);
+            // Review mode (spec section 8): never touches Attempts, History,
+            // Best Score, or section-unlock state — maybeShowScorecard is
+            // the only place that records an attempt, so it must never be
+            // reached from here, regardless of how many questions are left.
+            if (!reviewQueue) maybeShowScorecard(current.id, next);
           }}
-          onNext={() => goTo(index + 1)}
-          onPrev={() => goTo(index - 1)}
+          onNext={() => {
+            if (reviewQueue) {
+              if (reviewIndex < reviewQueue.questionIds.length - 1) setReviewIndex(reviewIndex + 1);
+              return;
+            }
+            goTo(index + 1);
+          }}
+          onPrev={() => {
+            if (reviewQueue) {
+              if (reviewIndex > 0) setReviewIndex(reviewIndex - 1);
+              return;
+            }
+            goTo(index - 1);
+          }}
           onSkip={() => {
             setSkipped((s) => new Set(s).add(current.id));
+            if (reviewQueue) {
+              if (reviewIndex < reviewQueue.questionIds.length - 1) setReviewIndex(reviewIndex + 1);
+              return;
+            }
             maybeShowScorecard(current.id, checked);
             goTo(index + 1);
           }}
@@ -564,7 +642,7 @@ export default function PracticeClient({
         <AICoachPanel key={current.id} question={current} isOpen={coachOpen} onClose={() => setCoachOpen(false)} />
       </div>
 
-      <SectionHistoryPanel certId={certId} certLabel={`${certCode}: ${certTitle}`} />
+      <SectionHistoryPanel certId={certId} certLabel={`${certCode}: ${certTitle}`} totalQuestions={questions.length} />
 
       <PracticeNotesPanel isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
     </div>

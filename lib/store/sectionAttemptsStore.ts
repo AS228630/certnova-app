@@ -59,6 +59,11 @@ type SectionAttemptsState = {
   isSectionPermanentlyUnlocked: (certId: string, sectionIndex: number) => boolean;
   getAttempts: (certId: string) => SectionAttempt[];
   getBestScore: (certId: string, sectionIndex: number) => number | null;
+  /** Full best-score entry (score + the real, uncapped attempt count) —
+   * needed for the one-row-per-section history table, since getAttempts
+   * only returns the 20 most recent attempts (see EMPTY_ATTEMPTS comment
+   * above), which would undercount if used for the attempts total. */
+  getBestScoreEntry: (certId: string, sectionIndex: number) => BestScoreEntry | null;
   reset: () => void;
   /** False until we've successfully talked to the new tables at least
    * once. If the SQL migration hasn't been run yet, those tables don't
@@ -272,6 +277,10 @@ export const useSectionAttemptsStore = create<SectionAttemptsState>((set, get) =
 
   getBestScore: (certId: string, sectionIndex: number) => {
     return get().bestScoresByCert[certId]?.[sectionIndex]?.bestScorePercent ?? null;
+  },
+
+  getBestScoreEntry: (certId: string, sectionIndex: number) => {
+    return get().bestScoresByCert[certId]?.[sectionIndex] ?? null;
   },
 
   reset: () =>
