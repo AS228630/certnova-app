@@ -281,28 +281,62 @@ export default function PracticeClient({
   // Either way, the *set* of questions in this section never changes,
   // only their order — section boundaries (global indices) stay stable
   // for the rest of the exam.
+  // Restarts just one section, always wiping all progress for its
+  // questions back to zero (0 correct, 0 wrong, 0%, empty progress bar).
+  // `shuffle` picks between the two restart buttons on the section
+  // scorecard:
+  //   - false ("Wiederholen"): the exact same questions, restored to the
+  //     TRUE original authored order (1 -> 2 -> 3 -> ... -> N) — always
+  //     the same fixed order on every click, even if the section had
+  //     previously been shuffled by "Gemischt wiederholen". This must
+  //     read from `questions` (the authored/locale array), NOT from
+  //     `activeQuestions`, since the latter may already reflect a prior
+  //     shuffle.
+  //   - true ("Gemischt wiederholen"): the exact same questions, but
+  //     reshuffled into a brand-new random order every single time it's
+  //     called. Guards against generating the exact same order as the
+  //     one just shown (relevant mainly for very small sections, where a
+  //     random shuffle has a real chance of landing back on the same
+  //     sequence) by reshuffling again, up to a few tries.
+  // Either way, the *set* of questions in this section never changes,
+  // only their order — section boundaries (global indices) stay stable
+  // for the rest of the exam.
   function resetSection(sectionIdx: number, shuffle: boolean) {
     const [start, end] = getSectionRange(activeQuestions.length, sectionIdx);
-    const ids = activeQuestions.slice(start, end).map((q) => q.id);
+    const currentIds = activeQuestions.slice(start, end).map((q) => q.id);
+    const originalIds = questions.slice(start, end).map((q) => q.id);
 
     // Clear the persisted (Supabase-backed) correctness for just these
     // questions too — otherwise the question navigator keeps showing them
     // as green/complete after "try this section again", since that comes
     // from persistedCorrectness, not just the local `checked` set below.
     if (user) {
-      clearPersistedQuestions(user.id, certId, ids);
+      clearPersistedQuestions(user.id, certId, currentIds);
     }
 
-    const nextIds = [...ids];
+    let nextIds: string[];
     if (shuffle) {
-      // Fisher-Yates — a fresh random order every call, so repeated
-      // "Gemischt wiederholen" clicks in the same session keep producing
-      // different orders rather than settling into a fixed alternate one.
-      for (let i = nextIds.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [nextIds[i], nextIds[j]] = [nextIds[j], nextIds[i]];
+      // Fisher-Yates — a fresh random order every call. Retried up to 5
+      // times if it happens to land on exactly the same order the
+      // section was just showing (only realistically possible for very
+      // small sections); after that, a rare exact repeat is accepted
+      // rather than looping forever.
+      let attempt = [...currentIds];
+      for (let tries = 0; tries < 5; tries++) {
+        attempt = [...currentIds];
+        for (let i = attempt.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [attempt[i], attempt[j]] = [attempt[j], attempt[i]];
+        }
+        if (attempt.length <= 1 || attempt.join(",") !== currentIds.join(",")) break;
       }
+      nextIds = attempt;
+    } else {
+      // Always the true original authored order, regardless of whatever
+      // order was active before (e.g. a prior shuffle).
+      nextIds = originalIds;
     }
+
     const baseOrder = order ?? questions.map((q) => q.id);
     const newOrder = [...baseOrder];
     newOrder.splice(start, nextIds.length, ...nextIds);
@@ -310,25 +344,25 @@ export default function PracticeClient({
 
     setChecked((s) => {
       const next = new Set(s);
-      ids.forEach((id) => next.delete(id));
+      currentIds.forEach((id) => next.delete(id));
       return next;
     });
     setSkipped((s) => {
       const next = new Set(s);
-      ids.forEach((id) => next.delete(id));
+      currentIds.forEach((id) => next.delete(id));
       return next;
     });
     setAnswers((a) => {
       const next = { ...a };
-      ids.forEach((id) => delete next[id]);
+      currentIds.forEach((id) => delete next[id]);
       return next;
     });
     setMarked((s) => {
       const next = new Set(s);
-      ids.forEach((id) => next.delete(id));
+      currentIds.forEach((id) => next.delete(id));
       return next;
     });
-    setReopenedIds((s) => new Set([...s, ...ids]));
+    setReopenedIds((s) => new Set([...s, ...currentIds]));
   }
 
   if (!current) {
