@@ -5221,11 +5221,13 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     prompt: "Ordnen Sie die Sicherheitskomponenten den entsprechenden Tiefenverteidigungsebenen zu. (Ziehen Sie dazu den entsprechenden Dienst aus der linken Spalte in die entsprechende Beschreibung rechts. Jeder Dienst kann einmal, mehrmals oder gar nicht verwendet werden. HINWEIS: Jede richtige Zuordnung zä",
     items: [
       { id: "item0", label: "Software-Updates und Patches" },
-      { id: "item1", label: "Überwachungskamera" },
+      { id: "item1", label: "Multifaktor-Authentifizierung (MFA)" },
+      { id: "item2", label: "Überwachungskamera" },
     ],
     descriptions: [
       { id: "d0", text: "Computing", correctItemId: "item0" },
-      { id: "d1", text: "Physische Sicherheit", correctItemId: "item1" },
+      { id: "d1", text: "Identität und Zugriff", correctItemId: "item1" },
+      { id: "d2", text: "Physische Sicherheit", correctItemId: "item2" },
     ],
     explanation: "Bei der mehrstufigen Verteidigung handelt es sich um eine Strategie, die eine Reihe von Mechanismen nutzt, um das Voranschreiten eines Angriffs zu verlangsamen, der auf unbefugten Zugriff auf Informationen abzielt. Jede Ebene bietet Schutz, sodass bei einem Durchbruch einer Ebene bereits eine weitere Ebene vorhanden ist, um weitere Angriffe zu verhindern. Microsoft verfolgt einen mehrschichtigen Sicherheitsansatz, sowohl in seinen physischen Rechenzentren als auch in allen Azure-Diensten. Ziel der mehrstufigen Verteidigung ist es, Informationen zu schützen und deren Diebstahl durch unbefugte Personen zu verhindern. Die allgemeinen Prinzipien zur Definition einer Sicherheitslage sind Vertraulichkeit, Integrität und Verfügbarkeit (zusammengefasst als CIA). • Vertraulichkeit: Das Prinzip der geringsten Privilegien beschränkt den Zugriff auf Informationen auf Personen, denen dieser ausdrücklich gewährt wurde. Zu diesen Informationen gehört der Schutz von Benutzerkennwörtern, Remote-Zugriffszertifikaten und E-Mail-Inhalten. • Integrität: Ziel ist es, unbefugte Änderungen an gespeicherten oder übertragenen Informationen zu verhindern. Ein gängiger Ansatz bei der Datenübertragung besteht darin, dass der Absender mithilfe eines Einweg-Hashing-Algorithmus einen eindeutigen Fingerabdruck der Daten erstellt. Dieser Hash wird zusammen mit den Daten an den Empfänger gesendet. Der Empfänger berechnet den Hash der Daten neu und vergleicht ihn mit dem Original, um sicherzustellen, dass die Daten während der Übertragung nicht verloren gegangen oder verändert wurden. • Verfügbarkeit: Stellen Sie sicher, dass die Dienste für autorisierte Benutzer verfügbar sind. Denial-of-Service-Angriffe sind eine häufige Ursache für den Verlust der Verfügbarkeit für Benutzer. Naturkatastrophen erfordern außerdem die Systementwicklung, um einzelne Ausfallpunkte zu vermeiden und mehrere Instanzen einer Anwendung an geografisch verteilten Standorten bereitzustellen. Jede Schicht kann eines oder mehrere der CIA-Anliegen implementieren:",
     resources: [{ label: "2 Defense In Depth", url: "https://learn.microsoft.com/en-us/training/modules/azure-well-architected-security/2-defense-in-depth" }],
