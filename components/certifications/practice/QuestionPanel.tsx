@@ -241,12 +241,41 @@ export default function QuestionPanel({
           </div>
         </div>
       )}
+      {!isYesNo && !isMatching && "blankFill" in question && question.blankFill && (
+        <div className="mb-4 rounded-lg border border-border-soft p-3">
+          <p className="mb-2.5 text-xs font-semibold text-text-faint">{t("practice.orFillBlank")}</p>
+          <p className="mb-3 whitespace-pre-line text-sm leading-relaxed text-text">
+            {question.blankFill.template.split("___")[0]}
+            <select
+              disabled={checked}
+              value={singleSelected ?? ""}
+              onChange={(e) => onSelect(e.target.value as PracticeOptionId)}
+              className={`mx-1 rounded-md border px-2 py-1 text-sm font-semibold ${
+                singleSelected ? "border-primary bg-primary-light text-primary" : "border-border-soft bg-panel text-text-muted"
+              }`}
+            >
+              <option value="" disabled>
+                {t("practice.blankPlaceholder")}
+              </option>
+              {question.blankFill.choices.map((choice, ci) => (
+                <option key={ci} value={question.options[ci]?.id}>
+                  {choice}
+                </option>
+              ))}
+            </select>
+            {question.blankFill.template.split("___")[1]}
+          </p>
+        </div>
+      )}
       {!isYesNo && !isMatching && (
         <div className="space-y-2.5">
           {isMultiSelect && !checked && (
             <p className="mb-1 text-xs font-semibold text-primary">
               {t("practice.selectMultipleHint").replace("{count}", String(correctOptionIds(question).length))}
             </p>
+          )}
+          {"blankFill" in question && question.blankFill && (
+            <p className="mb-1 text-xs font-semibold text-text-faint">{t("practice.orPickFullSentence")}</p>
           )}
           {question.options.map((opt) => {
             const isSelected = isMultiSelect ? multiSelected.includes(opt.id) : singleSelected === opt.id;

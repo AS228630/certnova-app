@@ -50,6 +50,18 @@ export type SingleChoiceQuestion = {
   /** Path to a reference screenshot the question depends on (e.g. an Azure
    * Portal navigation panel), shown above the answer options. */
   imageUrl?: string;
+  /** For "complete the sentence" questions that, in the real exam, offer a
+   * live fill-in-the-blank dropdown as an alternative to picking one of the
+   * full pre-written sentences below. `choices[i]` always corresponds to
+   * `options[i]` (same order, same underlying answer) — picking a blank
+   * choice calls the exact same onSelect as picking the matching full
+   * option, so both input methods stay in sync automatically. */
+  blankFill?: {
+    /** The sentence with exactly one "___" marking where the dropdown goes. */
+    template: string;
+    /** German-translated short choices, in the same order as `options`. */
+    choices: string[];
+  };
   options: { id: PracticeOptionId; text: string }[];
   /** A single letter for normal single-choice questions, or an array of
    * letters for "select all that apply" / multi-response questions (real
@@ -2784,6 +2796,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-187",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "___ ist der Prozess der Überprüfung der Anmeldeinformationen eines Benutzers.",
+      choices: ["Autorisierung", "Authentifizierung", "Föderation", "Ticketerstellung"],
+    },
     options: [
       { id: "A", text: "Bei der Autorisierung handelt es sich um den Vorgang der Überprüfung der Anmeldeinformationen eines Benutzers." },
       { id: "B", text: "Bei der Authentifizierung handelt es sich um den Vorgang der Überprüfung der Anmeldeinformationen eines Benutzers." },
@@ -2811,6 +2827,15 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-189",
     topicId: "azure-architektur",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Wenn eine Ressourcengruppe mit dem Namen RG1 über eine Löschsperre verfügt, ___",
+      choices: [
+        "kann nur ein Mitglied der globalen Administratorgruppe RG1 löschen.",
+        "muss die Löschsperre entfernt werden, bevor ein Administrator RG1 löschen kann.",
+        "muss eine Azure-Richtlinie geändert werden, bevor ein Administrator RG1 löschen kann.",
+        "muss ein Azure-Tag hinzugefügt werden, bevor ein Administrator RG1 löschen kann.",
+      ],
+    },
     options: [
       { id: "A", text: "Wenn eine Ressourcengruppe mit dem Namen RG1 über eine Löschsperre verfügt, kann nur ein Mitglied der globalen Administratorgruppe RG1 löschen." },
       { id: "B", text: "Wenn eine Ressourcengruppe mit dem Namen RG1 über eine Löschsperre verfügt, muss die Löschsperre entfernt werden, bevor ein Administrator RG1 löschen kann." },
@@ -2854,6 +2879,15 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-192",
     topicId: "azure-architektur",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "VNET1 ___",
+      choices: [
+        "wird automatisch gelöscht.",
+        "wird automatisch in eine andere Ressourcengruppe verschoben.",
+        "funktioniert weiterhin normal.",
+        "ist jetzt ein schreibgeschütztes Objekt.",
+      ],
+    },
     options: [
       { id: "A", text: "VNET1 wird automatisch gelöscht." },
       { id: "B", text: "VNET1 wird automatisch in eine andere Ressourcengruppe verschoben." },
