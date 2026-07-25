@@ -291,13 +291,34 @@ export default function PracticeClient({
   function maybeShowScorecard(justResolvedId: string, nowChecked: Set<string>) {
     const sectionIdx = getSectionForIndex(activeQuestions.length, index);
     const [start, end] = getSectionRange(activeQuestions.length, sectionIdx);
+    let allResolved = true;
     for (let i = start; i < end; i++) {
       const q = activeQuestions[i];
       if (!q) continue;
       const resolved = q.id === justResolvedId || nowChecked.has(q.id) || skipped.has(q.id);
-      if (!resolved) return;
+      if (!resolved) {
+        allResolved = false;
+        break;
+      }
     }
+
+    // Demo/preview shortcut: resolving the very LAST question of a
+    // section always opens the scorecard right away, even if earlier
+    // questions in the section were never touched — e.g. an instructor
+    // jumping straight from the question grid to question 50 to show
+    // students what the results screen looks like, without solving all
+    // 50 questions first. Only the section's actual last question
+    // triggers this; answering any other still-unresolved question in
+    // the middle of the section does nothing extra.
+    const isLastQuestionOfSection = index === end - 1;
+    if (!allResolved && !isLastQuestionOfSection) return;
+
     setScorecardSection(sectionIdx);
+
+    // A preview jump (section not actually fully resolved) is never a
+    // real attempt — it must never touch Attempts, History, Best Score,
+    // or section-unlock state, exactly like Review Wrong Answers.
+    if (!allResolved) return;
 
     // Record this as a completed attempt at the section — every genuine
     // completion, not just the first, and never overwritten (spec: full
