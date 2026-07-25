@@ -32,9 +32,18 @@ type UniversalLabStageProps = {
  * ComingSoonLab. Add a new case (e.g. 'AWS' -> <AwsPortalSimulator />) here,
  * and nowhere else, once a new runtime is built.
  */
+// Labs are temporarily locked site-wide (every company, every
+// certification, including the Azure runtime that otherwise works) —
+// everyone sees the same "we're working on it" placeholder for now.
+// Flip this back to false to re-enable; nothing else here was touched.
+const LABS_LOCKED = true;
+
 export default function UniversalLabStage({ infrastructureType, company, cert, lab: labFromServer }: UniversalLabStageProps) {
   const { locale } = useLocale();
   const lab = infrastructureType === "AZURE" && labFromServer ? getLab(cert.id, cert.title, cert.level, labFromServer.slug, locale) : labFromServer;
+
+  if (LABS_LOCKED) return <ComingSoonLab company={company} cert={cert} />;
+
   switch (infrastructureType) {
     case "AZURE":
       if (!lab) return <ComingSoonLab company={company} cert={cert} />;

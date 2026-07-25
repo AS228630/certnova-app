@@ -1063,7 +1063,7 @@ const tr: Dictionary = {
   labs: {
     backToCert: "Geri dön",
     labEnvironment: "Lab Ortamı",
-    labInProgress: "{company} için etkileşimli, uygulamalı bir lab geliştiriliyor ve yakında burada kullanıma sunulacak — Azure simülatörümüzle aynı deneyimle.",
+    labInProgress: "Bunun üzerinde çalışıyoruz! {company} için etkileşimli, uygulamalı bir lab geliştiriliyor ve yakında burada kullanıma sunulacak.",
     endLab: "Labı Sonlandır",
     labsBreadcrumb: "Lablar",
     remainingTimeL: "Kalan Süre",

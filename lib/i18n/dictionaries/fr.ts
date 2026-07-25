@@ -1063,7 +1063,7 @@ const fr: Dictionary = {
   labs: {
     backToCert: "Retour à",
     labEnvironment: "Environnement de lab",
-    labInProgress: "Un lab interactif pratique pour {company} est en préparation et sera bientôt disponible ici — avec la même expérience que notre simulateur Azure.",
+    labInProgress: "Nous y travaillons ! Un lab interactif pratique pour {company} est en préparation et sera bientôt disponible ici.",
     endLab: "Terminer le lab",
     labsBreadcrumb: "Labs",
     remainingTimeL: "Temps restant",

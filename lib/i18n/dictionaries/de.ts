@@ -1064,7 +1064,7 @@ const de = {
   labs: {
     backToCert: "Zurück zu",
     labEnvironment: "Lab-Umgebung",
-    labInProgress: "Ein interaktives Hands-on-Lab für {company} ist in Arbeit und wird hier bald verfügbar sein — mit der gleichen Erfahrung wie unser Azure-Simulator.",
+    labInProgress: "Wir arbeiten daran! Ein interaktives Hands-on-Lab für {company} ist in Arbeit und wird hier in Kürze verfügbar sein.",
     endLab: "Lab beenden",
     labsBreadcrumb: "Labs",
     remainingTimeL: "Verbleibende Zeit",

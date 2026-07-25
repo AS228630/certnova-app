@@ -1063,7 +1063,7 @@ const ar: Dictionary = {
   labs: {
     backToCert: "الرجوع إلى",
     labEnvironment: "بيئة المختبر",
-    labInProgress: "مختبر تفاعلي عملي لـ {company} قيد التطوير وسيكون متاحاً هنا قريباً — بنفس تجربة محاكي Azure لدينا.",
+    labInProgress: "نحن نعمل على ذلك! مختبر تفاعلي عملي لـ {company} قيد التطوير وسيكون متاحاً هنا قريباً.",
     endLab: "إنهاء المختبر",
     labsBreadcrumb: "المختبرات",
     remainingTimeL: "الوقت المتبقي",

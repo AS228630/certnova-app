@@ -1063,7 +1063,7 @@ const fa: Dictionary = {
   labs: {
     backToCert: "بازگشت به",
     labEnvironment: "محیط لب",
-    labInProgress: "یه لب عملی و تعاملی برای {company} در حال ساخته و به‌زودی اینجا در دسترس قرار می‌گیره — با همون تجربه‌ی شبیه‌ساز Azure ما.",
+    labInProgress: "ما در حال کار روی این هستیم! یک لب عملی و تعاملی برای {company} در حال ساخته‌شدنه و به‌زودی اینجا در دسترس قرار می‌گیره.",
     endLab: "پایان لب",
     labsBreadcrumb: "لب‌ها",
     remainingTimeL: "زمان باقی‌مانده",
