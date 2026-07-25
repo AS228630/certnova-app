@@ -32,7 +32,6 @@ export default function QuestionPanel({
   onSkip,
   onToggleMark,
   onOpenAiCoach,
-  onShuffle,
   onOpenNotes,
   onRetrySection,
   onRetrySectionShuffled,
@@ -56,7 +55,6 @@ export default function QuestionPanel({
   onSkip: () => void;
   onToggleMark: () => void;
   onOpenAiCoach: () => void;
-  onShuffle: () => void;
   onOpenNotes: () => void;
   /** "Wiederholen" — restart the current section (same question order),
    * available at any time, not just after finishing the section. */
@@ -82,7 +80,13 @@ export default function QuestionPanel({
       : isMultiSelect
         ? multiSelected.length > 0
         : !!singleSelected;
-  const explanationVisible = checked || showExplanation;
+  // Explanation is ALWAYS hidden by default, for every question in every
+  // certification/company (this is the shared practice engine, so this
+  // one fix applies everywhere) — it only appears when the person
+  // explicitly taps the "Erläuterung"/explanation button, and a second
+  // tap hides it again. It must never auto-reveal just because the
+  // answer was checked (right or wrong).
+  const explanationVisible = showExplanation;
 
   const [lastQuestionId, setLastQuestionId] = useState(question.id);
   if (question.id !== lastQuestionId) {
@@ -335,13 +339,6 @@ export default function QuestionPanel({
             Überspringen + the primary CTA (spanning 2 cols) below */}
         <div className="mb-2.5 flex gap-2.5 sm:hidden">
           <button
-            onClick={onShuffle}
-            className="flex flex-1 items-center justify-center gap-1.5 rounded-2xl border border-border-soft px-3 py-2 text-xs font-semibold text-text"
-          >
-            <Shuffle size={13} />
-            {t("practice.shuffle")}
-          </button>
-          <button
             onClick={onOpenNotes}
             className="flex flex-1 items-center justify-center gap-1.5 rounded-2xl border border-border-soft px-3 py-2 text-xs font-semibold text-text"
           >
@@ -413,13 +410,6 @@ export default function QuestionPanel({
               className="rounded-2xl border border-border-soft px-5 py-2.5 text-sm font-semibold text-text transition-all duration-200 ease-in-out hover:border-primary/60 hover:shadow-[0_0_12px_rgba(124,58,237,0.15)] disabled:opacity-30"
             >
               {t("practice.backBtn")}
-            </button>
-            <button
-              onClick={onShuffle}
-              className="flex items-center gap-1.5 rounded-2xl border border-border-soft px-5 py-2.5 text-sm font-semibold text-text transition-all duration-200 ease-in-out hover:border-primary/60 hover:shadow-[0_0_12px_rgba(124,58,237,0.15)]"
-            >
-              <Shuffle size={15} />
-              {t("practice.shuffle")}
             </button>
             <button
               onClick={onOpenNotes}

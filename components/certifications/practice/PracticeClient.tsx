@@ -173,16 +173,6 @@ export default function PracticeClient({
     return ids.size;
   }, [checked, persistedCorrectness]);
 
-  function shuffle() {
-    const ids = questions.map((q) => q.id);
-    for (let i = ids.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [ids[i], ids[j]] = [ids[j], ids[i]];
-    }
-    setOrder(ids);
-    setIndex(0);
-  }
-
   // Full "start over": wipes every persisted answer for this cert (so
   // sections re-lock from Abschnitt 1), resets all local session state,
   // and reshuffles the full question order so it's never the same as any
@@ -800,7 +790,6 @@ export default function PracticeClient({
             })
           }
           onOpenAiCoach={() => setCoachOpen(true)}
-          onShuffle={shuffle}
           onOpenNotes={() => setNotesOpen(true)}
           onRetrySection={() => requestSectionRetry(false)}
           onRetrySectionShuffled={() => requestSectionRetry(true)}
