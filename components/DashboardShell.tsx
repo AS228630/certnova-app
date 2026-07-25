@@ -20,6 +20,8 @@ import { useLiveRoomStore } from "@/lib/store/liveRoomStore";
 import { useTopicMasteryStore } from "@/lib/store/topicMasteryStore";
 import { useActivityLogStore } from "@/lib/store/activityLogStore";
 import { useSubscriptionStore } from "@/lib/store/subscriptionStore";
+import { useQuestionAnswersStore } from "@/lib/store/questionAnswersStore";
+import { useSectionAttemptsStore } from "@/lib/store/sectionAttemptsStore";
 import { getFullName } from "@/lib/supabase/useUser";
 import CtaBanner from "@/components/dashboard/CtaBanner";
 import Footer from "@/components/Footer";
@@ -112,6 +114,16 @@ export default function DashboardShell({
         useTopicMasteryStore.getState().reset();
         useActivityLogStore.getState().reset();
         useSubscriptionStore.getState().reset();
+        // These two power the practice-exam question colors (correct/
+        // wrong/unanswered) and section-unlock state. Missing from this
+        // list meant that switching accounts in the same browser tab —
+        // without a hard refresh — could leave the PREVIOUS user's
+        // practice progress visible (green "already answered" questions,
+        // sections already unlocked) briefly or, in some navigation
+        // patterns, persistently, since the underlying Zustand store
+        // never got cleared on sign-out.
+        useQuestionAnswersStore.getState().reset();
+        useSectionAttemptsStore.getState().reset();
         if (requireAuth) {
           router.replace("/login");
         }
