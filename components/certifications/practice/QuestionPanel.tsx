@@ -305,6 +305,12 @@ export default function QuestionPanel({
             </p>
           )}
           <p className="text-sm text-text-muted">{question.explanation}</p>
+          {"explanationImageUrl" in question && question.explanationImageUrl && (
+            <div className="mt-3 overflow-hidden rounded-lg border border-border-soft">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={question.explanationImageUrl} alt={t("practice.referenceImgAlt")} className="w-full" />
+            </div>
+          )}
           {question.resources && question.resources.length > 0 && (
             <div className="mt-3 space-y-1">
               {question.resources.map((r) => (
