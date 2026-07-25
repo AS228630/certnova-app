@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { CSSProperties } from "react";
-import { Bookmark, Sparkles, CheckCircle2, XCircle, ExternalLink, Lightbulb, Shuffle, StickyNote, Repeat } from "lucide-react";
+import { Bookmark, Sparkles, CheckCircle2, XCircle, ExternalLink, Lightbulb, Shuffle, StickyNote, Repeat, Trash2 } from "lucide-react";
 import type { PracticeOptionId, PracticeQuestion } from "@/lib/az900Practice";
 import { isMultiSelectQuestion, correctOptionIds } from "@/lib/az900Practice";
 import MatchingQuestionView from "./MatchingQuestionView";
@@ -35,6 +35,7 @@ export default function QuestionPanel({
   onOpenNotes,
   onRetrySection,
   onRetrySectionShuffled,
+  onResetAll,
 }: {
   question: PracticeQuestion;
   index: number;
@@ -62,6 +63,11 @@ export default function QuestionPanel({
   /** "Gemischt wiederholen" — restart the current section with a fresh
    * random order, available at any time. */
   onRetrySectionShuffled: () => void;
+  /** Resets ALL progress for the whole certification (every section,
+   * not just the current one) — the same action as the "restart the
+   * whole exam" button, exposed here so it doesn't require finishing
+   * the exam or navigating away to Settings first. */
+  onResetAll: () => void;
 }) {
   const { t } = useLocale();
   const [showExplanation, setShowExplanation] = useState(false);
@@ -129,6 +135,14 @@ export default function QuestionPanel({
           >
             <Shuffle size={13} />
             <span className="hidden sm:inline">{t("practice.retryShuffledBtn")}</span>
+          </button>
+          <button
+            onClick={onResetAll}
+            title={t("practice.resetAllHint")}
+            className="flex items-center gap-1.5 rounded-lg border border-danger/30 px-3 py-1.5 text-xs font-semibold text-danger hover:bg-danger/10"
+          >
+            <Trash2 size={13} />
+            <span className="hidden sm:inline">{t("practice.resetAllBtn")}</span>
           </button>
           <button
             onClick={onOpenAiCoach}

@@ -989,6 +989,8 @@ const ru: Dictionary = {
     retryShuffledBtn: "Повторить вперемешку",
     retrySameOrderHint: "Те же вопросы, в том же порядке, что и раньше.",
     retryShuffledHint: "Те же вопросы, но новый случайный порядок при каждом клике.",
+    resetAllBtn: "Сбросить всё",
+    resetAllHint: "Удаляет весь твой прогресс по этой сертификации — навсегда разблокированные разделы остаются разблокированными.",
     sectionRetryConfirmTitle: "Начать новую попытку?",
     sectionRetryConfirmBody: "Текущий прогресс в этом разделе будет сброшен.",
     practiceAgain: "Тренироваться снова",

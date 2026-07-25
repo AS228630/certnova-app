@@ -989,6 +989,8 @@ const ar: Dictionary = {
     retryShuffledBtn: "إعادة عشوائية",
     retrySameOrderHint: "نفس الأسئلة، بنفس الترتيب السابق.",
     retryShuffledHint: "نفس الأسئلة، لكن بترتيب عشوائي جديد مع كل نقرة.",
+    resetAllBtn: "إعادة تعيين الكل",
+    resetAllHint: "يمسح كل تقدمك لهذه الشهادة — الأقسام المفتوحة نهائيًا تبقى مفتوحة.",
     sectionRetryConfirmTitle: "بدء محاولة جديدة؟",
     sectionRetryConfirmBody: "سيتم إعادة تعيين تقدمك الحالي في هذا القسم.",
     practiceAgain: "التدرب مرة أخرى",

@@ -989,6 +989,8 @@ const tr: Dictionary = {
     retryShuffledBtn: "Karışık Tekrarla",
     retrySameOrderHint: "Aynı sorular, öncekiyle aynı sırada.",
     retryShuffledHint: "Aynı sorular, her tıklamada yeni bir rastgele sırayla.",
+    resetAllBtn: "Her Şeyi Sıfırla",
+    resetAllHint: "Bu sertifika için tüm ilerlemeni siler — kalıcı olarak açılmış bölümler açık kalır.",
     sectionRetryConfirmTitle: "Yeni bir deneme başlatılsın mı?",
     sectionRetryConfirmBody: "Bu bölümdeki mevcut ilerlemeniz sıfırlanacak.",
     practiceAgain: "Tekrar Pratik Yap",

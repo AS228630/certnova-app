@@ -795,6 +795,7 @@ export default function PracticeClient({
           onOpenNotes={() => setNotesOpen(true)}
           onRetrySection={() => requestSectionRetry(false)}
           onRetrySectionShuffled={() => requestSectionRetry(true)}
+          onResetAll={() => setRestartModalOpen(true)}
         />
       </div>
 
@@ -816,6 +817,10 @@ export default function PracticeClient({
             goTo(start);
           }}
         />
+      )}
+
+      {restartModalOpen && (
+        <RestartConfirmModal onConfirm={restartFromScratch} onCancel={() => setRestartModalOpen(false)} loading={restarting} />
       )}
 
       {/* AI coach now spans the full width below the question. */}

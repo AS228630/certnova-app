@@ -989,6 +989,8 @@ const fr: Dictionary = {
     retryShuffledBtn: "Répéter (mélangé)",
     retrySameOrderHint: "Les mêmes questions, dans le même ordre qu'avant.",
     retryShuffledHint: "Les mêmes questions, avec un nouvel ordre aléatoire à chaque clic.",
+    resetAllBtn: "Tout réinitialiser",
+    resetAllHint: "Efface toute ta progression pour cette certification — les sections déjà débloquées définitivement le restent.",
     sectionRetryConfirmTitle: "Démarrer une nouvelle tentative ?",
     sectionRetryConfirmBody: "Votre progression actuelle dans cette section sera réinitialisée.",
     practiceAgain: "S'entraîner à nouveau",

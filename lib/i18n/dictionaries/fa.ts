@@ -989,6 +989,8 @@ const fa: Dictionary = {
     retryShuffledBtn: "تکرار درهم‌شده",
     retrySameOrderHint: "همان سؤال‌ها، با همان ترتیب قبلی.",
     retryShuffledHint: "همان سؤال‌ها، اما با هر کلیک ترتیب تصادفی جدید.",
+    resetAllBtn: "بازنشانی همه",
+    resetAllHint: "کل پیشرفتت برای این گواهینامه رو پاک می‌کنه — بخش‌هایی که قبلاً برای همیشه باز شدن، باز می‌مونن.",
     sectionRetryConfirmTitle: "شروع یک مرور جدید؟",
     sectionRetryConfirmBody: "پیشرفت فعلی این بخش صفر خواهد شد.",
     practiceAgain: "دوباره تمرین کن",

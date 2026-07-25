@@ -990,6 +990,8 @@ const de = {
     retryShuffledBtn: "Gemischt wiederholen",
     retrySameOrderHint: "Gleiche Fragen, gleiche Reihenfolge wie zuvor.",
     retryShuffledHint: "Gleiche Fragen, aber bei jedem Klick neu gemischt.",
+    resetAllBtn: "Alles zurücksetzen",
+    resetAllHint: "Löscht deinen gesamten Fortschritt für diese Zertifizierung — bereits dauerhaft freigeschaltete Teile bleiben freigeschaltet.",
     sectionRetryConfirmTitle: "Neue Wiederholung starten?",
     sectionRetryConfirmBody: "Der aktuelle Fortschritt dieser Wiederholung wird zurückgesetzt.",
     practiceAgain: "Erneut üben",

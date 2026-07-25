@@ -989,6 +989,8 @@ const uk: Dictionary = {
     retryShuffledBtn: "Повторити (перемішано)",
     retrySameOrderHint: "Ті самі питання, той самий порядок, що й раніше.",
     retryShuffledHint: "Ті самі питання, але новий випадковий порядок з кожним кліком.",
+    resetAllBtn: "Скинути все",
+    resetAllHint: "Видаляє весь твій прогрес з цієї сертифікації — назавжди розблоковані розділи залишаються розблокованими.",
     sectionRetryConfirmTitle: "Почати нову спробу?",
     sectionRetryConfirmBody: "Ваш поточний прогрес у цьому розділі буде скинуто.",
     practiceAgain: "Практикуватися знову",
