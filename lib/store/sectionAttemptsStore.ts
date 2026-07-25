@@ -79,7 +79,17 @@ export const useSectionAttemptsStore = create<SectionAttemptsState>((set, get) =
   unlockedByCert: {},
   bestScoresByCert: {},
   loadedCerts: new Set(),
-  migrationReady: true,
+  // Starts false — we haven't actually talked to the database yet, so we
+  // don't know anything about unlock state. Only loadForCert's success
+  // path sets this true, once real data is in unlockedByCert. Previously
+  // this defaulted to true, which meant isSectionPermanentlyUnlocked was
+  // trusted immediately on a fresh page load — before the fetch had even
+  // returned — making every section beyond the first look locked for
+  // however long the fetch took, even for an account with real, earned
+  // progress. On a slow connection (or if the fetch stalled for any
+  // reason) this could be mistaken for a permanent lock instead of a
+  // brief loading state.
+  migrationReady: false,
 
   loadForCert: async (userId: string, certId: string) => {
     const cacheKey = `${userId}:${certId}`;
@@ -289,6 +299,6 @@ export const useSectionAttemptsStore = create<SectionAttemptsState>((set, get) =
       unlockedByCert: {},
       bestScoresByCert: {},
       loadedCerts: new Set(),
-      migrationReady: true,
+      migrationReady: false,
     }),
 }));
