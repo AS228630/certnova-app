@@ -124,12 +124,27 @@ export default function SectionScorecard({
   const [start, end] = getSectionRange(total, sectionIndex);
   const sectionQuestions = questions.slice(start, end);
 
+  // A question the user never touched at all (not checked, not even
+  // skipped) only happens via the instructor "jump to the last question"
+  // demo shortcut — a genuinely completed section never leaves any
+  // question in this state, since maybeShowScorecard only opens this
+  // screen once every question is checked or skipped. Counting it as
+  // correct-neutral (excluded from the score, like a real skip) would be
+  // misleading here: it must count as wrong, so a demo where only the
+  // very last question was answered shows a realistic low score and a
+  // populated wrong-answers list, not a fake 100%.
+  const isUntouched = (q: PracticeQuestion) => !checked.has(q.id) && !skipped.has(q.id);
+
   const correct = sectionQuestions.filter((q) => checked.has(q.id) && isCorrectAnswer(q, answers[q.id])).length;
-  const wrong = sectionQuestions.filter((q) => checked.has(q.id) && !isCorrectAnswer(q, answers[q.id])).length;
+  const wrong = sectionQuestions.filter(
+    (q) => (checked.has(q.id) && !isCorrectAnswer(q, answers[q.id])) || isUntouched(q)
+  ).length;
   const skippedCount = sectionQuestions.filter((q) => skipped.has(q.id) && !checked.has(q.id)).length;
   const score = correct + wrong === 0 ? 0 : Math.round((correct / (correct + wrong)) * 100);
 
-  const wrongQuestions = sectionQuestions.filter((q) => checked.has(q.id) && !isCorrectAnswer(q, answers[q.id]));
+  const wrongQuestions = sectionQuestions.filter(
+    (q) => (checked.has(q.id) && !isCorrectAnswer(q, answers[q.id])) || isUntouched(q)
+  );
   const skippedQuestions = sectionQuestions.filter((q) => skipped.has(q.id) && !checked.has(q.id));
   const markedQuestions = sectionQuestions.filter((q) => marked.has(q.id));
 
