@@ -522,7 +522,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-30",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Eine Platform-as-a-Service (PaaS)-Lösung, die Web-Apps in Azure hostet, bietet die vollständige Kontrolle über die Betriebssysteme, auf denen Anwendungen gehostet werden: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Eine Platform-as-a-Service (PaaS)-Lösung, die Web-Apps in Azure hostet, bietet die vollständige Kontrolle über die Betriebssysteme, auf denen Anwendungen gehostet werden", correct: "Nein" },
       { text: "Eine Platform-as-a-Service (PaaS)-Lösung, die Web-Apps in Azure hostet, bietet die Möglichkeit, die Plattform automatisch zu skalieren", correct: "Ja" },
@@ -697,7 +697,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-41",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie zutrifft. Andernfalls wählen Sie „Nein“. So implementieren Sie eine Azure Multi-Factor Authentication (MFA)-Lösung, müssen Sie eine Verbundlösung bereitstellen oder lokale Identitäten mit der Cloud synchronisieren: Nein",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie zutrifft. Andernfalls wählen Sie „Nein“.",
     statements: [
       { text: "So implementieren Sie eine Azure Multi-Factor Authentication (MFA)-Lösung, müssen Sie eine Verbundlösung bereitstellen oder lokale Identitäten mit der Cloud synchronisieren", correct: "Nein" },
       { text: "Zwei gültige Methoden für Azure Multi-Factor Authentication (MFA) sind eine Bildidentifikation und eine Passnummer", correct: "Nein" },
@@ -738,7 +738,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-44",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie zutrifft. Andernfalls wählen Sie „Nein“. Die im Service Level Agreement (SLA) garantierte Betriebszeit für kostenpflichtige Azure-Dienste beträgt mindestens 99,99 Prozent: Nein",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie zutrifft. Andernfalls wählen Sie „Nein“.",
     statements: [
       { text: "Die im Service Level Agreement (SLA) garantierte Betriebszeit für kostenpflichtige Azure-Dienste beträgt mindestens 99,99 Prozent", correct: "Nein" },
       { text: "Unternehmen können die im Service Level Agreement (SLA) garantierte Betriebszeit erhöhen, indem sie Azure-Ressourcen in mehreren Regionen bereitstellen", correct: "Ja" },
@@ -765,7 +765,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-46",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie zutrifft. Andernfalls wählen Sie „Nein“. Alle in einer einzelnen Ressourcengruppe bereitgestellten Azure-Ressourcen müssen dieselbe Azure-Region gemeinsam nutzen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie zutrifft. Andernfalls wählen Sie „Nein“.",
     statements: [
       { text: "Alle in einer einzelnen Ressourcengruppe bereitgestellten Azure-Ressourcen müssen dieselbe Azure-Region gemeinsam nutzen", correct: "Nein" },
       { text: "Wenn Sie einer Ressourcengruppe ein Tag zuweisen, werden alle Azure-Ressourcen in dieser Ressourcengruppe demselben Tag zugewiesen", correct: "Nein" },
@@ -795,7 +795,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-48",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie zutrifft. Andernfalls wählen Sie „Nein“. Azure Advisor gibt Empfehlungen zur Verbesserung der Sicherheit einer Azure Active Directory (Azure AD)-Umgebung: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie zutrifft. Andernfalls wählen Sie „Nein“.",
     statements: [
       { text: "Azure Advisor gibt Empfehlungen zur Verbesserung der Sicherheit einer Azure Active Directory (Azure AD)-Umgebung", correct: "Ja" },
       { text: "Azure Advisor gibt Empfehlungen zur Senkung der Kosten für den Betrieb virtueller Azure-Computer", correct: "Ja" },
@@ -913,7 +913,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-57",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie zutrifft. Andernfalls wählen Sie „Nein“. Ein einzelnes Microsoft-Konto kann zum Verwalten mehrerer Azure-Abonnements verwendet werden: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie zutrifft. Andernfalls wählen Sie „Nein“.",
     statements: [
       { text: "Ein einzelnes Microsoft-Konto kann zum Verwalten mehrerer Azure-Abonnements verwendet werden", correct: "Ja" },
       { text: "Zwei Azure-Abonnements können durch Erstellen einer Supportanfrage zu einem einzigen Abonnement zusammengeführt werden", correct: "Nein" },
@@ -1591,7 +1591,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-106",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Azure-Ressourcen können nur auf andere Ressourcen in derselben Ressourcengruppe zugreifen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Azure-Ressourcen können nur auf andere Ressourcen in derselben Ressourcengruppe zugreifen", correct: "Nein" },
       { text: "Wenn Sie eine Ressourcengruppe löschen, werden alle Ressourcen in der Ressourcengruppe gelöscht", correct: "Ja" },
@@ -1664,7 +1664,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-111",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Das Speichern von 1 TB Daten im Azure Blob-Speicher kostet immer das Gleiche, unabhängig von der Azure-Region, in der sich die Daten befinden: Nein",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Das Speichern von 1 TB Daten im Azure Blob-Speicher kostet immer das Gleiche, unabhängig von der Azure-Region, in der sich die Daten befinden", correct: "Nein" },
       { text: "Wenn Sie ein Azure-Speicherkonto vom Typ Allzweck v2 verwenden, werden Ihnen nur die gespeicherte Datenmenge berechnet. Alle Lese- und Schreibvorgänge sind kostenlos", correct: "Nein" },
@@ -1678,7 +1678,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-112",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Ein Benutzer, dem die Rolle „Besitzer“ zugewiesen ist, kann den Besitz eines Azure-Abonnements übertragen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Ein Benutzer, dem die Rolle „Besitzer“ zugewiesen ist, kann den Besitz eines Azure-Abonnements übertragen", correct: "Ja" },
       { text: "Sie können das Azure-Abonnement Ihres Unternehmens von der kostenlosen Testversion auf Pay-As-You-Go umstellen", correct: "Ja" },
@@ -1954,7 +1954,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-132",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Azure Advisor kann eine Liste der virtuellen Azure-Computer erstellen, die durch Azure Backup geschützt sind: Nein",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Azure Advisor kann eine Liste der virtuellen Azure-Computer erstellen, die durch Azure Backup geschützt sind", correct: "Nein" },
       { text: "Wenn Sie die von Azure Advisor bereitgestellten Sicherheitsempfehlungen umsetzen, sinkt der Secure Score Ihres Unternehmens", correct: "Nein" },
@@ -1981,7 +1981,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-134",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Über Azure Service Health kann ein Administrator den Zustand aller in einer Azure-Umgebung bereitgestellten Dienste sowie aller anderen in Azure verfügbaren Dienste anzeigen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Über Azure Service Health kann ein Administrator den Zustand aller in einer Azure-Umgebung bereitgestellten Dienste sowie aller anderen in Azure verfügbaren Dienste anzeigen", correct: "Ja" },
       { text: "Über Azure Service Health kann ein Administrator eine Regel erstellen, um benachrichtigt zu werden, wenn ein Azure-Dienst ausfällt", correct: "Ja" },
@@ -1995,7 +1995,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-135",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) In Azure Active Directory Premium ist eine Verfügbarkeit von mindestens 99,9 Prozent garantiert: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "In Azure Active Directory Premium ist eine Verfügbarkeit von mindestens 99,9 Prozent garantiert", correct: "Ja" },
       { text: "Das Service Level Agreement (SLA) für Azure Active Directory Basic ist dasselbe wie das SLA für Azure Active Directory Free", correct: "Nein" },
@@ -2025,7 +2025,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-137",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Mit Azure-Reservierungen zahlen Sie weniger für virtuelle Maschinen als bei der nutzungsbasierten Bezahlung: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Mit Azure-Reservierungen zahlen Sie weniger für virtuelle Maschinen als bei der nutzungsbasierten Bezahlung", correct: "Ja" },
       { text: "Wenn Sie zwei virtuelle Azure-Computer erstellen, die die B2S-Größe verwenden, generiert jeder virtuelle Computer immer dieselben monatlichen Kosten", correct: "Nein" },
@@ -2126,7 +2126,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-144",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Durch das Erstellen zusätzlicher Ressourcengruppen in einem Azure-Abonnement entstehen zusätzliche Kosten: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Durch das Erstellen zusätzlicher Ressourcengruppen in einem Azure-Abonnement entstehen zusätzliche Kosten", correct: "Nein" },
       { text: "Durch das Kopieren mehrerer GB Daten von einem lokalen Netzwerk über ein VPN nach Azure entstehen zusätzliche Datenübertragungskosten", correct: "Nein" },
@@ -2354,7 +2354,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-161",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Daten, die in ein Azure Storage-Konto kopiert werden, werden automatisch in mindestens drei Kopien vorgehalten: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Daten, die in ein Azure Storage-Konto kopiert werden, werden automatisch in mindestens drei Kopien vorgehalten", correct: "Ja" },
       { text: "Alle Daten, die in ein Azure Storage-Konto kopiert werden, werden automatisch in einem anderen Azure-Rechenzentrum gesichert", correct: "Nein" },
@@ -2368,7 +2368,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-162",
     topicId: "cloud-konzepte",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Wenn Sie in jeder Region über bereitgestellte Azure-Ressourcen verfügen, können Sie in allen Regionen Verfügbarkeitszonen implementieren: Nein",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Wenn Sie in jeder Region über bereitgestellte Azure-Ressourcen verfügen, können Sie in allen Regionen Verfügbarkeitszonen implementieren", correct: "Nein" },
       { text: "In Verfügbarkeitszonen können nur virtuelle Maschinen erstellt werden, auf denen Windows Server ausgeführt wird", correct: "Nein" },
@@ -2513,7 +2513,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-172",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Ein Standard-Supportplan ist in einem kostenlosen Azure-Konto enthalten: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Ein Standard-Supportplan ist in einem kostenlosen Azure-Konto enthalten", correct: "Nein" },
       { text: "Ein Premier-Supportplan kann nur von Unternehmen erworben werden, die über ein Enterprise Agreement (EA) verfügen", correct: "Ja" },
@@ -2527,7 +2527,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-173",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Ein kostenloses Azure-Konto hat ein Ausgabenlimit: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Ein kostenloses Azure-Konto hat ein Ausgabenlimit", correct: "Ja" },
       { text: "Ein kostenloses Azure-Konto hat ein Limit für die Datenmenge, die in Azure hochgeladen werden kann", correct: "Ja" },
@@ -2541,7 +2541,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-174",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Ein kostenloses Azure-Konto hat ein Ausgabenlimit: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Ein kostenloses Azure-Konto hat ein Ausgabenlimit", correct: "Ja" },
       { text: "Ein kostenloses Azure-Konto hat ein Limit von 2 TB Daten, die in Azure hochgeladen werden können", correct: "Nein" },
@@ -2555,7 +2555,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-175",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Im Azure-Portal können Sie zwischen Diensten unterscheiden, die allgemein verfügbar sind...: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Im Azure-Portal können Sie zwischen Diensten unterscheiden, die allgemein verfügbar sind, und Diensten, die sich in der öffentlichen Vorschau befinden", correct: "Ja" },
       { text: "Nachdem ein Azure-Dienst allgemein verfügbar geworden ist, wird der Dienst nicht mehr mit neuen Funktionen aktualisiert", correct: "Nein" },
@@ -2569,7 +2569,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-176",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Bei Verwendung einer Azure ExpressRoute-Verbindung ist eingehender Datenverkehr von einem lokalen Netzwerk immer kostenlos: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Bei Verwendung einer Azure ExpressRoute-Verbindung ist eingehender Datenverkehr von einem lokalen Netzwerk immer kostenlos", correct: "Ja" },
       { text: "Ausgehender Datenverkehr von Azure zu einem lokalen Netzwerk ist immer kostenlos", correct: "Nein" },
@@ -2767,7 +2767,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-191",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Über Azure Service Health kann ein Administrator den Zustand aller ... anzeigen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Über Azure Service Health kann ein Administrator den Zustand aller in einer Azure-Umgebung bereitgestellten Dienste anzeigen", correct: "Ja" },
       { text: "Über Azure Service Health kann ein Administrator eine Regel erstellen, um benachrichtigt zu werden, wenn ein Azure-Dienst ausfällt", correct: "Ja" },
@@ -2890,7 +2890,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-200",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Alle in einer einzelnen Ressourcengruppe bereitgestellten Azure-Ressourcen müssen dieselbe Azure-Region verwenden: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Alle in einer einzelnen Ressourcengruppe bereitgestellten Azure-Ressourcen müssen dieselbe Azure-Region verwenden", correct: "Nein" },
       { text: "Wenn Sie einer Ressourcengruppe ein Tag zuweisen, wird dieses Tag allen Azure-Ressourcen in dieser Ressourcengruppe zugewiesen", correct: "Nein" },
@@ -2962,7 +2962,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-205",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Azure PowerShell-Module können unter macOS installiert werden: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Azure PowerShell-Module können unter macOS installiert werden", correct: "Ja" },
       { text: "Auf Azure Cloud Shell kann über einen Webbrowser auf einem Linux-Computer zugegriffen werden", correct: "Ja" },
@@ -2975,7 +2975,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-206",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Die Datenschutz-Grundverordnung (DSGVO) definiert Datenschutz- und Privatsphäreregeln: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Die Datenschutz-Grundverordnung (DSGVO) definiert Datenschutz- und Privatsphäreregeln", correct: "Ja" },
       { text: "Die Datenschutz-Grundverordnung (DSGVO) gilt für Unternehmen, die Personen in der EU Waren oder Dienstleistungen anbieten", correct: "Ja" },
@@ -3028,7 +3028,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-210",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Sie können Ressourcengruppen verschachteln: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Sie können Ressourcengruppen verschachteln", correct: "Nein" },
       { text: "Eine virtuelle Azure-Maschine kann in mehreren Ressourcengruppen enthalten sein", correct: "Nein" },
@@ -3149,7 +3149,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-219",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Azure Active Directory Premium P2 garantiert mindestens 99,9 Prozent Verfügbarkeit: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Azure Active Directory Premium P2 garantiert mindestens 99,9 Prozent Verfügbarkeit", correct: "Ja" },
       { text: "Das Service Level Agreement (SLA) für Azure Active Directory Premium P2 ist dasselbe wie das SLA für Azure Active Directory Free", correct: "Nein" },
@@ -3233,7 +3233,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-225",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Verfügbarkeitszonen können in allen Azure-Regionen implementiert werden: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Verfügbarkeitszonen können in allen Azure-Regionen implementiert werden", correct: "Nein" },
       { text: "In Verfügbarkeitszonen können nur virtuelle Maschinen erstellt werden, auf denen Windows Server ausgeführt wird", correct: "Nein" },
@@ -3732,7 +3732,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-262",
     topicId: "cloud-konzepte",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Eine Platform-as-a-Service-Lösung (PaaS) bietet die vollständige Kontrolle über Betriebssysteme, die Anwendungen hosten: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Eine Platform-as-a-Service-Lösung (PaaS) bietet die vollständige Kontrolle über Betriebssysteme, die Anwendungen hosten", correct: "Nein" },
       { text: "Eine Platform-as-a-Service-Lösung (PaaS) bietet Apps zusätzlichen Speicher durch Änderung der Preisstufen", correct: "Ja" },
@@ -3745,7 +3745,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-263",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Azure Pay-As-You-Go-Preise sind ein Beispiel für CapEx: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Azure Pay-As-You-Go-Preise sind ein Beispiel für CapEx", correct: "Nein" },
       { text: "Azure Reserved VM-Instanzen sind ein Beispiel für OpEx", correct: "Nein" },
@@ -3758,7 +3758,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-264",
     topicId: "cloud-konzepte",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Ein Unternehmen kann eine private Cloud erweitern, indem es der öffentlichen Cloud seine eigenen physischen Server hinzufügt: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Ein Unternehmen kann eine private Cloud erweitern, indem es der öffentlichen Cloud seine eigenen physischen Server hinzufügt", correct: "Nein" },
       { text: "Um eine Hybrid Cloud aufzubauen, müssen Sie Ressourcen in der öffentlichen Cloud bereitstellen", correct: "Ja" },
@@ -3797,7 +3797,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-267",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Sie können Verfügbarkeitszonen in Azure verwenden, um virtuelle Azure-Computer vor einem Rechenzentrumsausfall zu schützen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Sie können Verfügbarkeitszonen in Azure verwenden, um virtuelle Azure-Computer vor einem Rechenzentrumsausfall zu schützen", correct: "Ja" },
       { text: "Sie können Verfügbarkeitszonen in Azure verwenden, um virtuelle Azure-Computer vor einem Regionsausfall zu schützen", correct: "Nein" },
@@ -3844,7 +3844,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-270",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Sie können die Aktivitätsprotokolle von Azure Active Directory (Azure AD) so konfigurieren, dass sie in Azure Monitor angezeigt werden: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Sie können die Aktivitätsprotokolle von Azure Active Directory (Azure AD) so konfigurieren, dass sie in Azure Monitor angezeigt werden", correct: "Ja" },
       { text: "Von Azure Monitor aus können Sie Ressourcen über mehrere Azure-Abonnements hinweg überwachen", correct: "Ja" },
@@ -3915,7 +3915,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-275",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Nordamerika wird durch eine einzige Azure-Region repräsentiert: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Nordamerika wird durch eine einzige Azure-Region repräsentiert", correct: "Nein" },
       { text: "Jede Azure-Region verfügt über mehrere Rechenzentren", correct: "Nein" },
@@ -3942,7 +3942,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-277",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Azure Monitor kann die Leistung von lokalen Computern überwachen: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Azure Monitor kann die Leistung von lokalen Computern überwachen", correct: "Ja" },
       { text: "Azure Monitor kann Warnungen an Azure Active Directory-Sicherheitsgruppen senden", correct: "Nein" },
@@ -3970,7 +3970,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-279",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Sie können Gruppenrichtlinien in Azure Active Directory (Azure AD) erstellen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Sie können Gruppenrichtlinien in Azure Active Directory (Azure AD) erstellen", correct: "Nein" },
       { text: "Sie können Windows 10-Geräte mit Azure Active Directory (Azure AD) verbinden", correct: "Ja" },
@@ -3998,7 +3998,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-281",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Sie können einer Azure-Blaupause eine Azure-Ressourcenmanager-Vorlage hinzufügen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Sie können einer Azure-Blaupause eine Azure-Ressourcenmanager-Vorlage hinzufügen", correct: "Ja" },
       { text: "Sie können einer Ressourcengruppe eine Azure-Blaupause zuweisen", correct: "Nein" },
@@ -4247,7 +4247,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-298",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Sie können benutzerdefinierte Azure-Rollen erstellen, um den Zugriff auf Ressourcen zu steuern: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Sie können benutzerdefinierte Azure-Rollen erstellen, um den Zugriff auf Ressourcen zu steuern", correct: "Ja" },
       { text: "Einem Benutzerkonto können mehrere Azure-Rollen zugewiesen werden", correct: "Ja" },
@@ -4322,7 +4322,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-303",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn die Aussage wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Übereinstimmung ist einen Punkt wert.) Azure DevOps Services ermöglicht Entwicklern das Bereitstellen oder Aktualisieren von Anwendungen...: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn die Aussage wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Übereinstimmung ist einen Punkt wert.)",
     statements: [
       { text: "Azure DevOps Services ermöglicht Entwicklern das Bereitstellen oder Aktualisieren von Anwendungen in Azure mithilfe von Continuous-Integration/Continuous-Delivery (CI/CD)-Pipelines", correct: "Ja" },
       { text: "Azure DevOps Services umfasst ein Git-Repository, in dem Entwickler Code speichern können", correct: "Ja" },
@@ -4336,7 +4336,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-304",
     topicId: "cloud-konzepte",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Bei Software as a Service (SaaS) müssen Sie Softwareupdates anwenden: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Bei Software as a Service (SaaS) müssen Sie Softwareupdates anwenden", correct: "Nein" },
       { text: "Bei Infrastructure as a Service (IaaS) müssen Sie die Software installieren, die Sie verwenden möchten", correct: "Ja" },
@@ -4350,7 +4350,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-305",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Die Kosten für Azure-Ressourcen können je nach Region unterschiedlich sein: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Die Kosten für Azure-Ressourcen können je nach Region unterschiedlich sein", correct: "Ja" },
       { text: "Eine Azure-Reservierung wird verwendet, um Serverkapazität in einem bestimmten Rechenzentrum zu reservieren", correct: "Nein" },
@@ -4484,7 +4484,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-314",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Sie können Azure Policy verwenden, um Tags auf Ressourcen anzuwenden: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Sie können Azure Policy verwenden, um Tags auf Ressourcen anzuwenden", correct: "Ja" },
       { text: "Sie können derselben Azure-Ressource mehrere Tags hinzufügen", correct: "Ja" },
@@ -4629,7 +4629,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-324",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Sie können Azure Cost Management verwenden, um die mit Verwaltungsgruppen verbundenen Kosten anzuzeigen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Sie können Azure Cost Management verwenden, um die mit Verwaltungsgruppen verbundenen Kosten anzuzeigen", correct: "Ja" },
       { text: "Sie können Azure Cost Management verwenden, um die mit Ressourcengruppen verbundenen Kosten anzuzeigen", correct: "Ja" },
@@ -4657,7 +4657,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-326",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Die Archivzugriffsebene wird auf Speicherkontoebene festgelegt: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Die Archivzugriffsebene wird auf Speicherkontoebene festgelegt", correct: "Nein" },
       { text: "Die Hot-Zugriffsebene wird für Daten empfohlen, auf die häufig zugegriffen und die häufig geändert werden", correct: "Ja" },
@@ -5147,7 +5147,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-360",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) So verwenden Sie Azure Active Directory (Azure AD)-Anmeldeinformationen, um sich bei einem Computer anzumelden...: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Um sich mit Azure Active Directory (Azure AD)-Anmeldeinformationen bei einem Computer anzumelden, auf dem Windows 10 ausgeführt wird, muss der Computer mit Azure AD verbunden sein", correct: "Ja" },
       { text: "Benutzer in Azure Active Directory (Azure AD) werden mithilfe von Ressourcengruppen organisiert", correct: "Nein" },
@@ -5284,7 +5284,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-369",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Sie müssen Azure Cloud Shell auf Ihrem Computer installieren, bevor Sie es verwenden können: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Sie müssen Azure Cloud Shell auf Ihrem Computer installieren, bevor Sie es verwenden können", correct: "Nein" },
       { text: "Die Azure-Befehlszeilenschnittstelle (CLI) ist in Windows 11 standardmäßig installiert", correct: "Nein" },
@@ -5298,7 +5298,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-370",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Die Hot-Zugriffsebene ist für Blobdaten verfügbar, die Standardspeicher verwenden: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Die Hot-Zugriffsebene ist für Blobdaten verfügbar, die Standardspeicher verwenden", correct: "Ja" },
       { text: "Die Cool-Zugriffsebene ist für die Dateifreigaben im Premium-Speicher verfügbar", correct: "Nein" },
@@ -5368,7 +5368,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-375",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Single-Sign-On (SSO) erfordert, dass sich alle Benutzer über die Microsoft Authenticator-App anmelden: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Single Sign-On (SSO) erfordert, dass sich alle Benutzer über die Microsoft Authenticator-App anmelden", correct: "Nein" },
       { text: "Bei der Authentifizierung wird festgestellt, über welche Zugriffsebene ein authentifizierter Benutzer oder Dienst verfügt", correct: "Nein" },
@@ -5382,7 +5382,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-376",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Azure Active Directory (Azure AD) kann zum Verwalten des Zugriffs auf lokale Anwendungen verwendet werden: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Azure Active Directory (Azure AD) kann zum Verwalten des Zugriffs auf lokale Anwendungen verwendet werden", correct: "Ja" },
       { text: "Azure Active Directory (Azure AD) bietet Single Sign-On (SSO)", correct: "Ja" },
@@ -5396,7 +5396,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-377",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Sie können Azure Resource Manager (ARM)-Vorlagen mithilfe des Azure-Portals bereitstellen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Sie können Azure Resource Manager (ARM)-Vorlagen mithilfe des Azure-Portals bereitstellen", correct: "Ja" },
       { text: "Azure Resource Manager (ARM)-Vorlagen können Infrastruktur mithilfe von Code definieren", correct: "Ja" },
@@ -5410,7 +5410,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-378",
     topicId: "cloud-konzepte",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Azure Files ist ein Beispiel für Infrastructure as a Service (IaaS): Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Azure Files ist ein Beispiel für Infrastructure as a Service (IaaS)", correct: "Ja" },
       { text: "Ein DNS-Server, der auf einer virtuellen Azure-Maschine ausgeführt wird, ist ein Beispiel für Platform as a Service (PaaS)", correct: "Nein" },
@@ -5424,7 +5424,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-379",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) In einer Azure-VM-Skalierungsgruppe sind die virtuellen Maschinen identisch konfiguriert: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "In einer Azure-VM-Skalierungsgruppe sind die virtuellen Maschinen identisch konfiguriert", correct: "Ja" },
       { text: "Die Anzahl der Azure-VMs in einer VM-Skalierungsgruppe kann automatisch erhöht werden", correct: "Ja" },
@@ -5452,7 +5452,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-381",
     topicId: "cloud-konzepte",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Cloud Computing bietet elastische Skalierbarkeit: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Cloud Computing bietet elastische Skalierbarkeit", correct: "Ja" },
       { text: "Kunden können ihre Investitionsausgaben (CapEx) durch die Nutzung einer öffentlichen Cloud minimieren", correct: "Ja" },
@@ -5480,7 +5480,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-383",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Auf einem Azure Virtual Desktop-Sitzungshost kann nur Windows 10 oder Windows 11 ausgeführt werden: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Auf einem Azure Virtual Desktop-Sitzungshost kann nur Windows 10 oder Windows 11 ausgeführt werden", correct: "Nein" },
       { text: "Ein Azure Virtual Desktop-Hostpool mit 20 Sitzungshosts unterstützt maximal 20 gleichzeitige Benutzerverbindungen", correct: "Nein" },
@@ -5633,7 +5633,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-394",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Die Kosten für ausgehenden Datenverkehr von Azure sind für alle Azure-Regionen gleich: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Die Kosten für ausgehenden Datenverkehr von Azure sind für alle Azure-Regionen gleich", correct: "Nein" },
       { text: "Beim Kauf von Azure-Diensten über ein Enterprise Agreement (EA) müssen Sie einen festgelegten Betrag ausgeben", correct: "Ja" },
@@ -5647,7 +5647,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-395",
     topicId: "cloud-konzepte",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Azure Functions ist ein Beispiel für ein Platform-as-a-Service (PaaS)-Cloud-Servicemodell: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Azure Functions ist ein Beispiel für ein Platform-as-a-Service (PaaS)-Cloud-Servicemodell", correct: "Ja" },
       { text: "Microsoft 365 ist ein Beispiel für ein Software-as-a-Service (SaaS)-Cloud-Servicemodell", correct: "Ja" },
@@ -5661,7 +5661,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-396",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Microsoft Defender für Cloud kann Azure-Ressourcen und lokale Ressourcen überwachen: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Microsoft Defender für Cloud kann Azure-Ressourcen und lokale Ressourcen überwachen", correct: "Ja" },
       { text: "Alle Funktionen von Microsoft Defender für Cloud sind kostenlos", correct: "Nein" },
@@ -6033,7 +6033,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-426",
     topicId: "cloud-konzepte",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Microsoft SQL Server 2019, installiert auf einer virtuellen Azure-Maschine, ist ein Beispiel für Platform as a Service (PaaS): Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Microsoft SQL Server 2019, installiert auf einer virtuellen Azure-Maschine, ist ein Beispiel für Platform as a Service (PaaS)", correct: "Nein" },
       { text: "Azure SQL Database ist ein Beispiel für Platform as a Service (PaaS)", correct: "Ja" },
@@ -6047,7 +6047,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-427",
     topicId: "cloud-konzepte",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Sie müssen über physische Server verfügen, um Cloud Computing zu nutzen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Sie müssen über physische Server verfügen, um Cloud Computing zu nutzen", correct: "Nein" },
       { text: "Sie müssen über eine Internetverbindung verfügen, um Cloud Computing zu nutzen", correct: "Ja" },
@@ -6247,7 +6247,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-442",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Sie können eine Ressourcengruppe innerhalb einer anderen Ressourcengruppe erstellen: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Sie können eine Ressourcengruppe innerhalb einer anderen Ressourcengruppe erstellen", correct: "Nein" },
       { text: "Eine virtuelle Azure-Maschine kann in mehreren Ressourcengruppen enthalten sein", correct: "Nein" },
@@ -6305,7 +6305,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-446",
     topicId: "cloud-konzepte",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Sie müssen über eine Internetverbindung verfügen, um Cloud-Dienste zu verwalten: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Sie müssen über eine Internetverbindung verfügen, um Cloud-Dienste zu verwalten", correct: "Ja" },
       { text: "Sie müssen eine Verwaltungs-App installieren, um Cloud-Dienste zu verwalten", correct: "Nein" },
@@ -6333,7 +6333,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-448",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Microsoft Sentinel speichert erfasste Ereignisse in einem Azure Storage-Konto: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Microsoft Sentinel speichert erfasste Ereignisse in einem Azure Storage-Konto", correct: "Ja" },
       { text: "Microsoft Sentinel kann Vorfälle automatisch beheben", correct: "Ja" },
@@ -6554,7 +6554,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-463",
     topicId: "cloud-konzepte",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Sie können Cloud-Dienste nur von Windows-Geräten aus verwalten: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Sie können Cloud-Dienste nur von Windows-Geräten aus verwalten", correct: "Nein" },
       { text: "Sie können Cloud-Dienste über die Befehlszeile verwalten", correct: "Ja" },
@@ -6630,7 +6630,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-468",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.) Premium-Speicherkonten können als Azure-Dateifreigaben konfiguriert werden: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Premium-Speicherkonten können als Azure-Dateifreigaben konfiguriert werden", correct: "Ja" },
       { text: "Premium-Speicherkonten können als Blockblobs-Speicher konfiguriert werden", correct: "Ja" },
@@ -7009,7 +7009,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-496",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Sie können einer virtuellen Maschine eine Azure-Richtlinie zuweisen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Sie können einer virtuellen Maschine eine Azure-Richtlinie zuweisen", correct: "Ja" },
       { text: "Wenn einer Ressourcengruppe eine Azure-Richtlinie zugewiesen wird, werden nicht konforme Ressourcen aus der Gruppe entfernt", correct: "Nein" },
@@ -7093,7 +7093,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-502",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) AzCopy ist ein Befehlszeilenprogramm zum Kopieren von Blobs oder Dateien in ein oder aus einem Speicherkonto: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "AzCopy ist ein Befehlszeilenprogramm zum Kopieren von Blobs oder Dateien in ein oder aus einem Speicherkonto", correct: "Ja" },
       { text: "Azure Storage Explorer ist ein in der Cloud gehosteter Migrationsdienst zum Übertragen großer Datenmengen", correct: "Nein" },
@@ -7121,7 +7121,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-504",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Azure Arc kann physische Server verwalten, auf denen Linux ausgeführt wird: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Azure Arc kann physische Server verwalten, auf denen Linux ausgeführt wird", correct: "Ja" },
       { text: "Azure Arc kann Azure Kubernetes Service (AKS)-Cluster im großen Maßstab verwalten", correct: "Ja" },
@@ -7149,7 +7149,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-506",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Azure Advisor bietet personalisierte Empfehlungen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Azure Advisor bietet personalisierte Empfehlungen", correct: "Ja" },
       { text: "Azure Advisor kann Kostenempfehlungen für virtuelle Maschinen bereitstellen", correct: "Ja" },
@@ -7205,7 +7205,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-510",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) ExpressRoute verwendet Border Gateway Protocol (BGP): Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "ExpressRoute verwendet Border Gateway Protocol (BGP)", correct: "Ja" },
       { text: "ExpressRoute verwendet das Internet, um ein lokales Netzwerk mit Azure zu verbinden", correct: "Nein" },
@@ -7343,7 +7343,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-520",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Microsoft Entra ID erfordert Domänencontroller auf virtuellen Azure-Maschinen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Microsoft Entra ID erfordert Domänencontroller auf virtuellen Azure-Maschinen", correct: "Nein" },
       { text: "Microsoft Entra ID bietet Authentifizierungsdienste für Azure und Microsoft 365", correct: "Ja" },
@@ -7509,7 +7509,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-532",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Der Total Cost of Ownership (TCO)-Rechner zeigt die Kosten für die Ausführung von Workloads in einem Rechenzentrum an: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Der Total Cost of Ownership (TCO)-Rechner zeigt die Kosten für die Ausführung von Workloads in einem Rechenzentrum an", correct: "Ja" },
       { text: "Der Total Cost of Ownership (TCO)-Rechner zeigt die Kosten für die Ausführung von Workloads in Azure an", correct: "Ja" },
@@ -7564,7 +7564,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-536",
     topicId: "cloud-konzepte",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Das Erstellen und Konfigurieren eines virtuellen Netzwerks ist Teil des Platform-as-a-Service-Clouddienstmodells (PaaS): Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Das Erstellen und Konfigurieren eines virtuellen Netzwerks ist Teil des Platform-as-a-Service-Clouddienstmodells (PaaS)", correct: "Nein" },
       { text: "Im Platform-as-a-Service-Clouddienstmodell (PaaS) liegt die Codeaktualisierung für eine Azure-Web-App in der Verantwortung des Kunden", correct: "Ja" },
@@ -7595,7 +7595,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-538",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Azure Advisor unterstützt Warnungen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Azure Advisor unterstützt Warnungen", correct: "Ja" },
       { text: "Azure Advisor-Empfehlungen können nach Verwaltungseinheit gefiltert werden", correct: "Nein" },
@@ -7666,7 +7666,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-543",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Die Cold-Zugriffsebene in Azure Storage ist für mindestens 90 Tage Datenspeicherung optimiert: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Die Cold-Zugriffsebene in Azure Storage ist für mindestens 90 Tage Datenspeicherung optimiert", correct: "Ja" },
       { text: "Die Cool-Zugriffsebene in Azure Storage ist für mindestens 90 Tage Datenspeicherung optimiert", correct: "Nein" },
@@ -7680,7 +7680,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-544",
     topicId: "cloud-konzepte",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Horizontale Skalierung kann die Anzahl der Instanzen virtueller Maschinen automatisch erhöhen: Ja.",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Horizontale Skalierung kann die Anzahl der Instanzen virtueller Maschinen automatisch erhöhen", correct: "Ja" },
       { text: "Vertikale Skalierung kann einer virtuellen Maschine automatisch zusätzlichen Speicher zuweisen", correct: "Ja" },
@@ -7694,7 +7694,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-545",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Sie können einem Microsoft Entra-Benutzer eine Ressourcensperre hinzufügen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Sie können einem Microsoft Entra-Benutzer eine Ressourcensperre hinzufügen", correct: "Nein" },
       { text: "Sie können derselben virtuellen Azure-Maschine mehrere Ressourcensperren hinzufügen", correct: "Ja" },
@@ -7722,7 +7722,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-547",
     topicId: "azure-architektur",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Microsoft Purview bietet Datensicherung: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Microsoft Purview bietet Datensicherung", correct: "Nein" },
       { text: "Microsoft Purview bietet Datenermittlung", correct: "Ja" },
@@ -7820,7 +7820,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "yesno",
     id: "real-az900-554",
     topicId: "azure-verwaltung",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.) Eine schreibgeschützte Sperre verhindert, dass Benutzer eine Azure-Ressource löschen: Ja",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
       { text: "Eine schreibgeschützte Sperre verhindert, dass Benutzer eine Azure-Ressource löschen", correct: "Ja" },
       { text: "Benutzer können eine Azure-Ressource ändern, auf die eine Löschsperre angewendet wurde", correct: "Ja" },
