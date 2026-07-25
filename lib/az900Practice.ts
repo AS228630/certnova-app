@@ -120,6 +120,12 @@ export type MatchingQuestion = {
   instructions?: string;
   items: MatchingItem[];
   descriptions: MatchingDescription[];
+  /** Full pre-combined answer options exactly as shown in the source PDF
+   * (e.g. "Platzhalter 1: X, Platzhalter 2: Y, ..."), letting the user
+   * pick one whole combination directly instead of matching items one by
+   * one. combos[i][j] = the itemId assigned to descriptions[j] for combo
+   * i — same order as `descriptions`. */
+  combos?: string[][];
   explanation: string;
   explanationImageUrl?: string;
   resources?: { label: string; url: string }[];
@@ -614,6 +620,14 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d3", text: "Ein vereinfachtes Tool zum Erstellen intelligenter Anwendungen für künstliche Intelligenz (KI).", correctItemId: "cognitive" },
       { id: "d4", text: "Überwacht Webanwendungen.", correctItemId: "insights" },
     ],
+    combos: [
+      ["devops", "advisor", "cognitive", "insights"],
+      ["devops", "cognitive", "advisor", "insights"],
+      ["advisor", "devops", "insights", "advisor"],
+      ["advisor", "devops", "cognitive", "insights"],
+      ["devops", "advisor", "advisor", "cognitive"],
+      ["cognitive", "advisor", "insights", "devops"],
+    ],
     explanation: "Azure Advisor ist ein personalisierter Cloud-Berater, der Sie bei der Optimierung Ihrer Azure-Bereitstellungen unterstützt. Azure Cognitive Services bringt KI für jeden Entwickler in Reichweite, ohne Machine-Learning-Kenntnisse. Azure Application Insights, eine Funktion von Azure Monitor, überwacht Live-Anwendungen und erkennt automatisch Leistungsanomalien. Azure DevOps bietet Entwicklerdienste für Arbeitsplanung, Codeentwicklung sowie das Erstellen und Bereitstellen von Anwendungen.",
     explanationImageUrl: "/exam-images/az900-q33-explain.png",
   },
@@ -693,6 +707,12 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d3", text: "Erkennt und diagnostiziert Anomalien in Web-Apps.", correctItemId: "insights" },
       { id: "d4", text: "Hostet Web-Apps.", correctItemId: "appservice" },
     ],
+    combos: [
+      ["functions", "insights", "databricks", "appservice"],
+      ["databricks", "functions", "insights", "appservice"],
+      ["functions", "databricks", "insights", "appservice"],
+      ["appservice", "insights", "databricks", "databricks"],
+    ],
     explanation: "Azure Databricks bietet Data-Science- und Data-Engineering-Teams eine schnelle, kollaborative Spark-basierte Plattform für Big Data und maschinelles Lernen. Azure Functions ist eine ereignisgesteuerte Compute-on-Demand-Lösung zur Implementierung von Code. Azure App Service ist ein HTTP-basierter Dienst zum Hosten von Webanwendungen. Application Insights, eine Funktion von Azure Monitor, ist ein erweiterbarer APM-Dienst, der automatisch Leistungsanomalien in Live-Anwendungen erkennt.",
     explanationImageUrl: "/exam-images/az900-q38-explain.png",
   },
@@ -744,6 +764,13 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d1", text: "Eine Organisation, die Standards für die US-Regierung definiert.", correctItemId: "i1" },
       { id: "d2", text: "Eine europäische Richtlinie, die Datenschutz und den Schutz personenbezogener Daten regelt.", correctItemId: "i2" },
       { id: "d3", text: "Eine dedizierte öffentliche Cloud für Bundes- und Landesbehörden in den USA.", correctItemId: "i3" },
+    ],
+    combos: [
+      ["i0", "i1", "i2", "i3"],
+      ["i3", "i0", "i1", "i2"],
+      ["i0", "i3", "i1", "i2"],
+      ["i3", "i3", "i0", "i1"],
+      ["i1", "i0", "i2", "i3"],
     ],
     explanation: "ISO ist eine internationale Normungsorganisation. NIST definiert Standards, die von US-Behörden verwendet werden. Die DSGVO (GDPR) ist eine europäische Datenschutzverordnung. Azure Government ist eine dedizierte, isolierte Instanz von Azure für US-Bundes-, Landes- und Kommunalbehörden.",
     explanationImageUrl: "/exam-images/az900-q40-explain.png",
@@ -885,6 +912,14 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d1", text: "Nutzt vergangene Trainingsdaten, um Vorhersagen mit hoher Wahrscheinlichkeit zu treffen.", correctItemId: "i1" },
       { id: "d2", text: "Bietet serverlose Rechenfunktionen.", correctItemId: "i2" },
       { id: "d3", text: "Verarbeitet Daten von Millionen von Sensoren.", correctItemId: "i3" },
+    ],
+    combos: [
+      ["i1", "i2", "i0", "i3"],
+      ["i0", "i1", "i2", "i3"],
+      ["i2", "i3", "i3", "i0"],
+      ["i3", "i1", "i1", "i2"],
+      ["i0", "i2", "i2", "i3"],
+      ["i2", "i2", "i0", "i1"],
     ],
     explanation: "Azure AI Bot (Bot Service) ermöglicht die Erstellung intelligenter, sprachfähiger digitaler Assistenten. Azure Machine Learning nutzt historische Trainingsdaten für Vorhersagemodelle. Azure Functions bietet ereignisgesteuerte, serverlose Rechenleistung. Azure IoT Hub ist der zentrale Nachrichtenhub zur Verarbeitung von Daten großer Mengen an IoT-Sensoren.",
     explanationImageUrl: "/exam-images/az900-q49-explain.png",

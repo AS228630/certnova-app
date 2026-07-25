@@ -159,6 +159,45 @@ export default function MatchingQuestionView({
           </div>
         </div>
       </div>
+
+      {question.combos && question.combos.length > 0 && (
+        <div className="mt-4 rounded-lg border border-border-soft p-3">
+          <p className="mb-2.5 text-xs font-semibold text-text-faint">{t("practice.orPickCombo")}</p>
+          <div className="space-y-1.5">
+            {question.combos.map((combo, ci) => {
+              const letter = String.fromCharCode(65 + ci);
+              const isThisPicked = question.descriptions.every((d, i) => selectedMap[d.id] === combo[i]);
+              const isThisCorrect = question.descriptions.every((d, i) => combo[i] === d.correctItemId);
+              let style = "border-border-soft hover:border-primary/40";
+              if (checked && isThisCorrect) style = "border-success bg-success-light";
+              else if (checked && isThisPicked && !isThisCorrect) style = "border-danger bg-danger/10";
+              else if (!checked && isThisPicked) style = "border-primary bg-primary-light";
+              return (
+                <button
+                  key={ci}
+                  disabled={checked}
+                  onClick={() => combo.forEach((itemId, i) => onAssign(question.descriptions[i].id, itemId))}
+                  className={`flex w-full items-start gap-2.5 rounded-md border px-3 py-2 text-left text-xs transition ${style}`}
+                >
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-current text-[10px] font-bold">
+                    {letter}
+                  </span>
+                  <span className="flex-1 space-y-0.5 text-text-muted">
+                    {question.descriptions.map((d, i) => {
+                      const item = question.items.find((it) => it.id === combo[i]);
+                      return (
+                        <span key={d.id} className="block">
+                          {d.text}: <span className="font-semibold text-text">{item?.label ?? "—"}</span>
+                        </span>
+                      );
+                    })}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
