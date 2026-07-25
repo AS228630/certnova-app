@@ -1015,6 +1015,8 @@ const tr: Dictionary = {
     orFillBlank: "Ya da boşluğu doldur",
     blankPlaceholder: "Lütfen seçin...",
     orPickFullSentence: "Ya da doğrudan tam cümleyi seç",
+    questionBankLabel: "Soru Bankası",
+    bankInProgress: "Bunun üzerinde çalışıyoruz! {company} için gerçek bir soru bankası geliştiriliyor ve yakında burada kullanıma sunulacak.",
     orPickCombo: "Veya doğrudan bir cevap kombinasyonu seç",
     optionLetter: "Seçenek",
     noLabel: "Hayır",

@@ -7,10 +7,11 @@ import { getExamInfo } from "@/lib/examInfoData";
 import { AZ900_QUESTIONS } from "@/lib/az900Practice";
 import { AZ104_QUESTIONS } from "@/lib/az104Practice";
 import { AB900_QUESTIONS } from "@/lib/ab900Practice";
-import { generatePracticeBank } from "@/lib/genericPractice";
+import ComingSoonPractice from "@/components/certifications/practice/ComingSoonPractice";
 
 // Same registry pattern as the practice page — any certId not listed here
-// automatically gets the generic-but-real question bank.
+// shows the ComingSoonPractice placeholder instead of a generic/fabricated
+// question bank.
 const QUESTION_BANKS: Record<string, typeof AZ900_QUESTIONS> = {
   "az-900": AZ900_QUESTIONS,
   "az-104": AZ104_QUESTIONS,
@@ -46,7 +47,17 @@ export default async function MockExamPage({
   const cert = company?.certs.find((c) => c.id === certId);
   if (!company || !cert) notFound();
 
-  const bank = QUESTION_BANKS[certId] ?? generatePracticeBank(certId, cert.title, cert, company).questions;
+  if (!(certId in QUESTION_BANKS)) {
+    return (
+      <DashboardShell>
+        <main className="flex-1 p-4 md:p-8">
+          <ComingSoonPractice company={company} cert={cert} />
+        </main>
+      </DashboardShell>
+    );
+  }
+
+  const bank = QUESTION_BANKS[certId];
   const examInfo = getExamInfo(certId);
 
   return (

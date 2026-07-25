@@ -1015,6 +1015,8 @@ const ru: Dictionary = {
     orFillBlank: "Или заполни пропуск",
     blankPlaceholder: "Пожалуйста, выбери...",
     orPickFullSentence: "Или выбери полное предложение напрямую",
+    questionBankLabel: "Банк вопросов",
+    bankInProgress: "Мы над этим работаем! Настоящий банк вопросов для {company} разрабатывается и скоро появится здесь.",
     orPickCombo: "Или выбери комбинацию ответов напрямую",
     optionLetter: "Вариант",
     noLabel: "Нет",

@@ -1015,6 +1015,8 @@ const fr: Dictionary = {
     orFillBlank: "Ou complète le texte à trous",
     blankPlaceholder: "Veuillez sélectionner...",
     orPickFullSentence: "Ou choisis directement la phrase complète",
+    questionBankLabel: "Banque de questions",
+    bankInProgress: "Nous y travaillons ! Une vraie banque de questions pour {company} est en préparation et sera bientôt disponible ici.",
     orPickCombo: "Ou choisis directement une combinaison de réponses",
     optionLetter: "Option",
     noLabel: "Non",

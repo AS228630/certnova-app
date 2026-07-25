@@ -1016,6 +1016,8 @@ const de = {
     orFillBlank: "Oder füllen Sie die Lücke aus",
     blankPlaceholder: "Bitte auswählen...",
     orPickFullSentence: "Oder wählen Sie direkt den vollständigen Satz",
+    questionBankLabel: "Fragenbank",
+    bankInProgress: "Wir arbeiten daran! Eine echte Fragenbank für {company} ist in Arbeit und wird hier in Kürze verfügbar sein.",
     orPickCombo: "Oder wählen Sie direkt eine Antwortkombination",
     optionLetter: "Option",
     noLabel: "Nein",

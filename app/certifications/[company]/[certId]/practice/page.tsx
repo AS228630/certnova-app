@@ -5,13 +5,13 @@ import { getCompany, companies } from "@/lib/companiesData";
 import { AZ900_TOPICS, AZ900_QUESTIONS } from "@/lib/az900Practice";
 import { AZ104_TOPICS, AZ104_QUESTIONS } from "@/lib/az104Practice";
 import { AB900_TOPICS, AB900_QUESTIONS } from "@/lib/ab900Practice";
-import { generatePracticeBank } from "@/lib/genericPractice";
+import ComingSoonPractice from "@/components/certifications/practice/ComingSoonPractice";
 
 // Registry of hand-authored practice-question banks by certId. Any certId
-// not listed here automatically gets a generic-but-real placeholder bank
-// via generatePracticeBank (see lib/genericPractice.ts), so this page works
-// for every company/cert from the start. Add more entries here as real
-// question banks are authored.
+// not listed here shows the ComingSoonPractice placeholder instead of a
+// generic/fabricated question bank — real content only, per the project's
+// "never show fake data" rule. Add more entries here as real question
+// banks are authored.
 const PRACTICE_BANKS: Record<string, { topics: typeof AZ900_TOPICS; questions: typeof AZ900_QUESTIONS }> = {
   "az-900": { topics: AZ900_TOPICS, questions: AZ900_QUESTIONS },
   "az-104": { topics: AZ104_TOPICS, questions: AZ104_QUESTIONS },
@@ -33,7 +33,18 @@ export default async function PracticePage({
 
   if (!company || !cert) notFound();
 
-  const bank = PRACTICE_BANKS[certId] ?? generatePracticeBank(certId, cert.title, cert, company);
+  const hasRealBank = certId in PRACTICE_BANKS;
+  if (!hasRealBank) {
+    return (
+      <DashboardShell>
+        <main className="flex-1 pb-4 pt-0 md:pb-8">
+          <ComingSoonPractice company={company} cert={cert} />
+        </main>
+      </DashboardShell>
+    );
+  }
+
+  const bank = PRACTICE_BANKS[certId];
 
   return (
     <DashboardShell>

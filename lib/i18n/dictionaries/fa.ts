@@ -1015,6 +1015,8 @@ const fa: Dictionary = {
     orFillBlank: "یا جای خالی رو پر کن",
     blankPlaceholder: "لطفاً انتخاب کن...",
     orPickFullSentence: "یا مستقیم جمله‌ی کامل رو انتخاب کن",
+    questionBankLabel: "بانک سؤال",
+    bankInProgress: "ما در حال کار روی این هستیم! یک بانک سؤال واقعی برای {company} در حال ساخته‌شدنه و به‌زودی اینجا در دسترس قرار می‌گیره.",
     orPickCombo: "یا مستقیم یه ترکیب پاسخ رو انتخاب کن",
     optionLetter: "گزینه",
     noLabel: "خیر",

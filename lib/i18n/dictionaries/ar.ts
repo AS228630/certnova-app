@@ -1015,6 +1015,8 @@ const ar: Dictionary = {
     orFillBlank: "أو املأ الفراغ",
     blankPlaceholder: "يرجى الاختيار...",
     orPickFullSentence: "أو اختر الجملة الكاملة مباشرة",
+    questionBankLabel: "بنك الأسئلة",
+    bankInProgress: "نحن نعمل على ذلك! بنك أسئلة حقيقي لـ {company} قيد التطوير وسيكون متاحاً هنا قريباً.",
     orPickCombo: "أو اختر مجموعة إجابات مباشرة",
     optionLetter: "الخيار",
     noLabel: "لا",

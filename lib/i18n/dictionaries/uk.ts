@@ -1015,6 +1015,8 @@ const uk: Dictionary = {
     orFillBlank: "Або заповни пропуск",
     blankPlaceholder: "Будь ласка, обери...",
     orPickFullSentence: "Або обери повне речення напряму",
+    questionBankLabel: "Банк питань",
+    bankInProgress: "Ми над цим працюємо! Реальний банк питань для {company} розробляється і незабаром з'явиться тут.",
     orPickCombo: "Або обери комбінацію відповідей напряму",
     optionLetter: "Варіант",
     noLabel: "Ні",
