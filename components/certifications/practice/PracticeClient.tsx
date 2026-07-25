@@ -132,6 +132,7 @@ export default function PracticeClient({
   const isSectionPermanentlyUnlocked = useSectionAttemptsStore((s) => s.isSectionPermanentlyUnlocked);
   const getBestScore = useSectionAttemptsStore((s) => s.getBestScore);
   const attemptsMigrationReady = useSectionAttemptsStore((s) => s.migrationReady);
+  const resetCertHistory = useSectionAttemptsStore((s) => s.resetCertHistory);
 
   useEffect(() => {
     if (user) {
@@ -184,6 +185,7 @@ export default function PracticeClient({
       if (user) {
         await clearPersistedAnswers(user.id, certId);
         await resetCertPracticeDetail(certId);
+        await resetCertHistory(user.id, certId);
       }
       const ids = questions.map((q) => q.id);
       for (let i = ids.length - 1; i > 0; i--) {

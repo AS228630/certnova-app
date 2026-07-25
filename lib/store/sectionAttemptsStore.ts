@@ -64,6 +64,14 @@ type SectionAttemptsState = {
    * only returns the 20 most recent attempts (see EMPTY_ATTEMPTS comment
    * above), which would undercount if used for the attempts total. */
   getBestScoreEntry: (certId: string, sectionIndex: number) => BestScoreEntry | null;
+  /** Clears attempts/best-score history for one certification — used by
+   * both the practice page's "restart the whole exam" flow and the
+   * standalone "reset my progress" tool in Settings. Deliberately does
+   * NOT touch unlocked_sections: a section you've genuinely earned stays
+   * unlocked forever, even after resetting your attempt history, exactly
+   * like every other reset/retry in the app (Wiederholen, Gemischt
+   * wiederholen, the full-exam restart) already does. */
+  resetCertHistory: (userId: string, certId: string) => Promise<void>;
   reset: () => void;
   /** False until we've successfully talked to the new tables at least
    * once. If the SQL migration hasn't been run yet, those tables don't
@@ -291,6 +299,19 @@ export const useSectionAttemptsStore = create<SectionAttemptsState>((set, get) =
 
   getBestScoreEntry: (certId: string, sectionIndex: number) => {
     return get().bestScoresByCert[certId]?.[sectionIndex] ?? null;
+  },
+
+  resetCertHistory: async (userId: string, certId: string) => {
+    try {
+      await supabase.from("section_attempts").delete().eq("user_id", userId).eq("cert_id", certId);
+      await supabase.from("section_best_scores").delete().eq("user_id", userId).eq("cert_id", certId);
+    } catch (err) {
+      console.error("Failed to reset cert history:", err);
+    }
+    set((s) => ({
+      attemptsByCert: { ...s.attemptsByCert, [certId]: [] },
+      bestScoresByCert: { ...s.bestScoresByCert, [certId]: {} },
+    }));
   },
 
   reset: () =>
