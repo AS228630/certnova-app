@@ -217,7 +217,26 @@ export default function PracticeClient({
   }
 
   function goTo(i: number) {
-    setIndex(Math.max(0, Math.min(activeQuestions.length - 1, i)));
+    const clamped = Math.max(0, Math.min(activeQuestions.length - 1, i));
+    // Refuse to move the question pointer into a section that isn't
+    // actually unlocked yet — this is the single low-level function every
+    // navigation path goes through (the Next/Prev arrows, the scorecard's
+    // "next section" button, section-grid jumps), so checking it here
+    // closes the lock system against every current and future bypass at
+    // once, rather than re-checking it separately in each caller. Only
+    // blocks crossing INTO a different, locked section; moving within the
+    // current (already-reachable) section is never affected.
+    if (attemptsMigrationReady) {
+      const targetSection = getSectionForIndex(activeQuestions.length, clamped);
+      const currentSection = getSectionForIndex(activeQuestions.length, index);
+      if (targetSection !== currentSection && !isSectionPermanentlyUnlocked(certId, targetSection)) {
+        const [, currentEnd] = getSectionRange(activeQuestions.length, currentSection);
+        setIndex(Math.min(currentEnd - 1, activeQuestions.length - 1));
+        setHintOpen(false);
+        return;
+      }
+    }
+    setIndex(clamped);
     setHintOpen(false);
   }
 
@@ -506,9 +525,19 @@ export default function PracticeClient({
             skipped={skipped}
             marked={marked}
             elapsedSeconds={EXAM_TOTAL_SECONDS - remainingSeconds}
-            hasNextSection={scorecardSection + 1 < sectionCount}
+            hasNextSection={
+              scorecardSection + 1 < sectionCount &&
+              (attemptsMigrationReady ? isSectionPermanentlyUnlocked(certId, scorecardSection + 1) : false)
+            }
             onBackToPath={() => router.push(`/certifications/${companySlug}/${certId}/learn`)}
             onNextSection={() => {
+              // Defense in depth: hasNextSection already hides/disables this
+              // button when the next section isn't unlocked, but never
+              // navigate there even if this somehow gets called anyway —
+              // e.g. a low-score demo-preview result (see the "jump to the
+              // last question" instructor shortcut) must never let anyone
+              // into a section that hasn't actually been earned.
+              if (!attemptsMigrationReady || !isSectionPermanentlyUnlocked(certId, scorecardSection + 1)) return;
               const [, end] = getSectionRange(activeQuestions.length, scorecardSection);
               setScorecardSection(null);
               goTo(Math.min(end, activeQuestions.length - 1));
