@@ -981,6 +981,8 @@ const de = {
     retryShuffledBtn: "Gemischt wiederholen",
     retrySameOrderHint: "Gleiche Fragen, gleiche Reihenfolge wie zuvor.",
     retryShuffledHint: "Gleiche Fragen, aber bei jedem Klick neu gemischt.",
+    sectionRetryConfirmTitle: "Neue Wiederholung starten?",
+    sectionRetryConfirmBody: "Der aktuelle Fortschritt dieser Wiederholung wird zurückgesetzt.",
     practiceAgain: "Erneut üben",
     reviewWrongBtn: "Falsche Antworten üben",
     reviewModeTitle: "Übungsmodus: falsche Antworten",

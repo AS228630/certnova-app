@@ -980,6 +980,8 @@ const uk: Dictionary = {
     retryShuffledBtn: "Повторити (перемішано)",
     retrySameOrderHint: "Ті самі питання, той самий порядок, що й раніше.",
     retryShuffledHint: "Ті самі питання, але новий випадковий порядок з кожним кліком.",
+    sectionRetryConfirmTitle: "Почати нову спробу?",
+    sectionRetryConfirmBody: "Ваш поточний прогрес у цьому розділі буде скинуто.",
     practiceAgain: "Практикуватися знову",
     reviewWrongBtn: "Переглянути неправильні відповіді",
     reviewModeTitle: "Режим тренування: неправильні відповіді",

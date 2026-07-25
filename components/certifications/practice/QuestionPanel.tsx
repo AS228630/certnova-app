@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { CSSProperties } from "react";
-import { Bookmark, Sparkles, CheckCircle2, XCircle, ExternalLink, Lightbulb, Shuffle, StickyNote } from "lucide-react";
+import { Bookmark, Sparkles, CheckCircle2, XCircle, ExternalLink, Lightbulb, Shuffle, StickyNote, Repeat } from "lucide-react";
 import type { PracticeOptionId, PracticeQuestion } from "@/lib/az900Practice";
 import { isMultiSelectQuestion, correctOptionIds } from "@/lib/az900Practice";
 import MatchingQuestionView from "./MatchingQuestionView";
@@ -34,6 +34,8 @@ export default function QuestionPanel({
   onOpenAiCoach,
   onShuffle,
   onOpenNotes,
+  onRetrySection,
+  onRetrySectionShuffled,
 }: {
   question: PracticeQuestion;
   index: number;
@@ -56,6 +58,12 @@ export default function QuestionPanel({
   onOpenAiCoach: () => void;
   onShuffle: () => void;
   onOpenNotes: () => void;
+  /** "Wiederholen" — restart the current section (same question order),
+   * available at any time, not just after finishing the section. */
+  onRetrySection: () => void;
+  /** "Gemischt wiederholen" — restart the current section with a fresh
+   * random order, available at any time. */
+  onRetrySectionShuffled: () => void;
 }) {
   const { t } = useLocale();
   const [showExplanation, setShowExplanation] = useState(false);
@@ -92,7 +100,7 @@ export default function QuestionPanel({
           </span>
         </div>
 
-        <div className="flex flex-none items-center gap-2">
+        <div className="flex flex-none flex-wrap items-center justify-end gap-2">
           <button
             onClick={onToggleMark}
             className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold ${
@@ -101,6 +109,22 @@ export default function QuestionPanel({
           >
             <Bookmark size={13} className={marked ? "fill-warning" : ""} />
             {t("practice.markQ")}
+          </button>
+          <button
+            onClick={onRetrySection}
+            title={t("practice.retrySameOrderHint")}
+            className="flex items-center gap-1.5 rounded-lg border border-border-soft px-3 py-1.5 text-xs font-semibold text-text-muted hover:border-primary"
+          >
+            <Repeat size={13} />
+            <span className="hidden sm:inline">{t("practice.retrySameOrderBtn")}</span>
+          </button>
+          <button
+            onClick={onRetrySectionShuffled}
+            title={t("practice.retryShuffledHint")}
+            className="flex items-center gap-1.5 rounded-lg border border-border-soft px-3 py-1.5 text-xs font-semibold text-text-muted hover:border-primary"
+          >
+            <Shuffle size={13} />
+            <span className="hidden sm:inline">{t("practice.retryShuffledBtn")}</span>
           </button>
           <button
             onClick={onOpenAiCoach}

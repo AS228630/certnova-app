@@ -980,6 +980,8 @@ const tr: Dictionary = {
     retryShuffledBtn: "Karışık Tekrarla",
     retrySameOrderHint: "Aynı sorular, öncekiyle aynı sırada.",
     retryShuffledHint: "Aynı sorular, her tıklamada yeni bir rastgele sırayla.",
+    sectionRetryConfirmTitle: "Yeni bir deneme başlatılsın mı?",
+    sectionRetryConfirmBody: "Bu bölümdeki mevcut ilerlemeniz sıfırlanacak.",
     practiceAgain: "Tekrar Pratik Yap",
     reviewWrongBtn: "Yanlış Cevapları Gözden Geçir",
     reviewModeTitle: "Alıştırma modu: yanlış cevaplar",

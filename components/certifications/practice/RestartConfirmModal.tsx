@@ -7,10 +7,24 @@ export default function RestartConfirmModal({
   onConfirm,
   onCancel,
   loading,
+  title,
+  body,
+  confirmLabel,
+  danger = true,
 }: {
   onConfirm: () => void;
   onCancel: () => void;
   loading: boolean;
+  /** Overrides the default "restart whole exam" copy — used when this
+   * modal is reused for a single-section Wiederholen/Gemischt wiederholen
+   * confirmation instead. */
+  title?: string;
+  body?: string;
+  confirmLabel?: string;
+  /** The whole-exam restart is a bigger, more destructive action than a
+   * single-section retry, so it keeps the red/danger styling by default;
+   * section-level retries use the neutral primary color instead. */
+  danger?: boolean;
 }) {
   const { t } = useLocale();
 
@@ -20,11 +34,15 @@ export default function RestartConfirmModal({
         className="w-full max-w-sm rounded-2xl border border-border-soft bg-panel p-6 shadow-xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-danger/10 text-danger">
-          <TriangleAlert size={22} />
+        <div
+          className={`mx-auto flex h-12 w-12 items-center justify-center rounded-full ${
+            danger ? "bg-danger/10 text-danger" : "bg-primary/10 text-primary"
+          }`}
+        >
+          {danger ? <TriangleAlert size={22} /> : <RotateCcw size={22} />}
         </div>
-        <h3 className="mt-4 text-center text-lg font-bold text-text">{t("practice.restartConfirmTitle")}</h3>
-        <p className="mt-2 text-center text-sm leading-relaxed text-text-muted">{t("practice.restartConfirmBody")}</p>
+        <h3 className="mt-4 text-center text-lg font-bold text-text">{title ?? t("practice.restartConfirmTitle")}</h3>
+        <p className="mt-2 text-center text-sm leading-relaxed text-text-muted">{body ?? t("practice.restartConfirmBody")}</p>
 
         <div className="mt-6 flex gap-3">
           <button
@@ -37,10 +55,12 @@ export default function RestartConfirmModal({
           <button
             onClick={onConfirm}
             disabled={loading}
-            className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-danger py-2.5 text-sm font-bold text-white hover:opacity-90 disabled:opacity-60"
+            className={`flex flex-1 items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-bold text-white hover:opacity-90 disabled:opacity-60 ${
+              danger ? "bg-danger" : "bg-primary"
+            }`}
           >
             <RotateCcw size={15} className={loading ? "animate-spin" : ""} />
-            {loading ? t("practice.restartInProgress") : t("practice.restartConfirmYes")}
+            {loading ? t("practice.restartInProgress") : (confirmLabel ?? t("practice.restartConfirmYes"))}
           </button>
         </div>
       </div>

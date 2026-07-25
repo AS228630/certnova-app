@@ -980,6 +980,8 @@ const ru: Dictionary = {
     retryShuffledBtn: "Повторить вперемешку",
     retrySameOrderHint: "Те же вопросы, в том же порядке, что и раньше.",
     retryShuffledHint: "Те же вопросы, но новый случайный порядок при каждом клике.",
+    sectionRetryConfirmTitle: "Начать новую попытку?",
+    sectionRetryConfirmBody: "Текущий прогресс в этом разделе будет сброшен.",
     practiceAgain: "Тренироваться снова",
     reviewWrongBtn: "Повторить неправильные ответы",
     reviewModeTitle: "Режим тренировки: неправильные ответы",

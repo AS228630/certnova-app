@@ -980,6 +980,8 @@ const ar: Dictionary = {
     retryShuffledBtn: "إعادة عشوائية",
     retrySameOrderHint: "نفس الأسئلة، بنفس الترتيب السابق.",
     retryShuffledHint: "نفس الأسئلة، لكن بترتيب عشوائي جديد مع كل نقرة.",
+    sectionRetryConfirmTitle: "بدء محاولة جديدة؟",
+    sectionRetryConfirmBody: "سيتم إعادة تعيين تقدمك الحالي في هذا القسم.",
     practiceAgain: "التدرب مرة أخرى",
     reviewWrongBtn: "مراجعة الإجابات الخاطئة",
     reviewModeTitle: "وضع التدريب: الإجابات الخاطئة",

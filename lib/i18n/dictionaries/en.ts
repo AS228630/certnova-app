@@ -980,6 +980,8 @@ const en: Dictionary = {
     retryShuffledBtn: "Shuffle & Repeat",
     retrySameOrderHint: "Same questions, same order as before.",
     retryShuffledHint: "Same questions, freshly shuffled on every click.",
+    sectionRetryConfirmTitle: "Start a new attempt?",
+    sectionRetryConfirmBody: "Your current progress on this section will be reset.",
     practiceAgain: "Practice Again",
     reviewWrongBtn: "Review Wrong Answers",
     reviewModeTitle: "Practice mode: wrong answers",

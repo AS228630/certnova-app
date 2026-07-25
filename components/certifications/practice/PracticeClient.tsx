@@ -96,6 +96,15 @@ export default function PracticeClient({
   // whole section, so it must never reach maybeShowScorecard/recordAttempt
   // — spec section 8 applies here just as much as to the batch review mode.
   const [singleRetryId, setSingleRetryId] = useState<string | null>(null);
+  // Set when the user clicks Wiederholen/Gemischt wiederholen on the
+  // question toolbar (as opposed to on the post-completion scorecard)
+  // while the current section still has unresolved questions — per spec,
+  // a confirmation is required in that case since real in-progress work
+  // would otherwise be silently wiped. If the section is already fully
+  // resolved, no confirmation is needed and this is never set.
+  const [pendingSectionRetry, setPendingSectionRetry] = useState<{ sectionIdx: number; shuffle: boolean } | null>(
+    null
+  );
   const [examComplete, setExamComplete] = useState(false);
   const [restartModalOpen, setRestartModalOpen] = useState(false);
   const [restarting, setRestarting] = useState(false);
@@ -229,6 +238,32 @@ export default function PracticeClient({
       resetSection(sectionIdx, true);
     } else {
       goTo(targetIndex);
+    }
+  }
+
+  // Entry point for the Wiederholen / Gemischt wiederholen buttons on the
+  // question toolbar itself (available at any time, not just after
+  // finishing the section — unlike the identical buttons on the
+  // post-completion scorecard). If the current section still has
+  // unanswered questions, this is a real interruption, so it's gated
+  // behind a confirmation dialog first; a fully-finished section skips
+  // straight to resetSection, matching the spec.
+  function requestSectionRetry(shuffle: boolean) {
+    const sectionIdx = getSectionForIndex(activeQuestions.length, index);
+    const [start, end] = getSectionRange(activeQuestions.length, sectionIdx);
+    let complete = true;
+    for (let i = start; i < end; i++) {
+      const st = statusFor(i);
+      if (st !== "correct" && st !== "wrong") {
+        complete = false;
+        break;
+      }
+    }
+    if (complete) {
+      resetSection(sectionIdx, shuffle);
+      goTo(start);
+    } else {
+      setPendingSectionRetry({ sectionIdx, shuffle });
     }
   }
 
@@ -702,8 +737,30 @@ export default function PracticeClient({
           onOpenAiCoach={() => setCoachOpen(true)}
           onShuffle={shuffle}
           onOpenNotes={() => setNotesOpen(true)}
+          onRetrySection={() => requestSectionRetry(false)}
+          onRetrySectionShuffled={() => requestSectionRetry(true)}
         />
       </div>
+
+      {pendingSectionRetry && (
+        <RestartConfirmModal
+          loading={false}
+          title={t("practice.sectionRetryConfirmTitle")}
+          body={t("practice.sectionRetryConfirmBody")}
+          confirmLabel={
+            pendingSectionRetry.shuffle ? t("practice.retryShuffledBtn") : t("practice.retrySameOrderBtn")
+          }
+          danger={false}
+          onCancel={() => setPendingSectionRetry(null)}
+          onConfirm={() => {
+            const { sectionIdx, shuffle: doShuffle } = pendingSectionRetry;
+            resetSection(sectionIdx, doShuffle);
+            const [start] = getSectionRange(activeQuestions.length, sectionIdx);
+            setPendingSectionRetry(null);
+            goTo(start);
+          }}
+        />
+      )}
 
       {/* AI coach now spans the full width below the question. */}
       <div className="mt-6 hidden h-[420px] lg:block">

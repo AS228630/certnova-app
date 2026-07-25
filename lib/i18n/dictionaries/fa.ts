@@ -980,6 +980,8 @@ const fa: Dictionary = {
     retryShuffledBtn: "تکرار درهم‌شده",
     retrySameOrderHint: "همان سؤال‌ها، با همان ترتیب قبلی.",
     retryShuffledHint: "همان سؤال‌ها، اما با هر کلیک ترتیب تصادفی جدید.",
+    sectionRetryConfirmTitle: "شروع یک مرور جدید؟",
+    sectionRetryConfirmBody: "پیشرفت فعلی این بخش صفر خواهد شد.",
     practiceAgain: "دوباره تمرین کن",
     reviewWrongBtn: "تمرین سؤالات اشتباه",
     reviewModeTitle: "حالت تمرین: سؤالات اشتباه",
