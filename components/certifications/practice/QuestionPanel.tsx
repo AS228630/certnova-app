@@ -267,6 +267,17 @@ export default function QuestionPanel({
           </p>
         </div>
       )}
+      {!isYesNo && !isMatching && "blankFillMulti" in question && question.blankFillMulti && (
+        <MultiBlankFill
+          key={question.id}
+          blankFillMulti={question.blankFillMulti}
+          options={question.options}
+          checked={checked}
+          onSelect={onSelect}
+          blankPlaceholder={t("practice.blankPlaceholder")}
+          orFillBlankLabel={t("practice.orFillBlank")}
+        />
+      )}
       {!isYesNo && !isMatching && (
         <div className="space-y-2.5">
           {isMultiSelect && !checked && (
@@ -274,7 +285,7 @@ export default function QuestionPanel({
               {t("practice.selectMultipleHint").replace("{count}", String(correctOptionIds(question).length))}
             </p>
           )}
-          {"blankFill" in question && question.blankFill && (
+          {(("blankFill" in question && question.blankFill) || ("blankFillMulti" in question && question.blankFillMulti)) && (
             <p className="mb-1 text-xs font-semibold text-text-faint">{t("practice.orPickFullSentence")}</p>
           )}
           {question.options.map((opt) => {
@@ -560,5 +571,65 @@ function renderPrompt(question: PracticeQuestion) {
       <span className="block">{statement}</span>
       {instruction && <span className="mt-3 block text-[15px] font-normal text-text-muted">({instruction})</span>}
     </>
+  );
+}
+
+// Small standalone piece for blankFillMulti (2-3 simultaneous blanks).
+// Mounted with key={question.id} by the caller, so its own local state
+// naturally resets on a fresh mount whenever the question changes —
+// no effect needed to clear stale picks from a previous question.
+function MultiBlankFill({
+  blankFillMulti,
+  options,
+  checked,
+  onSelect,
+  blankPlaceholder,
+  orFillBlankLabel,
+}: {
+  blankFillMulti: { template: string; blanks: string[][]; combos: number[][] };
+  options: { id: PracticeOptionId; text: string }[];
+  checked: boolean;
+  onSelect: (id: PracticeOptionId) => void;
+  blankPlaceholder: string;
+  orFillBlankLabel: string;
+}) {
+  const [picks, setPicks] = useState<(number | null)[]>([]);
+
+  return (
+    <div className="mb-4 rounded-lg border border-border-soft p-3">
+      <p className="mb-2.5 text-xs font-semibold text-text-faint">{orFillBlankLabel}</p>
+      <p className="mb-3 whitespace-pre-line text-sm leading-relaxed text-text">
+        {blankFillMulti.template.split("___").map((segment, si, arr) => (
+          <span key={si}>
+            {segment}
+            {si < arr.length - 1 && (
+              <select
+                disabled={checked}
+                value={picks[si] ?? ""}
+                onChange={(e) => {
+                  const next = [...picks];
+                  next[si] = e.target.value === "" ? null : Number(e.target.value);
+                  setPicks(next);
+                  const matchIndex = blankFillMulti.combos.findIndex((combo) => combo.every((v, bi) => v === next[bi]));
+                  if (matchIndex !== -1) onSelect(options[matchIndex].id);
+                }}
+                className={`mx-1 rounded-md border px-2 py-1 text-sm font-semibold ${
+                  picks[si] != null ? "border-primary bg-primary-light text-primary" : "border-border-soft bg-panel text-text-muted"
+                }`}
+              >
+                <option value="" disabled>
+                  {blankPlaceholder}
+                </option>
+                {blankFillMulti.blanks[si].map((choice, ci) => (
+                  <option key={ci} value={ci}>
+                    {choice}
+                  </option>
+                ))}
+              </select>
+            )}
+          </span>
+        ))}
+      </p>
+    </div>
   );
 }

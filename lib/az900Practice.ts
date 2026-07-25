@@ -62,6 +62,20 @@ export type SingleChoiceQuestion = {
     /** German-translated short choices, in the same order as `options`. */
     choices: string[];
   };
+  /** For "complete the sentence" questions with TWO OR THREE simultaneous
+   * blanks (e.g. "minimum VMs: ___, minimum zones: ___"), rather than one.
+   * Only a full combination of picks that matches one of the curated
+   * `options` (via `combos`) results in a selection — an incomplete or
+   * unlisted combination simply doesn't select anything yet. */
+  blankFillMulti?: {
+    /** Sentence template with one "___" per blank, in order. */
+    template: string;
+    /** Per-blank list of German choices, in the order they appear in the template. */
+    blanks: string[][];
+    /** combos[i] = the chosen choice-index for each blank that reproduces
+     * options[i] — same order/length as `options`. */
+    combos: number[][];
+  };
   options: { id: PracticeOptionId; text: string }[];
   /** A single letter for normal single-choice questions, or an array of
    * letters for "select all that apply" / multi-response questions (real
@@ -686,6 +700,20 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-39",
     topicId: "azure-architektur",
     prompt: "Sie planen die Bereitstellung einer geschäftskritischen Branchenanwendung in Azure. Die Anwendung wird auf einer virtuellen Azure-Maschine ausgeführt. Sie müssen eine Bereitstellungslösung für die Anwendung empfehlen. Die Lösung muss eine garantierte Verfügbarkeit von 99,99 Prozent bieten. Wie viele virtuelle Maschinen und Verfügbarkeitszonen sollten Sie für die Bereitstellung mindestens empfehlen?",
+    blankFillMulti: {
+      template: "Mindestanzahl virtueller Maschinen: ___, Mindestanzahl Verfügbarkeitszonen: ___",
+      blanks: [
+        ["1", "2", "3"],
+        ["1", "2", "3"],
+      ],
+      combos: [
+        [0, 0],
+        [1, 1],
+        [2, 2],
+        [1, 0],
+        [0, 1],
+      ],
+    },
     options: [
       { id: "A", text: "Mindestanzahl virtueller Maschinen: 1, Mindestanzahl Verfügbarkeitszonen: 1" },
       { id: "B", text: "Mindestanzahl virtueller Maschinen: 2, Mindestanzahl Verfügbarkeitszonen: 2" },
@@ -2064,6 +2092,22 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-136",
     topicId: "azure-verwaltung",
     prompt: "Wie berechnen Sie die monatliche Verfügbarkeit in Prozent? (Wählen Sie zur Beantwortung die entsprechenden Optionen im Antwortbereich aus. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    blankFillMulti: {
+      template: "___ / ___ * ___",
+      blanks: [
+        ["Ausfallzeit in Minuten", "Maximal verfügbare Minuten", "(Maximal verfügbare Minuten – Ausfallzeit in Minuten)"],
+        ["60", "1.440", "Maximal verfügbare Minuten"],
+        ["99,99", "1.440", "100"],
+      ],
+      combos: [
+        [0, 0, 0],
+        [0, 1, 1],
+        [1, 0, 0],
+        [1, 2, 2],
+        [2, 1, 1],
+        [2, 2, 2],
+      ],
+    },
     options: [
       { id: "A", text: "Ausfallzeit in Minuten / 60 * 99,99" },
       { id: "B", text: "Ausfallzeit in Minuten / 1.440 * 1.440" },
@@ -2467,6 +2511,21 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-164",
     topicId: "azure-verwaltung",
     prompt: "Sie verfügen über eine Azure-Umgebung mit zehn Web-Apps. Mit welcher URL sollten Sie eine Verbindung herstellen, um alle Azure-Ressourcen zu verwalten? (Wählen Sie zur Beantwortung die entsprechenden Optionen im Antwortbereich aus. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    blankFillMulti: {
+      template: "https://___ ___com",
+      blanks: [
+        ["admin.", "portal.", "www."],
+        ["azure.", "azurewebsites.", "microsoft."],
+      ],
+      combos: [
+        [0, 0],
+        [0, 2],
+        [1, 1],
+        [1, 0],
+        [2, 1],
+        [2, 2],
+      ],
+    },
     options: [
       { id: "A", text: "https : // admin.azure.com" },
       { id: "B", text: "https://admin.microsoft .com" },
