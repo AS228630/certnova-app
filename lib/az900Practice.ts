@@ -2813,6 +2813,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-188",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "___ können Sie sehen, welcher Benutzer in den letzten 14 Tagen eine bestimmte virtuelle Maschine ausgeschaltet hat.",
+      choices: ["Über Azure Control IAM", "Über Azure Event Hubs", "Im Azure-Aktivitätsprotokoll", "Über Azure Service Health"],
+    },
     options: [
       { id: "A", text: "Über Azure Control IAM können Sie anzeigen, welcher Benutzer in den letzten 14 Tagen eine bestimmte virtuelle Maschine ausgeschaltet hat." },
       { id: "B", text: "Über Azure Event Hubs können Sie anzeigen, welcher Benutzer in den letzten 14 Tagen eine bestimmte virtuelle Maschine ausgeschaltet hat." },
@@ -2850,6 +2854,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-190",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Ihr Unternehmen implementiert ___, um Microsoft Word-Dokumenten, die Kreditkarteninformationen enthalten, automatisch ein Wasserzeichen hinzuzufügen.",
+      choices: ["Azure-Richtlinien", "einen DDOS-Schutz", "Azure Information Protection", "Azure Active Directory Identity Protection"],
+    },
     options: [
       { id: "A", text: "Ihr Unternehmen implementiert Azure-Richtlinien , um Microsoft Word-Dokumenten, die Kreditkarteninformationen enthalten, automatisch ein Wasserzeichen hinzuzufügen." },
       { id: "B", text: "Ihr Unternehmen implementiert einen DDOS-Schutz , um Microsoft Word-Dokumenten, die Kreditkarteninformationen enthalten, automatisch ein Wasserzeichen hinzuzufügen." },
@@ -3013,6 +3021,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-201",
     topicId: "azure-architektur",
     prompt: "Sie planen, 20 virtuelle Computer in einer Azure-Umgebung bereitzustellen. Um sicherzustellen, dass ein virtueller Computer namens VM1 keine Verbindung zu den anderen virtuellen Computern herstellen kann, muss VM1 ... Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Um sicherzustellen, dass eine virtuelle Maschine namens VM1 keine Verbindung zu den anderen virtuellen Maschinen herstellen kann, muss VM1 ___",
+      choices: ["in einem separaten virtuellen Netzwerk bereitgestellt werden", "ein anderes Betriebssystem ausführen als die anderen virtuellen Computer", "in einer separaten Ressourcengruppe bereitgestellt werden", "über zwei Netzwerkschnittstellen verfügen"],
+    },
     options: [
       { id: "A", text: "in einem separaten virtuellen Netzwerk bereitgestellt werden" },
       { id: "B", text: "ein anderes Betriebssystem ausführen als die anderen virtuellen Computer" },
@@ -3026,6 +3038,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-202",
     topicId: "azure-architektur",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Daten, die in der Archivzugriffsebene eines Azure Storage-Kontos gespeichert sind, ___",
+      choices: ["können jederzeit mithilfe von azcopy.exe zugegriffen werden", "können nur mithilfe von Azure Backup gelesen werden", "müssen wiederhergestellt werden, bevor auf die Daten zugegriffen werden kann", "müssen rehydriert werden, bevor auf die Daten zugegriffen werden kann"],
+    },
     options: [
       { id: "A", text: "Auf Daten, die in der Archivzugriffsebene eines Azure Storage-Kontos gespeichert sind, kann jederzeit mithilfe von azcopy.exe zugegriffen werden ." },
       { id: "B", text: "Daten, die in der Archivzugriffsebene eines Azure Storage-Kontos gespeichert sind, können nur mithilfe von Azure Backup gelesen werden ." },
@@ -3040,6 +3056,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-203",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "___ können Sie sehen, welcher Benutzer in den letzten 14 Tagen eine bestimmte virtuelle Maschine ausgeschaltet hat.",
+      choices: ["Über Azure Control IAM", "Über Azure Event Hubs", "Im Azure-Aktivitätsprotokoll", "Über Azure Service Health"],
+    },
     options: [
       { id: "A", text: "Über Azure Control IAM können Sie anzeigen, welcher Benutzer in den letzten 14 Tagen eine bestimmte virtuelle Maschine ausgeschaltet hat." },
       { id: "B", text: "Über Azure Event Hubs können Sie anzeigen, welcher Benutzer in den letzten 14 Tagen eine bestimmte virtuelle Maschine ausgeschaltet hat." },
@@ -3103,6 +3123,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-207",
     topicId: "cloud-konzepte",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Eine Organisation, die ihre Infrastruktur ___ hostet, benötigt kein Rechenzentrum mehr.",
+      choices: ["in einer privaten Cloud", "in einer Hybrid Cloud", "in der öffentlichen Cloud", "auf einem Hyper-V-Host"],
+    },
     options: [
       { id: "A", text: "Eine Organisation, die ihre Infrastruktur in einer privaten Cloud hostet , benötigt kein Rechenzentrum mehr." },
       { id: "B", text: "Eine Organisation, die ihre Infrastruktur in einer Hybrid Cloud hostet , benötigt kein Rechenzentrum mehr." },
@@ -3116,6 +3140,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-208",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Ihr Azure-Testkonto ist letzte Woche abgelaufen. Sie können jetzt ___",
+      choices: ["keine weiteren Azure Active Directory (Azure AD)-Benutzerkonten erstellen.", "keine vorhandene virtuelle Azure-Maschine mehr starten.", "nicht mehr auf Ihre in Azure gespeicherten Daten zugreifen.", "nicht mehr auf das Azure-Portal zugreifen."],
+    },
     options: [
       { id: "A", text: "Ihr Azure-Testkonto ist letzte Woche abgelaufen. Sie können jetzt keine weiteren Azure Active Directory (Azure AD)-Benutzerkonten erstellen." },
       { id: "B", text: "Ihr Azure-Testkonto ist letzte Woche abgelaufen. Sie können jetzt keine vorhandene virtuelle Azure-Maschine mehr starten." },
@@ -3129,6 +3157,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-209",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Einer der Vorteile von Azure SQL Data Warehouse besteht darin, dass ___ in die Plattform integriert ist.",
+      choices: ["eine hohe Verfügbarkeit", "die automatische Skalierung", "die Datenkomprimierung", "die Versionsverwaltung"],
+    },
     options: [
       { id: "A", text: "Einer der Vorteile von Azure SQL Data Warehouse besteht darin, dass die Plattform über eine hohe Verfügbarkeit verfügt." },
       { id: "B", text: "Einer der Vorteile von Azure SQL Data Warehouse besteht darin, dass die automatische Skalierung in die Plattform integriert ist." },
@@ -3278,6 +3310,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-220",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Microsoft ___",
+      choices: ["erstattet den Betrag auf Ihr Bankkonto zurück.", "migriert die Ressource zu einem anderen Abonnement.", "schreibt den Betrag Ihrem Azure-Konto gut.", "sendet Ihnen einen Gutscheincode, den Sie gegen Azure-Guthaben einlösen können."],
+    },
     options: [
       { id: "A", text: "Microsoft erstattet den Betrag auf Ihr Bankkonto zurück." },
       { id: "B", text: "Microsoft migriert die Ressource zu einem anderen Abonnement." },
@@ -3308,6 +3344,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-222",
     topicId: "cloud-konzepte",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Die virtuellen Maschinen ___",
+      choices: ["können nicht in das neue Abonnement verschoben werden.", "können in das neue Abonnement verschoben werden.", "können nur dann nicht in das neue Abonnement verschoben werden, wenn sie sich alle in derselben Ressourcengruppe befinden.", "können nur dann nicht in das neue Abonnement verschoben werden, wenn sie Windows Server 2016 ausführen."],
+    },
     options: [
       { id: "A", text: "Die virtuellen Maschinen können nicht in das neue Abonnement verschoben werden." },
       { id: "B", text: "Die virtuellen Maschinen können in das neue Abonnement verschoben werden." },
@@ -3323,6 +3363,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-223",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Sie können den Just-in-Time-VM-Zugriff (JIT) mithilfe von ___ aktivieren.",
+      choices: ["Azure Bastion", "Azure Firewall", "Azure Front Door", "dem Azure Security Center"],
+    },
     options: [
       { id: "A", text: "Sie können den Just-in-Time-VM-Zugriff (JIT) mithilfe von Azure Bastion aktivieren." },
       { id: "B", text: "Sie können den Just-in-Time-VM-Zugriff (JIT) mithilfe von Azure Firewall aktivieren." },
@@ -3337,6 +3381,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-224",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Das zusammengesetzte SLA für die Anwendung ist ___",
+      choices: ["das Produkt beider SLAs, das 99,94 Prozent entspricht.", "das niedrigste mit der Anwendung verbundene SLA, das 99,95 Prozent beträgt.", "das höchste mit der Anwendung verbundene SLA, nämlich 99,99 Prozent.", "die Differenz zwischen den beiden SLAs, also 0,05 Prozent."],
+    },
     options: [
       { id: "A", text: "Das zusammengesetzte SLA für die Anwendung ist das Produkt beider SLAs, das 99,94 Prozent entspricht." },
       { id: "B", text: "Das zusammengesetzte SLA für die Anwendung ist das niedrigste mit der Anwendung verbundene SLA, das 99,95 Prozent beträgt." },
@@ -3914,6 +3962,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-266",
     topicId: "azure-architektur",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Azure Cosmos DB ist ein Beispiel für ___",
+      choices: ["ein Platform-as-a-Service-Angebot (PaaS).", "ein Infrastructure-as-a-Service-Angebot (IaaS).", "ein serverloses Angebot.", "ein Software-as-a-Service-Angebot (SaaS)."],
+    },
     options: [
       { id: "A", text: "Azure Cosmos DB ist ein Beispiel für ein Platform-as-a-Service -Angebot (PaaS)." },
       { id: "B", text: "Azure Cosmos DB ist ein Beispiel für ein Infrastructure-as-a-Service-Angebot (IaaS) ." },
@@ -3942,6 +3994,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-268",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "___ eine gemeinsame Plattform zum Bereitstellen von Objekten in einer Cloud-Infrastruktur und zum Implementieren von Konsistenz in der gesamten Azure-Umgebung.",
+      choices: ["Azure-Richtlinien bieten", "Ressourcengruppen bieten", "Azure Resource Manager bietet", "Verwaltungsgruppen bieten"],
+    },
     options: [
       { id: "A", text: "Azure-Richtlinien bieten eine gemeinsame Plattform zum Bereitstellen von Objekten in einer Cloud-Infrastruktur und zum Implementieren von Konsistenz in der gesamten Azure-Umgebung." },
       { id: "B", text: "Ressourcengruppen bieten eine gemeinsame Plattform zum Bereitstellen von Objekten in einer Cloud-Infrastruktur und zum Implementieren von Konsistenz in der gesamten Azure-Umgebung." },
@@ -3991,6 +4047,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-271",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "___ die Möglichkeit, die Compliance von Azure-Ressourcen über mehrere Abonnements hinweg zu verwalten.",
+      choices: ["Ressourcengruppen bieten Organisationen", "Verwaltungsgruppen bieten Organisationen", "Azure-Richtlinien bieten Organisationen", "Azure App Service-Pläne bieten Organisationen"],
+    },
     options: [
       { id: "A", text: "Ressourcengruppen bieten Organisationen die Möglichkeit, die Compliance von Azure-Ressourcen über mehrere Abonnements hinweg zu verwalten." },
       { id: "B", text: "Verwaltungsgruppen bieten Organisationen die Möglichkeit, die Compliance von Azure-Ressourcen über mehrere Abonnements hinweg zu verwalten." },
@@ -4005,6 +4065,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-272",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Ein Azure-Dienst ist für alle Azure-Kunden verfügbar, wenn er ___",
+      choices: ["sich in der öffentlichen Vorschau befindet", "sich in der privaten Vorschau befindet", "sich in der Entwicklung befindet", "Teil eines Enterprise Agreement (EA)-Abonnements ist"],
+    },
     options: [
       { id: "A", text: "Ein Azure-Dienst ist für alle Azure-Kunden verfügbar, wenn er sich in der öffentlichen Vorschau befindet" },
       { id: "B", text: "Ein Azure-Dienst ist für alle Azure-Kunden verfügbar, wenn er sich in der privaten Vorschau befindet" },
@@ -4034,6 +4098,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-274",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Alle Azure-Dienste in der öffentlichen Vorschau ___",
+      choices: ["werden ohne Dokumentation bereitgestellt.", "sind nur über die Azure CLI konfigurierbar.", "sind von den Service Level Agreements ausgeschlossen.", "können nur über das Azure-Portal konfiguriert werden."],
+    },
     options: [
       { id: "A", text: "Alle Azure-Dienste in der öffentlichen Vorschau werden ohne Dokumentation bereitgestellt ." },
       { id: "B", text: "Alle Azure-Dienste in der öffentlichen Vorschau sind nur über die Azure CLI konfigurierbar ." },
@@ -4063,6 +4131,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-276",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Wenn Sie Berechtigungen gleichzeitig an mehrere virtuelle Azure-Maschinen delegieren müssen, müssen Sie die virtuellen Azure-Maschinen ___ bereitstellen.",
+      choices: ["in derselben Azure-Region", "mithilfe derselben Azure Resource Manager-Vorlage", "in derselben Ressourcengruppe", "in derselben Verfügbarkeitszone"],
+    },
     options: [
       { id: "A", text: "Wenn Sie Berechtigungen gleichzeitig an mehrere virtuelle Azure-Maschinen delegieren müssen, müssen Sie die virtuellen Azure-Maschinen in derselben Azure-Region bereitstellen ." },
       { id: "B", text: "Wenn Sie Berechtigungen gleichzeitig an mehrere virtuelle Azure-Computer delegieren müssen, müssen Sie die virtuellen Azure-Computer mithilfe derselben Azure Resource Manager-Vorlage bereitstellen ." },
@@ -4091,6 +4163,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-278",
     topicId: "azure-architektur",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Nachdem Sie eine virtuelle Maschine erstellt haben, müssen Sie ___ ändern, um Verbindungen vom TCP-Port 8080 zur virtuellen Maschine zuzulassen.",
+      choices: ["die Netzwerksicherheitsgruppe (NSG)", "das virtuelle Netzwerk-Gateway", "das virtuelle Netzwerk", "die Routentabelle"],
+    },
     options: [
       { id: "A", text: "Nachdem Sie eine virtuelle Maschine erstellt haben, müssen Sie die Netzwerksicherheitsgruppe (NSG) ändern , um Verbindungen vom TCP-Port 8080 zur virtuellen Maschine zuzulassen." },
       { id: "B", text: "Nachdem Sie eine virtuelle Maschine erstellt haben, müssen Sie das virtuelle Netzwerk-Gateway ändern , um Verbindungen vom TCP-Port 8080 zur virtuellen Maschine zuzulassen." },
@@ -4120,6 +4196,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-280",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "___ erläutert, welche Daten Microsoft verarbeitet, wie Microsoft die Daten verarbeitet und zu welchem Zweck die Datenverarbeitung erfolgt.",
+      choices: ["Die Datenschutzerklärung für Microsoft Onlinedienste", "Die Bedingungen für Microsoft Online Services", "Das Microsoft Online Services Level Agreement", "Der Online-Abonnementvertrag für Microsoft Azure"],
+    },
     options: [
       { id: "A", text: "In der Datenschutzerklärung für Microsoft Onlinedienste wird erläutert, welche Daten Microsoft verarbeitet, wie Microsoft die Daten verarbeitet und zu welchem Zweck die Datenverarbeitung erfolgt." },
       { id: "B", text: "In den Bedingungen für Microsoft Online Services wird erläutert, welche Daten Microsoft verarbeitet, wie Microsoft die Daten verarbeitet und zu welchem Zweck die Datenverarbeitung erfolgt." },
@@ -4178,6 +4258,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-284",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "___ ist ein auf Apache Spark basierender Analysedienst.",
+      choices: ["Azure Databricks", "Azure Data Factory", "Azure DevOps", "Azure Synapse Analytics"],
+    },
     options: [
       { id: "A", text: "Azure Databricks ist ein auf Apache Spark basierender Analysedienst." },
       { id: "B", text: "Azure Data Factory ist ein auf Apache Spark basierender Analysedienst." },
@@ -4192,6 +4276,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-285",
     topicId: "azure-architektur",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Eine Verfügbarkeitszone in Azure verfügt über physisch getrennte Standorte ___",
+      choices: ["auf zwei Kontinenten.", "innerhalb einer einzelnen Azure-Region.", "innerhalb mehrerer Azure-Regionen.", "innerhalb eines einzelnen Azure-Rechenzentrums."],
+    },
     options: [
       { id: "A", text: "Eine Availability Zone in Azure verfügt über physisch getrennte Standorte auf zwei Kontinenten." },
       { id: "B", text: "Eine Verfügbarkeitszone in Azure verfügt über physisch getrennte Standorte innerhalb einer einzelnen Azure-Region." },
@@ -4277,6 +4365,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-291",
     topicId: "azure-architektur",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Sie können den Bericht zur Einhaltung gesetzlicher Vorschriften Ihres Unternehmens ___ anzeigen.",
+      choices: ["von Azure Advisor aus", "in Azure Analysis Services", "in Azure Monitor", "im Azure Security Center"],
+    },
     options: [
       { id: "A", text: "Sie können den Bericht zur Einhaltung gesetzlicher Vorschriften Ihres Unternehmens von Azure Advisor aus anzeigen ." },
       { id: "B", text: "Sie können den Bericht zur Einhaltung gesetzlicher Vorschriften Ihres Unternehmens in Azure Analysis Services anzeigen ." },
@@ -4292,6 +4384,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-292",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "___ bieten Zugriff auf ungenutzte Azure-Rechenkapazität zu hohen Rabatten.",
+      choices: ["Azure Container Instances", "Azure Reserved Virtual Machine Instances", "Azure Spot Virtual Machine Instances", "Azure Virtual Machine Scale Sets"],
+    },
     options: [
       { id: "A", text: "Azure Container Instances bieten Zugriff auf ungenutzte Azure-Rechenkapazität zu hohen Rabatten." },
       { id: "B", text: "Azure Reserved Virtual Machine Instances bieten Zugriff auf ungenutzte Azure-Rechenkapazität zu hohen Rabatten." },
@@ -4514,6 +4610,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-306",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Wenn eine virtuelle Azure-Maschine den Status „Angehalten (Zuweisung aufgehoben)“ hat, zahlen Sie weiterhin für ___",
+      choices: ["die Rechenkapazität.", "E/A-Vorgänge.", "die Netzwerknutzung.", "den Speicher."],
+    },
     options: [
       { id: "A", text: "Wenn eine virtuelle Azure-Maschine den Status „Angehalten (Zuweisung aufgehoben)“ hat, zahlen Sie weiterhin für die Rechenkapazität ." },
       { id: "B", text: "Wenn eine virtuelle Azure-Maschine den Status „Angehalten (Zuweisung aufgehoben)“ hat, zahlen Sie weiterhin für E/A-Vorgänge ." },
@@ -4528,6 +4628,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-307",
     topicId: "azure-verwaltung",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Um die Kosten einer ungenutzten virtuellen Azure-Maschine zu sparen, auf der Windows 10 ausgeführt wird, sollten Sie ___",
+      choices: ["die Verbindung zur virtuellen Maschine während einer Remotedesktopsitzung trennen.", "die virtuelle Maschine über eine Remotedesktopsitzung in den Ruhemodus versetzen.", "im Azure-Portal „Beenden“ für die virtuelle Maschine auswählen.", "die virtuelle Maschine über eine Remotedesktopsitzung herunterfahren."],
+    },
     options: [
       { id: "A", text: "Um die Kosten einer ungenutzten virtuellen Azure-Maschine zu sparen, auf der Windows 10 ausgeführt wird, sollten Sie die Verbindung zur virtuellen Maschine während einer Remotedesktopsitzung trennen." },
       { id: "B", text: "Um die Kosten einer ungenutzten virtuellen Azure-Maschine zu sparen, auf der Windows 10 ausgeführt wird, sollten Sie die virtuelle Maschine über eine Remotedesktopsitzung in den Ruhemodus versetzen." },
@@ -4672,6 +4776,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-316",
     topicId: "azure-verwaltung",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Ein Beispiel für ___ ist die Anforderung, dass ein Benutzer bei der Anmeldung bei Azure Active Directory (Azure AD) ein Kennwort eingibt und eine Sicherheitsfrage beantwortet.",
+      choices: ["Business-to-Customer-Identitätsdienste (B2C)", "verwaltete Identitäten", "die Multi-Faktor-Authentifizierung (MFA)", "die rollenbasierte Zugriffssteuerung (RBAC)"],
+    },
     options: [
       { id: "A", text: "Ein Beispiel für Business-to-Customer-Identitätsdienste (B2C) ist die Anforderung, dass ein Benutzer bei der Anmeldung bei Azure Active Directory (Azure AD) ein Kennwort eingibt und eine Sicherheitsfrage beantwortet ." },
       { id: "B", text: "Ein Beispiel für verwaltete Identitäten ist die Anforderung, dass ein Benutzer bei der Anmeldung bei Azure Active Directory (Azure AD) ein Kennwort eingeben und eine Sicherheitsfrage beantworten muss ." },
@@ -4863,6 +4971,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-329",
     topicId: "cloud-konzepte",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Eine Microsoft SQL Server-Datenbank, die in der Cloud gehostet wird und deren Softwareupdates von Azure verwaltet werden, ist ein Beispiel für ___",
+      choices: ["Disaster Recovery as a Service (DRaaS).", "Infrastructure as a Service (IaaS).", "Platform as a Service (PaaS).", "Software as a Service (SaaS)."],
+    },
     options: [
       { id: "A", text: "Eine Microsoft SQL Server-Datenbank, die in der Cloud gehostet wird und deren Softwareupdates von Azure verwaltet werden, ist ein Beispiel für Disaster Recovery as a Service (DRaaS)." },
       { id: "B", text: "Eine Microsoft SQL Server-Datenbank, die in der Cloud gehostet wird und deren Softwareupdates von Azure verwaltet werden, ist ein Beispiel für Infrastructure as a Service (IaaS)." },
@@ -5328,6 +5440,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-361",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Premium-Blockblobs-Speicherkonten unterstützen nur ___",
+      choices: ["georedundante Speicherredundanz (GRS) und lokal redundante Speicherredundanz (LRS).", "geozonenredundanten Speicher (GZRS) und zonenredundanten Speicher (ZRS).", "lokal redundanten Speicher (LRS) und georedundanten Speicher (GRS).", "zonenredundante Speicherredundanz (ZRS) und lokal redundante Speicherredundanz (LRS)."],
+    },
     options: [
       { id: "A", text: "Premium-Blockblobs-Speicherkonten unterstützen nur georedundante Speicherredundanz (GRS) und lokal redundante Speicherredundanz (LRS) ." },
       { id: "B", text: "Premium-Blockblobs-Speicherkonten unterstützen nur die Redundanz von geozonenredundantem Speicher (GZRS) und zonenredundantem Speicher (ZRS) ." },
@@ -5488,6 +5604,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-371",
     topicId: "azure-verwaltung",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "___ bietet ausführliche Informationen zu Sicherheit, Datenschutz, Compliance-Angeboten, Richtlinien und Funktionen aller Microsoft-Cloudprodukte.",
+      choices: ["Das Microsoft Purview-Compliance-Portal", "Das Microsoft 365 Defender-Portal", "Microsoft Defender für Cloud im Azure-Portal", "Das Microsoft Trust Center"],
+    },
     options: [
       { id: "A", text: "Das Microsoft Purview-Compliance-Portal bietet ausführliche Informationen zu Sicherheit, Datenschutz, Compliance-Angeboten, Richtlinien und Funktionen aller Microsoft-Cloud-Produkte." },
       { id: "B", text: "Das Microsoft 365 Defender-Portal bietet ausführliche Informationen zu Sicherheit, Datenschutz, Compliance-Angeboten, Richtlinien und Funktionen aller Microsoft-Cloudprodukte." },
@@ -5619,6 +5739,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-380",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "___ kann Kosteneinsparungen aufgrund des geringeren Stromverbrauchs berechnen, die durch die Migration eines lokalen Microsoft SQL-Servers zu Azure entstehen.",
+      choices: ["Das Tool „Azure Migrate: Server Assessment“", "Der Azure-TCO-Rechner (Total Cost of Ownership)", "Der Datenbankmigrationsassistent", "Der Preisrechner in Azure"],
+    },
     options: [
       { id: "A", text: "Mit dem Tool „Azure Migrate: Server Assessment“ können Sie Kosteneinsparungen aufgrund des geringeren Stromverbrauchs berechnen, die durch die Migration eines lokalen Microsoft SQL-Servers zu Azure entstehen." },
       { id: "B", text: "Mit dem Azure-TCO-Rechner (Total Cost of Ownership) können Sie die Kosteneinsparungen aufgrund des geringeren Stromverbrauchs berechnen, die durch die Migration eines lokalen Microsoft SQL-Servers zu Azure entstehen." },
@@ -6495,6 +6619,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-445",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Sie können ___ auf den Compliance Manager zugreifen.",
+      choices: ["über das Azure Active Directory Admin Center", "über das Azure-Portal", "über das Microsoft 365 Admin Center", "über das Microsoft Service Trust Portal"],
+    },
     options: [
       { id: "A", text: "Sie können über das Azure Active Directory Admin Center auf den Compliance Manager zugreifen ." },
       { id: "B", text: "Sie können über das Azure-Portal auf den Compliance Manager zugreifen ." },
@@ -6524,6 +6652,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-447",
     topicId: "azure-verwaltung",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Sie können einen lokalen Windows-Server ___ als Azure-Ressource verwalten.",
+      choices: ["mithilfe von Azure AD Connect", "mithilfe von Azure ARC", "mithilfe eines Azure Pipelines-Agenten", "mithilfe von Azure VPN Gateway"],
+    },
     options: [
       { id: "A", text: "Sie können einen lokalen Windows-Server mithilfe von Azure AD Connect als Azure-Ressource verwalten ." },
       { id: "B", text: "Sie können einen lokalen Windows-Server mithilfe von Azure ARC als Azure-Ressource verwalten ." },
@@ -7200,6 +7332,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-494",
     topicId: "azure-verwaltung",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Ein Azure-SLA ist eine formelle Vereinbarung zwischen Microsoft und einem Kunden, die ___ definiert.",
+      choices: ["die Verpflichtung zur Bereitstellung der Funktionen einer Technologie-Roadmap", "eine Verpflichtung zu Leistungsstandards", "die maximalen Skalierbarkeitsgrenzen einer verfügbaren Infrastruktur", "die Mindestgrenzen der Skalierbarkeit einer verfügbaren Infrastruktur"],
+    },
     options: [
       { id: "A", text: "Ein Azure-SLA ist eine formelle Vereinbarung zwischen Microsoft und einem Kunden, die die Verpflichtung zur Bereitstellung der Funktionen einer Technologie-Roadmap definiert ." },
       { id: "B", text: "Ein Azure-SLA ist eine formelle Vereinbarung zwischen Microsoft und einem Kunden, die eine Verpflichtung zu Leistungsstandards definiert ." },
@@ -7386,6 +7522,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-507",
     topicId: "azure-verwaltung",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Wenn Windows Server- oder Microsoft SQL Server-Lizenzen ___, können Sie die Lizenzen auf Azure Virtual Machines umfunktionieren.",
+      choices: ["durch einen Endbenutzer-Lizenzvertrag (EULA) abgedeckt sind", "durch die Microsoft Lifecycle Policy abgedeckt sind", "durch Software Assurance abgedeckt sind"],
+    },
     options: [
       { id: "A", text: "Wenn für Windows Server- oder Microsoft SQL Server-Lizenzen ein Endbenutzer-Lizenzvertrag (EULA) gilt , können Sie die Lizenzen auf Azure Virtual Machines umfunktionieren." },
       { id: "B", text: "Wenn Windows Server- oder Microsoft SQL Server-Lizenzen durch die Microsoft Lifecycle Policy abgedeckt sind , können Sie die Lizenzen auf Azure Virtual Machines umfunktionieren." },
@@ -7456,6 +7596,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-512",
     topicId: "azure-architektur",
     prompt: "Wählen Sie im Antwortbereich die entsprechende Option aus, um den Satz zu vervollständigen.",
+    blankFill: {
+      template: "Sie planen, 20 virtuelle Maschinen in einer Azure-Umgebung bereitzustellen. Um sicherzustellen, dass eine virtuelle Maschine mit dem Namen VM1 keine Verbindung zu den anderen virtuellen Maschinen herstellen kann, muss ___",
+      choices: ["VM1 in einem separaten virtuellen Netzwerk bereitgestellt werden.", "auf VM1 ein anderes Betriebssystem als auf den anderen virtuellen Maschinen ausgeführt werden.", "VM1 in einer separaten Ressourcengruppe bereitgestellt werden.", "VM1 über zwei Netzwerkschnittstellen verfügen."],
+    },
     options: [
       { id: "A", text: "Sie planen, 20 virtuelle Maschinen in einer Azure-Umgebung bereitzustellen. Um sicherzustellen, dass eine virtuelle Maschine mit dem Namen VM1 keine Verbindung zu den anderen virtuellen Maschinen herstellen kann, muss VM1 in einem separaten virtuellen Netzwerk bereitgestellt werden ." },
       { id: "B", text: "Sie planen, 20 virtuelle Maschinen in einer Azure-Umgebung bereitzustellen. Um sicherzustellen, dass eine virtuelle Maschine mit dem Namen VM1 keine Verbindung zu den anderen virtuellen Maschinen herstellen kann, muss auf VM1 ein anderes Betriebssystem als auf den anderen virtuellen Maschinen ausgeführt werden ." },
@@ -7469,6 +7613,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-513",
     topicId: "azure-verwaltung",
     prompt: "Wählen Sie im Antwortbereich die entsprechende Option aus, um den Satz zu vervollständigen.",
+    blankFill: {
+      template: "Sie verfügen über ein virtuelles Azure-Netzwerk namens VNET1 in einer Ressourcengruppe namens RG1. Sie weisen eine Azure-Richtlinie zu, die angibt, dass virtuelle Netzwerke in RG1 kein zulässiger Ressourcentyp sind. VNET1 ___",
+      choices: ["wird automatisch gelöscht.", "wird automatisch in eine andere Ressourcengruppe verschoben.", "funktioniert weiterhin normal.", "ist jetzt ein schreibgeschütztes Objekt."],
+    },
     options: [
       { id: "A", text: "Sie verfügen über ein virtuelles Azure-Netzwerk namens VNET1 in einer Ressourcengruppe namens RG1. Sie weisen eine Azure-Richtlinie zu, die angibt, dass virtuelle Netzwerke in RG1 kein zulässiger Ressourcentyp sind. VNET1 wird automatisch gelöscht ." },
       { id: "B", text: "Sie verfügen über ein virtuelles Azure-Netzwerk namens VNET1 in einer Ressourcengruppe namens RG1. Sie weisen eine Azure-Richtlinie zu, die angibt, dass virtuelle Netzwerke in RG1 kein zulässiger Ressourcentyp sind. VNET1 wird automatisch in eine andere Ressourcengruppe verschoben ." },
@@ -7510,6 +7658,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-516",
     topicId: "cloud-konzepte",
     prompt: "Wählen Sie im Antwortbereich die entsprechende Option aus, um den Satz zu vervollständigen.",
+    blankFill: {
+      template: "Wenn Microsoft plant, den Support für einen Azure-Dienst einzustellen, für den es KEINEN Nachfolgedienst gibt, benachrichtigt Microsoft Sie mindestens ___",
+      choices: ["12 Monate im Voraus.", "sechs Monate vorher.", "90 Tage vorher.", "30 Tage vorher."],
+    },
     options: [
       { id: "A", text: "Wenn Microsoft plant, den Support für einen Azure-Dienst einzustellen, für den es KEINEN Nachfolgedienst gibt, benachrichtigt Microsoft Sie mindestens 12 Monate im Voraus." },
       { id: "B", text: "Wenn Microsoft plant, den Support für einen Azure-Dienst einzustellen, für den es KEINEN Nachfolgedienst gibt, benachrichtigt Microsoft Sie mindestens sechs Monate vorher." },
@@ -8204,6 +8356,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-563",
     topicId: "cloud-konzepte",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Das Service-Level-Agreement (SLA) eines Cloud-Service-Providers drückt ___ als Prozentsatz der Betriebszeit über ein bestimmtes Jahr aus.",
+      choices: ["die Verfügbarkeit", "die Elastizität", "die Zuverlässigkeit", "die Skalierbarkeit"],
+    },
     options: [
       { id: "A", text: "Das Service-Level-Agreement (SLA) eines Cloud-Service-Providers drückt die Verfügbarkeit als Prozentsatz der Betriebszeit über ein bestimmtes Jahr aus." },
       { id: "B", text: "Das Service-Level-Agreement (SLA) eines Cloud-Service-Providers drückt die Elastizität als Prozentsatz der Betriebszeit über ein bestimmtes Jahr aus." },
