@@ -1752,6 +1752,12 @@ const fr: Dictionary = {
     successDesc: "Merci ! Nous te répondrons dès que possible.",
     error: "Une erreur s'est produite. Réessaie plus tard.",
   },
+  install: {
+    title: "Installer CertCoach",
+    desc: "Installe CertCoach pour un accès plus rapide, comme une vraie appli.",
+    iosDesc: "Appuie sur Partager ci-dessous, puis \"Sur l'écran d'accueil\".",
+    cta: "Installer",
+  },
   faqPage: {
     title: "Questions fréquentes",
     desc: "Réponses aux questions les plus importantes sur CertCoach.",

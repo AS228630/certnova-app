@@ -1752,6 +1752,12 @@ const fa: Dictionary = {
     successDesc: "ممنون! در اسرع وقت با شما تماس می‌گیریم.",
     error: "مشکلی پیش آمد. لطفاً بعداً دوباره امتحان کن.",
   },
+  install: {
+    title: "نصب CertCoach",
+    desc: "CertCoach رو نصب کن تا مثل یک اپ واقعی، سریع‌تر بهش دسترسی داشته باشی.",
+    iosDesc: "روی دکمه‌ی Share بزن، بعد «Zum Home-Bildschirm» رو انتخاب کن.",
+    cta: "نصب کن",
+  },
   faqPage: {
     title: "سوالات متداول",
     desc: "پاسخ به مهم‌ترین سوالات درباره‌ی CertCoach.",

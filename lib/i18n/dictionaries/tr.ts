@@ -1752,6 +1752,12 @@ const tr: Dictionary = {
     successDesc: "Teşekkürler! En kısa sürede sizinle iletişime geçeceğiz.",
     error: "Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyin.",
   },
+  install: {
+    title: "CertCoach'u Yükle",
+    desc: "Gerçek bir uygulama gibi daha hızlı erişim için CertCoach'u yükle.",
+    iosDesc: "Aşağıdan Paylaş'a, sonra \"Ana Ekrana Ekle\"ye dokun.",
+    cta: "Yükle",
+  },
   faqPage: {
     title: "Sık Sorulan Sorular",
     desc: "CertCoach hakkında en önemli soruların cevapları.",

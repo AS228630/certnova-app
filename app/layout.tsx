@@ -53,6 +53,7 @@ export const metadata: Metadata = {
 import ThemeProvider from "@/components/ThemeProvider";
 import LocaleProvider from "@/components/LocaleProvider";
 import { Analytics } from "@vercel/analytics/react";
+import InstallPrompt from "@/components/InstallPrompt";
 
 export default function RootLayout({
   children,
@@ -94,7 +95,10 @@ try{var l=localStorage.getItem('certcoach-locale')||'de';document.documentElemen
       </head>
       <body className="min-h-full flex flex-col bg-bg text-text">
         <ThemeProvider>
-          <LocaleProvider>{children}</LocaleProvider>
+          <LocaleProvider>
+            {children}
+            <InstallPrompt />
+          </LocaleProvider>
         </ThemeProvider>
         {/* Real visitor analytics (page views, referrers, countries,
             devices) via Vercel's built-in analytics — free on the plan

@@ -1752,6 +1752,12 @@ const es: Dictionary = {
     successDesc: "¡Gracias! Te responderemos lo antes posible.",
     error: "Algo salió mal. Inténtalo de nuevo más tarde.",
   },
+  install: {
+    title: "Instalar CertCoach",
+    desc: "Instala CertCoach para un acceso más rápido, como una app real.",
+    iosDesc: "Toca Compartir abajo y luego \"Añadir a pantalla de inicio\".",
+    cta: "Instalar",
+  },
   faqPage: {
     title: "Preguntas frecuentes",
     desc: "Respuestas a las preguntas más importantes sobre CertCoach.",

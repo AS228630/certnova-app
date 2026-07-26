@@ -1760,6 +1760,12 @@ const de = {
     successDesc: "Danke! Wir melden uns so schnell wie möglich bei dir.",
     error: "Etwas ist schiefgelaufen. Bitte versuche es später erneut.",
   },
+  install: {
+    title: "CertCoach installieren",
+    desc: "Installiere CertCoach für schnelleren Zugriff, wie eine echte App.",
+    iosDesc: "Tippe unten auf Teilen und dann auf „Zum Home-Bildschirm“.",
+    cta: "Installieren",
+  },
   faqPage: {
     title: "Häufig gestellte Fragen",
     desc: "Antworten auf die wichtigsten Fragen zu CertCoach.",

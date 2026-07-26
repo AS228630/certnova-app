@@ -1758,6 +1758,12 @@ const en: Dictionary = {
     successDesc: "Thanks! We'll get back to you as soon as possible.",
     error: "Something went wrong. Please try again later.",
   },
+  install: {
+    title: "Install CertCoach",
+    desc: "Install CertCoach for faster access, just like a real app.",
+    iosDesc: "Tap Share below, then \"Add to Home Screen\".",
+    cta: "Install",
+  },
   faqPage: {
     title: "Frequently Asked Questions",
     desc: "Answers to the most important questions about CertCoach.",
