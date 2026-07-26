@@ -4495,7 +4495,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“.",
     statements: [
       { text: "Auf das Microsoft Service Trust Portal kann über ein Microsoft Cloud Services-Konto zugegriffen werden", correct: "Ja" },
-      { text: "Microsoft Cloud Services verfolgen", correct: "Ja" },
+      { text: "Mit dem Compliance Manager können Sie die Aktivitäten Ihres Unternehmens zur Einhaltung gesetzlicher Vorschriften im Zusammenhang mit Microsoft Cloud Services verfolgen", correct: "Ja" },
       { text: "Mit der Funktion „Meine Bibliothek“ können Sie Dokumente und Ressourcen des Microsoft Service Trust Portal an einem einzigen Ort speichern", correct: "Ja" },
     ],
     combinedOptions: [["Ja", "Ja", "Ja"], ["Ja", "Ja", "Nein"], ["Nein", "Ja", "Nein"], ["Nein", "Ja", "Ja"], ["Nein", "Nein", "Ja"], ["Nein", "Nein", "Nein"]],
