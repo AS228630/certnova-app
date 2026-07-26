@@ -4566,6 +4566,21 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-294",
     topicId: "cloud-konzepte",
     prompt: "Sie möchten Azure zum Hosten von zwei Apps mit den Namen App1 und App2 verwenden. Die Apps müssen die folgenden Anforderungen erfüllen: Sie müssen in der Lage sein, den Code von App1 zu ändern. Der Verwaltungsaufwand zur Verwaltung des Betriebssystems von App1 muss minimiert werden. App2 muss interaktiv mit dem Betriebssystem des Servers ausgeführt werden. Welche Art von Cloud-Dienst sollten Sie für jede App verwenden?",
+    blankFillMulti: {
+      template: "App1: ___, App2: ___",
+      blanks: [
+        ["Infrastruktur als Service (IaaS)", "Plattform als Service (PaaS)", "Software als Service (SaaS)"],
+        ["Infrastruktur als Service (IaaS)", "Plattform als Service (PaaS)", "Software als Service (SaaS)"],
+      ],
+      combos: [
+        [0, 1],
+        [0, 2],
+        [1, 2],
+        [1, 0],
+        [2, 1],
+        [2, 0],
+      ],
+    },
     options: [
       { id: "A", text: "App1: Infrastruktur als Service (IaaS), App2: Plattform als Service (PaaS)" },
       { id: "B", text: "App1: Infrastruktur als Service (IaaS), App2: Software als Service (SaaS)" },
