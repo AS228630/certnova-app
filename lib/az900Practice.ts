@@ -866,7 +866,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "matching",
     id: "real-az900-47",
     topicId: "azure-verwaltung",
-    prompt: "Mehrere Supporttechniker planen, Azure mithilfe der in der folgenden Tabelle aufgeführten Computer zu verwalten: Sie müssen ermitteln, welche Azure-Verwaltungstools von jedem Computer aus verwendet werden können. Was sollten Sie für jeden Computer ermitteln? (Wählen Sie zur Beantwortung die",
+    prompt: "Mehrere Supporttechniker planen, Azure mithilfe der in der folgenden Tabelle aufgeführten Computer zu verwalten: Sie müssen ermitteln, welche Azure-Verwaltungstools von jedem Computer aus verwendet werden können. Was sollten Sie für jeden Computer ermitteln? (Wählen Sie zur Beantwortung die entsprechenden Optionen im Antwortbereich aus. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     items: [
       { id: "item0", label: "Die Azure CLI, das Azure-Portal und Azure PowerShell" },
       { id: "item1", label: "Die Azure CLI, das Azure-Portal und Azure PowerShell" },
@@ -1726,7 +1726,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "matching",
     id: "real-az900-107",
     topicId: "azure-verwaltung",
-    prompt: "Sie müssen ermitteln, welche Blades im Azure-Portal zum Ausführen der folgenden Aufgaben verwendet werden müssen: • Sicherheitsempfehlungen anzeigen. • Überwachen Sie die Integrität von Azure-Diensten. • Durchsuchen Sie die verfügbaren Images virtueller Maschinen. Welche Klinge müssen",
+    prompt: "Sie müssen ermitteln, welche Blades im Azure-Portal zum Ausführen der folgenden Aufgaben verwendet werden müssen: • Sicherheitsempfehlungen anzeigen. • Überwachen Sie die Integrität von Azure-Diensten. • Durchsuchen Sie die verfügbaren Images virtueller Maschinen. Welche Klinge müssen Sie für die jeweilige Aufgabe identifizieren?",
     items: [
       { id: "item0", label: "Advisor" },
       { id: "item1", label: "Monitor" },
@@ -3196,7 +3196,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "matching",
     id: "real-az900-204",
     topicId: "azure-verwaltung",
-    prompt: "Ordnen Sie den Azure-Dienst der richtigen Beschreibung zu. (Ziehen Sie dazu den entsprechenden Azure-Dienst aus der linken Spalte in die rechte Spalte mit der Beschreibung. Jeder Dienst kann einmal, mehrmals oder gar nicht verwendet werden. HINWEIS: Jede richtige Zuordnung zählt einen Punkt.) Platzhalter 1: Azure SQL-Datenbank Platzhalter 2: Azure SQL-Datenbank",
+    prompt: "Ordnen Sie den Azure-Dienst der richtigen Beschreibung zu. (Ziehen Sie dazu den entsprechenden Azure-Dienst aus der linken Spalte in die rechte Spalte mit der Beschreibung. Jeder Dienst kann einmal, mehrmals oder gar nicht verwendet werden. HINWEIS: Jede richtige Zuordnung zählt einen Punkt.)",
     items: [
       { id: "item0", label: "Azure SQL-Datenbank" },
       { id: "item1", label: "Azure Synapse Analytics" },
@@ -5492,7 +5492,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "matching",
     id: "real-az900-352",
     topicId: "azure-architektur",
-    prompt: "Sie müssen die in einem Rechenzentrum verwendete Defense-in-Depth-Strategie vervollständigen. Was sollten Sie tun? (Ziehen Sie zur Beantwortung die entsprechenden Ebenen an die richtigen Positionen im Modell. Jede Ebene kann einmal, mehrmals oder gar nicht verwendet werden. HINWEIS: Jede richtig",
+    prompt: "Sie müssen die in einem Rechenzentrum verwendete Defense-in-Depth-Strategie vervollständigen. Was sollten Sie tun? (Ziehen Sie zur Beantwortung die entsprechenden Ebenen an die richtigen Positionen im Modell. Jede Ebene kann einmal, mehrmals oder gar nicht verwendet werden. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     items: [
       { id: "item0", label: "Physische Sicherheit" },
       { id: "item1", label: "Perimeter" },
@@ -5708,7 +5708,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "matching",
     id: "real-az900-365",
     topicId: "azure-architektur",
-    prompt: "Ordnen Sie die Sicherheitskomponenten den entsprechenden Tiefenverteidigungsebenen zu. (Ziehen Sie dazu den entsprechenden Dienst aus der linken Spalte in die entsprechende Beschreibung rechts. Jeder Dienst kann einmal, mehrmals oder gar nicht verwendet werden. HINWEIS: Jede richtige Zuordnung zä",
+    prompt: "Ordnen Sie die Sicherheitskomponenten den entsprechenden Tiefenverteidigungsebenen zu. (Ziehen Sie dazu den entsprechenden Dienst aus der linken Spalte in die entsprechende Beschreibung rechts. Jeder Dienst kann einmal, mehrmals oder gar nicht verwendet werden. HINWEIS: Jede richtige Zuordnung zählt einen Punkt.)",
     items: [
       { id: "item0", label: "Software-Updates und Patches" },
       { id: "item1", label: "Multifaktor-Authentifizierung (MFA)" },
