@@ -1753,6 +1753,7 @@ const es: Dictionary = {
     error: "Algo salió mal. Inténtalo de nuevo más tarde.",
   },
   install: {
+    alreadyInstalled: "Ya instalado",
     title: "Instalar CertCoach",
     desc: "Instala CertCoach para un acceso más rápido, como una app real.",
     iosDesc: "Toca Compartir abajo y luego \"Añadir a pantalla de inicio\".",

@@ -14,6 +14,7 @@ import { supabase } from "@/lib/supabase/client";
 import { getFullName, getFirstName } from "@/lib/supabase/useUser";
 import DeleteAccountButton from "@/components/settings/DeleteAccountButton";
 import ResetProgressButton from "@/components/settings/ResetProgressButton";
+import InstallAppButton from "@/components/settings/InstallAppButton";
 import SubscriptionSection from "@/components/help/SubscriptionSection";
 
 function ProfileForm({ user, profile }: { user: NonNullable<ReturnType<typeof useUser>["user"]>; profile: ReturnType<typeof useProfileStore.getState>["profile"] }) {
@@ -263,6 +264,13 @@ function SettingsBody() {
             })}
           </div>
         </div>
+      </div>
+
+      {/* App */}
+      <div className="rounded-2xl border border-border-soft bg-panel p-5 sm:p-6">
+        <h2 className="mb-1 font-bold text-text">{t("install.title")}</h2>
+        <p className="mb-4 text-sm text-text-faint">{t("install.desc")}</p>
+        <InstallAppButton />
       </div>
 
       {/* Data */}

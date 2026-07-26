@@ -1753,6 +1753,7 @@ const tr: Dictionary = {
     error: "Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyin.",
   },
   install: {
+    alreadyInstalled: "Zaten yüklü",
     title: "CertCoach'u Yükle",
     desc: "Gerçek bir uygulama gibi daha hızlı erişim için CertCoach'u yükle.",
     iosDesc: "Aşağıdan Paylaş'a, sonra \"Ana Ekrana Ekle\"ye dokun.",

@@ -1759,6 +1759,7 @@ const en: Dictionary = {
     error: "Something went wrong. Please try again later.",
   },
   install: {
+    alreadyInstalled: "Already installed",
     title: "Install CertCoach",
     desc: "Install CertCoach for faster access, just like a real app.",
     iosDesc: "Tap Share below, then \"Add to Home Screen\".",

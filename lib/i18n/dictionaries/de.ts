@@ -1761,6 +1761,7 @@ const de = {
     error: "Etwas ist schiefgelaufen. Bitte versuche es später erneut.",
   },
   install: {
+    alreadyInstalled: "Bereits installiert",
     title: "CertCoach installieren",
     desc: "Installiere CertCoach für schnelleren Zugriff, wie eine echte App.",
     iosDesc: "Tippe unten auf Teilen und dann auf „Zum Home-Bildschirm“.",

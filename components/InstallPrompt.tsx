@@ -4,24 +4,16 @@ import { useEffect, useState } from "react";
 import { Download, X, Share } from "lucide-react";
 import Logo from "@/components/Logo";
 import { useLocale } from "@/components/LocaleProvider";
+import { useInstallPromptStore, type BeforeInstallPromptEvent } from "@/lib/store/installPromptStore";
 
 const DISMISS_KEY = "certcoach-install-prompt-dismissed";
 
-// Fires on Chrome/Edge/Android before the browser would show its own
-// install prompt — capturing it lets us show our own styled banner
-// first and trigger the real browser prompt only when the person taps
-// our button.
-type BeforeInstallPromptEvent = Event & {
-  prompt: () => Promise<void>;
-  userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
-};
-
-function isIos() {
+export function isIos() {
   if (typeof navigator === "undefined") return false;
   return /iphone|ipad|ipod/i.test(navigator.userAgent);
 }
 
-function isStandalone() {
+export function isStandaloneNow() {
   if (typeof window === "undefined") return false;
   return (
     window.matchMedia("(display-mode: standalone)").matches ||
@@ -32,7 +24,9 @@ function isStandalone() {
 
 export default function InstallPrompt() {
   const { t } = useLocale();
-  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const setDeferredPrompt = useInstallPromptStore((s) => s.setDeferredPrompt);
+  const setStandalone = useInstallPromptStore((s) => s.setStandalone);
+  const triggerInstall = useInstallPromptStore((s) => s.triggerInstall);
   const [showBanner, setShowBanner] = useState(false);
   const [showIosHint, setShowIosHint] = useState(false);
 
@@ -44,32 +38,33 @@ export default function InstallPrompt() {
       });
     }
 
-    if (isStandalone()) return; // already installed, never show anything
-    if (localStorage.getItem(DISMISS_KEY)) return; // already asked once
+    setStandalone(isStandaloneNow());
 
+    // This ONE listener (registered here, at the always-mounted root
+    // layout) is the single global capture point for the event — it
+    // feeds the shared store so both this banner and the persistent
+    // "Install app" button in Settings can use the exact same deferred
+    // prompt, since the browser only ever fires this event once.
     const handler = (e: Event) => {
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
-      setShowBanner(true);
+      if (!isStandaloneNow() && !localStorage.getItem(DISMISS_KEY)) {
+        setShowBanner(true);
+      }
     };
     window.addEventListener("beforeinstallprompt", handler);
 
     // iOS never fires beforeinstallprompt at all — Safari has no
     // programmatic install API, only the manual Share -> "Zum
     // Home-Bildschirm" flow, so show a one-time instruction instead.
-    // This has to run in an effect (not a lazy useState initializer):
-    // isIos()/localStorage are browser-only, and computing them in an
-    // initializer would run during SSR/hydration too and risk a
-    // mismatch between the server-rendered (always-hidden) markup and
-    // what the client wants to show immediately.
-    if (isIos()) {
+    if (isIos() && !isStandaloneNow() && !localStorage.getItem(DISMISS_KEY)) {
       // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time client-only device detection on mount, not a render-loop update
       setShowIosHint(true);
       setShowBanner(true);
     }
 
     return () => window.removeEventListener("beforeinstallprompt", handler);
-  }, []);
+  }, [setDeferredPrompt, setStandalone]);
 
   function dismiss() {
     setShowBanner(false);
@@ -77,11 +72,8 @@ export default function InstallPrompt() {
   }
 
   async function handleInstall() {
-    if (!deferredPrompt) return;
-    await deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
-    setDeferredPrompt(null);
-    dismiss();
+    const shown = await triggerInstall();
+    if (shown) dismiss();
   }
 
   if (!showBanner) return null;

@@ -1753,6 +1753,7 @@ const fa: Dictionary = {
     error: "مشکلی پیش آمد. لطفاً بعداً دوباره امتحان کن.",
   },
   install: {
+    alreadyInstalled: "قبلاً نصب شده",
     title: "نصب CertCoach",
     desc: "CertCoach رو نصب کن تا مثل یک اپ واقعی، سریع‌تر بهش دسترسی داشته باشی.",
     iosDesc: "روی دکمه‌ی Share بزن، بعد «Zum Home-Bildschirm» رو انتخاب کن.",
