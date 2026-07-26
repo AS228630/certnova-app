@@ -6836,6 +6836,22 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-444",
     topicId: "azure-architektur",
     prompt: "Ordnen Sie die Redundanzoptionen für Speicherkonten von der am wenigsten redundanten zur am meisten redundanten an.",
+    blankFillMulti: {
+      template: "Reihenfolge: ___, ___, ___",
+      blanks: [
+        ["Zonenredundanter Speicher (ZRS)", "Georedundanter Speicher (GRS)", "Lokal redundanter Speicher (LRS)"],
+        ["Zonenredundanter Speicher (ZRS)", "Georedundanter Speicher (GRS)", "Lokal redundanter Speicher (LRS)"],
+        ["Zonenredundanter Speicher (ZRS)", "Georedundanter Speicher (GRS)", "Lokal redundanter Speicher (LRS)"],
+      ],
+      combos: [
+        [0, 1, 2],
+        [0, 2, 1],
+        [1, 0, 2],
+        [1, 2, 0],
+        [2, 0, 1],
+        [2, 1, 0],
+      ],
+    },
     options: [
       { id: "A", text: "Reihenfolge: Zonenredundanter Speicher (ZRS), Georedundanter Speicher (GRS), Lokal redundanter Speicher (LRS)" },
       { id: "B", text: "Reihenfolge: Zonenredundanter Speicher (ZRS), Lokal redundanter Speicher (LRS), Georedundanter Speicher (GRS)" },
@@ -8400,6 +8416,21 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-549",
     topicId: "azure-verwaltung",
     prompt: "In welcher Reihenfolge sollten Sie die Azure-Ressourcen vom höchsten übergeordneten Objekt (oben) zum niedrigsten untergeordneten Objekt anordnen? (Zur Beantwortung verschieben Sie alle Ressourcen aus der Ressourcenliste in den Antwortbereich und ordnen Sie sie in der richtigen Reihenfolge an.)",
+    blankFillMulti: {
+      template: "Reihenfolge (oben nach unten): ___, ___, ___, ___",
+      blanks: [
+        ["Ressourcengruppe", "Azure Virtual Machine", "Azure-Abonnement", "Verwaltungsgruppe"],
+        ["Ressourcengruppe", "Azure Virtual Machine", "Azure-Abonnement", "Verwaltungsgruppe"],
+        ["Ressourcengruppe", "Azure Virtual Machine", "Azure-Abonnement", "Verwaltungsgruppe"],
+        ["Ressourcengruppe", "Azure Virtual Machine", "Azure-Abonnement", "Verwaltungsgruppe"],
+      ],
+      combos: [
+        [2, 3, 0, 1],
+        [3, 0, 2, 1],
+        [3, 2, 0, 1],
+        [0, 2, 3, 1],
+      ],
+    },
     options: [
       { id: "A", text: "Reihenfolge: 3, 4, 1, 2" },
       { id: "B", text: "Sequenz: 4, 1, 3, 2" },
@@ -8559,6 +8590,20 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-559",
     topicId: "cloud-konzepte",
     prompt: "Sie müssen den Grad der gemeinsamen Verantwortung eines Kunden anhand des Cloud-Service-Modells ermitteln. In welcher Reihenfolge sollten Sie die einzelnen Modelle auflisten, von der größten bis zur geringsten Kundenverantwortung? (Zur Beantwortung verschieben Sie alle Modelle aus der Modellliste in den Antwortbereich und ordnen Sie sie in der richtigen Reihenfolge an.)",
+    blankFillMulti: {
+      template: "Reihenfolge (größte bis geringste Verantwortung): ___, ___, ___",
+      blanks: [
+        ["Platform as a Service (PaaS)", "Software as a Service (SaaS)", "Infrastructure as a Service (IaaS)"],
+        ["Platform as a Service (PaaS)", "Software as a Service (SaaS)", "Infrastructure as a Service (IaaS)"],
+        ["Platform as a Service (PaaS)", "Software as a Service (SaaS)", "Infrastructure as a Service (IaaS)"],
+      ],
+      combos: [
+        [1, 0, 2],
+        [2, 0, 1],
+        [0, 2, 1],
+        [0, 1, 2],
+      ],
+    },
     options: [
       { id: "A", text: "Sequenz: 2, 1, 3" },
       { id: "B", text: "Sequenz: 3, 1, 2" },
