@@ -63,6 +63,29 @@ export default function RootLayout({
     <html lang="de" className="h-full antialiased" suppressHydrationWarning>
       <head>
         <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "CertCoach",
+                url: "https://www.certcoach.de",
+                logo: "https://www.certcoach.de/icon-512.png",
+                description:
+                  "CertCoach: Deine All-in-One-Plattform, um IT-Skills aufzubauen, Zertifikate zu erhalten und deinen Traumjob zu bekommen.",
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "CertCoach",
+                url: "https://www.certcoach.de",
+                inLanguage: ["de", "en", "fa"],
+              },
+            ]),
+          }}
+        />
+        <script
           dangerouslySetInnerHTML={{
             __html: `try{var t=localStorage.getItem('certcoach-theme')||'dark';document.documentElement.classList.add(t);}catch(e){document.documentElement.classList.add('dark');}
 try{var l=localStorage.getItem('certcoach-locale')||'de';document.documentElement.lang=l;document.documentElement.dir=(l==='fa'||l==='ar')?'rtl':'ltr';}catch(e){}`,

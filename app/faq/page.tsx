@@ -1,45 +1,70 @@
-"use client";
+import type { Metadata } from "next";
+import FaqPageClient from "./FaqPageClient";
 
-import { useState } from "react";
-import { ChevronDown, HelpCircle } from "lucide-react";
-import LandingHeader from "@/components/LandingHeader";
-import Footer from "@/components/Footer";
-import { useLocale } from "@/components/LocaleProvider";
+export const metadata: Metadata = {
+  title: "Häufig gestellte Fragen",
+  description: "Antworten auf die wichtigsten Fragen zu CertCoach: Kosten, Einstieg, Übungsfragen, Support und mehr.",
+  alternates: {
+    canonical: "https://www.certcoach.de/faq",
+  },
+};
 
-const FAQ_KEYS = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8"];
+// German FAQ text, matching lib/i18n/dictionaries/de.ts (faqPage.*) exactly
+// — this is what crawlers actually see server-rendered, so it must stay in
+// sync with the German dictionary entries if that copy changes.
+const FAQ_ITEMS = [
+  {
+    q: "Ist CertCoach kostenlos?",
+    a: "Ja, du kannst dich kostenlos registrieren und sofort mit dem Lernen beginnen. Der kostenlose Plan bietet Zugriff auf ausgewählte Kurse, eine aktive Lab-Umgebung und begrenzten KI-Coach-Zugriff. Bezahlte Pläne mit mehr Funktionen befinden sich aktuell im Aufbau.",
+  },
+  {
+    q: "Wie fange ich an?",
+    a: "Registriere dich kostenlos, wähle eine Zertifizierung oder einen Sprachkurs aus, der zu deinem Ziel passt, und starte mit der ersten Lektion. Dein Fortschritt wird automatisch gespeichert.",
+  },
+  {
+    q: "Stellt CertCoach offizielle Zertifikate aus?",
+    a: "Nein. CertCoach bereitet dich auf die offiziellen Prüfungen von Anbietern wie Microsoft, AWS oder CompTIA vor. Das eigentliche Zertifikat erhältst du direkt vom jeweiligen Anbieter, nachdem du dessen offizielle Prüfung bestanden hast.",
+  },
+  {
+    q: "Woher kommen die Übungsfragen?",
+    a: "Alle Übungsfragen werden von unserem Team eigens erstellt, um die Themen der jeweiligen Zertifizierung realistisch abzudecken. Es handelt sich nicht um Fragen aus echten Prüfungen, da deren Verbreitung gegen die Nutzungsbedingungen der Zertifizierungsanbieter verstoßen würde.",
+  },
+  {
+    q: "Kann ich CertCoach auf dem Smartphone nutzen?",
+    a: "Ja, die Plattform funktioniert direkt im Browser auf Smartphone, Tablet und Desktop – eine Installation ist nicht nötig.",
+  },
+  {
+    q: "Wie verfolge ich meinen Lernfortschritt?",
+    a: "Dein Dashboard zeigt deinen aktuellen Fortschritt pro Zertifizierung, deine Lernserie und deine beantworteten Fragen in Echtzeit.",
+  },
+  {
+    q: "Wie erreiche ich den Support?",
+    a: 'Über die Seite „Hilfe & Support" im Dashboard oder über das Kontaktformular – wir antworten in der Regel innerhalb von 24 Stunden.',
+  },
+  {
+    q: "Kann ich schon auf einen bezahlten Plan upgraden?",
+    a: "Die Online-Zahlung befindet sich aktuell noch im Aufbau. Auf der Upgrade-Seite kannst du dir die geplanten Pläne ansehen, aber es wird aktuell noch nichts berechnet.",
+  },
+];
 
 export default function FaqPage() {
-  const { t } = useLocale();
-  const [open, setOpen] = useState<number | null>(0);
-
   return (
-    <div className="min-h-screen bg-bg">
-      <LandingHeader />
-      <main className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary-light text-primary">
-            <HelpCircle size={24} />
-          </div>
-          <h1 className="text-2xl font-extrabold text-text sm:text-3xl">{t("faqPage.title")}</h1>
-          <p className="mt-2 text-sm text-text-muted">{t("faqPage.desc")}</p>
-        </div>
-
-        <div className="divide-y divide-border-soft rounded-2xl border border-border-soft bg-panel">
-          {FAQ_KEYS.map((key, i) => (
-            <div key={key}>
-              <button
-                onClick={() => setOpen(open === i ? null : i)}
-                className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left"
-              >
-                <span className="text-sm font-bold text-text">{t(`faqPage.${key}Q`)}</span>
-                <ChevronDown size={16} className={`shrink-0 text-text-faint transition-transform ${open === i ? "rotate-180" : ""}`} />
-              </button>
-              {open === i && <p className="px-5 pb-5 text-sm leading-relaxed text-text-muted">{t(`faqPage.${key}A`)}</p>}
-            </div>
-          ))}
-        </div>
-      </main>
-      <Footer />
-    </div>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: FAQ_ITEMS.map((item) => ({
+              "@type": "Question",
+              name: item.q,
+              acceptedAnswer: { "@type": "Answer", text: item.a },
+            })),
+          }),
+        }}
+      />
+      <FaqPageClient />
+    </>
   );
 }
