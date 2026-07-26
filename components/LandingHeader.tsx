@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu, X, Search } from "lucide-react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import Logo from "@/components/Logo";
 import { useLocale } from "@/components/LocaleProvider";
 import { supabase } from "@/lib/supabase/client";
 
@@ -38,9 +39,7 @@ export default function LandingHeader() {
     <header className="sticky top-0 z-40 border-b border-border-soft bg-panel/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex shrink-0 items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white">
-            C
-          </div>
+          <Logo size={32} />
           <span className="text-lg font-bold tracking-tight text-text">CertCoach</span>
         </Link>
 

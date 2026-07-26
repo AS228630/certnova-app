@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLocale } from "@/components/LocaleProvider";
+import Logo from "@/components/Logo";
 import {
   Linkedin,
   Youtube,
@@ -154,9 +155,7 @@ export default function Footer() {
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-6">
         <div className="lg:col-span-1">
           <div className="mb-3 flex items-center gap-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary">
-              <span className="h-2.5 w-2.5 rotate-45 rounded-[2px] bg-white" />
-            </span>
+            <Logo size={28} />
             <span className="text-base font-bold text-text">CertCoach</span>
           </div>
           <p className="mb-4 text-sm text-text-muted">{t("footer.tagline")}</p>

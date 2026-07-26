@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Diamond, User, Mail, Lock, Eye, EyeOff, ArrowRight, ShieldCheck, CreditCard, Star, Check } from "lucide-react";
+import { User, Mail, Lock, Eye, EyeOff, ArrowRight, ShieldCheck, CreditCard, Star, Check } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { supabase } from "@/lib/supabase/client";
 import Link from "next/link";
 import AuthHero from "@/components/AuthHero";
+import Logo from "@/components/Logo";
 
 function MicrosoftLogo({ size = 16 }: { size?: number }) {
   return (
@@ -160,7 +161,7 @@ export default function AuthCard({ initialMode }: { initialMode: Mode }) {
       <header className="border-b border-border-soft">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8">
           <Link href="/" className="flex items-center gap-2">
-            <Diamond size={22} className="fill-primary text-primary" />
+            <Logo size={26} />
             <span className="text-lg font-bold tracking-tight text-text">CertCoach</span>
           </Link>
           <p className="text-sm text-text-muted">

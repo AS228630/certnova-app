@@ -20,6 +20,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
+import Logo from "@/components/Logo";
 import { useLocale } from "@/components/LocaleProvider";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
@@ -84,9 +85,7 @@ export default function Sidebar({
       >
         <div className="flex items-center justify-between px-5 py-5 lg:px-6 lg:py-6">
           <Link href="/dashboard" className="flex items-center gap-2" onClick={onClose}>
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white">
-              C
-            </div>
+            <Logo size={28} />
             <span className="text-lg font-bold tracking-tight text-text">CertCoach</span>
           </Link>
           <button

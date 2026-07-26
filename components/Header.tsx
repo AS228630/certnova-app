@@ -8,6 +8,7 @@ import { useUser } from "@/components/UserContext";
 import { getFullName } from "@/lib/supabase/useUser";
 import { useProfileStore } from "@/lib/store/profileStore";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import Logo from "@/components/Logo";
 import SearchBox from "@/components/SearchBox";
 import NotificationBell from "@/components/NotificationBell";
 
@@ -32,9 +33,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
           </button>
 
           <div className="flex shrink-0 items-center gap-2 lg:hidden">
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-sm font-bold text-white">
-              C
-            </div>
+            <Logo size={28} />
             <span className="text-base font-bold tracking-tight text-text">CertCoach</span>
           </div>
 
