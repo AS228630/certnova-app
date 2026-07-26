@@ -634,7 +634,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-34",
     topicId: "azure-architektur",
-    prompt: "Sie planen die Implementierung einer Azure-Datenbanklösung. Sie müssen eine Datenbanklösung implementieren, die die folgenden Anforderungen erfüllt: • Kann Daten aus mehreren Regionen gleichzeitig hinzufügen • Kann JSON-Dokumente speichern Welchen Datenbankdienst sollten Sie einsetzen? (Wählen Sie zur Beantwortung den entsprechenden Dienst im Antwortbereich aus.)",
+    prompt: "Sie planen die Implementierung einer Azure-Datenbanklösung. Sie müssen eine Datenbanklösung implementieren, die die folgenden Anforderungen erfüllt:\n• Kann Daten aus mehreren Regionen gleichzeitig hinzufügen\n• Kann JSON-Dokumente speichern\nWelchen Datenbankdienst sollten Sie einsetzen? (Wählen Sie zur Beantwortung den entsprechenden Dienst im Antwortbereich aus.)",
     imageUrl: "/exam-images/az900-q34.png",
     options: [
       { id: "A", text: "Azure Cosmos DB" },
@@ -943,7 +943,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-51",
     topicId: "azure-verwaltung",
-    prompt: "Ihr Unternehmen verfügt über ein lokales Netzwerk mit mehreren Servern. Das Unternehmen plant, die folgenden administrativen Aufgaben der Netzwerkadministratoren zu reduzieren: • Sichern von Anwendungsdaten • Austausch ausgefallener Serverhardware • Verwalten der physischen Serversicherheit • Aktualisieren von Serverbetriebssystemen • Verwalten von Berechtigungen für freigegebene Dokumente Das Unternehmen plant die Migration mehrerer Server auf virtuelle Azure-Computer. Sie müssen ermitteln, welche administrativen Aufgaben nach der geplanten Migration reduziert werden. Welche zwei Aufgaben sollten Sie identifizieren? (Jede richtige Antwort stellt eine Komplettlösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    prompt: "Ihr Unternehmen verfügt über ein lokales Netzwerk mit mehreren Servern. Das Unternehmen plant, die folgenden administrativen Aufgaben der Netzwerkadministratoren zu reduzieren:\n• Sichern von Anwendungsdaten\n• Austausch ausgefallener Serverhardware\n• Verwalten der physischen Serversicherheit\n• Aktualisieren von Serverbetriebssystemen\n• Verwalten von Berechtigungen für freigegebene Dokumente\nDas Unternehmen plant die Migration mehrerer Server auf virtuelle Azure-Computer. Sie müssen ermitteln, welche administrativen Aufgaben nach der geplanten Migration reduziert werden. Welche zwei Aufgaben sollten Sie identifizieren? (Jede richtige Antwort stellt eine Komplettlösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     options: [
       { id: "A", text: "Austausch ausgefallener Serverhardware" },
       { id: "B", text: "Sichern von Anwendungsdaten" },
@@ -1492,7 +1492,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-92",
     topicId: "azure-architektur",
-    prompt: "Sie müssen eine Azure-Lösung konfigurieren, die die folgenden Anforderungen erfüllt: • Schützt Websites vor Angriffen • Erstellt Berichte, die Details zu versuchten Angriffen enthalten Was sollte in die Lösung aufgenommen werden?",
+    prompt: "Sie müssen eine Azure-Lösung konfigurieren, die die folgenden Anforderungen erfüllt:\n• Schützt Websites vor Angriffen\n• Erstellt Berichte, die Details zu versuchten Angriffen enthalten\nWas sollte in die Lösung aufgenommen werden?",
     options: [
       { id: "A", text: "Azure Web Application Firewall (WAF)" },
       { id: "B", text: "Eine Netzwerksicherheitsgruppe (NSG)" },
@@ -1726,7 +1726,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "matching",
     id: "real-az900-107",
     topicId: "azure-verwaltung",
-    prompt: "Sie müssen ermitteln, welche Blades im Azure-Portal zum Ausführen der folgenden Aufgaben verwendet werden müssen: • Sicherheitsempfehlungen anzeigen. • Überwachen Sie die Integrität von Azure-Diensten. • Durchsuchen Sie die verfügbaren Images virtueller Maschinen. Welche Klinge müssen Sie für die jeweilige Aufgabe identifizieren?",
+    prompt: "Sie müssen ermitteln, welche Blades im Azure-Portal zum Ausführen der folgenden Aufgaben verwendet werden müssen:\n• Sicherheitsempfehlungen anzeigen.\n• Überwachen Sie die Integrität von Azure-Diensten.\n• Durchsuchen Sie die verfügbaren Images virtueller Maschinen.\nWelche Klinge müssen Sie für die jeweilige Aufgabe identifizieren? (Wählen Sie zur Beantwortung die entsprechenden Optionen im Antwortbereich aus. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     items: [
       { id: "item0", label: "Advisor" },
       { id: "item1", label: "Monitor" },
@@ -1819,7 +1819,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-113",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehrere richtige Lösungen, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Ihr Unternehmen verfügt über ein Azure-Abonnement mit den folgenden ungenutzten Ressourcen: • 20 Benutzerkonten in Azure Active Directory (Azure AD) • Fünf Gruppen in Azure AD • 10 öffentliche IP-Adressen • 10 Netzwerkschnittstellen Sie müssen die Azure-Kosten für Ihr Unternehmen senken. Lösung: Sie entfernen die ungenutzten Netzwerkschnittstellen. Ist das zielführend?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehrere richtige Lösungen, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Ihr Unternehmen verfügt über ein Azure-Abonnement mit den folgenden ungenutzten Ressourcen:\n• 20 Benutzerkonten in Azure Active Directory (Azure AD)\n• Fünf Gruppen in Azure AD\n• 10 öffentliche IP-Adressen\n• 10 Netzwerkschnittstellen\nSie müssen die Azure-Kosten für Ihr Unternehmen senken. Lösung: Sie entfernen die ungenutzten Netzwerkschnittstellen. Ist das zielführend?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -1831,7 +1831,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-114",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehrere richtige Lösungen, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Ihr Unternehmen verfügt über ein Azure-Abonnement mit den folgenden ungenutzten Ressourcen: • 20 Benutzerkonten in Azure Active Directory (Azure AD) • Fünf Gruppen in Azure AD • 10 öffentliche IP-Adressen • 10 Netzwerkschnittstellen Sie müssen die Azure-Kosten für das Unternehmen senken. Lösung: Sie entfernen die ungenutzten öffentlichen IP-Adressen. Ist das zielführend?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehrere richtige Lösungen, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Ihr Unternehmen verfügt über ein Azure-Abonnement mit den folgenden ungenutzten Ressourcen:\n• 20 Benutzerkonten in Azure Active Directory (Azure AD)\n• Fünf Gruppen in Azure AD\n• 10 öffentliche IP-Adressen\n• 10 Netzwerkschnittstellen\nSie müssen die Azure-Kosten für das Unternehmen senken. Lösung: Sie entfernen die ungenutzten öffentlichen IP-Adressen. Ist das zielführend?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -1843,7 +1843,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-115",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehrere richtige Lösungen, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Ihr Unternehmen verfügt über ein Azure-Abonnement mit den folgenden ungenutzten Ressourcen: • 20 Benutzerkonten in Azure Active Directory (Azure AD) • Fünf Gruppen in Azure AD • 10 öffentliche IP-Adressen • 10 Netzwerkschnittstellen Sie müssen die Azure-Kosten für das Unternehmen senken. Lösung: Sie entfernen die ungenutzten Benutzerkonten. Ist das zielführend?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehrere richtige Lösungen, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Ihr Unternehmen verfügt über ein Azure-Abonnement mit den folgenden ungenutzten Ressourcen:\n• 20 Benutzerkonten in Azure Active Directory (Azure AD)\n• Fünf Gruppen in Azure AD\n• 10 öffentliche IP-Adressen\n• 10 Netzwerkschnittstellen\nSie müssen die Azure-Kosten für das Unternehmen senken. Lösung: Sie entfernen die ungenutzten Benutzerkonten. Ist das zielführend?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -1855,7 +1855,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-116",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehrere richtige Lösungen, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Ihr Unternehmen verfügt über ein Azure-Abonnement mit den folgenden ungenutzten Ressourcen: • 20 Benutzerkonten in Azure Active Directory (Azure AD) • Fünf Gruppen in Azure AD • 10 öffentliche IP-Adressen • 10 Netzwerkschnittstellen Sie müssen die Azure-Kosten für das Unternehmen senken. Lösung: Sie entfernen die ungenutzten Gruppen. Ist das zielführend?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehrere richtige Lösungen, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Ihr Unternehmen verfügt über ein Azure-Abonnement mit den folgenden ungenutzten Ressourcen:\n• 20 Benutzerkonten in Azure Active Directory (Azure AD)\n• Fünf Gruppen in Azure AD\n• 10 öffentliche IP-Adressen\n• 10 Netzwerkschnittstellen\nSie müssen die Azure-Kosten für das Unternehmen senken. Lösung: Sie entfernen die ungenutzten Gruppen. Ist das zielführend?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -1937,7 +1937,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-122",
     topicId: "azure-architektur",
-    prompt: "Ein Unternehmen verfügt über die folgenden lokalen Datenspeicher. • Eine Microsoft SQL Server 2012-Datenbank • Eine Microsoft SQL Server 2008-Datenbank • Die Daten müssen nach Azure migriert werden Das Unternehmen hat folgende Anforderungen. • Anforderung 1 – Die Daten in der Microsoft SQL Server 2012-Datenbank müssen in eine Azure SQL-Datenbank migriert werden. • Anforderung 2: Die Daten in einer Tabelle in der Microsoft SQL Server 2008-Datenbank müssen in ein Azure CosmosDB-Konto migriert werden, das die SQL- API verwendet. Welche der folgenden Maßnahmen sollte zur Erfüllung der Anforderung 2 verwendet werden?",
+    prompt: "Ein Unternehmen verfügt über die folgenden lokalen Datenspeicher.\n• Eine Microsoft SQL Server 2012-Datenbank\n• Eine Microsoft SQL Server 2008-Datenbank\n• Die Daten müssen nach Azure migriert werden\nDas Unternehmen hat folgende Anforderungen.\n• Anforderung 1 – Die Daten in der Microsoft SQL Server 2012-Datenbank müssen in eine Azure SQL-Datenbank migriert werden.\n• Anforderung 2: Die Daten in einer Tabelle in der Microsoft SQL Server 2008-Datenbank müssen in ein Azure CosmosDB-Konto migriert werden, das die SQLAPI verwendet.\nWelche der folgenden Maßnahmen sollte zur Erfüllung der Anforderung 2 verwendet werden?",
     options: [
       { id: "A", text: "AzCopy" },
       { id: "B", text: "Azure Cosmos DB-Datenmigrationstool" },
@@ -2011,7 +2011,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-126",
     topicId: "azure-verwaltung",
-    prompt: "Ein Unternehmen plant die Bereitstellung einer Anwendung auf Azure. Die Anwendung basiert auf der Programmiersprache .Net Core. Die Anwendung soll über Azure Web Apps gehostet werden. Nachfolgend sind einige der Anforderungen für die Anwendung aufgeführt: • Ermöglicht dem Testteam, die verschiedenen Komponenten einer Anwendung anzuzeigen und die zwischen den verschiedenen Anwendungskomponenten getätigten Aufrufe zu verfolgen. • Hilft Unternehmen bei der Analyse, wie viele Benutzer tatsächlich zur Anwendung zurückkehren. • Stellen Sie sicher, dass IT-Administratoren Warnmeldungen erhalten, wenn in der Anwendung kritische Bedingungen erfüllt sind. Welcher der folgenden Dienste wäre am besten geeignet, um die Anforderung „Hilft Unternehmen bei der Analyse, wie viele Benutzer tatsächlich zur Anwendung zurückkehren“ zu erfüllen?",
+    prompt: "Ein Unternehmen plant die Bereitstellung einer Anwendung auf Azure. Die Anwendung basiert auf der Programmiersprache .Net Core. Die Anwendung soll über Azure Web Apps gehostet werden. Nachfolgend sind einige der Anforderungen für die Anwendung aufgeführt:\n• Ermöglicht dem Testteam, die verschiedenen Komponenten einer Anwendung anzuzeigen und die zwischen den verschiedenen Anwendungskomponenten getätigten Aufrufe zu verfolgen.\n• Hilft Unternehmen bei der Analyse, wie viele Benutzer tatsächlich zur Anwendung zurückkehren.\n• Stellen Sie sicher, dass IT-Administratoren Warnmeldungen erhalten, wenn in der Anwendung kritische Bedingungen erfüllt sind.\nWelcher der folgenden Dienste wäre am besten geeignet, um die Anforderung „Hilft Unternehmen bei der Analyse, wie viele Benutzer tatsächlich zur Anwendung zurückkehren“ zu erfüllen?",
     options: [
       { id: "A", text: "Anwendungseinblicke" },
       { id: "B", text: "Azure-Dienstintegrität" },
@@ -2025,7 +2025,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-127",
     topicId: "azure-verwaltung",
-    prompt: "Ein Unternehmen möchte eine Anwendung in Azure bereitstellen. Die Anwendung muss die folgenden Anforderungen erfüllen: • Ermöglicht die Installation und den Zugriff auf das vollständige .NET-Framework. • Erlauben Sie den Administratorzugriff auf das Betriebssystem. • Sorgen Sie für eine gewisse Redundanz, falls eine Azure-Region ausfällt. Sie entscheiden sich für die Bereitstellung von zwei Azure Virtual Machines in zwei separaten Regionen. Anschließend erstellen Sie ein Traffic Manager-Profil. Erfüllt diese Lösung die Anforderungen?",
+    prompt: "Ein Unternehmen möchte eine Anwendung in Azure bereitstellen. Die Anwendung muss die folgenden Anforderungen erfüllen:\n• Ermöglicht die Installation und den Zugriff auf das vollständige .NET-Framework.\n• Erlauben Sie den Administratorzugriff auf das Betriebssystem.\n• Sorgen Sie für eine gewisse Redundanz, falls eine Azure-Region ausfällt.\nSie entscheiden sich für die Bereitstellung von zwei Azure Virtual Machines in zwei separaten Regionen. Anschließend erstellen Sie ein Traffic Manager-Profil. Erfüllt diese Lösung die Anforderungen?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -2631,7 +2631,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "matching",
     id: "real-az900-167",
     topicId: "azure-verwaltung",
-    prompt: "Sie planen die Implementierung mehrerer Sicherheitsdienste für eine Azure-Umgebung. Sie müssen ermitteln, welche Azure-Dienste verwendet werden müssen, um die folgenden Sicherheitsanforderungen zu erfüllen: • Überwachen Sie Bedrohungen mithilfe von Sensoren • Erzwingen der Azure Multi-Factor Authentication (MFA) basierend auf einer Bedingung Welchen Azure-Dienst sollten Sie für jede Anforderung angeben? (Wählen Sie zur Beantwortung die entsprechende Option im Antwortbereich aus. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.) Überwachen Sie Bedrohungen mithilfe von Sensoren: Azure Monitor.",
+    prompt: "Sie planen die Implementierung mehrerer Sicherheitsdienste für eine Azure-Umgebung. Sie müssen ermitteln, welche Azure-Dienste verwendet werden müssen, um die folgenden Sicherheitsanforderungen zu erfüllen:\n• Überwachen Sie Bedrohungen mithilfe von Sensoren\n• Erzwingen der Azure Multi-Factor Authentication (MFA) basierend auf einer Bedingung\nWelchen Azure-Dienst sollten Sie für jede Anforderung angeben? (Wählen Sie zur Beantwortung die entsprechende Option im Antwortbereich aus. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     items: [
       { id: "item0", label: "Azure Advanced Threat Protection (ATP)" },
       { id: "item1", label: "Azure Active Directory (Azure AD) Identity Protection" },
@@ -2796,7 +2796,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-178",
     topicId: "azure-verwaltung",
-    prompt: "Ein Unternehmen plant die Einrichtung einer Lösung in Azure. Die Lösung hätte die folgenden Hauptanforderungen: • Eine Integrationslösung für die Bereitstellung von Code. Welches der folgenden wäre für diese Anforderung am besten geeignet?",
+    prompt: "Ein Unternehmen plant die Einrichtung einer Lösung in Azure. Die Lösung hätte die folgenden Hauptanforderungen:\n• Eine Integrationslösung für die Bereitstellung von Code.\nWelches der folgenden wäre für diese Anforderung am besten geeignet?",
     options: [
       { id: "A", text: "Azure-Berater" },
       { id: "B", text: "Azure Cognitive Services" },
@@ -2822,7 +2822,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-180",
     topicId: "azure-architektur",
-    prompt: "Ein Unternehmen plant die Verwendung von Azure-Speicherkonten. Es gelten die folgenden Anforderungen. • Speicherung von 2 TB Daten • Speicherung von einer Million Dateien Würde die Verwendung von Azure Storage diese Anforderungen erfüllen?",
+    prompt: "Ein Unternehmen plant die Verwendung von Azure-Speicherkonten. Es gelten die folgenden Anforderungen.\n• Speicherung von 2 TB Daten\n• Speicherung von einer Million Dateien\nWürde die Verwendung von Azure Storage diese Anforderungen erfüllen?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -3072,7 +3072,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-196",
     topicId: "azure-verwaltung",
-    prompt: "Ihr Unternehmen verfügt über ein Azure-Abonnement, das die folgenden ungenutzten Ressourcen enthält: • 20 Benutzerkonten in Azure Active Directory (Azure AD) • Fünf Gruppen in Azure AD • 10 öffentliche IP-Adressen • 10 Netzwerkschnittstellen Sie müssen die Azure-Kosten für das Unternehmen senken. Welche ungenutzten Ressourcen sollten Sie entfernen?",
+    prompt: "Ihr Unternehmen verfügt über ein Azure-Abonnement, das die folgenden ungenutzten Ressourcen enthält:\n• 20 Benutzerkonten in Azure Active Directory (Azure AD)\n• Fünf Gruppen in Azure AD\n• 10 öffentliche IP-Adressen\n• 10 Netzwerkschnittstellen\nSie müssen die Azure-Kosten für das Unternehmen senken. Welche ungenutzten Ressourcen sollten Sie entfernen?",
     options: [
       { id: "A", text: "Die Benutzerkonten" },
       { id: "B", text: "Die Netzwerkschnittstellen" },
@@ -6241,7 +6241,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-400",
     topicId: "azure-architektur",
-    prompt: "Ihre Entwickler haben zehn Webanwendungen erstellt, die in Azure gehostet werden müssen. Sie müssen den Azure-Web-Tier-Plan für das Hosting der Web-Apps festlegen. Der Web-Tier-Plan muss die folgenden Anforderungen erfüllen: • Die Web-Apps verwenden benutzerdefinierte Domänen. • Die Web-Apps benötigen jeweils 10 GB Speicherplatz. • Die Web-Apps müssen jeweils in dedizierten Compute-Instanzen ausgeführt werden. • Ein Lastenausgleich zwischen den Instanzen muss integriert sein. • Die Kosten müssen minimiert werden. Welchen Web-Tier-Plan sollten Sie verwenden?",
+    prompt: "Ihre Entwickler haben zehn Webanwendungen erstellt, die in Azure gehostet werden müssen. Sie müssen den Azure-Web-Tier-Plan für das Hosting der Web-Apps festlegen. Der Web-Tier-Plan muss die folgenden Anforderungen erfüllen:\n• Die Web-Apps verwenden benutzerdefinierte Domänen.\n• Die Web-Apps benötigen jeweils 10 GB Speicherplatz.\n• Die Web-Apps müssen jeweils in dedizierten Compute-Instanzen ausgeführt werden.\n• Ein Lastenausgleich zwischen den Instanzen muss integriert sein.\n• Die Kosten müssen minimiert werden.\nWelchen Web-Tier-Plan sollten Sie verwenden?",
     options: [
       { id: "A", text: "Standard" },
       { id: "B", text: "Basic" },
@@ -6304,7 +6304,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-405",
     topicId: "azure-architektur",
-    prompt: "Ihre Entwickler haben eine Portal-Web-App für Benutzer in der Niederlassung Miami erstellt. Die Web-App ist öffentlich zugänglich und wird von den Benutzern in Miami zum Abrufen von Kunden- und Produktinformationen verwendet. Die Web-App wird derzeit in einer lokalen Testumgebung ausgeführt. Sie planen, die Web-App auf Azure zu hosten. Sie müssen festlegen, welcher Azure-Web-Tier-Plan die Web-App hosten soll. Der Web-Tier-Plan muss die folgenden Anforderungen erfüllen: • Die Website verwendet die URL miami.contoso.com. • Die Website wird auf zwei Instanzen bereitgestellt. • SSL-Unterstützung muss enthalten sein. • Die Website benötigt 12 GB Speicherplatz. • Die Kosten müssen minimiert werden. Welchen Web-Tier-Plan sollten Sie verwenden?",
+    prompt: "Ihre Entwickler haben eine Portal-Web-App für Benutzer in der Niederlassung Miami erstellt. Die Web-App ist öffentlich zugänglich und wird von den Benutzern in Miami zum Abrufen von Kunden- und Produktinformationen verwendet. Die Web-App wird derzeit in einer lokalen Testumgebung ausgeführt. Sie planen, die Web-App auf Azure zu hosten. Sie müssen festlegen, welcher Azure-Web-Tier-Plan die Web-App hosten soll. Der Web-Tier-Plan muss die folgenden Anforderungen erfüllen:\n• Die Website verwendet die URL miami.contoso.com.\n• Die Website wird auf zwei Instanzen bereitgestellt.\n• SSL-Unterstützung muss enthalten sein.\n• Die Website benötigt 12 GB Speicherplatz.\n• Die Kosten müssen minimiert werden.\nWelchen Web-Tier-Plan sollten Sie verwenden?",
     options: [
       { id: "A", text: "Standard" },
       { id: "B", text: "Basic" },
@@ -6368,7 +6368,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-410",
     topicId: "azure-architektur",
-    prompt: "Ihr Unternehmen verfügt über Rechenzentren in Los Angeles und New York. Das Unternehmen hat ein Microsoft Azure-Abonnement. Sie konfigurieren die beiden Rechenzentren als geografisch geclusterte Standorte für höhere Standortstabilität. Sie müssen eine Option für Azure-Speicherredundanz empfehlen. Sie haben die folgenden Anforderungen an die Datenspeicherung: • Daten müssen auf mehreren Knoten gespeichert werden. • Daten müssen auf Knoten an getrennten geografischen Standorten gespeichert werden. • Daten können sowohl vom sekundären als auch vom primären Standort gelesen werden. Welche der folgenden Azure-gespeicherten Redundanzoptionen sollten Sie empfehlen?",
+    prompt: "Ihr Unternehmen verfügt über Rechenzentren in Los Angeles und New York. Das Unternehmen hat ein Microsoft Azure-Abonnement. Sie konfigurieren die beiden Rechenzentren als geografisch geclusterte Standorte für höhere Standortstabilität. Sie müssen eine Option für Azure-Speicherredundanz empfehlen. Sie haben die folgenden Anforderungen an die Datenspeicherung:\n• Daten müssen auf mehreren Knoten gespeichert werden.\n• Daten müssen auf Knoten an getrennten geografischen Standorten gespeichert werden.\n• Daten können sowohl vom sekundären als auch vom primären Standort gelesen werden.\nWelche der folgenden Azure-gespeicherten Redundanzoptionen sollten Sie empfehlen?",
     options: [
       { id: "A", text: "Georedundanter Speicher" },
       { id: "B", text: "Georedundanter Speicher mit Lesezugriff" },
@@ -8270,7 +8270,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-539",
     topicId: "azure-verwaltung",
-    prompt: "Sie verfügen über ein Azure-Abonnement, das eine Ressourcengruppe namens RG1 enthält. Benutzer dürfen die folgenden Vorgänge NICHT ausführen: • Löschen Sie RG1. • Ändern Sie die Ressourcen in RG1. • Löschen Sie Ressourcen aus RG1. Was sollten Sie tun?",
+    prompt: "Sie verfügen über ein Azure-Abonnement, das eine Ressourcengruppe namens RG1 enthält. Benutzer dürfen die folgenden Vorgänge NICHT ausführen:\n• Löschen Sie RG1.\n• Ändern Sie die Ressourcen in RG1.\n• Löschen Sie Ressourcen aus RG1.\nWas sollten Sie tun?",
     options: [
       { id: "A", text: "Wenden Sie eine Löschsperre auf RG1 an." },
       { id: "B", text: "Wenden Sie eine schreibgeschützte Sperre auf RG1 an." },
