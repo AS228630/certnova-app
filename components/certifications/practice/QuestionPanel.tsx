@@ -362,7 +362,7 @@ export default function QuestionPanel({
               {t("practice.explanationLabel")}
             </p>
           )}
-          <p className="text-sm text-text-muted">{question.explanation}</p>
+          <p className="whitespace-pre-line text-sm text-text-muted">{question.explanation}</p>
           {"explanationImageUrl" in question && question.explanationImageUrl && (
             <div className="mt-3 overflow-hidden rounded-lg border border-border-soft">
               {/* eslint-disable-next-line @next/next/no-img-element */}
