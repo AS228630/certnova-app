@@ -2784,7 +2784,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-177",
     topicId: "azure-verwaltung",
-    prompt: "Ein Unternehmen plant, zwei virtuelle Maschinen in Azure zu hosten, wie unten gezeigt: Wenn die virtuelle Maschine demovm gestoppt wird, fallen dann weiterhin Kosten für den an die virtuelle Maschine angeschlossenen Speicher an?",
+    prompt: "Ein Unternehmen plant, 2 virtuelle Maschinen in Azure zu hosten, wie unten dargestellt:\nVirtuelle Maschine: demovm, Größe: B1S\nVirtuelle Maschine: demovm1, Größe: B1S\nFallen weiterhin Kosten für den an die virtuelle Maschine angeschlossenen Speicher an, wenn die virtuelle Maschine demovm gestoppt wird?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -2850,6 +2850,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-182",
     topicId: "azure-architektur",
     prompt: "Ein Unternehmen plant die Bereitstellung eines Webservers und eines Datenbankservers, wie im untenstehenden Architekturdiagramm dargestellt. Sie müssen sicherstellen, dass Datenverkehrsbeschränkungen gelten, sodass der Datenbankserver nur mit dem Webserver kommunizieren kann. Welche der folgenden Maßnahmen würden Sie zur Umsetzung dieser Beschränkungen empfehlen?",
+    imageUrl: "/exam-images/az900-q182.png",
     options: [
       { id: "A", text: "Netzwerksicherheitsgruppen (NSGs)" },
       { id: "B", text: "Azure Service Bus" },
@@ -2903,6 +2904,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-186",
     topicId: "azure-verwaltung",
     prompt: "Ein Unternehmen hat gerade eine virtuelle Maschine namens DemoVM in Azure bereitgestellt. Die Übersicht der virtuellen Maschine ist unten dargestellt. Das Unternehmen möchte wissen, ob die zugrunde liegende Infrastruktur in Azure, auf der die virtuelle Maschine gehostet wird, Probleme aufweist. Wo kann es solche Probleme erkennen?",
+    imageUrl: "/exam-images/az900-q186.png",
     options: [
       { id: "A", text: "Azure-Berater" },
       { id: "B", text: "Azure AD" },
@@ -3204,10 +3206,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "item3", label: "Azure HDInsight" },
     ],
     descriptions: [
-      { id: "d0", text: "Platzhalter 1", correctItemId: "item0" },
-      { id: "d1", text: "Platzhalter 2", correctItemId: "item1" },
-      { id: "d2", text: "Platzhalter 3", correctItemId: "item2" },
-      { id: "d3", text: "Platzhalter 4", correctItemId: "item3" },
+      { id: "d0", text: "Ein verwalteter relationaler Cloud-Datenbankdienst.", correctItemId: "item0" },
+      { id: "d1", text: "Ein cloudbasierter Dienst, der massiv parallele Verarbeitung (MPP) nutzt, um komplexe Abfragen über Petabytes an Daten in einer relationalen Datenbank schnell auszuführen.", correctItemId: "item1" },
+      { id: "d2", text: "Kann massiv parallele Datentransformations- und Verarbeitungsprogramme über Petabytes an Daten ausführen.", correctItemId: "item2" },
+      { id: "d3", text: "Ein Open-Source-Framework für die verteilte Verarbeitung und Analyse großer Datensätze in Clustern.", correctItemId: "item3" },
     ],
     combos: [
       ["item0", "item0", "item1", "item3"],
