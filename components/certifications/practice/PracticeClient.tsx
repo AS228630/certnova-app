@@ -336,19 +336,22 @@ export default function PracticeClient({
     // history, unlimited retries). If it clears the mastery bar, the
     // NEXT section unlocks permanently right here, even on a retry.
     //
-    // But: only the FIRST time this section reaches "fully resolved"
-    // since its last real reset counts. Once recorded, attemptedSections
-    // blocks every further "fully resolved" detection for this same
-    // section until resetSection() runs again (Wiederholen, Gemischt
-    // wiederholen, or the full-exam restart) — this is what stops a
-    // single wrong-answer touch-up from ever being recorded as its own
-    // attempt, regardless of how the user got back to that question.
-    // Also checks the permanent DB record directly (not just the local
-    // flag) so a page reload right after a real completion can't let one
-    // more touch-up slip through before local state catches up.
-    const alreadyAttempted =
-      attemptedSections.has(sectionIdx) || (attemptsMigrationReady && getBestScore(certId, sectionIdx) != null);
-    if (alreadyAttempted) return;
+    // Only the FIRST time this section reaches "fully resolved" since
+    // its last real reset counts — attemptedSections blocks every further
+    // "fully resolved" detection for this same section until
+    // resetSection() runs again (Wiederholen, Gemischt wiederholen, or
+    // the full-exam restart), which is what stops a single wrong-answer
+    // touch-up from ever being recorded as its own attempt.
+    //
+    // This must be judged ONLY by the local flag, never by whether a
+    // best score already exists in the database — a best score is
+    // permanent and never cleared by resetSection (by design, so past
+    // achievement isn't lost), so checking it here would silently stop
+    // recording every attempt after the very first one a section was
+    // ever completed, forever, even through genuine Wiederholen retries.
+    // That exact regression shipped once already and is why this comment
+    // is this explicit: don't add the DB check back.
+    if (attemptedSections.has(sectionIdx)) return;
     setAttemptedSections((s) => new Set(s).add(sectionIdx));
 
     if (user) {
