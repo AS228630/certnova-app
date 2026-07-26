@@ -4617,12 +4617,16 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-296",
     topicId: "azure-verwaltung",
-    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus. Sie können ___ in Azure verwenden, um E-Mail-Benachrichtigungen zu senden, wenn die Kosten des aktuellen Abrechnungszeitraums für ein Azure-Abonnement einen angegebenen Grenzwert überschreiten.",
+    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Sie können ___ in Azure verwenden, um E-Mail-Benachrichtigungen zu senden, wenn die Kosten des aktuellen Abrechnungszeitraums für ein Azure-Abonnement einen angegebenen Grenzwert überschreiten.",
+      choices: ["Advisor-Empfehlungen", "die Zugriffssteuerung (IAM)", "Budgetwarnungen", "den Compliance Manager"],
+    },
     options: [
-      { id: "A", text: "Advisor-Empfehlungen" },
-      { id: "B", text: "Zugriffssteuerung (IAM)" },
-      { id: "C", text: "Budgetwarnungen" },
-      { id: "D", text: "Compliance Manager" },
+      { id: "A", text: "Sie können Advisor-Empfehlungen in Azure verwenden, um E-Mail-Benachrichtigungen zu senden, wenn die Kosten des aktuellen Abrechnungszeitraums für ein Azure-Abonnement einen angegebenen Grenzwert überschreiten." },
+      { id: "B", text: "Sie können die Zugriffssteuerung (IAM) in Azure verwenden, um E-Mail-Benachrichtigungen zu senden, wenn die Kosten des aktuellen Abrechnungszeitraums für ein Azure-Abonnement einen angegebenen Grenzwert überschreiten." },
+      { id: "C", text: "Sie können Budgetwarnungen in Azure verwenden, um E-Mail-Benachrichtigungen zu senden, wenn die Kosten des aktuellen Abrechnungszeitraums für ein Azure-Abonnement einen angegebenen Grenzwert überschreiten." },
+      { id: "D", text: "Sie können den Compliance Manager in Azure verwenden, um E-Mail-Benachrichtigungen zu senden, wenn die Kosten des aktuellen Abrechnungszeitraums für ein Azure-Abonnement einen angegebenen Grenzwert überschreiten." },
     ],
     correct: "C",
     explanation: "Budgetwarnungen benachrichtigen Sie, wenn Ausgaben (basierend auf Nutzung oder Kosten) den in der Warnungsbedingung des Budgets festgelegten Betrag erreichen oder überschreiten. Cost Management-Budgets werden über das Azure-Portal oder die Azure Consumption API erstellt. Im Azure-Portal werden Budgets nach Kosten definiert. Mit der Azure Consumption API werden Budgets nach Kosten oder nach Verbrauch definiert. Budgetwarnungen unterstützen sowohl kosten- als auch nutzungsbasierte Budgets. Budgetwarnungen werden automatisch generiert, wenn die Bedingungen für Budgetwarnungen erfüllt sind. Sie können alle Kostenwarnungen im Azure-Portal anzeigen. Wenn eine Warnung generiert wird, wird sie in den Kostenwarnungen angezeigt. Eine Warn-E-Mail wird auch an die Personen in der Liste der Warnungsempfänger des Budgets gesendet.",
