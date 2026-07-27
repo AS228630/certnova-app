@@ -1757,6 +1757,7 @@ const fr: Dictionary = {
     iosStep1: "Ouvre cette page dans Safari (pas Chrome ni une autre appli).",
     iosStep2: "Appuie sur l'icône Partager en bas",
     iosStep3: "Choisis \"Sur l'écran d'accueil\", puis \"Ajouter\".",
+    fallbackHint: "Ce bouton n'est pas cliquable ? Ouvre la page directement dans Chrome ou Safari (pas dans une appli comme Instagram) et réessaie depuis le menu du navigateur (⋮ ou Partager).",
     alreadyInstalled: "Déjà installé",
     title: "Installer CertCoach",
     desc: "Installe CertCoach pour un accès plus rapide, comme une vraie appli.",

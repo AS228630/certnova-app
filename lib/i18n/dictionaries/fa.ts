@@ -1757,6 +1757,7 @@ const fa: Dictionary = {
     iosStep1: "این صفحه رو توی Safari باز کن (نه Chrome یا هر اپ دیگه‌ای).",
     iosStep2: "روی آیکون Share (پایین صفحه) بزن",
     iosStep3: "«Zum Home-Bildschirm» رو انتخاب کن، بعد «Hinzufügen» رو بزن.",
+    fallbackHint: "این دکمه فعال نیست؟ صفحه رو مستقیم توی Chrome یا Safari باز کن (نه داخل یک اپ مثل اینستاگرام) و از منوی مرورگر (⋮ یا Share) دوباره امتحان کن.",
     alreadyInstalled: "قبلاً نصب شده",
     title: "نصب CertCoach",
     desc: "CertCoach رو نصب کن تا مثل یک اپ واقعی، سریع‌تر بهش دسترسی داشته باشی.",

@@ -1763,6 +1763,7 @@ const en: Dictionary = {
     iosStep1: "Open this page in Safari (not Chrome or any other app).",
     iosStep2: "Tap the Share icon at the bottom",
     iosStep3: "Choose \"Add to Home Screen\", then \"Add\".",
+    fallbackHint: "Is this button not clickable? Open the page directly in Chrome or Safari (not inside an app like Instagram) and try again from the browser menu (⋮ or Share).",
     alreadyInstalled: "Already installed",
     title: "Install CertCoach",
     desc: "Install CertCoach for faster access, just like a real app.",

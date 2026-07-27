@@ -64,13 +64,16 @@ export default function InstallAppButton() {
   }
 
   return (
-    <button
-      onClick={handleClick}
-      disabled={!deferredPrompt}
-      className="flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-50"
-    >
-      <Download size={15} />
-      {t("install.cta")}
-    </button>
+    <div>
+      <button
+        onClick={handleClick}
+        disabled={!deferredPrompt}
+        className="flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        <Download size={15} />
+        {t("install.cta")}
+      </button>
+      {!deferredPrompt && <p className="mt-2.5 text-xs text-text-faint">{t("install.fallbackHint")}</p>}
+    </div>
   );
 }

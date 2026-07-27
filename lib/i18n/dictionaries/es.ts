@@ -1757,6 +1757,7 @@ const es: Dictionary = {
     iosStep1: "Abre esta página en Safari (no en Chrome ni otra app).",
     iosStep2: "Toca el icono de Compartir abajo",
     iosStep3: "Elige \"Añadir a pantalla de inicio\" y luego \"Añadir\".",
+    fallbackHint: "¿Este botón no es clicable? Abre la página directamente en Chrome o Safari (no dentro de una app como Instagram) e inténtalo de nuevo desde el menú del navegador (⋮ o Compartir).",
     alreadyInstalled: "Ya instalado",
     title: "Instalar CertCoach",
     desc: "Instala CertCoach para un acceso más rápido, como una app real.",

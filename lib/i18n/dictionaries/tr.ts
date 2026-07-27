@@ -1757,6 +1757,7 @@ const tr: Dictionary = {
     iosStep1: "Bu sayfayı Safari'de aç (Chrome veya başka bir uygulamada değil).",
     iosStep2: "Alttaki Paylaş simgesine dokun",
     iosStep3: "\"Ana Ekrana Ekle\"yi, sonra \"Ekle\"yi seç.",
+    fallbackHint: "Bu buton tıklanamıyor mu? Sayfayı doğrudan Chrome veya Safari'de aç (Instagram gibi bir uygulama içinde değil) ve tarayıcı menüsünden (⋮ veya Paylaş) tekrar dene.",
     alreadyInstalled: "Zaten yüklü",
     title: "CertCoach'u Yükle",
     desc: "Gerçek bir uygulama gibi daha hızlı erişim için CertCoach'u yükle.",

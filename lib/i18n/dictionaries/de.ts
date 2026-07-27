@@ -1765,6 +1765,7 @@ const de = {
     iosStep1: "Öffne diese Seite in Safari (nicht Chrome oder eine andere App).",
     iosStep2: "Tippe unten auf das Teilen-Symbol",
     iosStep3: "Wähle „Zum Home-Bildschirm“ und dann „Hinzufügen“.",
+    fallbackHint: "Wird dieser Button nicht klickbar? Öffne die Seite direkt in Chrome oder Safari (nicht in einer App wie Instagram) und versuche es über das Browsermenü (⋮ oder Teilen) erneut.",
     alreadyInstalled: "Bereits installiert",
     title: "CertCoach installieren",
     desc: "Installiere CertCoach für schnelleren Zugriff, wie eine echte App.",

@@ -10,7 +10,15 @@ const DISMISS_KEY = "certcoach-install-prompt-dismissed";
 
 export function isIos() {
   if (typeof navigator === "undefined") return false;
-  return /iphone|ipad|ipod/i.test(navigator.userAgent);
+  if (/iphone|ipad|ipod/i.test(navigator.userAgent)) return true;
+  // Some Safari configurations (iPadOS 13+, or "Request Desktop
+  // Website" toggled on for an iPhone) report as a plain "Macintosh"
+  // user agent, which the check above would miss entirely - falling
+  // through to the Android/desktop button, which stays permanently
+  // disabled on iOS since beforeinstallprompt never fires there. This
+  // is Apple's own recommended fallback: a "Mac" that also reports
+  // touch points is actually an iOS device.
+  return navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
 }
 
 export function isStandaloneNow() {
