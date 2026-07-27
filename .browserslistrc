@@ -1,0 +1,4 @@
+defaults
+not dead
+ios_saf >= 11
+safari >= 11
