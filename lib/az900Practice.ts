@@ -4902,6 +4902,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Stellen Sie eine vollständige Azure-Anwendungsumgebung einschließlich Ressourcenkonfiguration und Rollenzuweisungen bereit", correctItemId: "item2" },
     ],
     combos: [
+      ["item2", "item0", "item2"],
       ["item0", "item1", "item2"],
       ["item2", "item1", "item0"],
     ],
