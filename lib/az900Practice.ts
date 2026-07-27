@@ -5232,7 +5232,11 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-330",
     topicId: "azure-verwaltung",
-    prompt: "Füllen Sie die Lücke aus: Sie können über auf den Compliance Manager zugreifen.",
+    prompt: "Füllen Sie die Lücke aus: Sie können über ___ auf den Compliance Manager zugreifen.",
+    blankFill: {
+      template: "Sie können über ___ auf den Compliance Manager zugreifen.",
+      choices: ["Microsoft 365 Admin Center", "Microsoft 365 Defender", "Microsoft Purview", "Microsoft Endpoint Manager Admin Center"],
+    },
     options: [
       { id: "A", text: "Microsoft 365 Admin Center" },
       { id: "B", text: "Microsoft 365 Defender" },
@@ -5246,7 +5250,11 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-331",
     topicId: "azure-verwaltung",
-    prompt: "Füllen Sie die Lücke aus: Bieten Sie Zugriff auf ungenutzte Azure-Rechenkapazität zu hohen Rabatten.",
+    prompt: "Füllen Sie die Lücke aus: ___ bieten Zugriff auf ungenutzte Azure-Rechenkapazität zu hohen Rabatten.",
+    blankFill: {
+      template: "___ bieten Zugriff auf ungenutzte Azure-Rechenkapazität zu hohen Rabatten.",
+      choices: ["Reservierte Azure-VM-Instanzen", "Azure Container Instances", "Azure Virtual Machine-Skalierungsgruppen", "Azure Spot-VM-Instanzen"],
+    },
     options: [
       { id: "A", text: "Reservierte Azure-VM-Instanzen" },
       { id: "B", text: "Azure Container Instances" },
@@ -5260,7 +5268,11 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-332",
     topicId: "azure-architektur",
-    prompt: "Füllen Sie die Lücke aus: Der Azure-Schutz vor Distributed Denial of Service (DDoS) ist ein Beispiel für einen Schutz, der bei implementiert wird.",
+    prompt: "Füllen Sie die Lücke aus: Der Azure-Schutz vor Distributed Denial of Service (DDoS) ist ein Beispiel für einen Schutz, der bei ___ implementiert wird.",
+    blankFill: {
+      template: "Der Azure-Schutz vor Distributed Denial of Service (DDoS) ist ein Beispiel für einen Schutz, der bei ___ implementiert wird.",
+      choices: ["der Anwendungsschicht", "der Rechenschicht", "der Umfangsschicht", "der Netzwerkschicht"],
+    },
     options: [
       { id: "A", text: "Anwendungsschicht" },
       { id: "B", text: "Rechenschicht" },
@@ -5316,7 +5328,11 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-336",
     topicId: "azure-verwaltung",
-    prompt: "Füllen Sie die Lücke aus: Um die Kosten für eine ungenutzte virtuelle Azure-Maschine zu sparen, auf der Windows 10 ausgeführt wird, sollten Sie.",
+    prompt: "Füllen Sie die Lücke aus: Um die Kosten für eine ungenutzte virtuelle Azure-Maschine zu sparen, auf der Windows 10 ausgeführt wird, sollten Sie ___",
+    blankFill: {
+      template: "Um die Kosten für eine ungenutzte virtuelle Azure-Maschine zu sparen, auf der Windows 10 ausgeführt wird, sollten Sie ___",
+      choices: ["die virtuelle Maschine während einer Remotedesktopsitzung trennen.", "im Azure-Portal „Beenden“ für die virtuelle Maschine auswählen.", "die virtuelle Maschine über eine Remotedesktopsitzung herunterfahren.", "die virtuelle Maschine über eine Remotedesktopsitzung in den Ruhemodus versetzen."],
+    },
     options: [
       { id: "A", text: "Trennen Sie die virtuelle Maschine während einer Remotedesktopsitzung" },
       { id: "B", text: "Wählen Sie im Azure-Portal „Beenden“ für die virtuelle Maschine aus." },
@@ -5330,7 +5346,11 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-337",
     topicId: "azure-verwaltung",
-    prompt: "Füllen Sie die Lücke aus: Führt Anwendungscode in Azure aus, ohne dass ein Server erforderlich ist.",
+    prompt: "Füllen Sie die Lücke aus: ___ führt Anwendungscode in Azure aus, ohne dass ein Server erforderlich ist.",
+    blankFill: {
+      template: "___ führt Anwendungscode in Azure aus, ohne dass ein Server erforderlich ist.",
+      choices: ["Azure Logic Apps", "Azure App Services", "Azure-Container", "Azure-Funktionen"],
+    },
     options: [
       { id: "A", text: "Azure Logic Apps" },
       { id: "B", text: "Azure App Services" },
@@ -5372,7 +5392,11 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-340",
     topicId: "azure-verwaltung",
-    prompt: "Füllen Sie die Lücke aus: Wenn eine virtuelle Azure-Maschine den Status „Angehalten (Zuweisung aufgehoben)“ hat, zahlen Sie weiterhin für.",
+    prompt: "Füllen Sie die Lücke aus: Wenn eine virtuelle Azure-Maschine den Status „Angehalten (Zuweisung aufgehoben)“ hat, zahlen Sie weiterhin für ___",
+    blankFill: {
+      template: "Wenn eine virtuelle Azure-Maschine den Status „Angehalten (Zuweisung aufgehoben)“ hat, zahlen Sie weiterhin für ___",
+      choices: ["E/A-Vorgänge", "Lagerung", "die Rechenkapazität", "die Vernetzung"],
+    },
     options: [
       { id: "A", text: "E/A-Vorgänge" },
       { id: "B", text: "Lagerung" },
@@ -5399,7 +5423,11 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-342",
     topicId: "azure-architektur",
-    prompt: "Füllen Sie die Lücke aus: Der Azure-Schutz vor Distributed Denial of Service (DDoS) ist ein Beispiel für einen Schutz, der bei implementiert wird.",
+    prompt: "Füllen Sie die Lücke aus: Der Azure-Schutz vor Distributed Denial of Service (DDoS) ist ein Beispiel für einen Schutz, der bei ___ implementiert wird.",
+    blankFill: {
+      template: "Der Azure-Schutz vor Distributed Denial of Service (DDoS) ist ein Beispiel für einen Schutz, der bei ___ implementiert wird.",
+      choices: ["der Rechenschicht", "der Anwendungsschicht", "der Umfangsschicht", "der Netzwerkschicht"],
+    },
     options: [
       { id: "A", text: "Rechenschicht" },
       { id: "B", text: "Anwendungsschicht" },
@@ -5413,11 +5441,15 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-343",
     topicId: "azure-architektur",
-    prompt: "Füllen Sie die Lücke aus: Azure Firewall ermöglicht Benutzern im Internet den Zugriff auf einen Server in einem virtuellen Netzwerk.",
+    prompt: "Füllen Sie die Lücke aus: ___ ermöglichen Benutzern im Internet den Zugriff auf einen Server in einem virtuellen Netzwerk.",
+    blankFill: {
+      template: "___ ermöglichen Benutzern im Internet den Zugriff auf einen Server in einem virtuellen Netzwerk.",
+      choices: ["Network Address Translation (NAT)-Regeln", "Netzwerkregeln", "Anwendungsregeln"],
+    },
     options: [
       { id: "A", text: "Network Address Translation (NAT)-Regeln" },
       { id: "B", text: "Netzwerkregeln" },
-      { id: "C", text: "Bewerbungsregeln" },
+      { id: "C", text: "Anwendungsregeln" },
     ],
     correct: "A",
     explanation: "Sie können NAT-Regeln, Netzwerkregeln und Anwendungsregeln in Azure Firewall entweder mithilfe klassischer Regeln oder einer Firewallrichtlinie konfigurieren. Azure Firewall verweigert standardmäßig den gesamten Datenverkehr, bis manuell Regeln zum Zulassen des Datenverkehrs konfiguriert werden. Eingehende Internetverbindungen können durch Konfigurieren der Zielnetzwerkadressübersetzung (Destination Network Address Translation, DNAT) aktiviert werden. NAT-Regeln werden vorrangig vor Netzwerkregeln angewendet. Wenn eine Übereinstimmung gefunden wird, wird implizit eine entsprechende Netzwerkregel hinzugefügt, um den übersetzten Datenverkehr zuzulassen. Aus Sicherheitsgründen wird empfohlen, eine bestimmte Internetquelle hinzuzufügen, um DNAT-Zugriff auf das Netzwerk zu ermöglichen und die Verwendung von Platzhaltern zu vermeiden.",
@@ -5566,7 +5598,11 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-353",
     topicId: "azure-verwaltung",
-    prompt: "Füllen Sie die Lücke aus: ist eine hochsichere IoT-Lösung, die eine Mikrocontrollereinheit (MCU) und ein angepasstes Linux-Betriebssystem umfasst.",
+    prompt: "Füllen Sie die Lücke aus: ___ ist eine hochsichere IoT-Lösung, die eine Mikrocontrollereinheit (MCU) und ein angepasstes Linux-Betriebssystem umfasst.",
+    blankFill: {
+      template: "___ ist eine hochsichere IoT-Lösung, die eine Mikrocontrollereinheit (MCU) und ein angepasstes Linux-Betriebssystem umfasst.",
+      choices: ["Azure IoT Edge", "Azure IoT Hub", "Azure Sphere", "Azure IoT Central"],
+    },
     options: [
       { id: "A", text: "Azure IoT Edge" },
       { id: "B", text: "Azure IoT Hub" },
@@ -5580,7 +5616,11 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-354",
     topicId: "cloud-konzepte",
-    prompt: "Füllen Sie die Lücke aus: Ein Beispiel dafür ist, dass ein Benutzer bei der Anmeldung bei Azure Active Directory (Azure AD) ein Kennwort eingeben und eine Sicherheitsfrage beantworten muss.",
+    prompt: "Füllen Sie die Lücke aus: ___ ist ein Beispiel dafür, dass ein Benutzer bei der Anmeldung bei Azure Active Directory (Azure AD) ein Kennwort eingeben und eine Sicherheitsfrage beantworten muss.",
+    blankFill: {
+      template: "___ ist ein Beispiel dafür, dass ein Benutzer bei der Anmeldung bei Azure Active Directory (Azure AD) ein Kennwort eingeben und eine Sicherheitsfrage beantworten muss.",
+      choices: ["Hybrides Cloud-Computing", "Verteidigung in der Tiefe", "Multi-Faktor-Authentifizierung (MFA)", "Schutz vor Distributed Denial of Service (DDoS)"],
+    },
     options: [
       { id: "A", text: "Hybrides Cloud-Computing" },
       { id: "B", text: "Verteidigung in der Tiefe" },
@@ -5724,7 +5764,11 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-363",
     topicId: "azure-verwaltung",
-    prompt: "Füllen Sie die Lücke aus: Ein Beispiel dafür ist, dass ein Benutzer bei der Anmeldung bei Azure Active Directory (Azure AD) ein Kennwort eingeben und eine Sicherheitsfrage beantworten muss.",
+    prompt: "Füllen Sie die Lücke aus: ___ ist ein Beispiel dafür, dass ein Benutzer bei der Anmeldung bei Azure Active Directory (Azure AD) ein Kennwort eingeben und eine Sicherheitsfrage beantworten muss.",
+    blankFill: {
+      template: "___ ist ein Beispiel dafür, dass ein Benutzer bei der Anmeldung bei Azure Active Directory (Azure AD) ein Kennwort eingeben und eine Sicherheitsfrage beantworten muss.",
+      choices: ["Business-to-Customer (B2C)-Identitätsdienste", "verwaltete Identitäten", "Multi-Faktor-Authentifizierung (MFA)", "rollenbasierte Zugriffskontrolle (RBAC)"],
+    },
     options: [
       { id: "A", text: "Business-to-Customer (B2C)-Identitätsdienste" },
       { id: "B", text: "verwaltete Identitäten" },
