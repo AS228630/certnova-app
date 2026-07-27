@@ -5134,6 +5134,15 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-325",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Eine Azure-Region ___",
+      choices: [
+        "enthält ein oder mehrere Rechenzentren, die über ein Netzwerk mit geringer Latenz verbunden sind.",
+        "gibt es in jedem Land, in dem Microsoft eine Niederlassung hat.",
+        "gibt es nur in jedem Land in Europa und Amerika.",
+        "enthält ein oder mehrere Rechenzentren, die über ein Netzwerk mit hoher Latenz verbunden sind.",
+      ],
+    },
     options: [
       { id: "A", text: "Eine Azure-Region enthält ein oder mehrere Rechenzentren, die über ein Netzwerk mit geringer Latenz verbunden sind." },
       { id: "B", text: "In jedem Land, in dem Microsoft eine Niederlassung hat, gibt es eine Azure-Region." },
