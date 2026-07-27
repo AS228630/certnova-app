@@ -4972,7 +4972,11 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     combos: [
       ["dpa", "privacy", "ost"],
+      ["dpa", "ost", "privacy"],
       ["privacy", "dpa", "ost"],
+      ["privacy", "ost", "dpa"],
+      ["ost", "dpa", "privacy"],
+      ["ost", "privacy", "dpa"],
     ],
     explanation: "Die Microsoft-Datenschutzerklärung erläutert, welche personenbezogenen Daten Microsoft verarbeitet, wie und zu welchen Zwecken. Der Nachtrag zum Datenschutz (DPA) legt die Verpflichtungen von Kunde und Microsoft hinsichtlich der Verarbeitung und Sicherheit von Kundendaten fest. Die Bedingungen für Onlinedienste enthalten weitere Ausnahmen und Verpflichtungen für zentrale Onlinedienste, ergänzend zum DPA.",
     explanationImageUrl: "/exam-images/az900-q315-explain.png",
