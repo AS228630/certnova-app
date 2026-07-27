@@ -86,6 +86,14 @@ export default function RootLayout({
                 logo: "https://www.certcoach.de/icon-512.png",
                 description:
                   "CertCoach: Deine All-in-One-Plattform, um IT-Skills aufzubauen, Zertifikate zu erhalten und deinen Traumjob zu bekommen.",
+                // sameAs (linking this Organization entity to CertCoach's
+                // own verified LinkedIn/Instagram/YouTube profiles) is
+                // intentionally not set yet - the Footer currently links
+                // to those platforms' generic homepages, not real
+                // CertCoach-specific profile pages (see the external SEO
+                // checklist). Add real profile URLs here once those
+                // accounts actually exist - fabricating them would be
+                // worse than omitting the field.
               },
               {
                 "@context": "https://schema.org",
