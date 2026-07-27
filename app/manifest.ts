@@ -11,7 +11,14 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "CertCoach – Lerne. Übe. Zertifiziere dich.",
     short_name: "CertCoach",
     description: "Bereite dich mit CertCoach praxisnah auf IT-Zertifizierungen vor: Labs, Übungsfragen, KI-Coach und strukturierte Lernpfade.",
-    start_url: "/dashboard",
+    // NOT /dashboard: that route requires being logged in (see
+    // robots.ts, which explicitly excludes it from crawling for the
+    // same reason). Anyone who installs the app before creating an
+    // account or logging in would open straight into a broken/blank
+    // authenticated page every single time - "/" always works, logged
+    // in or not, and the header already links to the dashboard for
+    // people who are signed in.
+    start_url: "/",
     display: "standalone",
     background_color: "#0a0612",
     theme_color: "#7c3aed",
