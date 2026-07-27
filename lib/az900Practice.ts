@@ -5006,7 +5006,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-317",
     topicId: "azure-verwaltung",
-    prompt: "Sie verfügen über eine Azure-Anwendung, die die folgenden Dienste nutzt:\n• Dienst 1 mit einem SLA von 99,9 %\n• Dienst 2 mit einem SLA von 99,99 %\nWie sollten Sie das zusammengesetzte SLA für die Anwendung berechnen?",
+    prompt: "Sie verfügen über eine Azure-Anwendung, die die folgenden Dienste nutzt:\n• Azure Virtual Machines mit einem SLA von 99,9 %\n• Azure SQL Database mit einem SLA von 99,99 %\nWie sollten Sie das zusammengesetzte SLA für die Anwendung berechnen?",
     options: [
       { id: "A", text: "0,999 * 0,9999 = 0,9989001 = 99,89001 %" },
       { id: "B", text: "0,999 / 0,9999 = 0,9991 = 99,91 %" },
