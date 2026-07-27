@@ -4871,8 +4871,8 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     prompt: "Ordnen Sie die serverlose Lösung der richtigen Eigenschaft zu. (Ziehen Sie dazu die entsprechende serverlose Lösung aus der linken Spalte in die rechte Spalte. Jede serverlose Lösung kann einmal, mehrmals oder gar nicht verwendet werden. HINWEIS: Jede richtige Zuordnung zählt einen Punkt.)",
     items: [
       { id: "item0", label: "Azure Functions" },
-      { id: "item1", label: "Azure Functions" },
-      { id: "item2", label: "Azure Logic Apps" },
+      { id: "item1", label: "Azure Logic Apps" },
+      { id: "item2", label: "Azure Functions" },
     ],
     descriptions: [
       { id: "d0", text: "Führt Code aus", correctItemId: "item0" },
@@ -4881,7 +4881,6 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     combos: [
       ["item0", "item1", "item2"],
-      ["item0", "item2", "item1"],
     ],
     explanation: "Azure Logic Apps ist eine cloudbasierte Plattform zum Erstellen und Ausführen automatisierter Logik-App-Workflows , die Ihre Apps, Daten, Dienste und Systeme integrieren. Mit dieser Plattform können Sie schnell hoch skalierbare Integrationslösungen für Ihr Unternehmen und Business-to-Business (B2B)-Szenarien entwickeln. Zum Erstellen einer Logik-App verwenden Sie entweder den Ressourcentyp „Logik-App (Verbrauch)“ oder den Ressourcentyp „Logik-App (Standard)“. Der Ressourcentyp „Verbrauch“ wird in der mehrinstanzenfähigen Azure Logic Apps- oder Integrationsdienstumgebung ausgeführt , während der Ressourcentyp „Standard“ in einer Azure Logic Apps-Umgebung mit einem Mandanten ausgeführt wird .\nMit dem Ressourcentyp „Logik-App (Standard)“ können Sie diese Workflowtypen innerhalb derselben Logik-App erstellen:\n• Zustandsbehaftet\nErstellen Sie einen zustandsbehafteten Workflow, wenn Sie Daten aus früheren Ereignissen behalten, überprüfen oder referenzieren müssen. Diese Workflows speichern und übertragen alle Ein- und Ausgaben für jede Aktion und deren Status in einen externen Speicher. So können Sie nach Abschluss jedes Laufs die Ausführungsdetails und den Verlauf überprüfen.\n• Staatenlos\nErstellen Sie einen zustandslosen Workflow, wenn Sie Daten aus vorherigen Ereignissen nach Abschluss jedes Laufs nicht zur späteren Überprüfung im externen Speicher aufbewahren, überprüfen oder referenzieren müssen. Diese Workflows speichern alle Ein- und Ausgaben für jede Aktion und ihre Zustände nur im Arbeitsspeicher , nicht im externen Speicher. Dadurch haben zustandslose Workflows kürzere Läufe (in der Regel weniger als 5 Minuten), eine schnellere Leistung mit schnelleren Reaktionszeiten, einen höheren Durchsatz und geringere Betriebskosten, da die Laufdetails und der Verlauf nicht im externen Speicher gespeichert werden.\nAzure Functions ist eine serverlose Lösung, mit der Sie weniger Code schreiben, weniger Infrastruktur pflegen und Kosten sparen. Anstatt sich um die Bereitstellung und Wartung von Servern zu kümmern, bietet die Cloud-Infrastruktur alle aktuellen Ressourcen, die Sie für den Betrieb Ihrer Anwendungen benötigen. Sie konzentrieren sich auf die für Sie wichtigsten Codeteile, Azure Functions erledigt den Rest.\nReferenzen:\nSingle-Tenant-versus Multi-Tenant- und Integrationsdienstumgebung für Azure Logic Apps.\nEinführung in Azure Functions",
     explanationImageUrl: "/exam-images/az900-q310-explain.png",
