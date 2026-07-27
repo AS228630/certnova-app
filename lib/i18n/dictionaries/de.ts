@@ -1761,6 +1761,10 @@ const de = {
     error: "Etwas ist schiefgelaufen. Bitte versuche es später erneut.",
   },
   install: {
+    iosStepsTitle: "So installierst du auf dem iPhone:",
+    iosStep1: "Öffne diese Seite in Safari (nicht Chrome oder eine andere App).",
+    iosStep2: "Tippe unten auf das Teilen-Symbol",
+    iosStep3: "Wähle „Zum Home-Bildschirm“ und dann „Hinzufügen“.",
     alreadyInstalled: "Bereits installiert",
     title: "CertCoach installieren",
     desc: "Installiere CertCoach für schnelleren Zugriff, wie eine echte App.",

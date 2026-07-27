@@ -1753,6 +1753,10 @@ const tr: Dictionary = {
     error: "Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyin.",
   },
   install: {
+    iosStepsTitle: "iPhone'a nasıl yüklenir:",
+    iosStep1: "Bu sayfayı Safari'de aç (Chrome veya başka bir uygulamada değil).",
+    iosStep2: "Alttaki Paylaş simgesine dokun",
+    iosStep3: "\"Ana Ekrana Ekle\"yi, sonra \"Ekle\"yi seç.",
     alreadyInstalled: "Zaten yüklü",
     title: "CertCoach'u Yükle",
     desc: "Gerçek bir uygulama gibi daha hızlı erişim için CertCoach'u yükle.",

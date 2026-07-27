@@ -29,10 +29,32 @@ export default function InstallAppButton() {
 
   if (isIos()) {
     return (
-      <p className="flex items-center gap-2 text-sm text-text-muted">
-        <Share size={15} className="shrink-0" />
-        {t("install.iosDesc")}
-      </p>
+      <div className="rounded-xl border border-primary/30 bg-primary-light p-4">
+        <p className="mb-3 text-sm font-bold text-text">{t("install.iosStepsTitle")}</p>
+        <ol className="space-y-2.5 text-sm text-text-muted">
+          <li className="flex items-start gap-2.5">
+            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+              1
+            </span>
+            {t("install.iosStep1")}
+          </li>
+          <li className="flex items-start gap-2.5">
+            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+              2
+            </span>
+            <span className="flex items-center gap-1.5">
+              {t("install.iosStep2")}
+              <Share size={15} className="shrink-0 text-primary" />
+            </span>
+          </li>
+          <li className="flex items-start gap-2.5">
+            <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary text-xs font-bold text-white">
+              3
+            </span>
+            {t("install.iosStep3")}
+          </li>
+        </ol>
+      </div>
     );
   }
 

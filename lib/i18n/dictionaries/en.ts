@@ -1759,6 +1759,10 @@ const en: Dictionary = {
     error: "Something went wrong. Please try again later.",
   },
   install: {
+    iosStepsTitle: "How to install on iPhone:",
+    iosStep1: "Open this page in Safari (not Chrome or any other app).",
+    iosStep2: "Tap the Share icon at the bottom",
+    iosStep3: "Choose \"Add to Home Screen\", then \"Add\".",
     alreadyInstalled: "Already installed",
     title: "Install CertCoach",
     desc: "Install CertCoach for faster access, just like a real app.",
