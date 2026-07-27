@@ -29,6 +29,17 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
+  // Without this, "Add to Home Screen" on iOS Safari only creates a
+  // bookmark that still opens with Safari's browser chrome (address
+  // bar, tabs) instead of launching full-screen like a real app - this
+  // is the iOS-specific equivalent of what manifest.ts already does
+  // for Android/Chrome/Edge, and iOS ignores manifest.json for these
+  // particular settings, so it has to be declared here too.
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "CertCoach",
+  },
   openGraph: {
     type: "website",
     locale: "de_DE",
