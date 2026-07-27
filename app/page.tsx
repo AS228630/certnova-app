@@ -11,6 +11,13 @@ export const metadata: Metadata = {
       de: "https://www.certcoach.de",
       en: "https://www.certcoach.de/en",
       fa: "https://www.certcoach.de/fa",
+      ar: "https://www.certcoach.de/ar",
+      uk: "https://www.certcoach.de/uk",
+      es: "https://www.certcoach.de/es",
+      fr: "https://www.certcoach.de/fr",
+      ru: "https://www.certcoach.de/ru",
+      tr: "https://www.certcoach.de/tr",
+      "x-default": "https://www.certcoach.de",
     },
   },
 };
