@@ -5096,6 +5096,15 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-323",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Microsoft Sentinel verwendet Playbooks___",
+      choices: [
+        ", um automatisch auf Bedrohungen zu reagieren.",
+        ", um Daten von Azure-Diensten zu sammeln.",
+        ", um anzugeben, wie lange Daten aufbewahrt werden.",
+        " zum Speichern von Passwörtern und Zertifikaten.",
+      ],
+    },
     options: [
       { id: "A", text: "Microsoft Sentinel verwendet Playbooks, um automatisch auf Bedrohungen zu reagieren." },
       { id: "B", text: "Microsoft Sentinel verwendet Playbooks, um Daten von Azure-Diensten zu sammeln." },
