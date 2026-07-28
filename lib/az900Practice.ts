@@ -5798,6 +5798,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-364",
     topicId: "azure-architektur",
     prompt: "Sie müssen eine neue Azure-Dateifreigabe erstellen. Welchen Dienst sollten Sie verwenden? (Wählen Sie zur Beantwortung den Dienst im Antwortbereich aus. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    imageUrl: "/exam-images/az900-q364.png",
     options: [
       { id: "A", text: "Ressourcengruppen" },
       { id: "B", text: "App-Dienste" },
