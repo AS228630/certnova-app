@@ -4876,8 +4876,8 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     descriptions: [
       { id: "d0", text: "Führt Code aus", correctItemId: "item0" },
-      { id: "d1", text: "Ist immer zustandsbehaftet", correctItemId: "item2" },
-      { id: "d2", text: "Läuft nur in der Cloud", correctItemId: "item1" },
+      { id: "d1", text: "Ist immer zustandsbehaftet", correctItemId: "item1" },
+      { id: "d2", text: "Läuft nur in der Cloud", correctItemId: "item0" },
     ],
     combos: [
       ["item0", "item2", "item1"],
