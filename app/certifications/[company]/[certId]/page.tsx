@@ -38,6 +38,31 @@ export default async function CertJourneyPage({
 
   return (
     <DashboardShell>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Course",
+            name: `${cert.title} (${cert.code})`,
+            description: cert.description,
+            provider: {
+              "@type": "Organization",
+              name: "CertCoach",
+              url: "https://www.certcoach.de",
+            },
+            educationalLevel: cert.level,
+            inLanguage: "de",
+            url: `https://www.certcoach.de/certifications/${company.slug}/${cert.id}`,
+            // hasCourseInstance/offers intentionally omitted for certs
+            // without a real, live question bank yet (see
+            // ComingSoonPractice) - a Course schema claiming graded
+            // assessments exist when they don't would be inaccurate
+            // structured data, same "no fake data" rule as everywhere
+            // else in this project.
+          }),
+        }}
+      />
       <main className="flex-1 p-4 md:p-8">
         <JourneyPageClient company={company} cert={cert} companySlug={company.slug} certId={certId} />
       </main>
