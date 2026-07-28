@@ -5955,6 +5955,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-372",
     topicId: "azure-verwaltung",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Azure Resource Manager (ARM)-Vorlagen verwenden das ___",
+      choices: ["CSV-Format.", "HTML-Format.", "JSON-Format.", "XML-Format."],
+    },
     options: [
       { id: "A", text: "Azure Resource Manager (ARM)-Vorlagen verwenden das CSV-Format." },
       { id: "B", text: "Azure Resource Manager (ARM)-Vorlagen verwenden das HTML-Format." },
@@ -6105,11 +6109,15 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-382",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Azure Blob Storage ist ___",
+      choices: ["ein Datenspeicher zum Einreihen und zuverlässigen Übermitteln von Nachrichten zwischen Anwendungen.", "eine Dateifreigabe, die als Netzwerklaufwerk zugeordnet werden kann.", "ein Schlüssel-/Attributspeicher für nicht-relationale, strukturierte Daten.", "ein Speicherdienst, der für sehr große Objekte wie Videodateien und Bitmaps optimiert ist."],
+    },
     options: [
-      { id: "A", text: "Azure Blob Storage ist ein Datenspeicher zum Einreihen und zuverlässigen Übermitteln von Nachrichten zwischen Anwendungen. ." },
-      { id: "B", text: "Azure Blob Storage ist eine Dateifreigabe, die als Netzwerklaufwerk zugeordnet werden kann. ." },
-      { id: "C", text: "Azure Blob Storage ist ein Schlüssel-/Attributspeicher für nicht-relationale, strukturierte Daten. ." },
-      { id: "D", text: "Azure Blob Storage ist ein Speicherdienst, der für sehr große Objekte wie Videodateien und Bitmaps optimiert ist. ." },
+      { id: "A", text: "Azure Blob Storage ist ein Datenspeicher zum Einreihen und zuverlässigen Übermitteln von Nachrichten zwischen Anwendungen." },
+      { id: "B", text: "Azure Blob Storage ist eine Dateifreigabe, die als Netzwerklaufwerk zugeordnet werden kann." },
+      { id: "C", text: "Azure Blob Storage ist ein Schlüssel-/Attributspeicher für nicht-relationale, strukturierte Daten." },
+      { id: "D", text: "Azure Blob Storage ist ein Speicherdienst, der für sehr große Objekte wie Videodateien und Bitmaps optimiert ist." },
     ],
     correct: "D",
     explanation: "Azure Blob Storage ist die Objektspeicherlösung von Microsoft für die Cloud. Blob Storage ist für die Speicherung großer Mengen unstrukturierter Daten optimiert.\nUnstrukturierte Daten sind Daten, die keinem bestimmten Datenmodell oder keiner bestimmten Definition entsprechen, wie z. B. Text- oder Binärdaten.\nBlob-Speicher ist für Folgendes konzipiert:\n• Bilder oder Dokumente direkt an einen Browser senden.\n• Speichern von Dateien für verteilten Zugriff.\n• Streaming von Video und Audio.\n• Schreiben in Protokolldateien.\n• Speichern von Daten für Sicherung und Wiederherstellung, Notfallwiederherstellung und Archivierung.\n• Speichern von Daten zur Analyse durch einen lokalen oder in Azure gehosteten Dienst.\nBenutzer oder Clientanwendungen können von überall auf der Welt über HTTP/HTTPS auf Objekte im Blob-Speicher zugreifen.\nReferenz: Einführung in Azure Blob Storage",
@@ -6716,6 +6724,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-428",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Azure Site Recovery bietet ___ für virtuelle Maschinen.",
+      choices: ["Fehlertoleranz", "Notfallwiederherstellung", "Elastizität", "Hochverfügbarkeit"],
+    },
     options: [
       { id: "A", text: "Azure Site Recovery bietet Fehlertoleranz für virtuelle Maschinen." },
       { id: "B", text: "Azure Site Recovery bietet Notfallwiederherstellung für virtuelle Maschinen." },
@@ -6741,6 +6753,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-430",
     topicId: "cloud-konzepte",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Autoscaling ist ein Beispiel für ___",
+      choices: ["Agilität.", "Elastizität.", "Geoverteilung.", "Vorhersagbarkeit."],
+    },
     options: [
       { id: "A", text: "Autoscaling ist ein Beispiel für Agilität." },
       { id: "B", text: "Autoscaling ist ein Beispiel für Elastizität." },
@@ -6794,6 +6810,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-433",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "___ ist eine hochsichere IoT-Lösung, die eine Mikrocontrollereinheit (MCU) und ein angepasstes Linux-Betriebssystem umfasst.",
+      choices: ["Azure Arc", "Azure IoT Central", "Azure IoT Hub", "Azure Sphere"],
+    },
     options: [
       { id: "A", text: "Azure Arc ist eine hochsichere IoT-Lösung, die eine Mikrocontrollereinheit (MCU) und ein angepasstes Linux-Betriebssystem umfasst." },
       { id: "B", text: "Azure IoT Central ist eine hochsichere IoT-Lösung, die eine Mikrocontrollereinheit (MCU) und ein angepasstes Linux-Betriebssystem umfasst." },
@@ -6835,6 +6855,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-435",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Application Insights ist eine Funktion von ___",
+      choices: ["Azure Advisor.", "Azure Application Gateway.", "Azure Arc.", "Azure Monitor."],
+    },
     options: [
       { id: "A", text: "Application Insights ist eine Funktion von Azure Advisor." },
       { id: "B", text: "Application Insights ist eine Funktion von Azure Application Gateway." },
@@ -6936,6 +6960,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-443",
     topicId: "cloud-konzepte",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Durch ___ können Azure-Ressourcen in der Nähe der Benutzer bereitgestellt werden.",
+      choices: ["Elastizität", "die Geoverteilung", "die hohe Verfügbarkeit", "die Skalierbarkeit"],
+    },
     options: [
       { id: "A", text: "Durch Elastizität können Azure-Ressourcen in der Nähe der Benutzer bereitgestellt werden." },
       { id: "B", text: "Durch die Geoverteilung können Azure-Ressourcen in der Nähe der Benutzer bereitgestellt werden." },
@@ -7073,6 +7101,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-450",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "___ ermöglicht Benutzern die Authentifizierung bei mehreren Anwendungen mittels Single Sign-On (SSO).",
+      choices: ["Anwendungssicherheitsgruppen in Azure", "Azure Active Directory (Azure AD)", "Azure Key Vault", "Microsoft Defender für Cloud"],
+    },
     options: [
       { id: "A", text: "Anwendungssicherheitsgruppen in Azure ermöglichen Benutzern die Authentifizierung bei mehreren Anwendungen mittels Single Sign-On (SSO)." },
       { id: "B", text: "Azure Active Directory (Azure AD) ermöglicht Benutzern die Authentifizierung bei mehreren Anwendungen mittels Single Sign-On (SSO)." },
@@ -7300,10 +7332,14 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-465",
     topicId: "azure-verwaltung",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Sie können Überwachungsberichte und Compliance-bezogene Informationen für Azure-Dienste ___ überprüfen.",
+      choices: ["von Microsoft Defender für Cloud", "im Microsoft Defender for Identity Admin Center", "im Microsoft 365 Purview-Compliance-Portal", "im Microsoft Service Trust Portal"],
+    },
     options: [
-      { id: "A", text: "Sie können Überwachungsberichte und Compliance-bezogene Informationen für Azure-Dienste von Microsoft Defender für Cloud überprüfen. Sie können Überwachungsberichte und Compliance-bezogene Informationen für Azure-Dienste im Microsoft Defender for Identity Admin" },
-      { id: "B", text: "Center überprüfen. Sie können Überwachungsberichte und Compliance-bezogene Informationen für Azure-Dienste im Microsoft 365 Purview-Compliance-" },
-      { id: "C", text: "Portal überprüfen." },
+      { id: "A", text: "Sie können Überwachungsberichte und Compliance-bezogene Informationen für Azure-Dienste von Microsoft Defender für Cloud überprüfen." },
+      { id: "B", text: "Sie können Überwachungsberichte und Compliance-bezogene Informationen für Azure-Dienste im Microsoft Defender for Identity Admin Center überprüfen." },
+      { id: "C", text: "Sie können Überwachungsberichte und Compliance-bezogene Informationen für Azure-Dienste im Microsoft 365 Purview-Compliance-Portal überprüfen." },
       { id: "D", text: "Sie können Überwachungsberichte und Compliance-bezogene Informationen für Azure-Dienste im Microsoft Service Trust Portal überprüfen." },
     ],
     correct: "D",
@@ -7342,6 +7378,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-467",
     topicId: "cloud-konzepte",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Wenn eine Cloud-App Ressourcen zuweisen und freigeben kann, ___",
+      choices: ["verfügt sie über Elastizität.", "verfügt sie über Governance.", "verfügt sie über eine hohe Verfügbarkeit.", "ist sie vorhersehbar.", "ist sie zuverlässig."],
+    },
     options: [
       { id: "A", text: "Wenn eine Cloud-App Ressourcen zuweisen und freigeben kann, verfügt sie über Elastizität." },
       { id: "B", text: "Wenn eine Cloud-App Ressourcen zuweisen und freigeben kann, verfügt sie über Governance." },
@@ -7680,6 +7720,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-492",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "___ führt Anwendungscode in Azure aus, ohne dass ein Server erforderlich ist.",
+      choices: ["Eine Azure DevOps-Pipeline", "Eine Azure Resource Manager-Vorlage", "Azure Application Gateway", "Azure Functions"],
+    },
     options: [
       { id: "A", text: "Eine Azure DevOps-Pipeline führt Anwendungscode in Azure aus, ohne dass ein Server erforderlich ist." },
       { id: "B", text: "Eine Azure Resource Manager-Vorlage führt Anwendungscode in Azure aus, ohne dass ein Server erforderlich ist." },
@@ -7794,6 +7838,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-499",
     topicId: "cloud-konzepte",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "___ wird der Zugriff auf Cloud-Ressourcen im Falle eines Dienstausfalls sichergestellt.",
+      choices: ["Durch die hohe Verfügbarkeit", "Durch Vorhersehbarkeit", "Durch Zuverlässigkeit", "Durch die Skalierbarkeit"],
+    },
     options: [
       { id: "A", text: "Durch die hohe Verfügbarkeit wird der Zugriff auf Cloud-Ressourcen im Falle eines Dienstausfalls sichergestellt." },
       { id: "B", text: "Durch Vorhersehbarkeit wird der Zugriff auf Cloud-Ressourcen im Falle eines Dienstausfalls sichergestellt." },
@@ -7851,6 +7899,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-503",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "___ ist ein physischer Migrationsdienst, mit dem große Datenmengen schnell, kostengünstig und zuverlässig übertragen werden können.",
+      choices: ["Azure Data Box", "Azure Databricks", "Azure File Sync", "Azure Migrate"],
+    },
     options: [
       { id: "A", text: "Azure Data Box ist ein physischer Migrationsdienst, mit dem große Datenmengen schnell, kostengünstig und zuverlässig übertragen werden können." },
       { id: "B", text: "Azure Databricks ist ein physischer Migrationsdienst, mit dem große Datenmengen schnell, kostengünstig und zuverlässig übertragen werden können." },
@@ -7880,6 +7932,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-505",
     topicId: "azure-verwaltung",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "___ erweitert die Azure-Compliance und -Überwachung auf Hybrid- und Multicloud-Konfigurationen.",
+      choices: ["Azure AD Connect", "Azure Arc", "Azure Front Door", "Azure Policy"],
+    },
     options: [
       { id: "A", text: "Azure AD Connect erweitert die Azure-Compliance und -Überwachung auf Hybrid- und Multicloud-Konfigurationen." },
       { id: "B", text: "Azure Arc erweitert die Azure-Compliance und -Überwachung auf Hybrid- und Multicloud-Konfigurationen." },
@@ -8162,6 +8218,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-524",
     topicId: "azure-verwaltung",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "___ bietet einen Überblick über den Zustand von Azure-Diensten und -Regionen.",
+      choices: ["Azure Monitor", "Azure Resource Health", "Azure Service Health", "Der Azure-Status"],
+    },
     options: [
       { id: "A", text: "Azure Monitor bietet einen Überblick über den Zustand von Azure-Diensten und -Regionen." },
       { id: "B", text: "Azure Resource Health bietet einen Überblick über den Zustand von Azure-Diensten und -Regionen." },
@@ -8191,6 +8251,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-526",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "___ können Sie virtuelle Maschinen in einer Updatedomäne oder einer Fehlerdomäne gruppieren.",
+      choices: ["Bei der Verwendung von Verfügbarkeitsgruppen", "Bei der Verwendung von Verfügbarkeitszonen", "Wenn Sie Azure Load Balancer verwenden,", "Wenn Sie Azure Virtual Machine Scale Sets verwenden,"],
+    },
     options: [
       { id: "A", text: "Bei der Verwendung von Verfügbarkeitsgruppen können Sie virtuelle Maschinen in einer Updatedomäne oder einer Fehlerdomäne gruppieren." },
       { id: "B", text: "Bei der Verwendung von Verfügbarkeitszonen können Sie virtuelle Maschinen in einer Updatedomäne oder einer Fehlerdomäne gruppieren." },
@@ -8262,6 +8326,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-531",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "___ wertet Signale aus, um Anmeldungen bei Microsoft Entra ID zuzulassen oder zu verweigern.",
+      choices: ["Eine verwaltete Identität", "Der bedingte Zugriff", "Microsoft Intune", "Microsoft Defender for Identity"],
+    },
     options: [
       { id: "A", text: "Eine verwaltete Identität wertet Signale aus, um Anmeldungen bei Microsoft Entra ID zuzulassen oder zu verweigern." },
       { id: "B", text: "Der bedingte Zugriff wertet Signale aus, um Anmeldungen bei Microsoft Entra ID zuzulassen oder zu verweigern." },
@@ -8308,8 +8376,8 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
     options: [
-      { id: "A", text: "Die Zugriffsebene „Cool“ ist für Daten optimiert, auf die selten zugegriffen wird und die mindestens 30 Tage lang gespeichert werden. Die Zugriffsebene „Cool“ ist für Daten optimiert, auf die selten zugegriffen wird, die mindestens 180 Tage lang gespeichert werden und für die" },
-      { id: "B", text: "flexible Latenzanforderungen gelten." },
+      { id: "A", text: "Die Zugriffsebene „Cool“ ist für Daten optimiert, auf die selten zugegriffen wird und die mindestens 30 Tage lang gespeichert werden." },
+      { id: "B", text: "Die Zugriffsebene „Cool“ ist für Daten optimiert, auf die selten zugegriffen wird, die mindestens 180 Tage lang gespeichert werden und für die flexible Latenzanforderungen gelten." },
       { id: "C", text: "Die Cool-Zugriffsebene ist für die Speicherung von Daten optimiert, auf die häufig zugegriffen wird." },
     ],
     correct: "A",
@@ -8415,6 +8483,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-541",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Virtuelles Netzwerk-Peering kann ___",
+      choices: ["nur zwischen zwei virtuellen Netzwerken in derselben Azure-Region konfiguriert werden.", "nur zwischen zwei virtuellen Netzwerken in derselben Ressourcengruppe konfiguriert werden.", "nur zwischen zwei virtuellen Netzwerken im selben Azure-Abonnement konfiguriert werden.", "zwischen zwei beliebigen virtuellen Netzwerken konfiguriert werden."],
+    },
     options: [
       { id: "A", text: "Virtuelles Netzwerk-Peering kann nur zwischen zwei virtuellen Netzwerken in derselben Azure-Region konfiguriert werden." },
       { id: "B", text: "Virtuelles Netzwerk-Peering kann nur zwischen zwei virtuellen Netzwerken in derselben Ressourcengruppe konfiguriert werden." },
@@ -8429,6 +8501,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-542",
     topicId: "azure-verwaltung",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Auf ___ kann eine Ressourcensperre angewendet werden.",
+      choices: ["Verwaltungseinheiten", "Azure-Richtlinien", "Azure-Abonnements", "Benutzerkonten"],
+    },
     options: [
       { id: "A", text: "Auf Verwaltungseinheiten kann eine Ressourcensperre angewendet werden." },
       { id: "B", text: "Auf Azure-Richtlinien kann eine Ressourcensperre angewendet werden." },
@@ -8517,6 +8593,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-548",
     topicId: "azure-verwaltung",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Sie können ___ verwenden, um Empfehlungen zur Kosteneinsparung abzugeben.",
+      choices: ["Application Insights", "Azure Advisor", "Azure-Ressourcentags", "Azure Service Health"],
+    },
     options: [
       { id: "A", text: "Sie können Application Insights verwenden, um Empfehlungen zur Kosteneinsparung abzugeben." },
       { id: "B", text: "Sie können Azure Advisor verwenden, um Empfehlungen zur Kosteneinsparung zu erhalten." },
@@ -8668,6 +8748,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-557",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Bei vielen Azure-Ressourcen müssen Sie ___ angeben, in der sie bereitgestellt werden sollen.",
+      choices: ["eine geografische Region", "eine Region", "ein Rechenzentrum", "eine Stadt"],
+    },
     options: [
       { id: "A", text: "Bei vielen Azure-Ressourcen müssen Sie eine geografische Region angeben, in der sie bereitgestellt werden sollen." },
       { id: "B", text: "Bei vielen Azure-Ressourcen müssen Sie eine Region angeben, in der sie bereitgestellt werden sollen." },
@@ -8806,6 +8890,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-564",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Wenn Sie Daten ___ löschen, müssen Sie eine Gebühr für die vorzeitige Löschung zahlen.",
+      choices: ["aus einem Azure Cosmos DB-Datenspeicher, bevor 30 Tage vergangen sind,", "vor Ablauf von 30 Tagen aus der Azure SQL-Datenbank", "vor Ablauf von 30 Tagen aus der Cool-Access-Ebene von Azure Blob Storage", "vor Ablauf von 30 Tagen aus der Hot-Access-Ebene von Azure Blob Storage"],
+    },
     options: [
       { id: "A", text: "Wenn Sie Daten aus einem Azure Cosmos DB-Datenspeicher löschen, bevor 30 Tage vergangen sind, müssen Sie eine Gebühr für die vorzeitige Löschung zahlen." },
       { id: "B", text: "Wenn Sie Daten vor Ablauf von 30 Tagen aus der Azure SQL-Datenbank löschen, müssen Sie eine Gebühr für die vorzeitige Löschung zahlen." },
