@@ -297,7 +297,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-10",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Ein Azure-Administrator plant, ein PowerShell-Skript auszuführen, das Azure-Ressourcen erstellt. Sie müssen empfehlen, welche Computerkonfiguration zum Ausführen des Skripts verwendet werden soll. Lösung: Führen Sie das Skript von einem Computer aus, auf dem Linux läuft und auf dem die Azure CLI-Tools installiert sind. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Ein Azure-Administrator plant, ein PowerShell-Skript auszuführen, das Azure-Ressourcen erstellt. Sie müssen empfehlen, welche Computerkonfiguration zum Ausführen des Skripts verwendet werden soll. Lösung: Führen Sie das Skript von einem Computer aus, auf dem Linux läuft und auf dem die Azure CLI-Tools installiert sind. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -309,7 +309,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-11",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Ein Azure-Administrator plant, ein PowerShell-Skript auszuführen, das Azure-Ressourcen erstellt. Sie müssen empfehlen, welche Computerkonfiguration zum Ausführen des Skripts verwendet werden soll. Lösung: Führen Sie das Skript von einem Computer aus, auf dem Chrome OS ausgeführt wird und der Azure Cloud Shell verwendet. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Ein Azure-Administrator plant, ein PowerShell-Skript auszuführen, das Azure-Ressourcen erstellt. Sie müssen empfehlen, welche Computerkonfiguration zum Ausführen des Skripts verwendet werden soll. Lösung: Führen Sie das Skript von einem Computer aus, auf dem Chrome OS ausgeführt wird und der Azure Cloud Shell verwendet. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -321,7 +321,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-12",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Ein Azure-Administrator plant, ein PowerShell-Skript auszuführen, das Azure-Ressourcen erstellt. Sie müssen empfehlen, welche Computerkonfiguration zum Ausführen des Skripts verwendet werden soll. Lösung: Führen Sie das Skript von einem Computer aus, auf dem macOS läuft und auf dem PowerShell Core 6.0 installiert ist. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Ein Azure-Administrator plant, ein PowerShell-Skript auszuführen, das Azure-Ressourcen erstellt. Sie müssen empfehlen, welche Computerkonfiguration zum Ausführen des Skripts verwendet werden soll. Lösung: Führen Sie das Skript von einem Computer aus, auf dem macOS läuft und auf dem PowerShell Core 6.0 installiert ist. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -1240,7 +1240,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-73",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie planen die Bereitstellung mehrerer virtueller Azure-Computer. Sie müssen sicherstellen, dass die auf den virtuellen Computern ausgeführten Dienste verfügbar sind, wenn ein einzelnes Rechenzentrum ausfällt. Lösung: Sie stellen die virtuellen Computer in zwei oder mehr Skalierungsgruppen bereit. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie planen die Bereitstellung mehrerer virtueller Azure-Computer. Sie müssen sicherstellen, dass die auf den virtuellen Computern ausgeführten Dienste verfügbar sind, wenn ein einzelnes Rechenzentrum ausfällt. Lösung: Sie stellen die virtuellen Computer in zwei oder mehr Skalierungsgruppen bereit. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -1264,7 +1264,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-75",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie planen die Bereitstellung mehrerer virtueller Azure-Computer. Sie müssen sicherstellen, dass die auf den virtuellen Computern ausgeführten Dienste verfügbar sind, wenn ein einzelnes Rechenzentrum ausfällt. Lösung: Sie stellen die virtuellen Computer in zwei oder mehr Regionen bereit. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie planen die Bereitstellung mehrerer virtueller Azure-Computer. Sie müssen sicherstellen, dass die auf den virtuellen Computern ausgeführten Dienste verfügbar sind, wenn ein einzelnes Rechenzentrum ausfällt. Lösung: Sie stellen die virtuellen Computer in zwei oder mehr Regionen bereit. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -1276,7 +1276,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-76",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie planen die Bereitstellung mehrerer virtueller Azure-Computer. Sie müssen sicherstellen, dass die auf den virtuellen Computern ausgeführten Dienste verfügbar sind, wenn ein einzelnes Rechenzentrum ausfällt. Lösung: Sie stellen die virtuellen Computer in zwei oder mehr Ressourcengruppen bereit. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie planen die Bereitstellung mehrerer virtueller Azure-Computer. Sie müssen sicherstellen, dass die auf den virtuellen Computern ausgeführten Dienste verfügbar sind, wenn ein einzelnes Rechenzentrum ausfällt. Lösung: Sie stellen die virtuellen Computer in zwei oder mehr Ressourcengruppen bereit. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -3711,7 +3711,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-237",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen hat Azure bereitgestellt. Es gibt zwei Subnetze, und Sie müssen den Datenverkehr zwischen ihnen filtern. Die Filterung sollte auf drei Dingen basieren: verwendetes TCP/IP-Protokoll, Quell-IP/-Adresse und Portnummer, Ziel-IP-Adresse und Portnummer. Lösung: Als Lösung schlagen Sie vor, Azure Firewall bereitzustellen und als Datenverkehrsfilter zu konfigurieren. Wird dies dem Ziel gerecht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen hat Azure bereitgestellt. Es gibt zwei Subnetze, und Sie müssen den Datenverkehr zwischen ihnen filtern. Die Filterung sollte auf drei Dingen basieren: verwendetes TCP/IP-Protokoll, Quell-IP/-Adresse und Portnummer, Ziel-IP-Adresse und Portnummer. Lösung: Als Lösung schlagen Sie vor, Azure Firewall bereitzustellen und als Datenverkehrsfilter zu konfigurieren. Wird dies dem Ziel gerecht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -3724,7 +3724,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-238",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen hat Azure bereitgestellt. Es gibt zwei Subnetze, und Sie müssen den Datenverkehr zwischen ihnen filtern. Die Filterung sollte auf drei Dingen basieren: verwendetes TCP/IP-Protokoll, Quell-IP/-Adresse und Portnummer, Ziel-IP-Adresse und Portnummer. Lösung: Als Lösung schlagen Sie vor, Web Application Firewalls bereitzustellen und als Datenverkehrsfilter zu konfigurieren. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen hat Azure bereitgestellt. Es gibt zwei Subnetze, und Sie müssen den Datenverkehr zwischen ihnen filtern. Die Filterung sollte auf drei Dingen basieren: verwendetes TCP/IP-Protokoll, Quell-IP/-Adresse und Portnummer, Ziel-IP-Adresse und Portnummer. Lösung: Als Lösung schlagen Sie vor, Web Application Firewalls bereitzustellen und als Datenverkehrsfilter zu konfigurieren. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -3736,7 +3736,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-239",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen hat Azure bereitgestellt. Es gibt zwei Subnetze, und Sie müssen den Datenverkehr zwischen ihnen filtern. Die Filterung sollte auf drei Dingen basieren: verwendetes TCP/IP-Protokoll, Quell-IP/-Adresse und Portnummer, Ziel-IP-Adresse und Portnummer. Lösung: Als Lösung schlagen Sie vor, Netzwerksicherheitsgruppen bereitzustellen und als Datenverkehrsfilter zu konfigurieren. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen hat Azure bereitgestellt. Es gibt zwei Subnetze, und Sie müssen den Datenverkehr zwischen ihnen filtern. Die Filterung sollte auf drei Dingen basieren: verwendetes TCP/IP-Protokoll, Quell-IP/-Adresse und Portnummer, Ziel-IP-Adresse und Portnummer. Lösung: Als Lösung schlagen Sie vor, Netzwerksicherheitsgruppen bereitzustellen und als Datenverkehrsfilter zu konfigurieren. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -3978,7 +3978,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-257",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Ein Azure-Administrator plant, ein PowerShell-Skript auszuführen, das Azure-Ressourcen erstellt. Sie müssen empfehlen, welche Computerkonfiguration zum Ausführen des Skripts verwendet werden soll. Lösung: Führen Sie das Skript von einem Computer aus, auf dem Windows 10 ausgeführt wird und auf dem das Azure PowerShell-Modul installiert ist. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Ein Azure-Administrator plant, ein PowerShell-Skript auszuführen, das Azure-Ressourcen erstellt. Sie müssen empfehlen, welche Computerkonfiguration zum Ausführen des Skripts verwendet werden soll. Lösung: Führen Sie das Skript von einem Computer aus, auf dem Windows 10 ausgeführt wird und auf dem das Azure PowerShell-Modul installiert ist. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -5601,7 +5601,6 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       ["item0", "item2", "item1"],
     ],
     explanation: "Das Ziel der mehrstufigen Verteidigung besteht darin, Informationen zu schützen und deren Diebstahl zu verhindern.\nEine Defense-in-Depth-Strategie nutzt eine Reihe von Mechanismen, um das Voranschreiten eines Angriffs zu verlangsamen, der darauf abzielt, sich unbefugten Zugriff auf Daten zu verschaffen.\nTiefgreifende Verteidigungsebenen Sie können sich die tiefgreifende Verteidigung als eine Reihe von Schichten vorstellen, in deren Mitte die zu sichernden Daten stehen.\nJede Schicht bietet Schutz, sodass bei einem Angriff auf eine Schicht bereits eine weitere Schicht vorhanden ist, um weitere Angriffe zu verhindern. Dieser Ansatz macht die Abhängigkeit von einer einzelnen Schutzschicht überflüssig. Er verlangsamt einen Angriff und liefert Telemetrie-Alarme, auf die Sicherheitsteams automatisch oder manuell reagieren können.\nHier ist ein kurzer Überblick über die Rolle jeder Ebene:\n• Die physische Sicherheitsebene ist die erste Verteidigungslinie zum Schutz der Computerhardware im Rechenzentrum.\n• Die Identitäts- und Zugriffsebene steuert den Zugriff auf die Infrastruktur und die Änderungskontrolle.\n• Die Perimeterschicht nutzt DDoS-Schutz (Distributed Denial of Service), um groß angelegte Angriffe zu filtern, bevor sie zu einer Dienstverweigerung für Benutzer führen können.\n• Die Netzwerkschicht begrenzt die Kommunikation zwischen Ressourcen durch Segmentierung und Zugriffskontrollen.\n• Die Compute -Schicht sichert den Zugriff auf virtuelle Maschinen.\n• Die Anwendungsschicht trägt dazu bei, sicherzustellen, dass Anwendungen sicher und frei von Sicherheitslücken sind.\n• Die Datenschicht steuert den Zugriff auf Geschäfts- und Kundendaten, die Sie schützen müssen.\nDiese Ebenen dienen Ihnen als Leitfaden für Entscheidungen zur Sicherheitskonfiguration auf allen Ebenen Ihrer Anwendungen.\nReferenz: Was ist eine tiefgreifende Verteidigung?",
-    explanationImageUrl: "/exam-images/az900-q352-explain.png",
     resources: [{ label: "2 What Is Defense In Depth", url: "https://learn.microsoft.com/en-us/training/modules/secure-network-connectivity-azure/2-what-is-defense-in-depth" }],
   },
   {
@@ -6269,6 +6268,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-393",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "___ in Azure Firewall ermöglichen Benutzern im Internet den Zugriff auf einen Server in einem virtuellen Netzwerk.",
+      choices: ["Anwendungsregeln", "Mithilfe von NAT-Regeln (Network Address Translation)", "Netzwerkregeln", "Diensttags"],
+    },
     options: [
       { id: "A", text: "Anwendungsregeln in Azure Firewall ermöglichen Benutzern im Internet den Zugriff auf einen Server in einem virtuellen Netzwerk." },
       { id: "B", text: "Mithilfe von NAT-Regeln (Network Address Translation) in Azure Firewall können Benutzer im Internet auf einen Server in einem virtuellen Netzwerk zugreifen." },
@@ -6327,7 +6330,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-397",
     topicId: "cloud-konzepte",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie sind mit der Bereitstellung virtueller Azure-Computer für Ihr Unternehmen beauftragt. Sie benötigen die entsprechende Cloud-Bereitstellungslösung. Lösung: Sie sollten Software as a Service (SaaS) nutzen. Erfüllt dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie sind mit der Bereitstellung virtueller Azure-Computer für Ihr Unternehmen beauftragt. Sie benötigen die entsprechende Cloud-Bereitstellungslösung. Lösung: Sie sollten Software as a Service (SaaS) nutzen. Erfüllt dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6339,7 +6342,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-398",
     topicId: "cloud-konzepte",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie sind mit der Bereitstellung virtueller Azure-Computer für Ihr Unternehmen beauftragt. Sie benötigen die entsprechende Cloud-Bereitstellungslösung. Lösung: Sie sollten Platform as a Service (PaaS) nutzen. Erfüllt dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie sind mit der Bereitstellung virtueller Azure-Computer für Ihr Unternehmen beauftragt. Sie benötigen die entsprechende Cloud-Bereitstellungslösung. Lösung: Sie sollten Platform as a Service (PaaS) nutzen. Erfüllt dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6616,7 +6619,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-420",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Die Infrastruktur Ihres Unternehmens umfasst mehrere Geschäftseinheiten, die jeweils eine große Anzahl verschiedener Azure-Ressourcen für den täglichen Betrieb benötigen. Die von jeder Geschäftseinheit benötigten Ressourcen sind identisch. Sie müssen eine Strategie zur automatischen Erstellung von Azure-Ressourcen genehmigen. Lösung: Sie empfehlen, die Azure Resource Manager-Vorlagen in die Strategie aufzunehmen. Wird dies dem Ziel gerecht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Die Infrastruktur Ihres Unternehmens umfasst mehrere Geschäftseinheiten, die jeweils eine große Anzahl verschiedener Azure-Ressourcen für den täglichen Betrieb benötigen. Die von jeder Geschäftseinheit benötigten Ressourcen sind identisch. Sie müssen eine Strategie zur automatischen Erstellung von Azure-Ressourcen genehmigen. Lösung: Sie empfehlen, die Azure Resource Manager-Vorlagen in die Strategie aufzunehmen. Wird dies dem Ziel gerecht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6628,7 +6631,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-421",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Die Infrastruktur Ihres Unternehmens umfasst mehrere Geschäftseinheiten, die jeweils eine große Anzahl verschiedener Azure-Ressourcen für den täglichen Betrieb benötigen. Die von jeder Geschäftseinheit benötigten Ressourcen sind identisch. Sie müssen eine Strategie zur automatischen Erstellung von Azure-Ressourcen genehmigen. Lösung: Sie empfehlen, Azure Blueprints in die Strategie aufzunehmen. Wird dies dem Ziel gerecht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Die Infrastruktur Ihres Unternehmens umfasst mehrere Geschäftseinheiten, die jeweils eine große Anzahl verschiedener Azure-Ressourcen für den täglichen Betrieb benötigen. Die von jeder Geschäftseinheit benötigten Ressourcen sind identisch. Sie müssen eine Strategie zur automatischen Erstellung von Azure-Ressourcen genehmigen. Lösung: Sie empfehlen, Azure Blueprints in die Strategie aufzunehmen. Wird dies dem Ziel gerecht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6908,7 +6911,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-439",
     topicId: "azure-architektur",
-    prompt: "Für einige Fragensätze gibt es möglicherweise mehr als eine richtige Lösung, für andere wiederum keine richtige Lösung. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie haben die Aufgabe, eine kritische Branchenanwendung, die auf einem virtuellen Computer installiert wird, in Azure bereitzustellen. Sie werden darüber informiert, dass die Strategie zur Anwendungsbereitstellung eine garantierte Verfügbarkeit von 99,99 Prozent ermöglichen sollte. Sie müssen sicherstellen, dass die Strategie so wenig virtuelle Computer und Verfügbarkeitszonen erfordert wie möglich. Lösung: Sie beziehen zwei virtuelle Computer und eine Verfügbarkeitszone in Ihre Strategie ein. Wird das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Für einige Fragensätze gibt es möglicherweise mehr als eine richtige Lösung, für andere wiederum keine richtige Lösung. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie haben die Aufgabe, eine kritische Branchenanwendung, die auf einem virtuellen Computer installiert wird, in Azure bereitzustellen. Sie werden darüber informiert, dass die Strategie zur Anwendungsbereitstellung eine garantierte Verfügbarkeit von 99,99 Prozent ermöglichen sollte. Sie müssen sicherstellen, dass die Strategie so wenig virtuelle Computer und Verfügbarkeitszonen erfordert wie möglich. Lösung: Sie beziehen zwei virtuelle Computer und eine Verfügbarkeitszone in Ihre Strategie ein. Wird das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6920,7 +6923,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-440",
     topicId: "azure-architektur",
-    prompt: "Für einige Fragensätze gibt es möglicherweise mehr als eine richtige Lösung, für andere wiederum keine richtige Lösung. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie haben die Aufgabe, eine kritische Branchenanwendung, die auf einer virtuellen Maschine installiert wird, in Azure bereitzustellen. Sie werden darüber informiert, dass die Strategie zur Anwendungsbereitstellung eine garantierte Verfügbarkeit von 99,99 Prozent ermöglichen sollte. Sie müssen sicherstellen, dass die Strategie so wenig virtuelle Maschinen und Verfügbarkeitszonen erfordert wie möglich. Lösung: Sie beziehen eine virtuelle Maschine und zwei Verfügbarkeitszonen in Ihre Strategie ein. Wird das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Für einige Fragensätze gibt es möglicherweise mehr als eine richtige Lösung, für andere wiederum keine richtige Lösung. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie haben die Aufgabe, eine kritische Branchenanwendung, die auf einer virtuellen Maschine installiert wird, in Azure bereitzustellen. Sie werden darüber informiert, dass die Strategie zur Anwendungsbereitstellung eine garantierte Verfügbarkeit von 99,99 Prozent ermöglichen sollte. Sie müssen sicherstellen, dass die Strategie so wenig virtuelle Maschinen und Verfügbarkeitszonen erfordert wie möglich. Lösung: Sie beziehen eine virtuelle Maschine und zwei Verfügbarkeitszonen in Ihre Strategie ein. Wird das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6932,7 +6935,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-441",
     topicId: "azure-architektur",
-    prompt: "Für einige Fragensätze gibt es möglicherweise mehr als eine richtige Lösung, für andere wiederum keine richtige Lösung. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie haben die Aufgabe, eine kritische Branchenanwendung, die auf einem virtuellen Computer installiert wird, in Azure bereitzustellen. Sie werden darüber informiert, dass die Strategie zur Anwendungsbereitstellung eine garantierte Verfügbarkeit von 99,99 Prozent ermöglichen sollte. Sie müssen sicherstellen, dass die Strategie so wenig virtuelle Computer und Verfügbarkeitszonen erfordert wie möglich. Lösung: Sie beziehen zwei virtuelle Computer und zwei Verfügbarkeitszonen in Ihre Strategie ein. Wird das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Für einige Fragensätze gibt es möglicherweise mehr als eine richtige Lösung, für andere wiederum keine richtige Lösung. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie haben die Aufgabe, eine kritische Branchenanwendung, die auf einem virtuellen Computer installiert wird, in Azure bereitzustellen. Sie werden darüber informiert, dass die Strategie zur Anwendungsbereitstellung eine garantierte Verfügbarkeit von 99,99 Prozent ermöglichen sollte. Sie müssen sicherstellen, dass die Strategie so wenig virtuelle Computer und Verfügbarkeitszonen erfordert wie möglich. Lösung: Sie beziehen zwei virtuelle Computer und zwei Verfügbarkeitszonen in Ihre Strategie ein. Wird das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -7490,7 +7493,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-475",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie planen eine Strategie zur Bereitstellung mehrerer Webserver und Datenbankserver in Azure. Diese Strategie sollte die Steuerung der Verbindungstypen zwischen den Webservern und Datenbankservern ermöglichen. Lösung: Sie beziehen Netzwerksicherheitsgruppen (NSGs) in Ihre Strategie ein. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie planen eine Strategie zur Bereitstellung mehrerer Webserver und Datenbankserver in Azure. Diese Strategie sollte die Steuerung der Verbindungstypen zwischen den Webservern und Datenbankservern ermöglichen. Lösung: Sie beziehen Netzwerksicherheitsgruppen (NSGs) in Ihre Strategie ein. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -7502,7 +7505,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-476",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie planen eine Strategie zur Bereitstellung mehrerer Webserver und Datenbankserver in Azure. Diese Strategie sollte die Steuerung der Verbindungstypen zwischen den Webservern und Datenbankservern ermöglichen. Lösung: Sie integrieren ein lokales Netzwerkgateway in Ihre Strategie. Erreicht dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie planen eine Strategie zur Bereitstellung mehrerer Webserver und Datenbankserver in Azure. Diese Strategie sollte die Steuerung der Verbindungstypen zwischen den Webservern und Datenbankservern ermöglichen. Lösung: Sie integrieren ein lokales Netzwerkgateway in Ihre Strategie. Erreicht dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -7514,7 +7517,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-477",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie planen eine Strategie zur Bereitstellung mehrerer Webserver und Datenbankserver in Azure. Diese Strategie sollte die Steuerung der Verbindungstypen zwischen den Webservern und Datenbankservern ermöglichen. Lösung: Sie integrieren eine Site-to-Site-VPN-Verbindung in Ihre Strategie. Erreicht diese das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erreicht. Sie planen eine Strategie zur Bereitstellung mehrerer Webserver und Datenbankserver in Azure. Diese Strategie sollte die Steuerung der Verbindungstypen zwischen den Webservern und Datenbankservern ermöglichen. Lösung: Sie integrieren eine Site-to-Site-VPN-Verbindung in Ihre Strategie. Erreicht diese das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
