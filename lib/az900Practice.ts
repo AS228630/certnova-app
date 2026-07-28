@@ -5577,6 +5577,8 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "item0", label: "Physische Sicherheit" },
       { id: "item1", label: "Perimeter" },
       { id: "item2", label: "Anwendung" },
+      { id: "item3", label: "Identität und Zugriff" },
+      { id: "item4", label: "Computing" },
     ],
     descriptions: [
       { id: "d0", text: "Schicht 1", correctItemId: "item0" },
