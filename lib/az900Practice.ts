@@ -120,6 +120,10 @@ export type MatchingQuestion = {
   instructions?: string;
   items: MatchingItem[];
   descriptions: MatchingDescription[];
+  /** Reference image (e.g. a diagram the matching is based on) shown
+   * above the interactive matching UI, same purpose as SingleChoice/
+   * YesNo's imageUrl. */
+  imageUrl?: string;
   /** Full pre-combined answer options exactly as shown in the source PDF
    * (e.g. "Platzhalter 1: X, Platzhalter 2: Y, ..."), letting the user
    * pick one whole combination directly instead of matching items one by
@@ -5573,6 +5577,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-352",
     topicId: "azure-architektur",
     prompt: "Sie müssen die in einem Rechenzentrum verwendete Defense-in-Depth-Strategie vervollständigen. Was sollten Sie tun? (Ziehen Sie zur Beantwortung die entsprechenden Ebenen an die richtigen Positionen im Modell. Jede Ebene kann einmal, mehrmals oder gar nicht verwendet werden. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    imageUrl: "/exam-images/az900-q352.png",
     items: [
       { id: "item0", label: "Physische Sicherheit" },
       { id: "item1", label: "Perimeter" },
