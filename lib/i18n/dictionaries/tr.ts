@@ -1752,6 +1752,9 @@ const tr: Dictionary = {
     successDesc: "Teşekkürler! En kısa sürede sizinle iletişime geçeceğiz.",
     error: "Bir şeyler ters gitti. Lütfen daha sonra tekrar deneyin.",
   },
+  certFaq: {
+    title: "Sıkça Sorulan Sorular",
+  },
   install: {
     iosStepsTitle: "iPhone'a nasıl yüklenir:",
     iosStep1: "Bu sayfayı Safari'de aç (Chrome veya başka bir uygulamada değil).",

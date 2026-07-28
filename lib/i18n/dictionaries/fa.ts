@@ -1752,6 +1752,9 @@ const fa: Dictionary = {
     successDesc: "ممنون! در اسرع وقت با شما تماس می‌گیریم.",
     error: "مشکلی پیش آمد. لطفاً بعداً دوباره امتحان کن.",
   },
+  certFaq: {
+    title: "سؤالات متداول",
+  },
   install: {
     iosStepsTitle: "چطور روی آیفون نصب کنی:",
     iosStep1: "این صفحه رو توی Safari باز کن (نه Chrome یا هر اپ دیگه‌ای).",

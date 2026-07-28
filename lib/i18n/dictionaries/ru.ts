@@ -1752,6 +1752,9 @@ const ru: Dictionary = {
     successDesc: "Спасибо! Мы свяжемся с вами как можно скорее.",
     error: "Что-то пошло не так. Попробуйте позже.",
   },
+  certFaq: {
+    title: "Часто задаваемые вопросы",
+  },
   install: {
     iosStepsTitle: "Как установить на iPhone:",
     iosStep1: "Открой эту страницу в Safari (не в Chrome или другом приложении).",

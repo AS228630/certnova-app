@@ -1760,6 +1760,9 @@ const de = {
     successDesc: "Danke! Wir melden uns so schnell wie möglich bei dir.",
     error: "Etwas ist schiefgelaufen. Bitte versuche es später erneut.",
   },
+  certFaq: {
+    title: "Häufig gestellte Fragen",
+  },
   install: {
     iosStepsTitle: "So installierst du auf dem iPhone:",
     iosStep1: "Öffne diese Seite in Safari (nicht Chrome oder eine andere App).",

@@ -1752,6 +1752,9 @@ const uk: Dictionary = {
     successDesc: "Дякуємо! Ми зв'яжемося з вами якнайшвидше.",
     error: "Щось пішло не так. Спробуйте пізніше.",
   },
+  certFaq: {
+    title: "Часті запитання",
+  },
   install: {
     iosStepsTitle: "Як встановити на iPhone:",
     iosStep1: "Відкрий цю сторінку в Safari (не Chrome чи іншому застосунку).",

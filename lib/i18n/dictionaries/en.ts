@@ -1758,6 +1758,9 @@ const en: Dictionary = {
     successDesc: "Thanks! We'll get back to you as soon as possible.",
     error: "Something went wrong. Please try again later.",
   },
+  certFaq: {
+    title: "Frequently Asked Questions",
+  },
   install: {
     iosStepsTitle: "How to install on iPhone:",
     iosStep1: "Open this page in Safari (not Chrome or any other app).",

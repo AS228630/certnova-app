@@ -1752,6 +1752,9 @@ const ar: Dictionary = {
     successDesc: "شكرًا! سنتواصل معك في أقرب وقت ممكن.",
     error: "حدث خطأ ما. يرجى المحاولة مرة أخرى لاحقًا.",
   },
+  certFaq: {
+    title: "الأسئلة الشائعة",
+  },
   install: {
     iosStepsTitle: "كيفية التثبيت على الآيفون:",
     iosStep1: "افتح هذه الصفحة في Safari (وليس Chrome أو أي تطبيق آخر).",
