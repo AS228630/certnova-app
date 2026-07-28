@@ -5699,6 +5699,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-358",
     topicId: "azure-architektur",
     prompt: "Welchen Knoten im Azure-Portal sollten Sie verwenden, um einem Benutzer die Rolle „Leser“ für eine Ressourcengruppe zuzuweisen? (Wählen Sie zur Beantwortung den Knoten im Antwortbereich aus. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    imageUrl: "/exam-images/az900-q358.png",
     options: [
       { id: "A", text: "Überblick" },
       { id: "B", text: "Zugriffskontrolle (IAM)" },
