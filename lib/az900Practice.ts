@@ -1974,6 +1974,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-124",
     topicId: "azure-architektur",
     prompt: "Sie planen, Ihr Unternehmensnetzwerk auf Azure zu erweitern. Das Netzwerk enthält ein VPN-Gerät mit der IP-Adresse 131.107.200.1. Sie müssen eine Azure-Ressource erstellen, die das VPN-Gerät identifiziert. Welche Azure-Ressource sollten Sie erstellen? (Wählen Sie zur Beantwortung die entsprechende Ressource im Antwortbereich aus.)",
+    imageUrl: "/exam-images/az900-q124.png",
     options: [
       { id: "A", text: "Lastenausgleichsmodule" },
       { id: "B", text: "Virtuelle WANs" },
@@ -2310,6 +2311,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-145",
     topicId: "azure-verwaltung",
     prompt: "Sie müssen Microsoft bitten, das Abonnementkontingent für Ihr Unternehmen zu erhöhen. Welches Blade sollten Sie im Azure-Portal verwenden? (Wählen Sie zur Beantwortung das entsprechende Blade im Antwortbereich aus.)",
+    imageUrl: "/exam-images/az900-q145.png",
     options: [
       { id: "A", text: "App-Dienste" },
       { id: "B", text: "Funktions-Apps" },
@@ -7120,6 +7122,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-453",
     topicId: "azure-architektur",
     prompt: "Sie müssen einen neuen Benutzer für ein Azure-Abonnement erstellen. Welchen sollten Sie verwenden? (Wählen Sie zur Beantwortung den Dienst im Antwortbereich aus.)",
+    imageUrl: "/exam-images/az900-q453.png",
     options: [
       { id: "A", text: "Azure Active Directory" },
       { id: "B", text: "Virtuelle Maschinen" },
