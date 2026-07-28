@@ -6048,7 +6048,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     topicId: "cloud-konzepte",
     prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (Hinweis: Jede richtige Antwort ist einen Punkt wert.)",
     statements: [
-      { text: "Azure Files ist ein Beispiel für Infrastructure as a Service (IaaS)", correct: "Ja" },
+      { text: "Azure Files ist ein Beispiel für Infrastructure as a Service (IaaS)", correct: "Nein" },
       { text: "Ein DNS-Server, der auf einer virtuellen Azure-Maschine ausgeführt wird, ist ein Beispiel für Platform as a Service (PaaS)", correct: "Nein" },
       { text: "Microsoft Intune ist ein Beispiel für Software as a Service (SaaS)", correct: "Ja" },
     ],
