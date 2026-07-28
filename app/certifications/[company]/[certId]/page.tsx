@@ -3,11 +3,37 @@ import type { Metadata } from "next";
 import DashboardShell from "@/components/DashboardShell";
 import JourneyPageClient from "@/components/certifications/journey/JourneyPageClient";
 import CertFaq from "@/components/certifications/journey/CertFaq";
+import SampleQuiz, { type SampleQuestion } from "@/components/certifications/journey/SampleQuiz";
 import { getCompany, companies } from "@/lib/companiesData";
 import { getCertJourney } from "@/lib/journeyData";
 import { VERIFIED_EXAM_INFO } from "@/lib/examInfoData";
 import { AZ900_QUESTIONS } from "@/lib/az900Practice";
 import { AB900_QUESTIONS } from "@/lib/ab900Practice";
+
+// Public sample-question ids per cert — picked once, deliberately
+// plain single-choice questions (no blankFill/matching/yesno special
+// UI) so they render cleanly without login and map straightforwardly
+// to Quiz/Question JSON-LD. Pulled from the real bank by id below, so
+// the actual question/option/answer text can never drift out of sync
+// with what's shown in the real (login-required) practice page.
+const SAMPLE_QUESTION_IDS: Record<string, string[]> = {
+  "az-900": ["real-az900-1", "real-az900-2", "real-az900-4"],
+  "ab-900": ["real-ab900-3", "real-ab900-4", "real-ab900-5"],
+};
+
+function getSampleQuestions(certId: string): SampleQuestion[] {
+  const ids = SAMPLE_QUESTION_IDS[certId];
+  if (!ids) return [];
+  const bank = certId === "az-900" ? AZ900_QUESTIONS : certId === "ab-900" ? AB900_QUESTIONS : [];
+  return ids
+    .map((id) => bank.find((q) => q.id === id))
+    .filter((q): q is Extract<(typeof bank)[number], { options: unknown; correct: unknown }> => {
+      if (!q) return false;
+      const t = (q as { type?: string }).type;
+      return (t === undefined || t === "single") && "options" in q && "correct" in q;
+    })
+    .map((q) => ({ prompt: q.prompt, options: q.options, correct: q.correct as string }));
+}
 
 // Real practice-question counts, same registry pattern used for the
 // practice/mock-exam gating - only certs listed here have a real bank,
@@ -74,6 +100,7 @@ export default async function CertJourneyPage({
   if (!company || !journey || !cert) notFound();
 
   const faqItems = buildFaqItems(certId, cert.code, cert.title);
+  const sampleQuestions = getSampleQuestions(certId);
 
   return (
     <DashboardShell>
@@ -114,11 +141,36 @@ export default async function CertJourneyPage({
                   },
                 ]
               : []),
+            ...(sampleQuestions.length > 0
+              ? [
+                  {
+                    "@context": "https://schema.org",
+                    "@type": "Quiz",
+                    name: `${cert.code} Beispiel-Fragen`,
+                    description: `Kostenlose Beispielfragen zur Vorbereitung auf ${cert.title} (${cert.code}) bei CertCoach.`,
+                    about: cert.title,
+                    // isAccessibleForFree is genuinely true for exactly
+                    // these questions (public sample) — the full bank
+                    // behind /practice is what requires login, and that
+                    // page is correctly excluded from indexing already.
+                    isAccessibleForFree: true,
+                    hasPart: sampleQuestions.map((q) => ({
+                      "@type": "Question",
+                      name: q.prompt,
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: q.options.find((o) => o.id === q.correct)?.text ?? "",
+                      },
+                    })),
+                  },
+                ]
+              : []),
           ]),
         }}
       />
       <main className="flex-1 p-4 md:p-8">
         <JourneyPageClient company={company} cert={cert} companySlug={company.slug} certId={certId} />
+        <SampleQuiz questions={sampleQuestions} companySlug={company.slug} certId={cert.id} />
         <CertFaq items={faqItems} />
       </main>
     </DashboardShell>
