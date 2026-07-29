@@ -6381,7 +6381,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-401",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Sie planen, ein Unternehmen zu Azure zu migrieren. Jede der zahlreichen Abteilungen des Unternehmens verfügt über einen Administrator, der die von der jeweiligen Abteilung verwendeten Azure-Ressourcen verwaltet. Sie möchten sicherstellen, dass die von Ihnen verwendete Azure-Bereitstellung eine Segmentierung von Azure für die Abteilungen ermöglicht und gleichzeitig den Verwaltungsaufwand auf ein Minimum beschränkt. Lösung: Sie planen, mehrere Azure Active Directory (Azure AD)-Verzeichnisse zu verwenden. Wird dies dem Ziel gerecht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Sie planen, ein Unternehmen zu Azure zu migrieren. Jede der zahlreichen Abteilungen des Unternehmens verfügt über einen Administrator, der die von der jeweiligen Abteilung verwendeten Azure-Ressourcen verwaltet. Sie möchten sicherstellen, dass die von Ihnen verwendete Azure-Bereitstellung eine Segmentierung von Azure für die Abteilungen ermöglicht und gleichzeitig den Verwaltungsaufwand auf ein Minimum beschränkt. Lösung: Sie planen, mehrere Azure Active Directory (Azure AD)-Verzeichnisse zu verwenden. Wird dies dem Ziel gerecht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6393,7 +6393,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-402",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Sie planen, ein Unternehmen zu Azure zu migrieren. Jede der zahlreichen Abteilungen des Unternehmens verfügt über einen Administrator, der die von der jeweiligen Abteilung verwendeten Azure-Ressourcen verwaltet. Sie möchten sicherstellen, dass die von Ihnen verwendete Azure-Bereitstellung eine Segmentierung von Azure für die Abteilungen ermöglicht und gleichzeitig den Verwaltungsaufwand auf ein Minimum beschränkt. Lösung: Sie planen, mehrere Verwaltungseinheiten zu nutzen. Erfüllt dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Sie planen, ein Unternehmen zu Azure zu migrieren. Jede der zahlreichen Abteilungen des Unternehmens verfügt über einen Administrator, der die von der jeweiligen Abteilung verwendeten Azure-Ressourcen verwaltet. Sie möchten sicherstellen, dass die von Ihnen verwendete Azure-Bereitstellung eine Segmentierung von Azure für die Abteilungen ermöglicht und gleichzeitig den Verwaltungsaufwand auf ein Minimum beschränkt. Lösung: Sie planen, mehrere Verwaltungseinheiten zu nutzen. Erfüllt dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6405,7 +6405,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-403",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Sie planen, ein Unternehmen zu Azure zu migrieren. Jede der zahlreichen Abteilungen des Unternehmens verfügt über einen Administrator, der die von der jeweiligen Abteilung verwendeten Azure-Ressourcen verwaltet. Sie möchten sicherstellen, dass die von Ihnen verwendete Azure-Bereitstellung eine Segmentierung von Azure für die Abteilungen ermöglicht und gleichzeitig den Verwaltungsaufwand auf ein Minimum beschränkt. Lösung: Sie planen, mehrere Azure-Verwaltungsgruppen zu verwenden. Erfüllt dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Sie planen, ein Unternehmen zu Azure zu migrieren. Jede der zahlreichen Abteilungen des Unternehmens verfügt über einen Administrator, der die von der jeweiligen Abteilung verwendeten Azure-Ressourcen verwaltet. Sie möchten sicherstellen, dass die von Ihnen verwendete Azure-Bereitstellung eine Segmentierung von Azure für die Abteilungen ermöglicht und gleichzeitig den Verwaltungsaufwand auf ein Minimum beschränkt. Lösung: Sie planen, mehrere Azure-Verwaltungsgruppen zu verwenden. Erfüllt dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6417,7 +6417,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-404",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Sie planen, ein Unternehmen zu Azure zu migrieren. Jede der zahlreichen Abteilungen des Unternehmens verfügt über einen Administrator, der die von der jeweiligen Abteilung verwendeten Azure-Ressourcen verwaltet. Sie möchten sicherstellen, dass die von Ihnen verwendete Azure-Bereitstellung eine Segmentierung von Azure für die Abteilungen ermöglicht und gleichzeitig den Verwaltungsaufwand auf ein Minimum beschränkt. Lösung: Sie planen, mehrere Abonnements zu verwenden. Erfüllt dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Sie planen, ein Unternehmen zu Azure zu migrieren. Jede der zahlreichen Abteilungen des Unternehmens verfügt über einen Administrator, der die von der jeweiligen Abteilung verwendeten Azure-Ressourcen verwaltet. Sie möchten sicherstellen, dass die von Ihnen verwendete Azure-Bereitstellung eine Segmentierung von Azure für die Abteilungen ermöglicht und gleichzeitig den Verwaltungsaufwand auf ein Minimum beschränkt. Lösung: Sie planen, mehrere Abonnements zu verwenden. Erfüllt dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6444,7 +6444,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-406",
     topicId: "cloud-konzepte",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen plant, alle virtuellen Maschinen auf ein Azure-Pay-as-you-go-Abonnement zu migrieren. Die virtuellen Maschinen werden derzeit auf den Hyper-V-Hosts in einem Rechenzentrum gehostet. Sie müssen sicherstellen, dass die geplante Azure-Lösung das richtige Ausgabenmodell verwendet. Lösung: Sie sollten die Verwendung des elastischen Ausgabenmodells empfehlen. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen plant, alle virtuellen Maschinen auf ein Azure-Pay-as-you-go-Abonnement zu migrieren. Die virtuellen Maschinen werden derzeit auf den Hyper-VHosts in einem Rechenzentrum gehostet. Sie müssen sicherstellen, dass die geplante Azure-Lösung das richtige Ausgabenmodell verwendet. Lösung: Sie sollten die Verwendung des elastischen Ausgabenmodells empfehlen. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6455,7 +6455,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-407",
     topicId: "cloud-konzepte",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen plant, alle virtuellen Maschinen auf ein Azure-Pay-as-you-go-Abonnement zu migrieren. Die virtuellen Maschinen werden derzeit auf den Hyper-V-Hosts in einem Rechenzentrum gehostet. Sie müssen sicherstellen, dass die geplante Azure-Lösung das richtige Ausgabenmodell verwendet. Lösung: Sie sollten die Verwendung des skalierbaren Ausgabenmodells empfehlen. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen plant, alle virtuellen Maschinen auf ein Azure-Pay-as-you-go-Abonnement zu migrieren. Die virtuellen Maschinen werden derzeit auf den Hyper-VHosts in einem Rechenzentrum gehostet. Sie müssen sicherstellen, dass die geplante Azure-Lösung das richtige Ausgabenmodell verwendet. Lösung: Sie sollten die Verwendung des skalierbaren Ausgabenmodells empfehlen. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6466,7 +6466,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-408",
     topicId: "cloud-konzepte",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen plant, alle virtuellen Maschinen auf ein Azure-Pay-as-you-go-Abonnement zu migrieren. Die virtuellen Maschinen werden derzeit auf den Hyper-V-Hosts in einem Rechenzentrum gehostet. Sie müssen sicherstellen, dass die geplante Azure-Lösung das richtige Ausgabenmodell verwendet. Lösung: Sie sollten die Verwendung des Betriebsausgabenmodells empfehlen. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen plant, alle virtuellen Maschinen auf ein Azure-Pay-as-you-go-Abonnement zu migrieren. Die virtuellen Maschinen werden derzeit auf den Hyper-VHosts in einem Rechenzentrum gehostet. Sie müssen sicherstellen, dass die geplante Azure-Lösung das richtige Ausgabenmodell verwendet. Lösung: Sie sollten die Verwendung des Betriebsausgabenmodells empfehlen. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6507,7 +6507,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-411",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Das Azure-Abonnement Ihres Unternehmens umfasst einen Basic-Supportplan. Sie möchten von Microsoft eine Bewertung des Designs einer Azure-Umgebung anfordern. Dies wird jedoch vom bestehenden Plan nicht unterstützt. Sie möchten sicherstellen, dass das Unternehmen einen Supportplan abonniert, der diese Funktionalität ermöglicht und gleichzeitig die Kosten auf ein Minimum beschränkt. Lösung: Sie empfehlen dem Unternehmen, den Professional Direct-Supportplan zu abonnieren. Erfüllt dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Das Azure-Abonnement Ihres Unternehmens umfasst einen Basic-Supportplan. Sie möchten von Microsoft eine Bewertung des Designs einer Azure-Umgebung anfordern. Dies wird jedoch vom bestehenden Plan nicht unterstützt. Sie möchten sicherstellen, dass das Unternehmen einen Supportplan abonniert, der diese Funktionalität ermöglicht und gleichzeitig die Kosten auf ein Minimum beschränkt. Lösung: Sie empfehlen dem Unternehmen, den Professional Direct-Supportplan zu abonnieren. Erfüllt dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6520,7 +6520,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-412",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Das Azure-Abonnement Ihres Unternehmens umfasst einen Basic-Supportplan. Sie möchten von Microsoft eine Bewertung des Designs einer Azure-Umgebung anfordern. Dies wird jedoch vom bestehenden Plan nicht unterstützt. Sie möchten sicherstellen, dass das Unternehmen einen Supportplan abonniert, der diese Funktionalität ermöglicht und gleichzeitig die Kosten auf ein Minimum beschränkt. Lösung: Sie empfehlen dem Unternehmen, den Basic-Supportplan zu abonnieren. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Das Azure-Abonnement Ihres Unternehmens umfasst einen Basic-Supportplan. Sie möchten von Microsoft eine Bewertung des Designs einer Azure-Umgebung anfordern. Dies wird jedoch vom bestehenden Plan nicht unterstützt. Sie möchten sicherstellen, dass das Unternehmen einen Supportplan abonniert, der diese Funktionalität ermöglicht und gleichzeitig die Kosten auf ein Minimum beschränkt. Lösung: Sie empfehlen dem Unternehmen, den Basic-Supportplan zu abonnieren. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6533,7 +6533,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-413",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Das Azure-Abonnement Ihres Unternehmens umfasst einen Basic-Supportplan. Sie möchten von Microsoft eine Bewertung des Designs einer Azure-Umgebung anfordern. Dies wird jedoch vom bestehenden Plan nicht unterstützt. Sie möchten sicherstellen, dass das Unternehmen einen Supportplan abonniert, der diese Funktionalität ermöglicht und gleichzeitig die Kosten auf ein Minimum beschränkt. Lösung: Sie empfehlen dem Unternehmen, den Standard-Supportplan zu abonnieren. Erfüllt dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Das Azure-Abonnement Ihres Unternehmens umfasst einen Basic-Supportplan. Sie möchten von Microsoft eine Bewertung des Designs einer Azure-Umgebung anfordern. Dies wird jedoch vom bestehenden Plan nicht unterstützt. Sie möchten sicherstellen, dass das Unternehmen einen Supportplan abonniert, der diese Funktionalität ermöglicht und gleichzeitig die Kosten auf ein Minimum beschränkt. Lösung: Sie empfehlen dem Unternehmen, den Standard-Supportplan zu abonnieren. Erfüllt dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6546,7 +6546,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-414",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Das Azure-Abonnement Ihres Unternehmens umfasst einen Basic-Supportplan. Sie möchten von Microsoft eine Bewertung des Designs einer Azure-Umgebung anfordern. Dies wird jedoch vom bestehenden Plan nicht unterstützt. Sie möchten sicherstellen, dass das Unternehmen einen Supportplan abonniert, der diese Funktionalität ermöglicht und gleichzeitig die Kosten auf ein Minimum beschränkt. Lösung: Sie empfehlen dem Unternehmen, den Developer-Supportplan zu abonnieren. Erfüllt dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Das Azure-Abonnement Ihres Unternehmens umfasst einen Basic-Supportplan. Sie möchten von Microsoft eine Bewertung des Designs einer Azure-Umgebung anfordern. Dies wird jedoch vom bestehenden Plan nicht unterstützt. Sie möchten sicherstellen, dass das Unternehmen einen Supportplan abonniert, der diese Funktionalität ermöglicht und gleichzeitig die Kosten auf ein Minimum beschränkt. Lösung: Sie empfehlen dem Unternehmen, den Developer-Supportplan zu abonnieren. Erfüllt dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6559,7 +6559,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-415",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Sie müssen eine Lösung für künstliche Intelligenz (KI) in Azure bereitstellen. Sie möchten sicherstellen, dass Sie prädiktive Analysen für die Lösung erstellen, testen und bereitstellen können. Lösung: Sie verwenden Azure Machine Learning Studio. Erfüllt dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Sie müssen eine Lösung für künstliche Intelligenz (KI) in Azure bereitstellen. Sie möchten sicherstellen, dass Sie prädiktive Analysen für die Lösung erstellen, testen und bereitstellen können. Lösung: Sie verwenden Azure Machine Learning Studio. Erfüllt dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6571,7 +6571,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-416",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erfüllt. Sie müssen eine Lösung für künstliche Intelligenz (KI) in Azure bereitstellen. Sie möchten sicherstellen, dass Sie prädiktive Analysen für die Lösung erstellen, testen und bereitstellen können. Lösung: Sie beziehen Verwaltungsgruppen in die Lösung ein. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erfüllt. Sie müssen eine Lösung für künstliche Intelligenz (KI) in Azure bereitstellen. Sie möchten sicherstellen, dass Sie prädiktive Analysen für die Lösung erstellen, testen und bereitstellen können. Lösung: Sie beziehen Verwaltungsgruppen in die Lösung ein. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6583,7 +6583,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-417",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Sie müssen eine Lösung für künstliche Intelligenz (KI) in Azure bereitstellen. Sie möchten sicherstellen, dass Sie prädiktive Analysen für die Lösung erstellen, testen und bereitstellen können. Lösung: Sie verwenden Azure API Management. Erfüllt dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Sie müssen eine Lösung für künstliche Intelligenz (KI) in Azure bereitstellen. Sie möchten sicherstellen, dass Sie prädiktive Analysen für die Lösung erstellen, testen und bereitstellen können. Lösung: Sie verwenden Azure API Management. Erfüllt dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6595,7 +6595,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-418",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Die Infrastruktur Ihres Unternehmens umfasst mehrere Geschäftseinheiten, die jeweils eine große Anzahl verschiedener Azure-Ressourcen für den täglichen Betrieb benötigen. Die von jeder Geschäftseinheit benötigten Ressourcen sind identisch. Sie müssen eine Strategie zur automatischen Erstellung von Azure-Ressourcen genehmigen. Lösung: Sie empfehlen, den Azure API Management-Dienst in die Strategie aufzunehmen. Wird dies dem Ziel gerecht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Die Infrastruktur Ihres Unternehmens umfasst mehrere Geschäftseinheiten, die jeweils eine große Anzahl verschiedener Azure-Ressourcen für den täglichen Betrieb benötigen. Die von jeder Geschäftseinheit benötigten Ressourcen sind identisch. Sie müssen eine Strategie zur automatischen Erstellung von Azure-Ressourcen genehmigen. Lösung: Sie empfehlen, den Azure API Management-Dienst in die Strategie aufzunehmen. Wird dies dem Ziel gerecht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6607,7 +6607,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-419",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Die Infrastruktur Ihres Unternehmens umfasst mehrere Geschäftseinheiten, die jeweils eine große Anzahl verschiedener Azure-Ressourcen für den täglichen Betrieb benötigen. Die von jeder Geschäftseinheit benötigten Ressourcen sind identisch. Sie müssen eine Strategie zur automatischen Erstellung von Azure-Ressourcen genehmigen. Lösung: Sie empfehlen, Verwaltungsgruppen in die Strategie einzubeziehen. Wird dies dem Ziel gerecht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Die Infrastruktur Ihres Unternehmens umfasst mehrere Geschäftseinheiten, die jeweils eine große Anzahl verschiedener Azure-Ressourcen für den täglichen Betrieb benötigen. Die von jeder Geschäftseinheit benötigten Ressourcen sind identisch. Sie müssen eine Strategie zur automatischen Erstellung von Azure-Ressourcen genehmigen. Lösung: Sie empfehlen, Verwaltungsgruppen in die Strategie einzubeziehen. Wird dies dem Ziel gerecht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6643,7 +6643,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-422",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Die Entwickler Ihres Unternehmens beabsichtigen, wöchentlich eine große Anzahl benutzerdefinierter virtueller Maschinen bereitzustellen. Sie werden diese virtuellen Maschinen in derselben Woche, in der sie bereitgestellt wurden, auch wieder entfernen. Auf 60 % der virtuellen Maschinen ist Windows Server 2016 installiert, auf den anderen 40 % Ubuntu Linux. Sie müssen sicherstellen, dass der für diesen Prozess erforderliche Verwaltungsaufwand durch den Einsatz eines geeigneten Azure-Dienstes reduziert wird. Lösung: Sie empfehlen die Verwendung von Microsoft Managed Desktop. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Die Entwickler Ihres Unternehmens beabsichtigen, wöchentlich eine große Anzahl benutzerdefinierter virtueller Maschinen bereitzustellen. Sie werden diese virtuellen Maschinen in derselben Woche, in der sie bereitgestellt wurden, auch wieder entfernen. Auf 60 % der virtuellen Maschinen ist Windows Server 2016 installiert, auf den anderen 40 % Ubuntu Linux. Sie müssen sicherstellen, dass der für diesen Prozess erforderliche Verwaltungsaufwand durch den Einsatz eines geeigneten Azure-Dienstes reduziert wird. Lösung: Sie empfehlen die Verwendung von Microsoft Managed Desktop. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6655,7 +6655,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-423",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Die Entwickler Ihres Unternehmens beabsichtigen, wöchentlich eine große Anzahl benutzerdefinierter virtueller Maschinen bereitzustellen. Sie werden diese virtuellen Maschinen in derselben Woche, in der sie bereitgestellt wurden, auch wieder entfernen. Auf 60 % der virtuellen Maschinen ist Windows Server 2016 installiert, auf den anderen 40 % Ubuntu Linux. Sie müssen sicherstellen, dass der für diesen Prozess erforderliche Verwaltungsaufwand durch den Einsatz eines geeigneten Azure-Dienstes reduziert wird. Lösung: Sie empfehlen die Verwendung von Azure Reserved Virtual Machines (VM) Instances. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Die Entwickler Ihres Unternehmens beabsichtigen, wöchentlich eine große Anzahl benutzerdefinierter virtueller Maschinen bereitzustellen. Sie werden diese virtuellen Maschinen in derselben Woche, in der sie bereitgestellt wurden, auch wieder entfernen. Auf 60 % der virtuellen Maschinen ist Windows Server 2016 installiert, auf den anderen 40 % Ubuntu Linux. Sie müssen sicherstellen, dass der für diesen Prozess erforderliche Verwaltungsaufwand durch den Einsatz eines geeigneten Azure-Dienstes reduziert wird. Lösung: Sie empfehlen die Verwendung von Azure Reserved Virtual Machines (VM) Instances. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6667,7 +6667,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-424",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Die Entwickler Ihres Unternehmens beabsichtigen, wöchentlich eine große Anzahl benutzerdefinierter virtueller Maschinen bereitzustellen. Sie werden diese virtuellen Maschinen in derselben Woche, in der sie bereitgestellt wurden, auch wieder entfernen. Auf 60 % der virtuellen Maschinen ist Windows Server 2016 installiert, auf den anderen 40 % Ubuntu Linux. Sie müssen sicherstellen, dass der für diesen Prozess erforderliche Verwaltungsaufwand durch den Einsatz eines geeigneten Azure-Dienstes reduziert wird. Lösung: Sie empfehlen die Verwendung von Azure DevTest Labs. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Die Entwickler Ihres Unternehmens beabsichtigen, wöchentlich eine große Anzahl benutzerdefinierter virtueller Maschinen bereitzustellen. Sie werden diese virtuellen Maschinen in derselben Woche, in der sie bereitgestellt wurden, auch wieder entfernen. Auf 60 % der virtuellen Maschinen ist Windows Server 2016 installiert, auf den anderen 40 % Ubuntu Linux. Sie müssen sicherstellen, dass der für diesen Prozess erforderliche Verwaltungsaufwand durch den Einsatz eines geeigneten Azure-Dienstes reduziert wird. Lösung: Sie empfehlen die Verwendung von Azure DevTest Labs. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6679,13 +6679,14 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-425",
     topicId: "cloud-konzepte",
-    prompt: "Ihr Unternehmen möchte eine Cloud-Lösung mit Azure Government entwickeln. Azure Government kann nur von bestimmten Kundentypen zur Entwicklung von Cloud-Lösungen genutzt werden. Welche der folgenden Kundentypen können Azure Government nutzen? (Beantworten Sie die Frage, indem Sie die richtigen Optionen aus der Liste in den Antwortbereich ziehen.) Eine Regierungsbehörde aus einem beliebigen Land.",
+    prompt: "Ihr Unternehmen möchte eine Cloud-Lösung mit Azure Government entwickeln. Azure Government kann nur von bestimmten Kundentypen zur Entwicklung von Cloud-Lösungen genutzt werden. Welche der folgenden Kundentypen können Azure Government nutzen? (Beantworten Sie die Frage, indem Sie die richtigen Optionen aus der Liste in den Antwortbereich ziehen.)",
+    imageUrl: "/exam-images/az900-q425-explain.png",
     options: [
-      { id: "A", text: "Eine europäische Regierungsbehörde. Eine Regierungsbehörde der Vereinigten Staaten. Eine europäische Regierungsbehörde." },
-      { id: "B", text: "Eine Regierungsbehörde der Vereinigten Staaten. Ein Regierungsauftragnehmer aus einem beliebigen Land." },
-      { id: "C", text: "Ein europäischer Regierungsauftragnehmer. Ein Regierungsauftragnehmer der Vereinigten Staaten." },
-      { id: "D", text: "Ein Auftragnehmer der US-Regierung. Ein europäischer Regierungsauftragnehmer." },
-      { id: "E", text: "Eine europäische Regierungsbehörde. Ein Auftragnehmer der US-Regierung." },
+      { id: "A", text: "Eine Regierungsbehörde aus einem beliebigen Land. Eine europäische Regierungsbehörde. Eine Regierungsbehörde der Vereinigten Staaten." },
+      { id: "B", text: "Eine europäische Regierungsbehörde. Eine Regierungsbehörde der Vereinigten Staaten." },
+      { id: "C", text: "Ein Regierungsauftragnehmer aus einem beliebigen Land. Ein europäischer Regierungsauftragnehmer. Ein Regierungsauftragnehmer der Vereinigten Staaten." },
+      { id: "D", text: "Ein Auftragnehmer der US-Regierung." },
+      { id: "E", text: "Ein europäischer Regierungsauftragnehmer. Eine europäische Regierungsbehörde. Ein Auftragnehmer der US-Regierung." },
       { id: "F", text: "Eine Einrichtung der US-Regierung." },
     ],
     correct: "F",
@@ -6773,7 +6774,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-431",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Sie planen die Bereitstellung mehrerer virtueller Azure-Computer. Sie müssen sicherstellen, dass die auf den virtuellen Computern ausgeführten Dienste verfügbar sind, wenn ein einzelnes Rechenzentrum ausfällt. Lösung: Sie stellen die virtuellen Computer in einer Skalierungsgruppe bereit. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Sie planen die Bereitstellung mehrerer virtueller Azure-Computer. Sie müssen sicherstellen, dass die auf den virtuellen Computern ausgeführten Dienste verfügbar sind, wenn ein einzelnes Rechenzentrum ausfällt. Lösung: Sie stellen die virtuellen Computer in einer Skalierungsgruppe bereit. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6875,7 +6876,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-436",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Der Active Directory-Forest Ihres Unternehmens umfasst Tausende von Benutzerkonten. Sie wurden darüber informiert, dass alle Netzwerkressourcen zu Azure migriert werden. Danach wird das lokale Rechenzentrum außer Betrieb genommen. Sie müssen eine Strategie anwenden, die die Auswirkungen auf die Benutzer minimiert, sobald die geplante Migration abgeschlossen ist. Lösung: Sie planen, alle Active Directory-Benutzerkonten mit Azure Active Directory (Azure AD) zu synchronisieren. Wird dies dem Ziel gerecht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Der Active Directory-Forest Ihres Unternehmens umfasst Tausende von Benutzerkonten. Sie wurden darüber informiert, dass alle Netzwerkressourcen zu Azure migriert werden. Danach wird das lokale Rechenzentrum außer Betrieb genommen. Sie müssen eine Strategie anwenden, die die Auswirkungen auf die Benutzer minimiert, sobald die geplante Migration abgeschlossen ist. Lösung: Sie planen, alle Active Directory-Benutzerkonten mit Azure Active Directory (Azure AD) zu synchronisieren. Wird dies dem Ziel gerecht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6887,7 +6888,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-437",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Der Active Directory-Forest Ihres Unternehmens umfasst Tausende von Benutzerkonten. Sie wurden darüber informiert, dass alle Netzwerkressourcen zu Azure migriert werden. Danach wird das lokale Rechenzentrum außer Betrieb genommen. Sie müssen eine Strategie anwenden, die die Auswirkungen auf die Benutzer minimiert, sobald die geplante Migration abgeschlossen ist. Lösung: Sie planen, die mehrstufige Authentifizierung (MFA) von Azure AD vorzuschreiben. Erfüllt dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Der Active Directory-Forest Ihres Unternehmens umfasst Tausende von Benutzerkonten. Sie wurden darüber informiert, dass alle Netzwerkressourcen zu Azure migriert werden. Danach wird das lokale Rechenzentrum außer Betrieb genommen. Sie müssen eine Strategie anwenden, die die Auswirkungen auf die Benutzer minimiert, sobald die geplante Migration abgeschlossen ist. Lösung: Sie planen, die mehrstufige Authentifizierung (MFA) von Azure AD vorzuschreiben. Erfüllt dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6899,7 +6900,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-438",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Der Active Directory-Forest Ihres Unternehmens umfasst Tausende von Benutzerkonten. Sie wurden darüber informiert, dass alle Netzwerkressourcen zu Azure migriert werden. Danach wird das lokale Rechenzentrum außer Betrieb genommen. Sie müssen eine Strategie anwenden, die die Auswirkungen auf die Benutzer minimiert, sobald die geplante Migration abgeschlossen ist. Lösung: Sie planen, die Self-Service-Kennwortzurücksetzung (SSPR) von Azure AD zu implementieren. Wird dies dem Ziel gerecht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Der Active Directory-Forest Ihres Unternehmens umfasst Tausende von Benutzerkonten. Sie wurden darüber informiert, dass alle Netzwerkressourcen zu Azure migriert werden. Danach wird das lokale Rechenzentrum außer Betrieb genommen. Sie müssen eine Strategie anwenden, die die Auswirkungen auf die Benutzer minimiert, sobald die geplante Migration abgeschlossen ist. Lösung: Sie planen, die Self-Service-Kennwortzurücksetzung (SSPR) von Azure AD zu implementieren. Wird dies dem Ziel gerecht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
