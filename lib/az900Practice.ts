@@ -7443,7 +7443,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-471",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Sie wurden von Ihren Vorgesetzten über die Absicht des Unternehmens informiert, die Serverbereitstellung in Azure zu automatisieren. Es besteht jedoch die Sorge, dass dabei Administratoranmeldeinformationen aufgedeckt werden könnten. Sie müssen sicherstellen, dass die Administratoranmeldeinformationen während der Bereitstellung mit einer geeigneten Azure-Lösung verschlüsselt werden. Lösung: Sie empfehlen die Verwendung von Azure Information Protection. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Sie wurden von Ihren Vorgesetzten über die Absicht des Unternehmens informiert, die Serverbereitstellung in Azure zu automatisieren. Es besteht jedoch die Sorge, dass dabei Administratoranmeldeinformationen aufgedeckt werden könnten. Sie müssen sicherstellen, dass die Administratoranmeldeinformationen während der Bereitstellung mit einer geeigneten Azure-Lösung verschlüsselt werden. Lösung: Sie empfehlen die Verwendung von Azure Information Protection. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -7455,7 +7455,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-472",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Sie wurden von Ihren Vorgesetzten über die Absicht des Unternehmens informiert, die Serverbereitstellung in Azure zu automatisieren. Es besteht jedoch die Sorge, dass dabei Administratoranmeldeinformationen aufgedeckt werden könnten. Sie müssen sicherstellen, dass die Administratoranmeldeinformationen während der Bereitstellung mit einer geeigneten Azure-Lösung verschlüsselt werden. Lösung: Sie empfehlen die Verwendung der Azure Multi-Factor Authentication (MFA). Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Sie wurden von Ihren Vorgesetzten über die Absicht des Unternehmens informiert, die Serverbereitstellung in Azure zu automatisieren. Es besteht jedoch die Sorge, dass dabei Administratoranmeldeinformationen aufgedeckt werden könnten. Sie müssen sicherstellen, dass die Administratoranmeldeinformationen während der Bereitstellung mit einer geeigneten Azure-Lösung verschlüsselt werden. Lösung: Sie empfehlen die Verwendung der Azure Multi-Factor Authentication (MFA). Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -7467,7 +7467,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-473",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Sie wurden von Ihren Vorgesetzten über die Absicht des Unternehmens informiert, die Serverbereitstellung in Azure zu automatisieren. Es besteht jedoch die Sorge, dass dabei Administratoranmeldeinformationen offengelegt werden könnten. Sie müssen sicherstellen, dass die Administratoranmeldeinformationen während der Bereitstellung mit einer geeigneten Azure-Lösung verschlüsselt werden. Lösung: Sie empfehlen die Verwendung von Azure Key Vault. Erfüllt dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Sie wurden von Ihren Vorgesetzten über die Absicht des Unternehmens informiert, die Serverbereitstellung in Azure zu automatisieren. Es besteht jedoch die Sorge, dass dabei Administratoranmeldeinformationen offengelegt werden könnten. Sie müssen sicherstellen, dass die Administratoranmeldeinformationen während der Bereitstellung mit einer geeigneten Azure-Lösung verschlüsselt werden. Lösung: Sie empfehlen die Verwendung von Azure Key Vault. Erfüllt dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -7684,7 +7684,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-489",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen verfügt über eine Azure Active Directory (Azure AD)-Umgebung. Benutzer stellen gelegentlich über das Internet eine Verbindung zu Azure AD her. Sie wurden beauftragt, sicherzustellen, dass Benutzer, die über das Internet von einer unbekannten IP-Adresse aus eine Verbindung zu Azure AD herstellen, automatisch aufgefordert werden, ihre Passwörter zu ändern. Lösung: Sie konfigurieren die Verwendung von Azure AD Identity Protection. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen verfügt über eine Azure Active Directory (Azure AD)-Umgebung. Benutzer stellen gelegentlich über das Internet eine Verbindung zu Azure AD her. Sie wurden beauftragt, sicherzustellen, dass Benutzer, die über das Internet von einer unbekannten IP-Adresse aus eine Verbindung zu Azure AD herstellen, automatisch aufgefordert werden, ihre Passwörter zu ändern. Lösung: Sie konfigurieren die Verwendung von Azure AD Identity Protection. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -7697,7 +7697,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-490",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen verfügt über eine Azure Active Directory (Azure AD)-Umgebung. Benutzer stellen gelegentlich über das Internet eine Verbindung zu Azure AD her. Sie wurden beauftragt, sicherzustellen, dass Benutzer, die über das Internet von einer unbekannten IP-Adresse aus eine Verbindung zu Azure AD herstellen, automatisch aufgefordert werden, ihre Passwörter zu ändern. Lösung: Sie konfigurieren die Verwendung von Azure AD Privileged Identity Management. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen verfügt über eine Azure Active Directory (Azure AD)-Umgebung. Benutzer stellen gelegentlich über das Internet eine Verbindung zu Azure AD her. Sie wurden beauftragt, sicherzustellen, dass Benutzer, die über das Internet von einer unbekannten IP-Adresse aus eine Verbindung zu Azure AD herstellen, automatisch aufgefordert werden, ihre Passwörter zu ändern. Lösung: Sie konfigurieren die Verwendung von Azure AD Privileged Identity Management. Wird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -7710,7 +7710,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-491",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen verfügt über eine Azure Active Directory (Azure AD)-Umgebung. Benutzer stellen gelegentlich über das Internet eine Verbindung zu Azure AD her. Sie wurden beauftragt, sicherzustellen, dass Benutzer, die über das Internet von einer unbekannten IP-Adresse aus eine Verbindung zu Azure AD herstellen, automatisch aufgefordert werden, ihre Passwörter zu ändern. Lösung: Sie konfigurieren die Verwendung des Azure AD-Passwortschutzes. Wird dies dem Ziel gerecht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen verfügt über eine Azure Active Directory (Azure AD)-Umgebung. Benutzer stellen gelegentlich über das Internet eine Verbindung zu Azure AD her. Sie wurden beauftragt, sicherzustellen, dass Benutzer, die über das Internet von einer unbekannten IP-Adresse aus eine Verbindung zu Azure AD herstellen, automatisch aufgefordert werden, ihre Passwörter zu ändern. Lösung: Sie konfigurieren die Verwendung des Azure AD-Passwortschutzes. Wird dies dem Ziel gerecht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
