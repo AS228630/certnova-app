@@ -27,6 +27,8 @@ import { useActivityLogStore } from "@/lib/store/activityLogStore";
 import { useQuestionAnswersStore } from "@/lib/store/questionAnswersStore";
 import { useSectionAttemptsStore } from "@/lib/store/sectionAttemptsStore";
 import { useUser } from "@/components/UserContext";
+import { loadGuestProgress, saveGuestAnswer, clearGuestProgress } from "@/lib/guestProgress";
+import GuestSignupModal from "./GuestSignupModal";
 
 const EXAM_TOTAL_SECONDS = 2 * 60 * 60; // 2h, matches a real certification exam
 
@@ -121,6 +123,13 @@ export default function PracticeClient({
   }, []);
 
   const { user } = useUser();
+  // A guest is simply "no logged-in user" — practice pages now render
+  // for guests too (DashboardShell requireAuth={false}), with access
+  // limited to Teil 1 only (see goTo). Recomputed on every render from
+  // `user`, so it flips to false automatically the instant a guest
+  // finishes signing up mid-session — no extra state to keep in sync.
+  const isGuest = !user;
+  const [showGuestGate, setShowGuestGate] = useState(false);
   const persistedCorrectness = useQuestionAnswersStore((s) => s.getCorrectness(certId));
   const loadPersistedAnswers = useQuestionAnswersStore((s) => s.loadForCert);
   const recordPersistedAnswer = useQuestionAnswersStore((s) => s.recordAnswer);
@@ -138,8 +147,21 @@ export default function PracticeClient({
     if (user) {
       loadPersistedAnswers(user.id, certId);
       loadSectionAttempts(user.id, certId);
+
+      // Migrate any guest answers saved just before this person signed
+      // up (the redirect back here after OAuth/email signup is a full
+      // page load, so `user` is already populated on first render here
+      // rather than transitioning from null -> set within one mount —
+      // this is the one place that reliably catches it either way).
+      const guestAnswers = loadGuestProgress(certId);
+      if (guestAnswers.length > 0) {
+        for (const a of guestAnswers) {
+          recordPersistedAnswer(user.id, certId, a.questionId, a.isCorrect);
+        }
+        clearGuestProgress(certId);
+      }
     }
-  }, [user, certId, loadPersistedAnswers, loadSectionAttempts]);
+  }, [user, certId, loadPersistedAnswers, loadSectionAttempts, recordPersistedAnswer]);
 
   // The practice exam always covers the full authored question set for this
   // cert — no topic filter, matching a real certification exam simulation.
@@ -210,6 +232,20 @@ export default function PracticeClient({
 
   function goTo(i: number) {
     const clamped = Math.max(0, Math.min(activeQuestions.length - 1, i));
+
+    // Guests (not logged in) may freely move within Teil 1 only — the
+    // rest of the exam is the paid/registered experience. Checked
+    // independently of the attemptsMigrationReady block below, since
+    // that one only applies once a real user's DB-backed unlock state
+    // has loaded, which never happens for a guest.
+    if (isGuest) {
+      const targetSection = getSectionForIndex(activeQuestions.length, clamped);
+      if (targetSection > 0) {
+        setShowGuestGate(true);
+        return;
+      }
+    }
+
     // Refuse to move the question pointer into a section that isn't
     // actually unlocked yet — this is the single low-level function every
     // navigation path goes through (the Next/Prev arrows, the scorecard's
@@ -627,7 +663,9 @@ export default function PracticeClient({
             currentIndex={index}
             statusFor={statusFor}
             onJump={(i, sectionIdx) => (sectionIdx !== undefined ? jumpToSection(sectionIdx, i) : goTo(i))}
-            isUnlocked={attemptsMigrationReady ? (s) => isSectionPermanentlyUnlocked(certId, s) : undefined}
+            isUnlocked={
+              isGuest ? (s) => s === 0 : attemptsMigrationReady ? (s) => isSectionPermanentlyUnlocked(certId, s) : undefined
+            }
             getBestScore={attemptsMigrationReady ? (s) => getBestScore(certId, s) : undefined}
           />
           <SectionProgressBar
@@ -753,6 +791,7 @@ export default function PracticeClient({
             useCertProgressStore.getState().recordAnswerForCert(certId, isCorrect);
             useTopicMasteryStore.getState().recordAnswerForTopic(current.topicId, isCorrect);
             if (user) recordPersistedAnswer(user.id, certId, current.id, isCorrect);
+            if (isGuest) saveGuestAnswer(certId, { questionId: current.id, answer: answers[current.id], isCorrect });
             if (isCorrect) useCertProgressStore.getState().recordModuleCompletion(certId, 2);
             // Review mode (spec section 8) never touches Attempts, History,
             // Best Score, or section-unlock state — maybeShowScorecard is
@@ -825,6 +864,8 @@ export default function PracticeClient({
       {restartModalOpen && (
         <RestartConfirmModal onConfirm={restartFromScratch} onCancel={() => setRestartModalOpen(false)} loading={restarting} />
       )}
+
+      {showGuestGate && <GuestSignupModal onClose={() => setShowGuestGate(false)} />}
 
       {/* AI coach now spans the full width below the question. */}
       <div className="mt-6 hidden h-[420px] lg:block">

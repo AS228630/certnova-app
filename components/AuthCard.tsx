@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { User, Mail, Lock, Eye, EyeOff, ArrowRight, ShieldCheck, CreditCard, Star, Check } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -53,6 +53,11 @@ function translateAuthError(message: string): string {
 
 export default function AuthCard({ initialMode }: { initialMode: Mode }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  // Where to send the person after a successful login/signup — used so
+  // a guest who hit the free-preview limit on a practice page lands
+  // right back where they were, not generically on /dashboard.
+  const redirectTarget = searchParams.get("redirect") || "/dashboard";
   const [mode, setMode] = useState<Mode>(initialMode);
 
   const [fullName, setFullName] = useState("");
@@ -121,7 +126,7 @@ export default function AuthCard({ initialMode }: { initialMode: Mode }) {
       return;
     }
 
-    router.push("/dashboard");
+    router.push(redirectTarget);
   }
 
   async function handleLogin(e: React.FormEvent) {
@@ -135,7 +140,7 @@ export default function AuthCard({ initialMode }: { initialMode: Mode }) {
     setLoading(false);
     if (signInError) return setError(translateAuthError(signInError.message));
 
-    router.push("/dashboard");
+    router.push(redirectTarget);
   }
 
   async function handleOAuth(provider: "google" | "github" | "azure") {
@@ -143,7 +148,7 @@ export default function AuthCard({ initialMode }: { initialMode: Mode }) {
     setOauthLoading(provider);
     const { error: oauthError } = await supabase.auth.signInWithOAuth({
       provider,
-      options: { redirectTo: `${window.location.origin}/dashboard` },
+      options: { redirectTo: `${window.location.origin}${redirectTarget}` },
     });
     if (oauthError) {
       setOauthLoading(null);

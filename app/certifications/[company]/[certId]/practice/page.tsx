@@ -36,7 +36,7 @@ export default async function PracticePage({
   const hasRealBank = certId in PRACTICE_BANKS;
   if (!hasRealBank) {
     return (
-      <DashboardShell>
+      <DashboardShell requireAuth={false}>
         <main className="flex-1 pb-4 pt-0 md:pb-8">
           <ComingSoonPractice company={company} cert={cert} />
         </main>
@@ -47,7 +47,7 @@ export default async function PracticePage({
   const bank = PRACTICE_BANKS[certId];
 
   return (
-    <DashboardShell>
+    <DashboardShell requireAuth={false}>
       <main className="flex-1 pb-4 pt-0 md:pb-8">
         <PracticeClient
           companyName={company.name}
