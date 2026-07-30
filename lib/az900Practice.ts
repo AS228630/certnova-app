@@ -224,7 +224,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-4",
     topicId: "azure-architektur",
-    prompt: "Ihr Unternehmen verfügt über mehrere Geschäftsbereiche. Jeder Geschäftsbereich benötigt 20 verschiedene Azure-Ressourcen für den täglichen Betrieb. Alle Geschäftsbereiche benötigen denselben Typ von Azure-Ressourcen. Sie benötigen eine Lösung zur Automatisierung der Erstellung der Azure-Ressourcen. Was sollten Sie in die Empfehlungen aufnehmen?",
+    prompt: "Ihr Unternehmen verfügt über mehrere Geschäftsbereiche. Jeder Geschäftsbereich benötigt 20 verschiedene Azure-Ressourcen für den täglichen Betrieb. Alle Geschäftsbereiche benötigen denselben Typ von Azure-Ressourcen.\n\nSie benötigen eine Lösung zur Automatisierung der Erstellung der Azure-Ressourcen.\n\nWas sollten Sie in die Empfehlungen aufnehmen?",
     options: [
       { id: "A", text: "Azure Resource Manager-Vorlagen" },
       { id: "B", text: "VM-Skalierungsgruppen" },
@@ -250,7 +250,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-6",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehrere richtige Lösungen, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihre Azure-Umgebung enthält mehrere virtuelle Azure-Computer. Sie müssen sicherstellen, dass ein virtueller Computer namens VM1 über HTTP aus dem Internet erreichbar ist. Lösung: Sie ändern einen DDoS-Schutzplan. Erreicht dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehrere richtige Lösungen, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nIhre Azure-Umgebung enthält mehrere virtuelle Azure-Computer. Sie müssen sicherstellen, dass ein virtueller Computer namens VM1 über HTTP aus dem Internet erreichbar ist.\n\nLösung: Sie ändern einen DDoS-Schutzplan.\n\nErreicht dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -261,7 +261,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-7",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihre Azure-Umgebung enthält mehrere virtuelle Azure-Computer. Sie müssen sicherstellen, dass ein virtueller Computer namens VM1 über HTTP aus dem Internet erreichbar ist. Lösung: Sie ändern eine Azure-Firewall. Erreicht dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nIhre Azure-Umgebung enthält mehrere virtuelle Azure-Computer. Sie müssen sicherstellen, dass ein virtueller Computer namens VM1 über HTTP aus dem Internet erreichbar ist.\n\nLösung: Sie ändern eine Azure-Firewall.\n\nErreicht dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -272,7 +272,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-8",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihre Azure-Umgebung enthält mehrere virtuelle Azure-Computer. Sie müssen sicherstellen, dass ein virtueller Computer namens VM1 über HTTP aus dem Internet erreichbar ist. Lösung: Sie ändern ein Azure Traffic Manager-Profil. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nIhre Azure-Umgebung enthält mehrere virtuelle Azure-Computer. Sie müssen sicherstellen, dass ein virtueller Computer namens VM1 über HTTP aus dem Internet erreichbar ist.\n\nLösung: Sie ändern ein Azure Traffic Manager-Profil.\n\nWird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -433,7 +433,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-20",
     topicId: "azure-architektur",
-    prompt: "Ihr Netzwerk enthält eine Active Directory-Gesamtstruktur mit 5.000 Benutzerkonten. Ihr Unternehmen plant, alle Netzwerkressourcen nach Azure zu migrieren und das lokale Rechenzentrum außer Betrieb zu nehmen. Sie benötigen eine Lösung, um die Auswirkungen auf die Benutzer nach der geplanten Migration zu minimieren. Was sollten Sie empfehlen?",
+    prompt: "Ihr Netzwerk enthält eine Active Directory-Gesamtstruktur mit 5.000 Benutzerkonten. Ihr Unternehmen plant, alle Netzwerkressourcen nach Azure zu migrieren und das lokale Rechenzentrum außer Betrieb zu nehmen.\n\nSie benötigen eine Lösung, um die Auswirkungen auf die Benutzer nach der geplanten Migration zu minimieren.\n\nWas sollten Sie empfehlen?",
     options: [
       { id: "A", text: "Implementieren Sie die Azure Multi-Factor Authentication (MFA)." },
       { id: "B", text: "Synchronisieren Sie alle Active Directory-Benutzerkonten mit Azure Active Directory (Azure AD)." },
@@ -446,7 +446,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-21",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen plant, Azure zu erwerben. Die Supportrichtlinie des Unternehmens besagt, dass die Azure-Umgebung die Möglichkeit bieten muss, Supporttechniker per Telefon oder E-Mail zu erreichen. Sie müssen empfehlen, welcher Supportplan die Anforderungen der Supportrichtlinie erfüllt. Lösung: Empfehlen Sie einen Basis-Supportplan. Erfüllt dieser das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine einzigartige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nIhr Unternehmen plant, Azure zu erwerben. Die Supportrichtlinie des Unternehmens besagt, dass die Azure-Umgebung die Möglichkeit bieten muss, Supporttechniker per Telefon oder E-Mail zu erreichen.\n\nSie müssen empfehlen, welcher Supportplan die Anforderungen der Supportrichtlinie erfüllt.\n\nLösung: Empfehlen Sie einen Basis-Supportplan.\n\nErfüllt dieser das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -458,7 +458,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-22",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen plant, Azure zu erwerben. Die Supportrichtlinie des Unternehmens besagt, dass die Azure-Umgebung die Möglichkeit bieten muss, Supporttechniker per Telefon oder E-Mail zu erreichen. Sie müssen empfehlen, welcher Supportplan die Anforderungen der Supportrichtlinie erfüllt. Lösung: Empfehlen Sie einen Standard-Supportplan. Erfüllt dieser das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nIhr Unternehmen plant, Azure zu erwerben. Die Supportrichtlinie des Unternehmens besagt, dass die Azure-Umgebung die Möglichkeit bieten muss, Supporttechniker per Telefon oder E-Mail zu erreichen.\n\nSie müssen empfehlen, welcher Supportplan die Anforderungen der Supportrichtlinie erfüllt.\n\nLösung: Empfehlen Sie einen Standard-Supportplan.\n\nErfüllt dieser das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -470,7 +470,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-23",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen plant, Azure zu erwerben. Die Supportrichtlinie des Unternehmens besagt, dass die Azure-Umgebung die Möglichkeit bieten muss, Supporttechniker per Telefon oder E-Mail zu erreichen. Sie müssen empfehlen, welcher Supportplan die Anforderungen der Supportrichtlinie erfüllt. Lösung: Empfehlen Sie einen Premier-Supportplan. Erfüllt dieser das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine einzigartige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nIhr Unternehmen plant, Azure zu erwerben. Die Supportrichtlinie des Unternehmens besagt, dass die Azure-Umgebung die Möglichkeit bieten muss, Supporttechniker per Telefon oder E-Mail zu erreichen.\n\nSie müssen empfehlen, welcher Supportplan die Anforderungen der Supportrichtlinie erfüllt.\n\nLösung: Empfehlen Sie einen Premier-Supportplan.\n\nErfüllt dieser das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -482,7 +482,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-24",
     topicId: "azure-verwaltung",
-    prompt: "Ihr Unternehmen plant, bei Microsoft eine Architekturüberprüfung einer Azure-Umgebung anzufordern. Das Unternehmen verfügt derzeit über einen Basic-Supportplan. Sie möchten dem Unternehmen einen neuen Supportplan empfehlen. Die Lösung muss die Kosten minimieren. Welchen Supportplan sollten Sie empfehlen?",
+    prompt: "Ihr Unternehmen plant, bei Microsoft eine Architekturüberprüfung einer Azure-Umgebung anzufordern. Das Unternehmen verfügt derzeit über einen Basic- Supportplan.\n\nSie möchten dem Unternehmen einen neuen Supportplan empfehlen. Die Lösung muss die Kosten minimieren.\n\nWelchen Supportplan sollten Sie empfehlen?",
     options: [
       { id: "A", text: "Premier" },
       { id: "B", text: "Entwickler" },
@@ -669,7 +669,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-36",
     topicId: "cloud-konzepte",
-    prompt: "Sie verfügen über ein lokales Netzwerk mit mehreren Servern. Sie planen, alle Server zu Azure zu migrieren. Sie benötigen eine Lösungsempfehlung, um sicherzustellen, dass einige Server verfügbar bleiben, wenn ein einzelnes Azure-Rechenzentrum für längere Zeit offline ist. Was sollte die Empfehlung enthalten?",
+    prompt: "Sie verfügen über ein lokales Netzwerk mit mehreren Servern. Sie planen, alle Server zu Azure zu migrieren.\n\nSie benötigen eine Lösungsempfehlung, um sicherzustellen, dass einige Server verfügbar bleiben, wenn ein einzelnes Azure-Rechenzentrum für längere Zeit offline ist.\n\nWas sollte die Empfehlung enthalten?",
     options: [
       { id: "A", text: "Fehlertoleranz" },
       { id: "B", text: "Elastizität" },
@@ -723,7 +723,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-39",
     topicId: "azure-architektur",
-    prompt: "Sie planen die Bereitstellung einer geschäftskritischen Branchenanwendung in Azure. Die Anwendung wird auf einer virtuellen Azure-Maschine ausgeführt. Sie müssen eine Bereitstellungslösung für die Anwendung empfehlen. Die Lösung muss eine garantierte Verfügbarkeit von 99,99 Prozent bieten. Wie viele virtuelle Maschinen und Verfügbarkeitszonen sollten Sie für die Bereitstellung mindestens empfehlen?",
+    prompt: "Sie planen die Bereitstellung einer geschäftskritischen Branchenanwendung in Azure. Die Anwendung wird auf einer virtuellen Azure-Maschine ausgeführt.\n\nSie müssen eine Bereitstellungslösung für die Anwendung empfehlen. Die Lösung muss eine garantierte Verfügbarkeit von 99,99 Prozent bieten.\n\nWie viele virtuelle Maschinen und Verfügbarkeitszonen sollten Sie für die Bereitstellung mindestens empfehlen?",
     blankFillMulti: {
       template: "Mindestanzahl virtueller Maschinen: ___, Mindestanzahl Verfügbarkeitszonen: ___",
       blanks: [
@@ -938,7 +938,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-50",
     topicId: "cloud-konzepte",
-    prompt: "Sie haben 1.000 virtuelle Maschinen auf den Hyper-V-Hosts in einem Rechenzentrum gehostet. Sie planen, alle virtuellen Maschinen auf ein Azure-Abonnement mit nutzungsbasierter Bezahlung zu migrieren. Sie müssen das für die geplante Azure-Lösung zu verwendende Kostenmodell ermitteln. Welches Kostenmodell sollten Sie ermitteln?",
+    prompt: "Sie haben 1.000 virtuelle Maschinen auf den Hyper-V-Hosts in einem Rechenzentrum gehostet. Sie planen, alle virtuellen Maschinen auf ein Azure-Abonnement mit nutzungsbasierter Bezahlung zu migrieren.\n\nSie müssen das für die geplante Azure-Lösung zu verwendende Kostenmodell ermitteln.\n\nWelches Kostenmodell sollten Sie ermitteln?",
     options: [
       { id: "A", text: "Betriebsbereit" },
       { id: "B", text: "Elastisch" },
@@ -978,7 +978,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-53",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Sie verfügen über eine Azure-Umgebung. Sie müssen eine neue virtuelle Azure-Maschine aus einem Android-Laptop erstellen. Lösung: Sie verwenden PowerShell in Azure Cloud Shell. Erreicht dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine einzigartige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nSie verfügen über eine Azure-Umgebung. Sie müssen eine neue virtuelle Azure-Maschine aus einem Android-Laptop erstellen.\n\nLösung: Sie verwenden PowerShell in Azure Cloud Shell.\n\nErreicht dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -989,7 +989,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-54",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Sie verfügen über eine Azure-Umgebung. Sie müssen eine neue virtuelle Azure-Maschine aus einem Android-Laptop erstellen. Lösung: Sie verwenden das PowerApps-Portal. Erfüllt dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine einzigartige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt.\n\nSie verfügen über eine Azure-Umgebung. Sie müssen eine neue virtuelle Azure-Maschine aus einem Android-Laptop erstellen.\n\nLösung: Sie verwenden das PowerApps-Portal.\n\nErfüllt dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -1000,7 +1000,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-55",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Sie verfügen über eine Azure-Umgebung. Sie müssen eine neue virtuelle Azure-Maschine aus einem Android-Laptop erstellen. Lösung: Sie verwenden das Azure-Portal. Erreicht dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine einzigartige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nSie verfügen über eine Azure-Umgebung. Sie müssen eine neue virtuelle Azure-Maschine aus einem Android-Laptop erstellen.\n\nLösung: Sie verwenden das Azure-Portal.\n\nErreicht dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -1011,7 +1011,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-56",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Sie verfügen über eine Azure-Umgebung. Sie müssen eine neue virtuelle Azure-Maschine aus einem Android-Laptop erstellen. Lösung: Sie verwenden Bash in Azure Cloud Shell. Erreicht dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine einzigartige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nSie verfügen über eine Azure-Umgebung. Sie müssen eine neue virtuelle Azure-Maschine aus einem Android-Laptop erstellen.\n\nLösung: Sie verwenden Bash in Azure Cloud Shell.\n\nErreicht dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -1036,7 +1036,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-58",
     topicId: "cloud-konzepte",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Ihr Unternehmen plant, alle seine Daten und Ressourcen nach Azure zu migrieren. Der Migrationsplan des Unternehmens sieht vor, dass in Azure nur Platform-as-a-Service-Lösungen (PaaS) verwendet werden dürfen. Sie müssen eine Azure-Umgebung bereitstellen, die die geplante Migration unterstützt. Lösung: Sie erstellen einen Azure App Service und Azure SQL-Datenbanken. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt.\n\nIhr Unternehmen plant, alle seine Daten und Ressourcen nach Azure zu migrieren.\n\nDer Migrationsplan des Unternehmens sieht vor, dass in Azure nur Platform-as-a-Service-Lösungen (PaaS) verwendet werden dürfen.\n\nSie müssen eine Azure-Umgebung bereitstellen, die die geplante Migration unterstützt.\n\nLösung: Sie erstellen einen Azure App Service und Azure SQL-Datenbanken.\n\nWird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -1049,7 +1049,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-59",
     topicId: "cloud-konzepte",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Ihr Unternehmen plant, alle seine Daten und Ressourcen nach Azure zu migrieren. Der Migrationsplan des Unternehmens sieht vor, dass in Azure nur Platform-as-a-Service-Lösungen (PaaS) verwendet werden dürfen. Sie müssen eine Azure-Umgebung bereitstellen, die die geplante Migration unterstützt. Lösung: Sie erstellen einen Azure App Service und virtuelle Azure-Computer, auf denen Microsoft SQL Server installiert ist. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt.\n\nIhr Unternehmen plant, alle seine Daten und Ressourcen nach Azure zu migrieren.\n\nDer Migrationsplan des Unternehmens sieht vor, dass in Azure nur Platform-as-a-Service-Lösungen (PaaS) verwendet werden dürfen.\n\nSie müssen eine Azure-Umgebung bereitstellen, die die geplante Migration unterstützt.\n\nLösung: Sie erstellen einen Azure App Service und virtuelle Azure-Computer, auf denen Microsoft SQL Server installiert ist.\n\nWird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -1062,7 +1062,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-60",
     topicId: "cloud-konzepte",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen plant, alle seine Daten und Ressourcen nach Azure zu migrieren. Der Migrationsplan des Unternehmens sieht vor, dass in Azure nur Platform-as-a-Service-Lösungen (PaaS) verwendet werden dürfen. Sie müssen eine Azure-Umgebung bereitstellen, die die geplante Migration unterstützt. Lösung: Sie erstellen ein Azure App Service- und Azure Storage-Konto. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nIhr Unternehmen plant, alle seine Daten und Ressourcen nach Azure zu migrieren.\n\nDer Migrationsplan des Unternehmens sieht vor, dass in Azure nur Platform-as-a-Service-Lösungen (PaaS) verwendet werden dürfen.\n\nSie müssen eine Azure-Umgebung bereitstellen, die die geplante Migration unterstützt.\n\nLösung: Sie erstellen ein Azure App Service- und Azure Storage-Konto.\n\nWird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -1075,7 +1075,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-61",
     topicId: "cloud-konzepte",
-    prompt: "Ihr Unternehmen hostet eine Anwendung namens App1, die von allen Kunden des Unternehmens verwendet wird. App1 wird in den ersten drei Wochen jedes Monats wenig und in der letzten Woche sehr stark genutzt. Welcher Vorteil von Azure Cloud Services unterstützt das Kostenmanagement bei diesem Nutzungsmuster?",
+    prompt: "Ihr Unternehmen hostet eine Anwendung namens App1, die von allen Kunden des Unternehmens verwendet wird.\n\nApp1 wird in den ersten drei Wochen jedes Monats wenig und in der letzten Woche sehr stark genutzt.\n\nWelcher Vorteil von Azure Cloud Services unterstützt das Kostenmanagement bei diesem Nutzungsmuster?",
     options: [
       { id: "A", text: "Hohe Verfügbarkeit" },
       { id: "B", text: "Hohe Latenz" },
@@ -1088,7 +1088,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-62",
     topicId: "cloud-konzepte",
-    prompt: "Sie planen die Migration einer Webanwendung nach Azure. Externe Benutzer greifen auf die Webanwendung zu. Sie benötigen eine Cloud-Bereitstellungslösung, um den Verwaltungsaufwand für die Webanwendung zu minimieren. Was sollte Ihre Empfehlung beinhalten?",
+    prompt: "Sie planen die Migration einer Webanwendung nach Azure. Externe Benutzer greifen auf die Webanwendung zu.\n\nSie benötigen eine Cloud-Bereitstellungslösung, um den Verwaltungsaufwand für die Webanwendung zu minimieren.\n\nWas sollte Ihre Empfehlung beinhalten?",
     options: [
       { id: "A", text: "Software als Service (SaaS)" },
       { id: "B", text: "Plattform als Service (PaaS)" },
@@ -1200,7 +1200,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-70",
     topicId: "azure-verwaltung",
-    prompt: "Ein Entwicklerteam in Ihrem Unternehmen plant, jede Woche 50 angepasste virtuelle Maschinen bereitzustellen und anschließend zu entfernen. 30 dieser virtuellen Maschinen laufen unter Windows Server 2016 und 20 unter Ubuntu Linux. Sie müssen empfehlen, welcher Azure-Dienst den Verwaltungsaufwand für die Bereitstellung und Entfernung der virtuellen Maschinen minimiert. Was sollten Sie empfehlen?",
+    prompt: "Ein Entwicklerteam in Ihrem Unternehmen plant, jede Woche 50 angepasste virtuelle Maschinen bereitzustellen und anschließend zu entfernen. 30 dieser virtuellen Maschinen laufen unter Windows Server 2016 und 20 unter Ubuntu Linux.\n\nSie müssen empfehlen, welcher Azure-Dienst den Verwaltungsaufwand für die Bereitstellung und Entfernung der virtuellen Maschinen minimiert.\n\nWas sollten Sie empfehlen?",
     options: [
       { id: "A", text: "Azure Reservierte VM-Instanzen" },
       { id: "B", text: "Azure-VM-Skalierungsgruppen" },
@@ -1214,7 +1214,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-71",
     topicId: "cloud-konzepte",
-    prompt: "Sie verfügen über ein lokales Netzwerk mit 100 Servern. Sie möchten eine Lösung empfehlen, die Ihren Benutzern zusätzliche Ressourcen bietet. Die Lösung muss die Investitions- und Betriebskosten minimieren. Was sollte Ihre Empfehlung beinhalten?",
+    prompt: "Sie verfügen über ein lokales Netzwerk mit 100 Servern.\n\nSie möchten eine Lösung empfehlen, die Ihren Benutzern zusätzliche Ressourcen bietet. Die Lösung muss die Investitions- und Betriebskosten minimieren.\n\nWas sollte Ihre Empfehlung beinhalten?",
     options: [
       { id: "A", text: "Eine vollständige Migration in die Public Cloud" },
       { id: "B", text: "Ein zusätzliches Rechenzentrum" },
@@ -1252,7 +1252,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-74",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Sie planen die Bereitstellung mehrerer virtueller Azure-Computer. Sie müssen sicherstellen, dass die auf den virtuellen Computern ausgeführten Dienste verfügbar sind, wenn ein einzelnes Rechenzentrum ausfällt. Lösung: Sie stellen die virtuellen Computer in zwei oder mehr Verfügbarkeitszonen bereit. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nSie planen die Bereitstellung mehrerer virtueller Azure-Computer.\n\nSie müssen sicherstellen, dass die auf den virtuellen Computern ausgeführten Dienste verfügbar sind, wenn ein einzelnes Rechenzentrum ausfällt.\n\nLösung: Sie stellen die virtuellen Computer in zwei oder mehr Verfügbarkeitszonen bereit.\n\nWird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -1375,7 +1375,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-83",
     topicId: "azure-verwaltung",
-    prompt: "Ihr Unternehmen verfügt über eine Azure-Umgebung mit Ressourcen in mehreren Regionen. Eine Unternehmensrichtlinie besagt, dass Administratoren zusätzliche Azure-Ressourcen nur in einer Region des Landes erstellen dürfen, in dem sich ihr Büro befindet. Sie müssen die Azure-Ressource erstellen, die zur Erfüllung der Richtlinienanforderung verwendet werden muss. Was sollten Sie erstellen?",
+    prompt: "Ihr Unternehmen verfügt über eine Azure-Umgebung mit Ressourcen in mehreren Regionen.\n\nEine Unternehmensrichtlinie besagt, dass Administratoren zusätzliche Azure-Ressourcen nur in einer Region des Landes erstellen dürfen, in dem sich ihr Büro befindet.\n\nSie müssen die Azure-Ressource erstellen, die zur Erfüllung der Richtlinienanforderung verwendet werden muss.\n\nWas sollten Sie erstellen?",
     options: [
       { id: "A", text: "Eine schreibgeschützte Sperre" },
       { id: "B", text: "Eine Azure-Richtlinie" },
@@ -1403,7 +1403,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-85",
     topicId: "azure-verwaltung",
-    prompt: "Ihr Unternehmen plant, mehrere Server nach Azure zu migrieren. Die Compliance-Richtlinie des Unternehmens besagt, dass sich ein Server namens FinServer in einem separaten Netzwerksegment befinden muss. Sie prüfen, welche Azure-Dienste zur Erfüllung der Compliance-Richtlinienanforderungen verwendet werden können. Welche Azure-Lösung würden Sie empfehlen?",
+    prompt: "Ihr Unternehmen plant, mehrere Server nach Azure zu migrieren.\n\nDie Compliance-Richtlinie des Unternehmens besagt, dass sich ein Server namens FinServer in einem separaten Netzwerksegment befinden muss.\n\nSie prüfen, welche Azure-Dienste zur Erfüllung der Compliance-Richtlinienanforderungen verwendet werden können.\n\nWelche Azure-Lösung würden Sie empfehlen?",
     options: [
       { id: "A", text: "Eine Ressourcengruppe für FinServer und eine weitere Ressourcengruppe für alle anderen Server" },
       { id: "B", text: "Ein virtuelles Netzwerk für FinServer und ein weiteres virtuelles Netzwerk für alle anderen Server" },
@@ -1429,7 +1429,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-87",
     topicId: "azure-verwaltung",
-    prompt: "Sie verfügen über eine lokale Anwendung, die basierend auf einer Regel automatisch E-Mail-Benachrichtigungen versendet. Sie planen, die Anwendung zu Azure zu migrieren. Sie benötigen eine serverlose Computing-Lösung für die Anwendung. Was sollte die Empfehlung enthalten?",
+    prompt: "Sie verfügen über eine lokale Anwendung, die basierend auf einer Regel automatisch E-Mail-Benachrichtigungen versendet. Sie planen, die Anwendung zu Azure zu migrieren.\n\nSie benötigen eine serverlose Computing-Lösung für die Anwendung.\n\nWas sollte die Empfehlung enthalten?",
     options: [
       { id: "A", text: "Eine Web-App" },
       { id: "B", text: "Ein Serverimage im Azure Marketplace" },
@@ -1442,7 +1442,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-88",
     topicId: "azure-architektur",
-    prompt: "Sie planen die Bereitstellung einer Website in Azure. Die Website wird von Benutzern weltweit aufgerufen und enthält große Videodateien. Sie möchten empfehlen, welche Azure-Funktion für eine optimale Videowiedergabe verwendet werden sollte. Was sollten Sie empfehlen?",
+    prompt: "Sie planen die Bereitstellung einer Website in Azure. Die Website wird von Benutzern weltweit aufgerufen und enthält große Videodateien.\n\nSie möchten empfehlen, welche Azure-Funktion für eine optimale Videowiedergabe verwendet werden sollte.\n\nWas sollten Sie empfehlen?",
     options: [
       { id: "A", text: "Ein Anwendungsgateway" },
       { id: "B", text: "Eine Azure ExpressRoute-Verbindung" },
@@ -1471,7 +1471,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-90",
     topicId: "azure-verwaltung",
-    prompt: "Ihr Unternehmen plant, die Bereitstellung von Servern in Azure zu automatisieren. Ihr Vorgesetzter befürchtet, dass Sie während der Bereitstellung Administratoranmeldeinformationen preisgeben könnten. Sie müssen eine Azure-Lösung empfehlen, die die Administratoranmeldeinformationen während der Bereitstellung verschlüsselt. Was sollte Ihre Empfehlung beinhalten?",
+    prompt: "Ihr Unternehmen plant, die Bereitstellung von Servern in Azure zu automatisieren.\n\nIhr Vorgesetzter befürchtet, dass Sie während der Bereitstellung Administratoranmeldeinformationen preisgeben könnten.\n\nSie müssen eine Azure-Lösung empfehlen, die die Administratoranmeldeinformationen während der Bereitstellung verschlüsselt.\n\nWas sollte Ihre Empfehlung beinhalten?",
     options: [
       { id: "A", text: "Azure-Schlüsseltresor" },
       { id: "B", text: "Azure Information Protection" },
@@ -1615,7 +1615,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-100",
     topicId: "azure-verwaltung",
-    prompt: "Sie verfügen über eine Ressourcengruppe namens RG1. Sie planen, in RG1 virtuelle Netzwerke und App-Dienste zu erstellen. Sie möchten die Erstellung virtueller Maschinen ausschließlich in RG1 verhindern. Was sollten Sie verwenden?",
+    prompt: "Sie verfügen über eine Ressourcengruppe namens RG1. Sie planen, in RG1 virtuelle Netzwerke und App-Dienste zu erstellen.\n\nSie möchten die Erstellung virtueller Maschinen ausschließlich in RG1 verhindern.\n\nWas sollten Sie verwenden?",
     options: [
       { id: "A", text: "Ein Schloss" },
       { id: "B", text: "Eine Azure-Rolle" },
@@ -1769,7 +1769,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-109",
     topicId: "azure-architektur",
-    prompt: "Ihr Unternehmen plant die Migration zu Azure. Es besteht aus mehreren Abteilungen. Alle von den einzelnen Abteilungen genutzten Azure-Ressourcen werden von einem Abteilungsadministrator verwaltet. Sie benötigen eine Azure-Bereitstellung, die die Segmentierung von Azure für die Abteilungen ermöglicht. Die Lösung muss den Verwaltungsaufwand minimieren. Was sollte Ihre Empfehlung beinhalten?",
+    prompt: "Ihr Unternehmen plant die Migration zu Azure. Es besteht aus mehreren Abteilungen. Alle von den einzelnen Abteilungen genutzten Azure-Ressourcen werden von einem Abteilungsadministrator verwaltet.\n\nSie benötigen eine Azure-Bereitstellung, die die Segmentierung von Azure für die Abteilungen ermöglicht. Die Lösung muss den Verwaltungsaufwand minimieren.\n\nWas sollte Ihre Empfehlung beinhalten?",
     options: [
       { id: "A", text: "Mehrere Abonnements" },
       { id: "B", text: "Mehrere Azure Active Directory (Azure AD)-Verzeichnisse" },
@@ -1904,7 +1904,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-119",
     topicId: "azure-verwaltung",
-    prompt: "Ein Unternehmen hat ein Azure-Abonnement und einen Azure-Mandanten eingerichtet. Es wurden Premium P2-Lizenzen erworben. Verschiedene Abteilungen haben unterschiedliche Anforderungen an die Identitätsverwaltung. Welche der folgenden Maßnahmen würden Sie für die Logistikabteilung vorschlagen?",
+    prompt: "Ein Unternehmen hat ein Azure-Abonnement und einen Azure-Mandanten eingerichtet. Es wurden Premium P2-Lizenzen erworben.\n\nVerschiedene Abteilungen haben unterschiedliche Anforderungen an die Identitätsverwaltung.\n\nWelche der folgenden Maßnahmen würden Sie für die Logistikabteilung vorschlagen?",
     options: [
       { id: "A", text: "Verwaltete Dienstidentität" },
       { id: "B", text: "Identitätsschutz" },
@@ -1918,7 +1918,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-120",
     topicId: "azure-architektur",
-    prompt: "Ein Unternehmen hat einen Webdienst entwickelt, der auf einer virtuellen Maschine bereitgestellt wird, die in einem Subnetz eines virtuellen Netzwerks bereitgestellt ist. Ein API-Verwaltungsdienst wurde bereitgestellt, der Zugriff auf den auf der virtuellen Maschine gehosteten API-Dienst ermöglicht. Beratungsunternehmen müssen über das Internet auf die API zugreifen können. Nachfolgend finden Sie die Konfiguration der API-Verwaltungsgateway-Instanz. Wäre die API basierend auf dieser Konfiguration für die Berater über das Internet verfügbar?",
+    prompt: "Ein Unternehmen hat einen Webdienst entwickelt, der auf einer virtuellen Maschine bereitgestellt wird, die in einem Subnetz eines virtuellen Netzwerks bereitgestellt ist.\n\nEin API-Verwaltungsdienst wurde bereitgestellt, der Zugriff auf den auf der virtuellen Maschine gehosteten API-Dienst ermöglicht.\n\nBeratungsunternehmen müssen über das Internet auf die API zugreifen können. Nachfolgend finden Sie die Konfiguration der API-Verwaltungsgateway-Instanz.\n\nWäre die API basierend auf dieser Konfiguration für die Berater über das Internet verfügbar?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -1945,7 +1945,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-122",
     topicId: "azure-architektur",
-    prompt: "Ein Unternehmen verfügt über die folgenden lokalen Datenspeicher.\n• Eine Microsoft SQL Server 2012-Datenbank\n• Eine Microsoft SQL Server 2008-Datenbank\n• Die Daten müssen nach Azure migriert werden\nDas Unternehmen hat folgende Anforderungen.\n• Anforderung 1 – Die Daten in der Microsoft SQL Server 2012-Datenbank müssen in eine Azure SQL-Datenbank migriert werden.\n• Anforderung 2: Die Daten in einer Tabelle in der Microsoft SQL Server 2008-Datenbank müssen in ein Azure CosmosDB-Konto migriert werden, das die SQLAPI verwendet.\nWelche der folgenden Maßnahmen sollte zur Erfüllung der Anforderung 2 verwendet werden?",
+    prompt: "Ein Unternehmen verfügt über die folgenden lokalen Datenspeicher. • Eine Microsoft SQL Server 2012-Datenbank • Eine Microsoft SQL Server 2008-Datenbank • Die Daten müssen nach Azure migriert werden\n\nDas Unternehmen hat folgende Anforderungen. • Anforderung 1 – Die Daten in der Microsoft SQL Server 2012-Datenbank müssen in eine Azure SQL-Datenbank migriert werden. • Anforderung 2: Die Daten in einer Tabelle in der Microsoft SQL Server 2008-Datenbank müssen in ein Azure CosmosDB-Konto migriert werden, das die SQL- API verwendet.\n\nWelche der folgenden Maßnahmen sollte zur Erfüllung der Anforderung 2 verwendet werden?",
     options: [
       { id: "A", text: "AzCopy" },
       { id: "B", text: "Azure Cosmos DB-Datenmigrationstool" },
@@ -1959,7 +1959,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-123",
     topicId: "azure-verwaltung",
-    prompt: "Ein Unternehmen plant die Bereitstellung einer Azure-Web-App in zwei Regionen. Eine der wichtigsten Anforderungen besteht darin, sicherzustellen, dass die Web-App auch bei Ausfall einer Azure-Region weiterhin ausgeführt wird. Die Bereitstellungskosten müssen minimiert werden. Welchen der folgenden Dienste würden Sie in die Bereitstellung der Lösung einbeziehen?",
+    prompt: "Ein Unternehmen plant die Bereitstellung einer Azure-Web-App in zwei Regionen. Eine der wichtigsten Anforderungen besteht darin, sicherzustellen, dass die Web- App auch bei Ausfall einer Azure-Region weiterhin ausgeführt wird.\n\nDie Bereitstellungskosten müssen minimiert werden.\n\nWelchen der folgenden Dienste würden Sie in die Bereitstellung der Lösung einbeziehen?",
     options: [
       { id: "A", text: "Azure-Funktionen" },
       { id: "B", text: "Azure Traffic Manager" },
@@ -2020,7 +2020,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-126",
     topicId: "azure-verwaltung",
-    prompt: "Ein Unternehmen plant die Bereitstellung einer Anwendung auf Azure. Die Anwendung basiert auf der Programmiersprache.Net Core. Die Anwendung soll über Azure Web Apps gehostet werden. Nachfolgend sind einige der Anforderungen für die Anwendung aufgeführt:\n• Ermöglicht dem Testteam, die verschiedenen Komponenten einer Anwendung anzuzeigen und die zwischen den verschiedenen Anwendungskomponenten getätigten Aufrufe zu verfolgen.\n• Hilft Unternehmen bei der Analyse, wie viele Benutzer tatsächlich zur Anwendung zurückkehren.\n• Stellen Sie sicher, dass IT-Administratoren Warnmeldungen erhalten, wenn in der Anwendung kritische Bedingungen erfüllt sind.\nWelcher der folgenden Dienste wäre am besten geeignet, um die Anforderung „Hilft Unternehmen bei der Analyse, wie viele Benutzer tatsächlich zur Anwendung zurückkehren“ zu erfüllen?",
+    prompt: "Ein Unternehmen plant die Bereitstellung einer Anwendung auf Azure. Die Anwendung basiert auf der Programmiersprache .Net Core.\n\nDie Anwendung soll über Azure Web Apps gehostet werden.\n\nNachfolgend sind einige der Anforderungen für die Anwendung aufgeführt: • Ermöglicht dem Testteam, die verschiedenen Komponenten einer Anwendung anzuzeigen und die zwischen den verschiedenen Anwendungskomponenten getätigten Aufrufe zu verfolgen. • Hilft Unternehmen bei der Analyse, wie viele Benutzer tatsächlich zur Anwendung zurückkehren. • Stellen Sie sicher, dass IT-Administratoren Warnmeldungen erhalten, wenn in der Anwendung kritische Bedingungen erfüllt sind.\n\nWelcher der folgenden Dienste wäre am besten geeignet, um die Anforderung „Hilft Unternehmen bei der Analyse, wie viele Benutzer tatsächlich zur Anwendung zurückkehren“ zu erfüllen?",
     options: [
       { id: "A", text: "Anwendungseinblicke" },
       { id: "B", text: "Azure-Dienstintegrität" },
@@ -2034,7 +2034,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-127",
     topicId: "azure-verwaltung",
-    prompt: "Ein Unternehmen möchte eine Anwendung in Azure bereitstellen. Die Anwendung muss die folgenden Anforderungen erfüllen:\n• Ermöglicht die Installation und den Zugriff auf das vollständige.NET-Framework.\n• Erlauben Sie den Administratorzugriff auf das Betriebssystem.\n• Sorgen Sie für eine gewisse Redundanz, falls eine Azure-Region ausfällt.\nSie entscheiden sich für die Bereitstellung von zwei Azure Virtual Machines in zwei separaten Regionen. Anschließend erstellen Sie ein Traffic Manager-Profil. Erfüllt diese Lösung die Anforderungen?",
+    prompt: "Ein Unternehmen möchte eine Anwendung in Azure bereitstellen. Die Anwendung muss die folgenden Anforderungen erfüllen: • Ermöglicht die Installation und den Zugriff auf das vollständige .NET-Framework. • Erlauben Sie den Administratorzugriff auf das Betriebssystem. • Sorgen Sie für eine gewisse Redundanz, falls eine Azure-Region ausfällt.\n\nSie entscheiden sich für die Bereitstellung von zwei Azure Virtual Machines in zwei separaten Regionen. Anschließend erstellen Sie ein Traffic Manager-Profil.\n\nErfüllt diese Lösung die Anforderungen?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -2045,7 +2045,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-128",
     topicId: "azure-architektur",
-    prompt: "Ihr Team benötigt eine virtuelle Maschine, die einen SQL Server hostet. Die virtuelle Maschine verfügt über zwei Datenträger: einen für die Protokolldateien und einen für die Datendateien. Sie müssen für jeden Datenträger eine Caching-Richtlinie empfehlen. Welche der folgenden Optionen würden Sie für den Datenträger mit den Protokollen empfehlen?",
+    prompt: "Ihr Team benötigt eine virtuelle Maschine, die einen SQL Server hostet. Die virtuelle Maschine verfügt über zwei Datenträger: einen für die Protokolldateien und einen für die Datendateien.\n\nSie müssen für jeden Datenträger eine Caching-Richtlinie empfehlen.\n\nWelche der folgenden Optionen würden Sie für den Datenträger mit den Protokollen empfehlen?",
     options: [
       { id: "A", text: "Keiner" },
       { id: "B", text: "Schreibgeschützt" },
@@ -2059,7 +2059,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-129",
     topicId: "azure-verwaltung",
-    prompt: "Ein Unternehmen hat ein Azure-Abonnement und einen Azure-Mandanten eingerichtet. Sie müssen dem Entwicklungsteam ermöglichen, virtuelle Maschinen zu starten und zu stoppen. Der Zugriff darf nur zu bestimmten Anlässen gewährt werden. Sie müssen sicherstellen, dass die Berechtigung zugewiesen wird, und das Prinzip der geringsten Privilegien anwenden. Sie müssen außerdem die Kosten minimieren. Welche der folgenden Sicherheitsfunktionen würden Sie für diese Anforderung nutzen?",
+    prompt: "Ein Unternehmen hat ein Azure-Abonnement und einen Azure-Mandanten eingerichtet. Sie müssen dem Entwicklungsteam ermöglichen, virtuelle Maschinen zu starten und zu stoppen. Der Zugriff darf nur zu bestimmten Anlässen gewährt werden.\n\nSie müssen sicherstellen, dass die Berechtigung zugewiesen wird, und das Prinzip der geringsten Privilegien anwenden. Sie müssen außerdem die Kosten minimieren.\n\nWelche der folgenden Sicherheitsfunktionen würden Sie für diese Anforderung nutzen?",
     options: [
       { id: "A", text: "Richtlinie für bedingten Zugriff" },
       { id: "B", text: "Azure-Richtlinien" },
@@ -2073,7 +2073,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-130",
     topicId: "azure-verwaltung",
-    prompt: "Ein Unternehmen hat mehrere Anwendungen auf virtuellen Windows- und Linux-Computern in Azure bereitgestellt. Log Analytics wird verwendet, um die erforderlichen Daten für Warnmeldungen an die virtuellen Computer zu senden. Sie müssen empfehlen, welche Tabellen für sicherheitsrelevante Abfragen abgefragt werden müssen. Welche der folgenden Tabellen würden Sie nach Ereignissen aus Windows-Ereignisprotokollen abfragen?",
+    prompt: "Ein Unternehmen hat mehrere Anwendungen auf virtuellen Windows- und Linux-Computern in Azure bereitgestellt. Log Analytics wird verwendet, um die erforderlichen Daten für Warnmeldungen an die virtuellen Computer zu senden.\n\nSie müssen empfehlen, welche Tabellen für sicherheitsrelevante Abfragen abgefragt werden müssen.\n\nWelche der folgenden Tabellen würden Sie nach Ereignissen aus Windows-Ereignisprotokollen abfragen?",
     options: [
       { id: "A", text: "Azure-Aktivität" },
       { id: "B", text: "Azure-Diagnose" },
@@ -2087,7 +2087,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-131",
     topicId: "azure-verwaltung",
-    prompt: "Ein Unternehmen hat mehrere Anwendungen auf virtuellen Windows- und Linux-Computern in Azure bereitgestellt. Log Analytics wird verwendet, um die erforderlichen Daten für Warnmeldungen an die virtuellen Computer zu senden. Sie müssen empfehlen, welche Tabellen für sicherheitsrelevante Abfragen abgefragt werden müssen. Welche der folgenden Tabellen würden Sie nach Ereignissen aus der Linux-Systemprotokollierung abfragen?",
+    prompt: "Ein Unternehmen hat mehrere Anwendungen auf virtuellen Windows- und Linux-Computern in Azure bereitgestellt. Log Analytics wird verwendet, um die erforderlichen Daten für Warnmeldungen an die virtuellen Computer zu senden.\n\nSie müssen empfehlen, welche Tabellen für sicherheitsrelevante Abfragen abgefragt werden müssen.\n\nWelche der folgenden Tabellen würden Sie nach Ereignissen aus der Linux-Systemprotokollierung abfragen?",
     options: [
       { id: "A", text: "Azure-Aktivität" },
       { id: "B", text: "Azure-Diagnose" },
@@ -2253,7 +2253,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-141",
     topicId: "azure-verwaltung",
-    prompt: "Ihr Unternehmen verfügt über zehn Abteilungen. Das Unternehmen plant die Implementierung einer Azure-Umgebung. Sie müssen sicherstellen, dass jede Abteilung für die von ihr genutzten Azure-Dienste eine andere Zahlungsoption verwenden kann. Was sollten Sie für jede Abteilung erstellen?",
+    prompt: "Ihr Unternehmen verfügt über zehn Abteilungen. Das Unternehmen plant die Implementierung einer Azure-Umgebung.\n\nSie müssen sicherstellen, dass jede Abteilung für die von ihr genutzten Azure-Dienste eine andere Zahlungsoption verwenden kann.\n\nWas sollten Sie für jede Abteilung erstellen?",
     options: [
       { id: "A", text: "Eine Reservierung" },
       { id: "B", text: "Ein Abonnement" },
@@ -2442,7 +2442,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-154",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen plant den Erwerb eines Azure-Abonnements. Die Supportrichtlinie des Unternehmens besagt, dass die Azure-Umgebung die Möglichkeit bieten muss, Supporttechniker per Telefon oder E-Mail zu erreichen. Sie müssen empfehlen, welcher Supportplan die Anforderungen der Supportrichtlinie erfüllt. Lösung: Empfehlen Sie einen Professional Direct-Supportplan. Erfüllt dieser das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nIhr Unternehmen plant den Erwerb eines Azure-Abonnements.\n\nDie Supportrichtlinie des Unternehmens besagt, dass die Azure-Umgebung die Möglichkeit bieten muss, Supporttechniker per Telefon oder E-Mail zu erreichen.\n\nSie müssen empfehlen, welcher Supportplan die Anforderungen der Supportrichtlinie erfüllt.\n\nLösung: Empfehlen Sie einen Professional Direct-Supportplan.\n\nErfüllt dieser das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -2455,7 +2455,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-155",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen plant den Erwerb eines Azure-Abonnements. Die Supportrichtlinie des Unternehmens besagt, dass die Azure-Umgebung die Möglichkeit bieten muss, Supporttechniker per Telefon oder E-Mail zu erreichen. Sie müssen empfehlen, welcher Supportplan die Anforderungen der Supportrichtlinie erfüllt. Lösung: Empfehlen Sie einen Basic-Supportplan. Erfüllt dieser das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nIhr Unternehmen plant den Erwerb eines Azure-Abonnements.\n\nDie Supportrichtlinie des Unternehmens besagt, dass die Azure-Umgebung die Möglichkeit bieten muss, Supporttechniker per Telefon oder E-Mail zu erreichen.\n\nSie müssen empfehlen, welcher Supportplan die Anforderungen der Supportrichtlinie erfüllt.\n\nLösung: Empfehlen Sie einen Basic-Supportplan.\n\nErfüllt dieser das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -2468,7 +2468,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-156",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen plant den Erwerb eines Azure-Abonnements. Die Supportrichtlinie des Unternehmens besagt, dass die Azure-Umgebung die Möglichkeit bieten muss, Supporttechniker per Telefon oder E-Mail zu erreichen. Sie müssen empfehlen, welcher Supportplan die Anforderungen der Supportrichtlinie erfüllt. Lösung: Empfehlen Sie einen Standard-Supportplan. Erfüllt dieser das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nIhr Unternehmen plant den Erwerb eines Azure-Abonnements.\n\nDie Supportrichtlinie des Unternehmens besagt, dass die Azure-Umgebung die Möglichkeit bieten muss, Supporttechniker per Telefon oder E-Mail zu erreichen.\n\nSie müssen empfehlen, welcher Supportplan die Anforderungen der Supportrichtlinie erfüllt.\n\nLösung: Empfehlen Sie einen Standard-Supportplan.\n\nErfüllt dieser das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -2481,7 +2481,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-157",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen plant den Erwerb eines Azure-Abonnements. Die Supportrichtlinie des Unternehmens besagt, dass die Azure-Umgebung die Möglichkeit bieten muss, Supporttechniker per Telefon oder E-Mail zu erreichen. Sie müssen empfehlen, welcher Supportplan die Anforderungen der Supportrichtlinie erfüllt. Lösung: Empfehlen Sie einen Premier-Supportplan. Erfüllt dieser das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nIhr Unternehmen plant den Erwerb eines Azure-Abonnements.\n\nDie Supportrichtlinie des Unternehmens besagt, dass die Azure-Umgebung die Möglichkeit bieten muss, Supporttechniker per Telefon oder E-Mail zu erreichen.\n\nSie müssen empfehlen, welcher Supportplan die Anforderungen der Supportrichtlinie erfüllt.\n\nLösung: Empfehlen Sie einen Premier-Supportplan.\n\nErfüllt dieser das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -2494,7 +2494,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-158",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihr Unternehmen plant den Erwerb eines Azure-Abonnements. Die Supportrichtlinie des Unternehmens besagt, dass die Azure-Umgebung die Möglichkeit bieten muss, Supporttechniker per Telefon oder E-Mail zu erreichen. Sie müssen empfehlen, welcher Supportplan die Anforderungen der Supportrichtlinie erfüllt. Lösung: Empfehlen Sie einen Entwickler-Supportplan. Erfüllt dieser das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nIhr Unternehmen plant den Erwerb eines Azure-Abonnements.\n\nDie Supportrichtlinie des Unternehmens besagt, dass die Azure-Umgebung die Möglichkeit bieten muss, Supporttechniker per Telefon oder E-Mail zu erreichen.\n\nSie müssen empfehlen, welcher Supportplan die Anforderungen der Supportrichtlinie erfüllt.\n\nLösung: Empfehlen Sie einen Entwickler-Supportplan.\n\nErfüllt dieser das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -2507,7 +2507,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-159",
     topicId: "azure-verwaltung",
-    prompt: "Ihr Unternehmen verfügt über zehn Abteilungen. Das Unternehmen plant die Implementierung einer Azure-Umgebung. Sie müssen sicherstellen, dass jede Abteilung für die von ihr genutzten Azure-Dienste eine andere Zahlungsoption verwenden kann. Was sollten Sie für jede Abteilung erstellen?",
+    prompt: "Ihr Unternehmen verfügt über zehn Abteilungen. Das Unternehmen plant die Implementierung einer Azure-Umgebung.\n\nSie müssen sicherstellen, dass jede Abteilung für die von ihr genutzten Azure-Dienste eine andere Zahlungsoption verwenden kann.\n\nWas sollten Sie für jede Abteilung erstellen?",
     options: [
       { id: "A", text: "Eine Reservierung" },
       { id: "B", text: "Ein Abonnement" },
@@ -2859,7 +2859,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-182",
     topicId: "azure-architektur",
-    prompt: "Ein Unternehmen plant die Bereitstellung eines Webservers und eines Datenbankservers, wie im untenstehenden Architekturdiagramm dargestellt. Sie müssen sicherstellen, dass Datenverkehrsbeschränkungen gelten, sodass der Datenbankserver nur mit dem Webserver kommunizieren kann. Welche der folgenden Maßnahmen würden Sie zur Umsetzung dieser Beschränkungen empfehlen?",
+    prompt: "Ein Unternehmen plant die Bereitstellung eines Webservers und eines Datenbankservers, wie im untenstehenden Architekturdiagramm dargestellt.\n\nSie müssen sicherstellen, dass Datenverkehrsbeschränkungen gelten, sodass der Datenbankserver nur mit dem Webserver kommunizieren kann.\n\nWelche der folgenden Maßnahmen würden Sie zur Umsetzung dieser Beschränkungen empfehlen?",
     imageUrl: "/exam-images/az900-q182.png",
     options: [
       { id: "A", text: "Netzwerksicherheitsgruppen (NSGs)" },
@@ -2913,7 +2913,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-186",
     topicId: "azure-verwaltung",
-    prompt: "Ein Unternehmen hat gerade eine virtuelle Maschine namens DemoVM in Azure bereitgestellt. Die Übersicht der virtuellen Maschine ist unten dargestellt. Das Unternehmen möchte wissen, ob die zugrunde liegende Infrastruktur in Azure, auf der die virtuelle Maschine gehostet wird, Probleme aufweist. Wo kann es solche Probleme erkennen?",
+    prompt: "Ein Unternehmen hat gerade eine virtuelle Maschine namens DemoVM in Azure bereitgestellt. Die Übersicht der virtuellen Maschine ist unten dargestellt.\n\nDas Unternehmen möchte wissen, ob die zugrunde liegende Infrastruktur in Azure, auf der die virtuelle Maschine gehostet wird, Probleme aufweist.\n\nWo kann es solche Probleme erkennen?",
     imageUrl: "/exam-images/az900-q186.png",
     options: [
       { id: "A", text: "Azure-Berater" },
@@ -3112,7 +3112,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-198",
     topicId: "azure-verwaltung",
-    prompt: "Ihr Unternehmen nutzt Verwaltungsgruppen, um Ressourcen in Ihrem Azure-Mandanten effizienter zu verwalten. Benutzer1 sollte in der Lage sein, Verwaltungsgruppen Zugriffsrechte und Richtlinien zuzuweisen. Sie müssen festlegen, welcher rollenbasierten Zugriffssteuerungsrolle (RBAC) Benutzer1 hinzugefügt werden soll. Ihre Lösung sollte dem Prinzip der geringsten Privilegien folgen. Zu welcher Rolle sollten Sie Benutzer1 hinzufügen?",
+    prompt: "Ihr Unternehmen nutzt Verwaltungsgruppen, um Ressourcen in Ihrem Azure-Mandanten effizienter zu verwalten. Benutzer1 sollte in der Lage sein, Verwaltungsgruppen Zugriffsrechte und Richtlinien zuzuweisen.\n\nSie müssen festlegen, welcher rollenbasierten Zugriffssteuerungsrolle (RBAC) Benutzer1 hinzugefügt werden soll. Ihre Lösung sollte dem Prinzip der geringsten Privilegien folgen.\n\nZu welcher Rolle sollten Sie Benutzer1 hinzufügen?",
     options: [
       { id: "A", text: "Benutzerzugriffsadministrator" },
       { id: "B", text: "Eigentümer" },
@@ -3338,7 +3338,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-212",
     topicId: "azure-architektur",
-    prompt: "Ein Unternehmen nutzt eine Azure-Infrastruktur. Drei virtuelle Maschinen (VMs) werden in einer dreistufigen Architektur in Azure bereitgestellt. Alle drei VMs hosten unterschiedliche Elemente: eine hostet eine Front-End-Webanwendung, eine eine Microsoft SQL Server-Datenbank und eine eine Business-API (Application Programming Interface). Für den öffentlichen Zugriff sollte nur die Front-End-Webanwendung verfügbar sein und über HTTP auf Port 80 erreichbar sein. Alle drei VMs müssen über Remote Desktop Protocol (RDP) auf Port 222 erreichbar sein. Es sollte nur ein Konto geben, das über RDP auf die VMs zugreifen kann, und zwar Ihres. Können Sie bestimmen, wie Netzwerksicherheitsgruppen (NSGs) in diesem Szenario verwendet werden? (Identifizieren Sie die beiden Möglichkeiten, wie NSG-Regeln verwendet werden können. Wählen Sie zwei aus.)",
+    prompt: "Ein Unternehmen nutzt eine Azure-Infrastruktur. Drei virtuelle Maschinen (VMs) werden in einer dreistufigen Architektur in Azure bereitgestellt. Alle drei VMs hosten unterschiedliche Elemente: eine hostet eine Front-End-Webanwendung, eine eine Microsoft SQL Server-Datenbank und eine eine Business-API (Application Programming Interface).\n\nFür den öffentlichen Zugriff sollte nur die Front-End-Webanwendung verfügbar sein und über HTTP auf Port 80 erreichbar sein.\n\nAlle drei VMs müssen über Remote Desktop Protocol (RDP) auf Port 222 erreichbar sein. Es sollte nur ein Konto geben, das über RDP auf die VMs zugreifen kann, und zwar Ihres.\n\nKönnen Sie bestimmen, wie Netzwerksicherheitsgruppen (NSGs) in diesem Szenario verwendet werden?",
     options: [
       { id: "A", text: "Um sicherzustellen, dass nur Ihr Konto RDP für den Zugriff auf die VMs verwenden kann." },
       { id: "B", text: "Um sicherzustellen, dass nur die Front-End-VM über Port 80 öffentlich zugänglich ist." },
@@ -3406,7 +3406,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-217",
     topicId: "cloud-konzepte",
-    prompt: "Ein Unternehmen möchte Web-Apps entwickeln und bereitstellen und nutzt dafür Azure als Plattform. Ziel ist es, die Kosten vor der endgültigen Veröffentlichung der App so gering wie möglich zu halten. Identifizieren Sie die in der Azure Active Directory (AD) Free Edition verfügbaren Funktionen. Wählen Sie zwei der folgenden Optionen aus, die in der Azure Active Directory (AD) Free Edition verfügbar sind.",
+    prompt: "Ein Unternehmen möchte Web-Apps entwickeln und bereitstellen und nutzt dafür Azure als Plattform. Ziel ist es, die Kosten vor der endgültigen Veröffentlichung der App so gering wie möglich zu halten.\n\nIdentifizieren Sie die in der Azure Active Directory (AD) Free Edition verfügbaren Funktionen.\n\nWählen Sie zwei der folgenden Optionen aus, die in der Azure Active Directory (AD) Free Edition verfügbar sind.\n\nA              Firmenbranding\n\nB              Benutzer- und Gruppenverwaltung C              Gruppenbasiertes Zugriffsmanagement\n\nD              Self-Service-Passwortänderung für Cloud-Benutzer\n\nErläuterung:\n\nAzure Active Directory ist in vier Editionen erhältlich: Free, Office 365 Apps, Premium P1 und Premium P2.\n\nEinen Funktionsvergleich der Azure AD-Editionen finden Sie hier: Azure Active Directory-Preise\n\nRichtige Antwort: B, D A             Firmenbranding\n\nB             Benutzer- und Gruppenverwaltung\n\nC             Gruppenbasiertes Zugriffsmanagement\n\nD             Self-Service-Passwortänderung für Cloud-Benutzer",
     options: [
       { id: "A", text: "Firmenbranding" },
       { id: "B", text: "Benutzer- und Gruppenverwaltung" },
@@ -3654,7 +3654,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-233",
     topicId: "azure-verwaltung",
-    prompt: "Ein Automobilhersteller hat Ihr Unternehmen gebeten, eine Lösung für ihn zu entwickeln. Mit dieser Lösung möchte der Kunde es Fahrzeugen ermöglichen, On-Board-Diagnosesensor- und Fahrzeugtelemetriedaten in die Cloud zu senden. Die Daten werden für Analysen verwendet. Die Lösung muss die Identifizierung einzelner Personen anhand der gesendeten Daten ermöglichen. Welche der folgenden Azure-Lösungen eignet sich am besten für diese Situation?",
+    prompt: "Ein Automobilhersteller hat Ihr Unternehmen gebeten, eine Lösung für ihn zu entwickeln. Mit dieser Lösung möchte der Kunde es Fahrzeugen ermöglichen, On-Board- Diagnosesensor- und Fahrzeugtelemetriedaten in die Cloud zu senden. Die Daten werden für Analysen verwendet.\n\nDie Lösung muss die Identifizierung einzelner Personen anhand der gesendeten Daten ermöglichen.\n\nWelche der folgenden Azure-Lösungen eignet sich am besten für diese Situation?",
     options: [
       { id: "A", text: "IoT Hub" },
       { id: "B", text: "Benachrichtigungs-Hub" },
@@ -3668,7 +3668,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-234",
     topicId: "azure-architektur",
-    prompt: "Eine Organisation stellt zusätzliche Ressourcen in Azure bereit, um ihre Cloud-Präsenz zu erweitern. Dabei wird entschieden, Vorlagen basierend auf vorhandenen Ressourcen zu verwenden. Eine konsistente Bereitstellung ist unerlässlich. Welche der folgenden Optionen sollten Sie der Organisation empfehlen?",
+    prompt: "Eine Organisation stellt zusätzliche Ressourcen in Azure bereit, um ihre Cloud-Präsenz zu erweitern. Dabei wird entschieden, Vorlagen basierend auf vorhandenen Ressourcen zu verwenden. Eine\n\nkonsistente Bereitstellung ist unerlässlich.\n\nWelche der folgenden Optionen sollten Sie der Organisation empfehlen?",
     options: [
       { id: "A", text: "Azure-Ressourcengruppen" },
       { id: "B", text: "Azure-Ressourcen-Manager" },
@@ -3697,7 +3697,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-236",
     topicId: "azure-architektur",
-    prompt: "Eine Organisation arbeitet mit drei Availability Zones (AZs). Es wird entschieden, mehrere Instanzen einer Webanwendung in allen drei AZs bereitzustellen. Anschließend konfiguriert die Organisation ein Azure-Netzwerkprodukt, um die Serviceanfragen gleichmäßig auf alle drei Instanzen zu verteilen. Können Sie das zu verwendende Azure-Netzwerkprodukt identifizieren?",
+    prompt: "Eine Organisation arbeitet mit drei Availability Zones (AZs). Es wird entschieden, mehrere Instanzen einer Webanwendung in allen drei AZs bereitzustellen.\n\nAnschließend konfiguriert die Organisation ein Azure-Netzwerkprodukt, um die Serviceanfragen gleichmäßig auf alle drei Instanzen zu verteilen.\n\nKönnen Sie das zu verwendende Azure-Netzwerkprodukt identifizieren?",
     options: [
       { id: "A", text: "Content-Delivery-Netzwerk" },
       { id: "B", text: "Anwendungsgateway" },
@@ -3777,7 +3777,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-242",
     topicId: "azure-verwaltung",
-    prompt: "Ihre Organisation hat einen Azure Professional Direct (ProDirect)-Serviceplan abonniert. Ein Benutzer mit der integrierten Rolle „Support Request Contributor“ erstellt ein Supportticket. Das Supportticket hat den Schweregrad „Minimale Auswirkungen auf das Geschäft“ (Schweregrad C). Wie viele Stunden entspricht dieser Schweregrad?",
+    prompt: "Ihre Organisation hat einen Azure Professional Direct (ProDirect)-Serviceplan abonniert.\n\nEin Benutzer mit der integrierten Rolle „Support Request Contributor“ erstellt ein Supportticket. Das Supportticket hat den Schweregrad „Minimale Auswirkungen auf das Geschäft“ (Schweregrad C).\n\nWie viele Stunden entspricht dieser Schweregrad?",
     options: [
       { id: "A", text: "8 Stunden" },
       { id: "B", text: "2 Stunden" },
@@ -3846,7 +3846,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-247",
     topicId: "cloud-konzepte",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt. Ihr Unternehmen plant, alle seine Daten und Ressourcen nach Azure zu migrieren. Der Migrationsplan des Unternehmens sieht vor, dass in Azure nur Platform-as-a-Service-Lösungen (PaaS) verwendet werden dürfen. Sie müssen eine Azure-Umgebung bereitstellen, die die geplante Migration unterstützt. Lösung: Sie erstellen virtuelle Azure-Computer, Azure SQL-Datenbanken und Azure-Speicherkonten. Wird dies dem Ziel gerecht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erfüllt.\n\nIhr Unternehmen plant, alle seine Daten und Ressourcen nach Azure zu migrieren.\n\nDer Migrationsplan des Unternehmens sieht vor, dass in Azure nur Platform-as-a-Service-Lösungen (PaaS) verwendet werden dürfen.\n\nSie müssen eine Azure-Umgebung bereitstellen, die die geplante Migration unterstützt.\n\nLösung: Sie erstellen virtuelle Azure-Computer, Azure SQL-Datenbanken und Azure-Speicherkonten.\n\nWird dies dem Ziel gerecht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -3859,7 +3859,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-248",
     topicId: "cloud-konzepte",
-    prompt: "Ihr Unternehmen plant die Bereitstellung mehrerer benutzerdefinierter Anwendungen in Azure. Die Anwendungen dienen der Rechnungsstellung für Kunden. Für jede Anwendung werden mehrere erforderliche Anwendungen und Dienste installiert. Sie benötigen eine Cloud-Bereitstellungslösung für alle Anwendungen. Welche Lösung sollten Sie empfehlen?",
+    prompt: "Ihr Unternehmen plant die Bereitstellung mehrerer benutzerdefinierter Anwendungen in Azure. Die Anwendungen dienen der Rechnungsstellung für Kunden. Für jede Anwendung werden mehrere erforderliche Anwendungen und Dienste installiert.\n\nSie benötigen eine Cloud-Bereitstellungslösung für alle Anwendungen.\n\nWelche Lösung sollten Sie empfehlen?",
     options: [
       { id: "A", text: "Software as a Service (SaaS)" },
       { id: "B", text: "Plattform als Service (PaaS)" },
@@ -3872,7 +3872,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-249",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erfüllt. Sie haben ein Azure-Abonnement namens „Abonnement1“. Sie melden sich beim Azure-Portal an und erstellen eine Ressourcengruppe namens „RG1“. In der Azure-Dokumentation finden Sie den folgenden Befehl, der eine virtuelle Maschine namens „VM1“ erstellt. az vm create --resource-group RG1 --name VM1 --image UbuntuLTS --generate-ssh-keys Sie müssen VM1 in „Abonnement1“ mithilfe des Befehls erstellen. Lösung: Starten Sie im Azure-Portal Azure Cloud Shell und wählen Sie PowerShell aus. Führen Sie den Befehl in Cloud Shell aus. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erfüllt.\n\nSie haben ein Azure-Abonnement namens „Abonnement1“. Sie melden sich beim Azure-Portal an und erstellen eine Ressourcengruppe namens „RG1“.\n\nIn der Azure-Dokumentation finden Sie den folgenden Befehl, der eine virtuelle Maschine namens „VM1“ erstellt.\n\naz vm create --resource-group RG1 --name VM1 --image UbuntuLTS --generate-ssh-keys\n\nSie müssen VM1 in „Abonnement1“ mithilfe des Befehls erstellen.\n\nLösung: Starten Sie im Azure-Portal Azure Cloud Shell und wählen Sie PowerShell aus. Führen Sie den Befehl in Cloud Shell aus.\n\nWird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -3884,7 +3884,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-250",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erfüllt. Sie haben ein Azure-Abonnement namens „Abonnement1“. Sie melden sich beim Azure-Portal an und erstellen eine Ressourcengruppe namens „RG1“. In der Azure-Dokumentation finden Sie den folgenden Befehl, der eine virtuelle Maschine namens „VM1“ erstellt. az vm create --resource-group RG1 --name VM1 --image UbuntuLTS --generate-ssh-keys Sie müssen VM1 in „Abonnement1“ mithilfe des Befehls erstellen. Lösung: Installieren Sie Azure CLI auf einem Computer mit Windows 10. Melden Sie sich über PowerShell bei Azure an und führen Sie dann den Befehl aus. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erfüllt.\n\nSie haben ein Azure-Abonnement namens „Abonnement1“. Sie melden sich beim Azure-Portal an und erstellen eine Ressourcengruppe namens „RG1“.\n\nIn der Azure-Dokumentation finden Sie den folgenden Befehl, der eine virtuelle Maschine namens „VM1“ erstellt.\n\naz vm create --resource-group RG1 --name VM1 --image UbuntuLTS --generate-ssh-keys\n\nSie müssen VM1 in „Abonnement1“ mithilfe des Befehls erstellen.\n\nLösung: Installieren Sie Azure CLI auf einem Computer mit Windows 10. Melden Sie sich über PowerShell bei Azure an und führen Sie dann den Befehl aus.\n\nWird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -3896,7 +3896,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-251",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erfüllt. Sie haben ein Azure-Abonnement namens „Abonnement1“. Sie melden sich beim Azure-Portal an und erstellen eine Ressourcengruppe namens „RG1“. In der Azure-Dokumentation finden Sie den folgenden Befehl, der eine virtuelle Maschine namens „VM1“ erstellt. az vm create --resource-group RG1 --name VM1 --image UbuntuLTS --generate-ssh-keys Sie müssen VM1 in „Abonnement1“ mithilfe des Befehls erstellen. Lösung: Installieren Sie Azure CLI auf einem Computer mit Windows 10. Melden Sie sich über eine Eingabeaufforderung bei Azure an und führen Sie dann den Befehl aus. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erfüllt.\n\nSie haben ein Azure-Abonnement namens „Abonnement1“. Sie melden sich beim Azure-Portal an und erstellen eine Ressourcengruppe namens „RG1“.\n\nIn der Azure-Dokumentation finden Sie den folgenden Befehl, der eine virtuelle Maschine namens „VM1“ erstellt.\n\naz vm create --resource-group RG1 --name VM1 --image UbuntuLTS --generate-ssh-keys\n\nSie müssen VM1 in „Abonnement1“ mithilfe des Befehls erstellen.\n\nLösung: Installieren Sie Azure CLI auf einem Computer mit Windows 10. Melden Sie sich über eine Eingabeaufforderung bei Azure an und führen Sie dann den Befehl aus.\n\nWird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -3908,7 +3908,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-252",
     topicId: "azure-verwaltung",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erfüllt. Sie haben ein Azure-Abonnement namens „Abonnement1“. Sie melden sich beim Azure-Portal an und erstellen eine Ressourcengruppe namens „RG1“. In der Azure-Dokumentation finden Sie den folgenden Befehl, der eine virtuelle Maschine namens „VM1“ erstellt. az vm create --resource-group RG1 --name VM1 --image UbuntuLTS --generate-ssh-keys Sie müssen VM1 in „Abonnement1“ mithilfe des Befehls erstellen. Lösung: Starten Sie im Azure-Portal Azure Cloud Shell und wählen Sie „Bash“ aus. Führen Sie den Befehl in Cloud Shell aus. Wird damit das Ziel erreicht?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erfüllen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Bestimmen Sie, ob die Lösung die angegebenen Ziele erfüllt.\n\nSie haben ein Azure-Abonnement namens „Abonnement1“. Sie melden sich beim Azure-Portal an und erstellen eine Ressourcengruppe namens „RG1“.\n\nIn der Azure-Dokumentation finden Sie den folgenden Befehl, der eine virtuelle Maschine namens „VM1“ erstellt.\n\naz vm create --resource-group RG1 --name VM1 --image UbuntuLTS --generate-ssh-keys\n\nSie müssen VM1 in „Abonnement1“ mithilfe des Befehls erstellen.\n\nLösung: Starten Sie im Azure-Portal Azure Cloud Shell und wählen Sie „Bash“ aus. Führen Sie den Befehl in Cloud Shell aus.\n\nWird damit das Ziel erreicht?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -4020,7 +4020,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-260",
     topicId: "azure-architektur",
-    prompt: "Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Ihre Azure-Umgebung enthält mehrere virtuelle Azure-Computer. Sie müssen sicherstellen, dass ein virtueller Computer namens VM1 über HTTP aus dem Internet erreichbar ist. Lösung: Sie ändern eine Netzwerksicherheitsgruppe (NSG). Erreicht dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage in der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze enthalten möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung enthalten. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nIhre Azure-Umgebung enthält mehrere virtuelle Azure-Computer. Sie müssen sicherstellen, dass ein virtueller Computer namens VM1 über HTTP aus dem Internet erreichbar ist.\n\nLösung: Sie ändern eine Netzwerksicherheitsgruppe (NSG).\n\nErreicht dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -4483,7 +4483,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-289",
     topicId: "azure-verwaltung",
-    prompt: "Ihr Unternehmen verfügt über einen Software Assurance-Vertrag, der Microsoft SQL Server-Lizenzen umfasst. Sie planen, SQL Server auf virtuellen Azure-Computern bereitzustellen. Wie können Sie die Lizenzkosten für die Bereitstellung minimieren?",
+    prompt: "Ihr Unternehmen verfügt über einen Software Assurance-Vertrag, der Microsoft SQL Server-Lizenzen umfasst.\n\nSie planen, SQL Server auf virtuellen Azure-Computern bereitzustellen.\n\nWie können Sie die Lizenzkosten für die Bereitstellung minimieren?",
     options: [
       { id: "A", text: "Geben Sie die Zuordnung der virtuellen Maschinen außerhalb der Arbeitszeiten frei." },
       { id: "B", text: "Nutzen Sie den Azure-Hybridvorteil." },
@@ -5040,7 +5040,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-319",
     topicId: "cloud-konzepte",
-    prompt: "Ihr Unternehmen plant die Migration aller Daten und Ressourcen nach Azure. Der Migrationsplan des Unternehmens sieht vor, dass in Azure ausschließlich Platform-as-a-Service-Lösungen (PaaS) verwendet werden dürfen. Sie müssen eine Azure-Umgebung bereitstellen, die dem Migrationsplan des Unternehmens entspricht. Was sollten Sie erstellen?",
+    prompt: "Ihr Unternehmen plant die Migration aller Daten und Ressourcen nach Azure.\n\nDer Migrationsplan des Unternehmens sieht vor, dass in Azure ausschließlich Platform-as-a-Service-Lösungen (PaaS) verwendet werden dürfen.\n\nSie müssen eine Azure-Umgebung bereitstellen, die dem Migrationsplan des Unternehmens entspricht.\n\nWas sollten Sie erstellen?",
     options: [
       { id: "A", text: "Ein Azure App Service und Azure SQL-Datenbanken." },
       { id: "B", text: "Azure-Speicherkonten und Webserver auf virtuellen Azure-Computern." },
@@ -6354,7 +6354,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-399",
     topicId: "cloud-konzepte",
-    prompt: "Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht. Sie sind mit der Bereitstellung virtueller Azure-Computer für Ihr Unternehmen beauftragt. Sie benötigen die entsprechende Cloud-Bereitstellungslösung. Lösung: Sie sollten Infrastructure as a Service (IaaS) nutzen. Erfüllt dies das Ziel?",
+    prompt: "Hinweis: Diese Frage ist Teil einer Reihe von Fragen, die dasselbe Szenario darstellen. Jede Frage der Reihe enthält eine eindeutige Lösung, die die angegebenen Ziele erreichen könnte. Einige Fragensätze haben möglicherweise mehr als eine richtige Lösung, während andere möglicherweise keine richtige Lösung haben. Stellen Sie fest, ob die Lösung die angegebenen Ziele erreicht.\n\nSie sind mit der Bereitstellung virtueller Azure-Computer für Ihr Unternehmen beauftragt.\n\nSie benötigen die entsprechende Cloud-Bereitstellungslösung.\n\nLösung: Sie sollten Infrastructure as a Service (IaaS) nutzen.\n\nErfüllt dies das Ziel?",
     options: [
       { id: "A", text: "Ja" },
       { id: "B", text: "NEIN" },
@@ -6429,7 +6429,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-405",
     topicId: "azure-architektur",
-    prompt: "Ihre Entwickler haben eine Portal-Web-App für Benutzer in der Niederlassung Miami erstellt. Die Web-App ist öffentlich zugänglich und wird von den Benutzern in Miami zum Abrufen von Kunden- und Produktinformationen verwendet. Die Web-App wird derzeit in einer lokalen Testumgebung ausgeführt. Sie planen, die Web-App auf Azure zu hosten. Sie müssen festlegen, welcher Azure-Web-Tier-Plan die Web-App hosten soll. Der Web-Tier-Plan muss die folgenden Anforderungen erfüllen:\n• Die Website verwendet die URL miami.contoso.com.\n• Die Website wird auf zwei Instanzen bereitgestellt.\n• SSL-Unterstützung muss enthalten sein.\n• Die Website benötigt 12 GB Speicherplatz.\n• Die Kosten müssen minimiert werden.\nWelchen Web-Tier-Plan sollten Sie verwenden?",
+    prompt: "Ihre Entwickler haben eine Portal-Web-App für Benutzer in der Niederlassung Miami erstellt. Die Web-App ist öffentlich zugänglich und wird von den Benutzern in Miami zum Abrufen von Kunden- und Produktinformationen verwendet.\n\nDie Web-App wird derzeit in einer lokalen Testumgebung ausgeführt.\n\nSie planen, die Web-App auf Azure zu hosten.\n\nSie müssen festlegen, welcher Azure-Web-Tier-Plan die Web-App hosten soll. Der Web-Tier-Plan muss die folgenden Anforderungen erfüllen: • Die Website verwendet die URL miami.contoso.com. • Die Website wird auf zwei Instanzen bereitgestellt. • SSL-Unterstützung muss enthalten sein. • Die Website benötigt 12 GB Speicherplatz. • Die Kosten müssen minimiert werden. Welchen Web-Tier-Plan sollten Sie verwenden?",
     options: [
       { id: "A", text: "Standard" },
       { id: "B", text: "Basic" },
@@ -6492,7 +6492,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-410",
     topicId: "azure-architektur",
-    prompt: "Ihr Unternehmen verfügt über Rechenzentren in Los Angeles und New York. Das Unternehmen hat ein Microsoft Azure-Abonnement. Sie konfigurieren die beiden Rechenzentren als geografisch geclusterte Standorte für höhere Standortstabilität. Sie müssen eine Option für Azure-Speicherredundanz empfehlen. Sie haben die folgenden Anforderungen an die Datenspeicherung:\n• Daten müssen auf mehreren Knoten gespeichert werden.\n• Daten müssen auf Knoten an getrennten geografischen Standorten gespeichert werden.\n• Daten können sowohl vom sekundären als auch vom primären Standort gelesen werden.\nWelche der folgenden Azure-gespeicherten Redundanzoptionen sollten Sie empfehlen?",
+    prompt: "Ihr Unternehmen verfügt über Rechenzentren in Los Angeles und New York. Das Unternehmen hat ein Microsoft Azure-Abonnement.\n\nSie konfigurieren die beiden Rechenzentren als geografisch geclusterte Standorte für höhere Standortstabilität.\n\nSie müssen eine Option für Azure-Speicherredundanz empfehlen. Sie haben die folgenden Anforderungen an die Datenspeicherung: • Daten müssen auf mehreren Knoten gespeichert werden. • Daten müssen auf Knoten an getrennten geografischen Standorten gespeichert werden. • Daten können sowohl vom sekundären als auch vom primären Standort gelesen werden. Welche der folgenden Azure-gespeicherten Redundanzoptionen sollten Sie empfehlen?",
     options: [
       { id: "A", text: "Georedundanter Speicher" },
       { id: "B", text: "Georedundanter Speicher mit Lesezugriff" },
@@ -7232,7 +7232,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-458",
     topicId: "azure-verwaltung",
-    prompt: "Sie verfügen über ein Azure-Abonnement und 100 Windows 10-Geräte. Sie müssen sicherstellen, dass nur Benutzer, deren Geräte über die neuesten Sicherheitspatches verfügen, auf in Azure Active Directory (Azure AD) integrierte Anwendungen zugreifen können. Was sollten Sie implementieren?",
+    prompt: "Sie verfügen über ein Azure-Abonnement und 100 Windows 10-Geräte.\n\nSie müssen sicherstellen, dass nur Benutzer, deren Geräte über die neuesten Sicherheitspatches verfügen, auf in Azure Active Directory (Azure AD) integrierte Anwendungen zugreifen können.\n\nWas sollten Sie implementieren?",
     options: [
       { id: "A", text: "Eine Richtlinie für bedingten Zugriff" },
       { id: "B", text: "Azure Bastion" },
@@ -7274,7 +7274,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-461",
     topicId: "azure-architektur",
-    prompt: "Ihre Organisation hat eine benutzerdefinierte Webanwendung veröffentlicht. Sie möchten Azure Active Directory als Dienstanbieter für Identitäts- und Zugriffsverwaltung nutzen, um Kunden für Ihre Webanwendungen zu authentifizieren. Welche der folgenden Funktionen sollten Sie verwenden?",
+    prompt: "Ihre Organisation hat eine benutzerdefinierte Webanwendung veröffentlicht.\n\nSie möchten Azure Active Directory als Dienstanbieter für Identitäts- und Zugriffsverwaltung nutzen, um Kunden für Ihre Webanwendungen zu authentifizieren.\n\nWelche der folgenden Funktionen sollten Sie verwenden?",
     options: [
       { id: "A", text: "Einschränkungen für Azure AD-Mandanten" },
       { id: "B", text: "Azure AD Verbinden" },
@@ -7425,7 +7425,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-470",
     topicId: "azure-architektur",
-    prompt: "Ihr Unternehmen verfügt über virtuelle Maschinen (VMs), die in Microsoft Azure gehostet werden. Die VMs befinden sich in einem einzigen virtuellen Azure-Netzwerk namens VNet1. Das Unternehmen verfügt über Benutzer, die remote arbeiten. Die Remotemitarbeiter benötigen Zugriff auf die VMs in VNet1. Sie müssen den Remotemitarbeitern Zugriff gewähren. Was sollten Sie tun?",
+    prompt: "Ihr Unternehmen verfügt über virtuelle Maschinen (VMs), die in Microsoft Azure gehostet werden. Die VMs befinden sich in einem einzigen virtuellen Azure-Netzwerk namens VNet1.\n\nDas Unternehmen verfügt über Benutzer, die remote arbeiten. Die Remotemitarbeiter benötigen Zugriff auf die VMs in VNet1.\n\nSie müssen den Remotemitarbeitern Zugriff gewähren.\n\nWas sollten Sie tun?",
     options: [
       { id: "A", text: "Konfigurieren Sie ein Site-to-Site (S2S)-VPN." },
       { id: "B", text: "Konfigurieren Sie ein VNet-zu-VNet-VPN." },
@@ -7555,7 +7555,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-480",
     topicId: "azure-architektur",
-    prompt: "Sie planen die Bereitstellung eines Dienstes auf virtuellen Azure-Computern. Sie müssen sicherstellen, dass der Dienst auch bei einem Rechenzentrumsausfall verfügbar ist. Was sollten Sie bei der Bereitstellung virtueller Computer verwenden?",
+    prompt: "Sie planen die Bereitstellung eines Dienstes auf virtuellen Azure-Computern.\n\nSie müssen sicherstellen, dass der Dienst auch bei einem Rechenzentrumsausfall verfügbar ist.\n\nWas sollten Sie bei der Bereitstellung virtueller Computer verwenden?",
     options: [
       { id: "A", text: "Verfügbarkeitsgruppen" },
       { id: "B", text: "Näherungsplatzierungsgruppen" },
@@ -7667,7 +7667,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-488",
     topicId: "azure-architektur",
-    prompt: "Sie verfügen über mehrere Speicherkonten in Ihrem Abonnement. Sie müssen nur einem Benutzernamen namens „Benutzer1“ Lesezugriff auf das Speicherkonto „Konto1“ gewähren. Schreibzugriff auf „Konto1“ sollte nicht gewährt werden. Zugriff auf andere Speicherkonten sollte nicht gewährt werden. Welche der folgenden Optionen sollten Sie konfigurieren, um dieses Ziel zu erreichen?",
+    prompt: "Sie verfügen über mehrere Speicherkonten in Ihrem Abonnement.\n\nSie müssen nur einem Benutzernamen namens „Benutzer1“ Lesezugriff auf das Speicherkonto „Konto1“ gewähren. Schreibzugriff auf „Konto1“ sollte nicht gewährt werden. Zugriff auf andere Speicherkonten sollte nicht gewährt werden.\n\nWelche der folgenden Optionen sollten Sie konfigurieren, um dieses Ziel zu erreichen?",
     options: [
       { id: "A", text: "Azure AD-Geräteverwaltung" },
       { id: "B", text: "Privilegiertes Identitätsmanagement (PIM)" },
@@ -7997,7 +7997,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-509",
     topicId: "azure-verwaltung",
-    prompt: "Ihr Unternehmen verfügt über ein Azure-Abonnement und drei Geschäftseinheiten. Sie planen, für jede Geschäftseinheit neue Ressourcen bereitzustellen. Sie müssen sicherstellen, dass die neuen Ressourcen mithilfe einer wiederholbaren und zuverlässigen Methode bereitgestellt werden, die auf jede Ressource die gleichen Konfigurationen anwendet. Welche Methode sollten Sie verwenden?",
+    prompt: "Ihr Unternehmen verfügt über ein Azure-Abonnement und drei Geschäftseinheiten.\n\nSie planen, für jede Geschäftseinheit neue Ressourcen bereitzustellen.\n\nSie müssen sicherstellen, dass die neuen Ressourcen mithilfe einer wiederholbaren und zuverlässigen Methode bereitgestellt werden, die auf jede Ressource die gleichen Konfigurationen anwendet.\n\nWelche Methode sollten Sie verwenden?",
     options: [
       { id: "A", text: "Azure-Richtlinie" },
       { id: "B", text: "Azure Arc" },
@@ -8087,7 +8087,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-515",
     topicId: "cloud-konzepte",
-    prompt: "Wählen Sie im Antwortbereich die entsprechende Option aus, um den Satz zu vervollständigen. Sie stellen eine Azure-Ressource bereit. Aufgrund eines Dienstausfalls ist die Ressource für einen längeren Zeitraum nicht verfügbar.",
+    prompt: "Wählen Sie im Antwortbereich die entsprechende Option aus, um den Satz zu vervollständigen.\n\nSie stellen eine Azure-Ressource bereit. Aufgrund eines Dienstausfalls ist die Ressource für einen längeren Zeitraum nicht verfügbar. A Microsoft erstattet den Betrag automatisch auf Ihr Bankkonto zurück .\n\nSie stellen eine Azure-Ressource bereit. Aufgrund eines Dienstausfalls ist die Ressource für einen längeren Zeitraum nicht verfügbar. B Microsoft migriert die Ressource automatisch in ein anderes Abonnement .\n\nSie stellen eine Azure-Ressource bereit. Aufgrund eines Dienstausfalls ist die Ressource für einen längeren Zeitraum nicht verfügbar. C Microsoft schreibt Ihrem Konto automatisch den Betrag gut .\n\nSie stellen eine Azure-Ressource bereit. Aufgrund eines Dienstausfalls ist die Ressource für einen längeren Zeitraum nicht verfügbar. Microsoft sendet D Ihnen einen Gutscheincode, den Sie gegen Azure-Guthaben einlösen können .\n\nErläuterung:\n\nMicrosoft ist bereit, für Azure-Dienstausfälle, die nicht im Service Level Agreement (SLA) vereinbart wurden, eine Rückerstattung zu zahlen. In manchen Fällen geschieht dies automatisch. In der Regel muss der Kunde die Rückerstattung jedoch selbst beantragen.\n\nWas passiert, wenn Microsoft sein SLA nicht einhält? Es liegt in der Verantwortung des Kunden oder Partners, festzustellen, ob das Microsoft Azure Service Level Agreement nicht eingehalten wurde. Um einen Anspruch bezüglich eines Vorfalls geltend machen zu können, muss der Kunde den Kundensupport innerhalb von fünf Werktagen nach dem Vorfall über den Vorfall informieren. Der Kunde muss außerdem ausreichende Beweise zur Unterstützung des Anspruchs vorlegen. Sobald der Anspruch von Microsoft bestätigt wurde, wird für SLAs zwischen 99,5 % und 99 % eine Gutschrift von 10 % gewährt. Für SLAs unter 99 % wird für den jeweiligen Monat, in dem das SLA nicht eingehalten wurde, eine Gutschrift von 25 % ausgestellt. Weitere Informationen zum Azure SLA finden Sie im Service Level Agreement.",
     options: [
       { id: "A", text: "Microsoft erstattet den Betrag automatisch auf Ihr Bankkonto zurück. Sie stellen eine Azure-Ressource bereit. Aufgrund eines Dienstausfalls ist die Ressource für einen längeren Zeitraum nicht verfügbar." },
       { id: "B", text: "Microsoft migriert die Ressource automatisch in ein anderes Abonnement. Sie stellen eine Azure-Ressource bereit. Aufgrund eines Dienstausfalls ist die Ressource für einen längeren Zeitraum nicht verfügbar." },
