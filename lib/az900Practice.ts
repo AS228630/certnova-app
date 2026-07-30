@@ -7133,6 +7133,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "i0", label: "Hohe Verfügbarkeit" },
       { id: "i1", label: "Geo-Verteilung" },
       { id: "i2", label: "Skalierbarkeit" },
+      { id: "i3", label: "Notfallwiederherstellung" },
     ],
     descriptions: [
       { id: "d0", text: "Kontinuierliches Benutzererlebnis bei einem Ressourcenausfall bereitstellen.", correctItemId: "i0" },
@@ -7140,12 +7141,14 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Rechenkapazität dynamisch erhöhen, indem RAM oder CPU zu einer virtuellen Maschine hinzugefügt wird.", correctItemId: "i2" },
     ],
     combos: [
+      ["i3", "i1", "i0"],
+      ["i3", "i0", "i2"],
+      ["i1", "i2", "i3"],
       ["i0", "i1", "i2"],
       ["i0", "i2", "i1"],
       ["i2", "i0", "i1"],
     ],
     explanation: "Hohe Verfügbarkeit sorgt für ein kontinuierliches Erlebnis trotz Ressourcenausfällen. Geo-Verteilung bringt Apps und Daten näher an die Benutzer. Skalierbarkeit erhöht die Rechenkapazität dynamisch, z. B. durch Hinzufügen von RAM oder CPU.",
-    explanationImageUrl: "/exam-images/az900-q451-explain.png",
     resources: [{ label: "Solution Deployment Guide Geo Distributed", url: "https://learn.microsoft.com/en-us/azure/architecture/hybrid/deployments/solution-deployment-guide-geo-distributed" }, { label: "Design Scale", url: "https://learn.microsoft.com/en-us/azure/well-architected/scalability/design-scale" }],
   },
   {
@@ -7760,6 +7763,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "i0", label: "Azure-Warteschlangenspeicher" },
       { id: "i1", label: "Azure-Dateien" },
       { id: "i2", label: "Azure-Blobspeicher" },
+      { id: "i3", label: "Azure-Datenträgerspeicher" },
     ],
     descriptions: [
       { id: "d0", text: "Wird für zuverlässiges Messaging zwischen Anwendungen verwendet.", correctItemId: "i0" },
@@ -7767,6 +7771,9 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Kann für die Verwendung der Archiv-Zugriffsebene konfiguriert werden.", correctItemId: "i2" },
     ],
     combos: [
+      ["i2", "i0", "i3"],
+      ["i3", "i1", "i2"],
+      ["i1", "i3", "i0"],
       ["i1", "i0", "i2"],
       ["i0", "i1", "i2"],
       ["i0", "i2", "i1"],
@@ -7809,7 +7816,6 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "C",
     explanation: "Mit der Richtlinie „Nicht zulässige Ressourcentypen“ können Sie die Ressourcentypen angeben, die Ihre Organisation in einem bestimmten Bereich nicht bereitstellen kann. Vorhandene Ressourcen sind von der Richtlinie nicht betroffen.",
-    explanationImageUrl: "/exam-images/az900-q495-explain.png",
   },
   {
     type: "yesno",
