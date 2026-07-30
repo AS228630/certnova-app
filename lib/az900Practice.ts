@@ -7815,7 +7815,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "VNet1 ist jetzt ein schreibgeschütztes Objekt." },
     ],
     correct: "C",
-    explanation: "Mit der Richtlinie „Nicht zulässige Ressourcentypen“ können Sie die Ressourcentypen angeben, die Ihre Organisation in einem bestimmten Bereich nicht bereitstellen kann. Vorhandene Ressourcen sind von der Richtlinie nicht betroffen.",
+    explanation: "Szenario: Sie verfügen über ein virtuelles Azure-Netzwerk namens VNET1 in einer Ressourcengruppe namens RG1. Sie weisen eine Azure-Richtlinie zu, die festlegt, dass virtuelle Netzwerke kein zulässiger Ressourcentyp in RG1 sind.\nMit der Richtlinie „Nicht zulässige Ressourcentypen“ können Sie die Ressourcentypen angeben, die Ihre Organisation in einem bestimmten Bereich nicht bereitstellen kann. Vorhandene Ressourcen sind von der Richtlinie nicht betroffen — VNET1 funktioniert daher weiterhin normal.",
   },
   {
     type: "yesno",
