@@ -6680,7 +6680,6 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-425",
     topicId: "cloud-konzepte",
     prompt: "Ihr Unternehmen möchte eine Cloud-Lösung mit Azure Government entwickeln. Azure Government kann nur von bestimmten Kundentypen zur Entwicklung von Cloud-Lösungen genutzt werden. Welche der folgenden Kundentypen können Azure Government nutzen? (Beantworten Sie die Frage, indem Sie die richtigen Optionen aus der Liste in den Antwortbereich ziehen.)",
-    imageUrl: "/exam-images/az900-q425-explain.png",
     options: [
       { id: "A", text: "Eine Regierungsbehörde aus einem beliebigen Land. Eine europäische Regierungsbehörde. Eine Regierungsbehörde der Vereinigten Staaten." },
       { id: "B", text: "Eine europäische Regierungsbehörde. Eine Regierungsbehörde der Vereinigten Staaten." },
@@ -6691,7 +6690,6 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "F",
     explanation: "Azure Government ist die unternehmenskritische Cloud, die US-Regierungskunden und ihren Partnern bahnbrechende Innovationen bietet. Nur US-Bundes-, Landes-, Kommunal- und Stammesregierungen sowie deren Partner haben Zugriff auf diese dedizierte Instanz, deren Betrieb von überprüften US-Bürgern kontrolliert wird. Azure Government bietet das umfassendste Zertifizierungsniveau aller Cloud-Anbieter und vereinfacht so selbst die kritischsten Compliance-Anforderungen der Regierung.",
-    explanationImageUrl: "/exam-images/az900-q425-explain.png",
     resources: [{ label: "Get Started", url: "https://azure.microsoft.com/en-us/explore/global-infrastructure/government/get-started/" }],
   },
   {
