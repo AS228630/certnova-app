@@ -7085,6 +7085,8 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "i0", label: "Microsoft Sentinel" },
       { id: "i1", label: "Microsoft Defender für Cloud" },
       { id: "i2", label: "Azure Key Vault" },
+      { id: "i3", label: "Azure Active Directory (Azure AD)" },
+      { id: "i4", label: "Azure Lighthouse" },
     ],
     descriptions: [
       { id: "d0", text: "Analysiert Sicherheitsprotokolldateien von Azure-VMs und bietet SIEM/SOAR-Funktionen.", correctItemId: "i0" },
@@ -7092,6 +7094,11 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "d2", text: "Speichert Kennwörter zur Verwendung durch Azure Function-Anwendungen.", correctItemId: "i2" },
     ],
     combos: [
+      ["i3", "i4", "i0"],
+      ["i4", "i1", "i3"],
+      ["i4", "i0", "i2"],
+      ["i1", "i4", "i0"],
+      ["i1", "i0", "i3"],
       ["i0", "i1", "i2"],
     ],
     explanation: "Microsoft Sentinel ist eine skalierbare, Cloud-native SIEM/SOAR-Lösung zur Sicherheitsanalyse. Microsoft Defender für Cloud zeigt den Sicherheitsstatus (Secure Score) eines Abonnements an. Azure Key Vault speichert sicher Geheimnisse wie Kennwörter für Anwendungen.",
