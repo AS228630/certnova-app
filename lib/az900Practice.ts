@@ -7152,6 +7152,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-452",
     topicId: "cloud-konzepte",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "___ sorgt dafür, dass Sie die Kosten eines Cloud-Dienstes kalkulieren können.",
+      choices: ["Agilität", "Elastizität", "Hohe Verfügbarkeit", "Vorhersehbarkeit"],
+    },
     options: [
       { id: "A", text: "Agilität sorgt dafür, dass Sie die Kosten eines Cloud-Dienstes kalkulieren können." },
       { id: "B", text: "Durch die Elastizität ist die Kalkulation der Kosten eines Cloud-Dienstes möglich." },
@@ -7420,6 +7424,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-469",
     topicId: "azure-verwaltung",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Wenn Sie die Migration einer öffentlichen Website zu Azure planen, müssen Sie ___",
+      choices: ["die Bereitstellung eines VPN einplanen.", "mit monatlichen Nutzungskosten rechnen.", "mit der Zahlung für die Übertragung aller Website-Daten zu Azure rechnen.", "die Anzahl der Verbindungen zur Website reduzieren."],
+    },
     options: [
       { id: "A", text: "Wenn Sie die Migration einer öffentlichen Website zu Azure planen, müssen Sie die Bereitstellung eines VPN einplanen." },
       { id: "B", text: "Wenn Sie planen, eine öffentliche Website zu Azure zu migrieren, müssen Sie mit monatlichen Nutzungskosten rechnen." },
@@ -7789,6 +7797,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-495",
     topicId: "azure-verwaltung",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "VNet1 ___",
+      choices: ["wird automatisch gelöscht.", "wird automatisch in eine andere Ressourcengruppe verschoben.", "funktioniert weiterhin normal.", "ist jetzt ein schreibgeschütztes Objekt."],
+    },
     options: [
       { id: "A", text: "VNet1 wird automatisch gelöscht." },
       { id: "B", text: "VNet1 wird automatisch in eine andere Ressourcengruppe verschoben." },
@@ -8383,6 +8395,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-534",
     topicId: "azure-architektur",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Die Zugriffsebene „Cool“ ___",
+      choices: ["ist für Daten optimiert, auf die selten zugegriffen wird und die mindestens 30 Tage lang gespeichert werden.", "ist für Daten optimiert, auf die selten zugegriffen wird, die mindestens 180 Tage lang gespeichert werden und für die flexible Latenzanforderungen gelten.", "ist für die Speicherung von Daten optimiert, auf die häufig zugegriffen wird."],
+    },
     options: [
       { id: "A", text: "Die Zugriffsebene „Cool“ ist für Daten optimiert, auf die selten zugegriffen wird und die mindestens 30 Tage lang gespeichert werden." },
       { id: "B", text: "Die Zugriffsebene „Cool“ ist für Daten optimiert, auf die selten zugegriffen wird, die mindestens 180 Tage lang gespeichert werden und für die flexible Latenzanforderungen gelten." },
