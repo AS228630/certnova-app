@@ -6486,8 +6486,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
       { id: "E", text: "Basic, Developer, Standard und Professional Direct" },
     ],
     correct: "E",
-    explanation: "Microsoft bietet die folgenden Supportpläne an, die Azure, Microsoft 365 und Dynamics 365 umfassen.",
-    explanationImageUrl: "/exam-images/az900-q409-explain.png",
+    explanation: "Microsoft bietet die folgenden Supportpläne an, die Azure, Microsoft 365 und Dynamics 365 umfassen.\n• Basic: Kostenlos für alle Azure-Kunden enthalten. Ermöglicht keine Erstellung neuer Supportanfragen, jedoch Abrechnungs- und Abo-Verwaltungssupport sowie 24/7-Selbsthilfe-Ressourcen.\n• Developer: Ca. 29 $ pro Monat, gedacht für Test- und Nicht-Produktionsumgebungen. Ermöglicht das Öffnen von Supportanfragen mit Antwortzeiten während der Geschäftszeiten.\n• Standard: Ca. 100 $ pro Monat, für Produktionsworkloads. Ermöglicht das Öffnen von Supportanfragen mit 24/7-Zugang zu technischem Support per E-Mail und Telefon.\n• Professional Direct: Ca. 1.000 $ pro Monat, für geschäftskritische Abhängigkeiten. Ermöglicht das Öffnen von Supportanfragen mit dem schnellsten Reaktionszeit-Angebot.\nDa Developer, Standard und Professional Direct alle das Öffnen neuer Supportanfragen ermöglichen, erfüllt jede Kombination, die mindestens einen dieser drei Pläne enthält, das Ziel — einschließlich einer Kombination, die zusätzlich den kostenlosen Basic-Plan einschließt.",
     resources: [{ label: "Plans", url: "https://azure.microsoft.com/en-us/support/plans/" }],
   },
   {
