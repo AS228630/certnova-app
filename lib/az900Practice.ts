@@ -951,7 +951,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-51",
     topicId: "azure-verwaltung",
-    prompt: "Ihr Unternehmen verfügt über ein lokales Netzwerk mit mehreren Servern. Das Unternehmen plant, die folgenden administrativen Aufgaben der Netzwerkadministratoren zu reduzieren:\n• Sichern von Anwendungsdaten\n• Austausch ausgefallener Serverhardware\n• Verwalten der physischen Serversicherheit\n• Aktualisieren von Serverbetriebssystemen\n• Verwalten von Berechtigungen für freigegebene Dokumente\nDas Unternehmen plant die Migration mehrerer Server auf virtuelle Azure-Computer. Sie müssen ermitteln, welche administrativen Aufgaben nach der geplanten Migration reduziert werden. Welche zwei Aufgaben sollten Sie identifizieren? (Jede richtige Antwort stellt eine Komplettlösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    prompt: "Ihr Unternehmen verfügt über ein lokales Netzwerk mit mehreren Servern.\n\nDas Unternehmen plant, die folgenden administrativen Aufgaben der Netzwerkadministratoren zu reduzieren:\n• Sichern von Anwendungsdaten\n• Austausch ausgefallener Serverhardware\n• Verwalten der physischen Serversicherheit\n• Aktualisieren von Serverbetriebssystemen\n• Verwalten von Berechtigungen für freigegebene Dokumente\n\nDas Unternehmen plant die Migration mehrerer Server auf virtuelle Azure-Computer.\n\nSie müssen ermitteln, welche administrativen Aufgaben nach der geplanten Migration reduziert werden.\n\nWelche zwei Aufgaben sollten Sie identifizieren? (Jede richtige Antwort stellt eine Komplettlösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     options: [
       { id: "A", text: "Austausch ausgefallener Serverhardware" },
       { id: "B", text: "Sichern von Anwendungsdaten" },
@@ -1115,7 +1115,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-64",
     topicId: "azure-verwaltung",
-    prompt: "Ein Supporttechniker plant, mehrere Azure-Verwaltungsaufgaben mithilfe der Azure CLI auszuführen. Sie installieren die CLI auf einem Computer. Sie müssen dem Supporttechniker mitteilen, welche Tools er zum Ausführen der CLI verwenden soll. Welche zwei Tools sollten Sie dem Supporttechniker empfehlen? (Jede richtige Antwort stellt eine vollständige Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    prompt: "Ein Supporttechniker plant, mehrere Azure-Verwaltungsaufgaben mithilfe der Azure CLI auszuführen. Sie installieren die CLI auf einem Computer.\n\nSie müssen dem Supporttechniker mitteilen, welche Tools er zum Ausführen der CLI verwenden soll.\n\nWelche zwei Tools sollten Sie dem Supporttechniker empfehlen?\n\n(Jede richtige Antwort stellt eine vollständige Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     options: [
       { id: "A", text: "Eingabeaufforderung" },
       { id: "B", text: "Azure-Ressourcen-Explorer" },
@@ -1130,7 +1130,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-65",
     topicId: "azure-verwaltung",
-    prompt: "Sie planen, 20 TB Daten in Azure zu speichern. Auf die Daten wird nur selten zugegriffen, und sie werden mit Microsoft Power BI visualisiert. Sie müssen eine Speicherlösung für die Daten empfehlen. Welche zwei Lösungen sollten Sie empfehlen? (Jede richtige Antwort stellt eine Komplettlösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    prompt: "Sie planen, 20 TB Daten in Azure zu speichern. Auf die Daten wird nur selten zugegriffen, und sie werden mit Microsoft Power BI visualisiert.\n\nSie müssen eine Speicherlösung für die Daten empfehlen.\n\nWelche zwei Lösungen sollten Sie empfehlen?\n\n(Jede richtige Antwort stellt eine Komplettlösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     options: [
       { id: "A", text: "Azure Data Lake" },
       { id: "B", text: "Azure Cosmos DB" },
@@ -1302,7 +1302,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-78",
     topicId: "azure-architektur",
-    prompt: "Sie verfügen über eine Azure-Umgebung mit mehreren virtuellen Azure-Computern. Sie planen die Implementierung einer Lösung, die es den Clientcomputern in Ihrem lokalen Netzwerk ermöglicht, mit den virtuellen Azure-Computern zu kommunizieren. Sie müssen empfehlen, welche Azure-Ressourcen für die geplante Lösung erstellt werden müssen. Welche zwei Azure-Ressourcen sollten Sie in die Empfehlung aufnehmen? (Jede richtige Antwort stellt einen Teil der Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    prompt: "Sie verfügen über eine Azure-Umgebung mit mehreren virtuellen Azure-Computern.\n\nSie planen die Implementierung einer Lösung, die es den Clientcomputern in Ihrem lokalen Netzwerk ermöglicht, mit den virtuellen Azure-Computern zu kommunizieren.\n\nSie müssen empfehlen, welche Azure-Ressourcen für die geplante Lösung erstellt werden müssen.\n\nWelche zwei Azure-Ressourcen sollten Sie in die Empfehlung aufnehmen?\n\n(Jede richtige Antwort stellt einen Teil der Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     options: [
       { id: "A", text: "Ein virtuelles Netzwerk-Gateway" },
       { id: "B", text: "Ein Load Balancer" },
@@ -1456,7 +1456,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-89",
     topicId: "azure-architektur",
-    prompt: "Ihr Unternehmen plant die Bereitstellung mehrerer Millionen Sensoren, die Daten nach Azure hochladen. Sie müssen ermitteln, welche Azure-Ressourcen zur Unterstützung der geplanten Lösung erstellt werden müssen. Welche zwei Azure-Ressourcen sollten Sie identifizieren? (Jede richtige Antwort stellt einen Teil der Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    prompt: "Ihr Unternehmen plant die Bereitstellung mehrerer Millionen Sensoren, die Daten nach Azure hochladen.\n\nSie müssen ermitteln, welche Azure-Ressourcen zur Unterstützung der geplanten Lösung erstellt werden müssen.\n\nWelche zwei Azure-Ressourcen sollten Sie identifizieren?\n\n(Jede richtige Antwort stellt einen Teil der Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     options: [
       { id: "A", text: "Azure Data Lake" },
       { id: "B", text: "Azure-Warteschlangenspeicher" },
@@ -1643,7 +1643,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-102",
     topicId: "azure-architektur",
-    prompt: "Ein Unternehmen plant die Bereitstellung einer zustandslosen Anwendung auf Basis von Microservices mithilfe des Azure Service Fabric-Dienstes. Sie müssen die dafür erforderliche Infrastruktur für den Azure Service Fabric-Dienst entwerfen. Welche der folgenden Punkte sollten Sie berücksichtigen? (Jede richtige Antwort stellt einen Teil der Lösung dar. Wählen Sie zwei aus.)",
+    prompt: "Ein Unternehmen plant die Bereitstellung einer zustandslosen Anwendung auf Basis von Microservices mithilfe des Azure Service Fabric-Dienstes.\n\nSie müssen die dafür erforderliche Infrastruktur für den Azure Service Fabric-Dienst entwerfen.\n\nWelche der folgenden Punkte sollten Sie berücksichtigen?\n\n(Jede richtige Antwort stellt einen Teil der Lösung dar. Wählen Sie zwei aus.)",
     options: [
       { id: "A", text: "Die Anzahl der Knotentypen im Cluster" },
       { id: "B", text: "Die Eigenschaften für jeden Knotentyp" },
@@ -1973,7 +1973,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-124",
     topicId: "azure-architektur",
-    prompt: "Sie planen, Ihr Unternehmensnetzwerk auf Azure zu erweitern. Das Netzwerk enthält ein VPN-Gerät mit der IP-Adresse 131.107.200.1. Sie müssen eine Azure-Ressource erstellen, die das VPN-Gerät identifiziert. Welche Azure-Ressource sollten Sie erstellen? (Wählen Sie zur Beantwortung die entsprechende Ressource im Antwortbereich aus.)",
+    prompt: "Sie planen, Ihr Unternehmensnetzwerk auf Azure zu erweitern. Das Netzwerk enthält ein VPN-Gerät mit der IP-Adresse 131.107.200.1.\n\nSie müssen eine Azure-Ressource erstellen, die das VPN-Gerät identifiziert.\n\nWelche Azure-Ressource sollten Sie erstellen?\n\n(Wählen Sie zur Beantwortung die entsprechende Ressource im Antwortbereich aus.)",
     imageUrl: "/exam-images/az900-q124.png",
     options: [
       { id: "A", text: "Lastenausgleichsmodule" },
@@ -2611,7 +2611,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-165",
     topicId: "azure-architektur",
-    prompt: "Sie planen die Erstellung einer virtuellen Azure-Maschine. Sie müssen ermitteln, welcher Speicherdienst zum Speichern der Datenträger der virtuellen Maschine verwendet werden soll. Was sollten Sie ermitteln? (Wählen Sie zur Beantwortung den entsprechenden Dienst im Antwortbereich aus.)",
+    prompt: "Sie planen die Erstellung einer virtuellen Azure-Maschine.\n\nSie müssen ermitteln, welcher Speicherdienst zum Speichern der Datenträger der virtuellen Maschine verwendet werden soll.\n\nWas sollten Sie ermitteln?\n\n(Wählen Sie zur Beantwortung den entsprechenden Dienst im Antwortbereich aus.)",
     options: [
       { id: "A", text: "Behälter" },
       { id: "B", text: "Dateifreigaben" },
@@ -3057,7 +3057,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-194",
     topicId: "azure-verwaltung",
-    prompt: "Ein Azure-Administrator plant die Ausführung eines PowerShell-Skripts zum Erstellen von Azure-Ressourcen. Sie müssen eine Empfehlung für die Computerkonfiguration zum Ausführen des Skripts abgeben. Auf welchen drei Computern kann das Skript ausgeführt werden? (Jede richtige Antwort stellt eine vollständige Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    prompt: "Ein Azure-Administrator plant die Ausführung eines PowerShell-Skripts zum Erstellen von Azure-Ressourcen.\n\nSie müssen eine Empfehlung für die Computerkonfiguration zum Ausführen des Skripts abgeben.\n\nAuf welchen drei Computern kann das Skript ausgeführt werden?\n\n(Jede richtige Antwort stellt eine vollständige Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     options: [
       { id: "A", text: "Ein Computer, auf dem macOS ausgeführt wird und auf dem PowerShell Core 6.0 installiert ist." },
       { id: "B", text: "Ein Computer, auf dem Windows 10 ausgeführt wird und auf dem das Azure PowerShell-Modul installiert ist." },
@@ -3070,7 +3070,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-195",
     topicId: "azure-architektur",
-    prompt: "Ihre Azure-Umgebung enthält mehrere virtuelle Azure-Computer. Sie müssen sicherstellen, dass ein virtueller Computer namens VM1 über HTTP aus dem Internet erreichbar ist. Welche zwei möglichen Lösungen gibt es? (Jede richtige Antwort stellt eine vollständige Lösung dar.)",
+    prompt: "Ihre Azure-Umgebung enthält mehrere virtuelle Azure-Computer.\n\nSie müssen sicherstellen, dass ein virtueller Computer namens VM1 über HTTP aus dem Internet erreichbar ist.\n\nWelche zwei möglichen Lösungen gibt es?\n\n(Jede richtige Antwort stellt eine vollständige Lösung dar.)",
     options: [
       { id: "A", text: "Ändern Sie einen DDoS-Schutzplan." },
       { id: "B", text: "Ändern Sie eine Azure-Firewall." },
@@ -3934,7 +3934,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-254",
     topicId: "azure-architektur",
-    prompt: "Sie haben eine Azure-Web-App. Sie möchten die Einstellungen der Web-App von einem iPhone aus verwalten. Welche zwei Azure-Verwaltungstools können Sie verwenden? (Jede richtige Antwort stellt eine Komplettlösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    prompt: "Sie haben eine Azure-Web-App.\n\nSie möchten die Einstellungen der Web-App von einem iPhone aus verwalten.\n\nWelche zwei Azure-Verwaltungstools können Sie verwenden? (Jede richtige Antwort stellt eine Komplettlösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     options: [
       { id: "A", text: "Azure-Befehlszeilenschnittstelle" },
       { id: "B", text: "Das Azure-Portal" },
@@ -4005,7 +4005,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-259",
     topicId: "azure-architektur",
-    prompt: "Sie verfügen über eine Azure-Umgebung. Sie müssen eine neue virtuelle Azure-Maschine auf einem Tablet mit Android-Betriebssystem erstellen. Welche drei Lösungsansätze gibt es? (Jede richtige Antwort stellt eine vollständige Lösung dar. HINWEIS: Jede richtige Antwort zählt einen Punkt.)",
+    prompt: "Sie verfügen über eine Azure-Umgebung.\n\nSie müssen eine neue virtuelle Azure-Maschine auf einem Tablet mit Android-Betriebssystem erstellen.\n\nWelche drei Lösungsansätze gibt es? (Jede richtige Antwort stellt eine vollständige Lösung dar. HINWEIS: Jede richtige Antwort zählt einen Punkt.)",
     options: [
       { id: "A", text: "Verwenden Sie Bash in Azure Cloud Shell." },
       { id: "B", text: "Verwenden Sie PowerShell in Azure Cloud Shell." },
@@ -5464,7 +5464,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-344",
     topicId: "azure-architektur",
-    prompt: "Sie planen die Bereitstellung mehrerer virtueller Azure-Computer. Sie müssen sicherstellen, dass die auf den virtuellen Computern ausgeführten Dienste auch bei Ausfall eines Rechenzentrums verfügbar bleiben. Welche zwei Lösungsansätze gibt es? (Jede richtige Antwort stellt eine Komplettlösung dar. HINWEIS: Jede richtige Antwort zählt einen Punkt.)",
+    prompt: "Sie planen die Bereitstellung mehrerer virtueller Azure-Computer.\n\nSie müssen sicherstellen, dass die auf den virtuellen Computern ausgeführten Dienste auch bei Ausfall eines Rechenzentrums verfügbar bleiben.\n\nWelche zwei Lösungsansätze gibt es?\n\n(Jede richtige Antwort stellt eine Komplettlösung dar. HINWEIS: Jede richtige Antwort zählt einen Punkt.)",
     options: [
       { id: "A", text: "Stellen Sie die virtuellen Computer in einer Skalierungsgruppe bereit." },
       { id: "B", text: "Stellen Sie die virtuellen Maschinen in zwei oder mehr Ressourcengruppen bereit." },
@@ -5506,7 +5506,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-347",
     topicId: "azure-architektur",
-    prompt: "Sie verfügen über eine Azure-Umgebung mit mehreren virtuellen Azure-Computern. Sie planen die Implementierung einer Lösung, die es den Clientcomputern in Ihrem lokalen Netzwerk ermöglicht, mit den virtuellen Azure-Computern zu kommunizieren. Sie müssen empfehlen, welche Azure-Ressourcen für die geplante Lösung erstellt werden müssen. Welche zwei Azure-Ressourcen sollten Sie in die Empfehlung aufnehmen? (Jede richtige Antwort stellt einen Teil der Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    prompt: "Sie verfügen über eine Azure-Umgebung mit mehreren virtuellen Azure-Computern.\n\nSie planen die Implementierung einer Lösung, die es den Clientcomputern in Ihrem lokalen Netzwerk ermöglicht, mit den virtuellen Azure-Computern zu kommunizieren.\n\nSie müssen empfehlen, welche Azure-Ressourcen für die geplante Lösung erstellt werden müssen.\n\nWelche zwei Azure-Ressourcen sollten Sie in die Empfehlung aufnehmen?\n\n(Jede richtige Antwort stellt einen Teil der Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     options: [
       { id: "A", text: "Ein Lastenausgleich" },
       { id: "B", text: "Ein virtuelles Netzwerk" },
@@ -7476,7 +7476,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-474",
     topicId: "azure-verwaltung",
-    prompt: "Sie planen, die laufenden Azure-Ausgaben zu senken. Sie müssen ermitteln, welche Faktoren die Kosten einer Ressource beeinflussen. Welche drei Faktoren sollten Sie identifizieren? (Jede richtige Antwort stellt eine vollständige Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    prompt: "Sie planen, die laufenden Azure-Ausgaben zu senken.\n\nSie müssen ermitteln, welche Faktoren die Kosten einer Ressource beeinflussen.\n\nWelche drei Faktoren sollten Sie identifizieren?\n\n(Jede richtige Antwort stellt eine vollständige Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     options: [
       { id: "A", text: "Das Volumen der ausgehenden Daten" },
       { id: "B", text: "Das Volumen der eingehenden Daten" },
@@ -7610,7 +7610,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-484",
     topicId: "azure-verwaltung",
-    prompt: "Sie möchten Ereignisdetails für fünf virtuelle Azure-Computer erfassen und analysieren. Sie müssen Abfragen ausführen, um die von allen virtuellen Computern erfassten Ereignisdetails zu vergleichen. Welche zwei Tools sollten Sie verwenden? (Jede richtige Antwort stellt einen Teil der Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    prompt: "Sie möchten Ereignisdetails für fünf virtuelle Azure-Computer erfassen und analysieren.\n\nSie müssen Abfragen ausführen, um die von allen virtuellen Computern erfassten Ereignisdetails zu vergleichen.\n\nWelche zwei Tools sollten Sie verwenden?\n\n(Jede richtige Antwort stellt einen Teil der Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     options: [
       { id: "A", text: "Azure-Dienstintegrität" },
       { id: "B", text: "Azure Service Bus" },
@@ -8133,7 +8133,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-az900-518",
     topicId: "azure-verwaltung",
-    prompt: "Ein Azure-Administrator plant die Ausführung eines PowerShell-Skripts zum Erstellen von Azure-Ressourcen. Sie müssen eine Empfehlung für die Computerkonfiguration geben, mit der das Skript ausgeführt werden soll. Auf welchen drei Computern kann das Skript ausgeführt werden? (Jede richtige Antwort stellt eine vollständige Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    prompt: "Ein Azure-Administrator plant die Ausführung eines PowerShell-Skripts zum Erstellen von Azure-Ressourcen.\n\nSie müssen eine Empfehlung für die Computerkonfiguration geben, mit der das Skript ausgeführt werden soll.\n\nAuf welchen drei Computern kann das Skript ausgeführt werden?\n\n(Jede richtige Antwort stellt eine vollständige Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     options: [
       { id: "A", text: "Ein Computer, auf dem Windows 11 ausgeführt wird und auf dem die Azure CLI-Tools installiert sind." },
       { id: "B", text: "Ein Computer, auf dem Linux ausgeführt wird und auf dem die Azure CLI-Tools installiert sind." },
