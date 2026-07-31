@@ -1873,7 +1873,7 @@ const tr: Dictionary = {
   ueberUnsPage: {
     founderTitle: "Kurucu",
     founderRole: "CertCoach Kurucusu ve Yazılım Mühendisi",
-    founderBio: "Ataullah Senmas, yazılım mühendisi ve Sankt-Peterburg'daki ITMO Üniversitesi mezunudur. Şu anda Almanya'da yaşıyor ve Farsça konuşan topluluğa, özellikle Afganlara BT sertifikalarını daha erişilebilir kılmak için CertCoach'u kurdu.",
+    founderBio: "Ataullah Senmas, yazılım mühendisi ve Sankt-Peterburg'daki ITMO Üniversitesi mezunudur. Şu anda Almanya'da yaşıyor ve dünyanın her yerindeki insanlar için BT sertifikalarını daha erişilebilir kılmak amacıyla CertCoach'u kurdu.",
 
     title: "Hakkımızda",
     desc: "CertCoach net bir hedefle kuruldu: IT ve dil becerilerini kuru teori yerine yapılandırılmış öğrenme yolları, uygulamalı laboratuvarlar ve yapay zeka desteğiyle herkes için erişilebilir kılmak.",

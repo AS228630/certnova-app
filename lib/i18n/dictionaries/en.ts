@@ -1879,7 +1879,7 @@ const en: Dictionary = {
   ueberUnsPage: {
     founderTitle: "Founder",
     founderRole: "Founder & Software Engineer at CertCoach",
-    founderBio: "Ataullah Senmas is a software engineer and graduate of ITMO University in Saint Petersburg. He now lives in Germany and founded CertCoach to make IT certifications more accessible to the Persian-speaking community, especially Afghans.",
+    founderBio: "Ataullah Senmas is a software engineer and graduate of ITMO University in Saint Petersburg. He now lives in Germany and founded CertCoach to make IT certifications more accessible to people around the world.",
 
     title: "About Us",
     desc: "CertCoach was founded with a clear goal: to make IT and language skills accessible to everyone — with structured learning paths, hands-on labs, and AI support instead of dry theory.",
