@@ -8052,6 +8052,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-511",
     topicId: "cloud-konzepte",
     prompt: "Wählen Sie im Antwortbereich die entsprechende Option aus, um den Satz zu vervollständigen.",
+    blankFill: {
+      template: "Wenn Sie eine Software-as-a-Service-Lösung (SaaS) implementieren, sind Sie für ___ verantwortlich.",
+      choices: ["die Konfiguration der Hochverfügbarkeit", "die Definition von Skalierbarkeitsregeln", "die Installation der SaaS-Lösung", "die Konfiguration der SaaS-Lösung"],
+    },
     options: [
       { id: "A", text: "Wenn Sie eine Software-as-a-Service-Lösung (SaaS) implementieren, sind Sie für die Konfiguration der Hochverfügbarkeit verantwortlich." },
       { id: "B", text: "Wenn Sie eine Software-as-a-Service-Lösung (SaaS) implementieren, sind Sie für die Definition von Skalierbarkeitsregeln verantwortlich." },
@@ -8099,6 +8103,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-514",
     topicId: "azure-architektur",
     prompt: "Wählen Sie im Antwortbereich die entsprechende Option aus, um den Satz zu vervollständigen.",
+    blankFill: {
+      template: "Azure Key Vault wird zum Speichern von Geheimnissen für ___ verwendet.",
+      choices: ["Microsoft Entra ID-Benutzerkonten", "Microsoft Entra ID-Administratorkonten", "personenbezogene Daten (PII)", "Serveranwendungen"],
+    },
     options: [
       { id: "A", text: "Azure Key Vault wird zum Speichern von Geheimnissen für Microsoft Entra ID-Benutzerkonten verwendet." },
       { id: "B", text: "Azure Key Vault wird zum Speichern von Geheimnissen für Microsoft Entra ID-Administratorkonten verwendet." },
