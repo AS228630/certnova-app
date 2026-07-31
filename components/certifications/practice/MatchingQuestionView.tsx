@@ -4,25 +4,7 @@ import { useMemo, useState } from "react";
 import { GripVertical, CheckCircle2, XCircle, X, Info, MousePointer2 } from "lucide-react";
 import type { MatchingQuestion } from "@/lib/az900Practice";
 import { useLocale } from "@/components/LocaleProvider";
-
-// Deterministic string hash -> used to seed a stable shuffle per question,
-// so the same question always shows items in the same shuffled order
-// within a session/reload (not re-shuffling on every keystroke), but
-// different questions get different, unpredictable orderings.
-function seededShuffle<T>(arr: T[], seed: string): T[] {
-  let h = 0;
-  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
-  const rand = () => {
-    h = (h * 1664525 + 1013904223) >>> 0;
-    return h / 4294967296;
-  };
-  const copy = [...arr];
-  for (let i = copy.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
-  }
-  return copy;
-}
+import { seededShuffle } from "@/lib/seededShuffle";
 
 export default function MatchingQuestionView({
   question,

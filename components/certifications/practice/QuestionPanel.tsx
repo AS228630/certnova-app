@@ -7,6 +7,7 @@ import type { PracticeOptionId, PracticeQuestion } from "@/lib/az900Practice";
 import { isMultiSelectQuestion, correctOptionIds } from "@/lib/az900Practice";
 import MatchingQuestionView from "./MatchingQuestionView";
 import { useLocale } from "@/components/LocaleProvider";
+import { seededShuffle } from "@/lib/seededShuffle";
 
 type YesNoAnswers = Record<number, "Ja" | "Nein">;
 type MatchingAnswers = Record<string, string>;
@@ -36,6 +37,7 @@ export default function QuestionPanel({
   onRetrySection,
   onRetrySectionShuffled,
   onResetAll,
+  optionShuffleGen,
 }: {
   question: PracticeQuestion;
   index: number;
@@ -68,6 +70,11 @@ export default function QuestionPanel({
    * whole exam" button, exposed here so it doesn't require finishing
    * the exam or navigating away to Settings first. */
   onResetAll: () => void;
+  /** Bumped by "Gemischt wiederholen" so option/answer positions get a
+   * fresh shuffle at the same moments the question order does - part of
+   * the seed rather than extra state, so it works for every question
+   * type/certification automatically with no per-question setup. */
+  optionShuffleGen: number;
 }) {
   const { t } = useLocale();
   const [showExplanation, setShowExplanation] = useState(false);
@@ -75,6 +82,23 @@ export default function QuestionPanel({
   const isYesNo = question.type === "yesno";
   const isMatching = question.type === "matching";
   const isMultiSelect = !isYesNo && !isMatching && isMultiSelectQuestion(question);
+  // Reshuffled together with the question order by "Gemischt wiederholen"
+  // (optionShuffleGen bump) - seeded so it's stable across re-renders of
+  // the same question/generation, but different for every question and
+  // every reshuffle. blankFillIndexOrder keeps the dropdown's choices in
+  // sync with the same permutation, since blankFill.choices[i] must stay
+  // paired with options[i]'s id no matter what order either is displayed in.
+  const shuffledIndexOrder =
+    question.type !== "yesno" && question.type !== "matching"
+      ? seededShuffle(
+          question.options.map((_, i: number) => i),
+          `${question.id}-${optionShuffleGen}`
+        )
+      : [];
+  const displayOptions =
+    question.type !== "yesno" && question.type !== "matching"
+      ? shuffledIndexOrder.map((i) => question.options[i])
+      : [];
   const yesNoAnswers = (isYesNo ? (selected as YesNoAnswers) : {}) ?? {};
   const matchingAnswers = (isMatching ? (selected as MatchingAnswers) : {}) ?? {};
   const singleSelected = isYesNo || isMatching || isMultiSelect ? null : (selected as PracticeOptionId | null);
@@ -271,9 +295,9 @@ export default function QuestionPanel({
               <option value="" disabled>
                 {t("practice.blankPlaceholder")}
               </option>
-              {question.blankFill.choices.map((choice, ci) => (
-                <option key={ci} value={question.options[ci]?.id}>
-                  {choice}
+              {shuffledIndexOrder.map((oi) => (
+                <option key={oi} value={question.options[oi]?.id}>
+                  {question.blankFill!.choices[oi]}
                 </option>
               ))}
             </select>
@@ -302,7 +326,7 @@ export default function QuestionPanel({
           {(("blankFill" in question && question.blankFill) || ("blankFillMulti" in question && question.blankFillMulti)) && (
             <p className="mb-1 text-xs font-semibold text-text-faint">{t("practice.orPickFullSentence")}</p>
           )}
-          {question.options.map((opt) => {
+          {displayOptions.map((opt) => {
             const isSelected = isMultiSelect ? multiSelected.includes(opt.id) : singleSelected === opt.id;
             const isRight = isMultiSelect ? correctOptionIds(question).includes(opt.id) : opt.id === question.correct;
             let style = "border-border-soft hover:border-primary/50 hover:shadow-[0_0_16px_rgba(124,58,237,0.18)]";

@@ -68,6 +68,13 @@ export default function PracticeClient({
   }, [certId, locale, questionsFromServer]);
   const router = useRouter();
   const [order, setOrder] = useState<string[] | null>(null); // null = authored order, else shuffled question ids
+  // Bumped every time "Gemischt wiederholen" reshuffles the question
+  // order, so option/answer positions within each question are re-
+  // randomized at the exact same moments - never on every render (which
+  // would visibly jump the options around while answering) and never
+  // tied to just the question id alone (which would always shuffle the
+  // same way every time, defeating the point of "mixed" retries).
+  const [optionShuffleGen, setOptionShuffleGen] = useState(0);
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [checked, setChecked] = useState<Set<string>>(new Set());
@@ -473,6 +480,7 @@ export default function PracticeClient({
         if (attempt.length <= 1 || attempt.join(",") !== currentIds.join(",")) break;
       }
       nextIds = attempt;
+      setOptionShuffleGen((g) => g + 1);
     } else {
       // Always the true original authored order, regardless of whatever
       // order was active before (e.g. a prior shuffle).
@@ -743,6 +751,7 @@ export default function PracticeClient({
           question={current}
           index={index}
           total={activeQuestions.length}
+          optionShuffleGen={optionShuffleGen}
           selected={answers[current.id] ?? null}
           checked={checked.has(current.id)}
           marked={marked.has(current.id)}
