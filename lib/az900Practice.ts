@@ -8255,6 +8255,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-523",
     topicId: "azure-verwaltung",
     prompt: "Wählen Sie im Antwortbereich die entsprechende Option aus, um den Satz zu vervollständigen.",
+    blankFill: {
+      template: "Von ___ aus können Sie die regulatorischen Standards und Vorschriften Ihres Unternehmens, beispielsweise ISO 27001, verfolgen.",
+      choices: ["Azure Cloud Shell", "dem Microsoft Cloud Partner Portal", "dem Compliance Manager", "dem Trust Center"],
+    },
     options: [
       { id: "A", text: "Über Azure Cloud Shell können Sie die regulatorischen Standards und Vorschriften Ihres Unternehmens, beispielsweise ISO 27001, verfolgen." },
       { id: "B", text: "Über das Microsoft Cloud Partner Portal können Sie die regulatorischen Standards und Vorschriften Ihres Unternehmens, beispielsweise ISO 27001, verfolgen." },
