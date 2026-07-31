@@ -8220,6 +8220,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-521",
     topicId: "azure-verwaltung",
     prompt: "Wählen Sie im Antwortbereich die entsprechende Option aus, um den Satz zu vervollständigen.",
+    blankFill: {
+      template: "Der Azure ___-Supportplan ist die kostengünstigste Option, um rund um die Uhr telefonischen Zugang zu Supporttechnikern zu erhalten.",
+      choices: ["Standard", "Developer", "Basic", "Professional Direct"],
+    },
     options: [
       { id: "A", text: "Der Azure Standard-Supportplan ist die kostengünstigste Option, um rund um die Uhr telefonischen Zugang zu Supporttechnikern zu erhalten." },
       { id: "B", text: "Der Azure Developer-Supportplan ist die kostengünstigste Option, um rund um die Uhr telefonischen Zugang zu Supporttechnikern zu erhalten." },
@@ -8234,6 +8238,10 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-522",
     topicId: "cloud-konzepte",
     prompt: "Wählen Sie im Antwortbereich die entsprechende Option aus, um den Satz zu vervollständigen.",
+    blankFill: {
+      template: "Eine Organisation migriert zu Cloud-Diensten, um Infrastrukturkosten ___",
+      choices: ["sowohl als Kapital- als auch als Betriebsausgaben zu budgetieren.", "als Kapitalausgaben einzuplanen.", "weder als Kapital- noch als Betriebskosten einzuplanen.", "als Betriebsausgaben einzuplanen."],
+    },
     options: [
       { id: "A", text: "Eine Organisation migriert zu Cloud-Diensten, um die Infrastrukturkosten sowohl als Kapital- als auch als Betriebsausgaben zu budgetieren." },
       { id: "B", text: "Eine Organisation migriert zu Cloud-Diensten, um Infrastrukturkosten als Kapitalausgaben einzuplanen." },
