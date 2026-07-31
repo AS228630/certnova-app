@@ -8121,6 +8121,15 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-515",
     topicId: "cloud-konzepte",
     prompt: "Wählen Sie im Antwortbereich die entsprechende Option aus, um den Satz zu vervollständigen.\n\nSie stellen eine Azure-Ressource bereit. Aufgrund eines Dienstausfalls ist die Ressource für einen längeren Zeitraum nicht verfügbar.",
+    blankFill: {
+      template: "Sie stellen eine Azure-Ressource bereit. Aufgrund eines Dienstausfalls ist die Ressource für einen längeren Zeitraum nicht verfügbar.\n___",
+      choices: [
+        "Microsoft erstattet den Betrag automatisch auf Ihr Bankkonto zurück.",
+        "Microsoft migriert die Ressource automatisch in ein anderes Abonnement.",
+        "Microsoft schreibt Ihrem Konto automatisch den Betrag gut.",
+        "Microsoft sendet Ihnen einen Gutscheincode, den Sie gegen Azure-Guthaben einlösen können.",
+      ],
+    },
     options: [
       { id: "A", text: "Sie stellen eine Azure-Ressource bereit. Aufgrund eines Dienstausfalls ist die Ressource für einen längeren Zeitraum nicht verfügbar.\nMicrosoft erstattet den Betrag automatisch auf Ihr Bankkonto zurück." },
       { id: "B", text: "Sie stellen eine Azure-Ressource bereit. Aufgrund eines Dienstausfalls ist die Ressource für einen längeren Zeitraum nicht verfügbar.\nMicrosoft migriert die Ressource automatisch in ein anderes Abonnement." },
