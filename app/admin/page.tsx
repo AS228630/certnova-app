@@ -4,19 +4,23 @@
  * Admin Dashboard — UI shell only.
  *
  * STATUS: This is a visual implementation matching the approved mockup,
- * built with mock data so it can be reviewed end-to-end. It is NOT yet
- * wired to real Supabase data, and there is NO auth/role guard yet —
- * anyone with the URL can currently open it. Both of those are required
- * before this route goes anywhere near production:
- *   1. Wire each section to real queries (teacher_coupons, subscriptions,
- *      students, b2b_groups tables — see docs/admin-dashboard-plan.md).
- *   2. Add a server-side check that the signed-in user is the project
- *      owner/super-admin before rendering anything here.
+ * built with mock data so it can be reviewed end-to-end. It is now
+ * gated by AdminGuard (client-side email allow-list — see
+ * components/admin/AdminGuard.tsx for how to configure it and its
+ * limitations). It is NOT yet wired to real Supabase data — every table
+ * and stat below is mock data.
  *
- * Until both of those land, treat this page as a design preview, not a
- * functional admin panel.
+ * Before this goes anywhere near production:
+ *   1. Set NEXT_PUBLIC_ADMIN_EMAILS in Vercel so the guard actually
+ *      restricts to you (it currently allows nobody until configured).
+ *   2. Wire each section to real queries (teacher_coupons, subscriptions,
+ *      students, b2b_groups tables — see docs/admin-dashboard-plan.md).
+ *   3. Add a real server-side authorization check (e.g. an admin-only
+ *      API route or Supabase RLS policy) once real data is connected —
+ *      the client-side guard alone is not sufficient for sensitive data.
  */
 
+import AdminGuard from '@/components/admin/AdminGuard';
 import {
   LayoutDashboard,
   Ticket,
@@ -266,7 +270,7 @@ function StatusPill({ active }: { active: boolean }) {
 // Page
 // ---------------------------------------------------------------------------
 
-export default function AdminDashboardPage() {
+function AdminDashboardContent() {
   return (
     <div className="flex min-h-screen" style={{ background: 'var(--color-bg)', color: 'var(--color-text)' }}>
       {/* Sidebar */}
@@ -513,5 +517,13 @@ export default function AdminDashboardPage() {
         </main>
       </div>
     </div>
+  );
+}
+
+export default function AdminDashboardPage() {
+  return (
+    <AdminGuard>
+      <AdminDashboardContent />
+    </AdminGuard>
   );
 }
