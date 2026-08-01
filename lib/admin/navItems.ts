@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 
 export type AdminNavItem = {
-  /** URL segment under /admin/<slug>. */
+  /** URL segment under /admin-senmas/<slug>. */
   slug: string;
   label: string;
   icon: LucideIcon;

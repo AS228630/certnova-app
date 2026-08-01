@@ -8,7 +8,7 @@
  * This check happens entirely in the browser (same pattern already used
  * by DashboardShell for the student dashboard — see components/DashboardShell.tsx).
  * It is enough to stop casual/accidental access (someone guessing the
- * /admin URL) but it is NOT a substitute for real server-side
+ * /admin-senmas URL) but it is NOT a substitute for real server-side
  * authorization. Once real student/financial data is wired into this
  * panel, the underlying API routes and/or Supabase Row Level Security
  * policies must independently verify the caller is an admin — never
@@ -44,7 +44,7 @@ export default function AdminGuard({ children }: { children: React.ReactNode }) 
     if (loading) return;
 
     if (!user) {
-      router.replace('/login?redirect=/admin');
+      router.replace('/login?redirect=/admin-senmas');
       return;
     }
     if (!authorized) {

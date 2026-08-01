@@ -108,11 +108,11 @@ const B2B_GROUPS = [
 ];
 
 const QUICK_ACTIONS: { icon: LucideIcon; title: string; sub: string; color: string; href: string }[] = [
-  { icon: Folder, title: 'Karriere-Dokumente', sub: 'Private Links & Dokumente verwalten', color: '#F59E0B', href: '/admin/karriere-dokumente' },
-  { icon: Mail, title: 'E-Mails & Berichte', sub: 'E-Mails senden & Berichte exportieren', color: '#3B82F6', href: '/admin/berichte-exporte' },
-  { icon: Wallet, title: 'Auszahlungen', sub: 'Auszahlungsanfragen verwalten', color: '#22C55E', href: '/admin/auszahlungen' },
-  { icon: Settings, title: 'System-Einstellungen', sub: 'Allgemeine Einstellungen', color: '#8991AE', href: '/admin/einstellungen' },
-  { icon: HardDrive, title: 'Backup & Sicherheit', sub: 'Backup erstellen & sichern', color: '#7C3AED', href: '/admin/backup-restore' },
+  { icon: Folder, title: 'Karriere-Dokumente', sub: 'Private Links & Dokumente verwalten', color: '#F59E0B', href: '/admin-senmas/karriere-dokumente' },
+  { icon: Mail, title: 'E-Mails & Berichte', sub: 'E-Mails senden & Berichte exportieren', color: '#3B82F6', href: '/admin-senmas/berichte-exporte' },
+  { icon: Wallet, title: 'Auszahlungen', sub: 'Auszahlungsanfragen verwalten', color: '#22C55E', href: '/admin-senmas/auszahlungen' },
+  { icon: Settings, title: 'System-Einstellungen', sub: 'Allgemeine Einstellungen', color: '#8991AE', href: '/admin-senmas/einstellungen' },
+  { icon: HardDrive, title: 'Backup & Sicherheit', sub: 'Backup erstellen & sichern', color: '#7C3AED', href: '/admin-senmas/backup-restore' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -258,7 +258,7 @@ export default function AdminDashboardPage() {
 
         <SectionCard
           title="Letzte Aktivitäten"
-          action={<Link href="/admin/audit-logs" className="text-xs" style={{ color: 'var(--color-primary)' }}>Alle Aktivitäten</Link>}
+          action={<Link href="/admin-senmas/audit-logs" className="text-xs" style={{ color: 'var(--color-primary)' }}>Alle Aktivitäten</Link>}
         >
           <ul className="space-y-4">
             {RECENT_ACTIVITY.map((a) => (
@@ -276,7 +276,7 @@ export default function AdminDashboardPage() {
 
         <SectionCard
           title="System-Status"
-          action={<Link href="/admin/system-status" className="text-xs" style={{ color: 'var(--color-success)' }}>Alle Systeme OK</Link>}
+          action={<Link href="/admin-senmas/system-status" className="text-xs" style={{ color: 'var(--color-success)' }}>Alle Systeme OK</Link>}
         >
           <ul className="space-y-3">
             {SYSTEM_STATUS.map((s) => (
@@ -301,7 +301,7 @@ export default function AdminDashboardPage() {
         <SectionCard
           title="Dozenten-Codes (Übersicht)"
           action={
-            <Link href="/admin/dozenten-codes" className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}>
+            <Link href="/admin-senmas/dozenten-codes" className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}>
               <Plus size={13} /> Neuer Code
             </Link>
           }
@@ -318,14 +318,14 @@ export default function AdminDashboardPage() {
               </div>
             ))}
           </div>
-          <Link href="/admin/dozenten-codes" className="block text-center mt-4 text-xs" style={{ color: 'var(--color-primary)' }}>
+          <Link href="/admin-senmas/dozenten-codes" className="block text-center mt-4 text-xs" style={{ color: 'var(--color-primary)' }}>
             Alle Dozenten-Codes anzeigen
           </Link>
         </SectionCard>
 
         <SectionCard
           title="Studenten (Übersicht)"
-          action={<Link href="/admin/studenten" className="text-xs" style={{ color: 'var(--color-primary)' }}>Alle Studenten</Link>}
+          action={<Link href="/admin-senmas/studenten" className="text-xs" style={{ color: 'var(--color-primary)' }}>Alle Studenten</Link>}
         >
           <div className="space-y-3">
             {STUDENTEN.map((s) => (
@@ -342,7 +342,7 @@ export default function AdminDashboardPage() {
               </div>
             ))}
           </div>
-          <Link href="/admin/studenten" className="block text-center mt-4 text-xs" style={{ color: 'var(--color-primary)' }}>
+          <Link href="/admin-senmas/studenten" className="block text-center mt-4 text-xs" style={{ color: 'var(--color-primary)' }}>
             Alle Studenten anzeigen
           </Link>
         </SectionCard>
@@ -350,7 +350,7 @@ export default function AdminDashboardPage() {
         <SectionCard
           title="B2B & Gruppen (Übersicht)"
           action={
-            <Link href="/admin/b2b-gruppen" className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}>
+            <Link href="/admin-senmas/b2b-gruppen" className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}>
               <Plus size={13} /> Neue Gruppe
             </Link>
           }
@@ -367,7 +367,7 @@ export default function AdminDashboardPage() {
               </div>
             ))}
           </div>
-          <Link href="/admin/b2b-gruppen" className="block text-center mt-4 text-xs" style={{ color: 'var(--color-primary)' }}>
+          <Link href="/admin-senmas/b2b-gruppen" className="block text-center mt-4 text-xs" style={{ color: 'var(--color-primary)' }}>
             Alle Gruppen anzeigen
           </Link>
         </SectionCard>

@@ -7,10 +7,10 @@ import AdminGuard from './AdminGuard';
 import { ADMIN_NAV_SECTIONS, ADMIN_NAV_BY_SLUG } from '@/lib/admin/navItems';
 
 function currentTitle(pathname: string): { title: string; subtitle: string } {
-  if (pathname === '/admin') {
+  if (pathname === '/admin-senmas') {
     return { title: 'Dashboard', subtitle: 'Übersicht & Systemstatistiken' };
   }
-  const slug = pathname.replace(/^\/admin\/?/, '');
+  const slug = pathname.replace(/^\/admin-senmas\/?/, '');
   const item = ADMIN_NAV_BY_SLUG[slug];
   if (item) return { title: item.label, subtitle: item.description };
   return { title: 'Admin Panel', subtitle: '' };
@@ -43,10 +43,10 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
 
           <nav className="flex-1 overflow-y-auto py-4 px-3">
             <Link
-              href="/admin"
+              href="/admin-senmas"
               className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium mb-4"
               style={
-                pathname === '/admin'
+                pathname === '/admin-senmas'
                   ? { background: 'var(--color-primary)', color: '#fff' }
                   : { color: 'var(--color-text-muted)' }
               }
@@ -61,7 +61,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                   {section.label}
                 </div>
                 {section.items.map((item) => {
-                  const href = `/admin/${item.slug}`;
+                  const href = `/admin-senmas/${item.slug}`;
                   const active = pathname === href;
                   return (
                     <Link
