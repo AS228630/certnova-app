@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const disallow = ["/dashboard", "/profile", "/settings", "/analytics", "/api/"];
+  const disallow = ["/dashboard", "/profile", "/settings", "/analytics", "/api/", "/cv", "/admin-senmas"];
   return {
     rules: [
       {
