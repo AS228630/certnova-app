@@ -1,45 +1,33 @@
 'use client';
 
 /**
- * Admin Dashboard — UI shell only.
+ * Admin Dashboard — main content.
  *
- * STATUS: This is a visual implementation matching the approved mockup,
- * built with mock data so it can be reviewed end-to-end. It is now
- * gated by AdminGuard (client-side email allow-list — see
- * components/admin/AdminGuard.tsx for how to configure it and its
- * limitations). It is NOT yet wired to real Supabase data — every table
- * and stat below is mock data.
+ * STATUS: Visual implementation matching the approved mockup, built with
+ * mock data so it can be reviewed end-to-end. The sidebar/topbar/auth
+ * guard live in app/admin/layout.tsx (components/admin/AdminShell.tsx) —
+ * this file is only the page content. Every sidebar link and every
+ * "Öffnen"/"Alle X anzeigen" button below now routes to a real page
+ * (app/admin/[slug]/page.tsx), which currently shows an honest
+ * "In Entwicklung" placeholder — see docs/admin-dashboard-plan.md for
+ * the build-out plan.
  *
- * Before this goes anywhere near production:
- *   1. Set NEXT_PUBLIC_ADMIN_EMAILS in Vercel so the guard actually
- *      restricts to you (it currently allows nobody until configured).
- *   2. Wire each section to real queries (teacher_coupons, subscriptions,
- *      students, b2b_groups tables — see docs/admin-dashboard-plan.md).
- *   3. Add a real server-side authorization check (e.g. an admin-only
- *      API route or Supabase RLS policy) once real data is connected —
- *      the client-side guard alone is not sufficient for sensitive data.
+ * Still NOT done, in this order:
+ *   1. Set NEXT_PUBLIC_ADMIN_EMAILS in Vercel (guard allows nobody until
+ *      configured — see components/admin/AdminGuard.tsx).
+ *   2. Wire each section below to real Supabase queries.
+ *   3. Add server-side authorization once real data is connected.
  */
 
-import AdminGuard from '@/components/admin/AdminGuard';
+import Link from 'next/link';
 import {
-  LayoutDashboard,
   Ticket,
   GraduationCap,
-  Building2,
   Folder,
-  CreditCard,
-  Repeat,
-  Wallet,
-  ArrowLeftRight,
   Mail,
-  BarChart3,
-  Bell,
+  Wallet,
   Settings,
-  ScrollText,
-  Activity,
   HardDrive,
-  Moon,
-  ChevronDown,
   Plus,
   TrendingUp,
   TrendingDown,
@@ -64,7 +52,7 @@ type StatCard = {
 
 const STAT_CARDS: StatCard[] = [
   { label: 'Gesamtumsatz (Monat)', value: '€24.680,00', delta: '18,4%', positive: true, icon: Wallet, iconBg: '#7C3AED', spark: [4, 6, 5, 8, 7, 10, 12] },
-  { label: 'Verkäufe (Monat)', value: '248', delta: '14,7%', positive: true, icon: CreditCard, iconBg: '#3B82F6', spark: [3, 4, 4, 6, 5, 7, 8] },
+  { label: 'Verkäufe (Monat)', value: '248', delta: '14,7%', positive: true, icon: Wallet, iconBg: '#3B82F6', spark: [3, 4, 4, 6, 5, 7, 8] },
   { label: 'Aktive Studenten', value: '1.847', delta: '11,2%', positive: true, icon: GraduationCap, iconBg: '#22C55E', spark: [5, 5, 6, 6, 7, 8, 9] },
   { label: 'Dozenten-Codes', value: '78', delta: '5,6%', positive: true, icon: Ticket, iconBg: '#F59E0B', spark: [6, 6, 7, 6, 7, 7, 8] },
   { label: 'Offene Auszahlungen', value: '€3.930,00', delta: '3,1%', positive: false, icon: TrendingDown, iconBg: '#EF4444', spark: [9, 8, 8, 7, 7, 6, 6] },
@@ -89,11 +77,11 @@ const RECENT_ACTIVITY = [
 ];
 
 const SYSTEM_STATUS = [
-  { name: 'Web Server', online: true },
-  { name: 'Datenbank', online: true },
-  { name: 'Stripe', online: true },
-  { name: 'E-Mail Service', online: true },
-  { name: 'Cloud Storage', online: true },
+  { name: 'Web Server' },
+  { name: 'Datenbank' },
+  { name: 'Stripe' },
+  { name: 'E-Mail Service' },
+  { name: 'Cloud Storage' },
 ];
 
 const DOZENTEN_CODES = [
@@ -105,52 +93,26 @@ const DOZENTEN_CODES = [
 ];
 
 const STUDENTEN = [
-  { name: 'Max Mustermann', email: 'max.mustermann@example.com', plan: 'Premium', status: true, since: '21.07.2025', code: 'ARND10' },
-  { name: 'Anna Müller', email: 'anna.mueller@example.com', plan: 'Premium', status: true, since: '21.07.2025', code: 'MICHAEL10' },
-  { name: 'Thomas Schmidt', email: 'thomas.schmidt@example.com', plan: 'Basic', status: true, since: '20.07.2025', code: 'SARAH10' },
-  { name: 'Jessica Weber', email: 'jessica.weber@example.com', plan: 'Premium', status: true, since: '20.07.2025', code: 'DAVID10' },
-  { name: 'Lukas Hoffmann', email: 'lukas.hoffmann@example.com', plan: 'Basic', status: false, since: '20.07.2025', code: '—' },
+  { name: 'Max Mustermann', email: 'max.mustermann@example.com', plan: 'Premium', status: true },
+  { name: 'Anna Müller', email: 'anna.mueller@example.com', plan: 'Premium', status: true },
+  { name: 'Thomas Schmidt', email: 'thomas.schmidt@example.com', plan: 'Basic', status: true },
+  { name: 'Jessica Weber', email: 'jessica.weber@example.com', plan: 'Premium', status: true },
+  { name: 'Lukas Hoffmann', email: 'lukas.hoffmann@example.com', plan: 'Basic', status: false },
 ];
 
 const B2B_GROUPS = [
-  { name: 'WBS Training', type: 'Unternehmen', licenses: 50, used: 32, active: true, until: '21.07.2026' },
-  { name: 'IT Academy Berlin', type: 'Bildungseinrichtung', licenses: 100, used: 75, active: true, until: '15.08.2026' },
-  { name: 'Tech Solutions GmbH', type: 'Unternehmen', licenses: 25, used: 10, active: true, until: '01.10.2025' },
-  { name: 'DevSchool', type: 'Bildungseinrichtung', licenses: 30, used: 18, active: false, until: '15.06.2025' },
+  { name: 'WBS Training', type: 'Unternehmen', licenses: 50, used: 32, active: true },
+  { name: 'IT Academy Berlin', type: 'Bildungseinrichtung', licenses: 100, used: 75, active: true },
+  { name: 'Tech Solutions GmbH', type: 'Unternehmen', licenses: 25, used: 10, active: true },
+  { name: 'DevSchool', type: 'Bildungseinrichtung', licenses: 30, used: 18, active: false },
 ];
 
-const QUICK_ACTIONS = [
-  { icon: Folder, title: 'Karriere-Dokumente', sub: 'Private Links & Dokumente verwalten', color: '#F59E0B' },
-  { icon: Mail, title: 'E-Mails & Berichte', sub: 'E-Mails senden & Berichte exportieren', color: '#3B82F6' },
-  { icon: Wallet, title: 'Auszahlungen', sub: 'Auszahlungsanfragen verwalten', color: '#22C55E' },
-  { icon: Settings, title: 'System-Einstellungen', sub: 'Allgemeine Einstellungen', color: '#8991AE' },
-  { icon: HardDrive, title: 'Backup & Sicherheit', sub: 'Backup erstellen & sichern', color: '#7C3AED' },
-];
-
-const NAV_SECTIONS: { label: string; items: { icon: LucideIcon; label: string; active?: boolean }[] }[] = [
-  { label: 'MANAGEMENT', items: [
-    { icon: Ticket, label: 'Dozenten-Codes' },
-    { icon: GraduationCap, label: 'Studenten' },
-    { icon: Building2, label: 'B2B & Gruppen' },
-    { icon: Folder, label: 'Karriere-Dokumente' },
-  ]},
-  { label: 'FINANZEN', items: [
-    { icon: CreditCard, label: 'Zahlungen' },
-    { icon: Repeat, label: 'Abonnements' },
-    { icon: Wallet, label: 'Auszahlungen' },
-    { icon: ArrowLeftRight, label: 'Transaktionen' },
-  ]},
-  { label: 'KOMMUNIKATION', items: [
-    { icon: Mail, label: 'E-Mails & Vorlagen' },
-    { icon: BarChart3, label: 'Berichte & Exporte' },
-    { icon: Bell, label: 'Benachrichtigungen' },
-  ]},
-  { label: 'SYSTEM', items: [
-    { icon: Settings, label: 'Einstellungen' },
-    { icon: ScrollText, label: 'Audit Logs' },
-    { icon: Activity, label: 'System-Status' },
-    { icon: HardDrive, label: 'Backup & Restore' },
-  ]},
+const QUICK_ACTIONS: { icon: LucideIcon; title: string; sub: string; color: string; href: string }[] = [
+  { icon: Folder, title: 'Karriere-Dokumente', sub: 'Private Links & Dokumente verwalten', color: '#F59E0B', href: '/admin/karriere-dokumente' },
+  { icon: Mail, title: 'E-Mails & Berichte', sub: 'E-Mails senden & Berichte exportieren', color: '#3B82F6', href: '/admin/berichte-exporte' },
+  { icon: Wallet, title: 'Auszahlungen', sub: 'Auszahlungsanfragen verwalten', color: '#22C55E', href: '/admin/auszahlungen' },
+  { icon: Settings, title: 'System-Einstellungen', sub: 'Allgemeine Einstellungen', color: '#8991AE', href: '/admin/einstellungen' },
+  { icon: HardDrive, title: 'Backup & Sicherheit', sub: 'Backup erstellen & sichern', color: '#7C3AED', href: '/admin/backup-restore' },
 ];
 
 // ---------------------------------------------------------------------------
@@ -219,10 +181,7 @@ function StatCardView({ card }: { card: StatCard }) {
       style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}
     >
       <div className="flex items-center justify-between">
-        <div
-          className="w-10 h-10 rounded-xl flex items-center justify-center"
-          style={{ background: `${card.iconBg}26` }}
-        >
+        <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: `${card.iconBg}26` }}>
           <Icon size={18} color={card.iconBg} />
         </div>
         <Sparkline values={card.spark} color={card.iconBg} />
@@ -267,263 +226,179 @@ function StatusPill({ active }: { active: boolean }) {
 }
 
 // ---------------------------------------------------------------------------
-// Page
+// Page content
 // ---------------------------------------------------------------------------
-
-function AdminDashboardContent() {
-  return (
-    <div className="flex min-h-screen" style={{ background: 'var(--color-bg)', color: 'var(--color-text)' }}>
-      {/* Sidebar */}
-      <aside
-        className="hidden lg:flex flex-col shrink-0"
-        style={{ width: 280, background: 'var(--color-sidebar-bg)', borderRight: '1px solid var(--color-border-soft)' }}
-      >
-        <div className="flex items-center gap-2 px-5 h-20" style={{ borderBottom: '1px solid var(--color-border-soft)' }}>
-          <div
-            className="w-9 h-9 rounded-xl flex items-center justify-center font-bold text-white"
-            style={{ background: 'linear-gradient(135deg,#7C3AED,#3B82F6)' }}
-          >
-            C
-          </div>
-          <div>
-            <div className="text-sm font-bold leading-tight">CertCoach</div>
-            <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>Admin Panel</div>
-          </div>
-        </div>
-
-        <nav className="flex-1 overflow-y-auto py-4 px-3">
-          <button
-            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium mb-4"
-            style={{ background: 'var(--color-primary)', color: '#fff' }}
-          >
-            <LayoutDashboard size={17} />
-            Dashboard
-          </button>
-
-          {NAV_SECTIONS.map((section) => (
-            <div key={section.label} className="mb-4">
-              <div className="text-[10px] tracking-wider px-3 mb-1.5" style={{ color: 'var(--color-text-faint)' }}>
-                {section.label}
-              </div>
-              {section.items.map((item) => (
-                <button
-                  key={item.label}
-                  className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-sm mb-0.5 hover:opacity-90"
-                  style={{ color: 'var(--color-text-muted)' }}
-                >
-                  <item.icon size={16} />
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          ))}
-        </nav>
-
-        <div className="p-4 flex items-center gap-3" style={{ borderTop: '1px solid var(--color-border-soft)' }}>
-          <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-white" style={{ background: 'var(--color-primary)' }}>
-            AS
-          </div>
-          <div className="min-w-0">
-            <div className="text-xs font-semibold truncate">Ataullah Senmas</div>
-            <div className="text-[11px] flex items-center gap-1" style={{ color: 'var(--color-text-faint)' }}>
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--color-success)' }} />
-              Online
-            </div>
-          </div>
-        </div>
-      </aside>
-
-      {/* Main */}
-      <div className="flex-1 min-w-0 flex flex-col">
-        {/* Topbar */}
-        <header
-          className="h-20 flex items-center justify-between px-6 shrink-0"
-          style={{ background: 'var(--color-topbar-bg)', borderBottom: '1px solid var(--color-border-soft)' }}
-        >
-          <div>
-            <h1 className="text-lg font-bold">Dashboard</h1>
-            <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Übersicht &amp; Systemstatistiken</p>
-          </div>
-          <div className="flex items-center gap-3">
-            <button
-              className="hidden md:flex items-center gap-2 text-xs px-3 py-2 rounded-xl"
-              style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text-muted)' }}
-            >
-              Heute
-              <ChevronDown size={14} />
-            </button>
-            <button className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
-              <Moon size={16} />
-            </button>
-            <button className="relative w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
-              <Bell size={16} />
-              <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full text-[10px] flex items-center justify-center text-white" style={{ background: 'var(--color-danger)' }}>3</span>
-            </button>
-          </div>
-        </header>
-
-        <main className="flex-1 overflow-y-auto p-6 space-y-6">
-          {/* Stat cards */}
-          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
-            {STAT_CARDS.map((c) => (
-              <StatCardView key={c.label} card={c} />
-            ))}
-          </div>
-
-          {/* Revenue + Activity + Status */}
-          <div className="grid grid-cols-1 xl:grid-cols-[1.6fr_1fr_1fr] gap-4">
-            <SectionCard
-              title="Umsatz-Übersicht"
-              action={
-                <div className="flex items-center gap-4 text-xs" style={{ color: 'var(--color-text-muted)' }}>
-                  <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{ background: '#7C3AED' }} />Umsatz (€)</span>
-                  <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{ background: '#22C55E' }} />Provisionen (€)</span>
-                </div>
-              }
-            >
-              <RevenueChart />
-              <div className="flex justify-between text-[11px] mt-1" style={{ color: 'var(--color-text-faint)' }}>
-                {REVENUE_SERIES.map((d) => <span key={d.day}>{d.day}</span>)}
-              </div>
-            </SectionCard>
-
-            <SectionCard title="Letzte Aktivitäten" action={<span className="text-xs" style={{ color: 'var(--color-primary)' }}>Alle Aktivitäten</span>}>
-              <ul className="space-y-4">
-                {RECENT_ACTIVITY.map((a) => (
-                  <li key={a.text + a.time} className="flex items-start gap-3">
-                    <span className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ background: a.color }} />
-                    <div className="min-w-0">
-                      <div className="text-sm truncate">{a.text}</div>
-                      <div className="text-xs truncate" style={{ color: 'var(--color-text-faint)' }}>{a.sub}</div>
-                    </div>
-                    <span className="ml-auto text-[11px] shrink-0" style={{ color: 'var(--color-text-faint)' }}>{a.time}</span>
-                  </li>
-                ))}
-              </ul>
-            </SectionCard>
-
-            <SectionCard title="System-Status" action={<span className="text-xs" style={{ color: 'var(--color-success)' }}>Alle Systeme OK</span>}>
-              <ul className="space-y-3">
-                {SYSTEM_STATUS.map((s) => (
-                  <li key={s.name} className="flex items-center justify-between text-sm">
-                    <span className="flex items-center gap-2">
-                      <CheckCircle2 size={14} color="var(--color-success)" />
-                      {s.name}
-                    </span>
-                    <span className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Online</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-4 pt-3 flex items-center justify-between text-[11px]" style={{ borderTop: '1px solid var(--color-divider)', color: 'var(--color-text-faint)' }}>
-                Letzte Prüfung: vor 2 Minuten
-                <RefreshCw size={12} />
-              </div>
-            </SectionCard>
-          </div>
-
-          {/* Three overview tables */}
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
-            <SectionCard
-              title="Dozenten-Codes (Übersicht)"
-              action={
-                <button className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}>
-                  <Plus size={13} /> Neuer Code
-                </button>
-              }
-            >
-              <div className="space-y-3">
-                {DOZENTEN_CODES.map((d) => (
-                  <div key={d.code} className="flex items-center justify-between text-xs">
-                    <span className="px-2 py-1 rounded-md font-mono text-white text-[11px]" style={{ background: d.tag }}>{d.code}</span>
-                    <span style={{ color: 'var(--color-text-muted)' }}>{d.name}</span>
-                    <span style={{ color: 'var(--color-text-faint)' }}>+{d.giftDays} Tage</span>
-                    <span style={{ color: 'var(--color-text-faint)' }}>{d.commission}%</span>
-                    <span className="font-semibold">{d.revenue}</span>
-                    <StatusPill active={d.active} />
-                  </div>
-                ))}
-              </div>
-              <div className="text-center mt-4 text-xs" style={{ color: 'var(--color-primary)' }}>Alle Dozenten-Codes anzeigen</div>
-            </SectionCard>
-
-            <SectionCard title="Studenten (Übersicht)" action={<span className="text-xs" style={{ color: 'var(--color-primary)' }}>Alle Studenten</span>}>
-              <div className="space-y-3">
-                {STUDENTEN.map((s) => (
-                  <div key={s.email} className="flex items-center gap-3 text-xs">
-                    <div className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold text-white shrink-0" style={{ background: 'var(--color-primary)' }}>
-                      {s.name.split(' ').map((n) => n[0]).join('')}
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="truncate" style={{ color: 'var(--color-text)' }}>{s.name}</div>
-                      <div className="truncate" style={{ color: 'var(--color-text-faint)' }}>{s.email}</div>
-                    </div>
-                    <span style={{ color: 'var(--color-text-faint)' }}>{s.plan}</span>
-                    <StatusPill active={s.status} />
-                  </div>
-                ))}
-              </div>
-              <div className="text-center mt-4 text-xs" style={{ color: 'var(--color-primary)' }}>Alle Studenten anzeigen</div>
-            </SectionCard>
-
-            <SectionCard
-              title="B2B &amp; Gruppen (Übersicht)"
-              action={
-                <button className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}>
-                  <Plus size={13} /> Neue Gruppe
-                </button>
-              }
-            >
-              <div className="space-y-3">
-                {B2B_GROUPS.map((g) => (
-                  <div key={g.name} className="flex items-center justify-between text-xs">
-                    <div>
-                      <div style={{ color: 'var(--color-text)' }}>{g.name}</div>
-                      <div style={{ color: 'var(--color-text-faint)' }}>{g.type}</div>
-                    </div>
-                    <span style={{ color: 'var(--color-text-faint)' }}>{g.used}/{g.licenses}</span>
-                    <StatusPill active={g.active} />
-                  </div>
-                ))}
-              </div>
-              <div className="text-center mt-4 text-xs" style={{ color: 'var(--color-primary)' }}>Alle Gruppen anzeigen</div>
-            </SectionCard>
-          </div>
-
-          {/* Quick actions */}
-          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
-            {QUICK_ACTIONS.map((q) => (
-              <div key={q.title} className="rounded-2xl p-5 flex flex-col gap-3" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: `${q.color}26` }}>
-                  <q.icon size={18} color={q.color} />
-                </div>
-                <div>
-                  <div className="text-sm font-semibold">{q.title}</div>
-                  <div className="text-xs mt-0.5" style={{ color: 'var(--color-text-faint)' }}>{q.sub}</div>
-                </div>
-                <button
-                  className="mt-auto text-xs py-2 rounded-lg font-medium"
-                  style={{ background: 'var(--color-panel-alt)', color: 'var(--color-text-muted)' }}
-                >
-                  Öffnen
-                </button>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex items-center justify-between text-[11px] pt-2" style={{ color: 'var(--color-text-faint)' }}>
-            <span>© 2026 CertCoach. Alle Rechte vorbehalten.</span>
-            <span>Version 2.0.0 (UI-Vorschau — noch nicht mit echten Daten verbunden)</span>
-          </div>
-        </main>
-      </div>
-    </div>
-  );
-}
 
 export default function AdminDashboardPage() {
   return (
-    <AdminGuard>
-      <AdminDashboardContent />
-    </AdminGuard>
+    <>
+      {/* Stat cards */}
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
+        {STAT_CARDS.map((c) => (
+          <StatCardView key={c.label} card={c} />
+        ))}
+      </div>
+
+      {/* Revenue + Activity + Status */}
+      <div className="grid grid-cols-1 xl:grid-cols-[1.6fr_1fr_1fr] gap-4">
+        <SectionCard
+          title="Umsatz-Übersicht"
+          action={
+            <div className="flex items-center gap-4 text-xs" style={{ color: 'var(--color-text-muted)' }}>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{ background: '#7C3AED' }} />Umsatz (€)</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{ background: '#22C55E' }} />Provisionen (€)</span>
+            </div>
+          }
+        >
+          <RevenueChart />
+          <div className="flex justify-between text-[11px] mt-1" style={{ color: 'var(--color-text-faint)' }}>
+            {REVENUE_SERIES.map((d) => <span key={d.day}>{d.day}</span>)}
+          </div>
+        </SectionCard>
+
+        <SectionCard
+          title="Letzte Aktivitäten"
+          action={<Link href="/admin/audit-logs" className="text-xs" style={{ color: 'var(--color-primary)' }}>Alle Aktivitäten</Link>}
+        >
+          <ul className="space-y-4">
+            {RECENT_ACTIVITY.map((a) => (
+              <li key={a.text + a.time} className="flex items-start gap-3">
+                <span className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ background: a.color }} />
+                <div className="min-w-0">
+                  <div className="text-sm truncate">{a.text}</div>
+                  <div className="text-xs truncate" style={{ color: 'var(--color-text-faint)' }}>{a.sub}</div>
+                </div>
+                <span className="ml-auto text-[11px] shrink-0" style={{ color: 'var(--color-text-faint)' }}>{a.time}</span>
+              </li>
+            ))}
+          </ul>
+        </SectionCard>
+
+        <SectionCard
+          title="System-Status"
+          action={<Link href="/admin/system-status" className="text-xs" style={{ color: 'var(--color-success)' }}>Alle Systeme OK</Link>}
+        >
+          <ul className="space-y-3">
+            {SYSTEM_STATUS.map((s) => (
+              <li key={s.name} className="flex items-center justify-between text-sm">
+                <span className="flex items-center gap-2">
+                  <CheckCircle2 size={14} color="var(--color-success)" />
+                  {s.name}
+                </span>
+                <span className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Online</span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-4 pt-3 flex items-center justify-between text-[11px]" style={{ borderTop: '1px solid var(--color-divider)', color: 'var(--color-text-faint)' }}>
+            Letzte Prüfung: vor 2 Minuten
+            <RefreshCw size={12} />
+          </div>
+        </SectionCard>
+      </div>
+
+      {/* Three overview tables */}
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
+        <SectionCard
+          title="Dozenten-Codes (Übersicht)"
+          action={
+            <Link href="/admin/dozenten-codes" className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}>
+              <Plus size={13} /> Neuer Code
+            </Link>
+          }
+        >
+          <div className="space-y-3">
+            {DOZENTEN_CODES.map((d) => (
+              <div key={d.code} className="flex items-center justify-between text-xs">
+                <span className="px-2 py-1 rounded-md font-mono text-white text-[11px]" style={{ background: d.tag }}>{d.code}</span>
+                <span style={{ color: 'var(--color-text-muted)' }}>{d.name}</span>
+                <span style={{ color: 'var(--color-text-faint)' }}>+{d.giftDays} Tage</span>
+                <span style={{ color: 'var(--color-text-faint)' }}>{d.commission}%</span>
+                <span className="font-semibold">{d.revenue}</span>
+                <StatusPill active={d.active} />
+              </div>
+            ))}
+          </div>
+          <Link href="/admin/dozenten-codes" className="block text-center mt-4 text-xs" style={{ color: 'var(--color-primary)' }}>
+            Alle Dozenten-Codes anzeigen
+          </Link>
+        </SectionCard>
+
+        <SectionCard
+          title="Studenten (Übersicht)"
+          action={<Link href="/admin/studenten" className="text-xs" style={{ color: 'var(--color-primary)' }}>Alle Studenten</Link>}
+        >
+          <div className="space-y-3">
+            {STUDENTEN.map((s) => (
+              <div key={s.email} className="flex items-center gap-3 text-xs">
+                <div className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold text-white shrink-0" style={{ background: 'var(--color-primary)' }}>
+                  {s.name.split(' ').map((n) => n[0]).join('')}
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="truncate" style={{ color: 'var(--color-text)' }}>{s.name}</div>
+                  <div className="truncate" style={{ color: 'var(--color-text-faint)' }}>{s.email}</div>
+                </div>
+                <span style={{ color: 'var(--color-text-faint)' }}>{s.plan}</span>
+                <StatusPill active={s.status} />
+              </div>
+            ))}
+          </div>
+          <Link href="/admin/studenten" className="block text-center mt-4 text-xs" style={{ color: 'var(--color-primary)' }}>
+            Alle Studenten anzeigen
+          </Link>
+        </SectionCard>
+
+        <SectionCard
+          title="B2B & Gruppen (Übersicht)"
+          action={
+            <Link href="/admin/b2b-gruppen" className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}>
+              <Plus size={13} /> Neue Gruppe
+            </Link>
+          }
+        >
+          <div className="space-y-3">
+            {B2B_GROUPS.map((g) => (
+              <div key={g.name} className="flex items-center justify-between text-xs">
+                <div>
+                  <div style={{ color: 'var(--color-text)' }}>{g.name}</div>
+                  <div style={{ color: 'var(--color-text-faint)' }}>{g.type}</div>
+                </div>
+                <span style={{ color: 'var(--color-text-faint)' }}>{g.used}/{g.licenses}</span>
+                <StatusPill active={g.active} />
+              </div>
+            ))}
+          </div>
+          <Link href="/admin/b2b-gruppen" className="block text-center mt-4 text-xs" style={{ color: 'var(--color-primary)' }}>
+            Alle Gruppen anzeigen
+          </Link>
+        </SectionCard>
+      </div>
+
+      {/* Quick actions */}
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
+        {QUICK_ACTIONS.map((q) => (
+          <div key={q.title} className="rounded-2xl p-5 flex flex-col gap-3" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: `${q.color}26` }}>
+              <q.icon size={18} color={q.color} />
+            </div>
+            <div>
+              <div className="text-sm font-semibold">{q.title}</div>
+              <div className="text-xs mt-0.5" style={{ color: 'var(--color-text-faint)' }}>{q.sub}</div>
+            </div>
+            <Link
+              href={q.href}
+              className="mt-auto text-xs py-2 rounded-lg font-medium text-center"
+              style={{ background: 'var(--color-panel-alt)', color: 'var(--color-text-muted)' }}
+            >
+              Öffnen
+            </Link>
+          </div>
+        ))}
+      </div>
+
+      <div className="flex items-center justify-between text-[11px] pt-2" style={{ color: 'var(--color-text-faint)' }}>
+        <span>© 2026 CertCoach. Alle Rechte vorbehalten.</span>
+        <span>Version 2.0.0 (UI-Vorschau — noch nicht mit echten Daten verbunden)</span>
+      </div>
+    </>
   );
 }
