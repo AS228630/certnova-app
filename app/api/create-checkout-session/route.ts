@@ -14,10 +14,11 @@ function getStripe() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { plan, accessToken, widerrufConsent } = (await req.json()) as {
+    const { plan, accessToken, widerrufConsent, couponCode } = (await req.json()) as {
       plan: "monthly" | "yearly";
       accessToken: string;
       widerrufConsent?: boolean;
+      couponCode?: string;
     };
 
     if (!plan || !PLAN_PRICES[plan]) {
@@ -51,6 +52,31 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
     }
 
+    // Teacher referral coupon (optional). Looked up server-side with the
+    // service role key — never exposed to or trusted from the client,
+    // and the code is validated here, not just cosmetically checked in
+    // the UI. An explicitly wrong code fails the request rather than
+    // silently being ignored, so the person knows to fix it or remove it.
+    let teacherCouponId: string | null = null;
+    let bonusDays = 0;
+    if (couponCode && couponCode.trim()) {
+      const admin = createClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
+        process.env.SUPABASE_SERVICE_ROLE_KEY ?? ""
+      );
+      const { data: coupon } = await admin
+        .from("teacher_coupons")
+        .select("id, extra_days, is_active")
+        .ilike("code", couponCode.trim())
+        .maybeSingle();
+
+      if (!coupon || !coupon.is_active) {
+        return NextResponse.json({ error: "invalid_coupon" }, { status: 400 });
+      }
+      teacherCouponId = coupon.id;
+      bonusDays = coupon.extra_days;
+    }
+
     const priceInfo = PLAN_PRICES[plan];
     const origin = req.headers.get("origin") ?? "https://www.certcoach.de";
 
@@ -74,10 +100,22 @@ export async function POST(req: NextRequest) {
         },
       ],
       subscription_data: {
+        // A teacher coupon's "extra days free" is implemented as a
+        // Stripe trial period: billing simply starts N days later,
+        // rather than us trying to bolt days onto a period after the
+        // fact — this is the correct, Stripe-native way to do it.
+        ...(bonusDays > 0 ? { trial_period_days: bonusDays } : {}),
         metadata: {
           supabase_user_id: user.id,
           widerruf_consent: "true",
           widerruf_consent_at: new Date().toISOString(),
+          ...(teacherCouponId
+            ? {
+                teacher_coupon_id: teacherCouponId,
+                coupon_code: couponCode!.trim().toUpperCase(),
+                bonus_days_granted: String(bonusDays),
+              }
+            : {}),
         },
       },
       success_url: `${origin}/upgrade?success=true`,
