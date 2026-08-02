@@ -8921,6 +8921,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     id: "real-az900-562",
     topicId: "azure-architektur",
     prompt: "Ordnen Sie die Authentifizierungsmethode der entsprechenden Sicherheitsstufe zu.",
+    imageUrl: "/exam-images/az900-q562.png",
     instructions: "Ziehen Sie dazu die entsprechende Authentifizierungsmethode aus der linken Spalte in die rechte Spalte mit der entsprechenden Sicherheitsstufe. HINWEIS: Jede richtige Zuordnung zählt einen Punkt.",
     items: [
       { id: "i0", label: "Multifaktor-Authentifizierung (MFA)" },
@@ -8934,6 +8935,8 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     ],
     combos: [
       ["i0", "i1", "i2"],
+      ["i2", "i0", "i1"],
+      ["i1", "i2", "i0"],
       ["i0", "i2", "i1"],
     ],
     explanation: "Microsoft empfiehlt kennwortlose Authentifizierungsmethoden wie Windows Hello, Passkeys (FIDO2) und die Microsoft Authenticator-App als sicherste Anmeldung. Mehrstufige Authentifizierung (MFA) bietet zusätzliche Sicherheit gegenüber reiner Kennwortanmeldung. Reine Kennwort-Authentifizierung gilt als am wenigsten sicher und sollte ersetzt werden.",
