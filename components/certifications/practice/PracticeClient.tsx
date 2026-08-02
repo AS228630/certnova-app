@@ -483,8 +483,12 @@ export default function PracticeClient({
       setOptionShuffleGen((g) => g + 1);
     } else {
       // Always the true original authored order, regardless of whatever
-      // order was active before (e.g. a prior shuffle).
+      // order was active before (e.g. a prior shuffle) - and reset the
+      // option shuffle generation back to 0 too, so a plain "Wiederholen"
+      // after an earlier "Gemischt wiederholen" restores BOTH the
+      // question order and the option order to authored, not just one.
       nextIds = originalIds;
+      setOptionShuffleGen(0);
     }
 
     const baseOrder = order ?? questions.map((q) => q.id);

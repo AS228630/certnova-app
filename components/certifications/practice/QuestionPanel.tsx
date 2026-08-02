@@ -85,15 +85,17 @@ export default function QuestionPanel({
   // Reshuffled together with the question order by "Gemischt wiederholen"
   // (optionShuffleGen bump) - seeded so it's stable across re-renders of
   // the same question/generation, but different for every question and
-  // every reshuffle. blankFillIndexOrder keeps the dropdown's choices in
-  // sync with the same permutation, since blankFill.choices[i] must stay
-  // paired with options[i]'s id no matter what order either is displayed in.
+  // every reshuffle. Kept at the authored order (gen === 0) for a
+  // first-time visitor and for the plain "Wiederholen" button, which
+  // never bumps optionShuffleGen - only "Gemischt wiederholen" does.
   const shuffledIndexOrder =
     question.type !== "yesno" && question.type !== "matching"
-      ? seededShuffle(
-          question.options.map((_, i: number) => i),
-          `${question.id}-${optionShuffleGen}`
-        )
+      ? optionShuffleGen === 0
+        ? question.options.map((_, i: number) => i)
+        : seededShuffle(
+            question.options.map((_, i: number) => i),
+            `${question.id}-${optionShuffleGen}`
+          )
       : [];
   const displayOptions =
     question.type !== "yesno" && question.type !== "matching"
