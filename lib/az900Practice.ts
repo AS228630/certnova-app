@@ -8794,15 +8794,19 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     items: [
       { id: "item0", label: "Infrastructure as a Service (IaaS)" },
       { id: "item1", label: "Platform as a Service (PaaS)" },
-      { id: "item2", label: "Infrastructure as a Service (IaaS)" },
+      { id: "item2", label: "Software as a Service (SaaS)" },
     ],
     descriptions: [
       { id: "d0", text: "Bietet die größtmögliche Kontrolle über eine Cloud-Umgebung", correctItemId: "item0" },
       { id: "d1", text: "Bietet die größtmögliche Kontrolle über ein Datenbankdesign, ohne das Betriebssystem warten zu müssen", correctItemId: "item1" },
-      { id: "d2", text: "Wird zum Hosten virtueller Azure-Computer verwendet", correctItemId: "item2" },
+      { id: "d2", text: "Wird zum Hosten virtueller Azure-Computer verwendet", correctItemId: "item0" },
     ],
     combos: [
-      ["item0", "item1", "item2"],
+      ["item0", "item2", "item1"],
+      ["item0", "item1", "item0"],
+      ["item1", "item2", "item2"],
+      ["item1", "item1", "item0"],
+      ["item2", "item0", "item0"],
     ],
     explanation: "Software as a Service (SaaS) ist ein Softwarelizenzierungs- und Bereitstellungsmodell, bei dem Software an einen Benutzer lizenziert wird. Der Zugriff auf die Software bzw. Anwendung erfolgt über das Internet und einen Webbrowser. Sie müssen die Software nicht lokal installieren und warten. Sie können sofort mit der Konfiguration und Nutzung beginnen. Infrastructure as a Service (IaaS) ist ein Cloud-Computing-Dienst, der wichtige Rechen-, Speicher- und Netzwerkressourcen bedarfsgerecht und nutzungsbasiert bereitstellt. Mit IaaS sparen Sie sich die Kosten und den Aufwand für den Kauf und die Verwaltung physischer Server und Rechenzentrumsinfrastruktur. Jede Ressource wird als separate Servicekomponente angeboten, und Sie zahlen nur für die jeweilige Ressource, solange Sie sie benötigen. Ein Cloud-Computing-Dienstanbieter wie Azure verwaltet die Infrastruktur, während Sie Ihre eigene Software – einschließlich Betriebssystemen, Middleware und Anwendungen – kaufen, installieren, konfigurieren und verwalten. Wie IaaS umfasst PaaS Infrastruktur – Server, Speicher und Netzwerk –, aber auch Middleware, Entwicklungstools, Business Intelligence (BI)-Dienste, Datenbankmanagementsysteme und mehr. Azure Backup ist ein Beispiel für eine PaaS-Lösung. Referenzen: Was ist PaaS? Was ist IaaS? Was ist SaaS?",
     explanationImageUrl: "/exam-images/az900-q556-explain.png",
