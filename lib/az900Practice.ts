@@ -9000,6 +9000,103 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     explanation: "Für Blobs wird eine Gebühr für vorzeitiges Löschen erhoben, wenn sie gelöscht, überschrieben oder auf eine andere Ebene verschoben werden, bevor die für die Ebene erforderliche Mindestanzahl von Tagen verstrichen ist. Für ein Blob in der Cool-Ebene eines Allzweckkontos v2 wird eine Gebühr für vorzeitiges Löschen erhoben, wenn es vor Ablauf von 30 Tagen gelöscht oder auf eine andere Ebene verschoben wird. Diese Gebühr wird anteilig berechnet.",
     resources: [{ label: "Access Tiers Overview", url: "https://learn.microsoft.com/en-us/azure/storage/blobs/access-tiers-overview" }],
   },
+  {
+    id: "real-az900-565",
+    topicId: "azure-verwaltung",
+    prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "___ werden verwendet, um verwandte Azure-Richtlinien zu gruppieren.",
+      choices: ["Initiativen", "Verwaltungsgruppen", "Parameter", "Ressourcengruppen"],
+    },
+    options: [
+      { id: "A", text: "Initiativen werden verwendet, um verwandte Azure-Richtlinien zu gruppieren." },
+      { id: "B", text: "Verwaltungsgruppen werden verwendet, um verwandte Azure-Richtlinien zu gruppieren." },
+      { id: "C", text: "Parameter werden verwendet, um verwandte Azure-Richtlinien zu gruppieren." },
+      { id: "D", text: "Ressourcengruppen werden verwendet, um verwandte Azure-Richtlinien zu gruppieren." },
+    ],
+    correct: "A",
+    explanation: "Eine Initiative in Azure Policy ist eine Sammlung von Richtliniendefinitionen, die zusammen auf ein übergeordnetes Ziel ausgerichtet sind. Initiativen vereinfachen die Verwaltung und Zuweisung mehrerer zusammengehöriger Richtlinien als eine einzige Einheit.",
+    resources: [{ label: "Azure Policy Initiative Definition Structure", url: "https://learn.microsoft.com/en-us/azure/governance/policy/concepts/initiative-definition-structure" }],
+  },
+  {
+    id: "real-az900-566",
+    topicId: "azure-verwaltung",
+    prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Microsoft Purview kann verwendet werden, um ___",
+      choices: [
+        "Azure Monitor-Protokolle zu analysieren.",
+        "die Nutzung von Cloud-Apps zu analysieren.",
+        "Cloud-Ressourcen dynamisch bereitzustellen.",
+        "die Datenkonformität zu verwalten.",
+      ],
+    },
+    options: [
+      { id: "A", text: "Microsoft Purview kann verwendet werden, um Azure Monitor-Protokolle zu analysieren." },
+      { id: "B", text: "Microsoft Purview kann verwendet werden, um die Nutzung von Cloud-Apps zu analysieren." },
+      { id: "C", text: "Microsoft Purview kann verwendet werden, um Cloud-Ressourcen dynamisch bereitzustellen." },
+      { id: "D", text: "Microsoft Purview kann verwendet werden, um die Datenkonformität zu verwalten." },
+    ],
+    correct: "D",
+    explanation: "Microsoft Purview ist eine Familie von Datenverwaltungs-, Datenschutz- und Compliance-Lösungen, mit denen Unternehmen ihre gesamte Datenlandschaft verwalten, schützen und regeln können — vor Ort, in der Cloud und in SaaS-Anwendungen.",
+    resources: [{ label: "Microsoft Purview Platform Overview", url: "https://learn.microsoft.com/en-us/purview/purview" }],
+  },
+  {
+    id: "real-az900-567",
+    topicId: "azure-verwaltung",
+    prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template:
+        "___ bietet Vorteile durch verbesserte Sicherheit mittels erzwungener Richtlinien und Zugriffskontrollen sowie erhöhte betriebliche Effizienz durch Standardisierung und Automatisierung.",
+      choices: ["Governance", "Verwaltbarkeit", "Vorhersehbarkeit", "Zuverlässigkeit"],
+    },
+    options: [
+      {
+        id: "A",
+        text: "Governance bietet Vorteile durch verbesserte Sicherheit mittels erzwungener Richtlinien und Zugriffskontrollen sowie erhöhte betriebliche Effizienz durch Standardisierung und Automatisierung.",
+      },
+      {
+        id: "B",
+        text: "Verwaltbarkeit bietet Vorteile durch verbesserte Sicherheit mittels erzwungener Richtlinien und Zugriffskontrollen sowie erhöhte betriebliche Effizienz durch Standardisierung und Automatisierung.",
+      },
+      {
+        id: "C",
+        text: "Vorhersehbarkeit bietet Vorteile durch verbesserte Sicherheit mittels erzwungener Richtlinien und Zugriffskontrollen sowie erhöhte betriebliche Effizienz durch Standardisierung und Automatisierung.",
+      },
+      {
+        id: "D",
+        text: "Zuverlässigkeit bietet Vorteile durch verbesserte Sicherheit mittels erzwungener Richtlinien und Zugriffskontrollen sowie erhöhte betriebliche Effizienz durch Standardisierung und Automatisierung.",
+      },
+    ],
+    correct: "A",
+    explanation: "Governance bezeichnet die Art und Weise, wie eine Organisation ihre Cloud-Ressourcen überwacht und steuert. Durch erzwungene Richtlinien und Zugriffskontrollen verbessert Governance die Sicherheit, und durch Standardisierung und Automatisierung erhöht sie die betriebliche Effizienz.",
+    resources: [{ label: "What Is Cloud Governance", url: "https://azure.microsoft.com/en-us/resources/cloud-computing-dictionary/what-is-cloud-governance" }],
+  },
+  {
+    type: "yesno",
+    id: "real-az900-568",
+    topicId: "azure-verwaltung",
+    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja“, wenn sie wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    statements: [
+      { text: "Sie müssen über ein Azure-Abonnement verfügen, um den Azure-Preisrechner zu nutzen.", correct: "Nein" },
+      {
+        text: "Der Azure-Preisrechner greift direkt auf ein Azure-Abonnement zu, um die Kosten der bereitgestellten Ressourcen zu berechnen.",
+        correct: "Nein",
+      },
+      { text: "Der Azure-Preisrechner ist über das Azure-Portal zugänglich.", correct: "Ja" },
+    ],
+    combinedOptions: [
+      ["Ja", "Ja", "Ja"],
+      ["Ja", "Ja", "Nein"],
+      ["Nein", "Ja", "Nein"],
+      ["Nein", "Ja", "Ja"],
+      ["Nein", "Nein", "Ja"],
+      ["Nein", "Nein", "Nein"],
+    ],
+    explanation:
+      "Der Azure-Preisrechner ist ein kostenloses, öffentlich zugängliches Tool, das ohne Azure-Abonnement genutzt werden kann. Er berechnet Kostenschätzungen anhand manuell ausgewählter Ressourcen und greift dabei nicht direkt auf ein echtes Abonnement zu. Er ist sowohl über das Azure-Portal als auch direkt über die Azure-Website erreichbar.",
+    resources: [{ label: "Estimate Costs With The Azure Pricing Calculator", url: "https://learn.microsoft.com/en-us/azure/cost-management-billing/costs/pricing-calculator" }],
+  },
 ];
 
 // ---------------------------------------------------------------------
