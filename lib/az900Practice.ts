@@ -8481,17 +8481,22 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     items: [
       { id: "i0", label: "Azure Container Instances" },
       { id: "i1", label: "Azure Virtual Machine Scale Sets" },
+      { id: "i2", label: "Azure App Service" },
+      { id: "i3", label: "Azure Functions" },
     ],
     descriptions: [
-      { id: "d0", text: "Ermöglicht die Softwareemulation eines physischen Computers.", correctItemId: "i0" },
-      { id: "d1", text: "Ermöglicht die Virtualisierung des Betriebssystems.", correctItemId: "i1" },
+      { id: "d0", text: "Ermöglicht die Softwareemulation eines physischen Computers.", correctItemId: "i1" },
+      { id: "d1", text: "Ermöglicht die Virtualisierung des Betriebssystems.", correctItemId: "i0" },
     ],
     combos: [
+      ["i0", "i2"],
+      ["i2", "i0"],
       ["i1", "i0"],
+      ["i3", "i1"],
+      ["i3", "i2"],
       ["i0", "i1"],
     ],
-    explanation: "Azure Container Instances startet isolierte Container in Sekundenschnelle, ohne dass virtuelle Maschinen bereitgestellt und verwaltet werden müssen — es emuliert dabei einen physischen Computer per Software. Azure Virtual Machine Scale Sets ermöglicht die Erstellung und Verwaltung einer Gruppe lastverteilter, virtualisierter VMs, deren Anzahl automatisch angepasst werden kann.",
-    explanationImageUrl: "/exam-images/az900-q537-explain.png",
+    explanation: "Virtuelle Maschinen (und damit auch Azure Virtual Machine Scale Sets) sind Softwareemulationen physischer Computer — sie umfassen einen virtuellen Prozessor, Arbeitsspeicher, Speicher und Netzwerkressourcen, genau wie ein echter Computer. Container (wie bei Azure Container Instances) virtualisieren stattdessen auf Betriebssystemebene: Sie teilen sich den Kernel des Host-Betriebssystems und starten dadurch erheblich schneller als eine vollständige virtuelle Maschine.",
     resources: [{ label: "Container Instances Overview", url: "https://learn.microsoft.com/en-us/azure/container-instances/container-instances-overview" }, { label: "Overview", url: "https://learn.microsoft.com/en-us/azure/virtual-machine-scale-sets/overview" }],
   },
   {
