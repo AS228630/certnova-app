@@ -70,10 +70,32 @@ export async function POST(req: NextRequest) {
           stripe_subscription_id: subscription.id,
           plan,
           status: "active",
+          amount_paid_cents: priceAmount,
           updated_at: new Date().toISOString(),
         };
         const periodEndIso = extractPeriodEndIso(subscription);
         if (periodEndIso) row.current_period_end = periodEndIso;
+
+        // If a teacher coupon was applied, record the referral and
+        // compute the commission from that coupon's *current* rate at
+        // the time of this specific purchase — not recalculated later,
+        // so a future rate change never rewrites past commissions.
+        const teacherCouponId = subscription.metadata?.teacher_coupon_id;
+        if (teacherCouponId) {
+          const admin = getSupabaseAdmin();
+          const { data: coupon } = await admin
+            .from("teacher_coupons")
+            .select("commission_rate")
+            .eq("id", teacherCouponId)
+            .maybeSingle();
+
+          row.teacher_coupon_id = teacherCouponId;
+          row.applied_coupon_code = subscription.metadata?.coupon_code ?? null;
+          row.bonus_days_granted = Number(subscription.metadata?.bonus_days_granted ?? 0);
+          row.teacher_commission_cents = coupon
+            ? Math.round(priceAmount * Number(coupon.commission_rate))
+            : 0;
+        }
 
         await getSupabaseAdmin().from("subscriptions").upsert(row, { onConflict: "user_id" });
         break;

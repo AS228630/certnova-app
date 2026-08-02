@@ -26,6 +26,7 @@ export default function PaymentStep({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [widerrufConsent, setWiderrufConsent] = useState(false);
+  const [couponCode, setCouponCode] = useState("");
 
   async function handleCheckout() {
     if (planId !== "monthly" && planId !== "yearly") return;
@@ -45,11 +46,19 @@ export default function PaymentStep({
       const res = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan: planId, accessToken, widerrufConsent: true }),
+        body: JSON.stringify({
+          plan: planId,
+          accessToken,
+          widerrufConsent: true,
+          ...(couponCode.trim() ? { couponCode: couponCode.trim() } : {}),
+        }),
       });
       const json = await res.json();
       if (json.url) {
         window.location.href = json.url;
+      } else if (json.error === "invalid_coupon") {
+        setError(t("upgrade.couponInvalid"));
+        setLoading(false);
       } else {
         setError(t("upgrade.checkoutError"));
         setLoading(false);
@@ -94,6 +103,17 @@ export default function PaymentStep({
           </Link>
         </span>
       </label>
+
+      <div className="mb-6 text-left">
+        <label className="mb-1.5 block text-xs font-semibold text-text-muted">{t("upgrade.couponLabel")}</label>
+        <input
+          type="text"
+          value={couponCode}
+          onChange={(e) => setCouponCode(e.target.value)}
+          placeholder={t("upgrade.couponPlaceholder")}
+          className="w-full rounded-lg border border-border-soft bg-panel-alt px-3 py-2.5 text-sm text-text outline-none focus:border-primary"
+        />
+      </div>
 
       {error && <p className="mb-4 text-xs font-medium text-danger">{error}</p>}
 
