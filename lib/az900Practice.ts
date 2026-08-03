@@ -870,7 +870,7 @@ export const AZ900_QUESTIONS: PracticeQuestion[] = [
     type: "matching",
     id: "real-az900-47",
     topicId: "azure-verwaltung",
-    prompt: "Mehrere Supporttechniker planen, Azure mithilfe der in der folgenden Tabelle aufgeführten Computer zu verwalten: Sie müssen ermitteln, welche Azure-Verwaltungstools von jedem Computer aus verwendet werden können. Was sollten Sie für jeden Computer ermitteln? (Wählen Sie zur Beantwortung die entsprechenden Optionen im Antwortbereich aus. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    prompt: "Mehrere Supporttechniker planen, Azure mithilfe der in der folgenden Tabelle aufgeführten Computer zu verwalten:\nComputer1, Betriebssystem: Windows 10\nComputer2, Betriebssystem: Ubuntu\nComputer3, Betriebssystem: macOS Mojave\nSie müssen ermitteln, welche Azure-Verwaltungstools von jedem Computer aus verwendet werden können. Was sollten Sie für jeden Computer ermitteln? (Wählen Sie zur Beantwortung die entsprechenden Optionen im Antwortbereich aus. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     items: [
       { id: "item0", label: "Die Azure CLI, das Azure-Portal und Azure PowerShell" },
       { id: "item1", label: "Die Azure CLI und das Azure-Portal" },
