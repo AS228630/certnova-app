@@ -14,7 +14,7 @@ import { getSupabaseAdmin } from './requireAdmin';
  * made in requireAdmin.ts's role resolution, for the same reason.
  */
 export async function logAudit(entry: {
-  actorId: string;
+  actorId: string | null;
   actorEmail: string;
   action: string;
   resourceType?: string;

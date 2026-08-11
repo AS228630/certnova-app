@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
+import { logAudit } from "@/lib/admin/audit";
 
 function getStripe() {
   return new Stripe(process.env.STRIPE_SECRET_KEY ?? "");
@@ -194,6 +195,96 @@ export async function POST(req: NextRequest) {
           .from("subscriptions")
           .update({ plan: "free", status: "canceled", updated_at: new Date().toISOString() })
           .eq("stripe_subscription_id", subscription.id);
+        break;
+      }
+
+      // Refund → Commission Reversal (senior advisor priority order,
+      // Phase 4: after RBAC, Audit Log, and the Teacher Detail Page).
+      //
+      // A real charge was refunded — if that charge belonged to a
+      // student who was referred by a teacher and already earned that
+      // teacher a commission, write a REVERSAL row. The original
+      // EARNED row is never touched or deleted, per the advisor's
+      // explicit "ledger, not a single mutable balance" requirement —
+      // commission_ledger stays a real append-only history, and every
+      // balance (teacher detail page, Dozenten-Codes "ausstehend")
+      // is computed by aggregating EARNED − REVERSAL, never by editing
+      // a stored total.
+      case "charge.refunded": {
+        const charge = event.data.object as Stripe.Charge;
+        const customerId = typeof charge.customer === "string" ? charge.customer : charge.customer?.id;
+        if (!customerId || !charge.amount || !charge.amount_refunded) break;
+
+        const admin = getSupabaseAdmin();
+
+        const { data: sub } = await admin
+          .from("subscriptions")
+          .select("user_id")
+          .eq("stripe_customer_id", customerId)
+          .maybeSingle();
+        if (!sub?.user_id) break; // not a referred/tracked purchase — nothing to reverse
+
+        const { data: referral } = await admin
+          .from("referrals")
+          .select("id, teacher_id")
+          .eq("student_user_id", sub.user_id)
+          .maybeSingle();
+        if (!referral) break; // this student was never referred — no commission exists to reverse
+
+        const { data: ledgerRows } = await admin
+          .from("commission_ledger")
+          .select("id, type, commission_amount_cents")
+          .eq("referral_id", referral.id);
+
+        const earnedCents = (ledgerRows ?? [])
+          .filter((l) => l.type === "EARNED")
+          .reduce((sum, l) => sum + l.commission_amount_cents, 0);
+        const alreadyReversedCents = (ledgerRows ?? [])
+          .filter((l) => l.type === "REVERSAL")
+          .reduce((sum, l) => sum + Math.abs(l.commission_amount_cents), 0);
+        const remainingEarnedCents = earnedCents - alreadyReversedCents;
+        if (remainingEarnedCents <= 0) break; // nothing left to reverse
+
+        // Proportional to how much of the original charge was actually
+        // refunded (handles partial refunds correctly, per the
+        // advisor's explicit partial-refund example), capped so this
+        // can never reverse more than what's actually still earned.
+        const refundRatio = charge.amount_refunded / charge.amount;
+        const targetReversedCents = Math.round(earnedCents * refundRatio);
+        const reversalCents = Math.min(remainingEarnedCents, Math.max(0, targetReversedCents - alreadyReversedCents));
+        if (reversalCents <= 0) break;
+
+        const { error: reversalError } = await admin.from("commission_ledger").insert({
+          teacher_id: referral.teacher_id,
+          student_user_id: sub.user_id,
+          referral_id: referral.id,
+          stripe_event_id: event.id,
+          stripe_session_or_invoice_id: charge.id,
+          gross_amount_cents: -charge.amount_refunded,
+          commission_rate: earnedCents > 0 ? reversalCents / earnedCents : 0,
+          commission_amount_cents: -reversalCents,
+          type: "REVERSAL",
+          status: "REVERSED",
+        });
+        // Unique on (stripe_event_id, type) — a redelivered charge.refunded
+        // event hits this constraint and is safely ignored (23505),
+        // same idempotency pattern as the EARNED insert above.
+        if (reversalError && reversalError.code !== "23505") {
+          console.error("commission_ledger reversal insert error:", reversalError);
+        } else if (!reversalError) {
+          // System-triggered, not an admin action — actorId is null,
+          // actorEmail records the source, matching the advisor's
+          // audit event list (COMMISSION_REVERSED) even though no
+          // admin was logged in when this happened.
+          await logAudit({
+            actorId: null,
+            actorEmail: "stripe-webhook",
+            action: "COMMISSION_REVERSED",
+            resourceType: "commission_ledger",
+            resourceId: referral.id,
+            metadata: { teacherId: referral.teacher_id, reversalCents, chargeId: charge.id },
+          });
+        }
         break;
       }
     }
