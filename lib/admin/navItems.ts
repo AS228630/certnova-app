@@ -14,6 +14,7 @@ import {
   ScrollText,
   Activity,
   HardDrive,
+  ShieldCheck,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -60,6 +61,7 @@ export const ADMIN_NAV_SECTIONS: AdminNavSection[] = [
   {
     label: 'SYSTEM',
     items: [
+      { slug: 'team', label: 'Team & Rollen', icon: ShieldCheck, description: 'Admin-Zugriffe und Rollen (RBAC) verwalten.' },
       { slug: 'einstellungen', label: 'Einstellungen', icon: Settings, description: 'Allgemeine Systemeinstellungen verwalten.' },
       { slug: 'audit-logs', label: 'Audit Logs', icon: ScrollText, description: 'Protokoll aller administrativen Aktionen einsehen.' },
       { slug: 'system-status', label: 'System-Status', icon: Activity, description: 'Detaillierten Status aller Systemdienste einsehen.' },

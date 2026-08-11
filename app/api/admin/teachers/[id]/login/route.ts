@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin, getSupabaseAdmin } from '@/lib/admin/requireAdmin';
+import { requirePermission, getSupabaseAdmin } from '@/lib/admin/requireAdmin';
 
 /**
  * Teacher login accounts — a real CertCoach account the admin creates
@@ -34,7 +34,7 @@ import { requireAdmin, getSupabaseAdmin } from '@/lib/admin/requireAdmin';
 const ONE_YEAR_MS = 365 * 24 * 60 * 60 * 1000;
 
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const auth = await requireAdmin(req.headers.get('authorization')?.replace(/^Bearer\s+/i, ''));
+  const auth = await requirePermission(req.headers.get('authorization')?.replace(/^Bearer\s+/i, ''), 'teacher_login.manage');
   if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
 
   const { id: teacherId } = await params;

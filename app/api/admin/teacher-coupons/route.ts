@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin, getSupabaseAdmin } from '@/lib/admin/requireAdmin';
+import { requireAdmin, requirePermission, getSupabaseAdmin } from '@/lib/admin/requireAdmin';
 
 export async function GET(req: NextRequest) {
   const auth = await requireAdmin(req.headers.get('authorization')?.replace(/^Bearer\s+/i, ''));
@@ -82,7 +82,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-  const auth = await requireAdmin(req.headers.get('authorization')?.replace(/^Bearer\s+/i, ''));
+  const auth = await requirePermission(req.headers.get('authorization')?.replace(/^Bearer\s+/i, ''), 'instructor_code.manage');
   if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
 
   const body = await req.json().catch(() => null);
