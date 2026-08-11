@@ -96,11 +96,16 @@ export default function TeacherDetailPage({ params }: { params: Promise<{ teache
             <StatCard icon={Wallet} iconBg="#F59E0B" label="Umsatz generiert" value={fmtEuro(detail.summary.revenueGeneratedCents)} />
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-3">
             <StatCard icon={Wallet} iconBg="#7C3AED" label="Provision verdient" value={fmtEuro(detail.summary.earnedCents)} />
             <StatCard icon={Wallet} iconBg="#F59E0B" label="Ausstehend" value={fmtEuro(detail.summary.pendingCents)} />
             <StatCard icon={Wallet} iconBg="#22C55E" label="Ausgezahlt" value={fmtEuro(detail.summary.paidCents)} />
             <StatCard icon={Wallet} iconBg="#EF4444" label="Storniert" value={fmtEuro(detail.summary.reversedCents)} />
+          </div>
+          <div className="mb-6">
+            <Link href="/admin-senmas/auszahlungen" className="inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}>
+              <Wallet size={15} /> Auszahlung erstellen
+            </Link>
           </div>
 
           <h3 className="text-sm font-semibold mb-3">Codes dieses Dozenten</h3>
