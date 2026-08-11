@@ -1,21 +1,30 @@
-# CertCoach — Referral + Commission: Real Schema Audit & Migration Plan
+# CertCoach — Referral + Commission: Migration-Based Schema Audit & Migration Plan
 
 Status: **PROPOSAL ONLY — no migration executed. No new production database. Same live Supabase instance stays the single source of truth.**
 
-Revision 2 — responds directly to the senior advisor's Aug 11 2026 note:
-this version replaces the assumed schema from v1 with the **actual**
-schema, read from every migration file that has been run against the
-live database (`/migrations/supabase`, files 001-029 -- this repo's own
-migration history *is* the audit trail, since Claude has no direct SQL
-console access to Supabase; the owner runs each file by hand and this
-is the complete, ordered record of what exists). It also makes the
-Free Tier consumption engineering explicit instead of a side note,
-per the original spec document's own rules (para 3, 21, 65-68) -- see
-section 7 below, which is new in this revision.
+**Architecture APPROVED by the senior advisor (Aug 11 2026) — three tables: `teachers`, `referrals`, `commission_ledger`. `commission_policies` is explicitly NOT required for v1 (see section 2 and section 4a).**
+
+Revision 3 — corrects a terminology error the advisor flagged in Revision
+2: section 1 below is a **Migration-Based Schema Audit**, not a live
+database audit. It is reconstructed from every `.sql` file in
+`/migrations/supabase` (001-029) that is *supposed* to have been run
+against the live database — this repo's migration history, not a live
+query against Supabase itself, since Claude has no direct SQL console
+access. It is possible one of these 29 files was skipped, run out of
+order, or that a manual change was made directly in the Supabase
+dashboard at some point — this document cannot rule that out on its
+own. **Section 1a below (new in this revision) is the reconciliation
+step**: a read-only query the owner runs directly against the live
+database, so the assumptions in section 1 are verified, not just
+assumed, before any new SQL is written against production. It also
+keeps the Free Tier consumption engineering explicit instead of a side
+note, per the original spec document's own rules (para 3, 21, 65-68)
+-- see section 7, unchanged from Revision 2 and re-approved by the
+advisor as-is.
 
 ---
 
-## 1. Complete current schema audit (tables relevant to referral/commission)
+## 1. Migration-Based Schema Audit (reconstructed from repository history, NOT a live-database query)
 
 ### `auth.users` -- Supabase-managed, not in our migrations
 - `id uuid` (PK), `email`, `created_at` -- read-only for us.
@@ -82,6 +91,50 @@ Separate flow (company seat licensing), included here only because it shares `su
 
 ---
 
+## 1a. Schema Reconciliation — REQUIRED before any migration is written to run
+
+This is the advisor's required step between "migration-based audit" and
+"final migration SQL": confirm section 1 above actually matches what is
+live in Supabase right now, not just what the `.sql` files in the repo
+say *should* be there.
+
+**Action needed from the project owner (not something Claude can run —
+no direct database access):** paste the query below into the Supabase
+SQL Editor (read-only — `SELECT` against `information_schema` and
+`pg_indexes` only, no `INSERT`/`UPDATE`/`DELETE`, safe to run on
+production) and paste the result back into the chat.
+
+```sql
+-- Read-only reconciliation query. Confirms the actual live schema for
+-- every table this migration plan touches, plus confirms the three
+-- new table names are not already taken by something else.
+select table_name, column_name, data_type, is_nullable, column_default
+from information_schema.columns
+where table_schema = 'public'
+  and table_name in ('profiles', 'subscriptions', 'teacher_coupons',
+                      'b2b_groups', 'b2b_redemptions',
+                      'teachers', 'referrals', 'commission_ledger')
+order by table_name, ordinal_position;
+
+select tablename, indexname, indexdef
+from pg_indexes
+where schemaname = 'public'
+  and tablename in ('subscriptions', 'teacher_coupons', 'b2b_groups', 'b2b_redemptions')
+order by tablename, indexname;
+
+select tablename, policyname, cmd, qual
+from pg_policies
+where schemaname = 'public'
+  and tablename in ('profiles', 'subscriptions', 'teacher_coupons', 'b2b_groups', 'b2b_redemptions')
+order by tablename, policyname;
+```
+
+Until this comes back and matches section 1, the migration SQL in
+section 4/4a below stays a **draft for review**, not a file the owner
+should paste into the SQL Editor and run.
+
+---
+
 ## 2. Direct answer to "do we really need 4 new tables, or does teacher_coupons already cover it?"
 
 Checked against the actual schema above, not assumed:
@@ -89,9 +142,9 @@ Checked against the actual schema above, not assumed:
 - **`teacher_coupons` cannot become the "teacher" entity as-is**, because `teacher_name` is a plain `text` column with no uniqueness constraint and no relationship to anything else. Two rows with `teacher_name = 'Ahmad Mahmoud'` today are two unrelated strings to Postgres -- there is no way to query "give me all codes belonging to this teacher" reliably (a typo or a different capitalization silently creates a second, disconnected "teacher"). Since the locked business requirement (from the advisor's own Phase-2 directive) is **one teacher, multiple codes**, this needs a real foreign key, which means a real `teachers` table with an `id` that `teacher_coupons` points to. This is not a duplicate structure -- it is the one piece of identity `teacher_coupons` is missing.
 - **`referrals` cannot be replaced by reading `subscriptions.teacher_coupon_id`**, because that column only tells you the *current* redemption, not the historical one -- if `subscriptions` is later updated by a renewal event unrelated to any coupon, or if business logic ever needs to change which subscription row exists, there is nothing that independently proves "this specific student redeemed this specific code on this specific date." That is exactly the "historical rule" the advisor required -- it needs its own row, not a derived read.
 - **`commission_ledger` cannot be replaced by re-reading `subscriptions.teacher_commission_cents`**, for the reason in section 1: that column gets overwritten on renewal and was never designed to be idempotent against webhook retries. A financial record that can silently change value when unrelated activity happens is not a ledger.
-- **`commission_policies`** is the smallest and most optional of the four -- technically the single locked rule (`FIRST_PURCHASE`, 50%) could live as an environment variable instead of a table. It's proposed as a table only so a future policy change doesn't require a code deploy. **This one is the most negotiable of the four -- if the advisor prefers an env-var/config-constant for v1.0 instead of a table, that removes one table entirely and is a smaller, equally safe change.**
+- **`commission_policies`** -- **advisor's final decision: not a table for v1.** Instead, the policy lives as centralized constants in the application layer (see section 4a) referenced by one `CommissionService`, never scattered as magic numbers across multiple files.
 
-**Revised recommendation: 3 tables are architecturally required (`teachers`, `referrals`, `commission_ledger`); the 4th (`commission_policies`) is optional for v1.0 and can be a constant instead, pending the advisor's preference.**
+**APPROVED (advisor, Aug 11 2026): 3 tables — `teachers`, `referrals`, `commission_ledger`. No `commission_policies` table for v1.**
 
 Everything else -- `profiles`, `subscriptions`, `teacher_coupons`, `b2b_groups` -- is reused exactly as-is; nothing about them is duplicated.
 
@@ -136,6 +189,35 @@ b2b_redemptions         -------------------------------------------------->   un
 - **RLS:** enabled, zero public policies.
 - **Relationship to existing tables:** reads `subscriptions`/Stripe data at write time only (via the webhook), doesn't duplicate it -- `gross_amount_cents` is a snapshot of what was actually charged for *this* event, immune to `subscriptions` later being overwritten by a renewal.
 
+### 4a. Business Configuration (replaces `commission_policies` table)
+
+The v1 policy is centralized in one application-layer module, not a database table and not repeated in multiple files:
+
+```
+ReferralPolicy (constants)
+   COMMISSION_TRIGGER      = 'FIRST_PURCHASE'
+   COMMISSION_RATE_DEFAULT = 0.50   -- per-code override still lives on teacher_coupons.commission_rate, unchanged
+   REFERRAL_BONUS_DAYS_DEFAULT = 10 -- per-code override still lives on teacher_coupons.extra_days, unchanged
+        |
+        v
+CommissionService  -- the ONLY place that reads ReferralPolicy and writes to commission_ledger
+        |
+        v
+commission_ledger
+```
+
+Concretely: one file (proposed `lib/referral/policy.ts`), imported only
+by the future `CommissionService`. No component, API route, or webhook
+handler computes `amount * 0.5` directly — they all call the service.
+This satisfies the advisor's instruction ("these values must remain
+configurable at the appropriate business-rule layer and must not be
+scattered as magic numbers") without a table, and if a future version
+needs `FIRST_3_PURCHASES` or `ALL_RENEWALS`, only this one module
+changes — `commission_ledger`'s schema and every caller of
+`CommissionService` stay untouched. Not implemented yet — this is the
+design for Phase 2 Step 3 (Instructor Referral model / Commission
+Service), which comes after the migration itself is approved and live.
+
 ## 5. Modifications to existing tables -- full spec (per-column, as requested)
 
 | Current table | New column | Type | Nullable | Default | FK | Index | Reason |
@@ -175,15 +257,21 @@ This section exists because it must not be glossed over: the project runs on **S
 
 Every change above is additive except the two unique constraints (`referrals.student_user_id`, `commission_ledger.stripe_event_id + type`). Rollback = drop the 3 new tables + drop the 2 new nullable columns; nothing in `auth.users`, `profiles`, `subscriptions`, or `teacher_coupons` is altered destructively, so the app keeps working mid-rollback. The riskiest single step is section 8.2's backfill: if it surfaces a genuine duplicate student, the migration script must stop and surface that row for a manual decision rather than silently resolving it.
 
-## 10. Production deployment steps
+## 10. Production deployment steps (advisor's required final sequence)
 
-1. Advisor reviews this revision, confirms: (a) 3-table vs 4-table decision from section 2, (b) whether `commission_policies` is a table or a constant.
-2. Owner reviews and gives explicit go-ahead -- no SQL runs before this.
-3. Migration file `030_referral_commission.sql` created (or two files, per section 9's suggestion to separate the additive schema from the two unique constraints, so a backfill hiccup never blocks the safe part from shipping).
-4. Owner pastes into Supabase SQL Editor -> Run -> confirms "Success", exactly like every migration before it (001-029).
-5. Backfill script run and reviewed row-by-row for duplicates before the unique constraints are added.
-6. Application code (Referral model -> Commission Ledger writes from the webhook -> teacher-detail page -> payout foundation -> audit log -> RBAC) built only after step 4 is confirmed live.
+1. **Existing production schema verification** -- owner runs the section 1a query against the live database, pastes the result back.
+2. **Reconcile with migration-derived schema** -- section 1 above is checked line-by-line against that result; any mismatch is resolved here, before a single line of new SQL is written to run.
+3. **Final migration SQL review** -- the draft in section 4/4a (once written as an actual `.sql` file) is reviewed against the reconciled schema, not the assumed one.
+4. **Local/staging migration test** -- run against a disposable copy before touching production (a free Supabase project, or `supabase db diff` locally, is enough for this project's scale).
+5. **Integrity checks** -- confirm every FK resolves, confirm the backfill (section 8) produces zero unresolved duplicate-student rows before the unique constraint is added.
+6. **Performance/index checks** -- confirm the three indexes from section 4 are actually created and are the only ones added (matches section 7's Free-Tier discipline).
+7. **Rollback verification** -- confirm the section 9 rollback (drop 3 tables + 2 columns) actually leaves the app working, tested on the same staging copy.
+8. **Explicit production approval** -- advisor + owner both confirm, in writing, after steps 1-7 are done.
+9. **Production migration** -- owner pastes the approved SQL into the Supabase SQL Editor, same manual process as every migration before it (001-029).
+10. **Post-migration verification** -- confirm "Success" in the SQL Editor, re-run the section 1a query and confirm the three new tables now appear with the expected columns/indexes/policies, confirm the existing Dashboard/Dozenten-Codes/Studenten/B2B pages still load correctly with no regression.
+
+Only after step 10 does application code (Referral model -> Commission Service -> Commission Ledger writes from the webhook -> teacher-detail page -> payout foundation -> audit log -> RBAC) get built against this schema.
 
 ---
 
-**Nothing above has been executed.** Waiting for the advisor's answer on section 2 (3 vs 4 tables) before writing the actual `.sql` migration file.
+**Nothing above has been executed.** Architecture is approved (3 tables, no `commission_policies` table). Next action is step 1: the owner runs the section 1a reconciliation query and shares the result.
