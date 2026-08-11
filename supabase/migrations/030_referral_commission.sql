@@ -30,6 +30,14 @@ create table if not exists public.teachers (
   id uuid primary key default gen_random_uuid(),
   name text not null,
   email text,
+  -- Optional: links this teacher to a real login account (auth.users),
+  -- so a teacher can log into CertCoach itself with admin-chosen
+  -- credentials and a complimentary yearly subscription. Nullable —
+  -- most teachers only need a referral code, not a login; this is set
+  -- only when the admin explicitly creates one via the "Login
+  -- erstellen" action (Phase 2 follow-up, see app/api/admin/teachers).
+  user_id uuid references auth.users(id) on delete set null,
+  access_valid_until date,
   status text not null default 'active' check (status in ('active', 'inactive')),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -40,6 +48,9 @@ alter table public.teachers enable row level security;
 -- and b2b_groups: only ever read/written server-side with the
 -- service role key. There is no legitimate reason for a browser to
 -- query this table directly.
+
+create unique index if not exists teachers_user_id_idx
+  on public.teachers (user_id) where user_id is not null;
 
 -- --------------------------------------------------------------------
 -- 2. teacher_coupons: connect each existing code to its owning
