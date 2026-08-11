@@ -80,21 +80,89 @@ export async function POST(req: NextRequest) {
         // compute the commission from that coupon's *current* rate at
         // the time of this specific purchase — not recalculated later,
         // so a future rate change never rewrites past commissions.
+        //
+        // This also writes the real referrals + commission_ledger rows
+        // (migration 030) — the historical, immutable record of this
+        // redemption, independent of subscriptions ever being
+        // overwritten by a later renewal. Both inserts are safe against
+        // Stripe redelivering this same webhook event twice:
+        //   - referrals is unique on student_user_id, so a second
+        //     attempt for the same student hits that constraint (error
+        //     23505) and is caught/ignored below — one locked
+        //     attribution per student, exactly as required.
+        //   - commission_ledger is unique on (stripe_event_id, type),
+        //     using this event's own real event.id, so a redelivered
+        //     webhook can never double-credit the teacher.
         const teacherCouponId = subscription.metadata?.teacher_coupon_id;
         if (teacherCouponId) {
           const admin = getSupabaseAdmin();
           const { data: coupon } = await admin
             .from("teacher_coupons")
-            .select("commission_rate")
+            .select("commission_rate, teacher_id, code, used_count")
             .eq("id", teacherCouponId)
             .maybeSingle();
 
+          const bonusDaysGranted = Number(subscription.metadata?.bonus_days_granted ?? 0);
+          const commissionCents = coupon ? Math.round(priceAmount * Number(coupon.commission_rate)) : 0;
+
           row.teacher_coupon_id = teacherCouponId;
           row.applied_coupon_code = subscription.metadata?.coupon_code ?? null;
-          row.bonus_days_granted = Number(subscription.metadata?.bonus_days_granted ?? 0);
-          row.teacher_commission_cents = coupon
-            ? Math.round(priceAmount * Number(coupon.commission_rate))
-            : 0;
+          row.bonus_days_granted = bonusDaysGranted;
+          row.teacher_commission_cents = commissionCents;
+
+          if (coupon?.teacher_id) {
+            const { data: referral, error: referralError } = await admin
+              .from("referrals")
+              .insert({
+                student_user_id: userId,
+                teacher_id: coupon.teacher_id,
+                teacher_coupon_id: teacherCouponId,
+                code_at_redemption: subscription.metadata?.coupon_code ?? coupon.code,
+                bonus_days_granted: bonusDaysGranted,
+              })
+              .select("id")
+              .single();
+
+            // 23505 = unique_violation: this student already has a
+            // locked referral (from an earlier redemption or a
+            // redelivered webhook). Not an error — the correct,
+            // expected outcome of "one referral attribution per
+            // student, ever". Any other error is logged but doesn't
+            // block granting the subscription itself.
+            if (referralError && referralError.code !== "23505") {
+              console.error("referrals insert error:", referralError);
+            }
+
+            if (referral) {
+              row.referral_id = referral.id;
+
+              // Best-effort increment — acceptable read-then-write at
+              // this project's current scale (see docs/REFERRAL_COMMISSION_MIGRATION_PLAN.md
+              // section 7 on not over-engineering for scale that
+              // doesn't exist yet); revisit with an atomic RPC if
+              // concurrent redemptions of the same code become common.
+              await admin
+                .from("teacher_coupons")
+                .update({ used_count: (coupon.used_count ?? 0) + 1 })
+                .eq("id", teacherCouponId);
+
+              const { error: ledgerError } = await admin.from("commission_ledger").insert({
+                teacher_id: coupon.teacher_id,
+                student_user_id: userId,
+                referral_id: referral.id,
+                stripe_event_id: event.id,
+                stripe_session_or_invoice_id: session.id,
+                gross_amount_cents: priceAmount,
+                commission_rate: coupon.commission_rate,
+                commission_amount_cents: commissionCents,
+                type: "EARNED",
+                status: "PENDING",
+              });
+              if (ledgerError && ledgerError.code !== "23505") {
+                console.error("commission_ledger insert error:", ledgerError);
+              }
+            }
+          }
         }
 
         await getSupabaseAdmin().from("subscriptions").upsert(row, { onConflict: "user_id" });

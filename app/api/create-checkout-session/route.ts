@@ -66,12 +66,18 @@ export async function POST(req: NextRequest) {
       );
       const { data: coupon } = await admin
         .from("teacher_coupons")
-        .select("id, extra_days, is_active")
+        .select("id, extra_days, is_active, valid_until, max_uses, used_count")
         .ilike("code", couponCode.trim())
         .maybeSingle();
 
       if (!coupon || !coupon.is_active) {
         return NextResponse.json({ error: "invalid_coupon" }, { status: 400 });
+      }
+      if (coupon.valid_until && new Date(coupon.valid_until) < new Date()) {
+        return NextResponse.json({ error: "coupon_expired" }, { status: 400 });
+      }
+      if (coupon.max_uses !== null && (coupon.used_count ?? 0) >= coupon.max_uses) {
+        return NextResponse.json({ error: "coupon_usage_limit_reached" }, { status: 400 });
       }
       teacherCouponId = coupon.id;
       bonusDays = coupon.extra_days;
