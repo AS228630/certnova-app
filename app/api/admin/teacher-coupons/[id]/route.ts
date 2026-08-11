@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requirePermission, getSupabaseAdmin } from '@/lib/admin/requireAdmin';
+import { logAudit } from '@/lib/admin/audit';
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const auth = await requirePermission(req.headers.get('authorization')?.replace(/^Bearer\s+/i, ''), 'instructor_code.manage');
@@ -27,5 +28,17 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     .single();
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  await logAudit({
+    actorId: auth.userId,
+    actorEmail: auth.email,
+    action: typeof body.isActive === 'boolean'
+      ? (body.isActive ? 'INSTRUCTOR_CODE_ENABLED' : 'INSTRUCTOR_CODE_DISABLED')
+      : 'INSTRUCTOR_CODE_UPDATED',
+    resourceType: 'teacher_coupon',
+    resourceId: id,
+    metadata: patch,
+  });
+
   return NextResponse.json({ coupon: data });
 }

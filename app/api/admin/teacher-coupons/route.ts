@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAdmin, requirePermission, getSupabaseAdmin } from '@/lib/admin/requireAdmin';
+import { logAudit } from '@/lib/admin/audit';
 
 export async function GET(req: NextRequest) {
   const auth = await requireAdmin(req.headers.get('authorization')?.replace(/^Bearer\s+/i, ''));
@@ -161,6 +162,15 @@ export async function POST(req: NextRequest) {
     const status = error.code === '23505' ? 409 : 500; // unique violation -> code already exists
     return NextResponse.json({ error: error.message }, { status });
   }
+
+  await logAudit({
+    actorId: auth.userId,
+    actorEmail: auth.email,
+    action: 'INSTRUCTOR_CODE_CREATED',
+    resourceType: 'teacher_coupon',
+    resourceId: data.id,
+    metadata: { code, teacherId: resolvedTeacherId, extraDays, commissionRate, maxUses, validUntil },
+  });
 
   return NextResponse.json({ coupon: data }, { status: 201 });
 }

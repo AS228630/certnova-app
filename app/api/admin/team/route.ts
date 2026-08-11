@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requirePermission, getSupabaseAdmin } from '@/lib/admin/requireAdmin';
+import { logAudit } from '@/lib/admin/audit';
 
 const VALID_ROLES = ['SUPER_ADMIN', 'ADMIN', 'FINANCE_ADMIN', 'SUPPORT', 'AUDITOR'];
 
@@ -54,5 +55,15 @@ export async function POST(req: NextRequest) {
     .single();
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  await logAudit({
+    actorId: auth.userId,
+    actorEmail: auth.email,
+    action: 'ADMIN_ROLE_GRANTED',
+    resourceType: 'admin_users',
+    resourceId: data.id,
+    metadata: { targetEmail: email, role },
+  });
+
   return NextResponse.json({ admin: data }, { status: 201 });
 }

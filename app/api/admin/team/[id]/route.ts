@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requirePermission, getSupabaseAdmin } from '@/lib/admin/requireAdmin';
+import { logAudit } from '@/lib/admin/audit';
 
 export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const auth = await requirePermission(req.headers.get('authorization')?.replace(/^Bearer\s+/i, ''), 'admin_users.manage');
@@ -10,7 +11,7 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
 
   const { data: target, error: targetError } = await supabase
     .from('admin_users')
-    .select('id, user_id, role')
+    .select('id, user_id, email, role')
     .eq('id', id)
     .maybeSingle();
   if (targetError) return NextResponse.json({ error: targetError.message }, { status: 500 });
@@ -32,6 +33,15 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
 
   const { error } = await supabase.from('admin_users').delete().eq('id', id);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  await logAudit({
+    actorId: auth.userId,
+    actorEmail: auth.email,
+    action: 'ADMIN_ROLE_REVOKED',
+    resourceType: 'admin_users',
+    resourceId: id,
+    metadata: { targetEmail: target.email, revokedRole: target.role },
+  });
 
   return NextResponse.json({ removed: true });
 }

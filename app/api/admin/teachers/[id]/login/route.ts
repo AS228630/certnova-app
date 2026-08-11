@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requirePermission, getSupabaseAdmin } from '@/lib/admin/requireAdmin';
+import { logAudit } from '@/lib/admin/audit';
 
 /**
  * Teacher login accounts — a real CertCoach account the admin creates
@@ -66,6 +67,15 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
 
     await supabase.from('teachers').update({ access_valid_until: newPeriodEnd.slice(0, 10) }).eq('id', teacherId);
 
+    await logAudit({
+      actorId: auth.userId,
+      actorEmail: auth.email,
+      action: 'TEACHER_LOGIN_RENEWED',
+      resourceType: 'teacher',
+      resourceId: teacherId,
+      metadata: { validUntil: newPeriodEnd }, // never log email/password here
+    });
+
     return NextResponse.json({ renewed: true, validUntil: newPeriodEnd });
   }
 
@@ -112,6 +122,19 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
     .update({ user_id: userId, access_valid_until: newPeriodEnd.slice(0, 10) })
     .eq('id', teacherId);
   if (linkError) return NextResponse.json({ error: linkError.message }, { status: 500 });
+
+  await logAudit({
+    actorId: auth.userId,
+    actorEmail: auth.email,
+    action: 'TEACHER_LOGIN_CREATED',
+    resourceType: 'teacher',
+    resourceId: teacherId,
+    // Deliberately excludes password. Email is kept because it's the
+    // login identifier itself, not a secret — same distinction the
+    // advisor's spec draws ("secrets never in audit log", not "no PII
+    // at all").
+    metadata: { email, validUntil: newPeriodEnd },
+  });
 
   return NextResponse.json({ created: true, userId, validUntil: newPeriodEnd }, { status: 201 });
 }

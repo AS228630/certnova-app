@@ -23,7 +23,8 @@ export type Permission =
   | 'teacher_login.manage' // create/renew a teacher's CertCoach login account
   | 'financial.view' // view commission/payout figures
   | 'financial.manage' // approve/reverse commissions, create payouts (not built yet)
-  | 'admin_users.manage'; // add/remove admins, change roles
+  | 'admin_users.manage' // add/remove admins, change roles
+  | 'audit_logs.view'; // read the append-only audit trail
 
 const ROLE_PERMISSIONS: Record<Permission, AdminRole[]> = {
   'instructor_code.manage': ['SUPER_ADMIN', 'ADMIN'],
@@ -31,6 +32,7 @@ const ROLE_PERMISSIONS: Record<Permission, AdminRole[]> = {
   'financial.view': ['SUPER_ADMIN', 'ADMIN', 'FINANCE_ADMIN', 'AUDITOR'],
   'financial.manage': ['SUPER_ADMIN', 'FINANCE_ADMIN'],
   'admin_users.manage': ['SUPER_ADMIN'],
+  'audit_logs.view': ['SUPER_ADMIN', 'AUDITOR'],
 };
 
 type AdminOk = { ok: true; email: string; userId: string; role: AdminRole };
