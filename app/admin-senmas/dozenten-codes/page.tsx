@@ -20,6 +20,7 @@
  */
 
 import { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
 import { Plus, Loader2, FileText, FileSpreadsheet, Ticket, KeyRound, X, Search, Gift, Share2, KeyRound as KeyIcon, ShoppingCart, Wallet as WalletIcon } from 'lucide-react';
 import { supabase } from '@/lib/supabase/client';
 
@@ -443,7 +444,13 @@ export default function DozentenCodesPage() {
                       <td className="px-4 py-3">
                         <span className="font-mono text-xs px-2 py-1 rounded" style={{ background: 'var(--color-primary-light)', color: 'var(--color-primary-hover)' }}>{c.code}</span>
                       </td>
-                      <td className="px-4 py-3 whitespace-nowrap">{c.teacher_name}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        {c.teacher_id ? (
+                          <Link href={`/admin-senmas/dozenten-codes/${c.teacher_id}`} className="hover:underline" style={{ color: 'var(--color-primary)' }}>
+                            {c.teacher_name}
+                          </Link>
+                        ) : c.teacher_name}
+                      </td>
                       <td className="px-4 py-3 whitespace-nowrap" style={{ color: 'var(--color-text-faint)' }}>+{c.extra_days} Tage</td>
                       <td className="px-4 py-3" style={{ color: 'var(--color-text-faint)' }}>{Math.round(c.commission_rate * 100)}%</td>
                       <td className="px-4 py-3">{c.stats.count}{c.max_uses ? ` / ${c.max_uses}` : ''}</td>
