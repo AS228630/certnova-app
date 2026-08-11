@@ -3,23 +3,25 @@
 /**
  * Admin Dashboard — main content.
  *
- * STATUS: Visual implementation matching the approved mockup, built with
- * mock data so it can be reviewed end-to-end. The sidebar/topbar/auth
- * guard live in app/admin/layout.tsx (components/admin/AdminShell.tsx) —
- * this file is only the page content. Every sidebar link and every
- * "Öffnen"/"Alle X anzeigen" button below now routes to a real page
- * (app/admin/[slug]/page.tsx), which currently shows an honest
- * "In Entwicklung" placeholder — see docs/admin-dashboard-plan.md for
- * the build-out plan.
+ * STATUS: Wired to real data via /api/admin/dashboard-summary (see that
+ * route for exactly which tables each number comes from, and the one
+ * documented limitation: `subscriptions` is not a transaction ledger,
+ * so revenue figures are best-effort, not exact accounting). No number
+ * on this page is hardcoded anymore.
  *
- * Still NOT done, in this order:
- *   1. Set NEXT_PUBLIC_ADMIN_EMAILS in Vercel (guard allows nobody until
- *      configured — see components/admin/AdminGuard.tsx).
- *   2. Wire each section below to real Supabase queries.
- *   3. Add server-side authorization once real data is connected.
+ * Still open (see docs/admin-dashboard-plan.md and the Aug 11 2026
+ * senior-advisor chat for the full list):
+ *   - No `payouts` table yet -> "Offene Auszahlungen" is honestly shown
+ *     as "nicht verfuegbar", not a fake number.
+ *   - No `audit_logs` table yet -> "Letzte Aktivitaeten" is assembled
+ *     from real row timestamps (coupons/groups/subscriptions created
+ *     or updated), not a dedicated audit trail.
+ *   - Stripe/E-Mail/Cloud-Storage health checks are not implemented ->
+ *     shown as "Unbekannt", not defaulted to fake "Online".
  */
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import {
   Ticket,
   GraduationCap,
@@ -32,80 +34,74 @@ import {
   TrendingUp,
   TrendingDown,
   CheckCircle2,
+  HelpCircle,
+  XCircle,
   RefreshCw,
+  Loader2,
   type LucideIcon,
 } from 'lucide-react';
+import { supabase } from '@/lib/supabase/client';
 
 // ---------------------------------------------------------------------------
-// Mock data — replace with real Supabase queries before shipping.
+// Types matching app/api/admin/dashboard-summary/route.ts
 // ---------------------------------------------------------------------------
 
-type StatCard = {
-  label: string;
-  value: string;
-  delta: string;
-  positive: boolean;
-  icon: LucideIcon;
-  iconBg: string;
-  spark: number[];
+type SystemComponentStatus = { status: 'online' | 'down' | 'unknown'; latencyMs?: number; note?: string };
+
+type DashboardSummary = {
+  kpi: {
+    revenue: { currentCents: number; previousCents: number; changePercent: number | null };
+    sales: { current: number; previous: number; changePercent: number | null };
+    activeStudents: { current: number; changePercent: number | null };
+    teacherCodes: { active: number; total: number; changePercent: number | null };
+    payouts: { available: boolean; note?: string };
+  };
+  revenueChart: { date: string; revenueCents: number; commissionCents: number }[];
+  recentActivity: { type: string; text: string; sub: string; time: string }[];
+  teacherCoupons: {
+    id: string;
+    code: string;
+    teacher_name: string;
+    extra_days: number;
+    commission_rate: number;
+    is_active: boolean;
+    stats: { count: number; revenueCents: number; commissionCents: number };
+  }[];
+  students: { id: string; name: string; email: string; plan: string; active: boolean }[];
+  b2bGroups: { id: string; name: string; type: string; total_licenses: number; usedLicenses: number; is_active: boolean }[];
+  systemStatus: {
+    webServer: SystemComponentStatus;
+    database: SystemComponentStatus;
+    stripe: SystemComponentStatus;
+    email: SystemComponentStatus;
+    storage: SystemComponentStatus;
+  };
+  totals: { studentsTotal: number };
 };
 
-const STAT_CARDS: StatCard[] = [
-  { label: 'Gesamtumsatz (Monat)', value: '€24.680,00', delta: '18,4%', positive: true, icon: Wallet, iconBg: '#7C3AED', spark: [4, 6, 5, 8, 7, 10, 12] },
-  { label: 'Verkäufe (Monat)', value: '248', delta: '14,7%', positive: true, icon: Wallet, iconBg: '#3B82F6', spark: [3, 4, 4, 6, 5, 7, 8] },
-  { label: 'Aktive Studenten', value: '1.847', delta: '11,2%', positive: true, icon: GraduationCap, iconBg: '#22C55E', spark: [5, 5, 6, 6, 7, 8, 9] },
-  { label: 'Dozenten-Codes', value: '78', delta: '5,6%', positive: true, icon: Ticket, iconBg: '#F59E0B', spark: [6, 6, 7, 6, 7, 7, 8] },
-  { label: 'Offene Auszahlungen', value: '€3.930,00', delta: '3,1%', positive: false, icon: TrendingDown, iconBg: '#EF4444', spark: [9, 8, 8, 7, 7, 6, 6] },
-];
+function fmtEuro(cents: number): string {
+  return '€' + (cents / 100).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
 
-const REVENUE_SERIES: { day: string; umsatz: number; provisionen: number }[] = [
-  { day: '15.07', umsatz: 7000, provisionen: 4200 },
-  { day: '16.07', umsatz: 14500, provisionen: 10200 },
-  { day: '17.07', umsatz: 18200, provisionen: 13800 },
-  { day: '18.07', umsatz: 19600, provisionen: 15400 },
-  { day: '19.07', umsatz: 21200, provisionen: 16600 },
-  { day: '20.07', umsatz: 22800, provisionen: 18500 },
-  { day: '21.07', umsatz: 24680, provisionen: 19600 },
-];
+function fmtPercent(p: number | null): string {
+  return p === null ? '—' : `${p >= 0 ? '+' : ''}${p.toFixed(1)}%`;
+}
 
-const RECENT_ACTIVITY = [
-  { text: 'Neuer Student registriert', sub: 'max.mustermann@example.com', time: 'vor 5 Min.', color: '#3B82F6' },
-  { text: 'Zahlung erhalten', sub: '€69,99 von Anna Müller', time: 'vor 12 Min.', color: '#22C55E' },
-  { text: 'Dozenten-Code erstellt', sub: 'Code "MICHAEL10" wurde erstellt', time: 'vor 28 Min.', color: '#7C3AED' },
-  { text: 'Gruppen-Lizenz erstellt', sub: '50 Lizenzen für "WBS Training"', time: 'vor 1 Std.', color: '#F59E0B' },
-  { text: 'Auszahlung beantragt', sub: '€1.470,00 von Michael', time: 'vor 2 Std.', color: '#EF4444' },
-];
+function fmtRelativeTime(iso: string): string {
+  const diffMs = Date.now() - new Date(iso).getTime();
+  const min = Math.round(diffMs / 60000);
+  if (min < 1) return 'gerade eben';
+  if (min < 60) return `vor ${min} Min.`;
+  const h = Math.round(min / 60);
+  if (h < 24) return `vor ${h} Std.`;
+  return `vor ${Math.round(h / 24)} Tg.`;
+}
 
-const SYSTEM_STATUS = [
-  { name: 'Web Server' },
-  { name: 'Datenbank' },
-  { name: 'Stripe' },
-  { name: 'E-Mail Service' },
-  { name: 'Cloud Storage' },
-];
-
-const DOZENTEN_CODES = [
-  { code: 'ARND10', name: 'Arnd', tag: '#7C3AED', giftDays: 10, commission: 50, revenue: '€4.560,00', active: true },
-  { code: 'MICHAEL10', name: 'Michael', tag: '#3B82F6', giftDays: 10, commission: 50, revenue: '€2.940,00', active: true },
-  { code: 'SARAH10', name: 'Sarah', tag: '#F59E0B', giftDays: 10, commission: 50, revenue: '€2.280,00', active: true },
-  { code: 'DAVID10', name: 'David', tag: '#22C55E', giftDays: 10, commission: 50, revenue: '€1.920,00', active: true },
-  { code: 'JULIA10', name: 'Julia', tag: '#EF4444', giftDays: 10, commission: 50, revenue: '€660,00', active: false },
-];
-
-const STUDENTEN = [
-  { name: 'Max Mustermann', email: 'max.mustermann@example.com', plan: 'Premium', status: true },
-  { name: 'Anna Müller', email: 'anna.mueller@example.com', plan: 'Premium', status: true },
-  { name: 'Thomas Schmidt', email: 'thomas.schmidt@example.com', plan: 'Basic', status: true },
-  { name: 'Jessica Weber', email: 'jessica.weber@example.com', plan: 'Premium', status: true },
-  { name: 'Lukas Hoffmann', email: 'lukas.hoffmann@example.com', plan: 'Basic', status: false },
-];
-
-const B2B_GROUPS = [
-  { name: 'WBS Training', type: 'Unternehmen', licenses: 50, used: 32, active: true },
-  { name: 'IT Academy Berlin', type: 'Bildungseinrichtung', licenses: 100, used: 75, active: true },
-  { name: 'Tech Solutions GmbH', type: 'Unternehmen', licenses: 25, used: 10, active: true },
-  { name: 'DevSchool', type: 'Bildungseinrichtung', licenses: 30, used: 18, active: false },
-];
+async function authHeader(): Promise<Record<string, string>> {
+  const { data } = await supabase.auth.getSession();
+  const token = data.session?.access_token;
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
 
 const QUICK_ACTIONS: { icon: LucideIcon; title: string; sub: string; color: string; href: string }[] = [
   { icon: Folder, title: 'Karriere-Dokumente', sub: 'Private Links & Dokumente verwalten', color: '#F59E0B', href: '/admin-senmas/karriere-dokumente' },
@@ -119,52 +115,37 @@ const QUICK_ACTIONS: { icon: LucideIcon; title: string; sub: string; color: stri
 // Small presentational helpers
 // ---------------------------------------------------------------------------
 
-function Sparkline({ values, color }: { values: number[]; color: string }) {
-  const w = 90;
-  const h = 28;
-  const max = Math.max(...values);
-  const min = Math.min(...values);
-  const range = max - min || 1;
-  const step = w / (values.length - 1);
-  const points = values
-    .map((v, i) => `${i * step},${h - ((v - min) / range) * h}`)
-    .join(' ');
-  return (
-    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} className="overflow-visible">
-      <polyline points={points} fill="none" stroke={color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function RevenueChart() {
+function RevenueChart({ data }: { data: DashboardSummary['revenueChart'] }) {
   const w = 720;
   const h = 220;
   const padY = 16;
-  const max = Math.max(...REVENUE_SERIES.map((d) => d.umsatz));
-  const step = w / (REVENUE_SERIES.length - 1);
+  const max = Math.max(...data.map((d) => d.revenueCents), 1);
+  const step = data.length > 1 ? w / (data.length - 1) : w;
 
-  const pathFor = (key: 'umsatz' | 'provisionen') =>
-    REVENUE_SERIES.map((d, i) => {
-      const x = i * step;
-      const y = h - padY - (d[key] / max) * (h - padY * 2);
-      return `${i === 0 ? 'M' : 'L'}${x},${y}`;
-    }).join(' ');
+  const pathFor = (key: 'revenueCents' | 'commissionCents') =>
+    data
+      .map((d, i) => {
+        const x = i * step;
+        const y = h - padY - (d[key] / max) * (h - padY * 2);
+        return `${i === 0 ? 'M' : 'L'}${x},${y}`;
+      })
+      .join(' ');
 
   return (
     <svg viewBox={`0 0 ${w} ${h}`} className="w-full h-56">
       {[0, 1, 2, 3, 4].map((i) => (
         <line key={i} x1={0} x2={w} y1={(h / 4) * i} y2={(h / 4) * i} stroke="rgba(255,255,255,0.06)" strokeWidth={1} />
       ))}
-      <path d={pathFor('umsatz')} fill="none" stroke="#7C3AED" strokeWidth={2.5} />
-      <path d={pathFor('provisionen')} fill="none" stroke="#22C55E" strokeWidth={2.5} />
-      {REVENUE_SERIES.map((d, i) => {
+      <path d={pathFor('revenueCents')} fill="none" stroke="#7C3AED" strokeWidth={2.5} />
+      <path d={pathFor('commissionCents')} fill="none" stroke="#22C55E" strokeWidth={2.5} />
+      {data.map((d, i) => {
         const x = i * step;
-        const yU = h - padY - (d.umsatz / max) * (h - padY * 2);
-        const yP = h - padY - (d.provisionen / max) * (h - padY * 2);
+        const yR = h - padY - (d.revenueCents / max) * (h - padY * 2);
+        const yC = h - padY - (d.commissionCents / max) * (h - padY * 2);
         return (
-          <g key={d.day}>
-            <circle cx={x} cy={yU} r={3.5} fill="#7C3AED" />
-            <circle cx={x} cy={yP} r={3.5} fill="#22C55E" />
+          <g key={d.date}>
+            <circle cx={x} cy={yR} r={3.5} fill="#7C3AED" />
+            <circle cx={x} cy={yC} r={3.5} fill="#22C55E" />
           </g>
         );
       })}
@@ -172,27 +153,33 @@ function RevenueChart() {
   );
 }
 
-function StatCardView({ card }: { card: StatCard }) {
-  const Icon = card.icon;
-  const Trend = card.positive ? TrendingUp : TrendingDown;
+function StatCardView({
+  label,
+  value,
+  changePercent,
+  icon: Icon,
+  iconBg,
+}: {
+  label: string;
+  value: string;
+  changePercent: number | null;
+  icon: LucideIcon;
+  iconBg: string;
+}) {
+  const positive = (changePercent ?? 0) >= 0;
+  const Trend = positive ? TrendingUp : TrendingDown;
   return (
-    <div
-      className="rounded-2xl p-5 flex flex-col gap-3 min-w-[190px]"
-      style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}
-    >
-      <div className="flex items-center justify-between">
-        <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: `${card.iconBg}26` }}>
-          <Icon size={18} color={card.iconBg} />
-        </div>
-        <Sparkline values={card.spark} color={card.iconBg} />
+    <div className="rounded-2xl p-5 flex flex-col gap-3 min-w-[190px]" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
+      <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: `${iconBg}26` }}>
+        <Icon size={18} color={iconBg} />
       </div>
       <div>
-        <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{card.label}</div>
-        <div className="text-2xl font-bold mt-1" style={{ color: 'var(--color-text)' }}>{card.value}</div>
+        <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>{label}</div>
+        <div className="text-2xl font-bold mt-1" style={{ color: 'var(--color-text)' }}>{value}</div>
       </div>
-      <div className="flex items-center gap-1 text-xs" style={{ color: card.positive ? 'var(--color-success)' : 'var(--color-danger)' }}>
-        <Trend size={13} />
-        <span>{card.delta}</span>
+      <div className="flex items-center gap-1 text-xs" style={{ color: changePercent === null ? 'var(--color-text-faint)' : positive ? 'var(--color-success)' : 'var(--color-danger)' }}>
+        {changePercent !== null && <Trend size={13} />}
+        <span>{fmtPercent(changePercent)}</span>
         <span style={{ color: 'var(--color-text-faint)' }}>vs. letzter Monat</span>
       </div>
     </div>
@@ -215,13 +202,25 @@ function StatusPill({ active }: { active: boolean }) {
   return (
     <span
       className="text-[11px] px-2 py-0.5 rounded-full font-medium"
-      style={{
-        background: active ? 'var(--color-success-light)' : 'var(--color-danger-light)',
-        color: active ? 'var(--color-success)' : 'var(--color-danger)',
-      }}
+      style={{ background: active ? 'var(--color-success-light)' : 'var(--color-danger-light)', color: active ? 'var(--color-success)' : 'var(--color-danger)' }}
     >
       {active ? 'Aktiv' : 'Inaktiv'}
     </span>
+  );
+}
+
+function SystemRow({ label, s }: { label: string; s: SystemComponentStatus }) {
+  const icon =
+    s.status === 'online' ? <CheckCircle2 size={14} color="var(--color-success)" /> :
+    s.status === 'down' ? <XCircle size={14} color="var(--color-danger)" /> :
+    <HelpCircle size={14} color="var(--color-text-faint)" />;
+  const text = s.status === 'online' ? 'Online' : s.status === 'down' ? 'Offline' : 'Unbekannt';
+  const color = s.status === 'online' ? 'var(--color-success)' : s.status === 'down' ? 'var(--color-danger)' : 'var(--color-text-faint)';
+  return (
+    <li className="flex items-center justify-between text-sm">
+      <span className="flex items-center gap-2">{icon}{label}</span>
+      <span className="text-xs" style={{ color }}>{text}{s.latencyMs !== undefined ? ` · ${s.latencyMs}ms` : ''}</span>
+    </li>
   );
 }
 
@@ -230,19 +229,104 @@ function StatusPill({ active }: { active: boolean }) {
 // ---------------------------------------------------------------------------
 
 export default function AdminDashboardPage() {
+  const [data, setData] = useState<DashboardSummary | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [lastLoaded, setLastLoaded] = useState<Date | null>(null);
+  const [secondsSinceLoad, setSecondsSinceLoad] = useState(0);
+  const [refreshing, setRefreshing] = useState(false);
+
+  async function fetchSummary(): Promise<DashboardSummary> {
+    const res = await fetch('/api/admin/dashboard-summary', { headers: await authHeader() });
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      const message =
+        j.error === 'admin_not_configured' ? 'ADMIN_EMAILS ist in Vercel noch nicht konfiguriert.' :
+        j.error === 'not_admin' ? 'Kein Admin-Zugriff fuer dieses Konto.' :
+        'Dashboard konnte nicht geladen werden.';
+      throw new Error(message);
+    }
+    return (await res.json()) as DashboardSummary;
+  }
+
+  function applyResult(json: DashboardSummary) {
+    setData(json);
+    setLastLoaded(new Date());
+    setSecondsSinceLoad(0);
+  }
+
+  function reload() {
+    setError(null);
+    fetchSummary()
+      .then(applyResult)
+      .catch((e: Error) => setError(e.message))
+      .finally(() => setRefreshing(false));
+  }
+
+  useEffect(() => {
+    fetchSummary()
+      .then(applyResult)
+      .catch((e: Error) => setError(e.message))
+      .finally(() => setRefreshing(false));
+  }, []);
+
+  useEffect(() => {
+    if (!lastLoaded) return;
+    const id = setInterval(() => {
+      setSecondsSinceLoad(Math.max(0, Math.round((Date.now() - lastLoaded.getTime()) / 1000)));
+    }, 1000);
+    return () => clearInterval(id);
+  }, [lastLoaded]);
+
+  function handleRefresh() {
+    setRefreshing(true);
+    reload();
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-2xl p-8 text-center" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
+        <p className="text-sm mb-3" style={{ color: 'var(--color-danger)' }}>{error}</p>
+        <button onClick={reload} className="text-sm font-medium px-4 py-2 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}>
+          Erneut versuchen
+        </button>
+      </div>
+    );
+  }
+
+  if (!data) {
+    return (
+      <div className="flex items-center justify-center py-24">
+        <Loader2 className="animate-spin" size={22} color="var(--color-text-faint)" />
+      </div>
+    );
+  }
+
+  const { kpi, revenueChart, recentActivity, teacherCoupons, students, b2bGroups, systemStatus } = data;
+
   return (
     <>
       {/* Stat cards */}
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
-        {STAT_CARDS.map((c) => (
-          <StatCardView key={c.label} card={c} />
-        ))}
+        <StatCardView label="Gesamtumsatz (Monat)" value={fmtEuro(kpi.revenue.currentCents)} changePercent={kpi.revenue.changePercent} icon={Wallet} iconBg="#7C3AED" />
+        <StatCardView label="Verkaeufe (Monat)" value={String(kpi.sales.current)} changePercent={kpi.sales.changePercent} icon={Wallet} iconBg="#3B82F6" />
+        <StatCardView label="Aktive Studenten" value={kpi.activeStudents.current.toLocaleString('de-DE')} changePercent={kpi.activeStudents.changePercent} icon={GraduationCap} iconBg="#22C55E" />
+        <StatCardView label="Dozenten-Codes" value={String(kpi.teacherCodes.active)} changePercent={kpi.teacherCodes.changePercent} icon={Ticket} iconBg="#F59E0B" />
+        <div className="rounded-2xl p-5 flex flex-col gap-3 min-w-[190px]" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: '#EF444426' }}>
+            <TrendingDown size={18} color="#EF4444" />
+          </div>
+          <div>
+            <div className="text-xs" style={{ color: 'var(--color-text-muted)' }}>Offene Auszahlungen</div>
+            <div className="text-lg font-semibold mt-1" style={{ color: 'var(--color-text-faint)' }}>Nicht verfuegbar</div>
+          </div>
+          <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>Noch keine payouts-Tabelle</div>
+        </div>
       </div>
 
       {/* Revenue + Activity + Status */}
       <div className="grid grid-cols-1 xl:grid-cols-[1.6fr_1fr_1fr] gap-4">
         <SectionCard
-          title="Umsatz-Übersicht"
+          title="Umsatz-Uebersicht"
           action={
             <div className="flex items-center gap-4 text-xs" style={{ color: 'var(--color-text-muted)' }}>
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full" style={{ background: '#7C3AED' }} />Umsatz (€)</span>
@@ -250,48 +334,44 @@ export default function AdminDashboardPage() {
             </div>
           }
         >
-          <RevenueChart />
+          <RevenueChart data={revenueChart} />
           <div className="flex justify-between text-[11px] mt-1" style={{ color: 'var(--color-text-faint)' }}>
-            {REVENUE_SERIES.map((d) => <span key={d.day}>{d.day}</span>)}
+            {revenueChart.map((d) => <span key={d.date}>{d.date.slice(5)}</span>)}
           </div>
         </SectionCard>
 
-        <SectionCard
-          title="Letzte Aktivitäten"
-          action={<Link href="/admin-senmas/audit-logs" className="text-xs" style={{ color: 'var(--color-primary)' }}>Alle Aktivitäten</Link>}
-        >
-          <ul className="space-y-4">
-            {RECENT_ACTIVITY.map((a) => (
-              <li key={a.text + a.time} className="flex items-start gap-3">
-                <span className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ background: a.color }} />
-                <div className="min-w-0">
-                  <div className="text-sm truncate">{a.text}</div>
-                  <div className="text-xs truncate" style={{ color: 'var(--color-text-faint)' }}>{a.sub}</div>
-                </div>
-                <span className="ml-auto text-[11px] shrink-0" style={{ color: 'var(--color-text-faint)' }}>{a.time}</span>
-              </li>
-            ))}
-          </ul>
+        <SectionCard title="Letzte Aktivitaeten" action={<Link href="/admin-senmas/audit-logs" className="text-xs" style={{ color: 'var(--color-primary)' }}>Alle Aktivitaeten</Link>}>
+          {recentActivity.length === 0 ? (
+            <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Aktivitaeten.</p>
+          ) : (
+            <ul className="space-y-4">
+              {recentActivity.map((a, i) => (
+                <li key={a.text + a.time + i} className="flex items-start gap-3">
+                  <span className="w-2 h-2 rounded-full mt-1.5 shrink-0" style={{ background: 'var(--color-primary)' }} />
+                  <div className="min-w-0">
+                    <div className="text-sm truncate">{a.text}</div>
+                    <div className="text-xs truncate" style={{ color: 'var(--color-text-faint)' }}>{a.sub}</div>
+                  </div>
+                  <span className="ml-auto text-[11px] shrink-0" style={{ color: 'var(--color-text-faint)' }}>{fmtRelativeTime(a.time)}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </SectionCard>
 
-        <SectionCard
-          title="System-Status"
-          action={<Link href="/admin-senmas/system-status" className="text-xs" style={{ color: 'var(--color-success)' }}>Alle Systeme OK</Link>}
-        >
+        <SectionCard title="System-Status" action={<Link href="/admin-senmas/system-status" className="text-xs" style={{ color: 'var(--color-primary)' }}>Details</Link>}>
           <ul className="space-y-3">
-            {SYSTEM_STATUS.map((s) => (
-              <li key={s.name} className="flex items-center justify-between text-sm">
-                <span className="flex items-center gap-2">
-                  <CheckCircle2 size={14} color="var(--color-success)" />
-                  {s.name}
-                </span>
-                <span className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Online</span>
-              </li>
-            ))}
+            <SystemRow label="Web Server" s={systemStatus.webServer} />
+            <SystemRow label="Datenbank" s={systemStatus.database} />
+            <SystemRow label="Stripe" s={systemStatus.stripe} />
+            <SystemRow label="E-Mail Service" s={systemStatus.email} />
+            <SystemRow label="Cloud Storage" s={systemStatus.storage} />
           </ul>
           <div className="mt-4 pt-3 flex items-center justify-between text-[11px]" style={{ borderTop: '1px solid var(--color-divider)', color: 'var(--color-text-faint)' }}>
-            Letzte Prüfung: vor 2 Minuten
-            <RefreshCw size={12} />
+            {lastLoaded ? `Letzte Pruefung: vor ${secondsSinceLoad}s` : ''}
+            <button onClick={handleRefresh} aria-label="Aktualisieren">
+              <RefreshCw size={12} className={refreshing ? 'animate-spin' : ''} />
+            </button>
           </div>
         </SectionCard>
       </div>
@@ -299,74 +379,83 @@ export default function AdminDashboardPage() {
       {/* Three overview tables */}
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
         <SectionCard
-          title="Dozenten-Codes (Übersicht)"
+          title="Dozenten-Codes (Uebersicht)"
           action={
             <Link href="/admin-senmas/dozenten-codes" className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}>
               <Plus size={13} /> Neuer Code
             </Link>
           }
         >
-          <div className="space-y-3">
-            {DOZENTEN_CODES.map((d) => (
-              <div key={d.code} className="flex items-center justify-between text-xs">
-                <span className="px-2 py-1 rounded-md font-mono text-white text-[11px]" style={{ background: d.tag }}>{d.code}</span>
-                <span style={{ color: 'var(--color-text-muted)' }}>{d.name}</span>
-                <span style={{ color: 'var(--color-text-faint)' }}>+{d.giftDays} Tage</span>
-                <span style={{ color: 'var(--color-text-faint)' }}>{d.commission}%</span>
-                <span className="font-semibold">{d.revenue}</span>
-                <StatusPill active={d.active} />
-              </div>
-            ))}
-          </div>
+          {teacherCoupons.length === 0 ? (
+            <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Dozenten-Codes.</p>
+          ) : (
+            <div className="space-y-3">
+              {teacherCoupons.map((d) => (
+                <div key={d.id} className="flex items-center justify-between text-xs">
+                  <span className="px-2 py-1 rounded-md font-mono text-white text-[11px]" style={{ background: 'var(--color-primary)' }}>{d.code}</span>
+                  <span style={{ color: 'var(--color-text-muted)' }}>{d.teacher_name}</span>
+                  <span style={{ color: 'var(--color-text-faint)' }}>+{d.extra_days} Tage</span>
+                  <span style={{ color: 'var(--color-text-faint)' }}>{Math.round(d.commission_rate * 100)}%</span>
+                  <span className="font-semibold">{fmtEuro(d.stats.revenueCents)}</span>
+                  <StatusPill active={d.is_active} />
+                </div>
+              ))}
+            </div>
+          )}
           <Link href="/admin-senmas/dozenten-codes" className="block text-center mt-4 text-xs" style={{ color: 'var(--color-primary)' }}>
             Alle Dozenten-Codes anzeigen
           </Link>
         </SectionCard>
 
-        <SectionCard
-          title="Studenten (Übersicht)"
-          action={<Link href="/admin-senmas/studenten" className="text-xs" style={{ color: 'var(--color-primary)' }}>Alle Studenten</Link>}
-        >
-          <div className="space-y-3">
-            {STUDENTEN.map((s) => (
-              <div key={s.email} className="flex items-center gap-3 text-xs">
-                <div className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold text-white shrink-0" style={{ background: 'var(--color-primary)' }}>
-                  {s.name.split(' ').map((n) => n[0]).join('')}
+        <SectionCard title="Studenten (Uebersicht)" action={<Link href="/admin-senmas/studenten" className="text-xs" style={{ color: 'var(--color-primary)' }}>Alle Studenten</Link>}>
+          {students.length === 0 ? (
+            <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Studenten.</p>
+          ) : (
+            <div className="space-y-3">
+              {students.map((s) => (
+                <div key={s.id} className="flex items-center gap-3 text-xs">
+                  <div className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold text-white shrink-0" style={{ background: 'var(--color-primary)' }}>
+                    {s.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="truncate" style={{ color: 'var(--color-text)' }}>{s.name}</div>
+                    <div className="truncate" style={{ color: 'var(--color-text-faint)' }}>{s.email}</div>
+                  </div>
+                  <span style={{ color: 'var(--color-text-faint)' }}>{s.plan}</span>
+                  <StatusPill active={s.active} />
                 </div>
-                <div className="min-w-0 flex-1">
-                  <div className="truncate" style={{ color: 'var(--color-text)' }}>{s.name}</div>
-                  <div className="truncate" style={{ color: 'var(--color-text-faint)' }}>{s.email}</div>
-                </div>
-                <span style={{ color: 'var(--color-text-faint)' }}>{s.plan}</span>
-                <StatusPill active={s.status} />
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
           <Link href="/admin-senmas/studenten" className="block text-center mt-4 text-xs" style={{ color: 'var(--color-primary)' }}>
             Alle Studenten anzeigen
           </Link>
         </SectionCard>
 
         <SectionCard
-          title="B2B & Gruppen (Übersicht)"
+          title="B2B & Gruppen (Uebersicht)"
           action={
             <Link href="/admin-senmas/b2b-gruppen" className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}>
               <Plus size={13} /> Neue Gruppe
             </Link>
           }
         >
-          <div className="space-y-3">
-            {B2B_GROUPS.map((g) => (
-              <div key={g.name} className="flex items-center justify-between text-xs">
-                <div>
-                  <div style={{ color: 'var(--color-text)' }}>{g.name}</div>
-                  <div style={{ color: 'var(--color-text-faint)' }}>{g.type}</div>
+          {b2bGroups.length === 0 ? (
+            <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Gruppen.</p>
+          ) : (
+            <div className="space-y-3">
+              {b2bGroups.map((g) => (
+                <div key={g.id} className="flex items-center justify-between text-xs">
+                  <div>
+                    <div style={{ color: 'var(--color-text)' }}>{g.name}</div>
+                    <div style={{ color: 'var(--color-text-faint)' }}>{g.type}</div>
+                  </div>
+                  <span style={{ color: 'var(--color-text-faint)' }}>{g.usedLicenses}/{g.total_licenses}</span>
+                  <StatusPill active={g.is_active} />
                 </div>
-                <span style={{ color: 'var(--color-text-faint)' }}>{g.used}/{g.licenses}</span>
-                <StatusPill active={g.active} />
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
           <Link href="/admin-senmas/b2b-gruppen" className="block text-center mt-4 text-xs" style={{ color: 'var(--color-primary)' }}>
             Alle Gruppen anzeigen
           </Link>
@@ -384,12 +473,8 @@ export default function AdminDashboardPage() {
               <div className="text-sm font-semibold">{q.title}</div>
               <div className="text-xs mt-0.5" style={{ color: 'var(--color-text-faint)' }}>{q.sub}</div>
             </div>
-            <Link
-              href={q.href}
-              className="mt-auto text-xs py-2 rounded-lg font-medium text-center"
-              style={{ background: 'var(--color-panel-alt)', color: 'var(--color-text-muted)' }}
-            >
-              Öffnen
+            <Link href={q.href} className="mt-auto text-xs py-2 rounded-lg font-medium text-center" style={{ background: 'var(--color-panel-alt)', color: 'var(--color-text-muted)' }}>
+              Oeffnen
             </Link>
           </div>
         ))}
@@ -397,7 +482,7 @@ export default function AdminDashboardPage() {
 
       <div className="flex items-center justify-between text-[11px] pt-2" style={{ color: 'var(--color-text-faint)' }}>
         <span>© 2026 CertCoach. Alle Rechte vorbehalten.</span>
-        <span>Version 2.0.0 (UI-Vorschau — noch nicht mit echten Daten verbunden)</span>
+        <span>Version 2.1.0 — echte Daten</span>
       </div>
     </>
   );
