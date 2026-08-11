@@ -1,22 +1,26 @@
 'use client';
 
 /**
- * Real admin page for the teacher referral coupon system. Talks to
- * app/api/admin/teacher-coupons/* and app/api/admin/teachers/*, both
- * protected server-side by lib/admin/requireAdmin.ts.
+ * Real admin page for the teacher referral coupon system — matches the
+ * approved design reference (KPI cards, search/filter, info footer),
+ * but per the senior advisor's explicit rule: the screenshot is a
+ * visual reference only. No number, name, or status from it is used
+ * as data — everything below comes from
+ * app/api/admin/teacher-coupons and app/api/admin/teachers.
  *
- * Requires migrations 028, 029, and 030 to have been run in Supabase
- * (all confirmed live as of Aug 11 2026 — see docs/REFERRAL_COMMISSION_MIGRATION_PLAN.md).
+ * Requires migrations 028, 029, and 030 (confirmed live Aug 11 2026).
  *
- * Known honest limitation, not hidden: "Verwendet" below is the real
- * count of subscriptions that used each code (computed from actual
- * payment rows, same as before) — teacher_coupons.used_count exists in
- * the schema now but nothing increments it yet; that's part of the
- * Student Referral Service (Phase F), a later build step, not done yet.
+ * Honest, documented limitation, not hidden: search/filter below is
+ * client-side. At the project's current scale (a handful of codes)
+ * that's the correct tradeoff — the approved spec's server-side
+ * pagination requirement (its section 49) is deferred until the
+ * dataset is actually large enough to need it, consistent with the
+ * Free-Tier principle of not building for scale that doesn't exist
+ * yet. Revisit once this list is realistically multiple pages long.
  */
 
-import { useEffect, useState } from 'react';
-import { Plus, Loader2, FileText, FileSpreadsheet, Ticket, KeyRound, X } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { Plus, Loader2, FileText, FileSpreadsheet, Ticket, KeyRound, X, Search, Gift, Share2, KeyRound as KeyIcon, ShoppingCart, Wallet as WalletIcon } from 'lucide-react';
 import { supabase } from '@/lib/supabase/client';
 
 type Teacher = { id: string; name: string; email: string | null; user_id: string | null; access_valid_until: string | null; codeCount: number };
@@ -37,6 +41,8 @@ type Coupon = {
   teacher: { id: string; name: string; user_id: string | null; access_valid_until: string | null } | null;
 };
 
+type Summary = { totalCodes: number; activeCodes: number; usedCodes: number; grantedBonusDays: number; outstandingCommissionCents: number };
+
 function fmtEuro(cents: number): string {
   return '€ ' + (cents / 100).toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
@@ -50,6 +56,20 @@ async function authHeader(): Promise<Record<string, string>> {
   const { data } = await supabase.auth.getSession();
   const token = data.session?.access_token;
   return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
+function KpiCard({ icon: Icon, iconBg, label, value }: { icon: typeof Ticket; iconBg: string; label: string; value: string }) {
+  return (
+    <div className="rounded-2xl p-4 flex items-center gap-3" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
+      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: `${iconBg}26` }}>
+        <Icon size={18} color={iconBg} />
+      </div>
+      <div className="min-w-0">
+        <div className="text-xs truncate" style={{ color: 'var(--color-text-muted)' }}>{label}</div>
+        <div className="text-lg font-bold">{value}</div>
+      </div>
+    </div>
+  );
 }
 
 function NewCouponForm({ teachers, onCreated, onCancel }: { teachers: Teacher[]; onCreated: () => void; onCancel: () => void }) {
@@ -200,7 +220,7 @@ function CreateLoginModal({ teacherId, teacherName, onDone, onClose }: { teacher
           <button type="button" onClick={onClose}><X size={16} /></button>
         </div>
         <p className="text-xs mb-3" style={{ color: 'var(--color-text-faint)' }}>
-          Der Dozent erhält ein kostenloses 1-Jahres-Konto (jährlich manuell verlängerbar). E-Mail und Passwort werden von Ihnen frei gewählt.
+          Der Dozent erhält ein kostenloses 1-Jahres-Konto (jährlich manuell verlängerbar). E-Mail und Passwort werden von Ihnen frei gewählt — die E-Mail muss nur gültig formatiert sein, keine Bestätigung wird verschickt.
         </p>
         <div className="space-y-3">
           <div>
@@ -226,15 +246,27 @@ function CreateLoginModal({ teacherId, teacherName, onDone, onClose }: { teacher
   );
 }
 
+const HOW_IT_WORKS = [
+  { icon: Share2, title: '1. Code erstellen', text: 'Erstellen Sie einen Code für Ihren Dozenten mit Bonustagen und Provision.' },
+  { icon: KeyIcon, title: '2. Code teilen', text: 'Der Dozent teilt den Code mit seinen Studenten.' },
+  { icon: Gift, title: '3. Code einlösen', text: 'Student verwendet den Code und erhält zusätzliche Tage.' },
+  { icon: ShoppingCart, title: '4. Provision verdienen', text: 'Bei Zahlungen verdient der Dozent Provision.' },
+  { icon: WalletIcon, title: '5. Auszahlung erhalten', text: 'Sie genehmigen und überweisen die Provision.' },
+];
+
 export default function DozentenCodesPage() {
   const [coupons, setCoupons] = useState<Coupon[] | null>(null);
+  const [summary, setSummary] = useState<Summary | null>(null);
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [toggling, setToggling] = useState<string | null>(null);
   const [loginModalFor, setLoginModalFor] = useState<{ id: string; name: string } | null>(null);
+  const [search, setSearch] = useState('');
+  const [teacherFilter, setTeacherFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
 
-  async function fetchAll(): Promise<{ coupons: Coupon[]; teachers: Teacher[] }> {
+  async function fetchAll(): Promise<{ coupons: Coupon[]; summary: Summary; teachers: Teacher[] }> {
     const headers = await authHeader();
     const [couponsRes, teachersRes] = await Promise.all([
       fetch('/api/admin/teacher-coupons', { headers }),
@@ -252,14 +284,15 @@ export default function DozentenCodesPage() {
     }
     const couponsJson = await couponsRes.json();
     const teachersJson = teachersRes.ok ? await teachersRes.json() : { teachers: [] };
-    return { coupons: couponsJson.coupons as Coupon[], teachers: teachersJson.teachers as Teacher[] };
+    return { coupons: couponsJson.coupons as Coupon[], summary: couponsJson.summary as Summary, teachers: teachersJson.teachers as Teacher[] };
   }
 
   function reload() {
     setError(null);
     fetchAll()
-      .then(({ coupons: c, teachers: t }) => {
+      .then(({ coupons: c, summary: s, teachers: t }) => {
         setCoupons(c);
+        setSummary(s);
         setTeachers(t);
       })
       .catch((e: Error) => setError(e.message));
@@ -267,8 +300,9 @@ export default function DozentenCodesPage() {
 
   useEffect(() => {
     fetchAll()
-      .then(({ coupons: c, teachers: t }) => {
+      .then(({ coupons: c, summary: s, teachers: t }) => {
         setCoupons(c);
+        setSummary(s);
         setTeachers(t);
       })
       .catch((e: Error) => setError(e.message));
@@ -298,6 +332,18 @@ export default function DozentenCodesPage() {
     URL.revokeObjectURL(url);
   }
 
+  const filtered = useMemo(() => {
+    if (!coupons) return [];
+    const q = search.trim().toLowerCase();
+    return coupons.filter((c) => {
+      if (q && !c.code.toLowerCase().includes(q) && !c.teacher_name.toLowerCase().includes(q) && !(c.teacher_email ?? '').toLowerCase().includes(q)) return false;
+      if (teacherFilter && c.teacher_id !== teacherFilter) return false;
+      if (statusFilter === 'active' && !c.is_active) return false;
+      if (statusFilter === 'inactive' && c.is_active) return false;
+      return true;
+    });
+  }, [coupons, search, teacherFilter, statusFilter]);
+
   return (
     <div>
       <div className="flex items-center justify-between mb-5">
@@ -312,6 +358,16 @@ export default function DozentenCodesPage() {
           <Plus size={15} /> Neuer Code
         </button>
       </div>
+
+      {summary && (
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 mb-5">
+          <KpiCard icon={Ticket} iconBg="#7C3AED" label="Gesamt Codes" value={String(summary.totalCodes)} />
+          <KpiCard icon={KeyRound} iconBg="#3B82F6" label="Aktive Codes" value={String(summary.activeCodes)} />
+          <KpiCard icon={Gift} iconBg="#22C55E" label="Verwendete Codes" value={String(summary.usedCodes)} />
+          <KpiCard icon={ShoppingCart} iconBg="#F59E0B" label="Geschenkte Tage" value={String(summary.grantedBonusDays)} />
+          <KpiCard icon={WalletIcon} iconBg="#EF4444" label="Provision ausstehend" value={fmtEuro(summary.outstandingCommissionCents)} />
+        </div>
+      )}
 
       {showForm && <NewCouponForm teachers={teachers} onCreated={() => { setShowForm(false); reload(); }} onCancel={() => setShowForm(false)} />}
 
@@ -344,68 +400,116 @@ export default function DozentenCodesPage() {
       )}
 
       {coupons && coupons.length > 0 && (
-        <div className="rounded-2xl overflow-x-auto" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
-          <table className="w-full text-sm">
-            <thead>
-              <tr style={{ borderBottom: '1px solid var(--color-border-soft)' }}>
-                {['Code', 'Dozent', 'Bonustage', 'Provision', 'Verwendet', 'Umsatz', 'Provision (€)', 'Status', 'Gültig bis', 'Erstellt am', 'Aktionen'].map((h) => (
-                  <th key={h} className="text-left px-4 py-3 text-xs font-medium whitespace-nowrap" style={{ color: 'var(--color-text-faint)' }}>{h}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {coupons.map((c) => (
-                <tr key={c.id} style={{ borderBottom: '1px solid var(--color-border-soft)' }}>
-                  <td className="px-4 py-3">
-                    <span className="font-mono text-xs px-2 py-1 rounded" style={{ background: 'var(--color-primary-light)', color: 'var(--color-primary-hover)' }}>{c.code}</span>
-                  </td>
-                  <td className="px-4 py-3 whitespace-nowrap">{c.teacher_name}</td>
-                  <td className="px-4 py-3 whitespace-nowrap" style={{ color: 'var(--color-text-faint)' }}>+{c.extra_days} Tage</td>
-                  <td className="px-4 py-3" style={{ color: 'var(--color-text-faint)' }}>{Math.round(c.commission_rate * 100)}%</td>
-                  <td className="px-4 py-3">{c.stats.count}{c.max_uses ? ` / ${c.max_uses}` : ''}</td>
-                  <td className="px-4 py-3 font-semibold whitespace-nowrap">{fmtEuro(c.stats.revenueCents)}</td>
-                  <td className="px-4 py-3 font-semibold whitespace-nowrap" style={{ color: 'var(--color-primary-hover)' }}>{fmtEuro(c.stats.commissionCents)}</td>
-                  <td className="px-4 py-3">
-                    <button
-                      onClick={() => toggleActive(c)}
-                      disabled={toggling === c.id}
-                      className="text-[11px] px-2 py-0.5 rounded-full font-medium"
-                      style={{
-                        background: c.is_active ? 'var(--color-success-light)' : 'var(--color-danger-light)',
-                        color: c.is_active ? 'var(--color-success)' : 'var(--color-danger)',
-                      }}
-                    >
-                      {c.is_active ? 'Aktiv' : 'Inaktiv'}
-                    </button>
-                  </td>
-                  <td className="px-4 py-3 whitespace-nowrap" style={{ color: 'var(--color-text-faint)' }}>{fmtDate(c.valid_until)}</td>
-                  <td className="px-4 py-3 whitespace-nowrap" style={{ color: 'var(--color-text-faint)' }}>{fmtDate(c.created_at)}</td>
-                  <td className="px-4 py-3">
-                    <div className="flex gap-1.5">
-                      <button onClick={() => downloadReport(c, 'pdf')} title="PDF-Bericht" className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--color-panel-alt)' }}>
-                        <FileText size={13} />
-                      </button>
-                      <button onClick={() => downloadReport(c, 'csv')} title="CSV-Bericht (Excel)" className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--color-panel-alt)' }}>
-                        <FileSpreadsheet size={13} />
-                      </button>
-                      {c.teacher_id && !c.teacher?.user_id && (
-                        <button onClick={() => setLoginModalFor({ id: c.teacher_id!, name: c.teacher_name })} title="Login erstellen" className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--color-panel-alt)' }}>
-                          <KeyRound size={13} />
+        <>
+          <div className="flex flex-col sm:flex-row gap-3 mb-4">
+            <div className="relative flex-1">
+              <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2" color="var(--color-text-faint)" />
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Suche nach Code, Dozent oder E-Mail…"
+                className="w-full text-sm rounded-lg pl-9 pr-3 py-2"
+                style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }}
+              />
+            </div>
+            <select value={teacherFilter} onChange={(e) => setTeacherFilter(e.target.value)} className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }}>
+              <option value="">Alle Dozenten</option>
+              {teachers.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
+            </select>
+            <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }}>
+              <option value="">Alle Status</option>
+              <option value="active">Aktiv</option>
+              <option value="inactive">Inaktiv</option>
+            </select>
+          </div>
+
+          {filtered.length === 0 ? (
+            <div className="rounded-2xl p-8 text-center text-sm" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text-muted)' }}>
+              Keine Codes gefunden.
+            </div>
+          ) : (
+            <div className="rounded-2xl overflow-x-auto" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
+              <table className="w-full text-sm">
+                <thead>
+                  <tr style={{ borderBottom: '1px solid var(--color-border-soft)' }}>
+                    {['Code', 'Dozent', 'Bonustage', 'Provision', 'Verwendet', 'Umsatz', 'Provision (€)', 'Status', 'Gültig bis', 'Erstellt am', 'Aktionen'].map((h) => (
+                      <th key={h} className="text-left px-4 py-3 text-xs font-medium whitespace-nowrap" style={{ color: 'var(--color-text-faint)' }}>{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtered.map((c) => (
+                    <tr key={c.id} style={{ borderBottom: '1px solid var(--color-border-soft)' }}>
+                      <td className="px-4 py-3">
+                        <span className="font-mono text-xs px-2 py-1 rounded" style={{ background: 'var(--color-primary-light)', color: 'var(--color-primary-hover)' }}>{c.code}</span>
+                      </td>
+                      <td className="px-4 py-3 whitespace-nowrap">{c.teacher_name}</td>
+                      <td className="px-4 py-3 whitespace-nowrap" style={{ color: 'var(--color-text-faint)' }}>+{c.extra_days} Tage</td>
+                      <td className="px-4 py-3" style={{ color: 'var(--color-text-faint)' }}>{Math.round(c.commission_rate * 100)}%</td>
+                      <td className="px-4 py-3">{c.stats.count}{c.max_uses ? ` / ${c.max_uses}` : ''}</td>
+                      <td className="px-4 py-3 font-semibold whitespace-nowrap">{fmtEuro(c.stats.revenueCents)}</td>
+                      <td className="px-4 py-3 font-semibold whitespace-nowrap" style={{ color: 'var(--color-primary-hover)' }}>{fmtEuro(c.stats.commissionCents)}</td>
+                      <td className="px-4 py-3">
+                        <button
+                          onClick={() => toggleActive(c)}
+                          disabled={toggling === c.id}
+                          className="text-[11px] px-2 py-0.5 rounded-full font-medium"
+                          style={{
+                            background: c.is_active ? 'var(--color-success-light)' : 'var(--color-danger-light)',
+                            color: c.is_active ? 'var(--color-success)' : 'var(--color-danger)',
+                          }}
+                        >
+                          {c.is_active ? 'Aktiv' : 'Inaktiv'}
                         </button>
-                      )}
-                      {c.teacher?.user_id && (
-                        <span title={`Login aktiv, gültig bis ${fmtDate(c.teacher.access_valid_until)}`} className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--color-success-light)' }}>
-                          <KeyRound size={13} color="var(--color-success)" />
-                        </span>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                      </td>
+                      <td className="px-4 py-3 whitespace-nowrap" style={{ color: 'var(--color-text-faint)' }}>{fmtDate(c.valid_until)}</td>
+                      <td className="px-4 py-3 whitespace-nowrap" style={{ color: 'var(--color-text-faint)' }}>{fmtDate(c.created_at)}</td>
+                      <td className="px-4 py-3">
+                        <div className="flex gap-1.5">
+                          <button onClick={() => downloadReport(c, 'pdf')} title="PDF-Bericht" className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--color-panel-alt)' }}>
+                            <FileText size={13} />
+                          </button>
+                          <button onClick={() => downloadReport(c, 'csv')} title="CSV-Bericht (Excel)" className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--color-panel-alt)' }}>
+                            <FileSpreadsheet size={13} />
+                          </button>
+                          {c.teacher_id && !c.teacher?.user_id && (
+                            <button onClick={() => setLoginModalFor({ id: c.teacher_id!, name: c.teacher_name })} title="Login erstellen" className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--color-panel-alt)' }}>
+                              <KeyRound size={13} />
+                            </button>
+                          )}
+                          {c.teacher?.user_id && (
+                            <span title={`Login aktiv, gültig bis ${fmtDate(c.teacher.access_valid_until)}`} className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--color-success-light)' }}>
+                              <KeyRound size={13} color="var(--color-success)" />
+                            </span>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </>
       )}
+
+      <div className="rounded-2xl p-5 mt-6" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
+        <h3 className="text-sm font-semibold mb-1">Wie funktionieren Dozenten-Codes?</h3>
+        <p className="text-xs mb-4" style={{ color: 'var(--color-text-faint)' }}>
+          Dozenten-Codes ermöglichen es Ihren Partnern, neue Studenten zu werben. Jeder Code gewährt dem Studenten zusätzliche Tage und dem Dozenten eine Provision.
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          {HOW_IT_WORKS.map((step) => (
+            <div key={step.title} className="flex flex-col gap-2">
+              <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: 'var(--color-primary-light)' }}>
+                <step.icon size={16} color="var(--color-primary-hover)" />
+              </div>
+              <div className="text-xs font-semibold">{step.title}</div>
+              <div className="text-xs" style={{ color: 'var(--color-text-faint)' }}>{step.text}</div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

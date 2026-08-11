@@ -53,7 +53,32 @@ export async function GET(req: NextRequest) {
     teacher: c.teacher_id ? (teacherMap.get(c.teacher_id) ?? null) : null,
   }));
 
-  return NextResponse.json({ coupons: enriched });
+  // KPI summary — every number computed from real rows, per the
+  // approved spec's exact definitions (not code-count guesses):
+  //   - "Verwendete Codes" = codes with at least one real redemption,
+  //     not sum(usage_count).
+  //   - "Geschenkte Tage" = actual bonus days granted via real
+  //     referrals, not (code count × extra_days) — a code nobody used
+  //     yet has granted 0 days, regardless of its extra_days setting.
+  //   - "Provision Ausstehend" = real commission_ledger balance
+  //     (EARNED, not yet PAID or REVERSED), not revenue × rate.
+  const totalCodes = enriched.length;
+  const activeCodes = enriched.filter((c) => c.is_active).length;
+  const usedCodes = enriched.filter((c) => c.stats.count > 0).length;
+
+  const { data: referrals } = await supabase.from('referrals').select('bonus_days_granted');
+  const grantedBonusDays = (referrals ?? []).reduce((sum, r) => sum + (r.bonus_days_granted ?? 0), 0);
+
+  const { data: ledgerRows } = await supabase
+    .from('commission_ledger')
+    .select('commission_amount_cents, type, status');
+  const outstandingCommissionCents = (ledgerRows ?? [])
+    .filter((r) => r.type === 'EARNED' && (r.status === 'PENDING' || r.status === 'APPROVED'))
+    .reduce((sum, r) => sum + (r.commission_amount_cents ?? 0), 0);
+
+  const summary = { totalCodes, activeCodes, usedCodes, grantedBonusDays, outstandingCommissionCents };
+
+  return NextResponse.json({ coupons: enriched, summary });
 }
 
 export async function POST(req: NextRequest) {
