@@ -99,34 +99,48 @@ live in Supabase right now, not just what the `.sql` files in the repo
 say *should* be there.
 
 **Action needed from the project owner (not something Claude can run —
-no direct database access):** paste the query below into the Supabase
-SQL Editor (read-only — `SELECT` against `information_schema` and
-`pg_indexes` only, no `INSERT`/`UPDATE`/`DELETE`, safe to run on
-production) and paste the result back into the chat.
+no direct database access):** paste the single query below into the
+Supabase SQL Editor and run it **once**. It is deliberately written as
+one combined query — not three separate ones — for the same Free-Tier
+reason as section 7 (§3 of the original spec: never make the database
+do the work of several separate round-trips when one will do). It only
+reads Postgres's own metadata catalogs (`information_schema`,
+`pg_indexes`, `pg_policies`) — it never touches `subscriptions`,
+`teacher_coupons`, or any table with real student/payment rows, so
+there is no per-row read cost at all, regardless of how large those
+tables get. It returns one row with three JSON columns; copy that one
+row's result back into the chat.
 
 ```sql
--- Read-only reconciliation query. Confirms the actual live schema for
--- every table this migration plan touches, plus confirms the three
--- new table names are not already taken by something else.
-select table_name, column_name, data_type, is_nullable, column_default
-from information_schema.columns
-where table_schema = 'public'
-  and table_name in ('profiles', 'subscriptions', 'teacher_coupons',
-                      'b2b_groups', 'b2b_redemptions',
-                      'teachers', 'referrals', 'commission_ledger')
-order by table_name, ordinal_position;
-
-select tablename, indexname, indexdef
-from pg_indexes
-where schemaname = 'public'
-  and tablename in ('subscriptions', 'teacher_coupons', 'b2b_groups', 'b2b_redemptions')
-order by tablename, indexname;
-
-select tablename, policyname, cmd, qual
-from pg_policies
-where schemaname = 'public'
-  and tablename in ('profiles', 'subscriptions', 'teacher_coupons', 'b2b_groups', 'b2b_redemptions')
-order by tablename, policyname;
+-- Read-only, single-query schema reconciliation. Touches only Postgres
+-- metadata catalogs (information_schema / pg_indexes / pg_policies) —
+-- zero cost against actual table data, safe to run on production,
+-- and combined into one query on purpose (Free-Tier rule: one request,
+-- not several — see section 7).
+select
+  (select json_agg(row_to_json(c)) from (
+    select table_name, column_name, data_type, is_nullable, column_default
+    from information_schema.columns
+    where table_schema = 'public'
+      and table_name in ('profiles', 'subscriptions', 'teacher_coupons',
+                          'b2b_groups', 'b2b_redemptions',
+                          'teachers', 'referrals', 'commission_ledger')
+    order by table_name, ordinal_position
+  ) c) as columns_info,
+  (select json_agg(row_to_json(i)) from (
+    select tablename, indexname, indexdef
+    from pg_indexes
+    where schemaname = 'public'
+      and tablename in ('subscriptions', 'teacher_coupons', 'b2b_groups', 'b2b_redemptions')
+    order by tablename, indexname
+  ) i) as indexes_info,
+  (select json_agg(row_to_json(p)) from (
+    select tablename, policyname, cmd, qual
+    from pg_policies
+    where schemaname = 'public'
+      and tablename in ('profiles', 'subscriptions', 'teacher_coupons', 'b2b_groups', 'b2b_redemptions')
+    order by tablename, policyname
+  ) p) as policies_info;
 ```
 
 Until this comes back and matches section 1, the migration SQL in
