@@ -53,8 +53,8 @@ delete once testing is done.
 | E2E-15 | Payout status transitions | ⏳ not yet run | — |
 | E2E-16 | Audit Log entries for every sensitive action | ⏳ not yet run | audit_logs table is live (migration 032 confirmed executed), just not yet checked against real E2E actions |
 | E2E-17 | RBAC | ⏳ not yet run | admin_users table is live, owner confirmed as SUPER_ADMIN in the Team & Rollen page — a full RBAC test (e.g. a second role actually being restricted) hasn't been run yet |
-| E2E-18 | Teacher Portal | ⚪ **N/A — NOT BUILT** | No separate teacher-facing portal exists; a teacher account only gets regular student-dashboard access. Advisor's explicit instruction: mark this N/A, not PASS, and build the portal later as its own phase if needed |
-| E2E-19 | Teacher A cannot access Teacher B's data | ⏳ not yet run | blocked on E2E-18 not existing — there's no teacher-facing surface to test isolation on yet; this would need to be re-scoped to "admin can see Teacher A's data separately from Teacher B's" if the Teacher Portal stays out of scope |
+| E2E-18 | Teacher Portal | 🟡 **BUILT, NOT YET TESTED** | Teacher Portal (all 10 build steps) shipped since this table was last updated — see docs/ADMIN_PANEL_AND_REFERRAL_SYSTEM_STATUS.md. This entry can no longer stay N/A; it's now a real "verify it" step (see E2E-19) |
+| E2E-19 | Teacher A cannot access Teacher B's data | 🟡 **IN PROGRESS** | Portal built with server-side isolation (lib/teacher/requireTeacher.ts resolves teacherId only from the session, never from the client). Verification started: instructions given to create a second test teacher ("E2E Test Teacher 2", code "E2ETEST20") plus its own login, to log into /portal as each and confirm neither sees the other's codes/students/commission. Paused before the owner confirmed the second teacher account was actually created — resume from there |
 | E2E-20 | Admin can see the complete chain | ⏳ not yet run | depends on E2E-04 through E2E-16 all having real data to show |
 
 ## Why E2E-04 is blocked (and what's half-set-up to unblock it)
@@ -113,11 +113,29 @@ Per the advisor's explicit instruction: Stripe secret keys and webhook
 signing secrets should never be pasted into this chat — they go
 directly into Vercel's environment variable UI.
 
-## Resuming later
+## Resuming later — TWO separate threads, both paused, resume either independently
 
-When picking this back up: confirm the 5 steps above are done (ask the
-owner, or check Vercel/Stripe directly if the surface allows it), then
-continue with E2E-04 on the Preview URL, and work through E2E-05
-onward using the same "no PASS without evidence" discipline. Do not
-start Reports/Export until this whole table is either PASS or an
-explicit, advisor-acknowledged N/A.
+**Thread A — Stripe Preview environment (unblocks E2E-04 through E2E-17, E2E-20):**
+confirm the 5 steps in "What's still needed" above are done, then
+re-attempt E2E-04 on the Preview URL, then work through E2E-05 onward.
+
+**Thread B — Teacher Portal data isolation (E2E-18/E2E-19):**
+resume exactly here:
+1. Create a second test teacher: name `E2E Test Teacher 2`, code
+   `E2ETEST20` (Dozenten-Codes → + Neuer Code), same as the first
+   test teacher.
+2. Give that teacher a login (Dozenten-Codes → key icon → Login
+   erstellen) — admin-chosen email/password, same pattern as before.
+3. Log into `/portal` once as each of the two test teachers
+   (separately — different browser sessions or incognito windows work
+   well for this) and confirm: each only sees their own code
+   (`E2ETEST10` vs `E2ETEST20`), their own students (if any), and
+   their own commission figures. Try navigating directly to the
+   other's data if a URL/id is guessable anywhere in the UI — it
+   should be refused (403), not silently redacted.
+4. Record the result here (PASS/FAIL + what was checked) before
+   marking E2E-18/E2E-19 done.
+
+Neither thread blocks the other — whichever the owner has time for
+first is fine. Do not start Reports/Export until both threads reach
+PASS or an explicit, advisor-acknowledged N/A across the whole table.
