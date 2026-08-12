@@ -76,21 +76,18 @@ alter table public.candidate_profiles enable row level security;
 -- through a Next.js API route using the service-role key
 -- (app/api/candidate/profile, a later step), never directly from the
 -- browser via Supabase's client SDK.
-
--- PHASE 2 required change (senior architect decision, Aug 12 2026):
--- enforce "exactly one candidate profile" as a real database
--- invariant, not just application logic. Chosen approach: a unique
--- index on a constant expression — a standard Postgres idiom for
--- singleton tables. Since `true` evaluates identically for every row,
--- a UNIQUE index on it means Postgres itself rejects a second INSERT,
--- with zero new columns and zero required change to the application's
--- insert logic (a `profile_scope = 'primary'` column, the advisor's
--- alternative suggestion, was considered and rejected as unnecessary
--- architecture — it would require every insert to also set that
--- column correctly, one more thing that could be gotten wrong, for
--- the same guarantee this gives for free).
-create unique index if not exists candidate_profiles_singleton_idx
-  on public.candidate_profiles ((true));
+--
+-- PHASE 2 note (senior architect's final decision, Aug 12 2026): a
+-- database-level singleton constraint was considered (and briefly
+-- added, then reverted) for "exactly one candidate profile". Final
+-- call: not needed. This table is admin-only (candidate_profile.manage,
+-- SUPER_ADMIN/ADMIN via the existing RBAC), never written by anyone
+-- else, and the application layer's check-then-insert-or-update logic
+-- (app/api/admin/candidate/profile's PUT handler) already prevents a
+-- second row in normal operation. See
+-- docs/CANDIDATE_PROFILE_PHASE2_REVIEW.md section 5 for the full
+-- reasoning trail, including why the DB-level version was reverted
+-- rather than left in as extra safety.
 
 -- --------------------------------------------------------------------
 -- 2. candidate_skills

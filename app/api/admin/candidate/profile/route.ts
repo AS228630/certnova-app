@@ -69,17 +69,11 @@ export async function PUT(req: NextRequest) {
     ? await supabase.from('candidate_profiles').update(payload).eq('id', existing.id).select().single()
     : await supabase.from('candidate_profiles').insert(payload).select().single();
 
-  if (error) {
-    // 23505 = unique_violation on the singleton index (see migration
-    // 034's candidate_profiles_singleton_idx). Only reachable via a
-    // genuine race (two simultaneous PUTs both seeing "no existing
-    // row" and both attempting INSERT) — the database invariant added
-    // in PHASE 2 is exactly what makes this a safe, expected outcome
-    // instead of a silent duplicate row, so it's reported as a clean
-    // "someone else just created it, retry" rather than a generic 500.
-    const status = error.code === '23505' ? 409 : 500;
-    const message = error.code === '23505' ? 'PROFILE_ALREADY_EXISTS_RETRY' : error.message;
-    return NextResponse.json({ error: message }, { status });
-  }
+  // Second-row prevention is application-layer only here (the
+  // existing-row check above), per the senior architect's final
+  // PHASE 2 decision — no database-level singleton constraint for
+  // this admin-only-managed table. See
+  // docs/CANDIDATE_PROFILE_PHASE2_REVIEW.md section 5.
+  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ profile: data });
 }

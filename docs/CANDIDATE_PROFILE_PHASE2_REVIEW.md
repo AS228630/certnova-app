@@ -78,25 +78,23 @@ section 7: don't add indexes for scale that doesn't exist).
   uniqueness in this schema: two links must never hash to the same
   value, and a token lookup must resolve to exactly one link.
   Confirmed present and correct.
-- **Gap found, RESOLVED at the database level** (senior architect's
-  required PHASE 2 change): `candidate_profiles` now has a
-  `unique index on ((true))` — a standard Postgres idiom for
-  enforcing "exactly one row" on a table. Since the constant
-  expression `true` evaluates identically for every row, a `UNIQUE`
-  index on it means Postgres itself rejects any `INSERT` past the
-  first, with a real `23505 unique_violation` error — the same
-  guarantee the advisor's alternative suggestion
-  (`profile_scope = 'primary'` + a unique constraint on that column)
-  would have given, but with zero new columns and zero required
-  change to how the application constructs an insert. The
-  application-level protection (`PUT`'s check-then-insert-or-update
-  logic) stays in place too, per the advisor's explicit "do not solve
-  this only in the API" instruction — this is defense in depth, not a
-  replacement. `app/api/admin/candidate/profile`'s `PUT` handler now
-  also catches `23505` explicitly and returns a clean
-  `409 PROFILE_ALREADY_EXISTS_RETRY` instead of a generic 500, so the
-  one realistic trigger (two simultaneous PUT requests racing) fails
-  safely and legibly instead of surfacing a raw database error.
+- **Gap found, then resolved twice — final decision: application-layer
+  only, no database constraint.** `candidate_profiles` has no
+  constraint preventing a second row at the database level. This was
+  first flagged as an open question, then briefly resolved with a
+  `unique index on ((true))` (a standard Postgres singleton-table
+  idiom) per an initial architect decision — that change was then
+  **reverted** per the architect's final call: this table is written
+  only by `candidate_profile.manage` (`SUPER_ADMIN`/`ADMIN` via the
+  existing RBAC), never by anyone else, and the application layer's
+  check-then-insert-or-update logic
+  (`app/api/admin/candidate/profile`'s `PUT` handler) already prevents
+  a second row in normal operation. Given the narrow, fully
+  admin-controlled write path, a database-level invariant was judged
+  unnecessary extra architecture for this table specifically — noted
+  here so the reasoning (and the fact that a stricter version was
+  tried and deliberately backed out, not just never considered) stays
+  on record.
 
 ## 6. Verify RLS / authorization implications
 
@@ -246,10 +244,10 @@ the `candidate_profiles` single-row question (§5) — before PHASE 3.
 
 ## PHASE 2 FINAL REVIEW — PASS
 
-Per the senior architect's Aug 12 2026 approval ("PASS conditional on
-adding the database invariant") and the fix applied above (unique
-index on `candidate_profiles ((true))`), this section is the
-requested final summary.
+Per the senior architect's Aug 12 2026 final decision (application-
+layer protection is sufficient for `candidate_profiles`; no database
+constraint needed, since this table is exclusively admin-managed),
+this section is the requested final summary.
 
 **Final schema:** 9 tables — `candidate_profiles`, `candidate_skills`,
 `candidate_certifications`, `candidate_experiences`,
@@ -258,10 +256,10 @@ requested final summary.
 `document_access_grants`. Zero existing tables modified.
 
 **Constraints:**
-- `candidate_profiles`: singleton enforced via
-  `unique index on ((true))` (new, this phase) + application-layer
-  check-then-write (unchanged) — defense in depth, per explicit
-  instruction.
+- `candidate_profiles`: single-row guaranteed by the application layer
+  only (`PUT`'s check-then-insert-or-update) — a database-level
+  version (`unique index on ((true))`) was tried and then explicitly
+  reverted per the architect's final call, see §5.
 - `share_links.token_hash`: `unique`, the one security-critical
   constraint in the schema.
 - `share_link_documents`: composite primary key
@@ -311,12 +309,15 @@ signed-URL logic are PHASE 5.
 to `034_candidate_profile.sql`, file still marked
 "NOT APPROVED, NOT APPLIED"):
 1. Removed the redundant explicit index on `share_links.token_hash`.
-2. Added `create unique index candidate_profiles_singleton_idx on
-   candidate_profiles ((true))`.
+2. A `unique index on candidate_profiles ((true))` was added, then
+   reverted, per the architect's final decision (§5) — the migration
+   file's `candidate_profiles` section now matches its original PHASE
+   1 form, with an added comment recording that this was considered
+   and why it was decided against.
 
-Companion code change (not the migration): `PUT
-/api/admin/candidate/profile` now catches `23505` and returns
-`409 PROFILE_ALREADY_EXISTS_RETRY` instead of a generic 500.
+No companion code change remains in `PUT /api/admin/candidate/profile`
+— the brief `23505`-handling addition was reverted along with the
+constraint that would have produced it.
 
 **Local schema sanity check performed:** `npx tsc --noEmit` and
 `npx eslint` both pass on the updated route file. The SQL itself
