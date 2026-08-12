@@ -55,6 +55,9 @@ type Profile = {
   email: string | null;
   linkedin_url: string | null;
   github_url: string | null;
+  work_mode: string | null;
+  profile_photo_path: string | null;
+  desired_positions: string[] | null;
   created_at: string;
 };
 type Skill = { id: string; category: string; name: string; is_public: boolean };
@@ -88,6 +91,20 @@ function fmtMonthYear(iso: string | null): string {
   return new Date(iso).toLocaleDateString('de-DE', { month: '2-digit', year: 'numeric' });
 }
 
+function CvDownloadButton({ documentId }: { documentId: string }) {
+  async function download() {
+    const res = await fetch(`/api/admin/candidate/documents/${documentId}/view?download=true`, { headers: await authHeader() });
+    if (!res.ok) return;
+    const j = await res.json();
+    window.location.href = j.url;
+  }
+  return (
+    <button onClick={download} className="flex items-center justify-center gap-2 text-sm py-2.5 rounded-lg w-full" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}>
+      <Download size={14} /> CV herunterladen
+    </button>
+  );
+}
+
 function Card({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
   return (
     <div className="rounded-xl p-5" style={{ background: COLORS.card, border: `1px solid ${COLORS.cardBorder}`, ...style }}>
@@ -117,6 +134,8 @@ export default function CandidateProfilePreviewPage() {
   const [documents, setDocuments] = useState<Doc[]>([]);
   const [error, setError] = useState<string | null>(null);
 
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+
   useEffect(() => {
     authHeader()
       .then((headers) => fetch('/api/admin/candidate/profile', { headers }))
@@ -129,6 +148,13 @@ export default function CandidateProfilePreviewPage() {
         setExperiences(j.experiences ?? []);
         setProjects(j.projects ?? []);
         setDocuments(j.documents ?? []);
+        if (j.profile?.profile_photo_path) {
+          authHeader()
+            .then((headers2) => fetch('/api/admin/candidate/profile/photo/view', { headers: headers2 }))
+            .then((r) => r.json())
+            .then((pj) => setPhotoUrl(pj.url ?? null))
+            .catch(() => setPhotoUrl(null));
+        }
       })
       .catch((e: Error) => setError(e.message));
   }, []);
@@ -149,6 +175,8 @@ export default function CandidateProfilePreviewPage() {
   const publicProjects = projects.filter((p) => p.is_public);
   const publicDocs = documents.filter((d) => d.visibility === 'public' && !d.deleted_at);
   const confidentialDocsCount = documents.filter((d) => d.visibility === 'private' && !d.deleted_at).length;
+  const cvDoc = publicDocs.find((d) => d.document_type === 'CV');
+  const languageSkills = publicSkills.filter((s) => s.category === 'Sprachen').map((s) => s.name);
 
   const techCount = new Set(publicProjects.flatMap((p) => p.technologies ?? [])).size;
   const skillsByCategory = publicSkills.reduce<Record<string, Skill[]>>((acc, s) => {
@@ -163,13 +191,32 @@ export default function CandidateProfilePreviewPage() {
         Vorschau — diese Seite ist noch nicht öffentlich erreichbar. Der echte, tokengeschützte Recruiter-Link folgt in Phase 7.
       </div>
 
+      <div className="px-5 sm:px-8 py-4 flex flex-wrap items-center justify-between gap-3" style={{ borderBottom: `1px solid ${COLORS.cardBorder}` }}>
+        <div>
+          <div className="text-base font-bold" style={{ color: COLORS.textPrimary }}>CertCoach</div>
+          <div className="text-[11px]" style={{ color: COLORS.textSecondary }}>Private Candidate Profile</div>
+        </div>
+        <div className="flex items-center gap-2 text-[11px]" style={{ color: COLORS.textSecondary }}>
+          <Lock size={12} /> Dieser Link ist privat und vertraulich. Nur für autorisierte Unternehmen.
+        </div>
+        <div className="flex items-center gap-3 text-[11px]" style={{ color: COLORS.textSecondary }}>
+          <span>Profil erstellt: {new Date(profile.created_at).toLocaleDateString('de-DE')}</span>
+          <span className="px-3 py-1.5 rounded-lg" style={{ background: COLORS.cardBorder, opacity: 0.5 }} title="Verfügbar, sobald Phase 7 (Recruiter-Links) aktiv ist">Link teilen (Phase 7)</span>
+        </div>
+      </div>
+
       <div className="p-5 sm:p-8">
         <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-6">
           <div className="space-y-4">
             <Card>
               <div className="text-center mb-4">
-                <div className="w-20 h-20 rounded-full mx-auto mb-3 flex items-center justify-center text-2xl font-bold" style={{ background: `${COLORS.red}22`, color: COLORS.red, border: `2px solid ${COLORS.red}` }}>
-                  {profile.display_name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()}
+                <div className="w-20 h-20 rounded-full mx-auto mb-3 overflow-hidden flex items-center justify-center text-2xl font-bold" style={{ background: `${COLORS.red}22`, color: COLORS.red, border: `2px solid ${COLORS.red}` }}>
+                  {photoUrl ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={photoUrl} alt={profile.display_name} className="w-full h-full object-cover" />
+                  ) : (
+                    profile.display_name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()
+                  )}
                 </div>
                 {profile.availability && (
                   <span className="inline-flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full mb-3" style={{ background: 'rgba(34,197,94,0.12)', color: COLORS.green }}>
@@ -191,6 +238,7 @@ export default function CandidateProfilePreviewPage() {
                     <Mail size={14} /> Kontakt aufnehmen
                   </a>
                 )}
+                {cvDoc && <CvDownloadButton documentId={cvDoc.id} />}
                 {profile.linkedin_url && (
                   <a href={profile.linkedin_url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 text-sm py-2.5 rounded-lg" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}>
                     <Linkedin size={14} /> LinkedIn Profil
@@ -200,6 +248,40 @@ export default function CandidateProfilePreviewPage() {
                   <a href={profile.github_url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 text-sm py-2.5 rounded-lg" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}>
                     <Github size={14} /> GitHub Profil
                   </a>
+                )}
+              </div>
+            </Card>
+
+            <Card>
+              <div className="text-xs font-semibold mb-3" style={{ color: COLORS.textPrimary }}>Über mich</div>
+              <div className="space-y-2.5 text-xs">
+                {profile.location && (
+                  <div className="flex items-center justify-between">
+                    <span style={{ color: COLORS.textSecondary }}>Wohnort</span>
+                    <span style={{ color: COLORS.textPrimary }}>{profile.location}</span>
+                  </div>
+                )}
+                {languageSkills.length > 0 && (
+                  <div className="flex items-center justify-between">
+                    <span style={{ color: COLORS.textSecondary }}>Sprachen</span>
+                    <span style={{ color: COLORS.textPrimary }}>{languageSkills.join(', ')}</span>
+                  </div>
+                )}
+                <div className="flex items-center justify-between">
+                  <span style={{ color: COLORS.textSecondary }}>Erfahrung</span>
+                  <span style={{ color: COLORS.textPrimary }}>{yearsOfExperience(publicExperiences)}+ Jahre</span>
+                </div>
+                {profile.availability && (
+                  <div className="flex items-center justify-between">
+                    <span style={{ color: COLORS.textSecondary }}>Verfügbarkeit</span>
+                    <span style={{ color: COLORS.textPrimary }}>{AVAILABILITY_LABEL[profile.availability]}</span>
+                  </div>
+                )}
+                {profile.work_mode && (
+                  <div className="flex items-center justify-between">
+                    <span style={{ color: COLORS.textSecondary }}>Arbeitsmodell</span>
+                    <span style={{ color: COLORS.textPrimary }}>{profile.work_mode}</span>
+                  </div>
                 )}
               </div>
             </Card>
@@ -231,6 +313,17 @@ export default function CandidateProfilePreviewPage() {
                 </div>
               </div>
             </Card>
+
+            {profile.desired_positions && profile.desired_positions.length > 0 && (
+              <Card>
+                <SectionHeader icon={Briefcase} title="Gesuchte Positionen" />
+                <div className="flex flex-wrap gap-2">
+                  {profile.desired_positions.map((pos) => (
+                    <span key={pos} className="text-xs px-3 py-1.5 rounded-lg" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}>{pos}</span>
+                  ))}
+                </div>
+              </Card>
+            )}
 
             <Card>
               <SectionHeader icon={Globe} title="Fähigkeiten" accent={COLORS.blue} />

@@ -29,9 +29,12 @@ type Profile = {
   bio: string | null;
   location: string | null;
   availability: string | null;
+  work_mode: string | null;
   email: string | null;
   linkedin_url: string | null;
   github_url: string | null;
+  profile_photo_path: string | null;
+  desired_positions: string[] | null;
 };
 
 type Document = {
@@ -72,11 +75,39 @@ function ProfileForm({ profile, onSaved }: { profile: Profile | null; onSaved: (
   const [bio, setBio] = useState(profile?.bio ?? '');
   const [location, setLocation] = useState(profile?.location ?? '');
   const [availability, setAvailability] = useState(profile?.availability ?? 'available');
+  const [workMode, setWorkMode] = useState(profile?.work_mode ?? '');
   const [email, setEmail] = useState(profile?.email ?? '');
   const [linkedin, setLinkedin] = useState(profile?.linkedin_url ?? '');
   const [github, setGithub] = useState(profile?.github_url ?? '');
+  const [desiredPositions, setDesiredPositions] = useState((profile?.desired_positions ?? []).join(', '));
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+  const [photoUploading, setPhotoUploading] = useState(false);
+
+  useEffect(() => {
+    if (!profile?.profile_photo_path) {
+      Promise.resolve().then(() => setPhotoUrl(null));
+      return;
+    }
+    authHeader()
+      .then((headers) => fetch('/api/admin/candidate/profile/photo/view', { headers }))
+      .then((res) => res.json())
+      .then((j) => setPhotoUrl(j.url ?? null))
+      .catch(() => setPhotoUrl(null));
+  }, [profile?.profile_photo_path]);
+
+  async function uploadPhoto(file: File) {
+    setPhotoUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+    const res = await fetch('/api/admin/candidate/profile/photo', { method: 'POST', headers: await authHeader(), body: formData });
+    setPhotoUploading(false);
+    if (res.ok) {
+      const j = await res.json();
+      onSaved(j.profile);
+    }
+  }
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -86,8 +117,9 @@ function ProfileForm({ profile, onSaved }: { profile: Profile | null; onSaved: (
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
       body: JSON.stringify({
-        displayName, professionalTitle: title, bio, location, availability,
+        displayName, professionalTitle: title, bio, location, availability, workMode,
         email, linkedinUrl: linkedin, githubUrl: github,
+        desiredPositions: desiredPositions.split(',').map((s) => s.trim()).filter(Boolean),
       }),
     });
     if (!res.ok) {
@@ -103,6 +135,24 @@ function ProfileForm({ profile, onSaved }: { profile: Profile | null; onSaved: (
   return (
     <form onSubmit={submit} className="rounded-2xl p-5 mb-6" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
       <h3 className="text-sm font-semibold mb-4">Profil</h3>
+
+      {profile && (
+        <div className="flex items-center gap-4 mb-4">
+          <div className="w-16 h-16 rounded-full overflow-hidden flex items-center justify-center shrink-0" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)' }}>
+            {photoUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={photoUrl} alt="Profilfoto" className="w-full h-full object-cover" />
+            ) : (
+              <span className="text-lg font-bold" style={{ color: 'var(--color-text-faint)' }}>{displayName.slice(0, 1).toUpperCase() || '?'}</span>
+            )}
+          </div>
+          <label className="text-sm px-3 py-2 rounded-lg cursor-pointer" style={{ background: 'var(--color-panel-alt)', color: 'var(--color-text)' }}>
+            {photoUploading ? 'Wird hochgeladen…' : 'Foto hochladen'}
+            <input type="file" accept="image/jpeg,image/png,image/webp" className="hidden" disabled={photoUploading} onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadPhoto(f); }} />
+          </label>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label className="block text-xs mb-1" style={{ color: 'var(--color-text-muted)' }}>Name *</label>
@@ -127,6 +177,14 @@ function ProfileForm({ profile, onSaved }: { profile: Profile | null; onSaved: (
             <option value="open">Offen für Angebote</option>
             <option value="unavailable">Nicht verfügbar</option>
           </select>
+        </div>
+        <div>
+          <label className="block text-xs mb-1" style={{ color: 'var(--color-text-muted)' }}>Arbeitsmodell</label>
+          <input value={workMode} onChange={(e) => setWorkMode(e.target.value)} placeholder="z. B. Remote / Hybrid / Vor Ort" className="w-full text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        </div>
+        <div className="sm:col-span-2">
+          <label className="block text-xs mb-1" style={{ color: 'var(--color-text-muted)' }}>Gesuchte Positionen (mit Komma getrennt)</label>
+          <input value={desiredPositions} onChange={(e) => setDesiredPositions(e.target.value)} placeholder="z. B. Software Engineer, Full-Stack Developer" className="w-full text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
         </div>
         <div>
           <label className="block text-xs mb-1" style={{ color: 'var(--color-text-muted)' }}>E-Mail</label>

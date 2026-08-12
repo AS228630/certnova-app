@@ -53,7 +53,7 @@ export async function PUT(req: NextRequest) {
   const supabase = getSupabaseAdmin();
   const { data: existing } = await supabase.from('candidate_profiles').select('id').limit(1).maybeSingle();
 
-  const payload = {
+  const payload: Record<string, unknown> = {
     display_name: body.displayName,
     professional_title: body.professionalTitle ?? null,
     bio: body.bio ?? null,
@@ -65,6 +65,12 @@ export async function PUT(req: NextRequest) {
     github_url: body.githubUrl ?? null,
     updated_at: new Date().toISOString(),
   };
+  // Only included when the caller actually sends it, so existing
+  // saves keep working even before migration 036
+  // (candidate_profiles.desired_positions) has been run.
+  if (Array.isArray(body.desiredPositions)) {
+    payload.desired_positions = body.desiredPositions;
+  }
 
   const { data, error } = existing
     ? await supabase.from('candidate_profiles').update(payload).eq('id', existing.id).select().single()
