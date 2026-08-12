@@ -60,6 +60,25 @@ export default function AuthCard({ initialMode }: { initialMode: Mode }) {
   const redirectTarget = searchParams.get("redirect") || "/dashboard";
   const [mode, setMode] = useState<Mode>(initialMode);
 
+  // Teacher Portal referral link support (?ref=CODE): if a student
+  // arrived via a teacher's referral link, remember the code so
+  // /upgrade can pre-fill it later — the code isn't applied here,
+  // registration alone never grants a referral; it's only recorded as
+  // "remembered" until the student actually redeems it at checkout,
+  // same real redemption path (create-checkout-session ->
+  // checkout.session.completed) as a manually-typed code.
+  useEffect(() => {
+    const ref = searchParams.get("ref");
+    if (ref) {
+      try {
+        localStorage.setItem("certcoach_referral_code", ref.trim().toUpperCase());
+      } catch {
+        // localStorage unavailable (e.g. private browsing) — the
+        // student can still type the code manually at checkout.
+      }
+    }
+  }, [searchParams]);
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

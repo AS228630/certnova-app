@@ -26,7 +26,24 @@ export default function PaymentStep({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [widerrufConsent, setWiderrufConsent] = useState(false);
-  const [couponCode, setCouponCode] = useState("");
+  // Pre-fill a teacher's referral code if the student arrived via
+  // /register?ref=CODE (see components/AuthCard.tsx) — the code still
+  // isn't applied until the real checkout below actually redeems it;
+  // this only saves the student from re-typing what they already
+  // arrived with. Read once via a lazy initializer (not an effect) and
+  // cleared immediately so it's only auto-filled once.
+  const [couponCode, setCouponCode] = useState(() => {
+    try {
+      const remembered = localStorage.getItem("certcoach_referral_code");
+      if (remembered) {
+        localStorage.removeItem("certcoach_referral_code");
+        return remembered;
+      }
+    } catch {
+      // localStorage unavailable — no prefill, student can type it manually.
+    }
+    return "";
+  });
 
   async function handleCheckout() {
     if (planId !== "monthly" && planId !== "yearly") return;
