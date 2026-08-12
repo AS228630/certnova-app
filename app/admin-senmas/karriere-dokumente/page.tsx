@@ -15,6 +15,7 @@
  */
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import {
   Loader2, Save, Upload, FileText, Eye, EyeOff, Download, Pencil,
   RefreshCw, Trash2, RotateCcw, XCircle, Check, X, Plus,
@@ -649,6 +650,9 @@ export default function CandidateProfilePage() {
       <p className="text-sm mb-5" style={{ color: 'var(--color-text-muted)' }}>
         Privates Kandidatenprofil — Profil, Fähigkeiten, Zertifikate, Berufserfahrung und Dokumente für Bewerbungen. Echte Daten aus Supabase.
       </p>
+      <Link href="/admin-senmas/candidate-profile-preview" className="inline-block text-sm font-medium px-4 py-2 rounded-lg text-white mb-5" style={{ background: '#EF1B2D' }}>
+        Vorschau ansehen
+      </Link>
       <ProfileForm profile={profile} onSaved={reload} />
       {profile && (
         <>
