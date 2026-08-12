@@ -9,9 +9,9 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   const { id } = await params;
   const body = await req.json().catch(() => ({}));
   const map: Record<string, string> = {
-    issuer: 'issuer', name: 'name', credentialId: 'credential_id', issueDate: 'issue_date',
-    expiryDate: 'expiry_date', verificationUrl: 'verification_url', certificateFileId: 'certificate_file_id',
-    badgeFileId: 'badge_file_id', isPublic: 'is_public', sortOrder: 'sort_order', logoUrl: 'logo_url',
+    institutionName: 'institution_name', degree: 'degree', fieldOfStudy: 'field_of_study',
+    graduationDate: 'graduation_date', logoUrl: 'logo_url', websiteUrl: 'website_url',
+    isPublic: 'is_public', sortOrder: 'sort_order',
   };
   const patch: Record<string, unknown> = { updated_at: new Date().toISOString() };
   for (const [key, column] of Object.entries(map)) {
@@ -19,19 +19,19 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   }
 
   const supabase = getSupabaseAdmin();
-  const { data, error } = await supabase.from('candidate_certifications').update(patch).eq('id', id).select().single();
+  const { data, error } = await supabase.from('candidate_education').update(patch).eq('id', id).select().single();
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
   await logAudit({
     actorId: auth.userId,
     actorEmail: auth.email,
-    action: 'CANDIDATE_CERTIFICATION_UPDATED',
-    resourceType: 'candidate_certification',
+    action: 'CANDIDATE_EDUCATION_UPDATED',
+    resourceType: 'candidate_education',
     resourceId: id,
     metadata: patch,
   });
 
-  return NextResponse.json({ certification: data });
+  return NextResponse.json({ education: data });
 }
 
 export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -40,14 +40,14 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
 
   const { id } = await params;
   const supabase = getSupabaseAdmin();
-  const { error } = await supabase.from('candidate_certifications').delete().eq('id', id);
+  const { error } = await supabase.from('candidate_education').delete().eq('id', id);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
   await logAudit({
     actorId: auth.userId,
     actorEmail: auth.email,
-    action: 'CANDIDATE_CERTIFICATION_REMOVED',
-    resourceType: 'candidate_certification',
+    action: 'CANDIDATE_EDUCATION_REMOVED',
+    resourceType: 'candidate_education',
     resourceId: id,
   });
 

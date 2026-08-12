@@ -21,15 +21,19 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'CANDIDATE_PROFILE_NOT_INSTALLED', detail: error.message }, { status: 503 });
   }
   if (!profile) {
-    return NextResponse.json({ profile: null, skills: [], certifications: [], experiences: [], projects: [], documents: [] });
+    return NextResponse.json({ profile: null, skills: [], certifications: [], experiences: [], projects: [], documents: [], education: [] });
   }
 
-  const [{ data: skills }, { data: certifications }, { data: experiences }, { data: projects }, { data: documents }] = await Promise.all([
+  const [{ data: skills }, { data: certifications }, { data: experiences }, { data: projects }, { data: documents }, { data: education }] = await Promise.all([
     supabase.from('candidate_skills').select('*').eq('candidate_id', profile.id).order('sort_order'),
     supabase.from('candidate_certifications').select('*').eq('candidate_id', profile.id).order('sort_order'),
     supabase.from('candidate_experiences').select('*').eq('candidate_id', profile.id).order('sort_order'),
     supabase.from('candidate_projects').select('*').eq('candidate_id', profile.id).order('sort_order'),
     supabase.from('candidate_documents').select('*').eq('candidate_id', profile.id).is('deleted_at', null).order('created_at', { ascending: false }),
+    // candidate_education only exists once migration 037 has been
+    // run — a failed query here just yields null (no exception),
+    // handled the same as any other empty list below.
+    supabase.from('candidate_education').select('*').eq('candidate_id', profile.id).order('sort_order'),
   ]);
 
   return NextResponse.json({
@@ -39,6 +43,7 @@ export async function GET(req: NextRequest) {
     experiences: experiences ?? [],
     projects: projects ?? [],
     documents: documents ?? [],
+    education: education ?? [],
   });
 }
 

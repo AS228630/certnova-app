@@ -11,6 +11,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   const map: Record<string, string> = {
     roleTitle: 'role_title', companyName: 'company_name', location: 'location', startDate: 'start_date',
     endDate: 'end_date', description: 'description', isPublic: 'is_public', sortOrder: 'sort_order',
+    companyLogoUrl: 'company_logo_url', companyWebsiteUrl: 'company_website_url',
   };
   const patch: Record<string, unknown> = { updated_at: new Date().toISOString() };
   for (const [key, column] of Object.entries(map)) {

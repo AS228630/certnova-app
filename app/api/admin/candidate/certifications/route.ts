@@ -18,21 +18,28 @@ export async function POST(req: NextRequest) {
   }
 
   const supabase = getSupabaseAdmin();
+  const payload: Record<string, unknown> = {
+    candidate_id: body.candidateId,
+    issuer: body.issuer,
+    name: body.name,
+    credential_id: body.credentialId ?? null,
+    issue_date: body.issueDate ?? null,
+    expiry_date: body.expiryDate ?? null,
+    verification_url: body.verificationUrl ?? null,
+    certificate_file_id: body.certificateFileId ?? null,
+    badge_file_id: body.badgeFileId ?? null,
+    is_public: body.isPublic ?? true,
+    sort_order: body.sortOrder ?? 0,
+  };
+  // logo_url only exists once migration 037 has been run — only
+  // included when actually sent, so certification creation keeps
+  // working before that migration is live (same pattern as
+  // candidate_profiles.desired_positions in PHASE 6).
+  if (body.logoUrl !== undefined) payload.logo_url = body.logoUrl || null;
+
   const { data, error } = await supabase
     .from('candidate_certifications')
-    .insert({
-      candidate_id: body.candidateId,
-      issuer: body.issuer,
-      name: body.name,
-      credential_id: body.credentialId ?? null,
-      issue_date: body.issueDate ?? null,
-      expiry_date: body.expiryDate ?? null,
-      verification_url: body.verificationUrl ?? null,
-      certificate_file_id: body.certificateFileId ?? null,
-      badge_file_id: body.badgeFileId ?? null,
-      is_public: body.isPublic ?? true,
-      sort_order: body.sortOrder ?? 0,
-    })
+    .insert(payload)
     .select()
     .single();
 

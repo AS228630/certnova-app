@@ -12,19 +12,27 @@ export async function POST(req: NextRequest) {
   }
 
   const supabase = getSupabaseAdmin();
+  const payload: Record<string, unknown> = {
+    candidate_id: body.candidateId,
+    role_title: body.roleTitle,
+    company_name: body.companyName,
+    location: body.location ?? null,
+    start_date: body.startDate ?? null,
+    end_date: body.endDate ?? null, // null = "heute" / present, per the schema's own convention
+    description: body.description ?? null,
+    sort_order: body.sortOrder ?? 0,
+    is_public: body.isPublic ?? true,
+  };
+  // company_logo_url/company_website_url only exist once migration
+  // 037 has been run — same conditional-inclusion pattern as
+  // certifications.logo_url, so this route keeps working before that
+  // migration is live.
+  if (body.companyLogoUrl !== undefined) payload.company_logo_url = body.companyLogoUrl || null;
+  if (body.companyWebsiteUrl !== undefined) payload.company_website_url = body.companyWebsiteUrl || null;
+
   const { data, error } = await supabase
     .from('candidate_experiences')
-    .insert({
-      candidate_id: body.candidateId,
-      role_title: body.roleTitle,
-      company_name: body.companyName,
-      location: body.location ?? null,
-      start_date: body.startDate ?? null,
-      end_date: body.endDate ?? null, // null = "heute" / present, per the schema's own convention
-      description: body.description ?? null,
-      sort_order: body.sortOrder ?? 0,
-      is_public: body.isPublic ?? true,
-    })
+    .insert(payload)
     .select()
     .single();
 
