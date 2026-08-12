@@ -499,6 +499,8 @@ function SkillsSection({ candidateId, skills, onChanged }: { candidateId: string
   const [category, setCategory] = useState('IT & Cloud');
   const [name, setName] = useState('');
   const [saving, setSaving] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editName, setEditName] = useState('');
 
   async function add(e: React.FormEvent) {
     e.preventDefault();
@@ -511,6 +513,25 @@ function SkillsSection({ candidateId, skills, onChanged }: { candidateId: string
     });
     setName('');
     setSaving(false);
+    onChanged();
+  }
+
+  async function saveEdit(id: string) {
+    await fetch(`/api/admin/candidate/skills/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({ name: editName }),
+    });
+    setEditingId(null);
+    onChanged();
+  }
+
+  async function togglePublic(s: Skill) {
+    await fetch(`/api/admin/candidate/skills/${s.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({ isPublic: !s.is_public }),
+    });
     onChanged();
   }
 
@@ -543,10 +564,29 @@ function SkillsSection({ candidateId, skills, onChanged }: { candidateId: string
           <div key={cat} className="mb-3">
             <div className="text-[11px] mb-1.5" style={{ color: 'var(--color-text-faint)' }}>{cat}</div>
             <div className="flex flex-wrap gap-2">
-              {items.map((s) => (
-                <span key={s.id} className="flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg" style={{ background: 'var(--color-panel-alt)', color: 'var(--color-text)' }}>
-                  {s.name}
-                  <button onClick={() => remove(s.id)} title="Entfernen"><X size={11} color="var(--color-text-faint)" /></button>
+              {items.map((s, i) => (
+                <span key={s.id} className="flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg" style={{ background: 'var(--color-panel-alt)', color: 'var(--color-text)', opacity: s.is_public ? 1 : 0.5 }}>
+                  {editingId === s.id ? (
+                    <>
+                      <input autoFocus value={editName} onChange={(e) => setEditName(e.target.value)} className="text-xs rounded px-1.5 py-0.5 w-28" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                      <button onClick={() => saveEdit(s.id)} title="Speichern"><Check size={12} color="var(--color-success)" /></button>
+                      <button onClick={() => setEditingId(null)} title="Abbrechen"><X size={12} color="var(--color-danger)" /></button>
+                    </>
+                  ) : (
+                    <>
+                      {s.name}
+                      <button onClick={() => { setEditingId(s.id); setEditName(s.name); }} title="Bearbeiten"><Pencil size={11} color="var(--color-text-faint)" /></button>
+                      <ItemControls
+                        isPublic={s.is_public}
+                        canMoveUp={i > 0}
+                        canMoveDown={i < items.length - 1}
+                        onMoveUp={() => swapSortOrder('/api/admin/candidate/skills', s, items[i - 1]).then(onChanged)}
+                        onMoveDown={() => swapSortOrder('/api/admin/candidate/skills', s, items[i + 1]).then(onChanged)}
+                        onTogglePublic={() => togglePublic(s)}
+                        onRemove={() => remove(s.id)}
+                      />
+                    </>
+                  )}
                 </span>
               ))}
             </div>
@@ -563,7 +603,15 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
   const [credentialId, setCredentialId] = useState('');
   const [issueDate, setIssueDate] = useState('');
   const [verificationUrl, setVerificationUrl] = useState('');
+  const [logoUrl, setLogoUrl] = useState('');
   const [saving, setSaving] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editIssuer, setEditIssuer] = useState('');
+  const [editName, setEditName] = useState('');
+  const [editCredentialId, setEditCredentialId] = useState('');
+  const [editIssueDate, setEditIssueDate] = useState('');
+  const [editVerificationUrl, setEditVerificationUrl] = useState('');
+  const [editLogoUrl, setEditLogoUrl] = useState('');
 
   async function add(e: React.FormEvent) {
     e.preventDefault();
@@ -577,10 +625,40 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
         credentialId: credentialId || undefined,
         issueDate: issueDate || undefined,
         verificationUrl: verificationUrl || undefined,
+        logoUrl: logoUrl || undefined,
       }),
     });
-    setIssuer(''); setName(''); setCredentialId(''); setIssueDate(''); setVerificationUrl('');
+    setIssuer(''); setName(''); setCredentialId(''); setIssueDate(''); setVerificationUrl(''); setLogoUrl('');
     setSaving(false);
+    onChanged();
+  }
+
+  function startEdit(c: Certification) {
+    setEditingId(c.id);
+    setEditIssuer(c.issuer); setEditName(c.name); setEditCredentialId(c.credential_id ?? '');
+    setEditIssueDate(c.issue_date ?? ''); setEditVerificationUrl(c.verification_url ?? ''); setEditLogoUrl('');
+  }
+
+  async function saveEdit(id: string) {
+    await fetch(`/api/admin/candidate/certifications/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({
+        issuer: editIssuer, name: editName,
+        credentialId: editCredentialId || null, issueDate: editIssueDate || null,
+        verificationUrl: editVerificationUrl || null, logoUrl: editLogoUrl || undefined,
+      }),
+    });
+    setEditingId(null);
+    onChanged();
+  }
+
+  async function togglePublic(c: Certification) {
+    await fetch(`/api/admin/candidate/certifications/${c.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({ isPublic: !c.is_public }),
+    });
     onChanged();
   }
 
@@ -597,7 +675,8 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
         <input required value={name} onChange={(e) => setName(e.target.value)} placeholder="Name (z. B. Azure AZ-900)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
         <input value={credentialId} onChange={(e) => setCredentialId(e.target.value)} placeholder="Credential-ID (optional)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
         <input type="date" value={issueDate} onChange={(e) => setIssueDate(e.target.value)} className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
-        <input value={verificationUrl} onChange={(e) => setVerificationUrl(e.target.value)} placeholder="Verifizierungs-URL (optional)" className="sm:col-span-2 text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input value={verificationUrl} onChange={(e) => setVerificationUrl(e.target.value)} placeholder="Verifizierungs-URL (optional)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input value={logoUrl} onChange={(e) => setLogoUrl(e.target.value)} placeholder="Logo-URL (echtes Badge, optional)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
         <button type="submit" disabled={saving} className="flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-lg text-white disabled:opacity-50 w-fit" style={{ background: 'var(--color-primary)' }}>
           <Plus size={14} /> Hinzufügen
         </button>
@@ -606,17 +685,45 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
         <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Zertifizierungen hinzugefügt.</p>
       ) : (
         <div className="space-y-2">
-          {certifications.map((c) => (
-            <div key={c.id} className="flex items-center justify-between text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)' }}>
-              <div>
-                <div>{c.name} <span style={{ color: 'var(--color-text-faint)' }}>· {c.issuer}</span></div>
-                <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>
-                  {c.issue_date ? new Date(c.issue_date).toLocaleDateString('de-DE') : '—'}
-                  {c.credential_id ? ` · ${c.credential_id}` : ''}
-                  {!c.verification_url ? ' · Verifizierung nicht verfügbar' : ''}
+          {certifications.map((c, i) => (
+            <div key={c.id} className="rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', opacity: c.is_public ? 1 : 0.5 }}>
+              {editingId === c.id ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input value={editIssuer} onChange={(e) => setEditIssuer(e.target.value)} placeholder="Aussteller" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input value={editName} onChange={(e) => setEditName(e.target.value)} placeholder="Name" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input value={editCredentialId} onChange={(e) => setEditCredentialId(e.target.value)} placeholder="Credential-ID" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input type="date" value={editIssueDate} onChange={(e) => setEditIssueDate(e.target.value)} className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input value={editVerificationUrl} onChange={(e) => setEditVerificationUrl(e.target.value)} placeholder="Verifizierungs-URL" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input value={editLogoUrl} onChange={(e) => setEditLogoUrl(e.target.value)} placeholder="Logo-URL" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <div className="sm:col-span-2 flex gap-2">
+                    <button onClick={() => saveEdit(c.id)} className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}><Check size={12} /> Speichern</button>
+                    <button onClick={() => setEditingId(null)} className="text-xs px-3 py-1.5 rounded-lg" style={{ background: 'var(--color-panel)', color: 'var(--color-text-muted)' }}>Abbrechen</button>
+                  </div>
                 </div>
-              </div>
-              <button onClick={() => remove(c.id)} title="Entfernen"><X size={13} color="var(--color-text-faint)" /></button>
+              ) : (
+                <div className="flex items-center justify-between text-sm">
+                  <div>
+                    <div>{c.name} <span style={{ color: 'var(--color-text-faint)' }}>· {c.issuer}</span></div>
+                    <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>
+                      {c.issue_date ? new Date(c.issue_date).toLocaleDateString('de-DE') : '—'}
+                      {c.credential_id ? ` · ${c.credential_id}` : ''}
+                      {!c.verification_url ? ' · Verifizierung nicht verfügbar' : ''}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <button onClick={() => startEdit(c)} title="Bearbeiten"><Pencil size={13} color="var(--color-text-faint)" /></button>
+                    <ItemControls
+                      isPublic={c.is_public}
+                      canMoveUp={i > 0}
+                      canMoveDown={i < certifications.length - 1}
+                      onMoveUp={() => swapSortOrder('/api/admin/candidate/certifications', c, certifications[i - 1]).then(onChanged)}
+                      onMoveDown={() => swapSortOrder('/api/admin/candidate/certifications', c, certifications[i + 1]).then(onChanged)}
+                      onTogglePublic={() => togglePublic(c)}
+                      onRemove={() => remove(c.id)}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -632,7 +739,18 @@ function ExperienceSection({ candidateId, experiences, onChanged }: { candidateI
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [description, setDescription] = useState('');
+  const [companyLogoUrl, setCompanyLogoUrl] = useState('');
+  const [companyWebsiteUrl, setCompanyWebsiteUrl] = useState('');
   const [saving, setSaving] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editRoleTitle, setEditRoleTitle] = useState('');
+  const [editCompanyName, setEditCompanyName] = useState('');
+  const [editLocation, setEditLocation] = useState('');
+  const [editStartDate, setEditStartDate] = useState('');
+  const [editEndDate, setEditEndDate] = useState('');
+  const [editDescription, setEditDescription] = useState('');
+  const [editCompanyLogoUrl, setEditCompanyLogoUrl] = useState('');
+  const [editCompanyWebsiteUrl, setEditCompanyWebsiteUrl] = useState('');
 
   async function add(e: React.FormEvent) {
     e.preventDefault();
@@ -647,10 +765,42 @@ function ExperienceSection({ candidateId, experiences, onChanged }: { candidateI
         startDate: startDate || undefined,
         endDate: endDate || undefined,
         description: description || undefined,
+        companyLogoUrl: companyLogoUrl || undefined,
+        companyWebsiteUrl: companyWebsiteUrl || undefined,
       }),
     });
-    setRoleTitle(''); setCompanyName(''); setLocation(''); setStartDate(''); setEndDate(''); setDescription('');
+    setRoleTitle(''); setCompanyName(''); setLocation(''); setStartDate(''); setEndDate(''); setDescription(''); setCompanyLogoUrl(''); setCompanyWebsiteUrl('');
     setSaving(false);
+    onChanged();
+  }
+
+  function startEdit(exp: Experience) {
+    setEditingId(exp.id);
+    setEditRoleTitle(exp.role_title); setEditCompanyName(exp.company_name); setEditLocation(exp.location ?? '');
+    setEditStartDate(exp.start_date ?? ''); setEditEndDate(exp.end_date ?? ''); setEditDescription('');
+    setEditCompanyLogoUrl(''); setEditCompanyWebsiteUrl('');
+  }
+
+  async function saveEdit(id: string) {
+    await fetch(`/api/admin/candidate/experiences/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({
+        roleTitle: editRoleTitle, companyName: editCompanyName, location: editLocation || null,
+        startDate: editStartDate || null, endDate: editEndDate || null, description: editDescription || undefined,
+        companyLogoUrl: editCompanyLogoUrl || undefined, companyWebsiteUrl: editCompanyWebsiteUrl || undefined,
+      }),
+    });
+    setEditingId(null);
+    onChanged();
+  }
+
+  async function togglePublic(exp: Experience) {
+    await fetch(`/api/admin/candidate/experiences/${exp.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({ isPublic: !exp.is_public }),
+    });
     onChanged();
   }
 
@@ -670,6 +820,8 @@ function ExperienceSection({ candidateId, experiences, onChanged }: { candidateI
           <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
           <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} placeholder="leer = heute" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
         </div>
+        <input value={companyLogoUrl} onChange={(e) => setCompanyLogoUrl(e.target.value)} placeholder="Firmen-Logo-URL (echt, optional)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input value={companyWebsiteUrl} onChange={(e) => setCompanyWebsiteUrl(e.target.value)} placeholder="Firmen-Website (optional)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
         <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Beschreibung (optional, eine Zeile pro Punkt)" rows={2} className="sm:col-span-2 text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
         <button type="submit" disabled={saving} className="flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-lg text-white disabled:opacity-50 w-fit" style={{ background: 'var(--color-primary)' }}>
           <Plus size={14} /> Hinzufügen
@@ -679,15 +831,47 @@ function ExperienceSection({ candidateId, experiences, onChanged }: { candidateI
         <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Berufserfahrung hinzugefügt.</p>
       ) : (
         <div className="space-y-2">
-          {experiences.map((exp) => (
-            <div key={exp.id} className="flex items-center justify-between text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)' }}>
-              <div>
-                <div>{exp.role_title} <span style={{ color: 'var(--color-text-faint)' }}>· {exp.company_name}</span></div>
-                <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>
-                  {exp.start_date ? new Date(exp.start_date).toLocaleDateString('de-DE') : '—'} – {exp.end_date ? new Date(exp.end_date).toLocaleDateString('de-DE') : 'heute'}
+          {experiences.map((exp, i) => (
+            <div key={exp.id} className="rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', opacity: exp.is_public ? 1 : 0.5 }}>
+              {editingId === exp.id ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input value={editRoleTitle} onChange={(e) => setEditRoleTitle(e.target.value)} placeholder="Position" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input value={editCompanyName} onChange={(e) => setEditCompanyName(e.target.value)} placeholder="Unternehmen" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input value={editLocation} onChange={(e) => setEditLocation(e.target.value)} placeholder="Ort" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <div className="grid grid-cols-2 gap-2">
+                    <input type="date" value={editStartDate} onChange={(e) => setEditStartDate(e.target.value)} className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                    <input type="date" value={editEndDate} onChange={(e) => setEditEndDate(e.target.value)} className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  </div>
+                  <input value={editCompanyLogoUrl} onChange={(e) => setEditCompanyLogoUrl(e.target.value)} placeholder="Firmen-Logo-URL" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input value={editCompanyWebsiteUrl} onChange={(e) => setEditCompanyWebsiteUrl(e.target.value)} placeholder="Firmen-Website" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <textarea value={editDescription} onChange={(e) => setEditDescription(e.target.value)} placeholder="Beschreibung" rows={2} className="sm:col-span-2 text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <div className="sm:col-span-2 flex gap-2">
+                    <button onClick={() => saveEdit(exp.id)} className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}><Check size={12} /> Speichern</button>
+                    <button onClick={() => setEditingId(null)} className="text-xs px-3 py-1.5 rounded-lg" style={{ background: 'var(--color-panel)', color: 'var(--color-text-muted)' }}>Abbrechen</button>
+                  </div>
                 </div>
-              </div>
-              <button onClick={() => remove(exp.id)} title="Entfernen"><X size={13} color="var(--color-text-faint)" /></button>
+              ) : (
+                <div className="flex items-center justify-between text-sm">
+                  <div>
+                    <div>{exp.role_title} <span style={{ color: 'var(--color-text-faint)' }}>· {exp.company_name}</span></div>
+                    <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>
+                      {exp.start_date ? new Date(exp.start_date).toLocaleDateString('de-DE') : '—'} – {exp.end_date ? new Date(exp.end_date).toLocaleDateString('de-DE') : 'heute'}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <button onClick={() => startEdit(exp)} title="Bearbeiten"><Pencil size={13} color="var(--color-text-faint)" /></button>
+                    <ItemControls
+                      isPublic={exp.is_public}
+                      canMoveUp={i > 0}
+                      canMoveDown={i < experiences.length - 1}
+                      onMoveUp={() => swapSortOrder('/api/admin/candidate/experiences', exp, experiences[i - 1]).then(onChanged)}
+                      onMoveDown={() => swapSortOrder('/api/admin/candidate/experiences', exp, experiences[i + 1]).then(onChanged)}
+                      onTogglePublic={() => togglePublic(exp)}
+                      onRemove={() => remove(exp.id)}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -703,6 +887,12 @@ function ProjectsSection({ candidateId, projects, onChanged }: { candidateId: st
   const [projectUrl, setProjectUrl] = useState('');
   const [repoUrl, setRepoUrl] = useState('');
   const [saving, setSaving] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editTitle, setEditTitle] = useState('');
+  const [editDescription, setEditDescription] = useState('');
+  const [editTechnologies, setEditTechnologies] = useState('');
+  const [editProjectUrl, setEditProjectUrl] = useState('');
+  const [editRepoUrl, setEditRepoUrl] = useState('');
 
   async function add(e: React.FormEvent) {
     e.preventDefault();
@@ -721,6 +911,35 @@ function ProjectsSection({ candidateId, projects, onChanged }: { candidateId: st
     });
     setTitle(''); setDescription(''); setTechnologies(''); setProjectUrl(''); setRepoUrl('');
     setSaving(false);
+    onChanged();
+  }
+
+  function startEdit(p: Project) {
+    setEditingId(p.id);
+    setEditTitle(p.title); setEditDescription(p.description ?? ''); setEditTechnologies((p.technologies ?? []).join(', '));
+    setEditProjectUrl(p.project_url ?? ''); setEditRepoUrl(p.repo_url ?? '');
+  }
+
+  async function saveEdit(id: string) {
+    await fetch(`/api/admin/candidate/projects/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({
+        title: editTitle, description: editDescription || null,
+        technologies: editTechnologies.split(',').map((t) => t.trim()).filter(Boolean),
+        projectUrl: editProjectUrl || null, repoUrl: editRepoUrl || null,
+      }),
+    });
+    setEditingId(null);
+    onChanged();
+  }
+
+  async function togglePublic(p: Project) {
+    await fetch(`/api/admin/candidate/projects/${p.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({ isPublic: !p.is_public }),
+    });
     onChanged();
   }
 
@@ -746,15 +965,42 @@ function ProjectsSection({ candidateId, projects, onChanged }: { candidateId: st
         <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Projekte hinzugefügt.</p>
       ) : (
         <div className="space-y-2">
-          {projects.map((p) => (
-            <div key={p.id} className="flex items-center justify-between text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)' }}>
-              <div>
-                <div>{p.title}</div>
-                {p.technologies && p.technologies.length > 0 && (
-                  <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>{p.technologies.join(', ')}</div>
-                )}
-              </div>
-              <button onClick={() => remove(p.id)} title="Entfernen"><X size={13} color="var(--color-text-faint)" /></button>
+          {projects.map((p, i) => (
+            <div key={p.id} className="rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', opacity: p.is_public ? 1 : 0.5 }}>
+              {editingId === p.id ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input value={editTitle} onChange={(e) => setEditTitle(e.target.value)} placeholder="Titel" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input value={editTechnologies} onChange={(e) => setEditTechnologies(e.target.value)} placeholder="Technologien" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input value={editProjectUrl} onChange={(e) => setEditProjectUrl(e.target.value)} placeholder="Projekt-URL" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input value={editRepoUrl} onChange={(e) => setEditRepoUrl(e.target.value)} placeholder="Repository-URL" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <textarea value={editDescription} onChange={(e) => setEditDescription(e.target.value)} placeholder="Beschreibung" rows={2} className="sm:col-span-2 text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <div className="sm:col-span-2 flex gap-2">
+                    <button onClick={() => saveEdit(p.id)} className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}><Check size={12} /> Speichern</button>
+                    <button onClick={() => setEditingId(null)} className="text-xs px-3 py-1.5 rounded-lg" style={{ background: 'var(--color-panel)', color: 'var(--color-text-muted)' }}>Abbrechen</button>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center justify-between text-sm">
+                  <div>
+                    <div>{p.title}</div>
+                    {p.technologies && p.technologies.length > 0 && (
+                      <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>{p.technologies.join(', ')}</div>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <button onClick={() => startEdit(p)} title="Bearbeiten"><Pencil size={13} color="var(--color-text-faint)" /></button>
+                    <ItemControls
+                      isPublic={p.is_public}
+                      canMoveUp={i > 0}
+                      canMoveDown={i < projects.length - 1}
+                      onMoveUp={() => swapSortOrder('/api/admin/candidate/projects', p, projects[i - 1]).then(onChanged)}
+                      onMoveDown={() => swapSortOrder('/api/admin/candidate/projects', p, projects[i + 1]).then(onChanged)}
+                      onTogglePublic={() => togglePublic(p)}
+                      onRemove={() => remove(p.id)}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
