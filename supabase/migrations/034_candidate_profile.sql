@@ -319,7 +319,7 @@ create index if not exists document_access_grants_share_link_id_idx on public.do
 -- candidate_skills, candidate_certifications, candidate_experiences,
 -- candidate_projects, candidate_documents (metadata only),
 -- share_links, share_link_documents, document_access_codes,
--- document_access_grants — 9 tables, still fully additive, still
+-- document_access_grants — 10 tables, still fully additive, still
 -- NOT APPROVED / NOT APPLIED (see status banner at the top of this
 -- file).
 

@@ -2,7 +2,7 @@
 
 Status: review complete, migration still **NOT executed, NOT pushed**.
 Companion file: `supabase/migrations/034_candidate_profile.sql`
-(9 tables, marked "NOT APPROVED, NOT APPLIED" — unchanged this phase
+(10 tables, marked "NOT APPROVED, NOT APPLIED" — unchanged this phase
 except two fixes described in §4 and §5 below).
 
 This report walks the advisor's exact 12-point PHASE 2 checklist.
@@ -98,7 +98,7 @@ section 7: don't add indexes for scale that doesn't exist).
 
 ## 6. Verify RLS / authorization implications
 
-All 9 tables: `enable row level security`, zero policies defined.
+All 10 tables: `enable row level security`, zero policies defined.
 Confirmed this means the `authenticated` and `anon` Postgres roles
 get **zero** access to any of these tables under any circumstance —
 only the service-role key (used exclusively server-side, inside
@@ -199,7 +199,7 @@ problem before it was built.
 ## 12. Final Migration Plan
 
 **Why this migration is safe:**
-- 100% additive — 9 new tables, zero existing tables altered, zero
+- 100% additive — 10 new tables, zero existing tables altered, zero
   existing columns touched.
 - No second database, no duplicated entity (confirmed twice now,
   PHASE 1 and PHASE 2).
@@ -212,13 +212,13 @@ problem before it was built.
 - Every foreign key has a deliberate `ON DELETE` behavior (§3).
 - The one security-critical constraint (`share_links.token_hash
   unique`) is present and correct.
-- Rollback, if ever needed: drop the 9 new tables — nothing else in
+- Rollback, if ever needed: drop the 10 new tables — nothing else in
   the database references them (this migration is a pure leaf
   addition), so nothing else breaks.
 
 **What creates zero risk to current CertCoach data:** nothing in this
 migration can be reached by any existing code path — no existing API
-route, page, or webhook references any of these 9 tables. Running it
+route, page, or webhook references any of these 10 tables. Running it
 changes nothing about how the site currently behaves for students,
 teachers, or admins until new application code (a later phase)
 starts using it.
@@ -249,7 +249,7 @@ layer protection is sufficient for `candidate_profiles`; no database
 constraint needed, since this table is exclusively admin-managed),
 this section is the requested final summary.
 
-**Final schema:** 9 tables — `candidate_profiles`, `candidate_skills`,
+**Final schema:** 10 tables — `candidate_profiles`, `candidate_skills`,
 `candidate_certifications`, `candidate_experiences`,
 `candidate_projects`, `candidate_documents`, `share_links`,
 `share_link_documents`, `document_access_codes`,
@@ -282,7 +282,7 @@ child-of-profile relationships, default RESTRICT for the two
 certification→document links (protects against silently orphaning a
 certification's file reference).
 
-**Authorization model:** RLS enabled on all 9 tables, zero public
+**Authorization model:** RLS enabled on all 10 tables, zero public
 policies — service-role key only, via Next.js API routes, identical
 to the pattern already running in production for `teacher_coupons`,
 `teachers`, `referrals`, `commission_ledger`, `admin_users`, and
