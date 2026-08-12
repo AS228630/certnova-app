@@ -14,7 +14,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import {
   Loader2, MapPin, Mail, Linkedin, Github, FileText, Lock, ShieldCheck,
-  Briefcase, Award, Download, ExternalLink, Globe, Eye, EyeOff, AlertCircle,
+  Briefcase, Award, Download, ExternalLink, Globe, Eye, EyeOff, AlertCircle, CheckCircle2, BarChart3,
 } from 'lucide-react';
 
 const COLORS = {
@@ -28,7 +28,7 @@ type Profile = {
   availability: 'available' | 'open' | 'unavailable' | null; work_mode: string | null; email: string | null;
   linkedin_url: string | null; github_url: string | null; desired_positions: string[] | null; created_at: string;
 };
-type Skill = { id: string; category: string; name: string };
+type Skill = { id: string; category: string; name: string; level: string | null };
 type Certification = { id: string; issuer: string; name: string; issue_date: string | null; expiry_date: string | null; verification_url: string | null; logo_url: string | null };
 type Experience = { id: string; role_title: string; company_name: string; location: string | null; start_date: string | null; end_date: string | null; description: string | null; company_logo_url: string | null; company_website_url: string | null };
 type Education = { id: string; institution_name: string; degree: string | null; field_of_study: string | null; graduation_date: string | null; logo_url: string | null; website_url: string | null };
@@ -308,17 +308,65 @@ export default function PublicCandidateProfilePage() {
               </Card>
             )}
 
-            {data.skills.length > 0 && (
-              <Card>
-                <SectionHeader icon={Globe} title="Fähigkeiten" accent={COLORS.blue} />
-                {Object.entries(data.skills.reduce<Record<string, Skill[]>>((acc, s) => { (acc[s.category] ??= []).push(s); return acc; }, {})).map(([cat, items]) => (
-                  <div key={cat} className="mb-3 last:mb-0">
-                    <div className="text-[11px] mb-1.5" style={{ color: COLORS.textSecondary }}>{cat}</div>
-                    <div className="flex flex-wrap gap-2">{items.map((s) => <span key={s.id} className="text-xs px-2.5 py-1 rounded-md" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}>{s.name}</span>)}</div>
-                  </div>
-                ))}
-              </Card>
-            )}
+            {data.skills.length > 0 && (() => {
+              const STRENGTHS_CATEGORY = 'Was mich auszeichnet';
+              const strengths = data.skills.filter((s) => s.category === STRENGTHS_CATEGORY);
+              const regularSkills = data.skills.filter((s) => s.category !== STRENGTHS_CATEGORY);
+              const skillsByCategory = regularSkills.reduce<Record<string, Skill[]>>((acc, s) => { (acc[s.category] ??= []).push(s); return acc; }, {});
+              const topTechnologies = regularSkills
+                .filter((s) => s.level && !isNaN(Number(s.level)) && Number(s.level) > 0 && Number(s.level) <= 100)
+                .sort((a, b) => Number(b.level) - Number(a.level))
+                .slice(0, 6);
+              return (
+                <>
+                  {Object.keys(skillsByCategory).length > 0 && (
+                    <Card>
+                      <SectionHeader icon={Globe} title="Fähigkeiten" accent={COLORS.blue} />
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                        {Object.entries(skillsByCategory).map(([cat, items]) => (
+                          <div key={cat}>
+                            <div className="text-[11px] mb-1.5" style={{ color: COLORS.textSecondary }}>{cat}</div>
+                            <div className="flex flex-wrap gap-2">{items.map((s) => <span key={s.id} className="text-xs px-2.5 py-1 rounded-md" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}>{s.name}</span>)}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </Card>
+                  )}
+
+                  {strengths.length > 0 && (
+                    <Card>
+                      <SectionHeader icon={CheckCircle2} title="Was mich auszeichnet" accent={COLORS.green} />
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+                        {strengths.map((s) => (
+                          <div key={s.id} className="flex items-center gap-2 text-xs" style={{ color: COLORS.textPrimary }}>
+                            <CheckCircle2 size={13} color={COLORS.green} className="shrink-0" /> {s.name}
+                          </div>
+                        ))}
+                      </div>
+                    </Card>
+                  )}
+
+                  {topTechnologies.length > 0 && (
+                    <Card>
+                      <SectionHeader icon={BarChart3} title="Top Technologien" accent={COLORS.blue} />
+                      <div className="space-y-2.5">
+                        {topTechnologies.map((s) => (
+                          <div key={s.id}>
+                            <div className="flex items-center justify-between text-xs mb-1">
+                              <span style={{ color: COLORS.textPrimary }}>{s.name}</span>
+                              <span style={{ color: COLORS.textSecondary }}>{s.level}%</span>
+                            </div>
+                            <div className="h-1.5 rounded-full overflow-hidden" style={{ background: COLORS.cardBorder }}>
+                              <div className="h-full rounded-full" style={{ width: `${s.level}%`, background: COLORS.blue }} />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </Card>
+                  )}
+                </>
+              );
+            })()}
 
             {data.certifications.length > 0 && (
               <Card>

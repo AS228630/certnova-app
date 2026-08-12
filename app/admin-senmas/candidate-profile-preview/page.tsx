@@ -28,7 +28,7 @@
 import { useEffect, useState } from 'react';
 import {
   Loader2, MapPin, Mail, Linkedin, Github, FileText, Lock, ShieldCheck,
-  Briefcase, FolderGit2, Award, Download, ExternalLink, Globe,
+  Briefcase, FolderGit2, Award, Download, ExternalLink, Globe, CheckCircle2, BarChart3,
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase/client';
 
@@ -63,7 +63,7 @@ type Profile = {
   desired_positions: string[] | null;
   created_at: string;
 };
-type Skill = { id: string; category: string; name: string; is_public: boolean };
+type Skill = { id: string; category: string; name: string; level: string | null; is_public: boolean };
 type Certification = { id: string; issuer: string; name: string; credential_id: string | null; issue_date: string | null; expiry_date: string | null; verification_url: string | null; logo_url: string | null; is_public: boolean };
 type Education = { id: string; institution_name: string; degree: string | null; field_of_study: string | null; graduation_date: string | null; logo_url: string | null; website_url: string | null; is_public: boolean };
 type Experience = { id: string; role_title: string; company_name: string; location: string | null; start_date: string | null; end_date: string | null; description: string | null; company_logo_url: string | null; company_website_url: string | null; is_public: boolean };
@@ -215,10 +215,17 @@ export default function CandidateProfilePreviewPage() {
   const languageSkills = publicSkills.filter((s) => s.category === 'Sprachen').map((s) => s.name);
 
   const techCount = new Set(publicProjects.flatMap((p) => p.technologies ?? [])).size;
-  const skillsByCategory = publicSkills.reduce<Record<string, Skill[]>>((acc, s) => {
+  const STRENGTHS_CATEGORY = 'Was mich auszeichnet';
+  const strengths = publicSkills.filter((s) => s.category === STRENGTHS_CATEGORY);
+  const regularSkills = publicSkills.filter((s) => s.category !== STRENGTHS_CATEGORY);
+  const skillsByCategory = regularSkills.reduce<Record<string, Skill[]>>((acc, s) => {
     (acc[s.category] ??= []).push(s);
     return acc;
   }, {});
+  const topTechnologies = regularSkills
+    .filter((s) => s.level && !isNaN(Number(s.level)) && Number(s.level) > 0 && Number(s.level) <= 100)
+    .sort((a, b) => Number(b.level) - Number(a.level))
+    .slice(0, 6);
 
   return (
     <div className="rounded-2xl overflow-hidden" style={{ background: COLORS.bg, border: `1px solid ${COLORS.cardBorder}` }}>
@@ -366,18 +373,33 @@ export default function CandidateProfilePreviewPage() {
               {Object.keys(skillsByCategory).length === 0 ? (
                 <p className="text-xs" style={{ color: COLORS.textSecondary }}>Noch keine öffentlichen Fähigkeiten hinterlegt.</p>
               ) : (
-                Object.entries(skillsByCategory).map(([cat, items]) => (
-                  <div key={cat} className="mb-3 last:mb-0">
-                    <div className="text-[11px] mb-1.5" style={{ color: COLORS.textSecondary }}>{cat}</div>
-                    <div className="flex flex-wrap gap-2">
-                      {items.map((s) => (
-                        <span key={s.id} className="text-xs px-2.5 py-1 rounded-md" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}>{s.name}</span>
-                      ))}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                  {Object.entries(skillsByCategory).map(([cat, items]) => (
+                    <div key={cat}>
+                      <div className="text-[11px] mb-1.5" style={{ color: COLORS.textSecondary }}>{cat}</div>
+                      <div className="flex flex-wrap gap-2">
+                        {items.map((s) => (
+                          <span key={s.id} className="text-xs px-2.5 py-1 rounded-md" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}>{s.name}</span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ))
+                  ))}
+                </div>
               )}
             </Card>
+
+            {strengths.length > 0 && (
+              <Card>
+                <SectionHeader icon={CheckCircle2} title="Was mich auszeichnet" accent={COLORS.green} />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+                  {strengths.map((s) => (
+                    <div key={s.id} className="flex items-center gap-2 text-xs" style={{ color: COLORS.textPrimary }}>
+                      <CheckCircle2 size={13} color={COLORS.green} className="shrink-0" /> {s.name}
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            )}
 
             <Card>
               <SectionHeader icon={Award} title="Zertifizierungen" accent={COLORS.purple} />
@@ -485,6 +507,25 @@ export default function CandidateProfilePreviewPage() {
                           {p.technologies.map((t) => <span key={t} className="text-[10px] px-2 py-0.5 rounded" style={{ background: COLORS.cardBorder, color: COLORS.textSecondary }}>{t}</span>)}
                         </div>
                       )}
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            )}
+
+            {topTechnologies.length > 0 && (
+              <Card>
+                <SectionHeader icon={BarChart3} title="Top Technologien" accent={COLORS.blue} />
+                <div className="space-y-2.5">
+                  {topTechnologies.map((s) => (
+                    <div key={s.id}>
+                      <div className="flex items-center justify-between text-xs mb-1">
+                        <span style={{ color: COLORS.textPrimary }}>{s.name}</span>
+                        <span style={{ color: COLORS.textSecondary }}>{s.level}%</span>
+                      </div>
+                      <div className="h-1.5 rounded-full overflow-hidden" style={{ background: COLORS.cardBorder }}>
+                        <div className="h-full rounded-full" style={{ width: `${s.level}%`, background: COLORS.blue }} />
+                      </div>
                     </div>
                   ))}
                 </div>

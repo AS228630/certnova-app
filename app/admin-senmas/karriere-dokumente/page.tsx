@@ -504,9 +504,11 @@ function DocumentsSection({ candidateId, documents, onChanged }: { candidateId: 
 function SkillsSection({ candidateId, skills, onChanged }: { candidateId: string; skills: Skill[]; onChanged: () => void }) {
   const [category, setCategory] = useState('IT & Cloud');
   const [name, setName] = useState('');
+  const [level, setLevel] = useState('');
   const [saving, setSaving] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editName, setEditName] = useState('');
+  const [editLevel, setEditLevel] = useState('');
 
   async function add(e: React.FormEvent) {
     e.preventDefault();
@@ -515,9 +517,9 @@ function SkillsSection({ candidateId, skills, onChanged }: { candidateId: string
     await fetch('/api/admin/candidate/skills', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
-      body: JSON.stringify({ candidateId, category, name }),
+      body: JSON.stringify({ candidateId, category, name, level: level || undefined }),
     });
-    setName('');
+    setName(''); setLevel('');
     setSaving(false);
     onChanged();
   }
@@ -526,7 +528,7 @@ function SkillsSection({ candidateId, skills, onChanged }: { candidateId: string
     await fetch(`/api/admin/candidate/skills/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
-      body: JSON.stringify({ name: editName }),
+      body: JSON.stringify({ name: editName, level: editLevel || null }),
     });
     setEditingId(null);
     onChanged();
@@ -553,12 +555,16 @@ function SkillsSection({ candidateId, skills, onChanged }: { candidateId: string
 
   return (
     <div className="rounded-2xl p-5 mb-6" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
-      <h3 className="text-sm font-semibold mb-4">Fähigkeiten</h3>
+      <h3 className="text-sm font-semibold mb-1">Fähigkeiten</h3>
+      <p className="text-[11px] mb-4" style={{ color: 'var(--color-text-faint)' }}>
+        Kategorie „Was mich auszeichnet&quot; erscheint als eigene Checkliste. Ein optionaler Level-Wert (0–100) zeigt die Fähigkeit zusätzlich als Balken unter „Top Technologien&quot;.
+      </p>
       <form onSubmit={add} className="flex flex-wrap gap-2 mb-4">
         <select value={category} onChange={(e) => setCategory(e.target.value)} className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }}>
-          {['Development', 'IT & Cloud', 'Microsoft', 'DevOps', 'Database', 'Sprachen', 'Sonstiges'].map((c) => <option key={c} value={c}>{c}</option>)}
+          {['Development', 'IT & Cloud', 'Microsoft', 'DevOps', 'Database', 'Sprachen', 'Was mich auszeichnet', 'Sonstiges'].map((c) => <option key={c} value={c}>{c}</option>)}
         </select>
         <input value={name} onChange={(e) => setName(e.target.value)} placeholder="z. B. Deutsch (B2) oder Microsoft Azure" className="flex-1 min-w-[200px] text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input type="number" min={0} max={100} value={level} onChange={(e) => setLevel(e.target.value)} placeholder="Level % (optional)" className="w-36 text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
         <button type="submit" disabled={saving || !name} className="flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-lg text-white disabled:opacity-50" style={{ background: 'var(--color-primary)' }}>
           <Plus size={14} /> Hinzufügen
         </button>
@@ -575,13 +581,14 @@ function SkillsSection({ candidateId, skills, onChanged }: { candidateId: string
                   {editingId === s.id ? (
                     <>
                       <input autoFocus value={editName} onChange={(e) => setEditName(e.target.value)} className="text-xs rounded px-1.5 py-0.5 w-28" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                      <input type="number" min={0} max={100} value={editLevel} onChange={(e) => setEditLevel(e.target.value)} placeholder="%" className="text-xs rounded px-1.5 py-0.5 w-14" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
                       <button onClick={() => saveEdit(s.id)} title="Speichern"><Check size={12} color="var(--color-success)" /></button>
                       <button onClick={() => setEditingId(null)} title="Abbrechen"><X size={12} color="var(--color-danger)" /></button>
                     </>
                   ) : (
                     <>
-                      {s.name}
-                      <button onClick={() => { setEditingId(s.id); setEditName(s.name); }} title="Bearbeiten"><Pencil size={11} color="var(--color-text-faint)" /></button>
+                      {s.name}{s.level ? ` · ${s.level}%` : ''}
+                      <button onClick={() => { setEditingId(s.id); setEditName(s.name); setEditLevel(s.level ?? ''); }} title="Bearbeiten"><Pencil size={11} color="var(--color-text-faint)" /></button>
                       <ItemControls
                         isPublic={s.is_public}
                         canMoveUp={i > 0}
