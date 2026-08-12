@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requirePermission, getSupabaseAdmin } from '@/lib/admin/requireAdmin';
+import { logAudit } from '@/lib/admin/audit';
 
 export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const auth = await requirePermission(req.headers.get('authorization')?.replace(/^Bearer\s+/i, ''), 'candidate_profile.manage');
@@ -19,6 +20,16 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   const supabase = getSupabaseAdmin();
   const { data, error } = await supabase.from('candidate_experiences').update(patch).eq('id', id).select().single();
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  await logAudit({
+    actorId: auth.userId,
+    actorEmail: auth.email,
+    action: 'CANDIDATE_EXPERIENCE_UPDATED',
+    resourceType: 'candidate_experience',
+    resourceId: id,
+    metadata: patch,
+  });
+
   return NextResponse.json({ experience: data });
 }
 
@@ -30,5 +41,14 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
   const supabase = getSupabaseAdmin();
   const { error } = await supabase.from('candidate_experiences').delete().eq('id', id);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  await logAudit({
+    actorId: auth.userId,
+    actorEmail: auth.email,
+    action: 'CANDIDATE_EXPERIENCE_REMOVED',
+    resourceType: 'candidate_experience',
+    resourceId: id,
+  });
+
   return NextResponse.json({ deleted: true });
 }

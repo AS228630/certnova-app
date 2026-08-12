@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requirePermission, getSupabaseAdmin } from '@/lib/admin/requireAdmin';
+import { logAudit } from '@/lib/admin/audit';
 
 /**
  * Private Candidate Profile — admin side. Single combined GET
@@ -75,5 +76,15 @@ export async function PUT(req: NextRequest) {
   // this admin-only-managed table. See
   // docs/CANDIDATE_PROFILE_PHASE2_REVIEW.md section 5.
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  await logAudit({
+    actorId: auth.userId,
+    actorEmail: auth.email,
+    action: 'PROFILE_UPDATED',
+    resourceType: 'candidate_profile',
+    resourceId: data.id,
+    metadata: { wasCreate: !existing },
+  });
+
   return NextResponse.json({ profile: data });
 }

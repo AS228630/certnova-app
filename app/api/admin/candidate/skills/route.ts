@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requirePermission, getSupabaseAdmin } from '@/lib/admin/requireAdmin';
+import { logAudit } from '@/lib/admin/audit';
 
 export async function POST(req: NextRequest) {
   const auth = await requirePermission(req.headers.get('authorization')?.replace(/^Bearer\s+/i, ''), 'candidate_profile.manage');
@@ -25,5 +26,15 @@ export async function POST(req: NextRequest) {
     .single();
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  await logAudit({
+    actorId: auth.userId,
+    actorEmail: auth.email,
+    action: 'CANDIDATE_SKILL_ADDED',
+    resourceType: 'candidate_skill',
+    resourceId: data.id,
+    metadata: { category: body.category, name: body.name },
+  });
+
   return NextResponse.json({ skill: data }, { status: 201 });
 }

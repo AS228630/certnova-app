@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { requirePermission, getSupabaseAdmin } from '@/lib/admin/requireAdmin';
+import { logAudit } from '@/lib/admin/audit';
 
 export async function POST(req: NextRequest) {
   const auth = await requirePermission(req.headers.get('authorization')?.replace(/^Bearer\s+/i, ''), 'candidate_profile.manage');
@@ -27,5 +28,15 @@ export async function POST(req: NextRequest) {
     .single();
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+  await logAudit({
+    actorId: auth.userId,
+    actorEmail: auth.email,
+    action: 'CANDIDATE_PROJECT_ADDED',
+    resourceType: 'candidate_project',
+    resourceId: data.id,
+    metadata: { title: body.title },
+  });
+
   return NextResponse.json({ project: data }, { status: 201 });
 }
