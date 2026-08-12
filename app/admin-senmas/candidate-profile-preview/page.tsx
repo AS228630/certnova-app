@@ -33,16 +33,17 @@ import {
 import { supabase } from '@/lib/supabase/client';
 
 const COLORS = {
-  bg: '#020817',
-  card: '#07111F',
-  cardBorder: '#172338',
-  red: '#EF1B2D',
-  redHover: '#FF293D',
-  blue: '#1683FF',
-  green: '#22C55E',
-  purple: '#8B5CF6',
-  textPrimary: '#F8FAFC',
-  textSecondary: '#94A3B8',
+  bg: '#020B14',
+  card: '#071522',
+  cardBorder: '#17293A',
+  red: '#EF233C',
+  redHover: '#FF3048',
+  blue: '#2EA3FF',
+  green: '#35D07F',
+  purple: '#A855F7',
+  textPrimary: '#F5F7FA',
+  textSecondary: '#9AA8B7',
+  textMuted: '#687788',
 };
 
 type Profile = {

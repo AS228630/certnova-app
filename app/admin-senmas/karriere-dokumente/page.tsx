@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   Loader2, Save, Upload, FileText, Eye, EyeOff, Download, Pencil,
-  RefreshCw, Trash2, RotateCcw, XCircle, Check, X, Plus,
+  RefreshCw, Trash2, RotateCcw, XCircle, Check, X, Plus, ArrowUp, ArrowDown,
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase/client';
 
@@ -52,10 +52,10 @@ type Document = {
   storage_deleted_at?: string | null;
 };
 
-type Skill = { id: string; category: string; name: string; level: string | null };
-type Certification = { id: string; issuer: string; name: string; credential_id: string | null; issue_date: string | null; verification_url: string | null };
-type Experience = { id: string; role_title: string; company_name: string; start_date: string | null; end_date: string | null };
-type Project = { id: string; title: string; description: string | null; technologies: string[] | null; project_url: string | null; repo_url: string | null };
+type Skill = { id: string; category: string; name: string; level: string | null; is_public: boolean; sort_order: number };
+type Certification = { id: string; issuer: string; name: string; credential_id: string | null; issue_date: string | null; verification_url: string | null; is_public: boolean; sort_order: number };
+type Experience = { id: string; role_title: string; company_name: string; location: string | null; start_date: string | null; end_date: string | null; description: string | null; is_public: boolean; sort_order: number };
+type Project = { id: string; title: string; description: string | null; technologies: string[] | null; project_url: string | null; repo_url: string | null; is_public: boolean; sort_order: number };
 
 async function authHeader(): Promise<Record<string, string>> {
   const { data } = await supabase.auth.getSession();
@@ -67,6 +67,38 @@ function fmtBytes(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
   return `${(bytes / 1024 / 1024).toFixed(2)} MB`;
+}
+
+/** Shared row controls (reorder / show-hide / remove) for Skills,
+ * Certifications, Experience, and Projects — all four share the same
+ * id + is_public + sort_order shape, so this avoids repeating the
+ * same four buttons four times. */
+function ItemControls({
+  isPublic, canMoveUp, canMoveDown, onMoveUp, onMoveDown, onTogglePublic, onRemove,
+}: {
+  isPublic: boolean; canMoveUp: boolean; canMoveDown: boolean;
+  onMoveUp: () => void; onMoveDown: () => void; onTogglePublic: () => void; onRemove: () => void;
+}) {
+  return (
+    <div className="flex items-center gap-1 shrink-0">
+      <button onClick={onMoveUp} disabled={!canMoveUp} title="Nach oben" className="disabled:opacity-25"><ArrowUp size={13} color="var(--color-text-faint)" /></button>
+      <button onClick={onMoveDown} disabled={!canMoveDown} title="Nach unten" className="disabled:opacity-25"><ArrowDown size={13} color="var(--color-text-faint)" /></button>
+      <button onClick={onTogglePublic} title={isPublic ? 'Öffentlich sichtbar (klicken zum Verbergen)' : 'Verborgen (klicken zum Anzeigen)'}>
+        {isPublic ? <Eye size={13} color="var(--color-success)" /> : <EyeOff size={13} color="var(--color-text-faint)" />}
+      </button>
+      <button onClick={onRemove} title="Entfernen"><X size={13} color="var(--color-text-faint)" /></button>
+    </div>
+  );
+}
+
+/** Reorders two adjacent items by swapping their sort_order via the
+ * given PATCH endpoint, then reloads. */
+async function swapSortOrder(basePath: string, a: { id: string; sort_order: number }, b: { id: string; sort_order: number }) {
+  const headers = { 'Content-Type': 'application/json', ...(await authHeader()) };
+  await Promise.all([
+    fetch(`${basePath}/${a.id}`, { method: 'PATCH', headers, body: JSON.stringify({ sortOrder: b.sort_order }) }),
+    fetch(`${basePath}/${b.id}`, { method: 'PATCH', headers, body: JSON.stringify({ sortOrder: a.sort_order }) }),
+  ]);
 }
 
 function ProfileForm({ profile, onSaved }: { profile: Profile | null; onSaved: (p: Profile) => void }) {
