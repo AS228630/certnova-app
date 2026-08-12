@@ -232,7 +232,12 @@ create table if not exists public.share_links (
 );
 
 alter table public.share_links enable row level security;
-create index if not exists share_links_token_hash_idx on public.share_links (token_hash);
+-- No separate index on token_hash needed: the `unique` constraint
+-- above already creates one automatically in Postgres. An earlier
+-- draft of this file had a redundant explicit index here — removed
+-- during PHASE 2 review (a duplicate index costs write overhead for
+-- zero query benefit, exactly the kind of thing the Free-Tier
+-- discipline elsewhere in this project exists to avoid).
 create index if not exists share_links_candidate_id_idx on public.share_links (candidate_id);
 
 -- --------------------------------------------------------------------
