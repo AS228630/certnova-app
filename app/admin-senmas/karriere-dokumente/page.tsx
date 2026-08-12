@@ -57,6 +57,11 @@ type Certification = { id: string; issuer: string; name: string; credential_id: 
 type Experience = { id: string; role_title: string; company_name: string; location: string | null; start_date: string | null; end_date: string | null; description: string | null; is_public: boolean; sort_order: number };
 type Project = { id: string; title: string; description: string | null; technologies: string[] | null; project_url: string | null; repo_url: string | null; is_public: boolean; sort_order: number };
 type Education = { id: string; institution_name: string; degree: string | null; field_of_study: string | null; graduation_date: string | null; logo_url: string | null; website_url: string | null; is_public: boolean; sort_order: number };
+type ShareLink = {
+  id: string; company_name: string; recruiter_name: string | null; recruiter_email: string | null;
+  expires_at: string | null; revoked_at: string | null; require_access_code: boolean;
+  access_count: number; allow_download: boolean; created_at: string; last_accessed_at: string | null;
+};
 
 async function authHeader(): Promise<Record<string, string>> {
   const { data } = await supabase.auth.getSession();
@@ -1146,6 +1151,169 @@ function EducationSection({ candidateId, education, onChanged }: { candidateId: 
   );
 }
 
+function ShareLinksSection({ candidateId, documents }: { candidateId: string; documents: Document[]; }) {
+  const [links, setLinks] = useState<ShareLink[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+  const [companyName, setCompanyName] = useState('');
+  const [recruiterName, setRecruiterName] = useState('');
+  const [recruiterEmail, setRecruiterEmail] = useState('');
+  const [expiresInDays, setExpiresInDays] = useState(30);
+  const [requireAccessCode, setRequireAccessCode] = useState(true);
+  const [allowDownload, setAllowDownload] = useState(false);
+  const [selectedDocIds, setSelectedDocIds] = useState<string[]>([]);
+  const [creating, setCreating] = useState(false);
+  const [justCreated, setJustCreated] = useState<{ shareUrl: string; rawToken: string; rawAccessCode: string | null; companyName: string } | null>(null);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
+
+  const privateDocs = documents.filter((d) => d.visibility === 'private' && !d.deleted_at);
+
+  function loadLinks() {
+    setLoading(true);
+    authHeader()
+      .then((headers) => fetch('/api/admin/candidate/share-links', { headers }))
+      .then((res) => res.json())
+      .then((j) => setLinks(j.shareLinks ?? []))
+      .finally(() => setLoading(false));
+  }
+
+  useEffect(() => { Promise.resolve().then(loadLinks); }, []);
+
+  async function create(e: React.FormEvent) {
+    e.preventDefault();
+    if (!companyName) return;
+    setCreating(true);
+    const res = await fetch('/api/admin/candidate/share-links', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({
+        candidateId, companyName,
+        recruiterName: recruiterName || undefined, recruiterEmail: recruiterEmail || undefined,
+        expiresInDays, requireAccessCode, allowDownload, documentIds: selectedDocIds,
+      }),
+    });
+    setCreating(false);
+    if (!res.ok) return;
+    const j = await res.json();
+    setJustCreated({ shareUrl: j.shareUrl, rawToken: j.rawToken, rawAccessCode: j.rawAccessCode, companyName });
+    setCompanyName(''); setRecruiterName(''); setRecruiterEmail(''); setSelectedDocIds([]);
+    setShowForm(false);
+    loadLinks();
+  }
+
+  async function revoke(id: string) {
+    await fetch(`/api/admin/candidate/share-links/${id}/revoke`, { method: 'POST', headers: await authHeader() });
+    loadLinks();
+  }
+
+  function copy(text: string, field: string) {
+    navigator.clipboard?.writeText(text);
+    setCopiedField(field);
+    setTimeout(() => setCopiedField(null), 1500);
+  }
+
+  const origin = typeof window !== 'undefined' ? window.location.origin : '';
+
+  return (
+    <div className="rounded-2xl p-5 mb-6" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-sm font-semibold">Share-Links für Unternehmen</h3>
+        <button onClick={() => setShowForm(!showForm)} className="flex items-center gap-1 text-sm font-medium px-3 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}>
+          <Plus size={14} /> Neuer Link
+        </button>
+      </div>
+
+      {justCreated && (
+        <div className="rounded-xl p-4 mb-4" style={{ background: 'var(--color-success-light)', border: '1px solid var(--color-success)' }}>
+          <p className="text-xs font-semibold mb-2" style={{ color: 'var(--color-success)' }}>
+            Link für {justCreated.companyName} erstellt — Token und Code werden nur jetzt angezeigt, danach nicht mehr abrufbar!
+          </p>
+          <div className="flex items-center gap-2 mb-2">
+            <code className="flex-1 text-xs px-2 py-1.5 rounded overflow-x-auto" style={{ background: 'var(--color-panel-alt)', color: 'var(--color-text)' }}>{origin}{justCreated.shareUrl}</code>
+            <button onClick={() => copy(`${origin}${justCreated.shareUrl}`, 'link')} className="text-xs px-2 py-1.5 rounded" style={{ background: 'var(--color-panel-alt)' }}>{copiedField === 'link' ? <Check size={13} color="var(--color-success)" /> : 'Kopieren'}</button>
+          </div>
+          {justCreated.rawAccessCode && (
+            <div className="flex items-center gap-2">
+              <span className="text-xs" style={{ color: 'var(--color-text-muted)' }}>Zugriffscode:</span>
+              <code className="text-sm font-bold px-2 py-1 rounded" style={{ background: 'var(--color-panel-alt)', color: 'var(--color-text)' }}>{justCreated.rawAccessCode}</code>
+              <button onClick={() => copy(justCreated.rawAccessCode!, 'code')} className="text-xs px-2 py-1.5 rounded" style={{ background: 'var(--color-panel-alt)' }}>{copiedField === 'code' ? <Check size={13} color="var(--color-success)" /> : 'Kopieren'}</button>
+            </div>
+          )}
+          <button onClick={() => setJustCreated(null)} className="text-xs mt-2" style={{ color: 'var(--color-text-muted)' }}>Schließen</button>
+        </div>
+      )}
+
+      {showForm && (
+        <form onSubmit={create} className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4 p-4 rounded-xl" style={{ background: 'var(--color-panel-alt)' }}>
+          <input required value={companyName} onChange={(e) => setCompanyName(e.target.value)} placeholder="Unternehmen *" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+          <input value={recruiterName} onChange={(e) => setRecruiterName(e.target.value)} placeholder="Ansprechpartner (optional)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+          <input value={recruiterEmail} onChange={(e) => setRecruiterEmail(e.target.value)} placeholder="E-Mail (optional)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+          <div>
+            <label className="block text-xs mb-1" style={{ color: 'var(--color-text-muted)' }}>Gültig für (Tage, 0 = unbegrenzt)</label>
+            <input type="number" min={0} value={expiresInDays} onChange={(e) => setExpiresInDays(Number(e.target.value))} className="w-full text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+          </div>
+          <div className="flex items-center gap-2">
+            <input id="reqcode" type="checkbox" checked={requireAccessCode} onChange={(e) => setRequireAccessCode(e.target.checked)} />
+            <label htmlFor="reqcode" className="text-sm">Zugriffscode für vertrauliche Dokumente</label>
+          </div>
+          <div className="flex items-center gap-2">
+            <input id="dl" type="checkbox" checked={allowDownload} onChange={(e) => setAllowDownload(e.target.checked)} />
+            <label htmlFor="dl" className="text-sm">Download erlauben</label>
+          </div>
+          <div className="sm:col-span-2">
+            <label className="block text-xs mb-1.5" style={{ color: 'var(--color-text-muted)' }}>Welche privaten Dokumente für dieses Unternehmen freigeben?</label>
+            {privateDocs.length === 0 ? (
+              <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Keine privaten Dokumente vorhanden.</p>
+            ) : (
+              <div className="flex flex-wrap gap-2">
+                {privateDocs.map((d) => (
+                  <label key={d.id} className="flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-lg cursor-pointer" style={{ background: selectedDocIds.includes(d.id) ? 'var(--color-primary-light)' : 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
+                    <input
+                      type="checkbox"
+                      checked={selectedDocIds.includes(d.id)}
+                      onChange={(e) => setSelectedDocIds(e.target.checked ? [...selectedDocIds, d.id] : selectedDocIds.filter((id) => id !== d.id))}
+                    />
+                    {d.title}
+                  </label>
+                ))}
+              </div>
+            )}
+          </div>
+          <button type="submit" disabled={creating} className="flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-lg text-white disabled:opacity-50 w-fit" style={{ background: 'var(--color-primary)' }}>
+            {creating ? <Loader2 size={14} className="animate-spin" /> : <Plus size={14} />} Link erstellen
+          </button>
+        </form>
+      )}
+
+      {loading ? (
+        <div className="flex items-center gap-2 text-sm" style={{ color: 'var(--color-text-muted)' }}><Loader2 size={14} className="animate-spin" /> Wird geladen…</div>
+      ) : links.length === 0 ? (
+        <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Share-Links erstellt.</p>
+      ) : (
+        <div className="space-y-2">
+          {links.map((l) => {
+            const isRevoked = !!l.revoked_at;
+            const isExpired = l.expires_at ? new Date(l.expires_at) < new Date() : false;
+            return (
+              <div key={l.id} className="flex items-center justify-between text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', opacity: isRevoked ? 0.5 : 1 }}>
+                <div>
+                  <div>{l.company_name} {l.recruiter_name ? <span style={{ color: 'var(--color-text-faint)' }}>· {l.recruiter_name}</span> : null}</div>
+                  <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>
+                    Aufrufe: {l.access_count} · {isRevoked ? 'Widerrufen' : isExpired ? 'Abgelaufen' : `Gültig bis ${l.expires_at ? new Date(l.expires_at).toLocaleDateString('de-DE') : 'unbegrenzt'}`}
+                  </div>
+                </div>
+                {!isRevoked && (
+                  <button onClick={() => revoke(l.id)} className="text-xs px-3 py-1.5 rounded-lg" style={{ background: 'var(--color-danger-light)', color: 'var(--color-danger)' }}>Widerrufen</button>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function CandidateProfilePage() {
   const [profile, setProfile] = useState<Profile | null | undefined>(undefined);
   const [skills, setSkills] = useState<Skill[]>([]);
@@ -1208,6 +1376,7 @@ export default function CandidateProfilePage() {
           <EducationSection candidateId={profile.id} education={education} onChanged={reload} />
           <h3 className="text-sm font-semibold mb-3">Dokumente</h3>
           <DocumentsSection candidateId={profile.id} documents={documents} onChanged={reload} />
+          <ShareLinksSection candidateId={profile.id} documents={documents} />
         </>
       )}
     </div>

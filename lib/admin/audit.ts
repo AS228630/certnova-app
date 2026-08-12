@@ -15,7 +15,7 @@ import { getSupabaseAdmin } from './requireAdmin';
  */
 export async function logAudit(entry: {
   actorId: string | null;
-  actorEmail: string;
+  actorEmail: string | null;
   action: string;
   resourceType?: string;
   resourceId?: string;
