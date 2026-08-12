@@ -17,7 +17,7 @@
 import { useEffect, useState } from 'react';
 import {
   Loader2, Save, Upload, FileText, Eye, EyeOff, Download, Pencil,
-  RefreshCw, Trash2, RotateCcw, XCircle, Check, X,
+  RefreshCw, Trash2, RotateCcw, XCircle, Check, X, Plus,
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase/client';
 
@@ -47,6 +47,10 @@ type Document = {
   deleted_at: string | null;
   storage_deleted_at?: string | null;
 };
+
+type Skill = { id: string; category: string; name: string; level: string | null };
+type Certification = { id: string; issuer: string; name: string; credential_id: string | null; issue_date: string | null; verification_url: string | null };
+type Experience = { id: string; role_title: string; company_name: string; start_date: string | null; end_date: string | null };
 
 async function authHeader(): Promise<Record<string, string>> {
   const { data } = await supabase.auth.getSession();
@@ -399,10 +403,222 @@ function DocumentsSection({ candidateId, documents, onChanged }: { candidateId: 
   );
 }
 
+function SkillsSection({ candidateId, skills, onChanged }: { candidateId: string; skills: Skill[]; onChanged: () => void }) {
+  const [category, setCategory] = useState('IT & Cloud');
+  const [name, setName] = useState('');
+  const [saving, setSaving] = useState(false);
+
+  async function add(e: React.FormEvent) {
+    e.preventDefault();
+    if (!name) return;
+    setSaving(true);
+    await fetch('/api/admin/candidate/skills', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({ candidateId, category, name }),
+    });
+    setName('');
+    setSaving(false);
+    onChanged();
+  }
+
+  async function remove(id: string) {
+    await fetch(`/api/admin/candidate/skills/${id}`, { method: 'DELETE', headers: await authHeader() });
+    onChanged();
+  }
+
+  const grouped = skills.reduce<Record<string, Skill[]>>((acc, s) => {
+    (acc[s.category] ??= []).push(s);
+    return acc;
+  }, {});
+
+  return (
+    <div className="rounded-2xl p-5 mb-6" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
+      <h3 className="text-sm font-semibold mb-4">Fähigkeiten</h3>
+      <form onSubmit={add} className="flex flex-wrap gap-2 mb-4">
+        <select value={category} onChange={(e) => setCategory(e.target.value)} className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }}>
+          {['Development', 'IT & Cloud', 'Microsoft', 'DevOps', 'Database', 'Sprachen', 'Sonstiges'].map((c) => <option key={c} value={c}>{c}</option>)}
+        </select>
+        <input value={name} onChange={(e) => setName(e.target.value)} placeholder="z. B. Deutsch (B2) oder Microsoft Azure" className="flex-1 min-w-[200px] text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <button type="submit" disabled={saving || !name} className="flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-lg text-white disabled:opacity-50" style={{ background: 'var(--color-primary)' }}>
+          <Plus size={14} /> Hinzufügen
+        </button>
+      </form>
+      {Object.keys(grouped).length === 0 ? (
+        <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Fähigkeiten hinzugefügt.</p>
+      ) : (
+        Object.entries(grouped).map(([cat, items]) => (
+          <div key={cat} className="mb-3">
+            <div className="text-[11px] mb-1.5" style={{ color: 'var(--color-text-faint)' }}>{cat}</div>
+            <div className="flex flex-wrap gap-2">
+              {items.map((s) => (
+                <span key={s.id} className="flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg" style={{ background: 'var(--color-panel-alt)', color: 'var(--color-text)' }}>
+                  {s.name}
+                  <button onClick={() => remove(s.id)} title="Entfernen"><X size={11} color="var(--color-text-faint)" /></button>
+                </span>
+              ))}
+            </div>
+          </div>
+        ))
+      )}
+    </div>
+  );
+}
+
+function CertificationsSection({ candidateId, certifications, onChanged }: { candidateId: string; certifications: Certification[]; onChanged: () => void }) {
+  const [issuer, setIssuer] = useState('');
+  const [name, setName] = useState('');
+  const [credentialId, setCredentialId] = useState('');
+  const [issueDate, setIssueDate] = useState('');
+  const [verificationUrl, setVerificationUrl] = useState('');
+  const [saving, setSaving] = useState(false);
+
+  async function add(e: React.FormEvent) {
+    e.preventDefault();
+    if (!issuer || !name) return;
+    setSaving(true);
+    await fetch('/api/admin/candidate/certifications', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({
+        candidateId, issuer, name,
+        credentialId: credentialId || undefined,
+        issueDate: issueDate || undefined,
+        verificationUrl: verificationUrl || undefined,
+      }),
+    });
+    setIssuer(''); setName(''); setCredentialId(''); setIssueDate(''); setVerificationUrl('');
+    setSaving(false);
+    onChanged();
+  }
+
+  async function remove(id: string) {
+    await fetch(`/api/admin/candidate/certifications/${id}`, { method: 'DELETE', headers: await authHeader() });
+    onChanged();
+  }
+
+  return (
+    <div className="rounded-2xl p-5 mb-6" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
+      <h3 className="text-sm font-semibold mb-4">Zertifizierungen</h3>
+      <form onSubmit={add} className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+        <input required value={issuer} onChange={(e) => setIssuer(e.target.value)} placeholder="Aussteller (z. B. Microsoft)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input required value={name} onChange={(e) => setName(e.target.value)} placeholder="Name (z. B. Azure AZ-900)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input value={credentialId} onChange={(e) => setCredentialId(e.target.value)} placeholder="Credential-ID (optional)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input type="date" value={issueDate} onChange={(e) => setIssueDate(e.target.value)} className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input value={verificationUrl} onChange={(e) => setVerificationUrl(e.target.value)} placeholder="Verifizierungs-URL (optional)" className="sm:col-span-2 text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <button type="submit" disabled={saving} className="flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-lg text-white disabled:opacity-50 w-fit" style={{ background: 'var(--color-primary)' }}>
+          <Plus size={14} /> Hinzufügen
+        </button>
+      </form>
+      {certifications.length === 0 ? (
+        <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Zertifizierungen hinzugefügt.</p>
+      ) : (
+        <div className="space-y-2">
+          {certifications.map((c) => (
+            <div key={c.id} className="flex items-center justify-between text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)' }}>
+              <div>
+                <div>{c.name} <span style={{ color: 'var(--color-text-faint)' }}>· {c.issuer}</span></div>
+                <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>
+                  {c.issue_date ? new Date(c.issue_date).toLocaleDateString('de-DE') : '—'}
+                  {c.credential_id ? ` · ${c.credential_id}` : ''}
+                  {!c.verification_url ? ' · Verifizierung nicht verfügbar' : ''}
+                </div>
+              </div>
+              <button onClick={() => remove(c.id)} title="Entfernen"><X size={13} color="var(--color-text-faint)" /></button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ExperienceSection({ candidateId, experiences, onChanged }: { candidateId: string; experiences: Experience[]; onChanged: () => void }) {
+  const [roleTitle, setRoleTitle] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [location, setLocation] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [description, setDescription] = useState('');
+  const [saving, setSaving] = useState(false);
+
+  async function add(e: React.FormEvent) {
+    e.preventDefault();
+    if (!roleTitle || !companyName) return;
+    setSaving(true);
+    await fetch('/api/admin/candidate/experiences', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({
+        candidateId, roleTitle, companyName,
+        location: location || undefined,
+        startDate: startDate || undefined,
+        endDate: endDate || undefined,
+        description: description || undefined,
+      }),
+    });
+    setRoleTitle(''); setCompanyName(''); setLocation(''); setStartDate(''); setEndDate(''); setDescription('');
+    setSaving(false);
+    onChanged();
+  }
+
+  async function remove(id: string) {
+    await fetch(`/api/admin/candidate/experiences/${id}`, { method: 'DELETE', headers: await authHeader() });
+    onChanged();
+  }
+
+  return (
+    <div className="rounded-2xl p-5 mb-6" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
+      <h3 className="text-sm font-semibold mb-4">Berufserfahrung</h3>
+      <form onSubmit={add} className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+        <input required value={roleTitle} onChange={(e) => setRoleTitle(e.target.value)} placeholder="Position" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input required value={companyName} onChange={(e) => setCompanyName(e.target.value)} placeholder="Unternehmen" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input value={location} onChange={(e) => setLocation(e.target.value)} placeholder="Ort (optional)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <div className="grid grid-cols-2 gap-2">
+          <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+          <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} placeholder="leer = heute" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        </div>
+        <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Beschreibung (optional, eine Zeile pro Punkt)" rows={2} className="sm:col-span-2 text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <button type="submit" disabled={saving} className="flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-lg text-white disabled:opacity-50 w-fit" style={{ background: 'var(--color-primary)' }}>
+          <Plus size={14} /> Hinzufügen
+        </button>
+      </form>
+      {experiences.length === 0 ? (
+        <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Berufserfahrung hinzugefügt.</p>
+      ) : (
+        <div className="space-y-2">
+          {experiences.map((exp) => (
+            <div key={exp.id} className="flex items-center justify-between text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)' }}>
+              <div>
+                <div>{exp.role_title} <span style={{ color: 'var(--color-text-faint)' }}>· {exp.company_name}</span></div>
+                <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>
+                  {exp.start_date ? new Date(exp.start_date).toLocaleDateString('de-DE') : '—'} – {exp.end_date ? new Date(exp.end_date).toLocaleDateString('de-DE') : 'heute'}
+                </div>
+              </div>
+              <button onClick={() => remove(exp.id)} title="Entfernen"><X size={13} color="var(--color-text-faint)" /></button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function CandidateProfilePage() {
   const [profile, setProfile] = useState<Profile | null | undefined>(undefined);
+  const [skills, setSkills] = useState<Skill[]>([]);
+  const [certifications, setCertifications] = useState<Certification[]>([]);
+  const [experiences, setExperiences] = useState<Experience[]>([]);
   const [documents, setDocuments] = useState<Document[]>([]);
   const [error, setError] = useState<string | null>(null);
+
+  function applyResponse(j: { profile: Profile | null; skills: Skill[]; certifications: Certification[]; experiences: Experience[]; documents: Document[] }) {
+    setProfile(j.profile);
+    setSkills(j.skills ?? []);
+    setCertifications(j.certifications ?? []);
+    setExperiences(j.experiences ?? []);
+    setDocuments(j.documents ?? []);
+  }
 
   function reload() {
     setError(null);
@@ -410,9 +626,7 @@ export default function CandidateProfilePage() {
       .then((headers) => fetch('/api/admin/candidate/profile', { headers }))
       .then(async (res) => {
         if (!res.ok) throw new Error('Fehler beim Laden.');
-        const j = await res.json();
-        setProfile(j.profile);
-        setDocuments(j.documents ?? []);
+        applyResponse(await res.json());
       })
       .catch((e: Error) => setError(e.message));
   }
@@ -422,9 +636,7 @@ export default function CandidateProfilePage() {
       .then((headers) => fetch('/api/admin/candidate/profile', { headers }))
       .then(async (res) => {
         if (!res.ok) throw new Error('Fehler beim Laden.');
-        const j = await res.json();
-        setProfile(j.profile);
-        setDocuments(j.documents ?? []);
+        applyResponse(await res.json());
       })
       .catch((e: Error) => setError(e.message));
   }, []);
@@ -435,11 +647,14 @@ export default function CandidateProfilePage() {
   return (
     <div>
       <p className="text-sm mb-5" style={{ color: 'var(--color-text-muted)' }}>
-        Privates Kandidatenprofil — Profil, Fähigkeiten, Zertifikate und Dokumente für Bewerbungen. Echte Daten aus Supabase.
+        Privates Kandidatenprofil — Profil, Fähigkeiten, Zertifikate, Berufserfahrung und Dokumente für Bewerbungen. Echte Daten aus Supabase.
       </p>
       <ProfileForm profile={profile} onSaved={reload} />
       {profile && (
         <>
+          <SkillsSection candidateId={profile.id} skills={skills} onChanged={reload} />
+          <CertificationsSection candidateId={profile.id} certifications={certifications} onChanged={reload} />
+          <ExperienceSection candidateId={profile.id} experiences={experiences} onChanged={reload} />
           <h3 className="text-sm font-semibold mb-3">Dokumente</h3>
           <DocumentsSection candidateId={profile.id} documents={documents} onChanged={reload} />
         </>
