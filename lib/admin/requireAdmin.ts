@@ -24,7 +24,8 @@ export type Permission =
   | 'financial.view' // view commission/payout figures
   | 'financial.manage' // approve/reverse commissions, create payouts (not built yet)
   | 'admin_users.manage' // add/remove admins, change roles
-  | 'audit_logs.view'; // read the append-only audit trail
+  | 'audit_logs.view' // read the append-only audit trail
+  | 'candidate_profile.manage'; // manage the private candidate profile / recruiter share links
 
 const ROLE_PERMISSIONS: Record<Permission, AdminRole[]> = {
   'instructor_code.manage': ['SUPER_ADMIN', 'ADMIN'],
@@ -33,6 +34,7 @@ const ROLE_PERMISSIONS: Record<Permission, AdminRole[]> = {
   'financial.manage': ['SUPER_ADMIN', 'FINANCE_ADMIN'],
   'admin_users.manage': ['SUPER_ADMIN'],
   'audit_logs.view': ['SUPER_ADMIN', 'AUDITOR'],
+  'candidate_profile.manage': ['SUPER_ADMIN', 'ADMIN'],
 };
 
 type AdminOk = { ok: true; email: string; userId: string; role: AdminRole };

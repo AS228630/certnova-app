@@ -1,16 +1,48 @@
 -- Run this once in the Supabase SQL Editor (Project → SQL Editor → New query).
 --
+-- ================================================================
+-- STATUS: DRAFT — NOT APPROVED, NOT APPLIED.
+-- Per the senior architect's PHASE 1 decision (Aug 12 2026): this
+-- file is kept as an unapplied draft for review only. DO NOT run
+-- this in the Supabase SQL Editor until explicit PHASE 2 approval.
+-- ================================================================
+--
 -- Private Candidate Profile + Recruiter Share Links, per the senior
 -- advisor's Aug 12 2026 executive spec. Fully additive — no existing
--- table touched. Confirmed via a repo-wide search that nothing named
--- candidate_*/share_link*/recruiter* already exists, so none of this
--- duplicates an existing entity.
+-- table touched. Confirmed via a repo-wide search (PHASE 1 audit)
+-- that nothing named candidate_*/share_link*/recruiter* already
+-- exists, so none of this duplicates an existing entity.
 --
--- Scope note: this migration covers the DATA MODEL only (sections
--- 5-30 of the spec). Storage buckets (section 12), signed-URL /
--- access-grant application logic (sections 23-24), the admin UI, and
--- the recruiter-facing UI are separate follow-up work, built only
--- after this schema is reviewed and (if approved) actually run.
+-- PHASE 1 audit also found existing infrastructure this migration
+-- must reuse, not duplicate:
+--   - audit_logs (migration 032) + lib/admin/audit.ts's logAudit() —
+--     the candidate-portal event types (PROFILE_VIEWED,
+--     DOCUMENT_VIEWED, DOCUMENT_DOWNLOADED, ACCESS_CODE_FAILED,
+--     ACCESS_CODE_SUCCESS, SHARE_LINK_CREATED, SHARE_LINK_REVOKED,
+--     DOCUMENT_UPLOADED, DOCUMENT_DELETED, DOCUMENT_ACCESS_GRANTED)
+--     will be logged through that SAME table and helper, as free-text
+--     `action` values (audit_logs.action has no CHECK constraint, so
+--     no schema change is even needed there) — NOT a second,
+--     candidate-specific audit table. The `candidate_access_logs`
+--     table proposed in an earlier draft of this file has been
+--     REMOVED for exactly this reason.
+--   - admin_users / requireAdmin / requirePermission (migration 031)
+--     — candidate-profile management uses the existing RBAC system
+--     (a new 'candidate_profile.manage' permission was added to the
+--     existing permission map in lib/admin/requireAdmin.ts, not a
+--     second permission system).
+--   - Supabase Storage already has a bucket-usage convention
+--     (`avatars`, used by lib/store/profileStore.ts) — the new
+--     candidate-public/candidate-private buckets follow that same
+--     pattern; still not yet created (PHASE 5 per the advisor's
+--     12-phase order, not this migration).
+--
+-- Scope note: this migration covers the DATA MODEL only (spec
+-- sections 5-30, minus the removed access-log table). Storage
+-- buckets (section 12), signed-URL / access-grant application logic
+-- (sections 23-24), the admin UI, and the recruiter-facing UI are
+-- separate follow-up work for later phases, built only after this
+-- schema itself is reviewed line-by-line and explicitly approved.
 --
 -- This is a single-candidate system (the project owner's own
 -- professional profile) — candidate_profiles is expected to hold
@@ -258,27 +290,19 @@ alter table public.document_access_grants enable row level security;
 create index if not exists document_access_grants_share_link_id_idx on public.document_access_grants (share_link_id);
 
 -- --------------------------------------------------------------------
--- 11. candidate_access_logs — append-only, mirrors the enforcement
---     already used for audit_logs (migration 032): UPDATE/DELETE
---     revoked at the database level, not just by convention.
--- --------------------------------------------------------------------
+-- Section 11 (candidate_access_logs) and the storage.buckets creation
+-- previously drafted here have both been REMOVED per the senior
+-- architect's PHASE 1 decision:
+--   - Access logging reuses the existing audit_logs table/logAudit()
+--     helper (see the file header above) — no new table needed.
+--   - Storage bucket creation is explicitly deferred to PHASE 5
+--     ("Private File Storage + Upload") of the advisor's 12-phase
+--     order, not bundled into the data-model migration.
+-- This file's scope is now exactly: candidate_profiles,
+-- candidate_skills, candidate_certifications, candidate_experiences,
+-- candidate_projects, candidate_documents (metadata only),
+-- share_links, share_link_documents, document_access_codes,
+-- document_access_grants — 9 tables, still fully additive, still
+-- NOT APPROVED / NOT APPLIED (see status banner at the top of this
+-- file).
 
-create table if not exists public.candidate_access_logs (
-  id uuid primary key default gen_random_uuid(),
-  share_link_id uuid references public.share_links(id) on delete set null,
-  document_id uuid references public.candidate_documents(id) on delete set null,
-  event_type text not null check (event_type in (
-    'PROFILE_VIEWED', 'DOCUMENT_ACCESS_GRANTED', 'DOCUMENT_VIEWED', 'DOCUMENT_DOWNLOADED',
-    'ACCESS_CODE_FAILED', 'ACCESS_CODE_SUCCESS', 'SHARE_LINK_CREATED', 'SHARE_LINK_REVOKED',
-    'DOCUMENT_UPLOADED', 'DOCUMENT_DELETED'
-  )),
-  actor_ip_hash text, -- hashed, per spec section 32 — never a raw IP
-  metadata jsonb, -- never raw access codes, raw share tokens, or document content (spec section 32)
-  created_at timestamptz not null default now()
-);
-
-alter table public.candidate_access_logs enable row level security;
-create index if not exists candidate_access_logs_share_link_id_idx on public.candidate_access_logs (share_link_id);
-create index if not exists candidate_access_logs_created_at_idx on public.candidate_access_logs (created_at);
-
-revoke update, delete on public.candidate_access_logs from authenticated, anon;
