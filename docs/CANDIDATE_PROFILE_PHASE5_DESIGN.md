@@ -8,37 +8,27 @@ next, doesn't build it.
 
 ---
 
-## 1. Which Supabase Storage bucket will be used
+## 1-2. Bucket — single, private (revised per the advisor's final decision)
 
-Two buckets, matching the split `candidate_documents.visibility`
-already models:
+**Correction applied:** the two-bucket design (§1-2 of the original
+draft) is replaced with a single bucket:
 
-- **`candidate-private`** — the default and primary bucket. Every
-  document starts here regardless of its eventual `visibility` value,
-  because the file itself never needs to be reachable by a raw public
-  URL even when the *document record* is marked public — the
-  application always serves it through an API route (§9), so there's
-  no reason to also expose it via Storage's own public-URL mechanism.
-- **`candidate-public`** — reserved for exactly one use case:
-  `candidate_profiles.profile_photo_path` (a headshot/avatar image),
-  where a direct public URL is actually appropriate and low-risk (a
-  photo isn't the kind of confidential document this whole system
-  exists to protect). Documents (CV, certificates, references) never
-  go here, even the ones marked `visibility = 'public'` in the
-  database — "public" in that column means "viewable by any recruiter
-  holding a valid share link", not "world-readable via a bare URL".
+- **`candidate-private`** — every file this system ever stores: CV,
+  certificates, Arbeitszeugnisse, references, portfolio items, the
+  profile photo, anything else. One bucket, one access pattern, no
+  exception to remember or explain later.
 
-## 2. Bucket must be PRIVATE
-
-Both buckets are created with `public = false` at the Storage level.
-This is a deliberate stricter stance than section 1 might imply: even
-`candidate-public` (for the profile photo) is created private and
-served through a signed URL / API route, not Storage's native public
-flag — one consistent access pattern for every file in this system,
-no exception that has to be remembered or explained later. Matches
-this project's own established habit of erring toward the stricter
-option (e.g. `audit_logs`' `REVOKE UPDATE/DELETE` as a belt-and-braces
-measure even though RLS already blocked non-service-role access).
+Created with `public = false`. There is no `candidate-public` bucket
+in this design anymore — the reasoning that made the original
+two-bucket split unnecessary was already present in the first draft
+(every file, public-document or not, is always served through the
+backend via a signed URL, never a bare Storage URL) — the advisor's
+correction is that this same reasoning means a second bucket adds
+complexity without adding any real capability. `visibility` on
+`candidate_documents` remains exactly what decides who the backend
+will generate a signed URL for; it was never what decided *which*
+bucket a file lived in, so removing the second bucket changes nothing
+about that logic.
 
 ## 3. Database stores metadata only
 
@@ -55,12 +45,15 @@ candidate/{candidateId}/documents/{documentId}/{uuid}.{ext}
 candidate/{candidateId}/photo/{uuid}.{ext}
 ```
 
-Matches migration 034's own comment on `storage_path` (added back in
-PHASE 1/2, unchanged). Never the original filename — `file_name`
-(a separate column) is what the UI displays; `storage_path` is opaque
-and UUID-based specifically so a guessed/enumerated path reveals
-nothing (no candidate name, no document title, no sequential
-numbering to iterate over).
+Both paths live in the single `candidate-private` bucket (§1-2) —
+the path prefix (`documents/` vs `photo/`) is just organizational,
+not a security boundary; the bucket-level privacy and the
+signed-URL-only access pattern are what actually protect every file,
+regardless of which prefix it's under. Never the original filename —
+`file_name` (a separate column) is what the UI displays;
+`storage_path` is opaque and UUID-based specifically so a
+guessed/enumerated path reveals nothing (no candidate name, no
+document title, no sequential numbering to iterate over).
 
 ## 5. File size limits
 
@@ -245,9 +238,9 @@ without any code change per content update — exactly the requirement.
 ## PHASE 5 — DESIGN/AUDIT SUMMARY
 
 ```
-1.  Bucket choice ................. candidate-private (primary) + candidate-public (photo only)
-2.  Bucket privacy ................. Both created private; even the "public" bucket is
-                                      served via signed URL, never a bare Storage URL
+1.  Bucket choice ................. Single bucket: candidate-private (every file, no exceptions)
+2.  Bucket privacy ................. Created private (public = false); served only via
+                                      signed URL, never a bare Storage URL
 3.  DB = metadata only ............. Confirmed, unchanged since migration 034
 4.  Storage path convention ........ UUID-based, no filename/candidate-name leakage
 5.  File size limit ................ 20 MB, enforced at bucket AND application layer
@@ -277,3 +270,61 @@ No mock data. Recruiter document flow not activated.
 
 **PHASE 5 STATUS: DESIGN COMPLETE, awaiting explicit approval before
 any bucket is created or any code is written.**
+
+---
+
+## PHASE 5 FINAL REVIEW
+
+Per the advisor's Aug 12 2026 correction (single `candidate-private`
+bucket, no `candidate-public`), applied throughout this document
+(§1-2 and the storage-path section). Re-checked every other section
+for any dependency on the removed second bucket — none found; every
+other point (§3-15) was already bucket-agnostic by design (they
+describe metadata, size limits, validation, operations, signed-URL
+behavior, authorization, cleanup, audit, RBAC, and editability — none
+of which differ based on how many buckets exist).
+
+**Full-editability re-confirmation** (the advisor's explicit
+requirement, restated this message): every operation listed —
+add ➕, rename ✏️, replace 🔄, visibility toggle 👁️, download
+enable/disable 📥, delete 🗑️, deleted-file recovery ♻️, type/description
+edit 📄 — maps onto columns `candidate_documents` already has
+(`title`, `visibility`, `allow_download`, `storage_path`,
+`document_type`, `description`, `deleted_at`). "Recovery" specifically
+(♻️, new emphasis this message) means: clearing `deleted_at` back to
+`null` on a soft-deleted row, restoring it — no schema change needed
+for this either, since soft-delete was already designed as reversible
+(§12), not a point of no return, as long as the Storage object itself
+hasn't yet been through the separate manual cleanup step.
+
+This same full-editability guarantee already extends to
+certifications, experience, and projects — confirmed in PHASE 3 (all
+three have complete add/edit/remove APIs, already implemented and
+audited) and re-confirmed in PHASE 4 (schema supports it with no
+change needed). Nothing new required there; restated here only
+because the advisor's message grouped documents and these other
+content types together as one requirement.
+
+```
+PHASE 5 FINAL REVIEW
+
+1. Bucket design (single, private) ....... PASS (corrected this review)
+2. All 15 original design points ......... PASS (bucket-agnostic, no other change needed)
+3. Full editability -- documents .......... PASS (add/rename/replace/visibility/download/
+                                             delete/recover/type-description, all
+                                             mapped to existing columns)
+4. Full editability -- certifications/
+   experience/projects ................... PASS (already implemented + audited, PHASE 3/4)
+5. No bucket created ...................... CONFIRMED
+6. No file uploaded ........................ CONFIRMED
+7. No mock data ............................ CONFIRMED
+8. Not pushed ............................... CONFIRMED
+
+Blocking Issues:
+None.
+
+PHASE 5 FINAL STATUS: PASS.
+```
+
+Still nothing built. Awaiting the advisor's explicit go-ahead before
+creating the `candidate-private` bucket or writing any upload code.
