@@ -264,6 +264,31 @@ function DocumentRow({ doc, onChanged }: { doc: Document; onChanged: () => void 
     window.open(j.url, '_blank');
   }
 
+  async function download() {
+    setBusy(true);
+    const res = await fetch(`/api/admin/candidate/documents/${doc.id}/view`, { headers: await authHeader() });
+    if (!res.ok) {
+      setBusy(false);
+      return;
+    }
+    const j = await res.json();
+    // Fetch the actual file bytes from the signed URL and trigger a
+    // real browser download (not just opening it in a new tab) — the
+    // filename comes from the signed-URL response, matching what the
+    // admin originally uploaded.
+    const fileRes = await fetch(j.url);
+    const blob = await fileRes.blob();
+    const objectUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = objectUrl;
+    a.download = j.fileName ?? doc.file_name;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(objectUrl);
+    setBusy(false);
+  }
+
   async function replace(file: File) {
     setBusy(true);
     const formData = new FormData();
@@ -307,8 +332,14 @@ function DocumentRow({ doc, onChanged }: { doc: Document; onChanged: () => void 
       </td>
       <td className="px-4 py-3">
         {!isDeleted && (
-          <button onClick={() => patch({ allowDownload: !doc.allow_download })} disabled={busy} title="Download umschalten">
-            <Download size={14} color={doc.allow_download ? 'var(--color-success)' : 'var(--color-text-faint)'} />
+          <button
+            onClick={() => patch({ allowDownload: !doc.allow_download })}
+            disabled={busy}
+            title="Umschalten, ob Bewerber-Empfänger diese Datei herunterladen dürfen (wirkt sich erst mit den Recruiter-Links aus einer späteren Phase aus)"
+            className="text-[11px] px-2 py-0.5 rounded-full font-medium"
+            style={{ background: doc.allow_download ? 'var(--color-success-light)' : 'var(--color-panel-alt)', color: doc.allow_download ? 'var(--color-success)' : 'var(--color-text-faint)' }}
+          >
+            {doc.allow_download ? 'Erlaubt' : 'Gesperrt'}
           </button>
         )}
       </td>
@@ -326,6 +357,7 @@ function DocumentRow({ doc, onChanged }: { doc: Document; onChanged: () => void 
           {!isDeleted && (
             <>
               <button onClick={view} disabled={busy} title="Ansehen" className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--color-panel-alt)' }}><Eye size={13} /></button>
+              <button onClick={download} disabled={busy} title="Herunterladen" className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--color-panel-alt)' }}><Download size={13} /></button>
               <label title="Ersetzen" className="w-7 h-7 rounded-lg flex items-center justify-center cursor-pointer" style={{ background: 'var(--color-panel-alt)' }}>
                 <RefreshCw size={13} />
                 <input type="file" className="hidden" accept="application/pdf,image/jpeg,image/png,image/webp" onChange={(e) => { const f = e.target.files?.[0]; if (f) replace(f); }} />
@@ -359,7 +391,7 @@ function DocumentsSection({ candidateId, documents, onChanged }: { candidateId: 
           <table className="w-full text-sm">
             <thead>
               <tr style={{ borderBottom: '1px solid var(--color-border-soft)' }}>
-                {['Dokument', 'Typ', 'Sichtbarkeit', 'Download', 'Status', 'Aktionen'].map((h) => (
+                {['Dokument', 'Typ', 'Sichtbarkeit', 'Download für Bewerber', 'Status', 'Aktionen'].map((h) => (
                   <th key={h} className="text-left px-4 py-3 text-xs font-medium whitespace-nowrap" style={{ color: 'var(--color-text-faint)' }}>{h}</th>
                 ))}
               </tr>
