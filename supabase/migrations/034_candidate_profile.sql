@@ -77,6 +77,21 @@ alter table public.candidate_profiles enable row level security;
 -- (app/api/candidate/profile, a later step), never directly from the
 -- browser via Supabase's client SDK.
 
+-- PHASE 2 required change (senior architect decision, Aug 12 2026):
+-- enforce "exactly one candidate profile" as a real database
+-- invariant, not just application logic. Chosen approach: a unique
+-- index on a constant expression — a standard Postgres idiom for
+-- singleton tables. Since `true` evaluates identically for every row,
+-- a UNIQUE index on it means Postgres itself rejects a second INSERT,
+-- with zero new columns and zero required change to the application's
+-- insert logic (a `profile_scope = 'primary'` column, the advisor's
+-- alternative suggestion, was considered and rejected as unnecessary
+-- architecture — it would require every insert to also set that
+-- column correctly, one more thing that could be gotten wrong, for
+-- the same guarantee this gives for free).
+create unique index if not exists candidate_profiles_singleton_idx
+  on public.candidate_profiles ((true));
+
 -- --------------------------------------------------------------------
 -- 2. candidate_skills
 -- --------------------------------------------------------------------

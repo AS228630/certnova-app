@@ -78,21 +78,25 @@ section 7: don't add indexes for scale that doesn't exist).
   uniqueness in this schema: two links must never hash to the same
   value, and a token lookup must resolve to exactly one link.
   Confirmed present and correct.
-- **Gap found, accepted (not fixed at the DB level):**
-  `candidate_profiles` has no constraint preventing a second row.
-  This is a single-candidate system by design, but the database
-  itself doesn't enforce "exactly one row" — that's currently only
-  guaranteed by the application layer (`app/api/admin/candidate/profile`'s
-  PUT handler always checks for an existing row and updates it
-  instead of inserting a second one). Risk is low: only
-  `candidate_profile.manage` (SUPER_ADMIN/ADMIN) can write to this
-  table at all, and a second row wouldn't corrupt anything
-  automatically (every child table's queries always filter by a
-  specific `candidate_id`, not "the profile"). Flagged here
-  transparently rather than silently accepted — the advisor's call
-  whether this needs a DB-level guard (e.g. a generated boolean
-  column with a unique partial index) before approval, or whether
-  the application-layer guarantee is sufficient for v1.
+- **Gap found, RESOLVED at the database level** (senior architect's
+  required PHASE 2 change): `candidate_profiles` now has a
+  `unique index on ((true))` — a standard Postgres idiom for
+  enforcing "exactly one row" on a table. Since the constant
+  expression `true` evaluates identically for every row, a `UNIQUE`
+  index on it means Postgres itself rejects any `INSERT` past the
+  first, with a real `23505 unique_violation` error — the same
+  guarantee the advisor's alternative suggestion
+  (`profile_scope = 'primary'` + a unique constraint on that column)
+  would have given, but with zero new columns and zero required
+  change to how the application constructs an insert. The
+  application-level protection (`PUT`'s check-then-insert-or-update
+  logic) stays in place too, per the advisor's explicit "do not solve
+  this only in the API" instruction — this is defense in depth, not a
+  replacement. `app/api/admin/candidate/profile`'s `PUT` handler now
+  also catches `23505` explicitly and returns a clean
+  `409 PROFILE_ALREADY_EXISTS_RETRY` instead of a generic 500, so the
+  one realistic trigger (two simultaneous PUT requests racing) fails
+  safely and legibly instead of surfacing a raw database error.
 
 ## 6. Verify RLS / authorization implications
 
@@ -237,3 +241,95 @@ wasn't written down before.
 **Still not executed. Still not pushed.** Waiting for the senior
 architect's PHASE 2 verdict — specifically including a decision on
 the `candidate_profiles` single-row question (§5) — before PHASE 3.
+
+---
+
+## PHASE 2 FINAL REVIEW — PASS
+
+Per the senior architect's Aug 12 2026 approval ("PASS conditional on
+adding the database invariant") and the fix applied above (unique
+index on `candidate_profiles ((true))`), this section is the
+requested final summary.
+
+**Final schema:** 9 tables — `candidate_profiles`, `candidate_skills`,
+`candidate_certifications`, `candidate_experiences`,
+`candidate_projects`, `candidate_documents`, `share_links`,
+`share_link_documents`, `document_access_codes`,
+`document_access_grants`. Zero existing tables modified.
+
+**Constraints:**
+- `candidate_profiles`: singleton enforced via
+  `unique index on ((true))` (new, this phase) + application-layer
+  check-then-write (unchanged) — defense in depth, per explicit
+  instruction.
+- `share_links.token_hash`: `unique`, the one security-critical
+  constraint in the schema.
+- `share_link_documents`: composite primary key
+  `(share_link_id, document_id)` — a link can't be granted the same
+  document twice.
+- Every other table: standard `id uuid primary key`.
+
+**Indexes:** one per `candidate_id` foreign key (skills,
+certifications, experiences, projects, documents) for the combined
+profile load; one partial index on `candidate_documents(visibility)
+where deleted_at is null`; one on `share_links(candidate_id)` for the
+admin's link list. No redundant indexes remain (the `token_hash`
+duplicate found in §4 was removed). No speculative indexes added for
+access patterns that don't exist yet, per this project's Free-Tier
+discipline.
+
+**Foreign keys:** 12 total, every one reviewed individually in §3
+above with a deliberate `ON DELETE` behavior — CASCADE for
+child-of-profile relationships, default RESTRICT for the two
+certification→document links (protects against silently orphaning a
+certification's file reference).
+
+**Authorization model:** RLS enabled on all 9 tables, zero public
+policies — service-role key only, via Next.js API routes, identical
+to the pattern already running in production for `teacher_coupons`,
+`teachers`, `referrals`, `commission_ledger`, `admin_users`, and
+`payouts`. Candidate-profile management specifically gated by the new
+`candidate_profile.manage` permission (`SUPER_ADMIN`/`ADMIN`) inside
+the existing `requirePermission()` system — no second RBAC.
+
+**Audit integration:** zero schema changes needed. The existing
+`audit_logs` table already supports nullable `actor_id`/`actor_email`
+(for anonymous recruiter-triggered events) and unconstrained
+`action` text (for the new candidate-portal event types) — confirmed
+in §11.
+
+**Security considerations carried forward to later phases** (not this
+migration, listed so they aren't lost): raw tokens/access codes are
+never persisted (only their hashes, application-layer, PHASE 7/8);
+actual `expires_at`/`revoked_at`/`max_views` enforcement and the
+IDOR protection required by the original spec (Company A must never
+reach Company B's documents by editing an id) happen in the
+verification API route, not the schema; Storage bucket creation and
+signed-URL logic are PHASE 5.
+
+**Exact migration changes made during PHASE 2** (both already applied
+to `034_candidate_profile.sql`, file still marked
+"NOT APPROVED, NOT APPLIED"):
+1. Removed the redundant explicit index on `share_links.token_hash`.
+2. Added `create unique index candidate_profiles_singleton_idx on
+   candidate_profiles ((true))`.
+
+Companion code change (not the migration): `PUT
+/api/admin/candidate/profile` now catches `23505` and returns
+`409 PROFILE_ALREADY_EXISTS_RETRY` instead of a generic 500.
+
+**Local schema sanity check performed:** `npx tsc --noEmit` and
+`npx eslint` both pass on the updated route file. The SQL itself
+cannot be executed anywhere in this environment (no direct database
+access, by design — see
+`docs/ADMIN_PANEL_AND_REFERRAL_SYSTEM_STATUS.md`), so "sanity check"
+here means the syntax was hand-verified against standard Postgres
+idioms (the `((true))` singleton-index pattern is a well-established
+one, not novel), not a live `EXPLAIN`/dry-run — that level of
+verification happens at PHASE 3 per the advisor's own 10-step
+deployment sequence (local/staging test, step 4).
+
+**PHASE 2 FINAL STATUS: PASS.**
+
+Still not executed. Still not pushed. Waiting for explicit PHASE 3
+approval before any migration is run against production.
