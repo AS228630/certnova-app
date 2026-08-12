@@ -21,6 +21,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   if (!auth.ok) return NextResponse.json({ error: auth.error }, { status: auth.status });
 
   const { id } = await params;
+  const forceDownload = req.nextUrl.searchParams.get('download') === 'true';
   const supabase = getSupabaseAdmin();
 
   const { data: doc, error: fetchError } = await supabase
@@ -32,9 +33,17 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   if (!doc) return NextResponse.json({ error: 'NOT_FOUND' }, { status: 404 });
   if (doc.storage_deleted_at) return NextResponse.json({ error: 'FILE_PERMANENTLY_DELETED' }, { status: 410 });
 
+  // `download: doc.file_name` sets Content-Disposition: attachment on
+  // Supabase's response, so the browser downloads the file directly
+  // when navigated to this URL — no client-side fetch/blob needed,
+  // which avoids a CORS round-trip that was silently failing (the
+  // real bug reported: the download button did nothing because a
+  // background fetch to the Storage domain was blocked, while
+  // navigating directly via window.open worked fine since it isn't
+  // subject to CORS).
   const { data: signed, error: signError } = await supabase.storage
     .from(BUCKET)
-    .createSignedUrl(doc.storage_path, SIGNED_URL_EXPIRY_SECONDS);
+    .createSignedUrl(doc.storage_path, SIGNED_URL_EXPIRY_SECONDS, forceDownload ? { download: doc.file_name } : undefined);
   if (signError || !signed) {
     return NextResponse.json({ error: signError?.message ?? 'SIGNED_URL_FAILED' }, { status: 500 });
   }
@@ -42,7 +51,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   await logAudit({
     actorId: auth.userId,
     actorEmail: auth.email,
-    action: 'DOCUMENT_VIEWED',
+    action: forceDownload ? 'DOCUMENT_DOWNLOADED' : 'DOCUMENT_VIEWED',
     resourceType: 'candidate_document',
     resourceId: id,
   });

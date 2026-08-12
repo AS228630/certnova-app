@@ -266,27 +266,16 @@ function DocumentRow({ doc, onChanged }: { doc: Document; onChanged: () => void 
 
   async function download() {
     setBusy(true);
-    const res = await fetch(`/api/admin/candidate/documents/${doc.id}/view`, { headers: await authHeader() });
-    if (!res.ok) {
-      setBusy(false);
-      return;
-    }
-    const j = await res.json();
-    // Fetch the actual file bytes from the signed URL and trigger a
-    // real browser download (not just opening it in a new tab) — the
-    // filename comes from the signed-URL response, matching what the
-    // admin originally uploaded.
-    const fileRes = await fetch(j.url);
-    const blob = await fileRes.blob();
-    const objectUrl = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = objectUrl;
-    a.download = j.fileName ?? doc.file_name;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(objectUrl);
+    // ?download=true asks Supabase to set Content-Disposition:
+    // attachment on this specific signed URL, so simply navigating to
+    // it forces a real download — no client-side fetch of the file
+    // bytes needed, which is what avoids the CORS issue that made the
+    // previous version silently fail.
+    const res = await fetch(`/api/admin/candidate/documents/${doc.id}/view?download=true`, { headers: await authHeader() });
     setBusy(false);
+    if (!res.ok) return;
+    const j = await res.json();
+    window.location.href = j.url;
   }
 
   async function replace(file: File) {
