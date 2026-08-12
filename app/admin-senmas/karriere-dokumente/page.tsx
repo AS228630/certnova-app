@@ -52,6 +52,7 @@ type Document = {
 type Skill = { id: string; category: string; name: string; level: string | null };
 type Certification = { id: string; issuer: string; name: string; credential_id: string | null; issue_date: string | null; verification_url: string | null };
 type Experience = { id: string; role_title: string; company_name: string; start_date: string | null; end_date: string | null };
+type Project = { id: string; title: string; description: string | null; technologies: string[] | null; project_url: string | null; repo_url: string | null };
 
 async function authHeader(): Promise<Record<string, string>> {
   const { data } = await supabase.auth.getSession();
@@ -605,19 +606,88 @@ function ExperienceSection({ candidateId, experiences, onChanged }: { candidateI
   );
 }
 
+function ProjectsSection({ candidateId, projects, onChanged }: { candidateId: string; projects: Project[]; onChanged: () => void }) {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [technologies, setTechnologies] = useState('');
+  const [projectUrl, setProjectUrl] = useState('');
+  const [repoUrl, setRepoUrl] = useState('');
+  const [saving, setSaving] = useState(false);
+
+  async function add(e: React.FormEvent) {
+    e.preventDefault();
+    if (!title) return;
+    setSaving(true);
+    await fetch('/api/admin/candidate/projects', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({
+        candidateId, title,
+        description: description || undefined,
+        technologies: technologies ? technologies.split(',').map((t) => t.trim()).filter(Boolean) : undefined,
+        projectUrl: projectUrl || undefined,
+        repoUrl: repoUrl || undefined,
+      }),
+    });
+    setTitle(''); setDescription(''); setTechnologies(''); setProjectUrl(''); setRepoUrl('');
+    setSaving(false);
+    onChanged();
+  }
+
+  async function remove(id: string) {
+    await fetch(`/api/admin/candidate/projects/${id}`, { method: 'DELETE', headers: await authHeader() });
+    onChanged();
+  }
+
+  return (
+    <div className="rounded-2xl p-5 mb-6" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
+      <h3 className="text-sm font-semibold mb-4">Projekte</h3>
+      <form onSubmit={add} className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+        <input required value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Titel" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input value={technologies} onChange={(e) => setTechnologies(e.target.value)} placeholder="Technologien (mit Komma getrennt)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input value={projectUrl} onChange={(e) => setProjectUrl(e.target.value)} placeholder="Projekt-URL (optional)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input value={repoUrl} onChange={(e) => setRepoUrl(e.target.value)} placeholder="Repository-URL (optional)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Beschreibung (optional)" rows={2} className="sm:col-span-2 text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <button type="submit" disabled={saving} className="flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-lg text-white disabled:opacity-50 w-fit" style={{ background: 'var(--color-primary)' }}>
+          <Plus size={14} /> Hinzufügen
+        </button>
+      </form>
+      {projects.length === 0 ? (
+        <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Projekte hinzugefügt.</p>
+      ) : (
+        <div className="space-y-2">
+          {projects.map((p) => (
+            <div key={p.id} className="flex items-center justify-between text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)' }}>
+              <div>
+                <div>{p.title}</div>
+                {p.technologies && p.technologies.length > 0 && (
+                  <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>{p.technologies.join(', ')}</div>
+                )}
+              </div>
+              <button onClick={() => remove(p.id)} title="Entfernen"><X size={13} color="var(--color-text-faint)" /></button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function CandidateProfilePage() {
   const [profile, setProfile] = useState<Profile | null | undefined>(undefined);
   const [skills, setSkills] = useState<Skill[]>([]);
   const [certifications, setCertifications] = useState<Certification[]>([]);
   const [experiences, setExperiences] = useState<Experience[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [documents, setDocuments] = useState<Document[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  function applyResponse(j: { profile: Profile | null; skills: Skill[]; certifications: Certification[]; experiences: Experience[]; documents: Document[] }) {
+  function applyResponse(j: { profile: Profile | null; skills: Skill[]; certifications: Certification[]; experiences: Experience[]; projects: Project[]; documents: Document[] }) {
     setProfile(j.profile);
     setSkills(j.skills ?? []);
     setCertifications(j.certifications ?? []);
     setExperiences(j.experiences ?? []);
+    setProjects(j.projects ?? []);
     setDocuments(j.documents ?? []);
   }
 
@@ -659,6 +729,7 @@ export default function CandidateProfilePage() {
           <SkillsSection candidateId={profile.id} skills={skills} onChanged={reload} />
           <CertificationsSection candidateId={profile.id} certifications={certifications} onChanged={reload} />
           <ExperienceSection candidateId={profile.id} experiences={experiences} onChanged={reload} />
+          <ProjectsSection candidateId={profile.id} projects={projects} onChanged={reload} />
           <h3 className="text-sm font-semibold mb-3">Dokumente</h3>
           <DocumentsSection candidateId={profile.id} documents={documents} onChanged={reload} />
         </>
