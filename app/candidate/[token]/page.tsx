@@ -18,9 +18,9 @@ import {
 } from 'lucide-react';
 
 const COLORS = {
-  bg: '#020B14', card: '#071522', cardBorder: '#17293A',
-  red: '#EF233C', blue: '#2EA3FF', green: '#35D07F', purple: '#A855F7',
-  textPrimary: '#F5F7FA', textSecondary: '#9AA8B7',
+  bg: '#020B14', card: '#071421', cardBorder: '#1A2A39',
+  red: '#EF233C', blue: '#22A7F0', green: '#22C55E', purple: '#A855F7',
+  textPrimary: '#F4F7FA', textSecondary: '#A8B3BF',
 };
 
 type Profile = {
@@ -49,6 +49,12 @@ const AVAILABILITY_LABEL: Record<string, string> = {
 function fmtMonthYear(iso: string | null): string {
   if (!iso) return 'heute';
   return new Date(iso).toLocaleDateString('de-DE', { month: '2-digit', year: 'numeric' });
+}
+function yearsOfExperience(experiences: Experience[]): number {
+  const dated = experiences.filter((e) => e.start_date);
+  if (dated.length === 0) return 0;
+  const earliest = Math.min(...dated.map((e) => new Date(e.start_date!).getTime()));
+  return Math.max(0, Math.round((Date.now() - earliest) / (1000 * 60 * 60 * 24 * 365.25)));
 }
 function certStatus(expiryDate: string | null): { label: string; color: string } {
   if (!expiryDate) return { label: 'Kein Ablaufdatum', color: COLORS.textSecondary };
@@ -271,6 +277,28 @@ export default function PublicCandidateProfilePage() {
           </div>
 
           <div className="space-y-4">
+            <Card>
+              <SectionHeader icon={Briefcase} title="Überblick" />
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div>
+                  <div className="text-xl font-bold" style={{ color: COLORS.textPrimary }}>{yearsOfExperience(data.experiences)}</div>
+                  <div className="text-[11px]" style={{ color: COLORS.textSecondary }}>Jahre Erfahrung</div>
+                </div>
+                <div>
+                  <div className="text-xl font-bold" style={{ color: COLORS.textPrimary }}>{data.projects.length}</div>
+                  <div className="text-[11px]" style={{ color: COLORS.textSecondary }}>Projekte</div>
+                </div>
+                <div>
+                  <div className="text-xl font-bold" style={{ color: COLORS.textPrimary }}>{new Set(data.projects.flatMap((p) => p.technologies ?? [])).size}</div>
+                  <div className="text-[11px]" style={{ color: COLORS.textSecondary }}>Technologien</div>
+                </div>
+                <div>
+                  <div className="text-sm font-bold" style={{ color: COLORS.textPrimary }}>{profile.availability ? AVAILABILITY_LABEL[profile.availability] : '—'}</div>
+                  <div className="text-[11px]" style={{ color: COLORS.textSecondary }}>Verfügbarkeit</div>
+                </div>
+              </div>
+            </Card>
+
             {profile.desired_positions && profile.desired_positions.length > 0 && (
               <Card>
                 <SectionHeader icon={Briefcase} title="Gesuchte Positionen" />
@@ -295,7 +323,7 @@ export default function PublicCandidateProfilePage() {
             {data.certifications.length > 0 && (
               <Card>
                 <SectionHeader icon={Award} title="Zertifizierungen" accent={COLORS.purple} />
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                   {data.certifications.map((c) => {
                     const status = certStatus(c.expiry_date);
                     return (
@@ -394,6 +422,12 @@ export default function PublicCandidateProfilePage() {
               )}
             </div>
           </div>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-6 pt-5 text-[11px]" style={{ borderTop: `1px solid ${COLORS.cardBorder}`, color: COLORS.textSecondary }}>
+          <span className="flex items-center gap-1.5"><ShieldCheck size={13} color={COLORS.green} /> Datenschutz & sichere Datenübertragung</span>
+          <span>Made in Germany</span>
+          <span className="flex items-center gap-1.5"><Lock size={13} /> Verschlüsselte Verbindung</span>
         </div>
       </div>
     </div>

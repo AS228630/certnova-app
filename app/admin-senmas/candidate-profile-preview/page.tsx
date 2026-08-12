@@ -34,16 +34,18 @@ import { supabase } from '@/lib/supabase/client';
 
 const COLORS = {
   bg: '#020B14',
-  card: '#071522',
-  cardBorder: '#17293A',
+  card: '#071421',
+  cardHover: '#0A1927',
+  cardBorder: '#1A2A39',
   red: '#EF233C',
-  redHover: '#FF3048',
-  blue: '#2EA3FF',
-  green: '#35D07F',
+  redHover: '#FF334F',
+  blue: '#22A7F0',
+  green: '#22C55E',
+  yellow: '#F59E0B',
   purple: '#A855F7',
-  textPrimary: '#F5F7FA',
-  textSecondary: '#9AA8B7',
-  textMuted: '#687788',
+  textPrimary: '#F4F7FA',
+  textSecondary: '#A8B3BF',
+  textMuted: '#71808F',
 };
 
 type Profile = {
@@ -303,7 +305,7 @@ export default function CandidateProfilePreviewPage() {
                 )}
                 <div className="flex items-center justify-between">
                   <span style={{ color: COLORS.textSecondary }}>Erfahrung</span>
-                  <span style={{ color: COLORS.textPrimary }}>{yearsOfExperience(publicExperiences)}+ Jahre</span>
+                  <span style={{ color: COLORS.textPrimary }}>{yearsOfExperience(publicExperiences)} Jahre</span>
                 </div>
                 {profile.availability && (
                   <div className="flex items-center justify-between">
@@ -334,7 +336,7 @@ export default function CandidateProfilePreviewPage() {
               <SectionHeader icon={Briefcase} title="Überblick" />
               <div className="grid grid-cols-3 gap-3">
                 <div>
-                  <div className="text-xl font-bold" style={{ color: COLORS.textPrimary }}>{yearsOfExperience(publicExperiences)}+</div>
+                  <div className="text-xl font-bold" style={{ color: COLORS.textPrimary }}>{yearsOfExperience(publicExperiences)}</div>
                   <div className="text-[11px]" style={{ color: COLORS.textSecondary }}>Jahre Erfahrung</div>
                 </div>
                 <div>
@@ -382,7 +384,7 @@ export default function CandidateProfilePreviewPage() {
               {publicCerts.length === 0 ? (
                 <p className="text-xs" style={{ color: COLORS.textSecondary }}>Noch keine öffentlichen Zertifizierungen hinterlegt.</p>
               ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                   {publicCerts.map((c) => {
                     const status = certStatus(c.expiry_date);
                     return (
@@ -519,6 +521,11 @@ export default function CandidateProfilePreviewPage() {
               </Card>
             </div>
           </div>
+        </div>
+
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-6 pt-5 text-[11px]" style={{ borderTop: `1px solid ${COLORS.cardBorder}`, color: COLORS.textSecondary }}>
+          <span className="flex items-center gap-1.5"><ShieldCheck size={13} color={COLORS.green} /> Datenschutz & sichere Datenübertragung</span>
+          <span>Made in Germany</span>
         </div>
       </div>
     </div>
