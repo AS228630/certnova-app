@@ -251,3 +251,50 @@ NONE.
 `tsc --noEmit`, `eslint`, and `npm run build` all pass with the
 section 1 fixes applied. Nothing pushed to GitHub, nothing run
 against Supabase.
+
+---
+
+## Addendum — formal requirement: full content editability via Admin UI
+
+Per the advisor's Aug 12 2026 follow-up, this is now a formal part of
+the specification, not an implicit assumption:
+
+> Candidate Profile Content Management MUST be fully editable through
+> the Admin UI — every piece of content, without ever touching code —
+> and the recruiter-facing page must automatically reflect whatever
+> the current data says, with no redeploy required for a content
+> change.
+
+**Status for each content type:**
+
+| Content | Add | Edit | Remove | Status |
+|---|---|---|---|---|
+| Skills | ✅ | ✅ | ✅ | Already fully covered — `app/api/admin/candidate/skills[/:id]`, all three verbs implemented and audited (§1) |
+| Certifications | ✅ | ✅ | ✅ | Already fully covered — same pattern |
+| Experience | ✅ | ✅ | ✅ | Already fully covered — same pattern |
+| Projects | ✅ | ✅ | ✅ | Already fully covered — same pattern |
+| Profile fields (name, title, bio, location, availability, links) | ✅ | ✅ | n/a (singleton) | Already fully covered — `PUT /api/admin/candidate/profile` |
+| Documents: add / rename (title) / change visibility (public↔private) / replace with a new file / delete | — | — | — | **Designed, not built** — PHASE 5, blocked on Storage per the advisor's explicit instruction this message. `candidate_documents` schema (migration 034) already has every column this needs (`title`, `visibility`, `allow_download`, `storage_path`, `deleted_at` for soft-delete) — no schema change anticipated when PHASE 5 starts, just the upload/replace/delete API + Admin UI built against what already exists |
+
+**Why this doesn't require new architecture work now:** every
+non-file content type already satisfies the requirement completely,
+using the exact CRUD pattern the advisor approved in PHASE 3. The one
+remaining piece (documents: upload, rename, visibility toggle,
+replace, delete) was already the explicit scope of PHASE 5 — this
+requirement doesn't add new scope to PHASE 5, it just makes explicit
+that PHASE 5's document management must support the same full
+add/edit/remove/replace pattern, not a reduced version of it.
+
+**Recruiter page auto-reflecting current data:** already the design
+in every read path — `GET /api/admin/candidate/profile` (admin side)
+and the future `GET /api/candidate/:token/profile` (recruiter side,
+PHASE 7) both read live from the database on every request, nothing
+cached beyond what's explicitly designed with a short TTL for public
+read-only sections (per the original spec's own caching guidance,
+section 61) — never a static build-time snapshot. No code change
+needed for this requirement either; it was already the architecture.
+
+No code changed for this addendum — it's a specification record, not
+an implementation step. Still nothing pushed, nothing executed
+against production, no migration, no bucket, no upload, no mock data,
+per the advisor's explicit instruction this message.
