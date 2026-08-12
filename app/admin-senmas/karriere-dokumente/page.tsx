@@ -369,6 +369,10 @@ function DocumentRow({ doc, onChanged }: { doc: Document; onChanged: () => void 
 function DocumentsSection({ candidateId, documents, onChanged }: { candidateId: string; documents: Document[]; onChanged: () => void }) {
   return (
     <div>
+      <div className="rounded-xl p-3 mb-4 text-xs" style={{ background: 'var(--color-primary-light)', color: 'var(--color-primary-hover)' }}>
+        Als Administrator sehen und laden Sie hier immer alle Dokumente vollständig — unabhängig von „Sichtbarkeit&quot; und „Download für Bewerber&quot;.
+        Diese beiden Einstellungen steuern erst später, sobald Recruiter-Links existieren, was ein Unternehmen sehen darf.
+      </div>
       <UploadForm candidateId={candidateId} onUploaded={onChanged} />
       {documents.length === 0 ? (
         <div className="rounded-2xl p-10 flex flex-col items-center text-center gap-3" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
