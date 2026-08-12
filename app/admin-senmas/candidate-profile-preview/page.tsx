@@ -543,6 +543,26 @@ export default function CandidateProfilePreviewPage() {
                       <div key={d.id} className="flex flex-col items-center gap-1.5 text-center rounded-lg p-3" style={{ background: COLORS.cardBorder }}>
                         <FileText size={18} color={COLORS.red} />
                         <span className="text-[11px]" style={{ color: COLORS.textPrimary }}>{d.title}</span>
+                        <div className="flex gap-2 mt-1">
+                          <button
+                            onClick={async () => {
+                              const res = await fetch(`/api/admin/candidate/documents/${d.id}/view`, { headers: await authHeader() });
+                              if (res.ok) window.open((await res.json()).url, '_blank');
+                            }}
+                            title="Ansehen"
+                          >
+                            <FileText size={13} color={COLORS.textSecondary} />
+                          </button>
+                          <button
+                            onClick={async () => {
+                              const res = await fetch(`/api/admin/candidate/documents/${d.id}/view?download=true`, { headers: await authHeader() });
+                              if (res.ok) window.location.href = (await res.json()).url;
+                            }}
+                            title="Herunterladen"
+                          >
+                            <Download size={13} color={COLORS.textSecondary} />
+                          </button>
+                        </div>
                       </div>
                     ))}
                   </div>
