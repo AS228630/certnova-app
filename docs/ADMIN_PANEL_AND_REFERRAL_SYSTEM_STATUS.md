@@ -11,6 +11,11 @@ Related docs, read in this order if you need the full history:
 2. `docs/REFERRAL_COMMISSION_MIGRATION_PLAN.md` — the schema audit and
    migration plan (3 revisions) that led to migration 030.
 3. This file — current status of everything built on top of that plan.
+4. `docs/E2E_VERIFICATION_STATUS.md` — in-progress, real end-to-end
+   verification of the whole chain (teacher → code → student →
+   purchase → commission → refund → payout → audit → RBAC), paused
+   mid-way — read that file before resuming E2E testing or starting
+   Reports/Export.
 
 ---
 
