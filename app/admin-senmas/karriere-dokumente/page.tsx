@@ -56,6 +56,7 @@ type Skill = { id: string; category: string; name: string; level: string | null;
 type Certification = { id: string; issuer: string; name: string; credential_id: string | null; issue_date: string | null; verification_url: string | null; is_public: boolean; sort_order: number };
 type Experience = { id: string; role_title: string; company_name: string; location: string | null; start_date: string | null; end_date: string | null; description: string | null; is_public: boolean; sort_order: number };
 type Project = { id: string; title: string; description: string | null; technologies: string[] | null; project_url: string | null; repo_url: string | null; is_public: boolean; sort_order: number };
+type Education = { id: string; institution_name: string; degree: string | null; field_of_study: string | null; graduation_date: string | null; logo_url: string | null; website_url: string | null; is_public: boolean; sort_order: number };
 
 async function authHeader(): Promise<Record<string, string>> {
   const { data } = await supabase.auth.getSession();
@@ -1009,21 +1010,159 @@ function ProjectsSection({ candidateId, projects, onChanged }: { candidateId: st
   );
 }
 
+function EducationSection({ candidateId, education, onChanged }: { candidateId: string; education: Education[]; onChanged: () => void }) {
+  const [institutionName, setInstitutionName] = useState('');
+  const [degree, setDegree] = useState('');
+  const [fieldOfStudy, setFieldOfStudy] = useState('');
+  const [graduationDate, setGraduationDate] = useState('');
+  const [logoUrl, setLogoUrl] = useState('');
+  const [websiteUrl, setWebsiteUrl] = useState('');
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editInstitutionName, setEditInstitutionName] = useState('');
+  const [editDegree, setEditDegree] = useState('');
+  const [editFieldOfStudy, setEditFieldOfStudy] = useState('');
+  const [editGraduationDate, setEditGraduationDate] = useState('');
+  const [editLogoUrl, setEditLogoUrl] = useState('');
+  const [editWebsiteUrl, setEditWebsiteUrl] = useState('');
+
+  async function add(e: React.FormEvent) {
+    e.preventDefault();
+    if (!institutionName) return;
+    setSaving(true);
+    setError(null);
+    const res = await fetch('/api/admin/candidate/education', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({
+        candidateId, institutionName,
+        degree: degree || undefined, fieldOfStudy: fieldOfStudy || undefined,
+        graduationDate: graduationDate || undefined, logoUrl: logoUrl || undefined, websiteUrl: websiteUrl || undefined,
+      }),
+    });
+    if (!res.ok) {
+      setError('Fehler beim Speichern.');
+      setSaving(false);
+      return;
+    }
+    setInstitutionName(''); setDegree(''); setFieldOfStudy(''); setGraduationDate(''); setLogoUrl(''); setWebsiteUrl('');
+    setSaving(false);
+    onChanged();
+  }
+
+  function startEdit(edu: Education) {
+    setEditingId(edu.id);
+    setEditInstitutionName(edu.institution_name); setEditDegree(edu.degree ?? ''); setEditFieldOfStudy(edu.field_of_study ?? '');
+    setEditGraduationDate(edu.graduation_date ?? ''); setEditLogoUrl(edu.logo_url ?? ''); setEditWebsiteUrl(edu.website_url ?? '');
+  }
+
+  async function saveEdit(id: string) {
+    await fetch(`/api/admin/candidate/education/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({
+        institutionName: editInstitutionName, degree: editDegree || null, fieldOfStudy: editFieldOfStudy || null,
+        graduationDate: editGraduationDate || null, logoUrl: editLogoUrl || null, websiteUrl: editWebsiteUrl || null,
+      }),
+    });
+    setEditingId(null);
+    onChanged();
+  }
+
+  async function togglePublic(edu: Education) {
+    await fetch(`/api/admin/candidate/education/${edu.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
+      body: JSON.stringify({ isPublic: !edu.is_public }),
+    });
+    onChanged();
+  }
+
+  async function remove(id: string) {
+    await fetch(`/api/admin/candidate/education/${id}`, { method: 'DELETE', headers: await authHeader() });
+    onChanged();
+  }
+
+  return (
+    <div className="rounded-2xl p-5 mb-6" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
+      <h3 className="text-sm font-semibold mb-4">Ausbildung</h3>
+      <form onSubmit={add} className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+        <input required value={institutionName} onChange={(e) => setInstitutionName(e.target.value)} placeholder="Hochschule / Institution" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input value={degree} onChange={(e) => setDegree(e.target.value)} placeholder="Abschluss (z. B. Bachelor)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input value={fieldOfStudy} onChange={(e) => setFieldOfStudy(e.target.value)} placeholder="Fachrichtung" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input type="date" value={graduationDate} onChange={(e) => setGraduationDate(e.target.value)} className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input value={logoUrl} onChange={(e) => setLogoUrl(e.target.value)} placeholder="Logo-URL (echt, optional)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <input value={websiteUrl} onChange={(e) => setWebsiteUrl(e.target.value)} placeholder="Offizielle Website (optional)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <button type="submit" disabled={saving} className="flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-lg text-white disabled:opacity-50 w-fit" style={{ background: 'var(--color-primary)' }}>
+          <Plus size={14} /> Hinzufügen
+        </button>
+      </form>
+      {error && <p className="text-xs mb-3" style={{ color: 'var(--color-danger)' }}>{error}</p>}
+      {education.length === 0 ? (
+        <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Ausbildung hinzugefügt.</p>
+      ) : (
+        <div className="space-y-2">
+          {education.map((edu, i) => (
+            <div key={edu.id} className="rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', opacity: edu.is_public ? 1 : 0.5 }}>
+              {editingId === edu.id ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  <input value={editInstitutionName} onChange={(e) => setEditInstitutionName(e.target.value)} placeholder="Institution" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input value={editDegree} onChange={(e) => setEditDegree(e.target.value)} placeholder="Abschluss" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input value={editFieldOfStudy} onChange={(e) => setEditFieldOfStudy(e.target.value)} placeholder="Fachrichtung" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input type="date" value={editGraduationDate} onChange={(e) => setEditGraduationDate(e.target.value)} className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input value={editLogoUrl} onChange={(e) => setEditLogoUrl(e.target.value)} placeholder="Logo-URL" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input value={editWebsiteUrl} onChange={(e) => setEditWebsiteUrl(e.target.value)} placeholder="Website" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <div className="sm:col-span-2 flex gap-2">
+                    <button onClick={() => saveEdit(edu.id)} className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}><Check size={12} /> Speichern</button>
+                    <button onClick={() => setEditingId(null)} className="text-xs px-3 py-1.5 rounded-lg" style={{ background: 'var(--color-panel)', color: 'var(--color-text-muted)' }}>Abbrechen</button>
+                  </div>
+                </div>
+              ) : (
+                <div className="flex items-center justify-between text-sm">
+                  <div>
+                    <div>{edu.institution_name}</div>
+                    <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>{[edu.degree, edu.field_of_study].filter(Boolean).join(' · ')}</div>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <button onClick={() => startEdit(edu)} title="Bearbeiten"><Pencil size={13} color="var(--color-text-faint)" /></button>
+                    <ItemControls
+                      isPublic={edu.is_public}
+                      canMoveUp={i > 0}
+                      canMoveDown={i < education.length - 1}
+                      onMoveUp={() => swapSortOrder('/api/admin/candidate/education', edu, education[i - 1]).then(onChanged)}
+                      onMoveDown={() => swapSortOrder('/api/admin/candidate/education', edu, education[i + 1]).then(onChanged)}
+                      onTogglePublic={() => togglePublic(edu)}
+                      onRemove={() => remove(edu.id)}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function CandidateProfilePage() {
   const [profile, setProfile] = useState<Profile | null | undefined>(undefined);
   const [skills, setSkills] = useState<Skill[]>([]);
   const [certifications, setCertifications] = useState<Certification[]>([]);
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
+  const [education, setEducation] = useState<Education[]>([]);
   const [documents, setDocuments] = useState<Document[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  function applyResponse(j: { profile: Profile | null; skills: Skill[]; certifications: Certification[]; experiences: Experience[]; projects: Project[]; documents: Document[] }) {
+  function applyResponse(j: { profile: Profile | null; skills: Skill[]; certifications: Certification[]; experiences: Experience[]; projects: Project[]; education: Education[]; documents: Document[] }) {
     setProfile(j.profile);
     setSkills(j.skills ?? []);
     setCertifications(j.certifications ?? []);
     setExperiences(j.experiences ?? []);
     setProjects(j.projects ?? []);
+    setEducation(j.education ?? []);
     setDocuments(j.documents ?? []);
   }
 
@@ -1066,6 +1205,7 @@ export default function CandidateProfilePage() {
           <CertificationsSection candidateId={profile.id} certifications={certifications} onChanged={reload} />
           <ExperienceSection candidateId={profile.id} experiences={experiences} onChanged={reload} />
           <ProjectsSection candidateId={profile.id} projects={projects} onChanged={reload} />
+          <EducationSection candidateId={profile.id} education={education} onChanged={reload} />
           <h3 className="text-sm font-semibold mb-3">Dokumente</h3>
           <DocumentsSection candidateId={profile.id} documents={documents} onChanged={reload} />
         </>

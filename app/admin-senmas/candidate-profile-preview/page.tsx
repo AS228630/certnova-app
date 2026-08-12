@@ -62,8 +62,9 @@ type Profile = {
   created_at: string;
 };
 type Skill = { id: string; category: string; name: string; is_public: boolean };
-type Certification = { id: string; issuer: string; name: string; credential_id: string | null; issue_date: string | null; verification_url: string | null; is_public: boolean };
-type Experience = { id: string; role_title: string; company_name: string; location: string | null; start_date: string | null; end_date: string | null; description: string | null; is_public: boolean };
+type Certification = { id: string; issuer: string; name: string; credential_id: string | null; issue_date: string | null; expiry_date: string | null; verification_url: string | null; logo_url: string | null; is_public: boolean };
+type Education = { id: string; institution_name: string; degree: string | null; field_of_study: string | null; graduation_date: string | null; logo_url: string | null; website_url: string | null; is_public: boolean };
+type Experience = { id: string; role_title: string; company_name: string; location: string | null; start_date: string | null; end_date: string | null; description: string | null; company_logo_url: string | null; company_website_url: string | null; is_public: boolean };
 type Project = { id: string; title: string; description: string | null; technologies: string[] | null; is_public: boolean };
 type Doc = { id: string; title: string; document_type: string | null; visibility: 'public' | 'private'; deleted_at: string | null };
 
@@ -90,6 +91,36 @@ function yearsOfExperience(experiences: Experience[]): number {
 function fmtMonthYear(iso: string | null): string {
   if (!iso) return 'heute';
   return new Date(iso).toLocaleDateString('de-DE', { month: '2-digit', year: 'numeric' });
+}
+
+/** Certification status computed from expiry_date, per Stage 1's
+ * decision — never stored, so it can never drift out of sync with
+ * the real date. */
+function certStatus(expiryDate: string | null): { label: string; color: string } {
+  if (!expiryDate) return { label: 'Kein Ablaufdatum', color: COLORS.textSecondary };
+  const expired = new Date(expiryDate).getTime() < Date.now();
+  return expired ? { label: 'Abgelaufen', color: COLORS.red } : { label: 'Aktiv', color: COLORS.green };
+}
+
+function BrandLogo({ url, alt, size = 44 }: { url: string | null; alt: string; size?: number }) {
+  if (url) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={url}
+        alt={alt}
+        style={{ width: size, height: size, objectFit: 'contain', borderRadius: 10, background: '#fff', padding: 4 }}
+      />
+    );
+  }
+  return (
+    <div
+      className="flex items-center justify-center font-bold"
+      style={{ width: size, height: size, borderRadius: 10, background: COLORS.cardBorder, color: COLORS.textSecondary, fontSize: size * 0.4 }}
+    >
+      {alt.slice(0, 1).toUpperCase()}
+    </div>
+  );
 }
 
 function CvDownloadButton({ documentId }: { documentId: string }) {
@@ -133,6 +164,7 @@ export default function CandidateProfilePreviewPage() {
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [documents, setDocuments] = useState<Doc[]>([]);
+  const [education, setEducation] = useState<Education[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
@@ -149,6 +181,7 @@ export default function CandidateProfilePreviewPage() {
         setExperiences(j.experiences ?? []);
         setProjects(j.projects ?? []);
         setDocuments(j.documents ?? []);
+        setEducation(j.education ?? []);
         if (j.profile?.profile_photo_path) {
           authHeader()
             .then((headers2) => fetch('/api/admin/candidate/profile/photo/view', { headers: headers2 }))
@@ -349,20 +382,32 @@ export default function CandidateProfilePreviewPage() {
               {publicCerts.length === 0 ? (
                 <p className="text-xs" style={{ color: COLORS.textSecondary }}>Noch keine öffentlichen Zertifizierungen hinterlegt.</p>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {publicCerts.map((c) => (
-                    <div key={c.id} className="rounded-lg p-3" style={{ background: COLORS.cardBorder }}>
-                      <div className="text-sm font-medium" style={{ color: COLORS.textPrimary }}>{c.name}</div>
-                      <div className="text-[11px] mb-1" style={{ color: COLORS.textSecondary }}>{c.issuer} · Ausgestellt: {fmtMonthYear(c.issue_date)}</div>
-                      {c.verification_url ? (
-                        <a href={c.verification_url} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-[11px]" style={{ color: COLORS.red }}>
-                          Verifizieren <ExternalLink size={10} />
-                        </a>
-                      ) : (
-                        <span className="text-[11px]" style={{ color: COLORS.textSecondary }}>Verifizierung nicht verfügbar</span>
-                      )}
-                    </div>
-                  ))}
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {publicCerts.map((c) => {
+                    const status = certStatus(c.expiry_date);
+                    return (
+                      <div
+                        key={c.id}
+                        className="flex flex-col items-center text-center rounded-xl p-4 transition-transform"
+                        style={{ background: `linear-gradient(180deg, ${COLORS.cardBorder} 0%, ${COLORS.card} 100%)`, border: `1px solid ${COLORS.cardBorder}` }}
+                      >
+                        <BrandLogo url={c.logo_url} alt={c.issuer} size={48} />
+                        <div className="text-sm font-semibold mt-2.5" style={{ color: COLORS.textPrimary }}>{c.name}</div>
+                        <div className="text-[11px] mt-0.5" style={{ color: COLORS.textSecondary }}>{c.issuer}</div>
+                        <div className="text-[10px] mt-1" style={{ color: COLORS.textSecondary }}>Ausgestellt: {fmtMonthYear(c.issue_date)}</div>
+                        <span className="text-[10px] px-2 py-0.5 rounded-full mt-2" style={{ background: `${status.color}22`, color: status.color }}>{status.label}</span>
+                        <div className="mt-2.5">
+                          {c.verification_url ? (
+                            <a href={c.verification_url} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-[11px] font-medium" style={{ color: COLORS.red }}>
+                              Verifizieren <ExternalLink size={10} />
+                            </a>
+                          ) : (
+                            <span className="text-[10px]" style={{ color: COLORS.textSecondary }}>Verifizierung nicht verfügbar</span>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               )}
             </Card>
@@ -374,18 +419,56 @@ export default function CandidateProfilePreviewPage() {
               ) : (
                 <div className="space-y-4">
                   {publicExperiences.map((exp) => (
-                    <div key={exp.id} className="pl-3" style={{ borderLeft: `2px solid ${COLORS.red}` }}>
-                      <div className="flex items-center justify-between">
-                        <div className="text-sm font-medium" style={{ color: COLORS.textPrimary }}>{exp.role_title}</div>
-                        <div className="text-[11px]" style={{ color: COLORS.textSecondary }}>{fmtMonthYear(exp.start_date)} – {fmtMonthYear(exp.end_date)}</div>
+                    <div key={exp.id} className="flex gap-3 pl-3" style={{ borderLeft: `2px solid ${COLORS.red}` }}>
+                      <BrandLogo url={exp.company_logo_url} alt={exp.company_name} size={36} />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-2">
+                          <div className="text-sm font-medium" style={{ color: COLORS.textPrimary }}>{exp.role_title}</div>
+                          <div className="text-[11px] whitespace-nowrap" style={{ color: COLORS.textSecondary }}>{fmtMonthYear(exp.start_date)} – {fmtMonthYear(exp.end_date)}</div>
+                        </div>
+                        <div className="text-xs" style={{ color: COLORS.textSecondary }}>
+                          {exp.company_website_url ? (
+                            <a href={exp.company_website_url} target="_blank" rel="noreferrer" className="hover:underline" style={{ color: COLORS.blue }}>{exp.company_name}</a>
+                          ) : exp.company_name}
+                          {exp.location ? ` · ${exp.location}` : ''}
+                        </div>
+                        {exp.description && <p className="text-xs mt-1 whitespace-pre-line" style={{ color: COLORS.textSecondary }}>{exp.description}</p>}
                       </div>
-                      <div className="text-xs" style={{ color: COLORS.textSecondary }}>{exp.company_name}{exp.location ? ` · ${exp.location}` : ''}</div>
-                      {exp.description && <p className="text-xs mt-1 whitespace-pre-line" style={{ color: COLORS.textSecondary }}>{exp.description}</p>}
                     </div>
                   ))}
                 </div>
               )}
             </Card>
+
+            {(() => {
+              const publicEducation = education.filter((e) => e.is_public);
+              if (publicEducation.length === 0) return null;
+              return (
+                <Card>
+                  <SectionHeader icon={Award} title="Ausbildung" accent={COLORS.blue} />
+                  <div className="space-y-4">
+                    {publicEducation.map((edu) => (
+                      <div key={edu.id} className="flex gap-3">
+                        <BrandLogo url={edu.logo_url} alt={edu.institution_name} size={36} />
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-medium" style={{ color: COLORS.textPrimary }}>
+                            {edu.website_url ? (
+                              <a href={edu.website_url} target="_blank" rel="noreferrer" className="hover:underline" style={{ color: COLORS.textPrimary }}>{edu.institution_name}</a>
+                            ) : edu.institution_name}
+                          </div>
+                          <div className="text-xs" style={{ color: COLORS.textSecondary }}>
+                            {[edu.degree, edu.field_of_study].filter(Boolean).join(' · ')}
+                          </div>
+                          {edu.graduation_date && (
+                            <div className="text-[11px] mt-0.5" style={{ color: COLORS.textSecondary }}>Abschluss: {fmtMonthYear(edu.graduation_date)}</div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Card>
+              );
+            })()}
 
             {publicProjects.length > 0 && (
               <Card>
