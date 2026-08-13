@@ -80,20 +80,46 @@ alter table public.candidate_experiences
   add column if not exists company_id uuid references public.companies(id);
 ```
 
-**Open policy question, not yet decided:** when a company's logo
-changes later, should already-issued certifications keep showing the
-logo as it was at issuance (`logo_snapshot_path`), or always show the
-current company logo? Leaning toward snapshot-at-issuance as more
-historically accurate, but this needs an explicit decision before the
-migration is finalized.
+**Decided (Aug 2026):** logo snapshot-at-issuance. When a company's
+official logo changes later, already-issued certifications keep
+showing the logo as it was at the time they were issued
+(`logo_snapshot_path`) — the candidate page must reflect the reality
+of the document as issued, not silently reskin old certificates when
+a brand changes. A newly-added certificate issued under a newer brand
+uses that newer era's asset. `companies.logo_asset_path` is the
+*current* logo (used for new certifications going forward and for
+company/experience display); `logo_snapshot_path` on each
+certification row is the *immutable* copy fixed at creation time and
+never auto-updated by a later company logo change.
 
 ## Status as of this doc
 
 - Rule recorded here — permanent, no re-briefing needed for future
   work on this feature.
+- Snapshot-at-issuance policy decided (Aug 2026) — see above.
 - Schema above is a **draft**, not executed. No migration has been
   run for this yet.
 - No `public/logos/companies/` assets have been added yet — sourcing
   real official logos for CompTIA, PeopleCert (ITIL), and Microsoft
   is the next concrete step, one at a time, each with its source
   documented per this rule.
+
+## Candidate Share URL Rule (reaffirmed, already implemented)
+
+Kept here for reference since it's the sibling permanent rule for
+this same feature area:
+
+- `/c/{secure-random-token}` — short, professional.
+- Token is cryptographically random (`crypto.randomBytes`, never
+  `Math.random`), at least 128-bit entropy. Currently 128-bit exactly
+  (`randomBytes(16)`, ~22 base64url characters) — see
+  `lib/candidate/shareLinkAuth.ts`.
+- Only the SHA-256 hash is ever stored (`share_links.token_hash`);
+  the raw token exists only in the one-time creation response and the
+  URL itself.
+- No separate short "public ID" is ever, by itself, sufficient for
+  authorization — the token itself is what's checked, always.
+- `revoked_at`/`expires_at` checked fresh on every request (see
+  `lib/candidate/verifyShareLink.ts`), never cached.
+- No fixed, sequential, or guessable tokens anywhere in this flow.
+
