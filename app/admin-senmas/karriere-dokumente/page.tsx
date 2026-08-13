@@ -54,7 +54,7 @@ type Document = {
 };
 
 type Skill = { id: string; category: string; name: string; level: string | null; is_public: boolean; sort_order: number };
-type Certification = { id: string; issuer: string; name: string; credential_id: string | null; issue_date: string | null; verification_url: string | null; is_public: boolean; sort_order: number };
+type Certification = { id: string; issuer: string; name: string; credential_id: string | null; issue_date: string | null; expiry_date: string | null; verification_url: string | null; is_public: boolean; sort_order: number };
 type Experience = { id: string; role_title: string; company_name: string; location: string | null; start_date: string | null; end_date: string | null; description: string | null; is_public: boolean; sort_order: number };
 type Project = { id: string; title: string; description: string | null; technologies: string[] | null; project_url: string | null; repo_url: string | null; is_public: boolean; sort_order: number };
 type Education = { id: string; institution_name: string; degree: string | null; field_of_study: string | null; graduation_date: string | null; logo_url: string | null; website_url: string | null; is_public: boolean; sort_order: number };
@@ -621,6 +621,7 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
   const [name, setName] = useState('');
   const [credentialId, setCredentialId] = useState('');
   const [issueDate, setIssueDate] = useState('');
+  const [expiryDate, setExpiryDate] = useState('');
   const [verificationUrl, setVerificationUrl] = useState('');
   const [logoUrl, setLogoUrl] = useState('');
   const [saving, setSaving] = useState(false);
@@ -629,6 +630,7 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
   const [editName, setEditName] = useState('');
   const [editCredentialId, setEditCredentialId] = useState('');
   const [editIssueDate, setEditIssueDate] = useState('');
+  const [editExpiryDate, setEditExpiryDate] = useState('');
   const [editVerificationUrl, setEditVerificationUrl] = useState('');
   const [editLogoUrl, setEditLogoUrl] = useState('');
 
@@ -643,11 +645,12 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
         candidateId, issuer, name,
         credentialId: credentialId || undefined,
         issueDate: issueDate || undefined,
+        expiryDate: expiryDate || undefined,
         verificationUrl: verificationUrl || undefined,
         logoUrl: logoUrl || undefined,
       }),
     });
-    setIssuer(''); setName(''); setCredentialId(''); setIssueDate(''); setVerificationUrl(''); setLogoUrl('');
+    setIssuer(''); setName(''); setCredentialId(''); setIssueDate(''); setExpiryDate(''); setVerificationUrl(''); setLogoUrl('');
     setSaving(false);
     onChanged();
   }
@@ -655,7 +658,7 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
   function startEdit(c: Certification) {
     setEditingId(c.id);
     setEditIssuer(c.issuer); setEditName(c.name); setEditCredentialId(c.credential_id ?? '');
-    setEditIssueDate(c.issue_date ?? ''); setEditVerificationUrl(c.verification_url ?? ''); setEditLogoUrl('');
+    setEditIssueDate(c.issue_date ?? ''); setEditExpiryDate(c.expiry_date ?? ''); setEditVerificationUrl(c.verification_url ?? ''); setEditLogoUrl('');
   }
 
   async function saveEdit(id: string) {
@@ -665,6 +668,7 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
       body: JSON.stringify({
         issuer: editIssuer, name: editName,
         credentialId: editCredentialId || null, issueDate: editIssueDate || null,
+        expiryDate: editExpiryDate || null,
         verificationUrl: editVerificationUrl || null, logoUrl: editLogoUrl || undefined,
       }),
     });
@@ -693,7 +697,16 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
         <input required value={issuer} onChange={(e) => setIssuer(e.target.value)} placeholder="Aussteller (z. B. Microsoft)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
         <input required value={name} onChange={(e) => setName(e.target.value)} placeholder="Name (z. B. Azure AZ-900)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
         <input value={credentialId} onChange={(e) => setCredentialId(e.target.value)} placeholder="Credential-ID (optional)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
-        <input type="date" value={issueDate} onChange={(e) => setIssueDate(e.target.value)} className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        <div className="grid grid-cols-2 gap-2">
+          <div>
+            <label className="block text-[10px] mb-1" style={{ color: 'var(--color-text-faint)' }}>Ausgestellt</label>
+            <input type="date" value={issueDate} onChange={(e) => setIssueDate(e.target.value)} className="w-full text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+          </div>
+          <div>
+            <label className="block text-[10px] mb-1" style={{ color: 'var(--color-text-faint)' }}>Gültig bis (optional)</label>
+            <input type="date" value={expiryDate} onChange={(e) => setExpiryDate(e.target.value)} className="w-full text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+          </div>
+        </div>
         <input value={verificationUrl} onChange={(e) => setVerificationUrl(e.target.value)} placeholder="Verifizierungs-URL (optional)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
         <input value={logoUrl} onChange={(e) => setLogoUrl(e.target.value)} placeholder="Logo-URL (echtes Badge, optional)" className="text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
         <button type="submit" disabled={saving} className="flex items-center gap-1 text-sm font-medium px-3 py-2 rounded-lg text-white disabled:opacity-50 w-fit" style={{ background: 'var(--color-primary)' }}>
@@ -712,6 +725,7 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
                   <input value={editName} onChange={(e) => setEditName(e.target.value)} placeholder="Name" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
                   <input value={editCredentialId} onChange={(e) => setEditCredentialId(e.target.value)} placeholder="Credential-ID" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
                   <input type="date" value={editIssueDate} onChange={(e) => setEditIssueDate(e.target.value)} className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input type="date" value={editExpiryDate} onChange={(e) => setEditExpiryDate(e.target.value)} title="Gültig bis" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
                   <input value={editVerificationUrl} onChange={(e) => setEditVerificationUrl(e.target.value)} placeholder="Verifizierungs-URL" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
                   <input value={editLogoUrl} onChange={(e) => setEditLogoUrl(e.target.value)} placeholder="Logo-URL" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
                   <div className="sm:col-span-2 flex gap-2">
@@ -725,6 +739,7 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
                     <div>{c.name} <span style={{ color: 'var(--color-text-faint)' }}>· {c.issuer}</span></div>
                     <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>
                       {c.issue_date ? new Date(c.issue_date).toLocaleDateString('de-DE') : '—'}
+                      {c.expiry_date ? ` · gültig bis ${new Date(c.expiry_date).toLocaleDateString('de-DE')}` : ''}
                       {c.credential_id ? ` · ${c.credential_id}` : ''}
                       {!c.verification_url ? ' · Verifizierung nicht verfügbar' : ''}
                     </div>
@@ -1178,6 +1193,7 @@ function ShareLinksSection({ candidateId, documents }: { candidateId: string; do
   const [creating, setCreating] = useState(false);
   const [justCreated, setJustCreated] = useState<{ shareUrl: string; rawToken: string; rawAccessCode: string | null; companyName: string } | null>(null);
   const [copiedField, setCopiedField] = useState<string | null>(null);
+  const [hideRevoked, setHideRevoked] = useState(true);
 
   const privateDocs = documents.filter((d) => d.visibility === 'private' && !d.deleted_at);
 
@@ -1231,9 +1247,15 @@ function ShareLinksSection({ candidateId, documents }: { candidateId: string; do
     <div className="rounded-2xl p-5 mb-6" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)' }}>
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-sm font-semibold">Share-Links für Unternehmen</h3>
-        <button onClick={() => setShowForm(!showForm)} className="flex items-center gap-1 text-sm font-medium px-3 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}>
-          <Plus size={14} /> Neuer Link
-        </button>
+        <div className="flex items-center gap-3">
+          <label className="flex items-center gap-1.5 text-xs" style={{ color: 'var(--color-text-muted)' }}>
+            <input type="checkbox" checked={hideRevoked} onChange={(e) => setHideRevoked(e.target.checked)} />
+            Widerrufene ausblenden
+          </label>
+          <button onClick={() => setShowForm(!showForm)} className="flex items-center gap-1 text-sm font-medium px-3 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}>
+            <Plus size={14} /> Neuer Link
+          </button>
+        </div>
       </div>
 
       {justCreated && (
@@ -1300,29 +1322,33 @@ function ShareLinksSection({ candidateId, documents }: { candidateId: string; do
 
       {loading ? (
         <div className="flex items-center gap-2 text-sm" style={{ color: 'var(--color-text-muted)' }}><Loader2 size={14} className="animate-spin" /> Wird geladen…</div>
-      ) : links.length === 0 ? (
-        <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Share-Links erstellt.</p>
-      ) : (
-        <div className="space-y-2">
-          {links.map((l) => {
-            const isRevoked = !!l.revoked_at;
-            const isExpired = l.expires_at ? new Date(l.expires_at) < new Date() : false;
-            return (
-              <div key={l.id} className="flex items-center justify-between text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', opacity: isRevoked ? 0.5 : 1 }}>
-                <div>
-                  <div>{l.company_name} {l.recruiter_name ? <span style={{ color: 'var(--color-text-faint)' }}>· {l.recruiter_name}</span> : null}</div>
-                  <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>
-                    Aufrufe: {l.access_count} · {isRevoked ? 'Widerrufen' : isExpired ? 'Abgelaufen' : `Gültig bis ${l.expires_at ? new Date(l.expires_at).toLocaleDateString('de-DE') : 'unbegrenzt'}`}
+      ) : (() => {
+        const visibleLinks = hideRevoked ? links.filter((l) => !l.revoked_at) : links;
+        if (visibleLinks.length === 0) {
+          return <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>{hideRevoked && links.length > 0 ? 'Keine aktiven Share-Links (widerrufene sind ausgeblendet).' : 'Noch keine Share-Links erstellt.'}</p>;
+        }
+        return (
+          <div className="space-y-2">
+            {visibleLinks.map((l) => {
+              const isRevoked = !!l.revoked_at;
+              const isExpired = l.expires_at ? new Date(l.expires_at) < new Date() : false;
+              return (
+                <div key={l.id} className="flex items-center justify-between text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', opacity: isRevoked ? 0.5 : 1 }}>
+                  <div>
+                    <div>{l.company_name} {l.recruiter_name ? <span style={{ color: 'var(--color-text-faint)' }}>· {l.recruiter_name}</span> : null}</div>
+                    <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>
+                      Aufrufe: {l.access_count} · {isRevoked ? 'Widerrufen' : isExpired ? 'Abgelaufen' : `Gültig bis ${l.expires_at ? new Date(l.expires_at).toLocaleDateString('de-DE') : 'unbegrenzt'}`}
+                    </div>
                   </div>
+                  {!isRevoked && (
+                    <button onClick={() => revoke(l.id)} className="text-xs px-3 py-1.5 rounded-lg" style={{ background: 'var(--color-danger-light)', color: 'var(--color-danger)' }}>Widerrufen</button>
+                  )}
                 </div>
-                {!isRevoked && (
-                  <button onClick={() => revoke(l.id)} className="text-xs px-3 py-1.5 rounded-lg" style={{ background: 'var(--color-danger-light)', color: 'var(--color-danger)' }}>Widerrufen</button>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      )}
+              );
+            })}
+          </div>
+        );
+      })()}
     </div>
   );
 }
