@@ -633,6 +633,7 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
   const [editExpiryDate, setEditExpiryDate] = useState('');
   const [editVerificationUrl, setEditVerificationUrl] = useState('');
   const [editLogoUrl, setEditLogoUrl] = useState('');
+  const [uploadingLogo, setUploadingLogo] = useState(false);
 
   async function add(e: React.FormEvent) {
     e.preventDefault();
@@ -685,6 +686,19 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
     onChanged();
   }
 
+  async function uploadLogo(certId: string, file: File) {
+    setUploadingLogo(true);
+    const formData = new FormData();
+    formData.append('file', file);
+    await fetch(`/api/admin/candidate/certifications/${certId}/logo`, {
+      method: 'POST',
+      headers: await authHeader(),
+      body: formData,
+    });
+    setUploadingLogo(false);
+    onChanged();
+  }
+
   async function remove(id: string) {
     await fetch(`/api/admin/candidate/certifications/${id}`, { method: 'DELETE', headers: await authHeader() });
     onChanged();
@@ -727,7 +741,12 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
                   <input type="date" value={editIssueDate} onChange={(e) => setEditIssueDate(e.target.value)} className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
                   <input type="date" value={editExpiryDate} onChange={(e) => setEditExpiryDate(e.target.value)} title="Gültig bis" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
                   <input value={editVerificationUrl} onChange={(e) => setEditVerificationUrl(e.target.value)} placeholder="Verifizierungs-URL" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
-                  <input value={editLogoUrl} onChange={(e) => setEditLogoUrl(e.target.value)} placeholder="Logo-URL" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <input value={editLogoUrl} onChange={(e) => setEditLogoUrl(e.target.value)} placeholder="Logo-URL (extern)" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+                  <label className="flex items-center justify-center gap-1.5 text-xs rounded px-2 py-1.5 cursor-pointer" style={{ background: 'var(--color-panel-alt)', color: 'var(--color-text-muted)' }}>
+                    {uploadingLogo ? <Loader2 size={13} className="animate-spin" /> : <Upload size={13} />}
+                    {uploadingLogo ? 'Wird hochgeladen…' : 'Oder Badge-Bild hochladen'}
+                    <input type="file" accept="image/jpeg,image/png,image/webp" className="hidden" disabled={uploadingLogo} onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadLogo(c.id, f); }} />
+                  </label>
                   <div className="sm:col-span-2 flex gap-2">
                     <button onClick={() => saveEdit(c.id)} className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}><Check size={12} /> Speichern</button>
                     <button onClick={() => setEditingId(null)} className="text-xs px-3 py-1.5 rounded-lg" style={{ background: 'var(--color-panel)', color: 'var(--color-text-muted)' }}>Abbrechen</button>

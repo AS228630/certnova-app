@@ -126,6 +126,32 @@ function BrandLogo({ url, alt, size = 44 }: { url: string | null; alt: string; s
   );
 }
 
+/**
+ * Certification-logo-specific variant: logo_url can be either an
+ * external http(s) URL (pasted by the admin, rendered directly) or an
+ * internal Storage path (from a direct badge-image upload — never
+ * starts with http). For the latter, a signed URL is resolved via the
+ * admin logo-view endpoint before rendering, since the bucket is
+ * private and has no permanent public URL.
+ */
+function CertLogo({ certId, logoUrl, alt, size = 48 }: { certId: string; logoUrl: string | null; alt: string; size?: number }) {
+  const [resolvedUrl, setResolvedUrl] = useState<string | null>(logoUrl && logoUrl.startsWith('http') ? logoUrl : null);
+
+  useEffect(() => {
+    if (!logoUrl || logoUrl.startsWith('http')) {
+      Promise.resolve().then(() => setResolvedUrl(logoUrl));
+      return;
+    }
+    authHeader()
+      .then((headers) => fetch(`/api/admin/candidate/certifications/${certId}/logo/view`, { headers }))
+      .then((res) => res.json())
+      .then((j) => setResolvedUrl(j.url ?? null))
+      .catch(() => setResolvedUrl(null));
+  }, [certId, logoUrl]);
+
+  return <BrandLogo url={resolvedUrl} alt={alt} size={size} />;
+}
+
 function CvDownloadButton({ documentId }: { documentId: string }) {
   async function download() {
     const res = await fetch(`/api/admin/candidate/documents/${documentId}/view?download=true`, { headers: await authHeader() });
@@ -421,7 +447,7 @@ export default function CandidateProfilePreviewPage() {
                         className="flex flex-col items-center text-center rounded-xl p-4 transition-transform"
                         style={{ background: `linear-gradient(180deg, ${COLORS.cardBorder} 0%, ${COLORS.card} 100%)`, border: `1px solid ${COLORS.cardBorder}` }}
                       >
-                        <BrandLogo url={c.logo_url} alt={c.issuer} size={48} />
+                        <CertLogo certId={c.id} logoUrl={c.logo_url} alt={c.issuer} size={48} />
                         <div className="text-sm font-semibold mt-2.5" style={{ color: COLORS.textPrimary }}>{c.name}</div>
                         <div className="text-[11px] mt-0.5" style={{ color: COLORS.textSecondary }}>{c.issuer}</div>
                         <div className="text-[10px] mt-1" style={{ color: COLORS.textSecondary }}>Ausgestellt: {fmtMonthYear(c.issue_date)}</div>

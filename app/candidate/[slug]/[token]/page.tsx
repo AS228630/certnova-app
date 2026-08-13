@@ -67,6 +67,27 @@ function BrandLogo({ url, alt, size = 44 }: { url: string | null; alt: string; s
   }
   return <div className="flex items-center justify-center font-bold" style={{ width: size, height: size, borderRadius: 10, background: COLORS.cardBorder, color: COLORS.textSecondary, fontSize: size * 0.4 }}>{alt.slice(0, 1).toUpperCase()}</div>;
 }
+
+/** Public-side certification logo: resolves an internal Storage path
+ * (uploaded badge image, never starts with http) to a fresh signed
+ * URL via the token-gated logo endpoint. An external URL (pasted by
+ * the admin) is used directly. */
+function CertLogo({ token, certId, logoUrl, alt, size = 48 }: { token: string; certId: string; logoUrl: string | null; alt: string; size?: number }) {
+  const [resolvedUrl, setResolvedUrl] = useState<string | null>(logoUrl && logoUrl.startsWith('http') ? logoUrl : null);
+
+  useEffect(() => {
+    if (!logoUrl || logoUrl.startsWith('http')) {
+      Promise.resolve().then(() => setResolvedUrl(logoUrl));
+      return;
+    }
+    fetch(`/api/candidate/${token}/certifications/${certId}/logo`)
+      .then((res) => res.json())
+      .then((j) => setResolvedUrl(j.url ?? null))
+      .catch(() => setResolvedUrl(null));
+  }, [token, certId, logoUrl]);
+
+  return <BrandLogo url={resolvedUrl} alt={alt} size={size} />;
+}
 function Card({ children }: { children: React.ReactNode }) {
   return <div className="rounded-xl p-5" style={{ background: COLORS.card, border: `1px solid ${COLORS.cardBorder}` }}>{children}</div>;
 }
@@ -386,7 +407,7 @@ export default function PublicCandidateProfilePage() {
                     const status = certStatus(c.expiry_date);
                     return (
                       <div key={c.id} className="flex flex-col items-center text-center rounded-xl p-4" style={{ background: `linear-gradient(180deg, ${COLORS.cardBorder} 0%, ${COLORS.card} 100%)`, border: `1px solid ${COLORS.cardBorder}` }}>
-                        <BrandLogo url={c.logo_url} alt={c.issuer} size={48} />
+                        <CertLogo token={token} certId={c.id} logoUrl={c.logo_url} alt={c.issuer} size={48} />
                         <div className="text-sm font-semibold mt-2.5" style={{ color: COLORS.textPrimary }}>{c.name}</div>
                         <div className="text-[11px] mt-0.5" style={{ color: COLORS.textSecondary }}>{c.issuer}</div>
                         <div className="text-[10px] mt-1" style={{ color: COLORS.textSecondary }}>Ausgestellt: {fmtMonthYear(c.issue_date)}</div>
