@@ -25,23 +25,10 @@ export async function POST(req: NextRequest) {
   const expiresInDays = typeof body.expiresInDays === 'number' ? body.expiresInDays : 30;
   const documentIds: string[] = Array.isArray(body.documentIds) ? body.documentIds : [];
 
-  // A cosmetic, human-readable slug (candidate's name) so the link
-  // looks like a real professional URL instead of a bare random
-  // string — reduces the chance a company mistakes it for a phishing
-  // link. Carries zero security weight (see the route's own doc
-  // comment / the frontend page's matching comment) — every lookup
-  // still happens purely via the token's hash.
-  const { data: candidateProfile } = await supabase
-    .from('candidate_profiles')
-    .select('display_name')
-    .eq('id', body.candidateId)
-    .maybeSingle();
-  const slug = (candidateProfile?.display_name ?? 'kandidat')
-    .toLowerCase()
-    .normalize('NFKD').replace(/[\u0300-\u036f]/g, '') // strip accents (ä -> a, etc.)
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '') || 'kandidat';
-
+  // Per the advisor's final URL design decision, the URL is now
+  // /c/{token} — a short (128-bit, ~22 char), URL-safe token, no
+  // separate name-slug segment needed anymore (see
+  // lib/candidate/shareLinkAuth.ts for the length/entropy rationale).
   const rawToken = generateShareToken();
   const { data: link, error: linkError } = await supabase
     .from('share_links')
@@ -103,7 +90,7 @@ export async function POST(req: NextRequest) {
       // hashes exist afterward).
       rawToken,
       rawAccessCode,
-      shareUrl: `/candidate/${slug}/${rawToken}`,
+      shareUrl: `/c/${rawToken}`,
     },
     { status: 201 },
   );

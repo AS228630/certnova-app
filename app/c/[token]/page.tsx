@@ -183,15 +183,12 @@ function ConfidentialSection({ token, docs, requireCode, onUnlocked }: { token: 
 
 export default function PublicCandidateProfilePage() {
   // The [slug] segment (candidate's name, e.g. "ataullah-senmas") is
-  // purely cosmetic — makes the URL look like a real professional
-  // link instead of a bare random string, matching what a company
-  // expects to see and reducing the chance it's mistaken for a
-  // phishing link. It carries ZERO security weight and is never
-  // checked: only the token segment is looked up (as its hash) by
-  // every /api/candidate/[token]/* route. A wrong or missing slug in
-  // the URL still works exactly the same, as long as the token is
-  // correct.
-  const params = useParams<{ slug: string; token: string }>();
+  // Per the advisor's final URL design decision: the standalone name
+  // slug was dropped in favor of a shorter, cleaner token (128-bit,
+  // ~22 characters) at /c/{token} — no cosmetic segment needed
+  // anymore since the token itself is now short enough to look like a
+  // normal, professional share link on its own.
+  const params = useParams<{ token: string }>();
   const token = params.token;
   const [data, setData] = useState<ProfileResponse | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);

@@ -7,9 +7,19 @@ import { randomBytes, createHash, scryptSync, timingSafeEqual } from 'crypto';
  * in the database.
  */
 
-/** 256-bit cryptographically secure token for a share link, base64url encoded. */
+/**
+ * 128-bit cryptographically secure token for a share link, base64url
+ * encoded (~22 characters) — per the advisor's final URL design
+ * decision (Aug 2026): short enough for a clean /c/{token} URL in a
+ * CV/email, while still meeting the explicit "at least 128-bit
+ * entropy" floor (crypto.randomBytes, never Math.random). Previously
+ * 256 bits/43 characters — that was cryptographically fine but
+ * unnecessarily long for this use case; 128 bits is still considered
+ * effectively unbreakable by brute force (matches, e.g., a standard
+ * AES-128 key).
+ */
 export function generateShareToken(): string {
-  return randomBytes(32).toString('base64url');
+  return randomBytes(16).toString('base64url');
 }
 
 /** SHA-256 is fine for the share token: it's already 256 bits of real

@@ -2,6 +2,26 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  async redirects() {
+    return [
+      // Old candidate-profile share-link URL format
+      // (/candidate/{name-slug}/{token}) -> new short format
+      // (/c/{token}). Per the advisor's final URL design decision:
+      // the URL got shorter (128-bit token instead of 256-bit, no
+      // cosmetic name segment anymore), but no previously-issued link
+      // should silently break — this preserves the {token} segment
+      // exactly and just changes the path shape around it. The old
+      // long token still hashes and verifies correctly either way
+      // (verifyShareToken doesn't care about token length), so an
+      // old-format link keeps working via this redirect even though
+      // new links are issued in the shorter /c/{token} form.
+      {
+        source: '/candidate/:slug/:token',
+        destination: '/c/:token',
+        permanent: false,
+      },
+    ];
+  },
   async headers() {
     return [
       {
