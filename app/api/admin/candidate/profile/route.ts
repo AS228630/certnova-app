@@ -72,9 +72,13 @@ export async function PUT(req: NextRequest) {
   };
   // Only included when the caller actually sends it, so existing
   // saves keep working even before migration 036
-  // (candidate_profiles.desired_positions) has been run.
+  // (candidate_profiles.desired_positions) or migration 039
+  // (candidate_profiles.website_url) has been run.
   if (Array.isArray(body.desiredPositions)) {
     payload.desired_positions = body.desiredPositions;
+  }
+  if (body.websiteUrl !== undefined) {
+    payload.website_url = body.websiteUrl || null;
   }
 
   const { data, error } = existing

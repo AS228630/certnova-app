@@ -58,6 +58,7 @@ type Profile = {
   email: string | null;
   linkedin_url: string | null;
   github_url: string | null;
+  website_url: string | null;
   work_mode: string | null;
   profile_photo_path: string | null;
   desired_positions: string[] | null;
@@ -290,6 +291,11 @@ export default function CandidateProfilePreviewPage() {
                 {profile.github_url && (
                   <a href={profile.github_url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 text-sm py-2.5 rounded-lg" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}>
                     <Github size={14} /> GitHub Profil
+                  </a>
+                )}
+                {profile.website_url && (
+                  <a href={profile.website_url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 text-sm py-2.5 rounded-lg" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}>
+                    <Globe size={14} /> Website
                   </a>
                 )}
               </div>

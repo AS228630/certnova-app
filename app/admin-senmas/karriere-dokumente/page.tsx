@@ -33,6 +33,7 @@ type Profile = {
   email: string | null;
   linkedin_url: string | null;
   github_url: string | null;
+  website_url: string | null;
   profile_photo_path: string | null;
   desired_positions: string[] | null;
 };
@@ -117,6 +118,7 @@ function ProfileForm({ profile, onSaved }: { profile: Profile | null; onSaved: (
   const [email, setEmail] = useState(profile?.email ?? '');
   const [linkedin, setLinkedin] = useState(profile?.linkedin_url ?? '');
   const [github, setGithub] = useState(profile?.github_url ?? '');
+  const [website, setWebsite] = useState(profile?.website_url ?? '');
   const [desiredPositions, setDesiredPositions] = useState((profile?.desired_positions ?? []).join(', '));
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -156,7 +158,7 @@ function ProfileForm({ profile, onSaved }: { profile: Profile | null; onSaved: (
       headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
       body: JSON.stringify({
         displayName, professionalTitle: title, bio, location, availability, workMode,
-        email, linkedinUrl: linkedin, githubUrl: github,
+        email, linkedinUrl: linkedin, githubUrl: github, websiteUrl: website,
         desiredPositions: desiredPositions.split(',').map((s) => s.trim()).filter(Boolean),
       }),
     });
@@ -235,6 +237,10 @@ function ProfileForm({ profile, onSaved }: { profile: Profile | null; onSaved: (
         <div>
           <label className="block text-xs mb-1" style={{ color: 'var(--color-text-muted)' }}>GitHub</label>
           <input value={github} onChange={(e) => setGithub(e.target.value)} className="w-full text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
+        </div>
+        <div>
+          <label className="block text-xs mb-1" style={{ color: 'var(--color-text-muted)' }}>Website</label>
+          <input value={website} onChange={(e) => setWebsite(e.target.value)} placeholder="z. B. https://www.certcoach.de" className="w-full text-sm rounded-lg px-3 py-2" style={{ background: 'var(--color-panel-alt)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
         </div>
       </div>
       {error && <p className="text-xs mt-3" style={{ color: 'var(--color-danger)' }}>{error}</p>}

@@ -19,7 +19,7 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ toke
   const { link } = verified;
 
   const [{ data: profile }, { data: skills }, { data: certifications }, { data: experiences }, { data: projects }, { data: education }, { data: documents }, { data: grantedDocIds }] = await Promise.all([
-    supabase.from('candidate_profiles').select('id, display_name, professional_title, bio, location, availability, work_mode, email, linkedin_url, github_url, profile_photo_path, desired_positions, created_at').eq('id', link.candidate_id).maybeSingle(),
+    supabase.from('candidate_profiles').select('id, display_name, professional_title, bio, location, availability, work_mode, email, linkedin_url, github_url, website_url, profile_photo_path, desired_positions, created_at').eq('id', link.candidate_id).maybeSingle(),
     supabase.from('candidate_skills').select('*').eq('candidate_id', link.candidate_id).eq('is_public', true).order('sort_order'),
     supabase.from('candidate_certifications').select('*').eq('candidate_id', link.candidate_id).eq('is_public', true).order('sort_order'),
     supabase.from('candidate_experiences').select('*').eq('candidate_id', link.candidate_id).eq('is_public', true).order('sort_order'),

@@ -26,7 +26,7 @@ const COLORS = {
 type Profile = {
   display_name: string; professional_title: string | null; bio: string | null; location: string | null;
   availability: 'available' | 'open' | 'unavailable' | null; work_mode: string | null; email: string | null;
-  linkedin_url: string | null; github_url: string | null; desired_positions: string[] | null; created_at: string;
+  linkedin_url: string | null; github_url: string | null; website_url: string | null; desired_positions: string[] | null; created_at: string;
 };
 type Skill = { id: string; category: string; name: string; level: string | null };
 type Certification = { id: string; issuer: string; name: string; issue_date: string | null; expiry_date: string | null; verification_url: string | null; logo_url: string | null };
@@ -250,6 +250,7 @@ export default function PublicCandidateProfilePage() {
                 )}
                 {profile.linkedin_url && <a href={profile.linkedin_url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 text-sm py-2.5 rounded-lg" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}><Linkedin size={14} /> LinkedIn Profil</a>}
                 {profile.github_url && <a href={profile.github_url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 text-sm py-2.5 rounded-lg" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}><Github size={14} /> GitHub Profil</a>}
+                {profile.website_url && <a href={profile.website_url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 text-sm py-2.5 rounded-lg" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}><Globe size={14} /> Website</a>}
               </div>
             </Card>
 
