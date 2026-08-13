@@ -1,0 +1,99 @@
+# Company Logo Rule (Global, Permanent)
+
+Established Aug 2026 by the senior advisor. This is a standing rule
+for the whole project — anyone (human or Claude) working on
+Certificates, Company Profiles, PDFs, or any related page must follow
+this without needing a fresh instruction each time.
+
+## The rule
+
+> **A company logo must be real, traceable, and sourced from that
+> company's own official source. Fabricated, guessed, AI-generated,
+> or "close enough" lookalike logos are forbidden. Every logo must
+> have a recorded Source. If no verifiable official logo exists, the
+> system shows no logo / an explicit "Logo unavailable" state — it
+> never invents one.**
+
+## Concrete requirements
+
+1. Nobody (including Claude) designs a logo or generates one with AI.
+2. Before any logo is added, find that company's own official source
+   — preferably their official website or an official brand/press
+   page — never a generic image search result.
+3. The **real** logo from that source is what gets used.
+4. Logo files are stored as **project assets**, not uploaded through
+   the admin UI into Supabase Storage: `public/logos/companies/<slug>.svg`
+   (e.g. `microsoft.svg`, `comptia.svg`, `peoplecert.svg`). Public,
+   static, versioned in git — appropriate because these are public
+   brand assets, not private candidate content, and this makes the
+   same file usable identically on the web page and in a generated
+   PDF with zero Storage/signed-URL complexity.
+5. Filenames are the company's own lowercase slug — clear and
+   traceable, not a random ID.
+6. If no usable official logo is found, do not substitute a similar
+   or generic one. The company record's logo field stays empty and
+   the UI shows an explicit "Logo unavailable" / initial-letter
+   fallback (already implemented — see `BrandLogo`/`CertLogo` in
+   `app/admin-senmas/candidate-profile-preview/page.tsx` and
+   `app/c/[token]/page.tsx`).
+7. Every logo's origin is recorded (see `companies.logo_source_url`
+   in the schema below) — so it's always possible to check later
+   where a given logo actually came from.
+8. Preferred format: SVG (scales cleanly, small file size). PNG only
+   if no official SVG exists — must still be reasonably high
+   resolution, not a thumbnail.
+9. A logo is never stretched, skewed, flipped, recolored, or
+   otherwise altered from the official version.
+10. The exact same asset is used in both the web page and any
+    generated Certificate PDF — one source of truth per company, not
+    a separate copy per document type.
+
+## Schema implication (proposed, NOT yet executed)
+
+The current schema has no shared "company/issuer" entity — every
+certification's `logo_url` and every experience's `company_logo_url`
+is independent, so the same company's logo has to be re-uploaded per
+record. Proposed fix, drafted for review, not run:
+
+```sql
+create table if not exists public.companies (
+  id uuid primary key default gen_random_uuid(),
+  name text not null unique,          -- source of truth for identity,
+                                       -- not a filename or URL
+  official_website text,
+  logo_asset_path text,               -- e.g. '/logos/companies/microsoft.svg'
+  logo_source_url text,               -- where this logo actually came
+                                       -- from, for traceability (rule #7)
+  verified boolean not null default false,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+alter table public.candidate_certifications
+  add column if not exists company_id uuid references public.companies(id),
+  add column if not exists logo_snapshot_path text; -- immutable copy of
+    -- the logo path at issuance time, so a later company-logo change
+    -- doesn't retroactively alter an already-issued certificate's
+    -- display (open policy question, see below)
+
+alter table public.candidate_experiences
+  add column if not exists company_id uuid references public.companies(id);
+```
+
+**Open policy question, not yet decided:** when a company's logo
+changes later, should already-issued certifications keep showing the
+logo as it was at issuance (`logo_snapshot_path`), or always show the
+current company logo? Leaning toward snapshot-at-issuance as more
+historically accurate, but this needs an explicit decision before the
+migration is finalized.
+
+## Status as of this doc
+
+- Rule recorded here — permanent, no re-briefing needed for future
+  work on this feature.
+- Schema above is a **draft**, not executed. No migration has been
+  run for this yet.
+- No `public/logos/companies/` assets have been added yet — sourcing
+  real official logos for CompTIA, PeopleCert (ITIL), and Microsoft
+  is the next concrete step, one at a time, each with its source
+  documented per this rule.
