@@ -14,7 +14,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import {
   Loader2, MapPin, Mail, Linkedin, Github, FileText, Lock, ShieldCheck,
-  Briefcase, Award, Download, ExternalLink, Globe, Eye, EyeOff, AlertCircle, CheckCircle2, BarChart3, FolderGit2,
+  Briefcase, Award, Download, ExternalLink, Globe, Eye, EyeOff, AlertCircle, CheckCircle2, BarChart3, FolderGit2, X,
 } from 'lucide-react';
 
 const COLORS = {
@@ -89,6 +89,46 @@ function CertLogo({ token, certId, logoUrl, alt, size = 48 }: { token: string; c
 
   return <BrandLogo url={resolvedUrl} alt={alt} size={size} />;
 }
+/** Click-to-enlarge profile photo, Instagram/Facebook-style — same
+ * component/behavior as the admin preview page. */
+function PhotoLightbox({ url, alt, onClose }: { url: string; alt: string; onClose: () => void }) {
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose();
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={alt}
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center p-6"
+      style={{ background: 'rgba(2,11,20,0.92)' }}
+    >
+      <button
+        onClick={onClose}
+        aria-label="Schließen"
+        className="absolute top-5 right-5 flex items-center justify-center w-10 h-10 rounded-full"
+        style={{ background: 'rgba(255,255,255,0.1)' }}
+      >
+        <X size={20} color="#fff" />
+      </button>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={url}
+        alt={alt}
+        onClick={(e) => e.stopPropagation()}
+        className="max-w-full max-h-full rounded-xl object-contain"
+        style={{ boxShadow: '0 0 60px rgba(0,0,0,0.5)' }}
+      />
+    </div>
+  );
+}
+
 function Card({ children }: { children: React.ReactNode }) {
   return <div className="rounded-xl p-5" style={{ background: COLORS.card, border: `1px solid ${COLORS.cardBorder}` }}>{children}</div>;
 }
@@ -194,6 +234,7 @@ export default function PublicCandidateProfilePage() {
   const [data, setData] = useState<ProfileResponse | undefined>(undefined);
   const [error, setError] = useState<string | null>(null);
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+  const [photoLightboxOpen, setPhotoLightboxOpen] = useState(false);
 
   const load = useCallback(() => {
     fetch(`/api/candidate/${token}`)
@@ -261,7 +302,13 @@ export default function PublicCandidateProfilePage() {
           <div className="space-y-4">
             <Card>
               <div className="text-center mb-4">
-                <div className="w-20 h-20 rounded-full mx-auto mb-3 overflow-hidden flex items-center justify-center text-2xl font-bold" style={{ background: `${COLORS.red}22`, color: COLORS.red, border: `2px solid ${COLORS.red}` }}>
+                <div
+                  className="w-20 h-20 rounded-full mx-auto mb-3 overflow-hidden flex items-center justify-center text-2xl font-bold"
+                  style={{ background: `${COLORS.red}22`, color: COLORS.red, border: `2px solid ${COLORS.red}`, cursor: photoUrl ? 'pointer' : 'default' }}
+                  onClick={() => photoUrl && setPhotoLightboxOpen(true)}
+                  role={photoUrl ? 'button' : undefined}
+                  aria-label={photoUrl ? 'Profilbild vergrößern' : undefined}
+                >
                   {photoUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={photoUrl} alt={profile.display_name} className="w-full h-full object-cover" />
@@ -269,6 +316,9 @@ export default function PublicCandidateProfilePage() {
                     profile.display_name.split(' ').map((n: string) => n[0]).join('').slice(0, 2).toUpperCase()
                   )}
                 </div>
+                {photoLightboxOpen && photoUrl && (
+                  <PhotoLightbox url={photoUrl} alt={profile.display_name} onClose={() => setPhotoLightboxOpen(false)} />
+                )}
                 {profile.availability && (
                   <span className="inline-flex items-center gap-1.5 text-[11px] px-2.5 py-1 rounded-full mb-3" style={{ background: 'rgba(53,208,127,0.12)', color: COLORS.green }}>
                     <span className="w-1.5 h-1.5 rounded-full" style={{ background: COLORS.green }} /> {AVAILABILITY_LABEL[profile.availability]}
