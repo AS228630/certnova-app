@@ -755,7 +755,14 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
               ) : (
                 <div className="flex items-center justify-between text-sm">
                   <div>
-                    <div>{c.name} <span style={{ color: 'var(--color-text-faint)' }}>· {c.issuer}</span></div>
+                    <div className="flex items-center gap-2">
+                      {c.name} <span style={{ color: 'var(--color-text-faint)' }}>· {c.issuer}</span>
+                      {!c.issue_date && !c.credential_id && !c.verification_url && (
+                        <span className="text-[10px] px-2 py-0.5 rounded-full" style={{ background: 'var(--color-warning-light, rgba(245,158,11,0.15))', color: 'var(--color-warning, #F59E0B)' }}>
+                          In Vorbereitung — noch nicht erhalten
+                        </span>
+                      )}
+                    </div>
                     <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>
                       {c.issue_date ? new Date(c.issue_date).toLocaleDateString('de-DE') : '—'}
                       {c.expiry_date ? ` · gültig bis ${new Date(c.expiry_date).toLocaleDateString('de-DE')}` : ''}
