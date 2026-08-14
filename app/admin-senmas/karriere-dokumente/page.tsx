@@ -634,6 +634,7 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
   const [editVerificationUrl, setEditVerificationUrl] = useState('');
   const [editLogoUrl, setEditLogoUrl] = useState('');
   const [uploadingLogo, setUploadingLogo] = useState(false);
+  const [editError, setEditError] = useState<string | null>(null);
 
   async function add(e: React.FormEvent) {
     e.preventDefault();
@@ -663,7 +664,8 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
   }
 
   async function saveEdit(id: string) {
-    await fetch(`/api/admin/candidate/certifications/${id}`, {
+    setEditError(null);
+    const res = await fetch(`/api/admin/candidate/certifications/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
       body: JSON.stringify({
@@ -673,6 +675,11 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
         verificationUrl: editVerificationUrl || null, logoUrl: editLogoUrl || undefined,
       }),
     });
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      setEditError(j.error ?? `Fehler beim Speichern (${res.status}).`);
+      return; // keep the edit form open with the entered values so nothing is lost
+    }
     setEditingId(null);
     onChanged();
   }
@@ -747,9 +754,10 @@ function CertificationsSection({ candidateId, certifications, onChanged }: { can
                     {uploadingLogo ? 'Wird hochgeladen…' : 'Oder Badge-Bild hochladen'}
                     <input type="file" accept="image/jpeg,image/png,image/webp" className="hidden" disabled={uploadingLogo} onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadLogo(c.id, f); }} />
                   </label>
-                  <div className="sm:col-span-2 flex gap-2">
+                  <div className="sm:col-span-2 flex gap-2 items-center">
                     <button onClick={() => saveEdit(c.id)} className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}><Check size={12} /> Speichern</button>
                     <button onClick={() => setEditingId(null)} className="text-xs px-3 py-1.5 rounded-lg" style={{ background: 'var(--color-panel)', color: 'var(--color-text-muted)' }}>Abbrechen</button>
+                    {editError && <span className="text-xs" style={{ color: 'var(--color-danger)' }}>{editError}</span>}
                   </div>
                 </div>
               ) : (
