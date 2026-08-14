@@ -515,27 +515,40 @@ function SkillsSection({ candidateId, skills, onChanged }: { candidateId: string
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editName, setEditName] = useState('');
   const [editLevel, setEditLevel] = useState('');
+  const [formError, setFormError] = useState<string | null>(null);
 
   async function add(e: React.FormEvent) {
     e.preventDefault();
     if (!name) return;
     setSaving(true);
-    await fetch('/api/admin/candidate/skills', {
+    setFormError(null);
+    const res = await fetch('/api/admin/candidate/skills', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
       body: JSON.stringify({ candidateId, category, name, level: level || undefined }),
     });
-    setName(''); setLevel('');
     setSaving(false);
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      setFormError(j.error ?? `Fehler beim Speichern (${res.status}).`);
+      return;
+    }
+    setName(''); setLevel('');
     onChanged();
   }
 
   async function saveEdit(id: string) {
-    await fetch(`/api/admin/candidate/skills/${id}`, {
+    setFormError(null);
+    const res = await fetch(`/api/admin/candidate/skills/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
       body: JSON.stringify({ name: editName, level: editLevel || null }),
     });
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      setFormError(j.error ?? `Fehler beim Speichern (${res.status}).`);
+      return;
+    }
     setEditingId(null);
     onChanged();
   }
@@ -575,6 +588,7 @@ function SkillsSection({ candidateId, skills, onChanged }: { candidateId: string
           <Plus size={14} /> Hinzufügen
         </button>
       </form>
+      {formError && <p className="text-xs mb-3" style={{ color: 'var(--color-danger)' }}>{formError}</p>}
       {Object.keys(grouped).length === 0 ? (
         <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Fähigkeiten hinzugefügt.</p>
       ) : (
@@ -819,12 +833,14 @@ function ExperienceSection({ candidateId, experiences, onChanged }: { candidateI
   const [editDescription, setEditDescription] = useState('');
   const [editCompanyLogoUrl, setEditCompanyLogoUrl] = useState('');
   const [editCompanyWebsiteUrl, setEditCompanyWebsiteUrl] = useState('');
+  const [formError, setFormError] = useState<string | null>(null);
 
   async function add(e: React.FormEvent) {
     e.preventDefault();
     if (!roleTitle || !companyName) return;
     setSaving(true);
-    await fetch('/api/admin/candidate/experiences', {
+    setFormError(null);
+    const res = await fetch('/api/admin/candidate/experiences', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
       body: JSON.stringify({
@@ -837,8 +853,13 @@ function ExperienceSection({ candidateId, experiences, onChanged }: { candidateI
         companyWebsiteUrl: companyWebsiteUrl || undefined,
       }),
     });
-    setRoleTitle(''); setCompanyName(''); setLocation(''); setStartDate(''); setEndDate(''); setDescription(''); setCompanyLogoUrl(''); setCompanyWebsiteUrl('');
     setSaving(false);
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      setFormError(j.error ?? `Fehler beim Speichern (${res.status}).`);
+      return;
+    }
+    setRoleTitle(''); setCompanyName(''); setLocation(''); setStartDate(''); setEndDate(''); setDescription(''); setCompanyLogoUrl(''); setCompanyWebsiteUrl('');
     onChanged();
   }
 
@@ -850,7 +871,8 @@ function ExperienceSection({ candidateId, experiences, onChanged }: { candidateI
   }
 
   async function saveEdit(id: string) {
-    await fetch(`/api/admin/candidate/experiences/${id}`, {
+    setFormError(null);
+    const res = await fetch(`/api/admin/candidate/experiences/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
       body: JSON.stringify({
@@ -859,6 +881,11 @@ function ExperienceSection({ candidateId, experiences, onChanged }: { candidateI
         companyLogoUrl: editCompanyLogoUrl || undefined, companyWebsiteUrl: editCompanyWebsiteUrl || undefined,
       }),
     });
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      setFormError(j.error ?? `Fehler beim Speichern (${res.status}).`);
+      return;
+    }
     setEditingId(null);
     onChanged();
   }
@@ -895,6 +922,7 @@ function ExperienceSection({ candidateId, experiences, onChanged }: { candidateI
           <Plus size={14} /> Hinzufügen
         </button>
       </form>
+      {formError && <p className="text-xs mb-3" style={{ color: 'var(--color-danger)' }}>{formError}</p>}
       {experiences.length === 0 ? (
         <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Berufserfahrung hinzugefügt.</p>
       ) : (
@@ -913,9 +941,10 @@ function ExperienceSection({ candidateId, experiences, onChanged }: { candidateI
                   <input value={editCompanyLogoUrl} onChange={(e) => setEditCompanyLogoUrl(e.target.value)} placeholder="Firmen-Logo-URL" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
                   <input value={editCompanyWebsiteUrl} onChange={(e) => setEditCompanyWebsiteUrl(e.target.value)} placeholder="Firmen-Website" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
                   <textarea value={editDescription} onChange={(e) => setEditDescription(e.target.value)} placeholder="Beschreibung" rows={2} className="sm:col-span-2 text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
-                  <div className="sm:col-span-2 flex gap-2">
+                  <div className="sm:col-span-2 flex gap-2 items-center">
                     <button onClick={() => saveEdit(exp.id)} className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}><Check size={12} /> Speichern</button>
                     <button onClick={() => setEditingId(null)} className="text-xs px-3 py-1.5 rounded-lg" style={{ background: 'var(--color-panel)', color: 'var(--color-text-muted)' }}>Abbrechen</button>
+                    {formError && <span className="text-xs" style={{ color: 'var(--color-danger)' }}>{formError}</span>}
                   </div>
                 </div>
               ) : (
@@ -1140,7 +1169,8 @@ function EducationSection({ candidateId, education, onChanged }: { candidateId: 
   }
 
   async function saveEdit(id: string) {
-    await fetch(`/api/admin/candidate/education/${id}`, {
+    setError(null);
+    const res = await fetch(`/api/admin/candidate/education/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
       body: JSON.stringify({
@@ -1148,6 +1178,10 @@ function EducationSection({ candidateId, education, onChanged }: { candidateId: 
         graduationDate: editGraduationDate || null, logoUrl: editLogoUrl || null, websiteUrl: editWebsiteUrl || null,
       }),
     });
+    if (!res.ok) {
+      setError('Fehler beim Speichern.');
+      return;
+    }
     setEditingId(null);
     onChanged();
   }
@@ -1195,9 +1229,10 @@ function EducationSection({ candidateId, education, onChanged }: { candidateId: 
                   <input type="date" value={editGraduationDate} onChange={(e) => setEditGraduationDate(e.target.value)} className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
                   <input value={editLogoUrl} onChange={(e) => setEditLogoUrl(e.target.value)} placeholder="Logo-URL" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
                   <input value={editWebsiteUrl} onChange={(e) => setEditWebsiteUrl(e.target.value)} placeholder="Website" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
-                  <div className="sm:col-span-2 flex gap-2">
+                  <div className="sm:col-span-2 flex gap-2 items-center">
                     <button onClick={() => saveEdit(edu.id)} className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}><Check size={12} /> Speichern</button>
                     <button onClick={() => setEditingId(null)} className="text-xs px-3 py-1.5 rounded-lg" style={{ background: 'var(--color-panel)', color: 'var(--color-text-muted)' }}>Abbrechen</button>
+                    {error && <span className="text-xs" style={{ color: 'var(--color-danger)' }}>{error}</span>}
                   </div>
                 </div>
               ) : (
