@@ -961,12 +961,14 @@ function ProjectsSection({ candidateId, projects, onChanged }: { candidateId: st
   const [editTechnologies, setEditTechnologies] = useState('');
   const [editProjectUrl, setEditProjectUrl] = useState('');
   const [editRepoUrl, setEditRepoUrl] = useState('');
+  const [formError, setFormError] = useState<string | null>(null);
 
   async function add(e: React.FormEvent) {
     e.preventDefault();
     if (!title) return;
     setSaving(true);
-    await fetch('/api/admin/candidate/projects', {
+    setFormError(null);
+    const res = await fetch('/api/admin/candidate/projects', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
       body: JSON.stringify({
@@ -977,8 +979,13 @@ function ProjectsSection({ candidateId, projects, onChanged }: { candidateId: st
         repoUrl: repoUrl || undefined,
       }),
     });
-    setTitle(''); setDescription(''); setTechnologies(''); setProjectUrl(''); setRepoUrl('');
     setSaving(false);
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      setFormError(j.error ?? `Fehler beim Speichern (${res.status}).`);
+      return; // keep the entered values so nothing is lost
+    }
+    setTitle(''); setDescription(''); setTechnologies(''); setProjectUrl(''); setRepoUrl('');
     onChanged();
   }
 
@@ -989,7 +996,8 @@ function ProjectsSection({ candidateId, projects, onChanged }: { candidateId: st
   }
 
   async function saveEdit(id: string) {
-    await fetch(`/api/admin/candidate/projects/${id}`, {
+    setFormError(null);
+    const res = await fetch(`/api/admin/candidate/projects/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json', ...(await authHeader()) },
       body: JSON.stringify({
@@ -998,6 +1006,11 @@ function ProjectsSection({ candidateId, projects, onChanged }: { candidateId: st
         projectUrl: editProjectUrl || null, repoUrl: editRepoUrl || null,
       }),
     });
+    if (!res.ok) {
+      const j = await res.json().catch(() => ({}));
+      setFormError(j.error ?? `Fehler beim Speichern (${res.status}).`);
+      return;
+    }
     setEditingId(null);
     onChanged();
   }
@@ -1029,6 +1042,7 @@ function ProjectsSection({ candidateId, projects, onChanged }: { candidateId: st
           <Plus size={14} /> Hinzufügen
         </button>
       </form>
+      {formError && <p className="text-xs mb-3" style={{ color: 'var(--color-danger)' }}>{formError}</p>}
       {projects.length === 0 ? (
         <p className="text-xs" style={{ color: 'var(--color-text-faint)' }}>Noch keine Projekte hinzugefügt.</p>
       ) : (
@@ -1042,9 +1056,10 @@ function ProjectsSection({ candidateId, projects, onChanged }: { candidateId: st
                   <input value={editProjectUrl} onChange={(e) => setEditProjectUrl(e.target.value)} placeholder="Projekt-URL" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
                   <input value={editRepoUrl} onChange={(e) => setEditRepoUrl(e.target.value)} placeholder="Repository-URL" className="text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
                   <textarea value={editDescription} onChange={(e) => setEditDescription(e.target.value)} placeholder="Beschreibung" rows={2} className="sm:col-span-2 text-sm rounded px-2 py-1" style={{ background: 'var(--color-panel)', border: '1px solid var(--color-border-soft)', color: 'var(--color-text)' }} />
-                  <div className="sm:col-span-2 flex gap-2">
+                  <div className="sm:col-span-2 flex gap-2 items-center">
                     <button onClick={() => saveEdit(p.id)} className="flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg text-white" style={{ background: 'var(--color-primary)' }}><Check size={12} /> Speichern</button>
                     <button onClick={() => setEditingId(null)} className="text-xs px-3 py-1.5 rounded-lg" style={{ background: 'var(--color-panel)', color: 'var(--color-text-muted)' }}>Abbrechen</button>
+                    {formError && <span className="text-xs" style={{ color: 'var(--color-danger)' }}>{formError}</span>}
                   </div>
                 </div>
               ) : (
