@@ -94,14 +94,39 @@ never auto-updated by a later company logo change.
 
 ## Sourced logos log (rule #6 — every logo's origin recorded)
 
+Two directories, per the advisor's Aug 2026 clarification: generic
+issuer/company logos in `public/logos/companies/`, personal
+certificate-specific badge artwork in `public/logos/certifications/`
+— kept separate since they're conceptually different things, even
+though `candidate_certifications` currently only has a single
+`logo_url` text field to point at one of them (see "Known limitation"
+below).
+
 | File | Source | Notes |
 |---|---|---|
-| `public/logos/companies/comptia.svg` | [simple-icons](https://github.com/simple-icons/simple-icons) npm package v16.28.0, CC0-1.0 licensed, verified against CompTIA's official brand guidelines | Generic CompTIA wordmark — use for the company/issuer identity |
-| `public/logos/companies/comptia-a-plus-badge.png` | Cropped directly from the owner's own real CompTIA A+ certificate PDF (`CompTIA_A__ce_certificate.pdf`), official CompTIA-issued badge artwork | Certificate-specific badge — use as the logo_snapshot for this exact certification |
-| `public/logos/companies/itil.png` | Cropped directly from the owner's own real ITIL 4 Foundation certificate PDF (`e-cert.pdf`), official PeopleCert-issued ITIL logo | |
-| `public/logos/companies/peoplecert.png` | Cropped directly from the same real ITIL certificate PDF, official PeopleCert logo | Slight light-purple background remnant from the source document's decorative graphic — acceptable for now, can be cleaned up later if needed |
-| `public/logos/companies/microsoft.png` | Cropped directly from the owner's own real Microsoft Learn credential PDF (`2_5454392051107929349.pdf`), official Microsoft logo as shown on their own certificate | |
-| `public/logos/companies/microsoft-fundamentals-badge.png` | Cropped directly from the same real Microsoft Learn credential PDF, official "Microsoft Certified: Fundamentals" badge artwork | Certificate-specific badge |
+| `public/logos/companies/comptia.svg` | [simple-icons](https://github.com/simple-icons/simple-icons) npm package v16.28.0, CC0-1.0 licensed, verified against CompTIA's official brand guidelines | Generic CompTIA wordmark |
+| `public/logos/companies/peoplecert.png` | Cropped directly from the owner's own real ITIL 4 Foundation certificate PDF (`e-cert.pdf`), official PeopleCert logo | Generic PeopleCert wordmark. Slight light-purple background remnant from the source document's decorative graphic — acceptable for now |
+| `public/logos/companies/microsoft.png` | Cropped directly from the owner's own real Microsoft Learn credential PDF (`2_5454392051107929349.pdf`), official Microsoft logo as shown on their own certificate | Generic Microsoft wordmark |
+| `public/logos/certifications/comptia-a-plus-badge.png` | Cropped directly from the owner's own real CompTIA A+ certificate PDF, official CompTIA-issued badge artwork | Personal certificate badge — this is what's actually wired to `logo_url` today |
+| `public/logos/certifications/itil-badge.png` | Cropped directly from the owner's own real ITIL 4 Foundation certificate PDF, official ITIL logo as shown on that certificate | Personal certificate badge |
+| `public/logos/certifications/microsoft-fundamentals-badge.png` | Cropped directly from the owner's own real Microsoft Learn credential PDF, official "Microsoft Certified: Fundamentals" badge artwork | Personal certificate badge |
+
+### Known limitation (reported, not fixed without approval)
+
+`candidate_certifications` has only one usable text field for a logo
+(`logo_url`) — there is no separate `badge_url` column. A
+`badge_file_id` column exists, but it's a foreign key into
+`candidate_documents` (designed for an uploaded private file), not a
+simple text path to a public static asset, so it doesn't fit this use
+case as-is. Per the advisor's explicit "no new migration for this"
+instruction, the current wiring uses `logo_url` for the **personal
+certificate badge** (the `public/logos/certifications/*` files) since
+that's what's actually rendered on each certification card today. The
+generic `public/logos/companies/*` issuer logos are sourced and ready
+as project assets but are not wired to anything in the UI yet — would
+need either a schema change (a real `badge_url` column, or the
+previously-discussed `companies` table, both currently on hold) or a
+different UI concept (e.g. a separate "Issuer" display) to use them.
 
 
 
