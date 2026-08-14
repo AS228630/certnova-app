@@ -14,7 +14,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import {
   Loader2, MapPin, Mail, Linkedin, Github, FileText, Lock, ShieldCheck,
-  Briefcase, Award, Download, ExternalLink, Globe, Eye, EyeOff, AlertCircle, CheckCircle2, BarChart3,
+  Briefcase, Award, Download, ExternalLink, Globe, Eye, EyeOff, AlertCircle, CheckCircle2, BarChart3, FolderGit2,
 } from 'lucide-react';
 
 const COLORS = {
@@ -38,7 +38,7 @@ type ConfidentialDoc = { id: string; title: string; documentType: string | null;
 type ProfileResponse = {
   companyName: string; requireAccessCode: boolean; allowDownload: boolean;
   profile: Profile; skills: Skill[]; certifications: Certification[]; experiences: Experience[];
-  projects: { id: string; title: string; description: string | null; technologies: string[] | null }[];
+  projects: { id: string; title: string; description: string | null; technologies: string[] | null; project_url: string | null; repo_url: string | null }[];
   education: Education[]; publicDocuments: PublicDoc[]; confidentialDocuments: ConfidentialDoc[];
 };
 
@@ -234,6 +234,15 @@ export default function PublicCandidateProfilePage() {
   }
 
   const { profile } = data;
+  // Hoisted out of the Fähigkeiten IIFE below so it can be rendered
+  // later in the page, after Ausbildung — matching the exact section
+  // order used in the admin preview (candidate-profile-preview),
+  // per the 'one Design System, not two divergent orderings'
+  // requirement.
+  const topTechnologies = data.skills
+    .filter((s) => s.category !== 'Was mich auszeichnet' && s.level && !isNaN(Number(s.level)) && Number(s.level) > 0 && Number(s.level) <= 100)
+    .sort((a, b) => Number(b.level) - Number(a.level))
+    .slice(0, 6);
 
   return (
     <div className="min-h-screen" style={{ background: COLORS.bg }}>
@@ -337,69 +346,50 @@ export default function PublicCandidateProfilePage() {
               </Card>
             )}
 
-            {data.skills.length > 0 && (() => {
-              const STRENGTHS_CATEGORY = 'Was mich auszeichnet';
-              const strengths = data.skills.filter((s) => s.category === STRENGTHS_CATEGORY);
-              const regularSkills = data.skills.filter((s) => s.category !== STRENGTHS_CATEGORY);
-              const skillsByCategory = regularSkills.reduce<Record<string, Skill[]>>((acc, s) => { (acc[s.category] ??= []).push(s); return acc; }, {});
-              const topTechnologies = regularSkills
-                .filter((s) => s.level && !isNaN(Number(s.level)) && Number(s.level) > 0 && Number(s.level) <= 100)
-                .sort((a, b) => Number(b.level) - Number(a.level))
-                .slice(0, 6);
+            <Card>
+              <SectionHeader icon={Globe} title="Fähigkeiten" accent={COLORS.blue} />
+              {(() => {
+                const STRENGTHS_CATEGORY = 'Was mich auszeichnet';
+                const regularSkills = data.skills.filter((s) => s.category !== STRENGTHS_CATEGORY);
+                const skillsByCategory = regularSkills.reduce<Record<string, Skill[]>>((acc, s) => { (acc[s.category] ??= []).push(s); return acc; }, {});
+                if (Object.keys(skillsByCategory).length === 0) {
+                  return <p className="text-xs" style={{ color: COLORS.textSecondary }}>Noch keine öffentlichen Fähigkeiten hinterlegt.</p>;
+                }
+                return (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+                    {Object.entries(skillsByCategory).map(([cat, items]) => (
+                      <div key={cat}>
+                        <div className="text-[11px] mb-1.5" style={{ color: COLORS.textSecondary }}>{cat}</div>
+                        <div className="flex flex-wrap gap-2">{items.map((s) => <span key={s.id} className="text-xs px-2.5 py-1 rounded-md" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}>{s.name}</span>)}</div>
+                      </div>
+                    ))}
+                  </div>
+                );
+              })()}
+            </Card>
+
+            {(() => {
+              const strengths = data.skills.filter((s) => s.category === 'Was mich auszeichnet');
+              if (strengths.length === 0) return null;
               return (
-                <>
-                  {Object.keys(skillsByCategory).length > 0 && (
-                    <Card>
-                      <SectionHeader icon={Globe} title="Fähigkeiten" accent={COLORS.blue} />
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
-                        {Object.entries(skillsByCategory).map(([cat, items]) => (
-                          <div key={cat}>
-                            <div className="text-[11px] mb-1.5" style={{ color: COLORS.textSecondary }}>{cat}</div>
-                            <div className="flex flex-wrap gap-2">{items.map((s) => <span key={s.id} className="text-xs px-2.5 py-1 rounded-md" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}>{s.name}</span>)}</div>
-                          </div>
-                        ))}
+                <Card>
+                  <SectionHeader icon={CheckCircle2} title="Was mich auszeichnet" accent={COLORS.green} />
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+                    {strengths.map((s) => (
+                      <div key={s.id} className="flex items-center gap-2 text-xs" style={{ color: COLORS.textPrimary }}>
+                        <CheckCircle2 size={13} color={COLORS.green} className="shrink-0" /> {s.name}
                       </div>
-                    </Card>
-                  )}
-
-                  {strengths.length > 0 && (
-                    <Card>
-                      <SectionHeader icon={CheckCircle2} title="Was mich auszeichnet" accent={COLORS.green} />
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
-                        {strengths.map((s) => (
-                          <div key={s.id} className="flex items-center gap-2 text-xs" style={{ color: COLORS.textPrimary }}>
-                            <CheckCircle2 size={13} color={COLORS.green} className="shrink-0" /> {s.name}
-                          </div>
-                        ))}
-                      </div>
-                    </Card>
-                  )}
-
-                  {topTechnologies.length > 0 && (
-                    <Card>
-                      <SectionHeader icon={BarChart3} title="Top Technologien" accent={COLORS.blue} />
-                      <div className="space-y-2.5">
-                        {topTechnologies.map((s) => (
-                          <div key={s.id}>
-                            <div className="flex items-center justify-between text-xs mb-1">
-                              <span style={{ color: COLORS.textPrimary }}>{s.name}</span>
-                              <span style={{ color: COLORS.textSecondary }}>{s.level}%</span>
-                            </div>
-                            <div className="h-1.5 rounded-full overflow-hidden" style={{ background: COLORS.cardBorder }}>
-                              <div className="h-full rounded-full" style={{ width: `${s.level}%`, background: COLORS.blue }} />
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </Card>
-                  )}
-                </>
+                    ))}
+                  </div>
+                </Card>
               );
             })()}
 
-            {data.certifications.length > 0 && (
-              <Card>
-                <SectionHeader icon={Award} title="Zertifizierungen" accent={COLORS.purple} />
+            <Card>
+              <SectionHeader icon={Award} title="Zertifizierungen" accent={COLORS.purple} />
+              {data.certifications.length === 0 ? (
+                <p className="text-xs" style={{ color: COLORS.textSecondary }}>Noch keine öffentlichen Zertifizierungen hinterlegt.</p>
+              ) : (
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
                   {data.certifications.map((c) => {
                     const status = certStatus(c.expiry_date);
@@ -417,12 +407,14 @@ export default function PublicCandidateProfilePage() {
                     );
                   })}
                 </div>
-              </Card>
-            )}
+              )}
+            </Card>
 
-            {data.experiences.length > 0 && (
-              <Card>
-                <SectionHeader icon={Briefcase} title="Berufliche Erfahrung" />
+            <Card>
+              <SectionHeader icon={Briefcase} title="Berufliche Erfahrung" />
+              {data.experiences.length === 0 ? (
+                <p className="text-xs" style={{ color: COLORS.textSecondary }}>Noch keine öffentliche Berufserfahrung hinterlegt.</p>
+              ) : (
                 <div className="space-y-4">
                   {data.experiences.map((exp) => (
                     <div key={exp.id} className="flex gap-3 pl-3" style={{ borderLeft: `2px solid ${COLORS.red}` }}>
@@ -441,8 +433,8 @@ export default function PublicCandidateProfilePage() {
                     </div>
                   ))}
                 </div>
-              </Card>
-            )}
+              )}
+            </Card>
 
             {data.education.length > 0 && (
               <Card>
@@ -457,6 +449,48 @@ export default function PublicCandidateProfilePage() {
                         </div>
                         <div className="text-xs" style={{ color: COLORS.textSecondary }}>{[edu.degree, edu.field_of_study].filter(Boolean).join(' · ')}</div>
                         {edu.graduation_date && <div className="text-[11px] mt-0.5" style={{ color: COLORS.textSecondary }}>Abschluss: {fmtMonthYear(edu.graduation_date)}</div>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            )}
+
+            {data.projects.length > 0 && (
+              <Card>
+                <SectionHeader icon={FolderGit2} title="Ausgewählte Projekte" accent={COLORS.green} />
+                <div className="space-y-3">
+                  {data.projects.map((p) => (
+                    <div key={p.id}>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-medium" style={{ color: COLORS.textPrimary }}>{p.title}</span>
+                        {p.project_url && <a href={p.project_url} target="_blank" rel="noreferrer" className="flex items-center gap-0.5 text-[11px]" style={{ color: COLORS.green }}>Website <ExternalLink size={10} /></a>}
+                        {p.repo_url && <a href={p.repo_url} target="_blank" rel="noreferrer" className="flex items-center gap-0.5 text-[11px]" style={{ color: COLORS.textSecondary }}>Code <ExternalLink size={10} /></a>}
+                      </div>
+                      {p.description && <p className="text-xs mt-0.5" style={{ color: COLORS.textSecondary }}>{p.description}</p>}
+                      {p.technologies && p.technologies.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5 mt-1.5">
+                          {p.technologies.map((t) => <span key={t} className="text-[10px] px-2 py-0.5 rounded" style={{ background: COLORS.cardBorder, color: COLORS.textSecondary }}>{t}</span>)}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            )}
+
+            {topTechnologies.length > 0 && (
+              <Card>
+                <SectionHeader icon={BarChart3} title="Top Technologien" accent={COLORS.blue} />
+                <div className="space-y-2.5">
+                  {topTechnologies.map((s) => (
+                    <div key={s.id}>
+                      <div className="flex items-center justify-between text-xs mb-1">
+                        <span style={{ color: COLORS.textPrimary }}>{s.name}</span>
+                        <span style={{ color: COLORS.textSecondary }}>{s.level}%</span>
+                      </div>
+                      <div className="h-1.5 rounded-full overflow-hidden" style={{ background: COLORS.cardBorder }}>
+                        <div className="h-full rounded-full" style={{ width: `${s.level}%`, background: COLORS.blue }} />
                       </div>
                     </div>
                   ))}

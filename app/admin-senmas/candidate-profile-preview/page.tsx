@@ -68,7 +68,7 @@ type Skill = { id: string; category: string; name: string; level: string | null;
 type Certification = { id: string; issuer: string; name: string; credential_id: string | null; issue_date: string | null; expiry_date: string | null; verification_url: string | null; logo_url: string | null; is_public: boolean };
 type Education = { id: string; institution_name: string; degree: string | null; field_of_study: string | null; graduation_date: string | null; logo_url: string | null; website_url: string | null; is_public: boolean };
 type Experience = { id: string; role_title: string; company_name: string; location: string | null; start_date: string | null; end_date: string | null; description: string | null; company_logo_url: string | null; company_website_url: string | null; is_public: boolean };
-type Project = { id: string; title: string; description: string | null; technologies: string[] | null; is_public: boolean };
+type Project = { id: string; title: string; description: string | null; technologies: string[] | null; project_url: string | null; repo_url: string | null; is_public: boolean };
 type Doc = { id: string; title: string; document_type: string | null; visibility: 'public' | 'private'; deleted_at: string | null };
 
 const AVAILABILITY_LABEL: Record<string, string> = {
@@ -533,7 +533,11 @@ export default function CandidateProfilePreviewPage() {
                 <div className="space-y-3">
                   {publicProjects.map((p) => (
                     <div key={p.id}>
-                      <div className="text-sm font-medium" style={{ color: COLORS.textPrimary }}>{p.title}</div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-medium" style={{ color: COLORS.textPrimary }}>{p.title}</span>
+                        {p.project_url && <a href={p.project_url} target="_blank" rel="noreferrer" className="flex items-center gap-0.5 text-[11px]" style={{ color: COLORS.green }}>Website <ExternalLink size={10} /></a>}
+                        {p.repo_url && <a href={p.repo_url} target="_blank" rel="noreferrer" className="flex items-center gap-0.5 text-[11px]" style={{ color: COLORS.textSecondary }}>Code <ExternalLink size={10} /></a>}
+                      </div>
                       {p.description && <p className="text-xs mt-0.5" style={{ color: COLORS.textSecondary }}>{p.description}</p>}
                       {p.technologies && p.technologies.length > 0 && (
                         <div className="flex flex-wrap gap-1.5 mt-1.5">
