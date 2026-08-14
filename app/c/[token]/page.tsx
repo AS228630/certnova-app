@@ -214,8 +214,16 @@ function ConfidentialSection({ token, docs, requireCode, onUnlocked }: { token: 
         </div>
       ) : (
         <>
+          <div className="grid grid-cols-2 gap-2 mb-3">
+            {docs.map((d) => (
+              <div key={d.id} className="flex flex-col items-center gap-1.5 text-center rounded-lg p-3" style={{ background: COLORS.cardBorder, opacity: 0.7 }}>
+                <Lock size={16} color={COLORS.textSecondary} />
+                <span className="text-[11px]" style={{ color: COLORS.textSecondary }}>{d.title}</span>
+              </div>
+            ))}
+          </div>
           <p className="text-xs mb-3" style={{ color: COLORS.textSecondary }}>
-            Dieser Bereich enthält {docs.length} vertrauliche{docs.length === 1 ? 's Dokument' : ' Dokumente'}, die nicht öffentlich einsehbar sind.
+            {docs.length === 1 ? 'Dieses Dokument ist' : 'Diese Dokumente sind'} nicht öffentlich einsehbar.
           </p>
           {requireCode ? (
             <form onSubmit={submit} className="space-y-2">

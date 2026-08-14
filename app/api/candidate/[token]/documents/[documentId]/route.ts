@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseAdmin } from '@/lib/admin/requireAdmin';
 import { logAudit } from '@/lib/admin/audit';
 import { verifyShareToken } from '@/lib/candidate/verifyShareLink';
+import { verifyUnlockToken, unlockCookieName } from '@/lib/candidate/unlockSession';
 
 const BUCKET = 'candidate-private';
 const SIGNED_URL_EXPIRY_SECONDS = 10 * 60;
@@ -14,6 +15,15 @@ const SIGNED_URL_EXPIRY_SECONDS = 10 * 60;
  * + document_id pair — never "any grant exists for this link" and
  * never "the document exists", both of which would let Company A
  * reach Company B's document by editing an id in the URL.
+ *
+ * Browser-scoped unlock (fix, Aug 2026): a live grant alone is no
+ * longer sufficient for a private document — this browser must ALSO
+ * hold the signed unlock cookie proving it itself entered the access
+ * code for this exact link (see lib/candidate/unlockSession.ts and
+ * the access-code/route.ts + [token]/route.ts fixes alongside this
+ * one). Without it, even a genuinely granted document is refused —
+ * this is what stops the confidential section from silently
+ * reappearing on a second device that never entered any code.
  */
 export async function GET(req: NextRequest, { params }: { params: Promise<{ token: string; documentId: string }> }) {
   const { token, documentId } = await params;
@@ -37,6 +47,10 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ toke
   if (doc.storage_deleted_at) return NextResponse.json({ error: 'FILE_PERMANENTLY_DELETED' }, { status: 410 });
 
   if (doc.visibility === 'private') {
+    const cookieToken = req.cookies.get(unlockCookieName(link.id))?.value;
+    if (!verifyUnlockToken(cookieToken, link.id)) {
+      return NextResponse.json({ error: 'NOT_AUTHORIZED' }, { status: 403 });
+    }
     const { data: grant } = await supabase
       .from('document_access_grants')
       .select('id')

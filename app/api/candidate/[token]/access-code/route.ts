@@ -3,6 +3,7 @@ import { getSupabaseAdmin } from '@/lib/admin/requireAdmin';
 import { logAudit } from '@/lib/admin/audit';
 import { verifyAccessCode } from '@/lib/candidate/shareLinkAuth';
 import { verifyShareToken } from '@/lib/candidate/verifyShareLink';
+import { issueUnlockToken, unlockCookieName } from '@/lib/candidate/unlockSession';
 
 const MAX_FAILED_ATTEMPTS = 5;
 const LOCKOUT_MINUTES = 15;
@@ -15,12 +16,20 @@ const LOCKOUT_MINUTES = 15;
  *
  * One-time use (explicit requirement): `used_at` is set the moment
  * verification succeeds, and any later attempt — even with the
- * correct code — is refused. The code_hash for this share link is
- * created exactly once (at share-link creation), so "one-time use"
- * effectively means "the confidential section can be unlocked once,
- * ever, for this recruiter's link" — matching the request precisely:
- * one company gets one shot to unlock, not unlimited repeat access
- * from the raw code.
+ * correct code — is refused.
+ *
+ * Browser-scoped unlock (fix, Aug 2026 — real security gap found by
+ * the owner's own testing): document_access_grants alone made the
+ * *link* look unlocked to anyone holding it, once ANY browser had
+ * entered the code — including a second device the owner opened the
+ * same link on, which never should have shown confidential documents
+ * without its own code entry. The code staying one-time-use globally
+ * is correct and unchanged; what's fixed is that the resulting
+ * "unlocked" *state* is now additionally scoped to the one browser
+ * that actually entered it, via a signed HttpOnly cookie (see
+ * lib/candidate/unlockSession.ts) — no other browser, even with the
+ * identical link, sees anything unlocked without going through this
+ * same verification itself (and by then the code is already spent).
  */
 export async function POST(req: NextRequest, { params }: { params: Promise<{ token: string }> }) {
   const { token } = await params;
@@ -93,5 +102,13 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ tok
     metadata: { companyName: link.company_name, documentsGranted: linkDocs?.length ?? 0 },
   });
 
-  return NextResponse.json({ unlocked: true, documentCount: linkDocs?.length ?? 0 });
+  const res = NextResponse.json({ unlocked: true, documentCount: linkDocs?.length ?? 0 });
+  res.cookies.set(unlockCookieName(link.id), issueUnlockToken(link.id), {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'lax',
+    path: '/',
+    maxAge: 90 * 24 * 60 * 60, // 90 days, matches issueUnlockToken's TTL
+  });
+  return res;
 }
