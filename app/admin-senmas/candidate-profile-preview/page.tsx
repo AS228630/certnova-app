@@ -25,7 +25,7 @@
  * list) are simply omitted rather than invented.
  */
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Loader2, MapPin, Mail, Linkedin, Github, FileText, Lock, ShieldCheck,
   Briefcase, FolderGit2, Award, Download, ExternalLink, Globe, CheckCircle2, BarChart3, X,
@@ -169,11 +169,34 @@ function CvDownloadButton({ documentId }: { documentId: string }) {
 
 /** Click-to-enlarge profile photo, Instagram/Facebook-style: click the
  * small circular avatar, see it full-size in a dark overlay; click
- * anywhere (overlay, image, or the X) or press Escape to close. */
+ * anywhere (overlay, image, or the X) or press Escape to close.
+ * Accessibility: focus moves to the close button on open, Tab is
+ * trapped inside the dialog (the close button is the only focusable
+ * element), and focus returns to whatever triggered the lightbox on
+ * close. */
 function PhotoLightbox({ url, alt, onClose }: { url: string; alt: string; onClose: () => void }) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    previouslyFocused.current = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
+    return () => {
+      previouslyFocused.current?.focus();
+    };
+  }, []);
+
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {
+        onClose();
+      } else if (e.key === 'Tab') {
+        // The close button is the only focusable element in this
+        // dialog, so trapping focus just means Tab/Shift+Tab always
+        // keeps it there rather than escaping to the page behind.
+        e.preventDefault();
+        closeButtonRef.current?.focus();
+      }
     }
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -189,6 +212,7 @@ function PhotoLightbox({ url, alt, onClose }: { url: string; alt: string; onClos
       style={{ background: 'rgba(2,11,20,0.92)' }}
     >
       <button
+        ref={closeButtonRef}
         onClick={onClose}
         aria-label="Schließen"
         className="absolute top-5 right-5 flex items-center justify-center w-10 h-10 rounded-full"

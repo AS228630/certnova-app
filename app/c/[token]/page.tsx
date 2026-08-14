@@ -10,7 +10,7 @@
  * different files).
  */
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams } from 'next/navigation';
 import {
   Loader2, MapPin, Mail, Linkedin, Github, FileText, Lock, ShieldCheck,
@@ -90,11 +90,29 @@ function CertLogo({ token, certId, logoUrl, alt, size = 48 }: { token: string; c
   return <BrandLogo url={resolvedUrl} alt={alt} size={size} />;
 }
 /** Click-to-enlarge profile photo, Instagram/Facebook-style — same
- * component/behavior as the admin preview page. */
+ * component/behavior as the admin preview page. Focus moves to the
+ * close button on open, Tab is trapped inside the dialog, focus
+ * returns to the trigger element on close. */
 function PhotoLightbox({ url, alt, onClose }: { url: string; alt: string; onClose: () => void }) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    previouslyFocused.current = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
+    return () => {
+      previouslyFocused.current?.focus();
+    };
+  }, []);
+
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {
+        onClose();
+      } else if (e.key === 'Tab') {
+        e.preventDefault();
+        closeButtonRef.current?.focus();
+      }
     }
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -110,6 +128,7 @@ function PhotoLightbox({ url, alt, onClose }: { url: string; alt: string; onClos
       style={{ background: 'rgba(2,11,20,0.92)' }}
     >
       <button
+        ref={closeButtonRef}
         onClick={onClose}
         aria-label="Schließen"
         className="absolute top-5 right-5 flex items-center justify-center w-10 h-10 rounded-full"
