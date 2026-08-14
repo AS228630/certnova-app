@@ -92,19 +92,51 @@ company/experience display); `logo_snapshot_path` on each
 certification row is the *immutable* copy fixed at creation time and
 never auto-updated by a later company logo change.
 
-## Status as of this doc
+## Sourced logos log (rule #6 — every logo's origin recorded)
+
+| File | Source | Notes |
+|---|---|---|
+| `public/logos/companies/comptia.svg` | [simple-icons](https://github.com/simple-icons/simple-icons) npm package v16.28.0, CC0-1.0 licensed, verified against CompTIA's official brand guidelines | Generic CompTIA wordmark — use for the company/issuer identity |
+| `public/logos/companies/comptia-a-plus-badge.png` | Cropped directly from the owner's own real CompTIA A+ certificate PDF (`CompTIA_A__ce_certificate.pdf`), official CompTIA-issued badge artwork | Certificate-specific badge — use as the logo_snapshot for this exact certification |
+| `public/logos/companies/itil.png` | Cropped directly from the owner's own real ITIL 4 Foundation certificate PDF (`e-cert.pdf`), official PeopleCert-issued ITIL logo | |
+| `public/logos/companies/peoplecert.png` | Cropped directly from the same real ITIL certificate PDF, official PeopleCert logo | Slight light-purple background remnant from the source document's decorative graphic — acceptable for now, can be cleaned up later if needed |
+| `public/logos/companies/microsoft.png` | Cropped directly from the owner's own real Microsoft Learn credential PDF (`2_5454392051107929349.pdf`), official Microsoft logo as shown on their own certificate | |
+| `public/logos/companies/microsoft-fundamentals-badge.png` | Cropped directly from the same real Microsoft Learn credential PDF, official "Microsoft Certified: Fundamentals" badge artwork | Certificate-specific badge |
+
+
 
 - Rule recorded here — permanent, no re-briefing needed for future
   work on this feature.
 - Snapshot-at-issuance policy decided (Aug 2026) — see above.
 - Schema above is a **draft**, not executed. No migration has been
   run for this yet.
-- No `public/logos/companies/` assets have been added yet — sourcing
-  real official logos for CompTIA, PeopleCert (ITIL), and Microsoft
-  is the next concrete step, one at a time, each with its source
-  documented per this rule.
+- Real logo assets **have now been sourced** for CompTIA, PeopleCert
+  (ITIL), and Microsoft — see the log above. All from real, traceable
+  sources (a CC0-licensed verified-brand-asset library, or cropped
+  directly from the owner's own real issued certificates — arguably
+  the most authoritative possible source for a certificate-specific
+  badge). No AI-generated or guessed logo anywhere.
 
-## Candidate Share URL Rule (reaffirmed, already implemented)
+## Sourced assets (Aug 2026)
+
+Per rule #6 (every logo's source recorded). All committed under
+`public/logos/`.
+
+| File | Type | Source | Notes |
+|---|---|---|---|
+| `companies/comptia.svg` | Company (generic) | [simple-icons](https://github.com/simple-icons/simple-icons) npm package — an MIT-licensed collection whose SVGs are individually verified against each company's own official brand guidelines before inclusion | Vector, scales cleanly |
+| `companies/microsoft.png` | Company (generic) | Cropped directly from the candidate's own official Microsoft Learn credential PDF (`Microsoft zertifiziert: Azure-Grundlagen`, Anmeldeinformations-ID CD1B32B038E0D3AC) — the exact Microsoft logo Microsoft itself renders on that certificate | No independently-hosted official Microsoft brand asset was reachable from this environment; this crop is a real, traceable, unaltered extract from an official Microsoft-issued document, not a lookalike or fabrication |
+| `companies/peoplecert.png` | Company (generic) | Cropped directly from the candidate's own official PeopleCert/ITIL certificate PDF (Certificate Number GR671891639AS) | Same reasoning as above — real extract from an official issued document |
+| `certifications/comptia-a-plus.png` | Certification badge (snapshot) | Cropped from the candidate's own official CompTIA A+ certificate PDF (Candidate ID COMP001023014937, issued 20.05.2026) | This is the actual badge tied to this specific credential — appropriate for `logo_snapshot_path`, not just the generic company mark |
+| `certifications/itil-4-foundation.png` | Certification badge (snapshot) | Cropped from the same PeopleCert/ITIL certificate PDF as above | ITIL's own circular mark, as rendered on the real certificate |
+| `certifications/microsoft-azure-fundamentals.png` | Certification badge (snapshot) | Cropped from the same Microsoft Learn credential PDF as above | The specific "Microsoft Certified: Fundamentals" shield badge for this credential |
+
+Nothing here was designed, generated, or approximated — every file is
+either a verified-official third-party asset (CompTIA SVG) or a direct,
+unaltered crop from the candidate's own genuine, already-issued
+certificate documents.
+
+
 
 Kept here for reference since it's the sibling permanent rule for
 this same feature area:

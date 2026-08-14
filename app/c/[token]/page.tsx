@@ -73,10 +73,11 @@ function BrandLogo({ url, alt, size = 44 }: { url: string | null; alt: string; s
  * URL via the token-gated logo endpoint. An external URL (pasted by
  * the admin) is used directly. */
 function CertLogo({ token, certId, logoUrl, alt, size = 48 }: { token: string; certId: string; logoUrl: string | null; alt: string; size?: number }) {
-  const [resolvedUrl, setResolvedUrl] = useState<string | null>(logoUrl && logoUrl.startsWith('http') ? logoUrl : null);
+  const isDirectUrl = (u: string) => u.startsWith('http') || u.startsWith('/');
+  const [resolvedUrl, setResolvedUrl] = useState<string | null>(logoUrl && isDirectUrl(logoUrl) ? logoUrl : null);
 
   useEffect(() => {
-    if (!logoUrl || logoUrl.startsWith('http')) {
+    if (!logoUrl || isDirectUrl(logoUrl)) {
       Promise.resolve().then(() => setResolvedUrl(logoUrl));
       return;
     }
