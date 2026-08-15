@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { CheckCircle2 } from "lucide-react";
 import DashboardShell from "@/components/DashboardShell";
 import { useLocale } from "@/components/LocaleProvider";
@@ -19,8 +20,22 @@ import { useSubscriptionStore } from "@/lib/store/subscriptionStore";
 // the plan-selection form — nothing prevents them from re-subscribing
 // server-side, but there's no reason to walk a paying customer through
 // checkout again.
+//
+// Wrapped in Suspense because the inner component reads useSearchParams
+// (for ?returnTo=) — required by Next.js for a client page that's
+// statically prerendered.
 export default function UpgradePage() {
+  return (
+    <Suspense fallback={null}>
+      <UpgradePageInner />
+    </Suspense>
+  );
+}
+
+function UpgradePageInner() {
   const { t } = useLocale();
+  const searchParams = useSearchParams();
+  const returnTo = searchParams.get("returnTo");
   const [step, setStep] = useState<UpgradeStep>(1);
   const [selectedPlan, setSelectedPlan] = useState<{ id: PlanId; name: string; price: string } | null>(null);
   const [toast, setToast] = useState<string | null>(null);
@@ -73,7 +88,13 @@ export default function UpgradePage() {
         <div className="mt-8">
           {step === 1 && <PlanSelectionStep onSelectPlan={handleSelectPlan} />}
           {step === 2 && selectedPlan && (
-            <PaymentStep planId={selectedPlan.id} planName={selectedPlan.name} planPrice={selectedPlan.price} onBack={() => setStep(1)} />
+            <PaymentStep
+              planId={selectedPlan.id}
+              planName={selectedPlan.name}
+              planPrice={selectedPlan.price}
+              onBack={() => setStep(1)}
+              returnTo={returnTo}
+            />
           )}
         </div>
 

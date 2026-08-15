@@ -1211,6 +1211,8 @@ const ar: Dictionary = {
     emailCta: "التسجيل المجاني بالبريد الإلكتروني",
   },
   premiumGate: {
+    includedInPremium: "مشمول Premium (١٩ يورو/شهر).",
+    activating: "جارٍ تفعيل Premium...",
     labsTitle: "فتح Labs",
     labsDesc: "تمارين عملية في بيئة سحابية حقيقية.",
     practiceTitle: "المزيد من أسئلة التدريب",

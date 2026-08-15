@@ -14,11 +14,12 @@ function getStripe() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { plan, accessToken, widerrufConsent, couponCode } = (await req.json()) as {
+    const { plan, accessToken, widerrufConsent, couponCode, returnTo } = (await req.json()) as {
       plan: "monthly" | "yearly";
       accessToken: string;
       widerrufConsent?: boolean;
       couponCode?: string;
+      returnTo?: string;
     };
 
     if (!plan || !PLAN_PRICES[plan]) {
@@ -86,6 +87,20 @@ export async function POST(req: NextRequest) {
     const priceInfo = PLAN_PRICES[plan];
     const origin = req.headers.get("origin") ?? "https://www.certcoach.de";
 
+    // returnTo lets a purchase started from a mid-session paywall (a
+    // locked Practice section, Lab, or Exam Simulation) resume exactly
+    // where the person left off instead of always dropping them on
+    // /upgrade — but it's attacker-controllable input, so it's only ever
+    // used if it's a real same-site relative path (starts with a single
+    // "/", never "//" or an absolute URL), otherwise we fall back to the
+    // safe default. The target page itself still re-verifies Premium
+    // access server-side via the real subscriptions table before showing
+    // any gated content — this only decides where the browser lands.
+    const isSafeReturnTo = typeof returnTo === "string" && returnTo.startsWith("/") && !returnTo.startsWith("//");
+    const successPath = isSafeReturnTo
+      ? `${returnTo}${returnTo.includes("?") ? "&" : "?"}premium_activated=true`
+      : "/upgrade?success=true";
+
     const session = await getStripe().checkout.sessions.create({
       mode: "subscription",
       // Dynamic payment methods: Stripe automatically shows whichever
@@ -124,7 +139,7 @@ export async function POST(req: NextRequest) {
             : {}),
         },
       },
-      success_url: `${origin}/upgrade?success=true`,
+      success_url: `${origin}${successPath}`,
       cancel_url: `${origin}/upgrade?canceled=true`,
     });
 

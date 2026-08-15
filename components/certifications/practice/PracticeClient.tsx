@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { BarChart3, RefreshCcw } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/practiceTypes";
 import { isSingleChoiceAnswerCorrect, isMultiSelectQuestion } from "@/lib/practiceTypes";
 import { supabase } from "@/lib/supabase/client";
@@ -56,6 +56,8 @@ export default function PracticeClient({
 }) {
   const { locale, t } = useLocale();
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { user } = useUser();
 
   // Questions (and how much of the bank the current user is entitled to)
@@ -73,11 +75,24 @@ export default function PracticeClient({
   const [questionsLoading, setQuestionsLoading] = useState(true);
   const [questionsError, setQuestionsError] = useState(false);
 
+  // Post-purchase resume (journey stage 8): the checkout success_url
+  // brings the browser straight back here with ?premium_activated=true,
+  // but Stripe's webhook — the only thing allowed to actually flip the
+  // real subscriptions row to active — may not have finished processing
+  // yet. The frontend never just assumes Premium; it keeps re-asking the
+  // real gated API for up to ~20s until that row is genuinely active,
+  // shows an honest "activating" state meanwhile, then cleans the URL.
+  const justPurchased = searchParams.get("premium_activated") === "true";
+  const [activatingPremium, setActivatingPremium] = useState(justPurchased);
+  const [activationAttempt, setActivationAttempt] = useState(0);
+
   useEffect(() => {
     let cancelled = false;
     async function loadQuestions() {
-      setQuestionsLoading(true);
-      setQuestionsError(false);
+      if (activationAttempt === 0) {
+        setQuestionsLoading(true);
+        setQuestionsError(false);
+      }
       try {
         const { data } = await supabase.auth.getSession();
         const accessToken = data.session?.access_token ?? null;
@@ -93,6 +108,22 @@ export default function PracticeClient({
         setTopics(json.topics ?? []);
         setTotalQuestionCount(json.totalCount ?? 0);
         setIsPro(!!json.isPro);
+
+        if (justPurchased && !json.isPro && activationAttempt < 10) {
+          // Webhook hasn't landed yet — try again shortly, still not
+          // trusting the client's own guess about Premium status.
+          setTimeout(() => {
+            if (!cancelled) setActivationAttempt((n) => n + 1);
+          }, 2000);
+        } else if (justPurchased) {
+          // Either genuinely active now, or we've waited long enough
+          // that continuing to poll silently would be worse than
+          // letting the person retry manually — either way, stop
+          // showing the activating overlay and drop the query param so
+          // a refresh doesn't restart this whole dance.
+          setActivatingPremium(false);
+          router.replace(pathname);
+        }
       } catch {
         if (!cancelled) setQuestionsError(true);
       } finally {
@@ -104,10 +135,10 @@ export default function PracticeClient({
       cancelled = true;
     };
     // Re-fetches on locale change (server returns the correctly translated
-    // bank) and whenever the signed-in user changes (a guest signing up,
-    // or a user's subscription status changing, both change what the next
-    // fetch is entitled to receive).
-  }, [certId, locale, user]);
+    // bank), whenever the signed-in user changes (a guest signing up, or
+    // a user's subscription status changing, both change what the next
+    // fetch is entitled to receive), and on each post-purchase retry tick.
+  }, [certId, locale, user, activationAttempt, justPurchased, router, pathname]);
   const [order, setOrder] = useState<string[] | null>(null); // null = authored order, else shuffled question ids
   // Bumped every time "Gemischt wiederholen" reshuffles the question
   // order, so option/answer positions within each question are re-
@@ -564,10 +595,10 @@ export default function PracticeClient({
     setReopenedIds((s) => new Set([...s, ...currentIds]));
   }
 
-  if (questionsLoading) {
+  if (questionsLoading || activatingPremium) {
     return (
-      <div className="flex items-center justify-center rounded-xl border border-border-soft bg-panel p-16 text-sm text-text-muted">
-        {t("common.loading")}
+      <div className="flex flex-col items-center justify-center gap-2 rounded-xl border border-border-soft bg-panel p-16 text-sm text-text-muted">
+        {activatingPremium ? t("premiumGate.activating") : t("common.loading")}
       </div>
     );
   }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { ChevronLeft, ChevronRight, Clock3, X, AlertTriangle } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
 import { useUser } from "@/components/UserContext";
@@ -56,6 +56,8 @@ export default function MockExamClient({
 }) {
   const { t, locale } = useLocale();
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
   const { user } = useUser();
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -72,11 +74,19 @@ export default function MockExamClient({
   const [questionsLoading, setQuestionsLoading] = useState(true);
   const [questionsError, setQuestionsError] = useState(false);
 
+  // Post-purchase resume (journey stage 8) - see PracticeClient's comment
+  // for why this polls instead of trusting the URL param directly.
+  const justPurchased = searchParams.get("premium_activated") === "true";
+  const [activatingPremium, setActivatingPremium] = useState(justPurchased);
+  const [activationAttempt, setActivationAttempt] = useState(0);
+
   useEffect(() => {
     let cancelled = false;
     async function loadQuestions() {
-      setQuestionsLoading(true);
-      setQuestionsError(false);
+      if (activationAttempt === 0) {
+        setQuestionsLoading(true);
+        setQuestionsError(false);
+      }
       try {
         const { data } = await supabase.auth.getSession();
         const accessToken = data.session?.access_token ?? null;
@@ -91,6 +101,15 @@ export default function MockExamClient({
         setQuestions(json.questions ?? []);
         setTotalQuestionCount(json.totalCount ?? 0);
         setIsPro(!!json.isPro);
+
+        if (justPurchased && !json.isPro && activationAttempt < 10) {
+          setTimeout(() => {
+            if (!cancelled) setActivationAttempt((n) => n + 1);
+          }, 2000);
+        } else if (justPurchased) {
+          setActivatingPremium(false);
+          router.replace(pathname);
+        }
       } catch {
         if (!cancelled) setQuestionsError(true);
       } finally {
@@ -101,7 +120,7 @@ export default function MockExamClient({
     return () => {
       cancelled = true;
     };
-  }, [certId, locale, user]);
+  }, [certId, locale, user, activationAttempt, justPurchased, router, pathname]);
 
   const activeQuestions = useMemo(
     () => questions.slice(0, Math.min(examInfo.simQuestionCount, questions.length)),
@@ -205,10 +224,10 @@ export default function MockExamClient({
     router.push(`/certifications/${companySlug}/${certId}`);
   }
 
-  if (questionsLoading) {
+  if (questionsLoading || activatingPremium) {
     return (
       <div className="flex items-center justify-center rounded-xl border border-border-soft bg-panel p-16 text-sm text-text-muted">
-        {t("common.loading")}
+        {activatingPremium ? t("premiumGate.activating") : t("common.loading")}
       </div>
     );
   }

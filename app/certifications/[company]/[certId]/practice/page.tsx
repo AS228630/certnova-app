@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import DashboardShell from "@/components/DashboardShell";
 import PracticeClient from "@/components/certifications/practice/PracticeClient";
@@ -66,16 +67,18 @@ export default async function PracticePage({
   return (
     <DashboardShell requireAuth={false}>
       <main className="flex-1 pb-4 pt-0 md:pb-8">
-        <PracticeClient
-          companyName={company.name}
-          companySlug={company.slug}
-          certId={certId}
-          certCode={cert.code}
-          certTitle={cert.title}
-          level={cert.level}
-          rating={company.rating}
-          ratingCount={1245}
-        />
+        <Suspense fallback={null}>
+          <PracticeClient
+            companyName={company.name}
+            companySlug={company.slug}
+            certId={certId}
+            certCode={cert.code}
+            certTitle={cert.title}
+            level={cert.level}
+            rating={company.rating}
+            ratingCount={1245}
+          />
+        </Suspense>
       </main>
     </DashboardShell>
   );

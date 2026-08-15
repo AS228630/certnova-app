@@ -1211,6 +1211,8 @@ const es: Dictionary = {
     emailCta: "Regístrate gratis con email",
   },
   premiumGate: {
+    includedInPremium: "Incluido en Premium (€19/mes).",
+    activating: "Activando Premium...",
     labsTitle: "Desbloquear Labs",
     labsDesc: "Ejercicios prácticos en un entorno cloud real.",
     practiceTitle: "Más preguntas de práctica",

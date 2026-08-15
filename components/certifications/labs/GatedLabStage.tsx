@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Lock, ArrowRight } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
 import { useSubscriptionStore } from "@/lib/store/subscriptionStore";
@@ -35,6 +36,7 @@ export default function GatedLabStage({
   labIndex: number;
 }) {
   const { t } = useLocale();
+  const pathname = usePathname();
   const isPro = useSubscriptionStore((s) => s.isPro);
   const subLoading = useSubscriptionStore((s) => s.loading);
   const freeLabsCount = cert.freeLabsCount ?? 1;
@@ -55,9 +57,10 @@ export default function GatedLabStage({
           <Lock size={22} />
         </div>
         <h2 className="mb-2 text-lg font-extrabold text-text">{t("premiumGate.labsTitle")}</h2>
-        <p className="mb-6 text-sm leading-relaxed text-text-muted">{t("premiumGate.labsDesc")}</p>
+        <p className="mb-1 text-sm leading-relaxed text-text-muted">{t("premiumGate.labsDesc")}</p>
+        <p className="mb-6 text-sm font-semibold text-primary">{t("premiumGate.includedInPremium")}</p>
         <Link
-          href="/upgrade"
+          href={`/upgrade?returnTo=${encodeURIComponent(pathname ?? "/dashboard")}`}
           className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-white hover:bg-primary-dark"
         >
           {t("premiumGate.cta")}

@@ -16,11 +16,13 @@ export default function PaymentStep({
   planName,
   planPrice,
   onBack,
+  returnTo,
 }: {
   planId: PlanId;
   planName: string;
   planPrice: string;
   onBack: () => void;
+  returnTo?: string | null;
 }) {
   const { t } = useLocale();
   const [loading, setLoading] = useState(false);
@@ -68,6 +70,7 @@ export default function PaymentStep({
           accessToken,
           widerrufConsent: true,
           ...(couponCode.trim() ? { couponCode: couponCode.trim() } : {}),
+          ...(returnTo ? { returnTo } : {}),
         }),
       });
       const json = await res.json();

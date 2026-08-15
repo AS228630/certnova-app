@@ -1211,6 +1211,8 @@ const tr: Dictionary = {
     emailCta: "E-posta ile ücretsiz kaydol",
   },
   premiumGate: {
+    includedInPremium: "Premium'a dahildir (19 €/ay).",
+    activating: "Premium etkinleştiriliyor...",
     labsTitle: "Labs'ı aç",
     labsDesc: "Gerçek bir bulut ortamında uygulamalı alıştırmalar.",
     practiceTitle: "Daha fazla pratik sorusu",

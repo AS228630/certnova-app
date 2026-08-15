@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import DashboardShell from "@/components/DashboardShell";
 import MockExamClient from "@/components/certifications/mockExam/MockExamClient";
@@ -26,7 +27,7 @@ export async function generateMetadata({
   };
 }
 
-// Deliberately does NOT load or pass question content here anymore — see
+// Deliberately does NOT load or pass question content here anymore - see
 // the practice/page.tsx comment for why. Content now comes from the
 // gated /api/certifications/[certId]/mock-exam-questions route, which
 // decides server-side (Guest/Free = first 10 questions, Premium = full
@@ -59,14 +60,16 @@ export default async function MockExamPage({
   return (
     <DashboardShell requireAuth={false}>
       <main className="flex-1 p-4 md:p-8">
-        <MockExamClient
-          companySlug={company.slug}
-          companyName={company.name}
-          certId={certId}
-          certCode={cert.code}
-          certTitle={cert.title}
-          examInfo={examInfo}
-        />
+        <Suspense fallback={null}>
+          <MockExamClient
+            companySlug={company.slug}
+            companyName={company.name}
+            certId={certId}
+            certCode={cert.code}
+            certTitle={cert.title}
+            examInfo={examInfo}
+          />
+        </Suspense>
       </main>
     </DashboardShell>
   );

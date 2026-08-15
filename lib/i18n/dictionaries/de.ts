@@ -1212,6 +1212,8 @@ const de = {
     emailCta: "Kostenlos mit E-Mail registrieren",
   },
   premiumGate: {
+    includedInPremium: "Ist in Premium (€19/Monat) enthalten.",
+    activating: "Premium wird aktiviert...",
     labsTitle: "Labs freischalten",
     labsDesc: "Praxisnahe Übungen in einer echten Cloud-Umgebung.",
     practiceTitle: "Weitere Prüfungsfragen",

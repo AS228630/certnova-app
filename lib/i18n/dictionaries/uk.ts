@@ -1211,6 +1211,8 @@ const uk: Dictionary = {
     emailCta: "Безкоштовна реєстрація через email",
   },
   premiumGate: {
+    includedInPremium: "Входить у Premium (19 €/міс).",
+    activating: "Активація Premium...",
     labsTitle: "Розблокувати Labs",
     labsDesc: "Практичні вправи в реальному хмарному середовищі.",
     practiceTitle: "Більше практичних запитань",

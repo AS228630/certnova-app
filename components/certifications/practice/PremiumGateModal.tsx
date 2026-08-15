@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { X, Lock, ArrowRight } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
 
@@ -9,12 +10,14 @@ export type PremiumGateVariant = "labs" | "practice" | "examSimulation";
 /**
  * Shown to a signed-in, non-Premium user when they hit a real paywall
  * (Teil 2+ of the question bank, a locked Lab, or the full exam
- * simulation). Deliberately context-aware per the advisor's spec — the
- * copy names the exact feature the person was just trying to use — but
- * always leads to the single existing Premium checkout (/upgrade), never
- * a separate payment flow per feature. Distinct from GuestSignupModal,
- * which is for logged-out visitors and offers to create a free account
- * instead of a purchase.
+ * simulation). Per the advisor's explicit Option B decision: Labs,
+ * Practice, and Exam Simulation are NOT separate paid add-ons — they are
+ * all already included in the one €19/month Premium plan, so this modal
+ * always frames it that way ("X ist in Premium enthalten") and links to
+ * the single existing Premium checkout, never a separate payment flow
+ * per feature. Passes the current page as ?returnTo= so a successful
+ * purchase can resume exactly here afterward instead of dropping the
+ * person on the Dashboard.
  */
 export default function PremiumGateModal({
   variant,
@@ -24,11 +27,14 @@ export default function PremiumGateModal({
   onClose: () => void;
 }) {
   const { t } = useLocale();
+  const pathname = usePathname();
 
   const titleKey =
     variant === "labs" ? "premiumGate.labsTitle" : variant === "practice" ? "premiumGate.practiceTitle" : "premiumGate.examTitle";
   const descKey =
     variant === "labs" ? "premiumGate.labsDesc" : variant === "practice" ? "premiumGate.practiceDesc" : "premiumGate.examDesc";
+
+  const upgradeHref = `/upgrade?returnTo=${encodeURIComponent(pathname ?? "/dashboard")}`;
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60 p-4">
@@ -42,10 +48,11 @@ export default function PremiumGateModal({
         </div>
 
         <h3 className="mb-2 text-lg font-extrabold text-text">{t(titleKey)}</h3>
-        <p className="mb-6 text-sm leading-relaxed text-text-muted">{t(descKey)}</p>
+        <p className="mb-1 text-sm leading-relaxed text-text-muted">{t(descKey)}</p>
+        <p className="mb-6 text-sm font-semibold text-primary">{t("premiumGate.includedInPremium")}</p>
 
         <Link
-          href="/upgrade"
+          href={upgradeHref}
           className="mb-3 flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-bold text-white hover:bg-primary-dark"
         >
           {t("premiumGate.cta")}

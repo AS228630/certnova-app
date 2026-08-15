@@ -1211,6 +1211,8 @@ const fa: Dictionary = {
     emailCta: "ثبت‌نام رایگان با ایمیل",
   },
   premiumGate: {
+    includedInPremium: "در Premium (۱۹ یورو/ماه) گنجانده شده.",
+    activating: "در حال فعال‌سازی Premium...",
     labsTitle: "باز کردن Labs",
     labsDesc: "تمرین‌های عملی در یک محیط واقعی Cloud.",
     practiceTitle: "سؤالات تمرینی بیشتر",
