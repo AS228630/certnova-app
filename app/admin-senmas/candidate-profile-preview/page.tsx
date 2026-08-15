@@ -397,7 +397,7 @@ export default function CandidateProfilePreviewPage() {
                 )}
                 {profile.website_url && (
                   <a href={profile.website_url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 text-sm py-2.5 rounded-lg" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}>
-                    <Globe size={14} color={COLORS.red} /> Website
+                    <Globe size={14} color="#7c3aed" /> Website
                   </a>
                 )}
               </div>
