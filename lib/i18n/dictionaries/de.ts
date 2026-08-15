@@ -319,7 +319,7 @@ const de = {
     business: "Für Unternehmen",
     pricing: "Preise",
     login: "Anmelden",
-    getStarted: "Jetzt starten",
+    getStarted: "Kostenlos starten",
     goToDashboard: "Zum Dashboard",
   },
   bottomNav: {

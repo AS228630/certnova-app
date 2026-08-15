@@ -72,20 +72,19 @@ export default function LandingHeader() {
               {t("landingNav.goToDashboard")}
             </Link>
           ) : (
-            <>
-              <Link
-                href="/login"
-                className="hidden rounded-lg border border-border-soft px-4 py-2 text-sm font-semibold text-text hover:bg-panel-alt sm:inline-block"
-              >
-                {t("landingNav.login")}
-              </Link>
-              <Link
-                href="/register"
-                className="rounded-lg bg-primary px-3.5 py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark sm:px-4"
-              >
-                {t("landingNav.getStarted")}
-              </Link>
-            </>
+            // "Anmelden" (login) deliberately removed here for now — per
+            // the agreed 8-step journey, login/registration is only
+            // meant to be prompted at stage 5 (after a guest finishes
+            // their free questions), not pushed upfront in the navbar.
+            // The one remaining CTA goes straight to certification
+            // selection (stage 2), matching the nav's own
+            // "Zertifizierungen" link, not to /register.
+            <Link
+              href="/zertifizierungen"
+              className="rounded-lg bg-primary px-3.5 py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark sm:px-4"
+            >
+              {t("landingNav.getStarted")}
+            </Link>
           )}
           <button
             aria-label={open ? "Menü schließen" : "Menü öffnen"}
@@ -110,15 +109,6 @@ export default function LandingHeader() {
                 {t(l.labelKey)}
               </Link>
             ))}
-            {!signedIn && (
-              <Link
-                href="/login"
-                onClick={() => setOpen(false)}
-                className="mt-1 rounded-lg px-2 py-2.5 text-sm font-semibold text-text hover:bg-panel-alt sm:hidden"
-              >
-                {t("landingNav.login")}
-              </Link>
-            )}
           </div>
         </nav>
       )}
