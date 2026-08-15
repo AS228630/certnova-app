@@ -700,7 +700,7 @@ export default function CandidateProfilePreviewPage() {
                       <div className="grid grid-cols-2 gap-2 mb-3">
                         {privateDocs.map((d) => (
                           <div key={d.id} className="flex flex-col items-center gap-1.5 text-center rounded-lg p-3" style={{ background: COLORS.cardBorder, opacity: 0.7 }}>
-                            <Lock size={16} color={COLORS.textSecondary} />
+                            <Lock size={16} color={COLORS.red} />
                             <span className="text-[11px]" style={{ color: COLORS.textSecondary }}>{d.title}</span>
                           </div>
                         ))}
