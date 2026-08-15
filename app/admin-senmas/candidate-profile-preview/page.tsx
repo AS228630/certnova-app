@@ -304,7 +304,6 @@ export default function CandidateProfilePreviewPage() {
   const publicExperiences = experiences.filter((e) => e.is_public);
   const publicProjects = projects.filter((p) => p.is_public);
   const publicDocs = documents.filter((d) => d.visibility === 'public' && !d.deleted_at);
-  const confidentialDocsCount = documents.filter((d) => d.visibility === 'private' && !d.deleted_at).length;
   const cvDoc = publicDocs.find((d) => d.document_type === 'CV');
   const languageSkills = publicSkills.filter((s) => s.category === 'Sprachen').map((s) => s.name);
 
@@ -691,14 +690,27 @@ export default function CandidateProfilePreviewPage() {
 
               <Card>
                 <SectionHeader icon={Lock} title="Vertrauliche Unterlagen" accent={COLORS.red} />
-                <p className="text-xs mb-3" style={{ color: COLORS.textSecondary }}>
-                  {confidentialDocsCount > 0
-                    ? `${confidentialDocsCount} Dokument${confidentialDocsCount === 1 ? '' : 'e'} — Zugriff erfordert einen Code (Phase 8, noch nicht aktiv).`
-                    : 'Noch keine vertraulichen Dokumente hinterlegt.'}
-                </p>
-                <div className="flex items-center gap-2 text-xs px-3 py-2 rounded-lg" style={{ background: COLORS.cardBorder, color: COLORS.textSecondary }}>
-                  <Download size={13} className="opacity-40" /> Zugriffscode-Freischaltung folgt in Phase 8
-                </div>
+                {(() => {
+                  const privateDocs = documents.filter((d) => d.visibility === 'private' && !d.deleted_at);
+                  if (privateDocs.length === 0) {
+                    return <p className="text-xs" style={{ color: COLORS.textSecondary }}>Noch keine vertraulichen Dokumente hinterlegt.</p>;
+                  }
+                  return (
+                    <>
+                      <div className="grid grid-cols-2 gap-2 mb-3">
+                        {privateDocs.map((d) => (
+                          <div key={d.id} className="flex flex-col items-center gap-1.5 text-center rounded-lg p-3" style={{ background: COLORS.cardBorder, opacity: 0.7 }}>
+                            <Lock size={16} color={COLORS.textSecondary} />
+                            <span className="text-[11px]" style={{ color: COLORS.textSecondary }}>{d.title}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <p className="text-[11px]" style={{ color: COLORS.textSecondary }}>
+                        So sehen Unternehmen diese Dokumente, bevor sie den Zugriffscode eingeben — Name sichtbar, Inhalt gesperrt. Zum echten Freischalten mit Code: den öffentlichen Share-Link testen, nicht diese Admin-Vorschau.
+                      </p>
+                    </>
+                  );
+                })()}
               </Card>
             </div>
           </div>
