@@ -519,7 +519,7 @@ export default function PublicCandidateProfilePage() {
                 <div className="space-y-4">
                   {data.education.map((edu) => (
                     <div key={edu.id} className="flex gap-3">
-                      <BrandLogo url={edu.logo_url} alt={edu.institution_name} size={36} wide />
+                      <BrandLogo url={edu.logo_url} alt={edu.institution_name} size={36} />
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-medium" style={{ color: COLORS.textPrimary }}>
                           {edu.website_url ? <a href={edu.website_url} target="_blank" rel="noreferrer" className="hover:underline" style={{ color: COLORS.textPrimary }}>{edu.institution_name}</a> : edu.institution_name}
