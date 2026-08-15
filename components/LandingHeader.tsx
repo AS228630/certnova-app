@@ -80,7 +80,7 @@ export default function LandingHeader() {
             // selection (stage 2), matching the nav's own
             // "Zertifizierungen" link, not to /register.
             <Link
-              href="/zertifizierungen"
+              href="/certifications"
               className="rounded-lg bg-primary px-3.5 py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark sm:px-4"
             >
               {t("landingNav.getStarted")}

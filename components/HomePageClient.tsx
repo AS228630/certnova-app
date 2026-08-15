@@ -100,7 +100,7 @@ export default function HomePageClient() {
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
-                href="/zertifizierungen"
+                href="/certifications"
                 className="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-dark"
               >
                 {t("landing.ctaFree")}
