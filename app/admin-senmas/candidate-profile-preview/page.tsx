@@ -28,7 +28,7 @@
 import { useEffect, useRef, useState } from 'react';
 import {
   Loader2, MapPin, Mail, Linkedin, Github, FileText, Lock, ShieldCheck,
-  Briefcase, FolderGit2, Award, Download, ExternalLink, Globe, CheckCircle2, BarChart3, X,
+  Briefcase, FolderGit2, Award, Download, ExternalLink, Globe, CheckCircle2, BarChart3, X, User, Clock,
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase/client';
 
@@ -404,34 +404,42 @@ export default function CandidateProfilePreviewPage() {
             </Card>
 
             <Card>
-              <div className="text-xs font-semibold mb-3" style={{ color: COLORS.textPrimary }}>Über mich</div>
-              <div className="space-y-2.5 text-xs">
+              <div className="flex items-center gap-2 mb-4">
+                <User size={15} color={COLORS.red} />
+                <span className="text-xs font-semibold" style={{ color: COLORS.textPrimary }}>Über mich</span>
+              </div>
+              <div className="space-y-3.5 text-xs">
                 {profile.location && (
-                  <div className="flex items-center justify-between">
-                    <span style={{ color: COLORS.textSecondary }}>Wohnort</span>
-                    <span style={{ color: COLORS.textPrimary }}>{profile.location}</span>
+                  <div className="flex items-start gap-2.5">
+                    <MapPin size={14} color={COLORS.red} className="shrink-0 mt-0.5" />
+                    <span style={{ color: COLORS.textSecondary }} className="w-24 shrink-0">Wohnort</span>
+                    <span style={{ color: COLORS.textPrimary }} className="flex-1 text-right">{profile.location}</span>
                   </div>
                 )}
                 {languageSkills.length > 0 && (
-                  <div className="flex items-center justify-between">
-                    <span style={{ color: COLORS.textSecondary }}>Sprachen</span>
-                    <span style={{ color: COLORS.textPrimary }}>{languageSkills.join(', ')}</span>
+                  <div className="flex items-start gap-2.5">
+                    <Globe size={14} color={COLORS.red} className="shrink-0 mt-0.5" />
+                    <span style={{ color: COLORS.textSecondary }} className="w-24 shrink-0">Sprachen</span>
+                    <span style={{ color: COLORS.textPrimary }} className="flex-1 text-right">{languageSkills.join(', ')}</span>
                   </div>
                 )}
-                <div className="flex items-center justify-between">
-                  <span style={{ color: COLORS.textSecondary }}>Erfahrung</span>
-                  <span style={{ color: COLORS.textPrimary }}>{yearsOfExperience(publicExperiences)} Jahre</span>
+                <div className="flex items-start gap-2.5">
+                  <Clock size={14} color={COLORS.red} className="shrink-0 mt-0.5" />
+                  <span style={{ color: COLORS.textSecondary }} className="w-24 shrink-0">Erfahrung</span>
+                  <span style={{ color: COLORS.textPrimary }} className="flex-1 text-right">{yearsOfExperience(publicExperiences)} Jahre</span>
                 </div>
                 {profile.availability && (
-                  <div className="flex items-center justify-between">
-                    <span style={{ color: COLORS.textSecondary }}>Verfügbarkeit</span>
-                    <span style={{ color: COLORS.textPrimary }}>{AVAILABILITY_LABEL[profile.availability]}</span>
+                  <div className="flex items-start gap-2.5">
+                    <Clock size={14} color={COLORS.red} className="shrink-0 mt-0.5" />
+                    <span style={{ color: COLORS.textSecondary }} className="w-24 shrink-0">Verfügbarkeit</span>
+                    <span style={{ color: COLORS.textPrimary }} className="flex-1 text-right">{AVAILABILITY_LABEL[profile.availability]}</span>
                   </div>
                 )}
                 {profile.work_mode && (
-                  <div className="flex items-center justify-between">
-                    <span style={{ color: COLORS.textSecondary }}>Arbeitsmodell</span>
-                    <span style={{ color: COLORS.textPrimary }}>{profile.work_mode}</span>
+                  <div className="flex items-start gap-2.5">
+                    <Briefcase size={14} color={COLORS.red} className="shrink-0 mt-0.5" />
+                    <span style={{ color: COLORS.textSecondary }} className="w-24 shrink-0">Arbeitsmodell</span>
+                    <span style={{ color: COLORS.textPrimary }} className="flex-1 text-right">{profile.work_mode}</span>
                   </div>
                 )}
               </div>
