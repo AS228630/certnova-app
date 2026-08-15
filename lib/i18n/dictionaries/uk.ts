@@ -1209,6 +1209,9 @@ const uk: Dictionary = {
     desc: "Зареєструйтеся безкоштовно, щоб зберегти прогрес і продовжити.",
     googleCta: "Продовжити з Google",
     emailCta: "Безкоштовна реєстрація через email",
+    resultTitle: "Вітаємо! Ви завершили безкоштовні запитання.",
+    resultDesc: "Ваш результат",
+    resultKeepsResult: "Ваш результат збережеться після реєстрації.",
   },
   premiumGate: {
     includedInPremium: "Входить у Premium (19 €/міс).",

@@ -22,6 +22,7 @@ import Link from "next/link";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/practiceTypes";
 import { isSingleChoiceAnswerCorrect } from "@/lib/practiceTypes";
 import { getCompanyIcon } from "@/lib/vendorIcons";
+import GuestResultBanner from "./GuestResultBanner";
 
 type YesNoAnswers = Record<number, "Ja" | "Nein">;
 type MatchingAnswers = Record<string, string>;
@@ -55,6 +56,7 @@ export default function ExamCompleteScreen({
   elapsedSeconds,
   onBackToPath,
   onRetryAll,
+  isGuest,
 }: {
   companySlug: string;
   companyName: string;
@@ -68,6 +70,11 @@ export default function ExamCompleteScreen({
   elapsedSeconds: number;
   onBackToPath: () => void;
   onRetryAll: () => void;
+  /** Journey stage 4->5: shows the registration-focused banner above the
+   * normal results instead of assuming the viewer already has an
+   * account. Optional/defaults to false so every other caller (none of
+   * which currently pass it) keeps its exact previous behavior. */
+  isGuest?: boolean;
 }) {
   const { t } = useLocale();
   const [feedback, setFeedback] = useState<string | null>(null);
@@ -217,6 +224,8 @@ export default function ExamCompleteScreen({
           {t("practice.backToPractice")}
         </button>
       </div>
+
+      {isGuest && <GuestResultBanner score={score} correct={correct} total={total} />}
 
       <div className="mb-4 flex flex-col items-center gap-4 rounded-2xl border border-border-soft bg-panel p-6 text-center sm:flex-row sm:items-center sm:text-left">
         <div className="flex-1">

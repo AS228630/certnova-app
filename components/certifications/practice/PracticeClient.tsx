@@ -635,6 +635,7 @@ export default function PracticeClient({
             elapsedSeconds={EXAM_TOTAL_SECONDS - remainingSeconds}
             onBackToPath={() => router.push(`/certifications/${companySlug}/${certId}/learn`)}
             onRetryAll={() => setRestartModalOpen(true)}
+            isGuest={isGuest}
           />
         <PracticeNotesPanel isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
         {restartModalOpen && (

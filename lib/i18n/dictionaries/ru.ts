@@ -1209,6 +1209,9 @@ const ru: Dictionary = {
     desc: "Зарегистрируйтесь бесплатно, чтобы сохранить прогресс и продолжить.",
     googleCta: "Продолжить с Google",
     emailCta: "Бесплатная регистрация по email",
+    resultTitle: "Поздравляем! Вы завершили бесплатные вопросы.",
+    resultDesc: "Ваш результат",
+    resultKeepsResult: "Ваш результат сохранится после регистрации.",
   },
   premiumGate: {
     includedInPremium: "Входит в Premium (19 €/мес).",

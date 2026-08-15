@@ -1209,6 +1209,9 @@ const ar: Dictionary = {
     desc: "سجّل مجاناً لحفظ تقدمك ومواصلة العمل.",
     googleCta: "المتابعة باستخدام Google",
     emailCta: "التسجيل المجاني بالبريد الإلكتروني",
+    resultTitle: "تهانينا! أكملت أسئلتك المجانية.",
+    resultDesc: "نتيجتك",
+    resultKeepsResult: "ستُحفظ نتيجتك بمجرد التسجيل.",
   },
   premiumGate: {
     includedInPremium: "مشمول Premium (١٩ يورو/شهر).",

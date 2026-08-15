@@ -1209,6 +1209,9 @@ const fa: Dictionary = {
     desc: "برای ذخیره‌ی پیشرفتت و ادامه دادن، رایگان ثبت‌نام کن.",
     googleCta: "ادامه با گوگل",
     emailCta: "ثبت‌نام رایگان با ایمیل",
+    resultTitle: "تبریک! سؤالات رایگانت رو تموم کردی.",
+    resultDesc: "نتیجه‌ات",
+    resultKeepsResult: "با ثبت‌نام، نتیجه‌ات حفظ می‌شه.",
   },
   premiumGate: {
     includedInPremium: "در Premium (۱۹ یورو/ماه) گنجانده شده.",

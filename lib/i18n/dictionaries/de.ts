@@ -1210,6 +1210,9 @@ const de = {
     desc: "Registriere dich kostenlos, um deinen Fortschritt zu speichern und weiterzumachen.",
     googleCta: "Mit Google fortfahren",
     emailCta: "Kostenlos mit E-Mail registrieren",
+    resultTitle: "Glückwunsch! Du hast deine kostenlosen Fragen abgeschlossen.",
+    resultDesc: "Dein Ergebnis",
+    resultKeepsResult: "Dein Ergebnis bleibt erhalten, sobald du dich registrierst.",
   },
   premiumGate: {
     includedInPremium: "Ist in Premium (€19/Monat) enthalten.",

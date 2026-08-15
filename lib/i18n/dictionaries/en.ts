@@ -1209,6 +1209,9 @@ const en: Dictionary = {
     desc: "Sign up for free to save your progress and keep going.",
     googleCta: "Continue with Google",
     emailCta: "Sign up free with email",
+    resultTitle: "Congratulations! You've completed your free questions.",
+    resultDesc: "Your result",
+    resultKeepsResult: "Your result is kept once you register.",
   },
   premiumGate: {
     includedInPremium: "Included in Premium (€19/month).",

@@ -1209,6 +1209,9 @@ const tr: Dictionary = {
     desc: "İlerlemeni kaydetmek ve devam etmek için ücretsiz kaydol.",
     googleCta: "Google ile devam et",
     emailCta: "E-posta ile ücretsiz kaydol",
+    resultTitle: "Tebrikler! Ücretsiz sorularını tamamladın.",
+    resultDesc: "Sonucun",
+    resultKeepsResult: "Kaydolduğunda sonucun saklanır.",
   },
   premiumGate: {
     includedInPremium: "Premium'a dahildir (19 €/ay).",
