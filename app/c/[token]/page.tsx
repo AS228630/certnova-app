@@ -60,10 +60,10 @@ function certStatus(expiryDate: string | null): { label: string; color: string }
   if (!expiryDate) return { label: 'Kein Ablaufdatum', color: COLORS.textSecondary };
   return new Date(expiryDate).getTime() < Date.now() ? { label: 'Abgelaufen', color: COLORS.red } : { label: 'Aktiv', color: COLORS.green };
 }
-function BrandLogo({ url, alt, size = 44 }: { url: string | null; alt: string; size?: number }) {
+function BrandLogo({ url, alt, size = 44, wide = false }: { url: string | null; alt: string; size?: number; wide?: boolean }) {
   if (url) {
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src={url} alt={alt} style={{ width: size, height: size, objectFit: 'contain', borderRadius: 10, background: '#fff', padding: 4 }} />;
+    return <img src={url} alt={alt} style={{ width: wide ? size * 2.4 : size, height: size, objectFit: 'contain', borderRadius: 10, background: '#fff', padding: 4 }} />;
   }
   return <div className="flex items-center justify-center font-bold" style={{ width: size, height: size, borderRadius: 10, background: COLORS.cardBorder, color: COLORS.textSecondary, fontSize: size * 0.4 }}>{alt.slice(0, 1).toUpperCase()}</div>;
 }
@@ -519,7 +519,7 @@ export default function PublicCandidateProfilePage() {
                 <div className="space-y-4">
                   {data.education.map((edu) => (
                     <div key={edu.id} className="flex gap-3">
-                      <BrandLogo url={edu.logo_url} alt={edu.institution_name} size={36} />
+                      <BrandLogo url={edu.logo_url} alt={edu.institution_name} size={36} wide />
                       <div className="flex-1 min-w-0">
                         <div className="text-sm font-medium" style={{ color: COLORS.textPrimary }}>
                           {edu.website_url ? <a href={edu.website_url} target="_blank" rel="noreferrer" className="hover:underline" style={{ color: COLORS.textPrimary }}>{edu.institution_name}</a> : edu.institution_name}

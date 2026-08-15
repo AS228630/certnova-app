@@ -105,14 +105,14 @@ function certStatus(expiryDate: string | null): { label: string; color: string }
   return expired ? { label: 'Abgelaufen', color: COLORS.red } : { label: 'Aktiv', color: COLORS.green };
 }
 
-function BrandLogo({ url, alt, size = 44 }: { url: string | null; alt: string; size?: number }) {
+function BrandLogo({ url, alt, size = 44, wide = false }: { url: string | null; alt: string; size?: number; wide?: boolean }) {
   if (url) {
     return (
       // eslint-disable-next-line @next/next/no-img-element
       <img
         src={url}
         alt={alt}
-        style={{ width: size, height: size, objectFit: 'contain', borderRadius: 10, background: '#fff', padding: 4 }}
+        style={{ width: wide ? size * 2.4 : size, height: size, objectFit: 'contain', borderRadius: 10, background: '#fff', padding: 4 }}
       />
     );
   }
@@ -581,7 +581,7 @@ export default function CandidateProfilePreviewPage() {
                   <div className="space-y-4">
                     {publicEducation.map((edu) => (
                       <div key={edu.id} className="flex gap-3">
-                        <BrandLogo url={edu.logo_url} alt={edu.institution_name} size={36} />
+                        <BrandLogo url={edu.logo_url} alt={edu.institution_name} size={36} wide />
                         <div className="flex-1 min-w-0">
                           <div className="text-sm font-medium" style={{ color: COLORS.textPrimary }}>
                             {edu.website_url ? (
