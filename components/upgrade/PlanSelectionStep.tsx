@@ -3,8 +3,24 @@
 import { useState } from "react";
 import { Wallet, CalendarDays, Crown, Gift, ChevronDown, Check } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
+import { PLAN_PRICES } from "@/lib/stripeConfig";
 
 export type PlanId = "free" | "monthly" | "yearly" | "enterprise";
+
+// Single source of truth for what's actually charged — the exact same
+// values app/api/create-checkout-session/route.ts reads from, and the
+// same ones app/pricing/page.tsx now derives its numbers from. Fixes a
+// real inconsistency: this file previously had its own separate
+// hardcoded "€19"/"€159"/"€228" and a "Save 40%" badge, which could
+// silently drift from both the real Checkout price and the public
+// pricing page — and repeated the same 40%-vs-real-~30% math error
+// already fixed on /pricing.
+const MONTHLY_EUR = PLAN_PRICES.monthly.amount / 100;
+const YEARLY_EUR = PLAN_PRICES.yearly.amount / 100;
+const YEARLY_EQUIVALENT_MONTHLY = MONTHLY_EUR * 12;
+const YEARLY_SAVINGS_PERCENT = Math.round(
+  ((YEARLY_EQUIVALENT_MONTHLY - YEARLY_EUR) / YEARLY_EQUIVALENT_MONTHLY) * 100
+);
 
 function usePlans() {
   const { t } = useLocale();
@@ -34,7 +50,7 @@ function usePlans() {
       iconClass: "bg-primary-light text-primary",
       name: t("upgrade.planMonthlyName"),
       tag: t("upgrade.planMonthlyTag"),
-      price: "€19",
+      price: `€${MONTHLY_EUR}`,
       period: "Monat",
       features: [
         t("upgrade.planMonthlyFeature1"),
@@ -53,9 +69,9 @@ function usePlans() {
       iconClass: "bg-primary text-white",
       name: t("upgrade.planYearlyName"),
       tag: t("upgrade.planYearlyTag"),
-      badge: t("upgrade.save40"),
-      price: "€159",
-      strikePrice: "€228",
+      badge: `Spare ${YEARLY_SAVINGS_PERCENT}%`,
+      price: `€${YEARLY_EUR}`,
+      strikePrice: `€${YEARLY_EQUIVALENT_MONTHLY}`,
       period: "Jahr",
       features: [
         t("upgrade.planYearlyFeature1"),
