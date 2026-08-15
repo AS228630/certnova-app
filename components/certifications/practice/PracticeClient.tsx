@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
 import { BarChart3, RefreshCcw } from "lucide-react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/practiceTypes";
@@ -70,7 +69,6 @@ export default function PracticeClient({
   // affordance that a curious user could bypass via devtools.
   const [questions, setQuestions] = useState<PracticeQuestion[]>([]);
   const [topics, setTopics] = useState<PracticeTopic[]>([]);
-  const [totalQuestionCount, setTotalQuestionCount] = useState(0);
   const [isPro, setIsPro] = useState(false);
   const [questionsLoading, setQuestionsLoading] = useState(true);
   const [questionsError, setQuestionsError] = useState(false);
@@ -106,7 +104,6 @@ export default function PracticeClient({
         if (cancelled) return;
         setQuestions(json.questions ?? []);
         setTopics(json.topics ?? []);
-        setTotalQuestionCount(json.totalCount ?? 0);
         setIsPro(!!json.isPro);
 
         if (justPurchased && !json.isPro && activationAttempt < 10) {
@@ -761,22 +758,6 @@ export default function PracticeClient({
 
   return (
     <div className="px-1">
-      {!isPro && totalQuestionCount > activeQuestions.length && (
-        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-primary/30 bg-primary/10 px-4 py-3">
-          <p className="text-sm text-text-muted">
-            {t("premiumGate.practiceDesc")}{" "}
-            <span className="font-semibold text-text">
-              ({totalQuestionCount - activeQuestions.length} {t("premiumGate.moreQuestionsSuffix")})
-            </span>
-          </p>
-          <Link
-            href="/upgrade"
-            className="flex shrink-0 items-center gap-2 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white hover:bg-primary-dark"
-          >
-            {t("premiumGate.cta")}
-          </Link>
-        </div>
-      )}
       <div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
           <SectionMenu
