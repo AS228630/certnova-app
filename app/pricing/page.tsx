@@ -4,8 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import {
   Wallet,
-  CalendarDays,
-  Crown,
   CreditCard,
   RefreshCcw,
   ShieldCheck,
@@ -15,7 +13,6 @@ import {
   MonitorSmartphone,
   FileQuestion,
   Sparkles,
-  Route,
   ArrowRight,
   Rocket,
   GraduationCap,
@@ -28,132 +25,18 @@ import {
 import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
 import { useGuestOnlyRedirect } from "@/lib/useGuestOnlyRedirect";
+import { PLAN_PRICES } from "@/lib/stripeConfig";
 
-type Billing = "monthly" | "yearly";
-
-const plans = [
-  {
-    icon: Wallet,
-    iconClass: "bg-white/10 text-text",
-    name: "Kostenlos",
-    tag: "Free Plan",
-    tagClass: "text-success",
-    price: { monthly: "€0", yearly: "€0" },
-    period: { monthly: "immer", yearly: "immer" },
-    description: "Perfekt zum Starten und Kennenlernen der Plattform.",
-    features: [
-      "Zugriff auf kostenlose Kurse",
-      "1 aktive Lab-Umgebung",
-      "3 Exam-Simulationen / Monat",
-      "KI Coach – begrenzter Zugriff",
-      "Community-Zugang",
-      "E-Mail-Support",
-    ],
-    cta: "Kostenlos starten",
-    ctaHref: "/register",
-    ctaClass: "border border-success/40 text-success hover:bg-success/10",
-    featured: false,
-  },
-  {
-    icon: CalendarDays,
-    iconClass: "bg-primary-light text-primary",
-    name: "Monatlich",
-    tag: "Monthly Plan",
-    tagClass: "text-text-muted",
-    price: { monthly: "€19", yearly: "€19" },
-    period: { monthly: "Monat", yearly: "Monat" },
-    description: "Volle Flexibilität mit monatlicher Zahlung.",
-    features: [
-      "Unbegrenzte Kurse & Labs",
-      "Unbegrenzter KI-Coach-Zugriff",
-      "Praxisnahe Projekte",
-      "Zertifikats-Downloads",
-      "Priority Support",
-      "Lernfortschritts-Analysen",
-    ],
-    cta: "Jetzt wählen",
-    ctaHref: "/register?plan=monthly",
-    ctaClass: "bg-primary text-white hover:bg-primary-dark",
-    featured: false,
-  },
-  {
-    icon: Crown,
-    iconClass: "bg-primary text-white",
-    name: "Jährlich",
-    tag: "Annual Plan",
-    tagClass: "text-text-muted",
-    badge: "Spare 40%",
-    price: { monthly: "€19", yearly: "€159" },
-    period: { monthly: "Monat", yearly: "Jahr" },
-    strikePrice: "€228",
-    description: "Spare und profitiere mit dem Jahresabo.",
-    features: [
-      "Alles im Monatsabo",
-      "2 Monate kostenlos",
-      "Exklusive Inhalte",
-      "Früher Zugriff auf neue Kurse",
-      "Zertifikats-Downloads",
-      "Priority Support",
-    ],
-    cta: "Jetzt wählen",
-    ctaHref: "/register?plan=yearly",
-    ctaClass: "bg-primary text-white hover:bg-primary-dark",
-    featured: true,
-  },
-];
-
-const addOns = [
-  {
-    icon: BookOpen,
-    name: "Kurse einzeln kaufen",
-    tag: "Single Course Purchase",
-    price: "ab €29",
-    period: "Kurs",
-    features: ["Lebenslanger Zugriff", "Zertifikat inklusive", "Für jedes Level"],
-    cta: "Kurse entdecken",
-    href: "/courses",
-  },
-  {
-    icon: MonitorSmartphone,
-    name: "Lab-Zugang",
-    tag: "Cloud Labs Access",
-    price: "ab €9",
-    period: "Monat",
-    features: ["Hands-on Labs", "Cloud-Umgebung", "Schritt-für-Schritt-Anleitungen"],
-    cta: "Labs entdecken",
-    href: "/certifications",
-  },
-  {
-    icon: FileQuestion,
-    name: "Exam-Simulation",
-    tag: "Practice Exams",
-    price: "ab €14",
-    period: "Monat",
-    features: ["Aktuelle Fragenpools", "Zeitgesteuerte Tests", "Detaillierte Auswertung"],
-    cta: "Jetzt üben",
-    href: "/certifications",
-  },
-  {
-    icon: Sparkles,
-    name: "KI Coach",
-    tag: "AI Learning Assistant",
-    price: "ab €9",
-    period: "Monat",
-    features: ["Persönlicher KI-Assistent", "Lernempfehlungen", "24/7 verfügbar"],
-    cta: "KI Coach testen",
-    href: "/dashboard",
-  },
-  {
-    icon: Route,
-    name: "Lernpfade",
-    tag: "Career Paths",
-    price: "ab €29",
-    period: "Monat",
-    features: ["Strukturierte Lernpfade", "Zertifikate inklusive", "Job-Ready Skills"],
-    cta: "Pfad wählen",
-    href: "/learning-paths",
-  },
-];
+// Single source of truth for what's actually charged (lib/stripeConfig.ts,
+// the same file app/api/create-checkout-session/route.ts reads from) —
+// every number shown below is derived from these two values at runtime,
+// never a second hardcoded copy, so the displayed price can never drift
+// from the real Checkout price.
+const MONTHLY_EUR = PLAN_PRICES.monthly.amount / 100;
+const YEARLY_EUR = PLAN_PRICES.yearly.amount / 100;
+const YEARLY_EQUIVALENT_MONTHLY = MONTHLY_EUR * 12;
+const YEARLY_SAVINGS_EUR = YEARLY_EQUIVALENT_MONTHLY - YEARLY_EUR;
+const YEARLY_SAVINGS_PERCENT = Math.round((YEARLY_SAVINGS_EUR / YEARLY_EQUIVALENT_MONTHLY) * 100);
 
 const faqs = [
   {
@@ -176,7 +59,6 @@ const faqs = [
 
 
 export default function PricingPage() {
-  const [billing, setBilling] = useState<Billing>("yearly");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const { checking } = useGuestOnlyRedirect();
 
@@ -229,127 +111,127 @@ export default function PricingPage() {
           <div className="pointer-events-none absolute -right-10 -top-10 h-56 w-56 rounded-full bg-primary/10 blur-3xl" />
         </section>
 
-        {/* Billing toggle */}
-        <div className="mt-8 flex justify-center">
-          <div className="inline-flex items-center gap-1 rounded-full border border-border-soft bg-panel p-1">
-            <button
-              onClick={() => setBilling("monthly")}
-              className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
-                billing === "monthly" ? "bg-panel-alt text-text" : "text-text-muted hover:text-text"
-              }`}
-            >
-              Monatlich bezahlen
-              <span className="ml-1.5 text-xs text-text-faint">0% sparen</span>
-            </button>
-            <button
-              onClick={() => setBilling("yearly")}
-              className={`flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
-                billing === "yearly" ? "bg-primary text-white" : "text-text-muted hover:text-text"
-              }`}
-            >
-              Jährlich bezahlen
-              <span
-                className={`rounded-full px-2 py-0.5 text-[11px] ${
-                  billing === "yearly" ? "bg-white/20" : "bg-primary-light text-primary"
-                }`}
-              >
-                Spare bis zu 40%
+        {/* Pricing panel — Monthly / Yearly / Add-ons, matching the
+            approved reference design. Every price below comes from
+            MONTHLY_EUR/YEARLY_EUR (lib/stripeConfig.ts, the same values
+            Checkout actually charges) and YEARLY_SAVINGS_PERCENT is
+            computed at runtime — never a second hardcoded number that
+            could drift out of sync or repeat the old "Spare 40%" math
+            error (the real savings is ~30%). */}
+        <section className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-[220px_1fr_1fr_260px]">
+          {/* Left panel */}
+          <div className="flex flex-col justify-between rounded-2xl border border-border-soft bg-panel p-5">
+            <div>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-light px-2.5 py-1 text-[11px] font-semibold text-primary">
+                <ShieldCheck size={12} />
+                30-Tage Geld-zurück-Garantie
               </span>
-            </button>
-          </div>
-        </div>
-
-        {/* Plan cards */}
-        <section className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className={`relative flex flex-col rounded-2xl border p-5 ${
-                plan.featured
-                  ? "border-primary bg-panel shadow-[0_0_0_1px_rgba(109,76,255,0.4)]"
-                  : "border-border-soft bg-panel"
-              }`}
-            >
-              {plan.badge && (
-                <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-1 text-[11px] font-bold text-white">
-                  {billing === "yearly" ? "Am beliebtesten" : plan.badge}
-                </span>
-              )}
-
-              <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${plan.iconClass}`}>
-                <plan.icon size={20} />
-              </div>
-
-              <p className="mt-3 text-base font-bold text-text">{plan.name}</p>
-              <p className={`text-xs font-medium ${plan.tagClass}`}>{plan.tag}</p>
-
-              <div className="mt-3 flex items-baseline gap-1.5">
-                <span className="text-2xl font-extrabold text-text">
-                  {billing === "yearly" ? plan.price.yearly : plan.price.monthly}
-                </span>
-                {(billing === "yearly" ? plan.period.yearly : plan.period.monthly) && (
-                  <span className="text-sm text-text-faint">
-                    / {billing === "yearly" ? plan.period.yearly : plan.period.monthly}
-                  </span>
-                )}
-                {plan.strikePrice && billing === "yearly" && (
-                  <span className="text-xs text-text-faint line-through">statt {plan.strikePrice}</span>
-                )}
-              </div>
-
-              <p className="mt-2 text-xs text-text-muted">{plan.description}</p>
-
-              <ul className="mt-4 flex-1 space-y-2">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-xs text-text-muted">
-                    <Check size={14} className="mt-0.5 shrink-0 text-success" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                href={plan.ctaHref}
-                className={`mt-5 rounded-lg px-4 py-2.5 text-center text-sm font-bold transition-colors ${plan.ctaClass}`}
-              >
-                {plan.cta}
-              </Link>
+              <p className="mt-5 text-lg font-extrabold text-text">Wähle deinen Plan</p>
             </div>
-          ))}
-        </section>
+          </div>
 
-        {/* Add-ons */}
-        <section className="mt-14">
-          <h2 className="mb-5 text-lg font-bold text-text">Weitere Optionen &amp; Add-ons</h2>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {addOns.map((a) => (
-              <div key={a.name} className="flex flex-col rounded-xl border border-border-soft bg-panel p-4">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary-light text-primary">
-                  <a.icon size={17} />
-                </div>
-                <p className="mt-2.5 text-sm font-bold text-text">{a.name}</p>
-                <p className="text-[11px] text-text-faint">{a.tag}</p>
-                <p className="mt-2 text-sm font-bold text-text">
-                  {a.price} <span className="text-xs font-normal text-text-faint">/ {a.period}</span>
-                </p>
-                <ul className="mt-3 flex-1 space-y-1.5">
-                  {a.features.map((f) => (
-                    <li key={f} className="flex items-start gap-1.5 text-[11px] text-text-muted">
-                      <Check size={12} className="mt-0.5 shrink-0 text-success" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={a.href}
-                  className="mt-3 rounded-lg border border-border-soft px-3 py-2 text-center text-xs font-semibold text-text hover:bg-panel-alt"
-                >
-                  {a.cta}
-                </Link>
-              </div>
-            ))}
+          {/* Monthly */}
+          <div className="flex flex-col rounded-2xl border border-border-soft bg-panel p-5">
+            <p className="text-base font-bold text-text">Monatlich</p>
+            <p className="text-xs text-text-faint">Flexibel bleiben</p>
+            <div className="mt-4 flex items-baseline gap-1.5">
+              <span className="text-3xl font-extrabold text-text">€{MONTHLY_EUR}</span>
+              <span className="text-sm text-text-faint">/ Monat</span>
+            </div>
+            <ul className="mt-4 flex-1 space-y-2">
+              {["Voller Zugriff auf alle Premium-Funktionen", "Jederzeit kündbar", "Ideal für kurze Vorbereitung"].map((f) => (
+                <li key={f} className="flex items-start gap-2 text-xs text-text-muted">
+                  <Check size={14} className="mt-0.5 shrink-0 text-success" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <Link
+              href="/register?plan=monthly"
+              className="mt-5 rounded-lg border border-border-soft px-4 py-2.5 text-center text-sm font-bold text-text transition-colors hover:bg-panel-alt"
+            >
+              Monatlich starten
+            </Link>
+          </div>
+
+          {/* Yearly (featured) */}
+          <div className="relative flex flex-col rounded-2xl border border-primary bg-panel p-5 shadow-[0_0_30px_rgba(139,92,246,0.15)]">
+            <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-primary px-3 py-1 text-[11px] font-bold text-white">
+              Am beliebtesten – Spare {YEARLY_SAVINGS_PERCENT}%
+            </span>
+            <p className="text-base font-bold text-text">Jährlich</p>
+            <p className="text-xs text-text-faint">Beste Wahl für deinen Erfolg</p>
+            <div className="mt-4 flex items-baseline gap-1.5">
+              <span className="text-3xl font-extrabold text-text">€{YEARLY_EUR}</span>
+              <span className="text-sm text-text-faint">/ Jahr</span>
+              <span className="text-xs text-text-faint line-through">statt €{YEARLY_EQUIVALENT_MONTHLY}</span>
+            </div>
+            <ul className="mt-4 flex-1 space-y-2">
+              <li className="flex items-start gap-2 text-xs text-text-muted">
+                <Check size={14} className="mt-0.5 shrink-0 text-success" />
+                Voller Zugriff auf alle Premium-Funktionen
+              </li>
+              <li className="flex items-start gap-2 text-xs text-text-muted">
+                <Check size={14} className="mt-0.5 shrink-0 text-success" />
+                {Math.round(YEARLY_SAVINGS_EUR / MONTHLY_EUR)} Monate kostenlos
+              </li>
+              <li className="flex items-start gap-2 text-xs text-text-muted">
+                <Check size={14} className="mt-0.5 shrink-0 text-success" />
+                Priorität Support
+              </li>
+              <li className="flex items-start gap-2 text-xs text-text-muted">
+                <Check size={14} className="mt-0.5 shrink-0 text-success" />
+                Bester Preis – Spare {YEARLY_SAVINGS_PERCENT}%
+              </li>
+            </ul>
+            <Link
+              href="/register?plan=yearly"
+              className="mt-5 rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-bold text-white transition-colors hover:bg-primary-dark"
+            >
+              Jährlich starten
+            </Link>
+          </div>
+
+          {/* Add-ons — display only for now: these aren't real
+              purchasable Stripe products yet (Premium already includes
+              Labs/Practice/Exam Simulation), so no checkout button is
+              wired here rather than pretending one works. */}
+          <div className="rounded-2xl border border-border-soft bg-panel p-5">
+            <p className="mb-3 text-sm font-bold text-text">
+              Add-ons <span className="font-normal text-text-faint">(Optional)</span>
+            </p>
+            <ul className="space-y-3">
+              {[
+                { icon: MonitorSmartphone, name: "Labs Only", price: "€9", period: "Monat" },
+                { icon: FileQuestion, name: "Exam Simulator", price: "€14", period: "Monat" },
+                { icon: Sparkles, name: "AI Coach", price: "€9", period: "Monat" },
+                { icon: BookOpen, name: "Single Certification", price: "€29", period: "Einmalig" },
+              ].map((a) => (
+                <li key={a.name} className="flex items-center justify-between gap-2">
+                  <span className="flex items-center gap-2 text-xs text-text-muted">
+                    <a.icon size={15} className="text-primary" />
+                    {a.name}
+                  </span>
+                  <span className="text-xs font-semibold text-text">
+                    {a.price} <span className="font-normal text-text-faint">/ {a.period}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
+
+        {/* Payment methods / security */}
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs text-text-faint">
+          <span>Sichere Zahlung mit</span>
+          <span className="font-semibold text-text-muted">Visa</span>
+          <span className="font-semibold text-text-muted">Mastercard</span>
+          <span className="font-semibold text-text-muted">PayPal</span>
+          <span className="flex items-center gap-1">
+            <ShieldCheck size={13} className="text-primary" />
+            SSL verschlüsselt &amp; sicher
+          </span>
+        </div>
 
         {/* FAQ */}
         <section className="mt-14">
