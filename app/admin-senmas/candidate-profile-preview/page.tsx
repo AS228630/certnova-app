@@ -387,17 +387,17 @@ export default function CandidateProfilePreviewPage() {
                 {cvDoc && <CvDownloadButton documentId={cvDoc.id} />}
                 {profile.linkedin_url && (
                   <a href={profile.linkedin_url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 text-sm py-2.5 rounded-lg" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}>
-                    <Linkedin size={14} /> LinkedIn Profil
+                    <Linkedin size={14} color="#0A66C2" /> LinkedIn Profil
                   </a>
                 )}
                 {profile.github_url && (
                   <a href={profile.github_url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 text-sm py-2.5 rounded-lg" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}>
-                    <Github size={14} /> GitHub Profil
+                    <Github size={14} color="#FFFFFF" /> GitHub Profil
                   </a>
                 )}
                 {profile.website_url && (
                   <a href={profile.website_url} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 text-sm py-2.5 rounded-lg" style={{ background: COLORS.cardBorder, color: COLORS.textPrimary }}>
-                    <Globe size={14} /> Website
+                    <Globe size={14} color={COLORS.red} /> Website
                   </a>
                 )}
               </div>
