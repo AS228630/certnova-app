@@ -1,27 +1,47 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import DashboardShell from "@/components/DashboardShell";
 import PracticeClient from "@/components/certifications/practice/PracticeClient";
 import { getCompany, companies } from "@/lib/companiesData";
-import { AZ900_TOPICS, AZ900_QUESTIONS } from "@/lib/az900Practice";
-import { AZ104_TOPICS, AZ104_QUESTIONS } from "@/lib/az104Practice";
-import { AB900_TOPICS, AB900_QUESTIONS } from "@/lib/ab900Practice";
+import { hasPracticeBank } from "@/lib/server/practiceBank";
 import ComingSoonPractice from "@/components/certifications/practice/ComingSoonPractice";
-
-// Registry of hand-authored practice-question banks by certId. Any certId
-// not listed here shows the ComingSoonPractice placeholder instead of a
-// generic/fabricated question bank — real content only, per the project's
-// "never show fake data" rule. Add more entries here as real question
-// banks are authored.
-const PRACTICE_BANKS: Record<string, { topics: typeof AZ900_TOPICS; questions: typeof AZ900_QUESTIONS }> = {
-  "az-900": { topics: AZ900_TOPICS, questions: AZ900_QUESTIONS },
-  "az-104": { topics: AZ104_TOPICS, questions: AZ104_QUESTIONS },
-  "ab-900": { topics: AB900_TOPICS, questions: AB900_QUESTIONS },
-};
 
 export function generateStaticParams() {
   return companies.flatMap((c) => c.certs.map((cert) => ({ company: c.slug, certId: cert.id })));
 }
 
+// Interactive Free/Gastmodus question session (not a content page worth
+// indexing) — same convention already used by the sibling mock-exam
+// route. The public, indexable page for a certification is
+// /certifications/[company]/[certId] (the journey/landing page), which
+// already carries its own real title/description and a handful of
+// hand-picked public sample questions for Google. This route is where
+// Google should send a searcher to click through to, never something
+// Google renders and indexes itself — noindex here keeps that boundary
+// real even though Google is capable of executing the client-side fetch
+// that loads the actual question content.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ company: string; certId: string }>;
+}): Promise<Metadata> {
+  const { company: slug, certId } = await params;
+  const company = getCompany(slug);
+  const cert = company?.certs.find((c) => c.id === certId);
+  if (!company || !cert) return {};
+  return {
+    title: `${cert.title} (${cert.code}) Übungsfragen`,
+    robots: { index: false },
+  };
+}
+
+// Deliberately does NOT load or pass question content here anymore — the
+// full bank (with correct answers) used to be bundled into this page's
+// server-rendered props and shipped to every visitor regardless of
+// subscription, which made the section lock a UI-only affordance. Content
+// now comes from the gated /api/certifications/[certId]/practice-questions
+// route instead, which decides server-side how much of the bank a given
+// request is actually entitled to.
 export default async function PracticePage({
   params,
 }: {
@@ -33,8 +53,7 @@ export default async function PracticePage({
 
   if (!company || !cert) notFound();
 
-  const hasRealBank = certId in PRACTICE_BANKS;
-  if (!hasRealBank) {
+  if (!hasPracticeBank(certId)) {
     return (
       <DashboardShell requireAuth={false}>
         <main className="flex-1 pb-4 pt-0 md:pb-8">
@@ -43,8 +62,6 @@ export default async function PracticePage({
       </DashboardShell>
     );
   }
-
-  const bank = PRACTICE_BANKS[certId];
 
   return (
     <DashboardShell requireAuth={false}>
@@ -58,8 +75,6 @@ export default async function PracticePage({
           level={cert.level}
           rating={company.rating}
           ratingCount={1245}
-          topics={bank.topics}
-          questions={bank.questions}
         />
       </main>
     </DashboardShell>

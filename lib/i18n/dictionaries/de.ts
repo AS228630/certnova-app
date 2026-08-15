@@ -821,6 +821,7 @@ const de = {
     monthDec: "Dezember",
   },
   practice: {
+    loadError: "Fragen konnten nicht geladen werden.",
     myProgress: "Mein Fortschritt",
     answeredQ: "Beantwortet",
     skippedQ: "Übersprungen",
@@ -1203,6 +1204,23 @@ const de = {
     genericPathPro: "{company} Profi",
     levelRangeBeginner: "Anfänger",
     levelRangeAdvancedExpert: "Fortgeschritten bis Experte",
+  },
+  guestGate: {
+    title: "Weiter geht's mit einem kostenlosen Konto",
+    desc: "Registriere dich kostenlos, um deinen Fortschritt zu speichern und weiterzumachen.",
+    googleCta: "Mit Google fortfahren",
+    emailCta: "Kostenlos mit E-Mail registrieren",
+  },
+  premiumGate: {
+    labsTitle: "Labs freischalten",
+    labsDesc: "Praxisnahe Übungen in einer echten Cloud-Umgebung.",
+    practiceTitle: "Weitere Prüfungsfragen",
+    practiceDesc: "Schalte den vollständigen Fragenpool frei.",
+    examTitle: "Prüfungssimulation freischalten",
+    examDesc: "Realistische Prüfung mit Timer und vollständiger Auswertung.",
+    cta: "Premium aktivieren",
+    moreQuestionsSuffix: "weitere Fragen",
+    laterCta: "Vielleicht später",
   },
   upgrade: {
     title: "Upgrade starten",

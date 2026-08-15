@@ -18,8 +18,8 @@ import {
   ExternalLink,
   Shuffle,
 } from "lucide-react";
-import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
-import { isSingleChoiceAnswerCorrect, correctOptionIds } from "@/lib/az900Practice";
+import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/practiceTypes";
+import { isSingleChoiceAnswerCorrect, correctOptionIds } from "@/lib/practiceTypes";
 import { getSectionCount, getSectionRange } from "@/lib/practiceSections";
 import { useLocale } from "@/components/LocaleProvider";
 

@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { GripVertical, CheckCircle2, XCircle, X, Info, MousePointer2 } from "lucide-react";
-import type { MatchingQuestion } from "@/lib/az900Practice";
+import type { MatchingQuestion } from "@/lib/practiceTypes";
 import { useLocale } from "@/components/LocaleProvider";
 import { seededShuffle } from "@/lib/seededShuffle";
 

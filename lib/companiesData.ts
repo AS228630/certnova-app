@@ -12,6 +12,12 @@ export type Certification = {
   progress: number; // 0-100
   free?: boolean;
   locked?: boolean;
+  /** How many of this cert's Labs (in the order returned by
+   * getLabsForCert) are open to Guest/Free users, per the agreed
+   * Free/Premium rule that this must be configurable per certification
+   * rather than a single hardcoded number for every cert. Defaults to 1
+   * when unset (see labsData.ts's getFreeLabsCount). */
+  freeLabsCount?: number;
 };
 
 export type CertCategoryDef = {
@@ -92,8 +98,8 @@ const MICROSOFT_CATEGORIES: CertCategoryDef[] = [
 const MICROSOFT_CERTS: Certification[] = [
   // Azure (15) — first 9 match the approved mockup card-for-card.
   { id: "az-104", code: "AZ-104", title: "Azure Administrator Associate", description: "Verwaltet Azure-Identitäten, Governance, Speicher und mehr.", categoryKey: "azure", level: "Intermediate", progress: 20 },
-  { id: "az-900", code: "AZ-900", title: "Azure Fundamentals", description: "Grundlegende Cloud-Konzepte und -Dienste verstehen.", categoryKey: "azure", level: "Beginner", progress: 35, free: true },
-  { id: "ab-900", code: "AB-900", title: "AB-900 Microsoft 365 Copilot", description: "Bereite dich mit 101 echten Prüfungsfragen auf Microsoft 365 Copilot vor.", categoryKey: "azure", level: "Beginner", progress: 0, free: true },
+  { id: "az-900", code: "AZ-900", title: "Azure Fundamentals", description: "Grundlegende Cloud-Konzepte und -Dienste verstehen.", categoryKey: "azure", level: "Beginner", progress: 35, free: true, freeLabsCount: 2 },
+  { id: "ab-900", code: "AB-900", title: "AB-900 Microsoft 365 Copilot", description: "Bereite dich mit 101 echten Prüfungsfragen auf Microsoft 365 Copilot vor.", categoryKey: "azure", level: "Beginner", progress: 0, free: true, freeLabsCount: 1 },
   { id: "az-305", code: "AZ-305", title: "Azure Solutions Architect Expert", description: "Entwerfen und Optimieren von Lösungen auf Azure.", categoryKey: "azure", level: "Advanced", progress: 10 },
   { id: "az-204", code: "AZ-204", title: "Azure Developer Associate", description: "Entwickeln von Lösungen auf Microsoft Azure.", categoryKey: "azure", level: "Intermediate", progress: 15 },
   { id: "az-400", code: "AZ-400", title: "DevOps Engineer Expert", description: "Entwerfen und Implementieren von DevOps-Prozessen.", categoryKey: "azure", level: "Advanced", progress: 5 },
@@ -114,7 +120,7 @@ const MICROSOFT_CERTS: Certification[] = [
   { id: "sc-300", code: "SC-300", title: "Identity and Access Administrator", description: "Entwerfen und Implementieren von Identitätslösungen.", categoryKey: "security", level: "Intermediate", progress: 0 },
   { id: "sc-400", code: "SC-400", title: "Information Protection Administrator", description: "Schützen von Informationen in Microsoft-365-Umgebungen.", categoryKey: "security", level: "Intermediate", progress: 0 },
   { id: "sc-100", code: "SC-100", title: "Cybersecurity Architect Expert", description: "Entwerfen von Cybersicherheitsstrategien für Unternehmen.", categoryKey: "security", level: "Advanced", progress: 0, locked: true },
-  { id: "md-102", code: "MD-102", title: "Endpoint Administrator", description: "Verwalten und Schützen von Geräten in Unternehmen.", categoryKey: "security", level: "Intermediate", progress: 0 },
+  { id: "md-102", code: "MD-102", title: "Endpoint Administrator", description: "Verwalten und Schützen von Geräten in Unternehmen.", categoryKey: "security", level: "Intermediate", progress: 0, freeLabsCount: 2 },
   { id: "sc-401", code: "SC-401", title: "Information Security Administrator", description: "Implementieren von Datensicherheits- und Compliance-Lösungen.", categoryKey: "security", level: "Intermediate", progress: 0 },
   { id: "sc-5001", code: "SC-5001", title: "Security Operations Specialty", description: "Fortgeschrittene Bedrohungserkennung mit Microsoft-Sicherheitstools.", categoryKey: "security", level: "Advanced", progress: 0, locked: true },
 

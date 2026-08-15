@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Bot, X, Send, Loader2 } from "lucide-react";
-import type { PracticeQuestion } from "@/lib/az900Practice";
-import { correctOptionIds } from "@/lib/az900Practice";
+import type { PracticeQuestion } from "@/lib/practiceTypes";
+import { correctOptionIds } from "@/lib/practiceTypes";
 import { useLocale } from "@/components/LocaleProvider";
 import { askAiCoach, AiCoachRequestError, languageInstruction, type SimpleChatMessage } from "@/lib/aiCoachClient";
 import AiCoachMessageContent from "@/components/AiCoachMessageContent";

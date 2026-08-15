@@ -820,6 +820,7 @@ const uk: Dictionary = {
     monthDec: "Грудень",
   },
   practice: {
+    loadError: "Не вдалося завантажити запитання.",
     myProgress: "Мій прогрес",
     answeredQ: "Дано відповідь",
     skippedQ: "Пропущено",
@@ -1202,6 +1203,23 @@ const uk: Dictionary = {
     genericPathPro: "{company} Профі",
     levelRangeBeginner: "Початківець",
     levelRangeAdvancedExpert: "Просунутий до експерта",
+  },
+  guestGate: {
+    title: "Продовжте з безкоштовним акаунтом",
+    desc: "Зареєструйтеся безкоштовно, щоб зберегти прогрес і продовжити.",
+    googleCta: "Продовжити з Google",
+    emailCta: "Безкоштовна реєстрація через email",
+  },
+  premiumGate: {
+    labsTitle: "Розблокувати Labs",
+    labsDesc: "Практичні вправи в реальному хмарному середовищі.",
+    practiceTitle: "Більше практичних запитань",
+    practiceDesc: "Розблокуйте повний банк запитань.",
+    examTitle: "Розблокувати симуляцію іспиту",
+    examDesc: "Реалістичний іспит з таймером і повним розбором результатів.",
+    cta: "Активувати Premium",
+    moreQuestionsSuffix: "ще запитань",
+    laterCta: "Можливо пізніше",
   },
   upgrade: {
     title: "Почати оновлення",

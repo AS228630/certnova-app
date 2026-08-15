@@ -2,8 +2,8 @@
 
 import { Flag } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
-import type { PracticeQuestion, PracticeOptionId } from "@/lib/az900Practice";
-import { isMultiSelectQuestion, correctOptionIds } from "@/lib/az900Practice";
+import type { PracticeQuestion, PracticeOptionId } from "@/lib/practiceTypes";
+import { isMultiSelectQuestion, correctOptionIds } from "@/lib/practiceTypes";
 
 type YesNoAnswers = Record<number, "Ja" | "Nein">;
 type MatchingAnswers = Record<string, string>;

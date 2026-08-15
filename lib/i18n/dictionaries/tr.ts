@@ -820,6 +820,7 @@ const tr: Dictionary = {
     monthDec: "Aralık",
   },
   practice: {
+    loadError: "Sorular yüklenemedi.",
     myProgress: "İlerlemem",
     answeredQ: "Cevaplandı",
     skippedQ: "Atlandı",
@@ -1202,6 +1203,23 @@ const tr: Dictionary = {
     genericPathPro: "{company} Profesyonel",
     levelRangeBeginner: "Başlangıç",
     levelRangeAdvancedExpert: "İleri Seviyeden Uzmana",
+  },
+  guestGate: {
+    title: "Ücretsiz bir hesapla devam et",
+    desc: "İlerlemeni kaydetmek ve devam etmek için ücretsiz kaydol.",
+    googleCta: "Google ile devam et",
+    emailCta: "E-posta ile ücretsiz kaydol",
+  },
+  premiumGate: {
+    labsTitle: "Labs'ı aç",
+    labsDesc: "Gerçek bir bulut ortamında uygulamalı alıştırmalar.",
+    practiceTitle: "Daha fazla pratik sorusu",
+    practiceDesc: "Tüm soru havuzunun kilidini aç.",
+    examTitle: "Sınav simülasyonunu aç",
+    examDesc: "Zamanlayıcılı ve tam değerlendirmeli gerçekçi bir sınav.",
+    cta: "Premium'u etkinleştir",
+    moreQuestionsSuffix: "daha fazla soru",
+    laterCta: "Belki daha sonra",
   },
   upgrade: {
     title: "Yükseltmeyi Başlat",

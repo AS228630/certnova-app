@@ -3,7 +3,7 @@ import DashboardShell from "@/components/DashboardShell";
 import { companies, getCompany } from "@/lib/companiesData";
 import { getLab, getLabsForCert } from "@/lib/labsData";
 import { getLabInfrastructureType } from "@/lib/labInfrastructure";
-import UniversalLabStage from "@/components/certifications/labs/UniversalLabStage";
+import GatedLabStage from "@/components/certifications/labs/GatedLabStage";
 
 // Same extensible-foundation approach as the parent /labs route, but scoped
 // to a specific hand-authored lab within a cert (e.g. az-104 has both
@@ -40,10 +40,21 @@ export default async function LabSlugPage({
   // Guard against an unknown labSlug landing on the wrong (fallback) lab.
   if (infrastructureType === "AZURE" && lab?.slug && lab.slug !== labSlug) notFound();
 
+  // Real position of this lab within the cert's authored lab list - this
+  // is what freeLabsCount actually counts against, not just "is this the
+  // first lab route or not".
+  const labIndex = Math.max(0, getLabsForCert(certId).findIndex((l) => (l.slug ?? l.id) === labSlug));
+
   return (
     <DashboardShell>
       <main className="min-w-0 flex-1 overflow-x-hidden">
-        <UniversalLabStage infrastructureType={infrastructureType} company={company} cert={cert} lab={lab} />
+        <GatedLabStage
+          infrastructureType={infrastructureType}
+          company={company}
+          cert={cert}
+          lab={lab}
+          labIndex={labIndex}
+        />
       </main>
     </DashboardShell>
   );

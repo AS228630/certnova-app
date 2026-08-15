@@ -820,6 +820,7 @@ const es: Dictionary = {
     monthDec: "Diciembre",
   },
   practice: {
+    loadError: "No se pudieron cargar las preguntas.",
     myProgress: "Mi progreso",
     answeredQ: "Respondido",
     skippedQ: "Omitido",
@@ -1202,6 +1203,23 @@ const es: Dictionary = {
     genericPathPro: "{company} Profesional",
     levelRangeBeginner: "Principiante",
     levelRangeAdvancedExpert: "Avanzado a experto",
+  },
+  guestGate: {
+    title: "Continúa con una cuenta gratuita",
+    desc: "Regístrate gratis para guardar tu progreso y continuar.",
+    googleCta: "Continuar con Google",
+    emailCta: "Regístrate gratis con email",
+  },
+  premiumGate: {
+    labsTitle: "Desbloquear Labs",
+    labsDesc: "Ejercicios prácticos en un entorno cloud real.",
+    practiceTitle: "Más preguntas de práctica",
+    practiceDesc: "Desbloquea el banco completo de preguntas.",
+    examTitle: "Desbloquear simulación de examen",
+    examDesc: "Un examen realista con temporizador y evaluación completa.",
+    cta: "Activar Premium",
+    moreQuestionsSuffix: "preguntas más",
+    laterCta: "Quizás más tarde",
   },
   upgrade: {
     title: "Iniciar actualización",

@@ -19,8 +19,8 @@ import {
   PartyPopper,
 } from "lucide-react";
 import Link from "next/link";
-import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
-import { isSingleChoiceAnswerCorrect } from "@/lib/az900Practice";
+import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/practiceTypes";
+import { isSingleChoiceAnswerCorrect } from "@/lib/practiceTypes";
 import { getCompanyIcon } from "@/lib/vendorIcons";
 
 type YesNoAnswers = Record<number, "Ja" | "Nein">;

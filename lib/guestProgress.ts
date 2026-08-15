@@ -1,4 +1,4 @@
-import type { PracticeOptionId } from "@/lib/az900Practice";
+import type { PracticeOptionId } from "@/lib/practiceTypes";
 
 const KEY_PREFIX = "certcoach-guest-progress-";
 

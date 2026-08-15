@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { BarChart3, RefreshCcw } from "lucide-react";
 import { useRouter } from "next/navigation";
-import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
-import { getAz900Questions, isSingleChoiceAnswerCorrect, isMultiSelectQuestion } from "@/lib/az900Practice";
-import { getAb900Questions } from "@/lib/ab900Practice";
+import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/practiceTypes";
+import { isSingleChoiceAnswerCorrect, isMultiSelectQuestion } from "@/lib/practiceTypes";
+import { supabase } from "@/lib/supabase/client";
 import { useLocale } from "@/components/LocaleProvider";
 import { getSectionForIndex, getSectionRange, getSectionCount } from "@/lib/practiceSections";
 import QuestionPanel from "./QuestionPanel";
@@ -29,6 +30,7 @@ import { useSectionAttemptsStore } from "@/lib/store/sectionAttemptsStore";
 import { useUser } from "@/components/UserContext";
 import { loadGuestProgress, saveGuestAnswer, clearGuestProgress } from "@/lib/guestProgress";
 import GuestSignupModal from "./GuestSignupModal";
+import PremiumGateModal from "./PremiumGateModal";
 
 const EXAM_TOTAL_SECONDS = 2 * 60 * 60; // 2h, matches a real certification exam
 
@@ -42,8 +44,6 @@ export default function PracticeClient({
   certId,
   certCode,
   certTitle,
-  topics,
-  questions: questionsFromServer,
 }: {
   companyName: string;
   companySlug: string;
@@ -53,20 +53,61 @@ export default function PracticeClient({
   level: string;
   rating: number;
   ratingCount: number;
-  topics: PracticeTopic[];
-  questions: PracticeQuestion[];
 }) {
   const { locale, t } = useLocale();
-  // az-900 and ab-900 have real translations available (see
-  // lib/i18n/questions/); every other cert's question bank isn't
-  // translated yet, so it always uses the server-provided (German or
-  // generic) questions unchanged.
-  const questions = useMemo(() => {
-    if (certId === "az-900") return getAz900Questions(locale);
-    if (certId === "ab-900") return getAb900Questions(locale);
-    return questionsFromServer;
-  }, [certId, locale, questionsFromServer]);
   const router = useRouter();
+  const { user } = useUser();
+
+  // Questions (and how much of the bank the current user is entitled to)
+  // now come exclusively from the gated /api/certifications/[certId]/
+  // practice-questions route — never imported directly into this client
+  // component. The route decides server-side, from the real subscriptions
+  // table, whether to return the full bank or just "Teil 1"; a Free/guest
+  // user's browser genuinely never receives section 2+ content (including
+  // correct answers), so this is a real access control, not just a UI
+  // affordance that a curious user could bypass via devtools.
+  const [questions, setQuestions] = useState<PracticeQuestion[]>([]);
+  const [topics, setTopics] = useState<PracticeTopic[]>([]);
+  const [totalQuestionCount, setTotalQuestionCount] = useState(0);
+  const [isPro, setIsPro] = useState(false);
+  const [questionsLoading, setQuestionsLoading] = useState(true);
+  const [questionsError, setQuestionsError] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function loadQuestions() {
+      setQuestionsLoading(true);
+      setQuestionsError(false);
+      try {
+        const { data } = await supabase.auth.getSession();
+        const accessToken = data.session?.access_token ?? null;
+        const res = await fetch(`/api/certifications/${certId}/practice-questions`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ accessToken, locale }),
+        });
+        if (!res.ok) throw new Error("practice-questions request failed");
+        const json = await res.json();
+        if (cancelled) return;
+        setQuestions(json.questions ?? []);
+        setTopics(json.topics ?? []);
+        setTotalQuestionCount(json.totalCount ?? 0);
+        setIsPro(!!json.isPro);
+      } catch {
+        if (!cancelled) setQuestionsError(true);
+      } finally {
+        if (!cancelled) setQuestionsLoading(false);
+      }
+    }
+    loadQuestions();
+    return () => {
+      cancelled = true;
+    };
+    // Re-fetches on locale change (server returns the correctly translated
+    // bank) and whenever the signed-in user changes (a guest signing up,
+    // or a user's subscription status changing, both change what the next
+    // fetch is entitled to receive).
+  }, [certId, locale, user]);
   const [order, setOrder] = useState<string[] | null>(null); // null = authored order, else shuffled question ids
   // Bumped every time "Gemischt wiederholen" reshuffles the question
   // order, so option/answer positions within each question are re-
@@ -129,7 +170,6 @@ export default function PracticeClient({
     return () => clearInterval(t);
   }, []);
 
-  const { user } = useUser();
   // A guest is simply "no logged-in user" — practice pages now render
   // for guests too (DashboardShell requireAuth={false}), with access
   // limited to Teil 1 only (see goTo). Recomputed on every render from
@@ -137,6 +177,7 @@ export default function PracticeClient({
   // finishes signing up mid-session — no extra state to keep in sync.
   const isGuest = !user;
   const [showGuestGate, setShowGuestGate] = useState(false);
+  const [showPremiumGate, setShowPremiumGate] = useState(false);
   const persistedCorrectness = useQuestionAnswersStore((s) => s.getCorrectness(certId));
   const loadPersistedAnswers = useQuestionAnswersStore((s) => s.loadForCert);
   const recordPersistedAnswer = useQuestionAnswersStore((s) => s.recordAnswer);
@@ -240,15 +281,19 @@ export default function PracticeClient({
   function goTo(i: number) {
     const clamped = Math.max(0, Math.min(activeQuestions.length - 1, i));
 
-    // Guests (not logged in) may freely move within Teil 1 only — the
-    // rest of the exam is the paid/registered experience. Checked
-    // independently of the attemptsMigrationReady block below, since
-    // that one only applies once a real user's DB-backed unlock state
-    // has loaded, which never happens for a guest.
-    if (isGuest) {
+    // Free/guest users (anyone the server didn't confirm as Premium) may
+    // freely move within Teil 1 only — the rest of the exam is the
+    // Premium experience. This isn't just a UI nicety: for a non-Premium
+    // user, activeQuestions itself only ever CONTAINS Teil 1 (the
+    // practice-questions API never sent the rest), so there is nothing to
+    // navigate into past this point regardless. Checked independently of
+    // the attemptsMigrationReady block below, since that one only applies
+    // once a real user's DB-backed unlock state has loaded.
+    if (!isPro) {
       const targetSection = getSectionForIndex(activeQuestions.length, clamped);
       if (targetSection > 0) {
-        setShowGuestGate(true);
+        if (isGuest) setShowGuestGate(true);
+        else setShowPremiumGate(true);
         return;
       }
     }
@@ -519,6 +564,22 @@ export default function PracticeClient({
     setReopenedIds((s) => new Set([...s, ...currentIds]));
   }
 
+  if (questionsLoading) {
+    return (
+      <div className="flex items-center justify-center rounded-xl border border-border-soft bg-panel p-16 text-sm text-text-muted">
+        {t("common.loading")}
+      </div>
+    );
+  }
+
+  if (questionsError) {
+    return (
+      <div className="rounded-xl border border-border-soft bg-panel p-8 text-center text-sm text-text-muted">
+        {t("practice.loadError")}
+      </div>
+    );
+  }
+
   if (!current) {
     return (
       <div className="rounded-xl border border-border-soft bg-panel p-8 text-center text-sm text-text-muted">
@@ -668,6 +729,22 @@ export default function PracticeClient({
 
   return (
     <div className="px-1">
+      {!isPro && totalQuestionCount > activeQuestions.length && (
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-primary/30 bg-primary/10 px-4 py-3">
+          <p className="text-sm text-text-muted">
+            {t("premiumGate.practiceDesc")}{" "}
+            <span className="font-semibold text-text">
+              ({totalQuestionCount - activeQuestions.length} {t("premiumGate.moreQuestionsSuffix")})
+            </span>
+          </p>
+          <Link
+            href="/upgrade"
+            className="flex shrink-0 items-center gap-2 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white hover:bg-primary-dark"
+          >
+            {t("premiumGate.cta")}
+          </Link>
+        </div>
+      )}
       <div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
           <SectionMenu
@@ -676,7 +753,7 @@ export default function PracticeClient({
             statusFor={statusFor}
             onJump={(i, sectionIdx) => (sectionIdx !== undefined ? jumpToSection(sectionIdx, i) : goTo(i))}
             isUnlocked={
-              isGuest ? (s) => s === 0 : attemptsMigrationReady ? (s) => isSectionPermanentlyUnlocked(certId, s) : undefined
+              !isPro ? (s) => s === 0 : attemptsMigrationReady ? (s) => isSectionPermanentlyUnlocked(certId, s) : undefined
             }
             getBestScore={attemptsMigrationReady ? (s) => getBestScore(certId, s) : undefined}
           />
@@ -879,6 +956,7 @@ export default function PracticeClient({
       )}
 
       {showGuestGate && <GuestSignupModal onClose={() => setShowGuestGate(false)} />}
+      {showPremiumGate && <PremiumGateModal variant="practice" onClose={() => setShowPremiumGate(false)} />}
 
       {/* AI coach now spans the full width below the question. */}
       <div className="mt-6 hidden h-[420px] lg:block">

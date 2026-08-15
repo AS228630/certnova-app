@@ -3,8 +3,8 @@
 import { useState } from "react";
 import type { CSSProperties } from "react";
 import { Bookmark, Sparkles, CheckCircle2, XCircle, ExternalLink, Lightbulb, Shuffle, StickyNote, Repeat, Trash2 } from "lucide-react";
-import type { PracticeOptionId, PracticeQuestion } from "@/lib/az900Practice";
-import { isMultiSelectQuestion, correctOptionIds } from "@/lib/az900Practice";
+import type { PracticeOptionId, PracticeQuestion } from "@/lib/practiceTypes";
+import { isMultiSelectQuestion, correctOptionIds } from "@/lib/practiceTypes";
 import MatchingQuestionView from "./MatchingQuestionView";
 import { useLocale } from "@/components/LocaleProvider";
 import { seededShuffle } from "@/lib/seededShuffle";

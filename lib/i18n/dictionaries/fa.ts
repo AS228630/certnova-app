@@ -820,6 +820,7 @@ const fa: Dictionary = {
     monthDec: "دسامبر",
   },
   practice: {
+    loadError: "سؤالات بارگذاری نشدند.",
     myProgress: "پیشرفت من",
     answeredQ: "پاسخ‌داده‌شده",
     skippedQ: "رد‌شده",
@@ -1202,6 +1203,23 @@ const fa: Dictionary = {
     genericPathPro: "{company} حرفه‌ای",
     levelRangeBeginner: "مبتدی",
     levelRangeAdvancedExpert: "پیشرفته تا متخصص",
+  },
+  guestGate: {
+    title: "با یک حساب رایگان ادامه بده",
+    desc: "برای ذخیره‌ی پیشرفتت و ادامه دادن، رایگان ثبت‌نام کن.",
+    googleCta: "ادامه با گوگل",
+    emailCta: "ثبت‌نام رایگان با ایمیل",
+  },
+  premiumGate: {
+    labsTitle: "باز کردن Labs",
+    labsDesc: "تمرین‌های عملی در یک محیط واقعی Cloud.",
+    practiceTitle: "سؤالات تمرینی بیشتر",
+    practiceDesc: "کل بانک سؤال را باز کن.",
+    examTitle: "باز کردن شبیه‌سازی امتحان",
+    examDesc: "یک امتحان واقعی با تایمر و تحلیل کامل نتیجه.",
+    cta: "فعال‌سازی Premium",
+    moreQuestionsSuffix: "سؤال بیشتر",
+    laterCta: "شاید بعداً",
   },
   upgrade: {
     title: "شروع ارتقا",

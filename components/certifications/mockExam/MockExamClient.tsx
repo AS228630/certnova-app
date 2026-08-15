@@ -4,14 +4,17 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight, Clock3, X, AlertTriangle } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
-import type { PracticeQuestion, PracticeOptionId } from "@/lib/az900Practice";
-import { isSingleChoiceAnswerCorrect, isMultiSelectQuestion } from "@/lib/az900Practice";
+import { useUser } from "@/components/UserContext";
+import { supabase } from "@/lib/supabase/client";
+import type { PracticeQuestion, PracticeOptionId } from "@/lib/practiceTypes";
+import { isSingleChoiceAnswerCorrect, isMultiSelectQuestion } from "@/lib/practiceTypes";
 import type { ExamInfo } from "@/lib/examInfoData";
 import MockExamIntro from "./MockExamIntro";
 import MockExamQuestion, { type MockAnswer } from "./MockExamQuestion";
 import MockExamReview from "./MockExamReview";
 import MockExamResults from "./MockExamResults";
 import { useActivityLogStore } from "@/lib/store/activityLogStore";
+import CtaBanner from "@/components/dashboard/CtaBanner";
 
 type YesNoAnswers = Record<number, "Ja" | "Nein">;
 type MatchingAnswers = Record<string, string>;
@@ -42,7 +45,6 @@ export default function MockExamClient({
   certId,
   certCode,
   certTitle,
-  questions,
   examInfo,
 }: {
   companySlug: string;
@@ -50,12 +52,56 @@ export default function MockExamClient({
   certId: string;
   certCode: string;
   certTitle: string;
-  questions: PracticeQuestion[];
   examInfo: ExamInfo;
 }) {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const router = useRouter();
+  const { user } = useUser();
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Questions come exclusively from the gated
+  // /api/certifications/[certId]/mock-exam-questions route — see
+  // practice/page.tsx's comment for why this matters. A Guest/Free
+  // request's response never contains question 11 onward, so
+  // simQuestionCount naturally caps at whatever the server actually
+  // sent, the same way it already capped at examInfo.simQuestionCount
+  // before this change.
+  const [questions, setQuestions] = useState<PracticeQuestion[]>([]);
+  const [totalQuestionCount, setTotalQuestionCount] = useState(0);
+  const [isPro, setIsPro] = useState(false);
+  const [questionsLoading, setQuestionsLoading] = useState(true);
+  const [questionsError, setQuestionsError] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    async function loadQuestions() {
+      setQuestionsLoading(true);
+      setQuestionsError(false);
+      try {
+        const { data } = await supabase.auth.getSession();
+        const accessToken = data.session?.access_token ?? null;
+        const res = await fetch(`/api/certifications/${certId}/mock-exam-questions`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ accessToken, locale }),
+        });
+        if (!res.ok) throw new Error("mock-exam-questions request failed");
+        const json = await res.json();
+        if (cancelled) return;
+        setQuestions(json.questions ?? []);
+        setTotalQuestionCount(json.totalCount ?? 0);
+        setIsPro(!!json.isPro);
+      } catch {
+        if (!cancelled) setQuestionsError(true);
+      } finally {
+        if (!cancelled) setQuestionsLoading(false);
+      }
+    }
+    loadQuestions();
+    return () => {
+      cancelled = true;
+    };
+  }, [certId, locale, user]);
 
   const activeQuestions = useMemo(
     () => questions.slice(0, Math.min(examInfo.simQuestionCount, questions.length)),
@@ -157,6 +203,22 @@ export default function MockExamClient({
   function exitToJourney() {
     if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
     router.push(`/certifications/${companySlug}/${certId}`);
+  }
+
+  if (questionsLoading) {
+    return (
+      <div className="flex items-center justify-center rounded-xl border border-border-soft bg-panel p-16 text-sm text-text-muted">
+        {t("common.loading")}
+      </div>
+    );
+  }
+
+  if (questionsError) {
+    return (
+      <div className="rounded-xl border border-border-soft bg-panel p-8 text-center text-sm text-text-muted">
+        {t("practice.loadError")}
+      </div>
+    );
   }
 
   if (!current && stage !== "intro") {
@@ -310,14 +372,27 @@ export default function MockExamClient({
           const scorePercent =
             activeQuestions.length === 0 ? 0 : Math.round((correctCount / activeQuestions.length) * 100);
           return (
-            <MockExamResults
-              companySlug={companySlug}
-              certId={certId}
-              correctCount={correctCount}
-              totalCount={activeQuestions.length}
-              passed={scorePercent >= 70}
-              onRetry={startExam}
-            />
+            <>
+              <MockExamResults
+                companySlug={companySlug}
+                certId={certId}
+                correctCount={correctCount}
+                totalCount={activeQuestions.length}
+                passed={scorePercent >= 70}
+                onRetry={startExam}
+              />
+              {/* Contextual Upgrade Trigger (journey stage 7): only shown
+                  when this really was the truncated Free/Guest version —
+                  i.e. more questions genuinely exist than were just
+                  shown. Reuses the same CtaBanner already used elsewhere
+                  in the app for visual consistency, rather than a
+                  one-off custom design. */}
+              {!isPro && totalQuestionCount > activeQuestions.length && (
+                <div className="mx-auto mt-6 max-w-2xl">
+                  <CtaBanner />
+                </div>
+              )}
+            </>
           );
         })()}
 

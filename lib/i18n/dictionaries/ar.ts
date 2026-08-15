@@ -820,6 +820,7 @@ const ar: Dictionary = {
     monthDec: "ديسمبر",
   },
   practice: {
+    loadError: "تعذر تحميل الأسئلة.",
     myProgress: "تقدمي",
     answeredQ: "تمت الإجابة",
     skippedQ: "تم تخطيه",
@@ -1202,6 +1203,23 @@ const ar: Dictionary = {
     genericPathPro: "{company} محترف",
     levelRangeBeginner: "مبتدئ",
     levelRangeAdvancedExpert: "متقدم إلى خبير",
+  },
+  guestGate: {
+    title: "تابع مع حساب مجاني",
+    desc: "سجّل مجاناً لحفظ تقدمك ومواصلة العمل.",
+    googleCta: "المتابعة باستخدام Google",
+    emailCta: "التسجيل المجاني بالبريد الإلكتروني",
+  },
+  premiumGate: {
+    labsTitle: "فتح Labs",
+    labsDesc: "تمارين عملية في بيئة سحابية حقيقية.",
+    practiceTitle: "المزيد من أسئلة التدريب",
+    practiceDesc: "افتح بنك الأسئلة الكامل.",
+    examTitle: "فتح محاكاة الامتحان",
+    examDesc: "امتحان واقعي بمؤقت وتحليل كامل للنتائج.",
+    cta: "تفعيل Premium",
+    moreQuestionsSuffix: "أسئلة إضافية",
+    laterCta: "ربما لاحقاً",
   },
   upgrade: {
     title: "بدء الترقية",

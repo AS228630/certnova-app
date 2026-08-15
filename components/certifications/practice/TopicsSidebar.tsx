@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronDown, Lock, Shuffle } from "lucide-react";
-import type { PracticeTopic } from "@/lib/az900Practice";
+import type { PracticeTopic } from "@/lib/practiceTypes";
 
 export default function TopicsSidebar({
   topics,

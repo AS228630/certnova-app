@@ -820,6 +820,7 @@ const ru: Dictionary = {
     monthDec: "Декабрь",
   },
   practice: {
+    loadError: "Не удалось загрузить вопросы.",
     myProgress: "Мой прогресс",
     answeredQ: "Отвечено",
     skippedQ: "Пропущено",
@@ -1202,6 +1203,23 @@ const ru: Dictionary = {
     genericPathPro: "{company} Профи",
     levelRangeBeginner: "Начинающий",
     levelRangeAdvancedExpert: "Продвинутый до эксперта",
+  },
+  guestGate: {
+    title: "Продолжите с бесплатным аккаунтом",
+    desc: "Зарегистрируйтесь бесплатно, чтобы сохранить прогресс и продолжить.",
+    googleCta: "Продолжить с Google",
+    emailCta: "Бесплатная регистрация по email",
+  },
+  premiumGate: {
+    labsTitle: "Разблокировать Labs",
+    labsDesc: "Практические упражнения в реальной облачной среде.",
+    practiceTitle: "Больше практических вопросов",
+    practiceDesc: "Откройте полный банк вопросов.",
+    examTitle: "Разблокировать симуляцию экзамена",
+    examDesc: "Реалистичный экзамен с таймером и полным разбором результатов.",
+    cta: "Активировать Premium",
+    moreQuestionsSuffix: "ещё вопросов",
+    laterCta: "Может быть позже",
   },
   upgrade: {
     title: "Начать обновление",
