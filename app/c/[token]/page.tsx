@@ -203,7 +203,7 @@ function ConfidentialSection({ token, docs, requireCode, onUnlocked }: { token: 
         <div className="grid grid-cols-2 gap-2">
           {docs.map((d) => (
             <div key={d.id} className="flex flex-col items-center gap-1.5 text-center rounded-lg p-3" style={{ background: COLORS.cardBorder }}>
-              <FileText size={18} color={COLORS.green} />
+              <FileText size={18} color={COLORS.red} />
               <span className="text-[11px]" style={{ color: COLORS.textPrimary }}>{d.title}</span>
               <div className="flex gap-2 mt-1">
                 <button onClick={() => view(d.id)} title="Ansehen"><Eye size={13} color={COLORS.textSecondary} /></button>
