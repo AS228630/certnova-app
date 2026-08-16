@@ -30,15 +30,18 @@ import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useProfileStore } from "@/lib/store/profileStore";
 import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
+import { useSubscriptionStore } from "@/lib/store/subscriptionStore";
 import { getLearnTrack } from "@/lib/learnData";
 import AvatarUpload from "@/components/AvatarUpload";
+import FreeDashboardCard from "@/components/profile/FreeDashboardCard";
 
 const TAB_KEYS = ["overview", "paths", "learn", "labs", "exams", "achievements", "badges", "certificates"] as const;
 type TabKey = (typeof TAB_KEYS)[number];
 
 export default function ProfileClient() {
   const { user } = useUser();
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
+  const isPro = useSubscriptionStore((s) => s.isPro);
   const progress = useUserProgressStore((s) => s.progress);
   const profile = useProfileStore((s) => s.profile);
   const progressMap = useCertProgressStore((s) => s.progressMap);
@@ -171,6 +174,14 @@ export default function ProfileClient() {
           );
         })}
       </div>
+
+      <FreeDashboardCard
+        isPro={isPro}
+        progressMap={progressMap}
+        detailMap={detailMap}
+        lessonCompletions={lessonCompletions}
+        locale={locale}
+      />
 
       {tab === "overview" && <OverviewTab progressMap={progressMap} avgScore={avgScore} questionsAnswered={questionsAnswered} labsCompleted={labsCompleted} />}
       {tab === "paths" && <PathsTab progressMap={progressMap} />}
