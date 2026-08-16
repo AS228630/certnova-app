@@ -1024,6 +1024,8 @@ const tr: Dictionary = {
     correctWouldBe: "Doğrusu",
   },
   learn: {
+    comingSoonLabel: "Öğrenme modülleri",
+    trackInProgress: "Üzerinde çalışıyoruz! {company} için gerçek öğrenme modülleri hazırlanıyor ve yakında burada kullanıma sunulacak.",
     tabLearningPath2: "Öğrenme Yolu",
     tabOverview2: "Genel Bakış",
     tabResources2: "Kaynaklar",
@@ -1154,6 +1156,8 @@ const tr: Dictionary = {
     simulationHint: "Zamanlayıcılı gerçekçi simülasyon",
   },
   mockExam: {
+    comingSoonLabel: "Sınav simülasyonu",
+    simInProgress: "Üzerinde çalışıyoruz! {company} için gerçek bir sınav simülasyonu hazırlanıyor ve yakında burada kullanıma sunulacak.",
     introTitle: "Sınav simülasyonu",
     questionsLabel: "Sorular",
     durationLabel: "Süre",

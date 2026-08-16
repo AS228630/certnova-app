@@ -1024,6 +1024,8 @@ const uk: Dictionary = {
     correctWouldBe: "Правильно було б",
   },
   learn: {
+    comingSoonLabel: "Навчальні модулі",
+    trackInProgress: "Ми над цим працюємо! Реальні навчальні модулі для {company} готуються і скоро з'являться тут.",
     tabLearningPath2: "Навчальний шлях",
     tabOverview2: "Огляд",
     tabResources2: "Ресурси",
@@ -1154,6 +1156,8 @@ const uk: Dictionary = {
     simulationHint: "Реалістична симуляція з таймером",
   },
   mockExam: {
+    comingSoonLabel: "Симуляція іспиту",
+    simInProgress: "Ми над цим працюємо! Реальна симуляція іспиту для {company} готується і скоро з'явиться тут.",
     introTitle: "Симуляція іспиту",
     questionsLabel: "Питання",
     durationLabel: "Тривалість",

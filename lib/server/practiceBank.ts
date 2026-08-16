@@ -1,6 +1,5 @@
 import type { PracticeQuestion, PracticeTopic } from "@/lib/az900Practice";
 import { AZ900_TOPICS, getAz900Questions } from "@/lib/az900Practice";
-import { AZ104_TOPICS, AZ104_QUESTIONS } from "@/lib/az104Practice";
 import { AB900_TOPICS, getAb900Questions } from "@/lib/ab900Practice";
 
 // Registry of hand-authored practice-question banks by certId. Any certId
@@ -13,7 +12,13 @@ import { AB900_TOPICS, getAb900Questions } from "@/lib/ab900Practice";
 // keeps their full content, including correct answers, out of the browser
 // bundle entirely. The client only ever receives the slice a route
 // explicitly decides to send it.
-const PRACTICE_CERT_IDS = ["az-900", "az-104", "ab-900"] as const;
+//
+// az-104 deliberately removed (Aug 2026): despite having a small amount of
+// real content (topic 1 only, out of 7), the owner's explicit decision was
+// to keep exactly three certs open — az-900, ab-900, and md-102 (the
+// latter's real question bank still to come) — and lock everything else,
+// az-104 included, until each is genuinely ready to re-enable.
+const PRACTICE_CERT_IDS = ["az-900", "ab-900"] as const;
 export type PracticeCertId = (typeof PRACTICE_CERT_IDS)[number];
 
 export function hasPracticeBank(certId: string): certId is PracticeCertId {
@@ -22,16 +27,10 @@ export function hasPracticeBank(certId: string): certId is PracticeCertId {
 
 export function getPracticeTopics(certId: PracticeCertId): PracticeTopic[] {
   if (certId === "az-900") return AZ900_TOPICS;
-  if (certId === "az-104") return AZ104_TOPICS;
   return AB900_TOPICS;
 }
 
-// az-104 has no real translations yet (see lib/az104Practice.ts), so it
-// always returns the authored (German) questions regardless of locale —
-// matches the exact fallback behavior PracticeClient used to implement
-// client-side before this route existed.
 export function getPracticeQuestions(certId: PracticeCertId, locale: string): PracticeQuestion[] {
   if (certId === "az-900") return getAz900Questions(locale);
-  if (certId === "az-104") return AZ104_QUESTIONS;
   return getAb900Questions(locale);
 }

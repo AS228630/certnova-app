@@ -1025,6 +1025,8 @@ const de = {
     correctWouldBe: "Richtig wäre",
   },
   learn: {
+    comingSoonLabel: "Lernmodule",
+    trackInProgress: "Wir arbeiten daran! Echte Lernmodule für {company} sind in Arbeit und werden hier in Kürze verfügbar sein.",
     tabLearningPath2: "Lernpfad",
     tabOverview2: "Übersicht",
     tabResources2: "Ressourcen",
@@ -1155,6 +1157,8 @@ const de = {
     simulationHint: "Realistische Simulation mit Timer",
   },
   mockExam: {
+    comingSoonLabel: "Prüfungssimulation",
+    simInProgress: "Wir arbeiten daran! Eine echte Prüfungssimulation für {company} ist in Arbeit und wird hier in Kürze verfügbar sein.",
     introTitle: "Prüfungssimulation",
     questionsLabel: "Fragen",
     durationLabel: "Dauer",

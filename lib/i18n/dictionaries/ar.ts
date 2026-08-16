@@ -1024,6 +1024,8 @@ const ar: Dictionary = {
     correctWouldBe: "الصحيح هو",
   },
   learn: {
+    comingSoonLabel: "وحدات التعلم",
+    trackInProgress: "نحن نعمل على ذلك! وحدات تعليمية حقيقية لـ {company} قيد الإعداد وستتوفر هنا قريباً.",
     tabLearningPath2: "مسار التعلم",
     tabOverview2: "نظرة عامة",
     tabResources2: "الموارد",
@@ -1154,6 +1156,8 @@ const ar: Dictionary = {
     simulationHint: "محاكاة واقعية بمؤقت",
   },
   mockExam: {
+    comingSoonLabel: "محاكاة الامتحان",
+    simInProgress: "نحن نعمل على ذلك! محاكاة امتحان حقيقية لـ {company} قيد الإعداد وستتوفر هنا قريباً.",
     introTitle: "محاكاة الامتحان",
     questionsLabel: "الأسئلة",
     durationLabel: "المدة",

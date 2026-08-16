@@ -1024,6 +1024,8 @@ const es: Dictionary = {
     correctWouldBe: "Lo correcto sería",
   },
   learn: {
+    comingSoonLabel: "Módulos de aprendizaje",
+    trackInProgress: "¡Estamos trabajando en ello! Módulos de aprendizaje reales para {company} están en proceso y estarán disponibles aquí pronto.",
     tabLearningPath2: "Ruta de aprendizaje",
     tabOverview2: "Resumen",
     tabResources2: "Recursos",
@@ -1154,6 +1156,8 @@ const es: Dictionary = {
     simulationHint: "Simulación realista con temporizador",
   },
   mockExam: {
+    comingSoonLabel: "Simulación de examen",
+    simInProgress: "¡Estamos trabajando en ello! Una simulación de examen real para {company} está en proceso y estará disponible aquí pronto.",
     introTitle: "Simulación de examen",
     questionsLabel: "Preguntas",
     durationLabel: "Duración",

@@ -1024,6 +1024,8 @@ const en: Dictionary = {
     correctWouldBe: "Correct would be",
   },
   learn: {
+    comingSoonLabel: "Learning modules",
+    trackInProgress: "We're working on it! Real learning modules for {company} are in progress and will be available here soon.",
     tabLearningPath2: "Learning Path",
     tabOverview2: "Overview",
     tabResources2: "Resources",
@@ -1154,6 +1156,8 @@ const en: Dictionary = {
     simulationHint: "Realistic simulation with timer",
   },
   mockExam: {
+    comingSoonLabel: "Exam simulation",
+    simInProgress: "We're working on it! A real exam simulation for {company} is in progress and will be available here soon.",
     introTitle: "Exam simulation",
     questionsLabel: "Questions",
     durationLabel: "Duration",

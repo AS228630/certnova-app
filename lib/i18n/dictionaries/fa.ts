@@ -1024,6 +1024,8 @@ const fa: Dictionary = {
     correctWouldBe: "جواب درست",
   },
   learn: {
+    comingSoonLabel: "ماژول‌های آموزشی",
+    trackInProgress: "داریم روش کار می‌کنیم! ماژول‌های آموزشی واقعی برای {company} در حال آماده‌سازی هستن و به‌زودی اینجا در دسترس می‌شن.",
     tabLearningPath2: "مسیر یادگیری",
     tabOverview2: "نمای کلی",
     tabResources2: "منابع",
@@ -1154,6 +1156,8 @@ const fa: Dictionary = {
     simulationHint: "شبیه‌سازی واقعی با تایمر",
   },
   mockExam: {
+    comingSoonLabel: "شبیه‌سازی امتحان",
+    simInProgress: "داریم روش کار می‌کنیم! یک شبیه‌سازی واقعی امتحان برای {company} در حال آماده‌سازیه و به‌زودی اینجا در دسترس می‌شه.",
     introTitle: "شبیه‌سازی امتحان",
     questionsLabel: "سؤالات",
     durationLabel: "مدت زمان",

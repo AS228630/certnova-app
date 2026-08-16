@@ -1024,6 +1024,8 @@ const fr: Dictionary = {
     correctWouldBe: "La bonne réponse serait",
   },
   learn: {
+    comingSoonLabel: "Modules d'apprentissage",
+    trackInProgress: "Nous y travaillons ! De vrais modules d'apprentissage pour {company} sont en préparation et seront bientôt disponibles ici.",
     tabLearningPath2: "Parcours d'apprentissage",
     tabOverview2: "Aperçu",
     tabResources2: "Ressources",
@@ -1154,6 +1156,8 @@ const fr: Dictionary = {
     simulationHint: "Simulation réaliste avec minuteur",
   },
   mockExam: {
+    comingSoonLabel: "Simulation d'examen",
+    simInProgress: "Nous y travaillons ! Une véritable simulation d'examen pour {company} est en préparation et sera bientôt disponible ici.",
     introTitle: "Simulation d'examen",
     questionsLabel: "Questions",
     durationLabel: "Durée",
