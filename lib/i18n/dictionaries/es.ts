@@ -1081,6 +1081,8 @@ const es: Dictionary = {
   },
   labs: {
     backToCert: "Volver a",
+    navLabel: "Labs de esta certificación",
+    labNumberLabel: "Lab",
     labEnvironment: "Entorno de laboratorio",
     labInProgress: "¡Estamos trabajando en ello! Un laboratorio interactivo práctico para {company} está en desarrollo y estará disponible aquí pronto.",
     endLab: "Finalizar laboratorio",

@@ -1081,6 +1081,8 @@ const uk: Dictionary = {
   },
   labs: {
     backToCert: "Назад до",
+    navLabel: "Labs цього сертифіката",
+    labNumberLabel: "Lab",
     labEnvironment: "Лабораторне середовище",
     labInProgress: "Ми над цим працюємо! Інтерактивна практична лабораторна для {company} розробляється і незабаром з'явиться тут.",
     endLab: "Завершити лабораторну",

@@ -7,6 +7,7 @@ import { useLocale } from "@/components/LocaleProvider";
 import { useSubscriptionStore } from "@/lib/store/subscriptionStore";
 import { canAccess } from "@/lib/entitlementPolicy";
 import UniversalLabStage from "./UniversalLabStage";
+import LabNavigationPanel from "./LabNavigationPanel";
 import type { Company, Certification } from "@/lib/companiesData";
 import type { Lab } from "@/lib/labsData";
 import type { LabInfrastructureType } from "@/lib/labInfrastructure";
@@ -27,6 +28,7 @@ export default function GatedLabStage({
   cert,
   lab,
   labIndex,
+  allLabs,
 }: {
   infrastructureType: LabInfrastructureType;
   company: Company;
@@ -35,6 +37,11 @@ export default function GatedLabStage({
   /** 0-based position of this lab within getLabsForCert(cert.id) (or 0
    * for certs with only the generated fallback lab). */
   labIndex: number;
+  /** Full lab list for this cert, for the Lab Navigation Panel — only
+   * ever non-empty for certs with real hand-authored labs (currently
+   * az-104, az-900); everything else renders nothing extra, same as
+   * before this panel existed. */
+  allLabs: Lab[];
 }) {
   const { t } = useLocale();
   const pathname = usePathname();
@@ -51,9 +58,21 @@ export default function GatedLabStage({
     );
   }
 
+  const nav = allLabs.length > 1 && (
+    <LabNavigationPanel
+      companySlug={company.slug}
+      certId={cert.id}
+      labs={allLabs}
+      freeLabsCount={freeLabsCount}
+      isPro={isPro}
+      currentLabIndex={labIndex}
+    />
+  );
+
   if (locked) {
     return (
       <div className="mx-auto max-w-md p-8 text-center">
+        {nav}
         <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-light text-primary">
           <Lock size={22} />
         </div>
@@ -71,5 +90,10 @@ export default function GatedLabStage({
     );
   }
 
-  return <UniversalLabStage infrastructureType={infrastructureType} company={company} cert={cert} lab={lab} />;
+  return (
+    <div>
+      {nav}
+      <UniversalLabStage infrastructureType={infrastructureType} company={company} cert={cert} lab={lab} />
+    </div>
+  );
 }

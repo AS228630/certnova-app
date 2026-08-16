@@ -1081,6 +1081,8 @@ const fa: Dictionary = {
   },
   labs: {
     backToCert: "بازگشت به",
+    navLabel: "Labهای این گواهی‌نامه",
+    labNumberLabel: "Lab",
     labEnvironment: "محیط لب",
     labInProgress: "ما در حال کار روی این هستیم! یک لب عملی و تعاملی برای {company} در حال ساخته‌شدنه و به‌زودی اینجا در دسترس قرار می‌گیره.",
     endLab: "پایان لب",

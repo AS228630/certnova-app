@@ -1082,6 +1082,8 @@ const de = {
   },
   labs: {
     backToCert: "Zurück zu",
+    navLabel: "Labs dieser Zertifizierung",
+    labNumberLabel: "Lab",
     labEnvironment: "Lab-Umgebung",
     labInProgress: "Wir arbeiten daran! Ein interaktives Hands-on-Lab für {company} ist in Arbeit und wird hier in Kürze verfügbar sein.",
     endLab: "Lab beenden",

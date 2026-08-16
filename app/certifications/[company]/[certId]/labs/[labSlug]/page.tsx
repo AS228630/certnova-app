@@ -54,6 +54,7 @@ export default async function LabSlugPage({
           cert={cert}
           lab={lab}
           labIndex={labIndex}
+          allLabs={getLabsForCert(certId)}
         />
       </main>
     </DashboardShell>

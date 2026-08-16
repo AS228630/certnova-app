@@ -1081,6 +1081,8 @@ const ar: Dictionary = {
   },
   labs: {
     backToCert: "الرجوع إلى",
+    navLabel: "مختبرات هذه الشهادة",
+    labNumberLabel: "Lab",
     labEnvironment: "بيئة المختبر",
     labInProgress: "نحن نعمل على ذلك! مختبر تفاعلي عملي لـ {company} قيد التطوير وسيكون متاحاً هنا قريباً.",
     endLab: "إنهاء المختبر",

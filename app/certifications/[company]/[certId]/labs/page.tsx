@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import DashboardShell from "@/components/DashboardShell";
 import { companies, getCompany } from "@/lib/companiesData";
-import { getLab } from "@/lib/labsData";
+import { getLab, getLabsForCert } from "@/lib/labsData";
 import { getLabInfrastructureType } from "@/lib/labInfrastructure";
 import GatedLabStage from "@/components/certifications/labs/GatedLabStage";
 
@@ -35,7 +35,14 @@ export default async function LabPage({
         {/* This route always lands on the first lab (index 0) — always
             within the free allotment (freeLabsCount defaults to 1), so
             no user ever lands here already locked out. */}
-        <GatedLabStage infrastructureType={infrastructureType} company={company} cert={cert} lab={lab} labIndex={0} />
+        <GatedLabStage
+          infrastructureType={infrastructureType}
+          company={company}
+          cert={cert}
+          lab={lab}
+          labIndex={0}
+          allLabs={getLabsForCert(certId)}
+        />
       </main>
     </DashboardShell>
   );

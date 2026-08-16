@@ -1081,6 +1081,8 @@ const tr: Dictionary = {
   },
   labs: {
     backToCert: "Geri dön",
+    navLabel: "Bu sertifikanın Lab'ları",
+    labNumberLabel: "Lab",
     labEnvironment: "Lab Ortamı",
     labInProgress: "Bunun üzerinde çalışıyoruz! {company} için etkileşimli, uygulamalı bir lab geliştiriliyor ve yakında burada kullanıma sunulacak.",
     endLab: "Labı Sonlandır",
