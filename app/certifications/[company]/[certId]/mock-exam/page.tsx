@@ -1,14 +1,13 @@
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import DashboardShell from "@/components/DashboardShell";
+import MockExamClient from "@/components/certifications/mockExam/MockExamClient";
 import { getCompany, companies } from "@/lib/companiesData";
-import ComingSoonExam from "@/components/certifications/mockExam/ComingSoonExam";
+import { getExamInfo } from "@/lib/examInfoData";
+import { hasPracticeBank } from "@/lib/server/practiceBank";
+import ComingSoonPractice from "@/components/certifications/practice/ComingSoonPractice";
 
-// Exam Simulation is locked for every company/cert right now, including
-// AZ-900/AB-900 which have a real practice-question bank - per the
-// owner's explicit decision to keep Exam Simulation fully locked
-// site-wide until it's ready to re-enable gradually, independent of
-// which certs already have real Practice Questions content.
 export function generateStaticParams() {
   return companies.flatMap((c) => c.certs.map((cert) => ({ company: c.slug, certId: cert.id })));
 }
@@ -24,10 +23,18 @@ export async function generateMetadata({
   if (!company || !cert) return {};
   return {
     title: `${cert.title} (${cert.code}) Prüfungssimulation`,
-    robots: { index: false },
+    robots: { index: false }, // interactive exam simulation, not a content page worth indexing
   };
 }
 
+// Deliberately does NOT load or pass question content here anymore - see
+// the practice/page.tsx comment for why. Content now comes from the
+// gated /api/certifications/[certId]/mock-exam-questions route, which
+// decides server-side (Guest/Free = first 10 questions, Premium = full
+// bank) how much of the real exam-simulation content a given request is
+// entitled to. requireAuth is now false so Guests can reach this page at
+// all, matching stage 3 of the Free->Premium journey (Prüfung starten -
+// Gastmodus applies to Exam Simulation too, not just Practice).
 export default async function MockExamPage({
   params,
 }: {
@@ -38,10 +45,31 @@ export default async function MockExamPage({
   const cert = company?.certs.find((c) => c.id === certId);
   if (!company || !cert) notFound();
 
+  if (!hasPracticeBank(certId)) {
+    return (
+      <DashboardShell requireAuth={false}>
+        <main className="flex-1 p-4 md:p-8">
+          <ComingSoonPractice company={company} cert={cert} />
+        </main>
+      </DashboardShell>
+    );
+  }
+
+  const examInfo = getExamInfo(certId);
+
   return (
     <DashboardShell requireAuth={false}>
       <main className="flex-1 p-4 md:p-8">
-        <ComingSoonExam company={company} cert={cert} />
+        <Suspense fallback={null}>
+          <MockExamClient
+            companySlug={company.slug}
+            companyName={company.name}
+            certId={certId}
+            certCode={cert.code}
+            certTitle={cert.title}
+            examInfo={examInfo}
+          />
+        </Suspense>
       </main>
     </DashboardShell>
   );

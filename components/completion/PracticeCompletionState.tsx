@@ -79,7 +79,7 @@ export default function PracticeCompletionState({
             the journey PhaseIllustration (gradient badge + Lucide icon),
             not a new custom asset or an emoji. */}
         <div className="mx-auto mb-5 flex h-40 w-40 items-center justify-center rounded-full bg-gradient-to-br from-primary/30 to-primary/10 shadow-[0_0_50px_rgba(139,92,246,0.3)]">
-          <Trophy size={72} className="text-primary" />
+          <Trophy size={72} className="text-primary" aria-hidden="true" />
         </div>
 
         <p className="text-center text-xl font-extrabold text-text">🎉 {t("practice.stage4CongratsTitle")}</p>

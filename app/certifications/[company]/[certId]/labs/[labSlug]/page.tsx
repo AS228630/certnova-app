@@ -1,15 +1,14 @@
 import { notFound } from "next/navigation";
 import DashboardShell from "@/components/DashboardShell";
 import { companies, getCompany } from "@/lib/companiesData";
-import { getLabsForCert } from "@/lib/labsData";
-import ComingSoonLab from "@/components/certifications/labs/ComingSoonLab";
+import { getLab, getLabsForCert } from "@/lib/labsData";
+import { getLabInfrastructureType } from "@/lib/labInfrastructure";
+import GatedLabStage from "@/components/certifications/labs/GatedLabStage";
 
-// Labs is locked for every company/cert right now, including specific
-// authored labs like az-104's "vm-creation"/"b2c-identitaeten" - same
-// site-wide lockdown as the parent /labs route. generateStaticParams
-// still reflects the real authored lab list so these specific URLs stay
-// reachable (and correctly 404 for an unknown slug) rather than
-// disappearing outright.
+// Same extensible-foundation approach as the parent /labs route, but scoped
+// to a specific hand-authored lab within a cert (e.g. az-104 has both
+// "vm-creation" and "b2c-identitaeten"). Only certs with more than one
+// hand-authored lab need this route; generateStaticParams reflects that.
 export function generateStaticParams() {
   return companies.flatMap((c) =>
     c.certs.flatMap((cert) =>
@@ -35,13 +34,27 @@ export default async function LabSlugPage({
   const cert = company.certs.find((c) => c.id === certId);
   if (!cert) notFound();
 
-  const knownSlugs = getLabsForCert(certId).map((l) => l.slug ?? l.id);
-  if (knownSlugs.length > 0 && !knownSlugs.includes(labSlug)) notFound();
+  const infrastructureType = getLabInfrastructureType(companySlug, cert);
+  const lab = infrastructureType === "AZURE" ? getLab(certId, cert.title, cert.level, labSlug) : undefined;
+
+  // Guard against an unknown labSlug landing on the wrong (fallback) lab.
+  if (infrastructureType === "AZURE" && lab?.slug && lab.slug !== labSlug) notFound();
+
+  // Real position of this lab within the cert's authored lab list - this
+  // is what freeLabsCount actually counts against, not just "is this the
+  // first lab route or not".
+  const labIndex = Math.max(0, getLabsForCert(certId).findIndex((l) => (l.slug ?? l.id) === labSlug));
 
   return (
     <DashboardShell>
       <main className="min-w-0 flex-1 overflow-x-hidden">
-        <ComingSoonLab company={company} cert={cert} />
+        <GatedLabStage
+          infrastructureType={infrastructureType}
+          company={company}
+          cert={cert}
+          lab={lab}
+          labIndex={labIndex}
+        />
       </main>
     </DashboardShell>
   );

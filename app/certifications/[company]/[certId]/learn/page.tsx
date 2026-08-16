@@ -1,13 +1,14 @@
 import { notFound } from "next/navigation";
 import DashboardShell from "@/components/DashboardShell";
+import LearnClient from "@/components/certifications/learn/LearnClient";
 import { getCompany, companies } from "@/lib/companiesData";
-import ComingSoonLearn from "@/components/certifications/learn/ComingSoonLearn";
+import { getLearnTrack } from "@/lib/learnData";
+import { getCertJourney } from "@/lib/journeyData";
 
-// Learn is locked for every company/cert right now — unlike Labs and
-// Practice Questions (which have some real content for a few certs),
-// there is no real hand-authored Learn content anywhere yet (see
-// lib/learnData.ts's generated fallback), so this is unconditional per
-// the owner's explicit decision, not per-cert like the others.
+// Learn content is provider-agnostic (modules/videos/quizzes, not a live
+// cloud simulator), so it's generic for every company/cert from the start —
+// see lib/learnData.ts's generateLearnTrack fallback for certs without
+// hand-authored modules yet.
 export function generateStaticParams() {
   return companies.flatMap((c) => c.certs.map((cert) => ({ company: c.slug, certId: cert.id })));
 }
@@ -20,13 +21,16 @@ export default async function LearnPage({
   const { company: slug, certId } = await params;
   const company = getCompany(slug);
   const cert = company?.certs.find((c) => c.id === certId);
+  const journey = getCertJourney(slug, certId);
 
-  if (!company || !cert) notFound();
+  if (!company || !cert || !journey) notFound();
+
+  const track = getLearnTrack(certId, cert.title);
 
   return (
     <DashboardShell>
       <main className="flex-1 p-4 md:p-8">
-        <ComingSoonLearn company={company} cert={cert} />
+        <LearnClient company={company} journey={journey} modules={track.modules} />
       </main>
     </DashboardShell>
   );

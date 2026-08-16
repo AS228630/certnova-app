@@ -27,6 +27,7 @@ import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useLessonCompletionStore } from "@/lib/store/lessonCompletionStore";
 import { useUser } from "@/components/UserContext";
 import { useLocale } from "@/components/LocaleProvider";
+import LearnModuleCompletionModal from "./LearnModuleCompletionModal";
 
 const TAB_KEYS = ["path", "overview", "resources", "discussions"] as const;
 
@@ -234,7 +235,9 @@ export default function LearnClient({
   const firstOpenIndex = localModules.findIndex((m) => !m.locked && modulePct(m) < 100);
   const totalLessons = localModules.flatMap((m) => m.lessons).length;
 
-  async function toggleLesson(_moduleId: string, lessonId: string) {
+  const [celebratingModule, setCelebratingModule] = useState<Module | null>(null);
+
+  async function toggleLesson(moduleId: string, lessonId: string) {
     if (!user) return;
     const nowCompleted = await useLessonCompletionStore.getState().toggle(user.id, certId, lessonId);
 
@@ -244,6 +247,16 @@ export default function LearnClient({
       const increment = totalLessons > 0 ? 100 / totalLessons : 0;
       useCertProgressStore.getState().recordModuleCompletion(certId, increment);
       useUserProgressStore.getState().recordLessonCompletion();
+
+      // Learn's own completion celebration (no Premium gate — Learn is
+      // fully free) — shown the moment every lesson in this module is
+      // now complete, using the just-updated store state directly
+      // rather than the possibly-stale `completionSet` closure value.
+      const freshCompletionSet = useLessonCompletionStore.getState().completions[certId];
+      const finishedModule = localModules.find((m) => m.id === moduleId);
+      if (finishedModule && freshCompletionSet && finishedModule.lessons.every((l) => freshCompletionSet.has(l.id))) {
+        setCelebratingModule(finishedModule);
+      }
     }
   }
 
@@ -474,6 +487,23 @@ export default function LearnClient({
         </div>
       </div>
       )}
+      {celebratingModule &&
+        (() => {
+          const finishedIndex = localModules.findIndex((m) => m.id === celebratingModule.id);
+          const nextModule = localModules[finishedIndex + 1];
+          const nextIsReachable = !!nextModule && !nextModule.locked;
+          return (
+            <LearnModuleCompletionModal
+              moduleTitle={celebratingModule.title}
+              hasNextModule={nextIsReachable}
+              onGoToNextModule={() => {
+                setCelebratingModule(null);
+                if (nextIsReachable) setTab("path");
+              }}
+              onClose={() => setCelebratingModule(null)}
+            />
+          );
+        })()}
     </div>
   );
 }

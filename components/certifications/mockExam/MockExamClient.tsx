@@ -14,7 +14,7 @@ import MockExamQuestion, { type MockAnswer } from "./MockExamQuestion";
 import MockExamReview from "./MockExamReview";
 import MockExamResults from "./MockExamResults";
 import { useActivityLogStore } from "@/lib/store/activityLogStore";
-import CtaBanner from "@/components/dashboard/CtaBanner";
+import ExamPreviewCompletion from "./ExamPreviewCompletion";
 
 type YesNoAnswers = Record<number, "Ja" | "Nein">;
 type MatchingAnswers = Record<string, string>;
@@ -69,7 +69,6 @@ export default function MockExamClient({
   // sent, the same way it already capped at examInfo.simQuestionCount
   // before this change.
   const [questions, setQuestions] = useState<PracticeQuestion[]>([]);
-  const [totalQuestionCount, setTotalQuestionCount] = useState(0);
   const [isPro, setIsPro] = useState(false);
   const [questionsLoading, setQuestionsLoading] = useState(true);
   const [questionsError, setQuestionsError] = useState(false);
@@ -99,7 +98,6 @@ export default function MockExamClient({
         const json = await res.json();
         if (cancelled) return;
         setQuestions(json.questions ?? []);
-        setTotalQuestionCount(json.totalCount ?? 0);
         setIsPro(!!json.isPro);
 
         if (justPurchased && !json.isPro && activationAttempt < 10) {
@@ -388,30 +386,35 @@ export default function MockExamClient({
       {stage === "results" &&
         (() => {
           const correctCount = activeQuestions.filter((q) => isCorrect(q, answers[q.id])).length;
+
+          // Per the advisor's explicit correction: a non-Premium user only
+          // ever saw the free preview (activeQuestions.length questions,
+          // never the real full exam), so a pass/fail verdict here would
+          // be misleading — ExamPreviewCompletion deliberately never
+          // claims "Prüfung bestanden". Only a confirmed Premium user
+          // (who really did take the complete exam) sees the real
+          // MockExamResults pass/fail card.
+          if (!isPro) {
+            return (
+              <ExamPreviewCompletion
+                freeQuestionLimit={activeQuestions.length}
+                correct={correctCount}
+                upgradeHref={`/upgrade?returnTo=${encodeURIComponent(pathname ?? "/dashboard")}`}
+              />
+            );
+          }
+
           const scorePercent =
             activeQuestions.length === 0 ? 0 : Math.round((correctCount / activeQuestions.length) * 100);
           return (
-            <>
-              <MockExamResults
-                companySlug={companySlug}
-                certId={certId}
-                correctCount={correctCount}
-                totalCount={activeQuestions.length}
-                passed={scorePercent >= 70}
-                onRetry={startExam}
-              />
-              {/* Contextual Upgrade Trigger (journey stage 7): only shown
-                  when this really was the truncated Free/Guest version —
-                  i.e. more questions genuinely exist than were just
-                  shown. Reuses the same CtaBanner already used elsewhere
-                  in the app for visual consistency, rather than a
-                  one-off custom design. */}
-              {!isPro && totalQuestionCount > activeQuestions.length && (
-                <div className="mx-auto mt-6 max-w-2xl">
-                  <CtaBanner />
-                </div>
-              )}
-            </>
+            <MockExamResults
+              companySlug={companySlug}
+              certId={certId}
+              correctCount={correctCount}
+              totalCount={activeQuestions.length}
+              passed={scorePercent >= 70}
+              onRetry={startExam}
+            />
           );
         })()}
 
