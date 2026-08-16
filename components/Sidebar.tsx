@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import FreeRegistrationGate from "@/components/registration/FreeRegistrationGate";
 import {
   LayoutDashboard,
   GraduationCap,
@@ -61,6 +63,12 @@ export default function Sidebar({
   // still sees it, since they genuinely have no plan yet.
   const isPro = useSubscriptionStore((s) => s.isPro);
   const { user } = useUser();
+  // Real bug fix: this used to link a Guest straight to the old,
+  // disruptive full-page /register instead of the small Stage 5
+  // registration window — from before that modal existed. A signed-in
+  // Free user still goes to /upgrade (a real purchase, which does
+  // warrant its own full page) unchanged.
+  const [showRegistrationGate, setShowRegistrationGate] = useState(false);
   // Honest simplification: without a full per-day activity log, we mark the
   // last N weekdays as done based on the current streak count (capped at 7).
   const streakDone = streakDayLabels.map((_, i) => i >= streakDayLabels.length - streakDaysCount);
@@ -142,13 +150,22 @@ export default function Sidebar({
               <p className="text-xs leading-relaxed text-text-muted">
                 {t("sidebar.proUpgradeDesc")}
               </p>
-              <Link
-                href={user ? "/upgrade" : "/register"}
-                onClick={onClose}
-                className="mt-3 flex w-full items-center justify-center rounded-lg bg-primary py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark"
-              >
-                {t("sidebar.upgradeNow")}
-              </Link>
+              {user ? (
+                <Link
+                  href="/upgrade"
+                  onClick={onClose}
+                  className="mt-3 flex w-full items-center justify-center rounded-lg bg-primary py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark"
+                >
+                  {t("sidebar.upgradeNow")}
+                </Link>
+              ) : (
+                <button
+                  onClick={() => setShowRegistrationGate(true)}
+                  className="mt-3 flex w-full items-center justify-center rounded-lg bg-primary py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark"
+                >
+                  {t("sidebar.upgradeNow")}
+                </button>
+              )}
             </div>
           )}
 
@@ -219,6 +236,9 @@ export default function Sidebar({
           </div>
         </div>
       </aside>
+      {showRegistrationGate && (
+        <FreeRegistrationGate returnTo={pathname ?? "/dashboard"} onClose={() => setShowRegistrationGate(false)} />
+      )}
     </>
   );
 }

@@ -1,8 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Trophy, CheckCircle2, XCircle, Clock3, ArrowRight } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
+import FreeRegistrationGate from "@/components/registration/FreeRegistrationGate";
 
 /** Single place the score-color thresholds live (advisor spec item 9) —
  * every caller asks this function instead of repeating the >=80/60-79/
@@ -55,6 +58,8 @@ export default function PracticeCompletionState({
   upgradeHref: string;
 }) {
   const { t } = useLocale();
+  const pathname = usePathname();
+  const [showRegistrationGate, setShowRegistrationGate] = useState(false);
   const total = correct + wrong;
   const scorePercent = total === 0 ? 0 : Math.round((correct / total) * 100);
   const status = getResultStatus(scorePercent);
@@ -143,12 +148,12 @@ export default function PracticeCompletionState({
 
         <div className="mt-6 space-y-2.5">
           {isGuest ? (
-            <Link
-              href="/register"
+            <button
+              onClick={() => setShowRegistrationGate(true)}
               className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-bold text-white hover:bg-primary-dark"
             >
               {t("practice.stage4RegisterCta")}
-            </Link>
+            </button>
           ) : (
             <Link
               href={upgradeHref}
@@ -166,6 +171,9 @@ export default function PracticeCompletionState({
           </button>
         </div>
       </div>
+      {showRegistrationGate && (
+        <FreeRegistrationGate returnTo={pathname ?? "/dashboard"} onClose={() => setShowRegistrationGate(false)} />
+      )}
     </div>
   );
 }
