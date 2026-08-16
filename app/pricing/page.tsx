@@ -161,6 +161,7 @@ export default function PricingPage() {
                 features: ["Video-Lektionen", "Lernpfade", "Zusammenfassungen", "Flashcards", "Fortschritts-Tracking"],
                 footer: "Teilweise verfügbar im kostenlosen Plan",
                 footerClass: "text-primary",
+                featureKey: "learn",
               },
               {
                 num: 2,
@@ -173,6 +174,7 @@ export default function PricingPage() {
                 features: ["Hands-on Azure Labs", "Sandbox-Umgebung", "Geführte Übungen", "Lab-Berichte", "Real Cloud Experience"],
                 footer: "Nur in Premium enthalten",
                 footerClass: "text-accent-blue",
+                featureKey: "labs",
               },
               {
                 num: 3,
@@ -185,6 +187,7 @@ export default function PricingPage() {
                 features: [`${REAL_TOTAL_QUESTIONS}+ echte Prüfungsfragen`, "Detaillierte Erklärungen", "Lesezeichen", "Schwächen analysieren", "Unbegrenzte Versuche"],
                 footer: "Nur in Premium enthalten",
                 footerClass: "text-success",
+                featureKey: "practice",
               },
               {
                 num: 4,
@@ -197,9 +200,28 @@ export default function PricingPage() {
                 features: ["Echte Prüfungsoberfläche", "Timer & Review", "Detaillierte Auswertung", "Erfahrungsbasierte Simulation", "Unbegrenzte Simulationen"],
                 footer: "Nur in Premium enthalten",
                 footerClass: "text-warning",
+                featureKey: "exam_simulation",
               },
+              // Each card is a real link, not a decorative div — per the
+              // advisor's "no purely decorative card" rule. /pricing
+              // (a guest, pre-certification-selection page) never has a
+              // "current certification" in context, so every card's real
+              // destination today is certification selection first
+              // (Certification Selection Audit, item 23) — the actual
+              // Learn/Labs/Practice/Exam Simulation routing then happens
+              // from a real certification page, using the existing
+              // routes (/certifications/[company]/[certId]/{learn,labs,
+              // practice,mock-exam}) that already enforce the real
+              // Free/Premium gates. featureKey is carried as a query
+              // param for a possible future context-aware highlight on
+              // the certifications page — not acted on yet, since no
+              // such highlighting exists there today.
             ].map((card) => (
-              <div key={card.title} className={`flex flex-col rounded-2xl border ${card.borderClass} bg-panel p-5`}>
+              <Link
+                key={card.title}
+                href={`/certifications?feature=${card.featureKey}`}
+                className={`flex flex-col rounded-2xl border ${card.borderClass} bg-panel p-5 transition-colors hover:border-primary/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary`}
+              >
                 <div className="flex items-center gap-2">
                   <span className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold ${card.bgClass} ${card.colorClass}`}>
                     {card.num}
@@ -219,7 +241,7 @@ export default function PricingPage() {
                   ))}
                 </ul>
                 <p className={`mt-4 text-[11px] font-semibold ${card.footerClass}`}>{card.footer}</p>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
@@ -260,11 +282,22 @@ export default function PricingPage() {
           {/* Left panel */}
           <div className="flex flex-col justify-between rounded-2xl border border-border-soft bg-panel p-5">
             <div>
+              {/* Deliberately NOT a "30-Tage Geld-zurück-Garantie" badge —
+                  checked against the real AGB (Abschnitt 5): cancelling
+                  explicitly does NOT refund the remaining paid period
+                  ("eine anteilige Rückerstattung für die laufende
+                  Periode erfolgt nicht"). A money-back guarantee badge
+                  here would directly contradict the site's own binding
+                  terms — exactly the false-legal-claim risk flagged for
+                  this page. Shows the real, confirmed policy instead. */}
               <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-light px-2.5 py-1 text-[11px] font-semibold text-primary">
                 <ShieldCheck size={12} />
-                30-Tage Geld-zurück-Garantie
+                Monatlich kündbar
               </span>
               <p className="mt-5 text-lg font-extrabold text-text">Wähle deinen Plan</p>
+              <Link href="/widerrufsrecht" className="mt-2 block text-xs text-text-faint underline hover:text-text-muted">
+                Gesetzliches Widerrufsrecht
+              </Link>
             </div>
           </div>
 
@@ -359,12 +392,20 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* Payment methods / security */}
+        {/* Payment methods / security — matches exactly what
+            create-checkout-session actually enables
+            (payment_method_types: ["card", "paypal", "klarna"]). Apple
+            Pay / Google Pay deliberately not listed here since they
+            aren't separately configured — Stripe's "card" method
+            surfaces them automatically on supported devices/browsers,
+            but claiming them as a distinct supported method here would
+            overstate what's actually configured. */}
         <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs text-text-faint">
           <span>Sichere Zahlung mit</span>
           <span className="font-semibold text-text-muted">Visa</span>
           <span className="font-semibold text-text-muted">Mastercard</span>
           <span className="font-semibold text-text-muted">PayPal</span>
+          <span className="font-semibold text-text-muted">Klarna</span>
           <span className="flex items-center gap-1">
             <ShieldCheck size={13} className="text-primary" />
             SSL verschlüsselt &amp; sicher
