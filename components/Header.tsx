@@ -51,7 +51,7 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
             {theme === "dark" ? <Moon size={19} /> : <Sun size={19} />}
           </button>
 
-          {user ? (
+          {user && (
             <>
               <NotificationBell />
 
@@ -71,22 +71,15 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
                 <ChevronDown size={14} className="hidden text-text-faint sm:block" />
               </Link>
             </>
-          ) : (
-            <div className="flex items-center gap-2">
-              <Link
-                href="/login"
-                className="rounded-lg px-3 py-1.5 text-sm font-semibold text-text-muted hover:text-text"
-              >
-                Anmelden
-              </Link>
-              <Link
-                href="/register"
-                className="rounded-lg bg-primary px-3.5 py-1.5 text-sm font-bold text-white hover:bg-primary-dark"
-              >
-                Jetzt starten
-              </Link>
-            </div>
           )}
+          {/* Deliberately renders nothing here for a Guest (no Anmelden/
+              Jetzt starten pair) — this Header is the app-shell header
+              used inside DashboardShell, now reachable by Guests on
+              /certifications, /practice, etc. per the agreed journey.
+              Per that journey, registration is only ever prompted at
+              stage 5 (GuestSignupModal / GuestResultBanner at the real
+              moment it matters), never pushed here as a second,
+              redundant CTA duplicating LandingHeader's own. */}
         </div>
       </div>
 

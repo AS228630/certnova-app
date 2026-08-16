@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { resolveEntitlement } from "@/lib/entitlements";
+import { canAccess } from "@/lib/entitlementPolicy";
 import { hasPracticeBank, getPracticeQuestions } from "@/lib/server/practiceBank";
 
 // Per the agreed Free/Premium rule: Exam Simulation gives Guest AND Free
@@ -27,7 +28,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ cer
 
   const allQuestions = getPracticeQuestions(certId, locale ?? "de");
   const totalCount = allQuestions.length;
-  const questions = isPro ? allQuestions : allQuestions.slice(0, FREE_QUESTION_LIMIT);
+  const questions = canAccess(isPro, "exam_simulation_full") ? allQuestions : allQuestions.slice(0, FREE_QUESTION_LIMIT);
 
   return NextResponse.json({
     questions,

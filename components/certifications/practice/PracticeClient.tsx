@@ -6,6 +6,7 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/practiceTypes";
 import { isSingleChoiceAnswerCorrect, isMultiSelectQuestion } from "@/lib/practiceTypes";
 import { supabase } from "@/lib/supabase/client";
+import { canAccess } from "@/lib/entitlementPolicy";
 import { useLocale } from "@/components/LocaleProvider";
 import { getSectionForIndex, getSectionRange, getSectionCount } from "@/lib/practiceSections";
 import QuestionPanel from "./QuestionPanel";
@@ -332,7 +333,7 @@ export default function PracticeClient({
     // independently of the attemptsMigrationReady block below, since
     // that one only applies once a real user's DB-backed unlock state
     // has loaded, which never happens for a guest.
-    if (!isPro) {
+    if (!canAccess(isPro, "practice_questions_full")) {
       const targetSection = getSectionForIndex(sectionTotal, i);
       if (targetSection > 0) {
         if (isGuest) setShowGuestGate(true);

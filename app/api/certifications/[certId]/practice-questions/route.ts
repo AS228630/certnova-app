@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { resolveEntitlement } from "@/lib/entitlements";
+import { canAccess } from "@/lib/entitlementPolicy";
 import { getSectionRange } from "@/lib/practiceSections";
 import { hasPracticeBank, getPracticeQuestions, getPracticeTopics } from "@/lib/server/practiceBank";
 
@@ -28,7 +29,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ cer
   const totalCount = allQuestions.length;
   const [, freeSectionEnd] = getSectionRange(totalCount, 0);
 
-  const questions = isPro ? allQuestions : allQuestions.slice(0, freeSectionEnd);
+  const questions = canAccess(isPro, "practice_questions_full") ? allQuestions : allQuestions.slice(0, freeSectionEnd);
 
   return NextResponse.json({
     questions,

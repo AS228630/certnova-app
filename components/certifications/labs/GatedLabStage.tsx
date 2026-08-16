@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Lock, ArrowRight } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
 import { useSubscriptionStore } from "@/lib/store/subscriptionStore";
+import { canAccess } from "@/lib/entitlementPolicy";
 import UniversalLabStage from "./UniversalLabStage";
 import type { Company, Certification } from "@/lib/companiesData";
 import type { Lab } from "@/lib/labsData";
@@ -40,7 +41,7 @@ export default function GatedLabStage({
   const isPro = useSubscriptionStore((s) => s.isPro);
   const subLoading = useSubscriptionStore((s) => s.loading);
   const freeLabsCount = cert.freeLabsCount ?? 1;
-  const locked = !subLoading && !isPro && labIndex >= freeLabsCount;
+  const locked = !subLoading && !canAccess(isPro, "labs_full") && labIndex >= freeLabsCount;
 
   if (subLoading) {
     return (

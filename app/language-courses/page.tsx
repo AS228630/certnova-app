@@ -145,7 +145,7 @@ function LanguageCoursesBody() {
 
 export default function LanguageCoursesPage() {
   return (
-    <DashboardShell>
+    <DashboardShell requireAuth={false}>
       <LanguageCoursesBody />
     </DashboardShell>
   );
