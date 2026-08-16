@@ -98,7 +98,7 @@ export default function FreeRegistrationGate({
         <h2 className="text-xl font-extrabold text-text">{t("registrationGate.title")}</h2>
         <p className="mt-3 text-sm text-text-muted">{t("registrationGate.subtitle")}</p>
 
-        <ul className="mx-auto mt-4 max-w-xs space-y-2 text-left">
+        <ul className="mx-auto mt-6 max-w-xs space-y-2 text-left">
           {[
             t("registrationGate.benefit1"),
             t("registrationGate.benefit2"),

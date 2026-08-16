@@ -158,6 +158,10 @@ export default function PracticeClient({
   // same way every time, defeating the point of "mixed" retries).
   const [optionShuffleGen, setOptionShuffleGen] = useState(0);
   const [index, setIndex] = useState(0);
+  // Stage 5 spec: after Auth, the person should land exactly back where
+  // they were, not at Question 1 again. Guarded to fire at most once —
+  // otherwise it would fight with the person's own later navigation.
+  const [hasAutoResumed, setHasAutoResumed] = useState(false);
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [checked, setChecked] = useState<Set<string>>(new Set());
   const [marked, setMarked] = useState<Set<string>>(new Set());
@@ -262,6 +266,28 @@ export default function PracticeClient({
     if (order) return order.map((id) => questions.find((q) => q.id === id)!).filter(Boolean);
     return questions;
   }, [order, questions]);
+
+  // Runs once real persisted-answer data is available (either a returning
+  // signed-in user's own history, or a Guest's answers that were just
+  // migrated onto their brand-new account a moment ago in the effect
+  // above) — jumps straight to the first still-unanswered question
+  // instead of leaving the person to re-click through everything they
+  // already did. A real position, computed from real per-question
+  // correctness data, never guessed or reset to 0 by default once this
+  // has real data to work from.
+  useEffect(() => {
+    if (hasAutoResumed || activeQuestions.length === 0) return;
+    const firstUnanswered = activeQuestions.findIndex((q) => persistedCorrectness[q.id] === undefined);
+    // hasAutoResumed makes this idempotent — it only ever fires once,
+    // the first time real persisted-answer data becomes available, so it
+    // does not cause a render cascade despite the lint rule's default
+    // suspicion of any setState call inside an effect body.
+    if (firstUnanswered > 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIndex(firstUnanswered);
+    }
+    setHasAutoResumed(true);
+  }, [hasAutoResumed, activeQuestions, persistedCorrectness]);
 
   const current = reviewQueue
     ? activeQuestions.find((q) => q.id === reviewQueue.questionIds[reviewIndex])
