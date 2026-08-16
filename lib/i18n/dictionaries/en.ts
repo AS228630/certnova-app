@@ -1244,6 +1244,13 @@ const en: Dictionary = {
     resultKeepsResult: "Your result is kept once you register.",
   },
   premiumGate: {
+    labsHeadline: "Ready for real hands-on practice?",
+    practiceHeadline: "Ready for more practice?",
+    examHeadline: "Ready for the full exam simulation?",
+    dashboardHeadline: "Unlock your complete learning path.",
+    unlockDesc: "Unlock all modules and pass the {cert} exam.",
+    opening: "Opening Premium...",
+    closeAriaLabel: "Close dialog",
     includedInPremium: "Included in Premium (€19/month).",
     activating: "Activating Premium...",
     labsTitle: "Unlock Labs",

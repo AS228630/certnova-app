@@ -5,6 +5,7 @@ import DashboardShell from "@/components/DashboardShell";
 import PracticeClient from "@/components/certifications/practice/PracticeClient";
 import { getCompany, companies } from "@/lib/companiesData";
 import { hasPracticeBank } from "@/lib/server/practiceBank";
+import { getPremiumBenefits } from "@/lib/server/premiumBenefits";
 import ComingSoonPractice from "@/components/certifications/practice/ComingSoonPractice";
 
 export function generateStaticParams() {
@@ -77,6 +78,7 @@ export default async function PracticePage({
             level={cert.level}
             rating={company.rating}
             ratingCount={1245}
+            premiumBenefits={getPremiumBenefits(certId)}
           />
         </Suspense>
       </main>

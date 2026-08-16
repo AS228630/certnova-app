@@ -1244,6 +1244,13 @@ const uk: Dictionary = {
     resultKeepsResult: "Ваш результат збережеться після реєстрації.",
   },
   premiumGate: {
+    labsHeadline: "Готові до реальної практики?",
+    practiceHeadline: "Готові до більшої практики?",
+    examHeadline: "Готові до повної симуляції іспиту?",
+    dashboardHeadline: "Відкрийте свій повний шлях навчання.",
+    unlockDesc: "Відкрийте всі модулі та складіть іспит {cert}.",
+    opening: "Відкриваємо Premium...",
+    closeAriaLabel: "Закрити вікно",
     includedInPremium: "Входить у Premium (19 €/міс).",
     activating: "Активація Premium...",
     labsTitle: "Розблокувати Labs",

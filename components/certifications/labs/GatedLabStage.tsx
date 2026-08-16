@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Lock, ArrowRight } from "lucide-react";
@@ -11,6 +10,7 @@ import { canAccess } from "@/lib/entitlementPolicy";
 import UniversalLabStage from "./UniversalLabStage";
 import LabNavigationPanel from "./LabNavigationPanel";
 import FreeRegistrationGate from "@/components/registration/FreeRegistrationGate";
+import PremiumGateModal from "@/components/certifications/practice/PremiumGateModal";
 import type { Company, Certification } from "@/lib/companiesData";
 import type { Lab } from "@/lib/labsData";
 import type { LabInfrastructureType } from "@/lib/labInfrastructure";
@@ -38,6 +38,7 @@ export default function GatedLabStage({
   lab,
   labIndex,
   allLabs,
+  premiumBenefits,
 }: {
   infrastructureType: LabInfrastructureType;
   company: Company;
@@ -51,6 +52,9 @@ export default function GatedLabStage({
    * az-104, az-900); everything else renders nothing extra, same as
    * before this panel existed. */
   allLabs: Lab[];
+  /** Real, per-certification Premium benefit list for the shared
+   * PremiumGateModal — computed server-side, never invented here. */
+  premiumBenefits: string[];
 }) {
   const { t } = useLocale();
   const pathname = usePathname();
@@ -58,6 +62,7 @@ export default function GatedLabStage({
   const isPro = useSubscriptionStore((s) => s.isPro);
   const subLoading = useSubscriptionStore((s) => s.loading);
   const [showRegistrationGate, setShowRegistrationGate] = useState(false);
+  const [showPremiumGate, setShowPremiumGate] = useState(false);
   const freeLabsCount = cert.freeLabsCount ?? 1;
   // A Guest never has a real subscription row to load, so `subLoading`
   // (which only ever resolves for a signed-in user) would otherwise
@@ -94,16 +99,13 @@ export default function GatedLabStage({
         <h2 className="mb-2 text-lg font-extrabold text-text">{t("premiumGate.labsTitle")}</h2>
         <p className="mb-1 text-sm leading-relaxed text-text-muted">{t("premiumGate.labsDesc")}</p>
         {user ? (
-          <>
-            <p className="mb-6 text-sm font-semibold text-primary">{t("premiumGate.includedInPremium")}</p>
-            <Link
-              href={`/upgrade?returnTo=${encodeURIComponent(pathname ?? "/dashboard")}`}
-              className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-white hover:bg-primary-dark"
-            >
-              {t("premiumGate.cta")}
-              <ArrowRight size={14} />
-            </Link>
-          </>
+          <button
+            onClick={() => setShowPremiumGate(true)}
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-white hover:bg-primary-dark"
+          >
+            {t("premiumGate.cta")}
+            <ArrowRight size={14} />
+          </button>
         ) : (
           <button
             onClick={() => setShowRegistrationGate(true)}
@@ -115,6 +117,14 @@ export default function GatedLabStage({
         )}
         {showRegistrationGate && (
           <FreeRegistrationGate returnTo={pathname ?? "/dashboard"} onClose={() => setShowRegistrationGate(false)} />
+        )}
+        {showPremiumGate && (
+          <PremiumGateModal
+            variant="labs"
+            certificationName={cert.code}
+            benefits={premiumBenefits}
+            onClose={() => setShowPremiumGate(false)}
+          />
         )}
       </div>
     );

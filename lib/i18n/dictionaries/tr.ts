@@ -1244,6 +1244,13 @@ const tr: Dictionary = {
     resultKeepsResult: "Kaydolduğunda sonucun saklanır.",
   },
   premiumGate: {
+    labsHeadline: "Gerçek pratiğe hazır mısın?",
+    practiceHeadline: "Daha fazla pratiğe hazır mısın?",
+    examHeadline: "Tam sınav simülasyonuna hazır mısın?",
+    dashboardHeadline: "Tam öğrenme yolunun kilidini aç.",
+    unlockDesc: "Tüm modüllerin kilidini aç ve {cert} sınavını geç.",
+    opening: "Premium açılıyor...",
+    closeAriaLabel: "Pencereyi kapat",
     includedInPremium: "Premium'a dahildir (19 €/ay).",
     activating: "Premium etkinleştiriliyor...",
     labsTitle: "Labs'ı aç",

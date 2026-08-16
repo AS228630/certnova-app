@@ -20,8 +20,7 @@ import SectionHistoryPanel from "./SectionHistoryPanel";
 import PracticeNotesPanel from "./PracticeNotesPanel";
 import SectionScorecard from "./SectionScorecard";
 import ExamCompleteScreen from "./ExamCompleteScreen";
-import PracticeCompletionState from "@/components/completion/PracticeCompletionState";
-import RestartConfirmModal from "./RestartConfirmModal";
+import PracticeCompletionState from "@/components/completion/PracticeCompletionState";import RestartConfirmModal from "./RestartConfirmModal";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useTopicMasteryStore } from "@/lib/store/topicMasteryStore";
@@ -45,6 +44,7 @@ export default function PracticeClient({
   certId,
   certCode,
   certTitle,
+  premiumBenefits,
 }: {
   companyName: string;
   companySlug: string;
@@ -54,6 +54,10 @@ export default function PracticeClient({
   level: string;
   rating: number;
   ratingCount: number;
+  /** Real, per-certification Premium benefit list — computed
+   * server-side by the parent page.tsx via
+   * lib/server/premiumBenefits.ts, never invented client-side. */
+  premiumBenefits: string[];
 }) {
   const { locale, t } = useLocale();
   const router = useRouter();
@@ -1039,7 +1043,14 @@ export default function PracticeClient({
       {showRegistrationGate && (
         <FreeRegistrationGate returnTo={pathname ?? "/dashboard"} onClose={() => setShowRegistrationGate(false)} />
       )}
-      {showPremiumGate && <PremiumGateModal variant="practice" onClose={() => setShowPremiumGate(false)} />}
+      {showPremiumGate && (
+        <PremiumGateModal
+          variant="practice"
+          certificationName={certCode}
+          benefits={premiumBenefits}
+          onClose={() => setShowPremiumGate(false)}
+        />
+      )}
 
       {/* AI coach now spans the full width below the question. */}
       <div className="mt-6 hidden h-[420px] lg:block">

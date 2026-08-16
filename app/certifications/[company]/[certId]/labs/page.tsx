@@ -3,6 +3,7 @@ import DashboardShell from "@/components/DashboardShell";
 import { companies, getCompany } from "@/lib/companiesData";
 import { getLab, getLabsForCert } from "@/lib/labsData";
 import { getLabInfrastructureType } from "@/lib/labInfrastructure";
+import { getPremiumBenefits } from "@/lib/server/premiumBenefits";
 import GatedLabStage from "@/components/certifications/labs/GatedLabStage";
 
 // Every company/cert gets a real, reachable Labs page — this is the
@@ -42,6 +43,7 @@ export default async function LabPage({
           lab={lab}
           labIndex={0}
           allLabs={getLabsForCert(certId)}
+          premiumBenefits={getPremiumBenefits(certId)}
         />
       </main>
     </DashboardShell>

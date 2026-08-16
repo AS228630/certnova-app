@@ -1244,6 +1244,13 @@ const ar: Dictionary = {
     resultKeepsResult: "ستُحفظ نتيجتك بمجرد التسجيل.",
   },
   premiumGate: {
+    labsHeadline: "مستعد لتدريب عملي حقيقي؟",
+    practiceHeadline: "مستعد لمزيد من التدريب؟",
+    examHeadline: "مستعد لمحاكاة الامتحان الكاملة؟",
+    dashboardHeadline: "افتح مسار تعلمك الكامل.",
+    unlockDesc: "افتح جميع الوحدات واجتز امتحان {cert}.",
+    opening: "جارٍ فتح Premium...",
+    closeAriaLabel: "إغلاق النافذة",
     includedInPremium: "مشمول Premium (١٩ يورو/شهر).",
     activating: "جارٍ تفعيل Premium...",
     labsTitle: "فتح Labs",

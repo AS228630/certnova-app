@@ -3,6 +3,7 @@ import DashboardShell from "@/components/DashboardShell";
 import { companies, getCompany } from "@/lib/companiesData";
 import { getLab, getLabsForCert } from "@/lib/labsData";
 import { getLabInfrastructureType } from "@/lib/labInfrastructure";
+import { getPremiumBenefits } from "@/lib/server/premiumBenefits";
 import GatedLabStage from "@/components/certifications/labs/GatedLabStage";
 
 // Same extensible-foundation approach as the parent /labs route, but scoped
@@ -55,6 +56,7 @@ export default async function LabSlugPage({
           lab={lab}
           labIndex={labIndex}
           allLabs={getLabsForCert(certId)}
+          premiumBenefits={getPremiumBenefits(certId)}
         />
       </main>
     </DashboardShell>

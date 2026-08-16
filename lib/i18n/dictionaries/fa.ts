@@ -1244,6 +1244,13 @@ const fa: Dictionary = {
     resultKeepsResult: "با ثبت‌نام، نتیجه‌ات حفظ می‌شه.",
   },
   premiumGate: {
+    labsHeadline: "آماده‌ی تمرین واقعی هستی؟",
+    practiceHeadline: "آماده‌ی تمرین بیشتری؟",
+    examHeadline: "آماده‌ی شبیه‌سازی کامل امتحان؟",
+    dashboardHeadline: "مسیر یادگیری کاملت رو باز کن.",
+    unlockDesc: "همه‌ی ماژول‌ها رو باز کن و امتحان {cert} رو قبول شو.",
+    opening: "در حال باز کردن Premium...",
+    closeAriaLabel: "بستن پنجره",
     includedInPremium: "در Premium (۱۹ یورو/ماه) گنجانده شده.",
     activating: "در حال فعال‌سازی Premium...",
     labsTitle: "باز کردن Labs",

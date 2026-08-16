@@ -1244,6 +1244,13 @@ const ru: Dictionary = {
     resultKeepsResult: "Ваш результат сохранится после регистрации.",
   },
   premiumGate: {
+    labsHeadline: "Готовы к реальной практике?",
+    practiceHeadline: "Готовы к большему количеству практики?",
+    examHeadline: "Готовы к полной симуляции экзамена?",
+    dashboardHeadline: "Откройте свой полный путь обучения.",
+    unlockDesc: "Откройте все модули и сдайте экзамен {cert}.",
+    opening: "Открываем Premium...",
+    closeAriaLabel: "Закрыть окно",
     includedInPremium: "Входит в Premium (19 €/мес).",
     activating: "Активация Premium...",
     labsTitle: "Разблокировать Labs",

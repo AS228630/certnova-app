@@ -1,65 +1,111 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { X, Lock, ArrowRight } from "lucide-react";
+import { X, Rocket, Check } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
 
-export type PremiumGateVariant = "labs" | "practice" | "examSimulation";
+export type PremiumGateVariant = "labs" | "practice" | "examSimulation" | "dashboard";
 
 /**
- * Shown to a signed-in, non-Premium user when they hit a real paywall
- * (Teil 2+ of the question bank, a locked Lab, or the full exam
- * simulation). Per the advisor's explicit Option B decision: Labs,
- * Practice, and Exam Simulation are NOT separate paid add-ons — they are
- * all already included in the one €19/month Premium plan, so this modal
- * always frames it that way ("X ist in Premium enthalten") and links to
- * the single existing Premium checkout, never a separate payment flow
- * per feature. Passes the current page as ?returnTo= so a successful
- * purchase can resume exactly here afterward instead of dropping the
- * person on the Dashboard.
+ * The one central Stage 7 Upgrade Trigger — reused, unmodified, for
+ * every certification and every trigger point (Practice, Labs, Exam
+ * Simulation, a locked Dashboard row). Nothing here is certId-specific:
+ * the certification name and the real per-cert benefit list (e.g. the
+ * real question count) are passed in as props, computed server-side by
+ * the caller's page.tsx via lib/server/premiumBenefits.ts — this
+ * component never invents a number itself.
+ *
+ * Deliberately does NOT show a "30-Tage Geld-zurück-Garantie" line (the
+ * reference image has one) — confirmed against the real AGB (Abschnitt
+ * 5) that this claim is false; already removed from /pricing for the
+ * same reason. No new legal claim is added here to compensate — only
+ * the real Premium checkout CTA.
  */
 export default function PremiumGateModal({
   variant,
+  certificationName,
+  benefits,
   onClose,
 }: {
   variant: PremiumGateVariant;
+  /** Real certification display name/code (e.g. "AZ-900") — never
+   * hardcoded here, always passed in by the caller. */
+  certificationName: string;
+  /** Real, per-certification benefit list — computed server-side by
+   * lib/server/premiumBenefits.ts, e.g. only including a question-count
+   * line for a cert that actually has a real bank. */
+  benefits: string[];
   onClose: () => void;
 }) {
   const { t } = useLocale();
   const pathname = usePathname();
+  const [ctaLoading, setCtaLoading] = useState(false);
+
+  useEffect(() => {
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") onClose();
+    }
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [onClose]);
 
   const titleKey =
-    variant === "labs" ? "premiumGate.labsTitle" : variant === "practice" ? "premiumGate.practiceTitle" : "premiumGate.examTitle";
-  const descKey =
-    variant === "labs" ? "premiumGate.labsDesc" : variant === "practice" ? "premiumGate.practiceDesc" : "premiumGate.examDesc";
+    variant === "labs"
+      ? "premiumGate.labsHeadline"
+      : variant === "practice"
+        ? "premiumGate.practiceHeadline"
+        : variant === "examSimulation"
+          ? "premiumGate.examHeadline"
+          : "premiumGate.dashboardHeadline";
 
+  const description = t("premiumGate.unlockDesc").replace("{cert}", certificationName);
   const upgradeHref = `/upgrade?returnTo=${encodeURIComponent(pathname ?? "/dashboard")}`;
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60 p-4">
-      <div className="relative w-full max-w-sm rounded-2xl border border-border-soft bg-panel p-6 text-center">
-        <button onClick={onClose} className="absolute right-4 top-4 text-text-faint hover:text-text" aria-label={t("help.close")}>
+    <div
+      className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60 p-3 sm:p-4"
+      role="dialog"
+      aria-modal="true"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) onClose();
+      }}
+    >
+      <div className="relative max-h-[calc(100vh-24px)] w-full max-w-[540px] overflow-y-auto rounded-2xl border border-border-soft bg-panel p-6 text-center sm:p-8">
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full text-text-faint hover:bg-panel-alt hover:text-text"
+          aria-label={t("premiumGate.closeAriaLabel")}
+        >
           <X size={18} />
         </button>
 
-        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-light text-primary">
-          <Lock size={22} />
+        <div className="mx-auto mb-5 flex h-28 w-28 items-center justify-center rounded-full bg-gradient-to-br from-primary/30 to-primary/10">
+          <Rocket size={56} className="text-primary" aria-hidden="true" />
         </div>
 
-        <h3 className="mb-2 text-lg font-extrabold text-text">{t(titleKey)}</h3>
-        <p className="mb-1 text-sm leading-relaxed text-text-muted">{t(descKey)}</p>
-        <p className="mb-6 text-sm font-semibold text-primary">{t("premiumGate.includedInPremium")}</p>
+        <h3 className="mb-2 text-xl font-extrabold text-text sm:text-2xl">{t(titleKey)}</h3>
+        <p className="mb-5 text-sm leading-relaxed text-text-muted">{description}</p>
+
+        <ul className="mx-auto mb-6 max-w-xs space-y-2 text-left">
+          {benefits.map((b) => (
+            <li key={b} className="flex items-start gap-2 text-sm text-text-muted">
+              <Check size={15} className="mt-0.5 shrink-0 text-success" aria-hidden="true" />
+              {b}
+            </li>
+          ))}
+        </ul>
 
         <Link
           href={upgradeHref}
+          onClick={() => setCtaLoading(true)}
           className="mb-3 flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-bold text-white hover:bg-primary-dark"
         >
-          {t("premiumGate.cta")}
-          <ArrowRight size={14} />
+          {ctaLoading ? t("premiumGate.opening") : t("premiumGate.cta")}
         </Link>
 
-        <button onClick={onClose} className="w-full text-sm font-medium text-text-faint hover:text-text">
+        <button onClick={onClose} className="w-full rounded-lg border border-border-soft py-3 text-sm font-medium text-text-muted hover:bg-panel-alt">
           {t("premiumGate.laterCta")}
         </button>
       </div>
