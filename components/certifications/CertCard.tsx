@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Bookmark, Lock } from "lucide-react";
+import { Bookmark } from "lucide-react";
 import type { Certification } from "@/lib/companiesData";
 import { translateCertDescription } from "@/lib/companiesData";
-import { useUser } from "@/components/UserContext";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useLocale } from "@/components/LocaleProvider";
 import CertBadge from "./CertBadge";
@@ -22,11 +21,22 @@ const LEVEL_LABEL_KEYS: Record<Certification["level"], string> = {
   Advanced: "certList.levelAdvancedShort",
 };
 
+// Every certification card is a real, clickable link, guest or not — a
+// Guest must be able to browse any certification, any company, without
+// being forced to register first (the whole "experience the product
+// before Registration" architecture this project is built on). This
+// component previously made a card entirely unclickable and forced
+// /register instead, purely because Certification.locked was true and
+// no session existed — a leftover, pre-dating that architecture, and
+// exactly the bug reported: clicking some certifications sent a Guest
+// straight to Registration for no real reason. Certs without real
+// content yet already show their own honest "coming soon" state once
+// the person actually opens Learn/Labs/Practice/Exam (ComingSoonLearn,
+// ComingSoonLab, ComingSoonPractice, ComingSoonExam) — there was never
+// a need to gate the card itself.
 export default function CertCard({ cert, companySlug }: { cert: Certification; companySlug: string }) {
   const { t, locale } = useLocale();
   const [saved, setSaved] = useState(false);
-  const { user } = useUser();
-  const gated = cert.locked && !user;
   const progress = useCertProgressStore((s) => s.getProgress(cert.id));
 
   return (
@@ -42,7 +52,7 @@ export default function CertCard({ cert, companySlug }: { cert: Certification; c
         </button>
       </div>
 
-      <Link href={gated ? "#" : `/certifications/${companySlug}/${cert.id}`} className={gated ? "pointer-events-none" : ""}>
+      <Link href={`/certifications/${companySlug}/${cert.id}`}>
         <h3 className="font-bold leading-snug text-text hover:text-primary">{cert.title}</h3>
         <span
           className={`mt-2 inline-block rounded-full px-2 py-0.5 text-[11px] font-semibold ${LEVEL_STYLES[cert.level]}`}
@@ -52,24 +62,14 @@ export default function CertCard({ cert, companySlug }: { cert: Certification; c
         <p className="mt-2 line-clamp-2 text-sm text-text-muted">{translateCertDescription(cert, cert.title.split(" ")[0], locale)}</p>
       </Link>
 
-      {gated ? (
-        <Link
-          href="/register"
-          className="flex items-center justify-center gap-1.5 rounded-lg border border-primary/30 bg-primary-light py-2 text-xs font-bold text-primary transition-colors hover:bg-primary hover:text-white"
-        >
-          <Lock size={12} />
-          Registrieren zum Freischalten
-        </Link>
-      ) : (
-        <Link href={`/certifications/${companySlug}/${cert.id}`}>
-          <div className="h-1.5 w-full overflow-hidden rounded-full bg-panel-alt">
-            <div className="h-full rounded-full bg-primary" style={{ width: `${progress}%` }} />
-          </div>
-          <p className="mt-1 text-[11px] text-text-faint">
-            {progress}% <span className="text-text-faint/80">{t("certList.progressLabel")}</span>
-          </p>
-        </Link>
-      )}
+      <Link href={`/certifications/${companySlug}/${cert.id}`}>
+        <div className="h-1.5 w-full overflow-hidden rounded-full bg-panel-alt">
+          <div className="h-full rounded-full bg-primary" style={{ width: `${progress}%` }} />
+        </div>
+        <p className="mt-1 text-[11px] text-text-faint">
+          {progress}% <span className="text-text-faint/80">{t("certList.progressLabel")}</span>
+        </p>
+      </Link>
     </div>
   );
 }

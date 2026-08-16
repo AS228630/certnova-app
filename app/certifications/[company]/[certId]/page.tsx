@@ -103,7 +103,7 @@ export default async function CertJourneyPage({
   const sampleQuestions = getSampleQuestions(certId);
 
   return (
-    <DashboardShell>
+    <DashboardShell requireAuth={false}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
