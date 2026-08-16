@@ -5,7 +5,7 @@ import Link from "next/link";
 import { CreditCard, ArrowLeft, Loader2, ShieldCheck } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
 import { supabase } from "@/lib/supabase/client";
-import type { PlanId } from "@/components/upgrade/PlanSelectionStep";
+import type { PlanId } from "./types";
 
 // Redirects to a real Stripe Checkout session — Stripe's own hosted
 // payment page (which dynamically shows card, PayPal, or Klarna based

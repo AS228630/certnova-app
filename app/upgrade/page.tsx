@@ -7,10 +7,9 @@ import { CheckCircle2 } from "lucide-react";
 import DashboardShell from "@/components/DashboardShell";
 import { useLocale } from "@/components/LocaleProvider";
 import UpgradeStepper, { type UpgradeStep } from "@/components/upgrade/UpgradeStepper";
-import PlanSelectionStep, { type PlanId } from "@/components/upgrade/PlanSelectionStep";
 import PaymentStep from "@/components/upgrade/PaymentStep";
-import UpgradeAddOns from "@/components/upgrade/UpgradeAddOns";
-import ComingSoonToast from "@/components/coachLive/ComingSoonToast";
+import type { PlanId } from "@/components/upgrade/types";
+import PricingPanel, { MONTHLY_EUR, YEARLY_EUR } from "@/components/pricing/PricingPanel";
 import { useSubscriptionStore } from "@/lib/store/subscriptionStore";
 
 // A real 4-step upgrade flow, matching the reference design, backed by a
@@ -38,7 +37,6 @@ function UpgradePageInner() {
   const returnTo = searchParams.get("returnTo");
   const [step, setStep] = useState<UpgradeStep>(1);
   const [selectedPlan, setSelectedPlan] = useState<{ id: PlanId; name: string; price: string } | null>(null);
-  const [toast, setToast] = useState<string | null>(null);
   const isPro = useSubscriptionStore((s) => s.isPro);
   const subscription = useSubscriptionStore((s) => s.subscription);
 
@@ -86,7 +84,13 @@ function UpgradePageInner() {
         </div>
 
         <div className="mt-8">
-          {step === 1 && <PlanSelectionStep onSelectPlan={handleSelectPlan} />}
+          {step === 1 && (
+            <PricingPanel
+              currentPlanLabel={t("upgrade.planFreeName")}
+              monthly={{ onClick: () => handleSelectPlan("monthly", "Monatlich", `€${MONTHLY_EUR} / Monat`) }}
+              yearly={{ onClick: () => handleSelectPlan("yearly", "Jährlich", `€${YEARLY_EUR} / Jahr`) }}
+            />
+          )}
           {step === 2 && selectedPlan && (
             <PaymentStep
               planId={selectedPlan.id}
@@ -97,10 +101,7 @@ function UpgradePageInner() {
             />
           )}
         </div>
-
-        {step === 1 && <UpgradeAddOns onNotAvailable={(label) => setToast(label)} />}
       </main>
-      {toast && <ComingSoonToast label={toast} onClose={() => setToast(null)} />}
     </DashboardShell>
   );
 }
