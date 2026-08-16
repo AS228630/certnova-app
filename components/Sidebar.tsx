@@ -26,6 +26,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useSubscriptionStore } from "@/lib/store/subscriptionStore";
+import { useUser } from "@/components/UserContext";
 
 const navItems = [
   { href: "/dashboard", labelKey: "nav.dashboard", icon: LayoutDashboard },
@@ -59,6 +60,7 @@ export default function Sidebar({
   // table, never assumed) hides this prompt — a brand-new or free user
   // still sees it, since they genuinely have no plan yet.
   const isPro = useSubscriptionStore((s) => s.isPro);
+  const { user } = useUser();
   // Honest simplification: without a full per-day activity log, we mark the
   // last N weekdays as done based on the current streak count (capped at 7).
   const streakDone = streakDayLabels.map((_, i) => i >= streakDayLabels.length - streakDaysCount);
@@ -141,7 +143,7 @@ export default function Sidebar({
                 {t("sidebar.proUpgradeDesc")}
               </p>
               <Link
-                href="/upgrade"
+                href={user ? "/upgrade" : "/register"}
                 onClick={onClose}
                 className="mt-3 flex w-full items-center justify-center rounded-lg bg-primary py-2 text-sm font-bold text-white transition-colors hover:bg-primary-dark"
               >
