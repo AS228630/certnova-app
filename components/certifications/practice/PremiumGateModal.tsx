@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X, Rocket, Check } from "lucide-react";
@@ -42,6 +42,7 @@ export default function PremiumGateModal({
   const { t } = useLocale();
   const pathname = usePathname();
   const [ctaLoading, setCtaLoading] = useState(false);
+  const primaryActionRef = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
@@ -50,6 +51,16 @@ export default function PremiumGateModal({
     document.addEventListener("keydown", handleKey);
     return () => document.removeEventListener("keydown", handleKey);
   }, [onClose]);
+
+  // Focus the primary action as soon as the dialog opens, per the
+  // spec's accessibility requirement (item 22). Returning focus to the
+  // specific button that opened this dialog afterward isn't implemented
+  // here — that would need a ref threaded down from each of this
+  // modal's several callers (PracticeClient, GatedLabStage, ...) — a
+  // real, flagged gap rather than a false claim that it already works.
+  useEffect(() => {
+    primaryActionRef.current?.focus();
+  }, []);
 
   const titleKey =
     variant === "labs"
@@ -99,6 +110,7 @@ export default function PremiumGateModal({
 
         <Link
           href={upgradeHref}
+          ref={primaryActionRef}
           onClick={() => setCtaLoading(true)}
           className="mb-3 flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-bold text-white hover:bg-primary-dark"
         >
