@@ -20,6 +20,7 @@ import SectionHistoryPanel from "./SectionHistoryPanel";
 import PracticeNotesPanel from "./PracticeNotesPanel";
 import SectionScorecard from "./SectionScorecard";
 import ExamCompleteScreen from "./ExamCompleteScreen";
+import PracticeCompletionState from "@/components/completion/PracticeCompletionState";
 import RestartConfirmModal from "./RestartConfirmModal";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useCertProgressStore } from "@/lib/store/certProgressStore";
@@ -202,6 +203,10 @@ export default function PracticeClient({
   );
   const [examComplete, setExamComplete] = useState(false);
   const [restartModalOpen, setRestartModalOpen] = useState(false);
+  // Stage 4: a non-Premium user sees the compact completion card first;
+  // "Ergebnis im Detail ansehen" reveals the existing full breakdown
+  // (ExamCompleteScreen) below it instead of navigating away.
+  const [showFullDetails, setShowFullDetails] = useState(false);
   const [restarting, setRestarting] = useState(false);
   const [statsDrawerOpen, setStatsDrawerOpen] = useState(false);
 
@@ -635,6 +640,26 @@ export default function PracticeClient({
   }
 
   if (examComplete) {
+    const freeCorrect = activeQuestions.filter((q) => checked.has(q.id) && isCorrectAnswer(q, answers[q.id])).length;
+    const freeWrong = activeQuestions.filter((q) => checked.has(q.id) && !isCorrectAnswer(q, answers[q.id])).length;
+    const freeElapsed = EXAM_TOTAL_SECONDS - remainingSeconds;
+
+    if (!isPro && !showFullDetails) {
+      return (
+        <div className="py-6">
+          <PracticeCompletionState
+            freeQuestionLimit={activeQuestions.length}
+            correct={freeCorrect}
+            wrong={freeWrong}
+            elapsedSeconds={freeElapsed}
+            isGuest={isGuest}
+            onViewDetails={() => setShowFullDetails(true)}
+            upgradeHref={`/upgrade?returnTo=${encodeURIComponent(pathname ?? "/dashboard")}`}
+          />
+        </div>
+      );
+    }
+
     return (
       <div>
         <ExamCompleteScreen
@@ -647,10 +672,9 @@ export default function PracticeClient({
             answers={answers}
             checked={checked}
             skipped={skipped}
-            elapsedSeconds={EXAM_TOTAL_SECONDS - remainingSeconds}
+            elapsedSeconds={freeElapsed}
             onBackToPath={() => router.push(`/certifications/${companySlug}/${certId}/learn`)}
             onRetryAll={() => setRestartModalOpen(true)}
-            isGuest={isGuest}
           />
         <PracticeNotesPanel isOpen={notesOpen} onClose={() => setNotesOpen(false)} />
         {restartModalOpen && (
