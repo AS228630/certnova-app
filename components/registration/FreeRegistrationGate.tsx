@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { X, Mail } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
@@ -53,6 +53,19 @@ export default function FreeRegistrationGate({
   const { t } = useLocale();
   const [oauthLoading, setOauthLoading] = useState<OAuthProvider | null>(null);
   const [error, setError] = useState<string | null>(null);
+  // Same generic focus-return pattern as PremiumGateModal: captures
+  // whatever was actually focused right before this opened (the real
+  // trigger, whichever of this modal's several callers it was) and
+  // restores it on close — one central mechanism, not duplicated per
+  // page (Stage 5 spec item 7 / doc 22 item 7).
+  const triggerElementRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    triggerElementRef.current = document.activeElement as HTMLElement | null;
+    return () => {
+      triggerElementRef.current?.focus?.();
+    };
+  }, []);
 
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {

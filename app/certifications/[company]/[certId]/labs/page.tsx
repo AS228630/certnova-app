@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import DashboardShell from "@/components/DashboardShell";
 import { companies, getCompany } from "@/lib/companiesData";
 import { getLab, getLabsForCert } from "@/lib/labsData";
@@ -13,6 +14,13 @@ import GatedLabStage from "@/components/certifications/labs/GatedLabStage";
 export function generateStaticParams() {
   return companies.flatMap((c) => c.certs.map((cert) => ({ company: c.slug, certId: cert.id })));
 }
+
+// Interactive/entitlement-gated session, same convention as the sibling
+// practice/mock-exam routes — the public, indexable page for a
+// certification is /certifications/[company]/[certId] itself.
+export const metadata: Metadata = {
+  robots: { index: false },
+};
 
 export default async function LabPage({
   params,

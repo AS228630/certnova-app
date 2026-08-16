@@ -1,10 +1,15 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import DashboardShell from "@/components/DashboardShell";
 import { companies, getCompany } from "@/lib/companiesData";
 import { getLab, getLabsForCert } from "@/lib/labsData";
 import { getLabInfrastructureType } from "@/lib/labInfrastructure";
 import { getPremiumBenefits } from "@/lib/server/premiumBenefits";
 import GatedLabStage from "@/components/certifications/labs/GatedLabStage";
+
+export const metadata: Metadata = {
+  robots: { index: false },
+};
 
 // Same extensible-foundation approach as the parent /labs route, but scoped
 // to a specific hand-authored lab within a cert (e.g. az-104 has both

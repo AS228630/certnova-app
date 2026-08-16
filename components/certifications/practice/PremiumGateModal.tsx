@@ -43,6 +43,18 @@ export default function PremiumGateModal({
   const pathname = usePathname();
   const [ctaLoading, setCtaLoading] = useState(false);
   const primaryActionRef = useRef<HTMLAnchorElement>(null);
+  // Captures whatever was actually focused right before this dialog
+  // opened (the real trigger element, whichever one of this modal's
+  // several different callers/buttons it was) — generic, so it works
+  // for every caller without each one needing to pass its own ref down.
+  const triggerElementRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    triggerElementRef.current = document.activeElement as HTMLElement | null;
+    return () => {
+      triggerElementRef.current?.focus?.();
+    };
+  }, []);
 
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
@@ -53,11 +65,7 @@ export default function PremiumGateModal({
   }, [onClose]);
 
   // Focus the primary action as soon as the dialog opens, per the
-  // spec's accessibility requirement (item 22). Returning focus to the
-  // specific button that opened this dialog afterward isn't implemented
-  // here — that would need a ref threaded down from each of this
-  // modal's several callers (PracticeClient, GatedLabStage, ...) — a
-  // real, flagged gap rather than a false claim that it already works.
+  // spec's accessibility requirement (item 22).
   useEffect(() => {
     primaryActionRef.current?.focus();
   }, []);
