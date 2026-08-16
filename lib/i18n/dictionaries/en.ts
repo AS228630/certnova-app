@@ -833,6 +833,8 @@ const en: Dictionary = {
     stage4TimeLabel: "Time",
     stage4RegisterCta: "Sign up for free and save your progress",
     stage4ViewDetailsCta: "View detailed result",
+    retryReasonPrefix: "You scored",
+    retryReasonSuffix: " — the next section needs at least {threshold}%. Give it another try!",
     myProgress: "My Progress",
     answeredQ: "Answered",
     skippedQ: "Skipped",

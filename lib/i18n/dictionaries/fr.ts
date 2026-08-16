@@ -833,6 +833,8 @@ const fr: Dictionary = {
     stage4TimeLabel: "Temps",
     stage4RegisterCta: "Inscris-toi gratuitement et sauvegarde ta progression",
     stage4ViewDetailsCta: "Voir le résultat détaillé",
+    retryReasonPrefix: "Tu as obtenu",
+    retryReasonSuffix: " — la section suivante nécessite au moins {threshold}%. Réessaie !",
     myProgress: "Ma progression",
     answeredQ: "Répondu",
     skippedQ: "Passé",

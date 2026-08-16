@@ -834,6 +834,8 @@ const de = {
     stage4TimeLabel: "Zeit",
     stage4RegisterCta: "Kostenlos registrieren und Fortschritt speichern",
     stage4ViewDetailsCta: "Ergebnis im Detail ansehen",
+    retryReasonPrefix: "Du hast",
+    retryReasonSuffix: " erreicht — für den nächsten Abschnitt sind mindestens {threshold}% nötig. Versuch es noch einmal!",
     myProgress: "Mein Fortschritt",
     answeredQ: "Beantwortet",
     skippedQ: "Übersprungen",

@@ -833,6 +833,8 @@ const tr: Dictionary = {
     stage4TimeLabel: "Süre",
     stage4RegisterCta: "Ücretsiz kaydol ve ilerlemeni kaydet",
     stage4ViewDetailsCta: "Detaylı sonucu görüntüle",
+    retryReasonPrefix: "Skorun:",
+    retryReasonSuffix: " — bir sonraki bölüm için en az %{threshold} gerekiyor. Tekrar dene!",
     myProgress: "İlerlemem",
     answeredQ: "Cevaplandı",
     skippedQ: "Atlandı",

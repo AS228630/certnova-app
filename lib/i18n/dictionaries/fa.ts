@@ -833,6 +833,8 @@ const fa: Dictionary = {
     stage4TimeLabel: "زمان",
     stage4RegisterCta: "رایگان ثبت‌نام کن و پیشرفتت رو ذخیره کن",
     stage4ViewDetailsCta: "دیدن نتیجه‌ی کامل",
+    retryReasonPrefix: "امتیازت",
+    retryReasonSuffix: " شد — برای بخش بعدی حداقل {threshold}٪ لازمه. دوباره امتحان کن!",
     myProgress: "پیشرفت من",
     answeredQ: "پاسخ‌داده‌شده",
     skippedQ: "رد‌شده",

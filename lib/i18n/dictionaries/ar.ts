@@ -833,6 +833,8 @@ const ar: Dictionary = {
     stage4TimeLabel: "الوقت",
     stage4RegisterCta: "سجّل مجاناً واحفظ تقدمك",
     stage4ViewDetailsCta: "عرض النتيجة التفصيلية",
+    retryReasonPrefix: "حصلت على",
+    retryReasonSuffix: " — القسم التالي يتطلب {threshold}٪ على الأقل. حاول مرة أخرى!",
     myProgress: "تقدمي",
     answeredQ: "تمت الإجابة",
     skippedQ: "تم تخطيه",

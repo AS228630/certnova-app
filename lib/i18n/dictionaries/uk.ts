@@ -833,6 +833,8 @@ const uk: Dictionary = {
     stage4TimeLabel: "Час",
     stage4RegisterCta: "Зареєструйтеся безкоштовно і збережіть прогрес",
     stage4ViewDetailsCta: "Переглянути детальний результат",
+    retryReasonPrefix: "Ви набрали",
+    retryReasonSuffix: " — для наступного розділу потрібно щонайменше {threshold}%. Спробуйте ще раз!",
     myProgress: "Мій прогрес",
     answeredQ: "Дано відповідь",
     skippedQ: "Пропущено",

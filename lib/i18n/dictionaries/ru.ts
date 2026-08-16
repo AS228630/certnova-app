@@ -833,6 +833,8 @@ const ru: Dictionary = {
     stage4TimeLabel: "Время",
     stage4RegisterCta: "Зарегистрируйтесь бесплатно и сохраните прогресс",
     stage4ViewDetailsCta: "Посмотреть подробный результат",
+    retryReasonPrefix: "Вы набрали",
+    retryReasonSuffix: " — для следующего раздела нужно минимум {threshold}%. Попробуйте ещё раз!",
     myProgress: "Мой прогресс",
     answeredQ: "Отвечено",
     skippedQ: "Пропущено",

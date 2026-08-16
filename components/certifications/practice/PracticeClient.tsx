@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { BarChart3, RefreshCcw } from "lucide-react";
+import { BarChart3, RefreshCcw, X } from "lucide-react";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import type { PracticeOptionId, PracticeQuestion, PracticeTopic } from "@/lib/practiceTypes";
 import { isSingleChoiceAnswerCorrect, isMultiSelectQuestion } from "@/lib/practiceTypes";
@@ -26,7 +26,7 @@ import { useCertProgressStore } from "@/lib/store/certProgressStore";
 import { useTopicMasteryStore } from "@/lib/store/topicMasteryStore";
 import { useActivityLogStore } from "@/lib/store/activityLogStore";
 import { useQuestionAnswersStore } from "@/lib/store/questionAnswersStore";
-import { useSectionAttemptsStore } from "@/lib/store/sectionAttemptsStore";
+import { useSectionAttemptsStore, SECTION_PASS_THRESHOLD } from "@/lib/store/sectionAttemptsStore";
 import { useUser } from "@/components/UserContext";
 import { loadGuestProgress, saveGuestAnswer, clearGuestProgress } from "@/lib/guestProgress";
 import FreeRegistrationGate from "@/components/registration/FreeRegistrationGate";
@@ -166,6 +166,10 @@ export default function PracticeClient({
   // they were, not at Question 1 again. Guarded to fire at most once —
   // otherwise it would fight with the person's own later navigation.
   const [hasAutoResumed, setHasAutoResumed] = useState(false);
+  // Real bug fix: explains why the person was sent back into the
+  // section instead of silently restarting it with no context — shows
+  // their real score and the real threshold, not a vague message.
+  const [retryReason, setRetryReason] = useState<{ scorePercent: number } | null>(null);
   const [answers, setAnswers] = useState<Record<string, Answer>>({});
   const [checked, setChecked] = useState<Set<string>>(new Set());
   const [marked, setMarked] = useState<Set<string>>(new Set());
@@ -807,12 +811,36 @@ export default function PracticeClient({
               setScorecardSection(null);
             }}
             onViewFinalResult={() => {
-              setScorecardSection(null);
-              setExamComplete(true);
               const answeredQuestions = activeQuestions.filter((q) => checked.has(q.id));
               const correctCount = answeredQuestions.filter((q) => isCorrectAnswer(q, answers[q.id])).length;
               const scorePercent =
                 answeredQuestions.length === 0 ? 0 : Math.round((correctCount / answeredQuestions.length) * 100);
+
+              // Real bug fix: "View Final Result" is offered whenever
+              // there's no next SECTION within what the server delivered
+              // (hasNextSection, an array-length check) — for a non-Pro
+              // user that's always true on their one free section,
+              // regardless of whether they actually passed it. Showing
+              // the Stage-4 completion screen (with its Register/Upgrade
+              // CTA) on a FAILED attempt falsely told someone who only
+              // scored 29-31% that they'd earned the right to continue.
+              // The real rule (confirmed): under 90%, the next section
+              // stays locked and the person must retry — same
+              // resetSection+goTo(start) the visible "Wiederholen" button
+              // already does, not a dead-end toward Registration/Premium.
+              // A Premium user is unaffected: they always see their real,
+              // full result regardless of score, same as before.
+              if (!canAccess(isPro, "practice_questions_full") && scorePercent < SECTION_PASS_THRESHOLD) {
+                resetSection(scorecardSection, false);
+                const [start] = getSectionRange(sectionTotal, scorecardSection);
+                setScorecardSection(null);
+                setRetryReason({ scorePercent });
+                goTo(start);
+                return;
+              }
+
+              setScorecardSection(null);
+              setExamComplete(true);
               // Only log the milestone for exams that were meaningfully
               // attempted and passed — avoids cluttering the activity feed
               // with abandoned or near-empty attempts.
@@ -830,6 +858,21 @@ export default function PracticeClient({
 
   return (
     <div className="px-1">
+      {retryReason && (
+        <div className="mb-3 flex items-center justify-between gap-3 rounded-lg border border-warning/30 bg-warning/10 px-4 py-2.5 text-sm text-text">
+          <span>
+            {t("practice.retryReasonPrefix")} {retryReason.scorePercent}%
+            {t("practice.retryReasonSuffix").replace("{threshold}", String(SECTION_PASS_THRESHOLD))}
+          </span>
+          <button
+            onClick={() => setRetryReason(null)}
+            className="shrink-0 text-text-faint hover:text-text"
+            aria-label={t("help.close")}
+          >
+            <X size={14} />
+          </button>
+        </div>
+      )}
       <div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
           <SectionMenu
