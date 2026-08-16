@@ -5,6 +5,8 @@ import { Heart, MessageCircle, Bookmark, MoreHorizontal, FileText, Download } fr
 import type { CommunityPost } from "@/lib/store/communityStore";
 import { useCommunityStore } from "@/lib/store/communityStore";
 import { useLocale } from "@/components/LocaleProvider";
+import { useUser } from "@/components/UserContext";
+import GuestSignupModal from "@/components/certifications/practice/GuestSignupModal";
 
 function timeAgo(iso: string, locale: string) {
   const diffMs = Date.now() - new Date(iso).getTime();
@@ -18,6 +20,7 @@ function timeAgo(iso: string, locale: string) {
 
 export default function CommunityPostCard({ post }: { post: CommunityPost }) {
   const { t, locale } = useLocale();
+  const { user } = useUser();
   const toggleLike = useCommunityStore((s) => s.toggleLike);
   const loadComments = useCommunityStore((s) => s.loadComments);
   const addComment = useCommunityStore((s) => s.addComment);
@@ -25,6 +28,19 @@ export default function CommunityPostCard({ post }: { post: CommunityPost }) {
 
   const [showComments, setShowComments] = useState(false);
   const [commentInput, setCommentInput] = useState("");
+  const [showGuestGate, setShowGuestGate] = useState(false);
+
+  // Like/comment already safely no-op for a signed-out user in the store
+  // (see communityStore.ts) rather than crashing — this just replaces
+  // that silent nothing-happens with an honest next step for a Guest
+  // browsing the now-guest-accessible /community page.
+  function requireUser(action: () => void) {
+    if (!user) {
+      setShowGuestGate(true);
+      return;
+    }
+    action();
+  }
 
   async function openComments() {
     setShowComments((v) => !v);
@@ -36,6 +52,10 @@ export default function CommunityPostCard({ post }: { post: CommunityPost }) {
   async function submitComment() {
     const body = commentInput.trim();
     if (!body || post.isSample) return;
+    if (!user) {
+      setShowGuestGate(true);
+      return;
+    }
     setCommentInput("");
     await addComment(post.id, body);
   }
@@ -95,7 +115,7 @@ export default function CommunityPostCard({ post }: { post: CommunityPost }) {
 
       <div className="mt-3 flex items-center gap-4 border-t border-border-soft pt-3 text-sm text-text-faint">
         <button
-          onClick={() => toggleLike(post.id)}
+          onClick={() => requireUser(() => toggleLike(post.id))}
           disabled={post.isSample}
           className={`flex items-center gap-1.5 hover:text-danger disabled:cursor-not-allowed disabled:opacity-60 ${
             post.likedByMe ? "text-danger" : ""
@@ -150,6 +170,7 @@ export default function CommunityPostCard({ post }: { post: CommunityPost }) {
           )}
         </div>
       )}
+      {showGuestGate && <GuestSignupModal onClose={() => setShowGuestGate(false)} />}
     </div>
   );
 }

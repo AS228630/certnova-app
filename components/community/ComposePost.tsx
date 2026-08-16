@@ -4,6 +4,8 @@ import { useState } from "react";
 import { HelpCircle, Lightbulb, Trophy, Link2, X } from "lucide-react";
 import { useCommunityStore, type PostType } from "@/lib/store/communityStore";
 import { useLocale } from "@/components/LocaleProvider";
+import { useUser } from "@/components/UserContext";
+import GuestSignupModal from "@/components/certifications/practice/GuestSignupModal";
 
 const postTypeButtons: { type: PostType; icon: typeof HelpCircle; labelKey: string; color: string }[] = [
   { type: "question", icon: HelpCircle, labelKey: "community.askQuestion", color: "text-primary" },
@@ -14,16 +16,27 @@ const postTypeButtons: { type: PostType; icon: typeof HelpCircle; labelKey: stri
 
 export default function ComposePost() {
   const { t } = useLocale();
+  const { user } = useUser();
   const userName = useCommunityStore((s) => s.userName);
   const createPost = useCommunityStore((s) => s.createPost);
 
   const [open, setOpen] = useState(false);
+  const [showGuestGate, setShowGuestGate] = useState(false);
   const [postType, setPostType] = useState<PostType>("discussion");
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
   function openWith(type: PostType) {
+    // Community is now Guest-browsable (read-only), but composing a
+    // real post needs a real account — createPost itself already no-ops
+    // silently for a signed-out user (see communityStore.ts), which
+    // would otherwise look like a broken button that does nothing. This
+    // gives a Guest an honest next step instead.
+    if (!user) {
+      setShowGuestGate(true);
+      return;
+    }
     setPostType(type);
     setOpen(true);
   }
@@ -45,12 +58,14 @@ export default function ComposePost() {
           {userName ? userName.charAt(0).toUpperCase() : "?"}
         </div>
         <button
-          onClick={() => setOpen(true)}
+          onClick={() => (user ? setOpen(true) : setShowGuestGate(true))}
           className="w-full rounded-lg border border-border-soft bg-panel-alt px-4 py-2.5 text-left text-sm text-text-faint hover:border-primary/40"
         >
           {t("community.composePlaceholder")}
         </button>
       </div>
+
+      {showGuestGate && <GuestSignupModal onClose={() => setShowGuestGate(false)} />}
 
       {open && (
         <div className="mt-4 space-y-3 border-t border-border-soft pt-4">

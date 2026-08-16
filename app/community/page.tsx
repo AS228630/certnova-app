@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Plus, Users, MessageSquare, CheckCircle2, Trophy, Video } from "lucide-react";
 import DashboardShell from "@/components/DashboardShell";
@@ -8,6 +8,7 @@ import ComposePost from "@/components/community/ComposePost";
 import CommunityPostCard from "@/components/community/CommunityPostCard";
 import CommunitySidebar from "@/components/community/CommunitySidebar";
 import { useCommunityStore } from "@/lib/store/communityStore";
+import { useUser } from "@/components/UserContext";
 import { useLocale } from "@/components/LocaleProvider";
 
 const tabs = ["tabForYou", "tabDiscussions", "tabQA", "tabGroups", "tabAchievements", "tabEvents"] as const;
@@ -27,10 +28,23 @@ const recommendedTopics = ["AWS Solutions Architect", "Azure Administrator", "De
 
 function CommunityBody() {
   const { t } = useLocale();
+  const { user } = useUser();
   const posts = useCommunityStore((s) => s.posts);
   const loaded = useCommunityStore((s) => s.loaded);
   const [activeTab, setActiveTab] = useState<(typeof tabs)[number]>("tabForYou");
   const [visibleCount, setVisibleCount] = useState(10);
+
+  // DashboardShell only calls communityStore.load() for a signed-in
+  // user, so a Guest would otherwise be stuck on the loading state
+  // forever now that this page is guest-accessible. Real posts are
+  // public/readable either way (RLS allows it) — passing an empty
+  // userId just means "liked by me" correctly comes back empty for
+  // everyone, since there is no "me" yet.
+  useEffect(() => {
+    if (!user && !loaded) {
+      useCommunityStore.getState().load("", "");
+    }
+  }, [user, loaded]);
 
   const filtered = posts.filter((p) => {
     if (activeTab === "tabQA") return p.postType === "question";
@@ -160,7 +174,7 @@ function CommunityBody() {
 
 export default function CommunityPage() {
   return (
-    <DashboardShell>
+    <DashboardShell requireAuth={false}>
       <CommunityBody />
     </DashboardShell>
   );
