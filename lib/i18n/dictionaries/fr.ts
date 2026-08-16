@@ -580,6 +580,8 @@ const fr: Dictionary = {
     editProfile: "Modifier le profil",
     joined: "Inscrit depuis",
     learnerBadge: "Apprenant",
+    freeBadge: "Gratuit",
+    premiumBadge: "Premium",
     badgeFirstSteps: "Premiers pas",
     badgeFirstStepsDesc: "Première activité terminée",
     badgeLabMaster: "Maître des labs",

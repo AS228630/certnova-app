@@ -580,6 +580,8 @@ const fa: Dictionary = {
     editProfile: "ویرایش پروفایل",
     joined: "تاریخ عضویت",
     learnerBadge: "یادگیرنده",
+    freeBadge: "رایگان",
+    premiumBadge: "Premium",
     badgeFirstSteps: "اولین قدم‌ها",
     badgeFirstStepsDesc: "اولین فعالیت انجام شد",
     badgeLabMaster: "استاد لب",

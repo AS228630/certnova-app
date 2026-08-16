@@ -580,6 +580,8 @@ const uk: Dictionary = {
     editProfile: "Редагувати профіль",
     joined: "Приєднався",
     learnerBadge: "Учень",
+    freeBadge: "Безкоштовно",
+    premiumBadge: "Premium",
     badgeFirstSteps: "Перші кроки",
     badgeFirstStepsDesc: "Завершено першу активність",
     badgeLabMaster: "Майстер лабораторій",

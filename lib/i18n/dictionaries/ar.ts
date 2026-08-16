@@ -580,6 +580,8 @@ const ar: Dictionary = {
     editProfile: "تعديل الملف الشخصي",
     joined: "انضم في",
     learnerBadge: "متعلّم",
+    freeBadge: "مجاني",
+    premiumBadge: "Premium",
     badgeFirstSteps: "الخطوات الأولى",
     badgeFirstStepsDesc: "تم إكمال النشاط الأول",
     badgeLabMaster: "خبير المختبرات",

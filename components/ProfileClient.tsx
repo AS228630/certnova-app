@@ -96,7 +96,9 @@ export default function ProfileClient() {
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-2">
               <h1 className="text-xl font-extrabold text-text">{displayName}</h1>
-              <span className="rounded-full bg-primary-light px-2.5 py-0.5 text-xs font-bold text-primary">{t("profile.learnerBadge")}</span>
+              <span className="rounded-full bg-primary-light px-2.5 py-0.5 text-xs font-bold text-primary">
+                {isPro ? t("profile.premiumBadge") : t("profile.freeBadge")}
+              </span>
             </div>
             {profile?.bio && <p className="mt-1 text-sm text-text-muted">{profile.bio}</p>}
             <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-text-faint">

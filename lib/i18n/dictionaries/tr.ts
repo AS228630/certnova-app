@@ -580,6 +580,8 @@ const tr: Dictionary = {
     editProfile: "Profili düzenle",
     joined: "Katılma tarihi",
     learnerBadge: "Öğrenci",
+    freeBadge: "Ücretsiz",
+    premiumBadge: "Premium",
     badgeFirstSteps: "İlk Adımlar",
     badgeFirstStepsDesc: "İlk aktivite tamamlandı",
     badgeLabMaster: "Lab Ustası",

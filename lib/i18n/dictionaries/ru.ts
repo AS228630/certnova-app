@@ -580,6 +580,8 @@ const ru: Dictionary = {
     editProfile: "Редактировать профиль",
     joined: "Присоединился",
     learnerBadge: "Ученик",
+    freeBadge: "Бесплатно",
+    premiumBadge: "Premium",
     badgeFirstSteps: "Первые шаги",
     badgeFirstStepsDesc: "Первая активность завершена",
     badgeLabMaster: "Мастер лабораторий",

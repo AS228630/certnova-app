@@ -581,6 +581,8 @@ const de = {
     editProfile: "Profil bearbeiten",
     joined: "Beigetreten",
     learnerBadge: "Learner",
+    freeBadge: "Kostenlos",
+    premiumBadge: "Premium",
     badgeFirstSteps: "Erste Schritte",
     badgeFirstStepsDesc: "Erste Aktivität abgeschlossen",
     badgeLabMaster: "Lab Master",
