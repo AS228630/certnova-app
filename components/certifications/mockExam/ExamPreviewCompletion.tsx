@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { PartyPopper, CheckCircle2, XCircle, Lock, ArrowRight } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
 import { getResultStatus } from "@/components/completion/PracticeCompletionState";
+import FreeRegistrationGate from "@/components/registration/FreeRegistrationGate";
 
 /**
  * Shown after a non-Premium user (Guest or Free) finishes the free
@@ -13,17 +15,27 @@ import { getResultStatus } from "@/components/completion/PracticeCompletionState
  * bestanden"/"passed": only 10 of the real exam's full question count
  * were shown, so a pass/fail verdict on that subset would be
  * misleading. Says "free preview completed" instead, always.
+ *
+ * Per the Stage 5 spec, the unlock CTA branches on isGuest: a true
+ * Guest sees the shared FreeRegistrationGate first (they don't have an
+ * account yet), a signed-in Free user goes straight to the real
+ * Premium/Checkout flow.
  */
 export default function ExamPreviewCompletion({
   freeQuestionLimit,
   correct,
+  isGuest,
   upgradeHref,
+  returnTo,
 }: {
   freeQuestionLimit: number;
   correct: number;
+  isGuest: boolean;
   upgradeHref: string;
+  returnTo: string;
 }) {
   const { t } = useLocale();
+  const [showRegistrationGate, setShowRegistrationGate] = useState(false);
   const wrong = freeQuestionLimit - correct;
   const scorePercent = freeQuestionLimit === 0 ? 0 : Math.round((correct / freeQuestionLimit) * 100);
   const status = getResultStatus(scorePercent);
@@ -69,15 +81,28 @@ export default function ExamPreviewCompletion({
             <li>• {t("mockExam.unlockFeature3")}</li>
             <li>• {t("mockExam.unlockFeature4")}</li>
           </ul>
-          <Link
-            href={upgradeHref}
-            className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-bold text-white hover:bg-primary-dark"
-          >
-            {t("premiumGate.cta")}
-            <ArrowRight size={14} />
-          </Link>
+          {isGuest ? (
+            <button
+              onClick={() => setShowRegistrationGate(true)}
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-bold text-white hover:bg-primary-dark"
+            >
+              {t("registrationGate.registerCta")}
+              <ArrowRight size={14} />
+            </button>
+          ) : (
+            <Link
+              href={upgradeHref}
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-bold text-white hover:bg-primary-dark"
+            >
+              {t("premiumGate.cta")}
+              <ArrowRight size={14} />
+            </Link>
+          )}
         </div>
       </div>
+      {showRegistrationGate && (
+        <FreeRegistrationGate returnTo={returnTo} onClose={() => setShowRegistrationGate(false)} />
+      )}
     </div>
   );
 }

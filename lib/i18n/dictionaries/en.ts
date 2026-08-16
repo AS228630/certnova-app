@@ -1971,6 +1971,21 @@ const en: Dictionary = {
     title: "Blog",
     desc: "Articles on IT topics, learning tips, and certifications are coming soon. Check back again soon!",
   },
+  registrationGate: {
+    title: "Sign up for free",
+    subtitle: "Create your free account now and:",
+    benefit1: "Save your progress",
+    benefit2: "Keep your results",
+    benefit3: "Continue on any device",
+    benefit4: "Keep your free access",
+    googleCta: "Continue with Google",
+    microsoftCta: "Continue with Microsoft",
+    githubCta: "Continue with GitHub",
+    emailCta: "Sign up with email",
+    alreadyHaveAccount: "Already have an account?",
+    loginCta: "Log in",
+    registerCta: "Sign up for free now",
+  },
 };
 
 export default en;

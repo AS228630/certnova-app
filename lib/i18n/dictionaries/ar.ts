@@ -1965,6 +1965,21 @@ const ar: Dictionary = {
     title: "المدونة",
     desc: "قريبًا ستجد هنا مقالات حول مواضيع تقنية المعلومات ونصائح التعلم والشهادات. عد قريبًا!",
   },
+  registrationGate: {
+    title: "سجّل مجاناً",
+    subtitle: "أنشئ حسابك المجاني الآن و:",
+    benefit1: "احفظ تقدمك",
+    benefit2: "احتفظ بنتائجك",
+    benefit3: "تابع على أي جهاز",
+    benefit4: "حافظ على وصولك المجاني",
+    googleCta: "المتابعة باستخدام Google",
+    microsoftCta: "المتابعة باستخدام Microsoft",
+    githubCta: "المتابعة باستخدام GitHub",
+    emailCta: "التسجيل بالبريد الإلكتروني",
+    alreadyHaveAccount: "لديك حساب بالفعل؟",
+    loginCta: "تسجيل الدخول",
+    registerCta: "سجّل مجاناً الآن",
+  },
 };
 
 export default ar;

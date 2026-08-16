@@ -2,12 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { Lock, ArrowRight } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
+import { useUser } from "@/components/UserContext";
 import { useSubscriptionStore } from "@/lib/store/subscriptionStore";
 import { canAccess } from "@/lib/entitlementPolicy";
 import UniversalLabStage from "./UniversalLabStage";
 import LabNavigationPanel from "./LabNavigationPanel";
+import FreeRegistrationGate from "@/components/registration/FreeRegistrationGate";
 import type { Company, Certification } from "@/lib/companiesData";
 import type { Lab } from "@/lib/labsData";
 import type { LabInfrastructureType } from "@/lib/labInfrastructure";
@@ -21,6 +24,12 @@ import type { LabInfrastructureType } from "@/lib/labInfrastructure";
  * per-certification (Certification.freeLabsCount), never a single
  * hardcoded number for every cert, defaulting to 1 when a cert hasn't
  * set one explicitly.
+ *
+ * Per the Stage 5 spec, a locked lab shows two different gates
+ * depending on who's asking: a true Guest (no account yet) sees the
+ * shared FreeRegistrationGate first (creating an account is the actual
+ * next step for them); a signed-in Free user already has an account, so
+ * they go straight to the real Premium gate/Checkout.
  */
 export default function GatedLabStage({
   infrastructureType,
@@ -45,12 +54,18 @@ export default function GatedLabStage({
 }) {
   const { t } = useLocale();
   const pathname = usePathname();
+  const { user } = useUser();
   const isPro = useSubscriptionStore((s) => s.isPro);
   const subLoading = useSubscriptionStore((s) => s.loading);
+  const [showRegistrationGate, setShowRegistrationGate] = useState(false);
   const freeLabsCount = cert.freeLabsCount ?? 1;
-  const locked = !subLoading && !canAccess(isPro, "labs_full") && labIndex >= freeLabsCount;
+  // A Guest never has a real subscription row to load, so `subLoading`
+  // (which only ever resolves for a signed-in user) would otherwise
+  // strand a Guest on the loading spinner forever — only wait on it when
+  // there's an actual account to load a subscription for.
+  const locked = !(user && subLoading) && !canAccess(isPro, "labs_full") && labIndex >= freeLabsCount;
 
-  if (subLoading) {
+  if (user && subLoading) {
     return (
       <div className="flex min-h-[40vh] items-center justify-center text-sm text-text-muted">
         {t("common.loading")}
@@ -78,14 +93,29 @@ export default function GatedLabStage({
         </div>
         <h2 className="mb-2 text-lg font-extrabold text-text">{t("premiumGate.labsTitle")}</h2>
         <p className="mb-1 text-sm leading-relaxed text-text-muted">{t("premiumGate.labsDesc")}</p>
-        <p className="mb-6 text-sm font-semibold text-primary">{t("premiumGate.includedInPremium")}</p>
-        <Link
-          href={`/upgrade?returnTo=${encodeURIComponent(pathname ?? "/dashboard")}`}
-          className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-white hover:bg-primary-dark"
-        >
-          {t("premiumGate.cta")}
-          <ArrowRight size={14} />
-        </Link>
+        {user ? (
+          <>
+            <p className="mb-6 text-sm font-semibold text-primary">{t("premiumGate.includedInPremium")}</p>
+            <Link
+              href={`/upgrade?returnTo=${encodeURIComponent(pathname ?? "/dashboard")}`}
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-white hover:bg-primary-dark"
+            >
+              {t("premiumGate.cta")}
+              <ArrowRight size={14} />
+            </Link>
+          </>
+        ) : (
+          <button
+            onClick={() => setShowRegistrationGate(true)}
+            className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-white hover:bg-primary-dark"
+          >
+            {t("registrationGate.registerCta")}
+            <ArrowRight size={14} />
+          </button>
+        )}
+        {showRegistrationGate && (
+          <FreeRegistrationGate returnTo={pathname ?? "/dashboard"} onClose={() => setShowRegistrationGate(false)} />
+        )}
       </div>
     );
   }

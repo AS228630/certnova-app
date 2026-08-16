@@ -59,6 +59,7 @@ export default function MockExamClient({
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { user } = useUser();
+  const isGuest = !user;
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Questions come exclusively from the gated
@@ -399,6 +400,8 @@ export default function MockExamClient({
               <ExamPreviewCompletion
                 freeQuestionLimit={activeQuestions.length}
                 correct={correctCount}
+                isGuest={isGuest}
+                returnTo={pathname ?? "/dashboard"}
                 upgradeHref={`/upgrade?returnTo=${encodeURIComponent(pathname ?? "/dashboard")}`}
               />
             );

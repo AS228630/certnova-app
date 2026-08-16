@@ -1965,6 +1965,21 @@ const ru: Dictionary = {
     title: "Блог",
     desc: "Скоро здесь появятся статьи об IT-темах, советах по обучению и сертификациях. Загляните позже!",
   },
+  registrationGate: {
+    title: "Зарегистрируйтесь бесплатно",
+    subtitle: "Создайте бесплатный аккаунт сейчас и:",
+    benefit1: "Сохраняйте прогресс",
+    benefit2: "Сохраняйте результаты",
+    benefit3: "Продолжайте на любом устройстве",
+    benefit4: "Сохраняйте бесплатный доступ",
+    googleCta: "Продолжить с Google",
+    microsoftCta: "Продолжить с Microsoft",
+    githubCta: "Продолжить с GitHub",
+    emailCta: "Регистрация по email",
+    alreadyHaveAccount: "Уже есть аккаунт?",
+    loginCta: "Войти",
+    registerCta: "Зарегистрироваться бесплатно",
+  },
 };
 
 export default ru;

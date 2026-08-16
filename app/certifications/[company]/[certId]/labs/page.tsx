@@ -30,7 +30,7 @@ export default async function LabPage({
   const lab = infrastructureType === "AZURE" ? getLab(certId, cert.title, cert.level) : undefined;
 
   return (
-    <DashboardShell>
+    <DashboardShell requireAuth={false}>
       <main className="min-w-0 flex-1 overflow-x-hidden">
         {/* This route always lands on the first lab (index 0) — always
             within the free allotment (freeLabsCount defaults to 1), so

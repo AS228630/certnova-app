@@ -1965,6 +1965,21 @@ const fr: Dictionary = {
     title: "Blog",
     desc: "Des articles sur des sujets IT, des astuces d'apprentissage et des certifications arrivent bientôt. Reviens bientôt !",
   },
+  registrationGate: {
+    title: "Inscris-toi gratuitement",
+    subtitle: "Crée ton compte gratuit maintenant et :",
+    benefit1: "Sauvegarde ta progression",
+    benefit2: "Conserve tes résultats",
+    benefit3: "Continue sur n'importe quel appareil",
+    benefit4: "Garde ton accès gratuit",
+    googleCta: "Continuer avec Google",
+    microsoftCta: "Continuer avec Microsoft",
+    githubCta: "Continuer avec GitHub",
+    emailCta: "S'inscrire par e-mail",
+    alreadyHaveAccount: "Déjà un compte ?",
+    loginCta: "Se connecter",
+    registerCta: "S'inscrire gratuitement",
+  },
 };
 
 export default fr;

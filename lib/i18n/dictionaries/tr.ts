@@ -1965,6 +1965,21 @@ const tr: Dictionary = {
     title: "Blog",
     desc: "IT konuları, öğrenme ipuçları ve sertifikalar hakkında makaleler yakında geliyor. Yakında tekrar uğra!",
   },
+  registrationGate: {
+    title: "Ücretsiz kaydol",
+    subtitle: "Şimdi ücretsiz hesabını oluştur ve:",
+    benefit1: "İlerlemeni kaydet",
+    benefit2: "Sonuçlarını sakla",
+    benefit3: "Her cihazda devam et",
+    benefit4: "Ücretsiz erişimini koru",
+    googleCta: "Google ile devam et",
+    microsoftCta: "Microsoft ile devam et",
+    githubCta: "GitHub ile devam et",
+    emailCta: "E-posta ile kaydol",
+    alreadyHaveAccount: "Zaten hesabın var mı?",
+    loginCta: "Giriş yap",
+    registerCta: "Şimdi ücretsiz kaydol",
+  },
 };
 
 export default tr;

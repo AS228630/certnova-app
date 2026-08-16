@@ -46,7 +46,7 @@ export default async function LabSlugPage({
   const labIndex = Math.max(0, getLabsForCert(certId).findIndex((l) => (l.slug ?? l.id) === labSlug));
 
   return (
-    <DashboardShell>
+    <DashboardShell requireAuth={false}>
       <main className="min-w-0 flex-1 overflow-x-hidden">
         <GatedLabStage
           infrastructureType={infrastructureType}

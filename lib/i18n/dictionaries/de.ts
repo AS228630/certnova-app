@@ -1973,6 +1973,21 @@ const de = {
     title: "Blog",
     desc: "Hier entstehen bald Artikel zu IT-Themen, Lerntipps und Zertifizierungen. Schau bald wieder vorbei!",
   },
+  registrationGate: {
+    title: "Registriere dich kostenlos",
+    subtitle: "Erstelle jetzt dein kostenloses Konto und:",
+    benefit1: "Fortschritt speichern",
+    benefit2: "Ergebnisse behalten",
+    benefit3: "Auf jedem Gerät weitermachen",
+    benefit4: "Kostenloser Zugang bleibt erhalten",
+    googleCta: "Continue with Google",
+    microsoftCta: "Mit Microsoft anmelden",
+    githubCta: "Mit GitHub anmelden",
+    emailCta: "Mit E-Mail registrieren",
+    alreadyHaveAccount: "Bereits ein Konto?",
+    loginCta: "Anmelden",
+    registerCta: "Jetzt kostenlos registrieren",
+  },
 };
 
 export default de;

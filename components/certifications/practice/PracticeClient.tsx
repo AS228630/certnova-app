@@ -30,7 +30,7 @@ import { useQuestionAnswersStore } from "@/lib/store/questionAnswersStore";
 import { useSectionAttemptsStore } from "@/lib/store/sectionAttemptsStore";
 import { useUser } from "@/components/UserContext";
 import { loadGuestProgress, saveGuestAnswer, clearGuestProgress } from "@/lib/guestProgress";
-import GuestSignupModal from "./GuestSignupModal";
+import FreeRegistrationGate from "@/components/registration/FreeRegistrationGate";
 import PremiumGateModal from "./PremiumGateModal";
 
 const EXAM_TOTAL_SECONDS = 2 * 60 * 60; // 2h, matches a real certification exam
@@ -221,7 +221,7 @@ export default function PracticeClient({
   // `user`, so it flips to false automatically the instant a guest
   // finishes signing up mid-session — no extra state to keep in sync.
   const isGuest = !user;
-  const [showGuestGate, setShowGuestGate] = useState(false);
+  const [showRegistrationGate, setShowRegistrationGate] = useState(false);
   const [showPremiumGate, setShowPremiumGate] = useState(false);
   const persistedCorrectness = useQuestionAnswersStore((s) => s.getCorrectness(certId));
   const loadPersistedAnswers = useQuestionAnswersStore((s) => s.loadForCert);
@@ -330,21 +330,21 @@ export default function PracticeClient({
 
   function goTo(i: number) {
     // Free/guest users (anyone the server didn't confirm as Premium) may
-    // freely move within Teil 1 only — the rest of the exam is the
-    // Premium experience. Checked against the RAW requested index (i),
-    // before it gets clamped to activeQuestions.length below — clamping
-    // first would silently turn an out-of-bounds jump request into an
-    // in-bounds one and this check would never fire. Checked
-    // independently of the attemptsMigrationReady block below, since
-    // that one only applies once a real user's DB-backed unlock state
-    // has loaded, which never happens for a guest.
-    if (!canAccess(isPro, "practice_questions_full")) {
-      const targetSection = getSectionForIndex(sectionTotal, i);
-      if (targetSection > 0) {
-        if (isGuest) setShowGuestGate(true);
-        else setShowPremiumGate(true);
-        return;
-      }
+    // only move within whatever the server actually delivered —
+    // activeQuestions.length itself already reflects that decision
+    // (Teil 1 exactly for a signed-in Free user; Teil 1 + one real bonus
+    // question — Teil 2's real Frage 1 — for a true Guest, per the
+    // Stage 5 spec). Checked against the RAW requested index (i), before
+    // it gets clamped below — clamping first would silently turn an
+    // out-of-bounds jump request into an in-bounds one and this check
+    // would never fire. Checked independently of the
+    // attemptsMigrationReady block below, since that one only applies
+    // once a real user's DB-backed unlock state has loaded, which never
+    // happens for a guest.
+    if (!canAccess(isPro, "practice_questions_full") && i >= activeQuestions.length) {
+      if (isGuest) setShowRegistrationGate(true);
+      else setShowPremiumGate(true);
+      return;
     }
 
     const clamped = Math.max(0, Math.min(activeQuestions.length - 1, i));
@@ -1010,7 +1010,9 @@ export default function PracticeClient({
         <RestartConfirmModal onConfirm={restartFromScratch} onCancel={() => setRestartModalOpen(false)} loading={restarting} />
       )}
 
-      {showGuestGate && <GuestSignupModal onClose={() => setShowGuestGate(false)} />}
+      {showRegistrationGate && (
+        <FreeRegistrationGate returnTo={pathname ?? "/dashboard"} onClose={() => setShowRegistrationGate(false)} />
+      )}
       {showPremiumGate && <PremiumGateModal variant="practice" onClose={() => setShowPremiumGate(false)} />}
 
       {/* AI coach now spans the full width below the question. */}

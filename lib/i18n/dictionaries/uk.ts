@@ -1965,6 +1965,21 @@ const uk: Dictionary = {
     title: "Блог",
     desc: "Незабаром тут з'являться статті про IT-теми, поради з навчання та сертифікації. Заглядайте знову!",
   },
+  registrationGate: {
+    title: "Зареєструйтеся безкоштовно",
+    subtitle: "Створіть безкоштовний акаунт зараз і:",
+    benefit1: "Зберігайте прогрес",
+    benefit2: "Зберігайте результати",
+    benefit3: "Продовжуйте на будь-якому пристрої",
+    benefit4: "Зберігайте безкоштовний доступ",
+    googleCta: "Продовжити з Google",
+    microsoftCta: "Продовжити з Microsoft",
+    githubCta: "Продовжити з GitHub",
+    emailCta: "Реєстрація через email",
+    alreadyHaveAccount: "Вже є акаунт?",
+    loginCta: "Увійти",
+    registerCta: "Зареєструватися безкоштовно",
+  },
 };
 
 export default uk;

@@ -1965,6 +1965,21 @@ const es: Dictionary = {
     title: "Blog",
     desc: "Próximamente publicaremos artículos sobre temas de TI, consejos de aprendizaje y certificaciones. ¡Vuelve pronto!",
   },
+  registrationGate: {
+    title: "Regístrate gratis",
+    subtitle: "Crea tu cuenta gratuita ahora y:",
+    benefit1: "Guarda tu progreso",
+    benefit2: "Conserva tus resultados",
+    benefit3: "Continúa en cualquier dispositivo",
+    benefit4: "Mantén tu acceso gratuito",
+    googleCta: "Continuar con Google",
+    microsoftCta: "Continuar con Microsoft",
+    githubCta: "Continuar con GitHub",
+    emailCta: "Regístrate con email",
+    alreadyHaveAccount: "¿Ya tienes una cuenta?",
+    loginCta: "Iniciar sesión",
+    registerCta: "Regístrate gratis ahora",
+  },
 };
 
 export default es;
