@@ -14,9 +14,9 @@ export function getResultStatus(scorePercent: number): "good" | "medium" | "low"
 }
 
 const RING_COLOR: Record<ReturnType<typeof getResultStatus>, string> = {
-  good: "#22C55E",
-  medium: "#F59E0B",
-  low: "#EF4444",
+  good: "var(--color-success)",
+  medium: "var(--color-warning)",
+  low: "var(--color-danger)",
 };
 
 function formatElapsed(totalSeconds: number) {
