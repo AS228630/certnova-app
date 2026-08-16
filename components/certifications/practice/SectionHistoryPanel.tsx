@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { CheckCircle2, XCircle, History, ChevronDown } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
-import { useSectionAttemptsStore, starsForScore, type SectionAttempt } from "@/lib/store/sectionAttemptsStore";
+import { useSectionAttemptsStore, starsForScore, SECTION_PASS_THRESHOLD, type SectionAttempt } from "@/lib/store/sectionAttemptsStore";
 import { getSectionCount } from "@/lib/practiceSections";
 
 // Attempt-history table for the current certification — one row per
@@ -80,7 +80,7 @@ export default function SectionHistoryPanel({
               const bestScore = bestEntry?.bestScorePercent ?? null;
               const totalAttempts = bestEntry?.totalAttempts ?? sectionAttempts.length;
               const stars = bestScore !== null ? starsForScore(bestScore) : 0;
-              const passed = bestScore !== null && bestScore >= 90;
+              const passed = bestScore !== null && bestScore >= SECTION_PASS_THRESHOLD;
               const isExpanded = expandedSection === sectionIndex;
 
               return (

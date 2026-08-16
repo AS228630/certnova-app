@@ -27,7 +27,7 @@ export function starsForScore(scorePercent: number): number {
 // attempt in the history panel — distinct from the overall mock-exam
 // PASS_THRESHOLD (70%) used in ExamCompleteScreen, which is about a
 // full end-to-end exam, not a single section.
-const SECTION_PASS_THRESHOLD = 90;
+export const SECTION_PASS_THRESHOLD = 90;
 
 // Only the 20 most recent attempts per section are kept in the visible
 // history table (section_attempts) — enforced by a DB trigger, see the
