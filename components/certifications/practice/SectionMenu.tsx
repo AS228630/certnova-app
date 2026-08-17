@@ -14,6 +14,7 @@ type Status = "current" | "correct" | "wrong" | "marked" | "skipped" | "unanswer
 // never requires a click to appear.
 export default function SectionMenu({
   total,
+  certId,
   currentIndex,
   statusFor,
   onJump,
@@ -21,6 +22,9 @@ export default function SectionMenu({
   getBestScore,
 }: {
   total: number;
+  /** Only used to look up a per-cert section-size override (see
+   * lib/practiceSections.ts) — never used for any data fetch here. */
+  certId?: string;
   currentIndex: number;
   statusFor: (index: number) => Status;
   onJump: (index: number, sectionIndex?: number) => void;
@@ -37,8 +41,8 @@ export default function SectionMenu({
   getBestScore?: (sectionIndex: number) => number | null;
 }) {
   const { t } = useLocale();
-  const SECTION_SIZE = getSectionSize(total);
-  const sectionCount = getSectionCount(total);
+  const SECTION_SIZE = getSectionSize(total, certId);
+  const sectionCount = getSectionCount(total, certId);
   const currentSection = Math.floor(currentIndex / SECTION_SIZE);
 
   const [menuOpen, setMenuOpen] = useState(false);

@@ -305,9 +305,9 @@ export default function PracticeClient({
   // calculation below. Falls back to activeQuestions.length only for the
   // brief render before the API response has set the real total.
   const sectionTotal = totalQuestionCount || activeQuestions.length;
-  const sectionCount = getSectionCount(sectionTotal);
-  const currentSectionIdx = getSectionForIndex(sectionTotal, index);
-  const [currentSectionStart, currentSectionEnd] = getSectionRange(sectionTotal, currentSectionIdx);
+  const sectionCount = getSectionCount(sectionTotal, certId);
+  const currentSectionIdx = getSectionForIndex(sectionTotal, index, certId);
+  const [currentSectionStart, currentSectionEnd] = getSectionRange(sectionTotal, currentSectionIdx, certId);
 
   function isCorrectAnswer(q: PracticeQuestion, answer: Answer | undefined): boolean {
     if (!answer) return false;
@@ -392,10 +392,10 @@ export default function PracticeClient({
     // blocks crossing INTO a different, locked section; moving within the
     // current (already-reachable) section is never affected.
     if (attemptsMigrationReady) {
-      const targetSection = getSectionForIndex(sectionTotal, clamped);
-      const currentSection = getSectionForIndex(sectionTotal, index);
+      const targetSection = getSectionForIndex(sectionTotal, clamped, certId);
+      const currentSection = getSectionForIndex(sectionTotal, index, certId);
       if (targetSection !== currentSection && !isSectionPermanentlyUnlocked(certId, targetSection)) {
-        const [, currentEnd] = getSectionRange(sectionTotal, currentSection);
+        const [, currentEnd] = getSectionRange(sectionTotal, currentSection, certId);
         setIndex(Math.min(currentEnd - 1, activeQuestions.length - 1));
         setHintOpen(false);
         return;
@@ -414,7 +414,7 @@ export default function PracticeClient({
   // Matches resetSection's shuffle logic; unfinished/never-attempted
   // sections are left in authored order.
   function jumpToSection(sectionIdx: number, targetIndex: number) {
-    const [start, end] = getSectionRange(sectionTotal, sectionIdx);
+    const [start, end] = getSectionRange(sectionTotal, sectionIdx, certId);
     let alreadyCompleted = true;
     for (let i = start; i < end; i++) {
       const st = statusFor(i);
@@ -438,8 +438,8 @@ export default function PracticeClient({
   // behind a confirmation dialog first; a fully-finished section skips
   // straight to resetSection, matching the spec.
   function requestSectionRetry(shuffle: boolean) {
-    const sectionIdx = getSectionForIndex(sectionTotal, index);
-    const [start, end] = getSectionRange(sectionTotal, sectionIdx);
+    const sectionIdx = getSectionForIndex(sectionTotal, index, certId);
+    const [start, end] = getSectionRange(sectionTotal, sectionIdx, certId);
     let complete = true;
     for (let i = start; i < end; i++) {
       const st = statusFor(i);
@@ -473,8 +473,8 @@ export default function PracticeClient({
   // Checks whether every question in `current`'s section has now been
   // resolved (answered or skipped) — if so, shows the real section results.
   function maybeShowScorecard(justResolvedId: string, nowChecked: Set<string>) {
-    const sectionIdx = getSectionForIndex(sectionTotal, index);
-    const [start, end] = getSectionRange(sectionTotal, sectionIdx);
+    const sectionIdx = getSectionForIndex(sectionTotal, index, certId);
+    const [start, end] = getSectionRange(sectionTotal, sectionIdx, certId);
     let allResolved = true;
     for (let i = start; i < end; i++) {
       const q = activeQuestions[i];
@@ -581,7 +581,7 @@ export default function PracticeClient({
       next.delete(sectionIdx);
       return next;
     });
-    const [start, end] = getSectionRange(sectionTotal, sectionIdx);
+    const [start, end] = getSectionRange(sectionTotal, sectionIdx, certId);
     const currentIds = activeQuestions.slice(start, end).map((q) => q.id);
     const originalIds = questions.slice(start, end).map((q) => q.id);
 
@@ -728,6 +728,7 @@ export default function PracticeClient({
         <SectionScorecard
           sectionIndex={scorecardSection}
           questions={activeQuestions}
+          certId={certId}
           topics={topics}
           answers={answers}
           checked={checked}
@@ -748,14 +749,14 @@ export default function PracticeClient({
               // last question" instructor shortcut) must never let anyone
               // into a section that hasn't actually been earned.
               if (!attemptsMigrationReady || !isSectionPermanentlyUnlocked(certId, scorecardSection + 1)) return;
-              const [, end] = getSectionRange(sectionTotal, scorecardSection);
+              const [, end] = getSectionRange(sectionTotal, scorecardSection, certId);
               setScorecardSection(null);
               goTo(Math.min(end, activeQuestions.length - 1));
             }}
             onRetry={() => {
               // "Wiederholen" — same order every time, per spec.
               resetSection(scorecardSection, false);
-              const [start] = getSectionRange(sectionTotal, scorecardSection);
+              const [start] = getSectionRange(sectionTotal, scorecardSection, certId);
               setScorecardSection(null);
               goTo(start);
             }}
@@ -763,7 +764,7 @@ export default function PracticeClient({
               // "Gemischt wiederholen" — a brand-new random order on
               // every click, per spec.
               resetSection(scorecardSection, true);
-              const [start] = getSectionRange(sectionTotal, scorecardSection);
+              const [start] = getSectionRange(sectionTotal, scorecardSection, certId);
               setScorecardSection(null);
               goTo(start);
             }}
@@ -790,7 +791,7 @@ export default function PracticeClient({
               goTo(qIndex);
             }}
             onReviewWrong={() => {
-              const [start, end] = getSectionRange(sectionTotal, scorecardSection);
+              const [start, end] = getSectionRange(sectionTotal, scorecardSection, certId);
               const wrongIds = activeQuestions
                 .slice(start, end)
                 .filter((q) => checked.has(q.id) && !isCorrectAnswer(q, answers[q.id]))
@@ -833,7 +834,7 @@ export default function PracticeClient({
               // full result regardless of score, same as before.
               if (!canAccess(isPro, "practice_questions_full") && scorePercent < SECTION_PASS_THRESHOLD) {
                 resetSection(scorecardSection, false);
-                const [start] = getSectionRange(sectionTotal, scorecardSection);
+                const [start] = getSectionRange(sectionTotal, scorecardSection, certId);
                 setScorecardSection(null);
                 setRetryReason({ scorePercent });
                 goTo(start);
@@ -878,6 +879,7 @@ export default function PracticeClient({
         <div className="flex flex-col gap-3 sm:flex-row sm:items-stretch">
           <SectionMenu
             total={sectionTotal}
+            certId={certId}
             currentIndex={index}
             statusFor={statusFor}
             onJump={(i, sectionIdx) => (sectionIdx !== undefined ? jumpToSection(sectionIdx, i) : goTo(i))}
@@ -1073,7 +1075,7 @@ export default function PracticeClient({
           onConfirm={() => {
             const { sectionIdx, shuffle: doShuffle } = pendingSectionRetry;
             resetSection(sectionIdx, doShuffle);
-            const [start] = getSectionRange(sectionTotal, sectionIdx);
+            const [start] = getSectionRange(sectionTotal, sectionIdx, certId);
             setPendingSectionRetry(null);
             goTo(start);
           }}

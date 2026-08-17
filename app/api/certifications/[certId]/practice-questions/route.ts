@@ -37,7 +37,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ cer
 
   const allQuestions = getPracticeQuestions(certId, locale ?? "de");
   const totalCount = allQuestions.length;
-  const [, freeSectionEnd] = getSectionRange(totalCount, 0);
+  const [, freeSectionEnd] = getSectionRange(totalCount, 0, certId);
   const guestBonusEnd = Math.min(totalCount, freeSectionEnd + 1);
 
   const questions = canAccess(isPro, "practice_questions_full")

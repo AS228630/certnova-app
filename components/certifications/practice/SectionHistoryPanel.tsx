@@ -27,7 +27,7 @@ export default function SectionHistoryPanel({
   const getBestScoreEntry = useSectionAttemptsStore((s) => s.getBestScoreEntry);
   const [expandedSection, setExpandedSection] = useState<number | null>(null);
 
-  const sectionCount = getSectionCount(totalQuestions);
+  const sectionCount = getSectionCount(totalQuestions, certId);
   const attemptsBySection = new Map<number, SectionAttempt[]>();
   for (const a of attempts) {
     const list = attemptsBySection.get(a.sectionIndex) ?? [];

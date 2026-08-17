@@ -73,6 +73,7 @@ function isCorrectAnswer(q: PracticeQuestion, answer: Answer | undefined): boole
 export default function SectionScorecard({
   sectionIndex,
   questions,
+  certId,
   topics,
   answers,
   checked,
@@ -91,6 +92,9 @@ export default function SectionScorecard({
 }: {
   sectionIndex: number;
   questions: PracticeQuestion[];
+  /** Only used to look up a per-cert section-size override (see
+   * lib/practiceSections.ts) — never used for any data fetch here. */
+  certId?: string;
   topics: PracticeTopic[];
   answers: Record<string, Answer>;
   checked: Set<string>;
@@ -127,14 +131,14 @@ export default function SectionScorecard({
   const [hideWrong, setHideWrong] = useState(false);
 
   const total = questions.length;
-  const sectionCount = getSectionCount(total);
+  const sectionCount = getSectionCount(total, certId);
   // Real bug fix: a non-Pro user must only ever see Section 1 in this
   // list, never real scores/stars for sections they don't actually
   // have access to — independent of whatever `questions`/`total`
   // happen to contain here, this is the real, final gate for what
   // renders below.
   const visibleSectionCount = isPro ? sectionCount : Math.min(sectionCount, 1);
-  const [start, end] = getSectionRange(total, sectionIndex);
+  const [start, end] = getSectionRange(total, sectionIndex, certId);
   const sectionQuestions = questions.slice(start, end);
 
   // A question the user never touched at all (not checked, not even
@@ -310,7 +314,7 @@ export default function SectionScorecard({
             <p className="mb-4 text-xs text-text-faint">{t("practice.earnStars")}</p>
             <div className="space-y-2">
               {Array.from({ length: visibleSectionCount }).map((_, s) => {
-                const [sStart, sEnd] = getSectionRange(total, s);
+                const [sStart, sEnd] = getSectionRange(total, s, certId);
                 const sQuestions = questions.slice(sStart, sEnd);
                 const sCorrect = sQuestions.filter((q) => checked.has(q.id) && isCorrectAnswer(q, answers[q.id])).length;
                 const sWrong = sQuestions.filter((q) => checked.has(q.id) && !isCorrectAnswer(q, answers[q.id])).length;
