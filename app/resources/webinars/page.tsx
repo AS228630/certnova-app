@@ -5,7 +5,6 @@ import { Video, Bell, Check, Loader2 } from "lucide-react";
 import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
 import { useLocale } from "@/components/LocaleProvider";
-import { useGuestOnlyRedirect } from "@/lib/useGuestOnlyRedirect";
 import { supabase } from "@/lib/supabase/client";
 
 // Webinars are, by definition, live scheduled events — we can't write
@@ -18,13 +17,10 @@ import { supabase } from "@/lib/supabase/client";
 // reach out once a real webinar is scheduled.
 export default function WebinarsPage() {
   const { t } = useLocale();
-  const { checking } = useGuestOnlyRedirect();
   const [email, setEmail] = useState("");
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  if (checking) return null;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

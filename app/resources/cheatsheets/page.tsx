@@ -5,7 +5,6 @@ import { Copy, Check, Terminal } from "lucide-react";
 import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
 import { useLocale } from "@/components/LocaleProvider";
-import { useGuestOnlyRedirect } from "@/lib/useGuestOnlyRedirect";
 
 type Entry = { cmd: string; desc: string };
 type Sheet = { id: string; titleKey: string; entries: Entry[] };
@@ -120,10 +119,7 @@ function CopyButton({ text }: { text: string }) {
 
 export default function CheatSheetsPage() {
   const { t } = useLocale();
-  const { checking } = useGuestOnlyRedirect();
   const [active, setActive] = useState(SHEETS[0].id);
-
-  if (checking) return null;
   const activeSheet = SHEETS.find((s) => s.id === active)!;
 
   return (

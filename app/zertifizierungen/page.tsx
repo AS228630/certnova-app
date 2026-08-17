@@ -4,7 +4,6 @@ import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
 import CertificationsGuestPage from "@/components/certifications/CertificationsGuestPage";
 import { useLocale } from "@/components/LocaleProvider";
-import { useGuestOnlyRedirect } from "@/lib/useGuestOnlyRedirect";
 import { SiGoogle } from "react-icons/si";
 import { getCompanyIcon } from "@/lib/vendorIcons";
 
@@ -21,9 +20,6 @@ const trustLogos = [
 
 export default function ZertifizierungenPage() {
   const { t } = useLocale();
-  const { checking } = useGuestOnlyRedirect();
-
-  if (checking) return null;
 
   return (
     <div className="min-h-screen bg-bg">

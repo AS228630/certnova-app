@@ -5,7 +5,6 @@ import { BookMarked, ChevronDown } from "lucide-react";
 import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
 import { useLocale } from "@/components/LocaleProvider";
-import { useGuestOnlyRedirect } from "@/lib/useGuestOnlyRedirect";
 
 type Chapter = { titleKey: string; descKey: string };
 type EBook = { id: string; titleKey: string; chapters: Chapter[] };
@@ -75,11 +74,8 @@ const EBOOKS: EBook[] = [
 
 export default function EbooksPage() {
   const { t } = useLocale();
-  const { checking } = useGuestOnlyRedirect();
   const [active, setActive] = useState(EBOOKS[0].id);
   const [open, setOpen] = useState<number | null>(0);
-
-  if (checking) return null;
   const book = EBOOKS.find((b) => b.id === active)!;
 
   return (

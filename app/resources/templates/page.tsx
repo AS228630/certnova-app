@@ -5,7 +5,6 @@ import { FileText, Copy, Check, Download } from "lucide-react";
 import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
 import { useLocale } from "@/components/LocaleProvider";
-import { useGuestOnlyRedirect } from "@/lib/useGuestOnlyRedirect";
 
 type Template = { id: string; titleKey: string; descKey: string; items: string[] };
 
@@ -134,9 +133,6 @@ function TemplateCard({ template }: { template: Template }) {
 
 export default function TemplatesPage() {
   const { t } = useLocale();
-  const { checking } = useGuestOnlyRedirect();
-
-  if (checking) return null;
 
   return (
     <div className="min-h-screen bg-bg">

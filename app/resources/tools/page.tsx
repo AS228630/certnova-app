@@ -5,7 +5,6 @@ import { Network, Braces, FileCode, KeyRound, Router } from "lucide-react";
 import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
 import { useLocale } from "@/components/LocaleProvider";
-import { useGuestOnlyRedirect } from "@/lib/useGuestOnlyRedirect";
 import SubnetCalculator from "@/components/resources/SubnetCalculator";
 import JsonFormatter from "@/components/resources/JsonFormatter";
 import YamlValidator from "@/components/resources/YamlValidator";
@@ -22,10 +21,7 @@ const TOOLS = [
 
 export default function ItToolsPage() {
   const { t } = useLocale();
-  const { checking } = useGuestOnlyRedirect();
   const [active, setActive] = useState<(typeof TOOLS)[number]["id"]>("subnet");
-
-  if (checking) return null;
   const ActiveComp = TOOLS.find((tool) => tool.id === active)!.Comp;
 
   return (

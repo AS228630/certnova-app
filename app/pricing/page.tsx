@@ -25,7 +25,6 @@ import {
 } from "lucide-react";
 import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
-import { useGuestOnlyRedirect } from "@/lib/useGuestOnlyRedirect";
 import PricingPanel from "@/components/pricing/PricingPanel";
 import FreeRegistrationGate from "@/components/registration/FreeRegistrationGate";
 import RegisterTriggerLink from "@/components/registration/RegisterTriggerLink";
@@ -83,9 +82,6 @@ const faqs = [
 export default function PricingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showRegistrationGate, setShowRegistrationGate] = useState(false);
-  const { checking } = useGuestOnlyRedirect();
-
-  if (checking) return null;
 
   return (
     <div className="min-h-screen bg-bg">

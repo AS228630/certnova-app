@@ -5,7 +5,6 @@ import { ChevronDown, BookOpen } from "lucide-react";
 import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
 import { useLocale } from "@/components/LocaleProvider";
-import { useGuestOnlyRedirect } from "@/lib/useGuestOnlyRedirect";
 
 type Section = { titleKey: string; bodyKey: string };
 type Guide = { id: string; titleKey: string; sections: Section[] };
@@ -65,11 +64,8 @@ const GUIDES: Guide[] = [
 
 export default function GuidesPage() {
   const { t } = useLocale();
-  const { checking } = useGuestOnlyRedirect();
   const [activeGuide, setActiveGuide] = useState(GUIDES[0].id);
   const [openSection, setOpenSection] = useState<number | null>(0);
-
-  if (checking) return null;
   const guide = GUIDES.find((g) => g.id === activeGuide)!;
 
   return (

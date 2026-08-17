@@ -6,7 +6,6 @@ import { BookOpen, Terminal, Wrench, Download, Video, BookMarked, Lightbulb, Arr
 import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
 import { useLocale } from "@/components/LocaleProvider";
-import { useGuestOnlyRedirect } from "@/lib/useGuestOnlyRedirect";
 import ResourcesHero from "@/components/resources/ResourcesHero";
 import { SiGoogle } from "react-icons/si";
 import { getCompanyIcon } from "@/lib/vendorIcons";
@@ -86,9 +85,6 @@ function SuggestTopicBox() {
 
 export default function ResourcesPage() {
   const { t } = useLocale();
-  const { checking } = useGuestOnlyRedirect();
-
-  if (checking) return null;
 
   return (
     <div className="min-h-screen bg-bg">
