@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ShieldCheck, Check, BookOpen, MonitorSmartphone, FileQuestion, Sparkles } from "lucide-react";
+import { ShieldCheck, Check } from "lucide-react";
 import { PLAN_PRICES } from "@/lib/stripeConfig";
 
 // Single source of truth for what's actually charged (the same file
@@ -35,7 +35,7 @@ export default function PricingPanel({
           Aktueller Plan: <span className="font-semibold text-text">{currentPlanLabel}</span>
         </p>
       )}
-      <section className="grid grid-cols-1 gap-4 lg:grid-cols-[220px_1fr_1fr_260px]">
+      <section className="grid grid-cols-1 gap-4 lg:grid-cols-[240px_1fr_1fr]">
         {/* Left panel */}
         <div className="flex flex-col justify-between rounded-2xl border border-border-soft bg-panel p-5">
           <div>
@@ -137,35 +137,6 @@ export default function PricingPanel({
               Jährlich starten
             </button>
           )}
-        </div>
-
-        {/* Add-ons — display only: these aren't real purchasable Stripe
-            products (Premium already includes Labs/Practice/Exam
-            Simulation per the earlier Option-B decision), so no
-            checkout button is wired here rather than pretending one
-            works. */}
-        <div className="rounded-2xl border border-border-soft bg-panel p-5">
-          <p className="mb-3 text-sm font-bold text-text">
-            Add-ons <span className="font-normal text-text-faint">(Optional)</span>
-          </p>
-          <ul className="space-y-3">
-            {[
-              { icon: MonitorSmartphone, name: "Labs Only", price: "€9", period: "Monat" },
-              { icon: FileQuestion, name: "Exam Simulator", price: "€14", period: "Monat" },
-              { icon: Sparkles, name: "AI Coach", price: "€9", period: "Monat" },
-              { icon: BookOpen, name: "Single Certification", price: "€29", period: "Einmalig" },
-            ].map((a) => (
-              <li key={a.name} className="flex items-center justify-between gap-2">
-                <span className="flex items-center gap-2 text-xs text-text-muted">
-                  <a.icon size={15} className="text-primary" />
-                  {a.name}
-                </span>
-                <span className="text-xs font-semibold text-text">
-                  {a.price} <span className="font-normal text-text-faint">/ {a.period}</span>
-                </span>
-              </li>
-            ))}
-          </ul>
         </div>
       </section>
 
