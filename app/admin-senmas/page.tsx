@@ -359,7 +359,7 @@ export default function AdminDashboardPage() {
           )}
         </SectionCard>
 
-        <SectionCard title="System-Status" action={<Link href="/admin-senmas/system-status" className="text-xs" style={{ color: 'var(--color-primary)' }}>Details</Link>}>
+        <SectionCard title="System-Status">
           <ul className="space-y-3">
             <SystemRow label="Web Server" s={systemStatus.webServer} />
             <SystemRow label="Datenbank" s={systemStatus.database} />
