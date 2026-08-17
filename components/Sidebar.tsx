@@ -237,7 +237,14 @@ export default function Sidebar({
         </div>
       </aside>
       {showRegistrationGate && (
-        <FreeRegistrationGate returnTo={pathname ?? "/dashboard"} onClose={() => setShowRegistrationGate(false)} />
+        // Real bug fix: this specific trigger's whole intent is to buy
+        // Premium — returnTo was the current page (right for Practice/
+        // Labs/Exam's "save my progress" registrations), which meant
+        // completing registration here just silently dropped the
+        // person back where they started with no path to what they
+        // actually clicked "Upgrade" for. Sends them to /upgrade
+        // instead, continuing their real intent.
+        <FreeRegistrationGate returnTo="/upgrade" onClose={() => setShowRegistrationGate(false)} />
       )}
     </>
   );
