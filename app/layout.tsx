@@ -48,12 +48,21 @@ export const metadata: Metadata = {
     title: "CertCoach – Lerne. Übe. Zertifiziere dich.",
     description:
       "Deine All-in-One-Plattform, um IT-Skills aufzubauen, Zertifikate zu erhalten und deinen Traumjob zu bekommen.",
+    // Real gap found during a full-site audit: neither openGraph nor
+    // twitter had any `images` at all — sharing certcoach.de on
+    // WhatsApp/LinkedIn/X/Facebook showed no preview image whatsoever.
+    // icon-512.png is a real, existing asset (not invented), used here
+    // as an honest interim fix — it's square, not the 1200x630 a
+    // proper branded share card should be, so this should be replaced
+    // with a real designed OG image when one exists.
+    images: [{ url: "/icon-512.png", width: 512, height: 512, alt: "CertCoach" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "CertCoach – Lerne. Übe. Zertifiziere dich.",
     description:
       "Deine All-in-One-Plattform, um IT-Skills aufzubauen, Zertifikate zu erhalten und deinen Traumjob zu bekommen.",
+    images: ["/icon-512.png"],
   },
   robots: {
     index: true,
