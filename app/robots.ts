@@ -5,7 +5,6 @@ export default function robots(): MetadataRoute.Robots {
     "/dashboard",
     "/profile",
     "/settings",
-    "/analytics",
     "/api/",
     "/ataullah-senmas",
     "/admin-senmas",

@@ -17,9 +17,14 @@ import { AB900_QUESTIONS } from "@/lib/ab900Practice";
 // the actual question/option/answer text can never drift out of sync
 // with what's shown in the real (login-required) practice page.
 const SAMPLE_QUESTION_IDS: Record<string, string[]> = {
-  "az-900": ["real-az900-1", "real-az900-2", "real-az900-4"],
+  "az-900": ["real-az900-1", "real-az900-2", "real-az900-4", "real-az900-16", "real-az900-17"],
   "ab-900": ["real-ab900-3", "real-ab900-4", "real-ab900-5"],
 };
+
+// Temporary, per-cert override — see generateMetadata below. Remove a
+// cert from this set once its question bank is confirmed fully
+// verified and ready for Google to index.
+const NOT_YET_INDEXABLE_CERTS = new Set<string>(["ab-900"]);
 
 function getSampleQuestions(certId: string): SampleQuestion[] {
   const ids = SAMPLE_QUESTION_IDS[certId];
@@ -85,6 +90,15 @@ export async function generateMetadata({
     title: `${cert.title} (${cert.code}) Prüfungsvorbereitung`,
     description: `${cert.description} Mit Labs, Übungsfragen und KI Coach bei CertCoach auf ${cert.title} vorbereiten.`,
     alternates: { canonical: `https://www.certcoach.de/certifications/${company.slug}/${cert.id}` },
+    // Temporary, per-cert override (owner's explicit instruction): only
+    // az-900's questions are confirmed fully verified right now, so
+    // only az-900 is allowed to be indexed. ab-900's question set isn't
+    // confirmed ready yet (being tested together before this is
+    // lifted) - the Practice feature itself stays fully functional for
+    // any user who navigates there directly, this only tells Google
+    // not to index the page yet. Not a general noindex list — every
+    // other cert's page keeps its normal indexable state.
+    ...(NOT_YET_INDEXABLE_CERTS.has(certId) ? { robots: { index: false } } : {}),
   };
 }
 
