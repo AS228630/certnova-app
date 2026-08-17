@@ -1256,7 +1256,7 @@ const de = {
     unlockDesc: "Schalte alle Module frei und bestehe die {cert}-Prüfung.",
     opening: "Premium wird geöffnet...",
     closeAriaLabel: "Dialog schließen",
-    includedInPremium: "Ist in Premium (€19/Monat) enthalten.",
+    includedInPremium: "Ist in Premium (€14,99/Monat) enthalten.",
     activating: "Premium wird aktiviert...",
     labsTitle: "Labs freischalten",
     labsDesc: "Praxisnahe Übungen in einer echten Cloud-Umgebung.",

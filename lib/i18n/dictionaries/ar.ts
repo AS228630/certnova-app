@@ -1255,7 +1255,7 @@ const ar: Dictionary = {
     unlockDesc: "افتح جميع الوحدات واجتز امتحان {cert}.",
     opening: "جارٍ فتح Premium...",
     closeAriaLabel: "إغلاق النافذة",
-    includedInPremium: "مشمول Premium (١٩ يورو/شهر).",
+    includedInPremium: "مشمول Premium (١٤.٩٩ يورو/شهر).",
     activating: "جارٍ تفعيل Premium...",
     labsTitle: "فتح Labs",
     labsDesc: "تمارين عملية في بيئة سحابية حقيقية.",

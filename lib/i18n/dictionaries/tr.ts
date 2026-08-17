@@ -1255,7 +1255,7 @@ const tr: Dictionary = {
     unlockDesc: "Tüm modüllerin kilidini aç ve {cert} sınavını geç.",
     opening: "Premium açılıyor...",
     closeAriaLabel: "Pencereyi kapat",
-    includedInPremium: "Premium'a dahildir (19 €/ay).",
+    includedInPremium: "Premium'a dahildir (14,99 €/ay).",
     activating: "Premium etkinleştiriliyor...",
     labsTitle: "Labs'ı aç",
     labsDesc: "Gerçek bir bulut ortamında uygulamalı alıştırmalar.",

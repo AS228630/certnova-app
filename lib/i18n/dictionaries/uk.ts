@@ -1255,7 +1255,7 @@ const uk: Dictionary = {
     unlockDesc: "Відкрийте всі модулі та складіть іспит {cert}.",
     opening: "Відкриваємо Premium...",
     closeAriaLabel: "Закрити вікно",
-    includedInPremium: "Входить у Premium (19 €/міс).",
+    includedInPremium: "Входить у Premium (14,99 €/міс).",
     activating: "Активація Premium...",
     labsTitle: "Розблокувати Labs",
     labsDesc: "Практичні вправи в реальному хмарному середовищі.",

@@ -1255,7 +1255,7 @@ const en: Dictionary = {
     unlockDesc: "Unlock all modules and pass the {cert} exam.",
     opening: "Opening Premium...",
     closeAriaLabel: "Close dialog",
-    includedInPremium: "Included in Premium (€19/month).",
+    includedInPremium: "Included in Premium (€14.99/month).",
     activating: "Activating Premium...",
     labsTitle: "Unlock Labs",
     labsDesc: "Hands-on exercises in a real cloud environment.",

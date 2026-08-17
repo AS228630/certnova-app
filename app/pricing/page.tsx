@@ -266,7 +266,7 @@ export default function PricingPage() {
           ))}
         </section>
 
-        {/* Pricing panel — Monthly / Yearly / Add-ons. Shared component
+        {/* Pricing panel — Monthly / Yearly. Shared component
             (components/pricing/PricingPanel.tsx) also used on /upgrade,
             so there is exactly one pricing UI on the whole site instead
             of two different-looking ones. */}

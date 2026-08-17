@@ -1255,7 +1255,7 @@ const es: Dictionary = {
     unlockDesc: "Desbloquea todos los módulos y aprueba el examen {cert}.",
     opening: "Abriendo Premium...",
     closeAriaLabel: "Cerrar diálogo",
-    includedInPremium: "Incluido en Premium (€19/mes).",
+    includedInPremium: "Incluido en Premium (€14,99/mes).",
     activating: "Activando Premium...",
     labsTitle: "Desbloquear Labs",
     labsDesc: "Ejercicios prácticos en un entorno cloud real.",

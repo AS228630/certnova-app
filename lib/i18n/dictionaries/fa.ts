@@ -1255,7 +1255,7 @@ const fa: Dictionary = {
     unlockDesc: "همه‌ی ماژول‌ها رو باز کن و امتحان {cert} رو قبول شو.",
     opening: "در حال باز کردن Premium...",
     closeAriaLabel: "بستن پنجره",
-    includedInPremium: "در Premium (۱۹ یورو/ماه) گنجانده شده.",
+    includedInPremium: "در Premium (۱۴.۹۹ یورو/ماه) گنجانده شده.",
     activating: "در حال فعال‌سازی Premium...",
     labsTitle: "باز کردن Labs",
     labsDesc: "تمرین‌های عملی در یک محیط واقعی Cloud.",

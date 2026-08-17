@@ -4,9 +4,9 @@ import Link from "next/link";
 import { ArrowUpRight, Wallet } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
 
-// Every account on the platform is, honestly, on the Free plan — there
-// is no real payment processor behind "Upgrade to Pro" yet (see the
-// Upgrade page), so showing a fabricated "€19/month" charge or a fake
+// Every account on the platform is, honestly, on the Free plan unless a
+// real subscriptions row says otherwise (see subscriptionStore.ts) —
+// so showing a fabricated "€14.99/month" charge or a fake
 // "VISA •••• 4242" on file here would be actively misleading. This
 // shows the one plan that's actually active, with a real link to start
 // upgrading, rather than a paid-plan mockup nobody has really bought.
