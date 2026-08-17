@@ -110,6 +110,31 @@ export default async function CertJourneyPage({
           __html: JSON.stringify([
             {
               "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              // Real gap found during a full-site SEO audit: every other
+              // hierarchical page here (Course/FAQPage/Quiz) already had
+              // structured data, but nothing told Google the real
+              // Home -> Company -> Certification hierarchy this page
+              // sits in - which is exactly the kind of page that
+              // benefits from a breadcrumb trail in search results.
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "CertCoach", item: "https://www.certcoach.de" },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: company.name,
+                  item: `https://www.certcoach.de/certifications/${company.slug}`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 3,
+                  name: `${cert.title} (${cert.code})`,
+                  item: `https://www.certcoach.de/certifications/${company.slug}/${certId}`,
+                },
+              ],
+            },
+            {
+              "@context": "https://schema.org",
               "@type": "Course",
               name: `${cert.title} (${cert.code})`,
               description: cert.description,
