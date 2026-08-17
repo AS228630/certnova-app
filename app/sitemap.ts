@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/fr",
     "/ru",
     "/tr",
+    "/certifications",
     "/zertifizierungen",
     "/learning-paths",
     "/resources",
@@ -33,7 +34,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/business",
     "/faq",
     "/blog",
+    "/news",
+    "/reviews",
     "/erfolgsgeschichten",
+    "/interview",
+    "/community",
+    "/help",
     "/ueber-uns",
     "/karriere",
     "/partner",
@@ -44,12 +50,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/impressum",
     "/datenschutz",
     "/agb",
-    "/cookie-einstellungen",
     "/widerrufsrecht",
-    "/kuendigen",
     "/barrierefreiheit",
     "/login",
     "/register",
+    // Deliberately NOT included: /kuendigen and /cookie-einstellungen —
+    // both correctly noindex (real account-action pages, not
+    // discoverable content, see their layout.tsx) — a sitemap should
+    // never list a page that itself says not to index it.
   ].map((path) => ({
     url: `${base}${path}`,
     lastModified: now,
