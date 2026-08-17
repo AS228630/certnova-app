@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import RegisterTriggerLink from "@/components/registration/RegisterTriggerLink";
 import { Briefcase, ArrowRight, Lock } from "lucide-react";
 import DashboardShell from "@/components/DashboardShell";
 import InterviewJobGrid from "@/components/interview/InterviewJobGrid";
@@ -137,13 +137,10 @@ function GuestInterviewBody() {
               Registriere dich kostenlos, um echte Interview-Themen zu üben und deinen Fortschritt zu speichern.
             </p>
           </div>
-          <Link
-            href="/register"
-            className="flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white hover:bg-primary-dark"
-          >
+          <RegisterTriggerLink className="flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-white hover:bg-primary-dark">
             Kostenlos registrieren
             <ArrowRight size={14} />
-          </Link>
+          </RegisterTriggerLink>
         </section>
       </main>
       <Footer />

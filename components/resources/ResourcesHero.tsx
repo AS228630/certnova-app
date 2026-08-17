@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowRight, PlayCircle, Users } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
+import RegisterTriggerLink from "@/components/registration/RegisterTriggerLink";
 
 export default function ResourcesHero() {
   const { t } = useLocale();
@@ -21,13 +21,10 @@ export default function ResourcesHero() {
           <p className="mt-4 max-w-md text-sm leading-relaxed text-text-muted">{t("resHome.heroDesc")}</p>
 
           <div className="mt-7 flex flex-wrap gap-3">
-            <Link
-              href="/register"
-              className="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-bold text-white hover:bg-primary-dark"
-            >
+            <RegisterTriggerLink className="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-bold text-white hover:bg-primary-dark">
               {t("resHome.ctaStart")}
               <ArrowRight size={16} />
-            </Link>
+            </RegisterTriggerLink>
             <a
               href="#overview"
               className="flex items-center gap-2 rounded-lg border border-border-soft px-6 py-3 text-sm font-bold text-text hover:bg-panel-alt"

@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { Gift, ArrowRight } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
+import RegisterTriggerLink from "@/components/registration/RegisterTriggerLink";
 
 const stats = [
   { value: "128.420+", labelKey: "certList.ctaActiveLearners" },
@@ -28,12 +28,9 @@ export default function CertificationsCTA() {
         </div>
       </div>
 
-      <Link
-        href="/register"
-        className="flex flex-none items-center justify-center gap-1.5 rounded-lg bg-white px-6 py-3 text-sm font-bold text-primary-dark hover:bg-white/90"
-      >
+      <RegisterTriggerLink className="flex flex-none items-center justify-center gap-1.5 rounded-lg bg-white px-6 py-3 text-sm font-bold text-primary-dark hover:bg-white/90">
         {t("certList.ctaButton")} <ArrowRight size={15} />
-      </Link>
+      </RegisterTriggerLink>
 
       <div className="grid grid-cols-2 gap-4 border-t border-white/15 pt-4 text-center sm:grid-cols-5 md:border-t-0 md:border-l md:pl-6 md:pt-0">
         {stats.map((s) => (

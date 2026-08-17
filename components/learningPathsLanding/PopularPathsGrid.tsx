@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowRight, Clock, Wallet } from "lucide-react";
 import { careerPaths } from "@/lib/careerPathsData";
 import { renderCareerPathIcon } from "@/lib/careerPathIcons";
 import { useLocale } from "@/components/LocaleProvider";
+import RegisterTriggerLink from "@/components/registration/RegisterTriggerLink";
 
 const levelClass: Record<string, string> = {
   Beginner: "bg-success-light text-success",
@@ -31,17 +31,16 @@ export default function PopularPathsGrid() {
     <section id="popular-paths" className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
       <div className="mb-6 flex items-center justify-between">
         <h2 className="text-xl font-extrabold text-text sm:text-2xl">{t("lpLanding.popularPathsTitle")}</h2>
-        <Link href="/register" className="hidden text-sm font-semibold text-primary hover:underline sm:inline">
+        <RegisterTriggerLink className="hidden text-sm font-semibold text-primary hover:underline sm:inline">
           {t("lpLanding.viewAllPaths")} →
-        </Link>
+        </RegisterTriggerLink>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {shown.map((path) => (
-          <Link
+          <RegisterTriggerLink
             key={path.slug}
-            href="/register"
-            className="flex flex-col rounded-xl border border-border-soft bg-panel p-4 transition-colors hover:border-primary/40"
+            className="flex flex-col rounded-xl border border-border-soft bg-panel p-4 text-left transition-colors hover:border-primary/40"
           >
             <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-panel-alt text-primary">
               {renderCareerPathIcon(path.icon, 18)}
@@ -62,7 +61,7 @@ export default function PopularPathsGrid() {
               {t("lpLanding.viewDetails")}
               <ArrowRight size={12} />
             </span>
-          </Link>
+          </RegisterTriggerLink>
         ))}
       </div>
     </section>

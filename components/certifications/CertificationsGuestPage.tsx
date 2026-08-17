@@ -6,6 +6,7 @@ import { Search, Star, Users, Award, Briefcase, Percent, TrendingUp, Rocket, Arr
 import { companies, type Certification, type Company } from "@/lib/companiesData";
 import { getCompanyIcon } from "@/lib/vendorIcons";
 import { useLocale } from "@/components/LocaleProvider";
+import RegisterTriggerLink from "@/components/registration/RegisterTriggerLink";
 
 type FlatCert = { company: Company; cert: Certification };
 
@@ -127,7 +128,7 @@ export default function CertificationsGuestPage() {
           <h2 className="text-xl font-extrabold text-text sm:text-2xl">
             {q.length > 0 ? t("certGuest.searchResultsTitle") : t("certGuest.featuredTitle")}
           </h2>
-          <Link href="/register" className="text-sm font-semibold text-primary hover:underline">
+          <Link href="/certifications" className="text-sm font-semibold text-primary hover:underline">
             {t("certGuest.viewAll")} →
           </Link>
         </div>
@@ -141,7 +142,7 @@ export default function CertificationsGuestPage() {
             {filtered.map(({ company, cert }) => (
               <Link
                 key={cert.id}
-                href="/register"
+                href={`/certifications/${company.slug}/${cert.id}`}
                 className="flex flex-col rounded-xl border border-border-soft bg-panel p-4 transition-colors hover:border-primary/40"
               >
                 <div className="mb-3 flex items-center justify-between">
@@ -196,13 +197,10 @@ export default function CertificationsGuestPage() {
             <h2 className="text-xl font-extrabold text-white sm:text-2xl">{t("certGuest.ctaTitle")}</h2>
             <p className="mt-2 text-sm text-white/85">{t("certGuest.ctaDesc")}</p>
           </div>
-          <Link
-            href="/register"
-            className="flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-primary hover:bg-white/90"
-          >
+          <RegisterTriggerLink className="flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-primary hover:bg-white/90">
             {t("certGuest.ctaBtn")}
             <ArrowRight size={16} />
-          </Link>
+          </RegisterTriggerLink>
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-1">
             {["ctaPoint1", "ctaPoint2", "ctaPoint3"].map((k) => (
               <span key={k} className="flex items-center gap-1.5 text-xs font-medium text-white/85">

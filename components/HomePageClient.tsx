@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import RegisterTriggerLink from "@/components/registration/RegisterTriggerLink";
 import {
   ArrowRight,
   Play,
@@ -340,12 +341,9 @@ export default function HomePageClient() {
               placeholder={t("landing.emailPlaceholder")}
               className="w-full rounded-lg border border-white/20 bg-white/10 px-4 py-2.5 text-sm text-white placeholder:text-white/60 focus:outline-none sm:w-64"
             />
-            <Link
-              href="/register"
-              className="flex items-center justify-center gap-1 rounded-lg bg-white px-5 py-2.5 text-sm font-bold text-primary hover:bg-white/90"
-            >
+            <RegisterTriggerLink className="flex items-center justify-center gap-1 rounded-lg bg-white px-5 py-2.5 text-sm font-bold text-primary hover:bg-white/90">
               {t("landing.ctaFree")}
-            </Link>
+            </RegisterTriggerLink>
           </div>
         </div>
         <div className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-text-faint">

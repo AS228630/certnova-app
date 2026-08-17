@@ -27,6 +27,8 @@ import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
 import { useGuestOnlyRedirect } from "@/lib/useGuestOnlyRedirect";
 import PricingPanel from "@/components/pricing/PricingPanel";
+import FreeRegistrationGate from "@/components/registration/FreeRegistrationGate";
+import RegisterTriggerLink from "@/components/registration/RegisterTriggerLink";
 
 // Single source of truth for what's actually charged (lib/stripeConfig.ts,
 // the same file app/api/create-checkout-session/route.ts reads from) —
@@ -80,6 +82,7 @@ const faqs = [
 
 export default function PricingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [showRegistrationGate, setShowRegistrationGate] = useState(false);
   const { checking } = useGuestOnlyRedirect();
 
   if (checking) return null;
@@ -267,7 +270,10 @@ export default function PricingPage() {
             (components/pricing/PricingPanel.tsx) also used on /upgrade,
             so there is exactly one pricing UI on the whole site instead
             of two different-looking ones. */}
-        <PricingPanel monthly={{ href: "/register?plan=monthly" }} yearly={{ href: "/register?plan=yearly" }} />
+        <PricingPanel
+          monthly={{ onClick: () => setShowRegistrationGate(true) }}
+          yearly={{ onClick: () => setShowRegistrationGate(true) }}
+        />
 
         {/* Payment methods / security — matches exactly what
             create-checkout-session actually enables
@@ -321,13 +327,10 @@ export default function PricingPage() {
               </div>
             </div>
           </div>
-          <Link
-            href="/register?plan=yearly"
-            className="flex shrink-0 items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-dark"
-          >
+          <RegisterTriggerLink className="flex shrink-0 items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-dark">
             Jetzt Premium werden
             <ArrowRight size={16} />
-          </Link>
+          </RegisterTriggerLink>
         </section>
 
         {/* FAQ */}
@@ -378,12 +381,9 @@ export default function PricingPage() {
               </div>
             </div>
           </div>
-          <Link
-            href="/register?discount=student"
-            className="shrink-0 rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-white hover:bg-primary-dark"
-          >
+          <RegisterTriggerLink className="shrink-0 rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-white hover:bg-primary-dark">
             Rabatt sichern
-          </Link>
+          </RegisterTriggerLink>
         </section>
 
         {/* CertCoach AI */}
@@ -447,13 +447,10 @@ export default function PricingPage() {
               placeholder="Deine E-Mail-Adresse"
               className="w-full rounded-lg border border-white/20 bg-white/10 px-3 py-2.5 text-sm text-white placeholder:text-white/60 focus:outline-none sm:w-64"
             />
-            <Link
-              href="/register"
-              className="flex items-center justify-center gap-1.5 whitespace-nowrap rounded-lg bg-white px-4 py-2.5 text-sm font-bold text-primary hover:bg-white/90"
-            >
+            <RegisterTriggerLink className="flex items-center justify-center gap-1.5 whitespace-nowrap rounded-lg bg-white px-4 py-2.5 text-sm font-bold text-primary hover:bg-white/90">
               Kostenlos starten
               <ArrowRight size={15} />
-            </Link>
+            </RegisterTriggerLink>
           </div>
           <div className="flex flex-wrap gap-4 text-[11px] text-white/80 sm:hidden">
             <span>Kostenlos starten</span>
@@ -464,6 +461,9 @@ export default function PricingPage() {
 
         <Footer />
       </main>
+      {showRegistrationGate && (
+        <FreeRegistrationGate returnTo="/pricing" onClose={() => setShowRegistrationGate(false)} />
+      )}
     </div>
   );
 }

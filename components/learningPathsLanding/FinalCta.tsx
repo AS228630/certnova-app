@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { Rocket, ArrowRight, Check } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
+import RegisterTriggerLink from "@/components/registration/RegisterTriggerLink";
 
 export default function FinalCta() {
   const { t } = useLocale();
@@ -14,13 +14,10 @@ export default function FinalCta() {
           <h2 className="text-xl font-extrabold text-white sm:text-2xl">{t("lpLanding.finalCtaTitle")}</h2>
           <p className="mt-2 text-sm text-white/85">{t("lpLanding.finalCtaDesc")}</p>
         </div>
-        <Link
-          href="/register"
-          className="flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-primary hover:bg-white/90"
-        >
+        <RegisterTriggerLink className="flex items-center gap-2 rounded-lg bg-white px-6 py-3 text-sm font-bold text-primary hover:bg-white/90">
           {t("lpLanding.ctaStartFree")}
           <ArrowRight size={16} />
-        </Link>
+        </RegisterTriggerLink>
         <div className="flex flex-wrap justify-center gap-x-6 gap-y-1">
           {["finalCtaPoint1", "finalCtaPoint2", "finalCtaPoint3"].map((k) => (
             <span key={k} className="flex items-center gap-1.5 text-xs font-medium text-white/85">

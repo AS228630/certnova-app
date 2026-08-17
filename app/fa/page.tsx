@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import RegisterTriggerLink from "@/components/registration/RegisterTriggerLink";
 import { ArrowRight, BookOpen, ShieldCheck, Sparkles, Route } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -47,13 +48,10 @@ export default function FarsiLandingPage() {
           تا CompTIA و Cisco.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href="/register"
-            className="flex items-center gap-2 rounded-full bg-violet-600 px-6 py-3 text-sm font-semibold hover:bg-violet-500"
-          >
+          <RegisterTriggerLink className="flex items-center gap-2 rounded-full bg-violet-600 px-6 py-3 text-sm font-semibold hover:bg-violet-500">
             رایگان شروع کن
             <ArrowRight size={16} className="rotate-180" />
-          </Link>
+          </RegisterTriggerLink>
           <Link
             href="/zertifizierungen"
             className="rounded-full border border-white/15 px-6 py-3 text-sm font-semibold hover:bg-white/5"

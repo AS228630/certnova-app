@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowRight, PlayCircle, Check } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
+import RegisterTriggerLink from "@/components/registration/RegisterTriggerLink";
 
 const highlights = ["highlightPractical", "highlightAiCoach", "highlightCertPrep", "highlightExpertMade"];
 
@@ -23,13 +23,10 @@ export default function LearningPathsHero() {
           <p className="mt-4 max-w-lg text-base text-text-muted">{t("lpLanding.heroDesc")}</p>
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/register"
-              className="flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-dark"
-            >
+            <RegisterTriggerLink className="flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-dark">
               {t("lpLanding.ctaStartFree")}
               <ArrowRight size={16} />
-            </Link>
+            </RegisterTriggerLink>
             <a
               href="#popular-paths"
               className="flex items-center justify-center gap-2 rounded-lg border border-border-soft px-6 py-3 text-sm font-bold text-text hover:bg-panel-alt"
