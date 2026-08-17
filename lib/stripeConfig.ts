@@ -6,5 +6,5 @@ export const STRIPE_PUBLISHABLE_KEY =
 
 export const PLAN_PRICES = {
   monthly: { amount: 1499, label: "Monatlich", interval: "month" as const },
-  yearly: { amount: 15900, label: "Jährlich", interval: "year" as const },
+  yearly: { amount: 12544, label: "Jährlich", interval: "year" as const },
 };
