@@ -1,7 +1,35 @@
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const disallow = ["/dashboard", "/profile", "/settings", "/analytics", "/api/", "/ataullah-senmas", "/admin-senmas"];
+  const disallow = [
+    "/dashboard",
+    "/profile",
+    "/settings",
+    "/analytics",
+    "/api/",
+    "/ataullah-senmas",
+    "/admin-senmas",
+    // Added during a full-site audit: these all correctly already had
+    // their own per-page `robots: { index: false }` (a crawler that
+    // fetches one of them won't index it either way), but robots.txt's
+    // disallow is a separate, complementary signal — it tells a
+    // well-behaved crawler not to even request the page at all, which
+    // matters in particular for /portal (real financial/commission
+    // data) rather than relying solely on the meta tag being read.
+    "/portal",
+    "/coach-live",
+    "/ai-coach",
+    "/license",
+    "/kuendigen",
+    "/cookie-einstellungen",
+    // Dynamic private feature routes under every certification -
+    // already correctly noindex via their own metadata, same reasoning
+    // as above (belt-and-suspenders: don't even let a crawler fetch
+    // these).
+    "/certifications/*/*/practice",
+    "/certifications/*/*/labs",
+    "/certifications/*/*/mock-exam",
+  ];
   return {
     rules: [
       {
