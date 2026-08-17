@@ -16,7 +16,7 @@ export default function HelpPage() {
   const [toast, setToast] = useState<string | null>(null);
 
   return (
-    <DashboardShell>
+    <DashboardShell requireAuth={false}>
       <main className="mx-auto max-w-6xl space-y-10 p-3 sm:p-4 md:p-8">
         <HelpHero />
         <QuickHelpGrid />

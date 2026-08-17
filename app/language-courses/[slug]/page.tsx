@@ -85,7 +85,7 @@ function CourseDetailBody({ slug }: { slug: string }) {
 export default function LanguageCourseDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params);
   return (
-    <DashboardShell>
+    <DashboardShell requireAuth={false}>
       <CourseDetailBody slug={slug} />
     </DashboardShell>
   );
