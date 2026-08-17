@@ -126,6 +126,8 @@ const fa: Dictionary = {
   community: {
     title: "انجمن",
     subtitle: "یاد بگیر، دانشت رو به اشتراک بذار و همراه با هزاران زبان‌آموز در سراسر دنیا رشد کن.",
+    moreOptions: "گزینه‌های بیشتر",
+    savePost: "ذخیره‌ی پست",
     createPostCta: "ساخت پست",
     tabForYou: "برای تو",
     tabDiscussions: "بحث‌ها",

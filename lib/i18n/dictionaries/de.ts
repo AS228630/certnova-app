@@ -127,6 +127,8 @@ const de = {
   community: {
     title: "Community",
     subtitle: "Lerne, teile Wissen und wachse gemeinsam mit tausenden Lernenden weltweit.",
+    moreOptions: "Weitere Optionen",
+    savePost: "Beitrag speichern",
     createPostCta: "Beitrag erstellen",
     tabForYou: "Für dich",
     tabDiscussions: "Diskussionen",

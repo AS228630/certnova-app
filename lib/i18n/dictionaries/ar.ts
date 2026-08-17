@@ -126,6 +126,8 @@ const ar: Dictionary = {
   community: {
     title: "المجتمع",
     subtitle: "تعلّم وشارك المعرفة وانمُ مع آلاف المتعلمين حول العالم.",
+    moreOptions: "خيارات أخرى",
+    savePost: "حفظ المنشور",
     createPostCta: "إنشاء منشور",
     tabForYou: "لك",
     tabDiscussions: "مناقشات",

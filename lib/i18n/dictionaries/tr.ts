@@ -126,6 +126,8 @@ const tr: Dictionary = {
   community: {
     title: "Topluluk",
     subtitle: "Öğren, bilgini paylaş ve dünya çapında binlerce öğrenciyle birlikte gelişin.",
+    moreOptions: "Diğer seçenekler",
+    savePost: "Gönderiyi kaydet",
     createPostCta: "Gönderi oluştur",
     tabForYou: "Senin için",
     tabDiscussions: "Tartışmalar",

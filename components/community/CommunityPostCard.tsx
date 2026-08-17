@@ -82,7 +82,7 @@ export default function CommunityPostCard({ post }: { post: CommunityPost }) {
             </p>
           </div>
         </div>
-        <button className="text-text-faint hover:text-text">
+        <button className="text-text-faint hover:text-text" aria-label={t("community.moreOptions")}>
           <MoreHorizontal size={18} />
         </button>
       </div>
@@ -128,7 +128,7 @@ export default function CommunityPostCard({ post }: { post: CommunityPost }) {
           <MessageCircle size={16} />
           {post.commentCount}
         </button>
-        <button className="ml-auto hover:text-text">
+        <button className="ml-auto hover:text-text" aria-label={t("community.savePost")}>
           <Bookmark size={16} />
         </button>
       </div>

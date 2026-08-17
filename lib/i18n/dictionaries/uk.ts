@@ -126,6 +126,8 @@ const uk: Dictionary = {
   community: {
     title: "Спільнота",
     subtitle: "Навчайся, ділись знаннями та розвивайся разом із тисячами учнів по всьому світу.",
+    moreOptions: "Більше опцій",
+    savePost: "Зберегти пост",
     createPostCta: "Створити допис",
     tabForYou: "Для тебе",
     tabDiscussions: "Обговорення",

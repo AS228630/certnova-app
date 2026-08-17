@@ -126,6 +126,8 @@ const en: Dictionary = {
   community: {
     title: "Community",
     subtitle: "Learn, share knowledge, and grow together with thousands of learners worldwide.",
+    moreOptions: "More options",
+    savePost: "Save post",
     createPostCta: "Create post",
     tabForYou: "For you",
     tabDiscussions: "Discussions",

@@ -126,6 +126,8 @@ const ru: Dictionary = {
   community: {
     title: "Сообщество",
     subtitle: "Учись, делись знаниями и расти вместе с тысячами учащихся по всему миру.",
+    moreOptions: "Больше опций",
+    savePost: "Сохранить пост",
     createPostCta: "Создать пост",
     tabForYou: "Для тебя",
     tabDiscussions: "Обсуждения",
