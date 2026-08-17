@@ -80,6 +80,7 @@ export default function SectionScorecard({
   marked,
   elapsedSeconds,
   hasNextSection,
+  isPro,
   onBackToPath,
   onNextSection,
   onRetry,
@@ -97,6 +98,12 @@ export default function SectionScorecard({
   marked: Set<string>;
   elapsedSeconds: number;
   hasNextSection: boolean;
+  /** Real, server-verified Premium status (from subscriptionStore, same
+   * source PracticeClient's own gate already uses) — a non-Pro user
+   * must never see real scores/stars for a section beyond what they're
+   * actually entitled to here, independent of how `questions` itself
+   * was bounded upstream (defense in depth, not the only gate). */
+  isPro: boolean;
   onBackToPath: () => void;
   onNextSection: () => void;
   /** "Wiederholen" — same section, questions kept in their existing
@@ -121,6 +128,12 @@ export default function SectionScorecard({
 
   const total = questions.length;
   const sectionCount = getSectionCount(total);
+  // Real bug fix: a non-Pro user must only ever see Section 1 in this
+  // list, never real scores/stars for sections they don't actually
+  // have access to — independent of whatever `questions`/`total`
+  // happen to contain here, this is the real, final gate for what
+  // renders below.
+  const visibleSectionCount = isPro ? sectionCount : Math.min(sectionCount, 1);
   const [start, end] = getSectionRange(total, sectionIndex);
   const sectionQuestions = questions.slice(start, end);
 
@@ -296,7 +309,7 @@ export default function SectionScorecard({
             <p className="font-bold text-text">{t("practice.yourProgress")}</p>
             <p className="mb-4 text-xs text-text-faint">{t("practice.earnStars")}</p>
             <div className="space-y-2">
-              {Array.from({ length: sectionCount }).map((_, s) => {
+              {Array.from({ length: visibleSectionCount }).map((_, s) => {
                 const [sStart, sEnd] = getSectionRange(total, s);
                 const sQuestions = questions.slice(sStart, sEnd);
                 const sCorrect = sQuestions.filter((q) => checked.has(q.id) && isCorrectAnswer(q, answers[q.id])).length;

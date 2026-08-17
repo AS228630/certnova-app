@@ -731,6 +731,7 @@ export default function PracticeClient({
           topics={topics}
           answers={answers}
           checked={checked}
+          isPro={isPro}
             skipped={skipped}
             marked={marked}
             elapsedSeconds={EXAM_TOTAL_SECONDS - remainingSeconds}
