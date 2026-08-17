@@ -207,7 +207,7 @@ export default function DashboardPage() {
   const { t } = useLocale();
   const [toast, setToast] = useState<string | null>(null);
   return (
-    <DashboardShell>
+    <DashboardShell requireAuth={false}>
       <main className="grid grid-cols-1 gap-5 p-3 sm:gap-6 sm:p-4 md:p-8 lg:grid-cols-3">
         <div className="space-y-5 sm:space-y-6 lg:col-span-2">
           <Greeting />

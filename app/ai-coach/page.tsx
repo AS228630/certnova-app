@@ -282,7 +282,7 @@ function AiCoachBody() {
 
 export default function AiCoachPage() {
   return (
-    <DashboardShell>
+    <DashboardShell requireAuth={false}>
       <AiCoachBody />
     </DashboardShell>
   );
