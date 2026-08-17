@@ -22,6 +22,7 @@ export default function robots(): MetadataRoute.Robots {
     "/license",
     "/kuendigen",
     "/cookie-einstellungen",
+    "/update-password",
     // Dynamic private feature routes under every certification -
     // already correctly noindex via their own metadata, same reasoning
     // as above (belt-and-suspenders: don't even let a crawler fetch

@@ -404,7 +404,14 @@ export default function AuthCard({ initialMode }: { initialMode: Mode }) {
                     onClick={async () => {
                       if (!email) return setError("Gib zuerst deine E-Mail-Adresse ein.");
                       setError(null);
-                      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email);
+                      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
+                        // Real gap fixed: without this, Supabase's
+                        // recovery link had nowhere real to send the
+                        // person on this site - /update-password is
+                        // the new page that receives it and lets them
+                        // actually set a new password.
+                        redirectTo: `${window.location.origin}/update-password`,
+                      });
                       if (resetError) setError(translateAuthError(resetError.message));
                       else setInfo("Wir haben dir einen Link zum Zurücksetzen geschickt.");
                     }}
