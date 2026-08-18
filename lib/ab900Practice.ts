@@ -34,8 +34,8 @@ export const AB900_TOPICS: PracticeTopic[] = [
   { id: "copilot-grundlagen", title: "Microsoft 365 Copilot Grundlagen", totalQuestions: 31 },
   { id: "copilot-agenten", title: "Copilot-Agenten verwalten", totalQuestions: 10 },
   { id: "sicherheit-identitaet", title: "Sicherheit und Identität", totalQuestions: 20 },
-  { id: "purview-compliance", title: "Purview und Compliance", totalQuestions: 27 },
-  { id: "verwaltung-governance", title: "Verwaltung und Governance", totalQuestions: 11 },
+  { id: "purview-compliance", title: "Purview und Compliance", totalQuestions: 26 },
+  { id: "verwaltung-governance", title: "Verwaltung und Governance", totalQuestions: 12 },
   { id: "verantwortungsvolle-ki", title: "Verantwortungsvolle KI", totalQuestions: 2 },
 ];
 
@@ -113,29 +113,37 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-ab900-5",
     topicId: "verantwortungsvolle-ki",
-    prompt: "Das Microsoft-Prinzip für verantwortungsbewusste KI in Bezug auf ___ erfordert die Überwachung von KI-Systemen, um sicherzustellen, dass Menschen die Kontrolle behalten.",
+    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Das Microsoft-Prinzip für verantwortungsbewusste KI in Bezug auf ___ erfordert die Überwachung von KI-Systemen, um sicherzustellen, dass Menschen die Kontrolle behalten.",
+      choices: ["Rechenschaftspflicht", "Inklusivität", "Datenschutz und Sicherheit", "Zuverlässigkeit & Sicherheit", "Transparenz"],
+    },
     options: [
-      { id: "A", text: "Rechenschaftspflicht" },
-      { id: "B", text: "Inklusivität" },
-      { id: "C", text: "Datenschutz und Sicherheit" },
-      { id: "D", text: "Zuverlässigkeit & Sicherheit" },
-      { id: "E", text: "Transparenz" },
+      { id: "A", text: "Das Microsoft-Prinzip für verantwortungsbewusste KI in Bezug auf Rechenschaftspflicht erfordert die Überwachung von KI-Systemen, um sicherzustellen, dass Menschen die Kontrolle behalten." },
+      { id: "B", text: "Das Microsoft-Prinzip für verantwortungsbewusste KI in Bezug auf Inklusivität erfordert die Überwachung von KI-Systemen, um sicherzustellen, dass Menschen die Kontrolle behalten." },
+      { id: "C", text: "Das Microsoft-Prinzip für verantwortungsbewusste KI in Bezug auf Datenschutz und Sicherheit erfordert die Überwachung von KI-Systemen, um sicherzustellen, dass Menschen die Kontrolle behalten." },
+      { id: "D", text: "Das Microsoft-Prinzip für verantwortungsbewusste KI in Bezug auf Zuverlässigkeit & Sicherheit erfordert die Überwachung von KI-Systemen, um sicherzustellen, dass Menschen die Kontrolle behalten." },
+      { id: "E", text: "Das Microsoft-Prinzip für verantwortungsbewusste KI in Bezug auf Transparenz erfordert die Überwachung von KI-Systemen, um sicherzustellen, dass Menschen die Kontrolle behalten." },
     ],
     correct: "A",
-    explanation: "",
+    explanation: "Microsoft integriert KI in seine Abläufe mit starkem Fokus auf Ethik und Verantwortung. Die sechs Leitprinzipien dieses Ansatzes sind: Fairness (Microsoft strebt an, Voreingenommenheit zu beseitigen und alle Nutzer gleich zu behandeln), Zuverlässigkeit & Sicherheit (strenge Tests stellen sicher, dass Microsofts KI konsistent und sicher funktioniert), Datenschutz & Sicherheit (Nutzerdaten werden sowohl während des Trainings als auch nach der Bereitstellung geschützt), Inklusivität (KI-Tools werden so gestaltet, dass sie für alle zugänglich und nützlich sind, unabhängig von körperlichen Fähigkeiten, Geschlecht oder Herkunft), Transparenz (Microsoft informiert Nutzer offen darüber, wie seine KI-Systeme funktionieren und wofür sie gedacht sind) und Rechenschaftspflicht (ethische und rechtliche Standards stehen im Vordergrund; Entwickler und Designer von KI-Systemen werden für ihre Ergebnisse zur Verantwortung gezogen). Die Rechenschaftspflicht ist dabei das Prinzip, das konkret die menschliche Überwachung (Human Oversight) von KI-Systemen verlangt, damit Menschen jederzeit die Kontrolle behalten.",
+    explanationImageUrl: "/exam-images/ab900-q5-explain.png",
   },
   {
     id: "real-ab900-6",
     topicId: "copilot-grundlagen",
-    prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Sie müssen die Identity Secure Score Ihrer Organisation bewerten. Welche zwei Faktoren beeinflussen die Punktzahl? (Jede richtige Antwort stellt die vollständige Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Sie müssen die Identity Secure Score Ihrer Organisation bewerten. Welche zwei Faktoren beeinflussen die Punktzahl? (Jede richtige Antwort stellt einen Teil der Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     options: [
       { id: "A", text: "Die Berechtigungen der SharePoint-Site" },
       { id: "B", text: "Die Anzahl der globalen Administratoren" },
       { id: "C", text: "Passwörter, die niemals ablaufen" },
       { id: "D", text: "Der Standort der Benutzer" },
     ],
-    correct: "B",
-    explanation: "",
+    correct: ["B", "C"],
+    explanation: "Die Identity Secure Score wird als Prozentsatz angezeigt und dient als Indikator dafür, wie gut die eigene Konfiguration mit den Sicherheitsempfehlungen von Microsoft übereinstimmt. Jede Verbesserungsmaßnahme in der Identity Secure Score ist individuell auf die jeweilige Konfiguration zugeschnitten; Punktzahl und einzelne Empfehlungen lassen sich über die Microsoft Entra-Empfehlungen einsehen, ebenso die Entwicklung der Punktzahl über die Zeit. Der Wert hilft dabei, die eigene Identitätssicherheitslage objektiv zu messen, Verbesserungen zu planen und deren Erfolg zu überprüfen. Zu den Empfehlungen, die in die Identity Secure Score einfließen, zählen unter anderem: mehr als einen globalen Administrator festlegen, Passwörter nicht unbegrenzt gültig lassen (nicht ablaufen lassen), Multi-Faktor-Authentifizierung für administrative Rollen verlangen, veraltete Authentifizierungsverfahren blockieren, Self-Service-Passwortzurücksetzung aktivieren, alle Benutzer mit einer Anmelde- bzw. Benutzerrisikorichtlinie schützen, ruhende Konten aus sensiblen Gruppen entfernen sowie geringstmögliche administrative Rechte (Least Privilege) verwenden. Die Berechtigungen einer SharePoint-Site und der Standort der Benutzer sind dagegen keine Faktoren, die in die Identity Secure Score einfließen.",
+    resources: [
+      { label: "What is Identity Secure Score?", url: "https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-identity-secure-score" },
+    ],
   },
   {
     id: "real-ab900-7",
@@ -148,11 +156,14 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Das Microsoft Exchange Admin Center" },
     ],
     correct: "A",
-    explanation: "",
+    explanation: "Das Microsoft Defender-Portal fasst korrelierte Warnungen, betroffene Assets, Untersuchungen und Beweise aus dem gesamten Bestand einer Organisation zu einem einzigen Vorfall (Incident) zusammen und liefert so einen umfassenden Überblick über das gesamte Ausmaß eines Angriffs – etwa eines Phishing-Vorfalls, der E-Mail-Benutzer betroffen hat. Innerhalb eines Vorfalls lassen sich die Warnungen analysieren, ihre Bedeutung verstehen und die Beweise sammeln, um einen wirksamen Plan zur Behebung zu erstellen. Das Microsoft 365 Admin Center, das Microsoft Entra Admin Center und das Microsoft Exchange Admin Center dienen dagegen der allgemeinen Verwaltung von Diensten, Identitäten bzw. Postfächern und bieten keine vergleichbare, vorfallsübergreifende Sicherheitsuntersuchung.",
+    resources: [
+      { label: "Investigate incidents in the Microsoft Defender portal", url: "https://learn.microsoft.com/en-us/defender-xdr/investigate-incidents" },
+    ],
   },
   {
     id: "real-ab900-8",
-    topicId: "purview-compliance",
+    topicId: "verwaltung-governance",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Sie müssen einem Benutzer eine Lizenz zuweisen. Was sollten Sie verwenden?",
     options: [
       { id: "A", text: "Das Microsoft Purview-Portal" },
@@ -160,12 +171,20 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "C", text: "Das Microsoft Teams Admin Center" },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Lizenzen für Benutzer lassen sich im Microsoft 365 Admin Center entweder auf der Seite „Aktive Benutzer“ oder auf der Seite „Lizenzen“ zuweisen bzw. entziehen. Welche Methode geeignet ist, hängt davon ab, ob Lizenzen für bestimmte Benutzer zugewiesen/entzogen werden sollen oder ob Benutzer für ein bestimmtes Produkt zugewiesen/entzogen werden sollen. Das Microsoft Purview-Portal dient der Daten-Governance und Compliance, nicht der Lizenzverwaltung; das Microsoft Teams Admin Center verwaltet ausschließlich Teams-spezifische Einstellungen.",
+    resources: [
+      { label: "Assign or unassign licenses for users in the Microsoft 365 admin center", url: "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/assign-licenses-to-users" },
+    ],
   },
   {
     id: "real-ab900-9",
     topicId: "copilot-grundlagen",
-    prompt: "Wählen Sie die Antwort aus, die den Satz korrekt vervollständigt.",
+    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Microsoft 365 Copilot ruft Daten von ___ mithilfe von Microsoft Graph ab.",
+      choices: ["Azure OpenAI", "externen Benutzern", "Microsoft SharePoint-Dateien", "Internetsuchmaschinen"],
+    },
+    imageUrl: "/exam-images/ab900-q9.png",
     options: [
       { id: "A", text: "Microsoft 365 Copilot ruft Daten von Azure OpenAI mithilfe von Microsoft Graph ab." },
       { id: "B", text: "Microsoft 365 Copilot ruft Daten von externen Benutzern mithilfe von Microsoft Graph ab." },
@@ -173,25 +192,41 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Microsoft 365 Copilot ruft Daten von Internetsuchmaschinen mithilfe von Microsoft Graph ab." },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Beim Erstellen eines Microsoft 365-Abonnements wird automatisch ein Mandant (Tenant) für die Organisation angelegt. Dieser Mandant liegt innerhalb der Microsoft 365-Dienstgrenze, innerhalb derer Microsoft 365 Copilot auf die Daten der Organisation zugreifen kann – dazu zählen unter anderem SharePoint-Dateien, Exchange-Postfächer, OneDrive-Dateien und Microsoft Teams-Daten, auf die über Microsoft Graph zugegriffen wird. Innerhalb der Dienstgrenze zu arbeiten verschafft Copilot jedoch keine mandantenweite Sichtbarkeit: Der Datenzugriff ist immer auf die Berechtigungen des angemeldeten Benutzers beschränkt. Diese Daten umfassen Informationen, auf die der Benutzer zugreifen kann, einschließlich seiner Aktivitäten sowie der Inhalte, die er in Microsoft 365-Apps erstellt und mit denen er interagiert. Azure OpenAI liefert dagegen das zugrunde liegende Sprachmodell (LLM), externe Benutzer und Internetsuchmaschinen sind keine Datenquellen, auf die Copilot über Microsoft Graph zugreift.",
+    explanationImageUrl: "/exam-images/ab900-q9-explain.png",
+    resources: [
+      { label: "Microsoft 365 Copilot architecture and how it works", url: "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-architecture" },
+    ],
   },
   {
     id: "real-ab900-10",
     topicId: "sicherheit-identitaet",
-    prompt: "Wählen Sie die Antwort aus, die den Satz korrekt vervollständigt.",
+    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Microsoft Entra Privileged Identity Management (PIM) bietet ___.",
+      choices: ["eingeschränkten Zugriff auf Microsoft 365-Dienste", "die Verwaltung des Benutzerlebenszyklus", "die Verwaltung von Unternehmensanwendungen", "zeitlich begrenzte Rollenaktivierung"],
+    },
     options: [
       { id: "A", text: "Microsoft Entra Privileged Identity Management (PIM) bietet eingeschränkten Zugriff auf Microsoft 365-Dienste." },
       { id: "B", text: "Microsoft Entra Privileged Identity Management (PIM) bietet die Verwaltung des Benutzerlebenszyklus." },
       { id: "C", text: "Microsoft Entra Privileged Identity Management (PIM) bietet die Verwaltung von Unternehmensanwendungen." },
-      { id: "D", text: "Microsoft Entra Privileged Identity Management (PIM) bietet zeitlich begrenzte Rollenzuweisung." },
+      { id: "D", text: "Microsoft Entra Privileged Identity Management (PIM) bietet zeitlich begrenzte Rollenaktivierung." },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Privileged Identity Management (PIM) ist ein Dienst in Microsoft Entra ID, mit dem sich der Zugriff auf wichtige Ressourcen einer Organisation verwalten, steuern und überwachen lässt – dazu zählen Ressourcen in Microsoft Entra ID, Azure sowie anderen Microsoft-Onlinediensten wie Microsoft 365 oder Microsoft Intune. PIM ermöglicht eine zeitbasierte und genehmigungsbasierte Rollenaktivierung, um Risiken durch übermäßige, unnötige oder missbräuchlich genutzte Zugriffsrechte zu verringern. Zu den wichtigsten Funktionen zählen: Just-in-Time-Zugriff auf privilegierte Rollen in Microsoft Entra ID und Azure-Ressourcen, zeitlich begrenzter Zugriff mit Start- und Enddatum, Genehmigungspflicht zur Aktivierung privilegierter Rollen, verpflichtende Multi-Faktor-Authentifizierung bei der Aktivierung, Begründungspflicht bei der Aktivierung, Benachrichtigungen bei Rollenaktivierungen, Zugriffsüberprüfungen, herunterladbare Prüfprotokolle sowie Schutz davor, dass die letzte aktive Zuweisung der Rollen „Globaler Administrator“ und „Privileged Role Administrator“ entfernt wird.",
+    resources: [
+      { label: "What is Microsoft Entra Privileged Identity Management?", url: "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-configure" },
+    ],
   },
   {
     id: "real-ab900-11",
     topicId: "sicherheit-identitaet",
     prompt: "Ein Benutzer namens User5 navigiert zu https://myapps.microsoft.com. Nachdem er seinen Benutzernamen und sein Passwort eingegeben hat, erhält User5 die folgende Nachricht auf seinem Mobilgerät. Verwenden Sie die Dropdown-Menüs, um die Antwort auszuwählen, die die Aussage basierend auf den im Diagramm dargestellten Informationen vervollständigt.",
+    imageUrl: "/exam-images/ab900-q11.png",
+    blankFill: {
+      template: "User5 verwendet ___ für die Multi-Faktor-Authentifizierung (MFA).",
+      choices: ["E-Mail-OTP", "die Microsoft Authenticator-App", "SMS", "ein Temporäres Zugangspasswort"],
+    },
     options: [
       { id: "A", text: "User5 verwendet E-Mail-OTP für die Multi-Faktor-Authentifizierung (MFA)." },
       { id: "B", text: "User5 verwendet die Microsoft Authenticator-App für die Multi-Faktor- Authentifizierung (MFA)." },
@@ -199,7 +234,10 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "User5 verwendet ein Temporäres Zugangspasswort für die Multi-Faktor- Authentifizierung (MFA)." },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Microsoft Authenticator ist eine kostenlose App, mit der man sich bei allen Konten ohne Passwort anmelden kann – stattdessen genügen Fingerabdruck, Gesichtserkennung oder eine PIN. Die App lässt sich für persönliche, geschäftliche, schulische oder andere Microsoft-Konten verwenden und auf drei Arten einsetzen: als zusätzliche Bestätigung der Anmeldung, falls das Passwort vergessen wurde; als Zwei-Faktor- bzw. Multi-Faktor-Authentifizierung, bei der bei jeder Anmeldung ein Einmalcode verwendet wird, um die Kontosicherheit zu erhöhen; oder als alleinige Anmeldemethode, bei der einfach eine Anmeldeanfrage auf dem Smartphone bestätigt wird (passwortlose Anmeldung). Die abgebildete Meldung „Are you trying to sign in?“ mit einer anzuzeigenden Zahl, die im Smartphone bestätigt werden muss, ist genau diese Benachrichtigung der Microsoft Authenticator-App – nicht die eines SMS-Codes, eines E-Mail-Einmalcodes oder eines temporären Zugangspasses.",
+    resources: [
+      { label: "About Microsoft Authenticator", url: "https://support.microsoft.com/en-us/authenticator/about-microsoft-authenticator" },
+    ],
   },
   {
     type: "yesno",
