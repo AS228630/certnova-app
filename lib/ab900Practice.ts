@@ -31,11 +31,11 @@
 import type { PracticeQuestion, PracticeTopic, SingleChoiceQuestion, YesNoQuestion } from "./az900Practice";
 
 export const AB900_TOPICS: PracticeTopic[] = [
-  { id: "copilot-grundlagen", title: "Microsoft 365 Copilot Grundlagen", totalQuestions: 29 },
+  { id: "copilot-grundlagen", title: "Microsoft 365 Copilot Grundlagen", totalQuestions: 28 },
   { id: "copilot-agenten", title: "Copilot-Agenten verwalten", totalQuestions: 12 },
-  { id: "sicherheit-identitaet", title: "Sicherheit und Identität", totalQuestions: 21 },
-  { id: "purview-compliance", title: "Purview und Compliance", totalQuestions: 25 },
-  { id: "verwaltung-governance", title: "Verwaltung und Governance", totalQuestions: 12 },
+  { id: "sicherheit-identitaet", title: "Sicherheit und Identität", totalQuestions: 20 },
+  { id: "purview-compliance", title: "Purview und Compliance", totalQuestions: 27 },
+  { id: "verwaltung-governance", title: "Verwaltung und Governance", totalQuestions: 13 },
   { id: "verantwortungsvolle-ki", title: "Verantwortungsvolle KI", totalQuestions: 2 },
 ];
 
@@ -934,9 +934,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
     ],
   },
   {
-    id: "real-ab900-50-displaced-teams-admin-center",
+    id: "real-ab900-51",
     topicId: "verwaltung-governance",
-    prompt: "Wählen Sie die Antwort, die den Satz korrekt vervollständigt.",
+    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Vom Microsoft Teams Admin Center aus können Sie ___.",
+      choices: ["einem Benutzer eine Teams-Lizenz zuweisen", "den Teams-Client bereitstellen", "ein Teams-Raumgerät verwalten", "verhindern, dass Benutzer Teams erstellen"],
+    },
     options: [
       { id: "A", text: "Vom Microsoft Teams Admin Center aus können Sie einem Benutzer eine Teams-Lizenz zuweisen." },
       { id: "B", text: "Vom Microsoft Teams Admin Center aus können Sie den Teams-Client bereitstellen." },
@@ -944,10 +948,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Vom Microsoft Teams Admin Center aus können Sie verhindern, dass Benutzer Teams erstellen." },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Wer über ein Microsoft Teams Rooms-Gerät verfügt, kann die Geräte im Teams Rooms Pro Management Portal oder im Teams Admin Center verwalten. Um Teams-Raumgeräte im Teams Admin Center zu verwalten, öffnet man das Microsoft Teams Admin Center und navigiert zu „Teams-Geräte“; dafür ist die Rolle Teams-Administrator oder Teams-Geräteadministrator erforderlich. Die Zuweisung von Teams-Lizenzen erfolgt über das Microsoft 365 Admin Center, die Bereitstellung des Teams-Clients über Endpoint-Management-Tools (z. B. Intune), und das Verhindern der Team-Erstellung durch Benutzer wird über Microsoft Entra ID-Gruppenrichtlinien gesteuert — keines davon läuft über das Teams Admin Center selbst.",
+    resources: [
+      { label: "Managing Microsoft Teams Rooms", url: "https://learn.microsoft.com/en-us/microsoftteams/rooms/rooms-manage" },
+    ],
   },
   {
-    id: "real-ab900-51",
+    id: "real-ab900-52",
     topicId: "purview-compliance",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Alle Benutzer haben Lizenzen für Microsoft 365 Copilot. Sie müssen ermitteln, wo sensible Inhalte während der Copilot-Interaktionen verwendet werden, die Nutzungsmuster der Inhalte analysieren und Empfehlungen zur Anwendung der geeigneten Schutzmaßnahmen geben. Was sollten Sie verwenden?",
     options: [
@@ -957,10 +964,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Die Microsoft Purview Insider Risk Management-Lösung" },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Microsoft Purview Data Security Posture Management (DSPM) hilft Organisationen, Risiken bei sensiblen Daten im gesamten digitalen Bestand zu erkennen, zu schützen und zu untersuchen. Die Lösung bietet einheitliche Sichtbarkeit und Kontrolle sowohl für klassische Anwendungen als auch für KI-Apps und -Agenten und unterstützt die Daten-Governance über Microsoft 365, Azure, Fabric sowie integrierte Drittanbieter-SaaS-Plattformen hinweg — Datenrisiken lassen sich überwachen, bewerten und beheben, unabhängig davon, wo die sensiblen Daten liegen. Statt sich auf Infrastruktur oder Endpunkte zu konzentrieren, stellt DSPM die Daten selbst in den Mittelpunkt: wo sie sich befinden, wer darauf zugreifen kann, wie sie verwendet werden und ob sie ausreichend geschützt sind — besonders wichtig in einer zunehmend KI-getriebenen Arbeitswelt, in der Daten sich ständig bewegen und verändern. DSPM scannt die Umgebung kontinuierlich, um sensible Daten zu identifizieren, Risiken zu bewerten und Maßnahmen zur Risikominderung zu empfehlen, und konsolidiert dabei Erkenntnisse aus DLP, Insider Risk Management, Informationsschutz mit Vertraulichkeitsbezeichnungen und Data Security Investigations zu einer einheitlichen Ansicht für Datenrisiken, Richtlinienabdeckung und Trends. Microsoft Viva Insights liefert Produktivitäts- statt Datenrisiko-Einblicke, Microsoft Security Copilot ist ein allgemeiner KI-Sicherheitsassistent, und Insider Risk Management fokussiert auf riskantes Nutzerverhalten statt auf Copilot-spezifische Inhaltsnutzungsmuster.",
+    resources: [
+      { label: "Learn about Data Security Posture Management", url: "https://learn.microsoft.com/en-us/purview/data-security-posture-management-learn-about" },
+    ],
   },
   {
-    id: "real-ab900-52",
+    id: "real-ab900-53",
     topicId: "copilot-agenten",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Allen Benutzern wurden Microsoft 365 Copilot-Lizenzen zugewiesen. Einige Benutzer berichten, dass sie Copilot-Antworten erhalten, die Informationen von einer Microsoft SharePoint-Website namens Finance enthalten. Die Benutzer geben an, dass die Informationen geschäftlich sensibel sind. Sie müssen verhindern, dass Copilot Antworten bereitstellt, die Informationen von der Finance-Website enthalten. Was sollten Sie tun?",
     options: [
@@ -970,10 +980,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Konfigurieren Sie die Berechtigungen auf der Finance-Website." },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Microsoft 365 Copilot arbeitet innerhalb der Microsoft 365-Dienstgrenze und respektiert dieselben Datenschutz-, Zugriffskontroll- und Compliance-Funktionen, die für ganz Microsoft 365 gelten. Wenn Benutzer geschäftlich sensible Informationen von der Finance-SharePoint-Website in Copilot-Antworten sehen, bedeutet das, dass diese Benutzer bereits Zugriff auf die Website oder ihre Inhalte haben — Copilot zeigt schließlich nur Daten an, auf die der jeweilige Benutzer ohnehin zugreifen kann. Um das Problem zu lösen, muss daher direkt an der Ursache angesetzt werden: Der Zugriff der betroffenen Benutzer auf die Finance-SharePoint-Website selbst muss über die Website-Berechtigungen eingeschränkt werden. Eine Informationsbarriere-Richtlinie verhindert Kommunikation zwischen bestimmten Gruppen, ein Datenconnector in Defender dient der Bedrohungserkennung, und eine Conditional-Access-Richtlinie steuert Anmeldebedingungen — keines davon entzieht direkt den Zugriff auf die Inhalte der Finance-Website.",
+    resources: [
+      { label: "How data is protected and audited in Microsoft 365 and Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-architecture-data-protection-auditing" },
+    ],
   },
   {
-    id: "real-ab900-53",
+    id: "real-ab900-54",
     topicId: "copilot-grundlagen",
     prompt: "Ein Manager fragt: „Was ist der hauptsächliche Unterschied in den Fähigkeiten zwischen Microsoft 365 Copilot, das in Word/Excel integriert ist, und einem benutzerdefinierten KI-Agenten, der in Copilot Studio erstellt wurde?“ Was ist die richtige Antwort?",
     options: [
@@ -983,10 +996,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Benutzerdefinierte Agenten sind nur über das Copilot Studio-Portal zugänglich, während Copilot in Apps eingebettet ist." },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Microsoft 365 Copilot ist ein KI-gestütztes Produktivitätstool, das Arbeitsabläufe in Microsoft-365-Anwendungen wie Copilot Chat, Outlook, Teams und Word verbessert und dabei Unternehmensdaten aus Microsoft Graph nutzt. Obwohl Copilot leistungsstarke integrierte Fähigkeiten bietet, benötigen Organisationen oft zusätzliches Wissen, weitere Datenquellen oder Anwendungen, um spezifische Anwendungsfälle abzudecken. Agenten erweitern die Funktionalität von Copilot, indem sie als spezialisierte KI-Assistenten für bestimmte Bereiche fungieren. Sie nutzen organisatorisches Wissen und Automatisierung, um Geschäftsprozesse zu optimieren, Entscheidungen zu verbessern und die Effizienz zu steigern — sie können Informationen abrufen, Daten zusammenfassen oder sogar Aktionen wie das Senden von E-Mails oder das Aktualisieren von Datensätzen ausführen. Der integrierte Copilot deckt also die breite, alltägliche Produktivität ab, während benutzerdefinierte Agenten für spezifische, mehrstufige Aufgaben und die Integration externer Systeme konzipiert sind — beide können auf organisatorische Daten über Microsoft Graph zugreifen, und beide sind auf unterschiedliche Weise in die Arbeitsumgebung eingebettet.",
+    resources: [
+      { label: "Agents for Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview" },
+    ],
   },
   {
-    id: "real-ab900-54",
+    id: "real-ab900-55",
     topicId: "copilot-grundlagen",
     prompt: "Ein Abteilungsleiter hat einen hochwirksamen, komplexen Microsoft 365 Copilot- Prompt zur Analyse wöchentlicher Verkaufsdaten entwickelt. Der Leiter möchte, dass alle 30 Mitglieder seines Verkaufsteams einfachen und konsistenten Zugriff auf diese spezielle Prompt-Vorlage haben. Welche Methode wird empfohlen, um sicherzustellen, dass diese wertvolle Vorlage vom gesamten Team einheitlich verwendet wird?",
     options: [
@@ -996,34 +1012,51 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Erstellen Sie einen Power Automate-Flow, der den Prompt wöchentlich ausführt." },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Copilot-Prompts sind Anweisungen oder Fragen, mit denen man Copilot mitteilt, was man erreichen möchte — sie können aus bis zu vier Teilen bestehen: Ziel, Kontext, Erwartungen und Quelle. Microsoft 365 Copilot enthält eine integrierte Prompt-Galerie, die speziell dafür entwickelt wurde, wertvolle Prompts im Team zu speichern, wiederzuverwenden und zu teilen. Mit wachsender Erfahrung im Umgang mit Microsoft 365 Copilot und beim Erstellen hilfreicher Prompts lohnt es sich, diese nicht für sich zu behalten: Die Copilot-Prompt-Galerie macht es einfach, Prompts zu finden, zu speichern und zu teilen, die dem eigenen Team und der gesamten Organisation helfen, effektiver zu arbeiten. Das Veröffentlichen als Agent, der Versand per E-Mail oder ein automatisierter Power-Automate-Flow sind für diesen Zweck nicht die vorgesehene bzw. praktikabelste Lösung, um eine Prompt-Vorlage konsistent im gesamten Team verfügbar zu machen.",
+    resources: [
+      { label: "Learn about Copilot prompts", url: "https://support.microsoft.com/en-us/topic/learn-about-copilot-prompts-f6c3b467-f07c-4db1-ae54-ffac96184dd5" },
+      { label: "Sharing prompts with a Team", url: "https://support.microsoft.com/en-us/topic/sharing-prompts-with-a-team-2fa7a228-8645-4dc4-beec-d75d6d0bc752" },
+    ],
   },
   {
     type: "yesno",
-    id: "real-ab900-55",
-    topicId: "copilot-grundlagen",
+    id: "real-ab900-56",
+    topicId: "purview-compliance",
     prompt: "Sie bewerten Microsoft Purview-Lösungen. Wählen Sie für jede der folgenden Aussagen \"Ja\" aus, wenn die Aussage zutrifft. Andernfalls wählen Sie \"Nein\".",
     statements: [
       { text: "Eine Richtlinie zur Kommunikations-Compliance kann unangemessene Texte in Microsoft Teams-Nachrichten erkennen", correct: "Ja" },
       { text: "Eine Richtlinie zur Kommunikations-Compliance kann anstößige Sprache in Microsoft 365 Copilot-Eingabeaufforderungen erkennen", correct: "Ja" },
       { text: "Eine Richtlinie zur Kommunikations-Compliance kann verwendet werden, um E-Mail-Nachrichten 10 Jahre lang aufzubewahren", correct: "Nein" },
     ],
-    explanation: "",
+    combinedOptions: [["Ja", "Ja", "Ja"], ["Ja", "Ja", "Nein"], ["Ja", "Nein", "Ja"], ["Nein", "Ja", "Nein"], ["Nein", "Nein", "Ja"], ["Nein", "Nein", "Nein"]],
+    explanation: "Microsoft Purview Kommunikations-Compliance ist eine Insider-Risk-Lösung, die hilft, Kommunikationsrisiken zu minimieren, indem sie unterstützt, potenziell unangemessene Nachrichten in der Organisation zu erkennen, zu erfassen und zu bearbeiten. Vordefinierte und benutzerdefinierte Richtlinien prüfen interne und externe Kommunikation auf Richtlinienübereinstimmungen, damit festgelegte Prüfer sie untersuchen können. Prüfer können dabei E-Mail, Microsoft Teams, Microsoft 365 Copilot und Microsoft 365 Copilot Chat, Viva Engage oder Kommunikation von Drittanbietern in der Organisation untersuchen und geeignete Maßnahmen ergreifen, um die Einhaltung der Nachrichtenstandards der Organisation sicherzustellen — Kommunikations-Compliance deckt also sowohl Teams-Nachrichten als auch Copilot-Eingabeaufforderungen ab. Kommunikations-Compliance dient jedoch der Erkennung und Überprüfung von Inhalten, nicht der langfristigen Aufbewahrung von E-Mail-Nachrichten über Jahre hinweg — dafür ist stattdessen die Datenlebenszyklusverwaltung (Aufbewahrungsrichtlinien) zuständig.",
+    resources: [
+      { label: "Learn about Communication Compliance", url: "https://learn.microsoft.com/en-us/purview/communication-compliance" },
+      { label: "Create and manage Communication Compliance policies", url: "https://learn.microsoft.com/en-us/purview/communication-compliance-policies" },
+      { label: "Configure a Communication Compliance policy to detect generative AI interactions", url: "https://learn.microsoft.com/en-us/purview/communication-compliance-copilot" },
+    ],
   },
   {
     type: "yesno",
-    id: "real-ab900-56",
+    id: "real-ab900-57",
     topicId: "copilot-grundlagen",
     prompt: "Für jede der folgenden Aussagen wählen Sie Ja, wenn die Aussage wahr ist. Andernfalls wählen Sie Nein. (HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     statements: [
       { text: "Aus der Copilot-Prompt-Galerie können Sie einen gespeicherten Prompt bearbeiten", correct: "Ja" },
       { text: "Aus der Copilot-Prompt-Galerie können Sie einen gespeicherten Prompt mit einem Microsoft Teams-Team teilen", correct: "Ja" },
-      { text: "Sie können einen freigegebenen Link für einen Prompt erstellen, der NICHT in der Copilot-Prompt-Galerie gespeichert wurde", correct: "Ja" },
+      { text: "Sie können einen freigegebenen Link für einen Prompt erstellen, der NICHT in der Copilot-Prompt-Galerie gespeichert wurde", correct: "Nein" },
     ],
-    explanation: "",
+    combinedOptions: [["Ja", "Ja", "Ja"], ["Ja", "Ja", "Nein"], ["Ja", "Nein", "Ja"], ["Nein", "Ja", "Nein"], ["Nein", "Ja", "Ja"], ["Nein", "Nein", "Nein"]],
+    explanation: "Copilot-Prompts sind Anweisungen oder Fragen, mit denen man Copilot mitteilt, was man erreichen möchte — sie können aus bis zu vier Teilen bestehen: Ziel, Kontext, Erwartungen und Quelle. Das Speichern von Prompts in der Copilot-Prompt-Galerie ist eine ideale Möglichkeit, tägliche Aufgaben zu vereinfachen: Ein häufig genutzter Prompt lässt sich speichern und muss nicht jedes Mal neu eingegeben werden. Jeder gespeicherte Prompt lässt sich anklicken, um ihn anzusehen, zu bearbeiten oder auszuführen. Die Prompt-Galerie macht es außerdem einfach, Prompts mit einem Microsoft-Teams-Team in der Organisation zu teilen oder einen Prompt-Link direkt zu kopieren und weiterzugeben. Um jedoch einen freigegebenen Link für einen Prompt zu erstellen, muss der Prompt zuerst in der Copilot-Prompt-Galerie gespeichert werden — nur gespeicherte Prompts lassen sich teilen. Ist ein Prompt nicht gespeichert, kann dafür kein freigegebener Link erzeugt werden.",
+    resources: [
+      { label: "Understand Prompt Gallery in Copilot", url: "https://learn.microsoft.com/en-us/copilot/microsoft-365/copilot-prompt-gallery" },
+      { label: "How to save prompts", url: "https://support.microsoft.com/en-us/topic/how-to-save-prompts-55373730-2627-46a5-b0d8-772abe22dba4" },
+      { label: "Sharing prompts with a Team", url: "https://support.microsoft.com/en-us/topic/sharing-prompts-with-a-team-2fa7a228-8645-4dc4-beec-d75d6d0bc752" },
+      { label: "Share your best prompts", url: "https://support.microsoft.com/en-us/topic/share-your-best-prompts-75402b14-b419-494d-9e58-1709b4f334a2" },
+    ],
   },
   {
-    id: "real-ab900-57",
+    id: "real-ab900-58",
     topicId: "sicherheit-identitaet",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Sie stellen fest, dass sich einige Benutzer nicht bei Microsoft 365 anmelden können. Sie müssen die fehlgeschlagenen Microsoft 365-Anmeldeversuche anzeigen. Was sollten Sie verwenden?",
     options: [
@@ -1033,11 +1066,14 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Das Microsoft 365 Admin Center" },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Die Microsoft Entra-Anmeldeprotokolle helfen dabei, Fragen rund um die Verwaltung des Zugriffs auf Anwendungen der Organisation zu beantworten — etwa welches Anmeldemuster ein Benutzer zeigt, wie viele Benutzer sich innerhalb einer Woche angemeldet haben oder welchen Status diese Anmeldungen hatten. Zusätzlich helfen die Anmeldeprotokolle bei der Fehlerbehebung fehlgeschlagener Anmeldeversuche von Benutzern der Organisation. Um Anmeldedetails zu erfassen: mit mindestens der Rolle „Reports Reader“ im Microsoft Entra Admin Center anmelden, zu Entra ID > Überwachung & Integrität > Anmeldeprotokolle navigieren, die Ergebnisse mit Filtern eingrenzen (z. B. nach Benutzername, nach Anwendung, oder „Fehler“ im Status-Menü auswählen, um nur fehlgeschlagene Anmeldungen anzuzeigen) und den gewünschten fehlgeschlagenen Anmeldeversuch für Details wie Korrelations-ID, Anmeldefehlercode, Fehlerursache sowie Benutzername/Benutzer-ID auswählen. Das Microsoft Defender-Portal, das Microsoft Purview-Portal und das Microsoft 365 Admin Center bieten keine vergleichbar detaillierten Anmeldeprotokolle.",
+    resources: [
+      { label: "How to troubleshoot Microsoft Entra sign-in errors", url: "https://learn.microsoft.com/en-us/entra/identity/monitoring-health/howto-troubleshoot-sign-in-errors" },
+    ],
   },
   {
-    id: "real-ab900-58",
-    topicId: "sicherheit-identitaet",
+    id: "real-ab900-59",
+    topicId: "verwaltung-governance",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement, das eine Microsoft SharePoint-Website namens Site1 enthält. Sie müssen verhindern, dass Benutzer die Inhalte von Site1 mit externen Benutzern teilen. Was sollten Sie verwenden?",
     options: [
       { id: "A", text: "Die Inhalte von Site1" },
@@ -1046,12 +1082,20 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Das Microsoft Entra-Admincenter" },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Externe Freigabe in SharePoint und OneDrive ermöglicht es Benutzern, Inhalte mit Personen außerhalb der Organisation zu teilen, etwa Partnern, Lieferanten, Klienten oder Kunden — sie lässt sich auch nutzen, um zwischen lizenzierten Benutzern mehrerer Microsoft 365-Abonnements zu teilen. SharePoint bietet Einstellungen zur externen Freigabe sowohl auf Organisationsebene als auch auf Websiteebene (früher „Websitesammlungsebene“ genannt). Damit externe Freigabe auf einer Website überhaupt möglich ist, muss sie zunächst auf Organisationsebene erlaubt sein; für einzelne Websites lässt sie sich dann weiter einschränken. Stimmen die Freigabeoption einer Website und die Organisationsebene nicht überein, gilt stets der restriktivere Wert. Die Freigabeeinstellungen von OneDrive können denen von SharePoint entsprechen oder restriktiver sein. Sowohl SharePoint- als auch OneDrive-Freigabe lassen sich zentral über das SharePoint-Admincenter konfigurieren — das Microsoft 365-Admincenter und das Microsoft Entra-Admincenter bieten diese spezifischen Freigabeeinstellungen nicht.",
+    resources: [
+      { label: "Overview of external sharing in SharePoint and OneDrive in Microsoft 365", url: "https://learn.microsoft.com/en-us/sharepoint/turn-external-sharing-on-or-off" },
+      { label: "Manage sharing settings for SharePoint and OneDrive in Microsoft 365", url: "https://learn.microsoft.com/en-us/sharepoint/manage-sharing-settings" },
+    ],
   },
   {
-    id: "real-ab900-59",
+    id: "real-ab900-60",
     topicId: "sicherheit-identitaet",
-    prompt: "Welche Aussage beschreibt Microsoft Defender XDR korrekt?",
+    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "___ ist eine einheitliche Unternehmenssuite, die Erkennung, Prävention, Untersuchung und Reaktion über Endpunkte, Identitäten, E-Mail und Anwendungen koordiniert, um integrierten Schutz gegen ausgeklügelte Angriffe zu bieten.",
+      choices: ["Microsoft Defender XDR", "Microsoft Entra Conditional Access", "Microsoft Entra ID Protection", "Microsoft Purview"],
+    },
     options: [
       { id: "A", text: "Microsoft Defender XDR ist eine einheitliche Unternehmenssuite, die Erkennung, Prävention, Untersuchung und Reaktion über Endpunkte, Identitäten, E-Mail und Anwendungen koordiniert, um integrierten Schutz gegen ausgeklügelte Angriffe zu bieten." },
       { id: "B", text: "Microsoft Entra Conditional Access ist eine einheitliche Unternehmenssuite, die Erkennung, Prävention, Untersuchung und Reaktion über Endpunkte, Identitäten, E-Mail und Anwendungen koordiniert, um integrierten Schutz gegen ausgeklügelte Angriffe zu bieten." },
@@ -1059,12 +1103,17 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Microsoft Purview ist eine einheitliche Unternehmenssuite, die Erkennung, Prävention, Untersuchung und Reaktion über Endpunkte, Identitäten, E-Mail und Anwendungen koordiniert, um integrierten Schutz gegen ausgeklügelte Angriffe zu bieten." },
     ],
     correct: "A",
-    explanation: "",
+    explanation: "Microsoft Defender XDR ist eine einheitliche Unternehmens-Verteidigungssuite für die Zeit vor und nach einem Sicherheitsvorfall, die Erkennung, Prävention, Untersuchung und Reaktion nativ über Endpunkte, Identitäten, E-Mail und Anwendungen koordiniert, um integrierten Schutz gegen ausgeklügelte Angriffe zu bieten. Defender XDR hilft Sicherheitsteams dabei, ihre Organisationen zu schützen und Bedrohungen zu erkennen, indem Informationen aus weiteren Microsoft-Sicherheitsprodukten genutzt werden — darunter Microsoft Defender for Endpoint, Microsoft Defender for Office 365, Microsoft Defender for Identity, Microsoft Defender for Cloud Apps, Microsoft Defender Vulnerability Management, Microsoft Defender for Cloud, Microsoft Entra ID Protection, Microsoft Data Loss Prevention, App Governance, Microsoft Purview Insider Risk Management und Microsoft Security Exposure Management. Mit der integrierten Defender-XDR-Lösung können Sicherheitsfachleute die Bedrohungssignale dieser Produkte zusammenführen und den vollen Umfang sowie die Auswirkung einer Bedrohung bestimmen — wie sie in die Umgebung gelangt ist, was sie betroffen hat und wie sie die Organisation derzeit beeinträchtigt. Defender XDR ergreift automatisch Maßnahmen, um den Angriff zu verhindern oder zu stoppen, und stellt betroffene Postfächer, Endpunkte und Benutzeridentitäten selbstständig wieder her. Microsoft Entra Conditional Access, Microsoft Entra ID Protection und Microsoft Purview sind dagegen jeweils spezialisierte Einzellösungen (Zugriffssteuerung, Identitätsrisiko bzw. Compliance), keine vereinheitlichte XDR-Verteidigungssuite.",
   },
   {
-    id: "real-ab900-60",
-    topicId: "copilot-grundlagen",
-    prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Ein Benutzer namens Alex Wilber ist wie in der folgenden Abbildung gezeigt einer Administratorrolle zugewiesen.",
+    id: "real-ab900-61",
+    topicId: "sicherheit-identitaet",
+    prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Ein Benutzer namens Alex Wilber ist wie in der folgenden Abbildung gezeigt einer Administratorrolle zugewiesen. Verwenden Sie die Dropdown-Menüs, um die Antwort auszuwählen, die die Aussage basierend auf den im Diagramm dargestellten Informationen vervollständigt.",
+    imageUrl: "/exam-images/ab900-q61.png",
+    blankFill: {
+      template: "Alex Wilber kann ___.",
+      choices: ["alle Benutzer im Microsoft Entra-Mandanten anzeigen", "alle Inhalte auf Microsoft SharePoint-Websites anzeigen", "alle Inhalte in Microsoft Exchange-Postfächern lesen", "eDiscovery von Microsoft 365 Copilot-Eingabeaufforderungen durchführen"],
+    },
     options: [
       { id: "A", text: "Alex Wilber kann alle Benutzer im Microsoft Entra-Mandanten anzeigen." },
       { id: "B", text: "Alex Wilber kann alle Inhalte auf Microsoft SharePoint-Websites anzeigen." },
@@ -1072,11 +1121,11 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Alex Wilber kann eDiscovery von Microsoft 365 Copilot-Eingabeaufforderungen durchführen." },
     ],
     correct: "A",
-    explanation: "",
+    explanation: "In Microsoft Entra ID wird einer Person, die Microsoft-Entra-Ressourcen verwalten muss (Administrator oder Nicht-Administrator), eine Microsoft-Entra-Rolle mit den benötigten Berechtigungen zugewiesen — etwa zum Hinzufügen oder Ändern von Benutzern, Zurücksetzen von Kennwörtern, Verwalten von Lizenzen oder Domänennamen. Die Rolle „Global Reader“ ist eine privilegierte Rolle: Benutzer in dieser Rolle können Einstellungen und administrative Informationen (keine Benutzerinhalte) über Microsoft-365-Dienste hinweg lesen, aber keine Verwaltungsmaßnahmen durchführen. Global Reader ist damit das reine Lese-Gegenstück zu Global Administrator und wird stattdessen für Planung, Audits oder Untersuchungen zugewiesen — oft in Kombination mit weiteren eingeschränkten Admin-Rollen wie Exchange Administrator, um Aufgaben zu erledigen, ohne die Rolle Global Administrator vergeben zu müssen. Global Reader funktioniert mit dem Microsoft 365 Admin Center, dem Exchange Admin Center, dem SharePoint Admin Center, dem Teams Admin Center, dem Microsoft Defender-Portal, dem Microsoft Purview-Portal, dem Azure-Portal und dem Device-Management-Admin-Center — Alex Wilber kann also alle Benutzer im Microsoft-Entra-Mandanten (lesend) anzeigen, jedoch keine Inhalte in SharePoint oder Exchange lesen oder eDiscovery durchführen, da Global Reader ausdrücklich keinen Zugriff auf Benutzerinhalte gewährt.",
   },
   {
     type: "yesno",
-    id: "real-ab900-61",
+    id: "real-ab900-62",
     topicId: "sicherheit-identitaet",
     prompt: "Wählen Sie für jede der folgenden Aussagen \"Ja\", wenn die Aussage zutrifft. Andernfalls wählen Sie \"Nein\". (HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     statements: [
@@ -1084,10 +1133,16 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { text: "Sie können eine Microsoft Entra-Sicherheitsgruppe verwenden, um Microsoft 365-Lizenzen zuzuweisen", correct: "Ja" },
       { text: "Sie können eine Microsoft Entra-Sicherheitsgruppe verwenden, um Berechtigungen für Microsoft Exchange-Postfächer zuzuweisen", correct: "Ja" },
     ],
-    explanation: "",
+    combinedOptions: [["Ja", "Ja", "Ja"], ["Ja", "Ja", "Nein"], ["Ja", "Nein", "Ja"], ["Nein", "Ja", "Nein"], ["Nein", "Nein", "Ja"], ["Nein", "Nein", "Nein"]],
+    explanation: "Microsoft Entra ID bietet mehrere Möglichkeiten, den Zugriff auf Ressourcen, Anwendungen und Aufgaben zu verwalten. Mit Microsoft-Entra-Gruppen lässt sich Zugriff und Berechtigungen einer ganzen Gruppe von Benutzern statt jedem einzelnen Benutzer gewähren — den Zugriff auf Microsoft-Entra-Ressourcen auf genau die Benutzer zu beschränken, die ihn benötigen, ist eines der Kernprinzipien von Zero Trust. Microsoft Entra ID bietet außerdem gruppenbasierte Lizenzierung, mit der einer Gruppe eine oder mehrere Produktlizenzen zugewiesen werden können; Microsoft Entra ID stellt sicher, dass alle Gruppenmitglieder diese Lizenzen erhalten, neue Mitglieder automatisch lizenziert werden und beim Austritt die Lizenzen wieder entzogen werden. Freigegebene Postfächer erlauben es einer Gruppe von Personen, von einem gemeinsamen Konto aus E-Mails zu überwachen und zu senden (z. B. info@contoso.com); dafür lässt sich beispielsweise ein freigegebenes Postfach für die Vertriebsabteilung erstellen und der Sicherheitsgruppe „MarketingSG“ die Berechtigungen „Vollzugriff“ und „Senden im Auftrag von“ erteilen — Mitglieder dieser Sicherheitsgruppe erhalten dadurch automatisch die entsprechenden Postfachberechtigungen. Eine Microsoft-Entra-Sicherheitsgruppe lässt sich also für alle drei Zwecke nutzen: Berechtigungen für Entra-ID-Ressourcen, Lizenzzuweisung und Berechtigungen für Exchange-Postfächer.",
+    resources: [
+      { label: "Learn about group types, membership types, and access management", url: "https://learn.microsoft.com/en-us/entra/fundamentals/concept-learn-about-groups" },
+      { label: "What is group-based licensing in Microsoft Entra ID?", url: "https://learn.microsoft.com/en-us/entra/fundamentals/concept-group-based-licensing" },
+      { label: "Shared mailboxes in Exchange Online", url: "https://learn.microsoft.com/en-us/exchange/collaboration-exo/shared-mailboxes" },
+    ],
   },
   {
-    id: "real-ab900-62",
+    id: "real-ab900-63",
     topicId: "sicherheit-identitaet",
     prompt: "Welche Aussage beschreibt die Autorisierung in Microsoft 365 genau?",
     options: [
@@ -1097,22 +1152,31 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Ein Prozess zur Validierung einer Identität aus einem externen System" },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Autorisierung bedeutet, einer bereits authentifizierten Partei die Erlaubnis zu erteilen, etwas Bestimmtes zu tun — sie legt fest, auf welche Daten zugegriffen werden darf und was mit diesen Daten getan werden kann. Autorisierung wird manchmal mit „AuthZ“ abgekürzt. Die Microsoft-Identitätsplattform stellt Ressourcenbesitzern das OAuth-2.0-Protokoll zur Handhabung der Autorisierung zur Verfügung; die Microsoft-Cloud bietet darüber hinaus weitere Autorisierungssysteme wie integrierte Microsoft-Entra-Rollen, Azure RBAC und Exchange RBAC. Die Überprüfung, ob eine Identität tatsächlich diejenige ist, die sie vorgibt zu sein, ist dagegen die Authentifizierung (nicht Autorisierung); zusätzliche Authentifizierungsmethoden beschreiben Multi-Faktor-Authentifizierung, und die Validierung einer Identität aus einem externen System betrifft Föderation — keines davon ist die korrekte Definition von Autorisierung.",
+    resources: [
+      { label: "Authentication vs. authorization", url: "https://learn.microsoft.com/en-us/entra/identity-platform/authentication-vs-authorization" },
+    ],
   },
   {
     type: "yesno",
-    id: "real-ab900-63",
-    topicId: "copilot-grundlagen",
+    id: "real-ab900-64",
+    topicId: "verwaltung-governance",
     prompt: "Für jede der folgenden Aussagen wählen Sie Ja, wenn die Aussage wahr ist. Andernfalls wählen Sie Nein. (HINWEIS: Jede korrekte Auswahl ist einen Punkt wert.)",
     statements: [
       { text: "Ein Mitglied einer Microsoft SharePoint-Website kann Benutzer einladen, auf die Inhalte der Website zuzugreifen", correct: "Ja" },
       { text: "Ein Websitebesitzer einer Microsoft SharePoint-Website kann Microsoft 365- Gruppen als Mitglieder der Website hinzufügen", correct: "Ja" },
       { text: "Ein Websitebesitzer einer Microsoft SharePoint-Website kann einen anderen Websitebesitzer von der Website entfernen", correct: "Ja" },
     ],
-    explanation: "",
+    combinedOptions: [["Ja", "Ja", "Ja"], ["Ja", "Ja", "Nein"], ["Ja", "Nein", "Ja"], ["Nein", "Ja", "Nein"], ["Nein", "Nein", "Ja"], ["Nein", "Nein", "Nein"]],
+    explanation: "Mitglieder einer Website können Benutzer einladen; die Einladung löst dabei je nach Mandanten- und Website-Einstellungen typischerweise eine Zugriffsanfrage aus, die von einem Websitebesitzer genehmigt werden muss. Websitebesitzer können Benutzer, Microsoft-365-Gruppen oder Sicherheitsgruppen als Mitglieder der Website hinzufügen und ihnen Berechtigungsstufen zuweisen. Websitebesitzer mit voller Kontrolle können außerdem andere Besitzer, Mitglieder oder Besucher der Website hinzufügen oder entfernen — ein Websitebesitzer kann also durchaus einen anderen Websitebesitzer von der Website entfernen.",
+    resources: [
+      { label: "Understand groups and permissions on a SharePoint site", url: "https://learn.microsoft.com/en-us/sharepoint/site-permissions" },
+      { label: "Share a site", url: "https://support.microsoft.com/en-us/office/share-a-site-958771a8-d041-4eb8-b51c-afea2eae3658" },
+      { label: "Overview: Site governance, permission, and sharing for site owners", url: "https://support.microsoft.com/en-us/office/overview-site-governance-permission-and-sharing-for-site-owners-c631723c-2ec8-4be8-a11b-a5e64ea2b52c" },
+    ],
   },
   {
-    id: "real-ab900-64",
+    id: "real-ab900-65",
     topicId: "verwaltung-governance",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Welche zwei Aufgaben können Sie mithilfe des Exchange-Verwaltungscenters ausführen? (Jede richtige Antwort bildet einen Teil der Lösung. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     options: [
@@ -1121,13 +1185,23 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "C", text: "Erstellen eines freigegebenen Postfachs." },
       { id: "D", text: "Hinzufügen einer benutzerdefinierten Domain." },
     ],
-    correct: "B",
-    explanation: "",
+    correct: ["B", "C"],
+    explanation: "Mailflussregeln ähneln den Posteingangsregeln, die in Outlook und Outlook im Web verfügbar sind — der Hauptunterschied ist, dass Mailflussregeln auf Nachrichten wirken, während diese sich noch im Transit befinden, und nicht erst nachdem die Nachricht im Postfach zugestellt wurde. Mailflussregeln bieten einen umfangreicheren Satz an Bedingungen, Ausnahmen und Aktionen, was die Flexibilität ermöglicht, viele Arten von Nachrichtenrichtlinien umzusetzen; sie lassen sich im Exchange-Verwaltungscenter (EAC) oder in PowerShell erstellen. Ein freigegebenes Postfach ist ein Postfach, das mehrere Benutzer zum Lesen und Senden von E-Mails nutzen können — es lässt sich zudem für einen gemeinsamen Kalender verwenden, sodass mehrere Benutzer Urlaubszeiten oder Schichten einsehen und planen können. Auch freigegebene Postfächer lassen sich im Exchange-Verwaltungscenter oder in PowerShell erstellen. Die Zuweisung einer Exchange-Lizenz erfolgt über das Microsoft 365 Admin Center (Lizenzverwaltung), und das Hinzufügen einer benutzerdefinierten Domain erfolgt ebenfalls über das Microsoft 365 Admin Center — beides gehört nicht zu den Aufgaben des Exchange-Verwaltungscenters.",
+    resources: [
+      { label: "Mail flow rules (transport rules) in Exchange Online", url: "https://learn.microsoft.com/en-us/exchange/security-and-compliance/mail-flow-rules/mail-flow-rules" },
+      { label: "Manage mail flow rules in Exchange Online", url: "https://learn.microsoft.com/en-us/exchange/security-and-compliance/mail-flow-rules/manage-mail-flow-rules" },
+      { label: "Shared mailboxes in Exchange Server", url: "https://learn.microsoft.com/en-us/exchange/collaboration/shared-mailboxes/shared-mailboxes" },
+      { label: "Create shared mailboxes in the Exchange admin center", url: "https://learn.microsoft.com/en-us/exchange/collaboration/shared-mailboxes/create-shared-mailboxes" },
+    ],
   },
   {
-    id: "real-ab900-65",
+    id: "real-ab900-66",
     topicId: "sicherheit-identitaet",
-    prompt: "Wählen Sie die Antwort aus, die den Satz korrekt vervollständigt.",
+    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "In Microsoft Entra Privileged Identity Management (PIM) hat ein Administrator Sie für die Rolle des Benutzeradministrators berechtigt. Bevor Sie ein Benutzerkonto erstellen können, müssen Sie ___.",
+      choices: ["die Rolle aktivieren", "die Microsoft Authenticator-App installieren", "eine Lizenz anfordern", "Ihre Standortinformationen aktualisieren"],
+    },
     options: [
       { id: "A", text: "In Microsoft Entra Privileged Identity Management (PIM) hat ein Administrator Sie für die Rolle des Benutzeradministrators berechtigt. Bevor Sie ein Benutzerkonto erstellen können, müssen Sie die Rolle aktivieren." },
       { id: "B", text: "In Microsoft Entra Privileged Identity Management (PIM) hat ein Administrator Sie für die Rolle des Benutzeradministrators berechtigt. Bevor Sie ein Benutzerkonto erstellen können, müssen Sie die Microsoft Authenticator-App installieren." },
@@ -1135,22 +1209,35 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "In Microsoft Entra Privileged Identity Management (PIM) hat ein Administrator Sie für die Rolle des Benutzeradministrators berechtigt. Bevor Sie ein Benutzerkonto erstellen können, müssen Sie Ihre Standortinformationen aktualisieren." },
     ],
     correct: "A",
-    explanation: "",
+    explanation: "Microsoft Entra Privileged Identity Management (PIM) vereinfacht die Verwaltung des privilegierten Zugriffs auf Ressourcen in Microsoft Entra ID und anderen Microsoft-Onlinediensten wie Microsoft 365 oder Microsoft Intune. Wurde eine Person für eine administrative Rolle berechtigt („eligible“), muss sie die Rollenzuweisung aktivieren, sobald privilegierte Aktionen ausgeführt werden müssen. Wer beispielsweise nur gelegentlich Microsoft-365-Funktionen verwaltet, wird von den Privileged Role Administrators der Organisation oft nicht dauerhaft zum Global Administrator gemacht, da diese Rolle auch andere Dienste betrifft — stattdessen wird die Person für Microsoft-Entra-Rollen wie Exchange Online Administrator berechtigt. Die Aktivierung dieser Rolle kann bei Bedarf angefordert werden, wodurch für einen festgelegten Zeitraum administrative Kontrolle gewährt wird. Das Installieren der Authenticator-App, das Anfordern einer Lizenz oder das Aktualisieren von Standortinformationen sind keine Voraussetzungen für die Nutzung einer berechtigten PIM-Rolle.",
+    resources: [
+      { label: "Activate a Microsoft Entra role in PIM", url: "https://learn.microsoft.com/en-us/entra/id-governance/privileged-identity-management/pim-how-to-activate-role" },
+    ],
   },
   {
-    id: "real-ab900-66",
+    id: "real-ab900-67",
     topicId: "sicherheit-identitaet",
-    prompt: "Sie öffnen das Microsoft Entra Admin Center wie in der folgenden Abbildung gezeigt. A Das Beheben der Empfehlung 'Passwörter nicht ablaufen lassen' wird den Identity Secure Score am meisten verbessern. B Das Beheben der Empfehlung 'Verwenden von Administrationsrollen mit minimalen Rechten' wird den Identity Secure Score am meisten verbessern. C Das Beheben der Empfehlung 'Richtlinie zur Blockierung von veralteter Authentifizierung aktivieren' wird den Identity Secure Score am meisten verbessern. D Das Beheben der Empfehlung 'Multifaktor-Authentifizierung für Verwaltungsrollen erforderlich machen' wird den Identity Secure Score am meisten verbessern.",
+    prompt: "Sie öffnen das Microsoft Entra Admin Center wie in der folgenden Abbildung gezeigt. Verwenden Sie die Dropdown-Menüs, um die Antwort auszuwählen, die die Aussage basierend auf den im Diagramm dargestellten Informationen vervollständigt.",
+    imageUrl: "/exam-images/ab900-q67.png",
+    blankFill: {
+      template: "Das Beheben der Empfehlung ___ wird den Identity Secure Score am meisten verbessern.",
+      choices: ["'Passwörter nicht ablaufen lassen'", "'Verwenden von Administrationsrollen mit minimalen Rechten'", "'Richtlinie zur Blockierung von veralteter Authentifizierung aktivieren'", "'Multifaktor-Authentifizierung für Verwaltungsrollen erforderlich machen'"],
+    },
     options: [
+      { id: "A", text: "Das Beheben der Empfehlung 'Passwörter nicht ablaufen lassen' wird den Identity Secure Score am meisten verbessern." },
       { id: "B", text: "Das Beheben der Empfehlung 'Verwenden von Administrationsrollen mit minimalen Rechten' wird den Identity Secure Score am meisten verbessern." },
       { id: "C", text: "Das Beheben der Empfehlung 'Richtlinie zur Blockierung von veralteter Authentifizierung aktivieren' wird den Identity Secure Score am meisten verbessern." },
       { id: "D", text: "Das Beheben der Empfehlung 'Multifaktor-Authentifizierung für Verwaltungsrollen erforderlich machen' wird den Identity Secure Score am meisten verbessern." },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Die Identity Secure Score wird als Prozentsatz angezeigt und dient als Indikator dafür, wie gut die eigene Konfiguration mit den Sicherheitsempfehlungen von Microsoft übereinstimmt. Jede Verbesserungsmaßnahme ist individuell auf die jeweilige Konfiguration zugeschnitten; der Wert hilft dabei, die Identitätssicherheitslage objektiv zu messen, Verbesserungen zu planen und deren Erfolg zu überprüfen. Alle 24 Stunden wird die Sicherheitskonfiguration mit den empfohlenen Best Practices verglichen und daraus ein neuer Score berechnet — ist eine Empfehlung nur teilweise umgesetzt, wird ein entsprechender Teil der maximal möglichen Punktzahl für diese Maßnahme vergeben. Laut der abgebildeten Tabelle hat „Passwörter nicht ablaufen lassen“ bereits volle 8/8 Punkte erreicht, „Verwenden von Administrationsrollen mit minimalen Rechten“ bereits 1/1 und „Richtlinie zur Blockierung von veralteter Authentifizierung aktivieren“ bereits 0,73/8 Punkte — bei diesen dreien ist also nur noch wenig oder gar kein zusätzlicher Punktegewinn möglich. Die Empfehlung „Multifaktor-Authentifizierung für Verwaltungsrollen erforderlich machen“ steht dagegen bei 0/10 Punkten und bietet damit das größte ungenutzte Verbesserungspotenzial (10 Punkte) — ihre Umsetzung verbessert den Identity Secure Score am meisten.",
+    resources: [
+      { label: "What is Identity Secure Score?", url: "https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-identity-secure-score" },
+      { label: "What are Microsoft Entra recommendations?", url: "https://learn.microsoft.com/en-us/entra/identity/monitoring-health/overview-recommendations" },
+    ],
   },
   {
-    id: "real-ab900-67",
+    id: "real-ab900-68",
     topicId: "sicherheit-identitaet",
     prompt: "Womit können Sie ein Benutzerkonto automatisch sperren, wenn eine riskante Anmeldung erkannt wird?",
     options: [
@@ -1160,10 +1247,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Microsoft Entra Privileged Identity Management (PIM)" },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Microsoft sammelt und analysiert täglich Billionen anonymisierter Signale aus Anmeldeversuchen. Diese Signale helfen dabei, Muster für normales Anmeldeverhalten zu erkennen und potenziell riskante Anmeldeversuche zu identifizieren. Microsoft Entra ID Protection überprüft Anmeldeversuche und kann bei verdächtigem Verhalten zusätzliche Maßnahmen auslösen — etwa bei Benutzern mit kompromittierten Zugangsdaten, Anmeldungen von anonymen IP-Adressen, unmöglichen Reisen zu untypischen Standorten, Anmeldungen von infizierten Geräten, Anmeldungen von IP-Adressen mit verdächtiger Aktivität oder Anmeldungen von unbekannten Standorten. Zum Schutz der Benutzer lassen sich risikobasierte Conditional-Access-Richtlinien in Microsoft Entra konfigurieren, die automatisch auf riskantes Verhalten reagieren — sie können einen Anmeldeversuch automatisch blockieren oder zusätzliche Maßnahmen verlangen, etwa eine sichere Kennwortänderung oder Multi-Faktor-Authentifizierung. Microsoft Defender for Identity erkennt identitätsbasierte Angriffe in lokalen Umgebungen, Microsoft Defender for Office 365 schützt vor E-Mail-Bedrohungen, und PIM verwaltet privilegierten Zugriff — keines davon blockiert automatisch Konten bei riskanten Anmeldungen.",
+    resources: [
+      { label: "Tutorial: Use risk detections for user sign-ins to trigger Microsoft Entra multifactor authentication or password changes", url: "https://learn.microsoft.com/en-us/entra/identity/authentication/tutorial-risk-based-sspr-mfa" },
+    ],
   },
   {
-    id: "real-ab900-68",
+    id: "real-ab900-68-displaced-zero-trust-principles",
     topicId: "sicherheit-identitaet",
     prompt: "Sie überprüfen die Sicherheitsrichtlinien Ihres Unternehmens im Rahmen einer Zero-Trust-Strategie. Welche Aussage beschreibt die Zero-Trust-Prinzipien genau?",
     options: [
