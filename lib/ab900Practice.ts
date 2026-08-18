@@ -31,10 +31,10 @@
 import type { PracticeQuestion, PracticeTopic, SingleChoiceQuestion, YesNoQuestion } from "./az900Practice";
 
 export const AB900_TOPICS: PracticeTopic[] = [
-  { id: "copilot-grundlagen", title: "Microsoft 365 Copilot Grundlagen", totalQuestions: 29 },
+  { id: "copilot-grundlagen", title: "Microsoft 365 Copilot Grundlagen", totalQuestions: 31 },
   { id: "copilot-agenten", title: "Copilot-Agenten verwalten", totalQuestions: 10 },
   { id: "sicherheit-identitaet", title: "Sicherheit und Identität", totalQuestions: 21 },
-  { id: "purview-compliance", title: "Purview und Compliance", totalQuestions: 27 },
+  { id: "purview-compliance", title: "Purview und Compliance", totalQuestions: 25 },
   { id: "verwaltung-governance", title: "Verwaltung und Governance", totalQuestions: 12 },
   { id: "verantwortungsvolle-ki", title: "Verantwortungsvolle KI", totalQuestions: 2 },
 ];
@@ -405,6 +405,7 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
     id: "real-ab900-21",
     topicId: "purview-compliance",
     prompt: "Ihre Organisation hat ein Microsoft 365-Abonnement. Die Personalabteilung Ihres Unternehmens bittet um eine Kopie aller kürzlich von einem Benutzer namens User1 geänderten Dateien. Was sollten Sie im Microsoft Purview-Portal verwenden? (Wählen Sie zur Beantwortung die entsprechenden Lösungen im Antwortbereich aus.)",
+    imageUrl: "/exam-images/ab900-q21.png",
     options: [
       { id: "A", text: "Überprüfung" },
       { id: "B", text: "Datenkatalog" },
@@ -414,42 +415,58 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "F", text: "Insider-Risikomanagement" },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Electronic Discovery (eDiscovery) ist der Prozess, elektronisch gespeicherte Informationen (ESI) zu identifizieren und bereitzustellen, die als Beweismittel in Untersuchungen und Rechtsfällen dienen können. Mit Microsoft Purview eDiscovery lassen sich Inhalte in Microsoft-365-Diensten identifizieren, überprüfen und verwalten, um Untersuchungen zu unterstützen – unterstützte Dienste sind unter anderem Exchange Online, Microsoft Teams, Microsoft 365-Gruppen, OneDrive, SharePoint und Viva Engage. Postfächer und Websites lassen sich in derselben eDiscovery-Suche durchsuchen, die Ergebnisse anschließend exportieren; eDiscovery-Fälle dienen dem Identifizieren, In-Bereitschaft-Setzen (Hold) und Exportieren von Inhalten aus Postfächern und Websites. Mit einem Office 365 E5- oder Microsoft 365 E5-Abonnement (bzw. entsprechenden E5-Zusatzlizenzen) lassen sich Fälle zusätzlich mit erweiterten eDiscovery-Funktionen verwalten und analysieren – etwa über eine gezielte Inhaltssuche mit einer Abfrage wie „Author:User1 OR ModifiedBy:User1“. Die übrigen Lösungen decken andere Aufgaben ab: Überwachung protokolliert Aktivitäten, Datenkatalog katalogisiert Datenquellen, Verlustprävention von Daten verhindert das Abfließen sensibler Daten, Informationsschutz klassifiziert und schützt Inhalte, und Insider-Risikomanagement erkennt riskantes Nutzerverhalten – keine davon liefert gezielt eine Kopie der von einem bestimmten Benutzer geänderten Dateien.",
+    resources: [
+      { label: "Learn about eDiscovery", url: "https://learn.microsoft.com/en-us/purview/edisc" },
+    ],
   },
   {
     id: "real-ab900-22",
     topicId: "purview-compliance",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Sie müssen Microsoft Purview verwenden, um die folgenden Anforderungen zu erfüllen: • Verhindern, dass Benutzer Dateien teilen, die persönlich identifizierbare Informationen (PII) enthalten. • Maschinelles Lernen verwenden, um ein Modell zu trainieren, das sensible Inhalte erkennt. Welche Microsoft Purview- Lösung sollten Sie für jede Anforderung verwenden? (Um zu antworten, wählen Sie die entsprechenden Optionen im Antwortbereich aus. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    imageUrl: "/exam-images/ab900-q22.png",
     options: [
-      { id: "A", text: "Verhindern, dass Benutzer PII teilen: Kommunikations-Compliance Maschinelles Lernen verwenden, um ein Modell zu trainieren: Datenschutzverletzungsvermeidung" },
-      { id: "B", text: "Verhindern, dass Benutzer PII teilen: Datenschutzverletzungsvermeidung Maschinelles Lernen verwenden, um ein Modell zu trainieren: Informationsschutz" },
-      { id: "C", text: "Verhindern, dass Benutzer PII teilen: Informationsschutz Maschinelles Lernen verwenden, um ein Modell zu trainieren: Insider-Risikomanagement" },
-      { id: "D", text: "Verhindern, dass Benutzer PII teilen: Insider-Risikomanagement Maschinelles Lernen verwenden, um ein Modell zu trainieren: Kommunikations-Compliance" },
-      { id: "E", text: "Verhindern, dass Benutzer PII teilen: Datenschutzverletzungsvermeidung Maschinelles Lernen verwenden, um ein Modell zu trainieren: DSPM für KI" },
-      { id: "F", text: "Verhindern, dass Benutzer PII teilen: DSPM für KI Maschinelles Lernen verwenden, um ein Modell zu trainieren: Insider-Risikomanagement" },
+      { id: "A", text: "Verhindern, dass Benutzer PII teilen: Kommunikations-Compliance; Maschinelles Lernen verwenden, um ein Modell zu trainieren: Verlustprävention von Daten" },
+      { id: "B", text: "Verhindern, dass Benutzer PII teilen: Verlustprävention von Daten; Maschinelles Lernen verwenden, um ein Modell zu trainieren: Informationsschutz" },
+      { id: "C", text: "Verhindern, dass Benutzer PII teilen: Informationsschutz; Maschinelles Lernen verwenden, um ein Modell zu trainieren: Insider-Risikomanagement" },
+      { id: "D", text: "Verhindern, dass Benutzer PII teilen: Insider-Risikomanagement; Maschinelles Lernen verwenden, um ein Modell zu trainieren: Kommunikations-Compliance" },
+      { id: "E", text: "Verhindern, dass Benutzer PII teilen: Verlustprävention von Daten; Maschinelles Lernen verwenden, um ein Modell zu trainieren: DSPM für KI" },
+      { id: "F", text: "Verhindern, dass Benutzer PII teilen: DSPM für KI; Maschinelles Lernen verwenden, um ein Modell zu trainieren: Insider-Risikomanagement" },
     ],
-    correct: "E",
-    explanation: "",
+    correct: "B",
+    explanation: "Data Loss Prevention (DLP) in Microsoft Purview erkennt sensible Informationen wie persönlich identifizierbare Informationen (PII) anhand von Richtlinien und verhindert, dass Benutzer solche Inhalte unbeabsichtigt oder unautorisiert teilen – etwa per E-Mail, SharePoint, OneDrive oder Teams. Informationsschutz (Information Protection) stellt dagegen die Klassifizierungs- und Kennzeichnungsfunktionen bereit, mit denen sich Modelle zur Erkennung sensibler Inhalte mithilfe von maschinellem Lernen trainieren lassen (z. B. trainierbare Klassifizierer), die anschließend von anderen Purview-Lösungen wie DLP genutzt werden können. Kommunikations-Compliance überwacht Nachrichteninhalte auf Richtlinienverstöße, Insider-Risikomanagement erkennt riskantes Nutzerverhalten, und DSPM für KI bewertet den Sicherheitsstatus von KI-Anwendungen – keine dieser drei Lösungen ist primär für das Verhindern von PII-Freigaben oder das Trainieren von Erkennungsmodellen zuständig.",
+    resources: [
+      { label: "Learn about data loss prevention", url: "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp" },
+      { label: "Learn about trainable classifiers", url: "https://learn.microsoft.com/en-us/purview/classifier-learn-about" },
+    ],
   },
   {
     id: "real-ab900-23",
+    type: "yesno",
     topicId: "purview-compliance",
     prompt: "Sie möchten die von einem Serviceadministrator in Microsoft 365 durchgeführten administrativen Maßnahmen anzeigen. Wählen Sie für jede der folgenden Aussagen „Ja“, wenn die Aussage zutrifft. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
-    options: [
-      { id: "A", text: "Sie können Suche & Intelligenz im Microsoft 365 Admin Center verwenden: Ja Sie können Überwachung im Microsoft Defender-Portal verwenden: Ja Sie können Überwachung im Microsoft Purview-Portal verwenden: Ja" },
-      { id: "B", text: "Sie können Suche & Intelligenz im Microsoft 365 Admin Center verwenden: Ja Sie können Überwachung im Microsoft Defender-Portal verwenden: Ja Sie können Überwachung im Microsoft Purview-Portal verwenden: Nein" },
-      { id: "C", text: "Sie können Suche & Intelligenz im Microsoft 365 Admin Center verwenden: Ja Sie können Überwachung im Microsoft Defender-Portal verwenden: Nein Sie können Überwachung im Microsoft Purview-Portal verwenden: Ja" },
-      { id: "D", text: "Sie können Suche & Intelligenz im Microsoft 365 Admin Center verwenden: Nein Sie können Überwachung im Microsoft Defender-Portal verwenden: Ja Sie können Überwachung im Microsoft Purview-Portal verwenden: Nein" },
-      { id: "E", text: "Sie können Suche & Intelligenz im Microsoft 365 Admin Center verwenden: Nein Sie können Überwachung im Microsoft Defender-Portal verwenden: Nein Sie können Überwachung im Microsoft Purview-Portal verwenden: Ja" },
-      { id: "F", text: "Sie können Suche & Intelligenz im Microsoft 365 Admin Center verwenden: Nein Sie können Audit im Microsoft Defender-Portal verwenden: Nein Sie können Audit im Microsoft Purview-Portal verwenden: Nein" },
+    statements: [
+      { text: "Sie können Suche & Intelligenz im Microsoft 365 Admin Center verwenden", correct: "Nein" },
+      { text: "Sie können Überwachung im Microsoft Defender-Portal verwenden", correct: "Ja" },
+      { text: "Sie können Überwachung im Microsoft Purview-Portal verwenden", correct: "Ja" },
     ],
-    correct: "A",
-    explanation: "",
+    combinedOptions: [["Ja", "Ja", "Ja"], ["Ja", "Ja", "Nein"], ["Ja", "Nein", "Ja"], ["Nein", "Ja", "Nein"], ["Nein", "Ja", "Ja"], ["Nein", "Nein", "Nein"]],
+    explanation: "Microsoft Search bietet eine benutzerfreundliche Oberfläche, um Informationen wie Dateien und Dokumente, interne Websites und Business-Tools, Personen und Gruppen sowie Antworten zu finden – Suche & Intelligenz im Microsoft 365 Admin Center eignet sich jedoch nicht dafür, Überwachungsprotokolle oder administrative Maßnahmen anzuzeigen. Die Überwachung (Audit) ist standardmäßig aktiviert, und das Überwachungsprotokoll lässt sich sowohl über das Microsoft Defender-Portal als auch über das Microsoft Purview-Portal durchsuchen – beide Portale greifen auf dasselbe zugrunde liegende Überwachungsprotokoll zu und eignen sich damit zur Überprüfung administrativer Maßnahmen eines Serviceadministrators.",
+    resources: [
+      { label: "Set up Microsoft Search", url: "https://learn.microsoft.com/en-us/microsoftsearch/set-up-microsoft-search" },
+      { label: "Audit log search in the Microsoft Defender portal", url: "https://learn.microsoft.com/en-us/purview/audit-log-search-defender-portal" },
+      { label: "Audit log activities", url: "https://learn.microsoft.com/en-us/purview/audit-log-activities" },
+    ],
   },
   {
     id: "real-ab900-24",
     topicId: "sicherheit-identitaet",
-    prompt: "Wählen Sie die Antwort aus, die den Satz korrekt vervollständigt.",
+    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    imageUrl: "/exam-images/ab900-q24.png",
+    blankFill: {
+      template: "Conditional Access-Richtlinien ___.",
+      choices: ["werden über das Microsoft Defender-Portal konfiguriert", "werden nur auf lokale Ressourcen angewendet", "bieten Kontrolle darüber, wie Benutzer auf Cloud-Apps zugreifen können", "erfordern ein Microsoft Exchange-Postfach"],
+    },
     options: [
       { id: "A", text: "Conditional Access-Richtlinien werden über das Microsoft Defender-Portal konfiguriert." },
       { id: "B", text: "Conditional Access-Richtlinien werden nur auf lokale Ressourcen angewendet." },
@@ -457,7 +474,10 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Conditional Access-Richtlinien erfordern ein Microsoft Exchange-Postfach." },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Conditional-Access-Richtlinien sind im Kern Wenn-Dann-Anweisungen: Wenn ein Benutzer auf eine Ressource zugreifen möchte, muss zuvor eine bestimmte Bedingung erfüllt werden. Möchte ein Benutzer beispielsweise auf eine Anwendung oder einen Dienst wie Microsoft 365 zugreifen, kann eine Richtlinie verlangen, dass zuvor eine Multi-Faktor-Authentifizierung durchgeführt wird. Damit bieten Conditional-Access-Richtlinien gezielte Kontrolle darüber, wie Benutzer auf Cloud-Apps zugreifen können. Sie werden über Microsoft Entra ID konfiguriert (nicht über das Microsoft Defender-Portal), gelten für Cloud-Ressourcen (nicht nur lokale Ressourcen) und setzen kein Microsoft-Exchange-Postfach voraus.",
+    resources: [
+      { label: "What is Conditional Access?", url: "https://learn.microsoft.com/en-us/entra/identity/conditional-access/overview" },
+    ],
   },
   {
     id: "real-ab900-25",
@@ -470,11 +490,14 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Verteilerliste" },
     ],
     correct: "A",
-    explanation: "",
+    explanation: "Microsoft Entra ID bietet gruppenbasierte Lizenzierung, mit der einer Gruppe eine oder mehrere Produktlizenzen zugewiesen werden können. Microsoft Entra ID stellt dabei sicher, dass die Lizenzen allen Mitgliedern der Gruppe zugewiesen werden; neue Mitglieder erhalten die passenden Lizenzen automatisch, und beim Austritt aus der Gruppe werden die Lizenzen wieder entzogen. Dieses Verfahren macht eine manuelle, per PowerShell automatisierte Lizenzverwaltung überflüssig, um organisatorische und abteilungsbezogene Änderungen pro Benutzer nachzuvollziehen – besonders wertvoll bei hoher Fluktuation wie im HR-Data-Users-Team. Lizenzen lassen sich jeder Sicherheitsgruppe in Microsoft Entra ID zuweisen; Sicherheitsgruppen können aus der lokalen Umgebung über Microsoft Entra Connect synchronisiert, direkt in Microsoft Entra ID (Cloud-only) erstellt oder automatisch über die dynamische Gruppenfunktion gepflegt werden. Eine dynamische Sicherheitsgruppe eignet sich hier am besten, da sie sowohl die Zugriffskontrolle auf die SharePoint-Website übernehmen als auch – dank automatischer, attributbasierter Mitgliedschaftspflege – die Lizenzzuweisung ohne manuellen Aufwand bei häufigen Personalwechseln sicherstellen kann. E-Mail-fähige Sicherheitsgruppen, Microsoft 365-Gruppen und Verteilerlisten unterstützen entweder keine oder nur eingeschränkte Lizenzzuweisung bzw. keine dynamische, attributbasierte Mitgliedschaft.",
+    resources: [
+      { label: "What is group-based licensing in Microsoft Entra ID?", url: "https://learn.microsoft.com/en-us/entra/fundamentals/concept-group-based-licensing" },
+    ],
   },
   {
     id: "real-ab900-26",
-    topicId: "purview-compliance",
+    topicId: "copilot-grundlagen",
     prompt: "Sie verwenden Microsoft 365 Copilot. Womit erstellt Copilot Antworten basierend auf in Microsoft SharePoint gespeicherten Unternehmensdaten?",
     options: [
       { id: "A", text: "Microsoft Intune" },
@@ -483,12 +506,20 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Microsoft Purview" },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Beim Erstellen eines Microsoft 365-Abonnements wird automatisch ein Mandant (Tenant) für die Organisation angelegt. Dieser Mandant liegt innerhalb der Microsoft 365-Dienstgrenze, innerhalb derer Microsoft 365 Copilot auf die Daten der Organisation zugreifen kann. Innerhalb dieser Dienstgrenze zu arbeiten verschafft Copilot jedoch keine mandantenweite Sichtbarkeit: Der Datenzugriff ist immer auf die Berechtigungen des angemeldeten Benutzers beschränkt und umfasst Informationen, auf die der Benutzer bereits zugreifen kann, einschließlich seiner Aktivitäten sowie der Inhalte, die er in Microsoft 365-Apps erstellt und mit denen er interagiert. Copilot nutzt Microsoft Graph, um auf Benutzerdaten im individuellen Kontext des jeweiligen Benutzers zuzugreifen – dazu zählen E-Mails, Chats und Dokumente (einschließlich SharePoint-Dateien), auf die der Benutzer Zugriffsberechtigung hat. Microsoft Intune, Microsoft Defender und Microsoft Purview dienen dagegen der Geräteverwaltung, der Sicherheit bzw. der Compliance und liefern nicht die Datengrundlage für Copilot-Antworten.",
+    resources: [
+      { label: "Microsoft 365 Copilot architecture and how it works", url: "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-architecture" },
+      { label: "Overview of Microsoft Graph", url: "https://learn.microsoft.com/en-us/graph/overview" },
+    ],
   },
   {
     id: "real-ab900-27",
     topicId: "purview-compliance",
-    prompt: "Wählen Sie die Antwort aus, die den Satz korrekt vervollständigt.",
+    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Sie können die ___ Microsoft Purview-Lösung verwenden, um Microsoft 365 Copilot-Eingaben zu erkennen, die sensible Informationen enthalten.",
+      choices: ["Data Lifecycle Management", "DSPM for AI", "Information Barriers", "Information Protection"],
+    },
     options: [
       { id: "A", text: "Sie können die Data Lifecycle Management Microsoft Purview-Lösung verwenden, um Microsoft 365 Copilot-Eingaben zu erkennen, die sensible Informationen enthalten." },
       { id: "B", text: "Sie können die DSPM for AI Microsoft Purview-Lösung verwenden, um Microsoft 365 Copilot-Eingaben zu erkennen, die sensible Informationen enthalten." },
@@ -496,11 +527,14 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Sie können die Information Protection Microsoft Purview-Lösung verwenden, um Microsoft 365 Copilot-Eingaben zu erkennen, die sensible Informationen enthalten." },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Microsoft Purview Data Security Posture Management (DSPM) for AI bietet im Microsoft Purview-Portal eine zentrale Verwaltungsstelle, um Daten für KI-Anwendungen schnell abzusichern und die KI-Nutzung proaktiv zu überwachen – dazu zählen Copilots, Agenten und andere KI-Anwendungen, die auch Large Language Models (LLMs) von Drittanbietern nutzen. DSPM for AI bietet unter anderem: Einblicke und Analysen zur KI-Aktivität in der Organisation, einsatzbereite Richtlinien zum Schutz von Daten und zur Vermeidung von Datenverlust in KI-Eingaben (Prompts), Risikobewertungen zur Identifizierung, Behebung und Überwachung möglicher Datenüberfreigabe sowie Compliance-Kontrollen für eine optimale Daten- und Speicherhandhabung. Data Lifecycle Management steuert die Aufbewahrung und Löschung von Inhalten, Information Barriers verhindert Kommunikation zwischen bestimmten Benutzergruppen, und Information Protection klassifiziert und kennzeichnet Inhalte – keine dieser drei Lösungen ist speziell auf das Erkennen sensibler Informationen in Copilot-Eingaben ausgerichtet.",
+    resources: [
+      { label: "Learn about Data Security Posture Management for AI - (classic)", url: "https://learn.microsoft.com/en-us/purview/dspm-for-ai" },
+    ],
   },
   {
     id: "real-ab900-28",
-    topicId: "purview-compliance",
+    topicId: "copilot-grundlagen",
     prompt: "Ein Marketing-Benutzer bittet Copilot, den „neueste Haushaltsvorschlag“ zusammenzufassen, der auf einer SharePoint-Website gespeichert ist, die nur für die Finanzabteilung zugänglich ist. Der Marketing-Benutzer ist kein Mitglied der Website. Welches Prinzip steuert das Verhalten von Copilot und verhindert, dass es die eingeschränkten Inhalte zurückgibt?",
     options: [
       { id: "A", text: "Copilot wendet vor der Verarbeitung der Anfrage die Zero-Trust-Verifizierung an." },
@@ -509,7 +543,10 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Microsoft Purview DLP schwärzt automatisch finanzielle Zahlen in Copilot- Antworten." },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Microsoft 365 Copilot schafft Mehrwert, indem es große Sprachmodelle (LLMs) mit den organisatorischen Daten verbindet. Über Microsoft Graph greift Copilot auf Inhalte und Kontext zu und kann Antworten generieren, die in echten Organisationsdaten verankert sind – etwa Dokumenten, E-Mails, Kalendern, Chats, Besprechungen und Kontakten. Diese Inhalte werden mit dem aktuellen Arbeitskontext des Benutzers kombiniert, um präzise und relevante Antworten zu liefern. Copilot zeigt dabei ausschließlich organisatorische Daten an, für die der jeweilige Benutzer mindestens Anzeigeberechtigungen besitzt – es gelten also dieselben Berechtigungsmodelle wie in den übrigen Microsoft 365-Diensten (z. B. SharePoint), einschließlich Berechtigungen, die Benutzern außerhalb der Organisation über tenantübergreifende Zusammenarbeit (z. B. freigegebene Kanäle in Microsoft Teams) gewährt werden. Da der Marketing-Benutzer kein Mitglied der Finance-Website ist, hat er auf SharePoint-Ebene keinen Zugriff auf den Haushaltsvorschlag – und genau diese bestehende Berechtigung setzt Copilot strikt durch, unabhängig von Zero-Trust-Verifizierung, Sensitivitätslabeln oder DLP-Schwärzung, die hier keine Rolle spielen.",
+    resources: [
+      { label: "Data, Privacy, and Security for Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy" },
+    ],
   },
   {
     id: "real-ab900-29",
@@ -522,7 +559,10 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Es setzt Conditional Access-Richtlinien in Echtzeit durch." },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Microsoft 365 Copilot bildet die Daten einer Organisation auf einen fortschrittlichen lexikalischen und semantischen Index ab, um Suchrelevanz und -genauigkeit zu ermöglichen. Über Microsoft Graph erhält Copilot Zugriff auf Kontext und Beziehungen innerhalb der Daten, was eine kontextuell präzisere Informationssuche ermöglicht. Der semantische Index wird aus Inhalten in Microsoft Graph erzeugt und hilft dabei, kontextrelevante Antworten auf Benutzeranfragen zu erzeugen; er ermöglicht es, Milliarden von Vektoren (mathematische Darstellungen von Merkmalen) zu durchsuchen und passende Ergebnisse zurückzugeben. In Kombination mit Erweiterungen in Microsoft Graph verbindet der semantische Index Benutzer mit relevanten Informationen in der Organisation – personalisiert auf Basis der Verbindungen zwischen Inhalten und Personen im jeweiligen Netzwerk. Dabei respektiert er stets die Sicherheits-, Compliance- und Datenschutzgrenzen innerhalb des Mandanten, einschließlich der individuellen Berechtigungen des Benutzers. Microsoft Graph liefert also weder das vortrainierte Weltwissen des LLM (das kommt vom Sprachmodell selbst) noch fungiert es als Redaktions-Engine oder als Durchsetzungsmechanismus für Conditional-Access-Richtlinien.",
+    resources: [
+      { label: "Semantic indexing for Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/microsoftsearch/semantic-index-for-copilot" },
+    ],
   },
   {
     type: "yesno",
@@ -534,10 +574,33 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { text: "SharePoint Advanced Management kann helfen, den Zugriff von Microsoft 365 Copilot auf Microsoft SharePoint-Inhalte einzuschränken", correct: "Ja" },
       { text: "SharePoint Advanced Management ist als eigenständige Lizenz für Organisationen ohne Microsoft 365 Copilot verfügbar", correct: "Ja" },
     ],
-    explanation: "",
+    combinedOptions: [["Ja", "Ja", "Ja"], ["Ja", "Ja", "Nein"], ["Ja", "Nein", "Ja"], ["Nein", "Ja", "Nein"], ["Nein", "Ja", "Ja"], ["Nein", "Nein", "Nein"]],
+    explanation: "SharePoint Advanced Management (SAM) ist eine umfassende Governance-Lösung für SharePoint und OneDrive, mit der sich Inhaltswachstum effizient verwalten, Zugriffe absichern und Änderungen in der gesamten Organisation überwachen lassen – so bleibt die Kontrolle über den digitalen Arbeitsbereich erhalten und die Umgebung wird auf Microsoft 365 Copilot vorbereitet. Der Zugriff auf SAM-Funktionen erfolgt über eine von zwei Lizenzoptionen: Verfügt eine Organisation über eine Copilot-Lizenz und ist mindestens einem Benutzer eine solche zugewiesen, erhalten SharePoint-Administratoren automatisch Zugriff auf die für die Copilot-Einführung nötigen SAM-Funktionen (einzige Ausnahme: „Restricted Site Creation“ ist nicht enthalten) – es ist also keine Copilot-Lizenz für alle Benutzer der Organisation erforderlich. Organisationen ohne Copilot-Lizenz können SAM-Funktionen alternativ über eine eigenständige SharePoint-Advanced-Management-Lizenz erwerben. SAM umfasst zudem Governance-Kontrollen wie „Restricted Content Discovery“ und „Restricted SharePoint Search“, die gezielt dafür ausgelegt sind, SharePoint-Websites und -Inhalte von der Auffindung und Nutzung durch Copilot auszuschließen oder einzuschränken.",
+    resources: [
+      { label: "What is SharePoint Advanced Management?", url: "https://learn.microsoft.com/en-us/sharepoint/advanced-management" },
+      { label: "Restrict discovery of SharePoint sites and content", url: "https://learn.microsoft.com/en-us/sharepoint/restricted-content-discovery" },
+      { label: "How does licensing work for SharePoint Advanced Management?", url: "https://learn.microsoft.com/en-us/sharepoint/sharepoint-advanced-management-licensing" },
+    ],
   },
   {
     id: "real-ab900-31",
+    type: "yesno",
+    topicId: "purview-compliance",
+    prompt: "Für jede der folgenden Aussagen wählen Sie 'Ja', wenn die Aussage zutrifft. Andernfalls wählen Sie 'Nein'. (HINWEIS: Jede korrekte Auswahl ist einen Punkt wert.)",
+    statements: [
+      { text: "Microsoft Purview DSPM for AI kann Einblick in die ChatGPT-Nutzung geben", correct: "Ja" },
+      { text: "Microsoft Purview DSPM for AI kann Einblick in die Microsoft 365 Copilot-Nutzung geben", correct: "Ja" },
+      { text: "Microsoft Purview DSPM for AI kann Benutzer daran hindern, Microsoft 365 Copilot zu verwenden", correct: "Nein" },
+    ],
+    combinedOptions: [["Ja", "Ja", "Ja"], ["Ja", "Ja", "Nein"], ["Ja", "Nein", "Ja"], ["Nein", "Ja", "Nein"], ["Nein", "Nein", "Ja"], ["Nein", "Nein", "Nein"]],
+    explanation: "Microsoft Purview Data Security Posture Management (DSPM) for AI bietet im Microsoft Purview-Portal eine zentrale Verwaltungsstelle, um Daten für KI-Anwendungen schnell abzusichern und die KI-Nutzung proaktiv zu überwachen – dazu zählen Copilots, Agenten und andere KI-Anwendungen, die auch Large Language Models (LLMs) von Drittanbietern wie ChatGPT nutzen. DSPM for AI liefert unter anderem Einblicke und Analysen zur KI-Aktivität in der Organisation, einsatzbereite Richtlinien zum Schutz von Daten in KI-Eingaben, Risikobewertungen zur möglichen Datenüberfreigabe sowie Compliance-Kontrollen. DSPM for AI ist jedoch darauf ausgelegt, die Nutzung sensibler Daten mit KI zu erkennen, zu bewerten und sichtbar zu machen – es blockiert Benutzer aber NICHT direkt daran, Microsoft 365 Copilot zu verwenden. Um Copilot einzuschränken oder zu blockieren, wird stattdessen das Microsoft 365 Admin Center zur Konfiguration von Lizenzen und Diensteplänen oder das Microsoft Entra Admin Center zur Konfiguration von Conditional Access verwendet.",
+    resources: [
+      { label: "Learn about Data Security Posture Management", url: "https://learn.microsoft.com/en-us/purview/data-security-posture-management-learn-about" },
+      { label: "Considerations for Microsoft Purview Data Security Posture Management", url: "https://learn.microsoft.com/en-us/purview/data-security-posture-management-considerations" },
+    ],
+  },
+  {
+    id: "real-ab900-32",
     topicId: "verantwortungsvolle-ki",
     prompt: "Ein KI-Agent, der darauf vorbereitet wird, Kundenprotokolle zusammenzufassen, zeigt eine Voreingenommenheit zugunsten bestimmter geografischer Regionen. Welches Microsoft Responsible AI-Prinzip wird in erster Linie verletzt und sollte vor der Bereitstellung angesprochen werden?",
     options: [
@@ -547,10 +610,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Inklusivität" },
     ],
     correct: "A",
-    explanation: "",
+    explanation: "Microsoft hat den Responsible AI Standard geschaffen, ein Rahmenwerk für die Entwicklung von KI-Systemen auf Basis von sechs Prinzipien: Fairness, Zuverlässigkeit & Sicherheit, Datenschutz & Sicherheit, Inklusivität, Transparenz und Rechenschaftspflicht. Diese Prinzipien bilden die Grundlage für einen verantwortungsvollen und vertrauenswürdigen Umgang mit KI, insbesondere da intelligente Technologien in alltäglichen Produkten und Diensten immer präsenter werden. Fairness bedeutet, dass KI-Systeme alle Menschen fair behandeln und ähnliche Gruppen nicht unterschiedlich beeinflussen sollen – etwa sollten KI-Systeme bei medizinischen Empfehlungen, Kreditanträgen oder Bewerbungen Personen mit ähnlichen Symptomen, finanziellen Verhältnissen oder Qualifikationen gleich behandeln. Eine Voreingenommenheit zugunsten bestimmter geografischer Regionen ist damit in erster Linie eine Verletzung des Fairness-Prinzips, nicht der Transparenz (verständliche Erklärung von Entscheidungen), der Rechenschaftspflicht (Verantwortlichkeit der Entwickler für das Systemverhalten) oder der Inklusivität (Zugänglichkeit für alle Nutzergruppen unabhängig von Fähigkeiten, Geschlecht oder Herkunft).",
+    resources: [
+      { label: "What is Responsible AI?", url: "https://learn.microsoft.com/en-us/azure/machine-learning/concept-responsible-ai" },
+    ],
   },
   {
-    id: "real-ab900-32",
+    id: "real-ab900-33",
     topicId: "sicherheit-identitaet",
     prompt: "Compliance benötigt einen Bericht, der SharePoint-Websites auflistet, die hochsensible Dokumente enthalten, aber mit großen Gruppen wie „Jeder außer externen Benutzern\" geteilt werden. Welche Microsoft-Funktion ist dafür ausgelegt, Data Access Governance (DAG)-Berichte zu erstellen, die sensible Inhalte sowie eine nachsichtigere Freigabepraxis identifizieren?",
     options: [
@@ -560,12 +626,17 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "SharePoint Advanced Management (SAM)" },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "SharePoint Advanced Management (SAM) ist eine umfassende Governance-Lösung für SharePoint und OneDrive, mit der sich Inhaltswachstum effizient verwalten, Zugriffe absichern und Änderungen in der gesamten Organisation überwachen lassen – so bleibt die Kontrolle über den digitalen Arbeitsbereich erhalten und die Umgebung wird auf Microsoft 365 Copilot vorbereitet. SAM umfasst Data-Access-Governance-Berichte, die dabei helfen, den Zugriff auf SharePoint-Daten zu steuern: Die Berichte zeigen Websites auf, die potenziell übermäßig freigegebene oder sensible Inhalte enthalten, sodass sich passende Sicherheits- und Compliance-Richtlinien anwenden lassen – genau das gesuchte Szenario mit hochsensiblen Dokumenten, die breit mit „Jeder außer externen Benutzern“ geteilt sind. Microsoft Entra ID Protection erkennt riskante Anmeldungen und Identitäten, Microsoft Purview DLP verhindert das Teilen sensibler Daten anhand von Richtlinien, und Microsoft Defender for Cloud Apps überwacht Cloud-App-Nutzung – keine dieser drei Lösungen liefert speziell DAG-Berichte zur SharePoint-Freigabepraxis.",
+    resources: [
+      { label: "What is SharePoint Advanced Management?", url: "https://learn.microsoft.com/en-us/sharepoint/advanced-management" },
+      { label: "Data access governance reports for SharePoint and OneDrive sites", url: "https://learn.microsoft.com/en-us/sharepoint/data-access-governance-reports" },
+    ],
   },
   {
-    id: "real-ab900-33",
+    id: "real-ab900-34",
     topicId: "purview-compliance",
     prompt: "Sie haben eine Microsoft SharePoint-Website wie in der folgenden Abbildung gezeigt. Sie müssen die Einstellungen von SLabel1 anzeigen. Was sollten Sie verwenden?",
+    imageUrl: "/exam-images/ab900-q34.png",
     options: [
       { id: "A", text: "Das Microsoft Defender-Portal" },
       { id: "B", text: "Das SharePoint-Admin-Center" },
@@ -573,12 +644,20 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Das Microsoft Purview-Portal" },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Vertraulichkeitsbezeichnungen (Sensitivity Labels) aus Microsoft Purview Information Protection ermöglichen es, die Daten einer Organisation zu klassifizieren und zu schützen, ohne dabei die Produktivität der Benutzer oder ihre Zusammenarbeit zu beeinträchtigen. Da SLabel1 in der Spalte „Sensitivity“ (Vertraulichkeit) der SharePoint-Dokumentbibliothek als Bezeichnung eines Dokuments erscheint, handelt es sich um eine solche Vertraulichkeitsbezeichnung – ihre Einstellungen (Name, Priorität, Schutzeinstellungen) werden zentral im Microsoft Purview-Portal unter Information Protection > Sensitivity labels verwaltet, nicht im Microsoft Defender-, SharePoint- oder Microsoft 365-Admin-Center.",
+    resources: [
+      { label: "Learn about sensitivity labels", url: "https://learn.microsoft.com/en-us/purview/sensitivity-labels" },
+      { label: "Create and configure sensitivity labels with Microsoft Purview", url: "https://learn.microsoft.com/en-us/training/modules/m365-compliance-information-protect-information" },
+    ],
   },
   {
-    id: "real-ab900-34",
+    id: "real-ab900-35",
     topicId: "purview-compliance",
-    prompt: "Wählen Sie die Antwort, die den Satz richtig vervollständigt.",
+    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Sie können ___ verwenden, um Bedrohungsindikatoren zu überprüfen, die über E-Mail-, Identitäts- und Gerätevorfälle hinweg in einer einzigen Ansicht korreliert sind.",
+      choices: ["Microsoft Defender für Office 365", "Microsoft Defender XDR", "Microsoft Purview Compliance Manager", "Microsoft Purview Data Loss Prevention"],
+    },
     options: [
       { id: "A", text: "Sie können Microsoft Defender für Office 365 verwenden, um Bedrohungsindikatoren zu überprüfen, die über E-Mail-, Identitäts- und Gerätevorfälle hinweg in einer einzigen Ansicht korreliert sind." },
       { id: "B", text: "Sie können Microsoft Defender XDR verwenden, um Bedrohungsindikatoren zu überprüfen, die über E-Mail-, Identitäts- und Gerätevorfälle hinweg in einer einzigen Ansicht korreliert sind." },
@@ -586,10 +665,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Sie können Microsoft Purview Data Loss Prevention verwenden, um Bedrohungsindikatoren zu überprüfen, die über E-Mail-, Identitäts- und Gerätevorfälle hinweg in einer einzigen Ansicht korreliert sind." },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Mit Microsoft Defender XDR lassen sich benutzerdefinierte Bedrohungswarnungen erstellen, die helfen, mögliche Angriffsaktivitäten in der Organisation im Blick zu behalten. Verdächtige Ereignisse können markiert werden, um Hinweise zusammenzufügen und möglicherweise eine Angriffskette zu stoppen. Diese benutzerdefinierten Bedrohungswarnungen gelten nur für die eigene Organisation und markieren genau die Ereignisse, die überwacht werden sollen – Defender XDR korreliert dabei Signale über E-Mail-, Identitäts- und Gerätevorfälle hinweg in einer einzigen, zusammenhängenden Ansicht. Microsoft Defender für Office 365 deckt nur E-Mail-Bedrohungen ab, Microsoft Purview Compliance Manager bewertet die Compliance-Lage, und Microsoft Purview Data Loss Prevention verhindert das Teilen sensibler Daten – keines dieser drei liefert eine vorfallsübergreifende, korrelierte Bedrohungsansicht über E-Mail, Identität und Geräte hinweg.",
+    resources: [
+      { label: "Understand threat intelligence concepts", url: "https://learn.microsoft.com/en-us/defender-endpoint/threat-indicator-concepts" },
+    ],
   },
   {
-    id: "real-ab900-35",
+    id: "real-ab900-35-displaced-user1-exfil",
     topicId: "purview-compliance",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement, das einen Benutzer namens User1 enthält. User1 plant, Ihr Unternehmen in zwei Wochen zu verlassen. Sie müssen die Aktivitäten von User1 erfassen, um festzustellen, ob der Benutzer Daten exfiltriert. Welche Microsoft Purview-Lösung sollten Sie verwenden?",
     options: [
