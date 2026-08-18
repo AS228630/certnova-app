@@ -32,9 +32,9 @@ import type { PracticeQuestion, PracticeTopic, SingleChoiceQuestion, YesNoQuesti
 
 export const AB900_TOPICS: PracticeTopic[] = [
   { id: "copilot-grundlagen", title: "Microsoft 365 Copilot Grundlagen", totalQuestions: 29 },
-  { id: "copilot-agenten", title: "Copilot-Agenten verwalten", totalQuestions: 11 },
+  { id: "copilot-agenten", title: "Copilot-Agenten verwalten", totalQuestions: 10 },
   { id: "sicherheit-identitaet", title: "Sicherheit und Identität", totalQuestions: 21 },
-  { id: "purview-compliance", title: "Purview und Compliance", totalQuestions: 26 },
+  { id: "purview-compliance", title: "Purview und Compliance", totalQuestions: 27 },
   { id: "verwaltung-governance", title: "Verwaltung und Governance", totalQuestions: 12 },
   { id: "verantwortungsvolle-ki", title: "Verantwortungsvolle KI", totalQuestions: 2 },
 ];
@@ -384,8 +384,9 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
   },
   {
     id: "real-ab900-20",
-    topicId: "copilot-agenten",
+    topicId: "purview-compliance",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Sie stellen fest, dass Microsoft SharePoint-Dateien mit Benutzern außerhalb Ihrer Organisation geteilt werden. Sie müssen herausfinden, welche Dateien mit den externen Benutzern geteilt werden. Welchen Bericht sollten Sie im SharePoint Admin Center verwenden? (Wählen Sie zur Beantwortung den entsprechenden Bericht im Antwortbereich aus.)",
+    imageUrl: "/exam-images/ab900-q20.png",
     options: [
       { id: "A", text: "Agenten-Einblicke" },
       { id: "B", text: "App-Einblicke" },
@@ -395,7 +396,10 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "F", text: "Vergleich von Website-Richtlinien" },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Die Datenzugriffsverwaltung (Data Access Governance) im SharePoint Admin Center hilft dabei, mögliche Ursachen für übermäßige Freigaben (Oversharing) zu erkennen, indem sie unter anderem anzeigt, auf welchen Websites die meisten neuen Freigabelinks erstellt wurden – einschließlich Berichten zu Inhalten, die mit „Jeder außer externen Benutzern“ sowie über Freigabelinks des Typs „Jeder“, „Personen in der Organisation“ oder „Bestimmte Personen (extern geteilt)“ zugänglich sind. Damit lässt sich gezielt nachvollziehen, welche SharePoint-Inhalte an externe Benutzer freigegeben wurden. Agenten-Einblicke und App-Einblicke betreffen die Nutzung von Copilot-Agenten bzw. Anwendungen, der Änderungsverlauf protokolliert administrative Änderungen, OneDrive-Konten listet Benutzerkonten auf, und der Vergleich von Website-Richtlinien vergleicht Richtlinieneinstellungen zwischen Websites – keiner dieser Berichte liefert eine Übersicht über extern geteilte Dateien.",
+    resources: [
+      { label: "Data access governance reports", url: "https://learn.microsoft.com/en-us/sharepoint/data-access-governance-reports" },
+    ],
   },
   {
     id: "real-ab900-21",
