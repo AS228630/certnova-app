@@ -1253,7 +1253,7 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
     ],
   },
   {
-    id: "real-ab900-68-displaced-zero-trust-principles",
+    id: "real-ab900-69",
     topicId: "sicherheit-identitaet",
     prompt: "Sie überprüfen die Sicherheitsrichtlinien Ihres Unternehmens im Rahmen einer Zero-Trust-Strategie. Welche Aussage beschreibt die Zero-Trust-Prinzipien genau?",
     options: [
@@ -1263,10 +1263,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Zero Trust entfernt die Notwendigkeit, Zugriffsberechtigungen regelmäßig zu überprüfen und anzupassen." },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Zero Trust ist eine Sicherheitsstrategie – kein Produkt und kein Dienst, sondern ein Ansatz zur Gestaltung und Umsetzung folgender Sicherheitsprinzipien: „Explizit überprüfen\" – Authentifizierung und Autorisierung erfolgen stets auf Basis aller verfügbaren Datenpunkte. „Zugriff mit den geringsten Rechten verwenden\" – der Benutzerzugriff wird durch Just-in-Time- und Just-Enough-Access (JIT/JEA), risikobasierte adaptive Richtlinien und Datenschutz eingeschränkt. „Von einem Sicherheitsvorfall ausgehen\" (Assume Breach) – der Explosionsradius wird minimiert und der Zugriff segmentiert; Ende-zu-Ende-Verschlüsselung wird überprüft, und Analysen werden genutzt, um Transparenz zu schaffen, Bedrohungen zu erkennen und die Abwehr zu verbessern. Diese Prinzipien bilden den Kern von Zero Trust. Statt davon auszugehen, dass alles hinter der Unternehmensfirewall sicher ist, geht das Zero-Trust-Modell von einem Sicherheitsvorfall aus und überprüft jede Anfrage so, als käme sie aus einem nicht kontrollierten Netzwerk. Unabhängig davon, woher eine Anfrage stammt oder auf welche Ressource sie zugreift, gilt beim Zero-Trust-Modell: „Never trust, always verify\" (Vertraue nie, überprüfe immer).",
+    resources: [
+      { label: "What is Zero Trust?", url: "https://learn.microsoft.com/en-us/security/zero-trust/zero-trust-overview" },
+    ],
   },
   {
-    id: "real-ab900-69",
+    id: "real-ab900-70",
     topicId: "purview-compliance",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Sie müssen einen Bericht erstellen, der die Berechtigungen und aktiven Freigabelinks von Inhalten zeigt, die in Microsoft OneDrive-Konten gespeichert sind. Was sollten Sie verwenden?",
     options: [
@@ -1276,19 +1279,10 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "eDiscovery im Microsoft Purview-Portal" },
     ],
     correct: "C",
-    explanation: "",
-  },
-  {
-    type: "yesno",
-    id: "real-ab900-70",
-    topicId: "copilot-grundlagen",
-    prompt: "Für jede der folgenden Aussagen wählen Sie Ja, wenn die Aussage wahr ist. Andernfalls wählen Sie Nein. (HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
-    statements: [
-      { text: "Eingabeaufforderungen und Antworten, die von Benutzern in Microsoft 365 Copilot ausgegeben werden, werden von Microsoft zum Trainieren von Modellen verwendet", correct: "Nein" },
-      { text: "Von Microsoft Graph abgerufene Inhalte werden von Microsoft zum Trainieren von Modellen verwendet", correct: "Nein" },
-      { text: "Microsoft 365 Copilot respektiert die Sicherheitsberechtigungen in Ihrem Microsoft 365-Abonnement", correct: "Ja" },
+    explanation: "Da Sprawl und übermäßige Freigabe von SharePoint-Websites mit dem exponentiellen Datenwachstum zunehmen, benötigen Organisationen Unterstützung bei der Verwaltung ihrer Daten. Berichte zur Datenzugriffsverwaltung (Data Access Governance) helfen, den Zugriff auf SharePoint-Daten zu steuern. Die Berichte ermöglichen es, Websites zu entdecken, die potenziell übermäßig freigegebene oder vertrauliche Inhalte enthalten. Anhand dieser Berichte können Sie die passenden Sicherheits- und Compliance-Richtlinien bewerten und anwenden. Momentaufnahmeberichte (Snapshot Reports) zeigen den aktuellen Status Ihrer Organisation basierend auf bestimmten Berichtskriterien zum Zeitpunkt der Erstellung. Derzeit gibt es drei Arten von Momentaufnahmeberichten: Bericht zu Websiteberechtigungen – bietet eine umfassende Momentaufnahme der Berechtigungsstruktur aller SharePoint- und OneDrive-Websites und hilft, Websites mit dem breitesten Benutzerzugriff zu identifizieren (z. B. Websites mit Tausenden von Benutzern, externen Gästen oder der Berechtigung „Jeder außer externen Benutzern\"). Bericht zu Websiteberechtigungen für Benutzer – listet alle Websites auf, auf die ein bestimmter Benutzer zugreifen kann, und zeigt, ob der Zugriff auf die gesamte Website oder nur bestimmte Bereiche besteht, direkt zugewiesen oder indirekt über Gruppen. Bericht zu Vertraulichkeitsbezeichnungen für Dateien – identifiziert SharePoint-Websites mit Dateien, denen bestimmte Vertraulichkeitsbezeichnungen zugewiesen sind, damit überprüft werden kann, ob für die sensibelsten Inhalte die passenden Sicherheitsrichtlinien gelten.",
+    resources: [
+      { label: "Data access governance reports for SharePoint and OneDrive sites", url: "https://learn.microsoft.com/en-us/sharepoint/data-access-governance-reports" },
     ],
-    explanation: "",
   },
   {
     id: "real-ab900-71",
@@ -1691,6 +1685,18 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "F", text: "Agenten – Einstellungen" },
     ],
     correct: "A",
+    explanation: "",
+  },
+  {
+    type: "yesno",
+    id: "real-ab900-70-displaced-copilot-data-usage",
+    topicId: "copilot-grundlagen",
+    prompt: "Für jede der folgenden Aussagen wählen Sie Ja, wenn die Aussage wahr ist. Andernfalls wählen Sie Nein. (HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    statements: [
+      { text: "Eingabeaufforderungen und Antworten, die von Benutzern in Microsoft 365 Copilot ausgegeben werden, werden von Microsoft zum Trainieren von Modellen verwendet", correct: "Nein" },
+      { text: "Von Microsoft Graph abgerufene Inhalte werden von Microsoft zum Trainieren von Modellen verwendet", correct: "Nein" },
+      { text: "Microsoft 365 Copilot respektiert die Sicherheitsberechtigungen in Ihrem Microsoft 365-Abonnement", correct: "Ja" },
+    ],
     explanation: "",
   },
 ];
