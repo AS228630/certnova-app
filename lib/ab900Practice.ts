@@ -5,8 +5,12 @@
 // explicit instruction, only the German content was extracted — no English
 // text is present in the final content.
 //
-// PROGRESS: 101 questions extracted and verified (real-ab900-1 through
-// real-ab900-101). The source PDF's own question numbering goes up to 104,
+// PROGRESS: 101 questions extracted and verified from the original PDF
+// (real-ab900-1 through real-ab900-101), plus additional real questions
+// (starting at real-ab900-102) added afterward from a second source
+// (cert2brain.com screenshots), each cross-checked for duplicates against
+// the existing 101 before being added. The original PDF's own question
+// numbering goes up to 104,
 // but a careful count (verified independently three ways: block-splitting,
 // counting "Antwort:" answer pages, and a full manual page-by-page listing)
 // confirms the PDF contains exactly 101 complete question+answer pairs — the
@@ -26,7 +30,7 @@ import type { PracticeQuestion, PracticeTopic, SingleChoiceQuestion, YesNoQuesti
 
 export const AB900_TOPICS: PracticeTopic[] = [
   { id: "copilot-grundlagen", title: "Microsoft 365 Copilot Grundlagen", totalQuestions: 32 },
-  { id: "copilot-agenten", title: "Copilot-Agenten verwalten", totalQuestions: 9 },
+  { id: "copilot-agenten", title: "Copilot-Agenten verwalten", totalQuestions: 10 },
   { id: "sicherheit-identitaet", title: "Sicherheit und Identität", totalQuestions: 20 },
   { id: "purview-compliance", title: "Purview und Compliance", totalQuestions: 27 },
   { id: "verwaltung-governance", title: "Verwaltung und Governance", totalQuestions: 11 },
@@ -1353,6 +1357,26 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "",
+  },
+  {
+    id: "real-ab900-102",
+    topicId: "copilot-agenten",
+    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "In Microsoft 365 Copilot sollten Sie ___ verwenden, um mehrstufiges Schlussfolgern über unstrukturierte Daten durchzuführen.",
+      choices: ["ein Notizbuch", "den Chat", "den Analyst-Agenten", "den Researcher-Agenten"],
+    },
+    options: [
+      { id: "A", text: "In Microsoft 365 Copilot sollten Sie ein Notizbuch verwenden, um mehrstufiges Schlussfolgern über unstrukturierte Daten durchzuführen." },
+      { id: "B", text: "In Microsoft 365 Copilot sollten Sie den Chat verwenden, um mehrstufiges Schlussfolgern über unstrukturierte Daten durchzuführen." },
+      { id: "C", text: "In Microsoft 365 Copilot sollten Sie den Analyst-Agenten verwenden, um mehrstufiges Schlussfolgern über unstrukturierte Daten durchzuführen." },
+      { id: "D", text: "In Microsoft 365 Copilot sollten Sie den Researcher-Agenten verwenden, um mehrstufiges Schlussfolgern über unstrukturierte Daten durchzuführen." },
+    ],
+    correct: "D",
+    explanation: "Der Researcher-Agent ist ein intelligenter Assistent innerhalb von Microsoft 365 Copilot, der für komplexe, mehrstufige Recherche-Aufgaben konzipiert ist. Er liefert umfassende, quellenbelegte Berichte, die fundierte Entscheidungen beschleunigen, und zieht dabei Erkenntnisse sowohl aus dem Web als auch aus Arbeitsinhalten (Dateien, E-Mails, Besprechungen, Chats), auf die der Benutzer bereits Zugriff hat. Der Researcher-Agent ist speziell für tiefergehendes Schlussfolgern ausgelegt und eignet sich besonders für komplexe Aufgaben, die eine sorgfältige Analyse erfordern – durch eine längere Verarbeitungszeit liefert er eine umfassendere, aufschlussreichere Antwort. Der Standard-Copilot-Chat dagegen unterstützt ein breites Spektrum alltäglicher Aufgaben in den Microsoft 365-Apps: Er ist auf Geschwindigkeit und Effizienz optimiert und eignet sich gut für schnellere Aufgaben wie das Zusammenfassen von E-Mails oder das Verfassen kurzer Antworten.",
+    resources: [
+      { label: "Get started with Researcher agent in Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/copilot/microsoft-365/researcher-agent" },
+    ],
   },
 ];
 
