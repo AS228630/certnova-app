@@ -61,7 +61,12 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { text: "Microsoft 365 Copilot verwendet dieselben zugrunde liegenden Kontrollen für den Datenzugriff wie andere Microsoft 365-Dienste", correct: "Ja" },
       { text: "Microsoft 365 Copilot kann Konnektoren verwenden, um Informationen aus Datenquellen von Drittanbietern abzurufen", correct: "Ja" },
     ],
-    explanation: "",
+    combinedOptions: [["Ja", "Ja", "Ja"], ["Ja", "Ja", "Nein"], ["Ja", "Nein", "Ja"], ["Nein", "Ja", "Ja"], ["Nein", "Nein", "Ja"], ["Nein", "Nein", "Nein"]],
+    explanation: "Microsoft 365 Copilot schafft Mehrwert, indem es große Sprachmodelle (LLMs) mit den organisatorischen Daten verbindet. Über Microsoft Graph greift Copilot auf Inhalte und Kontext zu und kann Antworten generieren, die in echten Organisationsdaten verankert sind – etwa Dokumenten, E-Mails, Kalendern, Chats, Besprechungen und Kontakten. Diese Inhalte werden mit dem aktuellen Arbeitskontext des Benutzers kombiniert (z. B. die laufende Besprechung, frühere E-Mail-Verläufe zu einem Thema oder Chat-Unterhaltungen der letzten Woche), um präzise und relevante Antworten zu liefern. Copilot zeigt dabei ausschließlich organisatorische Daten an, für die der jeweilige Benutzer mindestens Anzeigeberechtigungen besitzt – es gelten also dieselben Berechtigungsmodelle wie in den übrigen Microsoft 365-Diensten (z. B. SharePoint), weshalb eine korrekte Rechtevergabe in diesen Diensten entscheidend bleibt. Zusätzlich lassen sich über Copilot-Konnektoren externe Daten aus Drittanbieter-Quellen einbinden: synchronisierte Konnektoren indizieren externe Inhalte in Microsoft Graph, während föderierte Konnektoren (aktuell als Early-Access-Vorschau über das Model Context Protocol, MCP) Inhalte in Echtzeit abrufen, ohne sie zu indizieren.",
+    resources: [
+      { label: "Data, Privacy, and Security for Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy" },
+      { label: "Microsoft 365 Copilot connectors overview", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/overview-copilot-connector" },
+    ],
   },
   {
     id: "real-ab900-3",
