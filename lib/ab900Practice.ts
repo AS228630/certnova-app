@@ -31,9 +31,9 @@
 import type { PracticeQuestion, PracticeTopic, SingleChoiceQuestion, YesNoQuestion } from "./az900Practice";
 
 export const AB900_TOPICS: PracticeTopic[] = [
-  { id: "copilot-grundlagen", title: "Microsoft 365 Copilot Grundlagen", totalQuestions: 31 },
-  { id: "copilot-agenten", title: "Copilot-Agenten verwalten", totalQuestions: 10 },
-  { id: "sicherheit-identitaet", title: "Sicherheit und Identität", totalQuestions: 20 },
+  { id: "copilot-grundlagen", title: "Microsoft 365 Copilot Grundlagen", totalQuestions: 29 },
+  { id: "copilot-agenten", title: "Copilot-Agenten verwalten", totalQuestions: 11 },
+  { id: "sicherheit-identitaet", title: "Sicherheit und Identität", totalQuestions: 21 },
   { id: "purview-compliance", title: "Purview und Compliance", totalQuestions: 26 },
   { id: "verwaltung-governance", title: "Verwaltung und Governance", totalQuestions: 12 },
   { id: "verantwortungsvolle-ki", title: "Verantwortungsvolle KI", totalQuestions: 2 },
@@ -241,19 +241,30 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
   {
     type: "yesno",
     id: "real-ab900-12",
-    topicId: "copilot-grundlagen",
+    topicId: "sicherheit-identitaet",
     prompt: "Für jede der folgenden Aussagen wählen Sie Ja, wenn die Aussage wahr ist. Andernfalls wählen Sie Nein. (HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     statements: [
       { text: "Microsoft Defender für Office 365 bietet Schutz vor Phishing- und Malware-Angriffen", correct: "Ja" },
       { text: "Microsoft Defender für Identität überwacht Identitäten in Active-Directory-Domänen", correct: "Ja" },
       { text: "Microsoft Defender Schwachstellenmanagement bietet Schutz für Software-as-a-Service-(SaaS)-Anwendungen", correct: "Nein" },
     ],
-    explanation: "",
+    combinedOptions: [["Ja", "Ja", "Ja"], ["Ja", "Ja", "Nein"], ["Ja", "Nein", "Ja"], ["Nein", "Ja", "Nein"], ["Nein", "Nein", "Ja"], ["Nein", "Nein", "Nein"]],
+    explanation: "Microsoft Defender für Office 365 (MDO) schützt vor aktuellen E-Mail-Sicherheitsbedrohungen und ist als Plan 1 und Plan 2 für Organisationen unterschiedlicher Größe verfügbar; es ist die primäre E-Mail-Sicherheitslösung innerhalb von Microsoft 365 und schützt insbesondere vor Phishing- und Malware-Angriffen. Microsoft Defender für Identität hilft Organisationen, identitätsbasierte Angriffe in lokalen, Cloud- und Hybridumgebungen zu erkennen, zu untersuchen und darauf zu reagieren; da Angreifer häufig Identitäten wie Benutzer, Anwendungen und Dienstkonten angreifen, überwacht der Dienst Identitätssignale aus der lokalen Active Directory und Microsoft Entra ID (sowie weiteren IAM-Lösungen) und analysiert sie mittels Verhaltensanalyse, Bedrohungsdaten und bekannten Angriffsmustern. Microsoft Defender Schwachstellenmanagement liefert dagegen Asset-Transparenz, intelligente Bewertungen und integrierte Behebungstools für Windows, macOS, Linux, Android, iOS und Netzwerkgeräte – es priorisiert Schwachstellen auf Basis von Bedrohungsdaten und Geräte-Bewertungen, bietet jedoch keinen Schutz für SaaS-Anwendungen.",
+    resources: [
+      { label: "Microsoft Defender for Office 365 service description", url: "https://learn.microsoft.com/en-us/office365/servicedescriptions/office-365-advanced-threat-protection-service-description" },
+      { label: "Microsoft Defender for Identity overview", url: "https://learn.microsoft.com/en-us/defender-for-identity/what-is" },
+      { label: "What is Microsoft Defender Vulnerability Management", url: "https://learn.microsoft.com/en-us/defender-vulnerability-management/defender-vulnerability-management" },
+    ],
   },
   {
     id: "real-ab900-13",
     topicId: "copilot-grundlagen",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement, das eine Microsoft SharePoint-Website namens Site1 enthält. Die Berechtigungen für Site1 sind wie in der folgenden Abbildung dargestellt konfiguriert. Sie erstellen einen neuen Benutzer namens User1 im Abonnement. Verwenden Sie die Dropdown-Menüs, um die Antwort auszuwählen, die die Aussage basierend auf den im Diagramm dargestellten Informationen vervollständigt.",
+    imageUrl: "/exam-images/ab900-q13.png",
+    blankFill: {
+      template: "User1 ist ___ Site1.",
+      choices: ["ein Besucher von", "ein Eigentümer von", "ein Mitglied von", "daran gehindert, zuzugreifen auf"],
+    },
     options: [
       { id: "A", text: "User1 ist ein Besucher der Site1." },
       { id: "B", text: "User1 ist ein Eigentümer der Site1." },
@@ -261,7 +272,11 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "User1 ist daran gehindert, auf Site1 zuzugreifen." },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Als Websitebesitzer einer Microsoft SharePoint-Website kann man anderen Personen Zugriff auf die Website gewähren, indem man sie als Eigentümer, Mitglieder oder Besucher hinzufügt – je nach den von der Organisation und für die jeweilige Website festgelegten Berechtigungen ist es auch möglich, die Website mit Personen außerhalb der Organisation zu teilen. Site1 ist standardmäßig für „Everyone except external users“ (alle außer externen Benutzern) mit den Mitgliedsberechtigungen (Anzeigen und Bearbeiten) freigegeben. Das bedeutet: Alle Benutzer der Organisation – einschließlich eines neu erstellten Benutzers wie User1 – werden automatisch als Site-Mitglieder zur Website hinzugefügt, ohne dass eine manuelle Zuweisung als Eigentümer oder Besucher nötig wäre.",
+    resources: [
+      { label: "Share a site", url: "https://support.microsoft.com/en-us/office/share-a-site-958771a8-d041-4eb8-b51c-afea2eae3658" },
+      { label: "SharePoint Online is permissioned for \"everyone except external users\" but why are internal users still having to request access?", url: "https://learn.microsoft.com/en-us/answers/questions/5205764/sharepoint-online-is-permissioned-for-everyone-exc" },
+    ],
   },
   {
     id: "real-ab900-14",
@@ -274,12 +289,19 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Nur die Microsoft 365 Copilot-Zusatzlizenz für Benutzer mit Microsoft 365 E3-Lizenzen erwerben, da Office 365 E3 nicht berechtigt ist." },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Microsoft 365 Copilot ist als Zusatzlizenz (Add-on) verfügbar. Sowohl Microsoft 365 E3- als auch Office 365 E3-Lizenzen berechtigen zum Erwerb dieser Zusatzlizenz – ein Upgrade auf höherwertige Pläne wie Microsoft 365 E5 oder ein Wechsel des Lizenzmodells (z. B. auf Business Premium) ist dafür nicht erforderlich. Die minimale und ausreichende Maßnahme ist daher, für alle bestehenden Benutzer unabhängig von ihrer aktuellen E3-Lizenz die separate Microsoft 365 Copilot-Zusatzlizenz zu erwerben.",
+    resources: [
+      { label: "License options for Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-licensing" },
+    ],
   },
   {
     id: "real-ab900-15",
-    topicId: "copilot-grundlagen",
-    prompt: "Wählen Sie die Antwort aus, die den Satz korrekt vervollständigt.",
+    topicId: "copilot-agenten",
+    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Wenn ein Benutzer einen Microsoft 365 Copilot-Agenten teilt, können Sie ___ verwenden, um Benutzer daran zu hindern, den Agenten zu verwenden.",
+      choices: ["Microsoft Foundry", "Microsoft Copilot Studio", "das Microsoft 365 Admin Center", "das Power Apps-Portal"],
+    },
     options: [
       { id: "A", text: "Wenn ein Benutzer einen Microsoft 365 Copilot-Agenten teilt, können Sie Microsoft Foundry verwenden, um Benutzer daran zu hindern, den Agenten zu verwenden." },
       { id: "B", text: "Wenn ein Benutzer einen Microsoft 365 Copilot-Agenten teilt, können Sie Microsoft Copilot Studio verwenden, um Benutzer daran zu hindern, den Agenten zu verwenden." },
@@ -287,7 +309,10 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Wenn ein Benutzer einen Microsoft 365 Copilot-Agenten teilt, können Sie das Power Apps-Portal verwenden, um Benutzer daran zu hindern, den Agenten zu verwenden." },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Agenten für Copilot lassen sich über das Microsoft 365 Admin Center verwalten: Dort können sie für die Organisation aktiviert, deaktiviert, zugewiesen, blockiert oder entfernt werden, und auch die allgemeinen Copilot-Funktionen lassen sich dort steuern. Als Administrator sieht man geteilte Agenten auf der Seite „Agenten“ im Microsoft 365 Admin Center – mit einer Liste aller geteilten Agenten samt Name, Ersteller, Erstellungsdatum, Host-Produkten und Verfügbarkeitsstatus. Man kann dort gezielt nach Agenten suchen und ihren gesamten Lebenszyklus verwalten, einschließlich des Blockierens von Agenten, die als unsicher oder nicht konform eingestuft werden. Microsoft Foundry und Copilot Studio dienen der Entwicklung bzw. dem Erstellen von Agenten, nicht dem Blockieren bereits geteilter Agenten; das Power Apps-Portal ist für Power-Apps-Anwendungen zuständig, nicht für Copilot-Agenten.",
+    resources: [
+      { label: "Manage agents in the Microsoft 365 admin center", url: "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/manage-copilot-agents-integrated-apps" },
+    ],
   },
   {
     id: "real-ab900-16",
@@ -300,7 +325,11 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Einstellungen > Domains" },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Bevor eine Standarddomäne festgelegt werden kann, muss mindestens eine benutzerdefinierte Domäne zu Microsoft 365 hinzugefügt worden sein. Der Weg dorthin führt im Admin Center über Einstellungen > Domains: Auf der Seite „Domains“ wird die gewünschte Domäne ausgewählt, die als Standard für neue E-Mail-Adressen dienen soll, und anschließend „Als Standard festlegen“ gewählt. Dieser Bereich dient auch der allgemeinen Verwaltung und Verifizierung von Domänen. Die übrigen Optionen betreffen andere Aufgaben: Organisations-Einstellungen > Dienste steuert allgemeine Diensteinstellungen, Abrechnung > Lizenzen > Produktliste verwaltet Lizenzen, und „Domäne verbinden“ unter Einrichtung ist Teil des ersten Einrichtungsassistenten, nicht der laufenden Domänenverwaltung.",
+    explanationImageUrl: "/exam-images/ab900-q16-explain.png",
+    resources: [
+      { label: "Domains Frequently Asked Questions", url: "https://learn.microsoft.com/en-us/microsoft-365/admin/setup/domains-faq" },
+    ],
   },
   {
     id: "real-ab900-17",
@@ -313,7 +342,11 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Die einheitliche Erlebniswelt für Vorfälle und Warnungen sowie Secure Score im Microsoft Defender-Portal" },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Die einheitliche Erlebniswelt für Vorfälle und Warnungen (Incidents and Alerts) im Microsoft Defender-Portal korreliert Signale aus E-Mail (Defender for Office 365) und Endpunkten (Defender for Endpoint) zu einer einzigen Vorfallchronik. Sie liefert eine durchgängige Angriffserzählung, korrelierte Warnungen über mehrere Workloads hinweg sowie Details zur automatisierten Untersuchung und Reaktion. Secure Score ergänzt dies um konkrete Empfehlungen zur Verbesserung der Sicherheitslage, mit Anleitungen, die E-Mail, Endpunkte, Identität und Apps abdecken. Microsoft Defender for Identity, Microsoft Defender for Office 365 und Defender Vulnerability Management liefern dagegen jeweils nur Signale für ihren eigenen Bereich (Identität, E-Mail bzw. Schwachstellen) und bieten keine übergreifende, konsolidierte Vorfallchronik über mehrere Workloads hinweg.",
+    resources: [
+      { label: "Incidents and alerts in the Microsoft Defender portal", url: "https://learn.microsoft.com/en-us/defender-xdr/incidents-overview" },
+      { label: "Investigate incidents in the Microsoft Defender portal", url: "https://learn.microsoft.com/en-us/defender-xdr/investigate-incidents" },
+    ],
   },
   {
     id: "real-ab900-18",
@@ -326,8 +359,12 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Exchange Online Nachrichtenverfolgung" },
       { id: "E", text: "Microsoft Entra ID Anwendungsproxy" },
     ],
-    correct: "A",
-    explanation: "",
+    correct: ["A", "C"],
+    explanation: "Das Conditional Access What-If-Tool hilft zu verstehen, welches Ergebnis die vorhandenen Conditional-Access-Richtlinien für eine bestimmte Anmeldung liefern würden. Es eignet sich besonders zum Simulieren ungewöhnlicher Szenarien und erlaubt es, statt mehrerer manueller Testanmeldungen eine Anmeldung für einen Benutzer, eine Agentenidentität oder einen Single-Tenant-Dienstprinzipal zu simulieren – die Simulation schätzt ab, wie sich die Richtlinien auf diese Anmeldung auswirken, und erstellt einen Bericht. Damit lässt sich schnell ermitteln, welche Richtlinien auf eine bestimmte Anmeldung angewendet werden, um Probleme zu beheben und komplexe Anmeldeszenarien zu verstehen. Die Anmeldeprotokolle in Microsoft Entra ID liefern zusätzlich wertvolle Einblicke in tatsächlich aufgetretene Anmeldefehler und -muster – etwa wie viele fehlgeschlagene Anmeldeversuche in den letzten 24 Stunden aufgetreten sind oder von welchem Browser/Betriebssystem aus sich Benutzer anmelden – und zeigen zu jeder Anmeldeanfrage, wer (Identität), wie (Anwendung) und was (Ressource) betroffen war; in Kombination mit der Fehlerbehebung und dem Support in Microsoft Entra ID lässt sich so die genaue Ursache eines blockierten Sign-ins nachvollziehen. Das Microsoft 365 Service Health Dashboard, Exchange Online Nachrichtenverfolgung und der Microsoft Entra ID Anwendungsproxy dienen anderen Zwecken (Dienststatus, E-Mail-Zustellung bzw. Zugriff auf lokale Apps) und liefern keine Auskunft über die konkrete Ursache eines Anmeldefehlers.",
+    resources: [
+      { label: "Troubleshoot Conditional Access Policies with the What If Tool", url: "https://learn.microsoft.com/en-us/entra/identity/conditional-access/what-if-tool" },
+      { label: "What are Microsoft Entra sign-in logs?", url: "https://learn.microsoft.com/en-us/entra/identity/monitoring-health/concept-sign-ins" },
+    ],
   },
   {
     type: "yesno",
@@ -339,7 +376,11 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { text: "Microsoft Purview Compliance Manager bietet Schritt-für-Schritt-Anleitungen zur Behebung von Compliance-Problemen", correct: "Ja" },
       { text: "Compliance Manager ist Teil von Microsoft Defender", correct: "Nein" },
     ],
-    explanation: "",
+    combinedOptions: [["Ja", "Ja", "Ja"], ["Ja", "Ja", "Nein"], ["Ja", "Nein", "Ja"], ["Nein", "Ja", "Nein"], ["Nein", "Nein", "Ja"], ["Nein", "Nein", "Nein"]],
+    explanation: "Microsoft Purview Compliance Manager ist eine Lösung, die dabei hilft, die Compliance in einer Multicloud-Umgebung automatisch zu bewerten und zu verwalten – von der Bestandsaufnahme der Datenschutzrisiken über die Umsetzung von Kontrollen und das Einhalten aktueller Vorschriften und Zertifizierungen bis hin zur Berichterstattung an Prüfer. Compliance Manager vereinfacht Compliance und reduziert Risiken durch: vorgefertigte Bewertungen für gängige Branchen- und regionale Standards sowie benutzerdefinierte Bewertungen (abhängig vom Lizenzvertrag); Workflow-Funktionen zur effizienten Durchführung von Risikobewertungen in einem einzigen Tool; detaillierte Schritt-für-Schritt-Anleitungen zu empfohlenen Verbesserungsmaßnahmen (inklusive Implementierungsdetails und Prüfergebnissen bei von Microsoft verwalteten Maßnahmen); sowie eine risikobasierte Compliance-Bewertung, die den Fortschritt bei der Umsetzung von Verbesserungsmaßnahmen misst. Compliance Manager ist Teil der Microsoft-Purview-Suite – nicht von Microsoft Defender.",
+    resources: [
+      { label: "Microsoft Purview Compliance Manager", url: "https://learn.microsoft.com/en-us/purview/compliance-manager" },
+    ],
   },
   {
     id: "real-ab900-20",
