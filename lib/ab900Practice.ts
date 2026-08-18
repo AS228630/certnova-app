@@ -424,7 +424,21 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
     id: "real-ab900-22",
     topicId: "purview-compliance",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Sie müssen Microsoft Purview verwenden, um die folgenden Anforderungen zu erfüllen: • Verhindern, dass Benutzer Dateien teilen, die persönlich identifizierbare Informationen (PII) enthalten. • Maschinelles Lernen verwenden, um ein Modell zu trainieren, das sensible Inhalte erkennt. Welche Microsoft Purview- Lösung sollten Sie für jede Anforderung verwenden? (Um zu antworten, wählen Sie die entsprechenden Optionen im Antwortbereich aus. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
-    imageUrl: "/exam-images/ab900-q22.png",
+    blankFillMulti: {
+      template: "Verhindern, dass Benutzer PII teilen: ___; Maschinelles Lernen verwenden, um ein Modell zu trainieren: ___.",
+      blanks: [
+        ["Kommunikations-Compliance", "Verlustprävention von Daten", "DSPM für KI", "Informationsschutz", "Insider-Risikomanagement"],
+        ["Kommunikations-Compliance", "Verlustprävention von Daten", "DSPM für KI", "Informationsschutz", "Insider-Risikomanagement"],
+      ],
+      combos: [
+        [0, 1],
+        [1, 3],
+        [3, 4],
+        [4, 0],
+        [1, 2],
+        [2, 4],
+      ],
+    },
     options: [
       { id: "A", text: "Verhindern, dass Benutzer PII teilen: Kommunikations-Compliance; Maschinelles Lernen verwenden, um ein Modell zu trainieren: Verlustprävention von Daten" },
       { id: "B", text: "Verhindern, dass Benutzer PII teilen: Verlustprävention von Daten; Maschinelles Lernen verwenden, um ein Modell zu trainieren: Informationsschutz" },
@@ -462,7 +476,6 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
     id: "real-ab900-24",
     topicId: "sicherheit-identitaet",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
-    imageUrl: "/exam-images/ab900-q24.png",
     blankFill: {
       template: "Conditional Access-Richtlinien ___.",
       choices: ["werden über das Microsoft Defender-Portal konfiguriert", "werden nur auf lokale Ressourcen angewendet", "bieten Kontrolle darüber, wie Benutzer auf Cloud-Apps zugreifen können", "erfordern ein Microsoft Exchange-Postfach"],

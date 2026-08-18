@@ -20,6 +20,7 @@ export default function SectionMenu({
   onJump,
   isUnlocked,
   getBestScore,
+  onLockedClick,
 }: {
   total: number;
   /** Only used to look up a per-cert section-size override (see
@@ -39,6 +40,11 @@ export default function SectionMenu({
    * in-session accuracy below it, per spec section 7 ("نمایش بهترین
    * نتیجه"). Returns null if the section has never been attempted. */
   getBestScore?: (sectionIndex: number) => number | null;
+  /** Called instead of the normal jump when the user clicks a locked
+   * section. Lets the caller show its Premium upgrade modal — with no
+   * callback provided, a locked section click is silently ignored
+   * (previous behavior). */
+  onLockedClick?: (sectionIndex: number) => void;
 }) {
   const { t } = useLocale();
   const SECTION_SIZE = getSectionSize(total, certId);
@@ -122,11 +128,14 @@ export default function SectionMenu({
               <div key={s}>
                 <button
                   onClick={() => {
-                    if (!unlocked) return;
+                    if (!unlocked) {
+                      onLockedClick?.(s);
+                      return;
+                    }
                     onJump(start, s);
                     setMenuOpen(false);
                   }}
-                  disabled={!unlocked}
+                  disabled={!unlocked && !onLockedClick}
                   className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm transition-colors ${
                     isCurrent ? "bg-primary-light text-primary" : unlocked ? "text-text hover:bg-panel-alt" : "cursor-not-allowed text-text-faint"
                   }`}

@@ -887,6 +887,7 @@ export default function PracticeClient({
               !isPro ? (s) => s === 0 : attemptsMigrationReady ? (s) => isSectionPermanentlyUnlocked(certId, s) : undefined
             }
             getBestScore={attemptsMigrationReady ? (s) => getBestScore(certId, s) : undefined}
+            onLockedClick={!isPro ? () => setShowPremiumGate(true) : undefined}
           />
           <SectionProgressBar
             start={currentSectionStart}
