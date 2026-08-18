@@ -31,8 +31,8 @@
 import type { PracticeQuestion, PracticeTopic, SingleChoiceQuestion, YesNoQuestion } from "./az900Practice";
 
 export const AB900_TOPICS: PracticeTopic[] = [
-  { id: "copilot-grundlagen", title: "Microsoft 365 Copilot Grundlagen", totalQuestions: 31 },
-  { id: "copilot-agenten", title: "Copilot-Agenten verwalten", totalQuestions: 10 },
+  { id: "copilot-grundlagen", title: "Microsoft 365 Copilot Grundlagen", totalQuestions: 29 },
+  { id: "copilot-agenten", title: "Copilot-Agenten verwalten", totalQuestions: 12 },
   { id: "sicherheit-identitaet", title: "Sicherheit und Identität", totalQuestions: 21 },
   { id: "purview-compliance", title: "Purview und Compliance", totalQuestions: 25 },
   { id: "verwaltung-governance", title: "Verwaltung und Governance", totalQuestions: 12 },
@@ -684,7 +684,7 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
     ],
   },
   {
-    id: "real-ab900-35-displaced-user1-exfil",
+    id: "real-ab900-36",
     topicId: "purview-compliance",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement, das einen Benutzer namens User1 enthält. User1 plant, Ihr Unternehmen in zwei Wochen zu verlassen. Sie müssen die Aktivitäten von User1 erfassen, um festzustellen, ob der Benutzer Daten exfiltriert. Welche Microsoft Purview-Lösung sollten Sie verwenden?",
     options: [
@@ -694,10 +694,14 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Datenlebenszyklusverwaltung" },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Microsoft Purview Insider Risk Management ist eine Compliance-Lösung, die interne Risiken minimiert, indem sie böswillige und unbeabsichtigte Aktivitäten in der Organisation erkennt, untersucht und Maßnahmen dagegen ermöglicht. Über Insider-Risikorichtlinien lässt sich festlegen, welche Arten von Risiken erkannt werden sollen. Insider Risk Management bietet vordefinierte Richtlinienvorlagen mit festgelegten Risikoindikatoren und einem Risikobewertungsmodell — darunter eine eigene Vorlage für „Datendiebstahl durch ausscheidende Benutzer“: Beim Verlassen einer Organisation treten typische Risikoindikatoren für möglichen Datendiebstahl auf, etwa das Herunterladen von Dateien aus SharePoint Online, das Drucken von Dateien oder das Kopieren von Daten auf private Cloud-Speicher- und Messaging-Dienste in der Nähe des Kündigungs- und Austrittsdatums. Genau diese Exfiltrationsindikatoren nutzt die Vorlage zur Risikobewertung und für Erkennung/Warnungen in diesem Bereich. Kommunikations-Compliance überwacht Nachrichteninhalte auf Richtlinienverstöße, Verwaltung der Datensicherheitslage bewertet die allgemeine Datensicherheit (u. a. für KI), und Datenlebenszyklusverwaltung steuert Aufbewahrung und Löschung — keine dieser drei ist auf die Erkennung von Datenexfiltration durch einzelne (z. B. ausscheidende) Benutzer spezialisiert.",
+    resources: [
+      { label: "Learn about Insider Risk Management", url: "https://learn.microsoft.com/en-us/purview/insider-risk-management" },
+      { label: "Learn about Insider Risk Management policy templates", url: "https://learn.microsoft.com/en-us/purview/insider-risk-management-policy-templates" },
+    ],
   },
   {
-    id: "real-ab900-36",
+    id: "real-ab900-37",
     topicId: "verwaltung-governance",
     prompt: "Ihre Organisation hat ein Microsoft 365-Abonnement, das Microsoft SharePoint- Websites und Microsoft Teams-Teams enthält. Sie stellen fest, dass die Websites und Teams mit Benutzern außerhalb Ihrer Organisation geteilt werden. Sie müssen herausfinden, welche Websites und Teams mit den externen Benutzern geteilt wurden. Was sollten Sie verwenden?",
     options: [
@@ -707,10 +711,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Das Microsoft Defender-Portal" },
     ],
     correct: "A",
-    explanation: "",
+    explanation: "Mit zunehmender Datenmenge wachsen auch die unkontrollierte Ausbreitung (Sprawl) und übermäßige Freigabe (Oversharing) von SharePoint-Websites, weshalb Organisationen Unterstützung bei der Data Governance benötigen. Die Data-Access-Governance-Berichte helfen dabei, den Zugriff auf SharePoint-Daten zu steuern: Sie zeigen Websites auf, die potenziell übermäßig freigegebene oder sensible Inhalte enthalten, sodass sich passende Sicherheits- und Compliance-Richtlinien anwenden lassen — genau das gesuchte Szenario mit extern geteilten Websites und Teams. Der Zugriff erfolgt, indem man sich mit SharePoint-Administratorrechten im SharePoint-Admincenter anmeldet und im linken Bereich unter „Berichte“ den Punkt „Data Access Governance“ auswählt. Das Microsoft Teams-Admincenter, das Microsoft 365-Admincenter und das Microsoft Defender-Portal bieten keine vergleichbaren, speziell auf externe Freigabe von Websites/Teams ausgerichteten Berichte.",
+    resources: [
+      { label: "Data access governance reports for SharePoint and OneDrive sites", url: "https://learn.microsoft.com/en-us/sharepoint/data-access-governance-reports" },
+    ],
   },
   {
-    id: "real-ab900-37",
+    id: "real-ab900-38",
     topicId: "copilot-grundlagen",
     prompt: "Eine Organisation verlangt, dass Copilot niemals Ergebnisse aus öffentlichen Websuchen in Antworten einbezieht, um eine mögliche Offenlegung interner Aufforderungen/Daten zu vermeiden. Welche Copilot-Funktion sollte ein Administrator deaktivieren, um die Webgrundlage für Copilot-Antworten zu blockieren?",
     options: [
@@ -720,22 +727,30 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Copilot-Funktionen in Microsoft 365 Apps" },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Um die Qualität der Antworten zu verbessern, kann Copilot Chat Websuchanfragen an den Bing-Suchdienst senden, um Antworten mit aktuellen Informationen aus dem Web zu untermauern. Die Websuche in Copilot Chat lässt sich über die Richtlinie „Allow web search in Copilot“ steuern, die im Cloud Policy-Dienst für Microsoft 365 verfügbar ist und sich auch im Einstellungsbereich der Copilot-Control-System-Seite im Microsoft 365 Admin Center befindet. Die Richtlinie erlaubt die Verwaltung der Websuche auf Mandantenebene und lässt sich bei Bedarf für bestimmte Gruppen und Benutzer anpassen — auch für Benutzer mit einer Microsoft 365 Copilot-Lizenz. Wird die Richtlinie nicht konfiguriert, ist die Websuche standardmäßig sowohl in Microsoft 365 Copilot als auch in Copilot Chat verfügbar. Da genau Copilot Chat die Websuchfunktion nutzt, ist die Deaktivierung dieser Funktion (über die genannte Richtlinie) der richtige Ansatzpunkt, um die Webgrundlage für Copilot-Antworten zu blockieren.",
+    explanationImageUrl: "/exam-images/ab900-q38-explain.png",
+    resources: [
+      { label: "Manage web search queries in Copilot Chat", url: "https://learn.microsoft.com/en-us/copilot/manage#manage-web-search-queries-in--chat" },
+    ],
   },
   {
     type: "yesno",
-    id: "real-ab900-38",
+    id: "real-ab900-39",
     topicId: "copilot-grundlagen",
     prompt: "Für jede der folgenden Aussagen wählen Sie Ja, wenn die Aussage wahr ist. Andernfalls wählen Sie Nein. (HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     statements: [
       { text: "Der Microsoft 365 Copilot-Nutzungsbericht kann verwendet werden, um von Benutzern eingereichte Copilot-Prompts anzuzeigen", correct: "Nein" },
-      { text: "Der Microsoft 365 Copilot-Nutzungsbericht zeigt die Gesamtzahl der eindeutigen Benutzer in Ihrer Organisation", correct: "Ja" },
+      { text: "Der Microsoft 365 Copilot-Nutzungsbericht zeigt die Gesamtzahl der eindeutigen Benutzer in Ihrer Organisation, denen Microsoft 365 Copilot-Lizenzen zugewiesen sind", correct: "Ja" },
       { text: "Der Microsoft 365 Copilot-Nutzungsbericht zeigt die Copilot-Nutzung jeder einzelnen Microsoft 365-App", correct: "Ja" },
     ],
-    explanation: "",
+    combinedOptions: [["Ja", "Ja", "Ja"], ["Ja", "Ja", "Nein"], ["Ja", "Nein", "Ja"], ["Nein", "Ja", "Nein"], ["Nein", "Ja", "Ja"], ["Nein", "Nein", "Nein"]],
+    explanation: "Das Microsoft 365-Nutzungsbericht-Dashboard zeigt einen Aktivitätsüberblick über die Microsoft 365-Apps der Organisation und erlaubt es, in einzelne produktbezogene Berichte für detailliertere Einblicke zu wechseln. Der Microsoft 365 Copilot-Nutzungsbericht im Microsoft 365 Admin Center zeigt aggregierte Nutzungskennzahlen wie aktivierte Benutzer, aktive Benutzer, Adaptionstrends und Prompt-Zahlen in aggregierter Form – er zeigt jedoch NICHT den tatsächlichen Prompt-Text, den Benutzer eingereicht haben. Zu den verfügbaren Kennzahlen zählen unter anderem: „Aktivierte Benutzer“ (Gesamtzahl eindeutiger Benutzer mit Microsoft 365 Copilot-Lizenz im gewählten Zeitraum), „Aktive Benutzer“ (Benutzer, die eine Copilot-Funktion tatsächlich genutzt haben), die „Aktive-Benutzer-Rate“, „Aktive Agent-Benutzer“ sowie „Insgesamt gesendete Prompts“ und der „Durchschnitt gesendeter Prompts pro Benutzer“ – letztere unter anderem aufgeschlüsselt nach einzelnen Microsoft 365-Apps. Der Bericht liefert also Nutzungszahlen pro App und die Gesamtzahl lizenzierter Benutzer, aber keinen Einblick in den Inhalt einzelner Prompts.",
+    resources: [
+      { label: "Microsoft 365 Copilot usage report - Microsoft 365 admin center", url: "https://learn.microsoft.com/en-us/microsoft-365/admin/activity-reports/microsoft-365-copilot-usage" },
+    ],
   },
   {
-    id: "real-ab900-39",
+    id: "real-ab900-40",
     topicId: "copilot-grundlagen",
     prompt: "Sie planen, einen Agenten in der Microsoft 365 Copilot-App zu erstellen, um ein geschäftliches Problem zu lösen. Was sind zwei Gründe, den Agenten zu erstellen? (Jede richtige Antwort stellt eine vollständige Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     options: [
@@ -744,11 +759,15 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "C", text: "Sie müssen über eine bestimmte Website nachdenken." },
       { id: "D", text: "Sie müssen verwandte Chats in einem Copilot-Notizbuch gruppieren." },
     ],
-    correct: "B",
-    explanation: "",
+    correct: ["B", "C"],
+    explanation: "Agenten erweitern die Funktionalität von Copilot, indem sie als spezialisierte KI-Assistenten für bestimmte Bereiche fungieren. Sie nutzen organisatorisches Wissen und Automatisierung, um Geschäftsprozesse zu optimieren, Entscheidungen zu verbessern und die Effizienz zu steigern — sie können Informationen abrufen, Daten zusammenfassen oder sogar Aktionen wie das Senden von E-Mails oder das Aktualisieren von Datensätzen ausführen. Agenten lassen sich auf zwei Arten erstellen: deklarativ (mit eigenen Anweisungen, Wissensquellen und Aktionen in Kombination mit Copilots Orchestrator und Modellen) oder mit einer eigenen Engine (mit eigenem Orchestrator und Modellen für eine vollständig maßgeschneiderte Lösung). Ein Agent lohnt sich insbesondere, wenn eine benutzerdefinierte Anweisungsmenge benötigt wird, die sich von der Standard-Chat-Erfahrung unterscheidet, oder wenn über eine bestimmte Wissensquelle (z. B. eine bestimmte Website) argumentiert werden muss — beides sind Kernkomponenten eines Agenten (Wissen und Aktionen). Ein benutzerdefiniertes KI-Modell ist dagegen nur beim Custom-Engine-Ansatz relevant (nicht bei jedem Agenten grundsätzlich erforderlich), und das Gruppieren verwandter Chats in einem Copilot-Notizbuch ist eine reine Chat-Organisationsfunktion, kein Grund, einen Agenten zu erstellen.",
+    resources: [
+      { label: "Agents for Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview" },
+      { label: "Copilot and AI agents", url: "https://www.microsoft.com/en-us/microsoft-copilot/copilot-101/copilot-ai-agents" },
+    ],
   },
   {
-    id: "real-ab900-40",
+    id: "real-ab900-41",
     topicId: "purview-compliance",
     prompt: "Ein wesentliches Governance-Risiko bei der Implementierung von Microsoft 365 Copilot ist das mögliche Übermitteln von Unternehmensdaten. Der Chief Compliance Officer ist besorgt, dass ein Benutzer, da Copilot alle Daten nutzt, auf die er Zugriff hat, versehentlich Zugang zu sensiblen Informationen erhalten könnte, auf die er eigentlich keinen Zugriff haben sollte. Was ist die häufigste Ursache dieses Risikos des übermäßigen Teilens, die Administratoren als Governance-Aufgabe mit hoher Priorität angehen müssen, bevor Copilot breit eingesetzt wird?",
     options: [
@@ -758,10 +777,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Das Training des Azure OpenAI-Modells verwendet Mandantendaten und behält sie im Mandanten." },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Copilot respektiert das bestehende Identitätsmodell und die Berechtigungen einer Organisation, übernimmt Vertraulichkeitsbezeichnungen, wendet Aufbewahrungsrichtlinien an, unterstützt die Überwachung von Interaktionen und folgt den administrativen Einstellungen. Da Copilot dabei jedoch grundsätzlich auf alle Daten zugreifen kann, auf die der jeweilige Benutzer bereits Zugriff hat, wird ein bestehendes, aber bislang oft unbemerktes Problem sichtbar: zu weit gefasste Berechtigungen für Sites oder Dateien (z. B. Freigaben an „Jeder außer externen Benutzern“ oder überholte Berechtigungsstrukturen). Genau diese übermäßig freizügigen Berechtigungen sind die häufigste Ursache für das Risiko des übermäßigen Teilens (Oversharing) und müssen vor einer breiten Copilot-Einführung als Governance-Aufgabe priorisiert bereinigt werden – um sicherzustellen, dass Benutzer keine unnötigen Datenzugriffsrechte besitzen. Copilot umgeht keine SharePoint-Zugriffskontrollen bei der Indexierung, Chatprotokolle unterliegen sehr wohl eDiscovery und Aufbewahrung, und das Modelltraining verwendet keine Mandantendaten des Kunden zum Training des zugrunde liegenden Modells.",
+    resources: [
+      { label: "Enterprise data protection in Microsoft 365 Copilot and Microsoft 365 Copilot Chat", url: "https://learn.microsoft.com/en-us/copilot/microsoft-365/enterprise-data-protection" },
+    ],
   },
   {
-    id: "real-ab900-41",
+    id: "real-ab900-42",
     topicId: "sicherheit-identitaet",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Sie müssen Sicherheitsvorfälle und Warnungen untersuchen, die von den Windows 11- Geräten in Ihrer Organisation ausgelöst wurden. Was sollten Sie verwenden?",
     options: [
@@ -771,10 +793,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Microsoft Defender for Endpoint" },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Microsoft Defender for Endpoint ist eine Endpunktsicherheitsplattform für Unternehmen, die dabei hilft, fortgeschrittene Bedrohungen auf Endpunkten zu verhindern, zu erkennen, zu untersuchen und darauf zu reagieren. Zu den Endpunkten zählen Laptops, Smartphones, Tablets, PCs, Access Points, Router und Firewalls. Defender for Endpoint ist Teil von Microsoft Defender XDR und lässt sich mit weiteren Microsoft-Lösungen integrieren, darunter Intune, Microsoft Defender for Cloud, Microsoft Defender for Cloud Apps, Microsoft Defender for Identity, Microsoft Defender for Office, Microsoft Defender Vulnerability Management und Microsoft Sentinel. Es unterstützt die Betriebssysteme Windows, macOS, Linux, Android und iOS — damit ist es die richtige Wahl, um Sicherheitsvorfälle und Warnungen zu untersuchen, die von Windows-11-Geräten ausgelöst wurden. Microsoft Entra ID Protection und Microsoft Defender for Identity konzentrieren sich auf identitätsbezogene Risiken, und Microsoft Purview Insider Risk Management erkennt riskantes Nutzerverhalten — keines davon ist auf Gerätesicherheitsvorfälle spezialisiert.",
+    resources: [
+      { label: "Microsoft Defender for Endpoint", url: "https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-endpoint" },
+    ],
   },
   {
-    id: "real-ab900-42",
+    id: "real-ab900-43",
     topicId: "verwaltung-governance",
     prompt: "Ihr Unternehmen verlangt, dass alle Microsoft SharePoint-Websites mindestens zwei Besitzer haben. Sie müssen sicherstellen, dass Websites, die weniger als zwei Besitzer haben, als nur lesbar markiert werden, wenn die Websites NICHT behoben werden. Was sollten Sie im SharePoint-Admincenter konfigurieren?",
     options: [
@@ -784,10 +809,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Richtlinie zum Blockieren von Downloads für SharePoint und OneDrive" },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Hierfür wird die Website-Lebenszyklusverwaltung (Site Lifecycle Management) aus SharePoint Advanced Management genutzt. Richtlinien zur Website-Eigentümerschaft sind Teil der Website-Lebenszyklusverwaltung und helfen dabei, die Eigentümerschaftsanforderungen einer Organisation automatisch zu überwachen und durchzusetzen. Mit diesen Richtlinien lässt sich festlegen, wer für jede Website verantwortlich sein soll, eine Mindestanzahl an Besitzern oder Administratoren definieren und Benachrichtigungen automatisieren, wenn Websites die festgelegten Kriterien nicht erfüllen. Durch regelmäßiges Erkennen nicht konformer Websites und das Auffordern der Benutzer zum Handeln unterstützen Richtlinien zur Website-Eigentümerschaft ein effektives Website-Management, verringern das Risiko besitzerloser Websites und helfen, Sicherheit und Compliance in der SharePoint-Umgebung aufrechtzuerhalten — einschließlich der Möglichkeit, Websites bei Nichtbehebung automatisch auf „Nur Lesen“ zu setzen. Die Einschränkung des Zugriffs auf Website-Ebene, Berichte zur Datenzugriffsverwaltung und die Richtlinie zum Blockieren von Downloads dienen anderen Zwecken und setzen keine Eigentümerschaftsanforderungen durch.",
+    resources: [
+      { label: "What is SharePoint Advanced Management?", url: "https://learn.microsoft.com/en-us/sharepoint/advanced-management" },
+    ],
   },
   {
-    id: "real-ab900-43",
+    id: "real-ab900-44",
     topicId: "copilot-grundlagen",
     prompt: "Der IT-Leiter möchte aggregierte, mandantenbezogene Kennzahlen wie aktive Copilot-Benutzer, Nutzung nach App und Prompt-Kategorien, um den ROI von Copilot zu messen. Welches Verwaltungstool bietet diese aggregierte Adoption- und Nutzungsauswertung?",
     options: [
@@ -797,11 +825,15 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Microsoft 365 Service-Status" },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Das Microsoft Copilot Analytics Dashboard in Viva Insights ist das zentrale, dediziert für Microsoft 365 Copilot entwickelte Verwaltungstool zur Überwachung von Nutzung und Adoption. Es liefert wichtige Berichte und Einblicke zu aktiven Benutzern, Nutzung nach Anwendung (Word, Teams, Excel), Benutzerbindung und sogar Kategorien der Prompt-Nutzung — allesamt zentrale Kennzahlen, um Adoption und ROI (Return on Investment) zu messen. Das Microsoft Purview Auditprotokoll protokolliert einzelne Aktivitäten, die Microsoft Entra ID Anmeldeprotokolle betreffen Anmeldevorgänge, und der Microsoft 365 Service-Status zeigt den Betriebsstatus der Dienste — keines davon liefert aggregierte, mandantenweite Copilot-Adoptionskennzahlen wie das Copilot Analytics Dashboard.",
+    resources: [
+      { label: "Copilot Analytics introduction", url: "https://learn.microsoft.com/en-us/viva/insights/copilot-analytics-introduction" },
+      { label: "Connect to the Microsoft Copilot Dashboard for Microsoft 365 customers", url: "https://learn.microsoft.com/en-us/viva/insights/org-team-insights/copilot-dashboard" },
+    ],
   },
   {
-    id: "real-ab900-44",
-    topicId: "copilot-grundlagen",
+    id: "real-ab900-45",
+    topicId: "copilot-agenten",
     prompt: "Bevor ein in Copilot Studio erstellter KI-Agent, der eine Verbindung zu einer lokalen Finanzdatenbank herstellt, veröffentlicht werden kann, muss ein Administrator den Zugriff, die Leistung und den Lebenszyklusstatus überprüfen. Welche zwei Microsoft-Admin-Center werden hauptsächlich verwendet, um den Lebenszyklus und die Umgebungseinstellungen des Agenten zu verwalten und zu überwachen? (Jede richtige Auswahl stellt einen Teil der Lösung dar. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     options: [
       { id: "A", text: "Microsoft Purview-Portal" },
@@ -810,13 +842,21 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Microsoft Power Platform-Admin" },
       { id: "E", text: "Exchange-Administrationscenter" },
     ],
-    correct: "C",
-    explanation: "",
+    correct: ["C", "D"],
+    explanation: "Die Verwaltungskontrollen des Copilot Control System helfen dabei, die Bereitstellung und Anpassung von Microsoft 365 Copilot-Lizenzen und -Agenten an die individuellen Anforderungen einer Organisation zu steuern. Die entsprechenden Verwaltungskontrollen finden sich hauptsächlich im Microsoft 365 Admin Center, im Power Platform Admin Center und in Copilot Studio selbst. Das Microsoft 365-Admincenter ist die zentrale Steuerungsebene für Governance und Lebenszyklus-Freigabe von Copilot-Agenten (z. B. Genehmigung, Sichtbarkeit, Blockieren). Das Microsoft Power Platform-Admincenter ist die Steuerungsebene für Umgebung, Leistung und Infrastruktur von Copilot Studio — hier werden Umgebungen, Kapazität und Konnektoren (wie die Verbindung zur lokalen Finanzdatenbank) verwaltet. Das Microsoft Purview-Portal, das Microsoft Entra-Admincenter und das Exchange-Administrationscenter decken andere Bereiche (Compliance, Identität bzw. E-Mail) ab und sind nicht die primären Steuerungsebenen für den Lebenszyklus und die Umgebungseinstellungen von Copilot-Agenten.",
+    resources: [
+      { label: "Copilot Control System management controls", url: "https://learn.microsoft.com/en-us/copilot/microsoft-365/copilot-control-system" },
+      { label: "Manage Copilot Studio credits and capacity", url: "https://learn.microsoft.com/en-us/microsoft-copilot-studio/requirements-licensing-capacity" },
+    ],
   },
   {
-    id: "real-ab900-45",
+    id: "real-ab900-46",
     topicId: "verwaltung-governance",
-    prompt: "Wählen Sie die Antwort, die den Satz korrekt vervollständigt.",
+    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "Vom SharePoint-Admincenter aus können Sie ___ erstellen.",
+      choices: ["einen Server", "einen Benutzer", "eine Website", "eine Rolle"],
+    },
     options: [
       { id: "A", text: "Vom SharePoint-Admincenter aus können Sie einen Server erstellen." },
       { id: "B", text: "Vom SharePoint-Admincenter aus können Sie einen Benutzer erstellen." },
@@ -824,10 +864,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Vom SharePoint-Admincenter aus können Sie eine Rolle erstellen." },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Die Seite „Aktive Websites“ im SharePoint-Admincenter zeigt die SharePoint-Websites einer Organisation an, einschließlich Kommunikationswebsites, Kanalwebsites und Websites, die zu Microsoft 365-Gruppen gehören. Dort lassen sich Websites sortieren und filtern, nach einer Website suchen und neue Websites erstellen. Die Seite listet jeweils die Root-Website jeder Websitesammlung auf. Server, Benutzer und Rollen werden dagegen nicht über das SharePoint-Admincenter erstellt, sondern über andere Verwaltungsbereiche (z. B. das Microsoft 365 Admin Center für Benutzer).",
+    resources: [
+      { label: "Manage sites in the SharePoint admin center", url: "https://learn.microsoft.com/en-us/sharepoint/manage-sites-in-new-admin-center" },
+    ],
   },
   {
-    id: "real-ab900-46",
+    id: "real-ab900-47",
     topicId: "copilot-agenten",
     prompt: "Sie müssen einen Microsoft 365 Copilot-Agenten erstellen, der Diagramme und Visualisierungen basierend auf einer Microsoft Excel-Arbeitsmappe erstellen kann. Was sollten Sie für den Agenten konfigurieren?",
     options: [
@@ -837,10 +880,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Die Code-Interpreter-Funktion" },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Mit der Code-Interpreter-Funktion können Copilot Studio-Agenten Python-Code generieren und ausführen, um auf Benutzeranfragen zu antworten. Der Code-Interpreter unterstützt Aufgaben wie statistische Analysen, Tabellenverknüpfungen, Prognosen und die Erstellung von Diagrammen — und arbeitet dabei mit strukturierten Dateien wie CSV und Excel. Der Mehrwert liegt darin, dass durch deterministische, reproduzierbare Berechnungen vertrauenswürdige Analysen innerhalb von Agenten möglich werden (statt sich allein auf die mathematischen und logischen Fähigkeiten des Sprachmodells zu verlassen), die Einstiegshürde für fortgeschrittene Analysen durch natürlichsprachliche Fragen gesenkt wird und Tabellen sowie Visualisierungen programmatisch erzeugt werden, die Benutzer ansehen, herunterladen und weiterverwenden können. Strukturierte Dateien lassen sich dem Agenten auf zwei Arten bereitstellen: durch den Endbenutzer per Upload während des Chats, oder durch den Ersteller über eine SharePoint-Dokumentbibliothek als Wissensquelle. Die Bildgenerierungsfunktion erzeugt Bilder statt Datenvisualisierungen, und die Scrum-Assistant- bzw. Customer-Insights-Assistant-Vorlagen sind für andere, nicht datenanalytische Anwendungsfälle konzipiert.",
+    resources: [
+      { label: "Use code interpreter to analyze structured data", url: "https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-code-interpreter-structured-data" },
+    ],
   },
   {
-    id: "real-ab900-47",
+    id: "real-ab900-48",
     topicId: "verwaltung-governance",
     prompt: "Ihr Unternehmen testet die Verwendung von Microsoft 365 Copilot und hat 100 Microsoft 365 Copilot-Lizenzen erworben. Sie müssen detaillierte Berichte über die Nutzung von Copilot in Microsoft Teams anzeigen, wie z. B. zusammengefasste Besprechungsstunden durch Copilot und durch Copilot vorgenommene Besprechungsaktionen. Was sollten Sie verwenden?",
     options: [
@@ -850,10 +896,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Der Microsoft 365 Apps-Nutzungsbericht im Microsoft 365 Admin Center" },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Copilot-Kennzahlen auf Besprechungsebene in Microsoft Teams sind im Microsoft Copilot Dashboard innerhalb von Viva Insights verfügbar. Das Copilot Dashboard enthält Besprechungskennzahlen, die zusammengefasste bzw. nachträglich rekapitulierte Besprechungsstunden sowie in Teams durch Copilot vorgenommene Aktionen anzeigen — speziell konzipiert, um die Wirkung und den ROI von Copilot zu messen. Da der Mandant über 100 Microsoft 365 Copilot-Lizenzen verfügt, ist die Schwelle für die vollständigen Funktionen des Copilot Dashboards in Viva Insights erreicht, einschließlich dieser erweiterten Besprechungseinblicke. Der Bereitschaftsbericht, der Nutzungsbericht und der Apps-Nutzungsbericht im Microsoft 365 Admin Center liefern dagegen keine derart detaillierten, besprechungsbezogenen Copilot-Kennzahlen.",
+    resources: [
+      { label: "Connect to the Microsoft Copilot Dashboard for Microsoft 365 customers", url: "https://learn.microsoft.com/en-us/viva/insights/org-team-insights/copilot-dashboard" },
+    ],
   },
   {
-    id: "real-ab900-48",
+    id: "real-ab900-49",
     topicId: "copilot-agenten",
     prompt: "Ein Benutzer namens User1 erstellt einen Microsoft 365 Copilot-Agenten namens Agent1 und teilt den Agenten mit einem Benutzer namens User2. Was passiert, wenn ein Administrator Agent1 blockiert?",
     options: [
@@ -863,22 +912,29 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Agent1 wird von User1 und User2 entfernt, und kein Benutzer kann Agent1 installieren." },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Agenten für Copilot lassen sich über das Microsoft 365 Admin Center verwalten: Administratoren können Agenten für die Organisation aktivieren, deaktivieren, zuweisen, blockieren oder entfernen und die Copilot-Funktionen insgesamt steuern. Auf der Seite „Agenten“ im Microsoft 365 Admin Center sehen Administratoren alle geteilten Agenten mit Details wie Name, Ersteller, Erstellungsdatum, Host-Produkten und Verfügbarkeitsstatus und können gezielt danach suchen sowie ihren gesamten Lebenszyklus verwalten — einschließlich des Blockierens von Agenten, die als unsicher oder nicht konform eingestuft werden. Für Benutzer sind geteilte Agenten über Copilot auf verschiedenen Oberflächen verfügbar. Wenn ein Administrator einen Microsoft 365 Copilot-Agenten blockiert, gilt dieser Block organisationsweit und setzt sich über jede Benutzerfreigabe oder Eigentümerschaft hinweg durch — Agent1 wird also sowohl von User1 als auch von User2 entfernt, und kein Benutzer kann ihn installieren.",
+    resources: [
+      { label: "Manage agents in the Microsoft 365 admin center", url: "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/manage-copilot-agents-integrated-apps" },
+    ],
   },
   {
     type: "yesno",
-    id: "real-ab900-49",
-    topicId: "copilot-grundlagen",
+    id: "real-ab900-50",
+    topicId: "copilot-agenten",
     prompt: "Für jede der folgenden Aussagen wählen Sie Ja, wenn die Aussage wahr ist. Andernfalls wählen Sie Nein. (HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     statements: [
       { text: "Administratoren können einen bestimmten Copilot-Agenten von allen Benutzern entfernen", correct: "Ja" },
       { text: "Vom Microsoft 365 Admin Center aus können Administratoren die Eingabeaufforderungen eines Copilot-Agenten konfigurieren", correct: "Nein" },
       { text: "Administratoren können Copilot-Agenten bestimmten Benutzern bereitstellen", correct: "Ja" },
     ],
-    explanation: "",
+    combinedOptions: [["Ja", "Ja", "Ja"], ["Ja", "Ja", "Nein"], ["Ja", "Nein", "Ja"], ["Nein", "Ja", "Nein"], ["Nein", "Nein", "Ja"], ["Nein", "Nein", "Nein"]],
+    explanation: "Agenten für Copilot lassen sich über das Microsoft 365 Admin Center verwalten: Administratoren können Agenten für die Organisation aktivieren, deaktivieren, zuweisen, blockieren oder entfernen und die Copilot-Funktionen insgesamt steuern. Auf der Seite „Agenten“ im Microsoft 365 Admin Center sehen Administratoren alle geteilten Agenten mit Details wie Name, Ersteller, Erstellungsdatum, Host-Produkten und Verfügbarkeitsstatus und können ihren gesamten Lebenszyklus verwalten, einschließlich des Entfernens von Agenten für alle Benutzer und des Zuweisens von Agenten an bestimmte Benutzer. Für Benutzer sind zugewiesene Agenten über Copilot auf verschiedenen Oberflächen verfügbar. Die eigentlichen Eingabeaufforderungen (Prompts/Instruktionen) eines Agenten lassen sich jedoch nicht über das Microsoft 365 Admin Center konfigurieren — das ist Aufgabe des Erstellungswerkzeugs (z. B. Copilot Studio oder Agent Builder), nicht der Admin-Verwaltungsoberfläche.",
+    resources: [
+      { label: "Manage agents in the Microsoft 365 admin center", url: "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/manage-copilot-agents-integrated-apps" },
+    ],
   },
   {
-    id: "real-ab900-50",
+    id: "real-ab900-50-displaced-teams-admin-center",
     topicId: "verwaltung-governance",
     prompt: "Wählen Sie die Antwort, die den Satz korrekt vervollständigt.",
     options: [
