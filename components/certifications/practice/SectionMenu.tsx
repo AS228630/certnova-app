@@ -127,12 +127,27 @@ export default function SectionMenu({
 
       {menuOpen && (
         <div className="absolute left-0 top-full z-30 mt-2 max-h-[70vh] w-full min-w-[280px] overflow-y-auto rounded-xl border border-border-soft bg-panel p-2 shadow-lg sm:w-80">
-          {Array.from({ length: sectionCount }).map((_, s) => {
-            const [start, end] = sectionRange(s);
-            const unlocked = sectionUnlocked(s);
-            const completed = unlocked && sectionCompleted(s);
-            const isCurrent = s === currentSection;
-            const premiumLocked = !unlocked && isPro === false;
+          {(() => {
+            // Only the very next locked section (the actual gate the
+            // person needs to act on) shows the Premium badge/CTA — every
+            // section past that is locked for the ordinary reason (the
+            // one before it isn't done yet), so repeating "Premium" on
+            // all of them would wrongly suggest a separate purchase is
+            // needed per section instead of one upgrade unlocking the
+            // normal progressive 90% flow from there on.
+            let firstLockedIndex = -1;
+            for (let i = 0; i < sectionCount; i++) {
+              if (!sectionUnlocked(i)) {
+                firstLockedIndex = i;
+                break;
+              }
+            }
+            return Array.from({ length: sectionCount }).map((_, s) => {
+              const [start, end] = sectionRange(s);
+              const unlocked = sectionUnlocked(s);
+              const completed = unlocked && sectionCompleted(s);
+              const isCurrent = s === currentSection;
+              const premiumLocked = !unlocked && isPro === false && s === firstLockedIndex;
 
             return (
               <div key={s}>
@@ -199,7 +214,8 @@ export default function SectionMenu({
                 )}
               </div>
             );
-          })}
+            });
+          })()}
         </div>
       )}
     </div>
