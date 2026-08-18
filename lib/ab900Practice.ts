@@ -105,7 +105,10 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Eine App-Registrierung" },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Die Registrierung Ihrer Anwendung oder eines Cloud-Dienstes eines Drittanbieters in Microsoft Entra ID stellt eine Vertrauensbeziehung zwischen Ihrer App und der Microsoft-Identitätsplattform her. Dieses Vertrauen ist unidirektional: Ihre App vertraut der Microsoft-Identitätsplattform, nicht umgekehrt. Sobald das Anwendungsobjekt erstellt wurde, kann es nicht mehr zwischen verschiedenen Mandanten (Tenants) verschoben werden.",
+    resources: [
+      { label: "Register an application in Microsoft Entra ID", url: "https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app" },
+    ],
   },
   {
     id: "real-ab900-5",
