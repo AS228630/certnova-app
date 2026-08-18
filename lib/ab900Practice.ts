@@ -5,11 +5,13 @@
 // explicit instruction, only the German content was extracted — no English
 // text is present in the final content.
 //
-// PROGRESS: 101 questions extracted and verified from the original PDF
-// (real-ab900-1 through real-ab900-101), plus additional real questions
+// PROGRESS: 100 questions from the original PDF extraction (real-ab900-1
+// through real-ab900-101, with real-ab900-3 removed after being found to
+// be a broken duplicate with the wrong correct answer — see real-ab900-102
+// below for the corrected version), plus additional real questions
 // (starting at real-ab900-102) added afterward from a second source
 // (cert2brain.com screenshots), each cross-checked for duplicates against
-// the existing 101 before being added. The original PDF's own question
+// the existing bank before being added. The original PDF's own question
 // numbering goes up to 104,
 // but a careful count (verified independently three ways: block-splitting,
 // counting "Antwort:" answer pages, and a full manual page-by-page listing)
@@ -29,7 +31,7 @@
 import type { PracticeQuestion, PracticeTopic, SingleChoiceQuestion, YesNoQuestion } from "./az900Practice";
 
 export const AB900_TOPICS: PracticeTopic[] = [
-  { id: "copilot-grundlagen", title: "Microsoft 365 Copilot Grundlagen", totalQuestions: 32 },
+  { id: "copilot-grundlagen", title: "Microsoft 365 Copilot Grundlagen", totalQuestions: 31 },
   { id: "copilot-agenten", title: "Copilot-Agenten verwalten", totalQuestions: 10 },
   { id: "sicherheit-identitaet", title: "Sicherheit und Identität", totalQuestions: 20 },
   { id: "purview-compliance", title: "Purview und Compliance", totalQuestions: 27 },
@@ -71,19 +73,6 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { label: "Data, Privacy, and Security for Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy" },
       { label: "Microsoft 365 Copilot connectors overview", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/overview-copilot-connector" },
     ],
-  },
-  {
-    id: "real-ab900-3",
-    topicId: "copilot-grundlagen",
-    prompt: "In Microsoft 365 Copilot sollten Sie verwenden ___ mehrstufiges Schlussfolgern über unstrukturierte Daten durchführen.",
-    options: [
-      { id: "A", text: "ein Notebook" },
-      { id: "B", text: "Chat" },
-      { id: "C", text: "der Analyst-Agent" },
-      { id: "D", text: "der Forscher-Agent" },
-    ],
-    correct: "C",
-    explanation: "",
   },
   {
     id: "real-ab900-4",
