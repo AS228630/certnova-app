@@ -47,7 +47,7 @@ export default function MatchingQuestionView({
 
   return (
     <div>
-      {question.imageUrl && <img src={question.imageUrl} alt={t("practice.referenceImgAlt")} className="mb-4 w-full rounded-lg" />}
+      {question.imageUrl && <img src={question.imageUrl} alt={t("practice.referenceImgAlt")} className="mx-auto mb-4 h-auto max-w-full rounded-lg" />}
       {question.instructions && <p className="mb-4 text-sm text-text-muted">{question.instructions}</p>}
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

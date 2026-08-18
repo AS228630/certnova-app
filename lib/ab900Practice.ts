@@ -184,7 +184,6 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       template: "Microsoft 365 Copilot ruft Daten von ___ mithilfe von Microsoft Graph ab.",
       choices: ["Azure OpenAI", "externen Benutzern", "Microsoft SharePoint-Dateien", "Internetsuchmaschinen"],
     },
-    imageUrl: "/exam-images/ab900-q9.png",
     options: [
       { id: "A", text: "Microsoft 365 Copilot ruft Daten von Azure OpenAI mithilfe von Microsoft Graph ab." },
       { id: "B", text: "Microsoft 365 Copilot ruft Daten von externen Benutzern mithilfe von Microsoft Graph ab." },

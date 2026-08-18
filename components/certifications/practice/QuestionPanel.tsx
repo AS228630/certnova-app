@@ -192,7 +192,7 @@ export default function QuestionPanel({
       {"imageUrl" in question && question.imageUrl && (
         <div className="mb-5 overflow-hidden rounded-lg border border-border-soft">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={question.imageUrl} alt={t("practice.referenceImgAlt")} className="w-full" />
+          <img src={question.imageUrl} alt={t("practice.referenceImgAlt")} className="mx-auto h-auto max-w-full" />
         </div>
       )}
 
@@ -392,7 +392,7 @@ export default function QuestionPanel({
           {"explanationImageUrl" in question && question.explanationImageUrl && (
             <div className="mt-3 overflow-hidden rounded-lg border border-border-soft">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={question.explanationImageUrl} alt={t("practice.referenceImgAlt")} className="w-full" />
+              <img src={question.explanationImageUrl} alt={t("practice.referenceImgAlt")} className="mx-auto h-auto max-w-full" />
             </div>
           )}
           {question.resources && question.resources.length > 0 && (
