@@ -75,6 +75,26 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
     ],
   },
   {
+    id: "real-ab900-102",
+    topicId: "copilot-agenten",
+    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
+    blankFill: {
+      template: "In Microsoft 365 Copilot sollten Sie ___ verwenden, um mehrstufiges Schlussfolgern über unstrukturierte Daten durchzuführen.",
+      choices: ["ein Notizbuch", "den Chat", "den Analyst-Agenten", "den Researcher-Agenten"],
+    },
+    options: [
+      { id: "A", text: "In Microsoft 365 Copilot sollten Sie ein Notizbuch verwenden, um mehrstufiges Schlussfolgern über unstrukturierte Daten durchzuführen." },
+      { id: "B", text: "In Microsoft 365 Copilot sollten Sie den Chat verwenden, um mehrstufiges Schlussfolgern über unstrukturierte Daten durchzuführen." },
+      { id: "C", text: "In Microsoft 365 Copilot sollten Sie den Analyst-Agenten verwenden, um mehrstufiges Schlussfolgern über unstrukturierte Daten durchzuführen." },
+      { id: "D", text: "In Microsoft 365 Copilot sollten Sie den Researcher-Agenten verwenden, um mehrstufiges Schlussfolgern über unstrukturierte Daten durchzuführen." },
+    ],
+    correct: "D",
+    explanation: "Der Researcher-Agent ist ein intelligenter Assistent innerhalb von Microsoft 365 Copilot, der für komplexe, mehrstufige Recherche-Aufgaben konzipiert ist. Er liefert umfassende, quellenbelegte Berichte, die fundierte Entscheidungen beschleunigen, und zieht dabei Erkenntnisse sowohl aus dem Web als auch aus Arbeitsinhalten (Dateien, E-Mails, Besprechungen, Chats), auf die der Benutzer bereits Zugriff hat. Der Researcher-Agent ist speziell für tiefergehendes Schlussfolgern ausgelegt und eignet sich besonders für komplexe Aufgaben, die eine sorgfältige Analyse erfordern – durch eine längere Verarbeitungszeit liefert er eine umfassendere, aufschlussreichere Antwort. Der Standard-Copilot-Chat dagegen unterstützt ein breites Spektrum alltäglicher Aufgaben in den Microsoft 365-Apps: Er ist auf Geschwindigkeit und Effizienz optimiert und eignet sich gut für schnellere Aufgaben wie das Zusammenfassen von E-Mails oder das Verfassen kurzer Antworten.",
+    resources: [
+      { label: "Get started with Researcher agent in Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/copilot/microsoft-365/researcher-agent" },
+    ],
+  },
+  {
     id: "real-ab900-4",
     topicId: "copilot-agenten",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365 E5-Abonnement. Sie müssen sicherstellen, dass ein Cloud-Dienst eines Drittanbieters sich bei Microsoft Entra authentifizieren kann. Was sollten Sie konfigurieren?",
@@ -1346,26 +1366,6 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
     ],
     correct: "A",
     explanation: "",
-  },
-  {
-    id: "real-ab900-102",
-    topicId: "copilot-agenten",
-    prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
-    blankFill: {
-      template: "In Microsoft 365 Copilot sollten Sie ___ verwenden, um mehrstufiges Schlussfolgern über unstrukturierte Daten durchzuführen.",
-      choices: ["ein Notizbuch", "den Chat", "den Analyst-Agenten", "den Researcher-Agenten"],
-    },
-    options: [
-      { id: "A", text: "In Microsoft 365 Copilot sollten Sie ein Notizbuch verwenden, um mehrstufiges Schlussfolgern über unstrukturierte Daten durchzuführen." },
-      { id: "B", text: "In Microsoft 365 Copilot sollten Sie den Chat verwenden, um mehrstufiges Schlussfolgern über unstrukturierte Daten durchzuführen." },
-      { id: "C", text: "In Microsoft 365 Copilot sollten Sie den Analyst-Agenten verwenden, um mehrstufiges Schlussfolgern über unstrukturierte Daten durchzuführen." },
-      { id: "D", text: "In Microsoft 365 Copilot sollten Sie den Researcher-Agenten verwenden, um mehrstufiges Schlussfolgern über unstrukturierte Daten durchzuführen." },
-    ],
-    correct: "D",
-    explanation: "Der Researcher-Agent ist ein intelligenter Assistent innerhalb von Microsoft 365 Copilot, der für komplexe, mehrstufige Recherche-Aufgaben konzipiert ist. Er liefert umfassende, quellenbelegte Berichte, die fundierte Entscheidungen beschleunigen, und zieht dabei Erkenntnisse sowohl aus dem Web als auch aus Arbeitsinhalten (Dateien, E-Mails, Besprechungen, Chats), auf die der Benutzer bereits Zugriff hat. Der Researcher-Agent ist speziell für tiefergehendes Schlussfolgern ausgelegt und eignet sich besonders für komplexe Aufgaben, die eine sorgfältige Analyse erfordern – durch eine längere Verarbeitungszeit liefert er eine umfassendere, aufschlussreichere Antwort. Der Standard-Copilot-Chat dagegen unterstützt ein breites Spektrum alltäglicher Aufgaben in den Microsoft 365-Apps: Er ist auf Geschwindigkeit und Effizienz optimiert und eignet sich gut für schnellere Aufgaben wie das Zusammenfassen von E-Mails oder das Verfassen kurzer Antworten.",
-    resources: [
-      { label: "Get started with Researcher agent in Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/copilot/microsoft-365/researcher-agent" },
-    ],
   },
 ];
 
