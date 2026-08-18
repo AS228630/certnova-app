@@ -44,7 +44,12 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { text: "Um den Researcher-Agenten in Microsoft 365 Copilot zu verwenden, benötigen Sie eine Microsoft 365 Copilot-Lizenz", correct: "Ja" },
       { text: "Um einen Agenten in der Microsoft 365 Copilot-App hinzuzufügen, benötigen Sie eine Microsoft 365 Copilot-Lizenz", correct: "Nein" },
     ],
-    explanation: "",
+    combinedOptions: [["Ja", "Ja", "Ja"], ["Ja", "Ja", "Nein"], ["Ja", "Nein", "Ja"], ["Nein", "Ja", "Nein"], ["Nein", "Nein", "Ja"], ["Nein", "Nein", "Nein"]],
+    explanation: "Organisationen setzen in der Regel eine Kombination aus Microsoft 365 Copilot Chat und Microsoft 365 Copilot ein. Microsoft 365 Copilot Chat steht allen Microsoft Entra-Benutzern mit einem Microsoft 365- oder Office 365-Abonnement ohne zusätzliche Kosten zur Verfügung – auch für das Argumentieren über Web-Daten wird also keine Copilot-Lizenz benötigt. Der Researcher-Agent ist dagegen ein intelligenter Assistent für komplexe, mehrstufige Recherchen, der einen strukturierten, quellenbelegten Bericht liefert und dabei Web-Daten sowie – am Arbeitsplatz – Dateien, E-Mails, Besprechungen und Chats einbezieht, auf die der Benutzer bereits Zugriff hat; er steht ausschließlich Microsoft 365 Premium-Abonnenten sowie Business-/Enterprise-Benutzern mit einer Microsoft 365 Copilot-Add-on-Lizenz zur Verfügung. Mitglieder einer Organisation können zudem kostenlose Agenten aus dem Agent Store nutzen, sofern der Administrator diese aktiviert hat; Agenten, die auf Unternehmensdaten zugreifen, werden stattdessen nach tatsächlichem Verbrauch abgerechnet – für das bloße Hinzufügen eines Agenten in der App ist somit ebenfalls keine Copilot-Lizenz erforderlich.",
+    resources: [
+      { label: "Prerequisites for managing agents in Microsoft 365", url: "https://learn.microsoft.com/en-us/copilot/microsoft-365/agent-essentials/agent-prerequisites" },
+      { label: "Get started with Researcher in Microsoft 365 Copilot", url: "https://support.microsoft.com/en-us/topic/get-started-with-researcher-in-microsoft-365-copilot-e63ab760-f3de-4c47-ae87-dad601b0e9c4" },
+    ],
   },
   {
     type: "yesno",
