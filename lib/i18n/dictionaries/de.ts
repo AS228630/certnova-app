@@ -933,6 +933,8 @@ const de = {
     closeDrawer: "Schließen",
     startPrefix: "Starten",
     unlockHint: "Sobald Sie {section} zu {threshold}% richtig lösen, wird dieser Teil freigeschaltet.",
+    unlockHintPremium: "Nur mit Premium verfügbar — tippen, um freizuschalten",
+    premiumBadge: "Premium",
     historyTitle: "Meine Lernfortschritte & Ergebnisse",
     historyEmpty: "Noch keine abgeschlossenen Versuche. Schließen Sie einen Teil ab, um ihn hier zu sehen.",
     historyColSection: "Teil",

@@ -932,6 +932,8 @@ const uk: Dictionary = {
     closeDrawer: "Закрити",
     startPrefix: "Почати",
     unlockHint: "Щойно ви розв'яжете {section} правильно на {threshold}%+, ця частина розблокується.",
+    unlockHintPremium: "Доступно лише з Premium — натисніть, щоб розблокувати",
+    premiumBadge: "Premium",
     historyTitle: "Мій прогрес і результати",
     historyEmpty: "Ще немає завершених спроб. Завершіть частину, щоб побачити її тут.",
     historyColSection: "Частина",

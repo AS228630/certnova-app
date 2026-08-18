@@ -932,6 +932,8 @@ const fr: Dictionary = {
     closeDrawer: "Fermer",
     startPrefix: "Démarrer",
     unlockHint: "Dès que vous résolvez {section} correctement à {threshold}%+, cette partie se débloque.",
+    unlockHintPremium: "Disponible uniquement avec Premium — appuyez pour déverrouiller",
+    premiumBadge: "Premium",
     historyTitle: "Mes progrès et résultats",
     historyEmpty: "Aucun essai terminé pour l'instant. Terminez une partie pour la voir ici.",
     historyColSection: "Partie",

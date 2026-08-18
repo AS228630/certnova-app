@@ -932,6 +932,8 @@ const ar: Dictionary = {
     closeDrawer: "إغلاق",
     startPrefix: "ابدأ",
     unlockHint: "بمجرد حلّك {section} بدقة {threshold}٪ أو أعلى، سيُفتح هذا الجزء.",
+    unlockHintPremium: "متاح فقط مع Premium — اضغط للفتح",
+    premiumBadge: "Premium",
     historyTitle: "تقدمي ونتائجي",
     historyEmpty: "لا توجد محاولات مكتملة بعد. أكمل جزءًا لرؤيته هنا.",
     historyColSection: "الجزء",

@@ -932,6 +932,8 @@ const ru: Dictionary = {
     closeDrawer: "Закрыть",
     startPrefix: "Начать",
     unlockHint: "Как только вы решите {section} правильно на {threshold}%+, эта часть разблокируется.",
+    unlockHintPremium: "Доступно только с Premium — нажмите, чтобы разблокировать",
+    premiumBadge: "Premium",
     historyTitle: "Мой прогресс и результаты",
     historyEmpty: "Пока нет завершённых попыток. Завершите часть, чтобы увидеть её здесь.",
     historyColSection: "Часть",

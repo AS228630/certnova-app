@@ -932,6 +932,8 @@ const fa: Dictionary = {
     closeDrawer: "بستن",
     startPrefix: "شروع",
     unlockHint: "به‌محض این‌که {section} را با دقت بالای {threshold}٪ درست حل کنید، این بخش باز می‌شود.",
+    unlockHintPremium: "فقط با اشتراک Premium در دسترس است — برای باز کردن ضربه بزنید",
+    premiumBadge: "Premium",
     historyTitle: "پیشرفت و نتایج من",
     historyEmpty: "هنوز هیچ تلاش کامل‌شده‌ای وجود نداره. یه بخش رو کامل کن تا اینجا ببینیش.",
     historyColSection: "بخش",

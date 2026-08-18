@@ -34,6 +34,22 @@ import PremiumGateModal from "./PremiumGateModal";
 
 const EXAM_TOTAL_SECONDS = 2 * 60 * 60; // 2h, matches a real certification exam
 
+// Short-lived, in-memory cache for the gated practice-questions response.
+// Module-scoped (not sessionStorage), so it's naturally wiped on a real
+// page reload — a hard refresh always re-verifies entitlement server-side,
+// exactly as before. It only smooths the common case of navigating away
+// from and back to Practice within the same tab session (e.g. clicking
+// Dashboard then back), where re-fetching from scratch every single time
+// caused a multi-second reload the user didn't expect. Keyed by the exact
+// accessToken used for the request, so a login/logout/upgrade — anything
+// that changes what the next fetch is entitled to — is a different key and
+// therefore always a real fetch, never a stale hit.
+const PRACTICE_QUESTIONS_CACHE_TTL_MS = 3 * 60 * 1000; // 3 minutes
+const practiceQuestionsCache = new Map<
+  string,
+  { questions: PracticeQuestion[]; topics: PracticeTopic[]; isPro: boolean; totalCount: number; timestamp: number }
+>();
+
 type YesNoAnswers = Record<number, "Ja" | "Nein">;
 type MatchingAnswers = Record<string, string>;
 type Answer = PracticeOptionId | PracticeOptionId[] | YesNoAnswers | MatchingAnswers;
@@ -110,6 +126,24 @@ export default function PracticeClient({
       try {
         const { data } = await supabase.auth.getSession();
         const accessToken = data.session?.access_token ?? null;
+
+        // Post-purchase activation polling must never read a stale cache
+        // entry — it's specifically trying to observe the entitlement
+        // change in real time, so it always bypasses the cache below.
+        if (!justPurchased) {
+          const cacheKey = `${certId}:${locale}:${accessToken ?? "guest"}`;
+          const cached = practiceQuestionsCache.get(cacheKey);
+          if (cached && Date.now() - cached.timestamp < PRACTICE_QUESTIONS_CACHE_TTL_MS) {
+            if (cancelled) return;
+            setQuestions(cached.questions);
+            setTopics(cached.topics);
+            setIsPro(cached.isPro);
+            setTotalQuestionCount(cached.totalCount);
+            setQuestionsLoading(false);
+            return;
+          }
+        }
+
         const res = await fetch(`/api/certifications/${certId}/practice-questions`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -118,10 +152,21 @@ export default function PracticeClient({
         if (!res.ok) throw new Error("practice-questions request failed");
         const json = await res.json();
         if (cancelled) return;
-        setQuestions(json.questions ?? []);
-        setTopics(json.topics ?? []);
-        setIsPro(!!json.isPro);
-        setTotalQuestionCount(json.totalCount ?? (json.questions ?? []).length);
+        const loadedQuestions: PracticeQuestion[] = json.questions ?? [];
+        const loadedTopics: PracticeTopic[] = json.topics ?? [];
+        const loadedIsPro = !!json.isPro;
+        const loadedTotalCount = json.totalCount ?? loadedQuestions.length;
+        setQuestions(loadedQuestions);
+        setTopics(loadedTopics);
+        setIsPro(loadedIsPro);
+        setTotalQuestionCount(loadedTotalCount);
+        practiceQuestionsCache.set(`${certId}:${locale}:${accessToken ?? "guest"}`, {
+          questions: loadedQuestions,
+          topics: loadedTopics,
+          isPro: loadedIsPro,
+          totalCount: loadedTotalCount,
+          timestamp: Date.now(),
+        });
 
         if (justPurchased && !json.isPro && activationAttempt < 10) {
           // Webhook hasn't landed yet — try again shortly, still not
@@ -888,6 +933,7 @@ export default function PracticeClient({
             }
             getBestScore={attemptsMigrationReady ? (s) => getBestScore(certId, s) : undefined}
             onLockedClick={!isPro ? () => setShowPremiumGate(true) : undefined}
+            isPro={isPro}
           />
           <SectionProgressBar
             start={currentSectionStart}

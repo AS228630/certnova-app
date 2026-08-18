@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { ChevronDown, Lock, ListChecks, Check } from "lucide-react";
+import { ChevronDown, Lock, ListChecks, Check, Sparkles } from "lucide-react";
 import { getSectionSize, getSectionCount, UNLOCK_THRESHOLD } from "@/lib/practiceSections";
 import { useLocale } from "@/components/LocaleProvider";
 
@@ -21,6 +21,7 @@ export default function SectionMenu({
   isUnlocked,
   getBestScore,
   onLockedClick,
+  isPro,
 }: {
   total: number;
   /** Only used to look up a per-cert section-size override (see
@@ -45,6 +46,14 @@ export default function SectionMenu({
    * callback provided, a locked section click is silently ignored
    * (previous behavior). */
   onLockedClick?: (sectionIndex: number) => void;
+  /** Whether the viewer currently has Premium. When false, a locked
+   * section is ALWAYS gated behind upgrading (never behind score — see
+   * PracticeClient's isUnlocked callback), so the hint below it must say
+   * that plainly instead of showing the 90%-score wording, which would
+   * otherwise misleadingly imply a Free user could ever unlock it by
+   * scoring well. Optional so any caller that hasn't been updated yet
+   * keeps the old (Pro-only) wording unchanged. */
+  isPro?: boolean;
 }) {
   const { t } = useLocale();
   const SECTION_SIZE = getSectionSize(total, certId);
@@ -123,6 +132,7 @@ export default function SectionMenu({
             const unlocked = sectionUnlocked(s);
             const completed = unlocked && sectionCompleted(s);
             const isCurrent = s === currentSection;
+            const premiumLocked = !unlocked && isPro === false;
 
             return (
               <div key={s}>
@@ -137,7 +147,13 @@ export default function SectionMenu({
                   }}
                   disabled={!unlocked && !onLockedClick}
                   className={`flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-left text-sm transition-colors ${
-                    isCurrent ? "bg-primary-light text-primary" : unlocked ? "text-text hover:bg-panel-alt" : "cursor-not-allowed text-text-faint"
+                    isCurrent
+                      ? "bg-primary-light text-primary"
+                      : unlocked
+                        ? "text-text hover:bg-panel-alt"
+                        : premiumLocked
+                          ? "cursor-pointer border border-primary/30 bg-primary-light/40 text-text hover:bg-primary-light/70"
+                          : "cursor-not-allowed text-text-faint"
                   }`}
                 >
                   <span className="flex items-center gap-2">
@@ -145,6 +161,8 @@ export default function SectionMenu({
                       <Check size={14} className="text-success" />
                     ) : unlocked ? (
                       <span className="h-2 w-2 rounded-full bg-primary" />
+                    ) : premiumLocked ? (
+                      <Sparkles size={13} className="text-primary" />
                     ) : (
                       <Lock size={12} />
                     )}
@@ -163,12 +181,20 @@ export default function SectionMenu({
                       <span className="text-[11px] font-semibold text-success">{t("practice.bestScoreLabel")}: {best}%</span>
                     ) : null;
                   })()}
+                  {premiumLocked && (
+                    <span className="flex items-center gap-1 rounded-full bg-primary px-2 py-0.5 text-[10px] font-bold text-white">
+                      <Sparkles size={10} />
+                      {t("practice.premiumBadge")}
+                    </span>
+                  )}
                 </button>
                 {!unlocked && (
-                  <p className="px-3 pb-2 pt-0.5 text-[11px] leading-relaxed text-text-faint">
-                    {t("practice.unlockHint")
-                      .replace("{section}", `${t("practice.sectionN")} ${s}`)
-                      .replace("{threshold}", String(UNLOCK_THRESHOLD))}
+                  <p className={`px-3 pb-2 pt-0.5 text-[11px] leading-relaxed ${premiumLocked ? "font-medium text-primary" : "text-text-faint"}`}>
+                    {premiumLocked
+                      ? t("practice.unlockHintPremium")
+                      : t("practice.unlockHint")
+                          .replace("{section}", `${t("practice.sectionN")} ${s}`)
+                          .replace("{threshold}", String(UNLOCK_THRESHOLD))}
                   </p>
                 )}
               </div>

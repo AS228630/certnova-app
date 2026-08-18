@@ -932,6 +932,8 @@ const tr: Dictionary = {
     closeDrawer: "Kapat",
     startPrefix: "Başlat",
     unlockHint: "{section} bölümünü %{threshold}+ doğrulukla çözdüğünüzde bu kısım açılır.",
+    unlockHintPremium: "Yalnızca Premium ile kullanılabilir — kilidi açmak için dokunun",
+    premiumBadge: "Premium",
     historyTitle: "İlerlemem ve Sonuçlarım",
     historyEmpty: "Henüz tamamlanmış deneme yok. Görmek için bir kısmı tamamlayın.",
     historyColSection: "Kısım",

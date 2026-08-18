@@ -932,6 +932,8 @@ const es: Dictionary = {
     closeDrawer: "Cerrar",
     startPrefix: "Empezar",
     unlockHint: "En cuanto resuelvas {section} correctamente con un {threshold}%+, esta parte se desbloqueará.",
+    unlockHintPremium: "Solo disponible con Premium — toca para desbloquear",
+    premiumBadge: "Premium",
     historyTitle: "Mi progreso y resultados",
     historyEmpty: "Aún no hay intentos completados. Termina una parte para verla aquí.",
     historyColSection: "Parte",

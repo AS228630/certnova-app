@@ -932,6 +932,8 @@ const en: Dictionary = {
     closeDrawer: "Close",
     startPrefix: "Start",
     unlockHint: "Once you solve {section} correctly at {threshold}%+, this part unlocks.",
+    unlockHintPremium: "Available with Premium only — tap to unlock",
+    premiumBadge: "Premium",
     historyTitle: "My Progress & Results",
     historyEmpty: "No completed attempts yet. Finish a part to see it here.",
     historyColSection: "Part",
