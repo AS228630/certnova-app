@@ -91,6 +91,7 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "F", text: "Agenten – Einstellungen" },
     ],
     correct: "A",
+    imageUrl: "/exam-images/ab900-q102.png",
     explanation: "Microsoft 365 Copilot-Konnektoren erweitern die Reichweite von Microsoft 365 Copilot und der Microsoft Search-Erlebnisse, indem sie eine Verbindung zu Daten außerhalb von Microsoft 365 herstellen. Ihre Organisation kann externe Daten entweder mithilfe synchronisierter Konnektoren indizieren oder mithilfe föderierter Konnektoren (Early-Access-Vorschau) in Echtzeit mit Daten verbinden. Diese Flexibilität stellt sicher, dass Benutzer sowohl Unternehmens- als auch externe Datenquellen sicher innerhalb der Microsoft 365-Apps und Copilot-Erlebnisse durchsuchen und mit ihnen interagieren können.",
     resources: [
       { label: "Connectors overview", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/overview" },
@@ -1828,6 +1829,7 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "F", text: "OneDrive-Konten" },
     ],
     correct: "D",
+    imageUrl: "/exam-images/ab900-q98.png",
     explanation: "Als SharePoint-Administrator können Sie im SharePoint-Verwaltungscenter benutzerdefinierte Änderungshistorienberichte erstellen, um CSV-Berichte zu Websiteaktionen oder organisationsweiten Einstellungsänderungen der letzten 180 Tage einzusehen.\n\nÄnderungshistorienberichte erhöhen die Transparenz und ermöglichen es Ihnen, Änderungen an der SharePoint-Konfiguration auf verschiedenen Ebenen Ihrer Organisation zu überwachen.\n\nSie können bis zu 10 Berichte erstellen, die nachverfolgen, was geändert wurde, wann es geschah und wer die Änderung an den Website- und Organisationseinstellungen ausgelöst hat.",
     resources: [
       { label: "Track site actions or organization setting changes made within the last 180 days with change history reports", url: "https://learn.microsoft.com/en-us/sharepoint/change-history-report" },
