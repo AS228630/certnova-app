@@ -77,6 +77,29 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
   {
     id: "real-ab900-102",
     topicId: "copilot-agenten",
+    prompt: "Sie müssen sicherstellen, dass Benutzer ein externes System als Wissensquelle für benutzerdefinierte Microsoft 365 Copilot-Agenten nutzen können. Was sollten Sie im Microsoft 365 Admin Center konfigurieren? (Wählen Sie zur Beantwortung die entsprechenden Einstellungen im Antwortbereich aus.)",
+    blankFill: {
+      template: "Sie sollten ___ im Microsoft 365 Admin Center konfigurieren.",
+      choices: ["Copilot – Konnektoren", "Copilot – Suche", "Copilot – Einstellungen", "Agenten – Übersicht", "Agenten – Tools", "Agenten – Einstellungen"],
+    },
+    options: [
+      { id: "A", text: "Copilot – Konnektoren" },
+      { id: "B", text: "Copilot – Suche" },
+      { id: "C", text: "Copilot – Einstellungen" },
+      { id: "D", text: "Agenten – Übersicht" },
+      { id: "E", text: "Agenten – Tools" },
+      { id: "F", text: "Agenten – Einstellungen" },
+    ],
+    correct: "A",
+    explanation: "Microsoft 365 Copilot-Konnektoren erweitern die Reichweite von Microsoft 365 Copilot und der Microsoft Search-Erlebnisse, indem sie eine Verbindung zu Daten außerhalb von Microsoft 365 herstellen. Ihre Organisation kann externe Daten entweder mithilfe synchronisierter Konnektoren indizieren oder mithilfe föderierter Konnektoren (Early-Access-Vorschau) in Echtzeit mit Daten verbinden. Diese Flexibilität stellt sicher, dass Benutzer sowohl Unternehmens- als auch externe Datenquellen sicher innerhalb der Microsoft 365-Apps und Copilot-Erlebnisse durchsuchen und mit ihnen interagieren können.",
+    resources: [
+      { label: "Connectors overview", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/overview" },
+      { label: "Microsoft 365 Copilot connectors overview", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/overview-copilot-connector" },
+    ],
+  },
+  {
+    id: "real-ab900-102-displaced-researcher-multistep-reasoning",
+    topicId: "copilot-agenten",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
     blankFill: {
       template: "In Microsoft 365 Copilot sollten Sie ___ verwenden, um mehrstufiges Schlussfolgern über unstrukturierte Daten durchzuführen.",
@@ -1717,7 +1740,7 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
     ],
   },
   {
-    id: "real-ab900-93-displaced-copilot-rollout-admin-center",
+    id: "real-ab900-94",
     topicId: "copilot-grundlagen",
     prompt: "Ihr Unternehmen plant den Einsatz von Microsoft 365 Copilot. Sie müssen einem Benutzer die Möglichkeit geben, Microsoft 365 Copilot zu nutzen, einschließlich der Agenten „Researcher“ und „Analyst“. Was sollten Sie verwenden?",
     options: [
@@ -1727,10 +1750,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Das Microsoft Defender-Portal" },
     ],
     correct: "A",
-    explanation: "",
+    explanation: "Die Verwendung vorgefertigter Microsoft-Agenten, einschließlich Researcher, Analyst und Facilitator, setzt eine Microsoft 365 Copilot-Lizenz voraus. Sie müssen die Lizenz erwerben und über das Microsoft 365 Admin Center zuweisen.",
+    resources: [
+      { label: "Flexible Copilot plans for every organization", url: "https://www.microsoft.com/en-us/microsoft-365-copilot/pricing" },
+    ],
   },
   {
-    id: "real-ab900-94",
+    id: "real-ab900-95",
     topicId: "copilot-grundlagen",
     prompt: "Ihr Unternehmen erwägt, Microsoft 365 Copilot auf Pay-as-you-go-Basis zu nutzen, anstatt eine Microsoft 365 Copilot-Lizenz zu erwerben. In welchem Szenario kommt die Pay-as-you-go-Abrechnung in Frage?",
     options: [
@@ -1740,10 +1766,14 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Verwendung des KI-Assistenten zum Bearbeiten eines Dokuments in Copilot in Word" },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Der Microsoft 365 Copilot Pay-as-you-go-Plan bietet Organisationen einen flexiblen und kosteneffizienten Weg, um auf Copilot-Dienste zuzugreifen. Dieser Plan ermöglicht es Administratoren, für bestimmte Copilot-Szenarien eine nutzungsbasierte Abrechnung zu aktivieren, sodass Benutzer Copilot-Funktionen nutzen können, ohne sich auf eine vollständige Lizenz festzulegen.\n\nDie Pay-as-you-go-Abrechnung für Microsoft-365-Copilot-Dienste – darunter Microsoft 365 Copilot Chat und SharePoint-Agenten (Lite-Agenten) – bietet die Möglichkeit, benutzerdefinierte Agenten zu nutzen, ohne Microsoft 365 Copilot-Lizenzen erwerben zu müssen. Die Pay-as-you-go-Abrechnung kann auch beim Rollout neuer Agenten oder bei einem schnellen Anstieg der Nachfrage hilfreich sein. Administratoren müssen Abrechnungsrichtlinien konfigurieren, um zu steuern, wer auf Microsoft-365-Copilot-Dienste zugreifen kann, und um die Pay-as-you-go-Kosten zu überwachen.",
+    resources: [
+      { label: "Microsoft 365 Copilot pay-as-you-go overview for IT admins", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/pay-as-you-go/overview" },
+      { label: "Understanding Pay as You Go Billing for M365 Copilot \"Lite\" Agents", url: "https://www.directionsonmicrosoft.com/reports/understanding-pay-as-you-go-billing-for-m365-copilot-lite-agents" },
+    ],
   },
   {
-    id: "real-ab900-95",
+    id: "real-ab900-96",
     topicId: "copilot-grundlagen",
     prompt: "Ihr Unternehmen verfügt über eine Microsoft SharePoint-Website namens „Site1“. „Site1“ enthält alle Richtlinien der Personalabteilung des Unternehmens. Die Richtlinien sind als Microsoft Word-Dokumente gespeichert. Alle Benutzer haben Lesezugriff auf „Site1“. Der Leiter der Personalabteilung berichtet, dass Benutzeranfragen zu den Richtlinien NICHT zeitnah bearbeitet werden, insbesondere im Umfeld wichtiger Feiertage. Sie müssen eine Lösung vorschlagen, die es den Benutzern ermöglicht, die Richtlinien der Personalabteilung zu finden. Die Lösung muss den Benutzern eine Liste häufiger Fragen bereitstellen und sicherstellen, dass die Antworten ausschließlich auf Site1 basieren. Was sollten Sie in die Empfehlung aufnehmen?",
     options: [
@@ -1753,12 +1783,19 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Ein Microsoft 365 Copilot-Notizbuch" },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Microsoft 365 Copilot ist ein KI-gestütztes Produktivitätstool, das Arbeitsabläufe in Microsoft-365-Anwendungen wie Copilot Chat, Outlook, Teams und Word mithilfe von Unternehmensdaten aus Microsoft Graph verbessert. Obwohl Copilot leistungsstarke integrierte Funktionen bietet, müssen Organisationen häufig zusätzliches Wissen, Datenquellen oder Anwendungen einbinden, um spezifische Anwendungsfälle abzudecken.\n\nAgenten erweitern die Funktionalität von Copilot, indem sie als spezialisierte KI-Assistenten für bestimmte Fachbereiche fungieren. Diese Agenten wenden organisationsspezifisches Wissen und Automatisierung an, um Geschäftsprozesse zu vereinfachen, die Entscheidungsfindung zu verbessern und die Effizienz zu steigern. Agenten können Informationen abrufen, Daten zusammenfassen oder sogar Aktionen wie das Versenden von E-Mails oder das Aktualisieren von Datensätzen durchführen.\n\nMit einem benutzerdefinierten Copilot-Agenten können Sie die Fundierung (Grounding) auf eine bestimmte SharePoint-Website beschränken und so sicherstellen, dass Antworten ausschließlich auf den HR-Richtliniendokumenten basieren. Sie können außerdem vorgeschlagene Eingabeaufforderungen definieren, zum Beispiel:\n\n– „Wie lautet die Urlaubsrichtlinie?“\n– „Wie funktioniert der Elternurlaub?“\n– „Wie viele Krankheitstage stehen mir zu?“\n\nBenutzerdefinierte Agenten können in Apps wie Microsoft Teams bereitgestellt werden, wo Benutzer bereits ihre Fragen stellen.",
+    resources: [
+      { label: "Agents for Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agents-overview" },
+    ],
   },
   {
-    id: "real-ab900-96",
+    id: "real-ab900-97",
     topicId: "purview-compliance",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Über das Microsoft Purview-Portal können Sie mit dem Data Explorer ___.",
+      choices: ["Datenschutzrichtlinien erstellen und verwalten", "nach Inhalten in Postfächern und Websites suchen", "sensible Informationen identifizieren und deren Speicherorte ermitteln", "die Wirksamkeit Ihrer Richtlinien zur Verhinderung von Datenverlusten (DLP) überprüfen"],
+    },
     options: [
       { id: "A", text: "Über das Microsoft Purview-Portal können Sie mit dem Data Explorer Datenschutzrichtlinien erstellen und verwalten." },
       { id: "B", text: "Über das Microsoft Purview-Portal können Sie mit dem Data Explorer nach Inhalten in Postfächern und Websites suchen." },
@@ -1766,25 +1803,32 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Über das Microsoft Purview-Portal können Sie den Data Explorer verwenden, um die Wirksamkeit Ihrer Richtlinien zur Verhinderung von Datenverlusten (DLP) zu überprüfen." },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Der Data Explorer zeigt eine aktuelle Momentaufnahme der Elemente, die in Ihrer Organisation eine Vertraulichkeitskennzeichnung oder eine Aufbewahrungskennzeichnung besitzen oder als vertraulicher Informationstyp klassifiziert wurden.\n\nDas Identifizieren klassifizierter Elemente und das Anzeigen ihrer Speicherorte ist der Kernzweck des Data Explorer.",
+    resources: [
+      { label: "Get started with data explorer", url: "https://learn.microsoft.com/en-us/purview/data-classification-data-explorer" },
+    ],
   },
   {
-    id: "real-ab900-97",
+    id: "real-ab900-98",
     topicId: "verwaltung-governance",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement, das eine Microsoft SharePoint-Website namens „Site1“ enthält. Sie müssen alle Änderungen ermitteln, die ein Websiteadministrator an den Websiteeinstellungen von „Site1“ vorgenommen hat. Welchen Bericht sollten Sie im SharePoint-Verwaltungscenter verwenden? (Wählen Sie zur Beantwortung den entsprechenden Bericht im Antwortbereich aus.)",
     options: [
       { id: "A", text: "Agent Insights" },
-      { id: "B", text: "App Insights Katalogverwaltung" },
+      { id: "B", text: "App Insights" },
+      { id: "C", text: "Katalogverwaltung" },
       { id: "D", text: "Änderungshistorie" },
       { id: "E", text: "Datenzugriffs-Governance" },
       { id: "F", text: "OneDrive-Konten" },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Als SharePoint-Administrator können Sie im SharePoint-Verwaltungscenter benutzerdefinierte Änderungshistorienberichte erstellen, um CSV-Berichte zu Websiteaktionen oder organisationsweiten Einstellungsänderungen der letzten 180 Tage einzusehen.\n\nÄnderungshistorienberichte erhöhen die Transparenz und ermöglichen es Ihnen, Änderungen an der SharePoint-Konfiguration auf verschiedenen Ebenen Ihrer Organisation zu überwachen.\n\nSie können bis zu 10 Berichte erstellen, die nachverfolgen, was geändert wurde, wann es geschah und wer die Änderung an den Website- und Organisationseinstellungen ausgelöst hat.",
+    resources: [
+      { label: "Track site actions or organization setting changes made within the last 180 days with change history reports", url: "https://learn.microsoft.com/en-us/sharepoint/change-history-report" },
+    ],
   },
   {
     type: "yesno",
-    id: "real-ab900-98",
+    id: "real-ab900-99",
     topicId: "purview-compliance",
     prompt: "Für jede der folgenden Aussagen wählen Sie Ja, wenn die Aussage wahr ist. Andernfalls wählen Sie \"Nein\". (HINWEIS: Jede richtige Auswahl bringt einen Punkt.)",
     statements: [
@@ -1792,10 +1836,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { text: "Microsoft Purview Communications Compliance anonymisiert Benutzeridentitäten standardmäßig während Untersuchungen", correct: "Ja" },
       { text: "Microsoft Purview Communications Compliance fügt allen überwachten Kommunikationen einen Haftungsausschluss hinzu", correct: "Nein" },
     ],
-    explanation: "",
+    explanation: "Microsoft Purview Communication Compliance wertet text- und bildbasierte Nachrichten auf unangemessene Inhalte aus. Dazu gehört das Erkennen anstößiger oder unangemessener Inhalte mithilfe von Bildanalyse (OCR und Klassifizierer) in unterstützten Microsoft-365-Workloads, einschließlich in SharePoint gespeicherter Inhalte, die über unterstützte Kommunikationskanäle sichtbar werden.\n\nDie Identitäten von Absender und Empfänger werden standardmäßig pseudonymisiert – als Teil des „Privacy by Design“-Ansatzes von Communication Compliance. Prüfer sehen die tatsächlichen Benutzeridentitäten erst nach einem expliziten Opt-in durch einen Administrator.\n\nMicrosoft Purview Communication Compliance überwacht, erkennt und untersucht Kommunikationen, fügt jedoch nicht automatisch Haftungsausschlüsse zu Nachrichten hinzu.",
+    resources: [
+      { label: "Communication Compliance", url: "https://learn.microsoft.com/en-us/purview/communication-compliance-solution-overview" },
+    ],
   },
   {
-    id: "real-ab900-99",
+    id: "real-ab900-100",
     topicId: "sicherheit-identitaet",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Allen Benutzern wurde eine Microsoft 365 Copilot-Lizenz zugewiesen. Sie müssen verhindern, dass die Benutzer mit Copilot Bilder erstellen. Was sollten Sie verwenden?",
     options: [
@@ -1805,34 +1852,25 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Das Microsoft 365 Admin Center" },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Die Bilderzeugung von Copilot lässt sich im Microsoft 365 Admin Center aktivieren oder deaktivieren, wie unten gezeigt.",
+    explanationImageUrl: "/exam-images/ab900-q100-explain.png",
   },
   {
     type: "yesno",
-    id: "real-ab900-100",
-    topicId: "copilot-grundlagen",
-    prompt: "Wählen Sie für jede der folgenden Aussagen „Ja\", wenn die Aussage wahr ist. Andernfalls wählen Sie „Nein\". (HINWEIS: Jede richtige Auswahl bringt einen Punkt.)",
+    id: "real-ab900-101",
+    topicId: "copilot-agenten",
+    prompt: "Für jede der folgenden Aussagen wählen Sie Ja, wenn die Aussage wahr ist. Andernfalls wählen Sie Nein. (HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     statements: [
       { text: "Administratoren können bestimmte Websites für die Nutzung durch Microsoft 365 Copilot sperren", correct: "Ja" },
       { text: "Administratoren können Microsoft 365 Copilot daran hindern, bei der Beantwortung von Benutzeranfragen die Websuche zu nutzen", correct: "Ja" },
       { text: "Administratoren können den Zugriff auf den Researcher-Agenten in Microsoft 365 Copilot sperren, während sie den Zugriff auf den Analyst-Agenten zulassen", correct: "Ja" },
     ],
-    explanation: "",
-  },
-  {
-    id: "real-ab900-101",
-    topicId: "copilot-agenten",
-    prompt: "Sie müssen sicherstellen, dass Benutzer ein externes System als Wissensquelle für benutzerdefinierte Microsoft 365 Copilot-Agenten nutzen können. Was sollten Sie im Microsoft 365 Admin Center konfigurieren? (Wählen Sie zur Beantwortung die entsprechenden Einstellungen im Antwortbereich aus.)",
-    options: [
-      { id: "A", text: "Copilot – Konnektoren" },
-      { id: "B", text: "Copilot – Suche" },
-      { id: "C", text: "Copilot – Einstellungen" },
-      { id: "D", text: "Agenten – Übersicht" },
-      { id: "E", text: "Agenten – Tools" },
-      { id: "F", text: "Agenten – Einstellungen" },
+    explanation: "Microsoft 365 Copilot unterstützt den Ausschluss bestimmter Domänen für die Web-Fundierung (Web Grounding), wodurch Administratoren bestimmte externe Websites sperren können, wenn Copilot auf Webinhalte verweist.\n\nIT-Administratoren können den Zugriff auf die Websuche über die Richtlinie „Allow web search in Copilot“ steuern, die ausschließlich im Cloud Policy Service für Microsoft 365 verfügbar ist (im Microsoft 365 Apps Admin Center). Mit dieser Richtlinie können IT-Administratoren die Websuche für Benutzer oder Benutzergruppen im gesamten von ihnen verwalteten Mandanten ein- oder ausschalten – im Einklang mit den Richtlinien der Organisation, Datenschutzgesetzen oder anderen regulatorischen Anforderungen.\n\nWir sperren den Zugriff auf den Researcher-Agenten, ohne andere Agenten zu beeinträchtigen, direkt über das Microsoft 365 Admin Center, wie unten gezeigt.",
+    explanationImageUrl: "/exam-images/ab900-q101-explain.png",
+    resources: [
+      { label: "Data, privacy, and security for web search in Microsoft 365 Copilot and Microsoft 365 Copilot Chat", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/manage-public-web-access" },
+      { label: "Get started with Researcher agent in Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/researcher-agent" },
     ],
-    correct: "A",
-    explanation: "",
   },
 ];
 
