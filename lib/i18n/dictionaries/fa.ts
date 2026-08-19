@@ -921,6 +921,8 @@ const fa: Dictionary = {
     toastOpenedNewTab: "نتیجه تو یه تب جدید باز شد — اونجا ذخیره‌ش کن.",
     toastDownloadUnsupported: "دانلود تو این مرورگر پشتیبانی نمی‌شه.",
     progressBtn: "پیشرفت",
+    collapseSidebar: "بستن نوار کناری",
+    expandSidebar: "باز کردن نوار کناری",
     progressOverview: "نمای کلی پیشرفت",
     progressTrend: "روند پیشرفت",
     trendNotEnoughData: "هنوز داده‌ی کافی برای روند وجود نداره.",

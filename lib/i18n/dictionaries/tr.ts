@@ -921,6 +921,8 @@ const tr: Dictionary = {
     toastOpenedNewTab: "Sonuç yeni bir sekmede açıldı — orada kaydedin.",
     toastDownloadUnsupported: "İndirme bu tarayıcı tarafından desteklenmiyor.",
     progressBtn: "İlerleme",
+    collapseSidebar: "Kenar çubuğunu daralt",
+    expandSidebar: "Kenar çubuğunu genişlet",
     progressOverview: "İlerleme Özeti",
     progressTrend: "İlerleme Eğilimi",
     trendNotEnoughData: "Eğilim için henüz yeterli veri yok.",

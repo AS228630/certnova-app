@@ -921,6 +921,8 @@ const ar: Dictionary = {
     toastOpenedNewTab: "تم فتح النتيجة في علامة تبويب جديدة — احفظها هناك.",
     toastDownloadUnsupported: "التنزيل غير مدعوم في هذا المتصفح.",
     progressBtn: "التقدم",
+    collapseSidebar: "طي الشريط الجانبي",
+    expandSidebar: "توسيع الشريط الجانبي",
     progressOverview: "نظرة عامة على التقدم",
     progressTrend: "اتجاه التقدم",
     trendNotEnoughData: "لا توجد بيانات كافية بعد لعرض الاتجاه.",

@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { ChevronDown, Lock, ListChecks, Check, Sparkles } from "lucide-react";
+import { ChevronDown, Lock, ListChecks, Check, Sparkles, Menu } from "lucide-react";
 import { getSectionSize, getSectionCount, UNLOCK_THRESHOLD } from "@/lib/practiceSections";
 import { useLocale } from "@/components/LocaleProvider";
+import { useSidebarCollapseStore } from "@/lib/store/sidebarCollapseStore";
 
 type Status = "current" | "correct" | "wrong" | "marked" | "skipped" | "unanswered";
 
@@ -56,6 +57,11 @@ export default function SectionMenu({
   isPro?: boolean;
 }) {
   const { t } = useLocale();
+  // Desktop-only sidebar collapse toggle, shown right next to the question
+  // range below — same feature on every certification/company, since this
+  // component is shared by all of them.
+  const sidebarCollapsed = useSidebarCollapseStore((s) => s.collapsed);
+  const toggleSidebar = useSidebarCollapseStore((s) => s.toggle);
   const SECTION_SIZE = getSectionSize(total, certId);
   const sectionCount = getSectionCount(total, certId);
   const currentSection = Math.floor(currentIndex / SECTION_SIZE);
@@ -124,6 +130,20 @@ export default function SectionMenu({
         {sectionRange(currentSection)[0] + 1}–{sectionRange(currentSection)[1]} {t("practice.ofWord")}{" "}
         {sectionRange(currentSection)[1] - sectionRange(currentSection)[0]} {t("practice.questionsWord")}
       </span>
+
+      <button
+        onClick={toggleSidebar}
+        aria-label={t(sidebarCollapsed ? "practice.expandSidebar" : "practice.collapseSidebar")}
+        aria-pressed={sidebarCollapsed}
+        title={t(sidebarCollapsed ? "practice.expandSidebar" : "practice.collapseSidebar")}
+        className={`hidden h-9 w-9 shrink-0 items-center justify-center rounded-lg border transition-colors lg:flex ${
+          sidebarCollapsed
+            ? "border-primary/50 bg-primary/10 text-primary"
+            : "border-border-soft text-text-muted hover:border-primary hover:text-primary"
+        }`}
+      >
+        <Menu size={16} />
+      </button>
 
       {menuOpen && (
         <div className="absolute left-0 top-full z-30 mt-2 max-h-[70vh] w-full min-w-[280px] overflow-y-auto rounded-xl border border-border-soft bg-panel p-2 shadow-lg sm:w-80">

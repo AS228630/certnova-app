@@ -922,6 +922,8 @@ const de = {
     toastOpenedNewTab: "Ergebnis in neuem Tab geöffnet — dort speichern.",
     toastDownloadUnsupported: "Download wird von diesem Browser nicht unterstützt.",
     progressBtn: "Fortschritt",
+    collapseSidebar: "Seitenleiste einklappen",
+    expandSidebar: "Seitenleiste ausklappen",
     progressOverview: "Fortschrittsübersicht",
     progressTrend: "Fortschrittsverlauf",
     trendNotEnoughData: "Noch nicht genug Daten für einen Verlauf.",

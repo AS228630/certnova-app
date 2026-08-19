@@ -921,6 +921,8 @@ const fr: Dictionary = {
     toastOpenedNewTab: "Résultat ouvert dans un nouvel onglet — enregistrez-le là-bas.",
     toastDownloadUnsupported: "Le téléchargement n'est pas pris en charge par ce navigateur.",
     progressBtn: "Progression",
+    collapseSidebar: "Réduire la barre latérale",
+    expandSidebar: "Développer la barre latérale",
     progressOverview: "Aperçu de la progression",
     progressTrend: "Tendance de progression",
     trendNotEnoughData: "Pas encore assez de données pour une tendance.",

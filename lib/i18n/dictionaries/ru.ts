@@ -921,6 +921,8 @@ const ru: Dictionary = {
     toastOpenedNewTab: "Результат открыт в новой вкладке — сохраните его там.",
     toastDownloadUnsupported: "Этот браузер не поддерживает загрузку.",
     progressBtn: "Прогресс",
+    collapseSidebar: "Свернуть боковую панель",
+    expandSidebar: "Развернуть боковую панель",
     progressOverview: "Обзор прогресса",
     progressTrend: "Динамика прогресса",
     trendNotEnoughData: "Пока недостаточно данных для отображения динамики.",

@@ -921,6 +921,8 @@ const uk: Dictionary = {
     toastOpenedNewTab: "Результат відкрито в новій вкладці — збережіть його там.",
     toastDownloadUnsupported: "Цей браузер не підтримує завантаження.",
     progressBtn: "Прогрес",
+    collapseSidebar: "Згорнути бічну панель",
+    expandSidebar: "Розгорнути бічну панель",
     progressOverview: "Огляд прогресу",
     progressTrend: "Тенденція прогресу",
     trendNotEnoughData: "Ще недостатньо даних для тенденції.",

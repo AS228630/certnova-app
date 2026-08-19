@@ -28,6 +28,7 @@ import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
 import { useUserProgressStore } from "@/lib/store/userProgressStore";
 import { useSubscriptionStore } from "@/lib/store/subscriptionStore";
+import { useSidebarCollapseStore } from "@/lib/store/sidebarCollapseStore";
 import { useUser } from "@/components/UserContext";
 
 const navItems = [
@@ -56,6 +57,10 @@ export default function Sidebar({
   const { theme, toggleTheme } = useTheme();
   const { t } = useLocale();
   const router = useRouter();
+  // Desktop-only collapse (see SectionMenu's toggle button on the practice
+  // page) — deliberately independent from `open`/`onClose` above, which is
+  // the mobile slide-over drawer.
+  const collapsed = useSidebarCollapseStore((s) => s.collapsed);
   const progress = useUserProgressStore((s) => s.progress);
   const streakDaysCount = progress?.streak_days ?? 0;
   // Only a real "active" paid subscription (read from the subscriptions
@@ -89,10 +94,15 @@ export default function Sidebar({
       )}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] -translate-x-full flex-col overflow-y-auto bg-sidebar-bg transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:w-[280px] lg:max-w-none lg:shrink-0 lg:translate-x-0 lg:border-r lg:border-border-soft ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-72 max-w-[85vw] -translate-x-full flex-col overflow-y-auto bg-sidebar-bg transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:max-w-none lg:translate-x-0 lg:overflow-y-auto lg:overflow-x-hidden lg:border-border-soft lg:transition-[width,border-width] lg:duration-200 lg:ease-in-out ${
           open ? "translate-x-0" : ""
-        }`}
+        } ${collapsed ? "lg:w-0 lg:shrink-0 lg:border-r-0" : "lg:w-[280px] lg:shrink-0 lg:border-r"}`}
       >
+        {/* Fixed-width inner wrapper so the nav/links never reflow while the
+            <aside> itself animates between 0 and 280px — the outer element's
+            overflow-hidden simply clips this at whatever width it currently
+            has. */}
+        <div className="flex w-72 shrink-0 flex-col lg:w-[280px]">
         <div className="flex items-center justify-between px-5 py-5 lg:px-6 lg:py-6">
           <Link href="/dashboard" className="flex items-center gap-2" onClick={onClose}>
             <Logo size={28} />
@@ -234,6 +244,7 @@ export default function Sidebar({
               />
             </button>
           </div>
+        </div>
         </div>
       </aside>
       {showRegistrationGate && (
