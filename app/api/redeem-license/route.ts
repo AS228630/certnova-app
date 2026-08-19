@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { getSupabaseAdmin } from '@/lib/admin/requireAdmin';
+import { checkRateLimit } from '@/lib/rateLimit';
 
 export async function POST(req: NextRequest) {
   const { code, accessToken } = (await req.json().catch(() => ({}))) as { code?: string; accessToken?: string };
@@ -18,6 +19,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'not_authenticated' }, { status: 401 });
   }
   const userId = userData.user.id;
+
+  // Requires login, which raises the bar over a fully anonymous
+  // endpoint, but a logged-in attacker could still script rapid guesses
+  // against b2b_groups.code — cap attempts per user.
+  const { allowed } = await checkRateLimit(`redeem-license:${userId}`, 10, 60);
+  if (!allowed) {
+    return NextResponse.json({ error: 'rate_limited' }, { status: 429 });
+  }
 
   const admin = getSupabaseAdmin();
 

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
 import { PLAN_PRICES } from "@/lib/stripeConfig";
+import { checkRateLimit } from "@/lib/rateLimit";
 
 // Initialized lazily (inside the handler, not at module load time) so
 // that Next.js collecting page data during `next build` — which runs
@@ -61,6 +62,14 @@ export async function POST(req: NextRequest) {
     let teacherCouponId: string | null = null;
     let bonusDays = 0;
     if (couponCode && couponCode.trim()) {
+      // Logged-in already, but the coupon code is still guessable by
+      // brute force — cap attempts per user so teacher_coupons.code
+      // can't be enumerated by scripting this endpoint.
+      const { allowed } = await checkRateLimit(`checkout-coupon:${user.id}`, 15, 60);
+      if (!allowed) {
+        return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+      }
+
       const admin = createClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
         process.env.SUPABASE_SERVICE_ROLE_KEY ?? ""
