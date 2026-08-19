@@ -23,6 +23,38 @@ const nextConfig: NextConfig = {
     ];
   },
   async headers() {
+    // Every external origin the site actually loads/connects to at
+    // runtime, enumerated by grepping the codebase rather than assumed:
+    // Supabase (DB/auth/storage), EmailJS (contact form), flagcdn.com
+    // (language-course flag images), Vercel Analytics/Speed Insights
+    // (same-origin script + its data-collection endpoint). Stripe
+    // Checkout is NOT loaded in an iframe or via Stripe.js — the app
+    // creates a session server-side and does a full-page
+    // `window.location.href` redirect to it, so it needs no CSP
+    // allowance beyond the browser's normal top-level navigation.
+    //
+    // script-src/style-src keep 'unsafe-inline': Next.js's own
+    // hydration payload and ~70 components' inline `style={{...}}`
+    // attributes both rely on it. Removing that requires a nonce-based
+    // strict CSP wired through middleware and tested against every
+    // page before shipping — a separate, larger follow-up, not bundled
+    // into this first real CSP. Even with 'unsafe-inline' script-src,
+    // this CSP still blocks the actual common attack it exists for:
+    // an XSS payload loading attacker-controlled JS/CSS/images from a
+    // domain that isn't in this list.
+    const csp = [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: blob: https://flagcdn.com https://*.supabase.co",
+      "font-src 'self' data:",
+      "connect-src 'self' https://*.supabase.co https://api.emailjs.com https://vitals.vercel-insights.com https://va.vercel-scripts.com",
+      "frame-ancestors 'self'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "object-src 'none'",
+    ].join("; ");
+
     return [
       {
         source: "/:path*",
@@ -42,16 +74,13 @@ const nextConfig: NextConfig = {
           // Disables browser features we don't use, so an XSS bug can't
           // abuse them either.
           { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          // Restricts which origins scripts/styles/images/connections can
+          // come from at all — the actual defense against an XSS payload
+          // exfiltrating data or loading attacker JS from elsewhere.
+          { key: "Content-Security-Policy", value: csp },
         ],
       },
     ];
-    // Note: a Content-Security-Policy header is intentionally not set
-    // here yet — CertCoach loads resources from several external
-    // origins (Vercel Analytics, Stripe Checkout redirect, flagcdn.com
-    // flag images, Supabase, EmailJS), and a CSP needs every one of
-    // those explicitly allow-listed or it silently breaks things like
-    // fonts or the checkout redirect. Add it as a deliberate follow-up
-    // once every external origin in use has been enumerated and tested.
   },
 };
 
