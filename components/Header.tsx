@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { Moon, Sun, ChevronDown, Menu } from "lucide-react";
+import { Moon, Sun, ChevronDown, Menu, PanelLeft } from "lucide-react";
 import { useTheme } from "@/components/ThemeProvider";
 import { useLocale } from "@/components/LocaleProvider";
 import { useUser } from "@/components/UserContext";
 import { getFullName } from "@/lib/supabase/useUser";
 import { useProfileStore } from "@/lib/store/profileStore";
+import { useSidebarCollapseStore } from "@/lib/store/sidebarCollapseStore";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import Logo from "@/components/Logo";
 import SearchBox from "@/components/SearchBox";
@@ -19,6 +20,8 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
   const profile = useProfileStore((s) => s.profile);
   const displayName = getFullName(user);
   const initial = displayName.charAt(0).toUpperCase();
+  const sidebarCollapsed = useSidebarCollapseStore((s) => s.collapsed);
+  const toggleSidebar = useSidebarCollapseStore((s) => s.toggle);
 
   return (
     <header className="sticky top-0 z-30 flex min-h-20 flex-col justify-center border-b border-border-soft bg-topbar-bg px-3 py-3 sm:px-4 md:px-8">
@@ -30,6 +33,21 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
             className="shrink-0 text-text-muted hover:text-text lg:hidden"
           >
             <Menu size={22} />
+          </button>
+
+          {/* Desktop-only sidebar collapse — same feature, standard
+              position right next to the logo, works on every page (not
+              just Practice), unlike the earlier placement. */}
+          <button
+            onClick={toggleSidebar}
+            aria-label={t(sidebarCollapsed ? "practice.expandSidebar" : "practice.collapseSidebar")}
+            aria-pressed={sidebarCollapsed}
+            title={t(sidebarCollapsed ? "practice.expandSidebar" : "practice.collapseSidebar")}
+            className={`hidden shrink-0 items-center justify-center rounded-lg p-1.5 transition-colors lg:flex ${
+              sidebarCollapsed ? "text-primary" : "text-text-muted hover:text-text"
+            }`}
+          >
+            <PanelLeft size={20} />
           </button>
 
           <div className="flex shrink-0 items-center gap-2 lg:hidden">
