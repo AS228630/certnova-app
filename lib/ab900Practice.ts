@@ -1286,9 +1286,40 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
     ],
   },
   {
+    type: "yesno",
     id: "real-ab900-71",
+    topicId: "copilot-grundlagen",
+    prompt: "Für jede der folgenden Aussagen wählen Sie Ja, wenn die Aussage wahr ist. Andernfalls wählen Sie Nein. (HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    statements: [
+      { text: "Eingabeaufforderungen und Antworten, die von Benutzern in Microsoft 365 Copilot ausgegeben werden, werden von Microsoft zum Trainieren von Modellen verwendet", correct: "Nein" },
+      { text: "Von Microsoft Graph abgerufene Inhalte werden von Microsoft zum Trainieren von Modellen verwendet", correct: "Nein" },
+      { text: "Microsoft 365 Copilot respektiert die Sicherheitsberechtigungen in Ihrem Microsoft 365-Abonnement", correct: "Ja" },
+    ],
+    explanation: "Kundeneingaben, -antworten und -daten werden NICHT zum Trainieren der Foundation-Modelle verwendet. Microsoft 365 Copilot arbeitet unter dem Enterprise Data Protection (EDP)-Standard, und Kundendaten verbleiben innerhalb der Microsoft-365-Dienstgrenze.\n\nInhalte, auf die über Microsoft Graph zugegriffen wird, werden ausschließlich zur Laufzeit genutzt, um Antworten zu fundieren und kontextbezogene Ergebnisse zu erzeugen. Microsoft stellt ausdrücklich klar, dass diese Daten nicht zum Trainieren von Modellen verwendet werden.\n\nMicrosoft 365 Copilot respektiert die bestehenden Sicherheits- und Datenschutzkontrollen Ihrer Organisation. Copilot greift ausschließlich auf Daten zu, für die der jeweilige Benutzer bereits berechtigt ist, und hält sich dabei an die Compliance-, Datenschutz- und Datenresidenz-Zusagen von Microsoft 365.",
+    resources: [
+      { label: "Security for Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/security-microsoft-365-copilot" },
+      { label: "Microsoft 365 Copilot architecture and how it works", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/microsoft-365-copilot-architecture" },
+    ],
+  },
+  {
+    id: "real-ab900-72",
     topicId: "copilot-agenten",
     prompt: "Ihr Unternehmen verwendet die Abrechnung nach Verbrauch (Pay-as-you-go) für Microsoft 365 Copilot. Das Unternehmen möchte eine bessere Übersicht über die Copilot-Nutzungskosten und die Möglichkeit, die Ausgaben der Abteilungen vorherzusagen. Sie müssen sicherstellen, dass Sie die Copilot-Kosten nach Abteilung einsehen können. Was sollten Sie verwenden? (Um zu antworten, wählen Sie die entsprechenden Optionen im Antwortbereich aus. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    blankFillMulti: {
+      template: "Portal: ___; Funktion: ___.",
+      blanks: [
+        ["Das Microsoft 365 Admin Center", "Das Microsoft Entra Admin Center", "Das Microsoft Purview-Portal"],
+        ["Eine Auto-Claim-Richtlinie", "Eine Abrechnungsrichtlinie", "Ein Copilot-Connector"],
+      ],
+      combos: [
+        [0, 1],
+        [0, 2],
+        [1, 0],
+        [1, 1],
+        [2, 2],
+        [2, 0],
+      ],
+    },
     options: [
       { id: "A", text: "Portal: Das Microsoft 365 Admin Center Funktion: Eine Abrechnungsrichtlinie" },
       { id: "B", text: "Portal: Das Microsoft 365 Admin Center Funktion: Ein Copilot-Connector" },
@@ -1298,24 +1329,36 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "F", text: "Portal: Das Microsoft Purview-Portal Funktion: Eine Auto-Claim-Richtlinie" },
     ],
     correct: "A",
-    explanation: "",
+    explanation: "Der Microsoft 365 Copilot Pay-as-you-go-Plan bietet Organisationen einen flexiblen und kosteneffizienten Weg, um auf Copilot-Dienste zuzugreifen. Dieser Plan ermöglicht es Administratoren, für bestimmte Copilot-Szenarien eine nutzungsbasierte Abrechnung zu aktivieren, sodass Benutzer Copilot-Funktionen nutzen können, ohne sich auf eine vollständige Lizenz festzulegen.\n\nDie Nutzung des Pay-as-you-go-Dienstes durch die Organisation lässt sich im Microsoft 365 Admin Center auf der Seite „Kostenverwaltung“ für jeden verwendeten Microsoft 365 Pay-as-you-go-Dienst überwachen. Die Abrechnungsrichtlinie fungiert als eigenständige Abrechnungskennung, die einer für die entstandenen Kosten verantwortlichen Gruppe zugeordnet werden kann. Die wichtigsten Ziele einer Pay-as-you-go-Abrechnungsrichtlinie sind:\n\n– Abrechnungsverantwortung auf Abteilungen zu verteilen\n– Die Wiederverwendung von Abrechnungskonfigurationen über verschiedene Pay-as-you-go-Szenarien hinweg zu erleichtern\n– Administratoren die Durchsetzung von Governance zu ermöglichen\n– Benutzer mit einer Richtlinie zu verknüpfen und so Abrechnungsregeln für eine Benutzergruppe festzulegen\n\nAls Administrator können Sie einer Abrechnungsrichtlinie ein Budgetlimit hinzufügen und das Budget so konfigurieren, dass beim Erreichen bestimmter Prozent-Meilensteine E-Mail-Benachrichtigungen versendet werden.",
+    resources: [
+      { label: "Microsoft 365 Copilot pay-as-you-go overview for IT admins", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/pay-as-you-go/overview" },
+    ],
   },
   {
     type: "yesno",
-    id: "real-ab900-72",
+    id: "real-ab900-73",
     topicId: "copilot-agenten",
     prompt: "Für jede der folgenden Aussagen wählen Sie Ja, wenn die Aussage wahr ist. Andernfalls wählen Sie Nein. (HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     statements: [
-      { text: "Benutzer, denen eine Microsoft 365 E5-Lizenz zugewiesen ist, können keine auf dem Web basierenden Microsoft 365 Copilot-Agenten erstellen", correct: "Nein" },
+      { text: "Benutzer, denen eine Microsoft 365 E5-Lizenz zugewiesen ist, können auf dem Web basierende Microsoft 365 Copilot-Agenten erstellen", correct: "Nein" },
       { text: "Benutzer müssen eine Microsoft 365 Copilot-Lizenz zugewiesen bekommen, um den Analyst-Agenten zu verwenden", correct: "Ja" },
       { text: "Benutzer können eine natürliche Sprachaufforderung verwenden, um einen Microsoft 365 Copilot-Agenten zu erstellen", correct: "Ja" },
     ],
-    explanation: "",
+    explanation: "Eine Microsoft 365 E5-Lizenz allein enthält kein Microsoft 365 Copilot. Web-fundierte Agenten stehen über Copilot Chat zur Verfügung, während das Erstellen und Verwalten von Copilot-Agenten Copilot-Funktionen voraussetzt – für erweiterte oder auf den Mandanten fundierte Agenten zusätzlich eine eigene Konfiguration und Abrechnung. Eine E5-Lizenz allein gewährt keine Berechtigung zum Erstellen von Copilot-Agenten.\n\nMicrosoft gibt an, dass die Agenten Analyst und Researcher ausschließlich Benutzern mit einer Microsoft 365 Copilot-Lizenz zur Verfügung stehen. Diese Agenten sind Teil des erweiterten Copilot-Erlebnisses und in Standard-Microsoft-365-Lizenzen wie E3 oder E5 allein nicht enthalten.\n\nDie Funktion Agent Builder in Microsoft 365 Copilot bietet eine einfache Oberfläche, mit der sich deklarative Agenten mithilfe natürlicher Sprache schnell erstellen lassen.",
+    resources: [
+      { label: "Compare Microsoft 365 Copilot licensing models", url: "https://learn.microsoft.com/en-us/training/modules/explore-microsoft-365-copilot-agents/5-compare-microsoft-365-copilot-licensing-models" },
+      { label: "Introducing Researcher and Analyst in Microsoft 365 Copilot", url: "https://www.microsoft.com/en-us/microsoft-365/blog/2025/03/25/introducing-researcher-and-analyst-in-microsoft-365-copilot" },
+      { label: "Build agents by using Agent Builder in Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/agent-builder-build-agents" },
+    ],
   },
   {
-    id: "real-ab900-73",
+    id: "real-ab900-74",
     topicId: "purview-compliance",
     prompt: "Wählen Sie die Antwort aus, die den Satz korrekt vervollständigt.",
+    blankFill: {
+      template: "Sie können die ___ Microsoft Purview-Lösung verwenden, um alle Inhalte zu finden, die sich auf den Begriff \"Project Falcon\" in den E-Mails beziehen, die zwischen zwei Benutzern ausgetauscht wurden.",
+      choices: ["Audit", "Data Catalog", "eDiscovery", "Insider Risk Management"],
+    },
     options: [
       { id: "A", text: "Sie können die Audit Microsoft Purview-Lösung verwenden, um alle Inhalte zu finden, die sich auf den Begriff \"Project Falcon\" in den E-Mails beziehen, die zwischen zwei Benutzern ausgetauscht wurden." },
       { id: "B", text: "Sie können die Data Catalog Microsoft Purview-Lösung verwenden, um alle Inhalte zu finden, die sich auf den Begriff \"Project Falcon\" in den E-Mails beziehen, die zwischen zwei Benutzern ausgetauscht wurden." },
@@ -1323,12 +1366,15 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Sie können die Insider Risk Management Microsoft Purview-Lösung verwenden, um alle Inhalte zu finden, die sich auf den Begriff \"Project Falcon\" in den E-Mails beziehen, die zwischen zwei Benutzern ausgetauscht wurden." },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Electronic Discovery (eDiscovery) ist der Prozess, elektronisch gespeicherte Informationen (ESI) zu identifizieren und bereitzustellen, die als Beweismittel in Untersuchungen und Rechtsfällen dienen können. Mit Microsoft Purview eDiscovery lassen sich Inhalte in Microsoft-365-Diensten identifizieren, überprüfen und verwalten, um Untersuchungen zu unterstützen. Unterstützte Microsoft-365-Dienste sind:\n\n– Exchange Online\n– Microsoft Teams\n– Microsoft 365-Gruppen\n– OneDrive\n– SharePoint\n– Viva Engage\n\nPostfächer und Websites lassen sich in derselben eDiscovery-Suche durchsuchen, die Suchergebnisse anschließend exportieren. Mit eDiscovery-Fällen werden Inhalte in Postfächern und Websites identifiziert, in Bereitschaft gesetzt (Hold) und exportiert. Verfügt Ihre Organisation über ein Office 365 E5- oder Microsoft 365 E5-Abonnement (oder entsprechende E5-Zusatzlizenzen), lassen sich Fälle zusätzlich mit erweiterten eDiscovery-Funktionen verwalten und Inhalte analysieren.",
+    resources: [
+      { label: "Learn about eDiscovery", url: "https://learn.microsoft.com/en-us/purview/edisc" },
+    ],
   },
   {
-    id: "real-ab900-74",
+    id: "real-ab900-75",
     topicId: "purview-compliance",
-    prompt: "Ihr Unternehmen verwendet Microsoft Purview Data Loss Prevention (DLP)- Richtlinien. Ein Benutzer namens User1 teilt sensible Informationen mit einem externen Benutzer über Microsoft Teams. Sie müssen die geteilten sensiblen Inhalte identifizieren. Was sollten Sie im Microsoft Purview-Portal verwenden?",
+    prompt: "Ihr Unternehmen verwendet Microsoft Purview Data Loss Prevention (DLP)-Richtlinien. Ein Benutzer namens User1 teilt sensible Informationen mit einem externen Benutzer über Microsoft Teams. Sie müssen die geteilten sensiblen Inhalte identifizieren. Was sollten Sie im Microsoft Purview-Portal verwenden?",
     options: [
       { id: "A", text: "Diagnosen" },
       { id: "B", text: "Daten-Explorer" },
@@ -1336,11 +1382,14 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Aktivitäts-Explorer" },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "In Microsoft Purview setzen Sie Data Loss Prevention um, indem Sie DLP-Richtlinien definieren und anwenden. Eine DLP-Richtlinie hilft Ihnen, sensible Daten in Unternehmensanwendungen und -geräten sowie im eingehenden Web-Datenverkehr zu identifizieren, zu überwachen und automatisch zu schützen. DLP-Richtlinien wirken auf verschiedene Speicherorte, Übertragungsarten und Benutzeraktivitäten.\n\nDLP-Richtlinien überwachen die Aktivitäten, die Benutzer mit sensiblen Elementen durchführen, und ergreifen bei Erfüllung der Richtlinienbedingungen Schutzmaßnahmen. Versucht ein Benutzer beispielsweise eine untersagte Aktion – etwa das Kopieren eines sensiblen Elements an einen nicht genehmigten Ort oder das Teilen medizinischer Informationen per E-Mail –, kann DLP:\n\n– einen Pop-up-Richtlinientipp anzeigen, der den Benutzer warnt, dass er versucht, ein sensibles Element unangemessen zu teilen\n– das Teilen blockieren und dem Benutzer über einen Richtlinientipp erlauben, die Blockierung zu überschreiben, wobei die Begründung des Benutzers erfasst wird\n– das Teilen ohne Überschreibungsoption blockieren\n– bei ruhenden Daten sensible Elemente sperren und in einen sicheren Quarantänebereich verschieben\n– bei einem Teams-Chat die sensiblen Informationen nicht anzeigen\n\nAlle von DLP überwachten Aktivitäten werden standardmäßig im Microsoft-365-Überwachungsprotokoll (Audit Log) erfasst und an den Aktivitäts-Explorer weitergeleitet.",
+    resources: [
+      { label: "Learn about data loss prevention", url: "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp" },
+    ],
   },
   {
     type: "yesno",
-    id: "real-ab900-75",
+    id: "real-ab900-76",
     topicId: "verwaltung-governance",
     prompt: "Für jede der folgenden Aussagen wählen Sie Ja, wenn die Aussage wahr ist. Andernfalls wählen Sie Nein. (HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     statements: [
@@ -1348,12 +1397,20 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { text: "Zero Trust ist eine Sicherheitsstrategie, KEIN spezifisches Produkt", correct: "Ja" },
       { text: "Über das Microsoft 365 Admin Center können Sie Zero Trust für Ihre Organisation aktivieren", correct: "Nein" },
     ],
-    explanation: "",
+    explanation: "Zero Trust ist eine Sicherheitsstrategie. Es handelt sich nicht um ein Produkt oder einen Dienst, sondern um einen Ansatz zur Gestaltung und Umsetzung der folgenden Sicherheitsprinzipien:\n\n– Explizit überprüfen – Authentifizierung und Autorisierung erfolgen stets auf Basis aller verfügbaren Datenpunkte.\n– Zugriff mit den geringsten Rechten verwenden – der Benutzerzugriff wird durch Just-in-Time- und Just-Enough-Access (JIT/JEA), risikobasierte adaptive Richtlinien und Datenschutz eingeschränkt.\n– Von einem Sicherheitsvorfall ausgehen (Assume Breach) – der Explosionsradius wird minimiert und der Zugriff segmentiert; Ende-zu-Ende-Verschlüsselung wird überprüft, und Analysen werden genutzt, um Transparenz zu schaffen, Bedrohungen zu erkennen und die Abwehr zu verbessern.\n\nDiese Prinzipien bilden den Kern von Zero Trust. Statt davon auszugehen, dass alles hinter der Unternehmensfirewall sicher ist, geht das Zero-Trust-Modell von einem Sicherheitsvorfall aus und überprüft jede Anfrage so, als käme sie aus einem nicht kontrollierten Netzwerk. Unabhängig davon, woher eine Anfrage stammt oder auf welche Ressource sie zugreift, gilt beim Zero-Trust-Modell: „Never trust, always verify\" (Vertraue nie, überprüfe immer).\n\nZero Trust ist darauf ausgelegt, sich an die Komplexität der modernen, mobilen Arbeitswelt anzupassen. Zero Trust schützt Benutzerkonten, Geräte, Anwendungen und Daten unabhängig von ihrem Standort.\n\nEin Zero-Trust-Ansatz sollte sich über die gesamte Organisation erstrecken und als integrierte Sicherheitsphilosophie sowie durchgängige Strategie dienen.\n\nUnterschiedliche organisatorische Anforderungen, bestehende technische Implementierungen und Sicherheitsreifegrade beeinflussen jeweils, wie die Umsetzung eines Zero-Trust-Sicherheitsmodells geplant und durchgeführt wird. Mit Zero Trust bewegen Sie sich weg von einer standardmäßigen Vertrauensperspektive hin zu einer Vertrauen-nur-mit-Ausnahme-Perspektive. Eine integrierte Fähigkeit, diese Ausnahmen und Warnungen automatisch zu verwalten, ist dabei wichtig – so lassen sich Bedrohungen leichter erkennen, darauf reagieren und unerwünschte Ereignisse in der gesamten Organisation verhindern oder blockieren.",
+    explanationImageUrl: "/exam-images/ab900-q69-explain.png",
+    resources: [
+      { label: "What is Zero Trust?", url: "https://learn.microsoft.com/en-us/security/zero-trust/zero-trust-overview" },
+    ],
   },
   {
-    id: "real-ab900-76",
+    id: "real-ab900-77",
     topicId: "copilot-grundlagen",
     prompt: "Wählen Sie die Antwort, die den Satz korrekt vervollständigt.",
+    blankFill: {
+      template: "___ enthält Signale wie Zusammenarbeitsverlauf, Dokumentenrelevanz und Kommunikationshäufigkeit, die die Antworten von Microsoft 365 Copilot beeinflussen.",
+      choices: ["Microsoft Copilot Studio", "Microsoft Graph", "Microsoft Purview", "Microsoft Viva Insights"],
+    },
     options: [
       { id: "A", text: "Microsoft Copilot Studio enthält Signale wie Zusammenarbeitsverlauf, Dokumentenrelevanz und Kommunikationshäufigkeit, die die Antworten von Microsoft 365 Copilot beeinflussen." },
       { id: "B", text: "Microsoft Graph enthält Signale wie Zusammenarbeitsverlauf, Dokumentenrelevanz und Kommunikationshäufigkeit, die die Antworten von Microsoft 365 Copilot beeinflussen." },
@@ -1361,11 +1418,15 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Microsoft Viva Insights enthält Signale wie Zusammenarbeitsverlauf, Dokumentenrelevanz und Kommunikationshäufigkeit, die die Antworten von Microsoft 365 Copilot beeinflussen." },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Microsoft Graph fundiert Copilot mit Ihren Microsoft-365-Daten. Microsoft Graph integriert Dokumente, E-Mails, Chats, Besprechungen und weitere Inhalte, um innerhalb der Sicherheits- und Datenschutzgrenzen von Microsoft relevante und kontextbezogene Antworten in Microsoft 365 Copilot bereitzustellen.",
+    resources: [
+      { label: "Expand the knowledge of Microsoft 365 Copilot with Microsoft Graph", url: "https://adoption.microsoft.com/en-us/microsoft-graph" },
+      { label: "Overview of Microsoft Graph", url: "https://learn.microsoft.com/en-us/graph/overview" },
+    ],
   },
   {
     type: "yesno",
-    id: "real-ab900-77",
+    id: "real-ab900-78",
     topicId: "sicherheit-identitaet",
     prompt: "Für jede der folgenden Aussagen wählen Sie Ja, wenn die Aussage zutrifft. Andernfalls wählen Sie Nein. (HINWEIS: Jede korrekte Auswahl ist einen Punkt wert.)",
     statements: [
@@ -1373,25 +1434,44 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { text: "Administratoren können den Selbstkauf von Microsoft 365 Copilot-Lizenzen erlauben", correct: "Ja" },
       { text: "Microsoft 365 Copilot-Lizenzen können an Microsoft Entra ID-Gastbenutzer aus anderen Organisationen zugewiesen werden", correct: "Nein" },
     ],
-    explanation: "",
-  },
-  {
-    id: "real-ab900-78",
-    topicId: "purview-compliance",
-    prompt: "Discover and classify sensitive data across multiple platforms: Insider Risk Management Block users from sharing intellectual property with external users: Data Loss Prevention Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Sie müssen Microsoft Purview verwenden, um die folgenden Anforderungen zu erfüllen: • Sensible Daten auf mehreren Plattformen entdecken und klassifizieren. • Benutzer daran hindern, geistiges Eigentum mit externen Benutzern zu teilen. Welche Microsoft Purview-Lösung sollten Sie für jede Anforderung verwenden? (Um zu antworten, wählen Sie die entsprechenden Optionen im Antwortbereich aus. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
-    options: [
-      { id: "A", text: "Sensible Daten auf mehreren Plattformen entdecken und klassifizieren: Kommunikations-Compliance Benutzer daran hindern, geistiges Eigentum mit externen Benutzern zu teilen: Data Loss Prevention" },
-      { id: "B", text: "Sensible Daten auf mehreren Plattformen entdecken und klassifizieren: Data Loss Prevention Benutzer daran hindern, geistiges Eigentum mit externen Benutzern zu teilen: Information Protection" },
-      { id: "C", text: "Discover and classify sensitive data across multiple platforms: Data Loss Prevention Block users from sharing intellectual property with external users: Insider Risk Management" },
-      { id: "D", text: "Discover and classify sensitive data across multiple platforms: Information Protection Block users from sharing intellectual property with external users: Communication Compliance" },
-      { id: "E", text: "Discover and classify sensitive data across multiple platforms: Information Protection Block users from sharing intellectual property with external users: Insider Risk Management" },
-      { id: "F", text: "Discover and classify sensitive data across multiple platforms: Insider Risk Management Block users from sharing intellectual property with external users: Data Loss Prevention" },
-    ],
-    correct: "D",
-    explanation: "",
+    explanation: "Benutzer können Microsoft 365 Copilot nicht anonym verwenden. Microsoft 365 Copilot setzt einen lizenzierten, authentifizierten Microsoft Entra ID-Benutzer voraus.\n\nAls Administrator können Sie im Microsoft 365 Admin Center den Selbstkauf von Microsoft 365 Copilot erlauben oder einschränken. Für jeden Kauf oder jedes Testabonnement sehen Sie die folgenden Details:\n\n– Produktname\n– Name des Käufers\n– erworbene Abonnements\n– Ablaufdatum\n– Kaufpreis\n– zugewiesene Benutzer\n\nSie können außerdem steuern, ob Benutzer in Ihrer Organisation Käufe tätigen oder sich für Testversionen anmelden dürfen.\n\nMicrosoft 365 Copilot-Lizenzen sind für Mitgliedsbenutzer (Member) vorgesehen. Gastbenutzer (B2B) werden für die Copilot-Lizenzierung nicht unterstützt. Copilot setzt ein Benutzerpostfach und vollständigen Zugriff auf Microsoft-365-Workloads voraus.",
   },
   {
     id: "real-ab900-79",
+    topicId: "purview-compliance",
+    prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Sie müssen Microsoft Purview verwenden, um die folgenden Anforderungen zu erfüllen: • Sensible Daten auf mehreren Plattformen entdecken und klassifizieren. • Benutzer daran hindern, geistiges Eigentum mit externen Benutzern zu teilen. Welche Microsoft Purview-Lösung sollten Sie für jede Anforderung verwenden? (Um zu antworten, wählen Sie die entsprechenden Optionen im Antwortbereich aus. HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
+    blankFillMulti: {
+      template: "Sensible Daten auf mehreren Plattformen entdecken und klassifizieren: ___; Benutzer daran hindern, geistiges Eigentum mit externen Benutzern zu teilen: ___.",
+      blanks: [
+        ["Kommunikations-Compliance", "Verlustprävention von Daten", "Informationsschutz", "Insider-Risikomanagement"],
+        ["Kommunikations-Compliance", "Verlustprävention von Daten", "Informationsschutz", "Insider-Risikomanagement"],
+      ],
+      combos: [
+        [0, 1],
+        [1, 2],
+        [1, 3],
+        [2, 1],
+        [2, 3],
+        [3, 1],
+      ],
+    },
+    options: [
+      { id: "A", text: "Sensible Daten auf mehreren Plattformen entdecken und klassifizieren: Kommunikations-Compliance; Benutzer daran hindern, geistiges Eigentum mit externen Benutzern zu teilen: Verlustprävention von Daten" },
+      { id: "B", text: "Sensible Daten auf mehreren Plattformen entdecken und klassifizieren: Verlustprävention von Daten; Benutzer daran hindern, geistiges Eigentum mit externen Benutzern zu teilen: Informationsschutz" },
+      { id: "C", text: "Sensible Daten auf mehreren Plattformen entdecken und klassifizieren: Verlustprävention von Daten; Benutzer daran hindern, geistiges Eigentum mit externen Benutzern zu teilen: Insider-Risikomanagement" },
+      { id: "D", text: "Sensible Daten auf mehreren Plattformen entdecken und klassifizieren: Informationsschutz; Benutzer daran hindern, geistiges Eigentum mit externen Benutzern zu teilen: Verlustprävention von Daten" },
+      { id: "E", text: "Sensible Daten auf mehreren Plattformen entdecken und klassifizieren: Informationsschutz; Benutzer daran hindern, geistiges Eigentum mit externen Benutzern zu teilen: Insider-Risikomanagement" },
+      { id: "F", text: "Sensible Daten auf mehreren Plattformen entdecken und klassifizieren: Insider-Risikomanagement; Benutzer daran hindern, geistiges Eigentum mit externen Benutzern zu teilen: Verlustprävention von Daten" },
+    ],
+    correct: "D",
+    explanation: "Microsoft Purview Informationsschutz (früher Microsoft Information Protection) hilft Ihnen, sensible Informationen zu entdecken, zu klassifizieren und zu schützen – unabhängig davon, wo sie gespeichert sind oder wohin sie sich bewegen.\n\nMicrosoft Purview Verlustprävention von Daten (Data Loss Prevention) ist speziell dafür konzipiert, sensible Informationen einschließlich geistigen Eigentums zu erkennen, das Teilen dieser Daten mit externen Benutzern zu verhindern und Richtlinien über Microsoft-365-Workloads hinweg durchzusetzen – etwa in SharePoint, OneDrive, Exchange, Teams und sogar in Copilot-Szenarien.",
+    resources: [
+      { label: "Protect your sensitive data with Microsoft Purview", url: "https://learn.microsoft.com/en-us/purview/information-protection" },
+      { label: "Learn about data loss prevention", url: "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp" },
+    ],
+  },
+  {
+    id: "real-ab900-80",
     topicId: "purview-compliance",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365 E5-Abonnement. Sie müssen verhindern, dass Benutzer unternehmensinterne Finanzdaten an externe Benutzer weitergeben. Was sollten Sie verwenden?",
     options: [
@@ -1401,10 +1481,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Aufbewahrungsbezeichnungen" },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Organisationen kontrollieren sensible Informationen wie:\n\n– Finanzdaten\n– proprietäre Daten\n– Kreditkartennummern\n– Gesundheitsdaten\n– Sozialversicherungsnummern\n\nUm diese sensiblen Daten zu schützen und das Risiko einer übermäßigen Freigabe zu verringern, benötigen Organisationen eine Möglichkeit, ihre Benutzer daran zu hindern, sensible Daten unangemessen mit Personen zu teilen, die keinen Zugriff darauf haben sollten. Diese Praxis wird Verlustprävention von Daten (Data Loss Prevention, DLP) genannt.\n\nIn Microsoft Purview setzen Sie Data Loss Prevention um, indem Sie DLP-Richtlinien definieren und anwenden. Eine DLP-Richtlinie hilft Ihnen, sensible Daten in Unternehmensanwendungen und -geräten sowie im eingehenden Web-Datenverkehr zu identifizieren, zu überwachen und automatisch zu schützen. DLP-Richtlinien wirken auf verschiedene Speicherorte, Übertragungsarten und Benutzeraktivitäten.\n\nDLP nutzt eine tiefgehende Inhaltsanalyse – keinen einfachen Textscan. Der Inhalt wird analysiert durch:\n\n– primäre Datenübereinstimmungen mit Schlüsselwörtern\n– die Auswertung regulärer Ausdrücke\n– interne Funktionsvalidierung\n– sekundäre Datenübereinstimmungen in der Nähe der primären Übereinstimmung\n– zusätzlich nutzt DLP Algorithmen des maschinellen Lernens und weitere Methoden, um Inhalte zu erkennen, die Ihren DLP-Richtlinien entsprechen\n– inline über Microsoft Edge for Business für Windows-Geräte, die noch nicht in Microsoft Purview eingebunden wurden (Vorschau), sowie über Network Data Security, um das Teilen sensibler Informationen mit nicht verwalteter KI zu verhindern (Vorschau)",
+    resources: [
+      { label: "Learn about data loss prevention", url: "https://learn.microsoft.com/en-us/purview/dlp-learn-about-dlp" },
+    ],
   },
   {
-    id: "real-ab900-80",
+    id: "real-ab900-81",
     topicId: "purview-compliance",
     prompt: "Sie müssen Dateien und E-Mails identifizieren, die Sozialversicherungsnummern (SSNs) und Kreditkartennummern enthalten. Was sollten Sie im Microsoft Purview-Portal verwenden?",
     options: [
@@ -1414,24 +1497,39 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Aktivitäts-Explorer" },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Das Identifizieren und Klassifizieren sensibler Elemente, die der Kontrolle Ihrer Organisation unterliegen, ist der erste Schritt in der Disziplin Informationsschutz. Microsoft Purview bietet drei Möglichkeiten, Elemente zu identifizieren, damit sie klassifiziert werden können:\n\n– manuell, durch Benutzer\n– über automatisierte Mustererkennung, wie bei vertraulichen Informationstypen\n– über maschinelles Lernen\n\nVertrauliche Informationstypen (Sensitive Information Types, SITs) sind musterbasierte Klassifizierer. Sie erkennen sensible Informationen wie Sozialversicherungsnummern, Kreditkarten- oder Bankkontonummern, um sensible Elemente zu identifizieren.",
+    resources: [
+      { label: "Protect your sensitive data with Microsoft Purview", url: "https://learn.microsoft.com/en-us/purview/information-protection" },
+      { label: "Learn about sensitive information types", url: "https://learn.microsoft.com/en-us/purview/sit-sensitive-information-type-learn-about" },
+    ],
   },
   {
-    id: "real-ab900-81",
+    id: "real-ab900-82",
     topicId: "purview-compliance",
     prompt: "Wählen Sie die Antwort aus, die den Satz richtig vervollständigt.",
+    blankFill: {
+      template: "Microsoft Purview-Vertraulichkeitskennzeichnungen können auf ___ angewendet werden.",
+      choices: ["Azure Blob Storage", "Microsoft 365 Copilot-Konversationen", "Microsoft SharePoint-Websites"],
+    },
     options: [
       { id: "A", text: "Microsoft Purview-Vertraulichkeitskennzeichnungen können auf Azure Blob Storage angewendet werden." },
       { id: "B", text: "Microsoft Purview-Vertraulichkeitskennzeichnungen können auf Microsoft 365 Copilot-Konversationen angewendet werden." },
       { id: "C", text: "Microsoft Purview-Vertraulichkeitskennzeichnungen können auf Microsoft SharePoint-Websites angewendet werden." },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Vertraulichkeitskennzeichnungen von Microsoft Purview Informationsschutz ermöglichen es Ihnen, die Daten Ihrer Organisation zu klassifizieren und zu schützen, ohne dabei die Produktivität der Benutzer und ihre Zusammenarbeitsfähigkeit zu beeinträchtigen.\n\nSie können Vertraulichkeitskennzeichnungen für Folgendes verwenden:\n\n– Schutzeinstellungen bereitstellen, einschließlich Verschlüsselung und Inhaltskennzeichnungen. Wenden Sie beispielsweise die Kennzeichnung „Vertraulich“ auf ein Dokument oder eine E-Mail an – die Kennzeichnung verschlüsselt den Inhalt und fügt ein „Vertraulich“-Wasserzeichen hinzu. Inhaltskennzeichnungen umfassen Kopf- und Fußzeilen sowie Wasserzeichen, und die Verschlüsselung kann zusätzlich einschränken, welche Aktionen bestimmte Personen mit dem Inhalt durchführen dürfen.\n– SharePoint-Schutz beim Herunterladen von Dateien erweitern, wenn Sie eine Standard-Vertraulichkeitskennzeichnung für SharePoint-Dokumentbibliotheken konfigurieren und die Option zur Erweiterung des Schutzes für unverschlüsselte Dateien auswählen. Beim Herunterladen dieser Dateien werden dann die aktuellen SharePoint-Berechtigungen mit der gekennzeichneten Datei übertragen.\n– Inhalte in Office-Apps plattform- und geräteübergreifend schützen. Unterstützt von Word, Excel, PowerPoint und Outlook in den Office-Desktop-Apps sowie Office für das Web, unter Windows, macOS, iOS und Android.\n– Inhalte in Apps und Diensten von Drittanbietern mit Microsoft Defender for Cloud Apps schützen – etwa in SalesForce, Box oder DropBox, selbst wenn die Drittanbieter-App Vertraulichkeitskennzeichnungen nicht selbst liest oder unterstützt.\n– Inhalte für eDiscovery-Fälle identifizieren. Der Bedingungs-Generator zum Erstellen von Suchabfragen in eDiscovery unterstützt Vertraulichkeitskennzeichnungen, die auf Inhalte angewendet wurden.\n– Container schützen, darunter Teams, Microsoft 365-Gruppen, SharePoint-Websites, Viva Engage-Communitys und Loop-Arbeitsbereiche – z. B. Datenschutzeinstellungen, Zugriff externer Benutzer, externe Freigabe und Zugriff von nicht verwalteten Geräten.\n– Besprechungen und Chats schützen, indem Besprechungseinladungen und Antworten gekennzeichnet (und optional verschlüsselt) werden, und Teams-spezifische Optionen erzwingen.\n– Vertraulichkeitskennzeichnungen auf Power BI erweitern: Kennzeichnungen können in Power BI angewendet und angezeigt werden, und Daten werden auch außerhalb des Diensts geschützt.\n– Vertraulichkeitskennzeichnungen auf Objekte in Microsoft Purview Data Map erweitern (derzeit in der Vorschau) – einschließlich Dateien und schematisierter Datenobjekte wie SQL, Azure SQL, Azure Synapse, Azure Cosmos DB und AWS RDS.\n– Vertraulichkeitskennzeichnungen auf Apps und Dienste von Drittanbietern erweitern. Mithilfe des Microsoft Information Protection SDK können Drittanbieter-Apps Vertraulichkeitskennzeichnungen lesen und Schutzeinstellungen anwenden.\n– Inhalte kennzeichnen, ohne Schutzeinstellungen zu verwenden – als reine Klassifizierung der Datensensibilität, mit Nutzungsberichten und Aktivitätsdaten, sodass Schutzeinstellungen bei Bedarf später hinzugefügt werden können.\n– Daten schützen, wenn Microsoft 365 Copilot verwendet wird. Copilot und Agenten erkennen Vertraulichkeitskennzeichnungen und binden sie in die Benutzerinteraktionen ein, um gekennzeichnete Daten weiterhin geschützt zu halten.\n\nIn all diesen Fällen helfen Ihnen Vertraulichkeitskennzeichnungen von Microsoft Purview dabei, die richtigen Maßnahmen für die richtigen Inhalte zu ergreifen. Mit Vertraulichkeitskennzeichnungen lässt sich die Sensibilität von Daten in der gesamten Organisation erkennen, und die Kennzeichnung kann passende Schutzeinstellungen erzwingen – dieser Schutz bleibt dann dauerhaft mit dem Inhalt verbunden.",
+    resources: [
+      { label: "Learn about sensitivity labels", url: "https://learn.microsoft.com/en-us/purview/sensitivity-labels" },
+    ],
   },
   {
-    id: "real-ab900-82",
+    id: "real-ab900-83",
     topicId: "purview-compliance",
     prompt: "Wählen Sie die Antwort aus, die den Satz korrekt vervollständigt.",
+    blankFill: {
+      template: "Mit der eingeschränkten SharePoint-Suche können Sie den Zugriff von ___ auf Microsoft SharePoint-Websites einschränken, ohne dass Benutzer daran gehindert werden, auf die Dateien und Inhalte zuzugreifen, für die sie über Berechtigungen verfügen.",
+      choices: ["Administrator", "Gastbenutzer", "Microsoft 365 Copilot", "Microsoft Purview eDiscovery"],
+    },
     options: [
       { id: "A", text: "Mit der eingeschränkten SharePoint-Suche können Sie den Administratorzugriff auf Microsoft SharePoint-Websites einschränken, ohne dass Benutzer daran gehindert werden, auf die Dateien und Inhalte zuzugreifen, für die sie über Berechtigungen verfügen." },
       { id: "B", text: "Mit der eingeschränkten SharePoint-Suche können Sie den Zugriff von Gastbenutzern auf Microsoft SharePoint-Websites einschränken, ohne dass Benutzer daran gehindert werden, auf die Dateien und Inhalte zuzugreifen, für die sie über Berechtigungen verfügen." },
@@ -1439,10 +1537,14 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Mit der eingeschränkten SharePoint-Suche können Sie den Zugriff von Microsoft Purview eDiscovery auf Microsoft SharePoint-Websites einschränken, ohne dass Benutzer daran gehindert werden, auf die Dateien und Inhalte zuzugreifen, für die sie Berechtigungen besitzen." },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Die eingeschränkte SharePoint-Suche (Restricted SharePoint Search) ist eine Einstellung, mit der Sie als SharePoint-Administrator oder anderer Microsoft-365-Administrator eine Liste von SharePoint-Websites (eine „Zulassungsliste“) pflegen können, für die Sie die Berechtigungen überprüft und eine Data Governance angewendet haben. Die Zulassungsliste legt fest, welche SharePoint-Websites in organisationsweiten Suchanfragen sowie – als vorübergehende Maßnahme – in Copilot-Chat und agentischen Erlebnissen verwendet werden können.\n\nStandardmäßig ist die Einstellung „Eingeschränkte SharePoint-Suche“ deaktiviert und die Zulassungsliste ist leer. Ist die eingeschränkte SharePoint-Suche aktiviert, können Benutzer in Copilot mit Dateien und Inhalten interagieren, die ihnen gehören oder auf die sie zuvor bereits zugegriffen haben.",
+    resources: [
+      { label: "Restricted SharePoint Search", url: "https://learn.microsoft.com/en-us/sharepoint/restricted-sharepoint-search" },
+      { label: "Introducing Restricted SharePoint Search to help you get started with Copilot for Microsoft 365", url: "https://techcommunity.microsoft.com/blog/microsoft365copilotblog/introducing-restricted-sharepoint-search-to-help-you-get-started-with-copilot-fo/4071060" },
+    ],
   },
   {
-    id: "real-ab900-83",
+    id: "real-ab900-84",
     topicId: "purview-compliance",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365 E5-Abonnement. Sie erstellen eine Microsoft Purview-Vertraulichkeitskennzeichnung mit dem Namen „Label1“. Sie müssen sicherstellen, dass Benutzer „Label1“ auf Dateien in Microsoft 365 anwenden können. Was sollten Sie verwenden?",
     options: [
@@ -1452,10 +1554,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Eine Richtlinie für die automatische Kennzeichnung" },
     ],
     correct: "A",
-    explanation: "",
+    explanation: "Alle Lösungen von Microsoft Purview Informationsschutz werden mithilfe von Vertraulichkeitskennzeichnungen umgesetzt. Um diese Kennzeichnungen zu erstellen und zu veröffentlichen, verwenden Sie das Microsoft Purview-Portal.\n\nErstellen und konfigurieren Sie zunächst die Vertraulichkeitskennzeichnungen, die Sie für Apps und andere Dienste verfügbar machen möchten – etwa die Kennzeichnungen, die Benutzer in Office-Apps sehen und anwenden können sollen.\n\nErstellen Sie anschließend eine oder mehrere Kennzeichnungsrichtlinien, die die von Ihnen konfigurierten Kennzeichnungen und Richtlinieneinstellungen enthalten. Wenn Sie die Kennzeichnungsrichtlinie für die gewählten Benutzer veröffentlichen:\n\n– werden die Kennzeichnungen für diese Benutzer in ihren Apps sichtbar, die Vertraulichkeitskennzeichnungen unterstützen\n– werden die Richtlinieneinstellungen auf diese Benutzer angewendet",
+    resources: [
+      { label: "Create and configure sensitivity labels and their policies", url: "https://learn.microsoft.com/en-us/purview/create-sensitivity-labels" },
+    ],
   },
   {
-    id: "real-ab900-84",
+    id: "real-ab900-85",
     topicId: "purview-compliance",
     prompt: "Ihr Unternehmen verfügt über eine schriftliche Compliance-Richtlinie, wonach alle E-Mails sieben Jahre lang aufbewahrt und anschließend endgültig gelöscht werden müssen. Welche Microsoft Purview-Lösung sollten Sie verwenden?",
     options: [
@@ -1465,12 +1570,19 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Insider-Risikomanagement" },
     ],
     correct: "B",
-    explanation: "",
+    explanation: "Mit den Lösungen Datenlebenszyklusmanagement und Datensatzverwaltung (Records Management) in Microsoft Purview verwalten Sie die Compliance- und regulatorischen Anforderungen Ihrer Organisation für Daten und Datensätze über deren gesamten Lebenszyklus hinweg.\n\nDie Aufbewahrungsrichtlinien von Microsoft Purview Datenlebenszyklusmanagement für Microsoft-365-Workloads ermöglichen es Ihnen, Inhalte mit Richtlinienverwaltung für E-Mail, Dokumente sowie Teams- und Viva-Engage-Nachrichten aufzubewahren oder zu löschen.",
+    resources: [
+      { label: "Data lifecycle and records management in Microsoft Purview", url: "https://learn.microsoft.com/en-us/purview/manage-data-governance" },
+    ],
   },
   {
-    id: "real-ab900-85",
+    id: "real-ab900-86",
     topicId: "copilot-grundlagen",
     prompt: "Wählen Sie die Antwort aus, die den Satz korrekt vervollständigt.",
+    blankFill: {
+      template: "Im Microsoft 365-Admincenter zeigt die Kennzahl „Verwendete Credits“ im Copilot-Credits-Bericht die Gesamtzahl der Credits an, die von Benutzern in Ihrer Organisation verbraucht wurden, die ___, und die mit arbeitsbasierten Agenten im Microsoft 365 Copilot-Chat interagieren.",
+      choices: ["Microsoft Teams nutzen", "extern zu Ihrer Organisation sind", "denen eine Microsoft 365 Copilot-Lizenz zugewiesen ist", "denen KEINE Microsoft 365 Copilot-Lizenz zugewiesen ist"],
+    },
     options: [
       { id: "A", text: "Im Microsoft 365-Admincenter zeigt die Kennzahl „Verwendete Credits“ im Copilot-Credits-Bericht die Gesamtzahl der Credits an, die von Benutzern in Ihrer Organisation verbraucht wurden, die Microsoft Teams nutzen und mit arbeitsbasierten Agenten im Microsoft 365 Copilot-Chat interagieren." },
       { id: "B", text: "Im Microsoft 365 Admin Center zeigt die Metrik „Verwendete Credits“ im Copilot-Credits-Bericht die Gesamtzahl der Credits an, die von Benutzern in Ihrer Organisation verbraucht wurden, die nicht zu Ihrer Organisation gehören und mit geschäftlichen Agenten im Microsoft 365 Copilot Chat interagieren." },
@@ -1478,10 +1590,14 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Im Microsoft 365-Admincenter zeigt die Metrik „Verwendete Credits“ im Copilot-Credits-Bericht die Gesamtzahl der Credits an, die von Benutzern in Ihrer Organisation verwendet wurden, denen KEINE Microsoft 365 Copilot-Lizenz zugewiesen ist und die mit arbeitsbasierten Agenten in Microsoft 365 Copilot Chat interagieren." },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Der Microsoft 365 Copilot Pay-as-you-go-Plan bietet Organisationen einen flexiblen und kosteneffizienten Weg, um auf Copilot-Dienste zuzugreifen. Dieser Plan ermöglicht es Administratoren, für bestimmte Copilot-Szenarien eine nutzungsbasierte Abrechnung zu aktivieren, sodass Benutzer Copilot-Funktionen nutzen können, ohne sich auf eine vollständige Lizenz festzulegen.\n\nDer Copilot-Credits-Bericht hilft Ihnen, die verbrauchsabhängigen Kosten für Microsoft 365 Copilot Chat zu verwalten. Dieser Bericht bietet Ihnen Transparenz über die verwendeten Credits im Zusammenhang mit Ihren Pay-as-you-go-Abrechnungsrichtlinien für Microsoft 365 Copilot und enthält wichtige Kennzahlen wie:\n\n– Gesamtzahl der verwendeten Credits\n– kumulative und tägliche Zeitreihen\n– verwendete Credits pro Benutzer, pro Agent, pro Abrechnungsrichtlinie und pro Agent-Benutzer-Paar",
+    resources: [
+      { label: "Microsoft 365 Copilot pay-as-you-go overview for IT admins", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/pay-as-you-go/overview" },
+      { label: "Understand Microsoft 365 Copilot reports", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/agent-essentials/agent-usage-billing/agent-usage-cs-reports" },
+    ],
   },
   {
-    id: "real-ab900-86",
+    id: "real-ab900-87",
     topicId: "copilot-grundlagen",
     prompt: "Sie haben eine Microsoft SharePoint-Website namens „Site1“ und eine Sicherheitsgruppe namens „Group1“. Sie möchten verhindern, dass alle Benutzer, die derzeit Zugriff auf „Site1“ haben, auf die Inhalte der Website zugreifen können, es sei denn, der Benutzer ist auch Mitglied der Gruppe „Group1“. Welche Einstellungen sollten Sie konfigurieren? (Wählen Sie zur Beantwortung die entsprechenden Einstellungen im Antwortbereich aus.)",
     options: [
@@ -1492,23 +1608,33 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "E", text: "Erkennung von Inhalten einschränken" },
       { id: "F", text: "Eingeschränkter Zugriff auf die Website" },
     ],
-    correct: "B",
-    explanation: "",
-  },
-  {
-    type: "yesno",
-    id: "real-ab900-87",
-    topicId: "purview-compliance",
-    prompt: "Microsoft 365 Copilot honors Microsoft Purview sensitivity labels: No Microsoft 365 Copilot ignores Microsoft Purview data loss prevention (DLP) policies: No Microsoft 365 Copilot honors existing Microsoft 365 permissions: No Wählen Sie für jede der folgenden Aussagen „Ja“, wenn die Aussage wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Auswahl bringt einen Punkt.)",
-    statements: [
-      { text: "Microsoft 365 Copilot berücksichtigt die Vertraulichkeitskennzeichnungen von Microsoft Purview", correct: "Ja" },
-      { text: "Microsoft 365 Copilot ignoriert die Richtlinien zur Verhinderung von Datenverlusten (DLP) von Microsoft Purview", correct: "Nein" },
+    correct: ["B", "F"],
+    explanation: "Sie müssen die Datenschutzeinstellung von Öffentlich auf Privat ändern und den eingeschränkten Websitezugriff für „Group1“ aktivieren.\n\nDie Steuerung für eingeschränkten Websitezugriff hilft, übermäßige Freigabe zu verhindern, indem der Zugriff auf SharePoint-Websites und ihre Inhalte auf Benutzer in einer bestimmten Gruppe beschränkt wird. Benutzer, die nicht Teil der angegebenen Gruppe sind, können nicht auf die Website oder ihre Inhalte zugreifen – selbst wenn sie zuvor Berechtigungen hatten oder über einen Freigabelink verfügten. Diese Richtlinie kann auf Microsoft-365-Gruppen-verbundene, Teams-verbundene und nicht gruppenverbundene Websites angewendet werden, wobei entweder Microsoft-365-Gruppen oder Microsoft Entra-Sicherheitsgruppen verwendet werden.\n\nRichtlinien zur Einschränkung des Websitezugriffs greifen, wenn ein Benutzer versucht, eine Website zu öffnen oder auf eine Datei zuzugreifen. Benutzer mit direkten Berechtigungen für die Datei können diese weiterhin in Suchergebnissen sehen. Sie können jedoch nicht auf die Dateien zugreifen, wenn sie nicht Teil der angegebenen Gruppe sind.\n\nDie Datenschutzeinstellung in den Einstellungen einer SharePoint-Online-Website steuert standardmäßig, wer auf die Website zugreifen kann. Konkret legt sie fest, ob die Website innerhalb Ihrer Microsoft-365-Organisation öffentlich oder privat ist:\n\n– Private Website: Nur Benutzer, die explizit als Besitzer oder Mitglieder hinzugefügt wurden, können auf die Website und ihre Inhalte zugreifen. Dies wird typischerweise für team-spezifische, vertrauliche oder eingeschränkte Zusammenarbeitsszenarien verwendet.\n– Öffentliche Website: Alle authentifizierten Benutzer in der Organisation können auf die Website und ihre Inhalte zugreifen, auch wenn sie nicht explizit als Mitglieder hinzugefügt wurden. Dies wird üblicherweise für organisationsweite Informationen, Wissensdatenbanken oder gemeinsam genutzte Ressourcen verwendet.",
+    resources: [
+      { label: "Restrict SharePoint site access with Microsoft 365 groups and Microsoft Entra security groups", url: "https://learn.microsoft.com/en-us/sharepoint/restricted-access-control" },
+      { label: "How to Manage SharePoint Sites' Privacy Settings in Microsoft 365", url: "https://m365scripts.com/microsoft365/how-to-manage-sharepoint-sites-privacy-settings-in-microsoft-365" },
     ],
-    explanation: "",
   },
   {
     type: "yesno",
     id: "real-ab900-88",
+    topicId: "purview-compliance",
+    prompt: "Für jede der folgenden Aussagen wählen Sie Ja, wenn die Aussage wahr ist. Andernfalls wählen Sie „Nein“. (HINWEIS: Jede richtige Auswahl bringt einen Punkt.)",
+    statements: [
+      { text: "Microsoft 365 Copilot berücksichtigt die Vertraulichkeitskennzeichnungen von Microsoft Purview", correct: "Ja" },
+      { text: "Microsoft 365 Copilot ignoriert die Richtlinien zur Verhinderung von Datenverlusten (DLP) von Microsoft Purview", correct: "Nein" },
+      { text: "Microsoft 365 Copilot berücksichtigt die bestehenden Microsoft 365-Berechtigungen", correct: "Ja" },
+    ],
+    explanation: "Microsoft 365 Copilot arbeitet mit den Vertraulichkeitskennzeichnungen von Microsoft Purview zusammen und setzt deren Schutzeinstellungen während der Fundierung (Grounding) und der Inhaltsgenerierung durch. Copilot kann Inhalte nur gemäß den Verschlüsselungs- und Nutzungsrechten der jeweiligen Kennzeichnung abrufen und zusammenfassen, und generierte Inhalte können die Vertraulichkeitskennzeichnung mit der höchsten Priorität übernehmen.\n\nDLP-Richtlinien von Microsoft Purview gelten auch für Microsoft 365 Copilot. DLP kann Copilot daran hindern, sensible Eingabeaufforderungen zu verarbeiten, die externe Web-Fundierung blockieren und verhindern, dass gekennzeichnete Dateien und E-Mails in Copilot-Antworten verwendet werden.\n\nMicrosoft 365 Copilot greift ausschließlich auf Daten zu, für die der angemeldete Benutzer bereits berechtigt ist, und arbeitet innerhalb der bestehenden Microsoft-365-Berechtigungen – einschließlich der Zugriffssteuerungen von SharePoint, OneDrive und Microsoft Graph.",
+    resources: [
+      { label: "How data is protected and audited in Microsoft 365 and Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/microsoft-365-copilot-architecture-data-protection-auditing" },
+      { label: "Learn about using Microsoft Purview Data Loss Prevention to protect interactions with Microsoft 365 Copilot and Copilot Chat", url: "https://learn.microsoft.com/en-us/purview/dlp-microsoft365-copilot-location-learn-about" },
+      { label: "Microsoft 365 Copilot architecture and how it works", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/microsoft-365-copilot-architecture" },
+    ],
+  },
+  {
+    type: "yesno",
+    id: "real-ab900-89",
     topicId: "purview-compliance",
     prompt: "Für jede der folgenden Aussagen wählen Sie Ja, wenn die Aussage wahr ist. Andernfalls wählen Sie \"Nein\". (HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
     statements: [
@@ -1516,10 +1642,15 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { text: "Eine Vertraulichkeitskennzeichnung kann auf eine E-Mail-Nachricht in Microsoft Exchange angewendet werden", correct: "Ja" },
       { text: "Eine Vertraulichkeitskennzeichnung kann auf Windows 11-Geräte angewendet werden", correct: "Nein" },
     ],
-    explanation: "",
+    explanation: "Microsoft Purview unterstützt Vertraulichkeitskennzeichnungen auf Container-Ebene, die auf SharePoint-Websites angewendet werden können, um Einstellungen wie die Datenschutzstufe der Website, externe Freigabe und den Zugriff von nicht verwalteten Geräten zu steuern.\n\nVertraulichkeitskennzeichnungen können auf E-Mail-Nachrichten in Exchange Online angewendet werden – sowohl manuell durch Benutzer in Outlook als auch automatisch über Richtlinien zur automatischen Kennzeichnung, die von Exchange verarbeitet werden.\n\nVertraulichkeitskennzeichnungen können nicht direkt auf Windows-11-Geräte selbst angewendet werden. Vertraulichkeitskennzeichnungen gelten für Inhalte wie Dateien und E-Mails sowie für Container, nicht für Geräte. Unter Windows 11 können Kennzeichnungen auf Dateien angewendet werden, die auf dem Gerät gespeichert sind – das Gerät selbst kann jedoch nicht gekennzeichnet werden.",
+    resources: [
+      { label: "Learn about sensitivity labels", url: "https://learn.microsoft.com/en-us/purview/sensitivity-labels" },
+      { label: "Protect your sensitive data with Microsoft Purview", url: "https://learn.microsoft.com/en-us/purview/information-protection" },
+      { label: "Create and configure sensitivity labels and their policies", url: "https://learn.microsoft.com/en-us/purview/create-sensitivity-labels" },
+    ],
   },
   {
-    id: "real-ab900-89",
+    id: "real-ab900-90",
     topicId: "copilot-grundlagen",
     prompt: "Ihre Organisation verfügt über ein Microsoft 365-Abonnement. Ihr Unternehmen hat kürzlich Microsoft 365 Copilot-Lizenzen für einige Benutzer erworben. Sie müssen ermitteln, wie viele nicht lizenzierte Benutzer Copilot in Microsoft Teams genutzt haben. Welchen Nutzungsbericht sollten Sie im Microsoft 365 Admin Center verwenden?",
     options: [
@@ -1529,10 +1660,14 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Microsoft 365 Copilot" },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Um zu ermitteln, wie viele nicht lizenzierte Benutzer Copilot in Microsoft Teams genutzt haben, müssen Sie die Microsoft 365 Copilot-Berichte im Microsoft 365 Admin Center verwenden – konkret die Daten aus Copilot-Credits und Copilot-Nutzung.\n\nDer Copilot-Credits-Bericht zeigt die Nutzung durch Benutzer, die KEINE Microsoft 365 Copilot-Lizenz besitzen und mit Copilot-Agenten interagieren, unter anderem in Microsoft Teams über Copilot Chat.",
+    resources: [
+      { label: "Microsoft 365 Copilot usage report - Microsoft 365 admin center", url: "https://learn.microsoft.com/en-us/microsoft-365/admin/activity-reports/microsoft-365-copilot-usage" },
+      { label: "Microsoft 365 Copilot credits report - Microsoft 365 admin center", url: "https://learn.microsoft.com/en-us/microsoft-365/admin/activity-reports/microsoft-365-copilot-credits" },
+    ],
   },
   {
-    id: "real-ab900-90",
+    id: "real-ab900-91",
     topicId: "copilot-grundlagen",
     prompt: "Ein Benutzer namens „User1“ ist für die vierteljährliche Umsatzberichterstattung zuständig. „User1“ muss Leistungstrends erkennen, visuelle Erkenntnisse gewinnen und eine Zusammenfassung von Anomalien über mehrere Dateien hinweg erstellen, die verschiedene Datensätze enthalten. Was sollten Sie verwenden?",
     options: [
@@ -1542,10 +1677,14 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Copilot in Excel" },
     ],
     correct: "A",
-    explanation: "",
+    explanation: "Der Analyst-Agent in Microsoft 365 Copilot ist ein KI-gestützter Assistent für die Datenanalyse. Der Analyst-Agent ist vergleichbar mit einem erfahrenen Datenanalysten an Ihrer Seite, der Ihnen hilft, Daten schnell zu verstehen, ohne dass Sie selbst über fortgeschrittene Fachkenntnisse verfügen müssen.\n\nAnalyst denkt wie ein erfahrener Data Scientist, sodass Sie in wenigen Minuten von Rohdaten zu Erkenntnissen gelangen. Aufbauend auf dem o3-mini-Reasoning-Modell von OpenAI und optimiert für fortgeschrittene Datenanalyse im Arbeitsalltag nutzt Analyst Chain-of-Thought-Reasoning, um Probleme schrittweise iterativ zu durchdenken – mit so vielen Schritten wie nötig, um die Argumentation zu verfeinern und eine hochwertige Antwort zu liefern, die menschlichem analytischem Denken nahekommt. Analyst kann Python ausführen, um selbst komplexeste Datenabfragen zu bewältigen – und Sie können den ausgeführten Code in Echtzeit einsehen und überprüfen. So lassen sich beispielsweise Rohdaten, die über mehrere Tabellen verteilt sind, in eine Nachfrageprognose für ein neues Produkt, eine Visualisierung von Kundenkaufmustern oder eine Umsatzprojektion verwandeln.\n\nWarum Analyst verwenden?\n\n– Zeit sparen: Sie müssen nicht Tausende Datenzeilen oder mehrere Dateien wie Excel-Tabellen, CSV-Dateien, Datenbanken und Ähnliches durchsuchen und diese Daten dann selbst für die Analyse zusammenführen – Analyst übernimmt das für Sie.\n– Sie müssen kein Datenanalyst sein: Stellen Sie einfach eine Frage zu Ihren Daten, und Analyst berechnet Statistiken, erkennt Trends und zeigt Ausreißer auf.\n– Leicht verständliche Berichte erhalten: Sie erhalten zu Ihrer Frage einen Bericht in leicht verständlicher Sprache und Formatierung, der Erkenntnisse aufzeigt und Visualisierungen wie Diagramme und Tabellen enthalten kann.",
+    resources: [
+      { label: "Get started with Analyst in Microsoft 365 Copilot", url: "https://support.microsoft.com/en-us/topic/get-started-with-analyst-in-microsoft-365-copilot-ff505b9c-a06c-4be9-b855-69d89b1d25d2" },
+      { label: "Introducing Researcher and Analyst in Microsoft 365 Copilot", url: "https://www.microsoft.com/en-us/microsoft-365/blog/2025/03/25/introducing-researcher-and-analyst-in-microsoft-365-copilot" },
+    ],
   },
   {
-    id: "real-ab900-91",
+    id: "real-ab900-92",
     topicId: "copilot-agenten",
     prompt: "Ihr Unternehmen prüft derzeit die Lizenzierung von Microsoft 365 Copilot. In welchem Szenario sollten Sie die nutzungsabhängige Abrechnung nutzen?",
     options: [
@@ -1555,10 +1694,14 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Um nicht lizenzierten Benutzern einen benutzerdefinierten Agenten zur Verfügung zu stellen" },
     ],
     correct: "D",
-    explanation: "",
+    explanation: "Der Microsoft 365 Copilot Pay-as-you-go-Plan bietet Organisationen einen flexiblen und kosteneffizienten Weg, um auf Copilot-Dienste zuzugreifen. Dieser Plan ermöglicht es Administratoren, für bestimmte Copilot-Szenarien eine nutzungsbasierte Abrechnung zu aktivieren, sodass Benutzer Copilot-Funktionen nutzen können, ohne sich auf eine vollständige Lizenz festzulegen.\n\nPay-as-you-go gilt für Copilot Chat, SharePoint-Agenten und Copilot-Studio-Agenten. Nicht lizenzierte Benutzer verbrauchen Copilot-Credits, wenn sie mit benutzerdefinierten oder organisationsinternen Agenten interagieren.",
+    resources: [
+      { label: "Microsoft 365 Copilot pay-as-you-go overview for IT admins", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/pay-as-you-go/overview" },
+      { label: "Flexible Copilot plans for every organization", url: "https://www.microsoft.com/en-us/microsoft-365-copilot/pricing/copilot-studio" },
+    ],
   },
   {
-    id: "real-ab900-92",
+    id: "real-ab900-93",
     topicId: "copilot-grundlagen",
     prompt: "Sie verwenden Microsoft 365 Copilot. Sie möchten eine Eingabeaufforderung so planen, dass sie um Mitternacht ausgeführt wird. Welche Aufgabe sollten Sie in Ihre Lösung aufnehmen?",
     options: [
@@ -1568,10 +1711,13 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "D", text: "Die Eingabeaufforderung speichern." },
     ],
     correct: "C",
-    explanation: "",
+    explanation: "Wenn Sie eine nützliche Copilot-Eingabeaufforderung erstellt haben und diese weiterhin verwenden möchten, können Sie sie so planen, dass sie automatisch ausgeführt wird. Sie müssen sich dann nicht mehr merken, sie jedes Mal selbst auszuführen. Legen Sie einfach Uhrzeit und Häufigkeit fest, und Copilot übernimmt den Rest.\n\nWenn Sie Copilot beispielsweise häufig nutzen, um E-Mails zusammenzufassen, die vor dem Wochenende noch Ihre Aufmerksamkeit brauchen, können Sie diese Eingabeaufforderung so planen, dass sie jeden Freitagnachmittag ausgeführt wird. So erhalten Sie eine hilfreiche Liste, ohne die Eingabeaufforderung selbst ausführen zu müssen – das erleichtert den Wochenabschluss und verhindert, dass Sie wichtige Nachrichten übersehen.\n\nEine geplante Eingabeaufforderung erstellen:\n\n1. Öffnen Sie Copilot und senden (führen) Sie eine Eingabeaufforderung aus. Um Copilot zu öffnen, rufen Sie microsoft365.com/chat in Ihrem Browser auf – oder wählen Sie das Copilot-Symbol entweder in der Taskleiste in Teams oder in der vertikalen Taskleiste in Outlook für das Web oder Desktop.\n2. Bewegen Sie den Mauszeiger über die Eingabeaufforderung und wählen Sie „Diese Eingabeaufforderung planen“.\n3. Legen Sie fest, wann die Eingabeaufforderung ausgeführt wird, wie oft sie ausgeführt wird, und ob Sie eine E-Mail-Benachrichtigung erhalten möchten, sobald die Antwort bereit ist.\n4. Wählen Sie „Speichern“.\n\nHinweis: Sie können bis zu 10 verschiedene geplante Eingabeaufforderungen erstellen.",
+    resources: [
+      { label: "Schedule Copilot prompts", url: "https://support.microsoft.com/en-us/topic/schedule-copilot-prompts-29dfd5fb-211a-4515-88a6-730b8074e489" },
+    ],
   },
   {
-    id: "real-ab900-93",
+    id: "real-ab900-93-displaced-copilot-rollout-admin-center",
     topicId: "copilot-grundlagen",
     prompt: "Ihr Unternehmen plant den Einsatz von Microsoft 365 Copilot. Sie müssen einem Benutzer die Möglichkeit geben, Microsoft 365 Copilot zu nutzen, einschließlich der Agenten „Researcher“ und „Analyst“. Was sollten Sie verwenden?",
     options: [
@@ -1686,18 +1832,6 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
       { id: "F", text: "Agenten – Einstellungen" },
     ],
     correct: "A",
-    explanation: "",
-  },
-  {
-    type: "yesno",
-    id: "real-ab900-70-displaced-copilot-data-usage",
-    topicId: "copilot-grundlagen",
-    prompt: "Für jede der folgenden Aussagen wählen Sie Ja, wenn die Aussage wahr ist. Andernfalls wählen Sie Nein. (HINWEIS: Jede richtige Auswahl ist einen Punkt wert.)",
-    statements: [
-      { text: "Eingabeaufforderungen und Antworten, die von Benutzern in Microsoft 365 Copilot ausgegeben werden, werden von Microsoft zum Trainieren von Modellen verwendet", correct: "Nein" },
-      { text: "Von Microsoft Graph abgerufene Inhalte werden von Microsoft zum Trainieren von Modellen verwendet", correct: "Nein" },
-      { text: "Microsoft 365 Copilot respektiert die Sicherheitsberechtigungen in Ihrem Microsoft 365-Abonnement", correct: "Ja" },
-    ],
     explanation: "",
   },
 ];
