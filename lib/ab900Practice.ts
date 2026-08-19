@@ -75,31 +75,7 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
     ],
   },
   {
-    id: "real-ab900-102",
-    topicId: "copilot-agenten",
-    prompt: "Sie müssen sicherstellen, dass Benutzer ein externes System als Wissensquelle für benutzerdefinierte Microsoft 365 Copilot-Agenten nutzen können. Was sollten Sie im Microsoft 365 Admin Center konfigurieren? (Wählen Sie zur Beantwortung die entsprechenden Einstellungen im Antwortbereich aus.)",
-    blankFill: {
-      template: "Sie sollten ___ im Microsoft 365 Admin Center konfigurieren.",
-      choices: ["Copilot – Konnektoren", "Copilot – Suche", "Copilot – Einstellungen", "Agenten – Übersicht", "Agenten – Tools", "Agenten – Einstellungen"],
-    },
-    options: [
-      { id: "A", text: "Copilot – Konnektoren" },
-      { id: "B", text: "Copilot – Suche" },
-      { id: "C", text: "Copilot – Einstellungen" },
-      { id: "D", text: "Agenten – Übersicht" },
-      { id: "E", text: "Agenten – Tools" },
-      { id: "F", text: "Agenten – Einstellungen" },
-    ],
-    correct: "A",
-    imageUrl: "/exam-images/ab900-q102.png",
-    explanation: "Microsoft 365 Copilot-Konnektoren erweitern die Reichweite von Microsoft 365 Copilot und der Microsoft Search-Erlebnisse, indem sie eine Verbindung zu Daten außerhalb von Microsoft 365 herstellen. Ihre Organisation kann externe Daten entweder mithilfe synchronisierter Konnektoren indizieren oder mithilfe föderierter Konnektoren (Early-Access-Vorschau) in Echtzeit mit Daten verbinden. Diese Flexibilität stellt sicher, dass Benutzer sowohl Unternehmens- als auch externe Datenquellen sicher innerhalb der Microsoft 365-Apps und Copilot-Erlebnisse durchsuchen und mit ihnen interagieren können.",
-    resources: [
-      { label: "Connectors overview", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/overview" },
-      { label: "Microsoft 365 Copilot connectors overview", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/overview-copilot-connector" },
-    ],
-  },
-  {
-    id: "real-ab900-102-displaced-researcher-multistep-reasoning",
+    id: "real-ab900-3",
     topicId: "copilot-agenten",
     prompt: "Um den Satz zu vervollständigen, wählen Sie im Antwortbereich die entsprechende Option aus.",
     blankFill: {
@@ -1881,6 +1857,30 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
     resources: [
       { label: "Data, privacy, and security for web search in Microsoft 365 Copilot and Microsoft 365 Copilot Chat", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/manage-public-web-access" },
       { label: "Get started with Researcher agent in Microsoft 365 Copilot", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/researcher-agent" },
+    ],
+  },
+  {
+    id: "real-ab900-102",
+    topicId: "copilot-agenten",
+    prompt: "Sie müssen sicherstellen, dass Benutzer ein externes System als Wissensquelle für benutzerdefinierte Microsoft 365 Copilot-Agenten nutzen können. Was sollten Sie im Microsoft 365 Admin Center konfigurieren? (Wählen Sie zur Beantwortung die entsprechenden Einstellungen im Antwortbereich aus.)",
+    blankFill: {
+      template: "Sie sollten ___ im Microsoft 365 Admin Center konfigurieren.",
+      choices: ["Copilot – Konnektoren", "Copilot – Suche", "Copilot – Einstellungen", "Agenten – Übersicht", "Agenten – Tools", "Agenten – Einstellungen"],
+    },
+    options: [
+      { id: "A", text: "Copilot – Konnektoren" },
+      { id: "B", text: "Copilot – Suche" },
+      { id: "C", text: "Copilot – Einstellungen" },
+      { id: "D", text: "Agenten – Übersicht" },
+      { id: "E", text: "Agenten – Tools" },
+      { id: "F", text: "Agenten – Einstellungen" },
+    ],
+    correct: "A",
+    imageUrl: "/exam-images/ab900-q102.png",
+    explanation: "Microsoft 365 Copilot-Konnektoren erweitern die Reichweite von Microsoft 365 Copilot und der Microsoft Search-Erlebnisse, indem sie eine Verbindung zu Daten außerhalb von Microsoft 365 herstellen. Ihre Organisation kann externe Daten entweder mithilfe synchronisierter Konnektoren indizieren oder mithilfe föderierter Konnektoren (Early-Access-Vorschau) in Echtzeit mit Daten verbinden. Diese Flexibilität stellt sicher, dass Benutzer sowohl Unternehmens- als auch externe Datenquellen sicher innerhalb der Microsoft 365-Apps und Copilot-Erlebnisse durchsuchen und mit ihnen interagieren können.",
+    resources: [
+      { label: "Connectors overview", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/overview" },
+      { label: "Microsoft 365 Copilot connectors overview", url: "https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/overview-copilot-connector" },
     ],
   },
 ];
