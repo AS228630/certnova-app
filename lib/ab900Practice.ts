@@ -1863,10 +1863,6 @@ export const AB900_QUESTIONS: PracticeQuestion[] = [
     id: "real-ab900-102",
     topicId: "copilot-agenten",
     prompt: "Sie müssen sicherstellen, dass Benutzer ein externes System als Wissensquelle für benutzerdefinierte Microsoft 365 Copilot-Agenten nutzen können. Was sollten Sie im Microsoft 365 Admin Center konfigurieren? (Wählen Sie zur Beantwortung die entsprechenden Einstellungen im Antwortbereich aus.)",
-    blankFill: {
-      template: "Sie sollten ___ im Microsoft 365 Admin Center konfigurieren.",
-      choices: ["Copilot – Konnektoren", "Copilot – Suche", "Copilot – Einstellungen", "Agenten – Übersicht", "Agenten – Tools", "Agenten – Einstellungen"],
-    },
     options: [
       { id: "A", text: "Copilot – Konnektoren" },
       { id: "B", text: "Copilot – Suche" },
