@@ -137,10 +137,10 @@ try{var l=localStorage.getItem('certcoach-locale')||'de';document.documentElemen
             devices) via Vercel's built-in analytics — free on the plan
             this project already runs on, zero extra config beyond this
             component, and view the numbers at vercel.com under this
-            project's "Analytics" tab. This tracks visits, not purchases:
-            there is no real payment system on the site yet (the
-            "Upgrade to Pro" button has no backend behind it), so nobody
-            has actually purchased anything to report on. */}
+            project's "Analytics" tab. This tracks visits, not
+            purchases — Stripe is live and processes real payments, but
+            Vercel Analytics has no purchase/revenue data; for that,
+            check the Stripe Dashboard directly. */}
         <Analytics />
       </body>
     </html>

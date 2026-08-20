@@ -2,16 +2,15 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 import { getSupabaseAdmin } from '@/lib/admin/requireAdmin';
 import { checkRateLimit } from '@/lib/rateLimit';
+import { redeemLicenseSchema } from '@/lib/apiSchemas';
 
 export async function POST(req: NextRequest) {
-  const { code, accessToken } = (await req.json().catch(() => ({}))) as { code?: string; accessToken?: string };
-
-  if (!accessToken) {
-    return NextResponse.json({ error: 'not_authenticated' }, { status: 401 });
+  const rawBody = await req.json().catch(() => null);
+  const parsed = redeemLicenseSchema.safeParse(rawBody);
+  if (!parsed.success) {
+    return NextResponse.json({ error: 'invalid_request' }, { status: 400 });
   }
-  if (!code || !code.trim()) {
-    return NextResponse.json({ error: 'missing_code' }, { status: 400 });
-  }
+  const { code, accessToken } = parsed.data;
 
   const anon = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL ?? '', process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '');
   const { data: userData, error: userError } = await anon.auth.getUser(accessToken);

@@ -3,6 +3,7 @@ import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
 import { PLAN_PRICES } from "@/lib/stripeConfig";
 import { checkRateLimit } from "@/lib/rateLimit";
+import { createCheckoutSessionSchema } from "@/lib/apiSchemas";
 
 // Initialized lazily (inside the handler, not at module load time) so
 // that Next.js collecting page data during `next build` — which runs
@@ -15,13 +16,12 @@ function getStripe() {
 
 export async function POST(req: NextRequest) {
   try {
-    const { plan, accessToken, widerrufConsent, couponCode, returnTo } = (await req.json()) as {
-      plan: "monthly" | "yearly";
-      accessToken: string;
-      widerrufConsent?: boolean;
-      couponCode?: string;
-      returnTo?: string;
-    };
+    const rawBody = await req.json().catch(() => null);
+    const parseResult = createCheckoutSessionSchema.safeParse(rawBody);
+    if (!parseResult.success) {
+      return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+    }
+    const { plan, accessToken, widerrufConsent, couponCode, returnTo } = parseResult.data;
 
     if (!plan || !PLAN_PRICES[plan]) {
       return NextResponse.json({ error: "Invalid plan" }, { status: 400 });

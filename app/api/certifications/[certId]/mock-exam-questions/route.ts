@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { resolveEntitlement } from "@/lib/entitlements";
 import { canAccess } from "@/lib/entitlementPolicy";
 import { hasPracticeBank, getPracticeQuestions } from "@/lib/server/practiceBank";
+import { practiceQuestionsSchema } from "@/lib/apiSchemas";
 
 // Per the agreed Free/Premium rule: Exam Simulation gives Guest AND Free
 // accounts the first 10 questions of the real bank for this
@@ -19,10 +20,9 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ cer
     return NextResponse.json({ error: "no_practice_bank" }, { status: 404 });
   }
 
-  const { accessToken, locale } = (await req.json().catch(() => ({}))) as {
-    accessToken?: string;
-    locale?: string;
-  };
+  const rawBody = await req.json().catch(() => ({}));
+  const parseResult = practiceQuestionsSchema.safeParse(rawBody);
+  const { accessToken, locale } = parseResult.success ? parseResult.data : {};
 
   const { isPro } = await resolveEntitlement(accessToken);
 

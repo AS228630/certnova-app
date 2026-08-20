@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
+import { cancelSubscriptionSchema } from "@/lib/apiSchemas";
+import { checkRateLimit, getClientIp } from "@/lib/rateLimit";
 
 // Initialized lazily inside the handler — see create-checkout-session/route.ts
 // for why (avoids crashing `next build` when the env var isn't available
@@ -20,7 +22,28 @@ function getStripe() {
 // specific, verified identity — never anything the caller merely claims.
 export async function POST(req: NextRequest) {
   try {
-    const { accessToken, email } = (await req.json()) as { accessToken?: string; email?: string };
+    const rawBody = await req.json().catch(() => null);
+    const parsed = cancelSubscriptionSchema.safeParse(rawBody);
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+    }
+    const { accessToken, email } = parsed.data;
+
+    // Stopgap rate limit on the anonymous email-lookup path — this
+    // slows down bulk/scripted abuse but does NOT by itself fix the
+    // underlying gap: knowing someone's account email is currently
+    // sufficient to cancel their active subscription, with no proof
+    // they actually own that email. Flagged to the owner as a real
+    // finding needing a product decision (e.g. an email-confirmation
+    // link before the cancellation actually takes effect) — not
+    // silently treated as resolved by this rate limit alone.
+    if (!accessToken && email) {
+      const ip = getClientIp(req);
+      const { allowed } = await checkRateLimit(`cancel-subscription:${ip}`, 5, 60);
+      if (!allowed) {
+        return NextResponse.json({ error: "rate_limited" }, { status: 429 });
+      }
+    }
 
     const stripe = getStripe();
     let stripeSubscriptionId: string | null = null;

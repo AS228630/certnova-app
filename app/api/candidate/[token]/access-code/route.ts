@@ -4,6 +4,7 @@ import { logAudit } from '@/lib/admin/audit';
 import { verifyAccessCode } from '@/lib/candidate/shareLinkAuth';
 import { verifyShareToken } from '@/lib/candidate/verifyShareLink';
 import { issueUnlockToken, unlockCookieName } from '@/lib/candidate/unlockSession';
+import { candidateAccessCodeSchema } from '@/lib/apiSchemas';
 
 const MAX_FAILED_ATTEMPTS = 5;
 const LOCKOUT_MINUTES = 15;
@@ -36,10 +37,12 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ tok
   const verified = await verifyShareToken(token);
   if (!verified.ok) return NextResponse.json({ error: verified.error }, { status: verified.status });
 
-  const body = await req.json().catch(() => null);
-  if (typeof body?.code !== 'string' || !body.code.trim()) {
+  const rawBody = await req.json().catch(() => null);
+  const parsed = candidateAccessCodeSchema.safeParse(rawBody);
+  if (!parsed.success) {
     return NextResponse.json({ error: 'CODE_REQUIRED' }, { status: 400 });
   }
+  const { code } = parsed.data;
 
   const supabase = getSupabaseAdmin();
   const { link } = verified;
@@ -60,7 +63,7 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ tok
     return NextResponse.json({ error: 'TOO_MANY_ATTEMPTS_LOCKED' }, { status: 429 });
   }
 
-  const isValid = verifyAccessCode(body.code, accessCode.code_hash);
+  const isValid = verifyAccessCode(code, accessCode.code_hash);
 
   if (!isValid) {
     const failedAttempts = accessCode.failed_attempts + 1;

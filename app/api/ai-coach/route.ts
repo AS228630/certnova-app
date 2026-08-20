@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { aiCoachSchema } from "@/lib/apiSchemas";
 
 export const runtime = "nodejs";
 
@@ -120,12 +121,12 @@ async function callAzureOpenAI(
 }
 
 export async function POST(req: NextRequest) {
-  let body: { messages?: ChatMessage[]; mode?: "general" | "interview"; accessToken?: string };
-  try {
-    body = await req.json();
-  } catch {
+  const rawBody = await req.json().catch(() => null);
+  const parseResult = aiCoachSchema.safeParse(rawBody);
+  if (!parseResult.success) {
     return Response.json({ error: "Ungültige Anfrage." }, { status: 400 });
   }
+  const body = parseResult.data;
 
   // Require a real, logged-in user — this endpoint calls a paid external
   // API on our behalf, so it must never be reachable anonymously (someone

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'node:crypto';
 import { issueToken } from '@/lib/cv/accessToken';
 import { checkRateLimit, getClientIp } from '@/lib/rateLimit';
+import { cvAccessSchema } from '@/lib/apiSchemas';
 
 export async function POST(req: NextRequest) {
   // Anonymous, code-guessable endpoint — cap attempts per IP before even
@@ -13,7 +14,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ granted: false, error: 'rate_limited' }, { status: 429 });
   }
 
-  const { code } = await req.json().catch(() => ({ code: '' }));
+  const rawBody = await req.json().catch(() => null);
+  const parsed = cvAccessSchema.safeParse(rawBody);
+  if (!parsed.success) {
+    return NextResponse.json({ granted: false, error: 'invalid_request' }, { status: 400 });
+  }
+  const { code } = parsed.data;
   const expected = process.env.CV_ACCESS_CODE;
 
   if (!expected) {

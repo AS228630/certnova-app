@@ -3,6 +3,7 @@ import { resolveEntitlement } from "@/lib/entitlements";
 import { canAccess } from "@/lib/entitlementPolicy";
 import { getSectionRange } from "@/lib/practiceSections";
 import { hasPracticeBank, getPracticeQuestions, getPracticeTopics } from "@/lib/server/practiceBank";
+import { practiceQuestionsSchema } from "@/lib/apiSchemas";
 
 // Free/guest users are only entitled to "Teil 1" of any question bank —
 // this is the actual enforcement point (server-side), not just a UI
@@ -27,10 +28,9 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ cer
     return NextResponse.json({ error: "no_practice_bank" }, { status: 404 });
   }
 
-  const { accessToken, locale } = (await req.json().catch(() => ({}))) as {
-    accessToken?: string;
-    locale?: string;
-  };
+  const rawBody = await req.json().catch(() => ({}));
+  const parseResult = practiceQuestionsSchema.safeParse(rawBody);
+  const { accessToken, locale } = parseResult.success ? parseResult.data : {};
 
   const { isPro } = await resolveEntitlement(accessToken);
   const isTrueGuest = !accessToken;
