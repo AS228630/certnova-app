@@ -1,0 +1,33 @@
+name: E2E Health Check
+
+# Runs the Playwright suite against the real live site (not a preview
+# deploy), on a schedule rather than per-push — a push-triggered run
+# would race Vercel's own deploy (which takes 1-2 minutes), so this
+# checks the live site periodically instead, plus on-demand via the
+# "Run workflow" button in the Actions tab.
+on:
+  schedule:
+    - cron: "0 */6 * * *" # every 6 hours
+  workflow_dispatch: {}
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium webkit
+      - name: Run E2E tests against the live site
+        run: npm run test:e2e
+        env:
+          BASE_URL: https://www.certcoach.de
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14

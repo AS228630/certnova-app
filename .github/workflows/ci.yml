@@ -1,0 +1,33 @@
+name: CI
+
+# Runs the exact same checks that were previously only done manually
+# before each push (tsc --noEmit, eslint, next build) — now enforced
+# automatically on every push and PR, so a broken commit can't silently
+# reach main. Env vars are placeholders, same pattern used for local
+# manual builds: real secrets aren't needed to verify the app compiles.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Type check
+        run: npx tsc --noEmit -p .
+      - name: Lint
+        run: npx eslint .
+      - name: Build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder-anon-key
+          SUPABASE_SERVICE_ROLE_KEY: placeholder-service-role-key
+        run: npm run build
