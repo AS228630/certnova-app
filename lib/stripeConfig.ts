@@ -1,8 +1,13 @@
-// The publishable key is specifically designed to be safe in frontend
-// code (unlike the secret key, which lives only in server-side
-// environment variables and is never imported here).
-export const STRIPE_PUBLISHABLE_KEY =
-  "pk_test_51Tt6SmBpO8ZQFF1a3tUL8zhKk4gnTqs7MyXeWwUw0yqcUI3T7IuWTQOrtQoIEE2drApggZasjJHAcpba9HtO1ZSn001P637kDy";
+// Note: this file used to also export a hardcoded STRIPE_PUBLISHABLE_KEY
+// constant, but nothing in the codebase actually imported it (checkout
+// is a server-created Checkout Session + redirect, never the client-side
+// Stripe.js flow that publishable key is for) — and it held a stale
+// pk_test_ value that no longer matches the site's real Live-mode
+// billing, which now runs entirely on STRIPE_SECRET_KEY (a Vercel
+// environment variable, not committed here). Removed rather than fixed
+// in place, since dead code holding a wrong-looking secret-shaped value
+// is worse than no code at all — the next person to grep this file
+// shouldn't have to first work out that it was never live.
 
 export const PLAN_PRICES = {
   monthly: { amount: 1499, label: "Monatlich", interval: "month" as const },
