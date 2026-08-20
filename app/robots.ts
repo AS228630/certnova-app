@@ -20,6 +20,7 @@ export default function robots(): MetadataRoute.Robots {
     "/ai-coach",
     "/license",
     "/kuendigen",
+    "/kuendigen-bestaetigen",
     "/cookie-einstellungen",
     "/update-password",
     // Dynamic private feature routes under every certification -

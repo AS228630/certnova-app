@@ -15,7 +15,7 @@ import { supabase } from "@/lib/supabase/client";
 // button label "Jetzt kündigen" uses the statutory safe-harbor wording
 // and is intentionally never translated, regardless of site locale,
 // since that specific German wording is what case law requires.
-type Stage = "intro" | "form" | "success" | "notFound" | "error";
+type Stage = "intro" | "form" | "success" | "pending" | "notFound" | "error";
 
 export default function KuendigenPage() {
   const { t } = useLocale();
@@ -41,6 +41,11 @@ export default function KuendigenPage() {
 
       if (res.status === 404) {
         setStage("notFound");
+      } else if (json.pending) {
+        // Anonymous email path — nothing was cancelled yet, a
+        // confirmation link was emailed instead (see
+        // app/api/cancel-subscription/route.ts).
+        setStage("pending");
       } else if (json.success) {
         setCancelAt(json.cancelAt);
         setStage("success");
@@ -135,6 +140,24 @@ export default function KuendigenPage() {
               {loading && <Loader2 size={15} className="animate-spin" />}
               {t("kuendigen.ctaSubmit")}
             </button>
+          </div>
+        )}
+
+        {stage === "pending" && (
+          <div className="rounded-2xl border border-border-soft bg-panel p-6 text-center sm:p-8">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary-light text-primary">
+              <CheckCircle2 size={26} />
+            </div>
+            <h2 className="mb-2 text-lg font-bold text-text">Fast geschafft</h2>
+            <p className="mb-1 text-sm text-text-muted">
+              Wir haben dir eine E-Mail mit einem Bestätigungslink geschickt.
+            </p>
+            <p className="mb-4 text-sm text-text-muted">
+              Bitte öffne die E-Mail und bestätige die Kündigung dort — erst dann wird sie wirksam.
+            </p>
+            <Link href="/" className="text-sm font-semibold text-primary hover:underline">
+              {t("kuendigen.backHome")}
+            </Link>
           </div>
         )}
 
