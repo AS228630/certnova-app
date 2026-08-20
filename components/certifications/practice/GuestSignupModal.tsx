@@ -29,7 +29,7 @@ export default function GuestSignupModal({ onClose }: { onClose: () => void }) {
   }
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60 p-4">
+    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60 p-4" role="dialog" aria-modal="true" aria-labelledby="guest-signup-title">
       <div className="relative w-full max-w-sm rounded-2xl border border-border-soft bg-panel p-6 text-center">
         <button onClick={onClose} className="absolute right-4 top-4 text-text-faint hover:text-text" aria-label={t("help.close")}>
           <X size={18} />
@@ -39,7 +39,7 @@ export default function GuestSignupModal({ onClose }: { onClose: () => void }) {
           <Sparkles size={22} />
         </div>
 
-        <h3 className="mb-2 text-lg font-extrabold text-text">{t("guestGate.title")}</h3>
+        <h3 id="guest-signup-title" className="mb-2 text-lg font-extrabold text-text">{t("guestGate.title")}</h3>
         <p className="mb-6 text-sm leading-relaxed text-text-muted">{t("guestGate.desc")}</p>
 
         <button

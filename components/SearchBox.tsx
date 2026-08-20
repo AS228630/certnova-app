@@ -88,6 +88,11 @@ export default function SearchBox({ variant = "desktop" }: { variant?: "desktop"
           onFocus={() => setOpen(true)}
           onKeyDown={handleKeyDown}
           placeholder={t("header.searchPlaceholder")}
+          aria-label={t("header.searchPlaceholder")}
+          role="combobox"
+          aria-expanded={open}
+          aria-controls="search-results-listbox"
+          aria-autocomplete="list"
           className="w-full bg-transparent text-sm text-text outline-none placeholder:text-text-faint"
         />
         {isDesktop && (
@@ -98,7 +103,7 @@ export default function SearchBox({ variant = "desktop" }: { variant?: "desktop"
       </div>
 
       {open && query.trim().length >= 2 && (
-        <div className="absolute left-0 right-0 top-full z-40 mt-2 max-h-96 overflow-y-auto rounded-lg border border-border-soft bg-panel shadow-2xl">
+        <div id="search-results-listbox" role="listbox" className="absolute left-0 right-0 top-full z-40 mt-2 max-h-96 overflow-y-auto rounded-lg border border-border-soft bg-panel shadow-2xl">
           {results.length === 0 ? (
             <p className="px-4 py-6 text-center text-sm text-text-faint">{t("header.searchNoResults")}</p>
           ) : (

@@ -33,6 +33,9 @@ export default function RestartConfirmModal({
       <div
         className="w-full max-w-sm rounded-2xl border border-border-soft bg-panel p-6 shadow-xl"
         onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="restart-confirm-title"
       >
         <div
           className={`mx-auto flex h-12 w-12 items-center justify-center rounded-full ${
@@ -41,7 +44,7 @@ export default function RestartConfirmModal({
         >
           {danger ? <TriangleAlert size={22} /> : <RotateCcw size={22} />}
         </div>
-        <h3 className="mt-4 text-center text-lg font-bold text-text">{title ?? t("practice.restartConfirmTitle")}</h3>
+        <h3 id="restart-confirm-title" className="mt-4 text-center text-lg font-bold text-text">{title ?? t("practice.restartConfirmTitle")}</h3>
         <p className="mt-2 text-center text-sm leading-relaxed text-text-muted">{body ?? t("practice.restartConfirmBody")}</p>
 
         <div className="mt-6 flex gap-3">
