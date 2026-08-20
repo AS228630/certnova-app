@@ -1318,9 +1318,6 @@ const de = {
     widerrufConsentText:
       "Ich stimme ausdrücklich zu, dass der Zugriff auf CertCoach Pro sofort nach Zahlung beginnt, bevor die 14-tägige Widerrufsfrist abläuft, und bestätige, dass ich dadurch mein Widerrufsrecht mit vollständiger Freischaltung verliere. Details:",
     proceedToPayment: "Weiter zur Zahlung",
-    paymentNotAvailableTitle: "Online-Zahlung ist noch nicht verfügbar",
-    paymentNotAvailableDesc:
-      "Wir arbeiten daran, Online-Zahlungen bald zu ermöglichen. Dein gewählter Plan wird nicht berechnet — hier ist noch nichts aktiv. Bei Fragen zu Preisen oder für ein individuelles Angebot erreichst du unseren Support jederzeit.",
     contactSupport: "Support kontaktieren",
     backToPlans: "Zurück zur Planauswahl",
     selectedPlan: "Gewählter Plan",
@@ -1420,10 +1417,10 @@ const de = {
       "Du kannst dein CertCoach-Pro-Abonnement jederzeit über unsere Kündigungsseite unter www.certcoach.de/kuendigen online kündigen — ganz ohne Login-Zwang. Der Zugriff bleibt bis zum Ende der bereits bezahlten Abrechnungsperiode bestehen.",
     article2Q: "Wie ändere ich meinen Plan?",
     article2A:
-      "Gehe zu „Dein Abonnement verwalten\" weiter unten auf dieser Seite oder direkt zur Upgrade-Seite über die Seitenleiste. Dort kannst du einen Plan auswählen. Die Online-Zahlung befindet sich aktuell noch im Aufbau, dein gewählter Plan wird also noch nicht berechnet.",
+      "Gehe zu „Dein Abonnement verwalten\" weiter unten auf dieser Seite oder direkt zur Upgrade-Seite über die Seitenleiste. Dort kannst du einen Plan auswählen und die Zahlung über Stripe abschließen.",
     article3Q: "Ich wurde doppelt belastet – was kann ich tun?",
     article3A:
-      "Da Online-Zahlungen auf der Plattform noch nicht aktiv sind, kann aktuell keine Abbuchung durch CertCoach erfolgt sein. Solltest du dennoch eine unerwartete Belastung sehen, kontaktiere bitte umgehend unseren E-Mail-Support – wir kümmern uns persönlich darum.",
+      "Das sollte normalerweise nicht vorkommen, aber bitte kontaktiere in diesem Fall umgehend unseren E-Mail-Support mit dem Datum und Betrag der Belastung — wir prüfen das über unser Stripe-Dashboard und kümmern uns persönlich um eine Rückerstattung, falls tatsächlich doppelt abgerechnet wurde.",
     article4Q: "Zertifikat herunterladen oder erneut ausstellen",
     article4A:
       "Sobald du eine Zertifizierung zu 100% abgeschlossen hast, findest du dein Zertifikat auf deiner Profilseite. Von dort kannst du es jederzeit erneut herunterladen.",
@@ -1470,7 +1467,7 @@ const de = {
     currentPlanLabel: "Aktueller Plan",
     freePlanBadge: "Kostenloser Plan",
     forever: "immer",
-    freePlanDesc: "Dein Konto läuft aktuell im kostenlosen Plan. Online-Zahlungen für kostenpflichtige Pläne befinden sich im Aufbau.",
+    freePlanDesc: "Dein Konto läuft aktuell im kostenlosen Plan. Upgrade jederzeit auf CertCoach Pro, um die vollständige Fragenbank freizuschalten.",
     subscriptionOptionsTitle: "Abonnement-Optionen",
     changePlan: "Plan wechseln",
     viewInvoices: "Rechnungen anfragen",
@@ -1853,7 +1850,7 @@ const de = {
     title: "Häufig gestellte Fragen",
     desc: "Antworten auf die wichtigsten Fragen zu CertCoach.",
     q1Q: "Ist CertCoach kostenlos?",
-    q1A: "Ja, du kannst dich kostenlos registrieren und sofort mit dem Lernen beginnen. Der kostenlose Plan bietet Zugriff auf ausgewählte Kurse, eine aktive Lab-Umgebung und begrenzten KI-Coach-Zugriff. Bezahlte Pläne mit mehr Funktionen befinden sich aktuell im Aufbau.",
+    q1A: "Ja, du kannst dich kostenlos registrieren und sofort mit dem Lernen beginnen. Der kostenlose Plan bietet Zugriff auf ausgewählte Kurse, eine aktive Lab-Umgebung und begrenzten KI-Coach-Zugriff. Mit CertCoach Pro schaltest du die vollständige Fragenbank und weitere Funktionen frei.",
     q2Q: "Wie fange ich an?",
     q2A: "Registriere dich kostenlos, wähle eine Zertifizierung oder einen Sprachkurs aus, der zu deinem Ziel passt, und starte mit der ersten Lektion. Dein Fortschritt wird automatisch gespeichert.",
     q3Q: "Stellt CertCoach offizielle Zertifikate aus?",
@@ -1866,8 +1863,8 @@ const de = {
     q6A: "Dein Dashboard zeigt deinen aktuellen Fortschritt pro Zertifizierung, deine Lernserie und deine beantworteten Fragen in Echtzeit.",
     q7Q: "Wie erreiche ich den Support?",
     q7A: "Über die Seite „Hilfe & Support\" im Dashboard oder über das Kontaktformular – wir antworten in der Regel innerhalb von 24 Stunden.",
-    q8Q: "Kann ich schon auf einen bezahlten Plan upgraden?",
-    q8A: "Die Online-Zahlung befindet sich aktuell noch im Aufbau. Auf der Upgrade-Seite kannst du dir die geplanten Pläne ansehen, aber es wird aktuell noch nichts berechnet.",
+    q8Q: "Wie kann ich auf CertCoach Pro upgraden?",
+    q8A: "Auf der Upgrade-Seite kannst du direkt ein CertCoach-Pro-Abonnement abschließen — die Zahlung läuft sicher über Stripe (Kreditkarte, PayPal oder Klarna). Du kannst dein Abonnement jederzeit über die Kündigungsseite ohne Login online kündigen.",
   },
   sicherheitPage: {
     title: "Sicherheit",

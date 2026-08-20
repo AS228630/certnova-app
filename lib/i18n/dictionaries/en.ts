@@ -1317,9 +1317,6 @@ const en: Dictionary = {
     widerrufConsentText:
       "I expressly consent that access to CertCoach Pro begins immediately after payment, before the 14-day withdrawal period ends, and confirm that I lose my right of withdrawal once access is fully activated. Details:",
     proceedToPayment: "Proceed to Payment",
-    paymentNotAvailableTitle: "Online payment isn't available yet",
-    paymentNotAvailableDesc:
-      "We're working on enabling online payments soon. Your selected plan won't be charged — nothing is active yet. For pricing questions or a custom quote, our support team is here anytime.",
     contactSupport: "Contact Support",
     backToPlans: "Back to Plan Selection",
     selectedPlan: "Selected Plan",
@@ -1418,10 +1415,10 @@ const en: Dictionary = {
     article1A: "You can cancel your CertCoach Pro subscription online at any time via our cancellation page at www.certcoach.de/kuendigen — no login required. Access remains active until the end of the period you've already paid for.",
     article2Q: "How do I change my plan?",
     article2A:
-      "Go to \"Manage Subscription\" further down this page, or directly to the Upgrade page via the sidebar. You can select a plan there. Online payment is still being built, so your selected plan won't be charged yet.",
+      "Go to \"Manage Subscription\" further down this page, or directly to the Upgrade page via the sidebar. You can select a plan there and complete payment through Stripe.",
     article3Q: "I was charged twice — what can I do?",
     article3A:
-      "Since online payments aren't active on the platform yet, no charge could currently have come from CertCoach. If you still see an unexpected charge, please contact our email support right away — we'll take care of it personally.",
+      "This shouldn't normally happen, but if it does, please contact our email support right away with the date and amount of the charge — we'll check it against our Stripe dashboard and personally take care of a refund if you were genuinely charged twice.",
     article4Q: "Download or reissue a certificate",
     article4A:
       "Once you've completed a certification 100%, you'll find your certificate on your profile page. You can download it again anytime from there.",
@@ -1468,7 +1465,7 @@ const en: Dictionary = {
     currentPlanLabel: "Current Plan",
     freePlanBadge: "Free Plan",
     forever: "forever",
-    freePlanDesc: "Your account is currently on the free plan. Online payments for paid plans are still being built.",
+    freePlanDesc: "Your account is currently on the free plan. Upgrade to CertCoach Pro anytime to unlock the full question bank.",
     subscriptionOptionsTitle: "Subscription Options",
     changePlan: "Change Plan",
     viewInvoices: "Request Invoices",
@@ -1851,7 +1848,7 @@ const en: Dictionary = {
     title: "Frequently Asked Questions",
     desc: "Answers to the most important questions about CertCoach.",
     q1Q: "Is CertCoach free?",
-    q1A: "Yes, you can register for free and start learning immediately. The free plan includes access to selected courses, one active lab environment, and limited AI Coach access. Paid plans with more features are currently being developed.",
+    q1A: "Yes, you can register for free and start learning immediately. The free plan includes access to selected courses, one active lab environment, and limited AI Coach access. Upgrade to CertCoach Pro to unlock the full question bank and more features.",
     q2Q: "How do I get started?",
     q2A: "Register for free, choose a certification or language course that matches your goal, and start with the first lesson. Your progress is saved automatically.",
     q3Q: "Does CertCoach issue official certificates?",
@@ -1864,8 +1861,8 @@ const en: Dictionary = {
     q6A: "Your dashboard shows your current progress per certification, your learning streak, and your answered questions in real time.",
     q7Q: "How do I reach support?",
     q7A: "Via the \"Help & Support\" page in the dashboard or the contact form — we typically respond within 24 hours.",
-    q8Q: "Can I already upgrade to a paid plan?",
-    q8A: "Online payment is still being built. You can view the planned plans on the Upgrade page, but nothing is being charged yet.",
+    q8Q: "How can I upgrade to CertCoach Pro?",
+    q8A: "On the Upgrade page you can start a CertCoach Pro subscription right away — payment runs securely through Stripe (card, PayPal, or Klarna). You can cancel your subscription online at any time, no login required.",
   },
   sicherheitPage: {
     title: "Security",

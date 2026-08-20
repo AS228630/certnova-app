@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const FAQ_ITEMS = [
   {
     q: "Ist CertCoach kostenlos?",
-    a: "Ja, du kannst dich kostenlos registrieren und sofort mit dem Lernen beginnen. Der kostenlose Plan bietet Zugriff auf ausgewählte Kurse, eine aktive Lab-Umgebung und begrenzten KI-Coach-Zugriff. Bezahlte Pläne mit mehr Funktionen befinden sich aktuell im Aufbau.",
+    a: "Ja, du kannst dich kostenlos registrieren und sofort mit dem Lernen beginnen. Der kostenlose Plan bietet Zugriff auf ausgewählte Kurse, eine aktive Lab-Umgebung und begrenzten KI-Coach-Zugriff. Mit CertCoach Pro schaltest du die vollständige Fragenbank und weitere Funktionen frei.",
   },
   {
     q: "Wie fange ich an?",
@@ -42,8 +42,8 @@ const FAQ_ITEMS = [
     a: 'Über die Seite „Hilfe & Support" im Dashboard oder über das Kontaktformular – wir antworten in der Regel innerhalb von 24 Stunden.',
   },
   {
-    q: "Kann ich schon auf einen bezahlten Plan upgraden?",
-    a: "Die Online-Zahlung befindet sich aktuell noch im Aufbau. Auf der Upgrade-Seite kannst du dir die geplanten Pläne ansehen, aber es wird aktuell noch nichts berechnet.",
+    q: "Wie kann ich auf CertCoach Pro upgraden?",
+    a: "Auf der Upgrade-Seite kannst du direkt ein CertCoach-Pro-Abonnement abschließen — die Zahlung läuft sicher über Stripe (Kreditkarte, PayPal oder Klarna). Du kannst dein Abonnement jederzeit über die Kündigungsseite ohne Login online kündigen.",
   },
 ];
 
