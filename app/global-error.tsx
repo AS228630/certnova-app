@@ -3,11 +3,17 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import { AlertTriangle, RotateCcw } from "lucide-react";
+import * as Sentry from "@sentry/nextjs";
 import "./globals.css";
 
 export default function GlobalError({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   useEffect(() => {
     console.error("Unhandled application error:", error);
+    // Reports the crash to Sentry (once NEXT_PUBLIC_SENTRY_DSN is set —
+    // a no-op until then, see instrumentation-client.ts) so the owner
+    // finds out a real user hit this screen, instead of only the user's
+    // own browser console ever seeing it.
+    Sentry.captureException(error);
   }, [error]);
 
   return (

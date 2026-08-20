@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withSentryConfig } from "@sentry/nextjs";
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -48,7 +49,7 @@ const nextConfig: NextConfig = {
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://flagcdn.com https://*.supabase.co",
       "font-src 'self' data:",
-      "connect-src 'self' https://*.supabase.co https://api.emailjs.com https://vitals.vercel-insights.com https://va.vercel-scripts.com",
+      "connect-src 'self' https://*.supabase.co https://api.emailjs.com https://vitals.vercel-insights.com https://va.vercel-scripts.com https://*.ingest.sentry.io https://*.ingest.us.sentry.io",
       "frame-ancestors 'self'",
       "base-uri 'self'",
       "form-action 'self'",
@@ -84,4 +85,26 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withSentryConfig(nextConfig, {
+  // org/project are only needed for source-map upload (readable stack
+  // traces in Sentry instead of minified ones) — left unset since no
+  // Sentry project exists yet. Once you create one and add SENTRY_ORG /
+  // SENTRY_PROJECT / SENTRY_AUTH_TOKEN in Vercel, source-map upload
+  // turns on automatically; until then this silently skips it rather
+  // than failing the build.
+  org: process.env.SENTRY_ORG,
+  project: process.env.SENTRY_PROJECT,
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  sourcemaps: { disable: !process.env.SENTRY_AUTH_TOKEN },
+  // Only print Sentry's own build-time logs in CI, not on every local
+  // dev/build run.
+  silent: !process.env.CI,
+  // Reduces client bundle size by only widening the file set Sentry
+  // scans for source maps to what's actually needed.
+  widenClientFileUpload: true,
+  // Silences a deprecation warning; harmless either way but the
+  // recommended replacement isn't supported under Turbopack (which
+  // this project's build uses), so there's no functional alternative
+  // to switch to yet.
+  disableLogger: true,
+});
