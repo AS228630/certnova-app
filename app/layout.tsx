@@ -73,6 +73,7 @@ export const metadata: Metadata = {
 import ThemeProvider from "@/components/ThemeProvider";
 import LocaleProvider from "@/components/LocaleProvider";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import InstallPrompt from "@/components/InstallPrompt";
 
 export default function RootLayout({
@@ -142,6 +143,7 @@ try{var l=localStorage.getItem('certcoach-locale')||'de';document.documentElemen
             Vercel Analytics has no purchase/revenue data; for that,
             check the Stripe Dashboard directly. */}
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
