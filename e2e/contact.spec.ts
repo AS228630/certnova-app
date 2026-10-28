@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-// Deliberately does NOT click submit — that would fire a real EmailJS
+// Deliberately does NOT fill or submit the form — that would fire a real EmailJS
 // send on every CI run. This only verifies the form itself renders
 // correctly (name/email/message fields all present, required, and the
 // submit button visible) — exactly the kind of regression the project's
@@ -34,19 +34,7 @@ test.describe("Contact page", () => {
     await expect(submitButton).toBeEnabled();
   });
 
-  test("submit button becomes disabled once form is submitted with valid data", async ({ page }) => {
-    await page.goto("/kontakt");
-    const main = page.getByRole("main");
-    await main.locator("form input").nth(0).fill("E2E Test");
-    await main.locator('form input[type="email"]').fill("e2e-test@example.com");
-    await main.locator("form textarea").fill("This is an automated E2E structural test — please disregard.");
-    // Intercept the actual EmailJS call so this never sends a real email
-    // in CI, while still exercising the real submit handler and its
-    // loading-state UI.
-    await page.route("https://api.emailjs.com/**", (route) =>
-      route.fulfill({ status: 200, body: "OK" })
-    );
-    await main.locator('form button[type="submit"]').click();
-    await expect(main.locator('form button[type="submit"]')).toBeDisabled();
-  });
+  // No submit test: the scheduled run against the live site still delivered a real
+  // "E2E Test" email to the owner on every run (despite the EmailJS route stub), so this
+  // suite never fills or submits the contact form (owner request, 2026-10-28).
 });
