@@ -13,9 +13,10 @@ test.describe("Homepage", () => {
 
   test("has no obvious broken internal links in the header nav", async ({ page }) => {
     await page.goto("/");
+    // The header is rendered on the client after the first paint, so a plain count() right
+    // after goto() can still see 0 links; this assertion retries until the header is there.
     const navLinks = page.locator("header a[href^='/']");
-    const count = await navLinks.count();
-    expect(count).toBeGreaterThan(0);
+    await expect(navLinks).not.toHaveCount(0);
   });
 
   test("language switcher exposes at least German and English", async ({ page }) => {
