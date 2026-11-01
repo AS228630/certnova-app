@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Plus, Users, MessageSquare, CheckCircle2, Trophy, Video } from "lucide-react";
+import { Plus, Users, Video } from "lucide-react";
 import DashboardShell from "@/components/DashboardShell";
 import ComposePost from "@/components/community/ComposePost";
 import CommunityPostCard from "@/components/community/CommunityPostCard";
@@ -13,16 +13,8 @@ import { useLocale } from "@/components/LocaleProvider";
 
 const tabs = ["tabForYou", "tabDiscussions", "tabQA", "tabGroups", "tabAchievements", "tabEvents"] as const;
 
-// Catalog-level marketing numbers for the platform-wide stat cards — same
-// convention already established in lib/companiesData.ts (illustrative
-// platform scale, not per-user data). Distinct from the sidebar's
-// "Community-Überblick", which reflects this account's real activity.
-const platformStats = [
-  { icon: Users, value: "128.420+", labelKey: "community.statActiveMembers", changeKey: "+2,5%" },
-  { icon: MessageSquare, value: "34.680", labelKey: "community.statTotalPosts", changeKey: "+8,1%" },
-  { icon: CheckCircle2, value: "12.540", labelKey: "community.statSolvedQuestions", changeKey: "+5,2%" },
-  { icon: Trophy, value: "4.280", labelKey: "community.statCelebratedAchievements", changeKey: "+3,7%" },
-];
+// Keine erfundenen Community-Zahlen (UWG). Hier erscheinen erst echte Werte aus der Datenbank.
+const platformStats: { icon: typeof Users; value: string; labelKey: string; changeKey: string }[] = [];
 
 const recommendedTopics = ["AWS Solutions Architect", "Azure Administrator", "Deutsch B1", "Linux Basics", "KI & AI", "Netzwerke"];
 
@@ -67,6 +59,7 @@ function CommunityBody() {
         </button>
       </div>
 
+      {platformStats.length > 0 && (
       <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
         {platformStats.map((s) => (
           <div key={s.labelKey} className="rounded-xl border border-border-soft bg-panel p-4">
@@ -77,6 +70,7 @@ function CommunityBody() {
           </div>
         ))}
       </div>
+      )}
 
       <div className="no-scrollbar mb-5 flex gap-1 overflow-x-auto border-b border-border-soft">
         {tabs.map((tab) => (

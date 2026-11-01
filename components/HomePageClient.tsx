@@ -8,8 +8,6 @@ import {
   Users,
   BookOpen,
   ShieldCheck,
-  ThumbsUp,
-  Star,
   Rocket,
   Code2,
   Cloud,
@@ -28,14 +26,14 @@ import LandingHeader from "@/components/LandingHeader";
 import Footer from "@/components/Footer";
 import { useLocale } from "@/components/LocaleProvider";
 import { useGuestOnlyRedirect } from "@/lib/useGuestOnlyRedirect";
+import { REAL_STATS } from "@/lib/realStats";
 
+// Nur echte, aus dem Katalog berechnete Zahlen (UWG) – keine erfundenen Nutzer-/Bewertungszahlen.
 const heroStats = [
-  { icon: Users, value: "120K+", labelKey: "landing.statActiveLearners" },
-  { icon: BookOpen, value: "500+", labelKey: "landing.statCoursesLabs" },
-  { icon: ShieldCheck, value: "250+", labelKey: "landing.statCertifications" },
-  { icon: ThumbsUp, value: "98%", labelKey: "landing.statRecommend" },
-  { icon: Star, value: "4.9/5", labelKey: "landing.statAvgRating" },
-];
+  { icon: ShieldCheck, value: REAL_STATS.certifications, labelKey: "landing.statCertifications" },
+  { icon: Users, value: REAL_STATS.providers, labelKey: "certList.statProviders" },
+  { icon: BookOpen, value: REAL_STATS.questions, labelKey: "certList.statExamQuestions" },
+] as const;
 
 const features = [
   { icon: Laptop, titleKey: "landing.featPracticalTitle", descKey: "landing.featPracticalDesc" },
@@ -46,23 +44,6 @@ const features = [
   { icon: TrendingUp, titleKey: "landing.featCareerTitle", descKey: "landing.featCareerDesc" },
 ];
 
-const testimonials = [
-  {
-    initials: "LW",
-    roleKey: "landing.role1",
-    quoteKey: "landing.quote1",
-  },
-  {
-    initials: "SM",
-    roleKey: "landing.role2",
-    quoteKey: "landing.quote2",
-  },
-  {
-    initials: "DK",
-    roleKey: "landing.role3",
-    quoteKey: "landing.quote3",
-  },
-];
 
 const trustLogos = [
   { name: "Google", render: () => <SiGoogle size={22} /> },
@@ -116,15 +97,6 @@ export default function HomePageClient() {
               </Link>
             </div>
 
-            <div className="mt-8 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-light text-primary">
-                <Users size={18} />
-              </div>
-              <div className="text-sm">
-                <p className="font-bold text-text">120K+</p>
-                <p className="text-text-faint">{t("landing.activeLearners")}</p>
-              </div>
-            </div>
           </div>
 
           <div className="relative mx-auto flex h-80 w-full max-w-md items-center justify-center sm:h-96">
@@ -208,7 +180,7 @@ export default function HomePageClient() {
         </div>
 
         {/* Stats bar */}
-        <div className="mt-16 grid grid-cols-2 gap-4 rounded-2xl border border-border-soft bg-panel p-6 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="mt-16 grid grid-cols-2 gap-4 rounded-2xl border border-border-soft bg-panel p-6 sm:grid-cols-3">
           {heroStats.map((s) => (
             <div key={s.labelKey} className="flex items-center gap-3">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-light text-primary">
@@ -228,10 +200,10 @@ export default function HomePageClient() {
         <p className="mb-6 text-center text-xs font-semibold uppercase tracking-wide text-text-faint">
           {t("landing.trustedByTitle")}
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 opacity-70 grayscale">
+        <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 grayscale">
           {trustLogos.map((l) => (
             <span key={l.name} className="flex items-center gap-2 text-text-muted">
-              {l.render()}
+              <span aria-hidden="true">{l.render()}</span>
               <span className="text-base font-semibold">{l.name}</span>
             </span>
           ))}
@@ -284,41 +256,7 @@ export default function HomePageClient() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-        <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-2xl font-extrabold text-text">{t("landing.testimonialsTitle")}</h2>
-          <Link href="/reviews" className="flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
-            {t("landing.viewAllReviews")}
-            <ArrowRight size={14} />
-          </Link>
-        </div>
-
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((tst) => (
-            <div key={tst.initials} className="relative rounded-2xl border border-border-soft bg-panel p-5">
-              <span className="absolute right-4 top-4 rounded-full bg-panel-alt px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide text-text-faint">
-                {t("landing.beispielBadge")}
-              </span>
-              <div className="mb-3 flex items-center gap-3">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary-light text-sm font-bold text-primary">
-                  {tst.initials}
-                </div>
-                <div>
-                  <p className="text-xs text-text-faint">{t(tst.roleKey)}</p>
-                </div>
-              </div>
-              <p className="mb-3 text-sm leading-relaxed text-text-muted">&ldquo;{t(tst.quoteKey)}&rdquo;</p>
-              <div className="flex gap-0.5 text-warning">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} size={14} className="fill-warning" />
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
+      {/* Kundenstimmen erst, wenn echte Bewertungen mit Erlaubnis vorliegen (UWG) – Beispiel-Zitate entfernt. */}
 
       {/* CTA banner */}
       <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">

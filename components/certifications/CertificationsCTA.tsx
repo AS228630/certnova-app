@@ -2,14 +2,14 @@
 
 import { Gift, ArrowRight } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
+import { REAL_STATS } from "@/lib/realStats";
 import RegisterTriggerLink from "@/components/registration/RegisterTriggerLink";
 
 const stats = [
-  { value: "128.420+", labelKey: "certList.ctaActiveLearners" },
-  { value: "54.000+", labelKey: "certList.ctaCertsEarned" },
-  { value: "92", labelKey: "certList.ctaCountries" },
-  { value: "4,9/5", labelKey: "certList.ctaAvgRating" },
-  { value: "2,4 Mio.", labelKey: "certList.ctaAiSessions" },
+  // nur echte Zahlen aus dem Katalog (UWG) – keine erfundenen Nutzer-/Länder-/Bewertungszahlen
+  { value: REAL_STATS.certifications, labelKey: "certList.statCertifications2" },
+  { value: REAL_STATS.providers, labelKey: "certList.statProviders" },
+  { value: REAL_STATS.questions, labelKey: "certList.statExamQuestions" },
 ];
 
 export default function CertificationsCTA() {
@@ -32,7 +32,7 @@ export default function CertificationsCTA() {
         {t("certList.ctaButton")} <ArrowRight size={15} />
       </RegisterTriggerLink>
 
-      <div className="grid grid-cols-2 gap-4 border-t border-white/15 pt-4 text-center sm:grid-cols-5 md:border-t-0 md:border-l md:pl-6 md:pt-0">
+      <div className="grid grid-cols-2 gap-4 border-t border-white/15 pt-4 text-center sm:grid-cols-3 md:border-t-0 md:border-l md:pl-6 md:pt-0">
         {stats.map((s) => (
           <div key={s.labelKey}>
             <p className="text-sm font-extrabold text-white">{s.value}</p>

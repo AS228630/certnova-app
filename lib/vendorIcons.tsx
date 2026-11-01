@@ -109,7 +109,8 @@ export function getCompanyIcon(slug: string, size = 28) {
   const entry = COMPANY_ICONS[slug];
   if (entry) {
     const { Icon, color } = entry;
-    return <Icon size={size} style={{ color }} />;
+    // dekorativ: der Anbietername steht immer daneben (WCAG 1.1.1, SenmasAccess 2026-11-01)
+    return <Icon size={size} style={{ color }} aria-hidden="true" />;
   }
-  return <Building2 size={size} className="text-text-faint" />;
+  return <Building2 size={size} className="text-text-faint" aria-hidden="true" />;
 }

@@ -36,7 +36,7 @@ export default function ArabicLandingPage() {
     <main dir="rtl" className="min-h-screen bg-[#0a0a12] text-white">
       <div className="mx-auto max-w-5xl px-6 py-20 text-center">
         <span className="mb-6 inline-block rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold text-white/70">
-          منصة التعلم رقم ١ لتقنية المعلومات في ألمانيا والنمسا وسويسرا
+          شهادات تقنية المعلومات ودورات اللغة والتدريب بالذكاء الاصطناعي
         </span>
         <h1 className="font-bold text-4xl leading-tight sm:text-5xl">
           مستقبلك يبدأ
@@ -73,7 +73,7 @@ export default function ArabicLandingPage() {
         </div>
       </div>
 
-      <div className="border-t border-white/10 py-6 text-center text-xs text-white/40">
+      <div className="border-t border-white/10 py-6 text-center text-xs text-white/60">
         <p>© 2026 CertCoach. صُنع بـ ❤️ في ألمانيا</p>
         <p className="mt-2">
           <Link href="/" className="underline hover:text-white/70">Deutsch</Link>

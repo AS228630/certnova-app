@@ -463,7 +463,7 @@ const tr: Dictionary = {
   },
   ctaBanner: {
     title: "Geleceğini şekillendirmeye hazır mısın? 🚀",
-    desc: "128.420+ öğrenciye katıl ve hedeflerine CertCoach ile ulaş.",
+    desc: "Hedeflerine CertCoach ile ulaş.",
     upgradeBtn: "Pro'ya Yükselt",
     activeLearners: "Aktif Öğrenci",
     certsEarned: "Kazanılan Sertifika",
@@ -598,16 +598,16 @@ const tr: Dictionary = {
     badgeHighAchieverDesc: "En az 20 soruda ort. %90+",
   },
   certPreview: {
-    badge: "250'den fazla sertifika",
+    badge: "170'den fazla sertifika",
     title: "CertCoach'taki tüm sertifikaları keşfet",
     subtitle: "Microsoft ve AWS'den CompTIA ve Cisco'ya kadar — kurslara başlamak, ilerlemeni takip etmek ve sertifika kazanmak için ücretsiz bir hesap oluştur.",
     ctaMain: "Ücretsiz kaydol",
     certsSuffix: "sertifika",
     bottomCtaTitle: "İlk sertifikana başlamaya hazır mısın?",
-    bottomCtaDesc: "Ücretsiz hesabını oluştur ve 250'den fazla sertifika arasından seç.",
+    bottomCtaDesc: "Ücretsiz hesabını oluştur ve 170'den fazla sertifika arasından seç.",
   },
   landing: {
-    badge: "DACH'ta #1 BT Öğrenme Platformu",
+    badge: "BT sertifikaları, dil kursları ve yapay zekâ koçluğu",
     heroTitle1: "Geleceğin",
     heroTitle2: "yeni becerilerle başlıyor",
     heroDesc: "Uzmanlardan öğren, tanınmış sertifikalar kazan ve istediğin kariyeri inşa et.",

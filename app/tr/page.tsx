@@ -36,7 +36,7 @@ export default function TurkishLandingPage() {
     <main dir="ltr" className="min-h-screen bg-[#0a0a12] text-white">
       <div className="mx-auto max-w-5xl px-6 py-20 text-center">
         <span className="mb-6 inline-block rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold text-white/70">
-          DACH&apos;ta 1 Numaralı BT Öğrenme Platformu
+          BT sertifikaları, dil kursları ve yapay zekâ koçluğu
         </span>
         <h1 className="font-bold text-4xl leading-tight sm:text-5xl">
           Geleceğin başlıyor
@@ -73,7 +73,7 @@ export default function TurkishLandingPage() {
         </div>
       </div>
 
-      <div className="border-t border-white/10 py-6 text-center text-xs text-white/40">
+      <div className="border-t border-white/10 py-6 text-center text-xs text-white/60">
         <p>© 2026 CertCoach. Almanya&apos;da ❤️ ile yapıldı</p>
         <p className="mt-2">
           <Link href="/" className="underline hover:text-white/70">Deutsch</Link>

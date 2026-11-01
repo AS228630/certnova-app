@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, PlayCircle, Users } from "lucide-react";
+import { ArrowRight, PlayCircle } from "lucide-react";
 import { useLocale } from "@/components/LocaleProvider";
 import RegisterTriggerLink from "@/components/registration/RegisterTriggerLink";
 
@@ -34,15 +34,6 @@ export default function ResourcesHero() {
             </a>
           </div>
 
-          <div className="mt-7 flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-light text-primary">
-              <Users size={18} />
-            </div>
-            <div className="text-sm">
-              <p className="font-bold text-text">120K+</p>
-              <p className="text-text-faint">{t("resHome.learnersBenefit")}</p>
-            </div>
-          </div>
         </div>
 
         <div className="relative mx-auto hidden h-72 w-full max-w-sm items-center justify-center lg:flex">

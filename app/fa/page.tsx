@@ -36,7 +36,7 @@ export default function FarsiLandingPage() {
     <main dir="rtl" lang="fa" className="min-h-screen bg-[#0a0a12] text-white">
       <div className="mx-auto max-w-5xl px-6 py-20 text-center">
         <span className="mb-6 inline-block rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold text-white/70">
-          پلتفرم شماره یک آموزش فناوری اطلاعات در آلمان، اتریش و سوئیس
+          گواهینامه‌های IT، دوره‌های زبان و مربی هوش مصنوعی
         </span>
         <h1 className="font-bold text-4xl leading-tight sm:text-5xl">
           آینده‌ات از اینجا شروع می‌شه
@@ -74,7 +74,7 @@ export default function FarsiLandingPage() {
         </div>
       </div>
 
-      <div className="border-t border-white/10 py-6 text-center text-xs text-white/40">
+      <div className="border-t border-white/10 py-6 text-center text-xs text-white/60">
         <p>© ۲۰۲۶ CertCoach. با ❤️ در آلمان ساخته شده</p>
         <p className="mt-2">
           <Link href="/" className="underline hover:text-white/70">Deutsch</Link>

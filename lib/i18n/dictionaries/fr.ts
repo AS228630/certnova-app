@@ -463,7 +463,7 @@ const fr: Dictionary = {
   },
   ctaBanner: {
     title: "Prêt à façonner ton avenir ? 🚀",
-    desc: "Rejoins plus de 128 420+ apprenants et atteins tes objectifs avec CertCoach.",
+    desc: "Atteins tes objectifs avec CertCoach.",
     upgradeBtn: "Passer à Pro",
     activeLearners: "Apprenants actifs",
     certsEarned: "Certificats obtenus",
@@ -598,16 +598,16 @@ const fr: Dictionary = {
     badgeHighAchieverDesc: "Moyenne de 90%+ sur au moins 20 questions",
   },
   certPreview: {
-    badge: "Plus de 250 certifications",
+    badge: "Plus de 170 certifications",
     title: "Découvre toutes les certifications sur CertCoach",
     subtitle: "De Microsoft et AWS à CompTIA et Cisco — crée un compte gratuit pour démarrer des cours, suivre ta progression et obtenir des certificats.",
     ctaMain: "S'inscrire gratuitement",
     certsSuffix: "certificats",
     bottomCtaTitle: "Prêt à démarrer ta première certification ?",
-    bottomCtaDesc: "Crée ton compte gratuit et choisis parmi plus de 250 certifications.",
+    bottomCtaDesc: "Crée ton compte gratuit et choisis parmi plus de 170 certifications.",
   },
   landing: {
-    badge: "Plateforme d'apprentissage IT n°1 en DACH",
+    badge: "Certifications IT, cours de langue et coaching IA",
     heroTitle1: "Ton avenir commence",
     heroTitle2: "avec de nouvelles compétences",
     heroDesc: "Apprends auprès d'experts, obtiens des certificats reconnus et construis la carrière que tu souhaites.",
