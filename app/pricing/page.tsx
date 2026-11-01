@@ -24,6 +24,7 @@ import {
   Users,
 } from "lucide-react";
 import LandingHeader from "@/components/LandingHeader";
+import { REAL_STATS } from "@/lib/realStats";
 import Footer from "@/components/Footer";
 import PricingPanel from "@/components/pricing/PricingPanel";
 import FreeRegistrationGate from "@/components/registration/FreeRegistrationGate";
@@ -305,12 +306,12 @@ export default function PricingPage() {
               <p className="mt-1 max-w-md text-sm text-text-muted">
                 Schließe deine Zertifizierung mit Selbstvertrauen ab.
               </p>
-              <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
+              <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
                 {[
-                  { icon: Users, value: "120K+", label: "Aktive Lernende" },
-                  { icon: BookOpen, value: "500+", label: "Kurse & Labs" },
-                  { icon: ShieldCheck, value: "250+", label: "Zertifizierungen" },
-                  { icon: Sparkles, value: "98%", label: "Weiterempfehlung" },
+                  // nur echte Zahlen aus dem Katalog (UWG)
+                  { icon: ShieldCheck, value: REAL_STATS.certifications, label: "Zertifizierungen" },
+                  { icon: Users, value: REAL_STATS.providers, label: "Anbieter" },
+                  { icon: BookOpen, value: REAL_STATS.questions, label: "Prüfungsfragen" },
                 ].map((s) => (
                   <div key={s.label}>
                     <p className="flex items-center gap-1.5 text-lg font-extrabold text-text">

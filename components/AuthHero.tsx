@@ -1,11 +1,11 @@
 "use client";
 
-import { ShieldCheck, Award, Laptop, Bot, Users, Star } from "lucide-react";
+import { ShieldCheck, Award, Laptop, Bot, Users } from "lucide-react";
 
 type Mode = "register" | "login";
 
 const registerFeatures = [
-  { icon: ShieldCheck, text: "Zugang zu über 500+ Kursen und praktischen Labs" },
+  { icon: ShieldCheck, text: "Über 600 echte Prüfungsfragen und praktische Labs" },
   { icon: Award, text: "Erhalte anerkannte Zertifikate und verbessere deine Karriere" },
   { icon: Laptop, text: "Lerne überall und jederzeit auf allen Geräten" },
   { icon: Bot, text: "KI Coach unterstützt dich bei deinen Zielen" },
@@ -101,25 +101,7 @@ export default function AuthHero({ mode }: { mode: Mode }) {
         </svg>
       </div>
 
-      <div className="mt-5 flex items-center gap-3 lg:mt-6">
-        <div className="flex -space-x-2">
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className="h-9 w-9 rounded-full border-2 border-bg bg-gradient-to-br from-primary to-fuchsia-500"
-            />
-          ))}
-        </div>
-        <div>
-          <div className="flex items-center gap-0.5">
-            {[0, 1, 2, 3, 4].map((i) => (
-              <Star key={i} size={13} className="fill-warning text-warning" />
-            ))}
-          </div>
-          <p className="text-sm font-bold text-text">54.000+ Lernende weltweit</p>
-          <p className="text-xs text-text-faint">vertrauen bereits auf CertCoach</p>
-        </div>
-      </div>
+      {/* Kein erfundener Nutzer-/Bewertungsnachweis (UWG) – vorher „54.000+ Lernende weltweit" + 5 Sterne. */}
     </div>
   );
 }

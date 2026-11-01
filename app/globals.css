@@ -17,7 +17,9 @@
   --color-accent-blue: #3b82f6;
   --color-text: #f2f3f9;
   --color-text-muted: #8991ae;
-  --color-text-faint: #5c6485;
+  /* Violett als TEXT auf dunklem Grund: hellere Stufe für ≥ 4.5:1; Buttons (bg-primary) bleiben #7c3aed */
+  --color-primary-text: #a78bfa;
+  --color-text-faint: #7e859f; /* WCAG AA ≥ 4.5:1 auf bg/panel (BFSG, SenmasAccess 2026-11-01; vorher #5c6485 = 2.9–3.4:1) */
   --color-success: #22c55e;
   --color-success-light: rgba(34, 197, 94, 0.14);
   --color-warning: #f59e0b;
@@ -43,7 +45,8 @@ html.light {
   --color-accent-blue: #3b82f6;
   --color-text: #0f1222;
   --color-text-muted: #5b6178;
-  --color-text-faint: #9198ad;
+  --color-primary-text: #7c3aed;
+  --color-text-faint: #676c7b; /* WCAG AA ≥ 4.5:1 (vorher #9198ad) */
   --color-success: #16a34a;
   --color-success-light: rgba(22, 163, 74, 0.1);
   --color-warning: #d97706;
@@ -91,3 +94,9 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* WCAG AA (BFSG, SenmasAccess 2026-11-01): Violett als Schriftfarbe nutzt die lesbare Stufe. */
+.text-primary { color: var(--color-primary-text); }
+
+/* Weißer Button mit violetter Schrift: dunkle Stufe für ≥ 4.5:1 */
+.bg-white.text-primary { color: var(--color-primary-dark); }

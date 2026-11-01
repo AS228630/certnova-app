@@ -464,7 +464,7 @@ const de = {
   },
   ctaBanner: {
     title: "Bereit, deine Zukunft zu gestalten? 🚀",
-    desc: "Schließe dich über 128.420+ Lernenden an und erreiche deine Ziele mit CertCoach.",
+    desc: "Erreiche deine Ziele mit CertCoach.",
     upgradeBtn: "Upgrade to Pro",
     activeLearners: "Aktive Lernende",
     certsEarned: "Zertifikate erhalten",
@@ -599,16 +599,16 @@ const de = {
     badgeHighAchieverDesc: "Ø 90%+ bei mind. 20 Fragen",
   },
   certPreview: {
-    badge: "250+ Zertifizierungen",
+    badge: "170+ Zertifizierungen",
     title: "Entdecke alle Zertifizierungen auf CertCoach",
     subtitle: "Von Microsoft und AWS bis CompTIA und Cisco — erstelle ein kostenloses Konto, um Kurse zu starten, Fortschritt zu verfolgen und Zertifikate zu erhalten.",
     ctaMain: "Kostenlos registrieren",
     certsSuffix: "Zertifikate",
     bottomCtaTitle: "Bereit, deine erste Zertifizierung zu starten?",
-    bottomCtaDesc: "Erstelle dein kostenloses Konto und wähle aus über 250 Zertifizierungen.",
+    bottomCtaDesc: "Erstelle dein kostenloses Konto und wähle aus über 170 Zertifizierungen.",
   },
   landing: {
-    badge: "#1 IT Learning Platform in DACH",
+    badge: "IT-Zertifizierungen, Sprachkurse & KI-Coaching",
     heroTitle1: "Deine Zukunft beginnt",
     heroTitle2: "mit neuen Skills",
     heroDesc: "Lerne von Experten, erhalte anerkannte Zertifikate und baue die Karriere auf, die du dir wünschst.",

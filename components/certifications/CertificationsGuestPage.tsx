@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Search, Star, Users, Award, Briefcase, Percent, TrendingUp, Rocket, ArrowRight, Check } from "lucide-react";
+import { Search, Star, Users, Award, Briefcase, TrendingUp, Rocket, ArrowRight, Check } from "lucide-react";
 import { companies, type Certification, type Company } from "@/lib/companiesData";
 import { getCompanyIcon } from "@/lib/vendorIcons";
 import { useLocale } from "@/components/LocaleProvider";
@@ -100,12 +100,10 @@ export default function CertificationsGuestPage() {
           catalog data, not fabricated. Rating/pass-rate figures come
           from the same catalog fields already used elsewhere on the
           site. */}
-      <div className="mt-6 grid grid-cols-2 gap-4 rounded-2xl border border-border-soft bg-panel p-6 sm:grid-cols-3 lg:grid-cols-5">
+      <div className="mt-6 grid grid-cols-2 gap-4 rounded-2xl border border-border-soft bg-panel p-6 sm:grid-cols-2">
         {[
           { icon: Award, value: `${totalCertCount}+`, labelKey: "certGuest.statCerts" },
           { icon: Briefcase, value: `${totalProviders}+`, labelKey: "certGuest.statProviders" },
-          { icon: TrendingUp, value: "98%", labelKey: "certGuest.statPassRate" },
-          { icon: Percent, value: "4.9/5", labelKey: "certGuest.statRating" },
         ].map((s) => (
           <div key={s.labelKey} className="flex items-center gap-3">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary-light text-primary">

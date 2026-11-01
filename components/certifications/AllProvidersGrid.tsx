@@ -48,6 +48,7 @@ export default function AllProvidersGrid({
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
+          aria-label={t(`certList.${CATEGORY_KEYS[0]}`)}
           className="rounded-lg border border-border-soft bg-panel px-3 py-2.5 text-sm text-text focus:border-primary focus:outline-none sm:w-44"
         >
           {CATEGORY_KEYS.map((c) => (
@@ -58,6 +59,7 @@ export default function AllProvidersGrid({
         <select
           value={level}
           onChange={(e) => setLevel(e.target.value)}
+          aria-label={t(`certList.${LEVEL_KEYS[0]}`)}
           className="rounded-lg border border-border-soft bg-panel px-3 py-2.5 text-sm text-text focus:border-primary focus:outline-none sm:w-40"
         >
           {LEVEL_KEYS.map((l) => (
@@ -68,6 +70,7 @@ export default function AllProvidersGrid({
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value as "beliebt" | "az")}
+          aria-label={t("certList.sortPopular")}
           className="rounded-lg border border-border-soft bg-panel px-3 py-2.5 text-sm text-text focus:border-primary focus:outline-none sm:w-44"
         >
           <option value="beliebt">{t("certList.sortPopular")}</option>

@@ -1,19 +1,16 @@
 "use client";
 
-import { Users, Award, Globe2, Star, Sparkles, ArrowRight } from "lucide-react";
+import { Users, Award, Sparkles, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useLocale } from "@/components/LocaleProvider";
+import { REAL_STATS } from "@/lib/realStats";
 import { useSubscriptionStore } from "@/lib/store/subscriptionStore";
 
-// Platform-level marketing stats (not personal user progress) — the one
-// honest exception under the project's no-fabricated-data rule, same
-// category as the numbers already shown on the public landing page.
+// Nur echte Plattform-Zahlen aus dem Katalog (UWG) – keine erfundenen Nutzer-/Bewertungszahlen.
 const stats = [
-  { icon: Users, value: "128.420+", labelKey: "ctaBanner.activeLearners" },
-  { icon: Award, value: "54.000+", labelKey: "ctaBanner.certsEarned" },
-  { icon: Globe2, value: "92", labelKey: "ctaBanner.countries" },
-  { icon: Star, value: "4,9/5", labelKey: "ctaBanner.avgRating" },
-  { icon: Sparkles, value: "2,4 Mio.", labelKey: "ctaBanner.aiSessions" },
+  { icon: Award, value: REAL_STATS.certifications, labelKey: "certList.statCertifications2" },
+  { icon: Users, value: REAL_STATS.providers, labelKey: "certList.statProviders" },
+  { icon: Sparkles, value: REAL_STATS.questions, labelKey: "certList.statExamQuestions" },
 ];
 
 export default function CtaBanner() {
@@ -39,7 +36,7 @@ export default function CtaBanner() {
         </Link>
       </div>
 
-      <div className="mt-6 grid grid-cols-2 gap-4 border-t border-border-soft pt-6 sm:grid-cols-5">
+      <div className="mt-6 grid grid-cols-2 gap-4 border-t border-border-soft pt-6 sm:grid-cols-3">
         {stats.map((s) => (
           <div key={s.labelKey} className="flex items-center gap-2">
             <s.icon size={16} className="text-primary" />
